@@ -1,0 +1,30 @@
+.header {
+  height: 50px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  background: lightseagreen;
+
+  .logo div {
+    width: 100px;
+    height: 40px;
+    background: blue;
+  }
+
+  .menu {
+    margin-left: auto;
+
+    .button {
+      width: auto;
+      height: 30px;
+      padding: 0 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      cursor: pointer;
+    }
+  }
+
+}
+

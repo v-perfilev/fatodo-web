@@ -20,5 +20,6 @@
     "curly": false,
     "prettier": true,
     "interface-name": false
+//    "trailing-comma": [true, {"multiline": "always", "singleline": "never"}]
   }
 }

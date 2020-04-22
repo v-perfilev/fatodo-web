@@ -38,7 +38,7 @@ module.exports = options => merge(commonConfig({env: ENV}), {
     plugins: [
         new webpack.DefinePlugin({
             'process.env': {
-                BACKEND_URL: JSON.stringify("http://localhost:4000/api")
+                SERVER_API_URL: JSON.stringify("http://localhost:4000/api")
             }
         })
     ]
