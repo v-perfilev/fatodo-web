@@ -1,6 +1,12 @@
 import { AxiosResponse } from 'axios';
 import { ACTION_TYPES } from './types';
 
+export function toggleLoginModalAction() {
+  return {
+    type: ACTION_TYPES.TOGGLE_LOGIN_MODAL
+  }
+}
+
 export function loginAction(response: AxiosResponse) {
   return {
     type: ACTION_TYPES.LOGIN,

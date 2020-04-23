@@ -4,7 +4,7 @@ import { ACTION_TYPES } from './types';
 
 const initialState = {
   loading: false,
-  showModalLogin: false,
+  showLoginModal: false,
   account: {} as any,
   errorMessage: null as string,
   redirectMessage: null as string
@@ -24,7 +24,7 @@ export default (state: AuthenticationState = initialState, action): Authenticati
         ...state,
         loading: false,
         account: action.payload.data,
-        showModalLogin: false
+        showLoginModal: false
       };
     case FAILURE(ACTION_TYPES.LOGIN):
       SecurityUtils.clearAuthToken();
@@ -32,17 +32,12 @@ export default (state: AuthenticationState = initialState, action): Authenticati
         ...initialState,
         loading: false,
         errorMessage: action.payload,
-        showModalLogin: true
+        showLoginModal: true
       };
-    case ACTION_TYPES.MODAL_SHOW:
+    case ACTION_TYPES.TOGGLE_LOGIN_MODAL:
       return {
         ...state,
-        showModalLogin: true
-      };
-    case ACTION_TYPES.MODAL_HIDE:
-      return {
-        ...state,
-        showModalLogin: false
+        showLoginModal: !state.showLoginModal
       };
     case ACTION_TYPES.LOGOUT:
       return {

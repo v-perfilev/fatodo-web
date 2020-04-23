@@ -1,6 +1,10 @@
 import * as SecurityUtils from '../../security/security.utils';
 import axios from 'axios';
-import { clearAuthAction, errorMessageAction, loginAction, logoutAction } from './actions';
+import { clearAuthAction, errorMessageAction, loginAction, logoutAction, toggleLoginModalAction } from './actions';
+
+export const toggleLoginModal = () => dispatch => {
+  dispatch(toggleLoginModalAction());
+}
 
 export const login = formData => async dispatch => {
   const data = {

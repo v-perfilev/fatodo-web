@@ -7,6 +7,9 @@ import setupAxiosInterceptors from './config/axios-interceptor';
 import init from './config/store';
 import { clearAuth } from './shared/reducers/authentication';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from '@material-ui/core';
+import { theme } from './config/theme';
+import 'typeface-roboto';
 
 const store = init();
 
@@ -16,9 +19,11 @@ setupAxiosInterceptors(() => actions.clearAuth('login.error.unauthorized'));
 const root = document.getElementById('root');
 
 const render = Component => ReactDOM.render(
-  <Provider store={store}>
-    <Component/>
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <Component/>
+    </Provider>
+  </ThemeProvider>,
   root);
 
 render(App);
