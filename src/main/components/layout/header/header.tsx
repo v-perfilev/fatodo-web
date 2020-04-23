@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AppBar, Box, createStyles, IconButton, Theme, Toolbar, withStyles } from '@material-ui/core';
+import { AppBar, Box, createStyles, IconButton, Theme, Toolbar, WithStyles, withStyles } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Logo from './logo';
 import Account from './account';
@@ -16,7 +16,7 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
-const Header = (props) => {
+const Header = (props: WithStyles<typeof styles>) => {
   const {classes} = props;
   return (
     <AppBar position="static">

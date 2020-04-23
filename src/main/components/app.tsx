@@ -3,7 +3,7 @@ import './app.scss';
 import { hot } from 'react-hot-loader';
 import Header from './layout/header/header';
 import { connect } from 'react-redux';
-import LoginModal from './layout/authorization/login-modal';
+import LoginModal from './layout/auth/login-modal';
 
 class App extends React.Component {
   render() {

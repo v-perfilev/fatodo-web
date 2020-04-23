@@ -18,6 +18,7 @@ import { theme } from '../../../config/theme';
 import { compose } from 'redux';
 import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import LoginForm, { FormValues } from 'components/layout/auth/login-form';
 
 const styles = (theme: Theme) => createStyles({
   header: {
@@ -40,10 +41,12 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
-interface ILoginModal extends PropsFromRedux, WithStyles<typeof styles> {
+const initialValues: FormValues = {
+  email: '',
+  password: '',
 }
 
-class LoginModal extends React.Component<ILoginModal> {
+class LoginModal extends React.Component<PropsFromRedux&WithStyles<typeof styles>> {
   render() {
     const {classes, authentication, login} = this.props;
     const isModalOpen = authentication.showLoginModal && !authentication.account.empty;
@@ -53,7 +56,7 @@ class LoginModal extends React.Component<ILoginModal> {
     return (
       <Dialog open={isModalOpen} onClose={toggleLoginModal} TransitionComponent={slideDown}>
         <DialogTitle disableTypography className={classes.header}>
-          <AccountBoxIcon className={classes.icon} />
+          <AccountBoxIcon className={classes.icon}/>
           <Typography variant="h6">
             Sign in
           </Typography>
@@ -62,7 +65,7 @@ class LoginModal extends React.Component<ILoginModal> {
           </IconButton>
         </DialogTitle>
         <DialogContent dividers>
-          Test
+          <LoginForm initial={initialValues} login={login}/>
         </DialogContent>
       </Dialog>
     );

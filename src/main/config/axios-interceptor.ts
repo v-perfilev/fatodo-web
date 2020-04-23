@@ -17,7 +17,9 @@ const setupAxiosInterceptors = onUnauthenticated => {
   const onResponseSuccess = response => response;
 
   const onResponseError = err => {
-    const status = err.status || err.response.status;
+    const status = err && err.status ? err.status
+      : err && err.response && err.response.status ? err.response.status
+        : 500;
     if (status === 403 || status === 401) {
       onUnauthenticated();
     }

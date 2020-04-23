@@ -5,10 +5,7 @@ import Button from '@material-ui/core/Button';
 import { toggleLoginModal } from '../../../shared/reducers/authentication';
 import { Box } from '@material-ui/core';
 
-export interface IMenuProps extends PropsFromRedux {
-}
-
-class Account extends React.Component<IMenuProps> {
+class Account extends React.Component<PropsFromRedux> {
 
   toggleLoginModal = () => this.props.toggleLoginModal();
 
