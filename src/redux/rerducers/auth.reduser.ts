@@ -1,6 +1,6 @@
-import { FAILURE, REQUEST, SUCCESS } from '../thunk-types';
-import * as SecurityUtils from '../../utils/security-utils';
-import { ACTION_TYPES } from '../actions/auth-actions';
+import { FAILURE, REQUEST, SUCCESS } from '../thunk.types';
+import * as SecurityUtils from '../../utils/security.utils';
+import { ACTION_TYPES } from '../actions/auth.actions';
 
 const initialState = {
   loading: false,

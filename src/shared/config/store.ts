@@ -1,11 +1,10 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import reducer, { IRootState } from '../../redux';
+import reducer from '../../redux';
 
 const defaultMiddlewares = [thunkMiddleware];
+const composedMiddlewares = compose(applyMiddleware(...defaultMiddlewares));
 
-const composedMiddlewares = middlewares => compose(applyMiddleware(...defaultMiddlewares, ...middlewares));
+const initStore = createStore(reducer, composedMiddlewares);
 
-const init = (initialState?: IRootState, middlewares = []) => createStore(reducer, initialState, composedMiddlewares(middlewares));
-
-export default init;
+export default initStore;

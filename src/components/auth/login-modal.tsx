@@ -18,7 +18,7 @@ import { compose } from 'redux';
 import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LoginForm, { FormValues } from './login-form';
-import { login, toggleLoginModal } from '../../redux/actions/auth-actions';
+import { login, toggleLoginModal } from '../../redux/actions/auth.actions';
 
 const styles = (theme: Theme) => createStyles({
   header: {
@@ -46,10 +46,10 @@ const initialValues: FormValues = {
   password: '',
 }
 
-class LoginModal extends React.Component<PropsFromRedux&WithStyles<typeof styles>> {
+class LoginModal extends React.Component<PropsFromRedux & WithStyles<typeof styles>> {
   render() {
-    const {classes, authentication, login} = this.props;
-    const isModalOpen = authentication.showLoginModal && !authentication.account.empty;
+    const { classes, authState, login } = this.props;
+    const isModalOpen = authState.showLoginModal && !authState.account.empty;
 
     const toggleLoginModal = () => this.props.toggleLoginModal();
 
@@ -72,9 +72,9 @@ class LoginModal extends React.Component<PropsFromRedux&WithStyles<typeof styles
   }
 }
 
-const mapStateToProps = ({authentication}: IRootState) => ( {
-  authentication
-} );
+const mapStateToProps = ({ authState }: IRootState) => ({
+  authState
+});
 const mapDispatchToProps = {
   toggleLoginModal, login
 }

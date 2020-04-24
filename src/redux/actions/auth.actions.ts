@@ -1,20 +1,20 @@
-import AuthService from '../../services/auth-service';
-import * as SecurityUtils from '../../utils/security-utils';
-import { LoginDTO } from '../../model/dto/login-dto';
+import AuthService from '../../services/auth.service';
+import * as SecurityUtils from '../../utils/security.utils';
+import { LoginDto } from '../../model/dto/login.dto';
 
 export const ACTION_TYPES = {
-  TOGGLE_LOGIN_MODAL: 'authentication/TOGGLE_LOGIN_MODAL',
-  LOGIN: 'authentication/LOGIN',
-  LOGOUT: 'authentication/LOGOUT',
-  CLEAR_AUTH: 'authentication/CLEAR_AUTH',
-  ERROR_MESSAGE: 'authentication/ERROR_MESSAGE',
+  TOGGLE_LOGIN_MODAL: 'authState/TOGGLE_LOGIN_MODAL',
+  LOGIN: 'authState/LOGIN',
+  LOGOUT: 'authState/LOGOUT',
+  CLEAR_AUTH: 'authState/CLEAR_AUTH',
+  ERROR_MESSAGE: 'authState/ERROR_MESSAGE',
 };
 
 export const toggleLoginModal = () => dispatch => {
   dispatch({ type: ACTION_TYPES.TOGGLE_LOGIN_MODAL });
 };
 
-export const login = (data: LoginDTO, rememberMe: boolean) => async dispatch => {
+export const login = (data: LoginDto, rememberMe: boolean) => async dispatch => {
   SecurityUtils.clearAuthToken();
   const response = await dispatch({
     type: ACTION_TYPES.LOGIN,

@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux';
-import authentication, { AuthenticationState } from './rerducers/auth-reduser';
+import authState, { AuthenticationState } from './rerducers/auth.reduser';
+import notificationState, { NotificationState } from './rerducers/notification.reduser';
 
 export interface IRootState {
-  readonly authentication: AuthenticationState;
+  readonly authState: AuthenticationState;
+  readonly notificationState: NotificationState;
 }
 
 export default combineReducers<IRootState>({
-  authentication,
+  authState,
+  notificationState,
 });

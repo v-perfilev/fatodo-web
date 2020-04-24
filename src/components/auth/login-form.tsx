@@ -5,7 +5,6 @@ import { TextField } from 'formik-material-ui';
 import { createStyles, LinearProgress, Theme, WithStyles, withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import React = require('react');
-import { AuthenticationState } from '../../redux/rerducers/auth-reduser';
 
 interface FormProps {
   initial: FormValues,
@@ -27,8 +26,8 @@ const styles = (theme: Theme) => createStyles({
 });
 type StylesProps = WithStyles<typeof styles>;
 
-const InnerForm = (props: FormikProps<FormValues>&StylesProps) => {
-  const {classes, isValid, isSubmitting} = props;
+const InnerForm = (props: FormikProps<FormValues> & StylesProps) => {
+  const { classes, isValid, isSubmitting } = props;
   return (
     <Form className={classes.root}>
       <Field
@@ -61,10 +60,10 @@ const InnerForm = (props: FormikProps<FormValues>&StylesProps) => {
 
 export default compose(
   withFormik<FormProps, FormValues>({
-    mapPropsToValues: props => ( {
+    mapPropsToValues: props => ({
       email: props.initial.email,
       password: props.initial.password
-    } ),
+    }),
 
     validationSchema: Yup.object().shape({
       email: Yup.string().email('Email not valid').required('Email is required'),
@@ -74,7 +73,7 @@ export default compose(
     validateOnMount: true,
 
     handleSubmit: (values: FormValues, props: FormikBag<FormProps, FormValues>) => {
-      const {login} = props.props;
+      const { login } = props.props;
       login(values);
       props.setSubmitting(false);
     }

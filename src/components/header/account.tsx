@@ -3,15 +3,15 @@ import * as React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { Box } from '@material-ui/core';
-import { toggleLoginModal } from '../../redux/actions/auth-actions';
+import { toggleLoginModal } from '../../redux/actions/auth.actions';
 
 class Account extends React.Component<PropsFromRedux> {
 
   toggleLoginModal = () => this.props.toggleLoginModal();
 
   render() {
-    const {authentication} = this.props;
-    const isAuthenticated = authentication.account.empty;
+    const { authState } = this.props;
+    const isAuthenticated = authState.account.empty;
 
     return (
       <Box>
@@ -24,9 +24,9 @@ class Account extends React.Component<PropsFromRedux> {
   }
 }
 
-const mapStateToProps = ({authentication}: IRootState) => ( {
-  authentication: authentication
-} );
+const mapStateToProps = ({ authState }: IRootState) => ({
+  authState
+});
 const mapDispatchToProps = {
   toggleLoginModal
 }

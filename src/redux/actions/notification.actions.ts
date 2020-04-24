@@ -1,0 +1,30 @@
+import { Notification } from '../../shared/notifier';
+import { SnackbarKey } from 'notistack';
+
+export const ACTION_TYPES = {
+  ENQUEUE_SNACKBAR: 'notificationState/ENQUEUE_SNACKBAR',
+  CLOSE_SNACKBAR: 'notificationState/CLOSE_SNACKBAR',
+  REMOVE_SNACKBAR: 'notificationState/REMOVE_SNACKBAR',
+};
+
+export const enqueueSnackbar = (notification: Notification) => {
+  const key = notification.options?.key;
+  return {
+    type: ACTION_TYPES.ENQUEUE_SNACKBAR,
+    notification: {
+      ...notification,
+      key: key || new Date().getTime() + Math.random(),
+    },
+  };
+};
+
+export const closeSnackbar = (key: SnackbarKey) => ({
+  type: ACTION_TYPES.CLOSE_SNACKBAR,
+  dismissAll: !key,
+  key,
+});
+
+export const removeSnackbar = (key: SnackbarKey) => ({
+  type: ACTION_TYPES.REMOVE_SNACKBAR,
+  key,
+});
