@@ -3,18 +3,18 @@ import * as ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 
 import App from './components/app';
-import setupAxiosInterceptors from './config/axios-interceptor';
-import init from './config/store';
-import { clearAuth } from './shared/reducers/authentication';
+import setupAxiosInterceptors from './shared/config/axios-interceptor';
+import init from './shared/config/store';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core';
-import { theme } from './config/theme';
+import { theme } from './shared/config/theme';
 import 'typeface-roboto';
+import { clearAuth } from './redux/actions/auth-actions';
 
 const store = init();
 
 const actions = bindActionCreators({clearAuth}, store.dispatch);
-setupAxiosInterceptors(() => actions.clearAuth('login.error.unauthorized'));
+setupAxiosInterceptors(() => actions.clearAuth());
 
 const root = document.getElementById('root');
 

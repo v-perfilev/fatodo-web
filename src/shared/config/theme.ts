@@ -9,9 +9,9 @@ export const theme = createMuiTheme({
     secondary: {
       main: '#daa520',
       contrastText: '#f1f1f1',
-    }
+    },
   },
   typography: {
     fontFamily: 'Roboto, serif',
-  }
+  },
 });

@@ -4,7 +4,7 @@ const TSLintPlugin = require('tslint-webpack-plugin');
 const path = require('path');
 
 module.exports = options => ({
-    entry: './src/main/index.tsx',
+    entry: './src/index.tsx',
     resolve: {
         extensions: ['.ts', '.tsx', '.js']
     },
@@ -24,10 +24,10 @@ module.exports = options => ({
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/main/index.html'
+            template: './src/index.html'
         }),
         new TSLintPlugin({
-            files: ['./src/main/**/*.ts']
+            files: ['./src/**/*.ts']
         })
     ]
 });

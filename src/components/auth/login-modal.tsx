@@ -1,7 +1,6 @@
-import { login, toggleLoginModal } from '../../../shared/reducers/authentication';
 import { connect, ConnectedProps } from 'react-redux';
 import * as React from 'react';
-import { IRootState } from '../../../shared/reducers';
+import { IRootState } from '../../redux';
 import {
   createStyles,
   Dialog,
@@ -13,12 +12,13 @@ import {
   withStyles,
   WithStyles
 } from '@material-ui/core';
-import { slideDown } from '../../../shared/animations/slides';
-import { theme } from '../../../config/theme';
+import { slideDown } from '../../shared/animations/slides';
+import { theme } from '../../shared/config/theme';
 import { compose } from 'redux';
 import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import LoginForm, { FormValues } from 'components/layout/auth/login-form';
+import LoginForm, { FormValues } from './login-form';
+import { login, toggleLoginModal } from '../../redux/actions/auth-actions';
 
 const styles = (theme: Theme) => createStyles({
   header: {
@@ -73,7 +73,7 @@ class LoginModal extends React.Component<PropsFromRedux&WithStyles<typeof styles
 }
 
 const mapStateToProps = ({authentication}: IRootState) => ( {
-  authentication: authentication
+  authentication
 } );
 const mapDispatchToProps = {
   toggleLoginModal, login

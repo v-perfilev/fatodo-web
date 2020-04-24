@@ -5,11 +5,11 @@ import { TextField } from 'formik-material-ui';
 import { createStyles, LinearProgress, Theme, WithStyles, withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import React = require('react');
+import { AuthenticationState } from '../../redux/rerducers/auth-reduser';
 
 interface FormProps {
   initial: FormValues,
-  initialValid?: boolean,
-  login: any,
+  login: Function
 }
 
 export interface FormValues {
@@ -33,7 +33,7 @@ const InnerForm = (props: FormikProps<FormValues>&StylesProps) => {
     <Form className={classes.root}>
       <Field
         component={TextField}
-        type="email"
+        type="text"
         name="email"
         label="Email"
         fullWidth
@@ -76,6 +76,7 @@ export default compose(
     handleSubmit: (values: FormValues, props: FormikBag<FormProps, FormValues>) => {
       const {login} = props.props;
       login(values);
+      props.setSubmitting(false);
     }
   }),
   withStyles(styles)

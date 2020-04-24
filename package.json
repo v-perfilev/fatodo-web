@@ -61,7 +61,7 @@
     "build": "webpack --config webpack/webpack.prod.js",
     "lint": "tslint --project tsconfig.json -e 'node_modules/**' -e 'dist/**'",
     "lint:fix": "npm run-script lint -- --fix",
-    "jest": "jest --coverage --logHeapUsage --maxWorkers=2 --config src/test/jest.conf.js",
+    "jest": "jest --coverage --logHeapUsage --maxWorkers=2 --config test/jest.conf.js",
     "test": "npm run-script lint && npm run-script jest"
   }
 }

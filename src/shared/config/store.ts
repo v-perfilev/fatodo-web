@@ -1,6 +1,6 @@
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import reducer, { IRootState } from '../shared/reducers';
+import reducer, { IRootState } from '../../redux';
 
 const defaultMiddlewares = [thunkMiddleware];
 

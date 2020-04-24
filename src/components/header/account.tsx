@@ -1,9 +1,9 @@
-import { IRootState } from '../../../shared/reducers';
+import { IRootState } from '../../redux';
 import * as React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import { toggleLoginModal } from '../../../shared/reducers/authentication';
 import { Box } from '@material-ui/core';
+import { toggleLoginModal } from '../../redux/actions/auth-actions';
 
 class Account extends React.Component<PropsFromRedux> {
 
@@ -28,7 +28,7 @@ const mapStateToProps = ({authentication}: IRootState) => ( {
   authentication: authentication
 } );
 const mapDispatchToProps = {
-  toggleLoginModal: toggleLoginModal
+  toggleLoginModal
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps)

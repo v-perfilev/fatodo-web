@@ -1,9 +1,9 @@
 import * as React from 'react';
 import './app.scss';
 import { hot } from 'react-hot-loader';
-import Header from './layout/header/header';
+import Header from './header/header';
 import { connect } from 'react-redux';
-import LoginModal from './layout/auth/login-modal';
+import LoginModal from './auth/login-modal';
 
 class App extends React.Component {
   render() {

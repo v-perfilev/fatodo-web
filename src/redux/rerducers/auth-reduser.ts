@@ -1,13 +1,13 @@
 import { FAILURE, REQUEST, SUCCESS } from '../thunk-types';
-import * as SecurityUtils from '../../security/security.utils';
-import { ACTION_TYPES } from './types';
+import * as SecurityUtils from '../../utils/security-utils';
+import { ACTION_TYPES } from '../actions/auth-actions';
 
 const initialState = {
   loading: false,
   showLoginModal: false,
   account: {} as any,
   errorMessage: null as string,
-  redirectMessage: null as string
+  redirectMessage: null as string,
 };
 
 export type AuthenticationState = Readonly<typeof initialState>;
@@ -17,14 +17,14 @@ export default (state: AuthenticationState = initialState, action): Authenticati
     case REQUEST(ACTION_TYPES.LOGIN):
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case SUCCESS(ACTION_TYPES.LOGIN):
       return {
         ...state,
         loading: false,
         account: action.payload.data,
-        showLoginModal: false
+        showLoginModal: false,
       };
     case FAILURE(ACTION_TYPES.LOGIN):
       SecurityUtils.clearAuthToken();
@@ -32,25 +32,25 @@ export default (state: AuthenticationState = initialState, action): Authenticati
         ...initialState,
         loading: false,
         errorMessage: action.payload,
-        showLoginModal: true
+        showLoginModal: true,
       };
     case ACTION_TYPES.TOGGLE_LOGIN_MODAL:
       return {
         ...state,
-        showLoginModal: !state.showLoginModal
+        showLoginModal: !state.showLoginModal,
       };
     case ACTION_TYPES.LOGOUT:
       return {
-        ...initialState
+        ...initialState,
       };
     case ACTION_TYPES.ERROR_MESSAGE:
       return {
-        ...initialState,
-        redirectMessage: action.message
+        ...state,
+        redirectMessage: action.message,
       };
     case ACTION_TYPES.CLEAR_AUTH:
       return {
-        ...initialState
+        ...initialState,
       };
     default:
       return state;
