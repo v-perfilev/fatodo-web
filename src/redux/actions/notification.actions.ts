@@ -1,4 +1,4 @@
-import { Notification } from '../../shared/notifier';
+import Notification from '../../model/notification.model';
 import { SnackbarKey } from 'notistack';
 
 export const ACTION_TYPES = {
@@ -18,9 +18,8 @@ export const enqueueSnackbar = (notification: Notification) => {
   };
 };
 
-export const closeSnackbar = (key: SnackbarKey) => ({
+export const closeSnackbar = (key: SnackbarKey = 'all') => ({
   type: ACTION_TYPES.CLOSE_SNACKBAR,
-  dismissAll: !key,
   key,
 });
 

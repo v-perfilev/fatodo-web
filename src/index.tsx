@@ -25,7 +25,7 @@ setupAxiosInterceptors({
 const render = Component => ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <SnackbarProvider anchorOrigin={{horizontal: 'center', vertical: 'bottom'}}>
+      <SnackbarProvider anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>
         <Component/>
       </SnackbarProvider>
     </ThemeProvider>

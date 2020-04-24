@@ -5,11 +5,6 @@ import { connect, ConnectedProps } from 'react-redux';
 import { compose } from 'redux';
 import { removeSnackbar } from '../redux/actions/notification.actions';
 
-export interface Notification {
-  message: SnackbarMessage,
-  options?: OptionsObject,
-}
-
 interface INotifierProps {
   enqueueSnackbar: (message: SnackbarMessage, options?: OptionsObject) => SnackbarKey,
   closeSnackbar: (key: SnackbarKey) => void,
@@ -31,11 +26,10 @@ class Notifier extends React.Component<INotifierProps & PropsFromRedux, INotifie
   }
 
   handlingLoop = () => {
-    const { notificationState, enqueueSnackbar, closeSnackbar, removeSnackbar } = this.props;
+    const { notificationState, closeSnackbar } = this.props;
     const { displayed } = this.state;
 
     notificationState.list.forEach(({ message, options, key, dismissed = false }) => {
-
       if (dismissed) {
         closeSnackbar(key);
         return;
@@ -43,23 +37,26 @@ class Notifier extends React.Component<INotifierProps & PropsFromRedux, INotifie
       if (displayed.includes(key)) {
         return;
       }
-
-      enqueueSnackbar(message, {
-        key,
-        ...options,
-        onClose: (event, reason, k) => {
-          if (options?.onClose) {
-            options.onClose(event, reason, k);
-          }
-        },
-        onExited: (event, k) => {
-          removeSnackbar(k)
-          this.removeDisplayed(k);
-        },
-      });
-
-      this.addDisplayed(key);
+      this.enqueueSnackbar(message, key, options);
     });
+  }
+
+  enqueueSnackbar = (message, key, options) => {
+    const { enqueueSnackbar, removeSnackbar } = this.props;
+    enqueueSnackbar(message, {
+      key,
+      ...options,
+      onClose: (event, reason, k) => {
+        if (options?.onClose) {
+          options.onClose(event, reason, k);
+        }
+      },
+      onExited: (event, k) => {
+        removeSnackbar(k)
+        this.removeDisplayed(k);
+      },
+    });
+    this.addDisplayed(key);
   }
 
   addDisplayed = (key: SnackbarKey) => {
