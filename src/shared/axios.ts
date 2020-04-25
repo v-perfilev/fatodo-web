@@ -7,18 +7,18 @@ import { NotificationBuilder } from '../utils/notification.builder';
 axios.defaults.timeout = SERVER_API_TIMEOUT;
 axios.defaults.baseURL = SERVER_API_URL;
 
-interface ISetupAxiosActions {
+interface SetupAxiosActions {
   onUnauthenticated: () => void;
   enqueueSnackbar: (notification: Notification) => void;
 }
 
-const setupAxiosInterceptors = (actions: ISetupAxiosActions) => {
-  const onRequestSuccess = config => {
+const setupAxiosInterceptors = (actions: SetupAxiosActions) => {
+  const onRequestSuccess = request => {
     const token = SecurityUtils.getAuthToken();
     if (token) {
-      config.headers.authorization = `Bearer ${token}`;
+      request.headers.authorization = `Bearer ${token}`;
     }
-    return config;
+    return request;
   };
 
   const onResponseSuccess = response => response;

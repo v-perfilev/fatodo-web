@@ -6,16 +6,6 @@ import { createStyles, LinearProgress, Theme, WithStyles, withStyles } from '@ma
 import { compose } from 'redux';
 import React = require('react');
 
-interface FormProps {
-  initial: FormValues,
-  login: Function
-}
-
-export interface FormValues {
-  email: string;
-  password: string;
-}
-
 const styles = (theme: Theme) => createStyles({
   root: {
     '& > *': {
@@ -24,33 +14,15 @@ const styles = (theme: Theme) => createStyles({
     }
   }
 });
-type StylesProps = WithStyles<typeof styles>;
 
-const InnerForm = (props: FormikProps<FormValues> & StylesProps) => {
-  const { classes, isValid, isSubmitting } = props;
+type Props = FormikProps<FormValues> & WithStyles<typeof styles>;
+
+const InnerForm = ({ classes, isValid, isSubmitting }: Props) => {
   return (
     <Form className={classes.root}>
-      <Field
-        component={TextField}
-        type="text"
-        name="email"
-        label="Email"
-        fullWidth
-      />
-      <Field
-        component={TextField}
-        type="password"
-        name="password"
-        label="Password"
-        fullWidth
-      />
-      <Button
-        type="submit"
-        variant="contained"
-        color="secondary"
-        fullWidth
-        disabled={!isValid}
-      >
+      <Field component={TextField} type="text" name="email" label="Email" fullWidth/>
+      <Field component={TextField} type="password" name="password" label="Password" fullWidth/>
+      <Button type="submit" variant="contained" color="secondary" fullWidth disabled={!isValid}>
         Submit
       </Button>
       {isSubmitting && <LinearProgress/>}
@@ -58,25 +30,35 @@ const InnerForm = (props: FormikProps<FormValues> & StylesProps) => {
   );
 };
 
-export default compose(
-  withFormik<FormProps, FormValues>({
-    mapPropsToValues: props => ({
-      email: props.initial.email,
-      password: props.initial.password
-    }),
+interface FormValues {
+  email: string;
+  password: string;
+}
 
-    validationSchema: Yup.object().shape({
-      email: Yup.string().email('Email not valid').required('Email is required'),
-      password: Yup.string().required('Password is required')
-    }),
+interface FormProps {
+  login: Function
+}
 
-    validateOnMount: true,
-
-    handleSubmit: (values: FormValues, props: FormikBag<FormProps, FormValues>) => {
-      const { login } = props.props;
-      login(values);
-      props.setSubmitting(false);
-    }
+const formik = withFormik<FormProps, FormValues>({
+  mapPropsToValues: () => ({
+    email: '',
+    password: ''
   }),
+
+  validationSchema: Yup.object().shape({
+    email: Yup.string().email('Email not valid').required('Email is required'),
+    password: Yup.string().required('Password is required')
+  }),
+
+  validateOnMount: true,
+
+  handleSubmit: (values: FormValues, { setSubmitting, props: { login } }: FormikBag<FormProps, FormValues>) => {
+    login(values);
+    setSubmitting(false);
+  }
+});
+
+export default compose(
+  formik,
   withStyles(styles)
 )(InnerForm);

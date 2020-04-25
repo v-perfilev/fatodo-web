@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { createStyles, Link, Typography, withStyles } from '@material-ui/core';
+import { createStyles, Link, Typography, WithStyles, withStyles } from '@material-ui/core';
 
 const styles = () => createStyles({
   white: {
@@ -7,8 +7,9 @@ const styles = () => createStyles({
   },
 });
 
-const Logo = (props) => {
-  const {classes} = props;
+type Props = WithStyles<typeof styles>;
+
+const Logo = ({ classes }: Props) => {
   const preventDefault = (event) => event.preventDefault();
 
   return (

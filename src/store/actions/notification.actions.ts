@@ -8,12 +8,11 @@ export const ACTION_TYPES = {
 };
 
 export const enqueueSnackbar = (notification: Notification) => {
-  const key = notification.options?.key;
   return {
     type: ACTION_TYPES.ENQUEUE_SNACKBAR,
     notification: {
       ...notification,
-      key: key || new Date().getTime() + Math.random(),
+      key: notification.options?.key || new Date().getTime() + Math.random(),
     },
   };
 };
@@ -23,7 +22,9 @@ export const closeSnackbar = (key: SnackbarKey = 'all') => ({
   key,
 });
 
-export const removeSnackbar = (key: SnackbarKey) => ({
-  type: ACTION_TYPES.REMOVE_SNACKBAR,
-  key,
-});
+export const removeSnackbar = (key: SnackbarKey) => {
+  return {
+    type: ACTION_TYPES.REMOVE_SNACKBAR,
+    key,
+  };
+};

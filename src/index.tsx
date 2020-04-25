@@ -12,6 +12,7 @@ import 'typeface-roboto';
 import { clearAuth } from './store/actions/auth.actions';
 import { SnackbarProvider } from 'notistack';
 import { enqueueSnackbar } from './store/actions/notification.actions';
+import './styles.scss';
 
 const root = document.getElementById('root');
 const store = initStore;
@@ -25,7 +26,7 @@ setupAxiosInterceptors({
 const render = Component => ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <SnackbarProvider anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>
+      <SnackbarProvider anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
         <Component/>
       </SnackbarProvider>
     </ThemeProvider>

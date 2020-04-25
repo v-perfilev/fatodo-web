@@ -16,21 +16,20 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
-const Header = (props: WithStyles<typeof styles>) => {
-  const {classes} = props;
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <IconButton edge="start" color="inherit" className={classes.menuButton}>
-          <MenuIcon/>
-        </IconButton>
-        <Box className={classes.grow}>
-          <Logo/>
-        </Box>
-        <Account/>
-      </Toolbar>
-    </AppBar>
-  );
-}
+type Props = WithStyles<typeof styles>;
+
+const Header = ({ classes }: Props) => (
+  <AppBar position="static">
+    <Toolbar>
+      <IconButton edge="start" color="inherit" className={classes.menuButton}>
+        <MenuIcon/>
+      </IconButton>
+      <Box className={classes.grow}>
+        <Logo/>
+      </Box>
+      <Account/>
+    </Toolbar>
+  </AppBar>
+);
 
 export default withStyles(styles)(Header);

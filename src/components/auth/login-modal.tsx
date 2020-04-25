@@ -17,7 +17,7 @@ import { theme } from '../../shared/theme';
 import { compose } from 'redux';
 import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import LoginForm, { FormValues } from './login-form';
+import LoginForm from './login-form';
 import { login, toggleLoginModal } from '../../store/actions/auth.actions';
 
 const styles = (theme: Theme) => createStyles({
@@ -41,48 +41,34 @@ const styles = (theme: Theme) => createStyles({
   },
 });
 
-const initialValues: FormValues = {
-  email: '',
-  password: '',
-}
+type Props = ConnectedProps<typeof connector> & WithStyles<typeof styles>;
 
-class LoginModal extends React.Component<PropsFromRedux & WithStyles<typeof styles>> {
-  render() {
-    const { classes, authState, login } = this.props;
-    const isModalOpen = authState.showLoginModal && !authState.account.empty;
+const LoginModal = ({ classes, authState, login, toggleLoginModal }: Props) => {
+  const isModalOpen = authState.showLoginModal && !authState.account.empty;
 
-    const toggleLoginModal = () => this.props.toggleLoginModal();
+  return (
+    <Dialog open={isModalOpen} onClose={toggleLoginModal} TransitionComponent={slideDown}>
+      <DialogTitle disableTypography className={classes.header}>
+        <AccountBoxIcon className={classes.icon}/>
+        <Typography variant="h6">
+          Sign in
+        </Typography>
+        <IconButton onClick={toggleLoginModal} className={classes.closeButton}>
+          <CloseIcon/>
+        </IconButton>
+      </DialogTitle>
+      <DialogContent dividers>
+        <LoginForm login={login}/>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
-    return (
-      <Dialog open={isModalOpen} onClose={toggleLoginModal} TransitionComponent={slideDown}>
-        <DialogTitle disableTypography className={classes.header}>
-          <AccountBoxIcon className={classes.icon}/>
-          <Typography variant="h6">
-            Sign in
-          </Typography>
-          <IconButton onClick={toggleLoginModal} className={classes.closeButton}>
-            <CloseIcon/>
-          </IconButton>
-        </DialogTitle>
-        <DialogContent dividers>
-          <LoginForm initial={initialValues} login={login}/>
-        </DialogContent>
-      </Dialog>
-    );
-  }
-}
-
-const mapStateToProps = ({ authState }: IRootState) => ({
-  authState
-});
-const mapDispatchToProps = {
-  toggleLoginModal, login
-}
-
-const connector = connect(mapStateToProps, mapDispatchToProps)
-type PropsFromRedux = ConnectedProps<typeof connector>
+const mapStateToProps = ({ authState }: IRootState) => ({ authState });
+const mapDispatchToProps = { toggleLoginModal, login };
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
+  connector,
   withStyles(styles(theme)),
-  connector
 )(LoginModal);
