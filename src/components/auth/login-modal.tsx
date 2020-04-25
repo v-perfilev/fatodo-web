@@ -1,6 +1,6 @@
 import { connect, ConnectedProps } from 'react-redux';
 import * as React from 'react';
-import { IRootState } from '../../redux';
+import { IRootState } from '../../store';
 import {
   createStyles,
   Dialog,
@@ -12,13 +12,13 @@ import {
   withStyles,
   WithStyles
 } from '@material-ui/core';
-import { slideDown } from '../../shared/animations/slides';
-import { theme } from '../../shared/config/theme';
+import { slideDown } from '../../utils/animation.helpers';
+import { theme } from '../../shared/theme';
 import { compose } from 'redux';
 import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LoginForm, { FormValues } from './login-form';
-import { login, toggleLoginModal } from '../../redux/actions/auth.actions';
+import { login, toggleLoginModal } from '../../store/actions/auth.actions';
 
 const styles = (theme: Theme) => createStyles({
   header: {

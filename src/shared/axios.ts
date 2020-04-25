@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { SERVER_API_TIMEOUT, SERVER_API_URL } from '../constants';
-import * as SecurityUtils from '../../utils/security.utils';
-import Notification from '../../model/notification.model';
-import { NotificationBuilder } from '../../utils/notification.builder';
+import * as SecurityUtils from '../utils/security.utils';
+import Notification from '../model/notification.model';
+import { NotificationBuilder } from '../utils/notification.builder';
 
 axios.defaults.timeout = SERVER_API_TIMEOUT;
 axios.defaults.baseURL = SERVER_API_URL;

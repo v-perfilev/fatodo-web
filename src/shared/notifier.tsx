@@ -1,9 +1,9 @@
 import { OptionsObject, SnackbarKey, SnackbarMessage, withSnackbar } from 'notistack';
 import * as React from 'react';
-import { IRootState } from '../redux';
+import { IRootState } from '../store';
 import { connect, ConnectedProps } from 'react-redux';
 import { compose } from 'redux';
-import { removeSnackbar } from '../redux/actions/notification.actions';
+import { removeSnackbar } from '../store/actions/notification.actions';
 
 interface INotifierProps {
   enqueueSnackbar: (message: SnackbarMessage, options?: OptionsObject) => SnackbarKey,

@@ -1,9 +1,9 @@
-import { IRootState } from '../../redux';
+import { IRootState } from '../../store';
 import * as React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import { Box } from '@material-ui/core';
-import { toggleLoginModal } from '../../redux/actions/auth.actions';
+import { toggleLoginModal } from '../../store/actions/auth.actions';
 
 class Account extends React.Component<PropsFromRedux> {
 

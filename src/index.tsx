@@ -3,15 +3,15 @@ import * as ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
 
 import App from './components/app';
-import setupAxiosInterceptors from './shared/config/axios.interceptor';
-import initStore from './shared/config/store';
+import setupAxiosInterceptors from './shared/axios';
+import initStore from './shared/store';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core';
-import { theme } from './shared/config/theme';
+import { theme } from './shared/theme';
 import 'typeface-roboto';
-import { clearAuth } from './redux/actions/auth.actions';
+import { clearAuth } from './store/actions/auth.actions';
 import { SnackbarProvider } from 'notistack';
-import { enqueueSnackbar } from './redux/actions/notification.actions';
+import { enqueueSnackbar } from './store/actions/notification.actions';
 
 const root = document.getElementById('root');
 const store = initStore;
