@@ -4,17 +4,18 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Logo from './logo';
 import Account from './account';
 
-const styles = (theme: Theme) => createStyles({
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  white: {
-    color: 'white',
-  },
-});
+const styles = (theme: Theme) =>
+  createStyles({
+    grow: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    white: {
+      color: 'white',
+    },
+  });
 
 type Props = WithStyles<typeof styles>;
 
@@ -22,12 +23,12 @@ const Header = ({ classes }: Props) => (
   <AppBar position="static">
     <Toolbar>
       <IconButton edge="start" color="inherit" className={classes.menuButton}>
-        <MenuIcon/>
+        <MenuIcon />
       </IconButton>
       <Box className={classes.grow}>
-        <Logo/>
+        <Logo />
       </Box>
-      <Account/>
+      <Account />
     </Toolbar>
   </AppBar>
 );

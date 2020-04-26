@@ -23,16 +23,16 @@ module.exports = options => merge(commonConfig({env: ENV}), {
                 }
                 ]
             },
-            {
-                test: /\.(woff|woff2|eot|ttf|svg)$/,
-                loader: 'file-loader',
-                options: {
-                    limit: 1024,
-                    name: '[name].[ext]',
-                    publicPath: 'dist/assets/',
-                    outputPath: 'dist/assets/'
-                }
-            }
+            // {
+            //     test: /\.(woff|woff2|eot|ttf|svg)$/,
+            //     loader: 'file-loader',
+            //     options: {
+            //         limit: 1024,
+            //         name: '[name].[ext]',
+            //         publicPath: 'dist/assets/',
+            //         outputPath: 'dist/assets/'
+            //     }
+            // }
         ]
     },
     plugins: [

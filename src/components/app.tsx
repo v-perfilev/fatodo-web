@@ -6,9 +6,9 @@ import Notifier from '../shared/notifier';
 
 const App = () => (
   <div>
-    <Notifier/>
-    <LoginModal/>
-    <Header/>
+    <Notifier />
+    <LoginModal />
+    <Header />
   </div>
 );
 

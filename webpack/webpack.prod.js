@@ -19,12 +19,13 @@ module.exports = options => merge(commonConfig({env: ENV}), {
             {
                 test: /\.(sa|sc|c)ss$/,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            publicPath: '../'
-                        }
-                    },
+                    // {
+                    //     loader: MiniCssExtractPlugin.loader,
+                    //     options: {
+                    //         publicPath: '../'
+                    //     }
+                    // },
+                    // MiniCssExtractPlugin.loader,
                     'css-loader',
                     'postcss-loader',
                     {

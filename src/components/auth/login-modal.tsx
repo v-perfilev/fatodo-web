@@ -10,7 +10,7 @@ import {
   Theme,
   Typography,
   withStyles,
-  WithStyles
+  WithStyles,
 } from '@material-ui/core';
 import { slideDown } from '../../utils/animation.helpers';
 import { theme } from '../../shared/theme';
@@ -20,26 +20,27 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LoginForm from './login-form';
 import { login, toggleLoginModal } from '../../store/actions/auth.actions';
 
-const styles = (theme: Theme) => createStyles({
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    minWidth: 200,
-    margin: 0,
-    padding: theme.spacing(2),
-    color: 'white',
-    background: theme.palette.primary.main,
-  },
-  icon: {
-    marginRight: theme.spacing(1),
-  },
-  closeButton: {
-    position: 'absolute',
-    right: theme.spacing(1),
-    top: theme.spacing(1),
-    color: 'white',
-  },
-});
+const styles = (t: Theme) =>
+  createStyles({
+    header: {
+      display: 'flex',
+      alignItems: 'center',
+      minWidth: 200,
+      margin: 0,
+      padding: theme.spacing(2),
+      color: 'white',
+      background: theme.palette.primary.main,
+    },
+    icon: {
+      marginRight: theme.spacing(1),
+    },
+    closeButton: {
+      position: 'absolute',
+      right: theme.spacing(1),
+      top: theme.spacing(1),
+      color: 'white',
+    },
+  });
 
 type Props = ConnectedProps<typeof connector> & WithStyles<typeof styles>;
 
@@ -48,17 +49,15 @@ const LoginModal = ({ classes, authState, login, toggleLoginModal }: Props) => {
 
   return (
     <Dialog open={isModalOpen} onClose={toggleLoginModal} TransitionComponent={slideDown}>
-      <DialogTitle disableTypography className={classes.header}>
-        <AccountBoxIcon className={classes.icon}/>
-        <Typography variant="h6">
-          Sign in
-        </Typography>
+      <DialogTitle disableTypography={true} className={classes.header}>
+        <AccountBoxIcon className={classes.icon} />
+        <Typography variant="h6">Sign in</Typography>
         <IconButton onClick={toggleLoginModal} className={classes.closeButton}>
-          <CloseIcon/>
+          <CloseIcon />
         </IconButton>
       </DialogTitle>
-      <DialogContent dividers>
-        <LoginForm login={login}/>
+      <DialogContent dividers={true}>
+        <LoginForm login={login} />
       </DialogContent>
     </Dialog>
   );
@@ -68,7 +67,4 @@ const mapStateToProps = ({ authState }: IRootState) => ({ authState });
 const mapDispatchToProps = { toggleLoginModal, login };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  connector,
-  withStyles(styles(theme)),
-)(LoginModal);
+export default compose(connector, withStyles(styles(theme)))(LoginModal);

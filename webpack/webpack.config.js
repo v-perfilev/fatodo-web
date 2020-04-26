@@ -20,7 +20,33 @@ module.exports = options => ({
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
                 exclude: /node_modules/
-            }
+            },
+            {
+                enforce: 'pre',
+                test: /\.tsx?$/,
+                loader: 'source-map-loader'
+            },
+            {
+                test: /\.tsx?$/,
+                enforce: 'pre',
+                loader: 'tslint-loader',
+                exclude: ['/node_modules/']
+            },
+            {
+                test: /\.(jpe?g|png|gif|svg|woff2?|ttf|eot)$/i,
+                loader: 'file-loader',
+                // options: {
+                //     digest: 'hex',
+                //     hash: 'sha512',
+                //     name: 'content/[hash].[ext]'
+                // }
+                options: {
+                    limit: 1024,
+                    name: '[name].[ext]',
+                    publicPath: 'dist/assets/',
+                    outputPath: 'dist/assets/'
+                }
+            },
         ]
     },
     plugins: [
@@ -31,7 +57,7 @@ module.exports = options => ({
             files: ['./src/**/*.ts']
         }),
         new CopyWebpackPlugin([
-            { from: './public/', to: '' }
+            {from: './public/', to: ''}
         ])
     ]
 });

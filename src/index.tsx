@@ -21,20 +21,20 @@ const store = initStore;
 
 const axiosActions = bindActionCreators({ clearAuth, enqueueSnackbar }, store.dispatch);
 setupAxiosInterceptors({
-    onUnauthenticated: axiosActions.clearAuth,
-    enqueueSnackbar: axiosActions.enqueueSnackbar,
-  }
-);
+  onUnauthenticated: axiosActions.clearAuth,
+  enqueueSnackbar: axiosActions.enqueueSnackbar,
+});
 
-const render = Component => ReactDOM.render(
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <SnackbarProvider anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-        <Component/>
-      </SnackbarProvider>
-    </ThemeProvider>
-  </Provider>,
-  root
-);
+const render = Component =>
+  ReactDOM.render(
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
+          <Component />
+        </SnackbarProvider>
+      </ThemeProvider>
+    </Provider>,
+    root
+  );
 
 i18n.init().then(() => render(App));
