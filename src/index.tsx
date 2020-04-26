@@ -15,6 +15,7 @@ import { enqueueSnackbar } from './store/actions/notification.actions';
 import i18n from './shared/i18n';
 import './shared/i18n';
 import './styles.scss';
+import 'typeface-roboto-multilang/cyrillic.css';
 
 const root = document.getElementById('root');
 const store = initStore;

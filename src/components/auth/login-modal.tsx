@@ -44,7 +44,7 @@ const styles = (t: Theme) =>
 
 type Props = ConnectedProps<typeof connector> & WithStyles<typeof styles>;
 
-const LoginModal = ({ classes, authState, login, toggleLoginModal }: Props) => {
+const LoginModal = ({ authState, login, toggleLoginModal, classes }: Props) => {
   const isModalOpen = authState.showLoginModal && !authState.account.empty;
 
   return (

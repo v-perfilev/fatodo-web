@@ -20,6 +20,7 @@
     "curly": false,
     "prettier": true,
     "interface-name": false,
-    "no-shadowed-variable": false
+    "no-shadowed-variable": false,
+    "jsx-no-lambda": false
   }
 }

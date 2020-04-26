@@ -19,7 +19,7 @@ const styles = (theme: Theme) =>
 
 type Props = FormikProps<FormValues> & WithStyles<typeof styles>;
 
-const InnerForm = ({ classes, isValid, isSubmitting }: Props) => {
+const InnerForm = ({ isValid, isSubmitting, classes }: Props) => {
   return (
     <Form className={classes.root}>
       <Field component={TextField} type="text" name="email" label="Email" fullWidth={true} />
