@@ -51,7 +51,8 @@ module.exports = options => ({
             files: ['./src/**/*.ts']
         }),
         new CopyWebpackPlugin([
-            {from: './public/', to: ''}
+            {from: './public/', to: ''},
+            {from: './public/favicon.ico', to: 'favicon.ico'}
         ])
     ]
 });
