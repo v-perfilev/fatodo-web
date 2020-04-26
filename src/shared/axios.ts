@@ -3,6 +3,7 @@ import { SERVER_API_TIMEOUT, SERVER_API_URL } from '../constants';
 import * as SecurityUtils from '../utils/security.utils';
 import Notification from '../model/notification.model';
 import { NotificationBuilder } from '../utils/notification.builder';
+import i18n from './i18n';
 
 axios.defaults.timeout = SERVER_API_TIMEOUT;
 axios.defaults.baseURL = SERVER_API_URL;
@@ -29,7 +30,8 @@ const setupAxiosInterceptors = (actions: SetupAxiosActions) => {
     if (status === 403 || status === 401) {
       actions.onUnauthenticated();
     }
-    const notification = new NotificationBuilder('test1 test1 test1 tes').setVariant('warning').build();
+
+    const notification = new NotificationBuilder(i18n.t('test')).setVariant('warning').build();
     actions.enqueueSnackbar(notification);
     return Promise.resolve(response);
   };

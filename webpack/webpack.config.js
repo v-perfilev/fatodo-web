@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TSLintPlugin = require('tslint-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const path = require('path');
 
@@ -28,6 +29,9 @@ module.exports = options => ({
         }),
         new TSLintPlugin({
             files: ['./src/**/*.ts']
-        })
+        }),
+        new CopyWebpackPlugin([
+            { from: './public/', to: '' }
+        ])
     ]
 });

@@ -12,14 +12,17 @@ import 'typeface-roboto';
 import { clearAuth } from './store/actions/auth.actions';
 import { SnackbarProvider } from 'notistack';
 import { enqueueSnackbar } from './store/actions/notification.actions';
+import i18n from './shared/i18n';
+import './shared/i18n';
 import './styles.scss';
 
 const root = document.getElementById('root');
 const store = initStore;
-const rootActions = bindActionCreators({ clearAuth, enqueueSnackbar }, store.dispatch);
+
+const axiosActions = bindActionCreators({ clearAuth, enqueueSnackbar }, store.dispatch);
 setupAxiosInterceptors({
-    onUnauthenticated: rootActions.clearAuth,
-    enqueueSnackbar: rootActions.enqueueSnackbar,
+    onUnauthenticated: axiosActions.clearAuth,
+    enqueueSnackbar: axiosActions.enqueueSnackbar,
   }
 );
 
@@ -34,4 +37,4 @@ const render = Component => ReactDOM.render(
   root
 );
 
-render(App);
+i18n.init().then(() => render(App));
