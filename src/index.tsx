@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 
 import App from './components/app';
 import setupAxiosInterceptors from './shared/axios';
-import initStore from './shared/store';
+import store from './shared/store';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/core';
 import { theme } from './shared/theme';
@@ -18,7 +18,6 @@ import './styles.scss';
 import 'typeface-roboto-multilang/cyrillic.css';
 
 const root = document.getElementById('root');
-const store = initStore;
 
 const axiosActions = bindActionCreators({ clearAuth, enqueueSnackbar }, store.dispatch);
 setupAxiosInterceptors({

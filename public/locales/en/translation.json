@@ -1,3 +1,22 @@
 {
-  "test": "ENGLISH"
+  "header": {
+    "logout": "Logout",
+    "signup": "Sign up",
+    "signin": "Sign in"
+  },
+  "auth": {
+    "header": "Sign in",
+    "user": {
+      "label": "Email / Username",
+      "required": "Email / username is required"
+    },
+    "password": {
+      "label": "Password",
+      "required": "Password is required"
+    },
+    "rememberMe": {
+      "label": "Remember me"
+    },
+    "submit": "Submit"
+  }
 }

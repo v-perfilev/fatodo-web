@@ -6,8 +6,6 @@ const initialState = {
   loading: false,
   showLoginModal: false,
   account: {} as any,
-  errorMessage: null as string,
-  redirectMessage: null as string,
 };
 
 export type AuthenticationState = Readonly<typeof initialState>;
@@ -31,7 +29,6 @@ export default (state: AuthenticationState = initialState, action): Authenticati
       return {
         ...initialState,
         loading: false,
-        errorMessage: action.payload,
         showLoginModal: true,
       };
     case ACTION_TYPES.TOGGLE_LOGIN_MODAL:
@@ -42,11 +39,6 @@ export default (state: AuthenticationState = initialState, action): Authenticati
     case ACTION_TYPES.LOGOUT:
       return {
         ...initialState,
-      };
-    case ACTION_TYPES.ERROR_MESSAGE:
-      return {
-        ...state,
-        redirectMessage: action.message,
       };
     case ACTION_TYPES.CLEAR_AUTH:
       return {

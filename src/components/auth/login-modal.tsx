@@ -2,6 +2,7 @@ import { connect, ConnectedProps } from 'react-redux';
 import * as React from 'react';
 import { IRootState } from '../../store';
 import {
+  Button,
   createStyles,
   Dialog,
   DialogContent,
@@ -19,8 +20,9 @@ import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LoginForm from './login-form';
 import { login, toggleLoginModal } from '../../store/actions/auth.actions';
+import { useTranslation } from 'react-i18next';
 
-const styles = (t: Theme) =>
+const styles = () =>
   createStyles({
     header: {
       display: 'flex',
@@ -44,20 +46,21 @@ const styles = (t: Theme) =>
 
 type Props = ConnectedProps<typeof connector> & WithStyles<typeof styles>;
 
-const LoginModal = ({ authState, login, toggleLoginModal, classes }: Props) => {
+const LoginModal = ({ authState, toggleLoginModal, classes }: Props) => {
+  const { t } = useTranslation();
   const isModalOpen = authState.showLoginModal && !authState.account.empty;
 
   return (
     <Dialog open={isModalOpen} onClose={toggleLoginModal} TransitionComponent={slideDown}>
       <DialogTitle disableTypography={true} className={classes.header}>
         <AccountBoxIcon className={classes.icon} />
-        <Typography variant="h6">Sign in</Typography>
+        <Typography variant="h6">{t('auth.header')}</Typography>
         <IconButton onClick={toggleLoginModal} className={classes.closeButton}>
           <CloseIcon />
         </IconButton>
       </DialogTitle>
       <DialogContent dividers={true}>
-        <LoginForm login={login} />
+        <LoginForm />
       </DialogContent>
     </Dialog>
   );
@@ -67,4 +70,4 @@ const mapStateToProps = ({ authState }: IRootState) => ({ authState });
 const mapDispatchToProps = { toggleLoginModal, login };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(connector, withStyles(styles(theme)))(LoginModal);
+export default compose(connector, withStyles(styles))(LoginModal);

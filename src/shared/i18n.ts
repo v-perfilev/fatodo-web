@@ -21,6 +21,8 @@ i18next
   .init({
     fallbackLng: 'en',
     load: 'languageOnly',
+    ns: ['translation', 'feedback'],
+    defaultNS: 'translation',
     backend: {
       loadPath: 'locales/{{lng}}/{{ns}}.json',
     },

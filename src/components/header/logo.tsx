@@ -13,13 +13,11 @@ type Props = WithStyles<typeof styles>;
 
 const Logo = ({ classes }: Props) => {
   const preventDefault = event => event.preventDefault();
-  const { t, i18n } = useTranslation();
 
-  // i18n.changeLanguage('de');
   return (
     <Link href="#" onClick={preventDefault}>
       <Typography variant="h6" className={classes.white}>
-        FaToDo {t('test')}
+        FaToDo
       </Typography>
     </Link>
   );

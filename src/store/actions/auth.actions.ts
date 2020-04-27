@@ -7,7 +7,6 @@ export const ACTION_TYPES = {
   LOGIN: 'authState/LOGIN',
   LOGOUT: 'authState/LOGOUT',
   CLEAR_AUTH: 'authState/CLEAR_AUTH',
-  ERROR_MESSAGE: 'authState/ERROR_MESSAGE',
 };
 
 export const toggleLoginModal = () => dispatch => {

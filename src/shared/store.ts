@@ -1,10 +1,9 @@
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
+import promiseMiddleware from 'redux-promise-middleware';
 import reducer from '../store';
 
-const defaultMiddlewares = [thunkMiddleware];
-const composedMiddlewares = compose(applyMiddleware(...defaultMiddlewares));
+const defaultMiddlewares = [thunkMiddleware, promiseMiddleware];
+const composedMiddlewares = applyMiddleware(...defaultMiddlewares);
 
-const initStore = createStore(reducer, composedMiddlewares);
-
-export default initStore;
+export default createStore(reducer, composedMiddlewares);
