@@ -27,5 +27,10 @@
   },
   "permission": {
     "restricted": "Not enough rights to perform this operation"
+  },
+  "service": {
+    "group": {
+      "invalid": "Group contains invalid data"
+    }
   }
 }
