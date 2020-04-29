@@ -19,10 +19,11 @@ i18next
   .use(backend)
   .use(initReactI18next)
   .init({
+    whitelist: ['en', 'ru'],
     fallbackLng: 'en',
-    load: 'languageOnly',
     ns: ['translation', 'feedback'],
     defaultNS: 'translation',
+    load: 'languageOnly',
     backend: {
       loadPath: 'locales/{{lng}}/{{ns}}.json',
     },

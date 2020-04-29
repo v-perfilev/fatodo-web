@@ -38,7 +38,7 @@ const language = ({ classes }: Props) => {
 
   const handleClose = () => setAnchorEl(null);
 
-  const getNameForCode = code => LANGUAGES.find(l => l.code === code).name;
+  const getNameForCode = code => LANGUAGES.find(l => l.code === code)?.name;
 
   const changeLanguage = code => {
     i18n.changeLanguage(code);
