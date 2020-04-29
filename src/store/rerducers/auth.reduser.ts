@@ -1,11 +1,13 @@
 import { FAILURE, REQUEST, SUCCESS } from '../thunk.types';
 import * as SecurityUtils from '../../utils/security.utils';
 import { ACTION_TYPES } from '../actions/auth.actions';
+import User from '../../model/user.model';
 
 const initialState = {
   loading: false,
   showLoginModal: false,
-  account: {} as any,
+  isAuthenticated: false,
+  account: {} as User,
 };
 
 export type AuthenticationState = Readonly<typeof initialState>;
@@ -21,16 +23,26 @@ export default (state: AuthenticationState = initialState, action): Authenticati
       return {
         ...state,
         loading: false,
-        account: action.payload.data,
         showLoginModal: false,
+        isAuthenticated: true,
       };
     case FAILURE(ACTION_TYPES.LOGIN):
-      SecurityUtils.clearAuthToken();
       return {
         ...initialState,
         loading: false,
         showLoginModal: true,
       };
+
+    case SUCCESS(ACTION_TYPES.ACCOUNT):
+      return {
+        ...state,
+        account: action.payload.data,
+      };
+    case FAILURE(ACTION_TYPES.ACCOUNT):
+      return {
+        ...initialState,
+      };
+
     case ACTION_TYPES.TOGGLE_LOGIN_MODAL:
       return {
         ...state,

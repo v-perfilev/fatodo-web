@@ -8,7 +8,6 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  Theme,
   Typography,
   withStyles,
   WithStyles,
@@ -46,9 +45,11 @@ const styles = () =>
 
 type Props = ConnectedProps<typeof connector> & WithStyles<typeof styles>;
 
-const LoginModal = ({ authState, toggleLoginModal, classes }: Props) => {
+const LoginModal = ({ authState, toggleLoginModal, login, classes }: Props) => {
   const { t } = useTranslation();
-  const isModalOpen = authState.showLoginModal && !authState.account.empty;
+  const isModalOpen = authState.showLoginModal;
+
+  const doIt = () => login({ user: 'test_user', password: 'test_password' }, true);
 
   return (
     <Dialog open={isModalOpen} onClose={toggleLoginModal} TransitionComponent={slideDown}>
@@ -61,6 +62,9 @@ const LoginModal = ({ authState, toggleLoginModal, classes }: Props) => {
       </DialogTitle>
       <DialogContent dividers={true}>
         <LoginForm />
+        <Button variant="contained" color="primary" onClick={doIt}>
+          Test
+        </Button>
       </DialogContent>
     </Dialog>
   );

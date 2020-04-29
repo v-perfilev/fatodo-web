@@ -28,7 +28,7 @@ type Props = ConnectedProps<typeof connector> & WithStyles<typeof styles>;
 
 const Account = ({ authState, toggleLoginModal, logout, classes }: Props) => {
   const { t } = useTranslation();
-  const isAuthenticated = authState.account.empty;
+  const isAuthenticated = authState.isAuthenticated;
 
   return (
     <Box className={classes.root}>
