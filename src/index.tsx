@@ -6,7 +6,7 @@ import App from './components/app';
 import setupAxiosInterceptors from './shared/axios';
 import store from './shared/store';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from '@material-ui/core';
+import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import { theme } from './shared/theme';
 import 'typeface-roboto';
 import { clearAuth } from './store/actions/auth.actions';
@@ -14,7 +14,6 @@ import { SnackbarProvider } from 'notistack';
 import { enqueueSnackbar } from './store/actions/notification.actions';
 import i18n from './shared/i18n';
 import './shared/i18n';
-import './styles.scss';
 import 'typeface-roboto-multilang/cyrillic.css';
 
 const root = document.getElementById('root');
@@ -30,6 +29,7 @@ const render = Component =>
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <SnackbarProvider anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
+          <CssBaseline />
           <Component />
         </SnackbarProvider>
       </ThemeProvider>

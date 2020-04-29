@@ -1,9 +1,8 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const sass = require('sass');
 const commonConfig = require('./webpack.config.js');
 
-const path = require('path');
+const PATH = require('path');
 const ENV = 'development';
 
 module.exports = options => merge(commonConfig({env: ENV}), {
@@ -14,7 +13,7 @@ module.exports = options => merge(commonConfig({env: ENV}), {
         }
     },
     devServer: {
-        contentBase: path.join(__dirname, '../dist'),
+        contentBase: PATH.join(__dirname, '../dist'),
         compress: true,
         port: 9000,
         hot: true
@@ -22,12 +21,8 @@ module.exports = options => merge(commonConfig({env: ENV}), {
     module: {
         rules: [
             {
-                test: /\.(sa|sc|c)ss$/,
-                use: ['style-loader', 'css-loader', 'postcss-loader', {
-                    loader: 'sass-loader',
-                    options: {implementation: sass}
-                }
-                ]
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader'],
             },
         ]
     },
