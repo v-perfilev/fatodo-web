@@ -1,5 +1,6 @@
 import {RootState} from '../../store';
 import * as React from 'react';
+import {FC} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import {Box, createStyles, StyleRules, Theme, withStyles, WithStyles} from '@material-ui/core';
@@ -9,7 +10,6 @@ import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import {useTranslation} from 'react-i18next';
-import {FC} from 'react';
 import {AuthenticationState} from '../../store/rerducers/auth.reduser';
 
 const mapStateToProps = ({authState}: RootState): {authState: AuthenticationState} => ({authState});
@@ -22,6 +22,12 @@ const styles = (theme: Theme): StyleRules<any> =>
       '& > *': {
         marginLeft: theme.spacing(1),
         marginRight: theme.spacing(1),
+        '&:first-child': {
+          marginLeft: theme.spacing(0),
+        },
+        '&:last-child': {
+          marginRight: theme.spacing(0),
+        },
       },
     },
     icon: {
@@ -38,20 +44,20 @@ const Account: FC<any> = ({authState, toggleLoginModal, logout, classes}: Props)
   return (
     <Box className={classes.root}>
       {isAuthenticated && (
-        <Button variant="contained" color="secondary" onClick={logout}>
+        <Button color="inherit" onClick={logout}>
           <PowerSettingsNewIcon className={classes.icon} />
           {t('header.logout')}
+        </Button>
+      )}
+      {!isAuthenticated && (
+        <Button variant="outlined" color="inherit" onClick={toggleLoginModal}>
+          <ExitToAppIcon className={classes.icon} /> {t('header.signin')}
         </Button>
       )}
       {!isAuthenticated && (
         <Button variant="contained" color="secondary" onClick={toggleLoginModal}>
           <AccessibilityNewIcon className={classes.icon} />
           {t('header.signup')}
-        </Button>
-      )}
-      {!isAuthenticated && (
-        <Button variant="contained" color="secondary" onClick={toggleLoginModal}>
-          <ExitToAppIcon className={classes.icon} /> {t('header.signin')}
         </Button>
       )}
     </Box>

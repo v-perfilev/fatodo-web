@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {createStyles, Link, StyleRules, Typography, WithStyles, withStyles} from '@material-ui/core';
+import {COLORS} from '../../shared/theme';
 
 const styles = (): StyleRules<any> =>
   createStyles({
     white: {
-      color: 'white',
+      color: COLORS.WHITE,
     },
   });
 

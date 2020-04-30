@@ -19,6 +19,8 @@ import Account from './account';
 const styles = (theme: Theme): StyleRules<any> =>
   createStyles({
     root: {
+      marginLeft: theme.spacing(-2),
+      marginRight: theme.spacing(-2),
       '& > *': {
         margin: theme.spacing(1),
       },
@@ -27,7 +29,6 @@ const styles = (theme: Theme): StyleRules<any> =>
       flexGrow: 1,
     },
     menuButton: {
-      marginLeft: theme.spacing(-2),
       marginRight: theme.spacing(0),
     },
   });

@@ -15,7 +15,7 @@ import {
   WithStyles,
 } from '@material-ui/core';
 import {SlideDown} from '../../utils/animation.helpers';
-import {theme} from '../../shared/theme';
+import {COLORS, theme} from '../../shared/theme';
 import {compose} from 'redux';
 import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
@@ -36,7 +36,7 @@ const styles = (): StyleRules<any> =>
       minWidth: 200,
       margin: 0,
       padding: theme.spacing(2),
-      color: 'white',
+      color: COLORS.WHITE,
       background: theme.palette.primary.main,
     },
     icon: {
@@ -46,7 +46,7 @@ const styles = (): StyleRules<any> =>
       position: 'absolute',
       right: theme.spacing(1),
       top: theme.spacing(1),
-      color: 'white',
+      color: COLORS.WHITE,
     },
   });
 

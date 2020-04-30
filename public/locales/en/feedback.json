@@ -1,5 +1,6 @@
 {
-  "default": "Ops, unexpected error on server",
+  "default": "Error on server",
+  "connection": "Connection with server failed",
   "form": {
     "invalid": "Form data is invalid"
   },

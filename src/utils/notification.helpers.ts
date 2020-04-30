@@ -23,6 +23,11 @@ const getDefaultErrorTranslation = (): string => {
   return message && i18n.exists('feedback:' + message) ? i18n.t('feedback:' + message) : null;
 };
 
+const getConnectionErrorTranslation = (): string => {
+  const message = 'connection';
+  return message && i18n.exists('feedback:' + message) ? i18n.t('feedback:' + message) : null;
+};
+
 export const handleStatusFromErrorResponse = (response: any, onUnauthenticated: () => void): void => {
   const status = response?.status;
   if (status === 403 || status === 401) {
@@ -40,8 +45,12 @@ export const handleNotificationFromErrorResponse = (
   if (status && translatedMessage) {
     const variant = getNotificationVariantFromStatus(status);
     notification = new NotificationBuilder(translatedMessage).setVariant(variant).build();
-  } else if (!status || status >= 500) {
+  } else if (status >= 500) {
     const translatedMessage = getDefaultErrorTranslation();
+    const variant = getNotificationVariantFromStatus(500);
+    notification = new NotificationBuilder(translatedMessage).setVariant(variant).build();
+  } else if (!status) {
+    const translatedMessage = getConnectionErrorTranslation();
     const variant = getNotificationVariantFromStatus(500);
     notification = new NotificationBuilder(translatedMessage).setVariant(variant).build();
   }

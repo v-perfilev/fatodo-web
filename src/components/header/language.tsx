@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {FC} from 'react';
 import {
   Box,
   Button,
@@ -16,13 +17,9 @@ import {useTranslation} from 'react-i18next';
 import {LANGUAGES} from '../../shared/i18n';
 import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import {FC} from 'react';
 
 const styles = (theme: Theme): StyleRules<any> =>
   createStyles({
-    white: {
-      color: 'white',
-    },
     icon: {
       marginRight: theme.spacing(1),
     },
@@ -49,7 +46,7 @@ const Language: FC<any> = ({classes}: Props) => {
 
   return (
     <Box>
-      <Button onClick={handleClick} className={classes.white}>
+      <Button color="inherit" onClick={handleClick}>
         <LanguageIcon className={classes.icon} />
         {getNameForCode(i18n.language)}
         <ArrowDropDownIcon />
