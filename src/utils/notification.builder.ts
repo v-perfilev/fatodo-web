@@ -1,11 +1,11 @@
 import Notification from '../model/notification.model';
-import { SnackbarAction, SnackbarMessage, SnackbarOrigin, VariantType } from 'notistack';
+import {SnackbarAction, SnackbarMessage, SnackbarOrigin, VariantType} from 'notistack';
 
 export class NotificationBuilder {
   private readonly notification: Notification;
 
   constructor(message: SnackbarMessage) {
-    this.notification = { message, options: {} };
+    this.notification = {message, options: {}};
   }
 
   setVariant(variant: VariantType): NotificationBuilder {

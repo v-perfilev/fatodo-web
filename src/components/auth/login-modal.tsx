@@ -1,6 +1,7 @@
-import { connect, ConnectedProps } from 'react-redux';
+import {connect, ConnectedProps} from 'react-redux';
 import * as React from 'react';
-import { IRootState } from '../../store';
+import {FC} from 'react';
+import {RootState} from '../../store';
 import {
   Button,
   createStyles,
@@ -8,20 +9,26 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
+  StyleRules,
   Typography,
   withStyles,
   WithStyles,
 } from '@material-ui/core';
-import { slideDown } from '../../utils/animation.helpers';
-import { theme } from '../../shared/theme';
-import { compose } from 'redux';
+import {SlideDown} from '../../utils/animation.helpers';
+import {theme} from '../../shared/theme';
+import {compose} from 'redux';
 import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LoginForm from './login-form';
-import { login, toggleLoginModal } from '../../store/actions/auth.actions';
-import { useTranslation } from 'react-i18next';
+import {login, toggleLoginModal} from '../../store/actions/auth.actions';
+import {useTranslation} from 'react-i18next';
+import {AuthenticationState} from '../../store/rerducers/auth.reduser';
 
-const styles = () =>
+const mapStateToProps = ({authState}: RootState): {authState: AuthenticationState} => ({authState});
+const mapDispatchToProps = {toggleLoginModal, login};
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+const styles = (): StyleRules<any> =>
   createStyles({
     header: {
       display: 'flex',
@@ -45,14 +52,14 @@ const styles = () =>
 
 type Props = ConnectedProps<typeof connector> & WithStyles<typeof styles>;
 
-const LoginModal = ({ authState, toggleLoginModal, login, classes }: Props) => {
-  const { t } = useTranslation();
+const LoginModal: FC<any> = ({authState, toggleLoginModal, login, classes}: Props) => {
+  const {t} = useTranslation();
   const isModalOpen = authState.showLoginModal;
 
-  const doIt = () => login({ user: 'test_user', password: 'test_password' }, true);
+  const doIt = (): Promise<any> => login({user: 'test_user', password: 'test_password'}, true);
 
   return (
-    <Dialog open={isModalOpen} onClose={toggleLoginModal} TransitionComponent={slideDown}>
+    <Dialog open={isModalOpen} onClose={toggleLoginModal} TransitionComponent={SlideDown}>
       <DialogTitle disableTypography={true} className={classes.header}>
         <AccountBoxIcon className={classes.icon} />
         <Typography variant="h6">{t('auth.header')}</Typography>
@@ -69,9 +76,5 @@ const LoginModal = ({ authState, toggleLoginModal, login, classes }: Props) => {
     </Dialog>
   );
 };
-
-const mapStateToProps = ({ authState }: IRootState) => ({ authState });
-const mapDispatchToProps = { toggleLoginModal, login };
-const connector = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(connector, withStyles(styles))(LoginModal);

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { createStyles, Link, Typography, WithStyles, withStyles } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
+import {FC} from 'react';
+import {createStyles, Link, StyleRules, Typography, WithStyles, withStyles} from '@material-ui/core';
 
-const styles = () =>
+const styles = (): StyleRules<any> =>
   createStyles({
     white: {
       color: 'white',
@@ -11,8 +11,8 @@ const styles = () =>
 
 type Props = WithStyles<typeof styles>;
 
-const Logo = ({ classes }: Props) => {
-  const preventDefault = event => event.preventDefault();
+const Logo: FC<any> = ({classes}: Props) => {
+  const preventDefault = (event): void => event.preventDefault();
 
   return (
     <Link href="#" onClick={preventDefault}>

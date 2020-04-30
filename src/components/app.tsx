@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { hot } from 'react-hot-loader';
+import {FC} from 'react';
+import {hot} from 'react-hot-loader';
 import Header from './header/header';
 import LoginModal from './auth/login-modal';
 import Notifier from '../shared/notifier';
 
-const App = () => (
+const App: FC<any> = () => (
   <div>
     <Notifier />
     <LoginModal />

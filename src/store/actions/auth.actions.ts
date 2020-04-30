@@ -1,6 +1,6 @@
 import AuthService from '../../services/auth.service';
 import * as SecurityUtils from '../../utils/security.utils';
-import { LoginDto } from '../../model/dto/login.dto';
+import {LoginDto} from '../../model/dto/login.dto';
 import UserService from '../../services/user.service';
 
 export const ACTION_TYPES = {
@@ -11,11 +11,11 @@ export const ACTION_TYPES = {
   CLEAR_AUTH: 'authState/CLEAR_AUTH',
 };
 
-export const toggleLoginModal = () => dispatch => {
-  dispatch({ type: ACTION_TYPES.TOGGLE_LOGIN_MODAL });
+export const toggleLoginModal = () => (dispatch): any => {
+  dispatch({type: ACTION_TYPES.TOGGLE_LOGIN_MODAL});
 };
 
-export const login = (data: LoginDto, rememberMe: boolean) => async dispatch => {
+export const login = (data: LoginDto, rememberMe: boolean) => async (dispatch): Promise<any> => {
   const response = await dispatch({
     type: ACTION_TYPES.LOGIN,
     payload: AuthService.authenticate(data),
@@ -28,16 +28,16 @@ export const login = (data: LoginDto, rememberMe: boolean) => async dispatch => 
       payload: UserService.getCurrentUser(),
     });
   } else {
-    dispatch({ type: ACTION_TYPES.CLEAR_AUTH });
+    dispatch({type: ACTION_TYPES.CLEAR_AUTH});
   }
 };
 
-export const logout = () => dispatch => {
+export const logout = () => (dispatch): any => {
   SecurityUtils.clearAuthToken();
-  dispatch({ type: ACTION_TYPES.LOGOUT });
+  dispatch({type: ACTION_TYPES.LOGOUT});
 };
 
-export const clearAuth = () => dispatch => {
+export const clearAuth = () => (dispatch): any => {
   SecurityUtils.clearAuthToken();
-  dispatch({ type: ACTION_TYPES.CLEAR_AUTH });
+  dispatch({type: ACTION_TYPES.CLEAR_AUTH});
 };

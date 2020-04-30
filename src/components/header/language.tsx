@@ -6,17 +6,19 @@ import {
   Fade,
   Menu,
   MenuItem,
+  StyleRules,
   Theme,
   Typography,
   WithStyles,
   withStyles,
 } from '@material-ui/core';
-import { useTranslation } from 'react-i18next';
-import { LANGUAGES } from '../../shared/i18n';
+import {useTranslation} from 'react-i18next';
+import {LANGUAGES} from '../../shared/i18n';
 import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import {FC} from 'react';
 
-const styles = (theme: Theme) =>
+const styles = (theme: Theme): StyleRules<any> =>
   createStyles({
     white: {
       color: 'white',
@@ -28,19 +30,19 @@ const styles = (theme: Theme) =>
 
 type Props = WithStyles<typeof styles>;
 
-const language = ({ classes }: Props) => {
+const Language: FC<any> = ({classes}: Props) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const { i18n } = useTranslation();
+  const {i18n} = useTranslation();
 
   const isOpen = Boolean(anchorEl);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => setAnchorEl(event.currentTarget);
+  const handleClick = (event: React.MouseEvent<HTMLElement>): void => setAnchorEl(event.currentTarget);
 
-  const handleClose = () => setAnchorEl(null);
+  const handleClose = (): void => setAnchorEl(null);
 
-  const getNameForCode = code => LANGUAGES.find(l => l.code === code)?.name;
+  const getNameForCode = (code): string => LANGUAGES.find((l) => l.code === code)?.name;
 
-  const changeLanguage = code => {
+  const changeLanguage = (code): void => {
     i18n.changeLanguage(code);
     setAnchorEl(null);
   };
@@ -61,7 +63,7 @@ const language = ({ classes }: Props) => {
         TransitionComponent={Fade}
       >
         {LANGUAGES.map((language, index) => (
-          <MenuItem onClick={() => changeLanguage(language.code)} key={index}>
+          <MenuItem onClick={(): void => changeLanguage(language.code)} key={index}>
             <Typography>{language.name}</Typography>
           </MenuItem>
         ))}
@@ -70,4 +72,4 @@ const language = ({ classes }: Props) => {
   );
 };
 
-export default withStyles(styles)(language);
+export default withStyles(styles)(Language);

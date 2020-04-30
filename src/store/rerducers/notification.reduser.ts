@@ -1,6 +1,6 @@
-import { ACTION_TYPES } from '../actions/notification.actions';
+import {ACTION_TYPES} from '../actions/notification.actions';
 import Notification from '../../model/notification.model';
-import { SnackbarKey } from 'notistack';
+import {SnackbarKey} from 'notistack';
 
 interface ReduxNotification extends Notification {
   key?: SnackbarKey;
@@ -20,15 +20,15 @@ export default (state: NotificationState = initialState, action): NotificationSt
         list: [...state.list, action.notification],
       };
     case ACTION_TYPES.CLOSE_SNACKBAR:
-      const dismissAll = n => action.key === 'all' || n.key === action.key;
-      const handle = n => (dismissAll(n) ? { ...n, dismissed: true } : { ...n });
+      const isDismissAll = (n): boolean => action.key === 'all' || n.key === action.key;
+      const handle = (n): ReduxNotification => (isDismissAll(n) ? {...n, dismissed: true} : {...n});
       return {
-        list: state.list.map(notification => handle(notification)),
+        list: state.list.map((notification) => handle(notification)),
       };
     case ACTION_TYPES.REMOVE_SNACKBAR:
-      const filter = n => n.key !== action.key;
+      const filter = (n): boolean => n.key !== action.key;
       return {
-        list: state.list.filter(notification => filter(notification)),
+        list: state.list.filter((notification) => filter(notification)),
       };
     default:
       return state;

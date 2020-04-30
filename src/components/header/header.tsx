@@ -1,11 +1,22 @@
 import * as React from 'react';
-import { AppBar, Box, createStyles, IconButton, Theme, Toolbar, WithStyles, withStyles } from '@material-ui/core';
+import {FC} from 'react';
+import {
+  AppBar,
+  Box,
+  createStyles,
+  IconButton,
+  StyleRules,
+  Theme,
+  Toolbar,
+  WithStyles,
+  withStyles,
+} from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import Logo from './logo';
 import Language from './language';
 import Account from './account';
 
-const styles = (theme: Theme) =>
+const styles = (theme: Theme): StyleRules<any> =>
   createStyles({
     root: {
       '& > *': {
@@ -23,7 +34,7 @@ const styles = (theme: Theme) =>
 
 type Props = WithStyles<typeof styles>;
 
-const Header = ({ classes }: Props) => (
+const Header: FC<any> = ({classes}: Props) => (
   <AppBar position="static">
     <Toolbar className={classes.root}>
       <IconButton edge="start" color="inherit" className={classes.menuButton}>

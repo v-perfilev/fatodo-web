@@ -1,5 +1,5 @@
 import Notification from '../../model/notification.model';
-import { SnackbarKey } from 'notistack';
+import {SnackbarKey} from 'notistack';
 
 export const ACTION_TYPES = {
   ENQUEUE_SNACKBAR: 'notificationState/ENQUEUE_SNACKBAR',
@@ -7,7 +7,7 @@ export const ACTION_TYPES = {
   REMOVE_SNACKBAR: 'notificationState/REMOVE_SNACKBAR',
 };
 
-export const enqueueSnackbar = (notification: Notification) => {
+export const enqueueSnackbar = (notification: Notification): any => {
   return {
     type: ACTION_TYPES.ENQUEUE_SNACKBAR,
     notification: {
@@ -17,12 +17,12 @@ export const enqueueSnackbar = (notification: Notification) => {
   };
 };
 
-export const closeSnackbar = (key: SnackbarKey = 'all') => ({
+export const closeSnackbar = (key: SnackbarKey = 'all'): any => ({
   type: ACTION_TYPES.CLOSE_SNACKBAR,
   key,
 });
 
-export const removeSnackbar = (key: SnackbarKey) => {
+export const removeSnackbar = (key: SnackbarKey): any => {
   return {
     type: ACTION_TYPES.REMOVE_SNACKBAR,
     key,

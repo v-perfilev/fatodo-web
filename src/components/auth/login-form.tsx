@@ -1,18 +1,29 @@
 import Button from '@material-ui/core/Button';
-import { Field, Form, FormikBag, FormikProps, withFormik } from 'formik';
+import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
-import { CheckboxWithLabel, TextField } from 'formik-material-ui';
-import { Box, createStyles, Theme, WithStyles, withStyles } from '@material-ui/core';
-import { compose } from 'redux';
-import { login } from '../../store/actions/auth.actions';
-import { connect, ConnectedProps } from 'react-redux';
-import { IRootState } from '../../store';
-import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
+import {CheckboxWithLabel, TextField} from 'formik-material-ui';
+import {Box, createStyles, StyleRules, Theme, WithStyles, withStyles} from '@material-ui/core';
+import {compose} from 'redux';
+import {login} from '../../store/actions/auth.actions';
+import {connect, ConnectedProps} from 'react-redux';
+import {RootState} from '../../store';
+import {FC, useEffect} from 'react';
+import {useTranslation} from 'react-i18next';
 import i18n from '../../shared/i18n';
 import React = require('react');
+import {AuthenticationState} from '../../store/rerducers/auth.reduser';
 
-const styles = (theme: Theme) =>
+interface FormValues {
+  user: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+const mapStateToProps = ({authState}: RootState): {authState: AuthenticationState} => ({authState});
+const mapDispatchToProps = {login};
+const connector = connect(mapStateToProps, mapDispatchToProps);
+
+const styles = (theme: Theme): StyleRules<any> =>
   createStyles({
     root: {
       '& > *': {
@@ -22,17 +33,11 @@ const styles = (theme: Theme) =>
     },
   });
 
-interface FormValues {
-  user: string;
-  password: string;
-  rememberMe: boolean;
-}
-
 type Props = FormikProps<FormValues> & ConnectedProps<typeof connector> & WithStyles<typeof styles>;
 
-const InnerForm = ({ isValid, setSubmitting, authState, classes }: Props) => {
-  const { t } = useTranslation();
-  const { loading } = authState;
+const InnerForm: FC<any> = ({isValid, setSubmitting, authState, classes}: Props) => {
+  const {t} = useTranslation();
+  const {loading} = authState;
 
   useEffect(() => setSubmitting(loading), [loading]);
 
@@ -45,7 +50,7 @@ const InnerForm = ({ isValid, setSubmitting, authState, classes }: Props) => {
           component={CheckboxWithLabel}
           type="checkbox"
           name="rememberMe"
-          Label={{ label: t('auth.rememberMe.label') }}
+          Label={{label: t('auth.rememberMe.label')}}
         />
       </Box>
       <Button type="submit" variant="contained" color="secondary" fullWidth={true} disabled={!isValid}>
@@ -55,8 +60,8 @@ const InnerForm = ({ isValid, setSubmitting, authState, classes }: Props) => {
   );
 };
 
-const userRequired = () => i18n.t('auth.user.required');
-const passwordRequired = () => i18n.t('auth.password.required');
+const userRequired = (): string => i18n.t('auth.user.required');
+const passwordRequired = (): string => i18n.t('auth.password.required');
 
 const formik = withFormik<Props, FormValues>({
   mapPropsToValues: () => ({
@@ -73,13 +78,9 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, formikBag: FormikBag<Props, FormValues>) => {
-    formikBag.props.login({ user: values.user, password: values.password }, values.rememberMe);
+    formikBag.props.login({user: values.user, password: values.password}, values.rememberMe);
     formikBag.setSubmitting(false);
   },
 });
 
-const mapStateToProps = ({ authState }: IRootState) => ({ authState });
-const mapDispatchToProps = { login };
-const connector = connect(mapStateToProps, mapDispatchToProps);
-
-export default compose(connector, withStyles(styles))(formik(InnerForm));
+export default compose(connector, withStyles(styles), formik)(InnerForm);

@@ -1,13 +1,13 @@
-import { combineReducers } from 'redux';
-import authState, { AuthenticationState } from './rerducers/auth.reduser';
-import notificationState, { NotificationState } from './rerducers/notification.reduser';
+import {combineReducers} from 'redux';
+import authState, {AuthenticationState} from './rerducers/auth.reduser';
+import notificationState, {NotificationState} from './rerducers/notification.reduser';
 
-export interface IRootState {
+export interface RootState {
   readonly authState: AuthenticationState;
   readonly notificationState: NotificationState;
 }
 
-export default combineReducers<IRootState>({
+export default combineReducers<RootState>({
   authState,
   notificationState,
 });

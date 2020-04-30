@@ -1,4 +1,4 @@
-import { OptionsObject, SnackbarMessage } from 'notistack';
+import {OptionsObject, SnackbarMessage} from 'notistack';
 
 export default interface Notification {
   message: SnackbarMessage;
