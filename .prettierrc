@@ -1,13 +1,8 @@
-# Prettier configuration
+## Prettier configuration
 printWidth: 120
 singleQuote: true
 tabWidth: 2
 useTabs: false
 bracketSpacing: false
-tailingComma: all
-
-# js and ts rules:
 arrowParens: always
-
-# jsx and tsx rules:
-jsxBracketSameLine: false
+tailingComma: all

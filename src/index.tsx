@@ -15,6 +15,7 @@ import {enqueueSnackbar} from './store/actions/notification.actions';
 import i18n from './shared/i18n';
 import './shared/i18n';
 import 'typeface-roboto-multilang/cyrillic.css';
+import {FC} from 'react';
 
 const root = document.getElementById('root');
 
@@ -24,16 +25,17 @@ setupAxiosInterceptors({
   enqueueSnackbar: axiosActions.enqueueSnackbar,
 });
 
+const Root: FC<any> = () => (
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <SnackbarProvider anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>
+        <CssBaseline />
+        <App />
+      </SnackbarProvider>
+    </ThemeProvider>
+  </Provider>
+);
+
 i18n.init().then(() => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <SnackbarProvider anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>
-          <CssBaseline />
-          <App />
-        </SnackbarProvider>
-      </ThemeProvider>
-    </Provider>,
-    root,
-  );
+  ReactDOM.render(<Root />, root);
 });
