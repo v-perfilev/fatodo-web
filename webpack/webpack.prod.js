@@ -1,22 +1,28 @@
-const webpack = require("webpack");
-const merge = require("webpack-merge");
-const commonConfig = require("./webpack.config.js");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const commonConfig = require('./webpack.config.js');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 
-const ENV = "production";
+const ENV = 'production';
 
-module.exports = options => merge(commonConfig({ env: ENV }), {
+module.exports = options => merge(commonConfig({env: ENV}), {
   mode: ENV,
   module: {
     rules: [
       {
-        enforce: "pre",
+        test: /\.tsx?$/,
+        enforce: 'pre',
+        loader: 'eslint-loader',
+        exclude: /node_modules/
+      },
+      {
+        enforce: 'pre',
         test: /\.css$/,
-        loader: "stripcomment-loader"
+        loader: 'stripcomment-loader'
       },
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -27,19 +33,19 @@ module.exports = options => merge(commonConfig({ env: ENV }), {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all"
+          name: 'vendors',
+          chunks: 'all'
         }
       }
     }
   },
   plugins: [
     new webpack.DefinePlugin({
-      "process.env": {
-        SERVER_API_URL: JSON.stringify("http://localhost:4000/api")
+      'process.env': {
+        SERVER_API_URL: JSON.stringify('http://localhost:4000/api')
       }
     }),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin()
   ]
 })
 ;
