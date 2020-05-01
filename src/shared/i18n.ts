@@ -21,7 +21,7 @@ i18next
   .init({
     whitelist: ['en', 'ru'],
     fallbackLng: 'en',
-    ns: ['translation', 'feedback'],
+    ns: ['translation', 'feedback', 'form'],
     defaultNS: 'translation',
     load: 'languageOnly',
     backend: {

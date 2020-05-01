@@ -15,10 +15,10 @@ import {SlideDown} from '../../utils/animation.helpers';
 import {COLORS, theme} from '../../shared/theme';
 import CloseIcon from '@material-ui/icons/Close';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import LoginForm from './login-form';
+import RegisterForm from './register-form';
 import {useTranslation} from 'react-i18next';
 
-interface LoginModalProps {
+interface RegisterModalProps {
   isOpen: boolean;
   toggle: () => void;
 }
@@ -44,25 +44,25 @@ const styles = (): StyleRules<any> =>
     },
   });
 
-type Props = LoginModalProps & WithStyles<typeof styles>;
+type Props = RegisterModalProps & WithStyles<typeof styles>;
 
-const LoginModal: FC<LoginModalProps> = ({isOpen, toggle, classes}: Props) => {
+const RegisterModal: FC<RegisterModalProps> = ({isOpen, toggle, classes}: Props) => {
   const {t} = useTranslation();
 
   return (
     <Dialog open={isOpen} onClose={toggle} TransitionComponent={SlideDown}>
       <DialogTitle disableTypography={true} className={classes.header}>
         <AccountBoxIcon className={classes.icon} />
-        <Typography variant="h6">{t('login.header')}</Typography>
+        <Typography variant="h6">{t('register.header')}</Typography>
         <IconButton onClick={toggle} className={classes.closeButton}>
           <CloseIcon />
         </IconButton>
       </DialogTitle>
       <DialogContent dividers={true}>
-        <LoginForm toggle={toggle} />
+        <RegisterForm toggle={toggle} />
       </DialogContent>
     </Dialog>
   );
 };
 
-export default withStyles(styles)(LoginModal);
+export default withStyles(styles)(RegisterModal);

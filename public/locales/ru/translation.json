@@ -1,22 +1,15 @@
 {
   "header": {
     "logout": "Выйти",
-    "signup": "Регистрация",
-    "signin": "Войти"
+    "register": "Регистрация",
+    "login": "Войти"
   },
-  "auth": {
+  "login": {
     "header": "Вход",
-    "user": {
-      "label": "Email / Логин",
-      "required": "Обязательное поле"
-    },
-    "password": {
-      "label": "Пароль",
-      "required": "Обязательное поле"
-    },
-    "rememberMe": {
-      "label": "Запомнить меня"
-    },
-    "submit": "Отправить"
+    "submit": "Войти"
+  },
+  "register": {
+    "header": "Регистрация",
+    "submit": "Зарегистрироваться"
   }
 }

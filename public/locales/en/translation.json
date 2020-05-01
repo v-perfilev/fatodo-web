@@ -1,22 +1,15 @@
 {
   "header": {
     "logout": "Logout",
-    "signup": "Sign up",
-    "signin": "Sign in"
+    "register": "Sign up",
+    "login": "Sign in"
   },
-  "auth": {
+  "login": {
     "header": "Sign in",
-    "user": {
-      "label": "Email / Username",
-      "required": "Email / username is required"
-    },
-    "password": {
-      "label": "Password",
-      "required": "Password is required"
-    },
-    "rememberMe": {
-      "label": "Remember me"
-    },
-    "submit": "Submit"
+    "submit": "Sign in"
+  },
+  "register": {
+    "header": "Sign up",
+    "submit": "Register"
   }
 }

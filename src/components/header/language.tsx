@@ -28,20 +28,20 @@ const styles = (theme: Theme): StyleRules<any> =>
 type Props = WithStyles<typeof styles>;
 
 const Language: FC<any> = ({classes}: Props) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [anchorElement, setAnchorElement] = React.useState<HTMLElement | null>(null);
   const {i18n} = useTranslation();
 
-  const isOpen = Boolean(anchorEl);
+  const isOpen = Boolean(anchorElement);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>): void => setAnchorEl(event.currentTarget);
+  const handleClick = (event: React.MouseEvent<HTMLElement>): void => setAnchorElement(event.currentTarget);
 
-  const handleClose = (): void => setAnchorEl(null);
+  const handleClose = (): void => setAnchorElement(null);
 
   const getNameForCode = (code): string => LANGUAGES.find((l) => l.code === code)?.name;
 
   const changeLanguage = (code): void => {
     i18n.changeLanguage(code);
-    setAnchorEl(null);
+    setAnchorElement(null);
   };
 
   return (
@@ -53,7 +53,7 @@ const Language: FC<any> = ({classes}: Props) => {
       </Button>
       <Menu
         id="language-menu"
-        anchorEl={anchorEl}
+        anchorEl={anchorElement}
         keepMounted={true}
         open={isOpen}
         onClose={handleClose}
