@@ -37,7 +37,10 @@ const Language: FC<any> = ({classes}: Props) => {
 
   const handleClose = (): void => setAnchorElement(null);
 
-  const getNameForCode = (code): string => LANGUAGES.find((l) => l.code === code)?.name;
+  const getNameForCode = (code): string => {
+    const getName = (c): string => LANGUAGES.find((l) => l.code === c)?.name;
+    return i18n.languages.includes(code) ? getName(code) : getName(i18n.options.fallbackLng);
+  };
 
   const changeLanguage = (code): void => {
     i18n.changeLanguage(code);
