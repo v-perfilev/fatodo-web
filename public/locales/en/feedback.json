@@ -1,0 +1,37 @@
+{
+  "default": "Error on server",
+  "connection": "Connection with server failed",
+  "form": {
+    "invalid": "Form data is invalid"
+  },
+  "security": {
+    "forbidden": "Access is forbidden",
+    "unauthorized": "You are unauthorized",
+    "notRegistered": "User is not registered yet",
+    "wrongPassword": "Wrong password, try again",
+    "wrongProvider": {
+      "google": "User is registered with Google",
+      "facebook": "User is registered with Facebook"
+    },
+    "oauth2": {
+      "notRegistered": "User is not registered with remote provider",
+      "internal": "Something went wrong with remote provider",
+      "providerNotSupported": "You try to login with unsupported provider",
+      "wrongProvider": "User registered with another provider"
+    }
+  },
+  "model": {
+    "alreadyExists": "Model already exists in database",
+    "duplicated": "At least one of unique fields is duplicated",
+    "notFound": "Model not found",
+    "invalid": "Model contains invalid parameter"
+  },
+  "permission": {
+    "restricted": "Not enough rights to perform this operation"
+  },
+  "service": {
+    "group": {
+      "invalid": "Group contains invalid data"
+    }
+  }
+}

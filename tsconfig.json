@@ -12,12 +12,6 @@
     "removeComments": true,
     "allowSyntheticDefaultImports": false,
     "jsx": "react",
-    "allowJs": true,
-    "baseUrl": "./",
-    "paths": {
-      "components/*": [
-        "src/main/components/*"
-      ]
-    }
+    "allowJs": true
   }
 }
