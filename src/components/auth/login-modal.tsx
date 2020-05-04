@@ -14,9 +14,9 @@ import {
 import {SlideDown} from '../../utils/animation.helpers';
 import {COLORS, theme} from '../../shared/theme';
 import CloseIcon from '@material-ui/icons/Close';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import LoginForm from './login-form';
 import {useTranslation} from 'react-i18next';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -52,7 +52,7 @@ const LoginModal: FC<LoginModalProps> = ({isOpen, toggle, classes}: Props) => {
   return (
     <Dialog open={isOpen} onClose={toggle} TransitionComponent={SlideDown}>
       <DialogTitle disableTypography={true} className={classes.header}>
-        <AccountBoxIcon className={classes.icon} />
+        <ExitToAppIcon className={classes.icon} />
         <Typography variant="h6">{t('login.header')}</Typography>
         <IconButton onClick={toggle} className={classes.closeButton}>
           <CloseIcon />

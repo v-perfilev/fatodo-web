@@ -14,9 +14,9 @@ import {
 import {SlideDown} from '../../utils/animation.helpers';
 import {COLORS, theme} from '../../shared/theme';
 import CloseIcon from '@material-ui/icons/Close';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import RegisterForm from './register-form';
 import {useTranslation} from 'react-i18next';
+import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 
 interface RegisterModalProps {
   isOpen: boolean;
@@ -52,7 +52,7 @@ const RegisterModal: FC<RegisterModalProps> = ({isOpen, toggle, classes}: Props)
   return (
     <Dialog open={isOpen} onClose={toggle} TransitionComponent={SlideDown}>
       <DialogTitle disableTypography={true} className={classes.header}>
-        <AccountBoxIcon className={classes.icon} />
+        <AccessibilityNewIcon className={classes.icon} />
         <Typography variant="h6">{t('register.header')}</Typography>
         <IconButton onClick={toggle} className={classes.closeButton}>
           <CloseIcon />

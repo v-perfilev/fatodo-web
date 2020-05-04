@@ -54,7 +54,7 @@ const Account: FC<any> = ({authState, login, logout, classes}: Props) => {
   return (
     <Box className={classes.root}>
       <Button variant="contained" color="primary" onClick={doIt}>
-        Test
+        Test login
       </Button>
 
       {isAuthenticated && (
@@ -64,7 +64,7 @@ const Account: FC<any> = ({authState, login, logout, classes}: Props) => {
         </Button>
       )}
       {!isAuthenticated && (
-        <Button variant="outlined" color="inherit" onClick={toggleLoginModal}>
+        <Button color="inherit" onClick={toggleLoginModal}>
           <ExitToAppIcon className={classes.icon} />
           {t('header.login')}
         </Button>
