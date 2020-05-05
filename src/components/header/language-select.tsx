@@ -3,13 +3,12 @@ import {FC} from 'react';
 import {Box, Button, Fade, Menu, MenuItem, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {LANGUAGES} from '../../shared/i18n';
-import LanguageIcon from '@material-ui/icons/Language';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {languageStyles} from './_styles';
+import {ArrowDropDown, Language} from '@material-ui/icons';
 
 const useStyles = languageStyles;
 
-const Language: FC = () => {
+const LanguageSelect: FC = () => {
   const classes = useStyles();
   const {i18n} = useTranslation();
   const [anchorElement, setAnchorElement] = React.useState<HTMLElement | null>(null);
@@ -33,9 +32,9 @@ const Language: FC = () => {
   return (
     <Box>
       <Button color="inherit" onClick={handleClick}>
-        <LanguageIcon className={classes.icon} />
+        <Language className={classes.icon} />
         {getNameForCode(i18n.language)}
-        <ArrowDropDownIcon />
+        <ArrowDropDown />
       </Button>
       <Menu
         id="language-menu"
@@ -55,4 +54,4 @@ const Language: FC = () => {
   );
 };
 
-export default Language;
+export default LanguageSelect;

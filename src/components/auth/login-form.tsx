@@ -6,11 +6,11 @@ import {Box} from '@material-ui/core';
 import {compose} from 'redux';
 import {login} from '../../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
+import * as React from 'react';
 import {FC} from 'react';
-import {useTranslation} from 'react-i18next';
 import i18n from '../../shared/i18n';
 import {authFormStyles} from './_styles';
-import React = require('react');
+import {useTranslation} from 'react-i18next';
 
 const useStyles = authFormStyles;
 

@@ -2,11 +2,10 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Dialog, DialogContent, DialogTitle, IconButton, Typography} from '@material-ui/core';
 import {SlideDown} from '../../utils/animation.helpers';
-import CloseIcon from '@material-ui/icons/Close';
 import LoginForm from './login-form';
 import {useTranslation} from 'react-i18next';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {authModalStyles} from './_styles';
+import {Close, ExitToApp} from '@material-ui/icons';
 
 const useStyles = authModalStyles;
 
@@ -22,10 +21,10 @@ const LoginModal: FC<Props> = ({isOpen, toggle}: Props) => {
   return (
     <Dialog open={isOpen} onClose={toggle} TransitionComponent={SlideDown}>
       <DialogTitle disableTypography={true} className={classes.header}>
-        <ExitToAppIcon className={classes.icon} />
+        <ExitToApp className={classes.icon} />
         <Typography variant="h6">{t('login.header')}</Typography>
         <IconButton onClick={toggle} className={classes.closeButton}>
-          <CloseIcon />
+          <Close />
         </IconButton>
       </DialogTitle>
       <DialogContent dividers={true}>

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {AppBar, Box, IconButton, Toolbar} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
 import Logo from './logo';
-import Language from './language';
+import LanguageSelect from './language-select';
 import Account from './account';
 import {headerStyles} from './_styles';
+import {Menu} from '@material-ui/icons';
 
 const useStyles = headerStyles;
 
@@ -16,12 +16,12 @@ const Header: FC = () => {
     <AppBar position="static">
       <Toolbar className={classes.root}>
         <IconButton edge="start" color="inherit" className={classes.menuButton}>
-          <MenuIcon />
+          <Menu />
         </IconButton>
         <Box className={classes.grow}>
           <Logo />
         </Box>
-        <Language />
+        <LanguageSelect />
         <Account />
       </Toolbar>
     </AppBar>
@@ -29,3 +29,4 @@ const Header: FC = () => {
 };
 
 export default Header;
+

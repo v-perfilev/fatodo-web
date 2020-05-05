@@ -5,13 +5,11 @@ import {connect, ConnectedProps} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import {Box} from '@material-ui/core';
 import {login, logout} from '../../store/actions/auth.actions';
-import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import {useTranslation} from 'react-i18next';
 import LoginModal from '../auth/login-modal';
 import RegisterModal from '../auth/register-modal';
 import {accountStyles} from './_styles';
+import {AccessibilityNew, ExitToApp, PowerSettingsNew} from '@material-ui/icons';
 
 const useStyles = accountStyles;
 
@@ -43,19 +41,19 @@ const Account: FC<null> = ({authState, login, logout}: ComposedProps) => {
 
       {isAuthenticated && (
         <Button color="inherit" onClick={logout}>
-          <PowerSettingsNewIcon className={classes.icon} />
+          <PowerSettingsNew className={classes.icon} />
           {t('header.logout')}
         </Button>
       )}
       {!isAuthenticated && (
         <Button color="inherit" onClick={toggleLoginModal}>
-          <ExitToAppIcon className={classes.icon} />
+          <ExitToApp className={classes.icon} />
           {t('header.login')}
         </Button>
       )}
       {!isAuthenticated && (
         <Button variant="contained" color="secondary" onClick={toggleRegisterModal}>
-          <AccessibilityNewIcon className={classes.icon} />
+          <AccessibilityNew className={classes.icon} />
           {t('header.register')}
         </Button>
       )}
