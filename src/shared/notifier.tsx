@@ -3,19 +3,16 @@ import {FC, useEffect, useState} from 'react';
 import {RootState} from '../store';
 import {connect, ConnectedProps} from 'react-redux';
 import {removeSnackbar} from '../store/actions/notification.actions';
-import {NotificationState} from '../store/rerducers/notification.reduser';
 
-const mapStateToProps = ({notificationState}: RootState): {notificationState: NotificationState} => ({
-  notificationState,
-});
+const mapStateToProps = (state: RootState) => ({notificationState: state.notificationState});
 const mapDispatchToProps = {removeSnackbar};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-const Notifier: FC<any> = ({notificationState, removeSnackbar}: Props) => {
-  const [displayed, setDisplayed] = useState<SnackbarKey[]>([]);
+const Notifier: FC<null> = ({notificationState, removeSnackbar}: Props) => {
   const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+  const [displayed, setDisplayed] = useState<SnackbarKey[]>([]);
 
   const addDisplayed = (key: SnackbarKey): void => setDisplayed([...displayed, key]);
   const removeDisplayed = (key: SnackbarKey): void => setDisplayed(displayed.filter((k) => k !== key));

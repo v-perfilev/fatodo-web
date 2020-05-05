@@ -1,35 +1,18 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {
-  Box,
-  Button,
-  createStyles,
-  Fade,
-  Menu,
-  MenuItem,
-  StyleRules,
-  Theme,
-  Typography,
-  WithStyles,
-  withStyles,
-} from '@material-ui/core';
+import {Box, Button, Fade, Menu, MenuItem, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {LANGUAGES} from '../../shared/i18n';
 import LanguageIcon from '@material-ui/icons/Language';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import {languageStyles} from './_styles';
 
-const styles = (theme: Theme): StyleRules<any> =>
-  createStyles({
-    icon: {
-      marginRight: theme.spacing(1),
-    },
-  });
+const useStyles = languageStyles;
 
-type Props = WithStyles<typeof styles>;
-
-const Language: FC<any> = ({classes}: Props) => {
-  const [anchorElement, setAnchorElement] = React.useState<HTMLElement | null>(null);
+const Language: FC = () => {
+  const classes = useStyles();
   const {i18n} = useTranslation();
+  const [anchorElement, setAnchorElement] = React.useState<HTMLElement | null>(null);
 
   const isOpen = Boolean(anchorElement);
 
@@ -72,4 +55,4 @@ const Language: FC<any> = ({classes}: Props) => {
   );
 };
 
-export default withStyles(styles)(Language);
+export default Language;

@@ -14,8 +14,8 @@ export const login = (
   data: LoginDto,
   rememberMe: boolean,
   successCallback: () => void,
-  failureCallback: () => void
-) => async (dispatch): Promise<any> => {
+  failureCallback: () => void,
+) => async (dispatch): Promise<void> => {
   const response = await dispatch({
     type: ACTION_TYPES.LOGIN,
     payload: AuthService.authenticate(data).catch(failureCallback),
@@ -34,12 +34,12 @@ export const login = (
   }
 };
 
-export const logout = () => (dispatch): any => {
+export const logout = () => (dispatch): void => {
   SecurityUtils.clearAuthToken();
   dispatch({type: ACTION_TYPES.LOGOUT});
 };
 
-export const clearAuth = () => (dispatch): any => {
+export const clearAuth = () => (dispatch): void => {
   SecurityUtils.clearAuthToken();
   dispatch({type: ACTION_TYPES.CLEAR_AUTH});
 };

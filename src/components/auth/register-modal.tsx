@@ -1,52 +1,22 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {
-  createStyles,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  StyleRules,
-  Typography,
-  withStyles,
-  WithStyles,
-} from '@material-ui/core';
+import {Dialog, DialogContent, DialogTitle, IconButton, Typography} from '@material-ui/core';
 import {SlideDown} from '../../utils/animation.helpers';
-import {COLORS, theme} from '../../shared/theme';
 import CloseIcon from '@material-ui/icons/Close';
 import RegisterForm from './register-form';
 import {useTranslation} from 'react-i18next';
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
+import {authModalStyles} from './_styles';
 
-interface RegisterModalProps {
+const useStyles = authModalStyles;
+
+interface Props {
   isOpen: boolean;
   toggle: () => void;
 }
 
-const styles = (): StyleRules<any> =>
-  createStyles({
-    header: {
-      display: 'flex',
-      alignItems: 'center',
-      margin: 0,
-      padding: theme.spacing(2),
-      color: COLORS.WHITE,
-      background: theme.palette.primary.main,
-    },
-    icon: {
-      marginRight: theme.spacing(1),
-    },
-    closeButton: {
-      position: 'absolute',
-      right: theme.spacing(1),
-      top: theme.spacing(1),
-      color: COLORS.WHITE,
-    },
-  });
-
-type Props = RegisterModalProps & WithStyles<typeof styles>;
-
-const RegisterModal: FC<RegisterModalProps> = ({isOpen, toggle, classes}: Props) => {
+const RegisterModal: FC<Props> = ({isOpen, toggle}: Props) => {
+  const classes = useStyles();
   const {t} = useTranslation();
 
   return (
@@ -65,4 +35,4 @@ const RegisterModal: FC<RegisterModalProps> = ({isOpen, toggle, classes}: Props)
   );
 };
 
-export default withStyles(styles)(RegisterModal);
+export default RegisterModal;

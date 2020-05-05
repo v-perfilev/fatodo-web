@@ -3,46 +3,30 @@ import * as React from 'react';
 import {FC, useState} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import Button from '@material-ui/core/Button';
-import {Box, createStyles, StyleRules, Theme, withStyles, WithStyles} from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import {login, logout} from '../../store/actions/auth.actions';
-import {compose} from 'redux';
 import AccessibilityNewIcon from '@material-ui/icons/AccessibilityNew';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 import {useTranslation} from 'react-i18next';
-import {AuthenticationState} from '../../store/rerducers/auth.reduser';
 import LoginModal from '../auth/login-modal';
 import RegisterModal from '../auth/register-modal';
+import {accountStyles} from './_styles';
 
-const mapStateToProps = ({authState}: RootState): {authState: AuthenticationState} => ({authState});
+const useStyles = accountStyles;
+
+const mapStateToProps = (state: RootState) => ({authState: state.authState});
 const mapDispatchToProps = {logout, login};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-const styles = (theme: Theme): StyleRules<any> =>
-  createStyles({
-    root: {
-      '& > *': {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
-        '&:first-child': {
-          marginLeft: theme.spacing(0),
-        },
-        '&:last-child': {
-          marginRight: theme.spacing(0),
-        },
-      },
-    },
-    icon: {
-      marginRight: theme.spacing(1),
-    },
-  });
+type ComposedProps = ConnectedProps<typeof connector>;
 
-type Props = ConnectedProps<typeof connector> & WithStyles<typeof styles>;
-
-const Account: FC<any> = ({authState, login, logout, classes}: Props) => {
+const Account: FC<null> = ({authState, login, logout}: ComposedProps) => {
+  const classes = useStyles();
+  const {t} = useTranslation();
   const [loginModalOpen, setLoginModalOpen] = useState<boolean>(false);
   const [registerModalOpen, setRegisterModalOpen] = useState<boolean>(false);
-  const {t} = useTranslation();
+
   const isAuthenticated = authState.isAuthenticated;
 
   const emptyFunc = (): void => console.log('');
@@ -82,4 +66,4 @@ const Account: FC<any> = ({authState, login, logout, classes}: Props) => {
   );
 };
 
-export default compose(connector, withStyles(styles))(Account);
+export default connector(Account);

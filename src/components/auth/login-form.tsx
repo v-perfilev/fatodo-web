@@ -2,42 +2,29 @@ import Button from '@material-ui/core/Button';
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {CheckboxWithLabel, TextField} from 'formik-material-ui';
-import {Box, createStyles, StyleRules, Theme, WithStyles, withStyles} from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import {compose} from 'redux';
 import {login} from '../../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import i18n from '../../shared/i18n';
+import {authFormStyles} from './_styles';
 import React = require('react');
 
-interface LoginFormProps {
-  toggle: () => void;
-}
+const useStyles = authFormStyles;
 
-interface FormValues {
-  user: string;
-  password: string;
-  rememberMe: boolean;
+interface Props {
+  toggle: () => void;
 }
 
 const mapDispatchToProps = {login};
 const connector = connect(null, mapDispatchToProps);
 
-const useStyles = (theme: Theme): StyleRules<any> =>
-  createStyles({
-    root: {
-      width: 350,
-      '& > *': {
-        marginTop: theme.spacing(1),
-        marginBottom: theme.spacing(1),
-      },
-    },
-  });
+type ComposedProps = Props & FormikProps<any> & ConnectedProps<typeof connector>;
 
-type Props = LoginFormProps & FormikProps<FormValues> & ConnectedProps<typeof connector> & WithStyles<typeof useStyles>;
-
-const InnerForm: FC<LoginFormProps> = ({isValid, classes}: Props) => {
+const InnerForm: FC<Props> = ({isValid}: ComposedProps) => {
+  const classes = useStyles();
   const {t} = useTranslation();
 
   return (
@@ -59,7 +46,13 @@ const InnerForm: FC<LoginFormProps> = ({isValid, classes}: Props) => {
   );
 };
 
-const formik = withFormik<Props, FormValues>({
+interface FormValues {
+  user: string;
+  password: string;
+  rememberMe: boolean;
+}
+
+const formik = withFormik<ComposedProps, FormValues>({
   mapPropsToValues: () => ({
     user: '',
     password: '',
@@ -73,7 +66,7 @@ const formik = withFormik<Props, FormValues>({
 
   validateOnMount: true,
 
-  handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
+  handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<ComposedProps, FormValues>) => {
     const data = {
       user: values.user,
       password: values.password,
@@ -89,5 +82,5 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-const composer = compose<React.ComponentClass<LoginFormProps>>(connector, formik, withStyles(useStyles));
+const composer = compose<React.ComponentClass<Props>>(connector, formik);
 export default composer(InnerForm);

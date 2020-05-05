@@ -1,18 +1,13 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {createStyles, Link, StyleRules, Typography, WithStyles, withStyles} from '@material-ui/core';
-import {COLORS} from '../../shared/theme';
+import {Link, Typography} from '@material-ui/core';
+import {logoStyles} from './_styles';
 
-const styles = (): StyleRules<any> =>
-  createStyles({
-    white: {
-      color: COLORS.WHITE,
-    },
-  });
+const useStyles = logoStyles;
 
-type Props = WithStyles<typeof styles>;
+const Logo: FC = () => {
+  const classes = useStyles();
 
-const Logo: FC<any> = ({classes}: Props) => {
   const preventDefault = (event): void => event.preventDefault();
 
   return (
@@ -24,4 +19,4 @@ const Logo: FC<any> = ({classes}: Props) => {
   );
 };
 
-export default withStyles(styles)(Logo);
+export default Logo;
