@@ -4,7 +4,7 @@ import {RootState} from '../store';
 import {connect, ConnectedProps} from 'react-redux';
 import {removeSnackbar} from '../store/actions/notification.actions';
 
-const mapStateToProps = (state: RootState) => ({notificationState: state.notificationState});
+const mapStateToProps = (state: RootState): any => ({notificationState: state.notificationState});
 const mapDispatchToProps = {removeSnackbar};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 

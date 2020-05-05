@@ -14,7 +14,7 @@ export const login = (
   data: LoginDto,
   rememberMe: boolean,
   successCallback: () => void,
-  failureCallback: () => void,
+  failureCallback: () => void
 ) => async (dispatch): Promise<void> => {
   const response = await dispatch({
     type: ACTION_TYPES.LOGIN,

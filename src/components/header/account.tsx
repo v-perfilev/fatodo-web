@@ -15,7 +15,7 @@ import {accountStyles} from './_styles';
 
 const useStyles = accountStyles;
 
-const mapStateToProps = (state: RootState) => ({authState: state.authState});
+const mapStateToProps = (state: RootState): any => ({authState: state.authState});
 const mapDispatchToProps = {logout, login};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 

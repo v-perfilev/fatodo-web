@@ -42,7 +42,7 @@ export const languageStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const logoStyles = makeStyles((theme: Theme) => ({
+export const logoStyles = makeStyles(() => ({
   white: {
     color: COLORS.WHITE,
   },
