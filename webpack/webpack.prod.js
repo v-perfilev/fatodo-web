@@ -1,8 +1,9 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.config.js');
-const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const TerserPlugin = require('terser-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const ENV = 'production';
@@ -48,6 +49,13 @@ module.exports = () => merge(commonConfig({env: ENV}), {
       'process.env': {
         SERVER_API_URL: JSON.stringify('http://localhost:4000/api')
       }
+    }),
+    new CompressionPlugin({
+      filename: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$|\.eot?.+$|\.ttf?.+$|\.woff?.+$|\.svg?.+$/,
+      threshold: 10240,
+      minRatio: 0.8
     }),
     new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin()
