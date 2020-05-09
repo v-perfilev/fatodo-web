@@ -25,7 +25,7 @@ setupAxiosInterceptors({
   enqueueSnackbar: axiosActions.enqueueSnackbar,
 });
 
-const Root: FC<any> = () => (
+const Root: FC = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <SnackbarProvider anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>

@@ -15,7 +15,7 @@ import {authFormStyles} from './_styles';
 const useStyles = authFormStyles;
 
 interface Props {
-  toggle: () => void;
+  onSuccess?: () => void;
 }
 
 const mapDispatchToProps = {login};
@@ -68,7 +68,9 @@ const formik = withFormik<ComposedProps, FormValues>({
     };
     AuthService.register(data)
       .then(() => {
-        props.toggle();
+        if (props.onSuccess) {
+          props.onSuccess();
+        }
         setSubmitting(false);
       })
       .catch(() => {

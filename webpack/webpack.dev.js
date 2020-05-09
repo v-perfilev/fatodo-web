@@ -17,7 +17,8 @@ module.exports = () => merge(commonConfig({env: ENV}), {
     contentBase: PATH.join(__dirname, '../dist'),
     compress: true,
     port: 9000,
-    hot: true
+    hot: true,
+    historyApiFallback: true
   },
   module: {
     rules: [

@@ -10,15 +10,12 @@ export const ACTION_TYPES = {
   CLEAR_AUTH: 'authState/CLEAR_AUTH',
 };
 
-export const login = (
-  data: LoginDto,
-  rememberMe: boolean,
-  successCallback: () => void,
-  failureCallback: () => void
-) => async (dispatch): Promise<void> => {
+export const login = (data: LoginDto, rememberMe: boolean, onSuccess: () => void, onFailure: () => void) => async (
+  dispatch
+): Promise<void> => {
   const response = await dispatch({
     type: ACTION_TYPES.LOGIN,
-    payload: AuthService.authenticate(data).catch(failureCallback),
+    payload: AuthService.authenticate(data).catch(onFailure),
   });
   const token = SecurityUtils.parseToken(response);
   if (token) {
@@ -27,10 +24,10 @@ export const login = (
       type: ACTION_TYPES.ACCOUNT,
       payload: UserService.getCurrentUser(),
     });
-    successCallback();
+    onSuccess();
   } else {
     dispatch({type: ACTION_TYPES.CLEAR_AUTH});
-    failureCallback();
+    onFailure();
   }
 };
 

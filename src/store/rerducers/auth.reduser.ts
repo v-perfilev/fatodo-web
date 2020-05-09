@@ -7,9 +7,9 @@ const initialState = {
   account: {} as User,
 };
 
-export type AuthenticationState = Readonly<typeof initialState>;
+export type AuthState = Readonly<typeof initialState>;
 
-export default (state: AuthenticationState = initialState, action): AuthenticationState => {
+export default (state: AuthState = initialState, action): AuthState => {
   switch (action.type) {
     case REQUEST(ACTION_TYPES.LOGIN):
       return {

@@ -15,7 +15,7 @@ import {useTranslation} from 'react-i18next';
 const useStyles = authFormStyles;
 
 interface Props {
-  toggle: () => void;
+  onSuccess?: () => void;
 }
 
 const mapDispatchToProps = {login};
@@ -71,14 +71,16 @@ const formik = withFormik<ComposedProps, FormValues>({
       user: values.user,
       password: values.password,
     };
-    const successCallback = (): void => {
-      props.toggle();
+    const onSuccess = (): void => {
+      if (props.onSuccess) {
+        props.onSuccess();
+      }
       setSubmitting(false);
     };
-    const failureCallback = (): void => {
+    const onFailure = (): void => {
       setSubmitting(false);
     };
-    props.login(data, values.rememberMe, successCallback, failureCallback);
+    props.login(data, values.rememberMe, onSuccess, onFailure);
   },
 });
 

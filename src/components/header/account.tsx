@@ -6,14 +6,16 @@ import Button from '@material-ui/core/Button';
 import {Box} from '@material-ui/core';
 import {login, logout} from '../../store/actions/auth.actions';
 import {useTranslation} from 'react-i18next';
-import LoginModal from '../auth/login-modal';
-import RegisterModal from '../auth/register-modal';
+import LoginForm from '../auth/login-form';
+import RegisterForm from '../auth/register-form';
 import {accountStyles} from './_styles';
 import {AccessibilityNew, ExitToApp, PowerSettingsNew} from '@material-ui/icons';
+import SmallModal from '../common/small-modal';
+import {AuthState} from '../../store/rerducers/auth.reduser';
 
 const useStyles = accountStyles;
 
-const mapStateToProps = (state: RootState): any => ({authState: state.authState});
+const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout, login};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
@@ -58,8 +60,21 @@ const Account: FC<null> = ({authState, login, logout}: ComposedProps) => {
         </Button>
       )}
 
-      <LoginModal isOpen={loginModalOpen} toggle={toggleLoginModal} />
-      <RegisterModal isOpen={registerModalOpen} toggle={toggleRegisterModal} />
+      <SmallModal
+        isOpen={loginModalOpen}
+        toggle={toggleLoginModal}
+        headerText={t('login.header')}
+        headerIcon={<ExitToApp />}
+        content={<LoginForm onSuccess={toggleLoginModal} />}
+      />
+
+      <SmallModal
+        isOpen={registerModalOpen}
+        toggle={toggleRegisterModal}
+        headerText={t('register.header')}
+        headerIcon={<AccessibilityNew />}
+        content={<RegisterForm onSuccess={toggleRegisterModal} />}
+      />
     </Box>
   );
 };

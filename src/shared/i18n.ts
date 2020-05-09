@@ -25,7 +25,7 @@ i18next
     defaultNS: 'translation',
     load: 'languageOnly',
     backend: {
-      loadPath: 'locales/{{lng}}/{{ns}}.json',
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
     interpolation: {
       escapeValue: false,
