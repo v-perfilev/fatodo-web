@@ -6,15 +6,10 @@
   "password": {
     "label": "Password",
     "required": "Required",
-    "invalid": "Can contain only numbers, uppercase, lowercase and special case characters !@#$%",
-    "strength": "Should contain number, uppercase, lowercase and special case character !@#$%",
+    "invalid": "Can contain only uppercase and lowercase characters and numbers",
+    "strength": "Should contain uppercase and lowercase characters and numbers",
     "min8": "Can not be shorter than 8 characters",
     "max20": "Can not be longer than 20 characters"
-  },
-  "repeatPassword": {
-    "label": "Repeat password",
-    "required": "Required",
-    "mismatch": "Both passwords need to be the same"
   },
   "rememberMe": {
     "label": "Remember me"
@@ -28,7 +23,7 @@
   "username": {
     "label": "Username",
     "required": "Required",
-    "invalid": "Can contain only numbers, uppercase and lowercase characters",
+    "invalid": "Can contain only uppercase and lowercase characters and numbers",
     "min5": "Can not be shorter than 5 characters",
     "max20": "Can not be longer than 20 characters",
     "notUnique": "Should be unique"

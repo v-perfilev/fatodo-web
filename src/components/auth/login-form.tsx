@@ -2,17 +2,18 @@ import Button from '@material-ui/core/Button';
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {CheckboxWithLabel, TextField} from 'formik-material-ui';
-import {Box} from '@material-ui/core';
+import {Box, IconButton, InputAdornment} from '@material-ui/core';
 import {compose} from 'redux';
 import {login} from '../../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import i18n from '../../shared/i18n';
-import {authFormStyles} from './_styles';
+import {authStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
+import {Visibility, VisibilityOff} from '@material-ui/icons';
 
-const useStyles = authFormStyles;
+const useStyles = authStyles;
 
 interface Props {
   onSuccess?: () => void;
@@ -26,11 +27,33 @@ type ComposedProps = Props & FormikProps<any> & ConnectedProps<typeof connector>
 const InnerForm: FC<Props> = ({isValid}: ComposedProps) => {
   const classes = useStyles();
   const {t} = useTranslation();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = (): void => setShowPassword((prevState => !prevState));
+  const handleMouseDownPassword = (event): void => event.preventDefault();
 
   return (
     <Form className={classes.root}>
       <Field component={TextField} type="text" name="user" label={t('form:user.label')} fullWidth={true} />
-      <Field component={TextField} type="password" name="password" label={t('form:password.label')} fullWidth={true} />
+      <Field
+        component={TextField}
+        type={showPassword ? 'text' : 'password'}
+        name="password"
+        label={t('form:password.label')}
+        fullWidth={true}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                onClick={toggleShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                size={'small'}
+              >
+                {showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          ),
+        }} />
       <Box>
         <Field
           component={CheckboxWithLabel}

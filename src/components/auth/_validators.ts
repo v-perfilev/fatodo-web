@@ -11,7 +11,7 @@ export const emailValidator = new AsyncValidator(
     name: 'unique',
     message: (): string => i18n.t('form:email.notUnique'),
     test: async (value): Promise<boolean> => (await UserService.isEmailUnique(value)) == true,
-  }
+  },
 );
 
 const usernameRegex = /^[A-Za-z\d]+$/;
@@ -25,17 +25,22 @@ export const usernameValidator = new AsyncValidator(
     name: 'unique',
     message: (): string => i18n.t('form:username.notUnique'),
     test: async (value): Promise<boolean> => (await UserService.isUsernameUnique(value)) == true,
-  }
+  },
 );
 
-const passwordRegex = /^[A-Za-z\d!@#$%]+$/;
-const passwordStrengthRegex = /^((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%]).{0,50})$/;
+const passwordRegex = /^[A-Za-z\d]+$/;
+export const passwordStrengthMap = ['(?=.*[A-Z])', '(?=.*[a-z])', '(?=.*\\d)'];
+export const passwordStrengthPrefix = '^(';
+export const passwordStrengthPostfix = '.*)$';
+const passwordStrengthRegex = (): RegExp => {
+
+  const body = passwordStrengthMap.reduce((acc, val) => acc + val);
+  const regexpString = passwordStrengthPrefix + body + passwordStrengthPostfix;
+  return new RegExp(regexpString);
+};
 export const passwordValidator = Yup.string()
   .required(() => i18n.t('form:password.required'))
   .matches(passwordRegex, {message: () => i18n.t('form:password.invalid')})
-  .matches(passwordStrengthRegex, {message: () => i18n.t('form:password.strength')})
+  .matches(passwordStrengthRegex(), {message: () => i18n.t('form:password.strength')})
   .min(8, () => i18n.t('form:password.min8'))
   .max(20, () => i18n.t('form:password.max20'));
-export const repeatPasswordValidator = Yup.string()
-  .required(() => i18n.t('form:repeatPassword.required'))
-  .oneOf([Yup.ref("password")], () => i18n.t('form:repeatPassword.mismatch'))
