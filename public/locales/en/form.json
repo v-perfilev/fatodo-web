@@ -11,6 +11,11 @@
     "min8": "Can not be shorter than 8 characters",
     "max20": "Can not be longer than 20 characters"
   },
+  "repeatPassword": {
+    "label": "Repeat password",
+    "required": "Required",
+    "mismatch": "Both passwords need to be the same"
+  },
   "rememberMe": {
     "label": "Remember me"
   },

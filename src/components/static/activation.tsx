@@ -5,7 +5,7 @@ import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 import AuthService from '../../services/auth.service';
 import {RouteNames} from '../routes';
 
-type Props = RouteComponentProps<{code: string}>
+type Props = RouteComponentProps<{code: string}>;
 
 const Activation: FC<null> = (props: Props) => {
   console.log(props);
@@ -13,13 +13,11 @@ const Activation: FC<null> = (props: Props) => {
   const [activated, setActivated] = useState(false);
   const [error, setError] = useState(false);
 
-  useEffect(() => sendActivationRequest(code), [props]);
-
-  const sendActivationRequest = (code: string) => {
+  useEffect(() => {
     AuthService.activate(code)
       .then(() => setActivated(true))
       .catch(() => setError(true));
-  };
+  }, [props]);
 
   if (!activated && !error) {
     return null;

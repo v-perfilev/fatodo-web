@@ -9,8 +9,9 @@ import {login} from '../../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import {useTranslation} from 'react-i18next';
 import AuthService from '../../services/auth.service';
-import {emailValidator, passwordValidator, usernameValidator} from './_validators';
+import {emailValidator, passwordValidator, repeatPasswordValidator, usernameValidator} from './_validators';
 import {authFormStyles} from './_styles';
+import i18n from '../../shared/i18n';
 
 const useStyles = authFormStyles;
 
@@ -32,6 +33,13 @@ const InnerForm: FC<Props> = ({isValid}: ComposedProps) => {
       <Field component={TextField} type="text" name="email" label={t('form:email.label')} fullWidth={true} />
       <Field component={TextField} type="text" name="username" label={t('form:username.label')} fullWidth={true} />
       <Field component={TextField} type="password" name="password" label={t('form:password.label')} fullWidth={true} />
+      <Field
+        component={TextField}
+        type="password"
+        name="repeatPassword"
+        label={t('form:repeatPassword.label')}
+        fullWidth={true}
+      />
       <Button type="submit" variant="contained" color="secondary" fullWidth={true} disabled={!isValid}>
         {t('register.submit')}
       </Button>
@@ -50,12 +58,14 @@ const formik = withFormik<ComposedProps, FormValues>({
     email: '',
     username: '',
     password: '',
+    repeatPassword: '',
   }),
 
   validationSchema: Yup.object().shape({
     email: emailValidator.check(),
     username: usernameValidator.check(),
     password: passwordValidator,
+    repeatPassword: repeatPasswordValidator,
   }),
 
   validateOnMount: true,
@@ -65,6 +75,7 @@ const formik = withFormik<ComposedProps, FormValues>({
       email: values.email,
       username: values.username,
       password: values.password,
+      language: i18n.language
     };
     AuthService.register(data)
       .then(() => {

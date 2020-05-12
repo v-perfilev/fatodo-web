@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {LANGUAGES} from '../../shared/i18n';
 import {languageStyles} from './_styles';
 import {ArrowDropDown, Language} from '@material-ui/icons';
+import {getLanguage, setLanguage} from '../../utils/language.utils';
 
 const useStyles = languageStyles;
 
@@ -25,7 +26,7 @@ const LanguageSelect: FC = () => {
   };
 
   const changeLanguage = (code): void => {
-    i18n.changeLanguage(code);
+    setLanguage(code);
     setAnchorElement(null);
   };
 
@@ -33,7 +34,7 @@ const LanguageSelect: FC = () => {
     <Box>
       <Button color="inherit" onClick={handleClick}>
         <Language className={classes.icon} />
-        {getNameForCode(i18n.language)}
+        {getNameForCode(getLanguage())}
         <ArrowDropDown />
       </Button>
       <Menu

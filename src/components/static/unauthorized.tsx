@@ -2,8 +2,6 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Box} from '@material-ui/core';
 
-const PageNotFound: FC = () => (
-  <Box>Page not found.</Box>
-);
+const Unauthorized: FC = () => <Box>You are not authorized.</Box>;
 
-export default PageNotFound;
+export default Unauthorized;

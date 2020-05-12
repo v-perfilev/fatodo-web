@@ -2,6 +2,6 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Box} from '@material-ui/core';
 
-const Home: FC = () => <Box>Hello world!</Box>;
+const PageNotFound: FC = () => <Box>Page not found.</Box>;
 
-export default Home;
+export default PageNotFound;

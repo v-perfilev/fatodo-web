@@ -24,15 +24,11 @@ const InnerPrivateRoute: FC<RouteProps> = (routeProps: RouteProps, {authState, e
     enqueueSnackbar(notification);
   }
 
-  return isAuthenticated
-    ? <Route {...routeProps} />
-    : <Redirect to='/' />;
-
+  return isAuthenticated ? <Route {...routeProps} /> : <Redirect to="/" />;
 };
 
 const composer = compose<React.ComponentClass<RouteProps>>(connector);
 export const PrivateRoute = composer(InnerPrivateRoute);
-
 
 export const PublicRoute: FC<RouteProps> = (routeProps: RouteProps) => {
   return <Route {...routeProps} />;

@@ -14,5 +14,4 @@ export default class AuthService {
   public static activate = (code: string): Promise<any> => {
     return axios.get('auth/activation/activate/' + code);
   };
-
 }

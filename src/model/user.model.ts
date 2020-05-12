@@ -4,4 +4,5 @@ export default interface User {
   email: string;
   provider: string;
   authorities: string[];
+  language: string;
 }

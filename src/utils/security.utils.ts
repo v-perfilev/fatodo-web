@@ -23,7 +23,7 @@ export const getAuthToken = (): string => {
   return localStorage.getItem(AUTH_TOKEN_KEY) || sessionStorage.getItem(AUTH_TOKEN_KEY);
 };
 
-export const parseToken = (response): string => {
+export const parseTokenFromAuthResponse = (response): string => {
   const token = response?.value?.headers?.authorization;
   return token && token.slice(0, 7) === 'Bearer ' ? token.slice(7, token.length) : null;
 };

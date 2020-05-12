@@ -36,3 +36,6 @@ export const passwordValidator = Yup.string()
   .matches(passwordStrengthRegex, {message: () => i18n.t('form:password.strength')})
   .min(8, () => i18n.t('form:password.min8'))
   .max(20, () => i18n.t('form:password.max20'));
+export const repeatPasswordValidator = Yup.string()
+  .required(() => i18n.t('form:repeatPassword.required'))
+  .oneOf([Yup.ref("password")], () => i18n.t('form:repeatPassword.mismatch'))
