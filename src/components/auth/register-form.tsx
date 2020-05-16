@@ -14,7 +14,8 @@ import {authStyles} from './_styles';
 import i18n from '../../shared/i18n';
 import {PasswordStrengthBar} from './password-strength-bar';
 import {IconButton, InputAdornment} from '@material-ui/core';
-import {Visibility, VisibilityOff} from '@material-ui/icons';
+import {VisibilityOnIcon} from '../common/icon/visibility-on-icon';
+import {VisibilityOffIcon} from '../common/icon/visibility-off-icon';
 
 const useStyles = authStyles;
 
@@ -32,7 +33,7 @@ const InnerForm: FC<Props> = ({isValid, values}: ComposedProps) => {
   const {t} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
 
-  const toggleShowPassword = (): void => setShowPassword((prevState => !prevState));
+  const toggleShowPassword = (): void => setShowPassword((prevState) => !prevState);
   const handleMouseDownPassword = (event): void => event.preventDefault();
 
   return (
@@ -48,16 +49,13 @@ const InnerForm: FC<Props> = ({isValid, values}: ComposedProps) => {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton
-                onClick={toggleShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                size={'small'}
-              >
-                {showPassword ? <Visibility /> : <VisibilityOff />}
+              <IconButton onClick={toggleShowPassword} onMouseDown={handleMouseDownPassword} size={'small'}>
+                {showPassword ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
               </IconButton>
             </InputAdornment>
           ),
-        }} />
+        }}
+      />
       <PasswordStrengthBar password={values.password} />
       <Button type="submit" variant="contained" color="secondary" fullWidth={true} disabled={!isValid}>
         {t('register.submit')}

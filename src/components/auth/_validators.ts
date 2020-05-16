@@ -11,7 +11,7 @@ export const emailValidator = new AsyncValidator(
     name: 'unique',
     message: (): string => i18n.t('form:email.notUnique'),
     test: async (value): Promise<boolean> => (await UserService.isEmailUnique(value)) == true,
-  },
+  }
 );
 
 const usernameRegex = /^[A-Za-z\d]+$/;
@@ -25,7 +25,7 @@ export const usernameValidator = new AsyncValidator(
     name: 'unique',
     message: (): string => i18n.t('form:username.notUnique'),
     test: async (value): Promise<boolean> => (await UserService.isUsernameUnique(value)) == true,
-  },
+  }
 );
 
 const passwordRegex = /^[A-Za-z\d]+$/;
@@ -33,7 +33,6 @@ export const passwordStrengthMap = ['(?=.*[A-Z])', '(?=.*[a-z])', '(?=.*\\d)'];
 export const passwordStrengthPrefix = '^(';
 export const passwordStrengthPostfix = '.*)$';
 const passwordStrengthRegex = (): RegExp => {
-
   const body = passwordStrengthMap.reduce((acc, val) => acc + val);
   const regexpString = passwordStrengthPrefix + body + passwordStrengthPostfix;
   return new RegExp(regexpString);

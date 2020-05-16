@@ -16,7 +16,7 @@ export const PasswordStrengthBar: FC<Props> = ({password}: Props) => {
   if (password.length >= 8) {
     counter++;
   }
-  passwordStrengthMap.forEach(regexString => {
+  passwordStrengthMap.forEach((regexString) => {
     const regex = new RegExp(passwordStrengthPrefix + regexString + passwordStrengthPostfix);
     if (regex.exec(password)) {
       counter++;
@@ -31,9 +31,5 @@ export const PasswordStrengthBar: FC<Props> = ({password}: Props) => {
     subItems.push(<div className={classes.red} key={i} />);
   }
 
-  return (
-    <div className={classes.root}>
-      {subItems}
-    </div>
-  );
+  return <div className={classes.root}>{subItems}</div>;
 };

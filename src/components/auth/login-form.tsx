@@ -11,7 +11,8 @@ import {FC, useState} from 'react';
 import i18n from '../../shared/i18n';
 import {authStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
-import {Visibility, VisibilityOff} from '@material-ui/icons';
+import {VisibilityOnIcon} from '../common/icon/visibility-on-icon';
+import {VisibilityOffIcon} from '../common/icon/visibility-off-icon';
 
 const useStyles = authStyles;
 
@@ -29,7 +30,7 @@ const InnerForm: FC<Props> = ({isValid}: ComposedProps) => {
   const {t} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
 
-  const toggleShowPassword = (): void => setShowPassword((prevState => !prevState));
+  const toggleShowPassword = (): void => setShowPassword((prevState) => !prevState);
   const handleMouseDownPassword = (event): void => event.preventDefault();
 
   return (
@@ -44,16 +45,13 @@ const InnerForm: FC<Props> = ({isValid}: ComposedProps) => {
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
-              <IconButton
-                onClick={toggleShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                size={'small'}
-              >
-                {showPassword ? <Visibility /> : <VisibilityOff />}
+              <IconButton onClick={toggleShowPassword} onMouseDown={handleMouseDownPassword} size={'small'}>
+                {showPassword ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
               </IconButton>
             </InputAdornment>
           ),
-        }} />
+        }}
+      />
       <Box>
         <Field
           component={CheckboxWithLabel}

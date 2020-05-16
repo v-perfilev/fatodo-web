@@ -9,9 +9,11 @@ import {useTranslation} from 'react-i18next';
 import LoginForm from '../auth/login-form';
 import RegisterForm from '../auth/register-form';
 import {accountStyles} from './_styles';
-import {AccessibilityNew, ExitToApp, PowerSettingsNew} from '@material-ui/icons';
 import SmallModal from '../common/small-modal';
 import {AuthState} from '../../store/rerducers/auth.reduser';
+import {LoginIcon} from '../common/icon/login-icon';
+import {LogoutIcon} from '../common/icon/logout-icon';
+import {SignUpIcon} from '../common/icon/signup-icon';
 
 const useStyles = accountStyles;
 
@@ -43,19 +45,19 @@ const Account: FC<null> = ({authState, login, logout}: ComposedProps) => {
 
       {isAuthenticated && (
         <Button color="inherit" onClick={logout}>
-          <PowerSettingsNew className={classes.icon} />
+          <LogoutIcon className={classes.icon} />
           {t('header.logout')}
         </Button>
       )}
       {!isAuthenticated && (
         <Button color="inherit" onClick={toggleLoginModal}>
-          <ExitToApp className={classes.icon} />
+          <LoginIcon className={classes.icon} />
           {t('header.login')}
         </Button>
       )}
       {!isAuthenticated && (
         <Button variant="contained" color="secondary" onClick={toggleRegisterModal}>
-          <AccessibilityNew className={classes.icon} />
+          <SignUpIcon className={classes.icon} />
           {t('header.register')}
         </Button>
       )}
@@ -64,7 +66,7 @@ const Account: FC<null> = ({authState, login, logout}: ComposedProps) => {
         isOpen={loginModalOpen}
         toggle={toggleLoginModal}
         headerText={t('login.header')}
-        headerIcon={<ExitToApp />}
+        headerIcon={<LoginIcon />}
         content={<LoginForm onSuccess={toggleLoginModal} />}
       />
 
@@ -72,7 +74,7 @@ const Account: FC<null> = ({authState, login, logout}: ComposedProps) => {
         isOpen={registerModalOpen}
         toggle={toggleRegisterModal}
         headerText={t('register.header')}
-        headerIcon={<AccessibilityNew />}
+        headerIcon={<SignUpIcon />}
         content={<RegisterForm onSuccess={toggleRegisterModal} />}
       />
     </Box>

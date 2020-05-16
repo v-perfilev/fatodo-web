@@ -4,8 +4,9 @@ import {Box, Button, Fade, Menu, MenuItem, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {LANGUAGES} from '../../shared/i18n';
 import {languageStyles} from './_styles';
-import {ArrowDropDown, Language} from '@material-ui/icons';
 import {getLanguage, setLanguage} from '../../utils/language.utils';
+import {LanguageIcon} from '../common/icon/language-icon';
+import {ArrowDownIcon} from '../common/icon/arrow-down-icon';
 
 const useStyles = languageStyles;
 
@@ -33,9 +34,9 @@ const LanguageSelect: FC = () => {
   return (
     <Box>
       <Button color="inherit" onClick={handleClick}>
-        <Language className={classes.icon} />
+        <LanguageIcon className={classes.icon} />
         {getNameForCode(getLanguage())}
-        <ArrowDropDown />
+        <ArrowDownIcon />
       </Button>
       <Menu
         id="language-menu"

@@ -8,13 +8,11 @@ import store from './shared/store';
 import {Provider} from 'react-redux';
 import {CssBaseline, ThemeProvider} from '@material-ui/core';
 import {theme} from './shared/theme';
-import 'typeface-roboto';
 import {clearAuth} from './store/actions/auth.actions';
 import {SnackbarProvider} from 'notistack';
 import {enqueueSnackbar} from './store/actions/notification.actions';
 import i18n from './shared/i18n';
 import './shared/i18n';
-import 'typeface-roboto-multilang/cyrillic.css';
 import {FC} from 'react';
 
 const root = document.getElementById('root');

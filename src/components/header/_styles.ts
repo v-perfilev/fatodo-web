@@ -42,8 +42,17 @@ export const languageStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const logoStyles = makeStyles(() => ({
-  white: {
+export const logoStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  logoImage: {
+    height: 50,
+    marginRight: theme.spacing(1),
+  },
+  logoText: {
+    marginTop: -8,
     color: COLORS.WHITE,
   },
 }));

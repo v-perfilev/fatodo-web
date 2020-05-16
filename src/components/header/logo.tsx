@@ -11,9 +11,10 @@ const Logo: FC = () => {
   const preventDefault = (event): void => event.preventDefault();
 
   return (
-    <Link href="#" onClick={preventDefault}>
-      <Typography variant="h6" className={classes.white}>
-        FaToDo
+    <Link href="#" onClick={preventDefault} className={classes.root}>
+      <img src="/images/logo_small.png" className={classes.logoImage} />
+      <Typography variant="h1" className={classes.logoText}>
+        Fatodo
       </Typography>
     </Link>
   );

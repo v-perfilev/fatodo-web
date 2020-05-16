@@ -44,8 +44,7 @@ module.exports = () => ({
       template: './src/index.html'
     }),
     new CopyWebpackPlugin([
-      {from: './public/', to: ''},
-      {from: './public/favicon.ico', to: 'favicon.ico'}
+      {from: './public/', to: ''}
     ])
   ]
 });

@@ -1,8 +1,10 @@
 import {createMuiTheme} from '@material-ui/core';
 
 export enum COLORS {
-  MAIN = '#20b2aa',
-  SECONDARY = '#e2ae00',
+  MAIN = '#21b0a7',
+  // SECONDARY = '#ffb300',
+  SECONDARY = '#ffba16',
+  // SECONDARY = '#ffc335',
   INFO = '#29b6f6',
   SUCCESS = '#66bb6a',
   WARNING = '#e2ae00',
@@ -44,5 +46,11 @@ export const theme = createMuiTheme({
   },
   typography: {
     fontFamily: 'Roboto, serif',
+    h1: {
+      fontFamily: 'Didact Gothic, serif',
+      fontWeight: 300,
+      fontSize: '2rem',
+      letterSpacing: '0.05em',
+    },
   },
 });
