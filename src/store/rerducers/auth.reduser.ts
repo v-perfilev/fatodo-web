@@ -1,6 +1,6 @@
 import {FAILURE, REQUEST, SUCCESS} from '../thunk.types';
 import {ACTION_TYPES} from '../actions/auth.actions';
-import User from '../../model/user.model';
+import User from '../../models/user.model';
 
 const initialState = {
   isAuthenticated: false,

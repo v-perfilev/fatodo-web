@@ -14,8 +14,8 @@ import {authStyles} from './_styles';
 import i18n from '../../shared/i18n';
 import {PasswordStrengthBar} from './password-strength-bar';
 import {IconButton, InputAdornment} from '@material-ui/core';
-import {VisibilityOnIcon} from '../common/icon/visibility-on-icon';
-import {VisibilityOffIcon} from '../common/icon/visibility-off-icon';
+import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
+import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 
 const useStyles = authStyles;
 

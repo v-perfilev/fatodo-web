@@ -1,6 +1,6 @@
 import i18n from '../shared/i18n';
 import {NotificationBuilder} from './notification.builder';
-import Notification from '../model/notification.model';
+import Notification from '../models/notification.model';
 import {VariantType} from 'notistack';
 
 const getNotificationVariantFromStatus = (status: number): VariantType => {

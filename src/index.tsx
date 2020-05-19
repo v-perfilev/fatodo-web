@@ -14,6 +14,8 @@ import {enqueueSnackbar} from './store/actions/notification.actions';
 import i18n from './shared/i18n';
 import './shared/i18n';
 import {FC} from 'react';
+import {BrowserRouter as Router} from 'react-router-dom';
+import Notifier from './shared/notifier';
 
 const root = document.getElementById('root');
 
@@ -27,8 +29,11 @@ const Root: FC = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
       <SnackbarProvider anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>
-        <CssBaseline />
-        <App />
+        <Router>
+          <CssBaseline />
+          <Notifier />
+          <App />
+        </Router>
       </SnackbarProvider>
     </ThemeProvider>
   </Provider>

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import User from '../model/user.model';
+import User from '../models/user.model';
 
 export default class UserService {
   public static getCurrentUser = async (): Promise<User> => {

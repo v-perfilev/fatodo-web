@@ -1,6 +1,6 @@
 import AuthService from '../../services/auth.service';
 import * as SecurityUtils from '../../utils/security.utils';
-import {LoginDto} from '../../model/dto/login.dto';
+import {LoginDto} from '../../models/dto/login.dto';
 import UserService from '../../services/user.service';
 import {setLanguageFromAccountResponse} from '../../utils/language.utils';
 

@@ -2,7 +2,31 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 import {COLORS} from '../../shared/theme';
 
-export const smallModalStyles = makeStyles((theme: Theme) => ({
+export const appWrapperStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: '100vh',
+  },
+}));
+
+export const contentWrapperStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexGrow: 1,
+  },
+}));
+
+export const centralBlockStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+}));
+
+export const modalStyles = makeStyles((theme: Theme) => ({
   header: {
     display: 'flex',
     alignItems: 'center',

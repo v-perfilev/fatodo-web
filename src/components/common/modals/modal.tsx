@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {FC, ReactNode} from 'react';
 import {Box, Dialog, DialogContent, DialogTitle, IconButton, Typography} from '@material-ui/core';
-import {SlideDown} from '../../utils/animation.helpers';
-import {smallModalStyles} from './_styles';
-import {CloseIcon} from './icon/close-icon';
+import {SlideDown} from '../../../utils/animation.helpers';
+import {modalStyles} from '../_styles';
+import {CloseIcon} from '../icons/close-icon';
 
-const useStyles = smallModalStyles;
+const useStyles = modalStyles;
 
 interface Props {
   isOpen: boolean;
@@ -15,7 +15,7 @@ interface Props {
   content: ReactNode;
 }
 
-const SmallModal: FC<Props> = ({isOpen, toggle, headerText, headerIcon, content}: Props) => {
+const Modal: FC<Props> = ({isOpen, toggle, headerText, headerIcon, content}) => {
   const classes = useStyles();
 
   return (
@@ -32,4 +32,4 @@ const SmallModal: FC<Props> = ({isOpen, toggle, headerText, headerIcon, content}
   );
 };
 
-export default SmallModal;
+export default Modal;

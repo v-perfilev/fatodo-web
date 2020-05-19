@@ -2,16 +2,18 @@ import * as React from 'react';
 import {FC} from 'react';
 import {hot} from 'react-hot-loader';
 import Header from './header/header';
-import Notifier from '../shared/notifier';
-import {BrowserRouter as Router} from 'react-router-dom';
+import AppWrapper from './common/wrappers/app-wrapper';
+
 import Routes from './routes';
+import ContentWrapper from './common/wrappers/content-wrapper';
 
 const App: FC<any> = () => (
-  <Router>
-    <Notifier />
+  <AppWrapper>
     <Header />
-    <Routes />
-  </Router>
+    <ContentWrapper>
+      <Routes />
+    </ContentWrapper>
+  </AppWrapper>
 );
 
 export default hot(module)(App);

@@ -5,8 +5,8 @@ import {useTranslation} from 'react-i18next';
 import {LANGUAGES} from '../../shared/i18n';
 import {languageStyles} from './_styles';
 import {getLanguage, setLanguage} from '../../utils/language.utils';
-import {LanguageIcon} from '../common/icon/language-icon';
-import {ArrowDownIcon} from '../common/icon/arrow-down-icon';
+import {LanguageIcon} from '../common/icons/language-icon';
+import {ArrowDownIcon} from '../common/icons/arrow-down-icon';
 
 const useStyles = languageStyles;
 

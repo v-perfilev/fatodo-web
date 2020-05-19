@@ -9,11 +9,11 @@ import {useTranslation} from 'react-i18next';
 import LoginForm from '../auth/login-form';
 import RegisterForm from '../auth/register-form';
 import {accountStyles} from './_styles';
-import SmallModal from '../common/small-modal';
+import Modal from '../common/modals/modal';
 import {AuthState} from '../../store/rerducers/auth.reduser';
-import {LoginIcon} from '../common/icon/login-icon';
-import {LogoutIcon} from '../common/icon/logout-icon';
-import {SignUpIcon} from '../common/icon/signup-icon';
+import {LoginIcon} from '../common/icons/login-icon';
+import {LogoutIcon} from '../common/icons/logout-icon';
+import {SignUpIcon} from '../common/icons/signup-icon';
 
 const useStyles = accountStyles;
 
@@ -31,15 +31,17 @@ const Account: FC<null> = ({authState, login, logout}: ComposedProps) => {
 
   const isAuthenticated = authState.isAuthenticated;
 
-  const emptyFunc = (): void => console.log('');
-  const doIt = (): Promise<any> => login({user: 'testuser', password: 'test_password'}, true, emptyFunc, emptyFunc);
+  const emptyFunc = (): void => {
+    return;
+  };
+  const testLogin = (): Promise<any> => login({user: 'testuser', password: 'test_password'}, true, emptyFunc, emptyFunc);
 
   const toggleLoginModal = (): void => setLoginModalOpen((currentValue) => !currentValue);
   const toggleRegisterModal = (): void => setRegisterModalOpen((currentValue) => !currentValue);
 
   return (
     <Box className={classes.root}>
-      <Button variant="contained" color="primary" onClick={doIt}>
+      <Button variant="contained" color="primary" onClick={testLogin}>
         Test login
       </Button>
 
@@ -62,7 +64,7 @@ const Account: FC<null> = ({authState, login, logout}: ComposedProps) => {
         </Button>
       )}
 
-      <SmallModal
+      <Modal
         isOpen={loginModalOpen}
         toggle={toggleLoginModal}
         headerText={t('login.header')}
@@ -70,7 +72,7 @@ const Account: FC<null> = ({authState, login, logout}: ComposedProps) => {
         content={<LoginForm onSuccess={toggleLoginModal} />}
       />
 
-      <SmallModal
+      <Modal
         isOpen={registerModalOpen}
         toggle={toggleRegisterModal}
         headerText={t('register.header')}

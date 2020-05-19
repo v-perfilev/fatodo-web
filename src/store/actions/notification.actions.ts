@@ -1,4 +1,4 @@
-import Notification from '../../model/notification.model';
+import Notification from '../../models/notification.model';
 import {SnackbarKey} from 'notistack';
 
 export const ACTION_TYPES = {

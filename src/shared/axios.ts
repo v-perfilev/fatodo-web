@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {SERVER_API_TIMEOUT, SERVER_API_URL} from '../constants';
 import * as SecurityUtils from '../utils/security.utils';
-import Notification from '../model/notification.model';
+import Notification from '../models/notification.model';
 import {handleNotificationFromErrorResponse, handleStatusFromErrorResponse} from '../utils/notification.helpers';
 
 axios.defaults.timeout = SERVER_API_TIMEOUT;

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import {LoginDto} from '../model/dto/login.dto';
-import {RegisterDto} from '../model/dto/register.dto';
+import {LoginDto} from '../models/dto/login.dto';
+import {RegisterDto} from '../models/dto/register.dto';
 
 export default class AuthService {
   public static authenticate = (data: LoginDto): Promise<any> => {
