@@ -10,6 +10,7 @@ import Activated from './static/activated';
 import Home from './home';
 import InternalError from './static/internal-error';
 import Activation from './static/activation';
+import withContentWrapper from './common/wrappers/with-content-wrapper';
 
 export enum RouteNames {
   ROOT = '/',
@@ -36,4 +37,4 @@ const Routes: FC = () => (
   </Switch>
 );
 
-export default Routes;
+export default withContentWrapper(Routes);

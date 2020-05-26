@@ -1,19 +1,19 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {hot} from 'react-hot-loader';
 import Header from './header/header';
-import AppWrapper from './common/wrappers/app-wrapper';
+import withAppWrapper from './common/wrappers/with-app-wrapper';
 
 import Routes from './routes';
-import ContentWrapper from './common/wrappers/content-wrapper';
+import withLoading from './common/loaders/with-loading';
+import {compose} from 'redux';
+import {hot} from 'react-hot-loader';
 
 const App: FC<any> = () => (
-  <AppWrapper>
+  <>
     <Header />
-    <ContentWrapper>
-      <Routes />
-    </ContentWrapper>
-  </AppWrapper>
+    <Routes />
+  </>
 );
 
-export default hot(module)(App);
+const composer = compose(hot(module), withLoading, withAppWrapper);
+export default composer(App);

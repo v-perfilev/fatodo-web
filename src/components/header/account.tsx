@@ -34,7 +34,8 @@ const Account: FC<null> = ({authState, login, logout}: ComposedProps) => {
   const emptyFunc = (): void => {
     return;
   };
-  const testLogin = (): Promise<any> => login({user: 'testuser', password: 'test_password'}, true, emptyFunc, emptyFunc);
+  const testLogin = (): Promise<any> =>
+    login({user: 'testuser', password: 'test_password'}, true, emptyFunc, emptyFunc);
 
   const toggleLoginModal = (): void => setLoginModalOpen((currentValue) => !currentValue);
   const toggleRegisterModal = (): void => setRegisterModalOpen((currentValue) => !currentValue);

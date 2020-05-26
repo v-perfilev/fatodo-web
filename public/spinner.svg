@@ -1,0 +1,144 @@
+<svg width="270" height="270" viewBox="0 0 270 270" fill="none" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <g filter="url(#filter0_i)" transform="translate(-150 -126)">
+        <circle cx="150" cy="126" r="10" fill="white" fill-opacity="0.5"/>
+        <animateMotion
+                dur="3s"
+                begin="-0.7s"
+                fill="freeze"
+                repeatCount="indefinite"
+                keyTimes="0;1"
+                keySplines="0 0 0.58 1"
+                calcMode="spline">
+            <mpath xlink:href="#motionPath0"/>
+        </animateMotion>
+    </g>
+
+    <g filter="url(#filter1_i)" transform="translate(-150 -126)">
+        <circle cx="150" cy="126" r="9" fill="white" fill-opacity="0.5"/>
+        <animateMotion
+                dur="3s"
+                begin="-0.5s"
+                fill="freeze"
+                repeatCount="indefinite"
+                keyTimes="0;1"
+                keySplines="0 0 0.58 1"
+                calcMode="spline">
+            <mpath xlink:href="#motionPath1"/>
+        </animateMotion>
+    </g>
+
+    <g filter="url(#filter2_i)" transform="translate(-150 -126)">
+        <circle cx="150" cy="126" r="7" fill="white" fill-opacity="0.5"/>
+        <animateMotion
+                dur="3s"
+                begin="-0.25s"
+                fill="freeze"
+                repeatCount="indefinite"
+                keyTimes="0;1"
+                keySplines="0 0 0.58 1"
+                calcMode="spline">
+            <mpath xlink:href="#motionPath2"/>
+        </animateMotion>
+    </g>
+
+    <g filter="url(#filter3_i)" transform="translate(-150 -126)">
+        <circle cx="150" cy="126" r="5" fill="white" fill-opacity="0.5"/>
+        <animateMotion
+                dur="3s"
+                begin="0s"
+                fill="freeze"
+                repeatCount="indefinite"
+                keyTimes="0;1"
+                keySplines="0 0 0.58 1"
+                calcMode="spline">
+            <mpath xlink:href="#motionPath3"/>
+        </animateMotion>
+    </g>
+
+    <g>
+        <path d="M113.844 183.231C99.3802 171.553 92.1379 152.238 95.9065 134.089C100.248 113.181 116.05 90.6673 149.544 90.0698C147.445 89.4267 145.303 88.9204 143.139 88.5572C141.163 88.2241 140.175 88.2705 138.477 86.669C136.779 85.0676 134.88 84 132.509 84C129.771 84 125.911 87.4698 125.911 87.4698C124.737 88.5908 124.023 89.1243 122.456 89.516C120.103 90.1266 117.805 90.0564 115.464 89.268C114.407 88.9125 113.352 88.5572 112.178 88.5572C108.038 88.5572 104.623 91.6648 104.14 95.6747C103.849 97.6248 102.856 99.5104 101.435 100.746C99.4727 102.534 97.6488 104.495 95.985 106.598H96.02C95.2087 107.606 94.4358 108.647 93.7033 109.718C91.4522 113.053 89.5822 116.67 88.1663 120.458C87.2441 122.91 86.5254 125.397 86.0036 127.898C85.3455 131.134 85 134.484 85 137.915C85 157.967 96.8048 175.263 113.844 183.231Z"
+              fill="#FFB300"/>
+        <path d="M151.37 90.6673C155.256 92.0215 158.939 93.8365 162.341 96.045C164.819 97.6669 167.145 99.5028 169.292 101.527C133.932 86.847 111.097 111.135 106.441 132.754C100.768 159.098 123.402 185.965 150.656 185.415L150.654 185.415C120.908 190.674 92.2659 164.427 95.9065 134.089C100.248 113.181 116.05 90.6673 149.544 90.0698C150.157 90.2574 150.765 90.4566 151.37 90.6673Z"
+              fill="#FFBA16"/>
+        <path d="M116.94 131.687C110.445 163.537 152.438 184 175.919 166.656L175.917 166.659C149.699 190.861 103.152 169.404 106.441 132.754C111.097 111.135 133.932 86.847 169.292 101.527C172.511 104.562 175.328 108.019 177.653 111.811C178.256 112.994 178.74 114.231 179.035 115.545C155.907 91.6513 121.838 107.665 116.94 131.687Z"
+              fill="#FFC335"/>
+        <path d="M128.109 130.298C126.459 137.292 128.861 145.922 133.043 150.103C151.177 170.371 186.779 152.149 183.849 127.198L183.861 127.256C190.557 167.153 117.651 180.619 116.939 131.687C121.838 107.665 155.907 91.6513 179.035 115.545C179.236 116.445 179.349 117.381 179.349 118.362C179.349 123.621 176.703 128.202 172.811 131.409C169.609 106.865 134.581 102.861 128.109 130.298Z"
+              fill="#FFCC55"/>
+        <path d="M164.491 135.621C152.525 139.372 137.856 139.053 128.109 130.298C134.581 102.861 169.609 106.865 172.811 131.409C170.404 133.393 167.52 134.852 164.491 135.621Z"
+              fill="#FFD674"/>
+        <path d="M172.811 131.409C158.589 131.348 145.562 125.576 135.717 116.786C132.251 119.889 129.51 124.356 128.109 130.298C137.856 139.053 152.526 139.372 164.491 135.621C167.52 134.852 170.404 133.393 172.811 131.409C172.831 131.545 172.794 131.272 172.811 131.409Z"
+              fill="#FFDD8D"/>
+        <circle cx="110.858" cy="94.1526" r="4.35943" transform="rotate(-29.0837 110.858 94.1526)" fill="#FFD574"/>
+        <path d="M110.943 98.512C110.344 97.4797 110 96.28 110 95C110 93.0312 110.813 91.2522 112.121 89.9803C113.166 90.2967 114.095 91.0038 114.667 92.0335C115.838 94.1376 115.081 96.792 112.977 97.9623C112.331 98.3214 111.634 98.499 110.943 98.512Z"
+              fill="#FFEFC8"/>
+        <path d="M113.88 91.0095C113.754 91.0032 113.628 91 113.5 91C110.469 91 107.858 92.798 106.675 95.3855C106.109 93.4714 106.921 91.3536 108.739 90.3428C110.454 89.3886 112.536 89.7156 113.88 91.0095Z"
+              fill="#E8A300"/>
+        <animateTransform
+                attributeName="transform"
+                type="rotate"
+                dur="3s"
+                values="0 135 135;360 135 135"
+                repeatCount="indefinite"
+                keyTimes="0;1"
+                keySplines="0.5 0.1 0.5 0.9"
+                calcMode="spline"
+        />
+    </g>
+
+    <defs>
+        <path id="motionPath0" d="M150 126C223.5 187 229.5 98.5 234.5 27"/>
+        <path id="motionPath1" d="M150 126C217.5 168 233.5 110 193.5 22"/>
+        <path id="motionPath2" d="M150 126C198 191 211.5 55.5 249.5 47"/>
+        <path id="motionPath3" d="M150 126C220.5 210 214 34.5 214 9"/>
+        <filter id="filter0_i" x="138" y="114" width="22" height="22" filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                           result="hardAlpha"/>
+            <feOffset dx="-2" dy="-2"/>
+            <feGaussianBlur stdDeviation="2.5"/>
+            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.445833 0 0 0 0 1 0 0 0 0 0.96675 0 0 0 0.4 0"/>
+            <feBlend mode="normal" in2="shape" result="effect1_innerShadow"/>
+        </filter>
+        <filter id="filter1_i" x="139" y="115" width="20" height="20" filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                           result="hardAlpha"/>
+            <feOffset dx="-2" dy="-2"/>
+            <feGaussianBlur stdDeviation="2.5"/>
+            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.445833 0 0 0 0 1 0 0 0 0 0.96675 0 0 0 0.4 0"/>
+            <feBlend mode="normal" in2="shape" result="effect1_innerShadow"/>
+        </filter>
+        <filter id="filter2_i" x="141" y="117" width="16" height="16" filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                           result="hardAlpha"/>
+            <feOffset dx="-2" dy="-2"/>
+            <feGaussianBlur stdDeviation="2.5"/>
+            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.445833 0 0 0 0 1 0 0 0 0 0.96675 0 0 0 0.4 0"/>
+            <feBlend mode="normal" in2="shape" result="effect1_innerShadow"/>
+        </filter>
+        <filter id="filter3_i" x="143" y="119" width="12" height="12" filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                           result="hardAlpha"/>
+            <feOffset dx="-2" dy="-2"/>
+            <feGaussianBlur stdDeviation="1.5"/>
+            <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0.445833 0 0 0 0 1 0 0 0 0 0.96675 0 0 0 0.3 0"/>
+            <feBlend mode="normal" in2="shape" result="effect1_innerShadow"/>
+        </filter>
+    </defs>
+</svg>

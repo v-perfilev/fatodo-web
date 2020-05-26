@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, ReactNode} from 'react';
 import {Box, Dialog, DialogContent, DialogTitle, IconButton, Typography} from '@material-ui/core';
 import {SlideDown} from '../../../utils/animation.helpers';
-import {modalStyles} from '../_styles';
+import {modalStyles} from './_styles';
 import {CloseIcon} from '../icons/close-icon';
 
 const useStyles = modalStyles;
@@ -15,7 +15,7 @@ interface Props {
   content: ReactNode;
 }
 
-const Modal: FC<Props> = ({isOpen, toggle, headerText, headerIcon, content}) => {
+const Modal: FC<Props> = ({isOpen, toggle, headerText, headerIcon, content}: Props) => {
   const classes = useStyles();
 
   return (
