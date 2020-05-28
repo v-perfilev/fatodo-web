@@ -1,7 +1,27 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {Box} from '@material-ui/core';
+import {Box, Button, Typography} from '@material-ui/core';
+import withCentralContainer from '../common/hoc/with-central-container';
+import {compose} from 'redux';
+import withRedirectTimer, {RedirectTimerProps} from '../common/hoc/with-redirect-timer';
 
-const Unauthorized: FC = () => <Box>You are not authorized.</Box>;
+type Props = RedirectTimerProps;
 
-export default Unauthorized;
+const Unauthorized: FC<Props> = ({timer, resetTimer}: Props) => {
+  return (
+    <Box textAlign="center">
+      <Typography variant="h5" color="primary">
+        Unauthorized!
+      </Typography>
+      <Box m={2} />
+      <Typography>For redirecting to home page press the button or wait {timer} seconds...</Typography>
+      <Box m={2} />
+      <Button variant="contained" color="primary" size="large" onClick={resetTimer}>
+        To home page
+      </Button>
+    </Box>
+  );
+};
+
+const composer = compose(withCentralContainer, withRedirectTimer());
+export default composer(Unauthorized);

@@ -7,15 +7,11 @@ import withRedirectTimer, {RedirectTimerProps} from '../common/hoc/with-redirect
 
 type Props = RedirectTimerProps;
 
-const Activated: FC<Props> = ({timer, resetTimer}: Props) => {
+const Forbidden: FC<Props> = ({timer, resetTimer}: Props) => {
   return (
     <Box textAlign="center">
       <Typography variant="h5" color="primary">
-        Account was successfully activated.
-      </Typography>
-      <Box m={1} />
-      <Typography variant="h5" color="primary">
-        Now you can sign in!
+        Forbidden!
       </Typography>
       <Box m={2} />
       <Typography>For redirecting to home page press the button or wait {timer} seconds...</Typography>
@@ -28,4 +24,4 @@ const Activated: FC<Props> = ({timer, resetTimer}: Props) => {
 };
 
 const composer = compose(withCentralContainer, withRedirectTimer());
-export default composer(Activated);
+export default composer(Forbidden);

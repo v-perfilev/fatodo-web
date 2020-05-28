@@ -7,7 +7,7 @@ import {compose} from 'redux';
 import {login} from '../../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import * as React from 'react';
-import {FC, useState} from 'react';
+import {ComponentType, FC, useState} from 'react';
 import i18n from '../../shared/i18n';
 import {authStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
@@ -105,5 +105,5 @@ const formik = withFormik<ComposedProps, FormValues>({
   },
 });
 
-const composer = compose<React.ComponentClass<Props>>(connector, formik);
+const composer = compose<ComponentType<Props>>(connector, formik);
 export default composer(InnerForm);

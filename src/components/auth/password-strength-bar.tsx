@@ -9,7 +9,7 @@ interface Props {
   password: string;
 }
 
-export const PasswordStrengthBar: FC<Props> = ({password}: Props) => {
+const PasswordStrengthBar: FC<Props> = ({password}: Props) => {
   const classes = useStyles();
   const rulesCount = 4;
   let counter = 0;
@@ -33,3 +33,5 @@ export const PasswordStrengthBar: FC<Props> = ({password}: Props) => {
 
   return <div className={classes.root}>{subItems}</div>;
 };
+
+export default PasswordStrengthBar;

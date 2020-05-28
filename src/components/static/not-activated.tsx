@@ -1,7 +1,31 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {Box} from '@material-ui/core';
+import {Box, Button, Typography} from '@material-ui/core';
+import withCentralContainer from '../common/hoc/with-central-container';
+import {compose} from 'redux';
+import withRedirectTimer, {RedirectTimerProps} from '../common/hoc/with-redirect-timer';
 
-const NotActivated: FC = () => <Box>Not activated. Check your email box.</Box>;
+type Props = RedirectTimerProps;
 
-export default NotActivated;
+const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
+  return (
+    <Box textAlign="center">
+      <Typography variant="h5" color="primary">
+        Your account not activated yet.
+      </Typography>
+      <Box m={1} />
+      <Typography variant="h5" color="primary">
+        Check your email for activation link!
+      </Typography>
+      <Box m={2} />
+      <Typography>For redirecting to home page press the button or wait {timer} seconds...</Typography>
+      <Box m={2} />
+      <Button variant="contained" color="primary" size="large" onClick={resetTimer}>
+        To home page
+      </Button>
+    </Box>
+  );
+};
+
+const composer = compose(withCentralContainer, withRedirectTimer());
+export default composer(NotActivated);

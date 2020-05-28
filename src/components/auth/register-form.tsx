@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ComponentClass, FC, useState} from 'react';
+import {ComponentType, FC, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
@@ -12,7 +12,7 @@ import AuthService from '../../services/auth.service';
 import {emailValidator, passwordValidator, usernameValidator} from './_validators';
 import {authStyles} from './_styles';
 import i18n from '../../shared/i18n';
-import {PasswordStrengthBar} from './password-strength-bar';
+import PasswordStrengthBar from './password-strength-bar';
 import {IconButton, InputAdornment} from '@material-ui/core';
 import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
@@ -105,5 +105,5 @@ const formik = withFormik<ComposedProps, FormValues>({
   },
 });
 
-const composer = compose<ComponentClass<Props>>(connector, formik);
+const composer = compose<ComponentType<Props>>(connector, formik);
 export default composer(InnerForm);

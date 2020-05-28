@@ -4,7 +4,7 @@ import Header from './header/header';
 import withAppWrapper from './common/wrappers/with-app-wrapper';
 
 import Routes from './routes';
-import withLoading from './common/loaders/with-loading';
+import withLoading from './common/hoc/with-loading';
 import {compose} from 'redux';
 import {hot} from 'react-hot-loader';
 

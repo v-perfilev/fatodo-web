@@ -8,16 +8,15 @@ import {RouteNames} from '../routes';
 type Props = RouteComponentProps<{code: string}>;
 
 const Activation: FC<null> = (props: Props) => {
-  console.log(props);
-  const code = props.match.params.code;
   const [activated, setActivated] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    const code = props.match.params.code;
     AuthService.activate(code)
       .then(() => setActivated(true))
       .catch(() => setError(true));
-  }, [props]);
+  }, []);
 
   if (!activated && !error) {
     return null;
