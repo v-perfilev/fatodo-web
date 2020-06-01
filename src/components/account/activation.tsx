@@ -1,19 +1,19 @@
 import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
-import {compose} from 'redux';
 import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
-import AuthService from '../../services/auth.service';
-import {RouteNames} from '../routes';
+import AccountService from '../../services/account.service';
+import {Routes} from '../router';
+import {compose} from 'recompose';
 
 type Props = RouteComponentProps<{code: string}>;
 
-const Activation: FC<null> = (props: Props) => {
+const Activation: FC<Props> = (props) => {
+  const code = props.match.params.code;
   const [activated, setActivated] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const code = props.match.params.code;
-    AuthService.activate(code)
+    AccountService.activate(code)
       .then(() => setActivated(true))
       .catch(() => setError(true));
   }, []);
@@ -21,11 +21,10 @@ const Activation: FC<null> = (props: Props) => {
   if (!activated && !error) {
     return null;
   } else if (activated) {
-    return <Redirect to={RouteNames.ACTIVATED} />;
+    return <Redirect to={Routes.ACTIVATED} />;
   } else {
-    return <Redirect to={RouteNames.INTERNAL_ERROR} />;
+    return <Redirect to={Routes.INTERNAL_ERROR} />;
   }
 };
 
-const composer = compose(withRouter);
-export default composer(Activation);
+export default compose(withRouter)(Activation);

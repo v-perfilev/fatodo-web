@@ -1,31 +1,41 @@
 {
-  "user": {
-    "label": "Email / Username",
-    "required": "Required"
+  "login": {
+    "header": "Sign in",
+    "submit": "Sign in"
   },
-  "password": {
-    "label": "Password",
-    "required": "Required",
-    "invalid": "Can contain only uppercase and lowercase characters and numbers",
-    "strength": "Should contain uppercase and lowercase characters and numbers",
-    "min8": "Can not be shorter than 8 characters",
-    "max20": "Can not be longer than 20 characters"
+  "register": {
+    "header": "Sign up",
+    "submit": "Register"
   },
-  "rememberMe": {
-    "label": "Remember me"
-  },
-  "email": {
-    "label": "Email",
-    "required": "Required",
-    "notValid": "Should contain correct email",
-    "notUnique": "Should be unique"
-  },
-  "username": {
-    "label": "Username",
-    "required": "Required",
-    "invalid": "Can contain only uppercase and lowercase characters and numbers",
-    "min5": "Can not be shorter than 5 characters",
-    "max20": "Can not be longer than 20 characters",
-    "notUnique": "Should be unique"
+  "fields": {
+    "user": {
+      "label": "Email / Username",
+      "required": "Required"
+    },
+    "password": {
+      "label": "Password",
+      "required": "Required",
+      "invalid": "Can contain only uppercase and lowercase characters and numbers",
+      "strength": "Should contain uppercase and lowercase characters and numbers",
+      "min8": "Can not be shorter than 8 characters",
+      "max20": "Can not be longer than 20 characters"
+    },
+    "rememberMe": {
+      "label": "Remember me"
+    },
+    "email": {
+      "label": "Email",
+      "required": "Required",
+      "notValid": "Should contain correct email",
+      "notUnique": "Should be unique"
+    },
+    "username": {
+      "label": "Username",
+      "required": "Required",
+      "invalid": "Can contain only uppercase and lowercase characters and numbers",
+      "min5": "Can not be shorter than 5 characters",
+      "max20": "Can not be longer than 20 characters",
+      "notUnique": "Should be unique"
+    }
   }
 }

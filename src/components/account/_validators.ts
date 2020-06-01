@@ -1,4 +1,4 @@
-import {AsyncValidator} from '../../utils/yup.helpers';
+import {AsyncValidator} from '../../shared/utils/yup.utils';
 import i18n from 'i18next';
 import UserService from '../../services/user.service';
 import * as Yup from 'yup';

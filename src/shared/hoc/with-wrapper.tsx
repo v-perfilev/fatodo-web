@@ -1,18 +1,18 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
 import {Box} from '@material-ui/core';
-import {appWrapperStyles} from './_styles';
+import {wrapperStyles} from './_styles';
 
-const useStyles = appWrapperStyles;
+const useStyles = wrapperStyles;
 
-const withAppWrapper = (Component: ComponentType): FC => (): ReactElement => {
+const withWrapper = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = useStyles();
 
   return (
     <Box className={classes.root}>
-      <Component />
+      <Component {...props} />
     </Box>
   );
 };
 
-export default withAppWrapper;
+export default withWrapper;

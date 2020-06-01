@@ -1,14 +1,14 @@
 import * as Yup from 'yup';
 
-interface AsyncTest {
+interface AsyncValidationRule {
   name: string;
   message: Yup.TestOptionsMessage;
-  test: (value: string) => Promise<boolean> | boolean;
+  validate: (value: string) => Promise<boolean> | boolean;
 }
 
 export class AsyncValidator {
   private readonly preSchema: Yup.Schema<any>;
-  private readonly asyncTest: AsyncTest;
+  private readonly asyncTest: AsyncValidationRule;
 
   private previousValue = null;
   private previousResult = true;
@@ -18,7 +18,7 @@ export class AsyncValidator {
     this.asyncTest = asyncTest;
   }
 
-  test = async (value: string): Promise<boolean> => {
+  validate = async (value: string): Promise<boolean> => {
     let result;
     if (!(await this.preSchema.isValid(value))) {
       result = true;
@@ -26,13 +26,13 @@ export class AsyncValidator {
       result = this.previousResult;
     } else {
       this.previousValue = value;
-      result = await this.asyncTest.test(value);
+      result = await this.asyncTest.validate(value);
     }
     this.previousResult = result;
     return result;
   };
 
   check = (): Yup.Schema<any> => {
-    return this.preSchema.concat(Yup.string().test(this.asyncTest.name, this.asyncTest.message, this.test));
+    return this.preSchema.concat(Yup.string().test(this.asyncTest.name, this.asyncTest.message, this.validate));
   };
 }

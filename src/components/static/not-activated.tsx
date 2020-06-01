@@ -1,31 +1,96 @@
 import * as React from 'react';
-import {FC} from 'react';
-import {Box, Button, Typography} from '@material-ui/core';
-import withCentralContainer from '../common/hoc/with-central-container';
-import {compose} from 'redux';
-import withRedirectTimer, {RedirectTimerProps} from '../common/hoc/with-redirect-timer';
+import {FC, useEffect, useState} from 'react';
+import {Box, Button, CircularProgress, Typography} from '@material-ui/core';
+import {compose} from 'recompose';
+import withRedirectTimer, {RedirectTimerProps} from '../../shared/hoc/with-redirect-timer';
+import {Trans} from 'react-i18next';
+import {staticPageStyles} from './_styles';
+import withBackground from '../../shared/hoc/with-background';
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {Routes} from '../router';
+import AccountService from '../../services/account.service';
+import {HomeIcon} from '../common/icons/home-icon';
+import {EmailIcon} from '../common/icons/email-icon';
+import CircularProgressTimer from '../common/circular-progress-timer';
 
-type Props = RedirectTimerProps;
+const useStyles = staticPageStyles;
 
-const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
-  return (
+interface LocationState {
+  email: string;
+}
+
+type Props = RouteComponentProps<{}, any, LocationState> & RedirectTimerProps;
+
+const NotActivated: FC<Props> = ({timer, resetTimer, location}: Props) => {
+  const email = location?.state?.email;
+  const classes = useStyles();
+  const [activationCodeLoading, setActivationCodeLoading] = useState<boolean>(false);
+  const [activationCodeTimer, setActivationCodeTimer] = useState<number>(0);
+  const activationCodeTimerMaxValue = 20;
+  let timerId;
+
+  useEffect(() => {
+    if (timer > 0 && !timerId) {
+      timerId = setTimeout(() => setActivationCodeTimer(prevState => prevState - 1), 1000);
+    } else {
+      clearTimeout(timerId!);
+    }
+    return () => clearTimeout(timerId!);
+  }, [timer]);
+
+
+  const requestActivationCode = (): void => {
+    setActivationCodeLoading(true);
+    AccountService.sendActivationCode(email)
+      .then(() => setActivationCodeTimer(activationCodeTimerMaxValue))
+      .catch(() => setActivationCodeTimer(activationCodeTimerMaxValue))
+      .finally(() => setActivationCodeLoading(false));
+  };
+
+  return !email ? (
+    <Redirect to={Routes.INTERNAL_ERROR} />
+  ) : (
     <Box textAlign="center">
       <Typography variant="h5" color="primary">
-        Your account not activated yet.
-      </Typography>
-      <Box m={1} />
-      <Typography variant="h5" color="primary">
-        Check your email for activation link!
+        <Trans i18nKey={'static:notActivated.caption'} values={{email: email}} />
       </Typography>
       <Box m={2} />
-      <Typography>For redirecting to home page press the button or wait {timer} seconds...</Typography>
+      <Typography>
+        <Trans i18nKey={'static:redirectToHome.message'} count={timer} />
+      </Typography>
       <Box m={2} />
-      <Button variant="contained" color="primary" size="large" onClick={resetTimer}>
-        To home page
-      </Button>
+      <Box className={classes.buttons}>
+        <Button
+          variant="contained"
+          color="primary"
+          size="large"
+          disabled={activationCodeTimer > 0}
+          startIcon={<EmailIcon />}
+          onClick={requestActivationCode}
+
+        >
+          <Trans i18nKey={'static:sendActivationLink.button'} />
+        </Button>
+        <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
+          <Trans i18nKey={'static:redirectToHome.button'} />
+        </Button>
+      </Box>
+      <Box m={4} />
+
+      <Box>
+        <Box className={classes.loaders}>
+          {activationCodeTimer > 0 &&
+          <CircularProgressTimer maxValue={activationCodeTimerMaxValue} value={activationCodeTimer} />}
+          {activationCodeLoading && <CircularProgress />}
+        </Box>
+      </Box>
+
     </Box>
   );
 };
 
-const composer = compose(withCentralContainer, withRedirectTimer());
-export default composer(NotActivated);
+export default compose(
+  withBackground('/images/background-1.jpg'),
+  withRedirectTimer('/', 60),
+  withRouter,
+)(NotActivated);

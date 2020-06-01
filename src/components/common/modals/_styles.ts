@@ -1,6 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {COLORS} from '../../../shared/theme';
 
 export const modalStyles = makeStyles((theme: Theme) => ({
   header: {
@@ -8,18 +7,18 @@ export const modalStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     margin: 0,
     padding: theme.spacing(2),
-    color: COLORS.WHITE,
-    background: theme.palette.primary.main,
+    color: theme.palette.primary.main,
   },
   icon: {
     display: 'flex',
     alignItems: 'center',
     marginRight: theme.spacing(1),
+    color: theme.palette.primary.main,
   },
   closeButton: {
     position: 'absolute',
     right: theme.spacing(1),
     top: theme.spacing(1),
-    color: COLORS.WHITE,
+    color: theme.palette.primary.main,
   },
 }));

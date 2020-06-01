@@ -1,27 +1,38 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Box, Button, Typography} from '@material-ui/core';
-import withCentralContainer from '../common/hoc/with-central-container';
-import {compose} from 'redux';
-import withRedirectTimer, {RedirectTimerProps} from '../common/hoc/with-redirect-timer';
+import {compose} from 'recompose';
+import withRedirectTimer, {RedirectTimerProps} from '../../shared/hoc/with-redirect-timer';
+import {Trans} from 'react-i18next';
+import {staticPageStyles} from './_styles';
+import withBackground from '../../shared/hoc/with-background';
+import {HomeIcon} from '../common/icons/home-icon';
+
+const useStyles = staticPageStyles;
 
 type Props = RedirectTimerProps;
 
 const Forbidden: FC<Props> = ({timer, resetTimer}: Props) => {
+  const classes = useStyles();
   return (
     <Box textAlign="center">
+      <Typography variant="h5" color="primary" className={classes.code}>
+        403
+      </Typography>
+      <Box m={1} />
       <Typography variant="h5" color="primary">
-        Forbidden!
+        <Trans i18nKey={'static:forbidden.caption'} />
       </Typography>
       <Box m={2} />
-      <Typography>For redirecting to home page press the button or wait {timer} seconds...</Typography>
+      <Typography>
+        <Trans i18nKey={'static:redirectToHome.message'} count={timer} />
+      </Typography>
       <Box m={2} />
-      <Button variant="contained" color="primary" size="large" onClick={resetTimer}>
-        To home page
+      <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
+        <Trans i18nKey={'static:redirectToHome.button'} />
       </Button>
     </Box>
   );
 };
 
-const composer = compose(withCentralContainer, withRedirectTimer());
-export default composer(Forbidden);
+export default compose(withBackground('/images/background-1.jpg'), withRedirectTimer())(Forbidden);

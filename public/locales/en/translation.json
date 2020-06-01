@@ -3,13 +3,5 @@
     "logout": "Logout",
     "register": "Sign up",
     "login": "Sign in"
-  },
-  "login": {
-    "header": "Sign in",
-    "submit": "Sign in"
-  },
-  "register": {
-    "header": "Sign up",
-    "submit": "Register"
   }
 }

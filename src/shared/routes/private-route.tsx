@@ -1,21 +1,21 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {RootState} from '../store';
+import {RootState} from '../../store';
 import {connect, ConnectedProps} from 'react-redux';
-import {AuthState} from '../store/rerducers/auth.reduser';
+import {AuthState} from '../../store/rerducers/auth.reduser';
 import {Redirect, Route, RouteProps} from 'react-router-dom';
 import {compose} from 'redux';
-import {enqueueSnackbar} from '../store/actions/notification.actions';
+import {enqueueSnackbar} from '../../store/actions/notification.actions';
 import {useTranslation} from 'react-i18next';
-import {NotificationBuilder} from '../utils/notification.builder';
+import {NotificationBuilder} from '../notification/notification.builder';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {enqueueSnackbar};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type ComposedProps = RouteProps & ConnectedProps<typeof connector>;
+type ComposedProps = ConnectedProps<typeof connector> & RouteProps;
 
-const InnerPrivateRoute: FC<RouteProps> = (routeProps: RouteProps, {authState, enqueueSnackbar}: ComposedProps) => {
+const PrivateRoute: FC<RouteProps> = (routeProps: RouteProps, {authState, enqueueSnackbar}: ComposedProps) => {
   const {isAuthenticated} = authState;
   const {t} = useTranslation();
 
@@ -27,9 +27,4 @@ const InnerPrivateRoute: FC<RouteProps> = (routeProps: RouteProps, {authState, e
   return isAuthenticated ? <Route {...routeProps} /> : <Redirect to="/" />;
 };
 
-const composer = compose<React.ComponentClass<RouteProps>>(connector);
-export const PrivateRoute = composer(InnerPrivateRoute);
-
-export const PublicRoute: FC<RouteProps> = (routeProps: RouteProps) => {
-  return <Route {...routeProps} />;
-};
+export default compose<RouteProps>(connector)(PrivateRoute);

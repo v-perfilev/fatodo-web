@@ -1,9 +1,11 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Box, Button, Typography} from '@material-ui/core';
-import withCentralContainer from '../common/hoc/with-central-container';
-import {compose} from 'redux';
-import withRedirectTimer, {RedirectTimerProps} from '../common/hoc/with-redirect-timer';
+import withRedirectTimer, {RedirectTimerProps} from '../../shared/hoc/with-redirect-timer';
+import {Trans} from 'react-i18next';
+import {compose} from 'recompose';
+import withBackground from '../../shared/hoc/with-background';
+import {HomeIcon} from '../common/icons/home-icon';
 
 type Props = RedirectTimerProps;
 
@@ -11,21 +13,18 @@ const Activated: FC<Props> = ({timer, resetTimer}: Props) => {
   return (
     <Box textAlign="center">
       <Typography variant="h5" color="primary">
-        Account was successfully activated.
-      </Typography>
-      <Box m={1} />
-      <Typography variant="h5" color="primary">
-        Now you can sign in!
+        <Trans i18nKey={'static:activated.caption'} />
       </Typography>
       <Box m={2} />
-      <Typography>For redirecting to home page press the button or wait {timer} seconds...</Typography>
+      <Typography>
+        <Trans i18nKey={'static:redirectToHome.message'} count={timer} />
+      </Typography>
       <Box m={2} />
-      <Button variant="contained" color="primary" size="large" onClick={resetTimer}>
-        To home page
+      <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
+        <Trans i18nKey={'static:redirectToHome.button'} />
       </Button>
     </Box>
   );
 };
 
-const composer = compose(withCentralContainer, withRedirectTimer());
-export default composer(Activated);
+export default compose(withBackground('/images/background-1.jpg'), withRedirectTimer())(Activated);

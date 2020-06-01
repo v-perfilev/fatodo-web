@@ -1,8 +1,8 @@
 import {SnackbarKey, useSnackbar} from 'notistack';
 import {FC, useEffect, useState} from 'react';
-import {RootState} from '../store';
+import {RootState} from '../../store';
 import {connect, ConnectedProps} from 'react-redux';
-import {removeSnackbar} from '../store/actions/notification.actions';
+import {removeSnackbar} from '../../store/actions/notification.actions';
 
 const mapStateToProps = (state: RootState): any => ({notificationState: state.notificationState});
 const mapDispatchToProps = {removeSnackbar};

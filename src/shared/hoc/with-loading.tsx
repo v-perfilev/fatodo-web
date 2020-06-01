@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
-import Spinner from '../loaders/spinner';
+import Spinner from '../../components/common/loaders/spinner';
 import {Box, Fade} from '@material-ui/core';
 
 const withLoading = (Component: ComponentType): FC => (): ReactElement => {

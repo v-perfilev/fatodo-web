@@ -1,8 +1,8 @@
-import AuthService from '../../services/auth.service';
-import * as SecurityUtils from '../../utils/security.utils';
+import AccountService from '../../services/account.service';
+import * as SecurityUtils from '../../shared/utils/security.utils';
 import {LoginDto} from '../../models/dto/login.dto';
 import UserService from '../../services/user.service';
-import {setLanguageFromAccountResponse} from '../../utils/language.utils';
+import {setLanguageFromAccountResponse} from '../../shared/utils/language.utils';
 
 export const ACTION_TYPES = {
   LOGIN: 'authState/LOGIN',
@@ -16,7 +16,7 @@ export const login = (data: LoginDto, rememberMe: boolean, onSuccess: () => void
 ): Promise<void> => {
   const authResponse = await dispatch({
     type: ACTION_TYPES.LOGIN,
-    payload: AuthService.authenticate(data).catch(onFailure),
+    payload: AccountService.authenticate(data).catch(onFailure),
   });
   const token = SecurityUtils.parseTokenFromAuthResponse(authResponse);
   if (token) {

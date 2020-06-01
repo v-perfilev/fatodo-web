@@ -1,0 +1,28 @@
+{
+  "internalError": {
+    "caption": "Something went wrong"
+  },
+  "pageNotFound": {
+    "caption": "Page not found"
+  },
+  "unauthorized": {
+    "caption": "You are unauthorized"
+  },
+  "forbidden": {
+    "caption": "Access is forbidden"
+  },
+  "activated": {
+    "caption": "Account was successfully activated <br/> Now you can sign in!"
+  },
+  "notActivated": {
+    "caption": "Your account is not activated yet <br/> Link with activation code was sent to <strong>{{email}}</strong>"
+  },
+  "redirectToHome": {
+    "message": "For redirecting to home page press the button or wait {{count}} second...",
+    "message_plural": "For redirecting to home page press the button or wait {{count}} seconds...",
+    "button": "To home page"
+  },
+  "sendActivationLink": {
+    "button": "Send code again"
+  }
+}

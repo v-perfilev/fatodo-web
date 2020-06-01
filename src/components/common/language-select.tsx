@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {Box, Button, Fade, Menu, MenuItem, Typography} from '@material-ui/core';
+import {Box, Button, Fade, Menu, MenuItem} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {LANGUAGES} from '../../shared/i18n';
+import {getLanguage, setLanguage} from '../../shared/utils/language.utils';
+import {LanguageIcon} from './icons/language-icon';
+import {ArrowDownIcon} from './icons/arrow-down-icon';
 import {languageStyles} from './_styles';
-import {getLanguage, setLanguage} from '../../utils/language.utils';
-import {LanguageIcon} from '../common/icons/language-icon';
-import {ArrowDownIcon} from '../common/icons/arrow-down-icon';
 
 const useStyles = languageStyles;
 
@@ -33,8 +33,7 @@ const LanguageSelect: FC = () => {
 
   return (
     <Box>
-      <Button color="inherit" onClick={handleClick}>
-        <LanguageIcon className={classes.icon} />
+      <Button onClick={handleClick} color="primary" startIcon={<LanguageIcon />}>
         {getNameForCode(getLanguage())}
         <ArrowDownIcon />
       </Button>
@@ -48,7 +47,7 @@ const LanguageSelect: FC = () => {
       >
         {LANGUAGES.map((language, index) => (
           <MenuItem onClick={(): void => changeLanguage(language.code)} key={index}>
-            <Typography>{language.name}</Typography>
+            {language.name}
           </MenuItem>
         ))}
       </Menu>

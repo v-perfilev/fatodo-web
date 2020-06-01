@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 
 import App from './components/app';
 import setupAxiosInterceptors from './shared/axios';
-import store from './shared/store';
+import store from './store/store';
 import {Provider} from 'react-redux';
 import {CssBaseline, ThemeProvider} from '@material-ui/core';
 import {theme} from './shared/theme';
@@ -15,7 +15,7 @@ import i18n from './shared/i18n';
 import './shared/i18n';
 import {FC} from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
-import Notifier from './shared/notifier';
+import Notifier from './shared/notification/notifier';
 
 const root = document.getElementById('root');
 

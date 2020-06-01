@@ -1,10 +1,19 @@
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles, Theme} from '@material-ui/core/styles';
 
-export const centralContainerStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+export const staticPageStyles = makeStyles((theme: Theme) => ({
+  code: {
+    fontSize: '1000%',
+    lineHeight: 1,
+  },
+  buttons: {
+    '& > *': {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+    },
+  },
+  loaders: {
+    position: 'fixed',
+    display: 'inline-block',
+    transform: 'translateX(-50%)',
   },
 }));

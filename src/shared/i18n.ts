@@ -19,9 +19,10 @@ i18next
   .use(backend)
   .use(initReactI18next)
   .init({
+    debug: false,
     whitelist: ['en', 'ru'],
     fallbackLng: 'en',
-    ns: ['translation', 'feedback', 'form'],
+    ns: ['translation', 'feedback', 'form', 'static'],
     defaultNS: 'translation',
     load: 'languageOnly',
     backend: {
