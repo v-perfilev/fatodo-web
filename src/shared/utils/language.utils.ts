@@ -1,4 +1,9 @@
 import i18n from '../i18n';
+import {InitOptions} from 'i18next';
+
+export const getOptions = (): InitOptions => i18n.options;
+
+export const getLanguages = (): string[] => i18n.languages;
 
 export const getLanguage = (): string => i18n.language;
 

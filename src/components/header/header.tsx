@@ -6,10 +6,8 @@ import LanguageSelect from '../common/language-select';
 import Account from './account';
 import {headerStyles} from './_styles';
 
-const useStyles = headerStyles;
-
 const Header: FC = () => {
-  const classes = useStyles();
+  const classes = headerStyles();
 
   return (
     <AppBar position="static" color="transparent" className={classes.root}>

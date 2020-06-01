@@ -3,10 +3,8 @@ import {ComponentType, FC, ReactElement} from 'react';
 import {Box} from '@material-ui/core';
 import {wrapperStyles} from './_styles';
 
-const useStyles = wrapperStyles;
-
 const withWrapper = (Component: ComponentType): FC => (props): ReactElement => {
-  const classes = useStyles();
+  const classes = wrapperStyles();
 
   return (
     <Box className={classes.root}>

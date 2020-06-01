@@ -5,8 +5,6 @@ import {SlideDown} from '../../../shared/utils/animation.utils';
 import {modalStyles} from './_styles';
 import {CloseIcon} from '../icons/close-icon';
 
-const useStyles = modalStyles;
-
 interface ComponentProps {
   isOpen: boolean;
   toggle: () => void;
@@ -18,7 +16,7 @@ interface ComponentProps {
 type Props = ComponentProps;
 
 const Modal: FC<Props> = ({isOpen, toggle, headerText, headerIcon, content}: Props) => {
-  const classes = useStyles();
+  const classes = modalStyles();
 
   return (
     <Dialog open={isOpen} onClose={toggle} TransitionComponent={SlideDown}>

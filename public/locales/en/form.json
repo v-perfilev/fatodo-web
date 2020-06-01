@@ -1,11 +1,19 @@
 {
   "login": {
-    "header": "Sign in",
-    "submit": "Sign in"
+    "header": "Login",
+    "submit": "Login"
   },
   "register": {
-    "header": "Sign up",
+    "header": "Register",
     "submit": "Register"
+  },
+  "forgotPassword": {
+    "header": "Forgot password?",
+    "submit": "Request code"
+  },
+  "resetPassword": {
+    "header": "Reset password",
+    "submit": "Submit"
   },
   "fields": {
     "user": {
@@ -19,6 +27,14 @@
       "strength": "Should contain uppercase and lowercase characters and numbers",
       "min8": "Can not be shorter than 8 characters",
       "max20": "Can not be longer than 20 characters"
+    },
+    "newPassword": {
+      "label": "New password"
+    },
+    "repeatPassword": {
+      "label": "Confirm password",
+      "required": "Required",
+      "notEqual": "Passwords are not equals"
     },
     "rememberMe": {
       "label": "Remember me"

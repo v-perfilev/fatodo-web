@@ -8,12 +8,10 @@ import {staticPageStyles} from './_styles';
 import withBackground from '../../shared/hoc/with-background';
 import {HomeIcon} from '../common/icons/home-icon';
 
-const useStyles = staticPageStyles;
-
 type Props = RedirectTimerProps;
 
 const InternalError: FC<Props> = ({timer, resetTimer}: Props) => {
-  const classes = useStyles();
+  const classes = staticPageStyles();
 
   return (
     <Box textAlign="center">
@@ -30,7 +28,7 @@ const InternalError: FC<Props> = ({timer, resetTimer}: Props) => {
       </Typography>
       <Box m={2} />
       <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
-        <Trans i18nKey={'static:redirectToHome.button'} />
+        <Trans i18nKey={'buttons.toHomePage'} />
       </Button>
     </Box>
   );

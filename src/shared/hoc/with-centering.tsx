@@ -3,10 +3,8 @@ import {ComponentType, FC, ReactElement} from 'react';
 import {Grid} from '@material-ui/core';
 import {centeringStyles} from './_styles';
 
-const useStyles = centeringStyles;
-
 const withCentering = (Component: ComponentType): FC => (props): ReactElement => {
-  const classes = useStyles();
+  const classes = centeringStyles();
 
   return (
     <Grid container className={classes.root}>

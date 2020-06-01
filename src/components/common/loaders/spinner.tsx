@@ -3,10 +3,8 @@ import {FC} from 'react';
 import {spinnerStyles} from './_styles';
 import {Box} from '@material-ui/core';
 
-const useStyles = spinnerStyles;
-
 const Spinner: FC = () => {
-  const classes = useStyles();
+  const classes = spinnerStyles();
 
   return (
     <Box className={classes.root}>

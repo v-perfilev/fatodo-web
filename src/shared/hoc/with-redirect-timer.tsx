@@ -7,26 +7,25 @@ export interface RedirectTimerProps {
   resetTimer: () => void;
 }
 
-const withRedirectTimer = (redirectLink = '/', timerInitValue = 50) =>
-  (Component: ComponentType<RedirectTimerProps>): FC<null> => (): ReactElement => {
-    const [timer, setTimer] = useState<number>(timerInitValue);
-    let timerId;
+const withRedirectTimer = (redirectLink = '/', timerInitValue = 50) => (
+  Component: ComponentType<RedirectTimerProps>
+): FC<null> => (): ReactElement => {
+  const [timer, setTimer] = useState<number>(timerInitValue);
+  let timerId;
 
-    useEffect(() => {
-      if (timer > 0 && !timerId) {
-        timerId = setTimeout(() => setTimer(prevState => prevState - 1), 1000);
-      }
-      return () => clearTimeout(timerId!);
-    }, [timer]);
+  useEffect(() => {
+    if (timer > 0 && !timerId) {
+      timerId = setTimeout(() => setTimer((prevState) => prevState - 1), 1000);
+    }
+    return (): void => clearTimeout(timerId);
+  }, [timer]);
 
-    const resetTimer = (): void => {
-      setTimer(0);
-      clearTimeout(timerId!);
-    };
-
-    return timer === 0
-      ? <Redirect to={redirectLink} />
-      : <Component timer={timer} resetTimer={resetTimer} />;
+  const resetTimer = (): void => {
+    setTimer(0);
+    clearTimeout(timerId);
   };
+
+  return timer === 0 ? <Redirect to={redirectLink} /> : <Component timer={timer} resetTimer={resetTimer} />;
+};
 
 export default withRedirectTimer;

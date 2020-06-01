@@ -1,7 +1,12 @@
 {
   "header": {
     "logout": "Logout",
-    "register": "Sign up",
-    "login": "Sign in"
+    "register": "Register",
+    "login": "Login"
+  },
+  "buttons": {
+    "toHomePage": "To home page",
+    "sendActivationCode": "Send code again",
+    "forgotPassword": "Reset password"
   }
 }

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {Link, Typography} from '@material-ui/core';
-import {Link as RouterLink} from 'react-router-dom';
+import {Typography} from '@material-ui/core';
 import {logoStyles} from './_styles';
 import {Routes} from '../router';
+import Link from './link';
 
 const useStyles = logoStyles;
 
@@ -11,7 +11,7 @@ const Logo: FC = () => {
   const classes = useStyles();
 
   return (
-    <Link underline="none" component={RouterLink} to={Routes.ROOT} className={classes.root}>
+    <Link to={Routes.ROOT} className={classes.root} underline="none">
       <img src="/images/logo.png" className={classes.logoImage} />
       <Typography className={classes.logoText}>Fatodo</Typography>
     </Link>

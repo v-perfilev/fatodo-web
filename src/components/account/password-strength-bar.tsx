@@ -2,15 +2,14 @@ import * as React from 'react';
 import {FC} from 'react';
 import {passwordStrengthBarStyles} from './_styles';
 import {passwordStrengthMap, passwordStrengthPostfix, passwordStrengthPrefix} from './_validators';
-
-const useStyles = passwordStrengthBarStyles;
+import {Box} from '@material-ui/core';
 
 interface Props {
   password: string;
 }
 
 const PasswordStrengthBar: FC<Props> = ({password}: Props) => {
-  const classes = useStyles();
+  const classes = passwordStrengthBarStyles();
   const rulesCount = 4;
   let counter = 0;
   if (password.length >= 8) {
@@ -25,13 +24,18 @@ const PasswordStrengthBar: FC<Props> = ({password}: Props) => {
 
   const subItems = [];
   for (let i = 0; i < counter; i++) {
-    subItems.push(<div className={classes.green} key={i} />);
+    subItems.push(<Box className={classes.green} key={i} />);
   }
   for (let i = counter; i < rulesCount; i++) {
-    subItems.push(<div className={classes.red} key={i} />);
+    subItems.push(<Box className={classes.red} key={i} />);
   }
 
-  return <div className={classes.root}>{subItems}</div>;
+  return (
+    <>
+      <Box className={classes.root}>{subItems}</Box>
+      <Box m={1} />
+    </>
+  );
 };
 
 export default PasswordStrengthBar;

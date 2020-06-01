@@ -8,16 +8,14 @@ import {connect, ConnectedProps} from 'react-redux';
 import * as React from 'react';
 import {FC, useState} from 'react';
 import i18n from '../../shared/i18n';
-import {authStyles} from './_styles';
-import {Trans, useTranslation} from 'react-i18next';
+import {authFormStyles} from './_styles';
+import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
 
-const useStyles = authStyles;
-
 interface ComponentProps {
-  onSuccess?: () => void;
+  onSuccess: () => void;
 }
 
 const mapDispatchToProps = {login};
@@ -25,8 +23,8 @@ const connector = connect(null, mapDispatchToProps);
 
 type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
 
-const InnerForm: FC<Props> = ({isValid}: Props) => {
-  const classes = useStyles();
+const LoginForm: FC<Props> = ({isValid}: Props) => {
+  const classes = authFormStyles();
   const {t} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
 
@@ -85,6 +83,7 @@ const formik = withFormik<Props, FormValues>({
     password: Yup.string().required(() => i18n.t('form:fields.password.required')),
   }),
 
+  isInitialValid: false,
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
@@ -93,9 +92,7 @@ const formik = withFormik<Props, FormValues>({
       password: values.password,
     };
     const onSuccess = (): void => {
-      if (props.onSuccess) {
-        props.onSuccess();
-      }
+      props.onSuccess();
       setSubmitting(false);
     };
     const onFailure = (): void => {
@@ -105,4 +102,4 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose<ComponentProps>(connector, formik)(InnerForm);
+export default compose<ComponentProps>(withTranslation(), connector, formik)(LoginForm);

@@ -1,7 +1,20 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const authStyles = makeStyles((theme: Theme) => ({
+export const authPageStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  header: {
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'space-around',
+  },
+}));
+
+export const authFormStyles = makeStyles((theme: Theme) => ({
   root: {
     width: 350,
     '& > *': {
@@ -26,6 +39,7 @@ export const passwordStrengthBarStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
   red: {
-    backgroundColor: theme.palette.error.main,
+    // backgroundColor: theme.palette.error.main,
+    backgroundColor: theme.palette.secondary.main,
   },
 }));

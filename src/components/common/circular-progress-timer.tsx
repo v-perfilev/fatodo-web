@@ -10,12 +10,15 @@ interface ComponentProps {
 type Props = ComponentProps & CircularProgressProps;
 
 const CircularProgressTimer: FC<Props> = ({value, maxValue, ...props}: Props) => {
-  const progressValue = Math.round(value / maxValue * 100);
+  const progressValue = Math.round((value / maxValue) * 100);
   return (
     <Box position="relative" display="inline-flex">
       <CircularProgress variant="static" {...props} value={progressValue} />
       <Box
-        top={0} left={0} bottom={0} right={0}
+        top={0}
+        left={0}
+        bottom={0}
+        right={0}
         position="absolute"
         display="flex"
         alignItems="center"

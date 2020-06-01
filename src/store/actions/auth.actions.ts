@@ -1,6 +1,6 @@
 import AccountService from '../../services/account.service';
 import * as SecurityUtils from '../../shared/utils/security.utils';
-import {LoginDto} from '../../models/dto/login.dto';
+import {LoginDTO} from '../../models/dto/login.dto';
 import UserService from '../../services/user.service';
 import {setLanguageFromAccountResponse} from '../../shared/utils/language.utils';
 
@@ -11,7 +11,7 @@ export const ACTION_TYPES = {
   CLEAR_AUTH: 'authState/CLEAR_AUTH',
 };
 
-export const login = (data: LoginDto, rememberMe: boolean, onSuccess: () => void, onFailure: () => void) => async (
+export const login = (data: LoginDTO, rememberMe: boolean, onSuccess: () => void, onFailure: () => void) => async (
   dispatch
 ): Promise<void> => {
   const authResponse = await dispatch({

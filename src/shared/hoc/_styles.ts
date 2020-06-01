@@ -28,7 +28,7 @@ export const backgroundStyles = makeStyles(() => ({
     flexDirection: 'column',
   },
   header: {
-    minHeight: 200,
+    minHeight: 150,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -46,7 +46,7 @@ export const backgroundStyles = makeStyles(() => ({
     alignItems: 'center',
   },
   footer: {
-    minHeight: 200,
+    minHeight: 150,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

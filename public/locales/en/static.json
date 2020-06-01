@@ -19,10 +19,6 @@
   },
   "redirectToHome": {
     "message": "For redirecting to home page press the button or wait {{count}} second...",
-    "message_plural": "For redirecting to home page press the button or wait {{count}} seconds...",
-    "button": "To home page"
-  },
-  "sendActivationLink": {
-    "button": "Send code again"
+    "message_plural": "For redirecting to home page press the button or wait {{count}} seconds..."
   }
 }

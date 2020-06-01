@@ -13,8 +13,6 @@ import {HomeIcon} from '../common/icons/home-icon';
 import {EmailIcon} from '../common/icons/email-icon';
 import CircularProgressTimer from '../common/circular-progress-timer';
 
-const useStyles = staticPageStyles;
-
 interface LocationState {
   email: string;
 }
@@ -22,8 +20,8 @@ interface LocationState {
 type Props = RouteComponentProps<{}, any, LocationState> & RedirectTimerProps;
 
 const NotActivated: FC<Props> = ({timer, resetTimer, location}: Props) => {
+  const classes = staticPageStyles();
   const email = location?.state?.email;
-  const classes = useStyles();
   const [activationCodeLoading, setActivationCodeLoading] = useState<boolean>(false);
   const [activationCodeTimer, setActivationCodeTimer] = useState<number>(0);
   const activationCodeTimerMaxValue = 20;
@@ -31,17 +29,16 @@ const NotActivated: FC<Props> = ({timer, resetTimer, location}: Props) => {
 
   useEffect(() => {
     if (timer > 0 && !timerId) {
-      timerId = setTimeout(() => setActivationCodeTimer(prevState => prevState - 1), 1000);
+      timerId = setTimeout(() => setActivationCodeTimer((prevState) => prevState - 1), 1000);
     } else {
-      clearTimeout(timerId!);
+      clearTimeout(timerId);
     }
-    return () => clearTimeout(timerId!);
+    return (): void => clearTimeout(timerId);
   }, [timer]);
-
 
   const requestActivationCode = (): void => {
     setActivationCodeLoading(true);
-    AccountService.sendActivationCode(email)
+    AccountService.requestActivationCode(email)
       .then(() => setActivationCodeTimer(activationCodeTimerMaxValue))
       .catch(() => setActivationCodeTimer(activationCodeTimerMaxValue))
       .finally(() => setActivationCodeLoading(false));
@@ -67,24 +64,23 @@ const NotActivated: FC<Props> = ({timer, resetTimer, location}: Props) => {
           disabled={activationCodeTimer > 0}
           startIcon={<EmailIcon />}
           onClick={requestActivationCode}
-
         >
-          <Trans i18nKey={'static:sendActivationLink.button'} />
+          <Trans i18nKey={'buttons.requestActivationCode'} />
         </Button>
         <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
-          <Trans i18nKey={'static:redirectToHome.button'} />
+          <Trans i18nKey={'buttons.toHomePage'} />
         </Button>
       </Box>
       <Box m={4} />
 
       <Box>
         <Box className={classes.loaders}>
-          {activationCodeTimer > 0 &&
-          <CircularProgressTimer maxValue={activationCodeTimerMaxValue} value={activationCodeTimer} />}
+          {activationCodeTimer > 0 && (
+            <CircularProgressTimer maxValue={activationCodeTimerMaxValue} value={activationCodeTimer} />
+          )}
           {activationCodeLoading && <CircularProgress />}
         </Box>
       </Box>
-
     </Box>
   );
 };
@@ -92,5 +88,5 @@ const NotActivated: FC<Props> = ({timer, resetTimer, location}: Props) => {
 export default compose(
   withBackground('/images/background-1.jpg'),
   withRedirectTimer('/', 60),
-  withRouter,
+  withRouter
 )(NotActivated);

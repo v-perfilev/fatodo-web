@@ -9,18 +9,18 @@ type Props = RouteComponentProps<{code: string}>;
 
 const Activation: FC<Props> = (props) => {
   const code = props.match.params.code;
-  const [activated, setActivated] = useState(false);
+  const [isCodeCorrect, setIsCodeCorrect] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     AccountService.activate(code)
-      .then(() => setActivated(true))
+      .then(() => setIsCodeCorrect(true))
       .catch(() => setError(true));
   }, []);
 
-  if (!activated && !error) {
+  if (!isCodeCorrect && !error) {
     return null;
-  } else if (activated) {
+  } else if (isCodeCorrect) {
     return <Redirect to={Routes.ACTIVATED} />;
   } else {
     return <Redirect to={Routes.INTERNAL_ERROR} />;

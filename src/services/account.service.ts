@@ -1,13 +1,14 @@
 import axios from 'axios';
-import {LoginDto} from '../models/dto/login.dto';
-import {RegisterDto} from '../models/dto/register.dto';
+import {LoginDTO} from '../models/dto/login.dto';
+import {RegisterDTO} from '../models/dto/register.dto';
+import {ResetPasswordDTO} from '../models/dto/reset-password.dto';
 
 export default class AccountService {
-  public static authenticate = (data: LoginDto): Promise<any> => {
+  public static authenticate = (data: LoginDTO): Promise<any> => {
     return axios.post('auth/authenticate', data);
   };
 
-  public static register = (data: RegisterDto): Promise<any> => {
+  public static register = (data: RegisterDTO): Promise<any> => {
     return axios.post('auth/register', data);
   };
 
@@ -15,11 +16,16 @@ export default class AccountService {
     return axios.get('auth/account/activate/' + code);
   };
 
-  public static sendActivationCode = (user: string): Promise<any> => {
-    return axios.get('auth/account/send-activation-code/' + user);
+  public static requestActivationCode = (user: string): Promise<any> => {
+    return axios.get('auth/account/request-activation-code/' + user);
   };
 
-  public static sendResetPasswordCode = (user: string): Promise<any> => {
-    return axios.get('auth/account/send-reset-password/' + user);
+  public static requestResetPasswordCode = (user: string): Promise<Account> => {
+    return axios.get('auth/account/request-reset-password-code/' + user);
   };
+
+  public static resetPassword = (data: ResetPasswordDTO): Promise<any> => {
+    return axios.post('auth/account/reset-password', data);
+  };
+
 }

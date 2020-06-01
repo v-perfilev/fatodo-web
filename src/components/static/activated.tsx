@@ -21,7 +21,7 @@ const Activated: FC<Props> = ({timer, resetTimer}: Props) => {
       </Typography>
       <Box m={2} />
       <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
-        <Trans i18nKey={'static:redirectToHome.button'} />
+        <Trans i18nKey={'buttons.toHomePage'} />
       </Button>
     </Box>
   );
