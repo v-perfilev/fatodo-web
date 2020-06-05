@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 interface AsyncValidationRule {
   name: string;
   message: Yup.TestOptionsMessage;
-  validate: (value: string) => Promise<boolean> | boolean;
+  test: (value: string) => Promise<boolean> | boolean;
 }
 
 export class AsyncValidator {
@@ -18,7 +18,7 @@ export class AsyncValidator {
     this.asyncTest = asyncTest;
   }
 
-  validate = async (value: string): Promise<boolean> => {
+  private validate = async (value: string): Promise<boolean> => {
     let result;
     if (!(await this.preSchema.isValid(value))) {
       result = true;
@@ -26,7 +26,7 @@ export class AsyncValidator {
       result = this.previousResult;
     } else {
       this.previousValue = value;
-      result = await this.asyncTest.validate(value);
+      result = await this.asyncTest.test(value);
     }
     this.previousResult = result;
     return result;

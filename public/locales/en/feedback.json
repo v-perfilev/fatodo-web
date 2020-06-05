@@ -4,6 +4,10 @@
   "form": {
     "invalid": "Form data is invalid"
   },
+  "auth": {
+    "alreadyActivated": "Account is already activated",
+    "notActivated": "Account is not activated"
+  },
   "security": {
     "forbidden": "Access is forbidden",
     "unauthorized": "You are unauthorized",

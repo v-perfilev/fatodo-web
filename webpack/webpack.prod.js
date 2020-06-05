@@ -47,7 +47,8 @@ module.exports = () => merge(commonConfig({env: ENV}), {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        SERVER_API_URL: JSON.stringify('http://localhost:4000/api')
+        SERVER_API_URL: JSON.stringify('http://localhost:4000/api'),
+        DEVELOPMENT_MODE: false
       }
     }),
     new CompressionPlugin({

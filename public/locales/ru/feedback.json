@@ -4,6 +4,10 @@
   "form": {
     "invalid": "Форма содержит некорректные данные"
   },
+  "auth": {
+    "alreadyActivated": "Аккаунт уже был активирован",
+    "notActivated": "Аккаунт не активирован"
+  },
   "security": {
     "forbidden": "Доступ запрещён",
     "unauthorized": "Вы не авторизованы",

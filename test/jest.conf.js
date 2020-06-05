@@ -4,11 +4,11 @@ module.exports = {
     },
     rootDir: '../../',
     testURL: 'http://localhost/',
-    coverageDirectory: '<rootDir>/build/validate-results/',
-    testMatch: ['<rootDir>/src/validate/spec/**/@(*.)@(spec.ts?(x))'],
+    coverageDirectory: '<rootDir>/build/test-results/',
+    testMatch: ['<rootDir>/src/test/spec/**/@(*.)@(spec.ts?(x))'],
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     coveragePathIgnorePatterns: [
-        '<rootDir>/src/validate'
+        '<rootDir>/src/test'
     ],
     moduleNameMapper: {
         'components/(.*)': '<rootDir>/src/main/components/$1',
@@ -16,7 +16,7 @@ module.exports = {
     },
     reporters: [
         'default',
-        ['jest-junit', {output: './build/validate-results/TESTS-results-jest.xml'}]
+        ['jest-junit', {output: './build/test-results/TESTS-results-jest.xml'}]
     ],
     testResultsProcessor: 'jest-sonar-reporter',
     testPathIgnorePatterns: [
