@@ -34,8 +34,4 @@ const ResetPassword: FC<Props> = ({history, ...props}: Props) => {
   );
 };
 
-export default compose(
-  withTranslation(),
-  withRouter,
-  withBackground('/images/background-1.jpg'),
-)(ResetPassword);
+export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg'))(ResetPassword);

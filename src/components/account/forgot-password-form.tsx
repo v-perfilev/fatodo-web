@@ -1,4 +1,3 @@
-import Button from '@material-ui/core/Button';
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {TextField} from 'formik-material-ui';
@@ -11,6 +10,7 @@ import {authFormStyles} from './_styles';
 import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import AccountService from '../../services/account.service';
+import LoadingButton from '../common/buttons/loading-button';
 
 interface ComponentProps {
   onSuccess?: () => void;
@@ -21,15 +21,21 @@ const connector = connect(null, mapDispatchToProps);
 
 type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
 
-const ForgotPasswordForm: FC<Props> = ({isValid}: Props) => {
+const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
   return (
     <Form className={classes.root}>
       <Field component={TextField} type="text" name="user" label={t('form:fields.user.label')} fullWidth={true} />
-      <Button type="submit" variant="contained" color="secondary" fullWidth={true} disabled={!isValid}>
+      <LoadingButton
+        type="submit"
+        color="secondary"
+        fullWidth={true}
+        disabled={!isValid || isSubmitting}
+        loading={isSubmitting}
+      >
         <Trans i18nKey={'form:forgotPassword.submit'} />
-      </Button>
+      </LoadingButton>
     </Form>
   );
 };

@@ -32,8 +32,4 @@ const ForgotPassword: FC<Props> = ({history}: Props) => {
   );
 };
 
-export default compose(
-  withTranslation(),
-  withRouter,
-  withBackground('/images/background-1.jpg'),
-)(ForgotPassword);
+export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg'))(ForgotPassword);

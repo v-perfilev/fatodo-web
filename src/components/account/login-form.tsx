@@ -1,4 +1,3 @@
-import Button from '@material-ui/core/Button';
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {CheckboxWithLabel, TextField} from 'formik-material-ui';
@@ -13,6 +12,7 @@ import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
+import LoadingButton from '../common/buttons/loading-button';
 
 interface ComponentProps {
   onSuccess: () => void;
@@ -23,7 +23,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
 
-const LoginForm: FC<Props> = ({isValid}: Props) => {
+const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
@@ -58,9 +58,15 @@ const LoginForm: FC<Props> = ({isValid}: Props) => {
           Label={{label: t('form:fields.rememberMe.label')}}
         />
       </Box>
-      <Button type="submit" variant="contained" color="secondary" fullWidth={true} disabled={!isValid}>
+      <LoadingButton
+        type="submit"
+        color="secondary"
+        fullWidth={true}
+        disabled={!isValid || isSubmitting}
+        loading={isSubmitting}
+      >
         <Trans i18nKey={'form:login.submit'} />
-      </Button>
+      </LoadingButton>
     </Form>
   );
 };

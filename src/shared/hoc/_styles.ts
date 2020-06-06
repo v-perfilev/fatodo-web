@@ -84,5 +84,5 @@ export const developmentRibbonStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     background: theme.palette.error.main,
     opacity: 0.7,
-  }
+  },
 }));

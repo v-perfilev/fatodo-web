@@ -11,7 +11,7 @@ export const emailValidator = new AsyncValidator(
     name: 'unique',
     message: (): string => i18n.t('form:fields.email.notUnique'),
     test: async (value): Promise<boolean> => (await UserService.isEmailUnique(value)) == true,
-  },
+  }
 );
 
 const usernameRegex = /^[A-Za-z\d]+$/;
@@ -25,7 +25,7 @@ export const usernameValidator = new AsyncValidator(
     name: 'unique',
     message: (): string => i18n.t('form:fields.username.notUnique'),
     test: async (value): Promise<boolean> => (await UserService.isUsernameUnique(value)) == true,
-  },
+  }
 );
 
 const passwordRegex = /^[A-Za-z\d]+$/;
@@ -47,9 +47,6 @@ export const passwordValidator = Yup.string()
 export const repeatPasswordValidator = Yup.string()
   .required(() => i18n.t('form:fields.repeatPassword.required'))
   .when('password', {
-    is: val => (val && val.length > 0),
-    then: Yup.string().oneOf(
-      [Yup.ref('password')],
-      () => i18n.t('form:fields.repeatPassword.notEqual'),
-    ),
+    is: (val) => val && val.length > 0,
+    then: Yup.string().oneOf([Yup.ref('password')], () => i18n.t('form:fields.repeatPassword.notEqual')),
   });

@@ -1,4 +1,3 @@
-import Button from '@material-ui/core/Button';
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {TextField} from 'formik-material-ui';
@@ -13,6 +12,7 @@ import {passwordValidator, repeatPasswordValidator} from './_validators';
 import {IconButton, InputAdornment} from '@material-ui/core';
 import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
+import LoadingButton from '../common/buttons/loading-button';
 
 interface ComponentProps {
   code: string;
@@ -22,7 +22,7 @@ interface ComponentProps {
 
 type Props = ComponentProps & FormikProps<any>;
 
-const ResetPasswordForm: FC<Props> = ({isValid, values}: Props) => {
+const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
@@ -67,9 +67,15 @@ const ResetPasswordForm: FC<Props> = ({isValid, values}: Props) => {
         }}
       />
       <PasswordStrengthBar password={values.password} />
-      <Button type="submit" variant="contained" color="secondary" fullWidth={true} disabled={!isValid}>
+      <LoadingButton
+        type="submit"
+        color="secondary"
+        fullWidth={true}
+        disabled={!isValid || isSubmitting}
+        loading={isSubmitting}
+      >
         <Trans i18nKey={'form:resetPassword.submit'} />
-      </Button>
+      </LoadingButton>
     </Form>
   );
 };

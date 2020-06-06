@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Box, CircularProgress, CircularProgressProps, Typography} from '@material-ui/core';
+import {circularProgressTimerStyles} from './_styles';
 
 interface ComponentProps {
   value: number;
@@ -10,20 +11,12 @@ interface ComponentProps {
 type Props = ComponentProps & CircularProgressProps;
 
 const CircularProgressTimer: FC<Props> = ({value, maxValue, ...props}: Props) => {
+  const classes = circularProgressTimerStyles();
   const progressValue = Math.round((value / maxValue) * 100);
   return (
-    <Box position="relative" display="inline-flex">
+    <Box className={classes.root}>
       <CircularProgress variant="static" {...props} value={progressValue} />
-      <Box
-        top={0}
-        left={0}
-        bottom={0}
-        right={0}
-        position="absolute"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-      >
+      <Box className={classes.textBox}>
         <Typography variant="h6" component="div" color="primary">
           {value}
         </Typography>

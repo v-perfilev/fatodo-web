@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {FC, useState} from 'react';
-import Button from '@material-ui/core/Button';
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {TextField} from 'formik-material-ui';
@@ -14,6 +13,7 @@ import {IconButton, InputAdornment} from '@material-ui/core';
 import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
+import LoadingButton from '../common/buttons/loading-button';
 
 interface ComponentProps {
   onSuccess: () => void;
@@ -21,7 +21,7 @@ interface ComponentProps {
 
 type Props = ComponentProps & FormikProps<any>;
 
-const RegisterForm: FC<Props> = ({isValid, values}: Props) => {
+const RegisterForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
@@ -56,9 +56,16 @@ const RegisterForm: FC<Props> = ({isValid, values}: Props) => {
         }}
       />
       <PasswordStrengthBar password={values.password} />
-      <Button type="submit" variant="contained" color="secondary" fullWidth={true} disabled={!isValid}>
+
+      <LoadingButton
+        type="submit"
+        color="secondary"
+        fullWidth={true}
+        disabled={!isValid || isSubmitting}
+        loading={isSubmitting}
+      >
         <Trans i18nKey={'form:register.submit'} />
-      </Button>
+      </LoadingButton>
     </Form>
   );
 };

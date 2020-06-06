@@ -28,5 +28,4 @@ export default class AccountService {
   public static requestResetPasswordCode = (user: string): Promise<User> => {
     return axios.get('auth/account/request-reset-password-code/' + user);
   };
-
 }

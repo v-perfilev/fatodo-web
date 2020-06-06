@@ -17,9 +17,3 @@ export const logoStyles = makeStyles((theme: Theme) => ({
     letterSpacing: '0.05em',
   },
 }));
-
-export const languageStyles = makeStyles((theme: Theme) => ({
-  icon: {
-    marginRight: theme.spacing(1),
-  },
-}));
