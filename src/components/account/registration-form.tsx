@@ -14,14 +14,21 @@ import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
 import LoadingButton from '../common/buttons/loading-button';
+import {login} from '../../store/actions/auth.actions';
+import {enqueueSnackbar} from '../../store/actions/notification.actions';
+import {connect, ConnectedProps} from 'react-redux';
+import {ResponseUtils} from '../../shared/utils/response.utils';
 
 interface ComponentProps {
   onSuccess: () => void;
 }
 
-type Props = ComponentProps & FormikProps<any>;
+const mapDispatchToProps = {login, enqueueSnackbar};
+const connector = connect(null, mapDispatchToProps);
 
-const RegisterForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
+type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
+
+const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
@@ -101,8 +108,11 @@ const formik = withFormik<Props, FormValues>({
     };
     AccountService.register(data)
       .then(() => props.onSuccess())
-      .finally(() => setSubmitting(false));
+      .catch((response) => {
+        ResponseUtils.handleNotification(response, '*', props.enqueueSnackbar);
+        setSubmitting(false);
+      });
   },
 });
 
-export default compose<ComponentProps>(withTranslation(), formik)(RegisterForm);
+export default compose<ComponentProps>(withTranslation(), connector, formik)(RegistrationForm);

@@ -10,7 +10,7 @@ export const emailValidator = new AsyncValidator(
   {
     name: 'unique',
     message: (): string => i18n.t('form:fields.email.notUnique'),
-    test: async (value): Promise<boolean> => (await UserService.isEmailUnique(value)) == true,
+    test: async (value): Promise<boolean> => (await UserService.isEmailUnique(value)).data === true,
   }
 );
 
@@ -24,7 +24,7 @@ export const usernameValidator = new AsyncValidator(
   {
     name: 'unique',
     message: (): string => i18n.t('form:fields.username.notUnique'),
-    test: async (value): Promise<boolean> => (await UserService.isUsernameUnique(value)) == true,
+    test: async (value): Promise<boolean> => (await UserService.isUsernameUnique(value)).data === true,
   }
 );
 

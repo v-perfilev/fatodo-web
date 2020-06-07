@@ -1,29 +1,31 @@
 const AUTH_TOKEN_KEY = 'token';
 
-function removeFromStorage(storage, key): void {
-  if (storage.getItem(key)) {
-    storage.removeItem(key);
-  }
+export class SecurityUtils {
+  public static removeFromStorage = (storage, key): void => {
+    if (storage.getItem(key)) {
+      storage.removeItem(key);
+    }
+  };
+
+  public static clearAuthToken = (): void => {
+    SecurityUtils.removeFromStorage(localStorage, AUTH_TOKEN_KEY);
+    SecurityUtils.removeFromStorage(sessionStorage, AUTH_TOKEN_KEY);
+  };
+
+  public static saveAuthToken = (token, rememberMe): void => {
+    if (rememberMe) {
+      localStorage.setItem(AUTH_TOKEN_KEY, token);
+    } else {
+      sessionStorage.setItem(AUTH_TOKEN_KEY, token);
+    }
+  };
+
+  public static getAuthToken = (): string => {
+    return localStorage.getItem(AUTH_TOKEN_KEY) || sessionStorage.getItem(AUTH_TOKEN_KEY);
+  };
+
+  public static parseTokenFromResponse = (response): string => {
+    const token = response?.headers?.authorization;
+    return token && token.slice(0, 7) === 'Bearer ' ? token.slice(7, token.length) : null;
+  };
 }
-
-export const clearAuthToken = (): void => {
-  removeFromStorage(localStorage, AUTH_TOKEN_KEY);
-  removeFromStorage(sessionStorage, AUTH_TOKEN_KEY);
-};
-
-export const saveAuthToken = (token, rememberMe): void => {
-  if (rememberMe) {
-    localStorage.setItem(AUTH_TOKEN_KEY, token);
-  } else {
-    sessionStorage.setItem(AUTH_TOKEN_KEY, token);
-  }
-};
-
-export const getAuthToken = (): string => {
-  return localStorage.getItem(AUTH_TOKEN_KEY) || sessionStorage.getItem(AUTH_TOKEN_KEY);
-};
-
-export const parseTokenFromAuthResponse = (response): string => {
-  const token = response?.value?.headers?.authorization;
-  return token && token.slice(0, 7) === 'Bearer ' ? token.slice(7, token.length) : null;
-};

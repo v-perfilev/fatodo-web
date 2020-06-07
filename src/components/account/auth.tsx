@@ -8,7 +8,7 @@ import {Routes} from '../router';
 import Link from '../common/link';
 import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
-import RegisterForm from './register-form';
+import RegisterForm from './registration-form';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 type Props = RouteComponentProps;
@@ -19,7 +19,7 @@ const Auth: FC<Props> = ({match, history}: Props) => {
   const [activeTab, setActiveTab] = useState<number>(match.path === Routes.LOGIN ? 0 : 1);
 
   const handleChange = (event: React.ChangeEvent<{}>, newTab: number): void => {
-    history.replace(newTab === 0 ? Routes.LOGIN : Routes.REGISTER);
+    history.replace(newTab === 0 ? Routes.LOGIN : Routes.REGISTRATION);
     setActiveTab(newTab);
   };
 

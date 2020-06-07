@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, ReactNode} from 'react';
 import {Box, Dialog, DialogContent, DialogTitle, IconButton, Typography} from '@material-ui/core';
-import {SlideDown} from '../../../shared/utils/animation.utils';
+import {SlideDown} from '../animations/slide-down';
 import {modalStyles} from './_styles';
 import {CloseIcon} from '../icons/close-icon';
 

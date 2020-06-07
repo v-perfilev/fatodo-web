@@ -39,7 +39,7 @@ const Account: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) => {
         </Link>
       )}
       {!isAuthenticated && (
-        <Link to={Routes.REGISTER} underline="none">
+        <Link to={Routes.REGISTRATION} underline="none">
           <Button variant="contained" color="secondary" startIcon={<SignUpIcon />}>
             <Trans i18nKey={'header.register'} />
           </Button>

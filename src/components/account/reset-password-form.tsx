@@ -13,14 +13,20 @@ import {IconButton, InputAdornment} from '@material-ui/core';
 import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import LoadingButton from '../common/buttons/loading-button';
+import {enqueueSnackbar} from '../../store/actions/notification.actions';
+import {connect, ConnectedProps} from 'react-redux';
+import {ResponseUtils} from '../../shared/utils/response.utils';
 
 interface ComponentProps {
   code: string;
   onSuccess: () => void;
-  onFailure: () => void;
+  onFailure: (status: number) => void;
 }
 
-type Props = ComponentProps & FormikProps<any>;
+const mapDispatchToProps = {enqueueSnackbar};
+const connector = connect(null, mapDispatchToProps);
+
+type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -106,9 +112,12 @@ const formik = withFormik<Props, FormValues>({
     };
     AccountService.resetPassword(data)
       .then(() => props.onSuccess())
-      .catch(() => props.onFailure())
-      .finally(() => setSubmitting(false));
+      .catch((response) => {
+        ResponseUtils.handleNotification(response, '*', props.enqueueSnackbar);
+        setSubmitting(false);
+        props.onFailure(response?.status);
+      });
   },
 });
 
-export default compose<ComponentProps>(withTranslation(), formik)(ResetPasswordForm);
+export default compose<ComponentProps>(withTranslation(), connector, formik)(ResetPasswordForm);

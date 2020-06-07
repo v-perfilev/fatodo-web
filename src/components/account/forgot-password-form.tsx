@@ -1,7 +1,6 @@
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {TextField} from 'formik-material-ui';
-import {login} from '../../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import * as React from 'react';
 import {FC} from 'react';
@@ -11,12 +10,14 @@ import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import AccountService from '../../services/account.service';
 import LoadingButton from '../common/buttons/loading-button';
+import {ResponseUtils} from '../../shared/utils/response.utils';
+import {enqueueSnackbar} from '../../store/actions/notification.actions';
 
 interface ComponentProps {
   onSuccess?: () => void;
 }
 
-const mapDispatchToProps = {login};
+const mapDispatchToProps = {enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
@@ -58,13 +59,9 @@ const formik = withFormik<Props, FormValues>({
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
     AccountService.requestResetPasswordCode(values.user)
-      .then(() => {
-        if (props.onSuccess) {
-          props.onSuccess();
-        }
-        setSubmitting(false);
-      })
-      .catch(() => {
+      .then(() => props.onSuccess())
+      .catch((response) => {
+        ResponseUtils.handleNotification(response, '*', props.enqueueSnackbar);
         setSubmitting(false);
       });
   },

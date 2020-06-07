@@ -2,9 +2,9 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Box, Button, Fade, Menu, MenuItem} from '@material-ui/core';
 import {LANGUAGES} from '../../shared/i18n';
-import {getLanguage, getLanguages, getOptions, setLanguage} from '../../shared/utils/language.utils';
 import {LanguageIcon} from './icons/language-icon';
 import {ArrowDownIcon} from './icons/arrow-down-icon';
+import {LanguageUtils} from '../../shared/utils/language.utils';
 
 const LanguageSelect: FC = () => {
   const [anchorElement, setAnchorElement] = React.useState<HTMLElement | null>(null);
@@ -17,18 +17,20 @@ const LanguageSelect: FC = () => {
 
   const getNameForCode = (code): string => {
     const getName = (c): string => LANGUAGES.find((l) => l.code === c)?.name;
-    return getLanguages().includes(code) ? getName(code) : getName(getOptions().fallbackLng);
+    return LanguageUtils.getLanguages().includes(code)
+      ? getName(code)
+      : getName(LanguageUtils.getOptions().fallbackLng);
   };
 
   const changeLanguage = (code): void => {
-    setLanguage(code);
+    LanguageUtils.setLanguage(code);
     setAnchorElement(null);
   };
 
   return (
     <Box>
       <Button onClick={handleClick} color="primary" startIcon={<LanguageIcon />}>
-        {getNameForCode(getLanguage())}
+        {getNameForCode(LanguageUtils.getLanguage())}
         <ArrowDownIcon />
       </Button>
       <Menu

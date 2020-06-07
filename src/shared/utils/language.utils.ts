@@ -1,19 +1,21 @@
 import i18n from '../i18n';
 import {InitOptions} from 'i18next';
 
-export const getOptions = (): InitOptions => i18n.options;
+export class LanguageUtils {
+  public static getOptions = (): InitOptions => i18n.options;
 
-export const getLanguages = (): string[] => i18n.languages;
+  public static getLanguages = (): string[] => i18n.languages;
 
-export const getLanguage = (): string => i18n.language;
+  public static getLanguage = (): string => i18n.language;
 
-export const setLanguage = (code: string): void => {
-  i18n.changeLanguage(code).then();
-};
+  public static setLanguage = (code: string): void => {
+    i18n.changeLanguage(code).then();
+  };
 
-export const setLanguageFromAccountResponse = (response): void => {
-  const code = response?.value?.language;
-  if (code && getLanguage() !== code) {
-    setLanguage(code);
-  }
-};
+  public static setLanguageFromUser = (response): void => {
+    const code = response?.data?.language;
+    if (code && LanguageUtils.getLanguage() !== code) {
+      LanguageUtils.setLanguage(code);
+    }
+  };
+}

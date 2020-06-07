@@ -1,8 +1,6 @@
-import AccountService from '../../services/account.service';
-import * as SecurityUtils from '../../shared/utils/security.utils';
-import {LoginDTO} from '../../models/dto/login.dto';
+import {SecurityUtils} from '../../shared/utils/security.utils';
 import UserService from '../../services/user.service';
-import {setLanguageFromAccountResponse} from '../../shared/utils/language.utils';
+import {LanguageUtils} from '../../shared/utils/language.utils';
 
 export const ACTION_TYPES = {
   LOGIN: 'authState/LOGIN',
@@ -11,24 +9,27 @@ export const ACTION_TYPES = {
   CLEAR_AUTH: 'authState/CLEAR_AUTH',
 };
 
-export const login = (data: LoginDTO, rememberMe: boolean, onSuccess: () => void, onFailure: () => void) => async (
+export const clearAuth = () => (dispatch): void => {
+  SecurityUtils.clearAuthToken();
+  dispatch({type: ACTION_TYPES.CLEAR_AUTH});
+};
+
+export const login = (authResponse, rememberMe: boolean, onSuccess: () => void, onFailure: () => void) => async (
   dispatch
 ): Promise<void> => {
-  const authResponse = await dispatch({
-    type: ACTION_TYPES.LOGIN,
-    payload: AccountService.authenticate(data).catch(onFailure),
-  });
-  const token = SecurityUtils.parseTokenFromAuthResponse(authResponse);
-  if (token) {
+  try {
+    const token = SecurityUtils.parseTokenFromResponse(authResponse);
+    if (!token) {
+      throw new Error();
+    }
     SecurityUtils.saveAuthToken(token, rememberMe);
-    const accountResponse = await dispatch({
-      type: ACTION_TYPES.ACCOUNT,
-      payload: UserService.getCurrentUser(),
-    });
-    setLanguageFromAccountResponse(accountResponse);
+    const accountResponse = await UserService.getCurrentUser();
+    LanguageUtils.setLanguageFromUser(accountResponse.data);
+    dispatch({type: ACTION_TYPES.LOGIN});
+    dispatch({type: ACTION_TYPES.ACCOUNT, account: accountResponse.data});
     onSuccess();
-  } else {
-    dispatch({type: ACTION_TYPES.CLEAR_AUTH});
+  } catch (e) {
+    clearAuth();
     onFailure();
   }
 };
@@ -36,9 +37,4 @@ export const login = (data: LoginDTO, rememberMe: boolean, onSuccess: () => void
 export const logout = () => (dispatch): void => {
   SecurityUtils.clearAuthToken();
   dispatch({type: ACTION_TYPES.LOGOUT});
-};
-
-export const clearAuth = () => (dispatch): void => {
-  SecurityUtils.clearAuthToken();
-  dispatch({type: ACTION_TYPES.CLEAR_AUTH});
 };

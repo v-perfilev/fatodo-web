@@ -13,12 +13,15 @@ import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
 import LoadingButton from '../common/buttons/loading-button';
+import AccountService from '../../services/account.service';
+import {ResponseUtils} from '../../shared/utils/response.utils';
+import {enqueueSnackbar} from '../../store/actions/notification.actions';
 
 interface ComponentProps {
   onSuccess: () => void;
 }
 
-const mapDispatchToProps = {login};
+const mapDispatchToProps = {login, enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
@@ -97,14 +100,16 @@ const formik = withFormik<Props, FormValues>({
       user: values.user,
       password: values.password,
     };
-    const onSuccess = (): void => {
-      props.onSuccess();
-      setSubmitting(false);
-    };
-    const onFailure = (): void => {
-      setSubmitting(false);
-    };
-    props.login(data, values.rememberMe, onSuccess, onFailure);
+
+    const onSuccess = (): void => props.onSuccess();
+    const onFailure = (): void => setSubmitting(false);
+
+    AccountService.authenticate(data)
+      .then((response) => props.login(response, values.rememberMe, onSuccess, onFailure))
+      .catch((response) => {
+        ResponseUtils.handleNotification(response, '*', props.enqueueSnackbar);
+        setSubmitting(false);
+      });
   },
 });
 
