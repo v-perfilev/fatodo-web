@@ -3,7 +3,7 @@ import {createMuiTheme} from '@material-ui/core';
 export enum COLORS {
   MAIN = '#21b0a7',
   SECONDARY = '#ffba16',
-  INFO = '#68c9c1',
+  INFO = '#21b0a7',
   SUCCESS = '#66bb6a',
   WARNING = '#ffba16',
   ERROR = '#ff5722',
