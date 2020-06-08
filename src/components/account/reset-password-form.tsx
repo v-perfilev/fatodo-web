@@ -97,12 +97,16 @@ const formik = withFormik<Props, FormValues>({
     repeatPassword: '',
   }),
 
+  mapPropsToErrors: () => ({
+    password: '',
+    repeatPassword: '',
+  }),
+
   validationSchema: Yup.object().shape({
     password: passwordValidator,
     repeatPassword: repeatPasswordValidator,
   }),
 
-  isInitialValid: false,
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {

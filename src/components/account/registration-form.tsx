@@ -90,13 +90,18 @@ const formik = withFormik<Props, FormValues>({
     password: '',
   }),
 
+  mapPropsToErrors: () => ({
+    email: '',
+    username: '',
+    password: '',
+  }),
+
   validationSchema: Yup.object().shape({
     email: emailValidator.check(),
     username: usernameValidator.check(),
     password: passwordValidator,
   }),
 
-  isInitialValid: false,
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {

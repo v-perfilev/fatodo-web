@@ -87,12 +87,17 @@ const formik = withFormik<Props, FormValues>({
     rememberMe: false,
   }),
 
+  mapPropsToErrors: () => ({
+    user: '',
+    password: '',
+    rememberMe: '',
+  }),
+
   validationSchema: Yup.object().shape({
     user: Yup.string().required(() => i18n.t('form:fields.user.required')),
     password: Yup.string().required(() => i18n.t('form:fields.password.required')),
   }),
 
-  isInitialValid: false,
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
