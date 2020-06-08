@@ -3,7 +3,6 @@ import {FC} from 'react';
 import {Switch} from 'react-router-dom';
 import PublicRoute from '../shared/routes/public-route';
 import Unauthorized from './static/unauthorized';
-import Activated from './static/activated';
 import Home from './home';
 import InternalError from './static/internal-error';
 import Activation from './account/activation';
@@ -12,15 +11,12 @@ import PageNotFound from './static/page-not-found';
 import Auth from './account/auth';
 import ForgotPassword from './account/forgot-password';
 import ResetPassword from './account/reset-password';
-import Registered from './static/registered';
 
 export enum Routes {
   ROOT = '/',
   LOGIN = '/login',
   REGISTRATION = '/registration',
-  REGISTERED = '/registered',
   ACTIVATION = '/activation/:code',
-  ACTIVATED = '/activated',
   FORGOT_PASSWORD = '/forgot-password',
   RESET_PASSWORD = '/reset-password/:code',
   UNAUTHORIZED = '/unauthorized',
@@ -34,9 +30,7 @@ const Router: FC = () => (
     {/*Auth Router*/}
     <PublicRoute path={Routes.LOGIN} component={Auth} />
     <PublicRoute path={Routes.REGISTRATION} component={Auth} />
-    <PublicRoute path={Routes.REGISTERED} component={Registered} />
     <PublicRoute path={Routes.ACTIVATION} component={Activation} />
-    <PublicRoute path={Routes.ACTIVATED} component={Activated} />
     <PublicRoute path={Routes.FORGOT_PASSWORD} component={ForgotPassword} />
     <PublicRoute path={Routes.RESET_PASSWORD} component={ResetPassword} />
     {/*Errors*/}

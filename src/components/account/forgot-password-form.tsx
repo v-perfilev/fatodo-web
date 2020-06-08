@@ -10,7 +10,7 @@ import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import AccountService from '../../services/account.service';
 import LoadingButton from '../common/buttons/loading-button';
-import {ResponseUtils} from '../../shared/utils/response.utils';
+import {NotificationUtils} from '../../shared/utils/notification.utils';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
 
 interface ComponentProps {
@@ -59,9 +59,12 @@ const formik = withFormik<Props, FormValues>({
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
     AccountService.requestResetPasswordCode(values.user)
-      .then(() => props.onSuccess())
+      .then(() => {
+        NotificationUtils.handleSnack('auth.afterForgotPassword', 'info', props.enqueueSnackbar);
+        props.onSuccess();
+      })
       .catch((response) => {
-        ResponseUtils.handleNotification(response, '*', props.enqueueSnackbar);
+        NotificationUtils.handleFeedback(response, '*', props.enqueueSnackbar);
         setSubmitting(false);
       });
   },

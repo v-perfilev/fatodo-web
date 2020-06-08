@@ -15,7 +15,7 @@ import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import LoadingButton from '../common/buttons/loading-button';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
 import {connect, ConnectedProps} from 'react-redux';
-import {ResponseUtils} from '../../shared/utils/response.utils';
+import {NotificationUtils} from '../../shared/utils/notification.utils';
 
 interface ComponentProps {
   code: string;
@@ -111,9 +111,12 @@ const formik = withFormik<Props, FormValues>({
       password: values.password,
     };
     AccountService.resetPassword(data)
-      .then(() => props.onSuccess())
+      .then(() => {
+        NotificationUtils.handleSnack('auth.afterResetPassword', 'info', props.enqueueSnackbar);
+        props.onSuccess();
+      })
       .catch((response) => {
-        ResponseUtils.handleNotification(response, '*', props.enqueueSnackbar);
+        NotificationUtils.handleFeedback(response, '*', props.enqueueSnackbar);
         setSubmitting(false);
         props.onFailure(response?.status);
       });

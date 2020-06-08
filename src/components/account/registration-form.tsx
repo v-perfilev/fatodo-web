@@ -17,7 +17,7 @@ import LoadingButton from '../common/buttons/loading-button';
 import {login} from '../../store/actions/auth.actions';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
 import {connect, ConnectedProps} from 'react-redux';
-import {ResponseUtils} from '../../shared/utils/response.utils';
+import {NotificationUtils} from '../../shared/utils/notification.utils';
 
 interface ComponentProps {
   onSuccess: () => void;
@@ -107,9 +107,12 @@ const formik = withFormik<Props, FormValues>({
       language: i18n.language,
     };
     AccountService.register(data)
-      .then(() => props.onSuccess())
+      .then(() => {
+        NotificationUtils.handleSnack('auth.registered', 'info', props.enqueueSnackbar);
+        props.onSuccess();
+      })
       .catch((response) => {
-        ResponseUtils.handleNotification(response, '*', props.enqueueSnackbar);
+        NotificationUtils.handleFeedback(response, '*', props.enqueueSnackbar);
         setSubmitting(false);
       });
   },

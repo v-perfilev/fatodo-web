@@ -11,15 +11,6 @@
   "forbidden": {
     "caption": "Access is forbidden"
   },
-  "registered": {
-    "caption": "You have registered on Fatodo <br/> The email with activation link was sent to your email address"
-  },
-  "notActivated": {
-    "caption": "Your account is not activated yet <br/> Link with activation code was sent to <strong>{{email}}</strong>"
-  },
-  "activated": {
-    "caption": "Account was successfully activated <br/> Now you can sign in!"
-  },
   "redirectToHome": {
     "message": "For redirecting to home page press the button or wait {{count}} second...",
     "message_plural": "For redirecting to home page press the button or wait {{count}} seconds..."

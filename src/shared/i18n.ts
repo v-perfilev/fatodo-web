@@ -22,7 +22,7 @@ i18next
     debug: false,
     whitelist: ['en', 'ru'],
     fallbackLng: 'en',
-    ns: ['translation', 'feedback', 'form', 'static'],
+    ns: ['translation', 'feedback', 'snack', 'form', 'static'],
     defaultNS: 'translation',
     load: 'languageOnly',
     backend: {

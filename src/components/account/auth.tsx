@@ -24,7 +24,6 @@ const Auth: FC<Props> = ({match, history}: Props) => {
   };
 
   const redirectToHome = (): void => history.push(Routes.ROOT);
-  const redirectToRegister = (): void => history.push(Routes.REGISTERED);
 
   return (
     <Box className={classes.root}>
@@ -33,7 +32,7 @@ const Auth: FC<Props> = ({match, history}: Props) => {
         <Tab label={t('form:register.header')} />
       </Tabs>
       <Box m={1} />
-      {activeTab === 0 ? <LoginForm onSuccess={redirectToHome} /> : <RegisterForm onSuccess={redirectToRegister} />}
+      {activeTab === 0 ? <LoginForm onSuccess={redirectToHome} /> : <RegisterForm onSuccess={redirectToHome} />}
       <Box m={1} />
       <Link to={Routes.FORGOT_PASSWORD}>
         <Trans i18nKey={'buttons.forgotPassword'} />
@@ -46,4 +45,5 @@ const Auth: FC<Props> = ({match, history}: Props) => {
   );
 };
 
-export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg', false))(Auth);
+export default compose(withTranslation(), withRouter,
+  withBackground('/images/background-1.jpg', false))(Auth);

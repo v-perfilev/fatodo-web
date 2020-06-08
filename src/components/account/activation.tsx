@@ -1,30 +1,36 @@
 import * as React from 'react';
-import {FC, useEffect, useState} from 'react';
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {FC, useEffect} from 'react';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import AccountService from '../../services/account.service';
 import {Routes} from '../router';
 import {compose} from 'recompose';
+import {NotificationUtils} from '../../shared/utils/notification.utils';
+import {enqueueSnackbar} from '../../store/actions/notification.actions';
+import {connect, ConnectedProps} from 'react-redux';
 
-type Props = RouteComponentProps<{code: string}>;
+const mapDispatchToProps = {enqueueSnackbar};
+const connector = connect(null, mapDispatchToProps);
 
-const Activation: FC<Props> = (props) => {
-  const code = props.match.params.code;
-  const [isCodeCorrect, setIsCodeCorrect] = useState(false);
-  const [error, setError] = useState(false);
+type Props = RouteComponentProps<{code: string}> & ConnectedProps<typeof connector>;
+
+const Activation: FC<Props> = ({match, history, enqueueSnackbar}: Props) => {
+  const code = match.params.code;
+
+  const redirectToHome = (): void => history.push(Routes.ROOT);
+  const redirectToInternalError = (): void => history.push(Routes.INTERNAL_ERROR);
 
   useEffect(() => {
     AccountService.activate(code)
-      .then(() => setIsCodeCorrect(true))
-      .catch(() => setError(true));
+      .then(() => {
+        NotificationUtils.handleSnack('auth.activated', 'info', enqueueSnackbar);
+        redirectToHome();
+      })
+      .catch(() => {
+        redirectToInternalError();
+      });
   }, []);
 
-  if (!isCodeCorrect && !error) {
-    return null;
-  } else if (isCodeCorrect) {
-    return <Redirect to={Routes.ACTIVATED} />;
-  } else {
-    return <Redirect to={Routes.INTERNAL_ERROR} />;
-  }
+  return null;
 };
 
-export default compose(withRouter)(Activation);
+export default compose(withRouter, connector)(Activation);

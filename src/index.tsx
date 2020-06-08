@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {FC} from 'react';
 import * as ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 
@@ -13,7 +14,6 @@ import {SnackbarProvider} from 'notistack';
 import {enqueueSnackbar} from './store/actions/notification.actions';
 import i18n from './shared/i18n';
 import './shared/i18n';
-import {FC} from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Notifier from './shared/notification/notifier';
 

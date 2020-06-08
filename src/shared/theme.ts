@@ -3,9 +3,9 @@ import {createMuiTheme} from '@material-ui/core';
 export enum COLORS {
   MAIN = '#21b0a7',
   SECONDARY = '#ffba16',
-  INFO = '#29b6f6',
+  INFO = '#68c9c1',
   SUCCESS = '#66bb6a',
-  WARNING = '#e2ae00',
+  WARNING = '#ffba16',
   ERROR = '#ff5722',
   WHITE = '#fafafa',
   BLACK = '#222222',
@@ -44,5 +44,23 @@ export const theme = createMuiTheme({
   },
   typography: {
     fontFamily: 'Roboto, serif',
+  },
+  overrides: {
+    MuiSnackbarContent: {
+      root: {
+        '&[class*="variantInfo"]': {
+          backgroundColor: COLORS.INFO,
+        },
+        '&[class*="variantSuccess"]': {
+          backgroundColor: COLORS.SUCCESS,
+        },
+        '&[class*="variantWarning"]': {
+          backgroundColor: COLORS.WARNING,
+        },
+        '&[class*="variantError"]': {
+          backgroundColor: COLORS.ERROR,
+        },
+      },
+    },
   },
 });

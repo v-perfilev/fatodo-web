@@ -14,7 +14,7 @@ import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
 import LoadingButton from '../common/buttons/loading-button';
 import AccountService from '../../services/account.service';
-import {ResponseUtils} from '../../shared/utils/response.utils';
+import {NotificationUtils} from '../../shared/utils/notification.utils';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
 
 interface ComponentProps {
@@ -107,7 +107,7 @@ const formik = withFormik<Props, FormValues>({
     AccountService.authenticate(data)
       .then((response) => props.login(response, values.rememberMe, onSuccess, onFailure))
       .catch((response) => {
-        ResponseUtils.handleNotification(response, '*', props.enqueueSnackbar);
+        NotificationUtils.handleFeedback(response, '*', props.enqueueSnackbar);
         setSubmitting(false);
       });
   },

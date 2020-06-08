@@ -7,24 +7,23 @@ export const ACTION_TYPES = {
   REMOVE_SNACKBAR: 'notificationState/REMOVE_SNACKBAR',
 };
 
-export const enqueueSnackbar = (notification: Notification): any => {
-  return {
+export const enqueueSnackbar = (notification: Notification) => (dispatch) =>
+  dispatch({
     type: ACTION_TYPES.ENQUEUE_SNACKBAR,
     notification: {
       ...notification,
       key: notification.options?.key || new Date().getTime() + Math.random(),
     },
-  };
-};
+  });
 
-export const closeSnackbar = (key: SnackbarKey = 'all'): any => ({
-  type: ACTION_TYPES.CLOSE_SNACKBAR,
-  key,
-});
+export const closeSnackbar = (key: SnackbarKey = 'all') => (dispatch) =>
+  dispatch({
+    type: ACTION_TYPES.CLOSE_SNACKBAR,
+    key,
+  });
 
-export const removeSnackbar = (key: SnackbarKey): any => {
-  return {
+export const removeSnackbar = (key: SnackbarKey) => (dispatch) =>
+  dispatch({
     type: ACTION_TYPES.REMOVE_SNACKBAR,
     key,
-  };
-};
+  });

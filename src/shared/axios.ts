@@ -3,7 +3,7 @@ import {SERVER_API_TIMEOUT, SERVER_API_URL} from '../constants';
 import {SecurityUtils} from './utils/security.utils';
 import Notification from '../models/notification.model';
 import {NotificationBuilder} from './notification/notification.builder';
-import {ResponseUtils} from './utils/response.utils';
+import {TranslationUtils} from './utils/translation.utils';
 
 axios.defaults.timeout = SERVER_API_TIMEOUT;
 axios.defaults.baseURL = SERVER_API_URL;
@@ -14,30 +14,30 @@ interface SetupAxiosActions {
 }
 
 const setupAxiosInterceptors = (actions: SetupAxiosActions): void => {
-  const handleErrorFeedback = (response: AxiosResponse, enqueueSnackbar: (n: Notification) => void): void => {
+  const handleErrorFeedback = (response: AxiosResponse): void => {
     const status = response?.status;
     const enqueueErrorNotification = (message: string): void => {
       const notification = new NotificationBuilder(message).setVariant('error').build();
-      enqueueSnackbar(notification);
+      actions.enqueueSnackbar(notification);
     };
     if (status >= 500) {
-      enqueueErrorNotification(ResponseUtils.getFeedbackTranslation('default'));
+      enqueueErrorNotification(TranslationUtils.getFeedbackTranslation('default'));
     } else if (!status) {
-      enqueueErrorNotification(ResponseUtils.getFeedbackTranslation('connection'));
+      enqueueErrorNotification(TranslationUtils.getFeedbackTranslation('connection'));
     }
   };
 
-  const handleErrorStatus = (response: AxiosResponse, onUnauthenticated: () => void): void => {
+  const handleErrorStatus = (response: AxiosResponse): void => {
     const status = response?.status;
     if (status === 403 || status === 401) {
-      onUnauthenticated();
+      actions.onUnauthenticated();
     }
   };
 
   const onResponseError = (err): AxiosPromise => {
     const response = err?.response ? err.response : '';
-    handleErrorFeedback(response, actions.enqueueSnackbar);
-    handleErrorStatus(response, actions.onUnauthenticated);
+    handleErrorFeedback(response);
+    handleErrorStatus(response);
     return Promise.reject(response);
   };
 
