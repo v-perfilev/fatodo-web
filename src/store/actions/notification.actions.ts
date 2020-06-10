@@ -7,7 +7,7 @@ export const ACTION_TYPES = {
   REMOVE_SNACKBAR: 'notificationState/REMOVE_SNACKBAR',
 };
 
-export const enqueueSnackbar = (notification: Notification) => (dispatch) =>
+export const enqueueSnackbar = (notification: Notification) => (dispatch): void =>
   dispatch({
     type: ACTION_TYPES.ENQUEUE_SNACKBAR,
     notification: {
@@ -16,13 +16,13 @@ export const enqueueSnackbar = (notification: Notification) => (dispatch) =>
     },
   });
 
-export const closeSnackbar = (key: SnackbarKey = 'all') => (dispatch) =>
+export const closeSnackbar = (key: SnackbarKey = 'all') => (dispatch): void =>
   dispatch({
     type: ACTION_TYPES.CLOSE_SNACKBAR,
     key,
   });
 
-export const removeSnackbar = (key: SnackbarKey) => (dispatch) =>
+export const removeSnackbar = (key: SnackbarKey) => (dispatch): void =>
   dispatch({
     type: ACTION_TYPES.REMOVE_SNACKBAR,
     key,

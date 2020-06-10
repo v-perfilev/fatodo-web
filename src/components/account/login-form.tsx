@@ -16,6 +16,9 @@ import LoadingButton from '../common/buttons/loading-button';
 import AccountService from '../../services/account.service';
 import {NotificationUtils} from '../../shared/utils/notification.utils';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {Routes} from '../router';
+import {ResponseUtils} from '../../shared/utils/response.utils';
 
 interface ComponentProps {
   onSuccess: () => void;
@@ -24,7 +27,7 @@ interface ComponentProps {
 const mapDispatchToProps = {login, enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
+type Props = ComponentProps & RouteComponentProps<{}> & FormikProps<any> & ConnectedProps<typeof connector>;
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -112,10 +115,13 @@ const formik = withFormik<Props, FormValues>({
     AccountService.authenticate(data)
       .then((response) => props.login(response, values.rememberMe, onSuccess, onFailure))
       .catch((response) => {
-        NotificationUtils.handleFeedback(response, '*', props.enqueueSnackbar);
+        if (ResponseUtils.getFeedbackCode(response) === 'auth.notActivated') {
+          props.history.push(Routes.NOT_ACTIVATED, {user: values.user});
+        }
+        NotificationUtils.handleFeedback(response, '*', ['auth.notActivated'], props.enqueueSnackbar);
         setSubmitting(false);
       });
   },
 });
 
-export default compose<ComponentProps>(withTranslation(), connector, formik)(LoginForm);
+export default compose<ComponentProps>(withTranslation(), withRouter, connector, formik)(LoginForm);

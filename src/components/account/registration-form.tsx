@@ -117,7 +117,7 @@ const formik = withFormik<Props, FormValues>({
         props.onSuccess();
       })
       .catch((response) => {
-        NotificationUtils.handleFeedback(response, '*', props.enqueueSnackbar);
+        NotificationUtils.handleFeedback(response, '*', '', props.enqueueSnackbar);
         setSubmitting(false);
       });
   },

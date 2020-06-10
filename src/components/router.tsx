@@ -11,12 +11,14 @@ import PageNotFound from './static/page-not-found';
 import Auth from './account/auth';
 import ForgotPassword from './account/forgot-password';
 import ResetPassword from './account/reset-password';
+import NotActivated from './static/not-activated';
 
 export enum Routes {
   ROOT = '/',
   LOGIN = '/login',
   REGISTRATION = '/registration',
   ACTIVATION = '/activation/:code',
+  NOT_ACTIVATED = '/not-activated',
   FORGOT_PASSWORD = '/forgot-password',
   RESET_PASSWORD = '/reset-password/:code',
   UNAUTHORIZED = '/unauthorized',
@@ -31,6 +33,7 @@ const Router: FC = () => (
     <PublicRoute path={Routes.LOGIN} component={Auth} />
     <PublicRoute path={Routes.REGISTRATION} component={Auth} />
     <PublicRoute path={Routes.ACTIVATION} component={Activation} />
+    <PublicRoute path={Routes.NOT_ACTIVATED} component={NotActivated} />
     <PublicRoute path={Routes.FORGOT_PASSWORD} component={ForgotPassword} />
     <PublicRoute path={Routes.RESET_PASSWORD} component={ResetPassword} />
     {/*Errors*/}

@@ -10,6 +10,7 @@ import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
 import RegisterForm from './registration-form';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 type Props = RouteComponentProps;
 
@@ -23,6 +24,10 @@ const Auth: FC<Props> = ({match, history}: Props) => {
     setActiveTab(newTab);
   };
 
+  const facebookLogin = (): void => {
+    console.log('test');
+  };
+
   const redirectToHome = (): void => history.push(Routes.ROOT);
 
   return (
@@ -33,6 +38,10 @@ const Auth: FC<Props> = ({match, history}: Props) => {
       </Tabs>
       <Box m={1} />
       {activeTab === 0 ? <LoginForm onSuccess={redirectToHome} /> : <RegisterForm onSuccess={redirectToHome} />}
+      <Box m={1} />
+      <Button color="primary" onClick={facebookLogin}>
+        Facebook OAuth2
+      </Button>
       <Box m={1} />
       <Link to={Routes.FORGOT_PASSWORD}>
         <Trans i18nKey={'buttons.forgotPassword'} />
@@ -45,5 +54,4 @@ const Auth: FC<Props> = ({match, history}: Props) => {
   );
 };
 
-export default compose(withTranslation(), withRouter,
-  withBackground('/images/background-1.jpg', false))(Auth);
+export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg', false))(Auth);

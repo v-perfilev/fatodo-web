@@ -4,6 +4,7 @@ import {SecurityUtils} from './utils/security.utils';
 import Notification from '../models/notification.model';
 import {NotificationBuilder} from './notification/notification.builder';
 import {TranslationUtils} from './utils/translation.utils';
+import {ResponseUtils} from './utils/response.utils';
 
 axios.defaults.timeout = SERVER_API_TIMEOUT;
 axios.defaults.baseURL = SERVER_API_URL;
@@ -15,7 +16,7 @@ interface SetupAxiosActions {
 
 const setupAxiosInterceptors = (actions: SetupAxiosActions): void => {
   const handleErrorFeedback = (response: AxiosResponse): void => {
-    const status = response?.status;
+    const status = ResponseUtils.getStatus(response);
     const enqueueErrorNotification = (message: string): void => {
       const notification = new NotificationBuilder(message).setVariant('error').build();
       actions.enqueueSnackbar(notification);
@@ -28,7 +29,7 @@ const setupAxiosInterceptors = (actions: SetupAxiosActions): void => {
   };
 
   const handleErrorStatus = (response: AxiosResponse): void => {
-    const status = response?.status;
+    const status = ResponseUtils.getStatus(response);
     if (status === 403 || status === 401) {
       actions.onUnauthenticated();
     }
