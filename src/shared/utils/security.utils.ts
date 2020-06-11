@@ -1,3 +1,5 @@
+import {AUTHORIZATION_HEADER} from '../../constants';
+
 const AUTH_TOKEN_KEY = 'token';
 
 export class SecurityUtils {
@@ -25,7 +27,7 @@ export class SecurityUtils {
   };
 
   public static parseTokenFromResponse = (response): string => {
-    const token = response?.headers?.authorization;
+    const token = response?.headers?.[AUTHORIZATION_HEADER];
     return token && token.slice(0, 7) === 'Bearer ' ? token.slice(7, token.length) : null;
   };
 }

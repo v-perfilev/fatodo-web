@@ -18,7 +18,9 @@ module.exports = () => merge(commonConfig({env: ENV}), {
     compress: true,
     port: 9000,
     hot: true,
-    historyApiFallback: true
+    historyApiFallback: {
+      disableDotRule: true
+    }
   },
   module: {
     rules: [
@@ -36,7 +38,9 @@ module.exports = () => merge(commonConfig({env: ENV}), {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        SERVER_API_URL: JSON.stringify('http://localhost:4000/api'),
+        BASE_URL: JSON.stringify('http://localhost:9000'),
+        API_URL: JSON.stringify('http://localhost:4000/api'),
+        SOCIAL_LOGIN: true,
         DEVELOPMENT_MODE: true
       }
     })

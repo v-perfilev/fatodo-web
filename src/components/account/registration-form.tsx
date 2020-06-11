@@ -14,7 +14,6 @@ import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
 import LoadingButton from '../common/buttons/loading-button';
-import {login} from '../../store/actions/auth.actions';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import {NotificationUtils} from '../../shared/utils/notification.utils';
@@ -23,7 +22,7 @@ interface ComponentProps {
   onSuccess: () => void;
 }
 
-const mapDispatchToProps = {login, enqueueSnackbar};
+const mapDispatchToProps = {enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;

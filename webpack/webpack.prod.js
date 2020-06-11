@@ -45,12 +45,6 @@ module.exports = () => merge(commonConfig({env: ENV}), {
     minimizer: [new TerserPlugin()]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        SERVER_API_URL: JSON.stringify('http://localhost:4000/api'),
-        DEVELOPMENT_MODE: false
-      }
-    }),
     new CompressionPlugin({
       filename: '[path].gz[query]',
       algorithm: 'gzip',
@@ -59,6 +53,14 @@ module.exports = () => merge(commonConfig({env: ENV}), {
       minRatio: 0.8
     }),
     new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        BASE_URL: JSON.stringify('http://localhost:9000'),
+        API_URL: JSON.stringify('http://localhost:4000/api'),
+        SOCIAL_LOGIN: true,
+        DEVELOPMENT_MODE: false
+      }
+    })
   ]
 });

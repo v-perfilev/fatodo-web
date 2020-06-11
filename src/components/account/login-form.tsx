@@ -19,6 +19,7 @@ import {enqueueSnackbar} from '../../store/actions/notification.actions';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../router';
 import {ResponseUtils} from '../../shared/utils/response.utils';
+import {SecurityUtils} from '../../shared/utils/security.utils';
 
 interface ComponentProps {
   onSuccess: () => void;
@@ -113,7 +114,10 @@ const formik = withFormik<Props, FormValues>({
     const onFailure = (): void => setSubmitting(false);
 
     AccountService.authenticate(data)
-      .then((response) => props.login(response, values.rememberMe, onSuccess, onFailure))
+      .then((response) => {
+        const token = SecurityUtils.parseTokenFromResponse(response);
+        props.login(token, values.rememberMe, onSuccess, onFailure);
+      })
       .catch((response) => {
         if (ResponseUtils.getFeedbackCode(response) === 'auth.notActivated') {
           props.history.push(Routes.NOT_ACTIVATED, {user: values.user});

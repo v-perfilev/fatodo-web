@@ -12,15 +12,18 @@ import Auth from './account/auth';
 import ForgotPassword from './account/forgot-password';
 import ResetPassword from './account/reset-password';
 import NotActivated from './static/not-activated';
+import SocialLogin from './account/social-login';
 
 export enum Routes {
   ROOT = '/',
   LOGIN = '/login',
   REGISTRATION = '/registration',
-  ACTIVATION = '/activation/:code',
+  SOCIAL_LOGIN = '/social-login',
+  SOCIAL_LOGIN_WITH_PARAM = '/social-login/:token',
+  ACTIVATION_WITH_PARAM = '/activation/:code',
   NOT_ACTIVATED = '/not-activated',
   FORGOT_PASSWORD = '/forgot-password',
-  RESET_PASSWORD = '/reset-password/:code',
+  RESET_PASSWORD_WITH_PARAM = '/reset-password/:code',
   UNAUTHORIZED = '/unauthorized',
   FORBIDDEN = '/forbidden',
   INTERNAL_ERROR = '/something-went-wrong',
@@ -32,10 +35,11 @@ const Router: FC = () => (
     {/*Auth Router*/}
     <PublicRoute path={Routes.LOGIN} component={Auth} />
     <PublicRoute path={Routes.REGISTRATION} component={Auth} />
-    <PublicRoute path={Routes.ACTIVATION} component={Activation} />
+    <PublicRoute path={Routes.SOCIAL_LOGIN_WITH_PARAM} component={SocialLogin} />
+    <PublicRoute path={Routes.ACTIVATION_WITH_PARAM} component={Activation} />
     <PublicRoute path={Routes.NOT_ACTIVATED} component={NotActivated} />
     <PublicRoute path={Routes.FORGOT_PASSWORD} component={ForgotPassword} />
-    <PublicRoute path={Routes.RESET_PASSWORD} component={ResetPassword} />
+    <PublicRoute path={Routes.RESET_PASSWORD_WITH_PARAM} component={ResetPassword} />
     {/*Errors*/}
     <PublicRoute path={Routes.UNAUTHORIZED} component={Unauthorized} />
     <PublicRoute path={Routes.FORBIDDEN} component={Forbidden} />

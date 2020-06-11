@@ -14,11 +14,10 @@ export const clearAuth = () => (dispatch): void => {
   dispatch({type: ACTION_TYPES.CLEAR_AUTH});
 };
 
-export const login = (authResponse, rememberMe: boolean, onSuccess: () => void, onFailure: () => void) => async (
-  dispatch
+export const login = (token: string, rememberMe: boolean, onSuccess: () => void, onFailure: () => void) => async (
+  dispatch,
 ): Promise<void> => {
   try {
-    const token = SecurityUtils.parseTokenFromResponse(authResponse);
     if (!token) {
       throw new Error();
     }

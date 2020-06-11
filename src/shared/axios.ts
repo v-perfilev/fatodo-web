@@ -1,13 +1,13 @@
 import axios, {AxiosPromise, AxiosResponse} from 'axios';
-import {SERVER_API_TIMEOUT, SERVER_API_URL} from '../constants';
+import {API_TIMEOUT, API_URL} from '../constants';
 import {SecurityUtils} from './utils/security.utils';
 import Notification from '../models/notification.model';
 import {NotificationBuilder} from './notification/notification.builder';
 import {TranslationUtils} from './utils/translation.utils';
 import {ResponseUtils} from './utils/response.utils';
 
-axios.defaults.timeout = SERVER_API_TIMEOUT;
-axios.defaults.baseURL = SERVER_API_URL;
+axios.defaults.timeout = API_TIMEOUT;
+axios.defaults.baseURL = API_URL;
 
 interface SetupAxiosActions {
   onUnauthenticated: () => void;
