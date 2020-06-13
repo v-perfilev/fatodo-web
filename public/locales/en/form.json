@@ -1,11 +1,11 @@
 {
   "login": {
-    "header": "Login",
-    "submit": "Login"
+    "header": "Log In",
+    "submit": "Log In"
   },
   "register": {
-    "header": "Register",
-    "submit": "Register"
+    "header": "Sign Up",
+    "submit": "Sign Up"
   },
   "forgotPassword": {
     "header": "Forgot password?",

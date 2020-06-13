@@ -1,8 +1,8 @@
 {
   "header": {
-    "logout": "Выйти",
+    "logout": "Выход",
     "register": "Регистрация",
-    "login": "Войти"
+    "login": "Вход"
   },
   "auth": {
     "socialLogin": "или войдите через"

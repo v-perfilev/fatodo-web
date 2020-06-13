@@ -1,11 +1,11 @@
 {
   "header": {
-    "logout": "Logout",
-    "register": "Register",
-    "login": "Login"
+    "logout": "Log Out",
+    "register": "Sign Up",
+    "login": "Log In"
   },
   "auth": {
-    "socialLogin": "or sign in with"
+    "socialLogin": "or log in with"
   },
   "buttons": {
     "toHomePage": "To home page",
