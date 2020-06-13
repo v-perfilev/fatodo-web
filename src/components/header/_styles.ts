@@ -43,7 +43,6 @@ export const sidebarMenuStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-    color: theme.palette.primary.main,
   },
   grow: {
     flexGrow: 1,

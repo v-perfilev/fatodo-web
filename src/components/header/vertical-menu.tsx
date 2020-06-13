@@ -9,19 +9,22 @@ import {sidebarMenuStyles} from './_styles';
 import {AuthState} from '../../store/rerducers/auth.reduser';
 import {LogoutIcon} from '../common/icons/logout-icon';
 import {compose} from 'recompose';
-import Link from '../common/link';
 import {Routes} from '../router';
 import {LoginIcon} from '../common/icons/login-icon';
 import {SignUpIcon} from '../common/icons/signup-icon';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type Props = ConnectedProps<typeof connector>;
+type Props = ConnectedProps<typeof connector> & RouteComponentProps;
 
-const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) => {
+const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}: Props) => {
   const classes = sidebarMenuStyles();
+
+  const redirectToLogin = (): void => history.push(Routes.LOGIN);
+  const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
 
   return (
     <List component="nav">
@@ -36,31 +39,27 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) 
         </ListItem>
       )}
       {!isAuthenticated && (
-        <Link to={Routes.LOGIN} underline="none">
-          <ListItem button>
-            <ListItemIcon className={classes.icon}>
-              <LoginIcon />
-            </ListItemIcon>
-            <ListItemText>
-              <Trans i18nKey={'header.login'} />
-            </ListItemText>
-          </ListItem>
-        </Link>
+        <ListItem button onClick={redirectToLogin}>
+          <ListItemIcon className={classes.icon}>
+            <LoginIcon />
+          </ListItemIcon>
+          <ListItemText>
+            <Trans i18nKey={'header.login'} />
+          </ListItemText>
+        </ListItem>
       )}
       {!isAuthenticated && (
-        <Link to={Routes.REGISTRATION} underline="none">
-          <ListItem color="primary" button>
-            <ListItemIcon className={classes.icon}>
-              <SignUpIcon />
-            </ListItemIcon>
-            <ListItemText>
-              <Trans i18nKey={'header.register'} />
-            </ListItemText>
-          </ListItem>
-        </Link>
+        <ListItem color="primary" button onClick={redirectToRegistration}>
+          <ListItemIcon className={classes.icon}>
+            <SignUpIcon />
+          </ListItemIcon>
+          <ListItemText>
+            <Trans i18nKey={'header.register'} />
+          </ListItemText>
+        </ListItem>
       )}
     </List>
   );
 };
 
-export default compose(connector, withTranslation())(VerticalMenu);
+export default compose(connector, withTranslation(), withRouter)(VerticalMenu);

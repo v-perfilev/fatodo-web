@@ -13,17 +13,20 @@ import {LogoutIcon} from '../common/icons/logout-icon';
 import {SignUpIcon} from '../common/icons/signup-icon';
 import {compose} from 'recompose';
 import {Routes} from '../router';
-import Link from '../common/link';
 import LanguageSelect from '../common/language-select';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type Props = ConnectedProps<typeof connector>;
+type Props = ConnectedProps<typeof connector> & RouteComponentProps;
 
-const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) => {
+const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}: Props) => {
   const classes = horizontalMenuStyles();
+
+  const redirectToLogin = (): void => history.push(Routes.LOGIN);
+  const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
 
   return (
     <Box className={classes.root}>
@@ -34,21 +37,17 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
         </Button>
       )}
       {!isAuthenticated && (
-        <Link to={Routes.LOGIN} underline="none">
-          <Button color="primary" startIcon={<LoginIcon />}>
-            <Trans i18nKey={'header.login'} />
-          </Button>
-        </Link>
+        <Button color="primary" startIcon={<LoginIcon />} onClick={redirectToLogin}>
+          <Trans i18nKey={'header.login'} />
+        </Button>
       )}
       {!isAuthenticated && (
-        <Link to={Routes.REGISTRATION} underline="none">
-          <Button variant="contained" color="secondary" startIcon={<SignUpIcon />}>
-            <Trans i18nKey={'header.register'} />
-          </Button>
-        </Link>
+        <Button variant="contained" color="secondary" startIcon={<SignUpIcon />} onClick={redirectToRegistration}>
+          <Trans i18nKey={'header.signup'} />
+        </Button>
       )}
     </Box>
   );
 };
 
-export default compose(connector, withTranslation())(HorizontalMenu);
+export default compose(connector, withTranslation(), withRouter)(HorizontalMenu);
