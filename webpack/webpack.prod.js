@@ -53,7 +53,7 @@ module.exports = () => merge(commonConfig({env: ENV}), {
       minRatio: 0.8
     }),
     new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         BASE_URL: JSON.stringify('http://localhost:9000'),

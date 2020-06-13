@@ -6,7 +6,6 @@ COPY . ./
 RUN npm install
 RUN npm run-script build
 
-
 FROM nginx:alpine
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
