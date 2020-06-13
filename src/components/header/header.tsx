@@ -11,7 +11,7 @@ const Header: FC = () => {
   const classes = headerStyles();
   const [showMenu, setShowMenu] = useState(false);
 
-  const toggleMenu = (): void => setShowMenu(prevState => !prevState);
+  const toggleMenu = (): void => setShowMenu((prevState) => !prevState);
 
   return (
     <AppBar position="static" color="transparent" className={classes.root}>

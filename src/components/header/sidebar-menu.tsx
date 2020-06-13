@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {Box, Divider, Fab, IconButton, SwipeableDrawer, Toolbar} from '@material-ui/core';
+import {Box, Divider, Fab, SwipeableDrawer, Toolbar} from '@material-ui/core';
 import {withTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import {ArrowRightIcon} from '../common/icons/arrow-right-icon';
@@ -22,7 +22,6 @@ const SidebarMenu: FC<Props> = ({show, onToggle}: Props) => {
     <SwipeableDrawer anchor="right" open={show} onOpen={onToggle} onClose={onToggle}>
       <Box className={classes.root}>
         <Toolbar>
-          {/*<Box className={classes.grow} />*/}
           <Fab size="small" color="primary" onClick={onToggle} className={classes.menuButton}>
             <ArrowRightIcon />
           </Fab>

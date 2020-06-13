@@ -15,7 +15,7 @@ export const clearAuth = () => (dispatch): void => {
 };
 
 export const login = (token: string, rememberMe: boolean, onSuccess: () => void, onFailure: () => void) => async (
-  dispatch,
+  dispatch
 ): Promise<void> => {
   try {
     if (!token) {

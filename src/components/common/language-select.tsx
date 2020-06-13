@@ -43,9 +43,7 @@ const LanguageSelect: FC<Props> = ({list}: Props) => {
             <ListItemIcon>
               <LanguageIcon className={classes.icon} />
             </ListItemIcon>
-            <ListItemText>
-              {getNameForCode(LanguageUtils.getLanguage())}
-            </ListItemText>
+            <ListItemText>{getNameForCode(LanguageUtils.getLanguage())}</ListItemText>
           </ListItem>
         </List>
       ) : (

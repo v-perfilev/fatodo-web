@@ -5,9 +5,7 @@ import {backgroundStyles} from './_styles';
 import Logo from '../../components/common/logo';
 import LanguageSelect from '../../components/common/language-select';
 
-const withBackground = (imgSrc: string) => (Component: ComponentType): FC => (
-  props,
-): ReactElement => {
+const withBackground = (imgSrc: string) => (Component: ComponentType): FC => (props): ReactElement => {
   const classes = backgroundStyles();
 
   return (
