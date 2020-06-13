@@ -10,12 +10,12 @@ import {Provider} from 'react-redux';
 import {CssBaseline, ThemeProvider} from '@material-ui/core';
 import {theme} from './shared/theme';
 import {clearAuth} from './store/actions/auth.actions';
-import {SnackbarProvider} from 'notistack';
 import {enqueueSnackbar} from './store/actions/notification.actions';
 import i18n from './shared/i18n';
 import './shared/i18n';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Notifier from './shared/notification/notifier';
+import {NotificationProvider} from './shared/notification/notification-provider';
 
 const root = document.getElementById('root');
 
@@ -28,13 +28,13 @@ setupAxiosInterceptors({
 const Root: FC = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <SnackbarProvider anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>
+      <NotificationProvider>
         <Router>
           <CssBaseline />
           <Notifier />
           <App />
         </Router>
-      </SnackbarProvider>
+      </NotificationProvider>
     </ThemeProvider>
   </Provider>
 );

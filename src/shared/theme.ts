@@ -7,7 +7,7 @@ export enum COLORS {
   SUCCESS = '#66bb6a',
   WARNING = '#ffba16',
   ERROR = '#ff5722',
-  WHITE = '#fafafa',
+  WHITE = '#ffffff',
   BLACK = '#222222',
 }
 
@@ -41,26 +41,11 @@ export const theme = createMuiTheme({
     text: {
       primary: COLORS.BLACK,
     },
+    background: {
+      default: COLORS.WHITE,
+    },
   },
   typography: {
     fontFamily: 'Roboto, serif',
-  },
-  overrides: {
-    MuiSnackbarContent: {
-      root: {
-        '&[class*="variantInfo"]': {
-          backgroundColor: COLORS.INFO,
-        },
-        '&[class*="variantSuccess"]': {
-          backgroundColor: COLORS.SUCCESS,
-        },
-        '&[class*="variantWarning"]': {
-          backgroundColor: COLORS.WARNING,
-        },
-        '&[class*="variantError"]': {
-          backgroundColor: COLORS.ERROR,
-        },
-      },
-    },
   },
 });

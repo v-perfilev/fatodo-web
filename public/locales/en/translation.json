@@ -1,7 +1,7 @@
 {
   "header": {
     "logout": "Log Out",
-    "register": "Sign Up",
+    "registration": "Sign Up",
     "login": "Log In"
   },
   "auth": {

@@ -31,7 +31,7 @@ const Auth: FC<Props> = ({match, history}: Props) => {
     <Box className={classes.root}>
       <Tabs variant="fullWidth" textColor="primary" style={{width: '100%'}} value={activeTab} onChange={handleChange}>
         <Tab label={t('form:login.header')} />
-        <Tab label={t('form:register.header')} />
+        <Tab label={t('form:registration.header')} />
       </Tabs>
       <Box m={1} />
       {activeTab === 0 ? <LoginForm onSuccess={redirectToHome} /> : <RegisterForm onSuccess={redirectToHome} />}

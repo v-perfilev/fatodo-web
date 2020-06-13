@@ -30,8 +30,8 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
     <List component="nav">
       {isAuthenticated && (
         <ListItem button onClick={logout}>
-          <ListItemIcon className={classes.icon}>
-            <LogoutIcon />
+          <ListItemIcon>
+            <LogoutIcon className={classes.icon} />
           </ListItemIcon>
           <ListItemText>
             <Trans i18nKey={'header.logout'} />
@@ -40,8 +40,8 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
       )}
       {!isAuthenticated && (
         <ListItem button onClick={redirectToLogin}>
-          <ListItemIcon className={classes.icon}>
-            <LoginIcon />
+          <ListItemIcon>
+            <LoginIcon className={classes.icon} />
           </ListItemIcon>
           <ListItemText>
             <Trans i18nKey={'header.login'} />
@@ -50,11 +50,11 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
       )}
       {!isAuthenticated && (
         <ListItem color="primary" button onClick={redirectToRegistration}>
-          <ListItemIcon className={classes.icon}>
-            <SignUpIcon />
+          <ListItemIcon>
+            <SignUpIcon className={classes.icon} />
           </ListItemIcon>
           <ListItemText>
-            <Trans i18nKey={'header.register'} />
+            <Trans i18nKey={'header.registration'} />
           </ListItemText>
         </ListItem>
       )}

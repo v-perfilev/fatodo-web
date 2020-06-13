@@ -1,7 +1,7 @@
 {
   "header": {
     "logout": "Выход",
-    "register": "Регистрация",
+    "registration": "Регистрация",
     "login": "Вход"
   },
   "auth": {

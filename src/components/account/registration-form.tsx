@@ -70,7 +70,7 @@ const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => 
         disabled={!isValid || isSubmitting}
         loading={isSubmitting}
       >
-        <Trans i18nKey={'form:register.submit'} />
+        <Trans i18nKey={'form:registration.submit'} />
       </LoadingButton>
     </Form>
   );
