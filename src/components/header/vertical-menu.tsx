@@ -26,7 +26,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) 
   return (
     <List component="nav">
       {isAuthenticated && (
-        <ListItem color="primary" button onClick={logout}>
+        <ListItem button onClick={logout}>
           <ListItemIcon className={classes.icon}>
             <LogoutIcon />
           </ListItemIcon>
@@ -37,7 +37,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) 
       )}
       {!isAuthenticated && (
         <Link to={Routes.LOGIN} underline="none">
-          <ListItem color="primary" button>
+          <ListItem button>
             <ListItemIcon className={classes.icon}>
               <LoginIcon />
             </ListItemIcon>
