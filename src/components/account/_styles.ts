@@ -13,11 +13,13 @@ export const authPageStyles = makeStyles(() => ({
 
 export const authFormStyles = makeStyles((theme: Theme) => ({
   root: {
-    minHeight: 286,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  minHeightBox: {
+    minHeight: 286,
   },
   form: {
     width: '100%',

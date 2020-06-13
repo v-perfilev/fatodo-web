@@ -40,7 +40,7 @@ const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const handleMouseDownPassword = (event): void => event.preventDefault();
 
   return (
-    <Box className={classes.root}>
+    <Box className={classes.root + ' '+ classes.minHeightBox}>
       <Form className={classes.form}>
         <Field component={TextField} type="text" name="user" label={t('form:fields.user.label')} fullWidth={true} />
         <Field

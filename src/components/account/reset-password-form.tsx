@@ -39,7 +39,7 @@ const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) =>
   const handleMouseDownPassword = (event): void => event.preventDefault();
 
   return (
-    <Form className={classes.root}>
+    <Form className={classes.root + ' ' + classes.form}>
       <Field
         component={TextField}
         type={showPassword ? 'text' : 'password'}

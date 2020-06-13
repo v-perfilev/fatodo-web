@@ -31,7 +31,6 @@ export const backgroundStyles = makeStyles(() => ({
     justifyContent: 'center',
   },
   body: {
-    minHeight: 300,
     display: 'flex',
     flexGrow: 1,
     alignItems: 'center',

@@ -26,7 +26,7 @@ const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
   return (
-    <Form className={classes.root}>
+    <Form className={classes.root + ' ' + classes.form}>
       <Field component={TextField} type="text" name="user" label={t('form:fields.user.label')} fullWidth={true} />
       <LoadingButton
         type="submit"
