@@ -14,7 +14,7 @@ const PageNotFound: FC<Props> = ({timer, resetTimer}: Props) => {
   const classes = staticPageStyles();
 
   return (
-    <Box textAlign="center">
+    <Box className={classes.root}>
       <Typography variant="h5" color="primary" className={classes.code}>
         404
       </Typography>

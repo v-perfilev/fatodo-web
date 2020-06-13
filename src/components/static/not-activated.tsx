@@ -9,9 +9,9 @@ import withBackground from '../../shared/hoc/with-background';
 import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../router';
 import AccountService from '../../services/account.service';
-import {EmailIcon} from '../common/icons/email-icon';
 import {HomeIcon} from '../common/icons/home-icon';
 import LoadingButton from '../common/buttons/loading-button';
+import {EmailIcon} from '../common/icons/email-icon';
 
 export interface NotActivatedLocationState {
   user: string;
@@ -60,20 +60,19 @@ const NotActivated: FC<Props> = ({timer, resetTimer, location}: Props) => {
         <Trans i18nKey={'static:redirectToHome.message'} count={timer} />
       </Typography>
       <Box m={2} />
-      <Box className={classes.buttons}>
-        <LoadingButton
-          startIcon={<EmailIcon />}
-          onClick={sendActivationCode}
-          disabled={activationLoading || activationTimer !== undefined}
-          loading={activationLoading}
-          progressValue={activationTimer * (100 / activationTimerMax)}
-        >
-          <Trans i18nKey={'buttons.sendActivationCode'} />
-        </LoadingButton>
-        <LoadingButton startIcon={<HomeIcon />} onClick={resetTimer}>
-          <Trans i18nKey={'buttons.toHomePage'} />
-        </LoadingButton>
-      </Box>
+      <LoadingButton
+        startIcon={<EmailIcon />}
+        onClick={sendActivationCode}
+        disabled={activationLoading || activationTimer !== undefined}
+        loading={activationLoading}
+        progressValue={activationTimer * (100 / activationTimerMax)}
+      >
+        <Trans i18nKey={'buttons.sendActivationCode'} />
+      </LoadingButton>
+      <Box m={2} />
+      <LoadingButton startIcon={<HomeIcon />} onClick={resetTimer}>
+        <Trans i18nKey={'buttons.toHomePage'} />
+      </LoadingButton>
     </Box>
   );
 };
