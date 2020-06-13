@@ -40,19 +40,19 @@ const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const handleMouseDownPassword = (event): void => event.preventDefault();
 
   return (
-    <Box className={classes.root + ' '+ classes.minHeightBox}>
+    <Box className={classes.root + ' ' + classes.minHeightBox}>
       <Form className={classes.form}>
-        <Field component={TextField} type="text" name="user" label={t('form:fields.user.label')} fullWidth={true} />
+        <Field component={TextField} type="text" name="user" label={t('form:fields.user.label')} fullWidth />
         <Field
           component={TextField}
           type={showPassword ? 'text' : 'password'}
           name="password"
           label={t('form:fields.password.label')}
-          fullWidth={true}
+          fullWidth
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <IconButton onClick={toggleShowPassword} onMouseDown={handleMouseDownPassword} size={'small'}>
+                <IconButton onClick={toggleShowPassword} onMouseDown={handleMouseDownPassword} size="small">
                   {showPassword ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
                 </IconButton>
               </InputAdornment>
@@ -70,7 +70,7 @@ const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
         <LoadingButton
           type="submit"
           color="secondary"
-          fullWidth={true}
+          fullWidth
           disabled={!isValid || isSubmitting}
           loading={isSubmitting}
         >

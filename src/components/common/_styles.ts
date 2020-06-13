@@ -12,7 +12,7 @@ export const logoStyles = makeStyles((theme: Theme) => ({
   },
   logoText: {
     fontWeight: 500,
-    fontSize: '2.5rem',
+    fontSize: '2.2rem',
     lineHeight: 1,
     letterSpacing: '0.05em',
   },

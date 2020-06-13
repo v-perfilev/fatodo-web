@@ -5,10 +5,8 @@ import {logoStyles} from './_styles';
 import {Routes} from '../router';
 import Link from './link';
 
-const useStyles = logoStyles;
-
 const Logo: FC = () => {
-  const classes = useStyles();
+  const classes = logoStyles();
 
   return (
     <Link to={Routes.ROOT} className={classes.root} underline="none">

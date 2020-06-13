@@ -1,12 +1,20 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {Box, Button, Fade, Menu, MenuItem} from '@material-ui/core';
+import {Button, Fade, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem} from '@material-ui/core';
 import {LANGUAGES} from '../../shared/i18n';
 import {LanguageIcon} from './icons/language-icon';
 import {ArrowDownIcon} from './icons/arrow-down-icon';
 import {LanguageUtils} from '../../shared/utils/language.utils';
+import {sidebarMenuStyles} from '../header/_styles';
 
-const LanguageSelect: FC = () => {
+interface ComponentProps {
+  list?: boolean;
+}
+
+type Props = ComponentProps;
+
+const LanguageSelect: FC<Props> = ({list}: Props) => {
+  const classes = sidebarMenuStyles();
   const [anchorElement, setAnchorElement] = React.useState<HTMLElement | null>(null);
 
   const isOpen = Boolean(anchorElement);
@@ -28,11 +36,24 @@ const LanguageSelect: FC = () => {
   };
 
   return (
-    <Box>
-      <Button onClick={handleClick} color="primary" startIcon={<LanguageIcon />}>
-        {getNameForCode(LanguageUtils.getLanguage())}
-        <ArrowDownIcon />
-      </Button>
+    <>
+      {list ? (
+        <List component="nav">
+          <ListItem button onClick={handleClick}>
+            <ListItemIcon>
+              <LanguageIcon className={classes.icon} />
+            </ListItemIcon>
+            <ListItemText>
+              {getNameForCode(LanguageUtils.getLanguage())}
+            </ListItemText>
+          </ListItem>
+        </List>
+      ) : (
+        <Button onClick={handleClick} color="primary" startIcon={<LanguageIcon />}>
+          {getNameForCode(LanguageUtils.getLanguage())}
+          <ArrowDownIcon />
+        </Button>
+      )}
       <Menu
         id="language-menu"
         anchorEl={anchorElement}
@@ -47,7 +68,7 @@ const LanguageSelect: FC = () => {
           </MenuItem>
         ))}
       </Menu>
-    </Box>
+    </>
   );
 };
 
