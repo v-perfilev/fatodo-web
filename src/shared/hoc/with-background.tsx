@@ -5,19 +5,19 @@ import {backgroundStyles} from './_styles';
 import Logo from '../../components/common/logo';
 import LanguageSelect from '../../components/common/language-select';
 
-const withBackground = (imgSrc: string, bodyCentred = true) => (Component: ComponentType): FC => (
-  props
+const withBackground = (imgSrc: string) => (Component: ComponentType): FC => (
+  props,
 ): ReactElement => {
   const classes = backgroundStyles();
 
   return (
     <Grid container>
-      <Grid item sm md={8} lg className={classes.leftBox}>
+      <Grid item xs={12} md={6}>
         <Box className={classes.container}>
           <Box className={classes.header}>
             <Logo />
           </Box>
-          <Box className={bodyCentred ? classes.body + ' ' + classes.bodyCentred : classes.body}>
+          <Box className={classes.body}>
             <Component {...props} />
           </Box>
           <Box className={classes.footer}>
@@ -26,8 +26,10 @@ const withBackground = (imgSrc: string, bodyCentred = true) => (Component: Compo
         </Box>
       </Grid>
       <Hidden smDown>
-        <Grid item sm md={4} lg className={classes.rightBox}>
-          <img src={imgSrc} className={classes.img} />
+        <Grid item md={6} className={classes.rightBox}>
+          <Box className={classes.imgBox}>
+            <img src={imgSrc} className={classes.img} />
+          </Box>
         </Grid>
       </Hidden>
     </Grid>

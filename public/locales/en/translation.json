@@ -4,9 +4,12 @@
     "register": "Register",
     "login": "Login"
   },
+  "auth": {
+    "socialLogin": "or sign in with"
+  },
   "buttons": {
     "toHomePage": "To home page",
     "sendActivationCode": "Send code again",
-    "forgotPassword": "Reset password"
+    "forgotPassword": "Forgot password?"
   }
 }

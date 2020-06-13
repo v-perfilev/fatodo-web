@@ -4,9 +4,12 @@
     "register": "Регистрация",
     "login": "Войти"
   },
+  "auth": {
+    "socialLogin": "или войдите через"
+  },
   "buttons": {
     "toHomePage": "На главную страницу",
     "sendActivationCode": "Отправить код снова",
-    "forgotPassword": "Восстановить пароль"
+    "forgotPassword": "Забыли пароль?"
   }
 }

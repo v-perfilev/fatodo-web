@@ -19,17 +19,13 @@ export const wrapperStyles = makeStyles(() => ({
 }));
 
 export const backgroundStyles = makeStyles(() => ({
-  leftBox: {
-    overflowY: 'auto',
-    height: '100vh',
-  },
   container: {
     minHeight: '100vh',
     display: 'flex',
     flexDirection: 'column',
   },
   header: {
-    minHeight: 150,
+    height: 150,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -38,23 +34,27 @@ export const backgroundStyles = makeStyles(() => ({
     minHeight: 300,
     display: 'flex',
     flexGrow: 1,
+    alignItems: 'center',
     justifyContent: 'center',
     '& > *': {
       maxWidth: '80%',
     },
   },
-  bodyCentred: {
-    alignItems: 'center',
-  },
   footer: {
-    minHeight: 150,
+    height: 150,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
   rightBox: {
-    overflow: 'hidden',
+    position: 'relative',
+  },
+  imgBox: {
+    position: 'fixed',
     height: '100vh',
+    display: 'flex',
+    justifyContent: 'center',
+    overflow: 'hidden',
   },
   img: {
     height: '100%',

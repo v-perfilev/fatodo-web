@@ -37,15 +37,11 @@ const Auth: FC<Props> = ({match, history}: Props) => {
       {activeTab === 0 ? <LoginForm onSuccess={redirectToHome} /> : <RegisterForm onSuccess={redirectToHome} />}
       {SOCIAL_LOGIN && (
         <>
-          <Box m={1} />
+          <Box m={2} />
           <SocialLogin />
         </>
       )}
-      <Box m={1} />
-      <Link to={Routes.FORGOT_PASSWORD}>
-        <Trans i18nKey={'buttons.forgotPassword'} />
-      </Link>
-      <Box m={1} />
+      <Box m={2} />
       <Link to={Routes.ROOT}>
         <Trans i18nKey={'buttons.toHomePage'} />
       </Link>
@@ -53,4 +49,4 @@ const Auth: FC<Props> = ({match, history}: Props) => {
   );
 };
 
-export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg', false))(Auth);
+export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg'))(Auth);

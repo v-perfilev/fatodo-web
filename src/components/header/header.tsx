@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {AppBar, Box, Toolbar} from '@material-ui/core';
+import {AppBar, Box, Hidden, Toolbar} from '@material-ui/core';
 import Logo from '../common/logo';
 import LanguageSelect from '../common/language-select';
 import Account from './account';
@@ -15,8 +15,10 @@ const Header: FC = () => {
         <Box className={classes.grow}>
           <Logo />
         </Box>
-        <LanguageSelect />
-        <Account />
+        <Hidden smDown>
+          <LanguageSelect />
+          <Account />
+        </Hidden>
       </Toolbar>
     </AppBar>
   );

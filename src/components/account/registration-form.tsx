@@ -36,7 +36,7 @@ const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => 
   const handleMouseDownPassword = (event): void => event.preventDefault();
 
   return (
-    <Form className={classes.root}>
+    <Form className={classes.root + ' ' + classes.form}>
       <Field component={TextField} type="text" name="email" label={t('form:fields.email.label')} fullWidth={true} />
       <Field
         component={TextField}

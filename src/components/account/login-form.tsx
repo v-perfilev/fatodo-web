@@ -20,6 +20,7 @@ import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../router';
 import {ResponseUtils} from '../../shared/utils/response.utils';
 import {SecurityUtils} from '../../shared/utils/security.utils';
+import Link from '../common/link';
 
 interface ComponentProps {
   onSuccess: () => void;
@@ -39,42 +40,48 @@ const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const handleMouseDownPassword = (event): void => event.preventDefault();
 
   return (
-    <Form className={classes.root}>
-      <Field component={TextField} type="text" name="user" label={t('form:fields.user.label')} fullWidth={true} />
-      <Field
-        component={TextField}
-        type={showPassword ? 'text' : 'password'}
-        name="password"
-        label={t('form:fields.password.label')}
-        fullWidth={true}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton onClick={toggleShowPassword} onMouseDown={handleMouseDownPassword} size={'small'}>
-                {showPassword ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
-      />
-      <Box>
+    <Box className={classes.root}>
+      <Form className={classes.form}>
+        <Field component={TextField} type="text" name="user" label={t('form:fields.user.label')} fullWidth={true} />
         <Field
-          component={CheckboxWithLabel}
-          type="checkbox"
-          name="rememberMe"
-          Label={{label: t('form:fields.rememberMe.label')}}
+          component={TextField}
+          type={showPassword ? 'text' : 'password'}
+          name="password"
+          label={t('form:fields.password.label')}
+          fullWidth={true}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={toggleShowPassword} onMouseDown={handleMouseDownPassword} size={'small'}>
+                  {showPassword ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
         />
-      </Box>
-      <LoadingButton
-        type="submit"
-        color="secondary"
-        fullWidth={true}
-        disabled={!isValid || isSubmitting}
-        loading={isSubmitting}
-      >
-        <Trans i18nKey={'form:login.submit'} />
-      </LoadingButton>
-    </Form>
+        <Box>
+          <Field
+            component={CheckboxWithLabel}
+            type="checkbox"
+            name="rememberMe"
+            Label={{label: t('form:fields.rememberMe.label')}}
+          />
+        </Box>
+        <LoadingButton
+          type="submit"
+          color="secondary"
+          fullWidth={true}
+          disabled={!isValid || isSubmitting}
+          loading={isSubmitting}
+        >
+          <Trans i18nKey={'form:login.submit'} />
+        </LoadingButton>
+      </Form>
+      <Box m={1} />
+      <Link to={Routes.FORGOT_PASSWORD}>
+        <Trans i18nKey={'buttons.forgotPassword'} />
+      </Link>
+    </Box>
   );
 };
 
