@@ -2,12 +2,13 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
 import Spinner from '../../components/common/loaders/spinner';
 import {Box, Fade} from '@material-ui/core';
+import {LOADER_TIMEOUT} from '../../constants';
 
-const withLoading = (Component: ComponentType): FC => (): ReactElement => {
+const withLoader = (Component: ComponentType): FC => (): ReactElement => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 500);
+    setTimeout(() => setLoading(false), LOADER_TIMEOUT);
   }, []);
 
   return (
@@ -26,4 +27,4 @@ const withLoading = (Component: ComponentType): FC => (): ReactElement => {
   );
 };
 
-export default withLoading;
+export default withLoader;

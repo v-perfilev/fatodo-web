@@ -14,22 +14,28 @@ export const clearAuth = () => (dispatch): void => {
   dispatch({type: ACTION_TYPES.CLEAR_AUTH});
 };
 
-export const login = (token: string, rememberMe: boolean, onSuccess: () => void, onFailure: () => void) => async (
+export const login = (token?: string, rememberMe?: boolean) => async (dispatch): Promise<void> => {
+  if (token) {
+    SecurityUtils.saveAuthToken(token, rememberMe);
+  }
+  dispatch({type: ACTION_TYPES.LOGIN});
+};
+
+export const requestAccountData = (onSuccess?: () => void, onFailure?: () => void) => async (
   dispatch
 ): Promise<void> => {
   try {
-    if (!token) {
-      throw new Error();
-    }
-    SecurityUtils.saveAuthToken(token, rememberMe);
     const accountResponse = await UserService.getCurrentUser();
     LanguageUtils.setLanguageFromUser(accountResponse.data);
-    dispatch({type: ACTION_TYPES.LOGIN});
     dispatch({type: ACTION_TYPES.ACCOUNT, account: accountResponse.data});
-    onSuccess();
+    if (onSuccess) {
+      onSuccess();
+    }
   } catch (e) {
     clearAuth();
-    onFailure();
+    if (onFailure) {
+      onFailure();
+    }
   }
 };
 

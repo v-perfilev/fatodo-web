@@ -2,7 +2,7 @@ import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {CheckboxWithLabel, TextField} from 'formik-material-ui';
 import {Box, IconButton, InputAdornment} from '@material-ui/core';
-import {login} from '../../store/actions/auth.actions';
+import {login, requestAccountData} from '../../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import * as React from 'react';
 import {FC, useState} from 'react';
@@ -28,7 +28,7 @@ interface ComponentProps {
   onSuccess: () => void;
 }
 
-const mapDispatchToProps = {login, enqueueSnackbar};
+const mapDispatchToProps = {login, requestAccountData, enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = ComponentProps & RouteComponentProps & FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps;
@@ -126,14 +126,16 @@ const formik = withFormik<Props, FormValues>({
     AccountService.authenticate(data)
       .then((response) => {
         const token = SecurityUtils.parseTokenFromResponse(response);
-        props.login(token, values.rememberMe, onSuccess, onFailure);
+        props.login(token, values.rememberMe);
+        props.requestAccountData(onSuccess, onFailure);
       })
       .catch((response) => {
         if (ResponseUtils.getFeedbackCode(response) === 'auth.notActivated') {
           props.history.push(Routes.NOT_ACTIVATED, {user: values.user});
+        } else {
+          NotificationUtils.handleFeedback(response, '*', ['auth.notActivated'], props.enqueueSnackbar);
+          setSubmitting(false);
         }
-        NotificationUtils.handleFeedback(response, '*', ['auth.notActivated'], props.enqueueSnackbar);
-        setSubmitting(false);
       });
   },
 });
@@ -144,5 +146,5 @@ export default compose<ComponentProps>(
   withCaptchaProvider,
   withCaptcha,
   connector,
-  formik
+  formik,
 )(LoginForm);

@@ -6,19 +6,25 @@ export interface CaptchaProps {
   token: string;
 }
 
-const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (): ReactElement => {
-  const [token, setToken] = useState('');
+const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (props): ReactElement => {
   const {executeRecaptcha} = useGoogleReCaptcha();
+  const [token, setToken] = useState('');
+  let isMounted = true;
 
   useEffect(() => {
     executeRecaptcha()
-      .then((token) => setToken(token))
+      .then((token) => {
+        if (isMounted) {
+          setToken(token);
+        }
+      })
       .catch(() => {
         // skip
       });
+    return () => isMounted = false;
   }, []);
 
-  return <Component token={token} />;
+  return <Component {...props} token={token} />;
 };
 
 export default withCaptcha;

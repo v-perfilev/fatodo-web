@@ -1,4 +1,5 @@
 import {AUTHORIZATION_HEADER} from '../../constants';
+import {AxiosResponse} from 'axios';
 
 const AUTH_TOKEN_KEY = 'token';
 
@@ -14,7 +15,7 @@ export class SecurityUtils {
     SecurityUtils.removeFromStorage(sessionStorage, AUTH_TOKEN_KEY);
   };
 
-  public static saveAuthToken = (token, rememberMe): void => {
+  public static saveAuthToken = (token: string, rememberMe?: boolean): void => {
     if (rememberMe) {
       localStorage.setItem(AUTH_TOKEN_KEY, token);
     } else {
@@ -26,7 +27,7 @@ export class SecurityUtils {
     return localStorage.getItem(AUTH_TOKEN_KEY) || sessionStorage.getItem(AUTH_TOKEN_KEY);
   };
 
-  public static parseTokenFromResponse = (response): string => {
+  public static parseTokenFromResponse = (response: AxiosResponse): string => {
     const token = response?.headers?.[AUTHORIZATION_HEADER];
     return token && token.slice(0, 7) === 'Bearer ' ? token.slice(7, token.length) : null;
   };

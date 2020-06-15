@@ -9,8 +9,8 @@ import Link from '../common/link';
 import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
 import RegisterForm from './registration-form';
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
-import {SOCIAL_LOGIN} from '../../constants';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {LOADER_TIMEOUT, SOCIAL_LOGIN} from '../../constants';
 import SocialLogin from './social-buttons';
 import {RootState} from '../../store';
 import {AuthState} from '../../store/rerducers/auth.reduser';
@@ -31,11 +31,15 @@ const Auth: FC<Props> = ({authState: {isAuthenticated}, match, history}: Props) 
     setActiveTab(newTab);
   };
 
-  const redirectToHome = (): void => history.push(Routes.ROOT);
+  const redirectToHome = (): void => {
+    history.push(Routes.ROOT);
+  };
 
-  return isAuthenticated ? (
-    <Redirect to={Routes.ROOT} />
-  ) : (
+  if (isAuthenticated) {
+    setTimeout(() => redirectToHome(), LOADER_TIMEOUT);
+  }
+
+  return (
     <Box className={classes.root}>
       <Tabs variant="fullWidth" textColor="primary" style={{width: '100%'}} value={activeTab} onChange={handleChange}>
         <Tab label={t('form:login.header')} />

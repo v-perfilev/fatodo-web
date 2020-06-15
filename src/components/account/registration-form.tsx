@@ -29,7 +29,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps;
 
-const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
+const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values, ...props}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
   const [showPassword, setShowPassword] = useState(false);
@@ -113,6 +113,7 @@ const formik = withFormik<Props, FormValues>({
       language: i18n.language,
       token: props.token,
     };
+
     AccountService.register(data)
       .then(() => {
         NotificationUtils.handleSnack('auth.registered', 'info', props.enqueueSnackbar);
@@ -130,5 +131,5 @@ export default compose<ComponentProps>(
   withCaptchaProvider,
   withCaptcha,
   connector,
-  formik
+  formik,
 )(RegistrationForm);

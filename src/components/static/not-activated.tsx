@@ -6,28 +6,20 @@ import withRedirectTimer, {RedirectTimerProps} from '../../shared/hoc/with-redir
 import {Trans} from 'react-i18next';
 import {staticPageStyles} from './_styles';
 import withBackground from '../../shared/hoc/with-background';
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../router';
 import AccountService from '../../services/account.service';
 import {HomeIcon} from '../common/icons/home-icon';
 import LoadingButton from '../common/buttons/loading-button';
 import {EmailIcon} from '../common/icons/email-icon';
-import {RootState} from '../../store';
-import {AuthState} from '../../store/rerducers/auth.reduser';
-import {connect, ConnectedProps} from 'react-redux';
 
 export interface NotActivatedLocationState {
   user: string;
 }
 
-const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
-const connector = connect(mapStateToProps);
+type Props = RouteComponentProps<{}, any, NotActivatedLocationState> & RedirectTimerProps;
 
-type Props = RouteComponentProps<{}, any, NotActivatedLocationState> &
-  RedirectTimerProps &
-  ConnectedProps<typeof connector>;
-
-const NotActivated: FC<Props> = ({authState: {isAuthenticated}, timer, resetTimer, location}: Props) => {
+const NotActivated: FC<Props> = ({timer, resetTimer, history, location}: Props) => {
   const classes = staticPageStyles();
   const user = location?.state?.user;
   const [activationLoading, setActivationLoading] = useState<boolean>(false);
@@ -56,11 +48,10 @@ const NotActivated: FC<Props> = ({authState: {isAuthenticated}, timer, resetTime
       .finally(() => setActivationLoading(false));
   };
 
-  return isAuthenticated ? (
-    <Redirect to={Routes.ROOT} />
-  ) : !user ? (
-    <Redirect to={Routes.INTERNAL_ERROR} />
-  ) : (
+  if (!user) {
+    history.push(Routes.INTERNAL_ERROR);
+  }
+  return (
     <Box className={classes.root}>
       <Typography variant="h5" color="primary">
         <Trans i18nKey={'static:notActivated.caption'} values={{email: user}} />
@@ -91,5 +82,4 @@ export default compose(
   withBackground('/images/background-1.jpg'),
   withRedirectTimer('/', 60),
   withRouter,
-  connector
 )(NotActivated);

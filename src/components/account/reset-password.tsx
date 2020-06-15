@@ -7,11 +7,12 @@ import {Routes} from '../router';
 import Link from '../common/link';
 import {Trans, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import ResetPasswordForm from './reset-password-form';
 import {RootState} from '../../store';
 import {AuthState} from '../../store/rerducers/auth.reduser';
 import {connect, ConnectedProps} from 'react-redux';
+import {LOADER_TIMEOUT} from '../../constants';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
@@ -25,9 +26,11 @@ const ResetPassword: FC<Props> = ({authState: {isAuthenticated}, history, ...pro
   const redirectToHome = (): void => history.push(Routes.ROOT);
   const redirectToInternalError = (): void => history.push(Routes.INTERNAL_ERROR);
 
-  return isAuthenticated ? (
-    <Redirect to={Routes.ROOT} />
-  ) : (
+  if (isAuthenticated) {
+    setTimeout(() => redirectToHome(), LOADER_TIMEOUT);
+  }
+
+  return (
     <Box className={classes.root}>
       <Typography variant="h5" color="primary">
         <Trans i18nKey={'form:resetPassword.header'} />
@@ -46,5 +49,5 @@ export default compose(
   withTranslation(),
   withRouter,
   withBackground('/images/background-1.jpg'),
-  connector
+  connector,
 )(ResetPassword);
