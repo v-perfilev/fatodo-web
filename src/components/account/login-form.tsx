@@ -146,5 +146,5 @@ export default compose<ComponentProps>(
   withCaptchaProvider,
   withCaptcha,
   connector,
-  formik,
+  formik
 )(LoginForm);

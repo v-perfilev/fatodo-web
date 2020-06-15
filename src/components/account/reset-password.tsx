@@ -49,5 +49,5 @@ export default compose(
   withTranslation(),
   withRouter,
   withBackground('/images/background-1.jpg'),
-  connector,
+  connector
 )(ResetPassword);

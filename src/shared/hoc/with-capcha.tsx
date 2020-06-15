@@ -21,7 +21,9 @@ const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (props): Rea
       .catch(() => {
         // skip
       });
-    return () => isMounted = false;
+    return (): void => {
+      isMounted = false;
+    };
   }, []);
 
   return <Component {...props} token={token} />;

@@ -8,7 +8,7 @@ export interface RedirectTimerProps {
 }
 
 const withRedirectTimer = (redirectLink = '/', timerInitValue = 50) => (
-  Component: ComponentType<RedirectTimerProps>,
+  Component: ComponentType<RedirectTimerProps>
 ): FC => (props): ReactElement => {
   const [timer, setTimer] = useState<number>(timerInitValue);
   let timerId;
