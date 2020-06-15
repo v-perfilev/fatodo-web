@@ -56,9 +56,6 @@ module.exports = () => merge(commonConfig({env: ENV}), {
     // new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
-        BASE_URL: JSON.stringify('http://localhost:9000'),
-        API_URL: JSON.stringify('http://localhost:4000/api'),
-        RECAPTCHA_KEY: JSON.stringify('6Le5TKQZAAAAANv8EpvGFrvrgoP7HFVMPnPzu-55'),
         SOCIAL_LOGIN: true,
         DEVELOPMENT_MODE: false
       }

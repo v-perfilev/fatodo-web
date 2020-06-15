@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
@@ -45,6 +46,11 @@ module.exports = () => ({
     }),
     new CopyWebpackPlugin([
       {from: './public/', to: ''}
-    ])
+    ]),
+    new webpack.EnvironmentPlugin({
+      BASE_URL: 'http://localhost:9000',
+      API_URL: 'http://localhost:4000/api',
+      RECAPTCHA_KEY: '6Le5TKQZAAAAANv8EpvGFrvrgoP7HFVMPnPzu-55'
+    })
   ]
 });
