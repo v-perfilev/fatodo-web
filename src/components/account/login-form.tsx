@@ -21,6 +21,8 @@ import {Routes} from '../router';
 import {ResponseUtils} from '../../shared/utils/response.utils';
 import {SecurityUtils} from '../../shared/utils/security.utils';
 import Link from '../common/link';
+import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
+import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 
 interface ComponentProps {
   onSuccess: () => void;
@@ -29,7 +31,7 @@ interface ComponentProps {
 const mapDispatchToProps = {login, enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = ComponentProps & RouteComponentProps<{}> & FormikProps<any> & ConnectedProps<typeof connector>;
+type Props = ComponentProps & RouteComponentProps & FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps;
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -115,6 +117,7 @@ const formik = withFormik<Props, FormValues>({
     const data = {
       user: values.user,
       password: values.password,
+      token: props.token,
     };
 
     const onSuccess = (): void => props.onSuccess();
@@ -135,4 +138,11 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose<ComponentProps>(withTranslation(), withRouter, connector, formik)(LoginForm);
+export default compose<ComponentProps>(
+  withTranslation(),
+  withRouter,
+  withCaptchaProvider,
+  withCaptcha,
+  connector,
+  formik
+)(LoginForm);

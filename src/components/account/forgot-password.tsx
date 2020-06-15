@@ -7,17 +7,25 @@ import {Routes} from '../router';
 import Link from '../common/link';
 import {Trans, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 import ForgotPasswordForm from './forgot-password-form';
+import {RootState} from '../../store';
+import {AuthState} from '../../store/rerducers/auth.reduser';
+import {connect, ConnectedProps} from 'react-redux';
 
-type Props = RouteComponentProps;
+const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
+const connector = connect(mapStateToProps);
 
-const ForgotPassword: FC<Props> = ({history}: Props) => {
+type Props = RouteComponentProps & ConnectedProps<typeof connector>;
+
+const ForgotPassword: FC<Props> = ({authState: {isAuthenticated}, history}: Props) => {
   const classes = authPageStyles();
 
   const redirectToHome = (): void => history.push(Routes.ROOT);
 
-  return (
+  return isAuthenticated ? (
+    <Redirect to={Routes.ROOT} />
+  ) : (
     <Box className={classes.root}>
       <Typography variant="h5" color="primary">
         <Trans i18nKey={'form:forgotPassword.header'} />
@@ -32,4 +40,9 @@ const ForgotPassword: FC<Props> = ({history}: Props) => {
   );
 };
 
-export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg'))(ForgotPassword);
+export default compose(
+  withTranslation(),
+  withRouter,
+  withBackground('/images/background-1.jpg'),
+  connector
+)(ForgotPassword);

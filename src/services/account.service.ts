@@ -2,6 +2,7 @@ import axios, {AxiosPromise} from 'axios';
 import {LoginDTO} from '../models/dto/login.dto';
 import {RegistrationDto} from '../models/dto/registration.dto';
 import {ResetPasswordDTO} from '../models/dto/reset-password.dto';
+import {ForgotPasswordDTO} from '../models/dto/forgot-password.dto';
 
 export default class AccountService {
   public static authenticate = (data: LoginDTO): AxiosPromise => {
@@ -24,7 +25,7 @@ export default class AccountService {
     return axios.post('auth/account/reset-password', data);
   };
 
-  public static requestResetPasswordCode = (user: string): AxiosPromise => {
-    return axios.get('auth/account/request-reset-password-code/' + user);
+  public static requestResetPasswordCode = (data: ForgotPasswordDTO): AxiosPromise => {
+    return axios.post('auth/account/request-reset-password-code', data);
   };
 }

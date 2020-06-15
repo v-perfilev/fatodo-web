@@ -9,13 +9,19 @@ import Link from '../common/link';
 import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
 import RegisterForm from './registration-form';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 import {SOCIAL_LOGIN} from '../../constants';
 import SocialLogin from './social-buttons';
+import {RootState} from '../../store';
+import {AuthState} from '../../store/rerducers/auth.reduser';
+import {connect, ConnectedProps} from 'react-redux';
 
-type Props = RouteComponentProps;
+const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
+const connector = connect(mapStateToProps);
 
-const Auth: FC<Props> = ({match, history}: Props) => {
+type Props = RouteComponentProps & ConnectedProps<typeof connector>;
+
+const Auth: FC<Props> = ({authState: {isAuthenticated}, match, history}: Props) => {
   const classes = authPageStyles();
   const {t} = useTranslation();
   const [activeTab, setActiveTab] = useState<number>(match.path === Routes.LOGIN ? 0 : 1);
@@ -27,7 +33,9 @@ const Auth: FC<Props> = ({match, history}: Props) => {
 
   const redirectToHome = (): void => history.push(Routes.ROOT);
 
-  return (
+  return isAuthenticated ? (
+    <Redirect to={Routes.ROOT} />
+  ) : (
     <Box className={classes.root}>
       <Tabs variant="fullWidth" textColor="primary" style={{width: '100%'}} value={activeTab} onChange={handleChange}>
         <Tab label={t('form:login.header')} />
@@ -49,4 +57,4 @@ const Auth: FC<Props> = ({match, history}: Props) => {
   );
 };
 
-export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg'))(Auth);
+export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg'), connector)(Auth);

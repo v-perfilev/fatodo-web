@@ -7,19 +7,27 @@ import {Routes} from '../router';
 import Link from '../common/link';
 import {Trans, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 import ResetPasswordForm from './reset-password-form';
+import {RootState} from '../../store';
+import {AuthState} from '../../store/rerducers/auth.reduser';
+import {connect, ConnectedProps} from 'react-redux';
 
-type Props = RouteComponentProps<{code: string}>;
+const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
+const connector = connect(mapStateToProps);
 
-const ResetPassword: FC<Props> = ({history, ...props}: Props) => {
+type Props = RouteComponentProps<{code: string}> & ConnectedProps<typeof connector>;
+
+const ResetPassword: FC<Props> = ({authState: {isAuthenticated}, history, ...props}: Props) => {
   const classes = authPageStyles();
   const code = props.match.params.code;
 
   const redirectToHome = (): void => history.push(Routes.ROOT);
   const redirectToInternalError = (): void => history.push(Routes.INTERNAL_ERROR);
 
-  return (
+  return isAuthenticated ? (
+    <Redirect to={Routes.ROOT} />
+  ) : (
     <Box className={classes.root}>
       <Typography variant="h5" color="primary">
         <Trans i18nKey={'form:resetPassword.header'} />
@@ -34,4 +42,9 @@ const ResetPassword: FC<Props> = ({history, ...props}: Props) => {
   );
 };
 
-export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg'))(ResetPassword);
+export default compose(
+  withTranslation(),
+  withRouter,
+  withBackground('/images/background-1.jpg'),
+  connector
+)(ResetPassword);

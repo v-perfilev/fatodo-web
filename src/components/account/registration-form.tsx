@@ -17,6 +17,8 @@ import LoadingButton from '../common/buttons/loading-button';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import {NotificationUtils} from '../../shared/utils/notification.utils';
+import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
+import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 
 interface ComponentProps {
   onSuccess: () => void;
@@ -25,7 +27,7 @@ interface ComponentProps {
 const mapDispatchToProps = {enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
+type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps;
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -109,6 +111,7 @@ const formik = withFormik<Props, FormValues>({
       username: values.username,
       password: values.password,
       language: i18n.language,
+      token: props.token,
     };
     AccountService.register(data)
       .then(() => {
@@ -122,4 +125,10 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose<ComponentProps>(withTranslation(), connector, formik)(RegistrationForm);
+export default compose<ComponentProps>(
+  withTranslation(),
+  withCaptchaProvider,
+  withCaptcha,
+  connector,
+  formik
+)(RegistrationForm);

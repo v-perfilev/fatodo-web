@@ -3,4 +3,5 @@ export interface RegistrationDto {
   username: string;
   password: string;
   language: string;
+  token: string;
 }

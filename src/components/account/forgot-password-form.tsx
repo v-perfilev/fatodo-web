@@ -12,6 +12,8 @@ import AccountService from '../../services/account.service';
 import LoadingButton from '../common/buttons/loading-button';
 import {NotificationUtils} from '../../shared/utils/notification.utils';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
+import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
+import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 
 interface ComponentProps {
   onSuccess?: () => void;
@@ -20,7 +22,7 @@ interface ComponentProps {
 const mapDispatchToProps = {enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
+type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps;
 
 const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -61,7 +63,12 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-    AccountService.requestResetPasswordCode(values.user)
+    const data = {
+      user: values.user,
+      token: props.token,
+    };
+
+    AccountService.requestResetPasswordCode(data)
       .then(() => {
         NotificationUtils.handleSnack('auth.afterForgotPassword', 'info', props.enqueueSnackbar);
         props.onSuccess();
@@ -73,4 +80,10 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose<ComponentProps>(withTranslation(), connector, formik)(ForgotPasswordForm);
+export default compose<ComponentProps>(
+  withTranslation(),
+  withCaptchaProvider,
+  withCaptcha,
+  connector,
+  formik
+)(ForgotPasswordForm);

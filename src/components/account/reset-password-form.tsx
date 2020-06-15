@@ -16,6 +16,8 @@ import LoadingButton from '../common/buttons/loading-button';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import {NotificationUtils} from '../../shared/utils/notification.utils';
+import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
+import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
 
 interface ComponentProps {
   code: string;
@@ -26,7 +28,7 @@ interface ComponentProps {
 const mapDispatchToProps = {enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector>;
+type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps;
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -113,6 +115,7 @@ const formik = withFormik<Props, FormValues>({
     const data = {
       code: props.code,
       password: values.password,
+      token: props.token,
     };
     AccountService.resetPassword(data)
       .then(() => {
@@ -127,4 +130,10 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose<ComponentProps>(withTranslation(), connector, formik)(ResetPasswordForm);
+export default compose<ComponentProps>(
+  withTranslation(),
+  withCaptchaProvider,
+  withCaptcha,
+  connector,
+  formik
+)(ResetPasswordForm);
