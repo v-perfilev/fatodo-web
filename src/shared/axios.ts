@@ -7,7 +7,7 @@ import {TranslationUtils} from './utils/translation.utils';
 import {ResponseUtils} from './utils/response.utils';
 
 axios.defaults.timeout = API_TIMEOUT;
-axios.defaults.baseURL = API_URL + '/api';
+axios.defaults.baseURL = API_URL;
 
 interface SetupAxiosActions {
   onUnauthenticated: () => void;
