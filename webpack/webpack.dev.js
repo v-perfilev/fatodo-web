@@ -36,11 +36,9 @@ module.exports = () => merge(commonConfig({env: ENV}), {
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        SOCIAL_LOGIN: true,
-        DEVELOPMENT_MODE: true
-      }
+    new webpack.EnvironmentPlugin({
+      SOCIAL_LOGIN: true,
+      DEVELOPMENT_MODE: true
     })
   ]
 });

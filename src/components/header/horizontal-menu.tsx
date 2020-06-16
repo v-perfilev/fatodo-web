@@ -43,7 +43,7 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, histor
       )}
       {!isAuthenticated && (
         <Button variant="contained" color="secondary" startIcon={<SignUpIcon />} onClick={redirectToRegistration}>
-          <Trans i18nKey={'header.registration'} />
+          <Trans i18nKey={'header.register'} />
         </Button>
       )}
     </Box>

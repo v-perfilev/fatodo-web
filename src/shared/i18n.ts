@@ -14,7 +14,7 @@ export const LANGUAGES = [
   },
 ];
 
-i18next
+export const initLanguages = i18next
   .use(detector)
   .use(backend)
   .use(initReactI18next)

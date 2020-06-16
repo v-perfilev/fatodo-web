@@ -3,6 +3,7 @@ FROM node:alpine as build
 WORKDIR /app
 
 COPY . ./
+RUN rm -rf dist
 RUN npm install
 RUN npm run-script build
 

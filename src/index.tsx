@@ -11,7 +11,7 @@ import {CssBaseline, ThemeProvider} from '@material-ui/core';
 import {theme} from './shared/theme';
 import {clearAuth} from './store/actions/auth.actions';
 import {enqueueSnackbar} from './store/actions/notification.actions';
-import i18n from './shared/i18n';
+import {initLanguages} from './shared/i18n';
 import './shared/i18n';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Notifier from './shared/notification/notifier';
@@ -39,6 +39,6 @@ const Root: FC = () => (
   </Provider>
 );
 
-i18n.init().then(() => {
+initLanguages.then(() => {
   ReactDOM.render(<Root />, root);
 });
