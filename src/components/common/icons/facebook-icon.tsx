@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {SvgIcon, SvgIconProps} from '@material-ui/core';
+import {SvgIcon} from '@material-ui/core';
+import {CommonProps} from '@material-ui/core/OverridableComponent';
 
-// export const FacebookIcon: FC<CommonProps<any>> = (props) => (
-export const FacebookIcon: FC<SvgIconProps<any>> = (props) => (
+export const FacebookIcon: FC<CommonProps<any>> = (props) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"

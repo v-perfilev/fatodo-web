@@ -14,7 +14,7 @@ const Header: FC = () => {
   const toggleMenu = (): void => setShowMenu((prevState) => !prevState);
 
   return (
-    <AppBar position="static" color="transparent" className={classes.root}>
+    <AppBar position="static" color="transparent" elevation={3}>
       <Toolbar className={classes.toolbar}>
         <Logo />
         <Box className={classes.grow} />
