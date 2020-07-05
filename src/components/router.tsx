@@ -3,7 +3,6 @@ import {FC} from 'react';
 import {Switch} from 'react-router-dom';
 import PublicRoute from '../shared/routes/public-route';
 import Unauthorized from './static/unauthorized';
-import Home from './home';
 import InternalError from './static/internal-error';
 import Activation from './account/activation';
 import Forbidden from './static/forbidden';
@@ -13,9 +12,12 @@ import ForgotPassword from './account/forgot-password';
 import ResetPassword from './account/reset-password';
 import NotActivated from './static/not-activated';
 import SocialLogin from './account/social-login';
+import Home from './home';
+import GroupRouter from './groups/_router';
 
 export enum Routes {
   ROOT = '/',
+  GROUPS = '/groups',
   LOGIN = '/login',
   REGISTRATION = '/registration',
   SOCIAL_LOGIN = '/social-login',
@@ -32,6 +34,7 @@ export enum Routes {
 const Router: FC = () => (
   <Switch>
     <PublicRoute withHeader exact path={Routes.ROOT} component={Home} />
+    <PublicRoute withHeader exact path={Routes.GROUPS} component={GroupRouter} />
     {/*Auth Router*/}
     <PublicRoute path={Routes.LOGIN} component={Auth} />
     <PublicRoute path={Routes.REGISTRATION} component={Auth} />

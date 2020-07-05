@@ -4,7 +4,7 @@ import {RootState} from '../../store';
 import {connect, ConnectedProps} from 'react-redux';
 import {AuthState} from '../../store/rerducers/auth.reduser';
 import {Redirect, Route, RouteProps} from 'react-router-dom';
-import {compose} from 'redux';
+import {compose} from 'recompose';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
 import {useTranslation} from 'react-i18next';
 import {NotificationBuilder} from '../notification/notification.builder';

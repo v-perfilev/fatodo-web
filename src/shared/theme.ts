@@ -8,6 +8,8 @@ export enum COLORS {
   WARNING = '#ffba16',
   ERROR = '#ff5722',
   WHITE = '#ffffff',
+  LIGHT_GREY = '#eeeeee',
+  GREY = '#aaaaaa',
   BLACK = '#222222',
 }
 

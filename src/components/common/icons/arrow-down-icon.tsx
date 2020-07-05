@@ -5,7 +5,6 @@ import {CommonProps} from '@material-ui/core/OverridableComponent';
 
 export const ArrowDownIcon: FC<CommonProps<any>> = (props) => (
   <SvgIcon {...props}>
-    <path fill="none" d="M0 0h24v24H0V0z" />
-    <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" />
+    <path fill="currentColor" d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
   </SvgIcon>
 );

@@ -10,3 +10,4 @@ export const RECAPTCHA_KEY = process.env.RECAPTCHA_KEY;
 
 export const SOCIAL_LOGIN = process.env.SOCIAL_LOGIN;
 export const DEVELOPMENT_MODE = process.env.DEVELOPMENT_MODE;
+

@@ -3,8 +3,8 @@ import {FC} from 'react';
 import {SvgIcon} from '@material-ui/core';
 import {CommonProps} from '@material-ui/core/OverridableComponent';
 
-export const ArrowRightIcon: FC<CommonProps<any>> = (props) => (
+export const ArrowUpIcon: FC<CommonProps<any>> = (props) => (
   <SvgIcon {...props}>
-    <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
+    <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
   </SvgIcon>
 );
