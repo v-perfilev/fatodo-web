@@ -9,7 +9,7 @@ const Logo: FC = () => {
   const classes = logoStyles();
 
   return (
-    <Link to={Routes.ROOT} className={classes.root} underline="none">
+    <Link to={Routes.GROUPS} className={classes.root} underline="none">
       <img src="/images/logo.png" className={classes.logoImage} />
       <Typography className={classes.logoText}>Fatodo</Typography>
     </Link>

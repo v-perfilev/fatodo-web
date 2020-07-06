@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 import {TEST_GROUP} from './_constants';
-import GroupContainer from './group-list/group-container';
+import GroupGridContainer from './group-grid/group-grid-container';
 import {Button} from '@material-ui/core';
 
 const initGroups = Array.from(Array(5).keys()).map((value) => {
@@ -21,7 +21,7 @@ const Groups: FC = () => {
   return (
     <>
       <Button onClick={toggleMode}>Toggle</Button>
-      <GroupContainer groups={groups} mode={mode} />
+      <GroupGridContainer {...{groups, mode}} />
     </>
   );
 };

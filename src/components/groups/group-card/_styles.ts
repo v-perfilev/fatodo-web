@@ -1,25 +1,27 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 import {COLORS} from '../../../shared/theme';
-import {ITEMS_IN_GROUP_CARD} from '../_constants';
+import {CARD_HEADER_HEIGHT, ITEMS_IN_GROUP_CARD} from '../_constants';
 
 export const groupCardStyles = makeStyles(() => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
-    height: '100%',
   },
 }));
 
 export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
   header: {
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
+    height: CARD_HEADER_HEIGHT,
+    flexShrink: 0,
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
     backgroundColor: theme.palette.secondary.main,
     '& .MuiCardHeader-action': {
-      marginTop: 2,
-      marginRight: -10,
+      marginTop: 0,
+      marginRight: theme.spacing(-1.5),
+      alignSelf: 'center',
     },
   },
   caption: {
@@ -28,6 +30,14 @@ export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
   },
   action: {
     color: COLORS.WHITE,
+  },
+}));
+
+export const groupCardBodyStyles = makeStyles(() => ({
+  body: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
   },
 }));
 

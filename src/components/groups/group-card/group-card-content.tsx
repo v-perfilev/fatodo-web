@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useEffect, useState} from 'react';
+import {FC, memo, useEffect, useRef, useState} from 'react';
 import {Box, Button, CardContent, Typography} from '@material-ui/core';
 import {GroupItem} from '../_types';
 import {groupCardContentStyles} from './_styles';
@@ -8,6 +8,7 @@ import {ArrowUpIcon} from '../../common/icons/arrow-up-icon';
 import {useTrail} from 'react-spring';
 import GroupCardItem from './group-card-item';
 import {ITEMS_IN_GROUP_CARD} from '../_constants';
+import {compose} from 'recompose';
 
 interface Props {
   items: GroupItem[];
@@ -15,23 +16,25 @@ interface Props {
 
 const GroupCardContent: FC<Props> = ({items}: Props) => {
   const classes = groupCardContentStyles();
+
+  const ref = useRef();
   const [initialized, setInitialized] = useState(false);
   const [firstShowedItem, setFirstShowedItem] = useState(0);
   const [itemsToShow, setItemsToShow] = useState([]);
 
   useEffect(() => {
-    setInitialized(true);
+    setTimeout(() => setInitialized(true), 500);
   }, []);
 
   useEffect(() => {
     setItemsToShow(items.slice(firstShowedItem, firstShowedItem + ITEMS_IN_GROUP_CARD));
   }, [firstShowedItem]);
 
-  const trail = useTrail(itemsToShow.length, {
+  const trail = useTrail(itemsToShow.length, initialized && {
     reset: true,
     delay: 50,
     opacity: 1,
-    from: initialized && {opacity: 0},
+    from: {opacity: 0},
   });
 
   const isMultiPage = items.length > ITEMS_IN_GROUP_CARD;
@@ -43,7 +46,7 @@ const GroupCardContent: FC<Props> = ({items}: Props) => {
 
   return (
     <CardContent className={classes.content}>
-      <div className={classes.box}>
+      <div className={classes.box} ref={ref}>
         {trail.map((style, index) =>
           <GroupCardItem key={index} item={itemsToShow[index]} style={style} />,
         )}
@@ -65,4 +68,4 @@ const GroupCardContent: FC<Props> = ({items}: Props) => {
   );
 };
 
-export default GroupCardContent;
+export default compose(memo)(GroupCardContent);
