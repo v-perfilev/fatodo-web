@@ -20,14 +20,12 @@ import {NotificationUtils} from '../../shared/utils/notification.utils';
 import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
 import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 
-interface ComponentProps {
-  onSuccess: () => void;
-}
-
 const mapDispatchToProps = {enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = ComponentProps & FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps;
+type Props = FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps & {
+  onSuccess: () => void;
+};
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -126,10 +124,10 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose<ComponentProps>(
+export default compose(
   withTranslation(),
   withCaptchaProvider,
   withCaptcha,
   connector,
-  formik
+  formik,
 )(RegistrationForm);

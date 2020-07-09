@@ -10,7 +10,7 @@ import GroupCardItem from './group-card-item';
 import {ITEMS_IN_GROUP_CARD} from '../_constants';
 import {compose} from 'recompose';
 
-interface Props {
+type Props = {
   items: GroupItem[];
 }
 
@@ -30,38 +30,43 @@ const GroupCardContent: FC<Props> = ({items}: Props) => {
     setItemsToShow(items.slice(firstShowedItem, firstShowedItem + ITEMS_IN_GROUP_CARD));
   }, [firstShowedItem]);
 
-  const trail = useTrail(itemsToShow.length, initialized && {
-    reset: true,
-    delay: 50,
-    opacity: 1,
-    from: {opacity: 0},
-  });
+  const trail = useTrail(
+    itemsToShow.length,
+    initialized && {
+      reset: true,
+      delay: 50,
+      opacity: 1,
+      from: {opacity: 0},
+    }
+  );
 
   const isMultiPage = items.length > ITEMS_IN_GROUP_CARD;
   const isNotFirstPage = firstShowedItem > 0;
   const isNotLastPage = firstShowedItem + ITEMS_IN_GROUP_CARD < items.length;
 
-  const onUpClick = (): void => setFirstShowedItem(prevState => prevState - ITEMS_IN_GROUP_CARD);
-  const onDownClick = (): void => setFirstShowedItem(prevState => prevState + ITEMS_IN_GROUP_CARD);
+  const onUpClick = (): void => setFirstShowedItem((prevState) => prevState - ITEMS_IN_GROUP_CARD);
+  const onDownClick = (): void => setFirstShowedItem((prevState) => prevState + ITEMS_IN_GROUP_CARD);
 
   return (
     <CardContent className={classes.content}>
       <div className={classes.box} ref={ref}>
-        {trail.map((style, index) =>
-          <GroupCardItem key={index} item={itemsToShow[index]} style={style} />,
-        )}
+        {trail.map((style, index) => (
+          <GroupCardItem key={index} item={itemsToShow[index]} style={style} />
+        ))}
       </div>
       {isMultiPage && (
         <Box className={classes.control}>
-          <Button variant="outlined" size="small" onClick={onUpClick}
-                  disabled={!isNotFirstPage}><ArrowUpIcon /></Button>
+          <Button variant="outlined" size="small" onClick={onUpClick} disabled={!isNotFirstPage}>
+            <ArrowUpIcon />
+          </Button>
           <Box className={classes.pageCount}>
             <Typography color="primary">
               {firstShowedItem + 1} - {firstShowedItem + itemsToShow.length} / {items.length}
             </Typography>
           </Box>
-          <Button variant="outlined" size="small" onClick={onDownClick}
-                  disabled={!isNotLastPage}><ArrowDownIcon /></Button>
+          <Button variant="outlined" size="small" onClick={onDownClick} disabled={!isNotLastPage}>
+            <ArrowDownIcon />
+          </Button>
         </Box>
       )}
     </CardContent>

@@ -5,7 +5,7 @@ module.exports = {
     rootDir: '../../',
     testURL: 'http://localhost/',
     coverageDirectory: '<rootDir>/build/test-results/',
-    testMatch: ['<rootDir>/src/test/spec/**/@(*.)@(spec.ts?(x))'],
+    testMatch: ['<rootDir>/src/test/spec/**/@(*.)@(spec.ts?(width))'],
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     coveragePathIgnorePatterns: [
         '<rootDir>/src/test'

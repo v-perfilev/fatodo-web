@@ -2,7 +2,7 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
 import {Redirect} from 'react-router-dom';
 
-export interface RedirectTimerProps {
+export type RedirectTimerProps = {
   timer: number;
   resetTimer: () => void;
 }

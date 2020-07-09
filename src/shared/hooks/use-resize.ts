@@ -8,7 +8,7 @@ export const useResize = (): any => {
   useLayoutEffect(() => {
     updateSize();
     window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
+    return (): void => window.removeEventListener('resize', updateSize);
   }, []);
   return size;
 };

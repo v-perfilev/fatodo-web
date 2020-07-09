@@ -24,14 +24,12 @@ import Link from '../common/link';
 import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
 import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 
-interface ComponentProps {
-  onSuccess: () => void;
-}
-
 const mapDispatchToProps = {login, requestAccountData, enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = ComponentProps & RouteComponentProps & FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps;
+type Props = RouteComponentProps & FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps & {
+  onSuccess: () => void;
+};
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -140,11 +138,11 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose<ComponentProps>(
+export default compose(
   withTranslation(),
   withRouter,
   withCaptchaProvider,
   withCaptcha,
   connector,
-  formik
+  formik,
 )(LoginForm);

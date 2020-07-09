@@ -7,11 +7,9 @@ import {ArrowDownIcon} from './icons/arrow-down-icon';
 import {LanguageUtils} from '../../shared/utils/language.utils';
 import {sidebarMenuStyles} from '../header/_styles';
 
-interface ComponentProps {
+type Props = {
   list?: boolean;
 }
-
-type Props = ComponentProps;
 
 const LanguageSelect: FC<Props> = ({list}: Props) => {
   const classes = sidebarMenuStyles();

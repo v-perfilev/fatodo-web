@@ -4,7 +4,7 @@ import {passwordStrengthBarStyles} from './_styles';
 import {passwordStrengthMap, passwordStrengthPostfix, passwordStrengthPrefix} from './_validators';
 import {Box} from '@material-ui/core';
 
-interface Props {
+type Props = {
   password: string;
 }
 

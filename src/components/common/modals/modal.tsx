@@ -5,15 +5,13 @@ import {SlideDown} from '../animations/slide-down';
 import {modalStyles} from './_styles';
 import {CloseIcon} from '../icons/close-icon';
 
-interface ComponentProps {
+type Props = {
   isOpen: boolean;
   toggle: () => void;
   headerText: string;
   headerIcon?: ReactNode;
   content: ReactNode;
 }
-
-type Props = ComponentProps;
 
 const Modal: FC<Props> = ({isOpen, toggle, headerText, headerIcon, content}: Props) => {
   const classes = modalStyles();

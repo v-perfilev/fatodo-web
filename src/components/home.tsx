@@ -1,57 +1,66 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {compose} from 'recompose';
-import withCentering from '../shared/hoc/with-centering';
 import {Box, Grid} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+import {animated} from 'react-spring';
+import withSortableGrid, {SortingProps} from '../shared/hoc/with-sortable-grid';
 
-const items = Array.from(new Array(10), (val, index) => 'Test item ' + (index + 1));
+const items = Array.from(new Array(9), (val, index) => 'Test item ' + (index + 1));
 
 const homeStyles = makeStyles(() => ({
   container: {
-    width: 500,
+    position: 'relative',
   },
   item: {
+    position: 'absolute',
+    width: '100%',
+    height: 150,
     padding: 10,
   },
   box: {
-    position: 'relative',
-    paddingBottom: '100%',
-  },
-  innerBox: {
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
+    border: '1px solid red',
     display: 'flex',
+    height: '100%',
+    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    background: 'red',
+    background: 'grey',
+    userSelect: 'none',
+    cursor: 'pointer',
   },
 }));
 
-const MyBox: FC<{children}> = ({children}) => {
+const CustomBox: FC<{bind, style, children}> = ({bind, style, children}) => {
   const classes = homeStyles();
   return (
-    <Grid item xs={3} className={classes.item}>
+    <Grid item xs={3} {...{...bind, style}} className={classes.item}>
       <Box className={classes.box}>
-        <Box className={classes.innerBox}>
-          {children}
-        </Box>
+        {children}
       </Box>
     </Grid>
   );
 };
 
-const Home: FC = () => {
+const AnimatedBox = compose(animated)(CustomBox);
+
+type Props = SortingProps;
+
+const Home: FC<Props> = ({gridRef, setSortingItems, sortingOrder, sortingBind, sortingSprings}: Props) => {
   const classes = homeStyles();
 
+  useEffect(() => {
+    setSortingItems(items);
+  }, []);
+
   return (
-    <Grid container className={classes.container}>
-      {items.map((item, index) => (
-        <MyBox key={index}>{item}</MyBox>
+    <Grid container className={classes.container} ref={gridRef}>
+      {sortingSprings.map((style, i) => (
+        <AnimatedBox key={i} bind={sortingBind(i)} style={style}>{items[i]}</AnimatedBox>
       ))}
     </Grid>
   );
+
 };
 
-export default compose(withCentering)(Home);
+export default compose(withSortableGrid)(Home);

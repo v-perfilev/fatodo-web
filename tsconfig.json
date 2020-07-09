@@ -12,6 +12,7 @@
     "sourceMap": true,
     "allowJs": true,
     "removeComments": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true
   }
 }

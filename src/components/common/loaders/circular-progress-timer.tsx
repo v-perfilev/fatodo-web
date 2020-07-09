@@ -3,12 +3,10 @@ import {FC} from 'react';
 import {Box, CircularProgress, CircularProgressProps, Typography} from '@material-ui/core';
 import {circularProgressTimerStyles} from './_styles';
 
-interface ComponentProps {
+type Props = CircularProgressProps & {
   value: number;
   maxValue: number;
-}
-
-type Props = ComponentProps & CircularProgressProps;
+};
 
 const CircularProgressTimer: FC<Props> = ({value, maxValue, ...props}: Props) => {
   const classes = circularProgressTimerStyles();

@@ -13,11 +13,7 @@ import {HomeIcon} from '../common/icons/home-icon';
 import LoadingButton from '../common/buttons/loading-button';
 import {EmailIcon} from '../common/icons/email-icon';
 
-export interface NotActivatedLocationState {
-  user: string;
-}
-
-type Props = RouteComponentProps<{}, any, NotActivatedLocationState> & RedirectTimerProps;
+type Props = RouteComponentProps<{}, any, {user: string}> & RedirectTimerProps;
 
 const NotActivated: FC<Props> = ({timer, resetTimer, history, location}: Props) => {
   const classes = staticPageStyles();
@@ -81,5 +77,5 @@ const NotActivated: FC<Props> = ({timer, resetTimer, history, location}: Props) 
 export default compose(
   withBackground('/images/background-1.jpg'),
   withRedirectTimer('/', 60),
-  withRouter
+  withRouter,
 )(NotActivated);

@@ -7,11 +7,9 @@ import {groupCardItemStyles} from './_styles';
 import {compose} from 'recompose';
 import {animated} from 'react-spring';
 
-interface ComponentProps {
+type Props = HTMLAttributes<any> & {
   item: GroupItem;
 }
-
-type Props = ComponentProps & HTMLAttributes<any>;
 
 const GroupCardItem: FC<Props> = ({item, style}: Props) => {
   const classes = groupCardItemStyles();

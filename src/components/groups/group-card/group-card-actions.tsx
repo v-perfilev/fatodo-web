@@ -6,7 +6,7 @@ import {MessageIcon} from '../../common/icons/message-icon';
 import GroupCardAvatars from './group-card-avatars';
 import {groupCardActionsStyles} from './_styles';
 
-interface Props {
+type Props = {
   users: string[];
   notificationCount: number;
   messageCount: number;

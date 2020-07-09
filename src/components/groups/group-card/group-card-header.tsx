@@ -4,7 +4,7 @@ import {CardHeader, IconButton, Typography} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../common/icons/dots-vertical-icon';
 import {groupCardHeaderStyles} from './_styles';
 
-interface Props {
+type Props = {
   title: string;
 }
 

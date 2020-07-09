@@ -4,7 +4,7 @@ import {TEST_GROUP} from './_constants';
 import GroupGridContainer from './group-grid/group-grid-container';
 import {Button} from '@material-ui/core';
 
-const initGroups = Array.from(Array(5).keys()).map((value) => {
+const initGroups = Array.from(Array(5).keys()).map(() => {
   return TEST_GROUP;
 });
 
@@ -16,7 +16,7 @@ const Groups: FC = () => {
     setGroups(initGroups);
   }, []);
 
-  const toggleMode = (): void => setMode((prevState) => prevState === 'normal' ? 'dnd' : 'normal');
+  const toggleMode = (): void => setMode((prevState) => (prevState === 'normal' ? 'dnd' : 'normal'));
 
   return (
     <>

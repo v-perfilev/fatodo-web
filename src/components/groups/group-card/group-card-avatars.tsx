@@ -4,9 +4,10 @@ import {Avatar, Box, Typography} from '@material-ui/core';
 import {groupCardAvatarsStyles} from './_styles';
 import {AVATARS_IN_GROUP_CARD} from '../_constants';
 
-interface Props {
+type Props = {
   users: string[];
 }
+
 const GroupCardAvatars: FC<Props> = ({users}: Props) => {
   const classes = groupCardAvatarsStyles();
 

@@ -8,12 +8,10 @@ import LanguageSelect from '../common/language-select';
 import VerticalMenu from './vertical-menu';
 import {sidebarMenuStyles} from './_styles';
 
-interface ComponentProps {
+type Props = {
   show: boolean;
   onToggle: () => void;
 }
-
-type Props = ComponentProps;
 
 const SidebarMenu: FC<Props> = ({show, onToggle}: Props) => {
   const classes = sidebarMenuStyles();
@@ -35,4 +33,4 @@ const SidebarMenu: FC<Props> = ({show, onToggle}: Props) => {
   );
 };
 
-export default compose<ComponentProps>(withTranslation())(SidebarMenu);
+export default compose(withTranslation())(SidebarMenu);

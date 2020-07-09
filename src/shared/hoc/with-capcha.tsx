@@ -2,7 +2,7 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
 import {useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 
-export interface CaptchaProps {
+export type CaptchaProps = {
   token: string;
 }
 
