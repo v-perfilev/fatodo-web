@@ -3,14 +3,12 @@ import {FC, HTMLAttributes} from 'react';
 import {Box} from '@material-ui/core';
 import GroupCardContent from './group-card-content';
 import {groupCardBodyStyles} from './_styles';
-import {Group} from '../_types';
+import {GroupProps, GroupSpringProps} from '../_types';
 import GroupCardActions from './group-card-actions';
 import {compose} from 'recompose';
 import {animated} from 'react-spring';
 
-type Props = HTMLAttributes<any> & {
-  group: Group;
-}
+type Props = HTMLAttributes<any> & GroupProps;
 
 const GroupCardBody: FC<Props> = ({group, style}: Props) => {
   const classes = groupCardBodyStyles();

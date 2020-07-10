@@ -1,29 +1,25 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {groupGridContainerStyles} from './_styles';
 import {Grid} from '@material-ui/core';
-import {Group} from '../_types';
+import {defaultSize, Group, Size} from '../_types';
 import GroupGridItem from './group-grid-item';
 import {useSpring, useTrail} from 'react-spring';
 import {ANIMATION_DURATION, CARD_HEADER_HEIGHT, CARD_RATIO} from '../_constants';
-import {compose} from 'recompose';
-import withSizes, {SizeProps} from '../../../shared/hoc/with-sizes';
 
-type Props = SizeProps & {
+type Props = {
   groups: Group[];
   mode: string;
 };
 
-const GroupGridContainer: FC<Props> = ({gridRef, groups, mode}: Props) => {
+const GroupGridContainer: FC<Props> = ({groups, mode}: Props) => {
   const classes = groupGridContainerStyles();
-
-  const cardSize = {width: 100, height: 100};
-
+  const [cardWidth, setCardWidth] = useState(0);
   const isNormalMode = mode === 'normal';
 
   const heightSpring = useSpring({
     delay: isNormalMode ? 0 : ANIMATION_DURATION,
-    height: isNormalMode && cardSize.width ? cardSize.width * CARD_RATIO : CARD_HEADER_HEIGHT,
+    height: isNormalMode && cardWidth ? cardWidth * CARD_RATIO : CARD_HEADER_HEIGHT,
     config: {duration: ANIMATION_DURATION},
   });
 
@@ -40,17 +36,20 @@ const GroupGridContainer: FC<Props> = ({gridRef, groups, mode}: Props) => {
   });
 
   return (
-    <Grid container className={classes.container} ref={gridRef}>
+    <Grid container className={classes.container}>
       {gridTrail.map((style, index) => (
         <GroupGridItem
           key={index}
-          style={style}
+          index={index}
           group={groups[index]}
-          {...{heightSpring, opacitySpring}}
+          setCardWidth={setCardWidth}
+          heightSpring={heightSpring}
+          opacitySpring={opacitySpring}
+          style={style}
         />
       ))}
     </Grid>
   );
 };
 
-export default compose(withSizes)(GroupGridContainer);
+export default GroupGridContainer;

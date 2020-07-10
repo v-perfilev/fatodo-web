@@ -73,6 +73,7 @@
     "react-hot-loader": "^4.12.20",
     "react-i18next": "^11.4.0",
     "react-redux": "^7.2.0",
+    "react-resize-detector": "^5.0.6",
     "react-router-dom": "^5.1.2",
     "react-spring": "^9.0.0-rc.3",
     "react-use-gesture": "^8.0.0-alpha.2",
