@@ -11,7 +11,7 @@ type Props = {
   headerText: string;
   headerIcon?: ReactNode;
   content: ReactNode;
-}
+};
 
 const Modal: FC<Props> = ({isOpen, toggle, headerText, headerIcon, content}: Props) => {
   const classes = modalStyles();

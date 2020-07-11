@@ -10,7 +10,7 @@ type Props = {
   users: string[];
   notificationCount: number;
   messageCount: number;
-}
+};
 
 const GroupCardActions: FC<Props> = ({users, notificationCount, messageCount}: Props) => {
   const classes = groupCardActionsStyles();

@@ -3,7 +3,7 @@ import {FC, useEffect, useState} from 'react';
 import {TEST_GROUP} from './_constants';
 import GroupGridContainer from './group-grid/group-grid-container';
 
-const initGroups = Array.from(Array(5).keys()).map((value) => {
+const initGroups = Array.from(Array(5).keys()).map(() => {
   return TEST_GROUP;
 });
 

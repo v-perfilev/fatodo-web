@@ -6,7 +6,7 @@ import {AVATARS_IN_GROUP_CARD} from '../_constants';
 
 type Props = {
   users: string[];
-}
+};
 
 const GroupCardAvatars: FC<Props> = ({users}: Props) => {
   const classes = groupCardAvatarsStyles();

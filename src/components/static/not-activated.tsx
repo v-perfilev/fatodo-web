@@ -77,5 +77,5 @@ const NotActivated: FC<Props> = ({timer, resetTimer, history, location}: Props) 
 export default compose(
   withBackground('/images/background-1.jpg'),
   withRedirectTimer('/', 60),
-  withRouter,
+  withRouter
 )(NotActivated);

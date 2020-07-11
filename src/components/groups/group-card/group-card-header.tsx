@@ -6,7 +6,7 @@ import {groupCardHeaderStyles} from './_styles';
 
 type Props = {
   title: string;
-}
+};
 
 const GroupCardHeader: FC<Props> = ({title}: Props) => {
   const classes = groupCardHeaderStyles();

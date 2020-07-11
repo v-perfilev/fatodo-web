@@ -14,8 +14,11 @@ const GroupCardBody: FC<Props> = ({group}: Props) => {
   return (
     <Box className={classes.body}>
       <GroupCardContent items={group.items} />
-      <GroupCardActions users={group.users} messageCount={group.messageCount}
-                        notificationCount={group.notificationCount} />
+      <GroupCardActions
+        users={group.users}
+        messageCount={group.messageCount}
+        notificationCount={group.notificationCount}
+      />
     </Box>
   );
 };

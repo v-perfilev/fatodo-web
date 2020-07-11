@@ -6,7 +6,7 @@ import {Box} from '@material-ui/core';
 
 type Props = {
   password: string;
-}
+};
 
 const PasswordStrengthBar: FC<Props> = ({password}: Props) => {
   const classes = passwordStrengthBarStyles();

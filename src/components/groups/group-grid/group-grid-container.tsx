@@ -14,9 +14,9 @@ const GroupGridContainer: FC<Props> = ({groups}: Props) => {
 
   return (
     <Grid container className={classes.container}>
-      {groups.map((group, i) =>
-        <GroupGridItem key={i} group={group} />,
-      )}
+      {groups.map((group, i) => (
+        <GroupGridItem key={i} group={group} />
+      ))}
     </Grid>
   );
 };

@@ -23,9 +23,11 @@ import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 const mapDispatchToProps = {enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = FormikProps<any> & ConnectedProps<typeof connector> & CaptchaProps & {
-  onSuccess: () => void;
-};
+type Props = FormikProps<any> &
+  ConnectedProps<typeof connector> &
+  CaptchaProps & {
+    onSuccess: () => void;
+  };
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -124,10 +126,4 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose(
-  withTranslation(),
-  withCaptchaProvider,
-  withCaptcha,
-  connector,
-  formik,
-)(RegistrationForm);
+export default compose(withTranslation(), withCaptchaProvider, withCaptcha, connector, formik)(RegistrationForm);

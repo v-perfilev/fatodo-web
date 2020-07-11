@@ -9,7 +9,7 @@ type Props = {
   transparent?: boolean;
   hide?: boolean;
   center?: boolean;
-}
+};
 
 const ProgressIndicator: FC<Props> = ({transparent, hide, center, ...props}: Props) => {
   const classes = progressIndicatorStyles();
@@ -20,7 +20,7 @@ const ProgressIndicator: FC<Props> = ({transparent, hide, center, ...props}: Pro
       className={classNames(
         {[classes.center]: !!center},
         {[classes.transparent]: !!transparent},
-        {[classes.hide]: !!hide},
+        {[classes.hide]: !!hide}
       )}
     >
       {component}

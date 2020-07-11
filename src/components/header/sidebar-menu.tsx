@@ -11,7 +11,7 @@ import {sidebarMenuStyles} from './_styles';
 type Props = {
   show: boolean;
   onToggle: () => void;
-}
+};
 
 const SidebarMenu: FC<Props> = ({show, onToggle}: Props) => {
   const classes = sidebarMenuStyles();

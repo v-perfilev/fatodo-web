@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom';
 export type RedirectTimerProps = {
   timer: number;
   resetTimer: () => void;
-}
+};
 
 const withRedirectTimer = (redirectLink = '/', timerInitValue = 50) => (
   Component: ComponentType<RedirectTimerProps>

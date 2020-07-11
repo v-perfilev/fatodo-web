@@ -1,14 +1,25 @@
 import * as React from 'react';
-import {ComponentType, CSSProperties, FC, MutableRefObject, ReactElement, useEffect, useRef, useState} from 'react';
+import {
+  ComponentType,
+  CSSProperties,
+  FC,
+  MutableRefObject,
+  ReactElement,
+  RefObject,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import {UseSpringProps, useSprings} from 'react-spring';
 import {useDrag} from 'react-use-gesture';
 import {clamp} from 'lodash-es';
 import move from 'lodash-move';
+import {useResize} from '../hooks/use-resize';
 
 type SortingSize = {
   width: number;
   height: number;
-}
+};
 
 const defaultSize: Readonly<SortingSize> = {
   width: 1,
@@ -18,7 +29,7 @@ const defaultSize: Readonly<SortingSize> = {
 type SortingSizes = {
   container: SortingSize;
   item: SortingSize;
-}
+};
 
 const defaultSortingSizes: Readonly<SortingSizes> = {
   container: defaultSize,
@@ -35,29 +46,25 @@ interface StyleArgs {
 }
 
 export type SortingProps = {
+  sortingRef: RefObject<any>;
   setSortingItems: (items: any[]) => void;
   sortingOrder: MutableRefObject<number[]>;
   sortingSprings: CSSProperties[];
   sortingBind: (...any) => void;
-  setSortingSizes: (sizes: SortingSizes) => void;
-}
+};
 
 const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props): ReactElement => {
   const order = useRef(null);
+  const ref = useRef(null);
   const [items, setItems] = useState([]);
   const [sizes, setSizes] = useState<SortingSizes>(defaultSortingSizes);
-
-  useEffect(() => {
-    order.current = items.map((_, index) => index);
-    setSprings(calculateStyle({indexOrder: order.current}));
-    console.log(sizes);
-  }, [items, sizes]);
+  const resize = useResize();
 
   const calculateStyle = (args: StyleArgs) => (index): UseSpringProps<any> => {
     const {indexOrder, down, originalIndex, currentIndex, x, y} = args;
     const colCount = sizes.container.width / sizes.item.width;
-    const calculateX = (index) => index % colCount * sizes.item.width;
-    const calculateY = (index) => Math.floor(index / colCount) * sizes.item.height;
+    const calculateX = (index): number => (index % colCount) * sizes.item.width;
+    const calculateY = (index): number => Math.floor(index / colCount) * sizes.item.height;
     if (down && index === originalIndex) {
       const xOffset = calculateX(currentIndex) + x;
       const yOffset = calculateY(currentIndex) + y;
@@ -89,17 +96,31 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
     if (!down) order.current = newOrder;
   });
 
+  useEffect(() => {
+    const containerRef = ref.current;
+    const itemRef = ref.current.childNodes[0];
+    if (containerRef && itemRef) {
+      setSizes({
+        container: {width: containerRef.clientWidth, height: containerRef.clientHeight},
+        item: {width: itemRef.clientWidth, height: itemRef.clientHeight},
+      });
+    }
+  }, [ref, resize]);
+
+  useEffect(() => {
+    order.current = items.map((_, index) => index);
+    setSprings(calculateStyle({indexOrder: order.current}));
+  }, [items, sizes]);
+
   const sortingProps = {
+    sortingRef: ref,
     setSortingItems: setItems,
     sortingOrder: order,
     sortingSprings: springs,
     sortingBind: bind,
-    setSortingSizes: setSizes,
   };
 
-  return (
-    <Component {...sortingProps} {...props} />
-  );
+  return <Component {...sortingProps} {...props} />;
 };
 
 export default withSortableGrid;

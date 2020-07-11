@@ -4,7 +4,7 @@ import {useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 
 export type CaptchaProps = {
   token: string;
-}
+};
 
 const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (props): ReactElement => {
   const {executeRecaptcha} = useGoogleReCaptcha();

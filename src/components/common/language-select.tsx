@@ -9,7 +9,7 @@ import {sidebarMenuStyles} from '../header/_styles';
 
 type Props = {
   list?: boolean;
-}
+};
 
 const LanguageSelect: FC<Props> = ({list}: Props) => {
   const classes = sidebarMenuStyles();

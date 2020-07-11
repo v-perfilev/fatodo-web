@@ -5,7 +5,7 @@ import {SnackbarProvider} from 'notistack';
 
 type Props = {
   children: ReactNode;
-}
+};
 
 export const NotificationProvider: FC<Props> = ({children}: Props) => {
   const classes = notificationProviderStyles();
