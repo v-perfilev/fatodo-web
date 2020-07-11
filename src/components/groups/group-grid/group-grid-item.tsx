@@ -2,19 +2,19 @@ import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {Grid} from '@material-ui/core';
 import {groupGridItemStyles} from './_styles';
-import {GroupProps, GroupSpringProps} from '../_types';
+import {GroupProps} from '../_types';
 import GroupCard from '../group-card/group-card';
 import {animated} from 'react-spring';
 import {compose} from 'recompose';
 
-type Props = HTMLAttributes<any> & GroupProps & GroupSpringProps;
+type Props = HTMLAttributes<any> & GroupProps;
 
-const GroupGridItem: FC<Props> = ({style, heightSpring, ...props}: Props) => {
+const GroupGridItem: FC<Props> = ({group, style}: Props) => {
   const classes = groupGridItemStyles();
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.item} style={style}>
-      <GroupCard {...props} style={heightSpring}/>
+      <GroupCard group={group} />
     </Grid>
   );
 };

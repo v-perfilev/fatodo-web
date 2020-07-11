@@ -9,7 +9,7 @@ import {animated} from 'react-spring';
 
 type Props = HTMLAttributes<any> & {
   item: GroupItem;
-}
+};
 
 const GroupCardItem: FC<Props> = ({item, style}: Props) => {
   const classes = groupCardItemStyles();
