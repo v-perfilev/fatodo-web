@@ -55,7 +55,7 @@ const Home: FC<Props> = (props: Props) => {
   return (
     <Grid container className={classes.container} ref={sortingRef}>
       {sortingSprings.map((style, i) => (
-        <AnimatedBox key={i} bind={sortingBind(i)} style={style}>
+        <AnimatedBox key={i} style={style} bind={sortingBind(i)}>
           {items[i]}
         </AnimatedBox>
       ))}

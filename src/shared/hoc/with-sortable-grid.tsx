@@ -98,7 +98,7 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
 
   useEffect(() => {
     const containerRef = ref.current;
-    const itemRef = ref.current.childNodes[0];
+    const itemRef = ref.current && ref.current.childNodes ? ref.current.childNodes[0] : null;
     if (containerRef && itemRef) {
       setSizes({
         container: {width: containerRef.clientWidth, height: containerRef.clientHeight},
