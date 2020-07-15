@@ -14,14 +14,14 @@ type Props = SortingProps & {
 const GroupPreviewGridContainer: FC<Props> = (props: Props) => {
   const classes = groupPreviewGridContainerStyles();
   const {groups} = props;
-  const {sortingRef, setSortingItems, sortingBind, sortingSprings} = props;
+  const {sortingRef, setSortingItems, sortingBind, sortingSprings, sortingHeight} = props;
 
   useEffect(() => {
     setSortingItems(groups);
   }, [props.groups]);
 
   return (
-    <Grid container className={classes.container} ref={sortingRef}>
+    <Grid container className={classes.container} style={{height: sortingHeight}} ref={sortingRef}>
       {groups.map((group, i) => (
         <GroupPreviewGridItem key={i} group={group} style={sortingSprings[i]} bind={sortingBind(i)} />
       ))}

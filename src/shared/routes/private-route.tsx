@@ -13,9 +13,9 @@ const mapStateToProps = (state: RootState): {authState: AuthState} => ({authStat
 const mapDispatchToProps = {enqueueSnackbar};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type ComposedProps = ConnectedProps<typeof connector> & RouteProps;
+type Props = ConnectedProps<typeof connector> & RouteProps;
 
-const PrivateRoute: FC<RouteProps> = (routeProps: RouteProps, {authState, enqueueSnackbar}: ComposedProps) => {
+const PrivateRoute: FC<RouteProps> = (routeProps: RouteProps, {authState, enqueueSnackbar}: Props) => {
   const {isAuthenticated} = authState;
   const {t} = useTranslation();
 

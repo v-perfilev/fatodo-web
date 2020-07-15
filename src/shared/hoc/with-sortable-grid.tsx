@@ -7,6 +7,7 @@ import {
   ReactElement,
   RefObject,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from 'react';
@@ -43,6 +44,7 @@ interface StyleArgs {
   currentIndex?: number;
   x?: number;
   y?: number;
+  immediate?: boolean;
 }
 
 export type SortingProps = {
@@ -62,11 +64,11 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
   const [height, setHeight] = useState(0);
   const resize = useResize();
 
-  const colCount = sizes.container.width / sizes.item.width;
-  const rowCount = Math.ceil(items.length / colCount);
+  const colCount = useMemo(() => sizes.container.width / sizes.item.width, [sizes]);
+  const rowCount = useMemo(() => Math.ceil(items.length / colCount), [sizes]);
 
   const calculateStyle = (args: StyleArgs) => (index): UseSpringProps<any> => {
-    const {indexOrder, down, originalIndex, currentIndex, x, y} = args;
+    const {indexOrder, down, originalIndex, currentIndex, x, y, immediate} = args;
     const calculateX = (index): number => (index % colCount) * sizes.item.width;
     const calculateY = (index): number => Math.floor(index / colCount) * sizes.item.height;
     if (down && index === originalIndex) {
@@ -76,7 +78,7 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
     } else {
       const xOffset = calculateX(indexOrder.indexOf(index));
       const yOffset = calculateY(indexOrder.indexOf(index));
-      return {transform: `translate3d(${xOffset}px,${yOffset}px,0)`, zIndex: 0, immediate: false};
+      return {transform: `translate3d(${xOffset}px,${yOffset}px,0)`, zIndex: 0, immediate: immediate};
     }
   };
 
@@ -111,7 +113,7 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
 
   useEffect(() => {
     order.current = items.map((_, index) => index);
-    setSprings(calculateStyle({indexOrder: order.current}));
+    setSprings(calculateStyle({indexOrder: order.current, immediate: true}));
     setHeight(sizes.item.height * rowCount);
   }, [items, sizes]);
 

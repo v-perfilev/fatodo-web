@@ -1,67 +1,48 @@
 import * as React from 'react';
-import {FC, useEffect} from 'react';
-import {compose} from 'recompose';
-import {Box, Grid} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
-import {animated} from 'react-spring';
-import withSortableGrid, {SortingProps} from '../shared/hoc/with-sortable-grid';
+import {FC} from 'react';
+import {Box, Container, Typography} from '@material-ui/core';
 
-const items = Array.from(new Array(9), (val, index) => 'Test item ' + (index + 1));
-
-const homeStyles = makeStyles(() => ({
-  container: {
-    position: 'relative',
-  },
-  item: {
-    position: 'absolute',
-    boxSizing: 'border-box',
-    width: '100%',
-    height: 150,
-    padding: 10,
-  },
-  box: {
-    border: '1px solid red',
-    display: 'flex',
-    height: '100%',
-    flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: 'grey',
-    userSelect: 'none',
-    cursor: 'pointer',
-  },
-}));
-
-const CustomBox: FC<{bind; style; children}> = ({bind, style, children}: any) => {
-  const classes = homeStyles();
+const Home: FC = () => {
   return (
-    <Grid item xs={3} {...bind} className={classes.item} style={style}>
-      <Box className={classes.box}>{children}</Box>
-    </Grid>
+    <Box style={{height: 2000}}>
+      <Container>
+        <Typography>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tempor porttitor nunc. Nam neque sapien, semper
+          sit amet dignissim tempus, porttitor ut orci. Vivamus et tortor bibendum, viverra nulla non, bibendum leo.
+          Nunc diam sapien, congue ac suscipit in, malesuada eget ligula. Suspendisse eget laoreet augue. Nunc sed ante
+          sit amet risus vestibulum aliquet. Vivamus pellentesque nisi eu leo bibendum congue. Nulla vestibulum neque
+          sit amet urna placerat, a tempor ipsum laoreet.
+        </Typography>
+        <Typography>
+          Nunc sit amet neque eleifend, ultrices eros aliquam, condimentum nisi. Phasellus elit dolor, tincidunt sed
+          nisi ac, lobortis fermentum ante. Proin rhoncus odio mauris, quis tempus urna placerat vel. In quis tortor at
+          turpis tempus sodales sit amet vel eros. Quisque id velit purus. Sed ultricies mattis orci et maximus.
+          Suspendisse massa felis, faucibus ac nibh in, vulputate malesuada augue.
+        </Typography>
+        <Typography>
+          Vestibulum at aliquam massa. Praesent in accumsan lectus. Ut ultricies risus felis, eu consectetur ante
+          elementum a. Integer accumsan congue dui. Proin vel semper velit. Proin vitae tempor massa, a mollis ex. Morbi
+          quis ultricies turpis. Vivamus mi purus, pellentesque a metus ac, porta vestibulum ipsum. Integer aliquet
+          libero ac magna blandit, id interdum tortor lacinia. Aliquam sit amet aliquam orci. Curabitur vel ex suscipit,
+          dictum velit eget, convallis ante.
+        </Typography>
+        <Typography>
+          In eu dapibus augue. Etiam faucibus massa lacus, et rutrum ligula venenatis quis. Donec a erat magna. Aliquam
+          erat volutpat. Sed quam est, convallis ac dolor quis, eleifend bibendum ipsum. Pellentesque eget varius purus.
+          Donec sit amet sollicitudin leo, dapibus vestibulum orci. Donec pulvinar metus non scelerisque commodo. Etiam
+          scelerisque nunc eget tellus accumsan, vitae convallis nisl fringilla. Nulla facilisi. Aliquam quis odio vitae
+          mi luctus ultrices. Fusce varius pharetra feugiat. Vivamus lacinia est ac tortor scelerisque, at maximus est
+          tristique. Sed scelerisque risus ac dictum volutpat. Donec a erat id elit eleifend dictum eget at lacus.
+        </Typography>
+        <Typography>
+          Mauris velit nunc, volutpat nec odio iaculis, tempus molestie odio. Curabitur luctus vel eros at tempor.
+          Pellentesque eu elit et enim rutrum sodales. Nullam lectus mauris, bibendum convallis rhoncus at, sagittis a
+          lorem. Ut enim tellus, posuere tincidunt porttitor eget, imperdiet a tellus. Suspendisse mi nunc, euismod a
+          aliquet at, molestie in nibh. Donec ac libero nec risus ornare fermentum. Cras iaculis auctor fermentum.
+        </Typography>
+      </Container>
+    </Box>
   );
 };
 
-const AnimatedBox = compose(animated)(CustomBox);
-
-type Props = SortingProps;
-
-const Home: FC<Props> = (props: Props) => {
-  const classes = homeStyles();
-  const {sortingRef, setSortingItems, sortingSprings, sortingBind, sortingHeight} = props;
-
-  useEffect(() => {
-    setSortingItems(items);
-  }, []);
-
-  return (
-    <Grid container className={classes.container} style={{height: sortingHeight}} ref={sortingRef}>
-      {sortingSprings.map((style, i) => (
-        <AnimatedBox key={i} style={style} bind={sortingBind(i)}>
-          {items[i]}
-        </AnimatedBox>
-      ))}
-    </Grid>
-  );
-};
-
-export default compose(withSortableGrid)(Home);
+export default Home;

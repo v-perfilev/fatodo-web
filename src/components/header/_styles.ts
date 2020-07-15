@@ -1,7 +1,11 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
+import {COLORS} from '../../shared/theme';
 
 export const headerStyles = makeStyles((theme: Theme) => ({
+  appbar: {
+    backgroundColor: COLORS.WHITE,
+  },
   toolbar: {
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
