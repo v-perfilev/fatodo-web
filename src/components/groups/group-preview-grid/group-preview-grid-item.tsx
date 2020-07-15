@@ -7,9 +7,11 @@ import {animated} from 'react-spring';
 import {compose} from 'recompose';
 import GroupPreviewCard from '../group-preview/group-preview-card';
 
-type Props = RefAttributes<any> & HTMLAttributes<any> & GroupProps & {
-  bind: (...any) => void,
-};
+type Props = RefAttributes<any> &
+  HTMLAttributes<any> &
+  GroupProps & {
+    bind: (...any) => void;
+  };
 
 const GroupPreviewGridItem: FC<Props> = ({group, style, bind, ref}: Props) => {
   const classes = groupPreviewGridItemStyles();

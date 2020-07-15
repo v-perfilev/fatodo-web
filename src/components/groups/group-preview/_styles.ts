@@ -1,7 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 import {COLORS} from '../../../shared/theme';
-import {CARD_HEADER_HEIGHT, ITEMS_IN_GROUP_CARD} from '../_constants';
+import {CARD_HEADER_HEIGHT} from '../_constants';
 
 export const groupPreviewCardStyles = makeStyles(() => ({
   card: {

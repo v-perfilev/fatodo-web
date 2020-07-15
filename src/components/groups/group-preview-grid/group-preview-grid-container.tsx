@@ -9,9 +9,9 @@ import GroupPreviewGridItem from './group-preview-grid-item';
 
 type Props = SortingProps & {
   groups: Group[];
-}
+};
 
-const GroupPreviewGridContainer: FC<Props> = (props) => {
+const GroupPreviewGridContainer: FC<Props> = (props: Props) => {
   const classes = groupPreviewGridContainerStyles();
   const {groups} = props;
   const {sortingRef, setSortingItems, sortingBind, sortingSprings} = props;
