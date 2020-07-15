@@ -51,6 +51,7 @@ export type SortingProps = {
   sortingOrder: MutableRefObject<number[]>;
   sortingSprings: CSSProperties[];
   sortingBind: (...any) => void;
+  sortingHeight: number;
 };
 
 const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props): ReactElement => {
@@ -58,11 +59,14 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
   const ref = useRef(null);
   const [items, setItems] = useState([]);
   const [sizes, setSizes] = useState<SortingSizes>(defaultSortingSizes);
+  const [height, setHeight] = useState(0);
   const resize = useResize();
+
+  const colCount = sizes.container.width / sizes.item.width;
+  const rowCount = Math.ceil(items.length / colCount);
 
   const calculateStyle = (args: StyleArgs) => (index): UseSpringProps<any> => {
     const {indexOrder, down, originalIndex, currentIndex, x, y} = args;
-    const colCount = sizes.container.width / sizes.item.width;
     const calculateX = (index): number => (index % colCount) * sizes.item.width;
     const calculateY = (index): number => Math.floor(index / colCount) * sizes.item.height;
     if (down && index === originalIndex) {
@@ -77,8 +81,6 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
   };
 
   const calculateNewIndex = (count, index, x, y): number => {
-    const colCount = sizes.container.width / sizes.item.width;
-    const rowCount = Math.ceil(count / colCount);
     const currentCol = index % colCount;
     const currentRow = Math.floor(index / colCount);
     const newCol = clamp(Math.round((currentCol * sizes.item.width + x) / sizes.item.width), 0, colCount - 1);
@@ -110,6 +112,7 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
   useEffect(() => {
     order.current = items.map((_, index) => index);
     setSprings(calculateStyle({indexOrder: order.current}));
+    setHeight(sizes.item.height * rowCount);
   }, [items, sizes]);
 
   const sortingProps = {
@@ -118,6 +121,7 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
     sortingOrder: order,
     sortingSprings: springs,
     sortingBind: bind,
+    sortingHeight: height,
   };
 
   return <Component {...sortingProps} {...props} />;

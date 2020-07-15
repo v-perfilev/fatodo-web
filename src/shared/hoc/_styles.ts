@@ -62,7 +62,7 @@ export const backgroundStyles = makeStyles(() => ({
 
 export const developmentRibbonStyles = makeStyles((theme: Theme) => ({
   root: {
-    zIndex: 10000,
+    zIndex: 100000,
     position: 'absolute',
     top: 30,
     left: -100,

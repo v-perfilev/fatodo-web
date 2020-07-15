@@ -14,6 +14,7 @@ const homeStyles = makeStyles(() => ({
   },
   item: {
     position: 'absolute',
+    boxSizing: 'border-box',
     width: '100%',
     height: 150,
     padding: 10,
@@ -46,14 +47,14 @@ type Props = SortingProps;
 
 const Home: FC<Props> = (props: Props) => {
   const classes = homeStyles();
-  const {sortingRef, setSortingItems, sortingBind, sortingSprings} = props;
+  const {sortingRef, setSortingItems, sortingSprings, sortingBind, sortingHeight} = props;
 
   useEffect(() => {
     setSortingItems(items);
   }, []);
 
   return (
-    <Grid container className={classes.container} ref={sortingRef}>
+    <Grid container className={classes.container} style={{height: sortingHeight}} ref={sortingRef}>
       {sortingSprings.map((style, i) => (
         <AnimatedBox key={i} style={style} bind={sortingBind(i)}>
           {items[i]}

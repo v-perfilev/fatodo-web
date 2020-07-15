@@ -54,7 +54,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
             <SignUpIcon className={classes.icon} />
           </ListItemIcon>
           <ListItemText>
-            <Trans i18nKey={'header.registration'} />
+            <Trans i18nKey={'header.register'} />
           </ListItemText>
         </ListItem>
       )}
