@@ -2,7 +2,7 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
 import {Box, Grid, Hidden} from '@material-ui/core';
 import {backgroundStyles} from './_styles';
-import Logo from '../../components/common/logo';
+import LogoWithText from '../../components/common/logo-with-text';
 import LanguageSelect from '../../components/common/language-select';
 
 const withBackground = (imgSrc: string) => (Component: ComponentType): FC => (props): ReactElement => {
@@ -13,7 +13,7 @@ const withBackground = (imgSrc: string) => (Component: ComponentType): FC => (pr
       <Grid item xs={12} md={6}>
         <Box className={classes.container}>
           <Box className={classes.header}>
-            <Logo />
+            <LogoWithText />
           </Box>
           <Box className={classes.body}>
             <Component {...props} />

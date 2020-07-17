@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useState} from 'react';
 import {AppBar, Box, Hidden, IconButton, Slide, Toolbar, useScrollTrigger} from '@material-ui/core';
-import Logo from '../common/logo';
+import LogoWithText from '../common/logo-with-text';
 import HorizontalMenu from './horizontal-menu';
 import {headerStyles} from './_styles';
 import {MenuIcon} from '../common/icons/menu-icon';
@@ -22,7 +22,7 @@ const Header: FC<Props> = ({flexible}: Props) => {
     <Slide appear={false} in={!flexible || !trigger}>
       <AppBar elevation={3} className={classes.appbar}>
         <Toolbar className={classes.toolbar}>
-          <Logo />
+          <LogoWithText />
           <Box className={classes.grow} />
           <Hidden smDown>
             <HorizontalMenu />

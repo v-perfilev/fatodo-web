@@ -1,12 +1,15 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 import {COLORS} from '../../shared/theme';
+import {HEADER_HEIGHT} from './_constants';
 
 export const headerStyles = makeStyles((theme: Theme) => ({
   appbar: {
     backgroundColor: COLORS.WHITE,
   },
   toolbar: {
+    height: HEADER_HEIGHT,
+    minHeight: HEADER_HEIGHT,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
     '& > *': {

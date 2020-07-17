@@ -21,11 +21,13 @@ const LanguageSelect: FC<Props> = ({list}: Props) => {
 
   const handleClose = (): void => setAnchorElement(null);
 
-  const getNameForCode = (code): string => {
+  const getShortNameByCode = (code, short?): string => {
     const getName = (c): string => LANGUAGES.find((l) => l.code === c)?.name;
-    return LanguageUtils.getLanguages().includes(code)
+    const getShortName = (s): string => s.substr(0, 2);
+    const name = LanguageUtils.getLanguages().includes(code)
       ? getName(code)
       : getName(LanguageUtils.getOptions().fallbackLng);
+    return short ? getShortName(name) : name;
   };
 
   const changeLanguage = (code): void => {
@@ -41,12 +43,12 @@ const LanguageSelect: FC<Props> = ({list}: Props) => {
             <ListItemIcon>
               <LanguageIcon className={classes.icon} />
             </ListItemIcon>
-            <ListItemText>{getNameForCode(LanguageUtils.getLanguage())}</ListItemText>
+            <ListItemText>{getShortNameByCode(LanguageUtils.getLanguage())}</ListItemText>
           </ListItem>
         </List>
       ) : (
         <Button onClick={handleClick} color="primary" startIcon={<LanguageIcon />}>
-          {getNameForCode(LanguageUtils.getLanguage())}
+          {getShortNameByCode(LanguageUtils.getLanguage())}
           <ArrowDownIcon />
         </Button>
       )}

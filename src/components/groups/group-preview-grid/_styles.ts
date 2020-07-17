@@ -3,6 +3,7 @@ import {Theme} from '@material-ui/core';
 
 export const groupPreviewGridContainerStyles = makeStyles((theme: Theme) => ({
   container: {
+    width: 'calc(100% - ' + theme.spacing(2) + 'px)',
     position: 'relative',
     margin: theme.spacing(1),
   },

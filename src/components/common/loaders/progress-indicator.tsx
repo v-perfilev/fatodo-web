@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, ReactElement} from 'react';
 import {Box, CircularProgress} from '@material-ui/core';
 import {progressIndicatorStyles} from './_styles';
-import classNames from 'classnames';
+import cx from 'classnames';
 
 type Props = {
   component?: ReactElement;
@@ -17,7 +17,7 @@ const ProgressIndicator: FC<Props> = ({transparent, hide, center, ...props}: Pro
 
   return (
     <Box
-      className={classNames(
+      className={cx(
         {[classes.center]: !!center},
         {[classes.transparent]: !!transparent},
         {[classes.hide]: !!hide}

@@ -64,7 +64,7 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
   const [height, setHeight] = useState(0);
   const resize = useResize();
 
-  const colCount = useMemo(() => sizes.container.width / sizes.item.width, [sizes]);
+  const colCount = useMemo(() => Math.round(sizes.container.width / sizes.item.width), [sizes]);
   const rowCount = useMemo(() => Math.ceil(items.length / colCount), [sizes]);
 
   const calculateStyle = (args: StyleArgs) => (index): UseSpringProps<any> => {
