@@ -1,7 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const logoStyles = makeStyles((theme: Theme) => ({
+export const logoStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     alignItems: 'center',

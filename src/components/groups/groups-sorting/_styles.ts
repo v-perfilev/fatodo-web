@@ -3,7 +3,7 @@ import {Theme} from '@material-ui/core';
 import {COLORS} from '../../../shared/theme';
 import {CARD_HEADER_HEIGHT} from '../_constants';
 
-export const groupPreviewCardStyles = makeStyles(() => ({
+export const groupSortingCardStyles = makeStyles(() => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
@@ -11,7 +11,7 @@ export const groupPreviewCardStyles = makeStyles(() => ({
   },
 }));
 
-export const groupPreviewCardHeaderStyles = makeStyles((theme: Theme) => ({
+export const groupSortingCardHeaderStyles = makeStyles((theme: Theme) => ({
   header: {
     height: CARD_HEADER_HEIGHT,
     flexShrink: 0,
@@ -27,5 +27,22 @@ export const groupPreviewCardHeaderStyles = makeStyles((theme: Theme) => ({
   caption: {
     fontSize: '1rem',
     color: COLORS.WHITE,
+  },
+}));
+
+export const groupSortingGridContainerStyles = makeStyles((theme: Theme) => ({
+  container: {
+    width: 'calc(100% - ' + theme.spacing(2) + 'px)',
+    position: 'relative',
+    margin: theme.spacing(1),
+  },
+}));
+
+export const groupSortingGridItemStyles = makeStyles((theme: Theme) => ({
+  item: {
+    position: 'absolute',
+    width: '100%',
+    padding: theme.spacing(1),
+    userSelect: 'none',
   },
 }));

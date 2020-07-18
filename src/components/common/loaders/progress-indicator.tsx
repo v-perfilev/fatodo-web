@@ -16,13 +16,7 @@ const ProgressIndicator: FC<Props> = ({transparent, hide, center, ...props}: Pro
   const component = !!props.component ? props.component : <CircularProgress color={'secondary'} />;
 
   return (
-    <Box
-      className={cx(
-        {[classes.center]: !!center},
-        {[classes.transparent]: !!transparent},
-        {[classes.hide]: !!hide}
-      )}
-    >
+    <Box className={cx({[classes.center]: !!center}, {[classes.transparent]: !!transparent}, {[classes.hide]: !!hide})}>
       {component}
     </Box>
   );

@@ -39,9 +39,11 @@ const Auth: FC<Props> = ({authState: {isAuthenticated}, match, history}: Props) 
     setTimeout(() => redirectToHome(), LOADER_TIMEOUT);
   }
 
+  const tabsStyle = {width: '100%'};
+
   return (
     <Box className={classes.root}>
-      <Tabs variant="fullWidth" textColor="primary" style={{width: '100%'}} value={activeTab} onChange={handleChange}>
+      <Tabs variant="fullWidth" textColor="primary" style={tabsStyle} value={activeTab} onChange={handleChange}>
         <Tab label={t('form:login.header')} />
         <Tab label={t('form:register.header')} />
       </Tabs>

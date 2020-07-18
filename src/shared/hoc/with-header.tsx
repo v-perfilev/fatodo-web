@@ -5,10 +5,11 @@ import {HEADER_HEIGHT} from '../../components/header/_constants';
 import {Box} from '@material-ui/core';
 
 const withHeader = (Component: ComponentType): FC => (props): ReactElement => {
+  const headerStyle = {height: HEADER_HEIGHT};
   return (
     <>
       <Header />
-      <Box style={{height: HEADER_HEIGHT}} />
+      <Box style={headerStyle} />
       <Component {...props} />
     </>
   );

@@ -21,8 +21,10 @@ const GroupCard: FC<Props> = ({group}: Props) => {
     setHeight(ref.current.clientWidth * CARD_RATIO);
   }, [sizes, ref]);
 
+  const cardStyle = {height: height};
+
   return (
-    <Card square elevation={3} className={classes.card} style={{height: height}} ref={ref}>
+    <Card square elevation={3} className={classes.card} style={cardStyle} ref={ref}>
       <GroupCardHeader title={group.title} />
       <GroupCardBody group={group} />
     </Card>

@@ -51,7 +51,7 @@ const GroupCardContent: FC<Props> = ({items}: Props) => {
     <CardContent className={classes.content}>
       <div className={classes.box} ref={ref}>
         {trail.map((style, index) => (
-          <GroupCardItem key={index} item={itemsToShow[index]} style={style} />
+          <GroupCardItem item={itemsToShow[index]} key={index} style={style} />
         ))}
       </div>
       {isMultiPage && (

@@ -1,5 +1,7 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import {COLORS} from '../theme';
+import {HEADER_HEIGHT} from '../../components/header/_constants';
+import {BOTTOM_DRAWER_HEIGHT, LEFT_DRAWER_WIDTH} from './_constants';
 
 export const centeringStyles = makeStyles(() => ({
   root: {
@@ -83,5 +85,60 @@ export const developmentRibbonStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     background: theme.palette.error.main,
     opacity: 0.7,
+  },
+}));
+
+const horizontalBreakpoint = 'xs';
+const verticalBreakpoint = 'sm';
+
+export const drawerMenuStyles = makeStyles((theme: Theme) => ({
+  root: {
+    width: '100%',
+    display: 'flex',
+    [theme.breakpoints.down(horizontalBreakpoint)]: {
+      flexDirection: 'column',
+    },
+    [theme.breakpoints.up(verticalBreakpoint)]: {
+      flexDirection: 'row',
+    },
+  },
+  drawer: {
+    zIndex: 100,
+    [theme.breakpoints.down(horizontalBreakpoint)]: {
+      height: BOTTOM_DRAWER_HEIGHT,
+    },
+    [theme.breakpoints.up(verticalBreakpoint)]: {
+      width: LEFT_DRAWER_WIDTH,
+    },
+  },
+  container: {
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(1),
+    [theme.breakpoints.down(horizontalBreakpoint)]: {
+      flexDirection: 'row',
+    },
+    [theme.breakpoints.up(verticalBreakpoint)]: {
+      flexDirection: 'column',
+    },
+    '& .MuiFab-root': {
+      margin: theme.spacing(1),
+      [theme.breakpoints.down(horizontalBreakpoint)]: {
+        width: 40,
+        height: 40,
+      },
+      [theme.breakpoints.up(verticalBreakpoint)]: {
+        width: 50,
+        height: 50,
+      },
+    },
+  },
+  logo: {
+    width: '100%',
+    height: HEADER_HEIGHT,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 }));

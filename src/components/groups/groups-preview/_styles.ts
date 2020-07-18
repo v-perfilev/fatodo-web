@@ -133,3 +133,15 @@ export const groupCardAvatarsStyles = makeStyles((theme: Theme) => ({
     color: COLORS.GREY,
   },
 }));
+
+export const groupGridContainerStyles = makeStyles((theme: Theme) => ({
+  container: {
+    padding: theme.spacing(1),
+  },
+}));
+
+export const groupGridItemStyles = makeStyles((theme: Theme) => ({
+  item: {
+    padding: theme.spacing(1),
+  },
+}));

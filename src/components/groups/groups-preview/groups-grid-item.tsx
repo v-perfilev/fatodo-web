@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {Grid} from '@material-ui/core';
-import {groupGridItemStyles} from './_styles';
 import {GroupProps} from '../_types';
-import GroupCard from '../group-card/group-card';
+import GroupCard from './group-card';
 import {animated} from 'react-spring';
 import {compose} from 'recompose';
+import {groupGridItemStyles} from './_styles';
 
 type Props = HTMLAttributes<any> & GroupProps;
 
-const GroupGridItem: FC<Props> = ({group, style}: Props) => {
+const GroupsGridItem: FC<Props> = ({group, style}: Props) => {
   const classes = groupGridItemStyles();
 
   return (
@@ -19,4 +19,4 @@ const GroupGridItem: FC<Props> = ({group, style}: Props) => {
   );
 };
 
-export default compose(animated)(GroupGridItem);
+export default compose(animated)(GroupsGridItem);

@@ -5,10 +5,11 @@ import {Box} from '@material-ui/core';
 import {HEADER_HEIGHT} from '../../components/header/_constants';
 
 const withFlexibleHeader = (Component: ComponentType): FC => (props): ReactElement => {
+  const headerSpacerStyle = {height: HEADER_HEIGHT};
   return (
     <>
       <Header flexible />
-      <Box style={{height: HEADER_HEIGHT}} />
+      <Box style={headerSpacerStyle} />
       <Component {...props} />
     </>
   );
