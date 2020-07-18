@@ -6,6 +6,8 @@ import {GroupItem} from '../_types';
 import {groupCardItemStyles} from './_styles';
 import {compose} from 'recompose';
 import {animated} from 'react-spring';
+import Truncate from 'react-truncate';
+
 
 type Props = HTMLAttributes<any> & {
   item: GroupItem;
@@ -18,7 +20,9 @@ const GroupCardItem: FC<Props> = ({item, style}: Props) => {
     <Box className={classes.item}>
       <Card square variant="outlined" className={classes.card} style={style}>
         <CheckIcon className={classes.icon} />
-        <Typography>{item.title}</Typography>
+        <Typography className={classes.typography}>
+          <Truncate>{item.title}</Truncate>
+        </Typography>
       </Card>
     </Box>
   );

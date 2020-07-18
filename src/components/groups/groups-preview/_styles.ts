@@ -88,6 +88,9 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.main,
     marginRight: theme.spacing(1),
   },
+  typography: {
+    width: '100%',
+  }
 }));
 
 export const groupCardActionsStyles = makeStyles((theme: Theme) => ({
