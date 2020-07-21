@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import {Card} from '@material-ui/core';
 import GroupSortingCardHeader from './group-sorting-card-header';
 import {groupSortingCardStyles} from './_styles';
 import {GroupProps} from '../_types';
+import {compose} from 'recompose';
 
 type Props = GroupProps;
 
@@ -17,4 +18,5 @@ const GroupSortingCard: FC<Props> = ({group}: Props) => {
   );
 };
 
-export default GroupSortingCard;
+
+export default compose(memo)(GroupSortingCard);

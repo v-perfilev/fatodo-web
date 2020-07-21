@@ -13,6 +13,10 @@ export enum COLORS {
   BLACK = '#222222',
 }
 
+export enum GRADIENT_COLORS {
+  YELLOW = 'linear-gradient(175deg, rgba(255,186,22,1) 30%, rgba(255,216,46,1) 90%)',
+}
+
 export const theme = createMuiTheme({
   palette: {
     type: 'light',

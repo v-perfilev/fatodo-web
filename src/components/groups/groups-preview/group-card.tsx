@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useEffect, useRef, useState} from 'react';
+import {FC, memo, useEffect, useRef, useState} from 'react';
 import {Card} from '@material-ui/core';
 import GroupCardHeader from './group-card-header';
 import {groupCardStyles} from './_styles';
@@ -7,6 +7,7 @@ import {GroupProps} from '../_types';
 import GroupCardBody from './group-card-body';
 import {useResize} from '../../../shared/hooks/use-resize';
 import {CARD_RATIO} from '../_constants';
+import {compose} from 'recompose';
 
 type Props = GroupProps;
 
@@ -31,4 +32,4 @@ const GroupCard: FC<Props> = ({group}: Props) => {
   );
 };
 
-export default GroupCard;
+export default compose(memo)(GroupCard);

@@ -9,7 +9,7 @@ import {compose} from 'recompose';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
 
-const initGroups = Array.from(Array(10).keys()).map(() => {
+const initGroups = Array.from(Array(30).keys()).map(() => {
   return TEST_GROUP;
 });
 

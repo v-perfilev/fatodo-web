@@ -4,6 +4,7 @@ import {Grid} from '@material-ui/core';
 import {Group} from '../_types';
 import GroupGridItem from './groups-grid-item';
 import {groupGridContainerStyles} from './_styles';
+import {useTrail} from 'react-spring';
 
 interface Props {
   groups: Group[];

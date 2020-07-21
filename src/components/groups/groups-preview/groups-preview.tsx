@@ -6,17 +6,18 @@ import {TEST_GROUP} from '../_constants';
 import {RotateIcon} from '../../common/icons/rotate-icon';
 import withDrawerMenu, {DrawerProps, DrawerSpacer} from '../../../shared/hoc/with-drawer-menu';
 import {compose} from 'recompose';
-import {RouteComponentProps} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
 import {GroupsRoutes} from '../_router';
 
-const initGroups = Array.from(Array(10).keys()).map(() => {
+const initGroups = Array.from(Array(30).keys()).map(() => {
   return TEST_GROUP;
 });
 
-type Props = DrawerProps & RouteComponentProps;
+type Props = DrawerProps;
 
-const GroupsPreview: FC<Props> = ({setMenu, history}: Props) => {
+const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
+  const history = useHistory();
   const [groups, setGroups] = useState([]);
 
   const redirectToGroupsSorting = (): void => history.push(Routes.GROUPS + GroupsRoutes.SORTING);
