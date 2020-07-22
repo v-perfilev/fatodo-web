@@ -90,7 +90,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
   },
   typography: {
     width: '100%',
-  }
+  },
 }));
 
 export const groupCardActionsStyles = makeStyles((theme: Theme) => ({

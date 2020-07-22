@@ -5,7 +5,7 @@ import {LANGUAGES} from '../../shared/i18n';
 import {LanguageIcon} from './icons/language-icon';
 import {ArrowDownIcon} from './icons/arrow-down-icon';
 import {LanguageUtils} from '../../shared/utils/language.utils';
-import {sidebarMenuStyles} from '../header/_styles';
+import {sidebarMenuStyles} from '../layout/header/_styles';
 
 type Props = {
   list?: boolean;

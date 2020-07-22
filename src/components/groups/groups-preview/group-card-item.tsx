@@ -8,7 +8,6 @@ import {compose} from 'recompose';
 import {animated} from 'react-spring';
 import Truncate from 'react-truncate';
 
-
 type Props = HTMLAttributes<any> & {
   item: GroupItem;
 };

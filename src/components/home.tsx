@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Container, Typography} from '@material-ui/core';
+import {compose} from 'recompose';
+import withHeader from '../shared/hoc/with-header';
 
 const Home: FC = () => {
   return (
@@ -43,4 +45,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default compose(withHeader)(Home);

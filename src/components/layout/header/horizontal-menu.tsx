@@ -1,19 +1,19 @@
-import {RootState} from '../../store';
+import {RootState} from '../../../store';
 import * as React from 'react';
 import {FC} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import {Box} from '@material-ui/core';
-import {logout} from '../../store/actions/auth.actions';
+import {logout} from '../../../store/actions/auth.actions';
 import {Trans, withTranslation} from 'react-i18next';
 import {horizontalMenuStyles} from './_styles';
-import {AuthState} from '../../store/rerducers/auth.reduser';
-import {LoginIcon} from '../common/icons/login-icon';
-import {LogoutIcon} from '../common/icons/logout-icon';
-import {SignUpIcon} from '../common/icons/signup-icon';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
+import {LoginIcon} from '../../common/icons/login-icon';
+import {LogoutIcon} from '../../common/icons/logout-icon';
+import {SignUpIcon} from '../../common/icons/signup-icon';
 import {compose} from 'recompose';
-import {Routes} from '../router';
-import LanguageSelect from '../common/language-select';
+import {Routes} from '../../router';
+import LanguageSelect from '../../common/language-select';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});

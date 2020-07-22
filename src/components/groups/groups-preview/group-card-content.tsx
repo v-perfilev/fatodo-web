@@ -44,7 +44,7 @@ const GroupCardContent: FC<Props> = ({items}: Props) => {
       delay: 50,
       opacity: 1,
       from: {opacity: 0},
-    },
+    }
   );
 
   return (
@@ -61,9 +61,7 @@ const GroupCardContent: FC<Props> = ({items}: Props) => {
           </Button>
           <Box className={classes.pageCount}>
             <Typography color="primary">
-              {Math.floor(firstShowedItem / ITEMS_IN_GROUP_CARD) + 1}
-              /
-              {Math.ceil(items.length / ITEMS_IN_GROUP_CARD)}
+              {Math.floor(firstShowedItem / ITEMS_IN_GROUP_CARD) + 1}/{Math.ceil(items.length / ITEMS_IN_GROUP_CARD)}
             </Typography>
           </Box>
           <Button variant="outlined" size="small" onClick={onDownClick} disabled={!isNotLastPage}>

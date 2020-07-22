@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC} from 'react';
 import {RootState} from '../../store';
 import {connect, ConnectedProps} from 'react-redux';
-import {AuthState} from '../../store/rerducers/auth.reduser';
+import {AuthState} from '../../store/rerducers/auth.reducer';
 import {Redirect, Route, RouteProps} from 'react-router-dom';
 import {compose} from 'recompose';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';

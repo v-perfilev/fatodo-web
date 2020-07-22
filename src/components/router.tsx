@@ -33,8 +33,8 @@ export enum Routes {
 
 const Router: FC = () => (
   <Switch>
-    <PublicRoute withHeader exact path={Routes.ROOT} component={Home} />
-    <PublicRoute withFlexibleHeader path={Routes.GROUPS} component={GroupRouter} />
+    <PublicRoute exact path={Routes.ROOT} component={Home} />
+    <PublicRoute path={Routes.GROUPS} component={GroupRouter} />
     {/*Auth Router*/}
     <PublicRoute path={Routes.LOGIN} component={Auth} />
     <PublicRoute path={Routes.REGISTRATION} component={Auth} />

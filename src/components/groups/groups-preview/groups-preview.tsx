@@ -4,27 +4,32 @@ import {Fab} from '@material-ui/core';
 import GroupsGridContainer from './groups-grid-container';
 import {TEST_GROUP} from '../_constants';
 import {RotateIcon} from '../../common/icons/rotate-icon';
-import withDrawerMenu, {DrawerProps, DrawerSpacer} from '../../../shared/hoc/with-drawer-menu';
 import {compose} from 'recompose';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
 import {GroupsRoutes} from '../_router';
+import {connect, ConnectedProps} from 'react-redux';
+import {clearMenu, setMenu} from '../../../store/actions/additional-menu.actions';
+import {AdditionalMenuSpacer} from '../../layout/additional-menu/additional-menu';
 
 const initGroups = Array.from(Array(30).keys()).map(() => {
   return TEST_GROUP;
 });
 
-type Props = DrawerProps;
+const mapDispatchToProps = {setMenu, clearMenu};
+const connector = connect(null, mapDispatchToProps);
 
-const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
+type Props = ConnectedProps<typeof connector>;
+
+const GroupsPreview: FC<Props> = ({setMenu, clearMenu}: Props) => {
   const history = useHistory();
   const [groups, setGroups] = useState([]);
 
   const redirectToGroupsSorting = (): void => history.push(Routes.GROUPS + GroupsRoutes.SORTING);
 
-  const Menu: FC = () => (
+  const menu = (
     <>
-      <DrawerSpacer />
+      <AdditionalMenuSpacer />
       <Fab color="primary" onClick={redirectToGroupsSorting}>
         <RotateIcon />
       </Fab>
@@ -33,10 +38,11 @@ const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
 
   useEffect(() => {
     setGroups(initGroups);
-    setMenu(Menu);
+    setMenu(menu);
+    return (): void => clearMenu();
   }, []);
 
   return <GroupsGridContainer groups={groups} />;
 };
 
-export default compose(withDrawerMenu)(GroupsPreview);
+export default compose(connector)(GroupsPreview);

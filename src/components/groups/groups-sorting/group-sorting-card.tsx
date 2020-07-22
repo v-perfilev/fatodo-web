@@ -18,5 +18,4 @@ const GroupSortingCard: FC<Props> = ({group}: Props) => {
   );
 };
 
-
 export default compose(memo)(GroupSortingCard);

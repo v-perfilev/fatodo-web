@@ -13,7 +13,7 @@ import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {LOADER_TIMEOUT, SOCIAL_LOGIN} from '../../constants';
 import SocialLogin from './social-buttons';
 import {RootState} from '../../store';
-import {AuthState} from '../../store/rerducers/auth.reduser';
+import {AuthState} from '../../store/rerducers/auth.reducer';
 import {connect, ConnectedProps} from 'react-redux';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});

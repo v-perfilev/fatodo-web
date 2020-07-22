@@ -10,7 +10,7 @@ import {authPageStyles} from './_styles';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import ResetPasswordForm from './reset-password-form';
 import {RootState} from '../../store';
-import {AuthState} from '../../store/rerducers/auth.reduser';
+import {AuthState} from '../../store/rerducers/auth.reducer';
 import {connect, ConnectedProps} from 'react-redux';
 import {LOADER_TIMEOUT} from '../../constants';
 

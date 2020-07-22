@@ -1,17 +1,17 @@
-import {RootState} from '../../store';
+import {RootState} from '../../../store';
 import * as React from 'react';
 import {FC} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
-import {logout} from '../../store/actions/auth.actions';
+import {logout} from '../../../store/actions/auth.actions';
 import {Trans, withTranslation} from 'react-i18next';
 import {sidebarMenuStyles} from './_styles';
-import {AuthState} from '../../store/rerducers/auth.reduser';
-import {LogoutIcon} from '../common/icons/logout-icon';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
+import {LogoutIcon} from '../../common/icons/logout-icon';
 import {compose} from 'recompose';
-import {Routes} from '../router';
-import {LoginIcon} from '../common/icons/login-icon';
-import {SignUpIcon} from '../common/icons/signup-icon';
+import {Routes} from '../../router';
+import {LoginIcon} from '../../common/icons/login-icon';
+import {SignUpIcon} from '../../common/icons/signup-icon';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});

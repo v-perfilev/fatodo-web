@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
-import Header from '../../components/header/header';
-import {HEADER_HEIGHT} from '../../components/header/_constants';
+import Header from '../../components/layout/header/header';
+import {HEADER_HEIGHT} from '../../components/layout/header/_constants';
 import {Box} from '@material-ui/core';
 
 const withHeader = (Component: ComponentType): FC => (props): ReactElement => {
-  const headerStyle = {height: HEADER_HEIGHT};
+  const headerSpacerStyle = {height: HEADER_HEIGHT};
   return (
     <>
       <Header />
-      <Box style={headerStyle} />
+      <Box style={headerSpacerStyle} />
       <Component {...props} />
     </>
   );

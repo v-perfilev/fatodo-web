@@ -5,6 +5,9 @@ import PageNotFound from '../static/page-not-found';
 import PublicRoute from '../../shared/routes/public-route';
 import GroupsPreview from './groups-preview/groups-preview';
 import GroupsSorting from './groups-sorting/groups-sorting';
+import {compose} from 'recompose';
+import withFlexibleHeader from '../../shared/hoc/with-flexible-header';
+import withAdditionalMenu from '../../shared/hoc/with-additional-menu';
 
 export enum GroupsRoutes {
   SORTING = '/sorting',
@@ -21,4 +24,4 @@ const GroupRouter: FC = () => {
   );
 };
 
-export default GroupRouter;
+export default compose(withFlexibleHeader, withAdditionalMenu)(GroupRouter);
