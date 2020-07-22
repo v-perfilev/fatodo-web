@@ -17,8 +17,8 @@ const GroupsSortingGridItem: FC<Props> = ({group, style, bind, ref}: Props) => {
   const classes = groupSortingGridItemStyles();
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.item} style={style} {...bind} ref={ref}>
-      <GroupSortingCard group={group} />
+    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.item} style={style} ref={ref}>
+      <GroupSortingCard group={group} bind={bind} />
     </Grid>
   );
 };

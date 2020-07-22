@@ -17,9 +17,10 @@ export const AdditionalMenuSpacer: FC = () => {
 const mapStateToProps = (state: RootState): AdditionalMenuState => state.additionalMenuState;
 const connector = connect(mapStateToProps);
 
-type Props = ConnectedProps<typeof connector> & RouteProps & {
-  bottom?: boolean;
-};
+type Props = ConnectedProps<typeof connector> &
+  RouteProps & {
+    bottom?: boolean;
+  };
 
 const AdditionalMenu: FC<Props> = ({bottom, menu}: Props) => {
   const classes = additionalMenuStyles();

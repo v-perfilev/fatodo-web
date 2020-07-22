@@ -2,12 +2,14 @@ import * as React from 'react';
 import {FC} from 'react';
 import {CardHeader, Typography} from '@material-ui/core';
 import {groupSortingCardHeaderStyles} from './_styles';
+import {ArrowAllIcon} from '../../common/icons/arrow-all-icon';
 
 type Props = {
   title: string;
+  bind: (...any) => void;
 };
 
-const GroupSortingCardHeader: FC<Props> = ({title}: Props) => {
+const GroupSortingCardHeader: FC<Props> = ({title, bind}: Props) => {
   const classes = groupSortingCardHeaderStyles();
   return (
     <CardHeader
@@ -16,6 +18,7 @@ const GroupSortingCardHeader: FC<Props> = ({title}: Props) => {
           {title}
         </Typography>
       }
+      action={<ArrowAllIcon {...bind} />}
       className={classes.header}
     />
   );

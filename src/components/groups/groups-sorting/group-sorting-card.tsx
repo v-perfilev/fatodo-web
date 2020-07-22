@@ -6,14 +6,16 @@ import {groupSortingCardStyles} from './_styles';
 import {GroupProps} from '../_types';
 import {compose} from 'recompose';
 
-type Props = GroupProps;
+type Props = GroupProps & {
+  bind: (...any) => void;
+};
 
-const GroupSortingCard: FC<Props> = ({group}: Props) => {
+const GroupSortingCard: FC<Props> = ({group, bind}: Props) => {
   const classes = groupSortingCardStyles();
 
   return (
     <Card square elevation={3} className={classes.card}>
-      <GroupSortingCardHeader title={group.title} />
+      <GroupSortingCardHeader title={group.title} bind={bind} />
     </Card>
   );
 };

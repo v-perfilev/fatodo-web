@@ -19,9 +19,15 @@ export const groupSortingCardHeaderStyles = makeStyles((theme: Theme) => ({
     paddingRight: theme.spacing(2),
     background: GRADIENT_COLORS.YELLOW,
     '& .MuiCardHeader-action': {
-      marginTop: 0,
-      marginRight: theme.spacing(-1.5),
+      marginTop: 4,
+      marginRight: theme.spacing(0),
       alignSelf: 'center',
+      color: COLORS.WHITE,
+      cursor: 'pointer',
+      '& svg': {
+        width: '1.2em',
+        height: '1.2em',
+      },
     },
   },
   caption: {
