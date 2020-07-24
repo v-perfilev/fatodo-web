@@ -14,7 +14,7 @@ type Props = {
 const Header: FC<Props> = ({flexible}: Props) => {
   const classes = headerStyles();
   const [showMenu, setShowMenu] = useState(false);
-  const trigger = useScrollTrigger();
+  const trigger = useScrollTrigger({disableHysteresis: true});
 
   const toggleMenu = (): void => setShowMenu((prevState) => !prevState);
 

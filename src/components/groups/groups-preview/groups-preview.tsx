@@ -11,6 +11,7 @@ import {GroupsRoutes} from '../_router';
 import {connect, ConnectedProps} from 'react-redux';
 import {clearMenu, setMenu} from '../../../store/actions/additional-menu.actions';
 import {AdditionalMenuSpacer} from '../../layout/additional-menu/additional-menu';
+import {ReorderIcon} from '../../../shared/components/icons/reorder-icon';
 
 const initGroups = Array.from(Array(10).keys()).map(() => {
   return TEST_GROUP;
@@ -31,7 +32,7 @@ const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
     <>
       <AdditionalMenuSpacer />
       <Fab color="primary" onClick={redirectToGroupsSorting}>
-        <RotateIcon />
+        <ReorderIcon />
       </Fab>
     </>
   );
