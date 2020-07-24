@@ -27,3 +27,14 @@ export const logoWithTextStyles = makeStyles((theme: Theme) => ({
     letterSpacing: '0.05em',
   },
 }));
+
+export const animatedRouterStyles = makeStyles(() => ({
+  root: {
+    position: 'relative',
+    width: '100%',
+  },
+  animated: {
+    position: 'absolute',
+    width: '100%',
+  },
+}));

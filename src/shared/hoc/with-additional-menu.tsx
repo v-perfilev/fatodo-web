@@ -12,7 +12,9 @@ const withAdditionalMenu = (Component: ComponentType): FC => (props): ReactEleme
       <Hidden xsDown>
         <AdditionalMenu />
       </Hidden>
-      <Component {...props} />
+      <Box className={classes.container}>
+        <Component {...props} />
+      </Box>
       <Hidden smUp>
         <AdditionalMenu bottom />
       </Hidden>

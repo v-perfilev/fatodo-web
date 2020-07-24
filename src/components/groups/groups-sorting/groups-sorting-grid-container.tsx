@@ -2,11 +2,11 @@ import * as React from 'react';
 import {FC, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import {Group} from '../_types';
-import withSortableGrid, {SortingProps} from '../../../shared/hoc/with-sortable-grid';
-import {compose} from 'recompose';
 import GroupPreviewGridItem from './groups-sorting-grid-item';
-import {animated} from 'react-spring';
 import {groupSortingGridContainerStyles} from './_styles';
+import withSortableGrid, {SortingProps} from '../../../shared/hoc/with-sortable-grid';
+import {animated} from 'react-spring';
+import {compose} from 'recompose';
 
 type Props = SortingProps & {
   groups: Group[];

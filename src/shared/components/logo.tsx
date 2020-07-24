@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {logoStyles} from './_styles';
-import {Routes} from '../router';
+import {Routes} from '../../components/router';
 import Link from './link';
 
 const Logo: FC = () => {

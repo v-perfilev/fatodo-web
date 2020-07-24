@@ -4,7 +4,7 @@ import {Box, Typography} from '@material-ui/core';
 import {compose} from 'recompose';
 import withBackground from '../../shared/hoc/with-background';
 import {Routes} from '../router';
-import Link from '../common/link';
+import Link from '../../shared/components/link';
 import {Trans, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
 import {RouteComponentProps, withRouter} from 'react-router-dom';

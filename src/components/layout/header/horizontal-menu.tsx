@@ -8,12 +8,12 @@ import {logout} from '../../../store/actions/auth.actions';
 import {Trans, withTranslation} from 'react-i18next';
 import {horizontalMenuStyles} from './_styles';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {LoginIcon} from '../../common/icons/login-icon';
-import {LogoutIcon} from '../../common/icons/logout-icon';
-import {SignUpIcon} from '../../common/icons/signup-icon';
+import {LoginIcon} from '../../../shared/components/icons/login-icon';
+import {LogoutIcon} from '../../../shared/components/icons/logout-icon';
+import {SignUpIcon} from '../../../shared/components/icons/signup-icon';
 import {compose} from 'recompose';
 import {Routes} from '../../router';
-import LanguageSelect from '../../common/language-select';
+import LanguageSelect from '../../../shared/components/language-select';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Button, Fade, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem} from '@material-ui/core';
-import {LANGUAGES} from '../../shared/i18n';
+import {LANGUAGES} from '../i18n';
 import {LanguageIcon} from './icons/language-icon';
 import {ArrowDownIcon} from './icons/arrow-down-icon';
-import {LanguageUtils} from '../../shared/utils/language.utils';
-import {sidebarMenuStyles} from '../layout/header/_styles';
+import {LanguageUtils} from '../utils/language.utils';
+import {sidebarMenuStyles} from '../../components/layout/header/_styles';
 
 type Props = {
   list?: boolean;

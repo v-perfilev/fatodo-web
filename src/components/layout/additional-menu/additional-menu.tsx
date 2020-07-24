@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Box, Drawer} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
-import Logo from '../../common/logo';
+import Logo from '../../../shared/components/logo';
 import {RootState} from '../../../store';
 import {connect, ConnectedProps} from 'react-redux';
 import {RouteProps} from 'react-router-dom';

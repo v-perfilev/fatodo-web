@@ -15,6 +15,7 @@ export const wrapperStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
+    minWidth: '100vw',
   },
 }));
 
@@ -96,5 +97,17 @@ export const additionalMenuStyles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.up('sm')]: {
       flexDirection: 'row',
     },
+  },
+  container: {
+    position: 'relative',
+    display: 'flex',
+    flexGrow: 1,
+  },
+}));
+
+export const flexStyles = makeStyles(() => ({
+  container: {
+    display: 'flex',
+    flexGrow: 1,
   },
 }));

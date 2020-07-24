@@ -9,9 +9,9 @@ import withBackground from '../../shared/hoc/with-background';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../router';
 import AccountService from '../../services/account.service';
-import {HomeIcon} from '../common/icons/home-icon';
-import LoadingButton from '../common/buttons/loading-button';
-import {EmailIcon} from '../common/icons/email-icon';
+import {HomeIcon} from '../../shared/components/icons/home-icon';
+import LoadingButton from '../../shared/components/buttons/loading-button';
+import {EmailIcon} from '../../shared/components/icons/email-icon';
 
 type Props = RouteComponentProps<{}, any, {user: string}> & RedirectTimerProps;
 

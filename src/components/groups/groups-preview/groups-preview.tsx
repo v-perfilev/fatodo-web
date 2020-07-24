@@ -1,9 +1,9 @@
 import * as React from 'react';
-import {FC, useEffect, useState} from 'react';
+import {FC, memo, useEffect, useState} from 'react';
 import {Fab} from '@material-ui/core';
 import GroupsGridContainer from './groups-grid-container';
 import {TEST_GROUP} from '../_constants';
-import {RotateIcon} from '../../common/icons/rotate-icon';
+import {RotateIcon} from '../../../shared/components/icons/rotate-icon';
 import {compose} from 'recompose';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
@@ -12,7 +12,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import {clearMenu, setMenu} from '../../../store/actions/additional-menu.actions';
 import {AdditionalMenuSpacer} from '../../layout/additional-menu/additional-menu';
 
-const initGroups = Array.from(Array(30).keys()).map(() => {
+const initGroups = Array.from(Array(10).keys()).map(() => {
   return TEST_GROUP;
 });
 
@@ -21,7 +21,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-const GroupsPreview: FC<Props> = ({setMenu, clearMenu}: Props) => {
+const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
   const history = useHistory();
   const [groups, setGroups] = useState([]);
 
@@ -39,10 +39,9 @@ const GroupsPreview: FC<Props> = ({setMenu, clearMenu}: Props) => {
   useEffect(() => {
     setGroups(initGroups);
     setMenu(menu);
-    return (): void => clearMenu();
   }, []);
 
   return <GroupsGridContainer groups={groups} />;
 };
 
-export default compose(connector)(GroupsPreview);
+export default compose(connector, memo)(GroupsPreview);

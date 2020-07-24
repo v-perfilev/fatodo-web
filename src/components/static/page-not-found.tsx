@@ -6,7 +6,7 @@ import withRedirectTimer, {RedirectTimerProps} from '../../shared/hoc/with-redir
 import {staticPageStyles} from './_styles';
 import {Trans} from 'react-i18next';
 import withBackground from '../../shared/hoc/with-background';
-import {HomeIcon} from '../common/icons/home-icon';
+import {HomeIcon} from '../../shared/components/icons/home-icon';
 
 type Props = RedirectTimerProps;
 

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import {Grid} from '@material-ui/core';
 import {GroupProps} from '../_types';
 import GroupCard from './group-card';
 import {groupGridItemStyles} from './_styles';
+import {compose} from 'recompose';
 
 type Props = GroupProps;
 
@@ -17,4 +18,4 @@ const GroupsGridItem: FC<Props> = ({group}: Props) => {
   );
 };
 
-export default GroupsGridItem;
+export default compose(memo)(GroupsGridItem);

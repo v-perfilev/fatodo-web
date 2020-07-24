@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {Switch} from 'react-router-dom';
+import {Redirect, Switch} from 'react-router-dom';
 import PublicRoute from '../shared/routes/public-route';
 import Unauthorized from './static/unauthorized';
 import InternalError from './static/internal-error';
@@ -29,6 +29,7 @@ export enum Routes {
   UNAUTHORIZED = '/unauthorized',
   FORBIDDEN = '/forbidden',
   INTERNAL_ERROR = '/something-went-wrong',
+  PAGE_NOT_FOUND = '/page-not-found',
 }
 
 const Router: FC = () => (
@@ -47,7 +48,8 @@ const Router: FC = () => (
     <PublicRoute path={Routes.UNAUTHORIZED} component={Unauthorized} />
     <PublicRoute path={Routes.FORBIDDEN} component={Forbidden} />
     <PublicRoute path={Routes.INTERNAL_ERROR} component={InternalError} />
-    <PublicRoute component={PageNotFound} />
+    <PublicRoute path={Routes.PAGE_NOT_FOUND} component={PageNotFound} />
+    <Redirect to={Routes.PAGE_NOT_FOUND} />
   </Switch>
 );
 

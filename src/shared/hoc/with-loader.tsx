@@ -1,10 +1,12 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
-import Spinner from '../../components/common/loaders/spinner';
+import Spinner from '../components/loaders/spinner';
 import {Box, Fade} from '@material-ui/core';
 import {LOADER_TIMEOUT} from '../../constants';
+import {flexStyles} from './_styles';
 
-const withLoader = (Component: ComponentType): FC => (): ReactElement => {
+const withLoader = (Component: ComponentType): FC => (props): ReactElement => {
+  const classes = flexStyles();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -19,8 +21,8 @@ const withLoader = (Component: ComponentType): FC => (): ReactElement => {
         </Box>
       </Fade>
       <Fade in={!loading} timeout={1000}>
-        <Box>
-          <Component />
+        <Box className={classes.container}>
+          <Component {...props} />
         </Box>
       </Fade>
     </>

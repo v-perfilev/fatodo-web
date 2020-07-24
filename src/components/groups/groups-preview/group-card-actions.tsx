@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import {Badge, Box, CardActions} from '@material-ui/core';
-import {BellIcon} from '../../common/icons/bell-icon';
-import {MessageIcon} from '../../common/icons/message-icon';
+import {BellIcon} from '../../../shared/components/icons/bell-icon';
+import {MessageIcon} from '../../../shared/components/icons/message-icon';
 import GroupCardAvatars from './group-card-avatars';
 import {groupCardActionsStyles} from './_styles';
+import {compose} from 'recompose';
 
 type Props = {
   users: string[];
@@ -30,4 +31,4 @@ const GroupCardActions: FC<Props> = ({users, notificationCount, messageCount}: P
   );
 };
 
-export default GroupCardActions;
+export default compose(memo)(GroupCardActions);
