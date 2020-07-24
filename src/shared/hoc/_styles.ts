@@ -51,13 +51,16 @@ export const backgroundStyles = makeStyles(() => ({
   },
   imgBox: {
     position: 'fixed',
+    width: '100%',
     height: '100vh',
     display: 'flex',
+    alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
   },
   img: {
-    height: '100%',
+    minWidth: '100%',
+    minHeight: '100%',
   },
 }));
 
