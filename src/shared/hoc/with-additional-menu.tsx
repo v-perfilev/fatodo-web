@@ -1,23 +1,22 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
-import {Box, Hidden} from '@material-ui/core';
+import {Box, Theme, useMediaQuery} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
 import AdditionalMenu from '../../components/layout/additional-menu/additional-menu';
+import csx from 'classnames';
 
 const withAdditionalMenu = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = additionalMenuStyles();
+  const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
+
+  const rootClassNames = csx(classes.root, isBigDevice ? classes.rootMenuLeft : classes.rootMenuBottom);
 
   return (
-    <Box className={classes.root}>
-      <Hidden xsDown>
-        <AdditionalMenu />
-      </Hidden>
+    <Box className={rootClassNames}>
       <Box className={classes.container}>
         <Component {...props} />
       </Box>
-      <Hidden smUp>
-        <AdditionalMenu bottom />
-      </Hidden>
+      <AdditionalMenu />
     </Box>
   );
 };

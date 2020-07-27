@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {FC, memo, useEffect, useState} from 'react';
-import {Fab} from '@material-ui/core';
 import GroupsGridContainer from './groups-grid-container';
 import {TEST_GROUP} from '../_constants';
-import {RotateIcon} from '../../../shared/components/icons/rotate-icon';
 import {compose} from 'recompose';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
 import {GroupsRoutes} from '../_router';
 import {connect, ConnectedProps} from 'react-redux';
 import {clearMenu, setMenu} from '../../../store/actions/additional-menu.actions';
-import {AdditionalMenuSpacer} from '../../layout/additional-menu/additional-menu';
 import {ReorderIcon} from '../../../shared/components/icons/reorder-icon';
+import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-button';
+import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
+import {useTranslation} from 'react-i18next';
 
 const initGroups = Array.from(Array(10).keys()).map(() => {
   return TEST_GROUP;
@@ -24,6 +24,7 @@ type Props = ConnectedProps<typeof connector>;
 
 const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
   const history = useHistory();
+  const {t, i18n} = useTranslation();
   const [groups, setGroups] = useState([]);
 
   const redirectToGroupsSorting = (): void => history.push(Routes.GROUPS + GroupsRoutes.SORTING);
@@ -31,16 +32,22 @@ const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <Fab color="primary" onClick={redirectToGroupsSorting}>
-        <ReorderIcon />
-      </Fab>
+      <AdditionalMenuButton
+        icon={<ReorderIcon />}
+        action={redirectToGroupsSorting}
+        color="primary"
+        tooltip={t('groups:tooltips.reorder')}
+      />
     </>
   );
 
   useEffect(() => {
     setGroups(initGroups);
-    setMenu(menu);
   }, []);
+
+  useEffect(() => {
+    setMenu(menu);
+  }, [i18n.language]);
 
   return <GroupsGridContainer groups={groups} />;
 };

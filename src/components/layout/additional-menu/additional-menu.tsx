@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {FC} from 'react';
-import {Box, Drawer} from '@material-ui/core';
+import {FC, useEffect, useState} from 'react';
+import {Box, Drawer, Fade, Theme, useMediaQuery} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
 import Logo from '../../../shared/components/logo';
 import {RootState} from '../../../store';
@@ -8,36 +8,41 @@ import {connect, ConnectedProps} from 'react-redux';
 import {RouteProps} from 'react-router-dom';
 import {AdditionalMenuState} from '../../../store/rerducers/additional-menu.reducer';
 import {compose} from 'recompose';
-
-export const AdditionalMenuSpacer: FC = () => {
-  const style = {flexGrow: 1};
-  return <Box style={style} />;
-};
+import csx from 'classnames';
 
 const mapStateToProps = (state: RootState): AdditionalMenuState => state.additionalMenuState;
 const connector = connect(mapStateToProps);
 
-type Props = ConnectedProps<typeof connector> &
-  RouteProps & {
-    bottom?: boolean;
-  };
+type Props = ConnectedProps<typeof connector> & RouteProps;
 
-const AdditionalMenu: FC<Props> = ({bottom, menu}: Props) => {
+const AdditionalMenu: FC<Props> = ({menu}: Props) => {
   const classes = additionalMenuStyles();
+  const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
+  const [menuForRender, setMenuForRender] = useState(null);
+
+  useEffect(() => {
+    setMenuForRender(null);
+    setTimeout(() => setMenuForRender(menu), 200);
+  }, [menu]);
+
+  const drawerClassNames = csx(classes.drawer, isBigDevice ? classes.drawerLeft : classes.drawerBottom);
+  const containerClassNames = csx(classes.container, isBigDevice ? classes.containerLeft : classes.containerBottom);
 
   return (
     <Drawer
       variant="permanent"
-      anchor={bottom ? 'bottom' : 'left'}
-      className={classes.drawer}
-      classes={{paper: classes.drawer}}
+      anchor={isBigDevice ? 'left' : 'bottom'}
+      className={drawerClassNames}
+      classes={{paper: drawerClassNames}}
     >
-      {!bottom && (
+      {isBigDevice && (
         <Box className={classes.logo}>
           <Logo />
         </Box>
       )}
-      <Box className={classes.container}>{menu}</Box>
+      <Fade in={Boolean(menuForRender)} timeout={200}>
+        <Box className={containerClassNames}>{menuForRender}</Box>
+      </Fade>
     </Drawer>
   );
 };

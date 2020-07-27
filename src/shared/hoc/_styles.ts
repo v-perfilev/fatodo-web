@@ -90,16 +90,16 @@ export const developmentRibbonStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const additionalMenuStyles = makeStyles((theme: Theme) => ({
+export const additionalMenuStyles = makeStyles(() => ({
   root: {
     width: '100%',
     display: 'flex',
-    [theme.breakpoints.down('xs')]: {
-      flexDirection: 'column',
-    },
-    [theme.breakpoints.up('sm')]: {
-      flexDirection: 'row',
-    },
+  },
+  rootMenuBottom: {
+    flexDirection: 'column',
+  },
+  rootMenuLeft: {
+    flexDirection: 'row-reverse',
   },
   container: {
     position: 'relative',

@@ -22,7 +22,7 @@ export const initLanguages = i18next
     debug: false,
     whitelist: ['en', 'ru'],
     fallbackLng: 'en',
-    ns: ['translation', 'feedback', 'snack', 'form', 'static'],
+    ns: ['translation', 'feedback', 'snack', 'form', 'static', 'groups'],
     defaultNS: 'translation',
     load: 'languageOnly',
     backend: {

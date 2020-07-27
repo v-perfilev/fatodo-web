@@ -5,37 +5,31 @@ import {HEADER_HEIGHT} from '../header/_constants';
 export const additionalMenuStyles = makeStyles((theme: Theme) => ({
   drawer: {
     zIndex: 100,
-    [theme.breakpoints.down('xs')]: {
-      height: BOTTOM_DRAWER_HEIGHT,
-    },
-    [theme.breakpoints.up('sm')]: {
-      width: LEFT_DRAWER_WIDTH,
-    },
+  },
+  drawerLeft: {
+    width: LEFT_DRAWER_WIDTH,
+  },
+  drawerBottom: {
+    height: BOTTOM_DRAWER_HEIGHT,
   },
   container: {
     height: '100%',
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(1),
-    [theme.breakpoints.down('xs')]: {
-      flexDirection: 'row',
-    },
-    [theme.breakpoints.up('sm')]: {
-      flexDirection: 'column',
-    },
     '& > *': {
       margin: theme.spacing(1),
     },
     '& > .MuiFab-root': {
-      [theme.breakpoints.down('xs')]: {
-        width: 40,
-        height: 40,
-      },
-      [theme.breakpoints.up('sm')]: {
-        width: 50,
-        height: 50,
-      },
+      width: 50,
+      height: 50,
     },
+  },
+  containerLeft: {
+    flexDirection: 'column',
+  },
+  containerBottom: {
+    flexDirection: 'row',
   },
   logo: {
     width: '100%',

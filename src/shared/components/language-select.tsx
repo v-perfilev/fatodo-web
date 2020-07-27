@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {Button, Fade, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem} from '@material-ui/core';
 import {LANGUAGES} from '../i18n';
 import {LanguageIcon} from './icons/language-icon';
@@ -13,7 +13,7 @@ type Props = {
 
 const LanguageSelect: FC<Props> = ({list}: Props) => {
   const classes = sidebarMenuStyles();
-  const [anchorElement, setAnchorElement] = React.useState<HTMLElement | null>(null);
+  const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null);
 
   const isOpen = Boolean(anchorElement);
 
