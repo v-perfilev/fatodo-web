@@ -1,5 +1,5 @@
 import {FC, useEffect} from 'react';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {useHistory, useRouteMatch} from 'react-router-dom';
 import {Routes} from '../router';
 import {compose} from 'recompose';
 import {connect, ConnectedProps} from 'react-redux';
@@ -8,9 +8,11 @@ import {login, requestAccountData} from '../../store/actions/auth.actions';
 const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = RouteComponentProps<{token: string}> & ConnectedProps<typeof connector>;
+type Props = ConnectedProps<typeof connector>;
 
-const SocialLogin: FC<Props> = ({match, history, login, requestAccountData}: Props) => {
+const SocialLogin: FC<Props> = ({login, requestAccountData}: Props) => {
+  const history = useHistory();
+  const match = useRouteMatch<{token: string}>();
   const token = match.params.token;
 
   const redirectToHome = (): void => history.push(Routes.ROOT);
@@ -28,4 +30,4 @@ const SocialLogin: FC<Props> = ({match, history, login, requestAccountData}: Pro
   return null;
 };
 
-export default compose(withRouter, connector)(SocialLogin);
+export default compose(connector)(SocialLogin);

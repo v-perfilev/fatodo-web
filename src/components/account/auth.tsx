@@ -9,7 +9,7 @@ import Link from '../../shared/components/link';
 import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
 import RegisterForm from './registration-form';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {RouteComponentProps, useHistory, useRouteMatch} from 'react-router-dom';
 import {LOADER_TIMEOUT, SOCIAL_LOGIN} from '../../constants';
 import SocialLogin from './social-buttons';
 import {RootState} from '../../store';
@@ -21,8 +21,10 @@ const connector = connect(mapStateToProps);
 
 type Props = RouteComponentProps & ConnectedProps<typeof connector>;
 
-const Auth: FC<Props> = ({authState: {isAuthenticated}, match, history}: Props) => {
+const Auth: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   const classes = authPageStyles();
+  const history = useHistory();
+  const match = useRouteMatch();
   const {t} = useTranslation();
   const [activeTab, setActiveTab] = useState<number>(match.path === Routes.LOGIN ? 0 : 1);
 
@@ -63,4 +65,4 @@ const Auth: FC<Props> = ({authState: {isAuthenticated}, match, history}: Props) 
   );
 };
 
-export default compose(withTranslation(), withRouter, withBackground('/images/background-1.jpg'), connector)(Auth);
+export default compose(withTranslation(), withBackground('/images/background-1.jpg'), connector)(Auth);

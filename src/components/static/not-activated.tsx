@@ -6,18 +6,20 @@ import withRedirectTimer, {RedirectTimerProps} from '../../shared/hoc/with-redir
 import {Trans} from 'react-i18next';
 import {staticPageStyles} from './_styles';
 import withBackground from '../../shared/hoc/with-background';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {useHistory, useLocation} from 'react-router-dom';
 import {Routes} from '../router';
 import AccountService from '../../services/account.service';
 import {HomeIcon} from '../../shared/components/icons/home-icon';
 import LoadingButton from '../../shared/components/buttons/loading-button';
 import {EmailIcon} from '../../shared/components/icons/email-icon';
 
-type Props = RouteComponentProps<{}, any, {user: string}> & RedirectTimerProps;
+type Props = RedirectTimerProps;
 
-const NotActivated: FC<Props> = ({timer, resetTimer, history, location}: Props) => {
+const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
   const classes = staticPageStyles();
-  const user = location?.state?.user;
+  const history = useHistory();
+  const location = useLocation<{user: string}>();
+  const user = location.state.user;
   const [activationLoading, setActivationLoading] = useState<boolean>(false);
   const [activationTimer, setActivationTimer] = useState<number>(undefined);
   const activationTimerMax = 20;
@@ -74,8 +76,4 @@ const NotActivated: FC<Props> = ({timer, resetTimer, history, location}: Props) 
   );
 };
 
-export default compose(
-  withBackground('/images/background-1.jpg'),
-  withRedirectTimer('/', 60),
-  withRouter
-)(NotActivated);
+export default compose(withBackground('/images/background-1.jpg'), withRedirectTimer('/', 60))(NotActivated);

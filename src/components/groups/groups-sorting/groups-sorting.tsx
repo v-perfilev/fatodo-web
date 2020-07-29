@@ -6,7 +6,7 @@ import {CloseIcon} from '../../../shared/components/icons/close-icon';
 import {compose} from 'recompose';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
-import {clearMenu, setMenu} from '../../../store/actions/additional-menu.actions';
+import {setMenu} from '../../../store/actions/additional-menu.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-button';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
@@ -16,7 +16,7 @@ const initGroups = Array.from(Array(10).keys()).map(() => {
   return TEST_GROUP;
 });
 
-const mapDispatchToProps = {setMenu, clearMenu};
+const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;

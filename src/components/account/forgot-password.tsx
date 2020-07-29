@@ -7,7 +7,7 @@ import {Routes} from '../router';
 import Link from '../../shared/components/link';
 import {Trans, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import ForgotPasswordForm from './forgot-password-form';
 import {RootState} from '../../store';
 import {AuthState} from '../../store/rerducers/auth.reducer';
@@ -17,10 +17,11 @@ import {LOADER_TIMEOUT} from '../../constants';
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
 
-type Props = RouteComponentProps & ConnectedProps<typeof connector>;
+type Props = ConnectedProps<typeof connector>;
 
-const ForgotPassword: FC<Props> = ({authState: {isAuthenticated}, history}: Props) => {
+const ForgotPassword: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   const classes = authPageStyles();
+  const history = useHistory();
 
   const redirectToHome = (): void => history.push(Routes.ROOT);
 
@@ -43,9 +44,4 @@ const ForgotPassword: FC<Props> = ({authState: {isAuthenticated}, history}: Prop
   );
 };
 
-export default compose(
-  withTranslation(),
-  withRouter,
-  withBackground('/images/background-1.jpg'),
-  connector
-)(ForgotPassword);
+export default compose(withTranslation(), withBackground('/images/background-1.jpg'), connector)(ForgotPassword);

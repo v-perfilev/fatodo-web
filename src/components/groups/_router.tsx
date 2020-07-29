@@ -9,9 +9,11 @@ import withFlexibleHeader from '../../shared/hoc/with-flexible-header';
 import withAdditionalMenu from '../../shared/hoc/with-additional-menu';
 import {Routes} from '../router';
 import AnimatedRouter from '../../shared/components/animated-router';
+import Group from './group/group';
 
 export enum GroupsRoutes {
   SORTING = '/sorting',
+  GROUP = '/:groupId',
 }
 
 const GroupRouter: FC = () => {
@@ -21,6 +23,7 @@ const GroupRouter: FC = () => {
     <AnimatedRouter>
       <PublicRoute exact path={match.path} component={GroupsPreview} />
       <PublicRoute path={match.path + GroupsRoutes.SORTING} component={GroupsSorting} />
+      <PublicRoute path={match.path + GroupsRoutes.GROUP} component={Group} />
       <Redirect to={Routes.PAGE_NOT_FOUND} />
     </AnimatedRouter>
   );

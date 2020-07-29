@@ -1,5 +1,5 @@
 import {FC, useEffect} from 'react';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {useHistory, useRouteMatch} from 'react-router-dom';
 import AccountService from '../../services/account.service';
 import {Routes} from '../router';
 import {compose} from 'recompose';
@@ -10,9 +10,11 @@ import {connect, ConnectedProps} from 'react-redux';
 const mapDispatchToProps = {enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = RouteComponentProps<{code: string}> & ConnectedProps<typeof connector>;
+type Props = ConnectedProps<typeof connector>;
 
-const Activation: FC<Props> = ({match, history, enqueueSnackbar}: Props) => {
+const Activation: FC<Props> = ({enqueueSnackbar}: Props) => {
+  const match = useRouteMatch<{code: string}>();
+  const history = useHistory();
   const code = match.params.code;
 
   const redirectToHome = (): void => history.push(Routes.ROOT);
@@ -32,4 +34,4 @@ const Activation: FC<Props> = ({match, history, enqueueSnackbar}: Props) => {
   return null;
 };
 
-export default compose(withRouter, connector)(Activation);
+export default compose(connector)(Activation);

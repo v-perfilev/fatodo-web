@@ -7,7 +7,7 @@ import {Routes} from '../router';
 import Link from '../../shared/components/link';
 import {Trans, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {useHistory, useRouteMatch} from 'react-router-dom';
 import ResetPasswordForm from './reset-password-form';
 import {RootState} from '../../store';
 import {AuthState} from '../../store/rerducers/auth.reducer';
@@ -17,11 +17,13 @@ import {LOADER_TIMEOUT} from '../../constants';
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
 
-type Props = RouteComponentProps<{code: string}> & ConnectedProps<typeof connector>;
+type Props = ConnectedProps<typeof connector>;
 
-const ResetPassword: FC<Props> = ({authState: {isAuthenticated}, history, ...props}: Props) => {
+const ResetPassword: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   const classes = authPageStyles();
-  const code = props.match.params.code;
+  const history = useHistory();
+  const match = useRouteMatch<{code: string}>();
+  const code = match.params.code;
 
   const redirectToHome = (): void => history.push(Routes.ROOT);
   const redirectToInternalError = (): void => history.push(Routes.INTERNAL_ERROR);
@@ -45,9 +47,4 @@ const ResetPassword: FC<Props> = ({authState: {isAuthenticated}, history, ...pro
   );
 };
 
-export default compose(
-  withTranslation(),
-  withRouter,
-  withBackground('/images/background-1.jpg'),
-  connector
-)(ResetPassword);
+export default compose(withTranslation(), withBackground('/images/background-1.jpg'), connector)(ResetPassword);
