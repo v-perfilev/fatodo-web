@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, memo, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import GroupsGridContainer from './groups-grid-container';
 import {TEST_GROUP} from '../_constants';
 import {compose} from 'recompose';
@@ -52,4 +52,4 @@ const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
   return <GroupsGridContainer groups={groups} />;
 };
 
-export default compose(connector, memo)(GroupsPreview);
+export default compose(connector)(GroupsPreview);

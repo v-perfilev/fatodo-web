@@ -1,11 +1,13 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {Avatar, Box, Typography} from '@material-ui/core';
+import {Box, Typography} from '@material-ui/core';
 import {groupCardAvatarsStyles} from './_styles';
 import {AVATARS_IN_GROUP_CARD} from '../_constants';
+import {User} from '../../../models/user';
+import Userpic from '../../../shared/components/userpic';
 
 type Props = {
-  users: string[];
+  users: User[];
 };
 
 const GroupCardAvatars: FC<Props> = ({users}: Props) => {
@@ -17,7 +19,7 @@ const GroupCardAvatars: FC<Props> = ({users}: Props) => {
   return (
     <Box className={classes.avatars}>
       {usersToShow.map((user, index) => (
-        <Avatar key={index} alt={user} src={user} />
+        <Userpic key={index} user={user} />
       ))}
       {!!moreThanLimit && <Typography className={classes.count}>+{moreThanLimit}</Typography>}
     </Box>

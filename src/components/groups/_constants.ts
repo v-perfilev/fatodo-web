@@ -7,91 +7,113 @@ export const ITEMS_IN_GROUP_CARD = 5;
 export const AVATARS_IN_GROUP_CARD = 5;
 
 export const TEST_GROUP: Group = {
-  id: Math.random(),
+  id: Math.random().toString(),
   title: 'Test Group',
+  color: 'yellow',
   items: [
     {
-      id: 0,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Recruiting blog post',
     },
     {
-      id: 1,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Mobile app launch',
     },
     {
-      id: 2,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Submit updates to mobile storefonts',
     },
     {
-      id: 3,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Schedule meeting with Alex',
     },
     {
-      id: 4,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Review editor calendar',
     },
     {
-      id: 5,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Mobile app launch',
     },
     {
-      id: 6,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Submit updates to mobile storefonts',
     },
     {
-      id: 7,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Schedule meeting with Alex',
     },
     {
-      id: 8,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Homepage refresh',
     },
     {
-      id: 9,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Review editor calendar',
     },
     {
-      id: 10,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Submit updates to mobile storefonts',
     },
     {
-      id: 11,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Mobile app launch',
     },
     {
-      id: 12,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Schedule meeting with Alex',
     },
     {
-      id: 13,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Homepage refresh',
     },
     {
-      id: 14,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Review editor calendar',
     },
     {
-      id: 15,
+      id: Math.random().toString(),
       type: 'todo',
       title: 'Homepage refresh',
     },
   ],
-  users: ['Vladimir', 'Maria', 'Eva', 'John', 'Michael', 'Bernd'],
+  users: [
+    {
+      id: Math.random().toString(),
+      username: 'testUser1',
+    },
+    {
+      id: Math.random().toString(),
+      username: 'testUser2',
+    },
+    {
+      id: Math.random().toString(),
+      username: 'testUser3',
+    },
+    {
+      id: Math.random().toString(),
+      username: 'testUser4',
+    },
+    {
+      id: Math.random().toString(),
+      username: 'testUser5',
+    },
+  ],
   notificationCount: 3,
   messageCount: 11,
 };

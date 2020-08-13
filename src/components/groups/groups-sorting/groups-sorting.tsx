@@ -1,4 +1,4 @@
-import React, {FC, memo, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {TEST_GROUP} from '../_constants';
 import GroupsSortingGridContainer from './groups-sorting-grid-container';
 import {CheckIcon} from '../../../shared/components/icons/check-icon';
@@ -52,4 +52,4 @@ const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
   return <GroupsSortingGridContainer groups={groups} />;
 };
 
-export default compose(connector, memo)(GroupsSorting);
+export default compose(connector)(GroupsSorting);

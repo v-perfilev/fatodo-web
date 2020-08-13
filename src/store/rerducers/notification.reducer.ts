@@ -1,5 +1,5 @@
 import {ACTION_TYPES} from '../actions/notification.actions';
-import Notification from '../../models/notification.model';
+import Notification from '../../models/notification';
 import {SnackbarKey} from 'notistack';
 
 interface ReduxNotification extends Notification {

@@ -6,9 +6,10 @@ import {MessageIcon} from '../../../shared/components/icons/message-icon';
 import GroupCardAvatars from './group-card-avatars';
 import {groupCardActionsStyles} from './_styles';
 import {compose} from 'recompose';
+import {User} from '../../../models/user';
 
 type Props = {
-  users: string[];
+  users: User[];
   notificationCount: number;
   messageCount: number;
 };

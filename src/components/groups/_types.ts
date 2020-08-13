@@ -1,14 +1,19 @@
+import {User} from '../../models/user';
+
+type GradientColor = 'yellow';
+
 export interface Group {
-  id: number;
+  id: string;
   title: string;
+  color: GradientColor;
   items: GroupItem[];
-  users: string[];
+  users: User[];
   notificationCount: number;
   messageCount: number;
 }
 
 export interface GroupItem {
-  id: number;
+  id: string;
   type: string;
   title: string;
 }

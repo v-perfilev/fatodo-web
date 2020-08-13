@@ -32,9 +32,20 @@ export const animatedRouterStyles = makeStyles(() => ({
   root: {
     position: 'relative',
     width: '100%',
+    height: '100%',
   },
   animated: {
     position: 'absolute',
     width: '100%',
+  },
+}));
+
+export const userpicStyles = makeStyles((theme: Theme) => ({
+  root: {
+    width: 35,
+    height: 35,
+    border: 'solid',
+    borderWidth: 1,
+    borderColor: theme.palette.primary.main,
   },
 }));

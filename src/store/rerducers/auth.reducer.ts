@@ -1,9 +1,9 @@
 import {ACTION_TYPES} from '../actions/auth.actions';
-import User from '../../models/user.model';
+import {UserAccount} from '../../models/user';
 
 const initialState = {
   isAuthenticated: false,
-  account: {} as User,
+  account: {} as UserAccount,
 };
 
 export type AuthState = Readonly<typeof initialState>;

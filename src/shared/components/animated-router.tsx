@@ -13,7 +13,7 @@ const AnimatedRouter: FC<Props> = ({children}: Props) => {
 
   const resize = useResize();
   const ref = useRef(null);
-  const [height, setHeight] = useState(0);
+  const [minHeight, setMinHeight] = useState(0);
   const location = useLocation();
 
   const transitions = useTransition(location, (location) => location.pathname, {
@@ -24,19 +24,19 @@ const AnimatedRouter: FC<Props> = ({children}: Props) => {
 
   useEffect(() => {
     if (ref.current && ref.current.clientHeight) {
-      setHeight(ref.current.clientHeight);
+      setMinHeight(ref.current.clientHeight);
     }
   }, [ref.current && ref.current.clientHeight]);
 
   useEffect(() => {
     if (ref.current && ref.current.clientHeight) {
       setTimeout(() => {
-        setHeight(ref.current.clientHeight);
+        setMinHeight(ref.current.clientHeight);
       }, 500);
     }
   }, [resize]);
 
-  const heightStyle = {height};
+  const heightStyle = {minHeight};
 
   return (
     <Box className={classes.root} style={heightStyle}>

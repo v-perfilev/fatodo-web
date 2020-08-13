@@ -92,8 +92,9 @@ export const developmentRibbonStyles = makeStyles((theme: Theme) => ({
 
 export const additionalMenuStyles = makeStyles(() => ({
   root: {
-    width: '100%',
     display: 'flex',
+    flexGrow: 1,
+    width: '100%',
   },
   rootMenuBottom: {
     flexDirection: 'column',

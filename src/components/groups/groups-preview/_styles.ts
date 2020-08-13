@@ -119,12 +119,7 @@ export const groupCardAvatarsStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     '& .MuiAvatar-root': {
-      width: 35,
-      height: 35,
       marginLeft: theme.spacing(-1.5),
-      border: 'solid',
-      borderWidth: 2,
-      borderColor: theme.palette.primary.main,
       '&:first-child': {
         marginLeft: 0,
       },
