@@ -12,7 +12,7 @@ type Props = HTMLAttributes<any> & {
   item: GroupItem;
 };
 
-const GroupCardItem: FC<Props> = ({item, style}: Props) => {
+const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
   const classes = groupCardItemStyles();
 
   return (
@@ -27,4 +27,4 @@ const GroupCardItem: FC<Props> = ({item, style}: Props) => {
   );
 };
 
-export default compose(animated)(GroupCardItem);
+export default compose(animated)(GroupPreviewCardItem);

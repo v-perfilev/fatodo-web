@@ -8,7 +8,7 @@ type Props = {
   title: string;
 };
 
-const GroupCardHeader: FC<Props> = ({title}: Props) => {
+const GroupPreviewCardHeader: FC<Props> = ({title}: Props) => {
   const classes = groupCardHeaderStyles();
   return (
     <CardHeader
@@ -27,4 +27,4 @@ const GroupCardHeader: FC<Props> = ({title}: Props) => {
   );
 };
 
-export default GroupCardHeader;
+export default GroupPreviewCardHeader;

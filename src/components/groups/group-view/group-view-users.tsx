@@ -7,7 +7,7 @@ type Props = {
   users: User[];
 }
 
-const GroupUsers: FC<Props> = ({users}: Props) => {
+const GroupViewUsers: FC<Props> = ({users}: Props) => {
   const classes = groupUsersStyles();
 
   return (
@@ -21,4 +21,4 @@ const GroupUsers: FC<Props> = ({users}: Props) => {
   );
 };
 
-export default GroupUsers;
+export default GroupViewUsers;

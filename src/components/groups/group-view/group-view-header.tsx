@@ -8,7 +8,7 @@ type Props = {
   group: Group;
 }
 
-const GroupHeader: FC<Props> = ({group}: Props) => {
+const GroupViewHeader: FC<Props> = ({group}: Props) => {
   const classes = groupHeaderStyles();
 
   const dividerClassNames = csx(classes.divider, classes.dividerYellow);
@@ -25,4 +25,4 @@ const GroupHeader: FC<Props> = ({group}: Props) => {
   );
 };
 
-export default GroupHeader;
+export default GroupViewHeader;

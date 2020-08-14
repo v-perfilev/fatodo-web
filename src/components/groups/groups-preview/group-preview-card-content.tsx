@@ -6,7 +6,7 @@ import {groupCardContentStyles} from './_styles';
 import {ArrowDownIcon} from '../../../shared/components/icons/arrow-down-icon';
 import {ArrowUpIcon} from '../../../shared/components/icons/arrow-up-icon';
 import {useTrail} from 'react-spring';
-import GroupCardItem from './group-card-item';
+import GroupCardItem from './group-preview-card-item';
 import {ITEMS_IN_GROUP_CARD} from '../_constants';
 import {compose} from 'recompose';
 
@@ -14,7 +14,7 @@ type Props = {
   items: GroupItem[];
 };
 
-const GroupCardContent: FC<Props> = ({items}: Props) => {
+const GroupPreviewCardContent: FC<Props> = ({items}: Props) => {
   const classes = groupCardContentStyles();
 
   const ref = useRef();
@@ -73,4 +73,4 @@ const GroupCardContent: FC<Props> = ({items}: Props) => {
   );
 };
 
-export default compose(memo)(GroupCardContent);
+export default compose(memo)(GroupPreviewCardContent);

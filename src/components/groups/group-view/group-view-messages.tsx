@@ -7,7 +7,7 @@ type Props = {
   group: Group;
 }
 
-const GroupMessages: FC<Props> = ({group}: Props) => {
+const GroupViewMessages: FC<Props> = ({group}: Props) => {
   const classes = groupMessagesStyles()
 
   return (
@@ -17,4 +17,4 @@ const GroupMessages: FC<Props> = ({group}: Props) => {
   );
 };
 
-export default GroupMessages;
+export default GroupViewMessages;

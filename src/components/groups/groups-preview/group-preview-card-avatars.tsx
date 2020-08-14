@@ -10,7 +10,7 @@ type Props = {
   users: User[];
 };
 
-const GroupCardAvatars: FC<Props> = ({users}: Props) => {
+const GroupPreviewCardAvatars: FC<Props> = ({users}: Props) => {
   const classes = groupCardAvatarsStyles();
 
   const usersToShow = users.slice(0, AVATARS_IN_GROUP_CARD);
@@ -26,4 +26,4 @@ const GroupCardAvatars: FC<Props> = ({users}: Props) => {
   );
 };
 
-export default GroupCardAvatars;
+export default GroupPreviewCardAvatars;

@@ -6,11 +6,11 @@ import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-s
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import {Container} from '@material-ui/core';
-import GroupItemList from './group-item-list';
-import GroupUsers from './group-users';
-import GroupMessages from './group-messages';
+import GroupViewItems from './group-view-items';
+import GroupViewUsers from './group-view-users';
+import GroupViewMessages from './group-view-messages';
 import {groupStyles} from './_styles';
-import GroupHeader from './group-header';
+import GroupViewHeader from './group-view-header';
 
 const initGroup = TEST_GROUP;
 
@@ -19,7 +19,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-const Group: FC<Props> = ({setMenu}: Props) => {
+const GroupView: FC<Props> = ({setMenu}: Props) => {
   const classes = groupStyles();
   const {i18n} = useTranslation();
   const [group, setGroup] = useState(null);
@@ -40,12 +40,12 @@ const Group: FC<Props> = ({setMenu}: Props) => {
 
   return group && (
     <Container className={classes.root}>
-      <GroupHeader group={group} />
-      <GroupUsers users={group.users} />
-      <GroupItemList items={group.items} />
-      <GroupMessages group={group} />
+      <GroupViewHeader group={group} />
+      <GroupViewUsers users={group.users} />
+      <GroupViewItems items={group.items} />
+      <GroupViewMessages group={group} />
     </Container>
   );
 };
 
-export default compose(connector, memo)(Group);
+export default compose(connector, memo)(GroupView);

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, memo} from 'react';
 import {Grid} from '@material-ui/core';
 import {GroupProps} from '../_types';
-import GroupCard from './group-card';
+import GroupCard from './group-preview-card';
 import {groupGridItemStyles} from './_styles';
 import {compose} from 'recompose';
 

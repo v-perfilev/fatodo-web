@@ -5,7 +5,7 @@ import {TEST_GROUP} from '../_constants';
 import {compose} from 'recompose';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
-import {GroupsRoutes} from '../_router';
+import {GroupRoutes} from '../_router';
 import {connect, ConnectedProps} from 'react-redux';
 import {setMenu} from '../../../store/actions/additional-menu.actions';
 import {ReorderIcon} from '../../../shared/components/icons/reorder-icon';
@@ -27,7 +27,7 @@ const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
   const {t, i18n} = useTranslation();
   const [groups, setGroups] = useState([]);
 
-  const redirectToGroupsSorting = (): void => history.push(Routes.GROUPS + GroupsRoutes.SORTING);
+  const redirectToGroupsSorting = (): void => history.push(Routes.GROUPS + GroupRoutes.SORTING);
 
   const menu = (
     <>

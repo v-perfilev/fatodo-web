@@ -11,7 +11,7 @@ type Props = {
   item: GroupItem;
 }
 
-const GroupItemView: FC<Props> = ({item}: Props) => {
+const GroupViewItem: FC<Props> = ({item}: Props) => {
   const classes = groupItemViewStyles();
 
   return (
@@ -31,4 +31,4 @@ const GroupItemView: FC<Props> = ({item}: Props) => {
   );
 };
 
-export default GroupItemView;
+export default GroupViewItem;

@@ -2,14 +2,14 @@ import React, {FC} from 'react';
 import {GroupItem} from '../_types';
 import {Box} from '@material-ui/core';
 import {groupItemListStyles} from './_styles';
-import GroupItemView from './group-item-view';
+import GroupViewItem from './group-view-item';
 import csx from 'classnames';
 
 type Props = {
   items: GroupItem[];
 }
 
-const GroupItemList: FC<Props> = ({items}: Props) => {
+const GroupViewItems: FC<Props> = ({items}: Props) => {
   const classes = groupItemListStyles();
 
   const dividerClassNames = csx(classes.divider, classes.dividerYellow);
@@ -21,11 +21,11 @@ const GroupItemList: FC<Props> = ({items}: Props) => {
           {index !== 0 && (
             <Box className={dividerClassNames} />
           )}
-          <GroupItemView item={item} key={index} />
+          <GroupViewItem item={item} key={index} />
         </>
       ))}
     </Box>
   );
 };
 
-export default GroupItemList;
+export default GroupViewItems;
