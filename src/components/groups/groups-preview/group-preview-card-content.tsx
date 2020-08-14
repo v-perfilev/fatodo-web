@@ -1,17 +1,17 @@
 import * as React from 'react';
 import {FC, memo, useEffect, useRef, useState} from 'react';
 import {Box, Button, CardContent, Typography} from '@material-ui/core';
-import {GroupItem} from '../_types';
 import {groupCardContentStyles} from './_styles';
-import {ArrowDownIcon} from '../../../shared/components/icons/arrow-down-icon';
-import {ArrowUpIcon} from '../../../shared/components/icons/arrow-up-icon';
+import {ArrowDownIcon} from '../../common/icons/arrow-down-icon';
+import {ArrowUpIcon} from '../../common/icons/arrow-up-icon';
 import {useTrail} from 'react-spring';
 import GroupCardItem from './group-preview-card-item';
 import {ITEMS_IN_GROUP_CARD} from '../_constants';
 import {compose} from 'recompose';
+import {Item} from '../../../models/item';
 
 type Props = {
-  items: GroupItem[];
+  items: Item[];
 };
 
 const GroupPreviewCardContent: FC<Props> = ({items}: Props) => {
@@ -20,7 +20,7 @@ const GroupPreviewCardContent: FC<Props> = ({items}: Props) => {
   const ref = useRef();
   const [initialized, setInitialized] = useState(false);
   const [firstShowedItem, setFirstShowedItem] = useState(0);
-  const [itemsToShow, setItemsToShow] = useState([]);
+  const [itemsToShow, setItemsToShow] = useState<Item[]>([]);
 
   const isMultiPage = items.length > ITEMS_IN_GROUP_CARD;
   const isNotFirstPage = firstShowedItem > 0;
@@ -44,7 +44,7 @@ const GroupPreviewCardContent: FC<Props> = ({items}: Props) => {
       delay: 50,
       opacity: 1,
       from: {opacity: 0},
-    }
+    },
   );
 
   return (

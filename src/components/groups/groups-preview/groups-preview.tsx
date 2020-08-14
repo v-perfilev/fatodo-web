@@ -8,10 +8,11 @@ import {Routes} from '../../router';
 import {GroupRoutes} from '../_router';
 import {connect, ConnectedProps} from 'react-redux';
 import {setMenu} from '../../../store/actions/additional-menu.actions';
-import {ReorderIcon} from '../../../shared/components/icons/reorder-icon';
+import {ReorderIcon} from '../../common/icons/reorder-icon';
 import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-button';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
+import {Group} from '../../../models/group';
 
 const initGroups = Array.from(Array(10).keys()).map(() => {
   return TEST_GROUP;
@@ -25,7 +26,7 @@ type Props = ConnectedProps<typeof connector>;
 const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
   const history = useHistory();
   const {t, i18n} = useTranslation();
-  const [groups, setGroups] = useState([]);
+  const [groups, setGroups] = useState<Group[]>([]);
 
   const redirectToGroupsSorting = (): void => history.push(Routes.GROUPS + GroupRoutes.SORTING);
 

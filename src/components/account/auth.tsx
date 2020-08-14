@@ -5,7 +5,7 @@ import {compose} from 'recompose';
 import withBackground from '../../shared/hoc/with-background';
 import LoginForm from '../account/login-form';
 import {Routes} from '../router';
-import Link from '../../shared/components/link';
+import Link from '../common/link';
 import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
 import RegisterForm from './registration-form';

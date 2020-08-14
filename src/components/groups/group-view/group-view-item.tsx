@@ -1,14 +1,14 @@
 import React, {FC} from 'react';
-import {GroupItem} from '../_types';
 import {Box} from '@material-ui/core';
 import {groupItemViewStyles} from './_styles';
-import {CheckIcon} from '../../../shared/components/icons/check-icon';
-import {PackageDownIcon} from '../../../shared/components/icons/package-down-icon';
-import {EditIcon} from '../../../shared/components/icons/edit-icon';
-import {DeleteIcon} from '../../../shared/components/icons/delete-icon';
+import {CheckIcon} from '../../common/icons/check-icon';
+import {PackageDownIcon} from '../../common/icons/package-down-icon';
+import {EditIcon} from '../../common/icons/edit-icon';
+import {DeleteIcon} from '../../common/icons/delete-icon';
+import {Item} from '../../../models/item';
 
 type Props = {
-  item: GroupItem;
+  item: Item;
 }
 
 const GroupViewItem: FC<Props> = ({item}: Props) => {

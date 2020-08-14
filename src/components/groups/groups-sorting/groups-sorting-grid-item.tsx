@@ -10,8 +10,8 @@ import {groupSortingGridItemStyles} from './_styles';
 type Props = RefAttributes<any> &
   HTMLAttributes<any> &
   GroupProps & {
-    bind: (...any) => void;
-  };
+  bind: (...any) => void;
+};
 
 const GroupsSortingGridItem: FC<Props> = ({group, style, bind, ref}: Props) => {
   const classes = groupSortingGridItemStyles();

@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import {Group} from '../_types';
 import {Box, Typography} from '@material-ui/core';
 import {groupHeaderStyles} from './_styles';
-import csx from 'classnames';
+import Divider from '../../common/divider';
+import {Group} from '../../../models/group';
 
 type Props = {
   group: Group;
@@ -11,8 +11,6 @@ type Props = {
 const GroupViewHeader: FC<Props> = ({group}: Props) => {
   const classes = groupHeaderStyles();
 
-  const dividerClassNames = csx(classes.divider, classes.dividerYellow);
-
   return (
     <Box className={classes.root}>
       <Typography variant="h6" color="primary">
@@ -20,7 +18,7 @@ const GroupViewHeader: FC<Props> = ({group}: Props) => {
           {group.title}
         </Box>
       </Typography>
-      <Box className={dividerClassNames} />
+      <Divider color={'yellow'} height={5} />
     </Box>
   );
 };

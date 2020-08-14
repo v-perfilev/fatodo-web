@@ -8,8 +8,8 @@ import {compose} from 'recompose';
 import withFlexibleHeader from '../../shared/hoc/with-flexible-header';
 import withAdditionalMenu from '../../shared/hoc/with-additional-menu';
 import {Routes} from '../router';
-import AnimatedRouter from '../../shared/components/animated-router';
-import Group from './group-view/group-view';
+import AnimatedRouter from '../../shared/routes/animated-router';
+import GroupView from './group-view/group-view';
 
 export enum GroupRoutes {
   SORTING = '/sorting',
@@ -23,7 +23,7 @@ const GroupRouter: FC = () => {
     <AnimatedRouter>
       <PublicRoute exact path={match.path} component={GroupsPreview} />
       <PublicRoute path={match.path + GroupRoutes.SORTING} component={GroupsSorting} />
-      <PublicRoute path={match.path + GroupRoutes.GROUP} component={Group} />
+      <PublicRoute path={match.path + GroupRoutes.GROUP} component={GroupView} />
       <Redirect to={Routes.PAGE_NOT_FOUND} />
     </AnimatedRouter>
   );

@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
 import {TEST_GROUP} from '../_constants';
 import GroupsSortingGridContainer from './groups-sorting-grid-container';
-import {CheckIcon} from '../../../shared/components/icons/check-icon';
-import {CloseIcon} from '../../../shared/components/icons/close-icon';
+import {CheckIcon} from '../../common/icons/check-icon';
+import {CloseIcon} from '../../common/icons/close-icon';
 import {compose} from 'recompose';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
@@ -11,6 +11,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-button';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
+import {Group} from '../../../models/group';
 
 const initGroups = Array.from(Array(10).keys()).map(() => {
   return TEST_GROUP;
@@ -24,7 +25,7 @@ type Props = ConnectedProps<typeof connector>;
 const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
   const history = useHistory();
   const {t, i18n} = useTranslation();
-  const [groups, setGroups] = useState([]);
+  const [groups, setGroups] = useState<Group[]>([]);
 
   const redirectToGroupsRoot = (): void => history.push(Routes.GROUPS);
 

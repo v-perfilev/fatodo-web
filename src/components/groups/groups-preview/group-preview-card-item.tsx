@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {Box, Card, Typography} from '@material-ui/core';
-import {CheckIcon} from '../../../shared/components/icons/check-icon';
-import {GroupItem} from '../_types';
+import {CheckIcon} from '../../common/icons/check-icon';
 import {groupCardItemStyles} from './_styles';
 import {compose} from 'recompose';
 import {animated} from 'react-spring';
 import Truncate from 'react-truncate';
+import {Item} from '../../../models/item';
 
 type Props = HTMLAttributes<any> & {
-  item: GroupItem;
+  item: Item;
 };
 
 const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {

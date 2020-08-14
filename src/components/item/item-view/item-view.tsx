@@ -1,29 +1,23 @@
 import React, {FC, memo, useEffect, useState} from 'react';
-import {TEST_GROUP} from '../_constants';
 import {setMenu} from '../../../store/actions/additional-menu.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import {Container} from '@material-ui/core';
-import GroupViewItems from './group-view-items';
-import GroupViewUsers from './group-view-users';
-import GroupViewMessages from './group-view-messages';
-import {groupStyles} from './_styles';
-import GroupViewHeader from './group-view-header';
-import {Group} from '../../../models/group';
-
-const initGroup = TEST_GROUP;
+import {itemStyles} from './_styles';
+import {Item} from '../../../models/item';
+import {TEST_GROUP} from '../../groups/_constants';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-const GroupView: FC<Props> = ({setMenu}: Props) => {
-  const classes = groupStyles();
+const ItemView: FC<Props> = ({setMenu}: Props) => {
+  const classes = itemStyles();
   const {i18n} = useTranslation();
-  const [group, setGroup] = useState<Group>(null);
+  const [item, setItem] = useState<Item>(null);
 
   const menu = (
     <>
@@ -32,21 +26,19 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
   );
 
   useEffect(() => {
-    setGroup(initGroup);
+    // TODO set item
+    setItem(TEST_GROUP.items[0]);
   }, []);
 
   useEffect(() => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return group && (
+  return item && (
     <Container className={classes.root}>
-      <GroupViewHeader group={group} />
-      <GroupViewUsers users={group.users} />
-      <GroupViewItems items={group.items} color={group.color} />
-      <GroupViewMessages group={group} />
+      Test
     </Container>
   );
 };
 
-export default compose(connector, memo)(GroupView);
+export default compose(connector, memo)(ItemView);

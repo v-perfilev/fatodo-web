@@ -13,7 +13,7 @@ const GroupViewUsers: FC<Props> = ({users}: Props) => {
   return (
     <Box className={classes.root}>
       {users.map((user, index) => (
-        <Paper square className={classes.user}>
+        <Paper square className={classes.user} key={index}>
           <Typography variant="body2">{user.username}</Typography>
         </Paper>
       ))}

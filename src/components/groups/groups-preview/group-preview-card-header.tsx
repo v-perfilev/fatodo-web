@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {CardHeader, IconButton, Typography} from '@material-ui/core';
-import {DotsVerticalIcon} from '../../../shared/components/icons/dots-vertical-icon';
+import {DotsVerticalIcon} from '../../common/icons/dots-vertical-icon';
 import {groupCardHeaderStyles} from './_styles';
 
 type Props = {

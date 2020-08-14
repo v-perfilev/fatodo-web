@@ -1,14 +1,14 @@
 import React, {FC} from 'react';
-import {Group} from '../_types';
 import {Box} from '@material-ui/core';
 import {groupMessagesStyles} from './_styles';
+import {Group} from '../../../models/group';
 
 type Props = {
   group: Group;
 }
 
 const GroupViewMessages: FC<Props> = ({group}: Props) => {
-  const classes = groupMessagesStyles()
+  const classes = groupMessagesStyles();
 
   return (
     <Box className={classes.root}>

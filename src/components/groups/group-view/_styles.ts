@@ -1,5 +1,5 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {COLORS, GRADIENT_COLORS} from '../../../shared/theme';
+import {COLORS} from '../../../shared/theme';
 
 export const groupStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -16,14 +16,6 @@ export const groupHeaderStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     flexGrow: 1,
     padding: theme.spacing(1),
-  },
-  divider: {
-    width: '100%',
-    height: 5,
-    marginTop: theme.spacing(1),
-  },
-  dividerYellow: {
-    background: GRADIENT_COLORS.YELLOW,
   },
 }));
 
@@ -60,15 +52,6 @@ export const groupItemListStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
-  },
-  divider: {
-    width: '100%',
-    height: 1,
-    marginTop: theme.spacing(0.5),
-    marginBottom: theme.spacing(0.5),
-  },
-  dividerYellow: {
-    background: GRADIENT_COLORS.YELLOW,
   },
 }));
 

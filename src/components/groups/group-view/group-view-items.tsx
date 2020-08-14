@@ -1,28 +1,28 @@
 import React, {FC} from 'react';
-import {GroupItem} from '../_types';
 import {Box} from '@material-ui/core';
 import {groupItemListStyles} from './_styles';
 import GroupViewItem from './group-view-item';
-import csx from 'classnames';
+import Divider from '../../common/divider';
+import {GradientColor} from '../../_types';
+import {Item} from '../../../models/item';
 
 type Props = {
-  items: GroupItem[];
+  items: Item[];
+  color: GradientColor;
 }
 
-const GroupViewItems: FC<Props> = ({items}: Props) => {
+const GroupViewItems: FC<Props> = ({items, color}: Props) => {
   const classes = groupItemListStyles();
-
-  const dividerClassNames = csx(classes.divider, classes.dividerYellow);
 
   return (
     <Box className={classes.root}>
       {items.map((item, index) => (
-        <>
+        <Box key={index}>
           {index !== 0 && (
-            <Box className={dividerClassNames} />
+            <Divider color={color} />
           )}
-          <GroupViewItem item={item} key={index} />
-        </>
+          <GroupViewItem item={item} />
+        </Box>
       ))}
     </Box>
   );

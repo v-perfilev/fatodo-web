@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 import {Box, Drawer, Fade, Theme, useMediaQuery} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
-import Logo from '../../../shared/components/logo';
+import Logo from '../../common/logo';
 import {RootState} from '../../../store';
 import {connect, ConnectedProps} from 'react-redux';
 import {RouteProps} from 'react-router-dom';

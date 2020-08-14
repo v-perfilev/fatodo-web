@@ -7,11 +7,11 @@ import {logout} from '../../../store/actions/auth.actions';
 import {Trans, withTranslation} from 'react-i18next';
 import {sidebarMenuStyles} from './_styles';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {LogoutIcon} from '../../../shared/components/icons/logout-icon';
+import {LogoutIcon} from '../../common/icons/logout-icon';
 import {compose} from 'recompose';
 import {Routes} from '../../router';
-import {LoginIcon} from '../../../shared/components/icons/login-icon';
-import {SignUpIcon} from '../../../shared/components/icons/signup-icon';
+import {LoginIcon} from '../../common/icons/login-icon';
+import {SignUpIcon} from '../../common/icons/signup-icon';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Typography} from '@material-ui/core';
 import {logoWithTextStyles} from './_styles';
-import {Routes} from '../../components/router';
+import {Routes} from '../router';
 import Link from './link';
 
 const LogoWithText: FC = () => {

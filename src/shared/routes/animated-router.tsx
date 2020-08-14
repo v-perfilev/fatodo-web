@@ -3,7 +3,7 @@ import {FC, PropsWithChildren, useEffect, useRef, useState} from 'react';
 import {Switch, useLocation} from 'react-router-dom';
 import {animated, useTransition} from 'react-spring';
 import {Box} from '@material-ui/core';
-import {animatedRouterStyles} from './_styles';
+import {animatedRouterStyles} from '../../components/common/_styles';
 import {useResize} from '../hooks/use-resize';
 
 type Props = PropsWithChildren<any>;

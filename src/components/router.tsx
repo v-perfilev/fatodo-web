@@ -14,10 +14,12 @@ import NotActivated from './static/not-activated';
 import SocialLogin from './account/social-login';
 import Home from './home';
 import GroupRouter from './groups/_router';
+import ItemRouter from './item/_router';
 
 export enum Routes {
   ROOT = '/',
   GROUPS = '/groups',
+  ITEMS = '/items',
   LOGIN = '/login',
   REGISTRATION = '/registration',
   SOCIAL_LOGIN = '/social-login',
@@ -36,6 +38,7 @@ const Router: FC = () => (
   <Switch>
     <PublicRoute exact path={Routes.ROOT} component={Home} />
     <PublicRoute path={Routes.GROUPS} component={GroupRouter} />
+    <PublicRoute path={Routes.ITEMS} component={ItemRouter} />
     {/*Auth Router*/}
     <PublicRoute path={Routes.LOGIN} component={Auth} />
     <PublicRoute path={Routes.REGISTRATION} component={Auth} />

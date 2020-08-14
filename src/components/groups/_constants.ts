@@ -1,4 +1,4 @@
-import {Group} from './_types';
+import {Group} from '../../models/group';
 
 export const CARD_HEADER_HEIGHT = 60;
 export const CARD_RATIO = 1.5;

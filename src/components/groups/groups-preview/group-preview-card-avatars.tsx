@@ -4,7 +4,7 @@ import {Box, Typography} from '@material-ui/core';
 import {groupCardAvatarsStyles} from './_styles';
 import {AVATARS_IN_GROUP_CARD} from '../_constants';
 import {User} from '../../../models/user';
-import Userpic from '../../../shared/components/userpic';
+import Userpic from '../../common/userpic';
 
 type Props = {
   users: User[];

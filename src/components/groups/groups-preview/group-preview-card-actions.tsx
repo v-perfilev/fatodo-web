@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {FC, memo} from 'react';
 import {Badge, Box, CardActions} from '@material-ui/core';
-import {BellIcon} from '../../../shared/components/icons/bell-icon';
-import {MessageIcon} from '../../../shared/components/icons/message-icon';
+import {BellIcon} from '../../common/icons/bell-icon';
+import {MessageIcon} from '../../common/icons/message-icon';
 import GroupPreviewCardAvatars from './group-preview-card-avatars';
 import {groupCardActionsStyles} from './_styles';
 import {compose} from 'recompose';
