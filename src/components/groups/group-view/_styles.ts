@@ -10,15 +10,6 @@ export const groupStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupHeaderStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-    padding: theme.spacing(1),
-  },
-}));
-
 export const groupUsersStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',

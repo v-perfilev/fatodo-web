@@ -13,7 +13,7 @@ import {LogoutIcon} from '../../common/icons/logout-icon';
 import {SignUpIcon} from '../../common/icons/signup-icon';
 import {compose} from 'recompose';
 import {Routes} from '../../router';
-import LanguageSelect from '../../common/language-select';
+import LanguageSelect from '../../common/inputs/language-select';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});

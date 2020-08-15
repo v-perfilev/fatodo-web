@@ -1,4 +1,4 @@
-import {GradientColor} from '../components/_types';
+import {GradientColor} from '../shared/utils/color.utils';
 import {User} from './user';
 import {Item} from './item';
 

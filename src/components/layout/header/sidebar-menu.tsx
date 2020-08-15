@@ -4,7 +4,7 @@ import {Box, Divider, Fab, SwipeableDrawer, Toolbar} from '@material-ui/core';
 import {withTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import {ArrowRightIcon} from '../../common/icons/arrow-right-icon';
-import LanguageSelect from '../../common/language-select';
+import LanguageSelect from '../../common/inputs/language-select';
 import VerticalMenu from './vertical-menu';
 import {sidebarMenuStyles} from './_styles';
 

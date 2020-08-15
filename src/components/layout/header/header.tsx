@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useState} from 'react';
 import {AppBar, Box, Hidden, IconButton, Slide, Toolbar, useScrollTrigger} from '@material-ui/core';
-import LogoWithText from '../../common/logo-with-text';
+import LogoWithText from '../../common/logo/logo-with-text';
 import HorizontalMenu from './horizontal-menu';
 import {headerStyles} from './_styles';
 import {MenuIcon} from '../../common/icons/menu-icon';

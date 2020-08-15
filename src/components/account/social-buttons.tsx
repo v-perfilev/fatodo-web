@@ -4,7 +4,7 @@ import {API_URL, BASE_URL} from '../../constants';
 import {LanguageUtils} from '../../shared/utils/language.utils';
 import {Trans, withTranslation} from 'react-i18next';
 import {Routes} from '../router';
-import LoadingButton from '../common/buttons/loading-button';
+import LoadingButton from '../common/inputs/loading-button';
 import {FacebookIcon} from '../common/icons/facebook-icon';
 import {GoogleIcon} from '../common/icons/google-icon';
 import {Box, Divider, Typography} from '@material-ui/core';

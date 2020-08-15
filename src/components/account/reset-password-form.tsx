@@ -12,7 +12,7 @@ import {passwordValidator, repeatPasswordValidator} from './_validators';
 import {IconButton, InputAdornment} from '@material-ui/core';
 import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
-import LoadingButton from '../common/buttons/loading-button';
+import LoadingButton from '../common/inputs/loading-button';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import {NotificationUtils} from '../../shared/utils/notification.utils';

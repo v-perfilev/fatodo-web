@@ -1,12 +1,14 @@
 import * as React from 'react';
-import {FC, PropsWithChildren, useEffect, useRef, useState} from 'react';
+import {FC, ReactNode, useEffect, useRef, useState} from 'react';
 import {Switch, useLocation} from 'react-router-dom';
 import {animated, useTransition} from 'react-spring';
 import {Box} from '@material-ui/core';
-import {animatedRouterStyles} from '../../components/common/_styles';
+import {animatedRouterStyles} from './_styles';
 import {useResize} from '../hooks/use-resize';
 
-type Props = PropsWithChildren<any>;
+type Props = {
+  children: ReactNode
+};
 
 const AnimatedRouter: FC<Props> = ({children}: Props) => {
   const classes = animatedRouterStyles();

@@ -10,7 +10,7 @@ import GroupViewItems from './group-view-items';
 import GroupViewUsers from './group-view-users';
 import GroupViewMessages from './group-view-messages';
 import {groupStyles} from './_styles';
-import GroupViewHeader from './group-view-header';
+import PageHeader from '../../common/page-layouts/page-header';
 import {Group} from '../../../models/group';
 
 const initGroup = TEST_GROUP;
@@ -41,7 +41,7 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
 
   return group && (
     <Container className={classes.root}>
-      <GroupViewHeader group={group} />
+      <PageHeader title={group.title} color={group.color} />
       <GroupViewUsers users={group.users} />
       <GroupViewItems items={group.items} color={group.color} />
       <GroupViewMessages group={group} />

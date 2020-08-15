@@ -9,7 +9,7 @@ import {authFormStyles} from './_styles';
 import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import AccountService from '../../services/account.service';
-import LoadingButton from '../common/buttons/loading-button';
+import LoadingButton from '../common/inputs/loading-button';
 import {NotificationUtils} from '../../shared/utils/notification.utils';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
 import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';

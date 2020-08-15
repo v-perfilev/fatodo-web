@@ -10,7 +10,7 @@ import {useHistory, useLocation} from 'react-router-dom';
 import {Routes} from '../router';
 import AccountService from '../../services/account.service';
 import {HomeIcon} from '../common/icons/home-icon';
-import LoadingButton from '../common/buttons/loading-button';
+import LoadingButton from '../common/inputs/loading-button';
 import {EmailIcon} from '../common/icons/email-icon';
 
 type Props = RedirectTimerProps;

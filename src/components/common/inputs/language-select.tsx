@@ -1,18 +1,18 @@
 import * as React from 'react';
-import {FC, useState} from 'react';
-import {Button, Fade, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem} from '@material-ui/core';
-import {LANGUAGES} from '../../shared/i18n';
-import {LanguageIcon} from './icons/language-icon';
-import {ArrowDownIcon} from './icons/arrow-down-icon';
-import {LanguageUtils} from '../../shared/utils/language.utils';
-import {sidebarMenuStyles} from '../layout/header/_styles';
+import {FC, HTMLAttributes, useState} from 'react';
+import {Box, Button, Fade, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem} from '@material-ui/core';
+import {LANGUAGES} from '../../../shared/i18n';
+import {LanguageIcon} from '../icons/language-icon';
+import {ArrowDownIcon} from '../icons/arrow-down-icon';
+import {LanguageUtils} from '../../../shared/utils/language.utils';
+import {languageSelectStyles} from './_styles';
 
-type Props = {
+type Props = HTMLAttributes<any> & {
   list?: boolean;
 };
 
-const LanguageSelect: FC<Props> = ({list}: Props) => {
-  const classes = sidebarMenuStyles();
+const LanguageSelect: FC<Props> = ({list, className}: Props) => {
+  const classes = languageSelectStyles();
   const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null);
 
   const isOpen = Boolean(anchorElement);
@@ -36,7 +36,7 @@ const LanguageSelect: FC<Props> = ({list}: Props) => {
   };
 
   return (
-    <>
+    <Box className={className}>
       {list ? (
         <List component="nav">
           <ListItem button onClick={handleClick}>
@@ -66,7 +66,7 @@ const LanguageSelect: FC<Props> = ({list}: Props) => {
           </MenuItem>
         ))}
       </Menu>
-    </>
+    </Box>
   );
 };
 

@@ -12,7 +12,7 @@ import {Trans, useTranslation, withTranslation} from 'react-i18next';
 import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
-import LoadingButton from '../common/buttons/loading-button';
+import LoadingButton from '../common/inputs/loading-button';
 import AccountService from '../../services/account.service';
 import {NotificationUtils} from '../../shared/utils/notification.utils';
 import {enqueueSnackbar} from '../../store/actions/notification.actions';
@@ -20,7 +20,7 @@ import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../router';
 import {ResponseUtils} from '../../shared/utils/response.utils';
 import {SecurityUtils} from '../../shared/utils/security.utils';
-import Link from '../common/link';
+import Link from '../common/inputs/link';
 import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
 import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 
