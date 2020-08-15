@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Redirect, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
-import GroupsPreview from './groups-preview/groups-preview';
+import GroupsPreview from './groups-preview/group-preview';
 import GroupsSorting from './groups-sorting/groups-sorting';
 import {compose} from 'recompose';
 import withFlexibleHeader from '../../shared/hoc/with-flexible-header';

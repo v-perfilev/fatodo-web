@@ -8,7 +8,7 @@ import {compose} from 'recompose';
 
 type Props = GroupProps;
 
-const GroupsGridItem: FC<Props> = ({group}: Props) => {
+const GroupPreviewGridItem: FC<Props> = ({group}: Props) => {
   const classes = groupGridItemStyles();
 
   return (
@@ -18,4 +18,4 @@ const GroupsGridItem: FC<Props> = ({group}: Props) => {
   );
 };
 
-export default compose(memo)(GroupsGridItem);
+export default compose(memo)(GroupPreviewGridItem);

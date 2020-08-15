@@ -6,8 +6,8 @@ export interface Group {
   id: string;
   title: string;
   color: GradientColor;
-  items: Item[];
-  users: User[];
+  items?: Item[];
+  users?: User[];
   notificationCount: number;
   messageCount: number;
 }

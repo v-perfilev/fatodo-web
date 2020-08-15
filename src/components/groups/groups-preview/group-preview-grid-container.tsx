@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Grid} from '@material-ui/core';
-import GroupGridItem from './groups-grid-item';
+import GroupGridItem from './group-preview-grid-item';
 import {groupGridContainerStyles} from './_styles';
 import {Group} from '../../../models/group';
 
@@ -9,7 +9,7 @@ interface Props {
   groups: Group[];
 }
 
-const GroupsGridContainer: FC<Props> = ({groups}: Props) => {
+const GroupPreviewGridContainer: FC<Props> = ({groups}: Props) => {
   const classes = groupGridContainerStyles();
 
   return (
@@ -21,4 +21,4 @@ const GroupsGridContainer: FC<Props> = ({groups}: Props) => {
   );
 };
 
-export default GroupsGridContainer;
+export default GroupPreviewGridContainer;

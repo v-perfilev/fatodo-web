@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
-import GroupsGridContainer from './groups-grid-container';
-import {TEST_GROUP} from '../_constants';
+import GroupPreviewGridContainer from './group-preview-grid-container';
 import {compose} from 'recompose';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
@@ -13,6 +12,7 @@ import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-b
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group';
+import {TEST_GROUP} from '../../_constants';
 
 const initGroups = Array.from(Array(10).keys()).map(() => {
   return TEST_GROUP;
@@ -23,7 +23,7 @@ const connector = connect(null, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
+const GroupPreview: FC<Props> = ({setMenu}: Props) => {
   const history = useHistory();
   const {t, i18n} = useTranslation();
   const [groups, setGroups] = useState<Group[]>([]);
@@ -50,7 +50,7 @@ const GroupsPreview: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return <GroupsGridContainer groups={groups} />;
+  return <GroupPreviewGridContainer groups={groups} />;
 };
 
-export default compose(connector)(GroupsPreview);
+export default compose(connector)(GroupPreview);

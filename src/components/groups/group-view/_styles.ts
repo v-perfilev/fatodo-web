@@ -23,14 +23,6 @@ export const groupUsersStyles = makeStyles((theme: Theme) => ({
       marginBottom: theme.spacing(1),
     },
   },
-  user: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
-  },
   avatar: {
     width: 25,
     height: 25,

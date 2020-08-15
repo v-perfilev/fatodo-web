@@ -5,10 +5,12 @@ import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-s
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import {Container} from '@material-ui/core';
-import {itemStyles} from './_styles';
+import {itemViewStyles} from './_styles';
 import {Item} from '../../../models/item';
-import {TEST_GROUP} from '../../groups/_constants';
 import PageHeader from '../../common/page-layouts/page-header';
+import ItemViewFeatures from './item-view-features';
+import ItemViewContent from './item-view-content';
+import {generateItem} from '../../_constants';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -16,7 +18,7 @@ const connector = connect(null, mapDispatchToProps);
 type Props = ConnectedProps<typeof connector>;
 
 const ItemView: FC<Props> = ({setMenu}: Props) => {
-  const classes = itemStyles();
+  const classes = itemViewStyles();
   const {i18n} = useTranslation();
   const [item, setItem] = useState<Item>(null);
 
@@ -28,7 +30,7 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
 
   useEffect(() => {
     // TODO set item
-    setItem(TEST_GROUP.items[0]);
+    setItem(generateItem());
   }, []);
 
   useEffect(() => {
@@ -37,8 +39,9 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
 
   return item && (
     <Container className={classes.root}>
-      <PageHeader title={item.title} color={'yellow'} />
-      Test
+      <PageHeader title={item.title} subtitle={item.group.title} color={item.group.color} />
+      <ItemViewFeatures />
+      <ItemViewContent />
     </Container>
   );
 };

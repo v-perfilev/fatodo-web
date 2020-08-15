@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import {TEST_GROUP} from '../_constants';
 import GroupsSortingGridContainer from './groups-sorting-grid-container';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
@@ -12,6 +11,7 @@ import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-b
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group';
+import {TEST_GROUP} from '../../_constants';
 
 const initGroups = Array.from(Array(10).keys()).map(() => {
   return TEST_GROUP;

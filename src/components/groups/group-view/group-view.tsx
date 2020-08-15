@@ -1,5 +1,4 @@
 import React, {FC, memo, useEffect, useState} from 'react';
-import {TEST_GROUP} from '../_constants';
 import {setMenu} from '../../../store/actions/additional-menu.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
@@ -12,6 +11,7 @@ import GroupViewMessages from './group-view-messages';
 import {groupStyles} from './_styles';
 import PageHeader from '../../common/page-layouts/page-header';
 import {Group} from '../../../models/group';
+import {TEST_GROUP} from '../../_constants';
 
 const initGroup = TEST_GROUP;
 
