@@ -6,7 +6,8 @@ export const groupStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    padding: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -15,7 +16,8 @@ export const groupUsersStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     flexGrow: 1,
-    padding: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
     '& > *': {
       marginRight: theme.spacing(2),
       marginBottom: theme.spacing(1),
@@ -41,8 +43,8 @@ export const groupItemListStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -114,6 +116,7 @@ export const groupMessagesStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    padding: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
 }));

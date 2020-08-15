@@ -8,6 +8,7 @@ import {Container} from '@material-ui/core';
 import {itemStyles} from './_styles';
 import {Item} from '../../../models/item';
 import {TEST_GROUP} from '../../groups/_constants';
+import PageHeader from '../../common/page-layouts/page-header';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -36,6 +37,7 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
 
   return item && (
     <Container className={classes.root}>
+      <PageHeader title={item.title} color={'yellow'} />
       Test
     </Container>
   );
