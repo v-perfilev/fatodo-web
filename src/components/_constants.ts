@@ -1,5 +1,6 @@
 import {Group} from '../models/group';
 import {User} from '../models/user';
+import {Item} from '../models/item';
 
 
 const GROUP_BASE: Group = {
@@ -41,10 +42,20 @@ const ITEM_TITLES: string[] = [
   'Review editor calendar',
 ];
 
-const ITEM_TEMPLATE = {
+const LOREM_IPSUM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+
+const ITEM_TEMPLATE: Item = {
   id: Math.random().toString(),
-  type: 'todo',
-  content: 'test',
+  title: '',
+  content: LOREM_IPSUM,
+  type: 'task',
+  tags: ['test1', 'test2', 'test3'],
+  priority: 'normal',
+  reminders: [],
+  createdBy: GROUP_USERS[0],
+  createdAt: '01-01-2001',
+  updatedBy: GROUP_USERS[0],
+  updatedAt: '01-01-2001',
   group: GROUP_BASE,
 };
 

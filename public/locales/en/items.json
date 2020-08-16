@@ -1,0 +1,21 @@
+{
+  "labels": {
+    "group": "Group",
+    "type": "Type",
+    "priority": "Priority",
+    "createdBy": "Created by",
+    "createdAt": "Created at",
+    "updatedBy": "Updated by",
+    "updatedAt": "Updated at",
+    "tags": "Tags",
+    "reminders": "Reminders"
+  },
+  "types": {
+    "task": "Task"
+  },
+  "priorities": {
+    "low": "low",
+    "normal": "normal",
+    "high": "high"
+  }
+}

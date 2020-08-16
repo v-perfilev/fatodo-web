@@ -1,12 +1,12 @@
 import {createMuiTheme} from '@material-ui/core';
 
 export enum COLORS {
-  MAIN = '#21b0a7',
+  PRIMARY = '#21b0a7',
   SECONDARY = '#ffba16',
-  INFO = '#21b0a7',
-  SUCCESS = '#66bb6a',
-  WARNING = '#ffba16',
-  ERROR = '#ff5722',
+  BLUE = '#21b0a7',
+  GREEN = '#66bb6a',
+  YELLOW = '#ffba16',
+  RED = '#ff5722',
   WHITE = '#ffffff',
   LIGHT_GREY = '#e0e0e0',
   GREY = '#aaaaaa',
@@ -21,7 +21,7 @@ export const theme = createMuiTheme({
   palette: {
     type: 'light',
     primary: {
-      main: COLORS.MAIN,
+      main: COLORS.PRIMARY,
       contrastText: COLORS.WHITE,
     },
     secondary: {
@@ -29,19 +29,19 @@ export const theme = createMuiTheme({
       contrastText: COLORS.WHITE,
     },
     info: {
-      main: COLORS.INFO,
+      main: COLORS.BLUE,
       contrastText: COLORS.WHITE,
     },
     success: {
-      main: COLORS.SUCCESS,
+      main: COLORS.GREEN,
       contrastText: COLORS.WHITE,
     },
     warning: {
-      main: COLORS.WARNING,
+      main: COLORS.YELLOW,
       contrastText: COLORS.WHITE,
     },
     error: {
-      main: COLORS.ERROR,
+      main: COLORS.RED,
       contrastText: COLORS.WHITE,
     },
     text: {

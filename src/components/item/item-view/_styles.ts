@@ -10,13 +10,47 @@ export const itemViewStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const itemViewFeaturesStyles = makeStyles((theme: Theme) => ({
+export const itemViewDataStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    '& > *': {
+      marginRight: theme.spacing(3),
+    },
+    '& > *:last-child': {
+      marginRight: 0,
+    },
+  },
+}));
+
+export const itemViewPropertiesStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: 1,
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
+    '& > *': {
+      marginRight: theme.spacing(3),
+    },
+    '& > *:last-child': {
+      marginRight: 0,
+    },
+  },
+}));
+
+export const itemViewPropertiesChangesStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    '& > *': {
+      marginRight: theme.spacing(3),
+    },
+    '& > *:last-child': {
+      marginRight: 0,
+    },
   },
 }));
 

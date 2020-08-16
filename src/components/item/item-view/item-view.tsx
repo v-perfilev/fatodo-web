@@ -8,9 +8,11 @@ import {Container} from '@material-ui/core';
 import {itemViewStyles} from './_styles';
 import {Item} from '../../../models/item';
 import PageHeader from '../../common/page-layouts/page-header';
-import ItemViewFeatures from './item-view-features';
-import ItemViewContent from './item-view-content';
+import ItemViewData from './item-view-data';
 import {generateItem} from '../../_constants';
+import PageDivider from '../../common/page-layouts/page-divider';
+import ItemViewProperties from './item-view-properties';
+import ItemViewContent from './item-view-content';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -39,9 +41,17 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
 
   return item && (
     <Container className={classes.root}>
-      <PageHeader title={item.title} subtitle={item.group.title} color={item.group.color} />
-      <ItemViewFeatures />
-      <ItemViewContent />
+      <PageHeader title={item.title} />
+      <PageDivider color={item.group.color} height={5} />
+      <ItemViewData item={item} />
+      {item.content && (
+        <>
+          <PageDivider color={item.group.color} />
+          <ItemViewContent content={item.content} />
+          <PageDivider color={item.group.color} />
+        </>
+      )}
+      <ItemViewProperties item={item} />
     </Container>
   );
 };

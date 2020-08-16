@@ -80,7 +80,7 @@ export const groupItemViewStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(1),
     cursor: 'pointer',
     '&:hover': {
-      color: COLORS.MAIN,
+      color: COLORS.PRIMARY,
     },
   },
   editIcon: {
@@ -98,7 +98,7 @@ export const groupItemViewStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(1),
     cursor: 'pointer',
     '&:hover': {
-      color: COLORS.ERROR,
+      color: COLORS.RED,
     },
   },
 }));

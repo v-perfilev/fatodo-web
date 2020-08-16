@@ -1,0 +1,21 @@
+{
+  "labels": {
+    "group": "Группа",
+    "type": "Тип",
+    "priority": "Приоритет",
+    "createdBy": "Добавлено",
+    "createdAt": "Дата добавления",
+    "updatedBy": "Обновлено",
+    "updatedAt": "Дата обновления",
+    "tags": "Тэги",
+    "reminders": "Напоминания"
+  },
+  "types": {
+    "task": "Задача"
+  },
+  "priorities": {
+    "low": "низкий",
+    "normal": "нормальный",
+    "high": "высокий"
+  }
+}
