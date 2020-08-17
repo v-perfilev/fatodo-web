@@ -1,6 +1,7 @@
 import {Group} from '../models/group';
 import {User} from '../models/user';
 import {Item} from '../models/item';
+import {Reminder} from '../models/reminder';
 
 
 const GROUP_BASE: Group = {
@@ -44,6 +45,13 @@ const ITEM_TITLES: string[] = [
 
 const LOREM_IPSUM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
+const TEST_REMINDER: Reminder = {
+  id: '',
+  periodicity: 'once',
+  time: 600,
+  onceDate: 57657657,
+};
+
 const ITEM_TEMPLATE: Item = {
   id: Math.random().toString(),
   title: '',
@@ -51,7 +59,7 @@ const ITEM_TEMPLATE: Item = {
   type: 'task',
   tags: ['test1', 'test2', 'test3'],
   priority: 'normal',
-  reminders: [],
+  reminders: [TEST_REMINDER],
   createdBy: GROUP_USERS[0],
   createdAt: '01-01-2001',
   updatedBy: GROUP_USERS[0],

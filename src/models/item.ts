@@ -1,16 +1,10 @@
 import {Group} from './group';
 import {User} from './user';
+import {Reminder} from './reminder';
 
 export type ItemType = 'task' | 'event' | 'repetition';
 
 export type ItemPriority = 'low' | 'normal' | 'high';
-
-export interface ItemReminder {
-  id: string;
-  date: string;
-  time: string;
-  repeat: string;
-}
 
 export interface Item {
   id: string;
@@ -19,7 +13,7 @@ export interface Item {
   tags?: string[];
   type: ItemType;
   priority: ItemPriority;
-  reminders?: ItemReminder[];
+  reminders?: Reminder[];
   createdBy: User;
   createdAt: string;
   updatedBy: User;

@@ -3,7 +3,7 @@ import {Box} from '@material-ui/core';
 import {groupItemListStyles} from './_styles';
 import GroupViewItem from './group-view-item';
 import PageDivider from '../../common/page-layouts/page-divider';
-import {GradientColor} from '../../../shared/utils/color.utils';
+import {GradientColor} from '../../_types';
 import {Item} from '../../../models/item';
 
 type Props = {
