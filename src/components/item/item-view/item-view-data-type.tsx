@@ -13,7 +13,7 @@ const ItemViewDataType: FC<Props> = ({type}: Props) => {
 
   return (
     <LabeledBox label={t('items:labels.type')}>
-      <PaperBox text={type} />
+      <PaperBox>{type}</PaperBox>
     </LabeledBox>
   );
 };

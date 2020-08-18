@@ -14,7 +14,7 @@ const GroupViewUsers: FC<Props> = ({users}: Props) => {
   return (
     <Box className={classes.root}>
       {users.map((user, index) => (
-        <PaperBox text={user.username} key={index} />
+        <PaperBox key={index}>{user.username}</PaperBox>
       ))}
     </Box>
   );

@@ -17,19 +17,19 @@ const ItemViewPropertiesChanges: FC<Props> = ({item}: Props) => {
   return (
     <Box className={classes.root}>
       <LabeledBox label={t('items:labels.createdBy')}>
-        <PaperBox text={item.createdBy.username} />
+        <PaperBox>{item.createdBy.username}</PaperBox>
       </LabeledBox>
       <LabeledBox label={t('items:labels.createdAt')}>
-        <PaperBox text={item.createdAt} />
+        <PaperBox>{item.createdAt}</PaperBox>
       </LabeledBox>
       {item.updatedBy && (
         <LabeledBox label={t('items:labels.updatedBy')}>
-          <PaperBox text={item.updatedBy.username} />
+          <PaperBox>{item.updatedBy.username}</PaperBox>
         </LabeledBox>
       )}
       {item.updatedAt && (
         <LabeledBox label={t('items:labels.updatedAt')}>
-          <PaperBox text={item.updatedAt} />
+          <PaperBox>{item.updatedAt}</PaperBox>
         </LabeledBox>
       )}
     </Box>

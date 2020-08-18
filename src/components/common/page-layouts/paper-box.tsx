@@ -1,19 +1,19 @@
-import React, {FC, HTMLAttributes} from 'react';
+import React, {FC, HTMLAttributes, ReactNode} from 'react';
 import {paperBoxStyles} from './_styles';
-import {Paper, Typography} from '@material-ui/core';
+import {Paper} from '@material-ui/core';
 import csx from 'classnames';
 
 type Props = HTMLAttributes<any> & {
-  text: string;
+  children: ReactNode;
 }
 
-const PaperBox: FC<Props> = ({text, className}: Props) => {
+const PaperBox: FC<Props> = ({children, className}: Props) => {
   const classes = paperBoxStyles();
   const classNames = csx(classes.root, className);
 
   return (
     <Paper square className={classNames}>
-      <Typography variant="body2">{text}</Typography>
+      {children}
     </Paper>
   );
 };

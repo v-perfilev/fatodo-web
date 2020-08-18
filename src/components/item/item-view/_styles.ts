@@ -43,8 +43,6 @@ export const itemViewPropertiesChangesStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
     '& > *': {
       marginRight: theme.spacing(3),
     },

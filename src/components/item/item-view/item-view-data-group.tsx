@@ -13,7 +13,7 @@ const ItemViewDataGroup: FC<Props> = ({group}: Props) => {
 
   return (
     <LabeledBox label={t('items:labels.group')}>
-      <PaperBox text={group.title} />
+      <PaperBox>{group.title}</PaperBox>
     </LabeledBox>
   );
 };

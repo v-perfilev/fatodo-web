@@ -57,6 +57,6 @@ export const paperBoxStyles = makeStyles((theme: Theme) => ({
 
 export const pageSpacerStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: theme.spacing(1),
+    height: theme.spacing(2),
   },
 }));

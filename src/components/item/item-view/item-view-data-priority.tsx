@@ -1,8 +1,9 @@
 import React, {FC} from 'react';
-import Priority from '../../common/item-layouts/priority';
+import PriorityView from '../../common/item-layouts/priority-view';
 import LabeledBox from '../../common/page-layouts/labeled-box';
 import {ItemPriority} from '../../../models/item';
 import {useTranslation} from 'react-i18next';
+import PaperBox from '../../common/page-layouts/paper-box';
 
 type Props = {
   priority: ItemPriority;
@@ -13,7 +14,9 @@ const ItemViewDataPriority: FC<Props> = ({priority}: Props) => {
 
   return (
     <LabeledBox label={t('items:labels.priority')}>
-      <Priority priority={priority} />
+      <PaperBox>
+        <PriorityView priority={priority} />
+      </PaperBox>
     </LabeledBox>
   );
 };
