@@ -2,7 +2,7 @@ import {Group} from './group';
 import {User} from './user';
 import {Reminder} from './reminder';
 
-export type ItemType = 'task' | 'event' | 'repetition';
+export type ItemType = 'task' | 'event' | 'repetition' | 'note';
 
 export type ItemPriority = 'low' | 'normal' | 'high';
 

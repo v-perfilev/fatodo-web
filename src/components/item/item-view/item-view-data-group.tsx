@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import LabeledBox from '../../common/page-layouts/labeled-box';
 import {Group} from '../../../models/group';
-import PaperBox from '../../common/page-layouts/paper-box';
 import {useTranslation} from 'react-i18next';
+import {Box} from '@material-ui/core';
 
 type Props = {
   group: Group;
@@ -13,7 +13,7 @@ const ItemViewDataGroup: FC<Props> = ({group}: Props) => {
 
   return (
     <LabeledBox label={t('items:labels.group')}>
-      <PaperBox>{group.title}</PaperBox>
+      <Box>{group.title}</Box>
     </LabeledBox>
   );
 };

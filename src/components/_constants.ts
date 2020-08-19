@@ -49,7 +49,9 @@ const TEST_REMINDER: Reminder = {
   id: '',
   periodicity: 'once',
   time: 600,
-  onceDate: 57657657,
+  day: 15,
+  month: 6,
+  year: 2021,
 };
 
 const ITEM_TEMPLATE: Item = {

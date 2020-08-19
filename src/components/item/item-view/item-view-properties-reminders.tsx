@@ -4,6 +4,7 @@ import PaperBox from '../../common/page-layouts/paper-box';
 import PageSpacer from '../../common/page-layouts/page-spacer';
 import {useTranslation} from 'react-i18next';
 import {Reminder} from '../../../models/reminder';
+import ReminderView from '../../common/item-layouts/reminder-view';
 
 type Props = {
   reminders: Reminder[];
@@ -18,7 +19,9 @@ const ItemViewPropertiesReminders: FC<Props> = ({reminders}: Props) => {
     <>
       <LabeledBox label={t('items:labels.reminders')}>
         {reminders.map((reminder, index) => (
-          <PaperBox key={index}>{reminder.periodicity}</PaperBox>
+          <PaperBox key={index}>
+            <ReminderView reminder={reminder} />
+          </PaperBox>
         ))}
       </LabeledBox>
       <PageSpacer />

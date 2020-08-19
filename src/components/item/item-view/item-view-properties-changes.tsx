@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Box} from '@material-ui/core';
+import {Box, Typography} from '@material-ui/core';
 import {Item} from '../../../models/item';
 import LabeledBox from '../../common/page-layouts/labeled-box';
 import PaperBox from '../../common/page-layouts/paper-box';
@@ -17,19 +17,19 @@ const ItemViewPropertiesChanges: FC<Props> = ({item}: Props) => {
   return (
     <Box className={classes.root}>
       <LabeledBox label={t('items:labels.createdBy')}>
-        <PaperBox>{item.createdBy.username}</PaperBox>
+        <Box>{item.createdBy.username}</Box>
       </LabeledBox>
       <LabeledBox label={t('items:labels.createdAt')}>
-        <PaperBox>{item.createdAt}</PaperBox>
+        <Box>{item.createdAt}</Box>
       </LabeledBox>
       {item.updatedBy && (
         <LabeledBox label={t('items:labels.updatedBy')}>
-          <PaperBox>{item.updatedBy.username}</PaperBox>
+          <Box>{item.updatedBy.username}</Box>
         </LabeledBox>
       )}
       {item.updatedAt && (
         <LabeledBox label={t('items:labels.updatedAt')}>
-          <PaperBox>{item.updatedAt}</PaperBox>
+          <Box>{item.updatedAt}</Box>
         </LabeledBox>
       )}
     </Box>

@@ -66,6 +66,7 @@
     "i18next-http-backend": "^1.0.7",
     "lodash-es": "^4.17.15",
     "lodash-move": "^1.1.1",
+    "moment": "^2.27.0",
     "notistack": "^0.9.11",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

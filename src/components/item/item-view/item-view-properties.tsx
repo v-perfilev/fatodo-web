@@ -15,8 +15,8 @@ const ItemViewProperties: FC<Props> = ({item}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <ItemViewPropertiesTags tags={item.tags} />
       <ItemViewPropertiesReminders reminders={item.reminders} />
+      <ItemViewPropertiesTags tags={item.tags} />
       <ItemViewPropertiesChanges item={item} />
     </Box>
   );
