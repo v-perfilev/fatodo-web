@@ -9,9 +9,7 @@ export const itemFormStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(1),
   },
   form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
 }));

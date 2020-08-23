@@ -1,14 +1,12 @@
 import React, {FC} from 'react';
 import {itemFormStyles} from './_styles';
-import {Item} from '../../../models/item';
+import {Item, itemPriorities, ItemPriority, ItemType, itemTypes} from '../../../models/item';
 import {useTranslation} from 'react-i18next';
-import {Container} from '@material-ui/core';
+import {Container, Grid, MenuItem} from '@material-ui/core';
 import PageHeader from '../../common/page-layouts/page-header';
 import PageDivider from '../../common/page-layouts/page-divider';
 import {Field, Form, FormikBag, withFormik} from 'formik';
 import {TextField} from 'formik-material-ui';
-import * as Yup from 'yup';
-import {emailValidator, passwordValidator, usernameValidator} from '../../account/_validators';
 import {compose} from 'recompose';
 
 type Props = {
@@ -25,35 +23,55 @@ const ItemForm: FC<Props> = ({item, headerTitle}: Props) => {
       <PageHeader title={headerTitle} />
       <PageDivider color={item.group.color} height={5} />
       <Form className={classes.form}>
-        <Field component={TextField} type="text" name="email" label={t('form:fields.email.label')} fullWidth={true} />
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6} lg={6}>
+            <Field component={TextField} type="text" name="title" label={t('items:fields.title.label')} required
+                   fullWidth />
+          </Grid>
+          <Grid item xs={12} sm={6} lg={3}>
+            <Field component={TextField} type="text" name="type" label={t('items:fields.type.label')} select required
+                   fullWidth>
+              {Object.values(itemTypes).map((type, index) => (
+                <MenuItem value={type} key={index}>{t('items:types.' + type)}</MenuItem>
+              ))}
+            </Field>
+          </Grid>
+          <Grid item xs={12} sm={6} lg={3}>
+            <Field component={TextField} type="text" name="priority" label={t('items:fields.priority.label')} select
+                   required
+                   fullWidth>
+              {Object.values(itemPriorities).map((priority, index) => (
+                <MenuItem value={priority} key={index}>{t('items:priorities.' + priority)}</MenuItem>
+              ))}
+            </Field>
+          </Grid>
+          <Grid item xs={12} sm={6} lg={3}>
+            <Field component={TextField} type="text" name="priority" label={t('items:fields.priority.label')} select
+                   required
+                   fullWidth>
+              {Object.values(itemPriorities).map((priority, index) => (
+                <MenuItem value={priority} key={index}>{t('items:priorities.' + priority)}</MenuItem>
+              ))}
+            </Field>
+          </Grid>
+        </Grid>
+
       </Form>
     </Container>
   );
 };
 
 interface FormValues {
-  email: string;
-  username: string;
-  password: string;
+  title: string;
+  type: ItemType;
+  priority: ItemPriority;
 }
 
 const formik = withFormik<Props, FormValues>({
   mapPropsToValues: () => ({
-    email: '',
-    username: '',
-    password: '',
-  }),
-
-  mapPropsToErrors: () => ({
-    email: '',
-    username: '',
-    password: '',
-  }),
-
-  validationSchema: Yup.object().shape({
-    email: emailValidator.check(),
-    username: usernameValidator.check(),
-    password: passwordValidator,
+    title: '',
+    type: itemTypes[0],
+    priority: itemPriorities[1],
   }),
 
   validateOnMount: true,
