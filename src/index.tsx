@@ -16,6 +16,9 @@ import './shared/i18n';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Notifier from './shared/notification/notifier';
 import {NotificationProvider} from './shared/notification/notification-provider';
+import {MuiPickersUtilsProvider} from '@material-ui/pickers';
+import MomentUtils from '@date-io/moment';
+import {useTranslation} from 'react-i18next';
 
 const root = document.getElementById('root');
 
@@ -25,19 +28,25 @@ setupAxiosInterceptors({
   enqueueSnackbar: axiosActions.enqueueSnackbar,
 });
 
-const Root: FC = () => (
-  <Provider store={store}>
-    <ThemeProvider theme={theme}>
-      <NotificationProvider>
-        <Router>
-          <CssBaseline />
-          <Notifier />
-          <App />
-        </Router>
-      </NotificationProvider>
-    </ThemeProvider>
-  </Provider>
-);
+const Root: FC = () => {
+  const {i18n} = useTranslation();
+
+  return (
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <MuiPickersUtilsProvider utils={MomentUtils} locale={i18n.language}>
+          <NotificationProvider>
+            <Router>
+              <CssBaseline />
+              <Notifier />
+              <App />
+            </Router>
+          </NotificationProvider>
+        </MuiPickersUtilsProvider>
+      </ThemeProvider>
+    </Provider>
+  );
+};
 
 initLanguages.then(() => {
   ReactDOM.render(<Root />, root);

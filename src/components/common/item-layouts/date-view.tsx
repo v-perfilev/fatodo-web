@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
-import {TimeUtils} from '../../../shared/utils/time.utils';
+import {DateUtils} from '../../../shared/utils/date.utils';
 import {ParamDate} from '../../../models/param-date';
 
 type Props = HTMLAttributes<any> & {
@@ -14,8 +14,8 @@ const DateView: FC<Props> = ({date: paramDate, className}: Props) => {
 
   let description = '';
   if (paramDate.time) {
-    const timeDate = TimeUtils.getTimeFromParamDate(paramDate);
-    const time = TimeUtils.formatTime(timeDate);
+    const timeDate = DateUtils.getTimeFromParamDate(paramDate);
+    const time = DateUtils.formatTime(timeDate);
     const translatedTime = t('items:paramDate.time', {time});
     description = description.concat(translatedTime);
   }
@@ -25,12 +25,12 @@ const DateView: FC<Props> = ({date: paramDate, className}: Props) => {
       description = description.concat(' ');
     }
 
-    const dateDate = TimeUtils.getDateFromParamDate(paramDate);
+    const dateDate = DateUtils.getDateFromParamDate(paramDate);
     let date = '';
     if (paramDate.year) {
-      date = TimeUtils.formatDateWithYear(dateDate);
+      date = DateUtils.formatDateWithYear(dateDate);
     } else {
-      date = TimeUtils.formatDate(dateDate);
+      date = DateUtils.formatDate(dateDate);
     }
 
     const translatedDate = t('items:paramDate.date', {date});

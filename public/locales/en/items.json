@@ -24,6 +24,12 @@
     },
     "priority": {
       "label": "Priority"
+    },
+    "time": {
+      "label": "Time"
+    },
+    "date": {
+      "label": "Date"
     }
   },
   "types": {

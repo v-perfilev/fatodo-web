@@ -3,7 +3,7 @@ import {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {Reminder} from '../../../models/reminder';
-import {TimeUtils} from '../../../shared/utils/time.utils';
+import {DateUtils} from '../../../shared/utils/date.utils';
 
 type Props = HTMLAttributes<any> & {
   reminder: Reminder;
@@ -14,14 +14,14 @@ const ReminderView: FC<Props> = ({reminder, className}: Props) => {
 
   const label = t('items:reminder.periodicity.' + reminder.periodicity) + ': ';
 
-  const timeDate = TimeUtils.getTimeFromParamDate(reminder.date);
-  const dateDate = TimeUtils.getDateFromParamDate(reminder.date);
+  const timeDate = DateUtils.getTimeFromParamDate(reminder.date);
+  const dateDate = DateUtils.getDateFromParamDate(reminder.date);
 
-  const time = TimeUtils.formatTime(timeDate);
+  const time = DateUtils.formatTime(timeDate);
 
   let description = '';
   if (reminder.periodicity === 'once') {
-    const date = TimeUtils.formatDateWithYear(dateDate);
+    const date = DateUtils.formatDateWithYear(dateDate);
     description = t('items:reminder.' + reminder.periodicity, {time, date});
   } else if (reminder.periodicity === 'daily') {
     description = t('items:reminder.' + reminder.periodicity, {time});
@@ -32,7 +32,7 @@ const ReminderView: FC<Props> = ({reminder, className}: Props) => {
     const days = reminder.monthDays.map(d => t('items:reminder.weekdays.' + d)).join(', ');
     description = t('items:reminder.' + reminder.periodicity, {time, days});
   } else if (reminder.periodicity === 'yearly') {
-    const date = TimeUtils.formatDate(dateDate);
+    const date = DateUtils.formatDate(dateDate);
     description = t('items:reminder.' + reminder.periodicity, {time, date});
   }
 

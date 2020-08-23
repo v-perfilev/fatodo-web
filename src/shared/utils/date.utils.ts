@@ -1,7 +1,7 @@
 import moment from 'moment';
 import {ParamDate} from '../../models/param-date';
 
-export class TimeUtils {
+export class DateUtils {
 
   static getTimeFromParamDate = (paramDate: ParamDate): Date => {
     const time = paramDate.time;
@@ -23,7 +23,7 @@ export class TimeUtils {
       date.setFullYear(paramDate.year);
     }
     return date;
-  }
+  };
 
   static formatTime = (date: Date): string => {
     return moment(date).format('hh:mm');
@@ -36,5 +36,11 @@ export class TimeUtils {
   static formatDateWithYear = (date: Date): string => {
     return moment(date).format('DD.MM.YYYY');
   };
+
+  static getTimeFormat = (): string => 'hh:mm';
+
+  static getDateFormat = (): string => 'DD.MM';
+
+  static getDateWithYearFormat = (): string => 'DD.MM.YYYY';
 
 }

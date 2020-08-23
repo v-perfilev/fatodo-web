@@ -8,6 +8,8 @@ import PageDivider from '../../common/page-layouts/page-divider';
 import {Field, Form, FormikBag, withFormik} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {compose} from 'recompose';
+import {DatePicker, TimePicker} from 'formik-material-ui-pickers';
+import {DateUtils} from '../../../shared/utils/date.utils';
 
 type Props = {
   item: Item;
@@ -24,7 +26,7 @@ const ItemForm: FC<Props> = ({item, headerTitle}: Props) => {
       <PageDivider color={item.group.color} height={5} />
       <Form className={classes.form}>
         <Grid container spacing={3}>
-          <Grid item xs={12} sm={6} lg={6}>
+          <Grid item xs={12} sm={12} lg={6}>
             <Field component={TextField} type="text" name="title" label={t('items:fields.title.label')} required
                    fullWidth />
           </Grid>
@@ -45,14 +47,13 @@ const ItemForm: FC<Props> = ({item, headerTitle}: Props) => {
               ))}
             </Field>
           </Grid>
-          <Grid item xs={12} sm={6} lg={3}>
-            <Field component={TextField} type="text" name="priority" label={t('items:fields.priority.label')} select
-                   required
-                   fullWidth>
-              {Object.values(itemPriorities).map((priority, index) => (
-                <MenuItem value={priority} key={index}>{t('items:priorities.' + priority)}</MenuItem>
-              ))}
-            </Field>
+          <Grid item xs={6} sm={6} lg={3}>
+            <Field component={TimePicker} ampm={false} type="text" name="time" label={t('items:fields.time.label')}
+                   format={DateUtils.getTimeFormat()} variant="inline" fullWidth />
+          </Grid>
+          <Grid item xs={6} sm={6} lg={3}>
+            <Field component={DatePicker} ampm={false} type="text" name="date" label={t('items:fields.date.label')}
+                   format={DateUtils.getDateWithYearFormat()} variant="inline" fullWidth />
           </Grid>
         </Grid>
 
@@ -65,6 +66,8 @@ interface FormValues {
   title: string;
   type: ItemType;
   priority: ItemPriority;
+  time?: Date;
+  date?: Date;
 }
 
 const formik = withFormik<Props, FormValues>({
@@ -72,6 +75,8 @@ const formik = withFormik<Props, FormValues>({
     title: '',
     type: itemTypes[0],
     priority: itemPriorities[1],
+    time: new Date(),
+    date: new Date(),
   }),
 
   validateOnMount: true,
