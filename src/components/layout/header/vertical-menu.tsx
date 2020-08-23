@@ -4,7 +4,7 @@ import {FC} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import {List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import {logout} from '../../../store/actions/auth.actions';
-import {Trans, withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {sidebarMenuStyles} from './_styles';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {LogoutIcon} from '../../common/icons/logout-icon';
@@ -22,6 +22,7 @@ type Props = ConnectedProps<typeof connector> & RouteComponentProps;
 
 const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}: Props) => {
   const classes = sidebarMenuStyles();
+  const {t} = useTranslation();
 
   const redirectToLogin = (): void => history.push(Routes.LOGIN);
   const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
@@ -34,7 +35,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
             <LogoutIcon className={classes.icon} />
           </ListItemIcon>
           <ListItemText>
-            <Trans i18nKey={'header.logout'} />
+            {t('header.logout')}
           </ListItemText>
         </ListItem>
       )}
@@ -44,7 +45,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
             <LoginIcon className={classes.icon} />
           </ListItemIcon>
           <ListItemText>
-            <Trans i18nKey={'header.login'} />
+            {t('header.login')}
           </ListItemText>
         </ListItem>
       )}
@@ -54,7 +55,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
             <SignUpIcon className={classes.icon} />
           </ListItemIcon>
           <ListItemText>
-            <Trans i18nKey={'header.register'} />
+            {t('header.register')}
           </ListItemText>
         </ListItem>
       )}
@@ -62,4 +63,4 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
   );
 };
 
-export default compose(connector, withTranslation(), withRouter)(VerticalMenu);
+export default compose(connector, withRouter)(VerticalMenu);

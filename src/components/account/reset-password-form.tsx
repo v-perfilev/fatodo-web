@@ -4,7 +4,7 @@ import {TextField} from 'formik-material-ui';
 import * as React from 'react';
 import {FC, useState} from 'react';
 import {authFormStyles} from './_styles';
-import {Trans, useTranslation, withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import AccountService from '../../services/account.service';
 import PasswordStrengthBar from './password-strength-bar';
@@ -25,10 +25,10 @@ const connector = connect(null, mapDispatchToProps);
 type Props = FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-    code: string;
-    onSuccess: () => void;
-    onFailure: (status: number) => void;
-  };
+  code: string;
+  onSuccess: () => void;
+  onFailure: (status: number) => void;
+};
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -46,7 +46,7 @@ const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) =>
         component={TextField}
         type={showPassword ? 'text' : 'password'}
         name="password"
-        label={t('form:fields.newPassword.label')}
+        label={t('account:fields.newPassword.label')}
         fullWidth={true}
         InputProps={{
           endAdornment: (
@@ -62,7 +62,7 @@ const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) =>
         component={TextField}
         type={showRepeatPassword ? 'text' : 'password'}
         name="repeatPassword"
-        label={t('form:fields.repeatPassword.label')}
+        label={t('account:fields.repeatPassword.label')}
         fullWidth={true}
         InputProps={{
           endAdornment: (
@@ -82,7 +82,7 @@ const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) =>
         disabled={!isValid || isSubmitting}
         loading={isSubmitting}
       >
-        <Trans i18nKey={'form:resetPassword.submit'} />
+        {t('account:resetPassword.submit')}
       </LoadingButton>
     </Form>
   );
@@ -130,4 +130,4 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose(withTranslation(), withCaptchaProvider, withCaptcha, connector, formik)(ResetPasswordForm);
+export default compose(withCaptchaProvider, withCaptcha, connector, formik)(ResetPasswordForm);

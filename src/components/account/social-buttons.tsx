@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, useState} from 'react';
 import {API_URL, BASE_URL} from '../../constants';
 import {LanguageUtils} from '../../shared/utils/language.utils';
-import {Trans, withTranslation} from 'react-i18next';
+import {useTranslation, withTranslation} from 'react-i18next';
 import {Routes} from '../router';
 import LoadingButton from '../common/inputs/loading-button';
 import {FacebookIcon} from '../common/icons/facebook-icon';
@@ -13,6 +13,7 @@ import {socialLoginStyles} from './_styles';
 
 const SocialButtons: FC = () => {
   const classes = socialLoginStyles();
+  const {t} = useTranslation();
   const [facebookLoading, setFacebookLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
 
@@ -40,7 +41,7 @@ const SocialButtons: FC = () => {
       <Box className={classes.header}>
         <Divider />
         <Typography className={classes.caption}>
-          <Trans i18nKey={'auth.socialLogin'} />
+          {t('auth.socialLogin')}
         </Typography>
         <Divider />
       </Box>

@@ -1,4 +1,8 @@
 {
+  "headers": {
+    "createItem": "Create an item",
+    "editItem": "Edit an item"
+  },
   "labels": {
     "type": "Type",
     "date": "Date",

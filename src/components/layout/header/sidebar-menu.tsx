@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Box, Divider, Fab, SwipeableDrawer, Toolbar} from '@material-ui/core';
-import {withTranslation} from 'react-i18next';
-import {compose} from 'recompose';
 import {ArrowRightIcon} from '../../common/icons/arrow-right-icon';
 import LanguageSelect from '../../common/inputs/language-select';
 import VerticalMenu from './vertical-menu';
@@ -33,4 +31,4 @@ const SidebarMenu: FC<Props> = ({show, onToggle}: Props) => {
   );
 };
 
-export default compose(withTranslation())(SidebarMenu);
+export default SidebarMenu;

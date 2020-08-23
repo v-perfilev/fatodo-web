@@ -5,7 +5,7 @@ import {compose} from 'recompose';
 import withBackground from '../../shared/hoc/with-background';
 import {Routes} from '../router';
 import Link from '../common/inputs/link';
-import {Trans, withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
 import {useHistory} from 'react-router-dom';
 import ForgotPasswordForm from './forgot-password-form';
@@ -22,6 +22,7 @@ type Props = ConnectedProps<typeof connector>;
 const ForgotPassword: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   const classes = authPageStyles();
   const history = useHistory();
+  const {t} = useTranslation();
 
   const redirectToHome = (): void => history.push(Routes.ROOT);
 
@@ -32,16 +33,16 @@ const ForgotPassword: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   return (
     <Box className={classes.root}>
       <Typography variant="h5" color="primary">
-        <Trans i18nKey={'form:forgotPassword.header'} />
+        {t('account:forgotPassword.header')}
       </Typography>
       <Box m={1} />
       <ForgotPasswordForm onSuccess={redirectToHome} />
       <Box m={2} />
       <Link to={Routes.ROOT}>
-        <Trans i18nKey={'buttons.toHomePage'} />
+        {t('buttons.toHomePage')}
       </Link>
     </Box>
   );
 };
 
-export default compose(withTranslation(), withBackground('/images/background-1.jpg'), connector)(ForgotPassword);
+export default compose(withBackground('/images/background-1.jpg'), connector)(ForgotPassword);

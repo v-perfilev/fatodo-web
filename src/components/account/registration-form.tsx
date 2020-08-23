@@ -3,7 +3,7 @@ import {FC, useState} from 'react';
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {TextField} from 'formik-material-ui';
-import {Trans, useTranslation, withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import AccountService from '../../services/account.service';
 import {emailValidator, passwordValidator, usernameValidator} from './_validators';
 import {authFormStyles} from './_styles';
@@ -26,8 +26,8 @@ const connector = connect(null, mapDispatchToProps);
 type Props = FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-    onSuccess: () => void;
-  };
+  onSuccess: () => void;
+};
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -39,19 +39,19 @@ const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => 
 
   return (
     <Form className={classes.root + ' ' + classes.minHeightBox + ' ' + classes.form}>
-      <Field component={TextField} type="text" name="email" label={t('form:fields.email.label')} fullWidth={true} />
+      <Field component={TextField} type="text" name="email" label={t('account:fields.email.label')} fullWidth={true} />
       <Field
         component={TextField}
         type="text"
         name="username"
-        label={t('form:fields.username.label')}
+        label={t('account:fields.username.label')}
         fullWidth={true}
       />
       <Field
         component={TextField}
         type={showPassword ? 'text' : 'password'}
         name="password"
-        label={t('form:fields.password.label')}
+        label={t('account:fields.password.label')}
         fullWidth={true}
         InputProps={{
           endAdornment: (
@@ -72,7 +72,7 @@ const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => 
         disabled={!isValid || isSubmitting}
         loading={isSubmitting}
       >
-        <Trans i18nKey={'form:register.submit'} />
+        {t('account:register.submit')}
       </LoadingButton>
     </Form>
   );
@@ -126,4 +126,4 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose(withTranslation(), withCaptchaProvider, withCaptcha, connector, formik)(RegistrationForm);
+export default compose(withCaptchaProvider, withCaptcha, connector, formik)(RegistrationForm);

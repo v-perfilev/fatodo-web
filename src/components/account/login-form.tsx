@@ -8,7 +8,7 @@ import * as React from 'react';
 import {FC, useState} from 'react';
 import i18n from '../../shared/i18n';
 import {authFormStyles} from './_styles';
-import {Trans, useTranslation, withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
@@ -31,8 +31,8 @@ type Props = RouteComponentProps &
   FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-    onSuccess: () => void;
-  };
+  onSuccess: () => void;
+};
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -45,12 +45,12 @@ const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   return (
     <Box className={classes.root + ' ' + classes.minHeightBox}>
       <Form className={classes.form}>
-        <Field component={TextField} type="text" name="user" label={t('form:fields.user.label')} fullWidth />
+        <Field component={TextField} type="text" name="user" label={t('account:fields.user.label')} fullWidth />
         <Field
           component={TextField}
           type={showPassword ? 'text' : 'password'}
           name="password"
-          label={t('form:fields.password.label')}
+          label={t('account:fields.password.label')}
           fullWidth
           InputProps={{
             endAdornment: (
@@ -67,7 +67,7 @@ const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
             component={CheckboxWithLabel}
             type="checkbox"
             name="rememberMe"
-            Label={{label: t('form:fields.rememberMe.label')}}
+            Label={{label: t('account:fields.rememberMe.label')}}
           />
         </Box>
         <LoadingButton
@@ -77,12 +77,12 @@ const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
           disabled={!isValid || isSubmitting}
           loading={isSubmitting}
         >
-          <Trans i18nKey={'form:login.submit'} />
+          {t('account:login.submit')}
         </LoadingButton>
       </Form>
       <Box m={1} />
       <Link to={Routes.FORGOT_PASSWORD}>
-        <Trans i18nKey={'buttons.forgotPassword'} />
+        {t('buttons.forgotPassword')}
       </Link>
     </Box>
   );
@@ -108,8 +108,8 @@ const formik = withFormik<Props, FormValues>({
   }),
 
   validationSchema: Yup.object().shape({
-    user: Yup.string().required(() => i18n.t('form:fields.user.required')),
-    password: Yup.string().required(() => i18n.t('form:fields.password.required')),
+    user: Yup.string().required(() => i18n.t('account:fields.user.required')),
+    password: Yup.string().required(() => i18n.t('account:fields.password.required')),
   }),
 
   validateOnMount: true,
@@ -141,4 +141,4 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose(withTranslation(), withRouter, withCaptchaProvider, withCaptcha, connector, formik)(LoginForm);
+export default compose(withRouter, withCaptchaProvider, withCaptcha, connector, formik)(LoginForm);

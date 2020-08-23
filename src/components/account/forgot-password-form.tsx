@@ -6,7 +6,7 @@ import * as React from 'react';
 import {FC} from 'react';
 import i18n from '../../shared/i18n';
 import {authFormStyles} from './_styles';
-import {Trans, useTranslation, withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import AccountService from '../../services/account.service';
 import LoadingButton from '../common/inputs/loading-button';
@@ -21,15 +21,15 @@ const connector = connect(null, mapDispatchToProps);
 type Props = FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-    onSuccess?: () => void;
-  };
+  onSuccess?: () => void;
+};
 
 const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
   return (
     <Form className={classes.root + ' ' + classes.form}>
-      <Field component={TextField} type="text" name="user" label={t('form:fields.user.label')} fullWidth={true} />
+      <Field component={TextField} type="text" name="user" label={t('account:fields.user.label')} fullWidth={true} />
       <LoadingButton
         type="submit"
         color="secondary"
@@ -37,7 +37,7 @@ const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
         disabled={!isValid || isSubmitting}
         loading={isSubmitting}
       >
-        <Trans i18nKey={'form:forgotPassword.submit'} />
+        {t('account:forgotPassword.submit')}
       </LoadingButton>
     </Form>
   );
@@ -57,7 +57,7 @@ const formik = withFormik<Props, FormValues>({
   }),
 
   validationSchema: Yup.object().shape({
-    user: Yup.string().required(() => i18n.t('form:fields.user.required')),
+    user: Yup.string().required(() => i18n.t('account:fields.user.required')),
   }),
 
   validateOnMount: true,
@@ -80,4 +80,4 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose(withTranslation(), withCaptchaProvider, withCaptcha, connector, formik)(ForgotPasswordForm);
+export default compose(withCaptchaProvider, withCaptcha, connector, formik)(ForgotPasswordForm);

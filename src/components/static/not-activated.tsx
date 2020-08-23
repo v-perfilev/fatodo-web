@@ -3,7 +3,7 @@ import {FC, useEffect, useState} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {compose} from 'recompose';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hoc/with-redirect-timer';
-import {Trans} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {staticPageStyles} from './_styles';
 import withBackground from '../../shared/hoc/with-background';
 import {useHistory, useLocation} from 'react-router-dom';
@@ -18,6 +18,7 @@ type Props = RedirectTimerProps;
 const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
   const classes = staticPageStyles();
   const history = useHistory();
+  const {t} = useTranslation();
   const location = useLocation<{user: string}>();
   const user = location.state.user;
   const [activationLoading, setActivationLoading] = useState<boolean>(false);
@@ -52,11 +53,11 @@ const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
   return (
     <Box className={classes.root}>
       <Typography variant="h5" color="primary">
-        <Trans i18nKey={'static:notActivated.caption'} values={{email: user}} />
+        {t('static:notActivated.caption', {email: user})}
       </Typography>
       <Box m={2} />
       <Typography>
-        <Trans i18nKey={'static:redirectToHome.message'} count={timer} />
+        {t('static:redirectToHome.message', {count: timer})}
       </Typography>
       <Box m={2} />
       <LoadingButton
@@ -66,11 +67,11 @@ const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
         loading={activationLoading}
         progressValue={activationTimer * (100 / activationTimerMax)}
       >
-        <Trans i18nKey={'buttons.sendActivationCode'} />
+        {t('buttons.sendActivationCode')}
       </LoadingButton>
       <Box m={2} />
       <LoadingButton startIcon={<HomeIcon />} onClick={resetTimer}>
-        <Trans i18nKey={'buttons.toHomePage'} />
+        {t('buttons.toHomePage')}
       </LoadingButton>
     </Box>
   );

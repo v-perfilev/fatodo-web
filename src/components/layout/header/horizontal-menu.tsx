@@ -5,7 +5,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import Button from '@material-ui/core/Button';
 import {Box} from '@material-ui/core';
 import {logout} from '../../../store/actions/auth.actions';
-import {Trans, withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {horizontalMenuStyles} from './_styles';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {LoginIcon} from '../../common/icons/login-icon';
@@ -24,6 +24,7 @@ type Props = ConnectedProps<typeof connector> & RouteComponentProps;
 
 const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}: Props) => {
   const classes = horizontalMenuStyles();
+  const {t} = useTranslation();
 
   const redirectToLogin = (): void => history.push(Routes.LOGIN);
   const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
@@ -33,21 +34,21 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, histor
       <LanguageSelect />
       {isAuthenticated && (
         <Button color="primary" startIcon={<LogoutIcon />} onClick={logout}>
-          <Trans i18nKey={'header.logout'} />
+          {t('header.logout')}
         </Button>
       )}
       {!isAuthenticated && (
         <Button color="primary" startIcon={<LoginIcon />} onClick={redirectToLogin}>
-          <Trans i18nKey={'header.login'} />
+          {t('header.login')}
         </Button>
       )}
       {!isAuthenticated && (
         <Button variant="contained" color="secondary" startIcon={<SignUpIcon />} onClick={redirectToRegistration}>
-          <Trans i18nKey={'header.register'} />
+          {t('header.register')}
         </Button>
       )}
     </Box>
   );
 };
 
-export default compose(connector, withTranslation(), withRouter)(HorizontalMenu);
+export default compose(connector, withRouter)(HorizontalMenu);

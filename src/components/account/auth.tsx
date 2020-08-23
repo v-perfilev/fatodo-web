@@ -6,7 +6,7 @@ import withBackground from '../../shared/hoc/with-background';
 import LoginForm from '../account/login-form';
 import {Routes} from '../router';
 import Link from '../common/inputs/link';
-import {Trans, useTranslation, withTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
 import RegisterForm from './registration-form';
 import {RouteComponentProps, useHistory, useRouteMatch} from 'react-router-dom';
@@ -46,8 +46,8 @@ const Auth: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   return (
     <Box className={classes.root}>
       <Tabs variant="fullWidth" textColor="primary" style={tabsStyle} value={activeTab} onChange={handleChange}>
-        <Tab label={t('form:login.header')} />
-        <Tab label={t('form:register.header')} />
+        <Tab label={t('account:login.header')} />
+        <Tab label={t('account:register.header')} />
       </Tabs>
       <Box m={1} />
       {activeTab === 0 ? <LoginForm onSuccess={redirectToHome} /> : <RegisterForm onSuccess={redirectToHome} />}
@@ -59,10 +59,10 @@ const Auth: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
       )}
       <Box m={2} />
       <Link to={Routes.ROOT}>
-        <Trans i18nKey={'buttons.toHomePage'} />
+        {t('buttons.toHomePage')}
       </Link>
     </Box>
   );
 };
 
-export default compose(withTranslation(), withBackground('/images/background-1.jpg'), connector)(Auth);
+export default compose(withBackground('/images/background-1.jpg'), connector)(Auth);

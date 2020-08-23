@@ -9,9 +9,13 @@ import withAdditionalMenu from '../../shared/hoc/with-additional-menu';
 import {Routes} from '../router';
 import AnimatedRouter from '../../shared/routes/animated-router';
 import ItemView from './item-view/item-view';
+import ItemEdit from './item-edit/item-edit';
+import ItemCreate from './item-create/item-create';
 
 export enum ItemRoutes {
-  ITEM = '/:itemId',
+  CREATE = '/create',
+  EDIT = '/:itemId/edit',
+  VIEW = '/:itemId',
 }
 
 const ItemRouter: FC = () => {
@@ -19,7 +23,9 @@ const ItemRouter: FC = () => {
 
   return (
     <AnimatedRouter>
-      <PublicRoute path={match.path + ItemRoutes.ITEM} component={ItemView} />
+      <PublicRoute path={match.path + ItemRoutes.CREATE} component={ItemCreate} />
+      <PublicRoute path={match.path + ItemRoutes.EDIT} component={ItemEdit} />
+      <PublicRoute path={match.path + ItemRoutes.VIEW} component={ItemView} />
       <Redirect to={Routes.PAGE_NOT_FOUND} />
     </AnimatedRouter>
   );
