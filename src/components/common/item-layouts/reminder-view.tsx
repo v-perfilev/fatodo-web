@@ -3,44 +3,25 @@ import {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {Reminder} from '../../../models/reminder';
-import moment from 'moment';
+import {TimeUtils} from '../../../shared/utils/time.utils';
 
 type Props = HTMLAttributes<any> & {
   reminder: Reminder;
 }
-
-const getTime = (reminder: Reminder): Date => {
-  const {time} = reminder;
-  const date = new Date();
-  date.setHours(Math.floor(time / 60));
-  date.setMinutes(time % 60);
-  return date;
-};
-
-const getDate = (reminder: Reminder): Date => {
-  const {periodicity, day, month, year} = reminder;
-  const date = new Date();
-  if (periodicity === 'once') {
-    date.setFullYear(year, month, day);
-    date.setDate(day);
-    date.setMonth(month);
-  } else if (periodicity === 'yearly') {
-    date.setDate(day);
-    date.setMonth(month);
-  }
-  return date;
-};
-
 
 const ReminderView: FC<Props> = ({reminder, className}: Props) => {
   const {t} = useTranslation();
 
   const label = t('items:reminder.periodicity.' + reminder.periodicity) + ': ';
 
-  const time = moment(getTime(reminder)).format("hh:mm");
+  const timeDate = TimeUtils.getTimeFromParamDate(reminder.date);
+  const dateDate = TimeUtils.getDateFromParamDate(reminder.date);
+
+  const time = TimeUtils.formatTime(timeDate);
+
   let description = '';
   if (reminder.periodicity === 'once') {
-    const date = moment(getDate(reminder)).format("DD.MM.YYYY");
+    const date = TimeUtils.formatDateWithYear(dateDate);
     description = t('items:reminder.' + reminder.periodicity, {time, date});
   } else if (reminder.periodicity === 'daily') {
     description = t('items:reminder.' + reminder.periodicity, {time});
@@ -51,12 +32,12 @@ const ReminderView: FC<Props> = ({reminder, className}: Props) => {
     const days = reminder.monthDays.map(d => t('items:reminder.weekdays.' + d)).join(', ');
     description = t('items:reminder.' + reminder.periodicity, {time, days});
   } else if (reminder.periodicity === 'yearly') {
-    const date = moment(getDate(reminder)).format("DD.MM");
+    const date = TimeUtils.formatDate(dateDate);
     description = t('items:reminder.' + reminder.periodicity, {time, date});
   }
 
-  const string = label + description;
-  return <Box className={className}>{string}</Box>;
+  const reminderStr = label + description;
+  return <Box className={className}>{reminderStr}</Box>;
 };
 
 export default ReminderView;

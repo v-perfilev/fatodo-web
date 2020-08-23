@@ -1,20 +1,25 @@
 {
   "labels": {
-    "group": "Группа",
     "type": "Тип",
+    "date": "Дата",
     "priority": "Приоритет",
+    "reminders": "Напоминания",
+    "tags": "Тэги",
+    "group": "Группа",
     "createdBy": "Добавлено",
     "createdAt": "Дата добавления",
     "updatedBy": "Обновлено",
-    "updatedAt": "Дата обновления",
-    "tags": "Тэги",
-    "reminders": "Напоминания"
+    "updatedAt": "Дата обновления"
   },
   "types": {
     "task": "задача",
     "event": "событие",
     "repetition": "дата",
     "note": "заметка"
+  },
+  "paramDate": {
+    "time": "в {{time}}",
+    "date": "{{date}}"
   },
   "priorities": {
     "low": "низкий",

@@ -5,6 +5,7 @@ import {Item} from '../../../models/item';
 import ItemViewDataPriority from './item-view-data-priority';
 import ItemViewDataGroup from './item-view-data-group';
 import ItemViewDataType from './item-view-data-type';
+import ItemViewDataDate from './item-view-data-date';
 
 type Props = {
   item: Item
@@ -17,6 +18,7 @@ const ItemViewData: FC<Props> = ({item}: Props) => {
     <Box className={classes.root}>
       <ItemViewDataGroup group={item.group} />
       <ItemViewDataType type={item.type} />
+      <ItemViewDataDate date={item.date} />
       <ItemViewDataPriority priority={item.priority} />
     </Box>
   );

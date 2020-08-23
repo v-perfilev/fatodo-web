@@ -1,20 +1,25 @@
 {
   "labels": {
-    "group": "Group",
     "type": "Type",
+    "date": "Date",
     "priority": "Priority",
+    "reminders": "Reminders",
+    "tags": "Tags",
+    "group": "Group",
     "createdBy": "Created by",
     "createdAt": "Created at",
     "updatedBy": "Updated by",
-    "updatedAt": "Updated at",
-    "tags": "Tags",
-    "reminders": "Reminders"
+    "updatedAt": "Updated at"
   },
   "types": {
     "task": "task",
     "event": "event",
     "repetition": "repetition",
     "note": "note"
+  },
+  "paramDate": {
+    "time": "at {{time}}",
+    "date": "on {{date}}"
   },
   "priorities": {
     "low": "low",
