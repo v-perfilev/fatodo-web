@@ -12,7 +12,7 @@ export type ItemPriority = 'low' | 'normal' | 'high';
 export interface Item extends AbstractAuditing {
   id: string;
   title: string;
-  content: string;
+  description?: string;
   type: ItemType;
   date?: ParamDate;
   priority: ItemPriority;

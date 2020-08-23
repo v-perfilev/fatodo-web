@@ -62,7 +62,7 @@ const TEST_REMINDER: Reminder = {
 const ITEM_TEMPLATE: Item = {
   id: Math.random().toString(),
   title: '',
-  content: LOREM_IPSUM,
+  description: LOREM_IPSUM,
   type: 'task',
   date: TEST_DATE,
   tags: ['test1', 'test2', 'test3'],

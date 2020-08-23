@@ -12,7 +12,7 @@ import ItemViewData from './item-view-data';
 import {generateItem} from '../../_constants';
 import PageDivider from '../../common/page-layouts/page-divider';
 import ItemViewProperties from './item-view-properties';
-import ItemViewContent from './item-view-content';
+import ItemViewDescription from './item-view-description';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -44,10 +44,10 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
       <PageHeader title={item.title} />
       <PageDivider color={item.group.color} height={5} />
       <ItemViewData item={item} />
-      {item.content && (
+      {item.description && (
         <>
           <PageDivider color={item.group.color} />
-          <ItemViewContent content={item.content} />
+          <ItemViewDescription description={item.description} />
           <PageDivider color={item.group.color} />
         </>
       )}

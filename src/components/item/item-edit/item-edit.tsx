@@ -32,7 +32,7 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return item && <ItemForm item={item} headerTitle={t('items:headers.editItem')} />;
+  return item && <ItemForm item={item} headerPrefix={t('items:headers.editItem')} />;
 };
 
 export default compose(connector, memo)(ItemEdit);

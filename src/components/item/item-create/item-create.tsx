@@ -31,7 +31,7 @@ const ItemCreate: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return item && <ItemForm item={item} headerTitle={t('items:headers.createItem')} />;
+  return item && <ItemForm item={item} headerPrefix={t('items:headers.createItem')} />;
 };
 
 export default compose(connector, memo)(ItemCreate);

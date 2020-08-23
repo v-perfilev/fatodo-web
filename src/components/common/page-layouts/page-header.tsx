@@ -1,10 +1,10 @@
-import React, {FC, HTMLAttributes} from 'react';
+import React, {FC, HTMLAttributes, ReactNode} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {pageHeaderStyles} from './_styles';
 import csx from 'classnames';
 
 type Props = HTMLAttributes<any> & {
-  title: string;
+  title: ReactNode;
 }
 
 const PageHeader: FC<Props> = ({title, className}: Props) => {

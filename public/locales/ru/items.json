@@ -1,7 +1,7 @@
 {
   "headers": {
-    "createItem": "Добавление записи",
-    "editItem": "Редактирование записи"
+    "createItem": "Добавление записи в ",
+    "editItem": "Редактирование записи в "
   },
   "labels": {
     "type": "Тип",
@@ -14,6 +14,32 @@
     "createdAt": "Дата добавления",
     "updatedBy": "Обновлено",
     "updatedAt": "Дата обновления"
+  },
+  "fields": {
+    "title": {
+      "label": "Заголовок"
+    },
+    "type": {
+      "label": "Тип"
+    },
+    "priority": {
+      "label": "Приоритет"
+    },
+    "time": {
+      "label": "Время"
+    },
+    "date": {
+      "label": "Дата"
+    },
+    "description": {
+      "label": "Описание"
+    },
+    "tags": {
+      "label": "Теги"
+    },
+    "reminders": {
+      "label": "Напоминания"
+    }
   },
   "types": {
     "task": "задача",

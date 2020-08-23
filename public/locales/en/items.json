@@ -1,7 +1,7 @@
 {
   "headers": {
-    "createItem": "Create item",
-    "editItem": "Edit item"
+    "createItem": "Create item in ",
+    "editItem": "Edit item in "
   },
   "labels": {
     "type": "Type",
@@ -30,6 +30,15 @@
     },
     "date": {
       "label": "Date"
+    },
+    "description": {
+      "label": "Description"
+    },
+    "tags": {
+      "label": "Tags"
+    },
+    "reminders": {
+      "label": "Reminders"
     }
   },
   "types": {

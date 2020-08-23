@@ -9,7 +9,7 @@ export const itemFormStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(1),
   },
   form: {
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
 }));

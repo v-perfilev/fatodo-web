@@ -3,17 +3,17 @@ import {Box} from '@material-ui/core';
 import {itemViewContentStyles} from './_styles';
 
 type Props = {
-  content: string;
+  description: string;
 };
 
-const ItemViewContent: FC<Props> = ({content}: Props) => {
+const ItemViewDescription: FC<Props> = ({description}: Props) => {
   const classes = itemViewContentStyles();
 
   return (
     <Box className={classes.root}>
-      {content}
+      {description}
     </Box>
   );
 };
 
-export default ItemViewContent;
+export default ItemViewDescription;
