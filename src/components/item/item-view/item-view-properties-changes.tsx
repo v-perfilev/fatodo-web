@@ -1,8 +1,7 @@
 import React, {FC} from 'react';
-import {Box, Typography} from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import {Item} from '../../../models/item';
 import LabeledBox from '../../common/page-layouts/labeled-box';
-import PaperBox from '../../common/page-layouts/paper-box';
 import {itemViewPropertiesChangesStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
 

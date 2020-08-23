@@ -10,6 +10,7 @@ export enum COLORS {
   WHITE = '#ffffff',
   LIGHT_GREY = '#e0e0e0',
   GREY = '#aaaaaa',
+  DARK_GREY = '#888888',
   BLACK = '#222222',
 }
 

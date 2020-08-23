@@ -66,6 +66,10 @@ export const itemViewPropertiesChangesStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
+    '& *': {
+      color: COLORS.DARK_GREY,
+      fontSize: '0.7rem',
+    },
     '& > *': {
       marginRight: theme.spacing(3),
     },
