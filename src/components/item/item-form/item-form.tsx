@@ -42,10 +42,10 @@ const ItemForm: FC<Props> = ({item, headerPrefix, ...props}: Props) => {
             <ItemFormPriority />
           </Grid>
           <Grid item xs={6} lg={3}>
-            <ItemFormTime />
+            <ItemFormTime {...props} />
           </Grid>
           <Grid item xs={6} lg={3}>
-            <ItemFormDate />
+            <ItemFormDate {...props} />
           </Grid>
           <Grid item xs={12}>
             <ItemFormDescription />

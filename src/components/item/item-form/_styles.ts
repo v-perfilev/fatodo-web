@@ -13,3 +13,14 @@ export const itemFormStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(1),
   },
 }));
+
+export const itemFormClearableStyles = makeStyles((theme: Theme) => ({
+  root: {
+    position: 'relative',
+  },
+  button: {
+    position: 'absolute',
+    right: 0,
+    bottom: 1,
+  }
+}));

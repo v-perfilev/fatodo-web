@@ -37,7 +37,7 @@ export class DateUtils {
     return moment(date).format('DD.MM.YYYY');
   };
 
-  static getTimeFormat = (): string => 'hh:mm';
+  static getTimeFormat = (): string => 'HH:mm';
 
   static getDateFormat = (): string => 'DD.MM';
 
