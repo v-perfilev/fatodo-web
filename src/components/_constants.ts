@@ -53,7 +53,7 @@ const TEST_DATE: ParamDate = {
   year: 2021,
 };
 
-const TEST_REMINDER: Reminder = {
+export const TEST_REMINDER: Reminder = {
   id: '',
   periodicity: 'once',
   date: TEST_DATE,

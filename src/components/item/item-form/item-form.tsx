@@ -14,6 +14,9 @@ import ItemFormTime from './item-form-time';
 import ItemFormDate from './item-form-date';
 import ItemFormDescription from './item-form-description';
 import ItemFormTags from './item-form-tags';
+import ItemFormReminders from './item-form-reminders';
+import {Reminder} from '../../../models/reminder';
+import {TEST_REMINDER} from '../../_constants';
 
 type Props = FormikProps<any> & {
   item: Item;
@@ -32,6 +35,9 @@ const ItemForm: FC<Props> = ({item, headerPrefix, ...props}: Props) => {
       <PageDivider color={item.group.color} height={5} />
       <Form className={classes.form}>
         <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <ItemFormReminders {...props} />
+          </Grid>
           <Grid item xs={12}>
             <ItemFormTitle />
           </Grid>
@@ -67,6 +73,7 @@ interface FormValues {
   time?: Date;
   date?: Date;
   description?: string;
+  reminders?: Reminder[];
   tags?: string[];
 }
 
@@ -78,6 +85,7 @@ const formik = withFormik<Props, FormValues>({
     time: null,
     date: null,
     description: '',
+    reminders: [TEST_REMINDER],
     tags: [],
   }),
 

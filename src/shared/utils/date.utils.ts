@@ -26,7 +26,7 @@ export class DateUtils {
   };
 
   static formatTime = (date: Date): string => {
-    return moment(date).format('hh:mm');
+    return moment(date).format('HH:mm');
   };
 
   static formatDate = (date: Date): string => {

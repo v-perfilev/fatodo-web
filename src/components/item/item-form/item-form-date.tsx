@@ -3,9 +3,9 @@ import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import {DatePicker} from 'formik-material-ui-pickers';
 import {DateUtils} from '../../../shared/utils/date.utils';
-import {Box, IconButton} from '@material-ui/core';
+import {IconButton} from '@material-ui/core';
 import {CloseIcon} from '../../common/icons/close-icon';
-import {itemFormClearableStyles} from './_styles';
+import moment from 'moment';
 
 type Props = {
   values: any;
@@ -13,27 +13,32 @@ type Props = {
 };
 
 const ItemFormDate: FC<Props> = ({values, setFieldValue}: Props) => {
-  const classes = itemFormClearableStyles();
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
 
-  const clear = (): void => setFieldValue('date', null);
+  //need to set locale in moment here cause of bug in material-ui
+  moment.locale(i18n.language);
+
+  const clear = (e): void => {
+    e.stopPropagation();
+    setFieldValue('date', null);
+  };
 
   return (
-    <Box className={classes.root}>
-      <Field component={DatePicker}
-             type="text"
-             name="date"
-             label={t('items:fields.date.label')}
-             format={DateUtils.getDateWithYearFormat()}
-             variant="inline"
-             fullWidth
-      />
-      {values['date'] && (
-        <IconButton onClick={clear} size="small" className={classes.button}>
-          <CloseIcon />
-        </IconButton>
-      )}
-    </Box>
+    <Field component={DatePicker}
+           type="text"
+           name="date"
+           label={t('items:fields.date.label')}
+           format={DateUtils.getDateWithYearFormat()}
+           variant="inline"
+           fullWidth
+           InputProps={{
+             endAdornment: values['date'] && (
+               <IconButton onClick={clear} size="small">
+                 <CloseIcon />
+               </IconButton>
+             ),
+           }}
+    />
   );
 };
 

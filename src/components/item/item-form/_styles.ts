@@ -14,13 +14,3 @@ export const itemFormStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const itemFormClearableStyles = makeStyles((theme: Theme) => ({
-  root: {
-    position: 'relative',
-  },
-  button: {
-    position: 'absolute',
-    right: 0,
-    bottom: 1,
-  }
-}));
