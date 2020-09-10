@@ -4,6 +4,7 @@ import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {itemPriorities} from '../../../models/item';
 import {MenuItem} from '@material-ui/core';
+import PriorityView from '../../common/item-layouts/priority-view';
 
 const ItemFormPriority: FC = () => {
   const {t} = useTranslation();
@@ -20,7 +21,7 @@ const ItemFormPriority: FC = () => {
     >
       {Object.values(itemPriorities).map((priority, index) => (
         <MenuItem value={priority} key={index}>
-          {t('items:priorities.' + priority)}
+          <PriorityView priority={priority} />
         </MenuItem>
       ))}
     </Field>

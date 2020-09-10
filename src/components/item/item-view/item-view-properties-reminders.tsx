@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import LabeledBox from '../../common/page-layouts/labeled-box';
-import PaperBox from '../../common/page-layouts/paper-box';
 import PageSpacer from '../../common/page-layouts/page-spacer';
 import {useTranslation} from 'react-i18next';
 import {Reminder} from '../../../models/reminder';
 import ReminderView from '../../common/item-layouts/reminder-view';
+import {Chip} from '@material-ui/core';
 
 type Props = {
   reminders: Reminder[];
@@ -20,9 +20,11 @@ const ItemViewPropertiesReminders: FC<Props> = ({reminders}: Props) => {
       <>
         <LabeledBox label={t('items:labels.reminders')}>
           {reminders.map((reminder, index) => (
-            <PaperBox key={index}>
-              <ReminderView reminder={reminder} />
-            </PaperBox>
+            <Chip
+              key={index}
+              size="medium"
+              label={<ReminderView reminder={reminder} />}
+            />
           ))}
         </LabeledBox>
         <PageSpacer />

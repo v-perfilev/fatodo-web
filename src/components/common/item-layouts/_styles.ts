@@ -8,6 +8,7 @@ export const priorityStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     '& svg': {
       marginRight: theme.spacing(1),
+      fontSize: '1.2rem',
       '&.low': {
         color: COLORS.GREY,
       },
@@ -28,6 +29,7 @@ export const typeStyles = makeStyles((theme: Theme) => ({
     '& svg': {
       color: COLORS.PRIMARY,
       marginRight: theme.spacing(1),
+      fontSize: '1.2rem',
     },
   },
 }));

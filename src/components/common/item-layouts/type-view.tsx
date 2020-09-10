@@ -14,27 +14,26 @@ type Props = HTMLAttributes<any> & {
   type: ItemType;
 };
 
-const getIcon = (type: ItemType): ReactNode => {
-  if (type === 'task') {
-    return <TaskIcon />;
-  } else if (type === 'event') {
-    return <EventIcon />;
-  } else if (type === 'repetition') {
-    return <RepetitionIcon />;
-  } else {
-    return <NoteIcon />;
-  }
-};
 const TypeView: FC<Props> = ({type, className}: Props) => {
   const classes = typeStyles();
   const classNames = csx(classes.root, className);
   const {t} = useTranslation();
 
-  const icon = getIcon(type);
+  const icon = (): ReactNode => {
+    if (type === 'task') {
+      return <TaskIcon />;
+    } else if (type === 'event') {
+      return <EventIcon />;
+    } else if (type === 'repetition') {
+      return <RepetitionIcon />;
+    } else {
+      return <NoteIcon />;
+    }
+  };
 
   return (
     <Box className={classNames}>
-      {icon} {t('items:types.' + type)}
+      {icon()} {t('items:types.' + type)}
     </Box>
   );
 };

@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import LabeledBox from '../../common/page-layouts/labeled-box';
-import PaperBox from '../../common/page-layouts/paper-box';
 import PageSpacer from '../../common/page-layouts/page-spacer';
 import {useTranslation} from 'react-i18next';
+import {Chip} from '@material-ui/core';
 
 type Props = {
   tags: string[];
@@ -18,7 +18,11 @@ const ItemViewPropertiesTags: FC<Props> = ({tags}: Props) => {
       <>
         <LabeledBox label={t('items:labels.tags')}>
           {tags.map((tag, index) => (
-            <PaperBox key={index}>{tag}</PaperBox>
+            <Chip
+              key={index}
+              size="medium"
+              label={tag}
+            />
           ))}
         </LabeledBox>
         <PageSpacer />

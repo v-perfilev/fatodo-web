@@ -13,26 +13,24 @@ type Props = HTMLAttributes<any> & {
   priority: ItemPriority;
 };
 
-const getIcon = (priority: ItemPriority): ReactNode => {
-  if (priority === 'low') {
-    return <LowPriorityIcon className="low" />;
-  } else if (priority === 'normal') {
-    return <NormalPriorityIcon className="normal" />;
-  } else {
-    return <HighPriorityIcon className="high" />;
-  }
-};
-
 const PriorityView: FC<Props> = ({priority, className}: Props) => {
   const classes = priorityStyles();
   const classNames = csx(classes.root, className);
   const {t} = useTranslation();
 
-  const icon = getIcon(priority);
+  const icon = (): ReactNode => {
+    if (priority === 'low') {
+      return <LowPriorityIcon className="low" />;
+    } else if (priority === 'normal') {
+      return <NormalPriorityIcon className="normal" />;
+    } else {
+      return <HighPriorityIcon className="high" />;
+    }
+  };
 
   return (
     <Box className={classNames}>
-      {icon} {t('items:priorities.' + priority)}
+      {icon()} {t('items:priorities.' + priority)}
     </Box>
   );
 };
