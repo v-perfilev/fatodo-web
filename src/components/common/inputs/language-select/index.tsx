@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {FC, HTMLAttributes, useState} from 'react';
 import {Box, Button, Fade, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem} from '@material-ui/core';
-import {LANGUAGES} from '../../../shared/i18n';
-import {LanguageIcon} from '../icons/language-icon';
-import {ArrowDownIcon} from '../icons/arrow-down-icon';
-import {LanguageUtils} from '../../../shared/utils/language.utils';
+import {LANGUAGES} from '../../../../shared/i18n';
+import {LanguageIcon} from '../../icons/language-icon';
+import {ArrowDownIcon} from '../../icons/arrow-down-icon';
+import {LanguageUtils} from '../../../../shared/utils/language.utils';
 import {languageSelectStyles} from './_styles';
 
 type Props = HTMLAttributes<any> & {

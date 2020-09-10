@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {dateInputItemStyles} from './_styles';
 import cloneDeep from 'lodash/cloneDeep';
-import CalendarSelect from '../calendar-select/calendar-select';
+import CalendarSelect from '../calendar-select';
 import {DateUtils} from '../../../../shared/utils/date.utils';
 
 type Props = {

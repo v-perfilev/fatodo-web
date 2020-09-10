@@ -5,7 +5,7 @@ import {Item} from '../../../models/item';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {generateItem} from '../../_constants';
 import {useTranslation} from 'react-i18next';
-import ItemForm from '../item-form/item-form';
+import ItemForm from '../item-form';
 import {compose} from 'recompose';
 
 const mapDispatchToProps = {setMenu};

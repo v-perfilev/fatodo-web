@@ -2,14 +2,14 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Redirect, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
-import GroupsPreview from './groups-preview/group-preview';
-import GroupsSorting from './groups-sorting/groups-sorting';
+import GroupsPreview from './groups-preview';
+import GroupsSorting from './groups-sorting';
 import {compose} from 'recompose';
 import withFlexibleHeader from '../../shared/hoc/with-flexible-header';
 import withAdditionalMenu from '../../shared/hoc/with-additional-menu';
 import {Routes} from '../router';
 import AnimatedRouter from '../../shared/routes/animated-router';
-import GroupView from './group-view/group-view';
+import GroupView from './group-view';
 
 export enum GroupRoutes {
   SORTING = '/sorting',

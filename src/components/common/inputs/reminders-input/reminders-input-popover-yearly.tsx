@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Reminder} from '../../../../models/reminder';
-import TimeInput from '../time-input/time-input';
-import DateInput from '../date-input/date-input';
+import TimeInput from '../time-input';
+import DateInput from '../date-input';
 import {remindersInputPopoverItemStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import {ParamDate} from '../../../../models/param-date';

@@ -8,9 +8,9 @@ import withFlexibleHeader from '../../shared/hoc/with-flexible-header';
 import withAdditionalMenu from '../../shared/hoc/with-additional-menu';
 import {Routes} from '../router';
 import AnimatedRouter from '../../shared/routes/animated-router';
-import ItemView from './item-view/item-view';
-import ItemEdit from './item-edit/item-edit';
-import ItemCreate from './item-create/item-create';
+import ItemView from './item-view';
+import ItemEdit from './item-edit';
+import ItemCreate from './item-create';
 
 export enum ItemRoutes {
   CREATE = '/create',

@@ -4,7 +4,7 @@ import React, {FC, memo, useEffect, useState} from 'react';
 import {Item} from '../../../models/item';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
-import ItemForm from '../item-form/item-form';
+import ItemForm from '../item-form';
 import {compose} from 'recompose';
 import {TEST_GROUP} from '../../_constants';
 
