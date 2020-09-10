@@ -1,9 +1,9 @@
 import React, {FC, useState} from 'react';
 import {Box, Fade, TextField} from '@material-ui/core';
-import moment, {Moment} from 'moment';
+import {Moment} from 'moment';
 import {ClockView} from '@material-ui/pickers';
 import {timeInputStyles} from './_styles';
-import {DateUtils} from '../../../../shared/utils/date.utils';
+import {DateConverters, DateFormatters} from '../../../../shared/utils/date.utils';
 
 type Props = {
   label: string;
@@ -24,11 +24,9 @@ const TimeInput: FC<Props> = ({label, required, time, setTime}: Props) => {
     setShowMinutes(false);
   };
 
-  const handleClock = (moment: Moment) => {
-    const date = new Date();
-    date.setHours(moment.hours());
-    date.setMinutes(moment.minutes());
-    setTime(date);
+  const handleClock = (momentTime: Moment) => {
+    const timeDate = DateConverters.getTimeFromMoment(momentTime);
+    setTime(timeDate);
     if (!showMinutes) {
       toggleMinutesView();
     } else {
@@ -36,8 +34,8 @@ const TimeInput: FC<Props> = ({label, required, time, setTime}: Props) => {
     }
   };
 
-  const formattedTime = time ? DateUtils.formatTime(time) : '';
-  const timeMoment = time ? moment(time) : moment(new Date());
+  const formattedTime = time ? DateFormatters.formatTime(time) : '';
+  const timeMoment = DateConverters.getMomentFromTime(time);
 
   return (
     <Box>

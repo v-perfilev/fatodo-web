@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
-import {DateUtils} from '../../../shared/utils/date.utils';
+import {DateConverters, DateFormatters} from '../../../shared/utils/date.utils';
 import {ParamDate} from '../../../models/param-date';
 
 type Props = HTMLAttributes<any> & {
@@ -14,23 +14,23 @@ const DateView: FC<Props> = ({date: paramDate, className}: Props) => {
 
   let description = '';
   if (paramDate.time) {
-    const timeDate = DateUtils.getTimeFromParamDate(paramDate);
-    const time = DateUtils.formatTime(timeDate);
+    const timeDate = DateConverters.getTimeFromParamDate(paramDate);
+    const time = DateFormatters.formatTime(timeDate);
     const translatedTime = t('items:paramDate.time', {time});
     description = description.concat(translatedTime);
   }
 
-  if (paramDate.day && paramDate.month) {
+  if (paramDate.date && paramDate.month) {
     if (paramDate.time) {
       description = description.concat(' ');
     }
 
-    const dateDate = DateUtils.getDateFromParamDate(paramDate);
-    let date = '';
+    const dateDate = DateConverters.getDateFromParamDate(paramDate);
+    let date;
     if (paramDate.year) {
-      date = DateUtils.formatDateWithYear(dateDate);
+      date = DateFormatters.formatDateWithYear(dateDate);
     } else {
-      date = DateUtils.formatDate(dateDate);
+      date = DateFormatters.formatDate(dateDate);
     }
 
     const translatedDate = t('items:paramDate.date', {date});

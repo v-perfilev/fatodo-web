@@ -2,10 +2,9 @@ import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import {DatePicker} from 'formik-material-ui-pickers';
-import {DateUtils} from '../../../shared/utils/date.utils';
+import {DateFormats, DateUtils} from '../../../shared/utils/date.utils';
 import {IconButton} from '@material-ui/core';
 import {CloseIcon} from '../../common/icons/close-icon';
-import moment from 'moment';
 
 type Props = {
   values: any;
@@ -13,10 +12,10 @@ type Props = {
 };
 
 const ItemFormDate: FC<Props> = ({values, setFieldValue}: Props) => {
-  const {t, i18n} = useTranslation();
+  const {t} = useTranslation();
 
   //need to set locale in moment here cause of bug in material-ui
-  moment.locale(i18n.language);
+  DateUtils.resetLocale();
 
   const clear = (e): void => {
     e.stopPropagation();
@@ -28,7 +27,7 @@ const ItemFormDate: FC<Props> = ({values, setFieldValue}: Props) => {
            type="text"
            name="date"
            label={t('items:fields.date.label')}
-           format={DateUtils.getDateWithYearFormat()}
+           format={DateFormats.dateWithYearFormat}
            variant="inline"
            fullWidth
            InputProps={{

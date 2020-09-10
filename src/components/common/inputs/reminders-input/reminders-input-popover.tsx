@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Box, Popover} from '@material-ui/core';
 import {remindersInputPopoverStyles} from './_styles';
 import {Reminder, ReminderPeriodicity} from '../../../../models/reminder';
@@ -10,48 +10,45 @@ import RemindersInputPopoverMonthly from './reminders-input-popover-monthly';
 import RemindersInputPopoverYearly from './reminders-input-popover-yearly';
 
 type Props = {
-  reminder?: Reminder;
   anchorEl: HTMLElement;
-  handleClose: () => void;
+  handleClose: (reminder: Reminder) => void;
 };
 
-const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose, reminder: oldReminder}: Props) => {
+const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose}: Props) => {
   const classes = remindersInputPopoverStyles();
   const [reminder, setReminder] = useState<Reminder>(null);
   const [periodicity, setPeriodicity] = useState<ReminderPeriodicity>('once');
 
-  useEffect(() => {
-    if (reminder) {
-      setPeriodicity(oldReminder.periodicity);
-    }
-  }, []);
-
   const isOpen = Boolean(anchorEl);
+
+  const onClose = (): void => {
+    handleClose(reminder);
+  };
 
   return (
     <Popover
       open={isOpen}
       anchorEl={anchorEl}
-      onClose={handleClose}
-      anchorOrigin={{vertical: 'center', horizontal: 'center'}}
-      transformOrigin={{vertical: 'center', horizontal: 'center'}}
+      onClose={onClose}
+      anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+      transformOrigin={{vertical: 'top', horizontal: 'center'}}
     >
       <RemindersInputPopoverToolbar periodicity={periodicity} setPeriodicity={setPeriodicity} />
       <Box className={classes.popoverBody}>
         {periodicity === 'once' && (
-          <RemindersInputPopoverOnce reminder={reminder} setReminder={setReminder} />
+          <RemindersInputPopoverOnce setReminder={setReminder} />
         )}
         {periodicity === 'daily' && (
-          <RemindersInputPopoverDaily reminder={reminder} setReminder={setReminder} />
+          <RemindersInputPopoverDaily setReminder={setReminder} />
         )}
         {periodicity === 'weekly' && (
-          <RemindersInputPopoverWeekly reminder={reminder} setReminder={setReminder} />
+          <RemindersInputPopoverWeekly setReminder={setReminder} />
         )}
         {periodicity === 'monthly' && (
-          <RemindersInputPopoverMonthly reminder={reminder} setReminder={setReminder} />
+          <RemindersInputPopoverMonthly setReminder={setReminder} />
         )}
         {periodicity === 'yearly' && (
-          <RemindersInputPopoverYearly reminder={reminder} setReminder={setReminder} />
+          <RemindersInputPopoverYearly setReminder={setReminder} />
         )}
       </Box>
     </Popover>

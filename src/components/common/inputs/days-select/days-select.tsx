@@ -1,8 +1,8 @@
 import React, {FC, HTMLAttributes} from 'react';
 import {Box, Button, FormLabel} from '@material-ui/core';
 import {daysSelectStyles} from './_styles';
-import moment from 'moment';
 import csx from 'classnames';
+import {DateUtils} from '../../../../shared/utils/date.utils';
 
 type Props = HTMLAttributes<any> & {
   label?: string;
@@ -11,16 +11,11 @@ type Props = HTMLAttributes<any> & {
   handleClick: (day: number) => void;
 }
 
-const getWeekdayNumbers = (): number[] => {
-  const firstDayOfWeek = moment().startOf('week').day();
-  return Array.from({length: 7}, (_, i) => (i + firstDayOfWeek) % 7);
-};
-
 const DaysSelect: FC<Props> = ({label, required, selectedDays, handleClick, className}: Props) => {
   const classes = daysSelectStyles();
 
-  const dayNames = moment.weekdaysShort(true);
-  const dayNumbers = getWeekdayNumbers();
+  const dayNames = DateUtils.getWeekdayNames();
+  const dayNumbers = DateUtils.getWeekdayNumbers();
 
   const weekdays = dayNames.map((weekday, index) => {
     const dayNumber = dayNumbers[index];

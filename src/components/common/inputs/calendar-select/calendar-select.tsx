@@ -1,8 +1,8 @@
-import React, {FC, HTMLAttributes, useContext} from 'react';
+import React, {FC, HTMLAttributes} from 'react';
 import {Box, Button, FormLabel} from '@material-ui/core';
-import {MuiPickersContext} from '@material-ui/pickers';
 import {calendarSelectStyles} from './_styles';
 import csx from 'classnames';
+import {DateUtils} from '../../../../shared/utils/date.utils';
 
 type Props = HTMLAttributes<any> & {
   label?: string;
@@ -35,7 +35,6 @@ const CalendarSelect: FC<Props> = (props: Props) => {
   const classes = calendarSelectStyles();
   const {label, required} = props;
   const {dayOfWeek, datesInMonth, firstAllowedDate, selectedDates, showWeekend, handleClick, className} = props;
-  const momentContext = useContext(MuiPickersContext);
 
   const dow = dayOfWeek || 0;
   const dim = datesInMonth || 31;
@@ -44,7 +43,7 @@ const CalendarSelect: FC<Props> = (props: Props) => {
   const sw = showWeekend ?? true;
   const dateClass = csx(classes.date, {[classes.dateSmall]: true});
 
-  const weekdayArray = momentContext.getWeekdays();
+  const weekdayArray = DateUtils.getWeekdayNames();
   const weekdays = (
     <Box className={classes.weekHeader}>
       {weekdayArray.map((name, index) => (

@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Box, Fade, TextField} from '@material-ui/core';
-import {DateUtils} from '../../../../shared/utils/date.utils';
+import {DateFormatters} from '../../../../shared/utils/date.utils';
 import {dateInputStyles} from './_styles';
 import DateInputDate from './date-input-date';
 import DateInputYears from './date-input-years';
@@ -29,22 +29,20 @@ const DateInput: FC<Props> = ({label, required, date: inputDate, setDate: setInp
     setDate(inputDate || new Date());
   }, []);
 
-  const formattedDate = inputDate ? DateUtils.formatDateWithYear(inputDate) : '';
+  const formattedDate = inputDate
+    ? !firstInputType || firstInputType === 'year'
+      ? DateFormatters.formatDateWithYear(inputDate)
+      : DateFormatters.formatDate(inputDate)
+    : '';
 
   const openInput = (): void => {
     if (!firstInputType || firstInputType === 'year') {
       setInputType(InputType.YEAR);
-    } else if (firstInputType === 'month') {
+    } else {
       const newDate = new Date();
       newDate.setFullYear(1970);
       setDate(newDate);
       setInputType(InputType.MONTH);
-    } else {
-      const newDate = new Date();
-      newDate.setFullYear(1970);
-      newDate.setMonth(1);
-      setDate(newDate);
-      setInputType(InputType.DATE);
     }
   };
 

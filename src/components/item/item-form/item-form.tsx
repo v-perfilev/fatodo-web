@@ -36,9 +36,6 @@ const ItemForm: FC<Props> = ({item, headerPrefix, ...props}: Props) => {
       <Form className={classes.form}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <ItemFormReminders {...props} />
-          </Grid>
-          <Grid item xs={12}>
             <ItemFormTitle />
           </Grid>
           <Grid item xs={6} lg={3}>
@@ -55,6 +52,9 @@ const ItemForm: FC<Props> = ({item, headerPrefix, ...props}: Props) => {
           </Grid>
           <Grid item xs={12}>
             <ItemFormDescription />
+          </Grid>
+          <Grid item xs={12}>
+            <ItemFormReminders {...props} />
           </Grid>
           <Grid item xs={12}>
             <ItemFormTags />

@@ -8,7 +8,7 @@ const ItemFormDescription: FC = () => {
 
   return (
     <Field component={TextField} type="text" name="description" label={t('items:fields.description.label')}
-           multiline fullWidth rows={20} />
+           multiline fullWidth rows={15} />
   );
 };
 

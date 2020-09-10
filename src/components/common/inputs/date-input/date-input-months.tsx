@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {dateInputItemStyles} from './_styles';
 import cloneDeep from 'lodash/cloneDeep';
-import moment from 'moment';
+import {DateFormatters} from '../../../../shared/utils/date.utils';
 
 type Props = {
   date: Date;
@@ -12,7 +12,7 @@ type Props = {
 const getMonthName = (month: number): string => {
   const date = new Date();
   date.setMonth(month);
-  return moment(date).format('MMMM');
+  return DateFormatters.formatMonth(date);
 };
 
 const getFirstMonth = (date: Date): number => {

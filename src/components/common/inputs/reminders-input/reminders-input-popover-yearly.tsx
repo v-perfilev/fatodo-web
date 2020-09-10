@@ -4,24 +4,35 @@ import TimeInput from '../time-input/time-input';
 import DateInput from '../date-input/date-input';
 import {remindersInputPopoverItemStyles} from './_styles';
 import {Box} from '@material-ui/core';
+import {ParamDate} from '../../../../models/param-date';
+import {DateConverters} from '../../../../shared/utils/date.utils';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
-  reminder: Reminder;
   setReminder: (reminder: Reminder) => void;
 };
 
-const RemindersInputPopoverYearly: FC<Props> = ({reminder, setReminder}: Props) => {
+const RemindersInputPopoverYearly: FC<Props> = ({setReminder}: Props) => {
   const classes = remindersInputPopoverItemStyles();
+  const {t} = useTranslation();
   const [time, setTime] = useState<Date>(null);
   const [date, setDate] = useState<Date>(null);
 
   useEffect(() => {
+    setReminder(null);
+  }, []);
+
+  useEffect(() => {
+    if (time && date) {
+      const paramDate: ParamDate = DateConverters.getParamDateFromTimeAndDateWithoutYear(time, date);
+      setReminder({date: paramDate, periodicity: 'yearly'});
+    }
   }, [time, date]);
 
   return (
     <Box className={classes.root}>
-      <TimeInput label="Time" required time={time} setTime={setTime} />
-      <DateInput label="Date" required date={date} setDate={setDate} firstInputType="month" />
+      <TimeInput label={t('items:fields.time.label')} required time={time} setTime={setTime} />
+      <DateInput label={t('items:fields.date.label')} required date={date} setDate={setDate} firstInputType="month" />
     </Box>
   );
 };

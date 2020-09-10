@@ -1,6 +1,5 @@
 import {Reminder} from '../../../../models/reminder';
 import React, {FC, useEffect, useState} from 'react';
-import {TEST_REMINDER} from '../../../_constants';
 import {Box} from '@material-ui/core';
 import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
@@ -31,11 +30,11 @@ const RemindersInput: FC<Props> = ({label, name, values, setFieldValue}: Props) 
 
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => setAnchorEl(event.currentTarget);
 
-  const handleClose = (): void => setAnchorEl(null);
-
-  const addReminder = (e): void => {
-    e.stopPropagation();
-    setReminders((prevState) => [...prevState, TEST_REMINDER]);
+  const handleClose = (reminder: Reminder): void => {
+    if (reminder) {
+      setReminders((prevState) => [...prevState, reminder]);
+    }
+    setAnchorEl(null);
   };
 
   const removeReminder = (index, e): void => {
@@ -63,7 +62,7 @@ const RemindersInput: FC<Props> = ({label, name, values, setFieldValue}: Props) 
           readOnly: true,
           value: '',
           startAdornment: <RemindersInputChips {...{reminders, removeReminder}} />,
-          endAdornment: <RemindersInputButtons {...{reminders, addReminder, clearReminders}} />,
+          endAdornment: <RemindersInputButtons {...{reminders, clearReminders}} />,
           onClick: handleClick,
         }}
         fullWidth

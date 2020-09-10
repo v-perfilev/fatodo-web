@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import {TimePicker} from 'formik-material-ui-pickers';
-import {DateUtils} from '../../../shared/utils/date.utils';
+import {DateFormats} from '../../../shared/utils/date.utils';
 import {IconButton} from '@material-ui/core';
 import {CloseIcon} from '../../common/icons/close-icon';
 
@@ -24,7 +24,7 @@ const ItemFormTime: FC<Props> = ({values, setFieldValue}: Props) => {
            type="text"
            name="time"
            label={t('items:fields.time.label')}
-           format={DateUtils.getTimeFormat()}
+           format={DateFormats.timeFormat}
            ampm={false}
            variant="inline"
            fullWidth

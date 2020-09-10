@@ -39,6 +39,12 @@
     },
     "reminders": {
       "label": "Reminders"
+    },
+    "weekdays": {
+      "label": "Days of week"
+    },
+    "monthdays": {
+      "label": "Days of month"
     }
   },
   "types": {
@@ -64,19 +70,10 @@
       "monthly": "monthly",
       "yearly": "yearly"
     },
-    "weekdays": {
-      "mo": "Mo",
-      "tu": "Tu",
-      "we": "We",
-      "th": "Th",
-      "fr": "Fr",
-      "sa": "Sa",
-      "su": "Su"
-    },
     "once": "at {{time}} on {{date}}",
     "daily": "at {{time}}",
-    "weekly": "at {{time}} on {{weekdays}}",
-    "monthly": "at {{time}} on {{days}} of every month",
+    "weekly": "at {{time}} on {{weekDays}}",
+    "monthly": "at {{time}} on {{monthDates}} of every month",
     "yearly": "at {{time}} on {{date}}"
   }
 }

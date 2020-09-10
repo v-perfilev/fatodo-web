@@ -1,6 +1,6 @@
 export interface ParamDate {
   time?: number;
-  day?: number;
+  date?: number;
   month?: number;
   year?: number;
 }

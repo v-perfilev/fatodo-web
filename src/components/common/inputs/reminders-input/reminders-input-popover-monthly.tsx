@@ -4,18 +4,29 @@ import TimeInput from '../time-input/time-input';
 import {remindersInputPopoverItemStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import CalendarSelect from '../calendar-select/calendar-select';
+import {ParamDate} from '../../../../models/param-date';
+import {DateConverters} from '../../../../shared/utils/date.utils';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
-  reminder: Reminder;
   setReminder: (reminder: Reminder) => void;
 };
 
-const RemindersInputPopoverMonthly: FC<Props> = ({reminder, setReminder}: Props) => {
+const RemindersInputPopoverMonthly: FC<Props> = ({setReminder}: Props) => {
   const classes = remindersInputPopoverItemStyles();
+  const {t} = useTranslation();
   const [time, setTime] = useState<Date>(null);
   const [dates, setDates] = useState<number[]>([]);
 
   useEffect(() => {
+    setReminder(null);
+  }, []);
+
+  useEffect(() => {
+    if (time && dates && dates.length > 0) {
+      const paramDate: ParamDate = DateConverters.getParamDateFromTime(time);
+      setReminder({date: paramDate, monthDates: dates, periodicity: 'monthly'});
+    }
   }, [time, dates]);
 
   const handleClick = (date: number): void => {
@@ -32,8 +43,9 @@ const RemindersInputPopoverMonthly: FC<Props> = ({reminder, setReminder}: Props)
 
   return (
     <Box className={classes.root}>
-      <TimeInput label="Time" required time={time} setTime={setTime} />
-      <CalendarSelect label="Test" required selectedDates={dates} handleClick={handleClick} showWeekend={false} />
+      <TimeInput label={t('items:fields.time.label')} required time={time} setTime={setTime} />
+      <CalendarSelect label={t('items:fields.monthdays.label')} required selectedDates={dates} handleClick={handleClick}
+                      showWeekend={false} />
     </Box>
   );
 };

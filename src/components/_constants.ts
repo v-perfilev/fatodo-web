@@ -48,7 +48,7 @@ const LOREM_IPSUM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, se
 
 const TEST_DATE: ParamDate = {
   time: 600,
-  day: 15,
+  date: 15,
   month: 6,
   year: 2021,
 };

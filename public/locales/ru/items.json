@@ -39,6 +39,12 @@
     },
     "reminders": {
       "label": "Напоминания"
+    },
+    "weekdays": {
+      "label": "Дни недели"
+    },
+    "monthdays": {
+      "label": "Дни месяца"
     }
   },
   "types": {
@@ -64,19 +70,10 @@
       "monthly": "ежемесячно",
       "yearly": "ежегодно"
     },
-    "weekdays": {
-      "mo": "Пн",
-      "tu": "Вт",
-      "we": "Ср",
-      "th": "Чт",
-      "fr": "Пт",
-      "sa": "Сб",
-      "su": "Вс"
-    },
     "once": "в {{time}} {{date}}",
     "daily": "в {{time}}",
-    "weekly": "в {{time}} в {{weekdays}}",
-    "monthly": "в {{time}} {{days}} каждого месяца",
+    "weekly": "в {{time}} в {{weekDays}}",
+    "monthly": "в {{time}} {{monthDates}} каждого месяца",
     "yearly": "в {{time}} {{date}}"
   }
 }

@@ -3,7 +3,7 @@ import {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {Reminder} from '../../../models/reminder';
-import {DateUtils} from '../../../shared/utils/date.utils';
+import {DateConverters, DateFormatters, DateUtils} from '../../../shared/utils/date.utils';
 
 type Props = HTMLAttributes<any> & {
   reminder: Reminder;
@@ -12,27 +12,29 @@ type Props = HTMLAttributes<any> & {
 const ReminderView: FC<Props> = ({reminder, className}: Props) => {
   const {t} = useTranslation();
 
+  //need to set locale in moment here cause of bug in material-ui
+  DateUtils.resetLocale();
+
   const label = t('items:reminder.periodicity.' + reminder.periodicity) + ': ';
 
-  const timeDate = DateUtils.getTimeFromParamDate(reminder.date);
-  const dateDate = DateUtils.getDateFromParamDate(reminder.date);
-
-  const time = DateUtils.formatTime(timeDate);
+  const timeDate = DateConverters.getTimeFromParamDate(reminder.date);
+  const dateDate = DateConverters.getDateFromParamDate(reminder.date);
+  const time = DateFormatters.formatTime(timeDate);
 
   let description = '';
   if (reminder.periodicity === 'once') {
-    const date = DateUtils.formatDateWithYear(dateDate);
+    const date = DateFormatters.formatDateWithYear(dateDate);
     description = t('items:reminder.' + reminder.periodicity, {time, date});
   } else if (reminder.periodicity === 'daily') {
     description = t('items:reminder.' + reminder.periodicity, {time});
   } else if (reminder.periodicity === 'weekly') {
-    const weekdays = reminder.weekDays.join(', ');
-    description = t('items:reminder.' + reminder.periodicity, {time, weekdays});
+    const weekDays = DateUtils.getDayNamesByNumbers(reminder.weekDays).map(str => str.toUpperCase()).join(', ');
+    description = t('items:reminder.' + reminder.periodicity, {time, weekDays});
   } else if (reminder.periodicity === 'monthly') {
-    const days = reminder.monthDays.map(d => t('items:reminder.weekdays.' + d)).join(', ');
-    description = t('items:reminder.' + reminder.periodicity, {time, days});
+    const monthDates = reminder.monthDates.join(', ');
+    description = t('items:reminder.' + reminder.periodicity, {time, monthDates});
   } else if (reminder.periodicity === 'yearly') {
-    const date = DateUtils.formatDate(dateDate);
+    const date = DateFormatters.formatDate(dateDate);
     description = t('items:reminder.' + reminder.periodicity, {time, date});
   }
 

@@ -2,8 +2,8 @@ import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {dateInputItemStyles} from './_styles';
 import cloneDeep from 'lodash/cloneDeep';
-import moment from 'moment';
 import CalendarSelect from '../calendar-select/calendar-select';
+import {DateUtils} from '../../../../shared/utils/date.utils';
 
 type Props = {
   date: Date;
@@ -13,8 +13,8 @@ type Props = {
 const getParamsOfMonth = (date: Date): [number, number] => {
   const tmpDate = cloneDeep(date);
   tmpDate.setDate(1);
-  const dayOfWeek = moment(tmpDate).weekday();
-  const datesInMonth = moment(tmpDate).daysInMonth();
+  const dayOfWeek = DateUtils.getDayOfWeek(tmpDate);
+  const datesInMonth = DateUtils.getDatesInMonth(tmpDate);
   return [dayOfWeek, datesInMonth];
 };
 
