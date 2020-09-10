@@ -5,7 +5,7 @@ import csx from 'classnames';
 
 type Props = HTMLAttributes<any> & {
   children: ReactNode;
-}
+};
 
 const PaperBox: FC<Props> = ({children, className}: Props) => {
   const classes = paperBoxStyles();

@@ -6,7 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
 type Props = {
   date: Date;
   handleChange: (date: Date) => void;
-}
+};
 
 const DateInputYears: FC<Props> = ({date, handleChange}: Props) => {
   const classes = dateInputItemStyles();
@@ -22,11 +22,14 @@ const DateInputYears: FC<Props> = ({date, handleChange}: Props) => {
 
   return (
     <Box className={classes.box}>
-      {years.map((year, index) => (
-        <Box className={classes.item} key={index} onClick={() => handleClick(index)}>
-          {year}
-        </Box>
-      ))}
+      {years.map((year, index) => {
+        const handleClickOnYear = (): void => handleClick(index);
+        return (
+          <Box className={classes.item} key={index} onClick={handleClickOnYear}>
+            {year}
+          </Box>
+        );
+      })}
     </Box>
   );
 };

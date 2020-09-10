@@ -20,21 +20,22 @@ const ItemFormTime: FC<Props> = ({values, setFieldValue}: Props) => {
   };
 
   return (
-    <Field component={TimePicker}
-           type="text"
-           name="time"
-           label={t('items:fields.time.label')}
-           format={DateFormats.timeFormat}
-           ampm={false}
-           variant="inline"
-           fullWidth
-           InputProps={{
-             endAdornment: values['time'] && (
-               <IconButton onClick={clear} size="small">
-                 <CloseIcon />
-               </IconButton>
-             ),
-           }}
+    <Field
+      component={TimePicker}
+      type="text"
+      name="time"
+      label={t('items:fields.time.label')}
+      format={DateFormats.timeFormat}
+      ampm={false}
+      variant="inline"
+      fullWidth
+      InputProps={{
+        endAdornment: values['time'] && (
+          <IconButton onClick={clear} size="small">
+            <CloseIcon />
+          </IconButton>
+        ),
+      }}
     />
   );
 };

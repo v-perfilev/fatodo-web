@@ -40,9 +40,7 @@ const SocialButtons: FC = () => {
     <>
       <Box className={classes.header}>
         <Divider />
-        <Typography className={classes.caption}>
-          {t('auth.socialLogin')}
-        </Typography>
+        <Typography className={classes.caption}>{t('auth.socialLogin')}</Typography>
         <Divider />
       </Box>
       <Box m={2} />

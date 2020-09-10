@@ -6,7 +6,7 @@ import csx from 'classnames';
 type Props = HTMLAttributes<any> & {
   label: string;
   children: ReactNode;
-}
+};
 
 const LabeledBox: FC<Props> = ({label, children, className}: Props) => {
   const classes = labeledBoxStyles();
@@ -19,7 +19,6 @@ const LabeledBox: FC<Props> = ({label, children, className}: Props) => {
       </Typography>
       {children}
     </Box>
-
   );
 };
 

@@ -38,9 +38,7 @@ const ForgotPassword: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
       <Box m={1} />
       <ForgotPasswordForm onSuccess={redirectToHome} />
       <Box m={2} />
-      <Link to={Routes.ROOT}>
-        {t('buttons.toHomePage')}
-      </Link>
+      <Link to={Routes.ROOT}>{t('buttons.toHomePage')}</Link>
     </Box>
   );
 };

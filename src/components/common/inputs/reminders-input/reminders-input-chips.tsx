@@ -12,18 +12,23 @@ type Props = {
 const RemindersInputChips: FC<Props> = ({reminders, removeReminder}: Props) => {
   const classes = remindersInputChipsStyles();
 
-  return reminders.length > 0 && (
-    <Box className={classes.root}>
-      {reminders.map((reminder, index) => (
-        <Chip
-          className={classes.chip}
-          key={index}
-          size="medium"
-          label={<ReminderView reminder={reminder} />}
-          onDelete={(e) => removeReminder(index, e)}
-        />
-      ))}
-    </Box>
+  return (
+    reminders.length > 0 && (
+      <Box className={classes.root}>
+        {reminders.map((reminder, index) => {
+          const handleDelete = (e): void => removeReminder(index, e);
+          return (
+            <Chip
+              className={classes.chip}
+              key={index}
+              size="medium"
+              label={<ReminderView reminder={reminder} />}
+              onDelete={handleDelete}
+            />
+          );
+        })}
+      </Box>
+    )
   );
 };
 

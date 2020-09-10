@@ -13,15 +13,17 @@ const ItemViewPropertiesTags: FC<Props> = ({tags}: Props) => {
 
   const showTags = tags && tags.length > 0;
 
-  return showTags && (
-    <>
-      <LabeledBox label={t('items:labels.tags')}>
-        {tags.map((tag, index) => (
-          <PaperBox key={index}>{tag}</PaperBox>
-        ))}
-      </LabeledBox>
-      <PageSpacer />
-    </>
+  return (
+    showTags && (
+      <>
+        <LabeledBox label={t('items:labels.tags')}>
+          {tags.map((tag, index) => (
+            <PaperBox key={index}>{tag}</PaperBox>
+          ))}
+        </LabeledBox>
+        <PageSpacer />
+      </>
+    )
   );
 };
 

@@ -30,7 +30,7 @@ const RemindersInputPopoverWeekly: FC<Props> = ({setReminder}: Props) => {
   }, [time, days]);
 
   const handleClick = (day: number): void => {
-    setDays(prevState => {
+    setDays((prevState) => {
       if (prevState.includes(day)) {
         prevState.splice(prevState.indexOf(day), 1);
       } else {

@@ -5,16 +5,12 @@ import {Group} from '../../../models/group';
 
 type Props = {
   group: Group;
-}
+};
 
-const GroupViewMessages: FC<Props> = ({group}: Props) => {
+const GroupViewMessages: FC<Props> = ({}: Props) => {
   const classes = groupMessagesStyles();
 
-  return (
-    <Box className={classes.root}>
-      Test
-    </Box>
-  );
+  return <Box className={classes.root}>Test</Box>;
 };
 
 export default GroupViewMessages;

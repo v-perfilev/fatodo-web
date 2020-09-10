@@ -74,9 +74,9 @@ export class DateConverters {
     return date;
   };
 
-  static getMomentFromTime = (time: Date) => time ? moment(time) : moment(new Date());
+  static getMomentFromTime = (time: Date): Moment => (time ? moment(time) : moment(new Date()));
 
-  static getTimeFromMoment = (moment: Moment) => {
+  static getTimeFromMoment = (moment: Moment): Date => {
     const date = new Date();
     date.setHours(moment.hours());
     date.setMinutes(moment.minutes());
@@ -106,14 +106,16 @@ export class DateUtils {
     const firstDayOfWeek = moment().startOf('week').day();
     const daysBeforeFirstDay = [];
     const daysAfterFirstDay = [];
-    numbers.filter(n => dayNumbers.includes(n)).forEach(n => {
-      if (n < firstDayOfWeek) {
-        daysBeforeFirstDay.push(n);
-      } else {
-        daysAfterFirstDay.push(n);
-      }
-    });
+    numbers
+      .filter((n) => dayNumbers.includes(n))
+      .forEach((n) => {
+        if (n < firstDayOfWeek) {
+          daysBeforeFirstDay.push(n);
+        } else {
+          daysAfterFirstDay.push(n);
+        }
+      });
     const orderedDays = daysAfterFirstDay.concat(daysBeforeFirstDay);
-    return orderedDays.map(d => dayNames[dayNumbers.indexOf(d)]);
+    return orderedDays.map((d) => dayNames[dayNumbers.indexOf(d)]);
   };
 }

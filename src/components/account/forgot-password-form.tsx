@@ -21,8 +21,8 @@ const connector = connect(null, mapDispatchToProps);
 type Props = FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-  onSuccess?: () => void;
-};
+    onSuccess?: () => void;
+  };
 
 const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();

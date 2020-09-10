@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, ReactElement} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import {Autocomplete, AutocompleteRenderInputParams} from 'formik-material-ui-lab';
@@ -15,12 +15,9 @@ const ItemFormTags: FC = () => {
       multiple
       fullWidth
       options={[]}
-      getOptionLabel={(option) => option}
-      renderInput={(params: AutocompleteRenderInputParams) => (
-        <TextField
-          {...params}
-          label={t('items:fields.tags.label')}
-        />
+      getOptionLabel={(option): string => option}
+      renderInput={(params: AutocompleteRenderInputParams): ReactElement => (
+        <TextField {...params} label={t('items:fields.tags.label')} />
       )}
     />
   );

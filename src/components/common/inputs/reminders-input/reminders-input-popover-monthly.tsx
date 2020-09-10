@@ -30,7 +30,7 @@ const RemindersInputPopoverMonthly: FC<Props> = ({setReminder}: Props) => {
   }, [time, dates]);
 
   const handleClick = (date: number): void => {
-    setDates(prevState => {
+    setDates((prevState) => {
       if (prevState.includes(date)) {
         prevState.splice(prevState.indexOf(date), 1);
       } else {
@@ -44,8 +44,13 @@ const RemindersInputPopoverMonthly: FC<Props> = ({setReminder}: Props) => {
   return (
     <Box className={classes.root}>
       <TimeInput label={t('items:fields.time.label')} required time={time} setTime={setTime} />
-      <CalendarSelect label={t('items:fields.monthdays.label')} required selectedDates={dates} handleClick={handleClick}
-                      showWeekend={false} />
+      <CalendarSelect
+        label={t('items:fields.monthdays.label')}
+        required
+        selectedDates={dates}
+        handleClick={handleClick}
+        showWeekend={false}
+      />
     </Box>
   );
 };

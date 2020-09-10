@@ -31,8 +31,8 @@ type Props = RouteComponentProps &
   FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-  onSuccess: () => void;
-};
+    onSuccess: () => void;
+  };
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -81,9 +81,7 @@ const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
         </LoadingButton>
       </Form>
       <Box m={1} />
-      <Link to={Routes.FORGOT_PASSWORD}>
-        {t('buttons.forgotPassword')}
-      </Link>
+      <Link to={Routes.FORGOT_PASSWORD}>{t('buttons.forgotPassword')}</Link>
     </Box>
   );
 };

@@ -9,7 +9,7 @@ type Props = HTMLAttributes<any> & {
   required?: boolean;
   selectedDays: number[];
   handleClick: (day: number) => void;
-}
+};
 
 const DaysSelect: FC<Props> = ({label, required, selectedDays, handleClick, className}: Props) => {
   const classes = daysSelectStyles();
@@ -20,8 +20,9 @@ const DaysSelect: FC<Props> = ({label, required, selectedDays, handleClick, clas
   const weekdays = dayNames.map((weekday, index) => {
     const dayNumber = dayNumbers[index];
     const classnames = csx(classes.day, {[classes.selectedDay]: selectedDays.includes(dayNumber)});
+    const handleClickOnDay = (): void => handleClick(dayNumber);
     return (
-      <Button className={classnames} key={index} onClick={() => handleClick(dayNumber)}>
+      <Button className={classnames} key={index} onClick={handleClickOnDay}>
         {weekday}
       </Button>
     );
@@ -30,12 +31,8 @@ const DaysSelect: FC<Props> = ({label, required, selectedDays, handleClick, clas
   const classnames = csx(classes.root, className);
   return (
     <Box className={classnames}>
-      {label && (
-        <FormLabel required={required}>{label}</FormLabel>
-      )}
-      <Box className={classes.week}>
-        {weekdays}
-      </Box>
+      {label && <FormLabel required={required}>{label}</FormLabel>}
+      <Box className={classes.week}>{weekdays}</Box>
     </Box>
   );
 };

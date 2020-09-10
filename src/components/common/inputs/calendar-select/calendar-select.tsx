@@ -13,10 +13,10 @@ type Props = HTMLAttributes<any> & {
   firstAllowedDate?: number;
   showWeekend?: boolean;
   handleClick: (day: number) => void;
-}
+};
 
 const getDatesAndWeeksCount = (dayOfWeek, datesInMonth): [number[], number] => {
-  const restDays = (dayOfWeek + datesInMonth) % 7 ? 7 - (dayOfWeek + datesInMonth) % 7 : 0;
+  const restDays = (dayOfWeek + datesInMonth) % 7 ? 7 - ((dayOfWeek + datesInMonth) % 7) : 0;
   const weekCount = (dayOfWeek + datesInMonth + restDays) / 7;
   const dates = [];
   for (let i = 0; i < dayOfWeek; i++) {
@@ -47,7 +47,9 @@ const CalendarSelect: FC<Props> = (props: Props) => {
   const weekdays = (
     <Box className={classes.weekHeader}>
       {weekdayArray.map((name, index) => (
-        <Box className={dateClass} key={index}>{name}</Box>
+        <Box className={dateClass} key={index}>
+          {name}
+        </Box>
       ))}
     </Box>
   );
@@ -62,8 +64,9 @@ const CalendarSelect: FC<Props> = (props: Props) => {
         const isDayAllowed = dayValue && dayValue >= fad;
         const isSelected = sd.includes(dayValue);
         const classnames = csx(dateClass, {[classes.selectedDate]: isSelected});
+        const handleClickOnDate = (): void => handleClick(dayValue);
         return dayValue ? (
-          <Button className={classnames} key={dateIndex} disabled={!isDayAllowed} onClick={() => handleClick(dayValue)}>
+          <Button className={classnames} key={dateIndex} disabled={!isDayAllowed} onClick={handleClickOnDate}>
             {dayValue}
           </Button>
         ) : (
@@ -76,9 +79,7 @@ const CalendarSelect: FC<Props> = (props: Props) => {
   const classnames = csx(classes.root, className);
   return (
     <Box className={classnames}>
-      {label && (
-        <FormLabel required={required}>{label}</FormLabel>
-      )}
+      {label && <FormLabel required={required}>{label}</FormLabel>}
       {sw && weekdays}
       {dates}
     </Box>

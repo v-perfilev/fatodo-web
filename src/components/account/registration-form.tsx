@@ -26,8 +26,8 @@ const connector = connect(null, mapDispatchToProps);
 type Props = FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-  onSuccess: () => void;
-};
+    onSuccess: () => void;
+  };
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();

@@ -23,20 +23,21 @@ const ItemFormDate: FC<Props> = ({values, setFieldValue}: Props) => {
   };
 
   return (
-    <Field component={DatePicker}
-           type="text"
-           name="date"
-           label={t('items:fields.date.label')}
-           format={DateFormats.dateWithYearFormat}
-           variant="inline"
-           fullWidth
-           InputProps={{
-             endAdornment: values['date'] && (
-               <IconButton onClick={clear} size="small">
-                 <CloseIcon />
-               </IconButton>
-             ),
-           }}
+    <Field
+      component={DatePicker}
+      type="text"
+      name="date"
+      label={t('items:fields.date.label')}
+      format={DateFormats.dateWithYearFormat}
+      variant="inline"
+      fullWidth
+      InputProps={{
+        endAdornment: values['date'] && (
+          <IconButton onClick={clear} size="small">
+            <CloseIcon />
+          </IconButton>
+        ),
+      }}
     />
   );
 };

@@ -7,7 +7,7 @@ import {DateConverters, DateFormatters, DateUtils} from '../../../shared/utils/d
 
 type Props = HTMLAttributes<any> & {
   reminder: Reminder;
-}
+};
 
 const ReminderView: FC<Props> = ({reminder, className}: Props) => {
   const {t} = useTranslation();
@@ -28,7 +28,9 @@ const ReminderView: FC<Props> = ({reminder, className}: Props) => {
   } else if (reminder.periodicity === 'daily') {
     description = t('items:reminder.' + reminder.periodicity, {time});
   } else if (reminder.periodicity === 'weekly') {
-    const weekDays = DateUtils.getDayNamesByNumbers(reminder.weekDays).map(str => str.toUpperCase()).join(', ');
+    const weekDays = DateUtils.getDayNamesByNumbers(reminder.weekDays)
+      .map((str) => str.toUpperCase())
+      .join(', ');
     description = t('items:reminder.' + reminder.periodicity, {time, weekDays});
   } else if (reminder.periodicity === 'monthly') {
     const monthDates = reminder.monthDates.join(', ');

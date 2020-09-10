@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {itemFormStyles} from './_styles';
 import {Item, itemPriorities, ItemPriority, ItemType, itemTypes} from '../../../models/item';
-import {useTranslation} from 'react-i18next';
 import {Container, Grid} from '@material-ui/core';
 import PageHeader from '../../common/page-layouts/page-header';
 import PageDivider from '../../common/page-layouts/page-divider';
@@ -21,11 +20,10 @@ import {TEST_REMINDER} from '../../_constants';
 type Props = FormikProps<any> & {
   item: Item;
   headerPrefix: string;
-}
+};
 
 const ItemForm: FC<Props> = ({item, headerPrefix, ...props}: Props) => {
   const classes = itemFormStyles();
-  const {t} = useTranslation();
 
   const headerTitle = headerPrefix + item.group.title;
 
@@ -60,7 +58,6 @@ const ItemForm: FC<Props> = ({item, headerPrefix, ...props}: Props) => {
             <ItemFormTags />
           </Grid>
         </Grid>
-
       </Form>
     </Container>
   );
@@ -91,8 +88,8 @@ const formik = withFormik<Props, FormValues>({
 
   validateOnMount: true,
 
-  handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-
+  handleSubmit: (values: FormValues, {}: FormikBag<Props, FormValues>) => {
+    console.log(values);
   },
 });
 

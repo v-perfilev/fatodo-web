@@ -40,14 +40,16 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return group && (
-    <Container className={classes.root}>
-      <PageHeader title={group.title} />
-      <PageDivider color={group.color} height={5} />
-      <GroupViewUsers users={group.users} />
-      <GroupViewItems items={group.items} color={group.color} />
-      <GroupViewMessages group={group} />
-    </Container>
+  return (
+    group && (
+      <Container className={classes.root}>
+        <PageHeader title={group.title} />
+        <PageDivider color={group.color} height={5} />
+        <GroupViewUsers users={group.users} />
+        <GroupViewItems items={group.items} color={group.color} />
+        <GroupViewMessages group={group} />
+      </Container>
+    )
   );
 };
 

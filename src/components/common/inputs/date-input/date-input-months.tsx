@@ -7,7 +7,7 @@ import {DateFormatters} from '../../../../shared/utils/date.utils';
 type Props = {
   date: Date;
   handleChange: (date: Date) => void;
-}
+};
 
 const getMonthName = (month: number): string => {
   const date = new Date();
@@ -17,9 +17,7 @@ const getMonthName = (month: number): string => {
 
 const getFirstMonth = (date: Date): number => {
   const currentDate = new Date();
-  return date.getFullYear() === currentDate.getFullYear()
-    ? currentDate.getMonth()
-    : 0;
+  return date.getFullYear() === currentDate.getFullYear() ? currentDate.getMonth() : 0;
 };
 
 const getMonths = (firstMonth: number): string[] =>
@@ -39,11 +37,14 @@ const DateInputMonths: FC<Props> = ({date, handleChange}: Props) => {
 
   return (
     <Box className={classes.box}>
-      {months.map((month, index) => (
-        <Box className={classes.item} key={index} onClick={() => handleClick(index)}>
-          {month}
-        </Box>
-      ))}
+      {months.map((month, index) => {
+        const handleClickOnMonth = (): void => handleClick(index);
+        return (
+          <Box className={classes.item} key={index} onClick={handleClickOnMonth}>
+            {month}
+          </Box>
+        );
+      })}
     </Box>
   );
 };

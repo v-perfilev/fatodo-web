@@ -12,7 +12,7 @@ import {NoteIcon} from '../icons/note-icon';
 
 type Props = HTMLAttributes<any> & {
   type: ItemType;
-}
+};
 
 const getIcon = (type: ItemType): ReactNode => {
   if (type === 'task') {
@@ -32,7 +32,11 @@ const TypeView: FC<Props> = ({type, className}: Props) => {
 
   const icon = getIcon(type);
 
-  return <Box className={classNames}>{icon} {t('items:types.' + type)}</Box>;
+  return (
+    <Box className={classNames}>
+      {icon} {t('items:types.' + type)}
+    </Box>
+  );
 };
 
 export default TypeView;

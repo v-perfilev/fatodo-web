@@ -56,9 +56,7 @@ const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
         {t('static:notActivated.caption', {email: user})}
       </Typography>
       <Box m={2} />
-      <Typography>
-        {t('static:redirectToHome.message', {count: timer})}
-      </Typography>
+      <Typography>{t('static:redirectToHome.message', {count: timer})}</Typography>
       <Box m={2} />
       <LoadingButton
         startIcon={<EmailIcon />}

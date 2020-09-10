@@ -9,11 +9,7 @@ type Props = {
 const ItemViewDescription: FC<Props> = ({description}: Props) => {
   const classes = itemViewContentStyles();
 
-  return (
-    <Box className={classes.root}>
-      {description}
-    </Box>
-  );
+  return <Box className={classes.root}>{description}</Box>;
 };
 
 export default ItemViewDescription;

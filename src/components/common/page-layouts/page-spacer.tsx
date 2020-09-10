@@ -4,9 +4,7 @@ import {pageSpacerStyles} from './_styles';
 
 const PageSpacer: FC = () => {
   const classes = pageSpacerStyles();
-  return (
-    <Box className={classes.root} />
-  );
+  return <Box className={classes.root} />;
 };
 
 export default PageSpacer;

@@ -8,7 +8,7 @@ import ItemViewDataType from './item-view-data-type';
 import ItemViewDataDate from './item-view-data-date';
 
 type Props = {
-  item: Item
+  item: Item;
 };
 
 const ItemViewData: FC<Props> = ({item}: Props) => {

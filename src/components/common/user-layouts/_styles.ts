@@ -10,4 +10,3 @@ export const userPicStyles = makeStyles((theme: Theme) => ({
     borderColor: theme.palette.primary.main,
   },
 }));
-

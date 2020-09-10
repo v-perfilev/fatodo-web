@@ -10,7 +10,7 @@ type Props = {
   required?: boolean;
   time: Date;
   setTime: (time: Date) => void;
-}
+};
 
 const TimeInput: FC<Props> = ({label, required, time, setTime}: Props) => {
   const classes = timeInputStyles();
@@ -24,7 +24,7 @@ const TimeInput: FC<Props> = ({label, required, time, setTime}: Props) => {
     setShowMinutes(false);
   };
 
-  const handleClock = (momentTime: Moment) => {
+  const handleClock = (momentTime: Moment): void => {
     const timeDate = DateConverters.getTimeFromMoment(momentTime);
     setTime(timeDate);
     if (!showMinutes) {
@@ -39,14 +39,24 @@ const TimeInput: FC<Props> = ({label, required, time, setTime}: Props) => {
 
   return (
     <Box>
-      <TextField label={label} required={required} value={formattedTime} InputProps={{readOnly: true}}
-                 onClick={toggleHoursView} className={classes.textField} />
+      <TextField
+        label={label}
+        required={required}
+        value={formattedTime}
+        InputProps={{readOnly: true}}
+        onClick={toggleHoursView}
+        className={classes.textField}
+      />
       <Fade in={showClock}>
         <Box className={classes.box}>
-          <ClockView date={timeMoment} type={showMinutes ? 'minutes' : 'hours'} ampm={false}
-                     onHourChange={handleClock}
-                     onMinutesChange={handleClock}
-                     onSecondsChange={handleClock} />
+          <ClockView
+            date={timeMoment}
+            type={showMinutes ? 'minutes' : 'hours'}
+            ampm={false}
+            onHourChange={handleClock}
+            onMinutesChange={handleClock}
+            onSecondsChange={handleClock}
+          />
         </Box>
       </Fade>
     </Box>

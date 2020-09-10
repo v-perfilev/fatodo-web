@@ -13,4 +13,3 @@ export const itemFormStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(1),
   },
 }));
-

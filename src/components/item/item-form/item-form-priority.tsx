@@ -9,11 +9,19 @@ const ItemFormPriority: FC = () => {
   const {t} = useTranslation();
 
   return (
-    <Field component={TextField} type="text" name="priority" label={t('items:fields.priority.label')} select
-           required
-           fullWidth>
+    <Field
+      component={TextField}
+      type="text"
+      name="priority"
+      label={t('items:fields.priority.label')}
+      select
+      required
+      fullWidth
+    >
       {Object.values(itemPriorities).map((priority, index) => (
-        <MenuItem value={priority} key={index}>{t('items:priorities.' + priority)}</MenuItem>
+        <MenuItem value={priority} key={index}>
+          {t('items:priorities.' + priority)}
+        </MenuItem>
       ))}
     </Field>
   );

@@ -34,9 +34,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
           <ListItemIcon>
             <LogoutIcon className={classes.icon} />
           </ListItemIcon>
-          <ListItemText>
-            {t('header.logout')}
-          </ListItemText>
+          <ListItemText>{t('header.logout')}</ListItemText>
         </ListItem>
       )}
       {!isAuthenticated && (
@@ -44,9 +42,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
           <ListItemIcon>
             <LoginIcon className={classes.icon} />
           </ListItemIcon>
-          <ListItemText>
-            {t('header.login')}
-          </ListItemText>
+          <ListItemText>{t('header.login')}</ListItemText>
         </ListItem>
       )}
       {!isAuthenticated && (
@@ -54,9 +50,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
           <ListItemIcon>
             <SignUpIcon className={classes.icon} />
           </ListItemIcon>
-          <ListItemText>
-            {t('header.register')}
-          </ListItemText>
+          <ListItemText>{t('header.register')}</ListItemText>
         </ListItem>
       )}
     </List>

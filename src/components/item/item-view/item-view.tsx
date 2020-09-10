@@ -39,20 +39,22 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return item && (
-    <Container className={classes.root}>
-      <PageHeader title={item.title} />
-      <PageDivider color={item.group.color} height={5} />
-      <ItemViewData item={item} />
-      {item.description && (
-        <>
-          <PageDivider color={item.group.color} />
-          <ItemViewDescription description={item.description} />
-          <PageDivider color={item.group.color} />
-        </>
-      )}
-      <ItemViewProperties item={item} />
-    </Container>
+  return (
+    item && (
+      <Container className={classes.root}>
+        <PageHeader title={item.title} />
+        <PageDivider color={item.group.color} height={5} />
+        <ItemViewData item={item} />
+        {item.description && (
+          <>
+            <PageDivider color={item.group.color} />
+            <ItemViewDescription description={item.description} />
+            <PageDivider color={item.group.color} />
+          </>
+        )}
+        <ItemViewProperties item={item} />
+      </Container>
+    )
   );
 };
 

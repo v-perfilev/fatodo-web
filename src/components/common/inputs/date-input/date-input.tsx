@@ -12,7 +12,7 @@ type Props = {
   date: Date;
   setDate: (date: Date) => void;
   firstInputType?: 'year' | 'month' | 'date';
-}
+};
 
 enum InputType {
   YEAR,
@@ -62,8 +62,14 @@ const DateInput: FC<Props> = ({label, required, date: inputDate, setDate: setInp
 
   return (
     <Box>
-      <TextField label={label} required={required} value={formattedDate} InputProps={{readOnly: true}}
-                 onClick={openInput} className={classes.textField} />
+      <TextField
+        label={label}
+        required={required}
+        value={formattedDate}
+        InputProps={{readOnly: true}}
+        onClick={openInput}
+        className={classes.textField}
+      />
       <Fade in={inputType !== null}>
         <Box className={classes.box}>
           {inputType === InputType.YEAR && <DateInputYears {...{date, handleChange}} />}

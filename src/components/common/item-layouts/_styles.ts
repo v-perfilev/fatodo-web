@@ -31,4 +31,3 @@ export const typeStyles = makeStyles((theme: Theme) => ({
     },
   },
 }));
-

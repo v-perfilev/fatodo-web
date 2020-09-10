@@ -4,7 +4,6 @@ import {Item} from '../models/item';
 import {Reminder} from '../models/reminder';
 import {ParamDate} from '../models/param-date';
 
-
 const GROUP_BASE: Group = {
   id: Math.random().toString(),
   title: 'Test Group',
@@ -44,7 +43,11 @@ const ITEM_TITLES: string[] = [
   'Review editor calendar',
 ];
 
-const LOREM_IPSUM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
+const LOREM_IPSUM =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore ' +
+  'magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo ' +
+  'consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ' +
+  'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
 const TEST_DATE: ParamDate = {
   time: 600,
@@ -75,7 +78,7 @@ const ITEM_TEMPLATE: Item = {
   group: GROUP_BASE,
 };
 
-export const generateItem = () => {
+export const generateItem = (): Item => {
   const titleId = Math.floor(Math.random() * ITEM_TITLES.length);
   const title = ITEM_TITLES[titleId];
 

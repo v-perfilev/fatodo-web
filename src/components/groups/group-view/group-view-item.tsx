@@ -9,7 +9,7 @@ import {Item} from '../../../models/item';
 
 type Props = {
   item: Item;
-}
+};
 
 const GroupViewItem: FC<Props> = ({item}: Props) => {
   const classes = groupItemViewStyles();
@@ -19,9 +19,7 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
       <Box className={classes.iconBox}>
         <CheckIcon className={classes.icon} />
       </Box>
-      <Box className={classes.contentBox}>
-        {item.title}
-      </Box>
+      <Box className={classes.contentBox}>{item.title}</Box>
       <Box className={classes.managementBox}>
         <PackageDownIcon className={classes.toggleIcon} />
         <EditIcon className={classes.editIcon} />

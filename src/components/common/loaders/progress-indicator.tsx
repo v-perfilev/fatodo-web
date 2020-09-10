@@ -13,15 +13,15 @@ type Props = {
 
 const ProgressIndicator: FC<Props> = ({transparent, hide, center, component}: Props) => {
   const classes = progressIndicatorStyles();
-  const classNames = csx({[classes.center]: !!center}, {[classes.transparent]: !!transparent}, {[classes.hide]: !!hide});
+  const classNames = csx(
+    {[classes.center]: !!center},
+    {[classes.transparent]: !!transparent},
+    {[classes.hide]: !!hide}
+  );
 
   const progressComponent = !!component ? component : <CircularProgress color={'secondary'} />;
 
-  return (
-    <Box className={classNames}>
-      {progressComponent}
-    </Box>
-  );
+  return <Box className={classNames}>{progressComponent}</Box>;
 };
 
 export default ProgressIndicator;

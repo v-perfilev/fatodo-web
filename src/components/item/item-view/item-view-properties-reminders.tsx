@@ -15,17 +15,19 @@ const ItemViewPropertiesReminders: FC<Props> = ({reminders}: Props) => {
 
   const showReminders = reminders && reminders.length > 0;
 
-  return showReminders && (
-    <>
-      <LabeledBox label={t('items:labels.reminders')}>
-        {reminders.map((reminder, index) => (
-          <PaperBox key={index}>
-            <ReminderView reminder={reminder} />
-          </PaperBox>
-        ))}
-      </LabeledBox>
-      <PageSpacer />
-    </>
+  return (
+    showReminders && (
+      <>
+        <LabeledBox label={t('items:labels.reminders')}>
+          {reminders.map((reminder, index) => (
+            <PaperBox key={index}>
+              <ReminderView reminder={reminder} />
+            </PaperBox>
+          ))}
+        </LabeledBox>
+        <PageSpacer />
+      </>
+    )
   );
 };
 

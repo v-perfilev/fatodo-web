@@ -5,7 +5,7 @@ import csx from 'classnames';
 
 type Props = HTMLAttributes<any> & {
   title: ReactNode;
-}
+};
 
 const PageHeader: FC<Props> = ({title, className}: Props) => {
   const classes = pageHeaderStyles();
@@ -14,9 +14,7 @@ const PageHeader: FC<Props> = ({title, className}: Props) => {
   return (
     <Box className={classNames}>
       <Typography variant="h6" color="primary">
-        <Box fontWeight="fontWeightMedium">
-          {title}
-        </Box>
+        <Box fontWeight="fontWeightMedium">{title}</Box>
       </Typography>
     </Box>
   );

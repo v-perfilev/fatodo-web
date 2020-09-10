@@ -4,10 +4,11 @@ import {Box, CircularProgress, CircularProgressProps, Typography} from '@materia
 import {circularProgressTimerStyles} from './_styles';
 import csx from 'classnames';
 
-type Props = HTMLAttributes<any> & CircularProgressProps & {
-  value: number;
-  maxValue: number;
-};
+type Props = HTMLAttributes<any> &
+  CircularProgressProps & {
+    value: number;
+    maxValue: number;
+  };
 
 const CircularProgressTimer: FC<Props> = ({value, maxValue, className, ...props}: Props) => {
   const classes = circularProgressTimerStyles();

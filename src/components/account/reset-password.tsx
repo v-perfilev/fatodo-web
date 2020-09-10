@@ -41,9 +41,7 @@ const ResetPassword: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
       <Box m={1} />
       <ResetPasswordForm code={code} onSuccess={redirectToHome} onFailure={redirectToInternalError} />
       <Box m={2} />
-      <Link to={Routes.ROOT}>
-        {t('buttons.toHomePage')}
-      </Link>
+      <Link to={Routes.ROOT}>{t('buttons.toHomePage')}</Link>
     </Box>
   );
 };

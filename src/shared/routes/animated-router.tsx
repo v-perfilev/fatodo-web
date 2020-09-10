@@ -7,7 +7,7 @@ import {animatedRouterStyles} from './_styles';
 import {useResize} from '../hooks/use-resize';
 
 type Props = {
-  children: ReactNode
+  children: ReactNode;
 };
 
 const AnimatedRouter: FC<Props> = ({children}: Props) => {

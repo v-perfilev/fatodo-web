@@ -11,7 +11,7 @@ import {HighPriorityIcon} from '../icons/high-priority-icon';
 
 type Props = HTMLAttributes<any> & {
   priority: ItemPriority;
-}
+};
 
 const getIcon = (priority: ItemPriority): ReactNode => {
   if (priority === 'low') {
@@ -30,7 +30,11 @@ const PriorityView: FC<Props> = ({priority, className}: Props) => {
 
   const icon = getIcon(priority);
 
-  return <Box className={classNames}>{icon} {t('items:priorities.' + priority)}</Box>;
+  return (
+    <Box className={classNames}>
+      {icon} {t('items:priorities.' + priority)}
+    </Box>
+  );
 };
 
 export default PriorityView;

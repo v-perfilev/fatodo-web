@@ -7,8 +7,7 @@ const ItemFormTitle: FC = () => {
   const {t} = useTranslation();
 
   return (
-    <Field component={TextField} type="text" name="title" label={t('items:fields.title.label')} required
-           fullWidth />
+    <Field component={TextField} type="text" name="title" label={t('items:fields.title.label')} required fullWidth />
   );
 };
 

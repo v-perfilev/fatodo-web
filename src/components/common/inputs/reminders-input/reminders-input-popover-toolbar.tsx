@@ -21,7 +21,7 @@ const RemindersInputPopoverToolbar: FC<Props> = ({periodicity, setPeriodicity}: 
   const [show, setShow] = useState(true);
   const {t} = useTranslation();
 
-  const handlePeriodicity = (event: React.MouseEvent<HTMLElement>, newPeriodicity: ReminderPeriodicity) => {
+  const handlePeriodicity = (event: React.MouseEvent<HTMLElement>, newPeriodicity: ReminderPeriodicity): void => {
     if (newPeriodicity !== null && periodicity !== newPeriodicity) {
       setShow(false);
       setTimeout(() => {
@@ -33,12 +33,7 @@ const RemindersInputPopoverToolbar: FC<Props> = ({periodicity, setPeriodicity}: 
 
   return (
     <Toolbar className={classes.root}>
-      <ToggleButtonGroup
-        value={periodicity}
-        exclusive
-        size="small"
-        onChange={handlePeriodicity}
-      >
+      <ToggleButtonGroup value={periodicity} exclusive size="small" onChange={handlePeriodicity}>
         <ToggleButton value="once">
           <OnceIcon />
         </ToggleButton>

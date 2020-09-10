@@ -6,7 +6,7 @@ import {itemViewPropertiesChangesStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
 
 type Props = {
-  item: Item
+  item: Item;
 };
 
 const ItemViewPropertiesChanges: FC<Props> = ({item}: Props) => {

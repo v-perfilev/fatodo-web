@@ -6,7 +6,7 @@ import PaperBox from '../../common/page-layouts/paper-box';
 
 type Props = {
   users: User[];
-}
+};
 
 const GroupViewUsers: FC<Props> = ({users}: Props) => {
   const classes = groupUsersStyles();

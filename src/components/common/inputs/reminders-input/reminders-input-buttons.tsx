@@ -9,8 +9,12 @@ type Props = {
 };
 
 const RemindersInputButtons: FC<Props> = ({reminders, clearReminders}: Props) => {
-  return reminders.length > 0 && (
-    <IconButton size="small" onClick={clearReminders}><CloseIcon /></IconButton>
+  return (
+    reminders.length > 0 && (
+      <IconButton size="small" onClick={clearReminders}>
+        <CloseIcon />
+      </IconButton>
+    )
   );
 };
 

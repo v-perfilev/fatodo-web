@@ -88,4 +88,3 @@ export const itemViewContentStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(1),
   },
 }));
-

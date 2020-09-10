@@ -7,7 +7,7 @@ import {userPicStyles} from './_styles';
 
 type Props = HTMLAttributes<any> & {
   user: User;
-}
+};
 
 const UserPic: FC<Props> = ({user, className}: Props) => {
   const classes = userPicStyles();
@@ -15,9 +15,7 @@ const UserPic: FC<Props> = ({user, className}: Props) => {
 
   const url = user.avatarUrl ? user.avatarUrl : '.';
 
-  return (
-    <Avatar alt={user.username} src={url} className={classNames} />
-  );
+  return <Avatar alt={user.username} src={url} className={classNames} />;
 };
 
 export default UserPic;

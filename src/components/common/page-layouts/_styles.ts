@@ -43,7 +43,7 @@ export const labeledBoxStyles = makeStyles((theme: Theme) => ({
   },
   label: {
     fontWeight: 500,
-  }
+  },
 }));
 
 export const paperBoxStyles = makeStyles((theme: Theme) => ({

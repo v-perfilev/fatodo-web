@@ -24,9 +24,7 @@ const InternalError: FC<Props> = ({timer, resetTimer}: Props) => {
         {t('static:internalError.caption')}
       </Typography>
       <Box m={2} />
-      <Typography>
-        {t('static:redirectToHome.message', {count: timer})}
-      </Typography>
+      <Typography>{t('static:redirectToHome.message', {count: timer})}</Typography>
       <Box m={2} />
       <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
         {t('buttons.toHomePage')}

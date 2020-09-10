@@ -25,10 +25,10 @@ const connector = connect(null, mapDispatchToProps);
 type Props = FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-  code: string;
-  onSuccess: () => void;
-  onFailure: (status: number) => void;
-};
+    code: string;
+    onSuccess: () => void;
+    onFailure: (status: number) => void;
+  };
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();

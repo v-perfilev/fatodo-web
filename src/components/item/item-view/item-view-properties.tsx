@@ -7,7 +7,7 @@ import ItemViewPropertiesReminders from './item-view-properties-reminders';
 import ItemViewPropertiesChanges from './item-view-properties-changes';
 
 type Props = {
-  item: Item
+  item: Item;
 };
 
 const ItemViewProperties: FC<Props> = ({item}: Props) => {

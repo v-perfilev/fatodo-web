@@ -9,10 +9,11 @@ const ItemFormType: FC = () => {
   const {t} = useTranslation();
 
   return (
-    <Field component={TextField} type="text" name="type" label={t('items:fields.type.label')} select required
-           fullWidth>
+    <Field component={TextField} type="text" name="type" label={t('items:fields.type.label')} select required fullWidth>
       {Object.values(itemTypes).map((type, index) => (
-        <MenuItem value={type} key={index}>{t('items:types.' + type)}</MenuItem>
+        <MenuItem value={type} key={index}>
+          {t('items:types.' + type)}
+        </MenuItem>
       ))}
     </Field>
   );

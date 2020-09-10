@@ -8,7 +8,7 @@ import {DateUtils} from '../../../../shared/utils/date.utils';
 type Props = {
   date: Date;
   handleChange: (date: Date) => void;
-}
+};
 
 const getParamsOfMonth = (date: Date): [number, number] => {
   const tmpDate = cloneDeep(date);
@@ -20,8 +20,7 @@ const getParamsOfMonth = (date: Date): [number, number] => {
 
 const getFirstDate = (date: Date): number => {
   const currentDate = new Date();
-  return date.getFullYear() === currentDate.getFullYear()
-  && date.getMonth() === currentDate.getMonth()
+  return date.getFullYear() === currentDate.getFullYear() && date.getMonth() === currentDate.getMonth()
     ? currentDate.getDate()
     : 0;
 };

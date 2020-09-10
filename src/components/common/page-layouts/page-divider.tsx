@@ -26,9 +26,7 @@ const PageDivider: FC<Props> = ({color, height, className}: Props) => {
 
   const style = {height: !!height ? height : 1};
 
-  return (
-    <Box className={classNames} style={style} />
-  );
+  return <Box className={classNames} style={style} />;
 };
 
 export default PageDivider;

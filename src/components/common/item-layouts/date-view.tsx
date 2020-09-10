@@ -7,7 +7,7 @@ import {ParamDate} from '../../../models/param-date';
 
 type Props = HTMLAttributes<any> & {
   date: ParamDate;
-}
+};
 
 const DateView: FC<Props> = ({date: paramDate, className}: Props) => {
   const {t} = useTranslation();
