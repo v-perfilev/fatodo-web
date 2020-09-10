@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
-import {dateInputYearsStyles} from './_styles';
+import {dateInputItemStyles} from './_styles';
 import cloneDeep from 'lodash/cloneDeep';
 import moment from 'moment';
 import CalendarSelect from '../calendar-select/calendar-select';
@@ -27,7 +27,7 @@ const getFirstDate = (date: Date): number => {
 };
 
 const DateInputDate: FC<Props> = ({date, handleChange}: Props) => {
-  const classes = dateInputYearsStyles();
+  const classes = dateInputItemStyles();
   const [dayOfWeek, datesInMonth] = getParamsOfMonth(date);
 
   const handleClick = (index: number): void => {

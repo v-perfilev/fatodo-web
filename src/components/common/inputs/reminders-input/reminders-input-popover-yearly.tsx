@@ -10,7 +10,7 @@ type Props = {
   setReminder: (reminder: Reminder) => void;
 };
 
-const RemindersInputPopoverOnce: FC<Props> = ({reminder, setReminder}: Props) => {
+const RemindersInputPopoverYearly: FC<Props> = ({reminder, setReminder}: Props) => {
   const classes = remindersInputPopoverItemStyles();
   const [time, setTime] = useState<Date>(null);
   const [date, setDate] = useState<Date>(null);
@@ -21,9 +21,9 @@ const RemindersInputPopoverOnce: FC<Props> = ({reminder, setReminder}: Props) =>
   return (
     <Box className={classes.root}>
       <TimeInput label="Time" required time={time} setTime={setTime} />
-      <DateInput label="Date" required date={date} setDate={setDate} />
+      <DateInput label="Date" required date={date} setDate={setDate} firstInputType="month" />
     </Box>
   );
 };
 
-export default RemindersInputPopoverOnce;
+export default RemindersInputPopoverYearly;

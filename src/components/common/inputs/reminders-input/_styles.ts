@@ -67,16 +67,17 @@ export const remindersInputPopoverToolbarStyles = makeStyles((theme: Theme) => (
   },
 }));
 
-export const remindersInputPopoverOnceStyles = makeStyles((theme: Theme) => ({
+export const remindersInputPopoverItemStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    // justifyContent: 'space-evenly',
     flexGrow: 1,
-    marginBottom: theme.spacing(2),
     '& > *': {
-      width: '70%,',
+      width: '80%',
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1),
     },
   },
 }));

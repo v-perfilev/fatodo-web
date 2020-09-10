@@ -1,7 +1,7 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
 import {COLORS} from '../../../../shared/theme';
 
-export const calendarSelectStyles = makeStyles((theme: Theme) => ({
+export const daysSelectStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -19,27 +19,25 @@ export const calendarSelectStyles = makeStyles((theme: Theme) => ({
   week: {
     display: 'flex',
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
-  date: {
+  day: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 36,
-    minWidth: 36,
-    maxWidth: 36,
-    height: 36,
-    margin: 2,
-    padding: 0,
-    borderRadius: 40,
-  },
-  dateSmall: {
     width: 34,
     minWidth: 34,
     maxWidth: 34,
     height: 34,
-    margin: 1,
+    marginLeft: 5,
+    marginRight: 5,
+    marginTop: 2,
+    marginBottom: 2,
+    padding: 0,
+    borderRadius: 20,
   },
-  selectedDate: {
+  selectedDay: {
     backgroundColor: COLORS.PRIMARY,
     color: COLORS.WHITE,
     '&:hover': {

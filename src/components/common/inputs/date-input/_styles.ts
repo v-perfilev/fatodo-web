@@ -2,6 +2,9 @@ import {makeStyles, Theme} from '@material-ui/core/styles';
 import {COLORS} from '../../../../shared/theme';
 
 export const dateInputStyles = makeStyles(() => ({
+  textField: {
+    width: '100%',
+  },
   box: {
     zIndex: 1000,
     position: 'absolute',
@@ -16,7 +19,7 @@ export const dateInputStyles = makeStyles(() => ({
   },
 }));
 
-export const dateInputYearsStyles = makeStyles((theme: Theme) => ({
+export const dateInputItemStyles = makeStyles((theme: Theme) => ({
   box: {
     display: 'flex',
     flexDirection: 'column',

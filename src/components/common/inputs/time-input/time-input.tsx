@@ -40,9 +40,9 @@ const TimeInput: FC<Props> = ({label, required, time, setTime}: Props) => {
   const timeMoment = time ? moment(time) : moment(new Date());
 
   return (
-    <>
+    <Box>
       <TextField label={label} required={required} value={formattedTime} InputProps={{readOnly: true}}
-                 onClick={toggleHoursView} />
+                 onClick={toggleHoursView} className={classes.textField} />
       <Fade in={showClock}>
         <Box className={classes.box}>
           <ClockView date={timeMoment} type={showMinutes ? 'minutes' : 'hours'} ampm={false}
@@ -51,7 +51,7 @@ const TimeInput: FC<Props> = ({label, required, time, setTime}: Props) => {
                      onSecondsChange={handleClock} />
         </Box>
       </Fade>
-    </>
+    </Box>
   );
 };
 

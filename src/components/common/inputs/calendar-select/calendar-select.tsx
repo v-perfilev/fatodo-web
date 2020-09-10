@@ -1,11 +1,13 @@
-import React, {FC, useContext} from 'react';
-import {Box, Button} from '@material-ui/core';
+import React, {FC, HTMLAttributes, useContext} from 'react';
+import {Box, Button, FormLabel} from '@material-ui/core';
 import {MuiPickersContext} from '@material-ui/pickers';
 import {calendarSelectStyles} from './_styles';
 import csx from 'classnames';
 
-type Props = {
-  selectedDays?: number[];
+type Props = HTMLAttributes<any> & {
+  label?: string;
+  required?: boolean;
+  selectedDates?: number[];
   dayOfWeek?: number;
   datesInMonth?: number;
   firstAllowedDate?: number;
@@ -13,67 +15,73 @@ type Props = {
   handleClick: (day: number) => void;
 }
 
-const getDaysAndWeeksCount = (dayOfWeek, daysInMonth): [number[], number] => {
-  const restDays = (dayOfWeek + daysInMonth) % 7 ? 7 - (dayOfWeek + daysInMonth) % 7 : 0;
-  const weekCount = (dayOfWeek + daysInMonth + restDays) / 7;
-  const days = [];
+const getDatesAndWeeksCount = (dayOfWeek, datesInMonth): [number[], number] => {
+  const restDays = (dayOfWeek + datesInMonth) % 7 ? 7 - (dayOfWeek + datesInMonth) % 7 : 0;
+  const weekCount = (dayOfWeek + datesInMonth + restDays) / 7;
+  const dates = [];
   for (let i = 0; i < dayOfWeek; i++) {
-    days.push(null);
+    dates.push(null);
   }
-  for (let i = 0; i < daysInMonth; i++) {
-    days.push(i + 1);
+  for (let i = 0; i < datesInMonth; i++) {
+    dates.push(i + 1);
   }
   for (let i = 0; i < restDays; i++) {
-    days.push(null);
+    dates.push(null);
   }
-  return [days, weekCount];
+  return [dates, weekCount];
 };
 
 const CalendarSelect: FC<Props> = (props: Props) => {
   const classes = calendarSelectStyles();
-  const {dayOfWeek, datesInMonth, firstAllowedDate, selectedDays, showWeekend, handleClick} = props;
+  const {label, required} = props;
+  const {dayOfWeek, datesInMonth, firstAllowedDate, selectedDates, showWeekend, handleClick, className} = props;
   const momentContext = useContext(MuiPickersContext);
 
   const dow = dayOfWeek || 0;
   const dim = datesInMonth || 31;
   const fad = firstAllowedDate || 0;
-  const sd = selectedDays || [];
+  const sd = selectedDates || [];
   const sw = showWeekend ?? true;
+  const dateClass = csx(classes.date, {[classes.dateSmall]: true});
 
   const weekdayArray = momentContext.getWeekdays();
   const weekdays = (
     <Box className={classes.weekHeader}>
       {weekdayArray.map((name, index) => (
-        <Box className={classes.day} key={index}>{name}</Box>
+        <Box className={dateClass} key={index}>{name}</Box>
       ))}
     </Box>
   );
 
-  const [daysValues, weekCount] = getDaysAndWeeksCount(dow, dim);
+  const [datesValues, weekCount] = getDatesAndWeeksCount(dow, dim);
   const weekArray = Array.from({length: weekCount}, (_, i) => i);
-  const dayArray = Array.from({length: 7}, (_, i) => i);
-  const days = weekArray.map((week, weekIndex) => (
+  const dateArray = Array.from({length: 7}, (_, i) => i);
+  const dates = weekArray.map((week, weekIndex) => (
     <Box className={classes.week} key={weekIndex}>
-      {dayArray.map((day, dayIndex) => {
-        const dayValue = daysValues[week * 7 + day];
+      {dateArray.map((date, dateIndex) => {
+        const dayValue = datesValues[week * 7 + date];
         const isDayAllowed = dayValue && dayValue >= fad;
         const isSelected = sd.includes(dayValue);
-        const classnames = csx(classes.day, {[classes.selectedDay]: isSelected});
+        const classnames = csx(dateClass, {[classes.selectedDate]: isSelected});
         return dayValue ? (
-          <Button className={classnames} key={dayIndex} disabled={!isDayAllowed} onClick={() => handleClick(dayValue)}>
+          <Button className={classnames} key={dateIndex} disabled={!isDayAllowed} onClick={() => handleClick(dayValue)}>
             {dayValue}
           </Button>
         ) : (
-          <Box className={classes.day} key={dayIndex} />
+          <Box className={dateClass} key={dateIndex} />
         );
       })}
     </Box>
   ));
 
+  const classnames = csx(classes.root, className);
   return (
-    <Box className={classes.root}>
+    <Box className={classnames}>
+      {label && (
+        <FormLabel required={required}>{label}</FormLabel>
+      )}
       {sw && weekdays}
-      {days}
+      {dates}
     </Box>
   );
 };

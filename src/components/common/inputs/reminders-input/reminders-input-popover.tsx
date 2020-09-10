@@ -4,6 +4,10 @@ import {remindersInputPopoverStyles} from './_styles';
 import {Reminder, ReminderPeriodicity} from '../../../../models/reminder';
 import RemindersInputPopoverToolbar from './reminders-input-popover-toolbar';
 import RemindersInputPopoverOnce from './reminders-input-popover-once';
+import RemindersInputPopoverDaily from './reminders-input-popover-daily';
+import RemindersInputPopoverWeekly from './reminders-input-popover-weekly';
+import RemindersInputPopoverMonthly from './reminders-input-popover-monthly';
+import RemindersInputPopoverYearly from './reminders-input-popover-yearly';
 
 type Props = {
   reminder?: Reminder;
@@ -36,6 +40,18 @@ const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose, reminder: oldR
       <Box className={classes.popoverBody}>
         {periodicity === 'once' && (
           <RemindersInputPopoverOnce reminder={reminder} setReminder={setReminder} />
+        )}
+        {periodicity === 'daily' && (
+          <RemindersInputPopoverDaily reminder={reminder} setReminder={setReminder} />
+        )}
+        {periodicity === 'weekly' && (
+          <RemindersInputPopoverWeekly reminder={reminder} setReminder={setReminder} />
+        )}
+        {periodicity === 'monthly' && (
+          <RemindersInputPopoverMonthly reminder={reminder} setReminder={setReminder} />
+        )}
+        {periodicity === 'yearly' && (
+          <RemindersInputPopoverYearly reminder={reminder} setReminder={setReminder} />
         )}
       </Box>
     </Popover>

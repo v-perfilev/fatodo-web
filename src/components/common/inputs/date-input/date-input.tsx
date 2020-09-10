@@ -11,15 +11,16 @@ type Props = {
   required?: boolean;
   date: Date;
   setDate: (date: Date) => void;
+  firstInputType?: 'year' | 'month' | 'date';
 }
 
 enum InputType {
   YEAR,
   MONTH,
   DATE,
-};
+}
 
-const DateInput: FC<Props> = ({label, required, date: inputDate, setDate: setInputDate}: Props) => {
+const DateInput: FC<Props> = ({label, required, date: inputDate, setDate: setInputDate, firstInputType}: Props) => {
   const classes = dateInputStyles();
   const [date, setDate] = useState<Date>(null);
   const [inputType, setInputType] = useState<InputType>(null);
@@ -31,7 +32,20 @@ const DateInput: FC<Props> = ({label, required, date: inputDate, setDate: setInp
   const formattedDate = inputDate ? DateUtils.formatDateWithYear(inputDate) : '';
 
   const openInput = (): void => {
-    setInputType(InputType.YEAR);
+    if (!firstInputType || firstInputType === 'year') {
+      setInputType(InputType.YEAR);
+    } else if (firstInputType === 'month') {
+      const newDate = new Date();
+      newDate.setFullYear(1970);
+      setDate(newDate);
+      setInputType(InputType.MONTH);
+    } else {
+      const newDate = new Date();
+      newDate.setFullYear(1970);
+      newDate.setMonth(1);
+      setDate(newDate);
+      setInputType(InputType.DATE);
+    }
   };
 
   const handleChange = (changedDate: Date): void => {
@@ -49,9 +63,9 @@ const DateInput: FC<Props> = ({label, required, date: inputDate, setDate: setInp
   };
 
   return (
-    <>
+    <Box>
       <TextField label={label} required={required} value={formattedDate} InputProps={{readOnly: true}}
-                 onClick={openInput} />
+                 onClick={openInput} className={classes.textField} />
       <Fade in={inputType !== null}>
         <Box className={classes.box}>
           {inputType === InputType.YEAR && <DateInputYears {...{date, handleChange}} />}
@@ -59,7 +73,7 @@ const DateInput: FC<Props> = ({label, required, date: inputDate, setDate: setInp
           {inputType === InputType.DATE && <DateInputDate {...{date, handleChange}} />}
         </Box>
       </Fade>
-    </>
+    </Box>
   );
 };
 

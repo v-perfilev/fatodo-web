@@ -2,6 +2,9 @@ import {makeStyles} from '@material-ui/core/styles';
 import {COLORS} from '../../../../shared/theme';
 
 export const timeInputStyles = makeStyles(() => ({
+  textField: {
+    width: '100%',
+  },
   box: {
     zIndex: 1000,
     position: 'absolute',
@@ -14,5 +17,4 @@ export const timeInputStyles = makeStyles(() => ({
     justifyContent: 'center',
     backgroundColor: COLORS.WHITE,
   },
-  clockView: {},
 }));

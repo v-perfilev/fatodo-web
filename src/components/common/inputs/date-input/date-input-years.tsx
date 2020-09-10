@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
-import {dateInputYearsStyles} from './_styles';
+import {dateInputItemStyles} from './_styles';
 import cloneDeep from 'lodash/cloneDeep';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 }
 
 const DateInputYears: FC<Props> = ({date, handleChange}: Props) => {
-  const classes = dateInputYearsStyles();
+  const classes = dateInputItemStyles();
 
   const currentYear = new Date().getFullYear();
   const years = Array.from({length: 5}, (v, k) => k + currentYear);

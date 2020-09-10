@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
-import {dateInputYearsStyles} from './_styles';
+import {dateInputItemStyles} from './_styles';
 import cloneDeep from 'lodash/cloneDeep';
 import moment from 'moment';
 
@@ -26,7 +26,7 @@ const getMonths = (firstMonth: number): string[] =>
   Array.from({length: 12 - firstMonth}, (_, i) => getMonthName(firstMonth + i));
 
 const DateInputMonths: FC<Props> = ({date, handleChange}: Props) => {
-  const classes = dateInputYearsStyles();
+  const classes = dateInputItemStyles();
 
   const firstMonth = getFirstMonth(date);
   const months = getMonths(firstMonth);
