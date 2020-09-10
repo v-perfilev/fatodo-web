@@ -18,11 +18,7 @@ const ItemViewPropertiesTags: FC<Props> = ({tags}: Props) => {
       <>
         <LabeledBox label={t('items:labels.tags')}>
           {tags.map((tag, index) => (
-            <Chip
-              key={index}
-              size="medium"
-              label={tag}
-            />
+            <Chip key={index} size="medium" label={tag} />
           ))}
         </LabeledBox>
         <PageSpacer />

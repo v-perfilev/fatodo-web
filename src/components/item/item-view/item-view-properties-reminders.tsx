@@ -20,11 +20,7 @@ const ItemViewPropertiesReminders: FC<Props> = ({reminders}: Props) => {
       <>
         <LabeledBox label={t('items:labels.reminders')}>
           {reminders.map((reminder, index) => (
-            <Chip
-              key={index}
-              size="medium"
-              label={<ReminderView reminder={reminder} />}
-            />
+            <Chip key={index} size="medium" label={<ReminderView reminder={reminder} />} />
           ))}
         </LabeledBox>
         <PageSpacer />
