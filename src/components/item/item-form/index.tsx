@@ -15,21 +15,18 @@ import ItemFormDescription from './item-form-description';
 import ItemFormTags from './item-form-tags';
 import ItemFormReminders from './item-form-reminders';
 import {Reminder} from '../../../models/reminder';
-import {TEST_REMINDER} from '../../_constants';
 
 type Props = FormikProps<any> & {
   item: Item;
-  headerPrefix: string;
+  header: string;
 };
 
-const ItemForm: FC<Props> = ({item, headerPrefix, ...props}: Props) => {
+const ItemForm: FC<Props> = ({item, header, ...props}: Props) => {
   const classes = itemFormStyles();
-
-  const headerTitle = headerPrefix + item.group.title;
 
   return (
     <Container className={classes.root}>
-      <PageHeader title={headerTitle} />
+      <PageHeader title={header} />
       <PageDivider color={item.group.color} height={5} />
       <Form className={classes.form}>
         <Grid container spacing={3}>
@@ -74,17 +71,19 @@ interface FormValues {
   tags?: string[];
 }
 
+export const defaultFormValues: Readonly<FormValues> = {
+  title: '',
+  type: itemTypes[0],
+  priority: itemPriorities[1],
+  time: null,
+  date: null,
+  description: '',
+  reminders: [],
+  tags: [],
+};
+
 const formik = withFormik<Props, FormValues>({
-  mapPropsToValues: () => ({
-    title: '',
-    type: itemTypes[0],
-    priority: itemPriorities[1],
-    time: null,
-    date: null,
-    description: '',
-    reminders: [TEST_REMINDER],
-    tags: [],
-  }),
+  mapPropsToValues: () => defaultFormValues,
 
   validateOnMount: true,
 

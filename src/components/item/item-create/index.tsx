@@ -1,6 +1,6 @@
 import {setMenu} from '../../../store/actions/additional-menu.actions';
 import {connect, ConnectedProps} from 'react-redux';
-import React, {FC, memo, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Item} from '../../../models/item';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
@@ -31,7 +31,7 @@ const ItemCreate: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return item && <ItemForm item={item} headerPrefix={t('items:headers.createItem')} />;
+  return item && <ItemForm item={item} header={t('items:headers.createItem', {group: item.group.title})} />;
 };
 
-export default compose(connector, memo)(ItemCreate);
+export default compose(connector)(ItemCreate);

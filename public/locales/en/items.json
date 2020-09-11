@@ -1,7 +1,7 @@
 {
   "headers": {
-    "createItem": "Create item in ",
-    "editItem": "Edit item in "
+    "createItem": "Create item in {{group}}",
+    "editItem": "Edit item in {{group}}"
   },
   "labels": {
     "type": "Type",

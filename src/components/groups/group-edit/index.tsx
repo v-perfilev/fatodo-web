@@ -1,21 +1,19 @@
 import {setMenu} from '../../../store/actions/additional-menu.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import React, {FC, useEffect, useState} from 'react';
-import {Item} from '../../../models/item';
-import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
-import {generateItem} from '../../_constants';
 import {useTranslation} from 'react-i18next';
-import ItemForm from '../item-form';
+import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {compose} from 'recompose';
+import {Group} from '../../../models/group';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-const ItemEdit: FC<Props> = ({setMenu}: Props) => {
+const GroupEdit: FC<Props> = ({setMenu}: Props) => {
   const {i18n, t} = useTranslation();
-  const [item, setItem] = useState<Item>(null);
+  const [group, setGroup] = useState<Group>(null);
 
   const menu = (
     <>
@@ -24,15 +22,10 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
   );
 
   useEffect(() => {
-    // TODO set item
-    setItem(generateItem());
-  }, []);
-
-  useEffect(() => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return item && <ItemForm item={item} header={t('items:headers.editItem', {group: item.group.title})} />;
+  return group && <span>TODO group form</span>;
 };
 
-export default compose(connector)(ItemEdit);
+export default compose(connector)(GroupEdit);

@@ -1,7 +1,7 @@
 {
   "headers": {
-    "createItem": "Добавление записи в ",
-    "editItem": "Редактирование записи в "
+    "createItem": "Добавление записи в {{group}}",
+    "editItem": "Редактирование записи в {{group}}"
   },
   "labels": {
     "type": "Тип",
