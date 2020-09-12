@@ -27,12 +27,21 @@ const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
   const {t, i18n} = useTranslation();
   const [groups, setGroups] = useState<Group[]>([]);
 
+  const saveOrderAndRedirectToGroupsRoot = (): void => {
+    console.log(groups);
+    history.push(Routes.GROUPS);
+  };
   const redirectToGroupsRoot = (): void => history.push(Routes.GROUPS);
 
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <AdditionalMenuButton icon={<CheckIcon />} color="primary" tooltip={t('groups:tooltips.ok')} />
+      <AdditionalMenuButton
+        icon={<CheckIcon />}
+        action={saveOrderAndRedirectToGroupsRoot}
+        color="primary"
+        tooltip={t('groups:tooltips.ok')}
+      />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroupsRoot}

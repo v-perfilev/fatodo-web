@@ -6,10 +6,10 @@ import {groupCardItemStyles} from './_styles';
 import {compose} from 'recompose';
 import {animated} from 'react-spring';
 import Truncate from 'react-truncate';
-import {ItemModel} from '../../../models/item.model';
+import {Item} from '../../../models/item.model';
 
 type Props = HTMLAttributes<any> & {
-  item: ItemModel;
+  item: Item;
 };
 
 const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {

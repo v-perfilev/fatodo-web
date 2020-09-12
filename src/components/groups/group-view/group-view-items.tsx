@@ -4,10 +4,10 @@ import {groupItemListStyles} from './_styles';
 import GroupViewItem from './group-view-item';
 import PageDivider from '../../common/layout-page/page-divider';
 import {GradientColor} from '../../../shared/utils/color.utils';
-import {ItemModel} from '../../../models/item.model';
+import {Item} from '../../../models/item.model';
 
 type Props = {
-  items: ItemModel[];
+  items: Item[];
   color: GradientColor;
 };
 

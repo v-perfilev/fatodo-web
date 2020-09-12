@@ -5,10 +5,10 @@ import {CheckIcon} from '../../common/icons/check-icon';
 import {PackageDownIcon} from '../../common/icons/package-down-icon';
 import {EditIcon} from '../../common/icons/edit-icon';
 import {DeleteIcon} from '../../common/icons/delete-icon';
-import {ItemModel} from '../../../models/item.model';
+import {Item} from '../../../models/item.model';
 
 type Props = {
-  item: ItemModel;
+  item: Item;
 };
 
 const GroupViewItem: FC<Props> = ({item}: Props) => {

@@ -1,12 +1,12 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
-import {ItemModel} from '../../../models/item.model';
+import {Item} from '../../../models/item.model';
 import LabeledBox from '../../common/layout-page/labeled-box';
 import {itemViewPropertiesChangesStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
 
 type Props = {
-  item: ItemModel;
+  item: Item;
 };
 
 const ItemViewPropertiesChanges: FC<Props> = ({item}: Props) => {

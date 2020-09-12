@@ -1,6 +1,6 @@
 import React, {FC, useRef} from 'react';
 import {Box, Button} from '@material-ui/core';
-import {imageUploaderButtonAndPreviewStyles} from './_styles';
+import {imageUploaderPreviewAndButtonsStyles} from './_styles';
 import {Image} from '../../../../models/image.model';
 import RoundPic from '../../images/round-pic';
 
@@ -9,10 +9,14 @@ type Props = {
   setImage: (image) => void;
   setSource: (image: string | ArrayBuffer) => void;
   setAnchorEl: (e: HTMLElement) => void;
+  uploadLabel: string;
+  updateLabel: string;
+  clearLabel: string;
 };
 
-const ImageUploaderButtonsAndPreview: FC<Props> = ({image, setImage, setSource, setAnchorEl}: Props) => {
-  const classes = imageUploaderButtonAndPreviewStyles();
+const ImageUploaderPreviewAndButtons: FC<Props> = (props: Props) => {
+  const classes = imageUploaderPreviewAndButtonsStyles();
+  const {image, setImage, setSource, setAnchorEl, uploadLabel, updateLabel, clearLabel} = props;
   const buttonRef = useRef<HTMLElement>();
 
   const onImageLoaded = (event) => {
@@ -30,22 +34,26 @@ const ImageUploaderButtonsAndPreview: FC<Props> = ({image, setImage, setSource, 
 
   return (
     <>
+      {image && (
+        <Box className={classes.image}>
+          <RoundPic url={image.url} size="big" />
+        </Box>
+      )}
       <Box className={classes.buttons}>
         <label htmlFor="upload-image">
           <input id="upload-image" type="file" accept="image/*" className={classes.input} onChange={onImageLoaded} />
           <Button color="primary" variant="contained" component="span" ref={buttonRef}>
-            Upload image
+            {image ? updateLabel : uploadLabel}
           </Button>
         </label>
-        <Button color="secondary" variant="contained" onClick={cleanImage}>
-          Clear image
-        </Button>
+        {image && (
+          <Button color="secondary" variant="contained" onClick={cleanImage}>
+            {clearLabel}
+          </Button>
+        )}
       </Box>
-      {image && (
-        <RoundPic url={image.url} size="big" />
-      )}
     </>
   );
 };
 
-export default ImageUploaderButtonsAndPreview;
+export default ImageUploaderPreviewAndButtons;

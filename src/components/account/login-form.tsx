@@ -31,8 +31,8 @@ type Props = RouteComponentProps &
   FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-    onSuccess: () => void;
-  };
+  onSuccess: () => void;
+};
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -113,26 +113,26 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
+    const {login, requestAccountData, history, onSuccess, enqueueSnackbar} = props;
     const data = {
       user: values.user,
       password: values.password,
       token: props.token,
     };
 
-    const onSuccess = (): void => props.onSuccess();
     const onFailure = (): void => setSubmitting(false);
 
     AccountService.authenticate(data)
       .then((response) => {
         const token = SecurityUtils.parseTokenFromResponse(response);
-        props.login(token, values.rememberMe);
-        props.requestAccountData(onSuccess, onFailure);
+        login(token, values.rememberMe);
+        requestAccountData(onSuccess, onFailure);
       })
       .catch((response) => {
         if (ResponseUtils.getFeedbackCode(response) === 'auth.notActivated') {
-          props.history.push(Routes.NOT_ACTIVATED, {user: values.user});
+          history.push(Routes.NOT_ACTIVATED, {user: values.user});
         } else {
-          NotificationUtils.handleFeedback(response, '*', ['auth.notActivated'], props.enqueueSnackbar);
+          NotificationUtils.handleFeedback(response, '*', ['auth.notActivated'], enqueueSnackbar);
           setSubmitting(false);
         }
       });

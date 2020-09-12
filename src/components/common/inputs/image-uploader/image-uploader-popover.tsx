@@ -33,7 +33,7 @@ const ImageUploaderPopover: FC<Props> = ({image, anchorEl, handleClose, cropOpti
 
   const onClose = (): void => {
     imageCompression(croppedBlob, compressionOptions).then((compressedBlob: Blob) => {
-      const image = {status: 'new-image', url: URL.createObjectURL(compressedBlob), compressedBlob} as Image;
+      const image = {url: URL.createObjectURL(compressedBlob), compressedBlob} as Image;
       handleClose(image);
     });
   };

@@ -7,7 +7,7 @@ const GroupFormTitle: FC = () => {
   const {t} = useTranslation();
 
   return (
-    <Field component={TextField} type="text" name="title" label={t('group:fields.title.label')} required fullWidth />
+    <Field component={TextField} type="text" name="title" label={t('groups:fields.title.label')} required fullWidth />
   );
 };
 

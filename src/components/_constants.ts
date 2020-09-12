@@ -1,6 +1,6 @@
 import {Group} from '../models/group.model';
 import {User} from '../models/user.model';
-import {ItemModel} from '../models/item.model';
+import {Item} from '../models/item.model';
 import {Reminder} from '../models/reminder.model';
 import {ParamDate} from '../models/param-date.model';
 
@@ -8,6 +8,7 @@ const GROUP_BASE: Group = {
   id: Math.random().toString(),
   title: 'Test Group',
   color: 'yellow',
+  imageUrl: null,
   notificationCount: 3,
   messageCount: 11,
 };
@@ -62,7 +63,7 @@ export const TEST_REMINDER: Reminder = {
   date: TEST_DATE,
 };
 
-const ITEM_TEMPLATE: ItemModel = {
+const ITEM_TEMPLATE: Item = {
   id: Math.random().toString(),
   title: '',
   description: LOREM_IPSUM,
@@ -78,7 +79,7 @@ const ITEM_TEMPLATE: ItemModel = {
   group: GROUP_BASE,
 };
 
-export const generateItem = (): ItemModel => {
+export const generateItem = (): Item => {
   const titleId = Math.floor(Math.random() * ITEM_TITLES.length);
   const title = ITEM_TITLES[titleId];
 

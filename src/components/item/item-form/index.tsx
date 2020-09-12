@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {itemFormStyles} from './_styles';
-import {ItemModel, itemPriorities, ItemPriority, ItemType, itemTypes} from '../../../models/item.model';
+import {Item, itemPriorities, ItemPriority, ItemType, itemTypes} from '../../../models/item.model';
 import {Container, Grid} from '@material-ui/core';
 import PageHeader from '../../common/layout-page/page-header';
 import PageDivider from '../../common/layout-page/page-divider';
@@ -17,7 +17,7 @@ import ItemFormReminders from './item-form-reminders';
 import {Reminder} from '../../../models/reminder.model';
 
 type Props = FormikProps<any> & {
-  item: ItemModel;
+  item: Item;
   header: string;
 };
 

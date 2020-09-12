@@ -22,7 +22,7 @@ const AdditionalMenu: FC<Props> = ({menu}: Props) => {
 
   useEffect(() => {
     setMenuForRender(null);
-    setTimeout(() => setMenuForRender(menu), 200);
+    setTimeout(() => setMenuForRender(menu), 500);
   }, [menu]);
 
   const drawerClassNames = csx(classes.drawer, isBigDevice ? classes.drawerLeft : classes.drawerBottom);
@@ -40,7 +40,7 @@ const AdditionalMenu: FC<Props> = ({menu}: Props) => {
           <Logo />
         </Box>
       )}
-      <Fade in={Boolean(menuForRender)} timeout={200}>
+      <Fade in={Boolean(menuForRender)} timeout={500}>
         <Box className={containerClassNames}>{menuForRender}</Box>
       </Fade>
     </Drawer>

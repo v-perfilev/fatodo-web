@@ -1,7 +1,15 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
+export const imageUploaderStyles = makeStyles((theme: Theme) => ({
+  label: {
+    marginBottom: theme.spacing(1),
+  },
+}));
 
-export const imageUploaderButtonAndPreviewStyles = makeStyles((theme: Theme) => ({
+export const imageUploaderPreviewAndButtonsStyles = makeStyles((theme: Theme) => ({
+  image: {
+    marginBottom: theme.spacing(1),
+  },
   buttons: {
     display: 'flex',
     flexDirection: 'row',

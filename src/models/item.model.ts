@@ -9,7 +9,7 @@ export type ItemType = 'task' | 'event' | 'repetition' | 'note';
 export const itemPriorities: ItemPriority[] = ['low', 'normal', 'high'];
 export type ItemPriority = 'low' | 'normal' | 'high';
 
-export interface ItemModel extends AbstractAuditing {
+export interface Item extends AbstractAuditing {
   id: string;
   title: string;
   type: ItemType;
