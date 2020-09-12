@@ -1,10 +1,10 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Reminder} from '../../../../models/reminder';
+import {Reminder} from '../../../../models/reminder.model';
 import TimeInput from '../time-input';
 import {remindersInputPopoverItemStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import DaysSelect from '../days-select';
-import {ParamDate} from '../../../../models/param-date';
+import {ParamDate} from '../../../../models/param-date.model';
 import {DateConverters} from '../../../../shared/utils/date.utils';
 import {useTranslation} from 'react-i18next';
 

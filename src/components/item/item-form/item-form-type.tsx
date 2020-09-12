@@ -2,9 +2,9 @@ import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
-import {itemTypes} from '../../../models/item';
+import {itemTypes} from '../../../models/item.model';
 import {MenuItem} from '@material-ui/core';
-import TypeView from '../../common/item-layouts/type-view';
+import TypeView from '../../common/layout-item/type-view';
 
 const ItemFormType: FC = () => {
   const {t} = useTranslation();

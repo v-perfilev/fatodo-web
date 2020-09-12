@@ -1,4 +1,4 @@
-import Notification from '../../models/notification';
+import Notification from '../../models/notification.model';
 import {SnackbarAction, SnackbarMessage, SnackbarOrigin, VariantType} from 'notistack';
 
 export class NotificationBuilder {

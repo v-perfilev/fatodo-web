@@ -3,7 +3,7 @@ import {Toolbar, Typography, Zoom} from '@material-ui/core';
 import {remindersInputPopoverToolbarStyles} from './_styles';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import {ToggleButton} from '@material-ui/lab';
-import {ReminderPeriodicity} from '../../../../models/reminder';
+import {ReminderPeriodicity} from '../../../../models/reminder.model';
 import {OnceIcon} from '../../icons/once-icon';
 import {DayIcon} from '../../icons/day-icon';
 import {WeekIcon} from '../../icons/week-icon';

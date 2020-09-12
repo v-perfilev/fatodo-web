@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import LabeledBox from '../../common/page-layouts/labeled-box';
-import {ItemType} from '../../../models/item';
+import LabeledBox from '../../common/layout-page/labeled-box';
+import {ItemType} from '../../../models/item.model';
 import {useTranslation} from 'react-i18next';
-import TypeView from '../../common/item-layouts/type-view';
+import TypeView from '../../common/layout-item/type-view';
 
 type Props = {
   type: ItemType;

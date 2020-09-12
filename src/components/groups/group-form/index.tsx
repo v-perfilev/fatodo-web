@@ -1,20 +1,25 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {groupFormStyles} from './_styles';
 import {Container, Grid} from '@material-ui/core';
-import PageHeader from '../../common/page-layouts/page-header';
-import PageDivider from '../../common/page-layouts/page-divider';
+import PageHeader from '../../common/layout-page/page-header';
+import PageDivider from '../../common/layout-page/page-divider';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
-import {Group} from '../../../models/group';
-import {GradientColor} from '../../_types';
+import {Group} from '../../../models/group.model';
+import {GradientColor} from '../../../shared/utils/color.utils';
+import ImageUploader from '../../common/inputs/image-uploader';
+import {Image} from '../../../models/image.model';
+import GroupFormTitle from './group-form-title';
+import GroupFormColor from './group-form-color';
 
 type Props = FormikProps<any> & {
   group: Group;
   header: string;
 };
 
-const ItemForm: FC<Props> = ({group, header, values, ...props}: Props) => {
+const GroupForm: FC<Props> = ({group, header, values, ...props}: Props) => {
   const classes = groupFormStyles();
+  const [image, setImage] = useState<Image>(null);
 
   const color = values.color;
 
@@ -25,10 +30,14 @@ const ItemForm: FC<Props> = ({group, header, values, ...props}: Props) => {
       <Form className={classes.form}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            Test
+            <GroupFormTitle />
           </Grid>
           <Grid item xs={6} lg={3}>
-            Test
+            <GroupFormColor />
+          </Grid>
+          <Grid item xs={6} lg={9} />
+          <Grid item xs={6} lg={3}>
+            <ImageUploader image={image} setImage={setImage} />
           </Grid>
         </Grid>
       </Form>
@@ -56,4 +65,4 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose(formik)(ItemForm);
+export default compose(formik)(GroupForm);

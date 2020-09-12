@@ -6,11 +6,11 @@ import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import {Container} from '@material-ui/core';
 import {itemViewStyles} from './_styles';
-import {Item} from '../../../models/item';
-import PageHeader from '../../common/page-layouts/page-header';
+import {ItemModel} from '../../../models/item.model';
+import PageHeader from '../../common/layout-page/page-header';
 import ItemViewData from './item-view-data';
 import {generateItem} from '../../_constants';
-import PageDivider from '../../common/page-layouts/page-divider';
+import PageDivider from '../../common/layout-page/page-divider';
 import ItemViewProperties from './item-view-properties';
 import ItemViewDescription from './item-view-description';
 
@@ -22,7 +22,7 @@ type Props = ConnectedProps<typeof connector>;
 const ItemView: FC<Props> = ({setMenu}: Props) => {
   const classes = itemViewStyles();
   const {i18n} = useTranslation();
-  const [item, setItem] = useState<Item>(null);
+  const [item, setItem] = useState<ItemModel>(null);
 
   const menu = (
     <>

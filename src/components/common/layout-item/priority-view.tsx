@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, HTMLAttributes, ReactNode} from 'react';
 import csx from 'classnames';
 import {priorityStyles} from './_styles';
-import {ItemPriority} from '../../../models/item';
+import {ItemPriority} from '../../../models/item.model';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {LowPriorityIcon} from '../icons/low-priority-icon';

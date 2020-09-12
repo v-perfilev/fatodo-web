@@ -3,8 +3,8 @@ import {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {groupCardAvatarsStyles} from './_styles';
 import {AVATARS_IN_GROUP_CARD} from '../_constants';
-import {User} from '../../../models/user';
-import UserPic from '../../common/user-layouts/user-pic';
+import {User} from '../../../models/user.model';
+import RoundPic from '../../common/images/round-pic';
 
 type Props = {
   users: User[];
@@ -19,7 +19,7 @@ const GroupPreviewCardAvatars: FC<Props> = ({users}: Props) => {
   return (
     <Box className={classes.avatars}>
       {usersToShow.map((user, index) => (
-        <UserPic key={index} user={user} />
+        <RoundPic key={index} alt={user.username} url={user.avatarUrl} />
       ))}
       {!!moreThanLimit && <Typography className={classes.count}>+{moreThanLimit}</Typography>}
     </Box>

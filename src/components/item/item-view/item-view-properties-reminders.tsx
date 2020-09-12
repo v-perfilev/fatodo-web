@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
-import LabeledBox from '../../common/page-layouts/labeled-box';
-import PageSpacer from '../../common/page-layouts/page-spacer';
+import LabeledBox from '../../common/layout-page/labeled-box';
+import PageSpacer from '../../common/layout-page/page-spacer';
 import {useTranslation} from 'react-i18next';
-import {Reminder} from '../../../models/reminder';
-import ReminderView from '../../common/item-layouts/reminder-view';
+import {Reminder} from '../../../models/reminder.model';
+import ReminderView from '../../common/layout-item/reminder-view';
 import {Chip} from '@material-ui/core';
 
 type Props = {

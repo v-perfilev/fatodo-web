@@ -2,9 +2,9 @@ import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
-import {itemPriorities} from '../../../models/item';
+import {itemPriorities} from '../../../models/item.model';
 import {MenuItem} from '@material-ui/core';
-import PriorityView from '../../common/item-layouts/priority-view';
+import PriorityView from '../../common/layout-item/priority-view';
 
 const ItemFormPriority: FC = () => {
   const {t} = useTranslation();

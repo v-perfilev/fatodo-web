@@ -6,7 +6,7 @@ import {groupSortingGridContainerStyles} from './_styles';
 import withSortableGrid, {SortingProps} from '../../../shared/hoc/with-sortable-grid';
 import {animated} from 'react-spring';
 import {compose} from 'recompose';
-import {Group} from '../../../models/group';
+import {Group} from '../../../models/group.model';
 
 type Props = SortingProps & {
   groups: Group[];

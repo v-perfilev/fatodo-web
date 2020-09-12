@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {itemViewPropertiesStyles} from './_styles';
-import {Item} from '../../../models/item';
+import {ItemModel} from '../../../models/item.model';
 import ItemViewPropertiesTags from './item-view-properties-tags';
 import ItemViewPropertiesReminders from './item-view-properties-reminders';
 import ItemViewPropertiesChanges from './item-view-properties-changes';
 
 type Props = {
-  item: Item;
+  item: ItemModel;
 };
 
 const ItemViewProperties: FC<Props> = ({item}: Props) => {

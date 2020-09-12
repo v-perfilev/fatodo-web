@@ -1,7 +1,7 @@
 import {VariantType} from 'notistack';
 import {AxiosResponse} from 'axios';
 import {NotificationBuilder} from '../notification/notification.builder';
-import Notification from '../../models/notification';
+import Notification from '../../models/notification.model';
 import {TranslationUtils} from './translation.utils';
 import {ResponseUtils} from './response.utils';
 

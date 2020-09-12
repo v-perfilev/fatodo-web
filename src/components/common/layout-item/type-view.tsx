@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, HTMLAttributes, ReactNode} from 'react';
 import csx from 'classnames';
 import {typeStyles} from './_styles';
-import {ItemType} from '../../../models/item';
+import {ItemType} from '../../../models/item.model';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {TaskIcon} from '../icons/task-icon';

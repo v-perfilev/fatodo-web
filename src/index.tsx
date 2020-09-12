@@ -20,6 +20,9 @@ import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import {useTranslation} from 'react-i18next';
 
+// import external styles
+import 'react-image-crop/dist/ReactCrop.css';
+
 const root = document.getElementById('root');
 
 const axiosActions = bindActionCreators({clearAuth, enqueueSnackbar}, store.dispatch);

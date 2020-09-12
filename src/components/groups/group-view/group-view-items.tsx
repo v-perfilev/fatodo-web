@@ -2,12 +2,12 @@ import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {groupItemListStyles} from './_styles';
 import GroupViewItem from './group-view-item';
-import PageDivider from '../../common/page-layouts/page-divider';
-import {GradientColor} from '../../_types';
-import {Item} from '../../../models/item';
+import PageDivider from '../../common/layout-page/page-divider';
+import {GradientColor} from '../../../shared/utils/color.utils';
+import {ItemModel} from '../../../models/item.model';
 
 type Props = {
-  items: Item[];
+  items: ItemModel[];
   color: GradientColor;
 };
 

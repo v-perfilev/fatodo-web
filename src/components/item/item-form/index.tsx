@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {itemFormStyles} from './_styles';
-import {Item, itemPriorities, ItemPriority, ItemType, itemTypes} from '../../../models/item';
+import {ItemModel, itemPriorities, ItemPriority, ItemType, itemTypes} from '../../../models/item.model';
 import {Container, Grid} from '@material-ui/core';
-import PageHeader from '../../common/page-layouts/page-header';
-import PageDivider from '../../common/page-layouts/page-divider';
+import PageHeader from '../../common/layout-page/page-header';
+import PageDivider from '../../common/layout-page/page-divider';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
 import ItemFormTitle from './item-form-title';
@@ -14,10 +14,10 @@ import ItemFormDate from './item-form-date';
 import ItemFormDescription from './item-form-description';
 import ItemFormTags from './item-form-tags';
 import ItemFormReminders from './item-form-reminders';
-import {Reminder} from '../../../models/reminder';
+import {Reminder} from '../../../models/reminder.model';
 
 type Props = FormikProps<any> & {
-  item: Item;
+  item: ItemModel;
   header: string;
 };
 

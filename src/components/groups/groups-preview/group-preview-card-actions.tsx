@@ -6,7 +6,7 @@ import {MessageIcon} from '../../common/icons/message-icon';
 import GroupPreviewCardAvatars from './group-preview-card-avatars';
 import {groupCardActionsStyles} from './_styles';
 import {compose} from 'recompose';
-import {User} from '../../../models/user';
+import {User} from '../../../models/user.model';
 
 type Props = {
   users: User[];

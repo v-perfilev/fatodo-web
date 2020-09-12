@@ -1,7 +1,7 @@
-import {Group} from './group';
-import {Reminder} from './reminder';
-import {AbstractAuditing} from './abstract-auditing';
-import {ParamDate} from './param-date';
+import {Group} from './group.model';
+import {Reminder} from './reminder.model';
+import {AbstractAuditing} from './abstract-auditing.model';
+import {ParamDate} from './param-date.model';
 
 export const itemTypes: ItemType[] = ['task', 'event', 'repetition', 'note'];
 export type ItemType = 'task' | 'event' | 'repetition' | 'note';
@@ -9,7 +9,7 @@ export type ItemType = 'task' | 'event' | 'repetition' | 'note';
 export const itemPriorities: ItemPriority[] = ['low', 'normal', 'high'];
 export type ItemPriority = 'low' | 'normal' | 'high';
 
-export interface Item extends AbstractAuditing {
+export interface ItemModel extends AbstractAuditing {
   id: string;
   title: string;
   type: ItemType;

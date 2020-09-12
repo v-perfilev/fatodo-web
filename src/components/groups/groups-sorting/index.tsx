@@ -10,7 +10,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-button';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
-import {Group} from '../../../models/group';
+import {Group} from '../../../models/group.model';
 import {TEST_GROUP} from '../../_constants';
 
 const initGroups = Array.from(Array(10).keys()).map(() => {

@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {Box, Popover} from '@material-ui/core';
 import {remindersInputPopoverStyles} from './_styles';
-import {Reminder, ReminderPeriodicity} from '../../../../models/reminder';
+import {Reminder, ReminderPeriodicity} from '../../../../models/reminder.model';
 import RemindersInputPopoverToolbar from './reminders-input-popover-toolbar';
 import RemindersInputPopoverOnce from './reminders-input-popover-once';
 import RemindersInputPopoverDaily from './reminders-input-popover-daily';

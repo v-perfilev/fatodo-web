@@ -8,10 +8,10 @@ import {useTrail} from 'react-spring';
 import GroupCardItem from './group-preview-card-item';
 import {ITEMS_IN_GROUP_CARD} from '../_constants';
 import {compose} from 'recompose';
-import {Item} from '../../../models/item';
+import {ItemModel} from '../../../models/item.model';
 
 type Props = {
-  items: Item[];
+  items: ItemModel[];
 };
 
 const GroupPreviewCardContent: FC<Props> = ({items}: Props) => {
@@ -20,7 +20,7 @@ const GroupPreviewCardContent: FC<Props> = ({items}: Props) => {
   const ref = useRef();
   const [initialized, setInitialized] = useState(false);
   const [firstShowedItem, setFirstShowedItem] = useState(0);
-  const [itemsToShow, setItemsToShow] = useState<Item[]>([]);
+  const [itemsToShow, setItemsToShow] = useState<ItemModel[]>([]);
 
   const isMultiPage = items.length > ITEMS_IN_GROUP_CARD;
   const isNotFirstPage = firstShowedItem > 0;

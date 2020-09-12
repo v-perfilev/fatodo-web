@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Reminder} from '../../../models/reminder';
+import {Reminder} from '../../../models/reminder.model';
 import RemindersInput from '../../common/inputs/reminders-input';
 
 type Props = {

@@ -4,8 +4,9 @@ import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {compose} from 'recompose';
-import {Group} from '../../../models/group';
+import {Group} from '../../../models/group.model';
 import {TEST_GROUP} from '../../_constants';
+import GroupForm from '../group-form';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -31,7 +32,7 @@ const GroupCreate: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return group && <span>TODO group form</span>;
+  return group && <GroupForm group={group} header="Test"/>;
 };
 
 export default compose(connector)(GroupCreate);

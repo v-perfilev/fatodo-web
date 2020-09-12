@@ -1,4 +1,4 @@
-import {ParamDate} from './param-date';
+import {ParamDate} from './param-date.model';
 
 export type ReminderPeriodicity = 'once' | 'daily' | 'weekly' | 'monthly' | 'yearly';
 

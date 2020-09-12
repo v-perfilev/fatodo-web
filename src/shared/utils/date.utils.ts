@@ -1,5 +1,5 @@
 import moment, {Moment} from 'moment';
-import {ParamDate} from '../../models/param-date';
+import {ParamDate} from '../../models/param-date.model';
 import i18n from '../i18n';
 
 export class DateFormats {

@@ -9,10 +9,10 @@ import GroupViewItems from './group-view-items';
 import GroupViewUsers from './group-view-users';
 import GroupViewMessages from './group-view-messages';
 import {groupStyles} from './_styles';
-import PageHeader from '../../common/page-layouts/page-header';
-import {Group} from '../../../models/group';
+import PageHeader from '../../common/layout-page/page-header';
+import {Group} from '../../../models/group.model';
 import {TEST_GROUP} from '../../_constants';
-import PageDivider from '../../common/page-layouts/page-divider';
+import PageDivider from '../../common/layout-page/page-divider';
 
 const initGroup = TEST_GROUP;
 

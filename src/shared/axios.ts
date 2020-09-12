@@ -1,7 +1,7 @@
 import axios, {AxiosPromise, AxiosResponse} from 'axios';
 import {API_TIMEOUT, API_URL} from '../constants';
 import {SecurityUtils} from './utils/security.utils';
-import Notification from '../models/notification';
+import Notification from '../models/notification.model';
 import {NotificationBuilder} from './notification/notification.builder';
 import {TranslationUtils} from './utils/translation.utils';
 import {ResponseUtils} from './utils/response.utils';

@@ -1,7 +1,7 @@
 import {setMenu} from '../../../store/actions/additional-menu.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import React, {FC, useEffect, useState} from 'react';
-import {Item} from '../../../models/item';
+import {ItemModel} from '../../../models/item.model';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import ItemForm from '../item-form';
@@ -15,7 +15,7 @@ type Props = ConnectedProps<typeof connector>;
 
 const ItemCreate: FC<Props> = ({setMenu}: Props) => {
   const {i18n, t} = useTranslation();
-  const [item, setItem] = useState<Item>(null);
+  const [item, setItem] = useState<ItemModel>(null);
 
   const menu = (
     <>
@@ -24,7 +24,7 @@ const ItemCreate: FC<Props> = ({setMenu}: Props) => {
   );
 
   useEffect(() => {
-    setItem({group: TEST_GROUP} as Item);
+    setItem({group: TEST_GROUP} as ItemModel);
   }, []);
 
   useEffect(() => {

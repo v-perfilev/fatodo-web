@@ -3,7 +3,7 @@ import {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {DateConverters, DateFormatters} from '../../../shared/utils/date.utils';
-import {ParamDate} from '../../../models/param-date';
+import {ParamDate} from '../../../models/param-date.model';
 
 type Props = HTMLAttributes<any> & {
   date: ParamDate;

@@ -10,10 +10,14 @@ import withAdditionalMenu from '../../shared/hoc/with-additional-menu';
 import {Routes} from '../router';
 import AnimatedRouter from '../../shared/routes/animated-router';
 import GroupView from './group-view';
+import GroupCreate from './group-create';
+import GroupEdit from './group-edit';
 
 export enum GroupRoutes {
   SORTING = '/sorting',
-  GROUP = '/:groupId',
+  CREATE = '/create',
+  EDIT = '/:groupId/edit',
+  VIEW = '/:groupId',
 }
 
 const GroupRouter: FC = () => {
@@ -23,7 +27,9 @@ const GroupRouter: FC = () => {
     <AnimatedRouter>
       <PublicRoute exact path={match.path} component={GroupsPreview} />
       <PublicRoute path={match.path + GroupRoutes.SORTING} component={GroupsSorting} />
-      <PublicRoute path={match.path + GroupRoutes.GROUP} component={GroupView} />
+      <PublicRoute path={match.path + GroupRoutes.CREATE} component={GroupCreate} />
+      <PublicRoute path={match.path + GroupRoutes.EDIT} component={GroupEdit} />
+      <PublicRoute path={match.path + GroupRoutes.VIEW} component={GroupView} />
       <Redirect to={Routes.PAGE_NOT_FOUND} />
     </AnimatedRouter>
   );

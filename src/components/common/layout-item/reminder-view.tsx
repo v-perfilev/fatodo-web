@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
-import {Reminder} from '../../../models/reminder';
+import {Reminder} from '../../../models/reminder.model';
 import {DateConverters, DateFormatters, DateUtils} from '../../../shared/utils/date.utils';
 
 type Props = HTMLAttributes<any> & {

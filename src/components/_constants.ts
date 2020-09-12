@@ -1,8 +1,8 @@
-import {Group} from '../models/group';
-import {User} from '../models/user';
-import {Item} from '../models/item';
-import {Reminder} from '../models/reminder';
-import {ParamDate} from '../models/param-date';
+import {Group} from '../models/group.model';
+import {User} from '../models/user.model';
+import {ItemModel} from '../models/item.model';
+import {Reminder} from '../models/reminder.model';
+import {ParamDate} from '../models/param-date.model';
 
 const GROUP_BASE: Group = {
   id: Math.random().toString(),
@@ -62,7 +62,7 @@ export const TEST_REMINDER: Reminder = {
   date: TEST_DATE,
 };
 
-const ITEM_TEMPLATE: Item = {
+const ITEM_TEMPLATE: ItemModel = {
   id: Math.random().toString(),
   title: '',
   description: LOREM_IPSUM,
@@ -78,7 +78,7 @@ const ITEM_TEMPLATE: Item = {
   group: GROUP_BASE,
 };
 
-export const generateItem = (): Item => {
+export const generateItem = (): ItemModel => {
   const titleId = Math.floor(Math.random() * ITEM_TITLES.length);
   const title = ITEM_TITLES[titleId];
 

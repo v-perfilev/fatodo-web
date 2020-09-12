@@ -1,5 +1,5 @@
 import {ACTION_TYPES} from '../actions/auth.actions';
-import {UserAccount} from '../../models/user';
+import {UserAccount} from '../../models/user.model';
 
 const initialState = {
   isAuthenticated: false,

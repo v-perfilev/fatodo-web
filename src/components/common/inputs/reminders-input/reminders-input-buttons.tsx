@@ -1,4 +1,4 @@
-import {Reminder} from '../../../../models/reminder';
+import {Reminder} from '../../../../models/reminder.model';
 import React, {FC} from 'react';
 import {IconButton} from '@material-ui/core';
 import {CloseIcon} from '../../icons/close-icon';

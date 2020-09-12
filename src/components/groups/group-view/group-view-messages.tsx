@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {groupMessagesStyles} from './_styles';
-import {Group} from '../../../models/group';
+import {Group} from '../../../models/group.model';
 
 type Props = {
   group: Group;

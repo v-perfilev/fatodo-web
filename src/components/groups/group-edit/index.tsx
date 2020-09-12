@@ -4,7 +4,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {compose} from 'recompose';
-import {Group} from '../../../models/group';
+import {Group} from '../../../models/group.model';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);

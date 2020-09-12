@@ -1,4 +1,4 @@
-import {Reminder} from '../../../../models/reminder';
+import {Reminder} from '../../../../models/reminder.model';
 import React, {FC, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {Field} from 'formik';

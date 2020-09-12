@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import LabeledBox from '../../common/page-layouts/labeled-box';
+import LabeledBox from '../../common/layout-page/labeled-box';
 import {useTranslation} from 'react-i18next';
-import {ParamDate} from '../../../models/param-date';
-import DateView from '../../common/item-layouts/date-view';
+import {ParamDate} from '../../../models/param-date.model';
+import DateView from '../../common/layout-item/date-view';
 
 type Props = {
   date: ParamDate;
