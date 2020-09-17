@@ -6,13 +6,12 @@ import PageDivider from '../../common/layout-page/page-divider';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
 import {Group} from '../../../models/group.model';
-import {GradientColor} from '../../../shared/utils/color.utils';
 import GroupFormColor from './group-form-color';
 import GroupFormImage from './group-form-image';
 import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
 import GroupFormTitle from './group-form-title';
-import {FormUtils} from '../../../shared/utils/form.utils';
+import {GroupFormUtils, GroupFormValues} from './_form';
 
 type Props = FormikProps<any> & {
   group?: Group;
@@ -65,24 +64,9 @@ const GroupForm: FC<Props> = ({header, setSaveCallback, isValid, isSubmitting, .
   );
 };
 
-interface FormValues {
-  id: string;
-  title: string;
-  color: GradientColor;
-  imageFilename?: string;
-  imageContent?: Blob;
-}
 
-export const defaultValues: Readonly<FormValues> = {
-  id: null,
-  title: '',
-  color: 'yellow',
-  imageFilename: null,
-  imageContent: null,
-};
-
-const formik = withFormik<Props, FormValues>({
-  mapPropsToValues: ({group}: Props) => group ?? defaultValues,
+const formik = withFormik<Props, GroupFormValues>({
+  mapPropsToValues: ({group}: Props) => GroupFormUtils.mapGroupToValues(group),
 
   validationSchema: Yup.object().shape({
     title: Yup.string().required(() => i18n.t('account:fields.user.required')),
@@ -91,9 +75,9 @@ const formik = withFormik<Props, FormValues>({
 
   validateOnMount: true,
 
-  handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-    const {request} = props;
-    const data = FormUtils.toFormData(values);
+  handleSubmit: (values: GroupFormValues, {setSubmitting, props}: FormikBag<Props, GroupFormValues>) => {
+    const {request, group} = props;
+    const data = GroupFormUtils.mapValuesToFormData(values, group);
     request(data, () => setSubmitting(false));
   },
 });

@@ -13,8 +13,8 @@ import ItemEdit from './item-edit';
 import ItemCreate from './item-create';
 
 export enum ItemRoutes {
-  CREATE = '/create',
-  EDIT = '/:itemId/edit',
+  CREATE = '/create/:groupId',
+  EDIT = 'edit/:groupId/:itemId',
   VIEW = '/:itemId',
 }
 

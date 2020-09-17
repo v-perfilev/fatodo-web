@@ -26,7 +26,7 @@ const GroupPreviewCard: FC<Props> = ({group}: Props) => {
 
   return (
     <Card square elevation={3} className={classes.card} style={cardStyle} ref={ref}>
-      <GroupPreviewCardHeader title={group.title} />
+      <GroupPreviewCardHeader group={group} />
       <GroupPreviewCardBody group={group} />
     </Card>
   );

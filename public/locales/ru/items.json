@@ -1,7 +1,7 @@
 {
   "headers": {
-    "createItem": "Добавление записи в {{group}}",
-    "editItem": "Редактирование записи в {{group}}"
+    "create": "Добавление записи в {{group}}",
+    "edit": "Редактирование записи в {{group}}"
   },
   "labels": {
     "type": "Тип",
@@ -75,5 +75,9 @@
     "weekly": "в {{time}} в {{weekDays}}",
     "monthly": "в {{time}} {{monthDates}} каждого месяца",
     "yearly": "в {{time}} {{date}}"
+  },
+  "tooltips": {
+    "ok": "Подтвердить",
+    "cancel": "Отменить"
   }
 }

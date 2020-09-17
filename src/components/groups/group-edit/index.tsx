@@ -24,13 +24,12 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
   const {i18n, t} = useTranslation();
   const history = useHistory();
   const {groupId} = useParams();
-  const [group, setGroup] = useState<Group>(null);
   const [saveCallback, setSaveCallback] = useState(() => () => {
   });
+  const [group, setGroup] = useState<Group>(null);
 
   const submit = (): void => saveCallback();
-  const redirectToGroup = (id: string): void => history.push(Routes.GROUPS + '/' + id);
-  const redirectToGroups = (): void => history.push(Routes.GROUPS);
+  const redirectToGroup = (): void => history.push(Routes.GROUPS + '/' + groupId);
 
   const loadGroup = (): void => {
     GroupService.get(groupId)
@@ -38,7 +37,7 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
         setGroup(response.data);
       })
       .catch(() => {
-        redirectToGroups();
+        redirectToGroup();
       });
   };
 
@@ -53,7 +52,7 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
       />
       <AdditionalMenuButton
         icon={<CloseIcon />}
-        action={redirectToGroups}
+        action={redirectToGroup}
         color="secondary"
         tooltip={t('groups:tooltips.cancel')}
       />
@@ -71,10 +70,9 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
 
   const request = (data: FormData, stopSubmitting: () => void) => {
     GroupService.update(data)
-      .then((response) => {
+      .then(() => {
         NotificationUtils.handleSnack('auth.afterResetPassword', 'info', enqueueSnackbar);
-        const id = response.data.id;
-        redirectToGroup(id);
+        redirectToGroup();
       })
       .catch((response) => {
         NotificationUtils.handleFeedback(response, '*', '', enqueueSnackbar);
@@ -85,7 +83,7 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
   return group && (
     <GroupForm
       group={group}
-      header={t('groups:headers.editGroup')}
+      header={t('groups:headers.edit')}
       setSaveCallback={setSaveCallback}
       request={request}
     />

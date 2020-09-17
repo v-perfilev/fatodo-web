@@ -20,6 +20,8 @@ import {GroupRoutes} from '../_router';
 import {useHistory, useParams} from 'react-router-dom';
 import {GroupsIcon} from '../../common/icons/groups-icon';
 import GroupService from '../../../services/group.service';
+import {PlusIcon} from '../../common/icons/plus-icon';
+import {ItemRoutes} from '../../item/_router';
 
 const initGroup = TEST_GROUP;
 
@@ -35,6 +37,8 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
   const {t, i18n} = useTranslation();
   const [group, setGroup] = useState<Group>(null);
 
+  const redirectToCreateItem = (): void =>
+    history.push((Routes.ITEMS + ItemRoutes.CREATE).replace(':groupId', groupId));
   const redirectToEditGroup = (): void =>
     history.push((Routes.GROUPS + GroupRoutes.EDIT).replace(':groupId', groupId));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
@@ -52,6 +56,12 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
   const menu = (
     <>
       <AdditionalMenuSpacer />
+      <AdditionalMenuButton
+        icon={<PlusIcon />}
+        action={redirectToCreateItem}
+        color="primary"
+        tooltip={t('groups:tooltips.createItem')}
+      />
       <AdditionalMenuButton
         icon={<EditIcon />}
         action={redirectToEditGroup}
@@ -82,7 +92,7 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
         <PageHeader title={group.title} />
         <PageDivider color={group.color} height={5} />
         <GroupViewUsers users={group.users} />
-        <GroupViewItems items={group.items} color={group.color} />
+        <GroupViewItems items={group.items ?? []} color={group.color} />
         <GroupViewMessages group={group} />
       </Container>
     )

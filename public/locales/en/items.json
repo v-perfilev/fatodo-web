@@ -1,7 +1,7 @@
 {
   "headers": {
-    "createItem": "Create item in {{group}}",
-    "editItem": "Edit item in {{group}}"
+    "create": "Create item in {{group}}",
+    "edit": "Edit item in {{group}}"
   },
   "labels": {
     "type": "Type",
@@ -75,5 +75,9 @@
     "weekly": "at {{time}} on {{weekDays}}",
     "monthly": "at {{time}} on {{monthDates}} of every month",
     "yearly": "at {{time}} on {{date}}"
+  },
+  "tooltips": {
+    "ok": "Ok",
+    "cancel": "Cancel"
   }
 }

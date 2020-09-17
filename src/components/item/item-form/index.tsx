@@ -1,7 +1,7 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useRef} from 'react';
 import {itemFormStyles} from './_styles';
-import {Item, itemPriorities, ItemPriority, ItemType, itemTypes} from '../../../models/item.model';
-import {Container, Grid} from '@material-ui/core';
+import {Item} from '../../../models/item.model';
+import {Button, Container, Grid} from '@material-ui/core';
 import PageHeader from '../../common/layout-page/page-header';
 import PageDivider from '../../common/layout-page/page-divider';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
@@ -14,20 +14,42 @@ import ItemFormDate from './item-form-date';
 import ItemFormDescription from './item-form-description';
 import ItemFormTags from './item-form-tags';
 import ItemFormReminders from './item-form-reminders';
-import {Reminder} from '../../../models/reminder.model';
+import * as Yup from 'yup';
+import i18n from '../../../shared/i18n';
+import {ItemFormUtils, ItemFormValues} from './_form';
+import {Group} from '../../../models/group.model';
 
 type Props = FormikProps<any> & {
-  item: Item;
+  group: Group;
+  item?: Item;
   header: string;
+  setSaveCallback: (callback: () => () => void) => void;
+  request: (data: FormData, stopSubmitting: () => void) => void;
 };
 
-const ItemForm: FC<Props> = ({item, header, ...props}: Props) => {
+const ItemForm: FC<Props> = ({group, item, header, setSaveCallback, isValid, isSubmitting, ...props}: Props) => {
   const classes = itemFormStyles();
+  const color = group.color;
+  const buttonRef = useRef<HTMLButtonElement>();
+
+  const saveCallback = (): void => {
+    if (isValid) {
+      buttonRef.current.click();
+    } else {
+      props.submitForm().catch(() => {
+        // skip
+      });
+    }
+  };
+
+  useEffect(() => {
+    setSaveCallback(() => saveCallback);
+  }, [isValid]);
 
   return (
     <Container className={classes.root}>
       <PageHeader title={header} />
-      <PageDivider color={item.group.color} height={5} />
+      <PageDivider color={color} height={5} />
       <Form className={classes.form}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -55,40 +77,29 @@ const ItemForm: FC<Props> = ({item, header, ...props}: Props) => {
             <ItemFormTags />
           </Grid>
         </Grid>
+        <Button type="submit" disabled={!isValid || isSubmitting} ref={buttonRef} className={classes.submitButton}>
+          Submit
+        </Button>
       </Form>
     </Container>
   );
 };
 
-interface FormValues {
-  title: string;
-  type: ItemType;
-  priority: ItemPriority;
-  time?: Date;
-  date?: Date;
-  description?: string;
-  reminders?: Reminder[];
-  tags?: string[];
-}
+const formik = withFormik<Props, ItemFormValues>({
+  mapPropsToValues: ({item}: Props) => ItemFormUtils.mapItemToValues(item),
 
-export const defaultFormValues: Readonly<FormValues> = {
-  title: '',
-  type: itemTypes[0],
-  priority: itemPriorities[1],
-  time: null,
-  date: null,
-  description: '',
-  reminders: [],
-  tags: [],
-};
-
-const formik = withFormik<Props, FormValues>({
-  mapPropsToValues: () => defaultFormValues,
+  validationSchema: Yup.object().shape({
+    title: Yup.string().required(() => i18n.t('account:fields.user.required')),
+    type: Yup.string().required(() => i18n.t('account:fields.user.required')),
+    priority: Yup.string().required(() => i18n.t('account:fields.user.required')),
+  }),
 
   validateOnMount: true,
 
-  handleSubmit: (values: FormValues, {}: FormikBag<Props, FormValues>) => {
-    console.log(values);
+  handleSubmit: (values: ItemFormValues, {setSubmitting, props}: FormikBag<Props, ItemFormValues>) => {
+    const {request, item} = props;
+    const data = ItemFormUtils.mapValuesToFormData(values, item);
+    request(data, () => setSubmitting(false));
   },
 });
 

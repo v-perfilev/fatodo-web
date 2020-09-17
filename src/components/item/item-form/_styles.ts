@@ -12,4 +12,7 @@ export const itemFormStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  submitButton: {
+    display: 'none',
+  },
 }));

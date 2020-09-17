@@ -25,6 +25,7 @@
     "reorder": "Reorder groups",
     "create": "Create group",
     "edit": "Edit group",
-    "list": "List of groups"
+    "list": "List of groups",
+    "createItem": "Create item"
   }
 }

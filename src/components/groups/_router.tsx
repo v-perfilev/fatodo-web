@@ -16,7 +16,7 @@ import GroupEdit from './group-edit';
 export enum GroupRoutes {
   SORTING = '/sorting',
   CREATE = '/create',
-  EDIT = '/:groupId/edit',
+  EDIT = '/edit/:groupId',
   VIEW = '/:groupId',
 }
 

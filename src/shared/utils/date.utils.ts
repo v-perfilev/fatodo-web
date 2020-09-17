@@ -32,27 +32,59 @@ export class DateFormatters {
 
 export class DateConverters {
   static getParamDateFromTime = (time: Date): ParamDate => {
+    if (!time) {
+      return null;
+    }
     return {time: time.getHours() * 60 + time.getMinutes()};
   };
 
   static getParamDateFromTimeAndDate = (time: Date, date: Date): ParamDate => {
-    return {
-      time: time.getHours() * 60 + time.getMinutes(),
-      date: date.getDate(),
-      month: date.getMonth(),
-      year: date.getFullYear(),
-    };
+    if (!time && !date) {
+      return null;
+    }
+    let result = {};
+    if (time) {
+      result = {
+        ...result,
+        time: time.getHours() * 60 + time.getMinutes(),
+      };
+    }
+    if (date) {
+      result = {
+        ...result,
+        date: date.getDate(),
+        month: date.getMonth(),
+        year: date.getFullYear(),
+      };
+    }
+    return result;
   };
 
   static getParamDateFromTimeAndDateWithoutYear = (time: Date, date: Date): ParamDate => {
-    return {
-      time: time.getHours() * 60 + time.getMinutes(),
-      date: date.getDate(),
-      month: date.getMonth(),
-    };
+    if (!time && !date) {
+      return null;
+    }
+    let result = {};
+    if (time) {
+      result = {
+        ...result,
+        time: time.getHours() * 60 + time.getMinutes(),
+      };
+    }
+    if (date) {
+      result = {
+        ...result,
+        date: date.getDate(),
+        month: date.getMonth(),
+      };
+    }
+    return result;
   };
 
   static getTimeFromParamDate = (paramDate: ParamDate): Date => {
+    if (!paramDate || !paramDate.time) {
+      return null;
+    }
     const time = paramDate.time;
     const date = new Date(0);
     date.setHours(Math.floor(time / 60));
@@ -61,6 +93,9 @@ export class DateConverters {
   };
 
   static getDateFromParamDate = (paramDate: ParamDate): Date => {
+    if (paramDate == null || (!paramDate.date && !paramDate.month && !paramDate.year)) {
+      return null;
+    }
     const date = new Date(0);
     if (paramDate.date) {
       date.setDate(paramDate.date);
@@ -78,8 +113,10 @@ export class DateConverters {
 
   static getTimeFromMoment = (moment: Moment): Date => {
     const date = new Date();
-    date.setHours(moment.hours());
-    date.setMinutes(moment.minutes());
+    if (moment) {
+      date.setHours(moment.hours());
+      date.setMinutes(moment.minutes());
+    }
     return date;
   };
 }
