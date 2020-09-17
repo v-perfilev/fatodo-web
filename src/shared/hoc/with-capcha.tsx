@@ -10,18 +10,22 @@ const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (props): Rea
   const {executeRecaptcha} = useGoogleReCaptcha();
   const [token, setToken] = useState('');
   let isMounted = true;
+  let interval = null;
 
-  useEffect(() => {
+  const updateCaptcha = (): void => {
     executeRecaptcha()
       .then((token) => {
         if (isMounted) {
           setToken(token);
         }
-      })
-      .catch(() => {
-        // skip
       });
+  };
+
+  useEffect(() => {
+    updateCaptcha();
+    interval = window.setInterval(() => updateCaptcha(), 30 * 1000);
     return (): void => {
+      window.clearInterval(interval);
       isMounted = false;
     };
   }, []);

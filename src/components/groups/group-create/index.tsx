@@ -10,21 +10,24 @@ import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
+import GroupService from '../../../services/group.service';
+import {NotificationUtils} from '../../../shared/utils/notification.utils';
+import {enqueueSnackbar} from '../../../store/actions/notification.actions';
 
-const mapDispatchToProps = {setMenu};
+const mapDispatchToProps = {setMenu, enqueueSnackbar};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-const GroupCreate: FC<Props> = ({setMenu}: Props) => {
+const GroupCreate: FC<Props> = ({setMenu, enqueueSnackbar}: Props) => {
   const history = useHistory();
   const {i18n, t} = useTranslation();
   const [saveCallback, setSaveCallback] = useState<() => void>(() => () => {
   });
 
   const submit = (): void => saveCallback();
-
-  const redirectToGroupsRoot = (): void => history.push(Routes.GROUPS);
+  const redirectToGroup = (id: string): void => history.push(Routes.GROUPS + '/' + id);
+  const redirectToGroups = (): void => history.push(Routes.GROUPS);
 
   const menu = (
     <>
@@ -37,7 +40,7 @@ const GroupCreate: FC<Props> = ({setMenu}: Props) => {
       />
       <AdditionalMenuButton
         icon={<CloseIcon />}
-        action={redirectToGroupsRoot}
+        action={redirectToGroups}
         color="secondary"
         tooltip={t('groups:tooltips.cancel')}
       />
@@ -45,14 +48,31 @@ const GroupCreate: FC<Props> = ({setMenu}: Props) => {
   );
 
   useEffect(() => {
+    setMenu(menu, true);
+  }, []);
+
+  useEffect(() => {
     setMenu(menu);
   }, [i18n.language, saveCallback]);
 
+  const request = (data: FormData, stopSubmitting: () => void) => {
+    GroupService.create(data)
+      .then((response) => {
+        NotificationUtils.handleSnack('auth.afterResetPassword', 'info', enqueueSnackbar);
+        const id = response.data.id;
+        redirectToGroup(id);
+      })
+      .catch((response) => {
+        NotificationUtils.handleFeedback(response, '*', '', enqueueSnackbar);
+        stopSubmitting();
+      });
+  };
+
   return (
     <GroupForm
-      header={t('groups:headers.createGroup')}
+      header={t('groups:headers.create')}
       setSaveCallback={setSaveCallback}
-      onSucess={redirectToGroupsRoot}
+      request={request}
     />
   );
 };

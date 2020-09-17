@@ -1,15 +1,20 @@
 import axios, {AxiosPromise} from 'axios';
 
 export default class UserService {
-  public static getCurrentUser = (): AxiosPromise => {
-    return axios.get('user/user');
+  private static baseUrl = '/api/user';
+
+  public static getCurrent = (): AxiosPromise => {
+    const url = UserService.baseUrl + '/user';
+    return axios.get(url);
   };
 
   public static isEmailUnique = (value: string): AxiosPromise => {
-    return axios.get('user/check/email/' + value + '/unique');
+    const url = UserService.baseUrl + '/check/email/' + value + '/unique';
+    return axios.get(url);
   };
 
   public static isUsernameUnique = (value: string): AxiosPromise => {
-    return axios.get('user/check/username/' + value + '/unique');
+    const url = UserService.baseUrl + '/check/username/' + value + '/unique';
+    return axios.get(url);
   };
 }

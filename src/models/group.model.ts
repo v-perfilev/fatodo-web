@@ -6,7 +6,7 @@ export interface Group {
   id: string;
   title: string;
   color: GradientColor;
-  imageUrl: string;
+  imageFilename: string;
   items?: Item[];
   users?: User[];
   notificationCount: number;

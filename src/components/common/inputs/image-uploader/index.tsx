@@ -1,16 +1,18 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Image} from '../../../../models/image.model';
-import ImageUploaderPreviewAndButtons from './image-uploader-preview-and-buttons';
-import ImageUploaderPopover from './image-uploader-popover';
+import ImageUploaderButtons from './image-uploader-buttons';
+import ImageUploaderCropPopover from './image-uploader-crop-popover';
 import {Box, FormLabel} from '@material-ui/core';
 import {imageUploaderStyles} from './_styles';
+import ImageUploaderPreview from './image-uploader-preview';
 
 type Props = {
   label?: string;
   required?: boolean;
-  name: string;
+  filenameName: string;
+  contentName: string;
   values: any;
-  setFieldValue: (field: string, value: Image) => void;
+  setFieldValue: (field: string, value: any) => void;
   uploadLabel: string;
   updateLabel: string;
   clearLabel: string;
@@ -19,17 +21,21 @@ type Props = {
 
 const ImageUploader: FC<Props> = (props: Props) => {
   const classes = imageUploaderStyles();
-  const {label, required, name, values, setFieldValue, uploadLabel, updateLabel, clearLabel, crop} = props;
+  const {filenameName, contentName} = props;
+  const {label, required, values, setFieldValue, uploadLabel, updateLabel, clearLabel, crop} = props;
   const [image, setImage] = useState<Image>(null);
   const [source, setSource] = useState(null);
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
 
   useEffect(() => {
-    setImage(values[name]);
+    if (values[filenameName] || values[contentName]) {
+      setImage({filename: values[filenameName], content: values[contentName]});
+    }
   }, []);
 
   useEffect(() => {
-    setFieldValue(name, image);
+    setFieldValue(filenameName, image ? image.filename : null);
+    setFieldValue(contentName, image ? image.content : null);
   }, [image]);
 
   const handleClose = (image: Image): void => {
@@ -45,7 +51,8 @@ const ImageUploader: FC<Props> = (props: Props) => {
           <FormLabel required={required}>{label}</FormLabel>
         </Box>
       )}
-      <ImageUploaderPreviewAndButtons
+      <ImageUploaderPreview image={image} />
+      <ImageUploaderButtons
         image={image}
         setImage={setImage}
         setSource={setSource}
@@ -54,7 +61,7 @@ const ImageUploader: FC<Props> = (props: Props) => {
         updateLabel={updateLabel}
         clearLabel={clearLabel}
       />
-      <ImageUploaderPopover cropOptions={crop} image={source} anchorEl={anchorEl} handleClose={handleClose} />
+      <ImageUploaderCropPopover cropOptions={crop} image={source} anchorEl={anchorEl} handleClose={handleClose} />
     </>
   );
 };

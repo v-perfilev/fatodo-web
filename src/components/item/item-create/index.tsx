@@ -17,6 +17,10 @@ const ItemCreate: FC<Props> = ({setMenu}: Props) => {
   const {i18n, t} = useTranslation();
   const [item, setItem] = useState<Item>(null);
 
+  const loadItem = (): void => {
+    setItem({group: TEST_GROUP} as Item);
+  };
+
   const menu = (
     <>
       <AdditionalMenuSpacer />
@@ -24,7 +28,8 @@ const ItemCreate: FC<Props> = ({setMenu}: Props) => {
   );
 
   useEffect(() => {
-    setItem({group: TEST_GROUP} as Item);
+    loadItem();
+    setMenu(menu, true);
   }, []);
 
   useEffect(() => {

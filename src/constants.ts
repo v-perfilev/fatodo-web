@@ -1,6 +1,6 @@
 export const BASE_URL = process.env.BASE_URL;
-export const API_PREFIX = '/api';
-export const API_URL = process.env.API_URL + API_PREFIX;
+export const API_URL = process.env.API_URL;
+export const IMAGE_API_URL = API_URL + '/api/image/store/'
 export const API_TIMEOUT = 60 * 1000;
 export const LOADER_TIMEOUT = 500;
 

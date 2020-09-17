@@ -25,7 +25,7 @@ export const requestAccountData = (onSuccess?: () => void, onFailure?: () => voi
   dispatch
 ): Promise<void> => {
   try {
-    const accountResponse = await UserService.getCurrentUser();
+    const accountResponse = await UserService.getCurrent();
     LanguageUtils.setLanguageFromUser(accountResponse.data);
     dispatch({type: ACTION_TYPES.ACCOUNT, account: accountResponse.data});
     if (onSuccess) {

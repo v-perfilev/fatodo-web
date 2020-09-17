@@ -9,7 +9,7 @@ import Link from '../common/inputs/link';
 import {useTranslation} from 'react-i18next';
 import {authPageStyles} from './_styles';
 import RegisterForm from './registration-form';
-import {RouteComponentProps, useHistory, useRouteMatch} from 'react-router-dom';
+import {useHistory, useRouteMatch} from 'react-router-dom';
 import {LOADER_TIMEOUT, SOCIAL_LOGIN} from '../../constants';
 import SocialLogin from './social-buttons';
 import {RootState} from '../../store';
@@ -19,7 +19,7 @@ import {connect, ConnectedProps} from 'react-redux';
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
 
-type Props = RouteComponentProps & ConnectedProps<typeof connector>;
+type Props = ConnectedProps<typeof connector>;
 
 const Auth: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   const classes = authPageStyles();

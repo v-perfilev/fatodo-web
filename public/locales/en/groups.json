@@ -1,7 +1,7 @@
 {
   "headers": {
-    "createGroup": "Create group",
-    "editGroup": "Edit group"
+    "create": "Create group",
+    "edit": "Edit group"
   },
   "fields": {
     "title": {
@@ -22,6 +22,9 @@
   "tooltips": {
     "ok": "Ok",
     "cancel": "Cancel",
-    "reorder": "Reorder groups"
+    "reorder": "Reorder groups",
+    "create": "Create group",
+    "edit": "Edit group",
+    "list": "List of groups"
   }
 }

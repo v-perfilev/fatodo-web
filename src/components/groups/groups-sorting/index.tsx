@@ -12,6 +12,9 @@ import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-s
 import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group.model';
 import {TEST_GROUP} from '../../_constants';
+import GroupService from '../../../services/group.service';
+import {Simulate} from 'react-dom/test-utils';
+
 
 const initGroups = Array.from(Array(10).keys()).map(() => {
   return TEST_GROUP;
@@ -28,10 +31,16 @@ const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
   const [groups, setGroups] = useState<Group[]>([]);
 
   const saveOrderAndRedirectToGroupsRoot = (): void => {
-    console.log(groups);
     history.push(Routes.GROUPS);
   };
   const redirectToGroupsRoot = (): void => history.push(Routes.GROUPS);
+
+  const loadGroups = (): void => {
+    GroupService.getAll()
+      .then((response) => {
+        setGroups(response.data);
+      });
+  };
 
   const menu = (
     <>
@@ -52,7 +61,8 @@ const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
   );
 
   useEffect(() => {
-    setGroups(initGroups);
+    loadGroups();
+    setMenu(menu, true);
   }, []);
 
   useEffect(() => {

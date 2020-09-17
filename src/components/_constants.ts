@@ -8,7 +8,7 @@ const GROUP_BASE: Group = {
   id: Math.random().toString(),
   title: 'Test Group',
   color: 'yellow',
-  imageUrl: null,
+  imageFilename: null,
   notificationCount: 3,
   messageCount: 11,
 };

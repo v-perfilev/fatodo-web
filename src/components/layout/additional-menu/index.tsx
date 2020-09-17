@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useEffect, useState} from 'react';
+import {FC, memo, useEffect, useState} from 'react';
 import {Box, Drawer, Fade, Theme, useMediaQuery} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
 import Logo from '../../common/logo/logo';
@@ -15,15 +15,19 @@ const connector = connect(mapStateToProps);
 
 type Props = ConnectedProps<typeof connector> & RouteProps;
 
-const AdditionalMenu: FC<Props> = ({menu}: Props) => {
+const AdditionalMenu: FC<Props> = ({menu, reload}: Props) => {
   const classes = additionalMenuStyles();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
   const [menuForRender, setMenuForRender] = useState(null);
 
   useEffect(() => {
-    setMenuForRender(null);
-    setTimeout(() => setMenuForRender(menu), 500);
+    setMenuForRender(menu);
   }, [menu]);
+
+  useEffect(() => {
+    setMenuForRender(null);
+    setTimeout(() => setMenuForRender(menu), 300);
+  }, [reload]);
 
   const drawerClassNames = csx(classes.drawer, isBigDevice ? classes.drawerLeft : classes.drawerBottom);
   const containerClassNames = csx(classes.container, isBigDevice ? classes.containerLeft : classes.containerBottom);
@@ -40,11 +44,11 @@ const AdditionalMenu: FC<Props> = ({menu}: Props) => {
           <Logo />
         </Box>
       )}
-      <Fade in={Boolean(menuForRender)} timeout={500}>
+      <Fade in={Boolean(menuForRender)} timeout={300}>
         <Box className={containerClassNames}>{menuForRender}</Box>
       </Fade>
     </Drawer>
   );
 };
 
-export default compose(connector)(AdditionalMenu);
+export default compose(connector, memo)(AdditionalMenu);

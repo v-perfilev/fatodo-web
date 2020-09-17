@@ -17,6 +17,11 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
   const {i18n, t} = useTranslation();
   const [item, setItem] = useState<Item>(null);
 
+  const loadItem = (): void => {
+    // TODO set item
+    setItem(generateItem());
+  };
+
   const menu = (
     <>
       <AdditionalMenuSpacer />
@@ -24,8 +29,8 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
   );
 
   useEffect(() => {
-    // TODO set item
-    setItem(generateItem());
+    loadItem();
+    setMenu(menu, true);
   }, []);
 
   useEffect(() => {

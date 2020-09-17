@@ -6,10 +6,13 @@ export const imageUploaderStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const imageUploaderPreviewAndButtonsStyles = makeStyles((theme: Theme) => ({
+export const imageUploaderPreview = makeStyles((theme: Theme) => ({
   image: {
     marginBottom: theme.spacing(1),
   },
+}));
+
+export const imageUploaderButtonsStyles = makeStyles((theme: Theme) => ({
   buttons: {
     display: 'flex',
     flexDirection: 'row',

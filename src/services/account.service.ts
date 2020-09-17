@@ -5,27 +5,35 @@ import {ResetPasswordDTO} from '../models/dto/reset-password.dto';
 import {ForgotPasswordDTO} from '../models/dto/forgot-password.dto';
 
 export default class AccountService {
+  private static baseUrl = '/api/auth/';
+
   public static authenticate = (data: LoginDTO): AxiosPromise => {
-    return axios.post('auth/authenticate', data);
+    const url = AccountService.baseUrl + 'authenticate';
+    return axios.post(url, data);
   };
 
   public static register = (data: RegistrationDto): AxiosPromise => {
-    return axios.post('auth/register', data);
+    const url = AccountService.baseUrl + 'register';
+    return axios.post(url, data);
   };
 
   public static activate = (code: string): AxiosPromise => {
-    return axios.get('auth/account/activate/' + code);
+    const url = AccountService.baseUrl + 'account/activate/' + code;
+    return axios.get(url);
   };
 
   public static requestActivationCode = (user: string): AxiosPromise => {
-    return axios.get('auth/account/request-activation-code/' + user);
+    const url = AccountService.baseUrl + 'account/request-activation-code/' + user;
+    return axios.get(url);
   };
 
   public static resetPassword = (data: ResetPasswordDTO): AxiosPromise => {
-    return axios.post('auth/account/reset-password', data);
+    const url = AccountService.baseUrl + 'account/reset-password';
+    return axios.post(url, data);
   };
 
   public static requestResetPasswordCode = (data: ForgotPasswordDTO): AxiosPromise => {
-    return axios.post('auth/account/request-reset-password-code', data);
+    const url = AccountService.baseUrl + 'account/request-reset-password-code';
+    return axios.post(url, data);
   };
 }

@@ -1,4 +1,4 @@
 export interface Image {
-  url: string,
-  blob?: Blob,
+  filename: string,
+  content?: Blob,
 }

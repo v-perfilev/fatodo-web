@@ -13,6 +13,8 @@ import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-s
 import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group.model';
 import {TEST_GROUP} from '../../_constants';
+import {PlusIcon} from '../../common/icons/plus-icon';
+import GroupService from '../../../services/group.service';
 
 const initGroups = Array.from(Array(10).keys()).map(() => {
   return TEST_GROUP;
@@ -28,11 +30,25 @@ const GroupPreview: FC<Props> = ({setMenu}: Props) => {
   const {t, i18n} = useTranslation();
   const [groups, setGroups] = useState<Group[]>([]);
 
+  const redirectToAddGroup = (): void => history.push(Routes.GROUPS + GroupRoutes.CREATE);
   const redirectToGroupsSorting = (): void => history.push(Routes.GROUPS + GroupRoutes.SORTING);
+
+  const loadGroups = (): void => {
+    GroupService.getAll()
+      .then((response) => {
+        setGroups(response.data);
+      });
+  };
 
   const menu = (
     <>
       <AdditionalMenuSpacer />
+      <AdditionalMenuButton
+        icon={<PlusIcon />}
+        action={redirectToAddGroup}
+        color="primary"
+        tooltip={t('groups:tooltips.create')}
+      />
       <AdditionalMenuButton
         icon={<ReorderIcon />}
         action={redirectToGroupsSorting}
@@ -43,7 +59,8 @@ const GroupPreview: FC<Props> = ({setMenu}: Props) => {
   );
 
   useEffect(() => {
-    setGroups(initGroups);
+    loadGroups();
+    setMenu(menu, true);
   }, []);
 
   useEffect(() => {

@@ -9,16 +9,16 @@ import {Group} from '../../../models/group.model';
 import {GradientColor} from '../../../shared/utils/color.utils';
 import GroupFormColor from './group-form-color';
 import GroupFormImage from './group-form-image';
-import {Image} from '../../../models/image.model';
 import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
 import GroupFormTitle from './group-form-title';
+import {FormUtils} from '../../../shared/utils/form.utils';
 
 type Props = FormikProps<any> & {
   group?: Group;
   header: string;
   setSaveCallback: (callback: () => () => void) => void;
-  onSuccess: () => void;
+  request: (data: FormData, stopSubmitting: () => void) => void;
 };
 
 const GroupForm: FC<Props> = ({header, setSaveCallback, isValid, isSubmitting, ...props}: Props) => {
@@ -38,7 +38,7 @@ const GroupForm: FC<Props> = ({header, setSaveCallback, isValid, isSubmitting, .
 
   useEffect(() => {
     setSaveCallback(() => saveCallback);
-  }, [isValid, props.values]);
+  }, [isValid]);
 
   return (
     <Container className={classes.root}>
@@ -66,23 +66,23 @@ const GroupForm: FC<Props> = ({header, setSaveCallback, isValid, isSubmitting, .
 };
 
 interface FormValues {
+  id: string;
   title: string;
   color: GradientColor;
-  image: Image;
+  imageFilename?: string;
+  imageContent?: Blob;
 }
 
 export const defaultValues: Readonly<FormValues> = {
+  id: null,
   title: '',
   color: 'yellow',
-  image: null,
+  imageFilename: null,
+  imageContent: null,
 };
 
 const formik = withFormik<Props, FormValues>({
-  mapPropsToValues: ({group}: Props) => (group ? {
-    title: group.title ?? defaultValues.title,
-    color: group.color ?? defaultValues.color,
-    image: group.imageUrl ? {url: group.imageUrl} : defaultValues.image,
-  } : defaultValues),
+  mapPropsToValues: ({group}: Props) => group ?? defaultValues,
 
   validationSchema: Yup.object().shape({
     title: Yup.string().required(() => i18n.t('account:fields.user.required')),
@@ -92,11 +92,9 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-    const {onSuccess} = props;
-    console.log('handle submit');
-    setTimeout(() => {
-      setSubmitting(false);
-    }, 1000);
+    const {request} = props;
+    const data = FormUtils.toFormData(values);
+    request(data, () => setSubmitting(false));
   },
 });
 

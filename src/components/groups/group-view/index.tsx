@@ -13,6 +13,13 @@ import PageHeader from '../../common/layout-page/page-header';
 import {Group} from '../../../models/group.model';
 import {TEST_GROUP} from '../../_constants';
 import PageDivider from '../../common/layout-page/page-divider';
+import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-button';
+import {EditIcon} from '../../common/icons/edit-icon';
+import {Routes} from '../../router';
+import {GroupRoutes} from '../_router';
+import {useHistory, useParams} from 'react-router-dom';
+import {GroupsIcon} from '../../common/icons/groups-icon';
+import GroupService from '../../../services/group.service';
 
 const initGroup = TEST_GROUP;
 
@@ -23,17 +30,46 @@ type Props = ConnectedProps<typeof connector>;
 
 const GroupView: FC<Props> = ({setMenu}: Props) => {
   const classes = groupStyles();
-  const {i18n} = useTranslation();
+  const history = useHistory();
+  const {groupId} = useParams();
+  const {t, i18n} = useTranslation();
   const [group, setGroup] = useState<Group>(null);
+
+  const redirectToEditGroup = (): void =>
+    history.push((Routes.GROUPS + GroupRoutes.EDIT).replace(':groupId', groupId));
+  const redirectToGroups = (): void => history.push(Routes.GROUPS);
+
+  const loadGroup = (): void => {
+    GroupService.get(groupId)
+      .then((response) => {
+        setGroup(response.data);
+      })
+      .catch(() => {
+        redirectToGroups();
+      });
+  };
 
   const menu = (
     <>
       <AdditionalMenuSpacer />
+      <AdditionalMenuButton
+        icon={<EditIcon />}
+        action={redirectToEditGroup}
+        color="primary"
+        tooltip={t('groups:tooltips.edit')}
+      />
+      <AdditionalMenuButton
+        icon={<GroupsIcon />}
+        action={redirectToGroups}
+        color="secondary"
+        tooltip={t('groups:tooltips.list')}
+      />
     </>
   );
 
   useEffect(() => {
-    setGroup(initGroup);
+    loadGroup();
+    setMenu(menu, true);
   }, []);
 
   useEffect(() => {

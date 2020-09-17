@@ -14,7 +14,8 @@ const GroupFormImage: FC<Props> = ({values, setFieldValue}: Props) => {
   return (
     <ImageUploader
       label={t('groups:fields.image.label')}
-      name="image"
+      filenameName="imageFilename"
+      contentName="imageContent"
       values={values}
       setFieldValue={setFieldValue}
       uploadLabel={t('groups:buttons.uploadImage')}

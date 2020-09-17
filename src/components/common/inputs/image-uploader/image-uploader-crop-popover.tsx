@@ -20,22 +20,29 @@ const defaultInitialCrop = {
 
 const compressionOptions = {
   maxSizeMB: 2,
-  maxWidthOrHeight: 500,
+  maxWidthOrHeight: 1000,
 };
 
-const ImageUploaderPopover: FC<Props> = ({image, anchorEl, handleClose, cropOptions}: Props) => {
+const minSize = 100;
+
+const ImageUploaderCropPopover: FC<Props> = ({image, anchorEl, handleClose, cropOptions}: Props) => {
   const classes = imageUploaderPopoverStyles();
   const imageRef = useRef();
   const [crop, setCrop] = useState({...defaultInitialCrop, ...cropOptions});
   const [croppedBlob, setCroppedBlob] = useState<Blob>(null);
+  const [toSmall, setToSmall] = useState(false);
 
   const isOpen = Boolean(anchorEl);
 
   const onClose = (): void => {
-    imageCompression(croppedBlob, compressionOptions).then((compressedBlob: Blob) => {
-      const image = {url: URL.createObjectURL(compressedBlob), compressedBlob} as Image;
-      handleClose(image);
-    });
+    if (toSmall) {
+      handleClose(null);
+    } else {
+      imageCompression(croppedBlob, compressionOptions).then((compressedBlob: Blob) => {
+        const image = {filename: URL.createObjectURL(compressedBlob), content: compressedBlob} as Image;
+        handleClose(image);
+      });
+    }
   };
 
   const onImageLoad = (image): void => {
@@ -43,6 +50,7 @@ const ImageUploaderPopover: FC<Props> = ({image, anchorEl, handleClose, cropOpti
   };
 
   const onCropChange = (crop): void => {
+    setToSmall(crop.width < minSize || crop.height < minSize);
     setCrop(crop);
   };
 
@@ -100,9 +108,12 @@ const ImageUploaderPopover: FC<Props> = ({image, anchorEl, handleClose, cropOpti
           onChange={onCropChange}
           onComplete={onCropComplete}
         />
+        {toSmall && (
+          <Box>To small</Box>
+        )}
       </Box>
     </Popover>
   );
 };
 
-export default ImageUploaderPopover;
+export default ImageUploaderCropPopover;
