@@ -26,14 +26,15 @@ export class GroupFormUtils {
   } : defaultGroupFormValues;
 
   public static mapValuesToFormData = (values: GroupFormValues, group: Group): FormData => {
-    const formItem = {
-      id: group.id ?? null,
+    const form = {
+      id: group ? group.id : null,
       title: values.title,
       color: values.color,
       imageFilename: values.imageFilename,
       imageContent: values.imageContent,
     };
-    return FormUtils.toFormData(formItem);
+    console.log(FormUtils.toFormData(form));
+    return FormUtils.toFormData(form);
   };
 
 }

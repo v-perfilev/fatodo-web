@@ -12,7 +12,7 @@ export class ImageUtils {
   private static handleUrl = (url: string, isThumbnail: boolean): string =>
     ImageUtils.isUrl(url)
       ? url
-      : IMAGE_API_URL + url + isThumbnail && ImageUtils.thumbnailPostfix;
+      : IMAGE_API_URL + url + (isThumbnail ? ImageUtils.thumbnailPostfix : '');
 
   private static isUrl = (url: string): boolean => {
     try {

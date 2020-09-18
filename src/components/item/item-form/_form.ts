@@ -40,7 +40,7 @@ export class ItemFormUtils {
 
   public static mapValuesToFormData = (values: ItemFormValues, item: Item): FormData => {
     const formItem = {
-      id: item.id ?? null,
+      id: item ? item.id : null,
       title: values.title,
       type: values.type,
       priority: values.priority,

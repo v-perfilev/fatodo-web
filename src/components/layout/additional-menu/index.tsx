@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, memo, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Box, Drawer, Fade, Theme, useMediaQuery} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
 import Logo from '../../common/logo/logo';
@@ -19,14 +19,17 @@ const AdditionalMenu: FC<Props> = ({menu, reload}: Props) => {
   const classes = additionalMenuStyles();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
   const [menuForRender, setMenuForRender] = useState(null);
+  const [timer, setTimer] = useState(null);
 
   useEffect(() => {
+    window.clearTimeout(timer);
     setMenuForRender(menu);
   }, [menu]);
 
   useEffect(() => {
     setMenuForRender(null);
-    setTimeout(() => setMenuForRender(menu), 300);
+    const newTimer = window.setTimeout(() => setMenuForRender(menu), 300);
+    setTimer(newTimer);
   }, [reload]);
 
   const drawerClassNames = csx(classes.drawer, isBigDevice ? classes.drawerLeft : classes.drawerBottom);
@@ -51,4 +54,4 @@ const AdditionalMenu: FC<Props> = ({menu, reload}: Props) => {
   );
 };
 
-export default compose(connector, memo)(AdditionalMenu);
+export default compose(connector)(AdditionalMenu);

@@ -20,23 +20,18 @@ type Props = FormikProps<any> & {
   request: (data: FormData, stopSubmitting: () => void) => void;
 };
 
-const GroupForm: FC<Props> = ({header, setSaveCallback, isValid, isSubmitting, ...props}: Props) => {
+const GroupForm: FC<Props> = (props: Props) => {
   const classes = groupFormStyles();
-  const color = props.values.color;
+  const {header, setSaveCallback, values, isValid, submitForm, isSubmitting} = props;
+  const color = values.color;
   const buttonRef = useRef<HTMLButtonElement>();
 
-  const saveCallback = (): void => {
-    if (isValid) {
-      buttonRef.current.click();
-    } else {
-      props.submitForm().catch(() => {
-        // skip
-      });
-    }
-  };
-
   useEffect(() => {
-    setSaveCallback(() => saveCallback);
+    if (isValid) {
+      setSaveCallback(() => () => buttonRef.current.click());
+    } else {
+      setSaveCallback(() => () => submitForm());
+    }
   }, [isValid]);
 
   return (
