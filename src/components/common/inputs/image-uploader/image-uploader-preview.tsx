@@ -13,7 +13,7 @@ const ImageUploaderPreview: FC<Props> = ({image}: Props) => {
 
   return image && (
     <Box className={classes.image}>
-      <RoundPic url={image.filename} size="big" />
+      <RoundPic url={image.filename} size="lg" />
     </Box>
   );
 };

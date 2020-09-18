@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {COLORS, GRADIENT_COLORS} from '../../../shared/theme';
+import {COLORS} from '../../../shared/theme';
 import {CARD_HEADER_HEIGHT} from '../_constants';
 
 export const groupSortingCardStyles = makeStyles(() => ({
@@ -27,6 +27,14 @@ export const groupSortingCardHeaderStyles = makeStyles((theme: Theme) => ({
         width: '1.2em',
         height: '1.2em',
       },
+    },
+  },
+  title: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    '& >  *': {
+      marginRight: theme.spacing(1),
     },
   },
   caption: {

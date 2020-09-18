@@ -23,6 +23,14 @@ export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
       alignSelf: 'center',
     },
   },
+  title: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    '& >  *': {
+      marginRight: theme.spacing(1),
+    },
+  },
   caption: {
     fontSize: '1rem',
     color: COLORS.WHITE,

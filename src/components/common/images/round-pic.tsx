@@ -9,19 +9,24 @@ import FallbackPic from './fallback-pic';
 type Props = HTMLAttributes<any> & {
   url: string;
   alt?: string;
-  size?: 'small' | 'normal' | 'big';
+  noBorder?: boolean;
+  whiteBorder?: boolean;
+  size?: 'xs' | 'sm' | 'md' | 'lg';
 };
 
-const RoundPic: FC<Props> = ({url, alt, size, className}: Props) => {
+const RoundPic: FC<Props> = ({url, alt, noBorder, whiteBorder, size, className}: Props) => {
   const classes = roundPicStyles();
   const classNames = csx(
     classes.root,
-    {[classes.small]: size === 'small'},
-    {[classes.big]: size === 'big'},
+    {[classes.xs]: size === 'xs'},
+    {[classes.md]: size === 'md'},
+    {[classes.lg]: size === 'lg'},
+    {[classes.noBorder]: noBorder},
+    {[classes.whiteBorder]: whiteBorder},
     className,
   );
 
-  const src = size === 'big'
+  const src = size === 'lg'
     ? ImageUtils.getImage(url)
     : ImageUtils.getThumbnail(url);
 

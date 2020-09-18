@@ -1,5 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
+import {COLORS} from '../../../shared/theme';
 
 export const roundPicStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -7,19 +8,29 @@ export const roundPicStyles = makeStyles((theme: Theme) => ({
     height: 35,
     border: 'solid',
     borderWidth: 1,
-    borderColor: theme.palette.primary.main,
+    borderColor: COLORS.PRIMARY,
     '& img': {
       height: '100%',
     },
   },
-  small: {
+  xs: {
     width: 20,
     height: 20,
   },
-  big: {
+  md: {
+    width: 40,
+    height: 40,
+  },
+  lg: {
     width: 100,
     height: 100,
-    borderWidth: 3,
+    borderWidth: 2,
+  },
+  noBorder: {
+    borderWidth: 0,
+  },
+  whiteBorder: {
+    borderColor: COLORS.WHITE,
   },
 }));
 
