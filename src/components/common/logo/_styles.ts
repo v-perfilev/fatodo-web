@@ -5,9 +5,9 @@ export const logoStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-  },
-  logoImage: {
-    height: 50,
+    '& img': {
+      height: 50,
+    }
   },
 }));
 
@@ -15,10 +15,9 @@ export const logoWithTextStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-  },
-  logoImage: {
-    height: 50,
-    marginRight: theme.spacing(1),
+    '& img': {
+      height: 50,
+    }
   },
   logoText: {
     fontWeight: 500,

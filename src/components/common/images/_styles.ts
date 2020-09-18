@@ -8,6 +8,9 @@ export const roundPicStyles = makeStyles((theme: Theme) => ({
     border: 'solid',
     borderWidth: 1,
     borderColor: theme.palette.primary.main,
+    '& img': {
+      height: '100%',
+    },
   },
   small: {
     width: 20,
@@ -19,3 +22,4 @@ export const roundPicStyles = makeStyles((theme: Theme) => ({
     borderWidth: 3,
   },
 }));
+

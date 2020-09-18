@@ -5,6 +5,7 @@ import {Routes} from '../../router';
 import Link from '../inputs/link';
 import {logoWithTextStyles} from './_styles';
 import csx from 'classnames';
+import LogoPic from '../images/logo-pic';
 
 type Props = HTMLAttributes<any>;
 
@@ -14,7 +15,7 @@ const LogoWithText: FC<Props> = ({className}: Props) => {
 
   return (
     <Link to={Routes.ROOT} className={classNames}>
-      <img src="/images/logo.png" className={classes.logoImage} />
+      <LogoPic />
       <Typography className={classes.logoText}>Fatodo</Typography>
     </Link>
   );
