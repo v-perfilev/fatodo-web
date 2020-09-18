@@ -1,10 +1,10 @@
 import {FormUtils} from '../../../shared/utils/form.utils';
-import {GradientColor} from '../../../shared/utils/color.utils';
+import {ColorScheme} from '../../../shared/utils/color-scheme.utils';
 import {Group} from '../../../models/group.model';
 
 export interface GroupFormValues {
   title: string;
-  color: GradientColor;
+  color: ColorScheme;
   imageFilename?: string;
   imageContent?: Blob;
 }

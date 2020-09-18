@@ -3,15 +3,20 @@ import {createMuiTheme} from '@material-ui/core';
 export enum COLORS {
   PRIMARY = '#21b0a7',
   SECONDARY = '#ffba16',
-  BLUE = '#21b0a7',
-  GREEN = '#66bb6a',
-  YELLOW = '#ffba16',
-  RED = '#ff5722',
+  INFO = '#21b0a7',
+  SUCCESS = '#66bb6a',
+  WARNING = '#ffba16',
+  ERROR = '#ff5722',
   WHITE = '#ffffff',
   LIGHT_GREY = '#e0e0e0',
   GREY = '#aaaaaa',
   DARK_GREY = '#888888',
   BLACK = '#222222',
+  YELLOW = '#ffba16',
+  TURQUOISE = '#21af9c',
+  PURPLE = '#9f15fe',
+  GREEN = '#0fa21a',
+  BLUE = '#0052f9',
 }
 
 export enum GRADIENT_COLORS {
@@ -34,19 +39,19 @@ export const theme = createMuiTheme({
       contrastText: COLORS.WHITE,
     },
     info: {
-      main: COLORS.BLUE,
+      main: COLORS.INFO,
       contrastText: COLORS.WHITE,
     },
     success: {
-      main: COLORS.GREEN,
+      main: COLORS.SUCCESS,
       contrastText: COLORS.WHITE,
     },
     warning: {
-      main: COLORS.YELLOW,
+      main: COLORS.WARNING,
       contrastText: COLORS.WHITE,
     },
     error: {
-      main: COLORS.RED,
+      main: COLORS.ERROR,
       contrastText: COLORS.WHITE,
     },
     text: {

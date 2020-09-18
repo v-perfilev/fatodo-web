@@ -1,11 +1,11 @@
-import {GradientColor} from '../shared/utils/color.utils';
+import {ColorScheme} from '../shared/utils/color-scheme.utils';
 import {User} from './user.model';
 import {Item} from './item.model';
 
 export interface Group {
   id: string;
   title: string;
-  color: GradientColor;
+  color: ColorScheme;
   imageFilename: string;
   items?: Item[];
   users?: User[];

@@ -3,7 +3,7 @@ import {FC} from 'react';
 import {Box, CardHeader, Typography} from '@material-ui/core';
 import {groupSortingCardHeaderStyles} from './_styles';
 import {ArrowAllIcon} from '../../common/icons/arrow-all-icon';
-import {ColorUtils} from '../../../shared/utils/color.utils';
+import {ColorSchemeUtils} from '../../../shared/utils/color-scheme.utils';
 import {Group} from '../../../models/group.model';
 import csx from 'classnames';
 import RoundPic from '../../common/images/round-pic';
@@ -15,7 +15,7 @@ type Props = {
 
 const GroupSortingCardHeader: FC<Props> = ({group, bind}: Props) => {
   const classes = groupSortingCardHeaderStyles();
-  const colorClassName = ColorUtils.getGradientColorClass(group.color);
+  const colorClassName = ColorSchemeUtils.getBackgroundClass(group.color);
   const classNames = csx(classes.root, colorClassName);
 
   return (

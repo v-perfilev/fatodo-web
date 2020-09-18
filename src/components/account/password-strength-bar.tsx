@@ -24,7 +24,7 @@ const PasswordStrengthBar: FC<Props> = ({password}: Props) => {
 
   const subItems = [];
   for (let i = 0; i < counter; i++) {
-    subItems.push(<Box className={classes.green} key={i} />);
+    subItems.push(<Box className={classes.bgGreen} key={i} />);
   }
   for (let i = counter; i < rulesCount; i++) {
     subItems.push(<Box className={classes.red} key={i} />);

@@ -16,7 +16,7 @@ export const priorityStyles = makeStyles((theme: Theme) => ({
         color: COLORS.PRIMARY,
       },
       '&.high': {
-        color: COLORS.RED,
+        color: COLORS.ERROR,
       },
     },
   },

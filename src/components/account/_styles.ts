@@ -46,7 +46,7 @@ export const passwordStrengthBarStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  green: {
+  bgGreen: {
     backgroundColor: theme.palette.primary.main,
   },
   red: {

@@ -6,7 +6,7 @@ import {groupCardHeaderStyles} from './_styles';
 import Link from '../../common/inputs/link';
 import {Routes} from '../../router';
 import {Group} from '../../../models/group.model';
-import {ColorUtils} from '../../../shared/utils/color.utils';
+import {ColorSchemeUtils} from '../../../shared/utils/color-scheme.utils';
 import csx from 'classnames';
 import RoundPic from '../../common/images/round-pic';
 
@@ -16,7 +16,7 @@ type Props = {
 
 const GroupPreviewCardHeader: FC<Props> = ({group}: Props) => {
   const classes = groupCardHeaderStyles();
-  const colorClassName = ColorUtils.getGradientColorClass(group.color);
+  const colorClassName = ColorSchemeUtils.getBackgroundClass(group.color);
   const classNames = csx(classes.root, colorClassName);
 
   return (
