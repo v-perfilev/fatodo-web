@@ -1,20 +1,16 @@
-import {Reminder} from '../../../../models/reminder.model';
 import React, {FC} from 'react';
 import {IconButton} from '@material-ui/core';
 import {CloseIcon} from '../../icons/close-icon';
 
 type Props = {
-  reminders: Reminder[];
   clearReminders: (event) => void;
 };
 
-const RemindersInputButtons: FC<Props> = ({reminders, clearReminders}: Props) => {
+const RemindersInputButtons: FC<Props> = ({clearReminders}: Props) => {
   return (
-    reminders.length > 0 && (
-      <IconButton size="small" onClick={clearReminders}>
-        <CloseIcon />
-      </IconButton>
-    )
+    <IconButton size="small" onClick={clearReminders}>
+      <CloseIcon />
+    </IconButton>
   );
 };
 

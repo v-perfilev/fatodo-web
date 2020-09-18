@@ -1,5 +1,5 @@
 import {Reminder} from '../../../../models/reminder.model';
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
@@ -17,6 +17,7 @@ type Props = {
 
 const RemindersInput: FC<Props> = ({label, name, values, setFieldValue}: Props) => {
   const classes = remindersInputStyles();
+  const ref = useRef<any>();
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
   const [reminders, setReminders] = useState<Reminder[]>([]);
 
@@ -28,7 +29,9 @@ const RemindersInput: FC<Props> = ({label, name, values, setFieldValue}: Props) 
     setFieldValue(name, reminders);
   }, [reminders]);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>): void => setAnchorEl(event.currentTarget);
+  const handleClick = (e: React.MouseEvent<HTMLElement>): void => {
+    setAnchorEl(e.currentTarget);
+  };
 
   const handleClose = (reminder: Reminder): void => {
     if (reminder) {
@@ -51,6 +54,19 @@ const RemindersInput: FC<Props> = ({label, name, values, setFieldValue}: Props) 
     setReminders([]);
   };
 
+  const inputLabelProps = reminders.length > 0 ? {} : {
+    shrink: false,
+  };
+
+  const inputProps = reminders.length > 0 ? {
+    readOnly: true,
+    startAdornment: <RemindersInputChips {...{reminders, removeReminder}} />,
+    endAdornment: <RemindersInputButtons {...{clearReminders}} />,
+  } : {
+    readOnly: true,
+  };
+
+
   return (
     <Box className={classes.root}>
       <Field
@@ -58,14 +74,10 @@ const RemindersInput: FC<Props> = ({label, name, values, setFieldValue}: Props) 
         type="text"
         label={label}
         name={name}
-        InputProps={{
-          readOnly: true,
-          value: '',
-          startAdornment: <RemindersInputChips {...{reminders, removeReminder}} />,
-          endAdornment: <RemindersInputButtons {...{reminders, clearReminders}} />,
-          onClick: handleClick,
-        }}
+        InputLabelProps={inputLabelProps}
+        InputProps={inputProps}
         fullWidth
+        onClick={handleClick}
       />
       <RemindersInputPopover {...{anchorEl, handleClose}} />
     </Box>
