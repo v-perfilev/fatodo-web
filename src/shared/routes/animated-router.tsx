@@ -12,11 +12,10 @@ type Props = {
 
 const AnimatedRouter: FC<Props> = ({children}: Props) => {
   const classes = animatedRouterStyles();
-
   const resize = useResize();
+  const location = useLocation();
   const ref = useRef(null);
   const [minHeight, setMinHeight] = useState(0);
-  const location = useLocation();
 
   const transitions = useTransition(location, (location) => location.pathname, {
     from: {opacity: 0},
@@ -24,19 +23,17 @@ const AnimatedRouter: FC<Props> = ({children}: Props) => {
     leave: {opacity: 0},
   });
 
-  useEffect(() => {
-    if (ref.current && ref.current.clientHeight) {
-      setMinHeight(ref.current.clientHeight);
-    }
-  }, [ref.current && ref.current.clientHeight]);
+  const setHeightAfterTimeout = (): void => {
+    setTimeout(() => {
+      if (ref.current && ref.current.clientHeight) {
+        setMinHeight(ref.current.clientHeight);
+      }
+    }, 500);
+  };
 
   useEffect(() => {
-    if (ref.current && ref.current.clientHeight) {
-      setTimeout(() => {
-        setMinHeight(ref.current.clientHeight);
-      }, 500);
-    }
-  }, [resize]);
+    setHeightAfterTimeout();
+  }, [ref, resize]);
 
   const heightStyle = {minHeight};
 
