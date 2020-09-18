@@ -6,6 +6,8 @@ import {groupCardHeaderStyles} from './_styles';
 import Link from '../../common/inputs/link';
 import {Routes} from '../../router';
 import {Group} from '../../../models/group.model';
+import {ColorUtils} from '../../../shared/utils/color.utils';
+import csx from 'classnames';
 
 type Props = {
   group: Group;
@@ -13,6 +15,9 @@ type Props = {
 
 const GroupPreviewCardHeader: FC<Props> = ({group}: Props) => {
   const classes = groupCardHeaderStyles();
+  const colorClassName = ColorUtils.getGradientColorClass(group.color);
+  const classNames = csx(classes.root, colorClassName);
+
   return (
     <CardHeader
       title={
@@ -27,7 +32,7 @@ const GroupPreviewCardHeader: FC<Props> = ({group}: Props) => {
           <DotsVerticalIcon />
         </IconButton>
       }
-      className={classes.header}
+      className={classNames}
     />
   );
 };

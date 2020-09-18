@@ -15,7 +15,7 @@ const GroupSortingCard: FC<Props> = ({group, bind}: Props) => {
 
   return (
     <Card square elevation={3} className={classes.card}>
-      <GroupSortingCardHeader title={group.title} bind={bind} />
+      <GroupSortingCardHeader group={group} bind={bind} />
     </Card>
   );
 };

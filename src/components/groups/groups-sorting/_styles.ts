@@ -12,12 +12,11 @@ export const groupSortingCardStyles = makeStyles(() => ({
 }));
 
 export const groupSortingCardHeaderStyles = makeStyles((theme: Theme) => ({
-  header: {
+  root: {
     height: CARD_HEADER_HEIGHT,
     flexShrink: 0,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
-    background: GRADIENT_COLORS.YELLOW,
     '& .MuiCardHeader-action': {
       marginTop: 6,
       marginRight: theme.spacing(0),

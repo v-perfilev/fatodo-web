@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {COLORS, GRADIENT_COLORS} from '../../../shared/theme';
+import {COLORS} from '../../../shared/theme';
 import {CARD_HEADER_HEIGHT, ITEMS_IN_GROUP_CARD} from '../_constants';
 
 export const groupCardStyles = makeStyles(() => ({
@@ -12,12 +12,11 @@ export const groupCardStyles = makeStyles(() => ({
 }));
 
 export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
-  header: {
+  root: {
     height: CARD_HEADER_HEIGHT,
     flexShrink: 0,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
-    background: GRADIENT_COLORS.YELLOW,
     '& .MuiCardHeader-action': {
       marginTop: 0,
       marginRight: theme.spacing(-1.5),
