@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, ReactNode, useEffect, useRef, useState} from 'react';
+import {FC, ReactNode, useEffect, useState} from 'react';
 import {Switch, useLocation} from 'react-router-dom';
 import {animated, useTransition} from 'react-spring';
 import {Box} from '@material-ui/core';
@@ -14,8 +14,8 @@ const AnimatedRouter: FC<Props> = ({children}: Props) => {
   const classes = animatedRouterStyles();
   const resize = useResize();
   const location = useLocation();
-  const ref = useRef(null);
-  const [minHeight, setMinHeight] = useState(0);
+  const [ref, setRef] = useState<HTMLDivElement>();
+  const [minHeight, setMinHeight] = useState<number | string>('100%');
 
   const transitions = useTransition(location, (location) => location.pathname, {
     from: {opacity: 0},
@@ -25,8 +25,8 @@ const AnimatedRouter: FC<Props> = ({children}: Props) => {
 
   const setHeightAfterTimeout = (): void => {
     setTimeout(() => {
-      if (ref.current && ref.current.clientHeight) {
-        setMinHeight(ref.current.clientHeight);
+      if (ref) {
+        setMinHeight(ref.clientHeight);
       }
     }, 500);
   };
@@ -40,7 +40,7 @@ const AnimatedRouter: FC<Props> = ({children}: Props) => {
   return (
     <Box className={classes.root} style={heightStyle}>
       {transitions.map(({item, props, key}) => (
-        <animated.div className={classes.animated} key={key} style={props} ref={ref}>
+        <animated.div className={classes.animated} key={key} style={props} ref={setRef}>
           <Switch location={item}>{children}</Switch>
         </animated.div>
       ))}

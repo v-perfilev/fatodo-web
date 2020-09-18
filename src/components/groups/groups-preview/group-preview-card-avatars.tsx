@@ -13,12 +13,8 @@ type Props = {
 const GroupPreviewCardAvatars: FC<Props> = ({users}: Props) => {
   const classes = groupCardAvatarsStyles();
 
-  console.log(users.length);
-
   const usersToShow = users.slice(0, AVATARS_IN_GROUP_CARD);
   const moreThanLimit = users.length > AVATARS_IN_GROUP_CARD ? users.length - AVATARS_IN_GROUP_CARD : 0;
-
-  console.log(users.length);
 
   return (
     <Box className={classes.avatars}>

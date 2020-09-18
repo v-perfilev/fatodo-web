@@ -47,22 +47,24 @@ interface StyleArgs {
   immediate?: boolean;
 }
 
-export type SortingProps = {
-  sortingRef: RefObject<any>;
-  setSortingItems: (items: any[]) => void;
-  sortingOrder: MutableRefObject<number[]>;
-  sortingSprings: CSSProperties[];
-  sortingBind: (...any) => void;
-  sortingHeight: number;
+export type SortProps = {
+  setSortItems: (items: any[]) => void;
+  setSortContainerRef: (element: HTMLDivElement) => void;
+  setSortItemRef: (element: HTMLDivElement) => void;
+  sortContainerHeight: string | number;
+  sortOrder: MutableRefObject<number[]>;
+  sortSprings: CSSProperties[];
+  sortBind: (...any) => void;
 };
 
-const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props): ReactElement => {
+const withSortableGrid = (Component: ComponentType<SortProps>): FC => (props): ReactElement => {
+  const resize = useResize();
   const order = useRef(null);
-  const ref = useRef(null);
+  const [containerRef, setContainerRef] = useState<HTMLDivElement>();
+  const [itemRef, setItemRef] = useState<HTMLDivElement>();
   const [items, setItems] = useState([]);
   const [sizes, setSizes] = useState<SortingSizes>(defaultSortingSizes);
-  const [height, setHeight] = useState(0);
-  const resize = useResize();
+  const [height, setHeight] = useState<string | number>(0);
 
   const colCount = useMemo(() => Math.round(sizes.container.width / sizes.item.width), [sizes]);
   const rowCount = useMemo(() => Math.ceil(items.length / colCount), [sizes]);
@@ -101,15 +103,13 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
   });
 
   useEffect(() => {
-    const containerRef = ref.current;
-    const itemRef = ref.current && ref.current.childNodes ? ref.current.childNodes[0] : null;
-    if (containerRef && itemRef) {
+    if (containerRef && itemRef && itemRef) {
       setSizes({
         container: {width: containerRef.clientWidth, height: containerRef.clientHeight},
         item: {width: itemRef.clientWidth, height: itemRef.clientHeight},
       });
     }
-  }, [ref, resize]);
+  }, [containerRef, itemRef, resize]);
 
   useEffect(() => {
     order.current = items.map((_, index) => index);
@@ -118,12 +118,13 @@ const withSortableGrid = (Component: ComponentType<SortingProps>): FC => (props)
   }, [items, sizes]);
 
   const sortingProps = {
-    sortingRef: ref,
-    setSortingItems: setItems,
-    sortingOrder: order,
-    sortingSprings: springs,
-    sortingBind: bind,
-    sortingHeight: height,
+    setSortItems: setItems,
+    setSortContainerRef: setContainerRef,
+    setSortItemRef: setItemRef,
+    sortContainerHeight: height,
+    sortOrder: order,
+    sortSprings: springs,
+    sortBind: bind,
   };
 
   return <Component {...sortingProps} {...props} />;

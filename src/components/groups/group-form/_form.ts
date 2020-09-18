@@ -33,7 +33,6 @@ export class GroupFormUtils {
       imageFilename: values.imageFilename,
       imageContent: values.imageContent,
     };
-    console.log(FormUtils.toFormData(form));
     return FormUtils.toFormData(form);
   };
 

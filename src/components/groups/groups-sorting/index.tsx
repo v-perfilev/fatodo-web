@@ -13,7 +13,6 @@ import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group.model';
 import {TEST_GROUP} from '../../_constants';
 import GroupService from '../../../services/group.service';
-import {Simulate} from 'react-dom/test-utils';
 
 
 const initGroups = Array.from(Array(10).keys()).map(() => {
@@ -69,7 +68,9 @@ const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return <GroupsSortingGridContainer groups={groups} />;
+  return groups && (
+    <GroupsSortingGridContainer groups={groups} />
+  );
 };
 
 export default compose(connector)(GroupsSorting);
