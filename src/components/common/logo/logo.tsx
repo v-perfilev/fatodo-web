@@ -12,7 +12,7 @@ const Logo: FC<Props> = ({className}: Props) => {
   const classNames = csx(classes.root, className);
 
   return (
-    <Link to={Routes.ROOT} className={classNames} underline="none">
+    <Link to={Routes.ROOT} className={classNames}>
       <img src="/images/logo.png" className={classes.logoImage} />
     </Link>
   );
