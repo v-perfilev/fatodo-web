@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {COLORS} from '../../../shared/theme';
+import {COLORS} from '../../../shared/theme/theme';
 import {HEADER_HEIGHT} from './_constants';
 
 export const headerStyles = makeStyles((theme: Theme) => ({

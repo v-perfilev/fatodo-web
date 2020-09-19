@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {COLORS} from '../../../shared/theme';
+import {COLORS} from '../../../shared/theme/theme';
 
 export const priorityStyles = makeStyles((theme: Theme) => ({
   root: {

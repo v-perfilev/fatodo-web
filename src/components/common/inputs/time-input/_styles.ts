@@ -1,5 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
-import {COLORS} from '../../../../shared/theme';
+import {COLORS} from '../../../../shared/theme/theme';
 
 export const timeInputStyles = makeStyles(() => ({
   textField: {

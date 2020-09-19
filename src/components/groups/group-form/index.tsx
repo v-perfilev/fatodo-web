@@ -12,7 +12,7 @@ import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
 import GroupFormTitle from './group-form-title';
 import {GroupFormUtils, GroupFormValues} from './_form';
-import {testTheme} from '../../../shared/theme';
+import {testTheme} from '../../../shared/theme/theme';
 
 type Props = FormikProps<any> & {
   group?: Group;

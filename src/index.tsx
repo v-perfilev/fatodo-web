@@ -8,7 +8,7 @@ import setupAxiosInterceptors from './shared/axios';
 import store from './store/store';
 import {Provider} from 'react-redux';
 import {CssBaseline, ThemeProvider} from '@material-ui/core';
-import {theme} from './shared/theme';
+import {ThemeFactory} from './shared/theme/theme';
 import {clearAuth} from './store/actions/auth.actions';
 import {enqueueSnackbar} from './store/actions/notification.actions';
 import {initLanguages} from './shared/i18n';
@@ -31,12 +31,14 @@ setupAxiosInterceptors({
   enqueueSnackbar: axiosActions.enqueueSnackbar,
 });
 
+const defaultTheme = ThemeFactory.getDefaultTheme();
+
 const Root: FC = () => {
   const {i18n} = useTranslation();
 
   return (
     <Provider store={store}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={defaultTheme}>
         <MuiPickersUtilsProvider utils={MomentUtils} locale={i18n.language}>
           <NotificationProvider>
             <Router>

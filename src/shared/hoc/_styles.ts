@@ -1,5 +1,5 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {COLORS} from '../theme';
+import {COLORS} from '../theme/theme';
 
 export const centeringStyles = makeStyles(() => ({
   root: {
