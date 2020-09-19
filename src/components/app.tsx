@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useState} from 'react';
 
 import Router from './router';
 import withLoader from '../shared/hoc/with-loader';
@@ -17,15 +17,18 @@ const connector = connect(null, mapDispatchToProps);
 type Props = ConnectedProps<typeof connector>;
 
 const App: FC<Props> = ({login, requestAccountData}: Props) => {
+  const [ready, setReady] = useState(false);
+
   useEffect(() => {
     const token = SecurityUtils.getAuthToken();
     if (token) {
       login();
       requestAccountData();
     }
+    setReady(true);
   }, []);
 
-  return <Router />;
+  return ready && <Router />;
 };
 
 export default compose(hot(module), withDevelopmentRibbon, withLoader, withWrapper, connector)(App);

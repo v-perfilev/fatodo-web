@@ -28,12 +28,16 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, histor
 
   const redirectToLogin = (): void => history.push(Routes.LOGIN);
   const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
+  const redirectAndLogout = (): void => {
+    history.push(Routes.ROOT);
+    logout();
+  };
 
   return (
     <Box className={classes.root}>
       <LanguageSelect />
       {isAuthenticated && (
-        <Button color="primary" startIcon={<LogoutIcon />} onClick={logout}>
+        <Button color="primary" startIcon={<LogoutIcon />} onClick={redirectAndLogout}>
           {t('header.logout')}
         </Button>
       )}

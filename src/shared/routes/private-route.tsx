@@ -20,7 +20,7 @@ const PrivateRoute: FC<Props> = ({authState, ...props}: Props) => {
     history.push(Routes.UNAUTHORIZED);
   }
 
-  return <Route {...props} />;
+  return isAuthenticated && <Route {...props} />;
 };
 
 export default compose<RouteProps>(connector)(PrivateRoute);

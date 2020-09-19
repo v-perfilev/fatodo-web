@@ -26,11 +26,15 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}
 
   const redirectToLogin = (): void => history.push(Routes.LOGIN);
   const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
+  const redirectAndLogout = (): void => {
+    history.push(Routes.ROOT);
+    logout();
+  };
 
   return (
     <List component="nav">
       {isAuthenticated && (
-        <ListItem button onClick={logout}>
+        <ListItem button onClick={redirectAndLogout}>
           <ListItemIcon>
             <LogoutIcon className={classes.icon} />
           </ListItemIcon>
