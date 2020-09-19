@@ -4,7 +4,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
-import {Container} from '@material-ui/core';
+import {Container, ThemeProvider} from '@material-ui/core';
 import GroupViewItems from './group-view-items';
 import GroupViewUsers from './group-view-users';
 import GroupViewMessages from './group-view-messages';
@@ -22,6 +22,7 @@ import {GroupsIcon} from '../../common/icons/groups-icon';
 import GroupService from '../../../services/group.service';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import {ItemRoutes} from '../../item/_router';
+import {ThemeFactory} from '../../../shared/theme/theme';
 
 const initGroup = TEST_GROUP;
 
@@ -86,15 +87,19 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
+  const theme = ThemeFactory.getTheme(group.color);
+
   return (
     group && (
-      <Container className={classes.root}>
-        <PageHeader title={group.title} color={group.color} />
-        <PageDivider color={group.color} height={5} />
-        <GroupViewUsers users={group.users} />
-        <GroupViewItems items={group.items ?? []} color={group.color} />
-        <GroupViewMessages group={group} />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container className={classes.root}>
+          <PageHeader title={group.title} />
+          <PageDivider height={5} />
+          <GroupViewUsers users={group.users} />
+          <GroupViewItems items={group.items ?? []} />
+          <GroupViewMessages group={group} />
+        </Container>
+      </ThemeProvider>
     )
   );
 };

@@ -43,8 +43,8 @@ const ItemForm: FC<Props> = (props: Props) => {
 
   return (
     <Container className={classes.root}>
-      <PageHeader title={header} color={group.color} />
-      <PageDivider color={color} height={5} />
+      <PageHeader title={header} />
+      <PageDivider height={5} />
       <Form className={classes.form}>
         <Grid container spacing={3}>
           <Grid item xs={12}>

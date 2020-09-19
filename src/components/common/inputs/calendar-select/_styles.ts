@@ -1,5 +1,4 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {COLORS} from '../../../../shared/theme/theme';
 
 export const calendarSelectStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -14,7 +13,7 @@ export const calendarSelectStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     fontWeight: 500,
-    color: COLORS.DARK_GREY,
+    color: theme.palette.grey['500'],
   },
   week: {
     display: 'flex',
@@ -40,11 +39,11 @@ export const calendarSelectStyles = makeStyles((theme: Theme) => ({
     margin: 1,
   },
   selectedDate: {
-    backgroundColor: COLORS.PRIMARY,
-    color: COLORS.WHITE,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
     '&:hover': {
-      backgroundColor: COLORS.PRIMARY,
-      color: COLORS.WHITE,
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.primary.contrastText,
     },
   },
 }));

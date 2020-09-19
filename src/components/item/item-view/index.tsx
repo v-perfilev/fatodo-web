@@ -4,7 +4,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
-import {Container} from '@material-ui/core';
+import {Container, ThemeProvider} from '@material-ui/core';
 import {itemViewStyles} from './_styles';
 import {Item} from '../../../models/item.model';
 import PageHeader from '../../common/layout-page/page-header';
@@ -13,6 +13,7 @@ import {generateItem} from '../../_constants';
 import PageDivider from '../../common/layout-page/page-divider';
 import ItemViewProperties from './item-view-properties';
 import ItemViewDescription from './item-view-description';
+import {ThemeFactory} from '../../../shared/theme/theme';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -44,21 +45,25 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
+  const theme = ThemeFactory.getTheme(item.group.color);
+
   return (
     item && (
-      <Container className={classes.root}>
-        <PageHeader title={item.title} color={item.group.color} />
-        <PageDivider color={item.group.color} height={5} />
-        <ItemViewData item={item} />
-        {item.description && (
-          <>
-            <PageDivider color={item.group.color} />
-            <ItemViewDescription description={item.description} />
-            <PageDivider color={item.group.color} />
-          </>
-        )}
-        <ItemViewProperties item={item} />
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container className={classes.root}>
+          <PageHeader title={item.title} />
+          <PageDivider height={5} />
+          <ItemViewData item={item} />
+          {item.description && (
+            <>
+              <PageDivider />
+              <ItemViewDescription description={item.description} />
+              <PageDivider />
+            </>
+          )}
+          <ItemViewProperties item={item} />
+        </Container>
+      </ThemeProvider>
     )
   );
 };

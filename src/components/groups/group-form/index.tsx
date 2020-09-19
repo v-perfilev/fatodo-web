@@ -12,7 +12,7 @@ import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
 import GroupFormTitle from './group-form-title';
 import {GroupFormUtils, GroupFormValues} from './_form';
-import {testTheme} from '../../../shared/theme/theme';
+import {ThemeFactory} from '../../../shared/theme/theme';
 
 type Props = FormikProps<any> & {
   group?: Group;
@@ -24,8 +24,9 @@ type Props = FormikProps<any> & {
 const GroupForm: FC<Props> = (props: Props) => {
   const classes = groupFormStyles();
   const {header, setSaveCallback, values, isValid, submitForm, isSubmitting} = props;
-  const color = values.color;
   const buttonRef = useRef<HTMLButtonElement>();
+
+  const color = values.color;
 
   useEffect(() => {
     if (isValid) {
@@ -35,11 +36,13 @@ const GroupForm: FC<Props> = (props: Props) => {
     }
   }, [isValid]);
 
+  const theme = ThemeFactory.getTheme(color);
+
   return (
-    <ThemeProvider theme={testTheme}>
+    <ThemeProvider theme={theme}>
       <Container className={classes.root}>
-        <PageHeader title={header} color={color} />
-        <PageDivider color={color} height={5} />
+        <PageHeader title={header} />
+        <PageDivider height={5} />
         <Form className={classes.form}>
           <Grid container spacing={3}>
             <Grid item xs={12}>

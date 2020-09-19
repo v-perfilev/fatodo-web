@@ -7,6 +7,7 @@ export const pageDividerStyles = makeStyles((theme: Theme) => ({
     height: 1,
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5),
+    background: theme.palette.gradient,
   },
 }));
 
@@ -15,6 +16,8 @@ export const pageHeaderStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
+    // TODO ?
+    color: theme.palette.primary.main,
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
     '& > *': {

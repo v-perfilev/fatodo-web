@@ -3,8 +3,8 @@ import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {MenuItem} from '@material-ui/core';
-import {colorSchemes} from '../../../shared/utils/color-scheme.utils';
 import ColorView from '../../common/layout-group/color-view';
+import {colorSchemes} from '../../../shared/theme/colors';
 
 const GroupFormColor: FC = () => {
   const {t} = useTranslation();

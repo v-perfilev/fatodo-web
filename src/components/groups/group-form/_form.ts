@@ -1,6 +1,6 @@
 import {FormUtils} from '../../../shared/utils/form.utils';
-import {ColorScheme} from '../../../shared/utils/color-scheme.utils';
 import {Group} from '../../../models/group.model';
+import {ColorScheme} from '../../../shared/theme/colors';
 
 export interface GroupFormValues {
   title: string;

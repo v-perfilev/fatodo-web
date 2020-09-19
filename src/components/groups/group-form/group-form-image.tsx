@@ -17,11 +17,7 @@ const GroupFormImage: FC<Props> = ({values, setFieldValue}: Props) => {
 
   const filenameName = 'imageFilename';
   const contentName = 'imageContent';
-  const color = values.color;
   const filename = values.imageFilename;
-
-  console.log(values);
-  console.log(filename);
 
   return (
     <>
@@ -30,7 +26,7 @@ const GroupFormImage: FC<Props> = ({values, setFieldValue}: Props) => {
       </Box>
       {filename && (
         <Box className={classes.preview}>
-          <RoundPic url={filename} size="lg" color={color} border={3} />
+          <RoundPic url={filename} size="lg" border={3} />
         </Box>
       )}
       <ImageUploader

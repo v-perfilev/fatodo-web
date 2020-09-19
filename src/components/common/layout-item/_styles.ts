@@ -1,6 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {COLORS} from '../../../shared/theme/theme';
 
 export const priorityStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -10,13 +9,13 @@ export const priorityStyles = makeStyles((theme: Theme) => ({
       marginRight: theme.spacing(1),
       fontSize: '1.2rem',
       '&.low': {
-        color: COLORS.GREY,
+        color: theme.palette.grey['400'],
       },
       '&.normal': {
-        color: COLORS.PRIMARY,
+        color: theme.palette.primary.main,
       },
       '&.high': {
-        color: COLORS.ERROR,
+        color: theme.palette.error.main,
       },
     },
   },
@@ -27,7 +26,7 @@ export const typeStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     '& svg': {
-      color: COLORS.PRIMARY,
+      color: theme.palette.primary.main,
       marginRight: theme.spacing(1),
       fontSize: '1.2rem',
     },

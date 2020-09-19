@@ -1,6 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {COLORS} from '../../../shared/theme/theme';
 import {CARD_HEADER_HEIGHT, ITEMS_IN_GROUP_CARD} from '../_constants';
 
 export const groupCardStyles = makeStyles(() => ({
@@ -17,6 +16,8 @@ export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
     flexShrink: 0,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
+    // TODO ?
+    background: theme.palette.gradient,
     '& .MuiCardHeader-action': {
       marginTop: 0,
       marginRight: theme.spacing(-1.5),
@@ -33,10 +34,10 @@ export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
   },
   caption: {
     fontSize: '1rem',
-    color: COLORS.WHITE,
+    color: theme.palette.primary.contrastText,
   },
   action: {
-    color: COLORS.WHITE,
+    color: theme.palette.primary.contrastText,
   },
 }));
 
@@ -86,7 +87,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: COLORS.LIGHT_GREY,
+    borderColor: theme.palette.grey['300'],
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
   },
@@ -116,7 +117,7 @@ export const groupCardActionsStyles = makeStyles((theme: Theme) => ({
     },
   },
   icon: {
-    color: COLORS.GREY,
+    color: theme.palette.grey['400'],
   },
 }));
 
@@ -135,7 +136,7 @@ export const groupCardAvatarsStyles = makeStyles((theme: Theme) => ({
   count: {
     fontSize: '1rem',
     marginLeft: theme.spacing(0.5),
-    color: COLORS.GREY,
+    color: theme.palette.grey['400'],
   },
 }));
 

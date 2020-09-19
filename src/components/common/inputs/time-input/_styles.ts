@@ -1,7 +1,6 @@
-import {makeStyles} from '@material-ui/core/styles';
-import {COLORS} from '../../../../shared/theme/theme';
+import {makeStyles, Theme} from '@material-ui/core/styles';
 
-export const timeInputStyles = makeStyles(() => ({
+export const timeInputStyles = makeStyles((theme: Theme) => ({
   textField: {
     width: '100%',
   },
@@ -15,6 +14,6 @@ export const timeInputStyles = makeStyles(() => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: theme.palette.background.paper,
   },
 }));

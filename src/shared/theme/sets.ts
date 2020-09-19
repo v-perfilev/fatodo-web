@@ -1,4 +1,4 @@
-import {COLORS} from './colors';
+import {COLORS, GRADIENT_COLORS} from './colors';
 
 export const defaultTypography = {
   fontFamily: 'Roboto, serif',
@@ -36,21 +36,7 @@ export const defaultPalette = {
     default: COLORS.WHITE,
   },
   border: COLORS.TURQUOISE,
-  gradient: COLORS.TURQUOISE,
-};
-
-export const turquoisePalette = {
-  ...defaultPalette,
-  primary: {
-    main: COLORS.TURQUOISE,
-    contrastText: COLORS.WHITE,
-  },
-  secondary: {
-    main: COLORS.YELLOW,
-    contrastText: COLORS.WHITE,
-  },
-  border: COLORS.TURQUOISE,
-  gradient: COLORS.TURQUOISE,
+  gradient: GRADIENT_COLORS.YELLOW,
 };
 
 export const yellowPalette = {
@@ -64,13 +50,27 @@ export const yellowPalette = {
     contrastText: COLORS.WHITE,
   },
   border: COLORS.TURQUOISE,
-  gradient: COLORS.TURQUOISE,
+  gradient: GRADIENT_COLORS.YELLOW,
+};
+
+export const turquoisePalette = {
+  ...defaultPalette,
+  primary: {
+    main: COLORS.TURQUOISE,
+    contrastText: COLORS.WHITE,
+  },
+  secondary: {
+    main: COLORS.YELLOW,
+    contrastText: COLORS.WHITE,
+  },
+  border: COLORS.WHITE,
+  gradient: GRADIENT_COLORS.TURQUOISE,
 };
 
 export const purplePalette = {
   ...defaultPalette,
   primary: {
-    main: COLORS.TURQUOISE,
+    main: COLORS.PURPLE,
     contrastText: COLORS.WHITE,
   },
   secondary: {
@@ -78,13 +78,13 @@ export const purplePalette = {
     contrastText: COLORS.WHITE,
   },
   border: COLORS.TURQUOISE,
-  gradient: COLORS.TURQUOISE,
+  gradient: GRADIENT_COLORS.PURPLE,
 };
 
 export const greenPalette = {
   ...defaultPalette,
   primary: {
-    main: COLORS.TURQUOISE,
+    main: COLORS.GREEN,
     contrastText: COLORS.WHITE,
   },
   secondary: {
@@ -92,13 +92,13 @@ export const greenPalette = {
     contrastText: COLORS.WHITE,
   },
   border: COLORS.TURQUOISE,
-  gradient: COLORS.TURQUOISE,
+  gradient: GRADIENT_COLORS.GREEN,
 };
 
 export const bluePalette = {
   ...defaultPalette,
   primary: {
-    main: COLORS.TURQUOISE,
+    main: COLORS.BLUE,
     contrastText: COLORS.WHITE,
   },
   secondary: {
@@ -106,5 +106,5 @@ export const bluePalette = {
     contrastText: COLORS.WHITE,
   },
   border: COLORS.TURQUOISE,
-  gradient: COLORS.TURQUOISE,
+  gradient: COLORS.BLUE,
 };

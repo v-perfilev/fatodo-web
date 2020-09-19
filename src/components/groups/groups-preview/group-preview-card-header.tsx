@@ -6,8 +6,6 @@ import {groupCardHeaderStyles} from './_styles';
 import Link from '../../common/inputs/link';
 import {Routes} from '../../router';
 import {Group} from '../../../models/group.model';
-import {ColorSchemeUtils} from '../../../shared/utils/color-scheme.utils';
-import csx from 'classnames';
 import RoundPic from '../../common/images/round-pic';
 
 type Props = {
@@ -16,8 +14,6 @@ type Props = {
 
 const GroupPreviewCardHeader: FC<Props> = ({group}: Props) => {
   const classes = groupCardHeaderStyles();
-  const colorClassName = ColorSchemeUtils.getBackgroundClass(group.color);
-  const classNames = csx(classes.root, colorClassName);
 
   return (
     <Link to={Routes.GROUPS + '/' + group.id}>
@@ -25,7 +21,7 @@ const GroupPreviewCardHeader: FC<Props> = ({group}: Props) => {
         title={
           <Box className={classes.title}>
             {group.imageFilename && (
-              <RoundPic url={group.imageFilename} size="md" color={group.color} variant={'secondary'} border={1} />
+              <RoundPic url={group.imageFilename} size="md" border={1} />
             )}
             <Typography variant={'h6'} className={classes.caption}>
               {group.title}
@@ -37,7 +33,7 @@ const GroupPreviewCardHeader: FC<Props> = ({group}: Props) => {
             <DotsVerticalIcon />
           </IconButton>
         }
-        className={classNames}
+        className={classes.root}
       />
     </Link>
   );

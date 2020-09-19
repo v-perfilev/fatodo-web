@@ -1,7 +1,6 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {COLORS} from '../../../../shared/theme/theme';
 
-export const dateInputStyles = makeStyles(() => ({
+export const dateInputStyles = makeStyles((theme: Theme) => ({
   textField: {
     width: '100%',
   },
@@ -15,7 +14,7 @@ export const dateInputStyles = makeStyles(() => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: theme.palette.background.paper,
   },
 }));
 
@@ -35,7 +34,7 @@ export const dateInputItemStyles = makeStyles((theme: Theme) => ({
     cursor: 'pointer',
     fontSize: '1.3em',
     '&:hover': {
-      color: COLORS.PRIMARY,
+      color: theme.palette.primary.main,
       fontWeight: 500,
     },
   },

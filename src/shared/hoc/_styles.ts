@@ -1,5 +1,4 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {COLORS} from '../theme/theme';
 
 export const centeringStyles = makeStyles(() => ({
   root: {
@@ -78,7 +77,7 @@ export const developmentRibbonStyles = makeStyles((theme: Theme) => ({
     transform: 'rotate(-45deg)',
     fontSize: '1em',
     fontWeight: 600,
-    color: COLORS.WHITE,
+    color: theme.palette.error.contrastText,
   },
   background: {
     zIndex: -1,

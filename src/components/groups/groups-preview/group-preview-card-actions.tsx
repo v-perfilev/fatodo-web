@@ -17,7 +17,7 @@ const GroupPreviewCardActions: FC<Props> = ({group}: Props) => {
 
   return (
     <CardActions className={classes.actions}>
-      <GroupPreviewCardAvatars group={group} />
+      <GroupPreviewCardAvatars users={group.users} />
       <Box className={classes.badges}>
         <Badge color="primary" max={5} badgeContent={group.notificationCount}>
           <BellIcon className={classes.icon} />

@@ -2,9 +2,9 @@ import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import csx from 'classnames';
 import {colorViewStyles} from './_styles';
-import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
-import {ColorSchemeUtils, ColorScheme} from '../../../shared/utils/color-scheme.utils';
+import {ColorUtils} from '../../../shared/utils/color.utils';
+import {ColorScheme} from '../../../shared/theme/colors';
 
 type Props = HTMLAttributes<any> & {
   color: ColorScheme
@@ -12,12 +12,12 @@ type Props = HTMLAttributes<any> & {
 
 const ColorView: FC<Props> = ({color, className}: Props) => {
   const classes = colorViewStyles();
-  const colorClassName = ColorSchemeUtils.getBackgroundClass(color);
-  const classNames = csx(classes.root, colorClassName, className);
-  const {t} = useTranslation();
+  const classNames = csx(classes.root, className);
+
+  const style = {background: ColorUtils.getGradientColor(color)};
 
   return (
-    <Box className={classNames} />
+    <Box className={classNames} style={style} />
   );
 };
 

@@ -1,5 +1,4 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {COLORS} from '../../../../shared/theme/theme';
 
 export const remindersInputStyles = makeStyles(() => ({
   root: {
@@ -40,11 +39,11 @@ export const remindersInputPopoverToolbarStyles = makeStyles((theme: Theme) => (
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.PRIMARY,
+    backgroundColor: theme.palette.primary.main,
     paddingTop: theme.spacing(1),
 
     '& .MuiTypography-root': {
-      color: COLORS.WHITE,
+      color: theme.palette.primary.contrastText,
       fontSize: '1.2rem',
       fontWeight: 500,
       marginTop: theme.spacing(0.5),

@@ -1,5 +1,4 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {COLORS} from '../../../shared/theme/theme';
 
 export const itemViewStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -30,7 +29,7 @@ export const itemViewDataTypeStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     '& svg': {
-      color: COLORS.PRIMARY,
+      color: theme.palette.primary.main,
       marginRight: theme.spacing(1),
     },
   },
@@ -41,7 +40,7 @@ export const itemViewDataPriorityStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     '& svg': {
-      color: COLORS.PRIMARY,
+      color: theme.palette.primary.main,
       marginRight: theme.spacing(1),
     },
   },
@@ -67,7 +66,7 @@ export const itemViewPropertiesChangesStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     '& *': {
-      color: COLORS.DARK_GREY,
+      color: theme.palette.grey['500'],
       fontSize: '0.7rem',
     },
     '& > *': {

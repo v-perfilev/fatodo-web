@@ -1,6 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {COLORS} from '../../../shared/theme/theme';
 import {CARD_HEADER_HEIGHT} from '../_constants';
 
 export const groupSortingCardStyles = makeStyles(() => ({
@@ -17,11 +16,13 @@ export const groupSortingCardHeaderStyles = makeStyles((theme: Theme) => ({
     flexShrink: 0,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
+    // TODO ?
+    background: theme.palette.gradient,
     '& .MuiCardHeader-action': {
       marginTop: 6,
       marginRight: theme.spacing(0),
       alignSelf: 'center',
-      color: COLORS.WHITE,
+      color: theme.palette.primary.contrastText,
       cursor: 'pointer',
       '& svg': {
         width: '1.2em',
@@ -39,7 +40,7 @@ export const groupSortingCardHeaderStyles = makeStyles((theme: Theme) => ({
   },
   caption: {
     fontSize: '1rem',
-    color: COLORS.WHITE,
+    color: theme.palette.primary.contrastText,
   },
 }));
 

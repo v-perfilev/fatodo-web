@@ -1,5 +1,4 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {COLORS} from '../../../shared/theme/theme';
 
 export const groupStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -76,29 +75,29 @@ export const groupItemViewStyles = makeStyles((theme: Theme) => ({
   },
   toggleIcon: {
     fontSize: '1.8rem',
-    color: COLORS.GREY,
+    color: theme.palette.grey['400'],
     marginRight: theme.spacing(1),
     cursor: 'pointer',
     '&:hover': {
-      color: COLORS.PRIMARY,
+      color: theme.palette.primary.main,
     },
   },
   editIcon: {
     fontSize: '1.8rem',
-    color: COLORS.GREY,
+    color: theme.palette.grey['400'],
     marginRight: theme.spacing(1),
     cursor: 'pointer',
     '&:hover': {
-      color: COLORS.SECONDARY,
+      color: theme.palette.secondary.main,
     },
   },
   deleteIcon: {
     fontSize: '1.8rem',
-    color: COLORS.GREY,
+    color: theme.palette.grey['400'],
     marginRight: theme.spacing(1),
     cursor: 'pointer',
     '&:hover': {
-      color: COLORS.ERROR,
+      color: theme.palette.error.main,
     },
   },
 }));
