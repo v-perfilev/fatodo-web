@@ -17,13 +17,16 @@
   },
   "fields": {
     "title": {
-      "label": "Название"
+      "label": "Название",
+      "required": "Обязательное поле"
     },
     "type": {
-      "label": "Тип"
+      "label": "Тип",
+      "required": "Обязательное поле"
     },
     "priority": {
-      "label": "Приоритет"
+      "label": "Приоритет",
+      "required": "Обязательное поле"
     },
     "time": {
       "label": "Время"

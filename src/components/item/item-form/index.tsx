@@ -30,7 +30,6 @@ type Props = FormikProps<any> & {
 const ItemForm: FC<Props> = (props: Props) => {
   const classes = itemFormStyles();
   const {group, header, setSaveCallback, isValid, submitForm, isSubmitting} = props;
-  const color = group.color;
   const buttonRef = useRef<HTMLButtonElement>();
 
   useEffect(() => {
@@ -84,9 +83,9 @@ const formik = withFormik<Props, ItemFormValues>({
   mapPropsToValues: ({item}: Props) => ItemFormUtils.mapItemToValues(item),
 
   validationSchema: Yup.object().shape({
-    title: Yup.string().required(() => i18n.t('account:fields.user.required')),
-    type: Yup.string().required(() => i18n.t('account:fields.user.required')),
-    priority: Yup.string().required(() => i18n.t('account:fields.user.required')),
+    title: Yup.string().required(() => i18n.t('items:fields.title.required')),
+    type: Yup.string().required(() => i18n.t('items:fields.type.required')),
+    priority: Yup.string().required(() => i18n.t('items:fields.priority.required')),
   }),
 
   validateOnMount: true,

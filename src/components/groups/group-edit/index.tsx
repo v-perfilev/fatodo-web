@@ -70,7 +70,7 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
   const request = (data: FormData, stopSubmitting: () => void) => {
     GroupService.update(data)
       .then(() => {
-        Notification.handleSnack('auth.afterResetPassword', 'info');
+        Notification.handleSnack('groups.edited', 'info');
         redirectToGroup();
       })
       .catch((response) => {

@@ -50,7 +50,7 @@ const GroupCreate: FC = () => {
   const request = (data: FormData, stopSubmitting: () => void) => {
     GroupService.create(data)
       .then((response) => {
-        Notification.handleSnack('auth.afterResetPassword', 'info');
+        Notification.handleSnack('groups.created', 'info');
         const id = response.data.id;
         redirectToGroup(id);
       })

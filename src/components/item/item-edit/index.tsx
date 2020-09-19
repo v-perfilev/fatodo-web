@@ -80,7 +80,7 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
   const request = (data: FormData, stopSubmitting: () => void) => {
     ItemService.update(data)
       .then(() => {
-        Notification.handleSnack('items.created', 'info');
+        Notification.handleSnack('items.edited', 'info');
         redirectToItem();
       })
       .catch((response) => {

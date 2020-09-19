@@ -17,13 +17,16 @@
   },
   "fields": {
     "title": {
-      "label": "Title"
+      "label": "Title",
+      "required": "Required"
     },
     "type": {
-      "label": "Type"
+      "label": "Type",
+      "required": "Required"
     },
     "priority": {
-      "label": "Priority"
+      "label": "Priority",
+      "required": "Required"
     },
     "time": {
       "label": "Time"

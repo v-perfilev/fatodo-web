@@ -7,5 +7,15 @@
   },
   "image": {
     "tooSmall": "Too small image selected"
+  },
+  "groups": {
+    "created": "Group created",
+    "edited": "Group edited",
+    "deleted": "Group deleted"
+  },
+  "items": {
+    "created": "Item created",
+    "edited": "Item edited",
+    "deleted": "Item deleted"
   }
 }

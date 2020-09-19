@@ -70,8 +70,8 @@ const formik = withFormik<Props, GroupFormValues>({
   mapPropsToValues: ({group}: Props) => GroupFormUtils.mapGroupToValues(group),
 
   validationSchema: Yup.object().shape({
-    title: Yup.string().required(() => i18n.t('account:fields.user.required')),
-    color: Yup.string().required(() => i18n.t('account:fields.user.required')),
+    title: Yup.string().required(() => i18n.t('groups:fields.title.required')),
+    color: Yup.string().required(() => i18n.t('groups:fields.color.required')),
   }),
 
   validateOnMount: true,

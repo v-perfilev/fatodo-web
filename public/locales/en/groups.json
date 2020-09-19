@@ -5,10 +5,12 @@
   },
   "fields": {
     "title": {
-      "label": "Title"
+      "label": "Title",
+      "required": "Required"
     },
     "color": {
-      "label": "Color"
+      "label": "Color",
+      "required": "Required"
     },
     "image": {
       "label": "Image"
