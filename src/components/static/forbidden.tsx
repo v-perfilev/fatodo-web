@@ -13,6 +13,7 @@ type Props = RedirectTimerProps;
 const Forbidden: FC<Props> = ({timer, resetTimer}: Props) => {
   const classes = staticPageStyles();
   const {t} = useTranslation();
+
   return (
     <Box className={classes.root}>
       <Typography variant="h5" color="primary" className={classes.code}>

@@ -21,8 +21,9 @@ import MomentUtils from '@date-io/moment';
 import {useTranslation} from 'react-i18next';
 import {setupNotification} from './shared/notification/notification';
 
-// import external styles
+// import styles
 import 'react-image-crop/dist/ReactCrop.css';
+import './styles.css';
 
 const root = document.getElementById('root');
 

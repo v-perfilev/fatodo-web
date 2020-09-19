@@ -2,7 +2,9 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Route, RouteProps} from 'react-router-dom';
 
-const PublicRoute: FC<RouteProps & any> = (props) => {
+type Props = RouteProps;
+
+const PublicRoute: FC<Props> = (props: Props) => {
   return <Route {...props} />;
 };
 

@@ -12,7 +12,7 @@
     "caption": "Access is forbidden"
   },
   "notActivated": {
-    "caption": "Your account is not activated yet <br/> Link with activation code was sent to your email"
+    "caption": "Your account is not activated yet \n Link with activation code was sent to your email"
   },
   "redirectToHome": {
     "message": "For redirecting to home page press the button or wait {{count}} second...",

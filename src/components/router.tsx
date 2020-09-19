@@ -15,6 +15,7 @@ import SocialLogin from './account/social-login';
 import Home from './home';
 import GroupRouter from './groups/_router';
 import ItemRouter from './item/_router';
+import PrivateRoute from '../shared/routes/private-route';
 
 export enum Routes {
   ROOT = '/',
@@ -37,7 +38,7 @@ export enum Routes {
 const Router: FC = () => (
   <Switch>
     <PublicRoute exact path={Routes.ROOT} component={Home} />
-    <PublicRoute path={Routes.GROUPS} component={GroupRouter} />
+    <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
     <PublicRoute path={Routes.ITEMS} component={ItemRouter} />
     {/*Auth Router*/}
     <PublicRoute path={Routes.LOGIN} component={Auth} />
