@@ -7,7 +7,7 @@ import {compose} from 'recompose';
 import {Group} from '../../../models/group.model';
 
 type Props = {
-  group: Group
+  group: Group;
 };
 
 const GroupPreviewGridItem: FC<Props> = ({group}: Props) => {

@@ -11,7 +11,6 @@ import {
 import {ColorScheme} from './colors';
 
 export class ThemeFactory {
-
   private static yellowTheme = createMuiTheme({
     palette: {
       type: 'light',
@@ -75,7 +74,4 @@ export class ThemeFactory {
         return ThemeFactory.getDefaultTheme();
     }
   };
-
 }
-
-

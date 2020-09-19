@@ -1,60 +1,20 @@
 import * as React from 'react';
-import {
-  ComponentType,
-  CSSProperties,
-  FC,
-  MutableRefObject,
-  ReactElement,
-  RefObject,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import {ComponentType, FC, ReactElement, useEffect, useMemo, useRef, useState} from 'react';
 import {UseSpringProps, useSprings} from 'react-spring';
 import {useDrag} from 'react-use-gesture';
 import {clamp} from 'lodash-es';
 import move from 'lodash-move';
 import {useResize} from '../hooks/use-resize';
-
-type SortingSize = {
-  width: number;
-  height: number;
-};
+import {SortingSize, SortingSizes, SortProps, StyleArgs} from './types';
 
 const defaultSize: Readonly<SortingSize> = {
   width: 1,
   height: 1,
 };
 
-type SortingSizes = {
-  container: SortingSize;
-  item: SortingSize;
-};
-
 const defaultSortingSizes: Readonly<SortingSizes> = {
   container: defaultSize,
   item: defaultSize,
-};
-
-interface StyleArgs {
-  indexOrder: any;
-  down?: boolean;
-  originalIndex?: number;
-  currentIndex?: number;
-  x?: number;
-  y?: number;
-  immediate?: boolean;
-}
-
-export type SortProps = {
-  setSortItems: (items: any[]) => void;
-  setSortContainerRef: (element: HTMLDivElement) => void;
-  setSortItemRef: (element: HTMLDivElement) => void;
-  sortContainerHeight: string | number;
-  sortOrder: MutableRefObject<number[]>;
-  sortSprings: CSSProperties[];
-  sortBind: (...any) => void;
 };
 
 const withSortableGrid = (Component: ComponentType<SortProps>): FC => (props): ReactElement => {

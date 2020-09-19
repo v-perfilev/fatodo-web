@@ -24,7 +24,8 @@ const ItemCreate: FC<Props> = ({setMenu}: Props) => {
   const {i18n, t} = useTranslation();
   const history = useHistory();
   const {groupId} = useParams();
-  const [saveCallback, setSaveCallback] = useState(() => () => {
+  const [saveCallback, setSaveCallback] = useState(() => (): void => {
+    // important stub function
   });
   const [group, setGroup] = useState<Group>(null);
 
@@ -45,12 +46,7 @@ const ItemCreate: FC<Props> = ({setMenu}: Props) => {
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <AdditionalMenuButton
-        icon={<CheckIcon />}
-        action={submit}
-        color="primary"
-        tooltip={t('items:tooltips.ok')}
-      />
+      <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('items:tooltips.ok')} />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroup}
@@ -69,7 +65,7 @@ const ItemCreate: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  const request = (data: FormData, stopSubmitting: () => void) => {
+  const request = (data: FormData, stopSubmitting: () => void): void => {
     ItemService.create(data)
       .then((response) => {
         Notification.handleSnack('items.created', 'info');
@@ -82,13 +78,15 @@ const ItemCreate: FC<Props> = ({setMenu}: Props) => {
       });
   };
 
-  return group && (
-    <ItemForm
-      group={group}
-      header={t('items:headers.create', {group: group.title})}
-      setSaveCallback={setSaveCallback}
-      request={request}
-    />
+  return (
+    group && (
+      <ItemForm
+        group={group}
+        header={t('items:headers.create', {group: group.title})}
+        setSaveCallback={setSaveCallback}
+        request={request}
+      />
+    )
   );
 };
 

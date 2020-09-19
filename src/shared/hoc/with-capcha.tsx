@@ -14,15 +14,14 @@ const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (props): Rea
   let isMounted = true;
   let interval = null;
 
-  const updateToken = () => setShouldUpdate(prevState => !prevState);
+  const updateToken = (): void => setShouldUpdate((prevState) => !prevState);
 
   const updateCaptcha = (): void => {
-    executeRecaptcha()
-      .then((token) => {
-        if (isMounted) {
-          setToken(token);
-        }
-      });
+    executeRecaptcha().then((token) => {
+      if (isMounted) {
+        setToken(token);
+      }
+    });
   };
 
   useEffect(() => {

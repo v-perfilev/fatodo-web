@@ -7,7 +7,7 @@ import RoundPic from '../../common/images/round-pic';
 import {User} from '../../../models/user.model';
 
 type Props = {
-  users: User[],
+  users: User[];
 };
 
 const GroupPreviewCardAvatars: FC<Props> = ({users}: Props) => {

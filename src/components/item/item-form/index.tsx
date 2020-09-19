@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useRef} from 'react';
 import {itemFormStyles} from './_styles';
 import {Item} from '../../../models/item.model';
-import {Button, Container, Grid} from '@material-ui/core';
+import {Button, Container, Grid, ThemeProvider} from '@material-ui/core';
 import PageHeader from '../../common/layout-page/page-header';
 import PageDivider from '../../common/layout-page/page-divider';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
@@ -17,6 +17,7 @@ import ItemFormReminders from './item-form-reminders';
 import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
 import {ItemFormUtils, ItemFormValues} from './_form';
+import {ThemeFactory} from '../../../shared/theme/theme';
 import {Group} from '../../../models/group.model';
 
 type Props = FormikProps<any> & {
@@ -34,48 +35,52 @@ const ItemForm: FC<Props> = (props: Props) => {
 
   useEffect(() => {
     if (isValid) {
-      setSaveCallback(() => () => buttonRef.current.click());
+      setSaveCallback(() => (): void => buttonRef.current.click());
     } else {
-      setSaveCallback(() => () => submitForm());
+      setSaveCallback(() => (): Promise<void> => submitForm());
     }
   }, [isValid]);
 
+  const theme = ThemeFactory.getTheme(group.color);
+
   return (
-    <Container className={classes.root}>
-      <PageHeader title={header} />
-      <PageDivider height={5} />
-      <Form className={classes.form}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <ItemFormTitle />
+    <ThemeProvider theme={theme}>
+      <Container className={classes.root}>
+        <PageHeader title={header} />
+        <PageDivider height={5} />
+        <Form className={classes.form}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <ItemFormTitle />
+            </Grid>
+            <Grid item xs={6} lg={3}>
+              <ItemFormType />
+            </Grid>
+            <Grid item xs={6} lg={3}>
+              <ItemFormPriority />
+            </Grid>
+            <Grid item xs={6} lg={3}>
+              <ItemFormTime {...props} />
+            </Grid>
+            <Grid item xs={6} lg={3}>
+              <ItemFormDate {...props} />
+            </Grid>
+            <Grid item xs={12}>
+              <ItemFormDescription />
+            </Grid>
+            <Grid item xs={12}>
+              <ItemFormReminders {...props} />
+            </Grid>
+            <Grid item xs={12}>
+              <ItemFormTags />
+            </Grid>
           </Grid>
-          <Grid item xs={6} lg={3}>
-            <ItemFormType />
-          </Grid>
-          <Grid item xs={6} lg={3}>
-            <ItemFormPriority />
-          </Grid>
-          <Grid item xs={6} lg={3}>
-            <ItemFormTime {...props} />
-          </Grid>
-          <Grid item xs={6} lg={3}>
-            <ItemFormDate {...props} />
-          </Grid>
-          <Grid item xs={12}>
-            <ItemFormDescription />
-          </Grid>
-          <Grid item xs={12}>
-            <ItemFormReminders {...props} />
-          </Grid>
-          <Grid item xs={12}>
-            <ItemFormTags />
-          </Grid>
-        </Grid>
-        <Button type="submit" disabled={!isValid || isSubmitting} ref={buttonRef} className={classes.submitButton}>
-          Submit
-        </Button>
-      </Form>
-    </Container>
+          <Button type="submit" disabled={!isValid || isSubmitting} ref={buttonRef} className={classes.submitButton}>
+            Submit
+          </Button>
+        </Form>
+      </Container>
+    </ThemeProvider>
   );
 };
 

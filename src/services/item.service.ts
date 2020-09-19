@@ -22,5 +22,4 @@ export default class ItemService {
     const url = ItemService.baseUrl + '/items/' + id;
     return axios.delete(url);
   };
-
 }

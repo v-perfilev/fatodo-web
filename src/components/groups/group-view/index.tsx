@@ -11,7 +11,6 @@ import GroupViewMessages from './group-view-messages';
 import {groupStyles} from './_styles';
 import PageHeader from '../../common/layout-page/page-header';
 import {Group} from '../../../models/group.model';
-import {TEST_GROUP} from '../../_constants';
 import PageDivider from '../../common/layout-page/page-divider';
 import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
@@ -23,8 +22,6 @@ import GroupService from '../../../services/group.service';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import {ItemRoutes} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
-
-const initGroup = TEST_GROUP;
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -40,8 +37,7 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
 
   const redirectToCreateItem = (): void =>
     history.push((Routes.ITEMS + ItemRoutes.CREATE).replace(':groupId', groupId));
-  const redirectToEditGroup = (): void =>
-    history.push((Routes.GROUPS + GroupRoutes.EDIT).replace(':groupId', groupId));
+  const redirectToEditGroup = (): void => history.push((Routes.GROUPS + GroupRoutes.EDIT).replace(':groupId', groupId));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
 
   const loadGroup = (): void => {

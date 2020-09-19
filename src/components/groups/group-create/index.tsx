@@ -14,7 +14,8 @@ import {Notification} from '../../../shared/notification/notification';
 const GroupCreate: FC = () => {
   const history = useHistory();
   const {i18n, t} = useTranslation();
-  const [saveCallback, setSaveCallback] = useState<() => void>(() => () => {
+  const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
+    // important stub function
   });
 
   const submit = (): void => saveCallback();
@@ -24,12 +25,7 @@ const GroupCreate: FC = () => {
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <AdditionalMenuButton
-        icon={<CheckIcon />}
-        action={submit}
-        color="primary"
-        tooltip={t('groups:tooltips.ok')}
-      />
+      <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('groups:tooltips.ok')} />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroups}
@@ -47,7 +43,7 @@ const GroupCreate: FC = () => {
     setMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  const request = (data: FormData, stopSubmitting: () => void) => {
+  const request = (data: FormData, stopSubmitting: () => void): void => {
     GroupService.create(data)
       .then((response) => {
         Notification.handleSnack('groups.created', 'info');
@@ -60,13 +56,7 @@ const GroupCreate: FC = () => {
       });
   };
 
-  return (
-    <GroupForm
-      header={t('groups:headers.create')}
-      setSaveCallback={setSaveCallback}
-      request={request}
-    />
-  );
+  return <GroupForm header={t('groups:headers.create')} setSaveCallback={setSaveCallback} request={request} />;
 };
 
 export default GroupCreate;

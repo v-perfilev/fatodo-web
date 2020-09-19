@@ -29,5 +29,4 @@ export default class GroupService {
     const url = GroupService.baseUrl + '/groups/' + id;
     return axios.delete(url);
   };
-
 }

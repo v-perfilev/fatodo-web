@@ -17,13 +17,15 @@ const defaultGroupFormValues: Readonly<GroupFormValues> = {
 };
 
 export class GroupFormUtils {
-
-  public static mapGroupToValues = (group: Group): GroupFormValues => group ? {
-    title: group.title,
-    color: group.color,
-    imageFilename: group.imageFilename,
-    imageContent: null,
-  } : defaultGroupFormValues;
+  public static mapGroupToValues = (group: Group): GroupFormValues =>
+    group
+      ? {
+          title: group.title,
+          color: group.color,
+          imageFilename: group.imageFilename,
+          imageContent: null,
+        }
+      : defaultGroupFormValues;
 
   public static mapValuesToFormData = (values: GroupFormValues, group: Group): FormData => {
     const form = {
@@ -35,5 +37,4 @@ export class GroupFormUtils {
     };
     return FormUtils.toFormData(form);
   };
-
 }

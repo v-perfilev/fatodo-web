@@ -44,7 +44,7 @@ const GroupPreviewCardContent: FC<Props> = ({items}: Props) => {
       delay: 50,
       opacity: 1,
       from: {opacity: 0},
-    },
+    }
   );
 
   return (

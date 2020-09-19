@@ -30,9 +30,9 @@ const GroupForm: FC<Props> = (props: Props) => {
 
   useEffect(() => {
     if (isValid) {
-      setSaveCallback(() => () => buttonRef.current.click());
+      setSaveCallback(() => (): void => buttonRef.current.click());
     } else {
-      setSaveCallback(() => () => submitForm());
+      setSaveCallback(() => (): Promise<void> => submitForm());
     }
   }, [isValid]);
 
@@ -64,7 +64,6 @@ const GroupForm: FC<Props> = (props: Props) => {
     </ThemeProvider>
   );
 };
-
 
 const formik = withFormik<Props, GroupFormValues>({
   mapPropsToValues: ({group}: Props) => GroupFormUtils.mapGroupToValues(group),

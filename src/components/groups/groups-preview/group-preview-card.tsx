@@ -11,7 +11,7 @@ import {Group} from '../../../models/group.model';
 import {ThemeFactory} from '../../../shared/theme/theme';
 
 type Props = {
-  group: Group
+  group: Group;
 };
 
 const GroupPreviewCard: FC<Props> = ({group}: Props) => {

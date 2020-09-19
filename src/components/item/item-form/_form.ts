@@ -26,17 +26,19 @@ const defaultItemFormValues: Readonly<ItemFormValues> = {
 };
 
 export class ItemFormUtils {
-
-  public static mapItemToValues = (item: Item): ItemFormValues => item ? {
-    title: item.title,
-    type: item.type,
-    priority: item.priority,
-    time: DateConverters.getTimeFromParamDate(item.date),
-    date: DateConverters.getDateFromParamDate(item.date),
-    description: item.description,
-    reminders: item.reminders,
-    tags: item.tags,
-  } : defaultItemFormValues;
+  public static mapItemToValues = (item: Item): ItemFormValues =>
+    item
+      ? {
+          title: item.title,
+          type: item.type,
+          priority: item.priority,
+          time: DateConverters.getTimeFromParamDate(item.date),
+          date: DateConverters.getDateFromParamDate(item.date),
+          description: item.description,
+          reminders: item.reminders,
+          tags: item.tags,
+        }
+      : defaultItemFormValues;
 
   public static mapValuesToFormData = (values: ItemFormValues, item: Item): FormData => {
     const formItem = {
@@ -52,5 +54,4 @@ export class ItemFormUtils {
     };
     return FormUtils.toFormData(formItem);
   };
-
 }

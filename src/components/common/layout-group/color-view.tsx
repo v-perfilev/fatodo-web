@@ -7,7 +7,7 @@ import {ColorUtils} from '../../../shared/utils/color.utils';
 import {ColorScheme} from '../../../shared/theme/colors';
 
 type Props = HTMLAttributes<any> & {
-  color: ColorScheme
+  color: ColorScheme;
 };
 
 const ColorView: FC<Props> = ({color, className}: Props) => {
@@ -16,9 +16,7 @@ const ColorView: FC<Props> = ({color, className}: Props) => {
 
   const style = {background: ColorUtils.getGradientColor(color)};
 
-  return (
-    <Box className={classNames} style={style} />
-  );
+  return <Box className={classNames} style={style} />;
 };
 
 export default ColorView;

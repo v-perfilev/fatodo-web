@@ -20,8 +20,8 @@ import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 
 type Props = FormikProps<any> &
   CaptchaProps & {
-  onSuccess: () => void;
-};
+    onSuccess: () => void;
+  };
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();

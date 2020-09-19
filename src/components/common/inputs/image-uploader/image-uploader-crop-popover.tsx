@@ -39,6 +39,8 @@ const ImageUploaderCropPopover: FC<Props> = ({source, anchorEl, handleClose, cro
 
   const isOpen = Boolean(anchorEl);
 
+  const classNames = csx(classes.popoverBody, {[classes.invalidBody]: !isValid});
+
   const onClose = (): void => {
     if (!isValid) {
       handleClose(null);
@@ -57,7 +59,7 @@ const ImageUploaderCropPopover: FC<Props> = ({source, anchorEl, handleClose, cro
 
   const sendErrorNotifications = (errors: ImageError[]): void => {
     if (notificationAllowed && errors.length > 0) {
-      errors.forEach(error => {
+      errors.forEach((error) => {
         Notification.handleSnack('image.' + error, 'warning');
       });
       setNotificationAllowed(false);
@@ -73,16 +75,6 @@ const ImageUploaderCropPopover: FC<Props> = ({source, anchorEl, handleClose, cro
     sendErrorNotifications(errors);
     setIsValid(errors.length === 0);
     setCrop(crop);
-  };
-
-  const onCropComplete = (crop): void => {
-    if (imageRef.current && crop.width && crop.height) {
-      getCroppedImg(imageRef.current, crop).then((croppedImage) => {
-        setCroppedBlob(croppedImage);
-      });
-    } else {
-      setCroppedBlob(null);
-    }
   };
 
   const getCroppedImg = (img, crop): Promise<Blob> => {
@@ -102,17 +94,29 @@ const ImageUploaderCropPopover: FC<Props> = ({source, anchorEl, handleClose, cro
       0,
       0,
       crop.width,
-      crop.height,
+      crop.height
     );
 
     return new Promise((resolve) => {
-      canvas.toBlob((blob: Blob) => {
-        resolve(blob);
-      }, 'image/jpeg', 1);
+      canvas.toBlob(
+        (blob: Blob) => {
+          resolve(blob);
+        },
+        'image/jpeg',
+        1
+      );
     });
   };
 
-  const classNames = csx(classes.popoverBody, {[classes.invalidBody]: !isValid});
+  const onCropComplete = (crop): void => {
+    if (imageRef.current && crop.width && crop.height) {
+      getCroppedImg(imageRef.current, crop).then((croppedImage) => {
+        setCroppedBlob(croppedImage);
+      });
+    } else {
+      setCroppedBlob(null);
+    }
+  };
 
   return (
     <Popover

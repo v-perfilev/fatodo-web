@@ -1,7 +1,6 @@
 import {ColorScheme, GRADIENT_COLORS} from '../theme/colors';
 
 export class ColorUtils {
-
   public static getGradientColor = (color: ColorScheme): string => {
     switch (color) {
       case 'turquoise':
@@ -18,5 +17,4 @@ export class ColorUtils {
         return '#fff';
     }
   };
-
 }

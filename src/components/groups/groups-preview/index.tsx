@@ -12,13 +12,8 @@ import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-b
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group.model';
-import {TEST_GROUP} from '../../_constants';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import GroupService from '../../../services/group.service';
-
-const initGroups = Array.from(Array(10).keys()).map(() => {
-  return TEST_GROUP;
-});
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -34,10 +29,9 @@ const GroupPreview: FC<Props> = ({setMenu}: Props) => {
   const redirectToGroupsSorting = (): void => history.push(Routes.GROUPS + GroupRoutes.SORTING);
 
   const loadGroups = (): void => {
-    GroupService.getAll()
-      .then((response) => {
-        setGroups(response.data);
-      });
+    GroupService.getAll().then((response) => {
+      setGroups(response.data);
+    });
   };
 
   const menu = (

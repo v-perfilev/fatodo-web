@@ -9,12 +9,7 @@ interface SetupNotificationActions {
   enqueueSnackbar: (notification: Snack) => void;
 }
 
-export const setupNotification = (actions: SetupNotificationActions): void => {
-  Notification.use(actions.enqueueSnackbar);
-};
-
 export class Notification {
-
   private static enqueueSnackbar: (n: Snack) => void;
 
   public static use = (enqueueSnackbar: (n: Snack) => void): void => {
@@ -24,7 +19,7 @@ export class Notification {
   public static handleFeedback = (
     response: AxiosResponse,
     allowedCodes: string[] | '*' = '*',
-    excludedCodes: string[] | '' = '',
+    excludedCodes: string[] | '' = ''
   ): void => {
     const feedbackCode = ResponseUtils.getFeedbackCode(response);
     const status = ResponseUtils.getStatus(response);
@@ -43,10 +38,7 @@ export class Notification {
     }
   };
 
-  public static handleSnack = (
-    code: string,
-    variant: VariantType,
-  ): void => {
+  public static handleSnack = (code: string, variant: VariantType): void => {
     const message = TranslationUtils.getSnackTranslation(code);
     const notification = message ? new NotificationBuilder(message).setVariant(variant).build() : null;
     if (notification) {
@@ -64,3 +56,7 @@ export class Notification {
     }
   };
 }
+
+export const setupNotification = (actions: SetupNotificationActions): void => {
+  Notification.use(actions.enqueueSnackbar);
+};

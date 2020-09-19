@@ -18,9 +18,7 @@ const GroupSortingCardHeader: FC<Props> = ({group, bind}: Props) => {
     <CardHeader
       title={
         <Box className={classes.title}>
-          {group.imageFilename && (
-            <RoundPic url={group.imageFilename} size="md" />
-          )}
+          {group.imageFilename && <RoundPic url={group.imageFilename} size="md" />}
           <Typography variant={'h6'} className={classes.caption}>
             {group.title}
           </Typography>

@@ -22,7 +22,7 @@ const GroupFormImage: FC<Props> = ({values, setFieldValue}: Props) => {
   return (
     <>
       <Box className={classes.label}>
-        <FormLabel required>{t('groups:fields.image.label')}</FormLabel>
+        <FormLabel>{t('groups:fields.image.label')}</FormLabel>
       </Box>
       {filename && (
         <Box className={classes.preview}>

@@ -11,13 +11,7 @@ import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-b
 import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group.model';
-import {TEST_GROUP} from '../../_constants';
 import GroupService from '../../../services/group.service';
-
-
-const initGroups = Array.from(Array(10).keys()).map(() => {
-  return TEST_GROUP;
-});
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -35,10 +29,9 @@ const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
   const redirectToGroupsRoot = (): void => history.push(Routes.GROUPS);
 
   const loadGroups = (): void => {
-    GroupService.getAll()
-      .then((response) => {
-        setGroups(response.data);
-      });
+    GroupService.getAll().then((response) => {
+      setGroups(response.data);
+    });
   };
 
   const menu = (
@@ -68,9 +61,7 @@ const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return groups && (
-    <GroupsSortingGridContainer groups={groups} />
-  );
+  return groups && <GroupsSortingGridContainer groups={groups} />;
 };
 
 export default compose(connector)(GroupsSorting);

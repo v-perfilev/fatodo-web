@@ -19,7 +19,7 @@ const ImageUploaderButtons: FC<Props> = (props: Props) => {
   const inputRef = useRef<HTMLInputElement>();
   const buttonRef = useRef<HTMLButtonElement>();
 
-  const onImageLoaded = (event) => {
+  const onImageLoaded = (event): void => {
     if (event.target.files && event.target.files.length > 0) {
       const reader = new FileReader();
       reader.addEventListener('load', () => setSource(reader.result));
@@ -36,8 +36,14 @@ const ImageUploaderButtons: FC<Props> = (props: Props) => {
   return (
     <Box className={classes.buttons}>
       <label htmlFor="upload-image">
-        <input id="upload-image" type="file" accept="image/*" className={classes.input} onChange={onImageLoaded}
-               ref={inputRef} />
+        <input
+          id="upload-image"
+          type="file"
+          accept="image/*"
+          className={classes.input}
+          onChange={onImageLoaded}
+          ref={inputRef}
+        />
         <Button color="primary" variant="contained" component="span" ref={buttonRef}>
           {image ? updateLabel : uploadLabel}
         </Button>

@@ -30,8 +30,8 @@ type Props = RouteComponentProps &
   FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-  onSuccess: () => void;
-};
+    onSuccess: () => void;
+  };
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();

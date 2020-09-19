@@ -3,9 +3,10 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Link as MaterialLink, LinkProps as MaterialLinkProps} from '@material-ui/core';
 
-type Props = LinkProps & MaterialLinkProps & {
-  underline?: boolean;
-};
+type Props = LinkProps &
+  MaterialLinkProps & {
+    underline?: boolean;
+  };
 
 const Link: FC<Props> = ({underline, to, children, ...props}: Props) => {
   return (

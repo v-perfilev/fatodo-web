@@ -19,10 +19,10 @@ import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
 
 type Props = FormikProps<any> &
   CaptchaProps & {
-  code: string;
-  onSuccess: () => void;
-  onFailure: (status: number) => void;
-};
+    code: string;
+    onSuccess: () => void;
+    onFailure: (status: number) => void;
+  };
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();

@@ -26,4 +26,3 @@ export const roundPicStyles = makeStyles((theme: Theme) => ({
     height: 100,
   },
 }));
-

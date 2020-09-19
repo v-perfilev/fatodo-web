@@ -23,7 +23,8 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
   const {i18n, t} = useTranslation();
   const history = useHistory();
   const {groupId} = useParams();
-  const [saveCallback, setSaveCallback] = useState(() => () => {
+  const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
+    // important stub function
   });
   const [group, setGroup] = useState<Group>(null);
 
@@ -43,12 +44,7 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <AdditionalMenuButton
-        icon={<CheckIcon />}
-        action={submit}
-        color="primary"
-        tooltip={t('groups:tooltips.ok')}
-      />
+      <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('groups:tooltips.ok')} />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroup}
@@ -67,7 +63,7 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  const request = (data: FormData, stopSubmitting: () => void) => {
+  const request = (data: FormData, stopSubmitting: () => void): void => {
     GroupService.update(data)
       .then(() => {
         Notification.handleSnack('groups.edited', 'info');
@@ -79,13 +75,10 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
       });
   };
 
-  return group && (
-    <GroupForm
-      group={group}
-      header={t('groups:headers.edit')}
-      setSaveCallback={setSaveCallback}
-      request={request}
-    />
+  return (
+    group && (
+      <GroupForm group={group} header={t('groups:headers.edit')} setSaveCallback={setSaveCallback} request={request} />
+    )
   );
 };
 

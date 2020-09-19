@@ -10,8 +10,15 @@ const GroupFormColor: FC = () => {
   const {t} = useTranslation();
 
   return (
-    <Field component={TextField} type="text" name="color" label={t('groups:fields.color.label')} select required
-           fullWidth>
+    <Field
+      component={TextField}
+      type="text"
+      name="color"
+      label={t('groups:fields.color.label')}
+      select
+      required
+      fullWidth
+    >
       {Object.values(colorSchemes).map((color, index) => (
         <MenuItem value={color} key={index}>
           <ColorView color={color} />

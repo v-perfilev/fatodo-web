@@ -12,7 +12,7 @@ type Props = {
   updateLabel: string;
   clearLabel: string;
   crop?: any;
-}
+};
 
 const ImageUploader: FC<Props> = (props: Props) => {
   const {filenameName, contentName} = props;

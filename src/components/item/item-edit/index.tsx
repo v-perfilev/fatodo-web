@@ -25,7 +25,8 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
   const {i18n, t} = useTranslation();
   const history = useHistory();
   const {groupId, itemId} = useParams();
-  const [saveCallback, setSaveCallback] = useState(() => () => {
+  const [saveCallback, setSaveCallback] = useState(() => (): void => {
+    // important stub function
   });
   const [group, setGroup] = useState<Group>(null);
   const [item, setItem] = useState<Item>(null);
@@ -53,12 +54,7 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <AdditionalMenuButton
-        icon={<CheckIcon />}
-        action={submit}
-        color="primary"
-        tooltip={t('items:tooltips.ok')}
-      />
+      <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('items:tooltips.ok')} />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToItem}
@@ -77,7 +73,7 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  const request = (data: FormData, stopSubmitting: () => void) => {
+  const request = (data: FormData, stopSubmitting: () => void): void => {
     ItemService.update(data)
       .then(() => {
         Notification.handleSnack('items.edited', 'info');
@@ -89,14 +85,17 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
       });
   };
 
-  return group && item && (
-    <ItemForm
-      group={group}
-      item={item}
-      header={t('items:headers.edit', {group: group.title})}
-      setSaveCallback={setSaveCallback}
-      request={request}
-    />
+  return (
+    group &&
+    item && (
+      <ItemForm
+        group={group}
+        item={item}
+        header={t('items:headers.edit', {group: group.title})}
+        setSaveCallback={setSaveCallback}
+        request={request}
+      />
+    )
   );
 };
 
