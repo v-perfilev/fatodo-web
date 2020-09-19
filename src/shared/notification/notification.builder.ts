@@ -1,8 +1,8 @@
-import Notification from '../../models/notification.model';
+import Snack from '../../models/snack.model';
 import {SnackbarAction, SnackbarMessage, SnackbarOrigin, VariantType} from 'notistack';
 
 export class NotificationBuilder {
-  private readonly notification: Notification;
+  private readonly notification: Snack;
 
   constructor(message: SnackbarMessage) {
     this.notification = {message, options: {}};
@@ -28,7 +28,7 @@ export class NotificationBuilder {
     return this;
   }
 
-  build(): Notification {
+  build(): Snack {
     return this.notification;
   }
 }

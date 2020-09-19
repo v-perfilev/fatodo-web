@@ -1,7 +1,6 @@
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {TextField} from 'formik-material-ui';
-import {connect, ConnectedProps} from 'react-redux';
 import * as React from 'react';
 import {FC} from 'react';
 import i18n from '../../shared/i18n';
@@ -10,16 +9,11 @@ import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import AccountService from '../../services/account.service';
 import LoadingButton from '../common/inputs/loading-button';
-import {NotificationUtils} from '../../shared/utils/notification.utils';
-import {enqueueSnackbar} from '../../store/actions/notification.actions';
+import {Notification} from '../../shared/notification/notification';
 import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
 import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 
-const mapDispatchToProps = {enqueueSnackbar};
-const connector = connect(null, mapDispatchToProps);
-
 type Props = FormikProps<any> &
-  ConnectedProps<typeof connector> &
   CaptchaProps & {
   onSuccess?: () => void;
 };
@@ -71,15 +65,15 @@ const formik = withFormik<Props, FormValues>({
 
     AccountService.requestResetPasswordCode(data)
       .then(() => {
-        NotificationUtils.handleSnack('auth.afterForgotPassword', 'info', props.enqueueSnackbar);
+        Notification.handleSnack('auth.afterForgotPassword', 'info');
         props.onSuccess();
       })
       .catch((response) => {
-        NotificationUtils.handleFeedback(response, '*', '', props.enqueueSnackbar);
+        Notification.handleFeedback(response);
         setSubmitting(false);
         updateToken();
       });
   },
 });
 
-export default compose(withCaptchaProvider, withCaptcha, connector, formik)(ForgotPasswordForm);
+export default compose(withCaptchaProvider, withCaptcha, formik)(ForgotPasswordForm);

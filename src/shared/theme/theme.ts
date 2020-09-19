@@ -12,20 +12,20 @@ import {ColorScheme} from './colors';
 
 export class ThemeFactory {
 
-  private static turquoiseTheme = createMuiTheme({
-    palette: {
-      type: 'light',
-      ...defaultPalette,
-      ...turquoisePalette,
-    },
-    typography: defaultTypography,
-  });
-
   private static yellowTheme = createMuiTheme({
     palette: {
       type: 'light',
       ...defaultPalette,
       ...yellowPalette,
+    },
+    typography: defaultTypography,
+  });
+
+  private static turquoiseTheme = createMuiTheme({
+    palette: {
+      type: 'light',
+      ...defaultPalette,
+      ...turquoisePalette,
     },
     typography: defaultTypography,
   });
@@ -57,14 +57,14 @@ export class ThemeFactory {
     typography: defaultTypography,
   });
 
-  public static getDefaultTheme = (): Theme => ThemeFactory.turquoiseTheme;
+  public static getDefaultTheme = (): Theme => ThemeFactory.yellowTheme;
 
   public static getTheme = (color: ColorScheme): Theme => {
     switch (color) {
-      case 'turquoise':
-        return ThemeFactory.turquoiseTheme;
       case 'yellow':
         return ThemeFactory.yellowTheme;
+      case 'turquoise':
+        return ThemeFactory.turquoiseTheme;
       case 'purple':
         return ThemeFactory.purpleTheme;
       case 'green':

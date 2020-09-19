@@ -12,10 +12,9 @@ import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-b
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import GroupService from '../../../services/group.service';
-import {NotificationUtils} from '../../../shared/utils/notification.utils';
-import {enqueueSnackbar} from '../../../store/actions/notification.actions';
+import {Notification} from '../../../shared/notification/notification';
 
-const mapDispatchToProps = {setMenu, enqueueSnackbar};
+const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
@@ -71,11 +70,11 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
   const request = (data: FormData, stopSubmitting: () => void) => {
     GroupService.update(data)
       .then(() => {
-        NotificationUtils.handleSnack('auth.afterResetPassword', 'info', enqueueSnackbar);
+        Notification.handleSnack('auth.afterResetPassword', 'info');
         redirectToGroup();
       })
       .catch((response) => {
-        NotificationUtils.handleFeedback(response, '*', '', enqueueSnackbar);
+        Notification.handleFeedback(response);
         stopSubmitting();
       });
   };

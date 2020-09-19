@@ -4,9 +4,13 @@ import {Image} from '../../../../models/image.model';
 import ReactCrop from 'react-image-crop';
 import imageCompression from 'browser-image-compression';
 import {imageUploaderPopoverStyles} from './_styles';
+import {Notification} from '../../../../shared/notification/notification';
+import {IMAGE_MAX_SIZE, IMAGE_MAX_WIDTH, IMAGE_MIN_WIDTH} from '../../../../constants';
+import {ImageError} from './types';
+import csx from 'classnames';
 
 type Props = {
-  image: File;
+  source: File;
   anchorEl: HTMLElement;
   handleClose: (image: Image) => void;
   cropOptions?: any;
@@ -19,38 +23,55 @@ const defaultInitialCrop = {
 };
 
 const compressionOptions = {
-  maxSizeMB: 2,
-  maxWidthOrHeight: 1000,
+  maxWidthOrHeight: IMAGE_MAX_WIDTH,
+  maxSizeMB: IMAGE_MAX_SIZE,
 };
 
-const minSize = 100;
+const minWidth = IMAGE_MIN_WIDTH;
 
-const ImageUploaderCropPopover: FC<Props> = ({image, anchorEl, handleClose, cropOptions}: Props) => {
+const ImageUploaderCropPopover: FC<Props> = ({source, anchorEl, handleClose, cropOptions}: Props) => {
   const classes = imageUploaderPopoverStyles();
   const imageRef = useRef();
   const [crop, setCrop] = useState({...defaultInitialCrop, ...cropOptions});
   const [croppedBlob, setCroppedBlob] = useState<Blob>(null);
-  const [toSmall, setToSmall] = useState(false);
+  const [isValid, setIsValid] = useState(true);
+  const [notificationAllowed, setNotificationAllowed] = useState(true);
 
   const isOpen = Boolean(anchorEl);
 
   const onClose = (): void => {
-    if (toSmall) {
+    if (!isValid) {
       handleClose(null);
     } else {
       imageCompression(croppedBlob, compressionOptions).then((compressedBlob: Blob) => {
-        const image = {filename: URL.createObjectURL(compressedBlob), content: compressedBlob} as Image;
+        const image = {filename: URL.createObjectURL(compressedBlob), content: compressedBlob};
         handleClose(image);
       });
     }
+    setCrop({...defaultInitialCrop, ...cropOptions});
   };
 
   const onImageLoad = (image): void => {
     imageRef.current = image;
   };
 
+  const sendErrorNotifications = (errors: ImageError[]): void => {
+    if (notificationAllowed && errors.length > 0) {
+      errors.forEach(error => {
+        Notification.handleSnack('image.' + error, 'warning');
+      });
+      setNotificationAllowed(false);
+      setTimeout(() => setNotificationAllowed(true), 5000);
+    }
+  };
+
   const onCropChange = (crop): void => {
-    setToSmall(crop.width < minSize || crop.height < minSize);
+    const errors: ImageError[] = [];
+    if (crop.width < minWidth || crop.height < minWidth) {
+      errors.push('tooSmall');
+    }
+    sendErrorNotifications(errors);
+    setIsValid(errors.length === 0);
     setCrop(crop);
   };
 
@@ -91,6 +112,8 @@ const ImageUploaderCropPopover: FC<Props> = ({image, anchorEl, handleClose, crop
     });
   };
 
+  const classNames = csx(classes.popoverBody, {[classes.invalidBody]: !isValid});
+
   return (
     <Popover
       open={isOpen}
@@ -99,18 +122,15 @@ const ImageUploaderCropPopover: FC<Props> = ({image, anchorEl, handleClose, crop
       anchorOrigin={{vertical: 'top', horizontal: 'center'}}
       transformOrigin={{vertical: 'top', horizontal: 'center'}}
     >
-      <Box className={classes.popoverBody}>
+      <Box className={classNames}>
         <ReactCrop
-          src={image}
+          src={source}
           crop={crop}
           ruleOfThirds
           onImageLoaded={onImageLoad}
           onChange={onCropChange}
           onComplete={onCropComplete}
         />
-        {toSmall && (
-          <Box>To small</Box>
-        )}
       </Box>
     </Popover>
   );

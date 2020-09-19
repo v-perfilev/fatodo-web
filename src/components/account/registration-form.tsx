@@ -14,20 +14,14 @@ import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
 import LoadingButton from '../common/inputs/loading-button';
-import {enqueueSnackbar} from '../../store/actions/notification.actions';
-import {connect, ConnectedProps} from 'react-redux';
-import {NotificationUtils} from '../../shared/utils/notification.utils';
+import {Notification} from '../../shared/notification/notification';
 import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
 import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 
-const mapDispatchToProps = {enqueueSnackbar};
-const connector = connect(null, mapDispatchToProps);
-
 type Props = FormikProps<any> &
-  ConnectedProps<typeof connector> &
   CaptchaProps & {
-    onSuccess: () => void;
-  };
+  onSuccess: () => void;
+};
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -117,15 +111,15 @@ const formik = withFormik<Props, FormValues>({
 
     AccountService.register(data)
       .then(() => {
-        NotificationUtils.handleSnack('auth.registered', 'info', props.enqueueSnackbar);
+        Notification.handleSnack('auth.registered', 'info');
         props.onSuccess();
       })
       .catch((response) => {
-        NotificationUtils.handleFeedback(response, '*', '', props.enqueueSnackbar);
+        Notification.handleFeedback(response);
         setSubmitting(false);
         updateToken();
       });
   },
 });
 
-export default compose(withCaptchaProvider, withCaptcha, connector, formik)(RegistrationForm);
+export default compose(withCaptchaProvider, withCaptcha, formik)(RegistrationForm);

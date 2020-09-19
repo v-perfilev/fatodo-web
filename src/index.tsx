@@ -14,21 +14,25 @@ import {enqueueSnackbar} from './store/actions/notification.actions';
 import {initLanguages} from './shared/i18n';
 import './shared/i18n';
 import {BrowserRouter as Router} from 'react-router-dom';
-import Notifier from './shared/notification/notifier';
+import NotificationHandler from './shared/notification/notification-handler';
 import {NotificationProvider} from './shared/notification/notification-provider';
 import {MuiPickersUtilsProvider} from '@material-ui/pickers';
 import MomentUtils from '@date-io/moment';
 import {useTranslation} from 'react-i18next';
+import {setupNotification} from './shared/notification/notification';
 
 // import external styles
 import 'react-image-crop/dist/ReactCrop.css';
 
 const root = document.getElementById('root');
 
-const axiosActions = bindActionCreators({clearAuth, enqueueSnackbar}, store.dispatch);
+const actions = bindActionCreators({clearAuth, enqueueSnackbar}, store.dispatch);
 setupAxiosInterceptors({
-  onUnauthenticated: axiosActions.clearAuth,
-  enqueueSnackbar: axiosActions.enqueueSnackbar,
+  onUnauthenticated: actions.clearAuth,
+  enqueueSnackbar: actions.enqueueSnackbar,
+});
+setupNotification({
+  enqueueSnackbar: actions.enqueueSnackbar,
 });
 
 const defaultTheme = ThemeFactory.getDefaultTheme();
@@ -41,9 +45,9 @@ const Root: FC = () => {
       <ThemeProvider theme={defaultTheme}>
         <MuiPickersUtilsProvider utils={MomentUtils} locale={i18n.language}>
           <NotificationProvider>
+            <NotificationHandler />
             <Router>
               <CssBaseline />
-              <Notifier />
               <App />
             </Router>
           </NotificationProvider>

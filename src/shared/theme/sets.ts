@@ -35,7 +35,6 @@ export const defaultPalette = {
   background: {
     default: COLORS.WHITE,
   },
-  border: COLORS.TURQUOISE,
   gradient: GRADIENT_COLORS.YELLOW,
 };
 
@@ -49,7 +48,6 @@ export const yellowPalette = {
     main: COLORS.YELLOW,
     contrastText: COLORS.WHITE,
   },
-  border: COLORS.TURQUOISE,
   gradient: GRADIENT_COLORS.YELLOW,
 };
 
@@ -63,7 +61,6 @@ export const turquoisePalette = {
     main: COLORS.YELLOW,
     contrastText: COLORS.WHITE,
   },
-  border: COLORS.WHITE,
   gradient: GRADIENT_COLORS.TURQUOISE,
 };
 
@@ -77,7 +74,6 @@ export const purplePalette = {
     main: COLORS.YELLOW,
     contrastText: COLORS.WHITE,
   },
-  border: COLORS.TURQUOISE,
   gradient: GRADIENT_COLORS.PURPLE,
 };
 
@@ -91,7 +87,6 @@ export const greenPalette = {
     main: COLORS.YELLOW,
     contrastText: COLORS.WHITE,
   },
-  border: COLORS.TURQUOISE,
   gradient: GRADIENT_COLORS.GREEN,
 };
 
@@ -105,6 +100,5 @@ export const bluePalette = {
     main: COLORS.YELLOW,
     contrastText: COLORS.WHITE,
   },
-  border: COLORS.TURQUOISE,
-  gradient: COLORS.BLUE,
+  gradient: GRADIENT_COLORS.BLUE,
 };

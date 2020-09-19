@@ -1,11 +1,5 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-export const imageUploaderPreview = makeStyles((theme: Theme) => ({
-  image: {
-    marginBottom: theme.spacing(1),
-  },
-}));
-
 export const imageUploaderButtonsStyles = makeStyles((theme: Theme) => ({
   buttons: {
     display: 'flex',
@@ -27,5 +21,8 @@ export const imageUploaderPopoverStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     maxWidth: 325,
     padding: theme.spacing(1.5),
+  },
+  invalidBody: {
+    background: theme.palette.error.light,
   },
 }));

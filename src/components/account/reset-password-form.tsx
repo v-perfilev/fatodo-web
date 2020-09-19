@@ -13,17 +13,11 @@ import {IconButton, InputAdornment} from '@material-ui/core';
 import {VisibilityOnIcon} from '../common/icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import LoadingButton from '../common/inputs/loading-button';
-import {enqueueSnackbar} from '../../store/actions/notification.actions';
-import {connect, ConnectedProps} from 'react-redux';
-import {NotificationUtils} from '../../shared/utils/notification.utils';
+import {Notification} from '../../shared/notification/notification';
 import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
 
-const mapDispatchToProps = {enqueueSnackbar};
-const connector = connect(null, mapDispatchToProps);
-
 type Props = FormikProps<any> &
-  ConnectedProps<typeof connector> &
   CaptchaProps & {
   code: string;
   onSuccess: () => void;
@@ -120,11 +114,11 @@ const formik = withFormik<Props, FormValues>({
     };
     AccountService.resetPassword(data)
       .then(() => {
-        NotificationUtils.handleSnack('auth.afterResetPassword', 'info', props.enqueueSnackbar);
+        Notification.handleSnack('auth.afterResetPassword', 'info');
         props.onSuccess();
       })
       .catch((response) => {
-        NotificationUtils.handleFeedback(response, '*', '', props.enqueueSnackbar);
+        Notification.handleFeedback(response);
         setSubmitting(false);
         updateToken();
         props.onFailure(response?.status);
@@ -132,4 +126,4 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose(withCaptchaProvider, withCaptcha, connector, formik)(ResetPasswordForm);
+export default compose(withCaptchaProvider, withCaptcha, formik)(ResetPasswordForm);

@@ -1,7 +1,7 @@
 import axios, {AxiosPromise, AxiosResponse} from 'axios';
 import {API_TIMEOUT, API_URL} from '../constants';
 import {SecurityUtils} from './utils/security.utils';
-import Notification from '../models/notification.model';
+import Snack from '../models/snack.model';
 import {NotificationBuilder} from './notification/notification.builder';
 import {TranslationUtils} from './utils/translation.utils';
 import {ResponseUtils} from './utils/response.utils';
@@ -11,7 +11,7 @@ axios.defaults.baseURL = API_URL;
 
 interface SetupAxiosActions {
   onUnauthenticated: () => void;
-  enqueueSnackbar: (notification: Notification) => void;
+  enqueueSnackbar: (notification: Snack) => void;
 }
 
 const setupAxiosInterceptors = (actions: SetupAxiosActions): void => {

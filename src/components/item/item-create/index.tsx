@@ -10,18 +10,17 @@ import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import {useHistory, useParams} from 'react-router-dom';
 import GroupService from '../../../services/group.service';
-import {NotificationUtils} from '../../../shared/utils/notification.utils';
+import {Notification} from '../../../shared/notification/notification';
 import ItemService from '../../../services/item.service';
-import {enqueueSnackbar} from '../../../store/actions/notification.actions';
 import {Group} from '../../../models/group.model';
 import ItemForm from '../item-form';
 
-const mapDispatchToProps = {setMenu, enqueueSnackbar};
+const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-const ItemCreate: FC<Props> = ({setMenu, enqueueSnackbar}: Props) => {
+const ItemCreate: FC<Props> = ({setMenu}: Props) => {
   const {i18n, t} = useTranslation();
   const history = useHistory();
   const {groupId} = useParams();
@@ -73,12 +72,12 @@ const ItemCreate: FC<Props> = ({setMenu, enqueueSnackbar}: Props) => {
   const request = (data: FormData, stopSubmitting: () => void) => {
     ItemService.create(data)
       .then((response) => {
-        NotificationUtils.handleSnack('items.created', 'info', enqueueSnackbar);
+        Notification.handleSnack('items.created', 'info');
         const id = response.data.id;
         redirectToItem(id);
       })
       .catch((response) => {
-        NotificationUtils.handleFeedback(response, '*', '', enqueueSnackbar);
+        Notification.handleFeedback(response);
         stopSubmitting();
       });
   };

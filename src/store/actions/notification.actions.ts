@@ -1,4 +1,4 @@
-import Notification from '../../models/notification.model';
+import Snack from '../../models/snack.model';
 import {SnackbarKey} from 'notistack';
 
 export const ACTION_TYPES = {
@@ -7,7 +7,7 @@ export const ACTION_TYPES = {
   REMOVE_SNACKBAR: 'notificationState/REMOVE_SNACKBAR',
 };
 
-export const enqueueSnackbar = (notification: Notification) => (dispatch): void =>
+export const enqueueSnackbar = (notification: Snack) => (dispatch): void =>
   dispatch({
     type: ACTION_TYPES.ENQUEUE_SNACKBAR,
     notification: {

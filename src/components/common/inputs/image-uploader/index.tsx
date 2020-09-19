@@ -49,7 +49,7 @@ const ImageUploader: FC<Props> = (props: Props) => {
         updateLabel={updateLabel}
         clearLabel={clearLabel}
       />
-      <ImageUploaderCropPopover cropOptions={crop} image={source} anchorEl={anchorEl} handleClose={handleClose} />
+      <ImageUploaderCropPopover cropOptions={crop} source={source} anchorEl={anchorEl} handleClose={handleClose} />
     </>
   );
 };

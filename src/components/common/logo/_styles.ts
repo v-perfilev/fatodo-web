@@ -7,7 +7,7 @@ export const logoStyles = makeStyles(() => ({
     alignItems: 'center',
     '& img': {
       height: 50,
-    }
+    },
   },
 }));
 
@@ -17,12 +17,13 @@ export const logoWithTextStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     '& img': {
       height: 50,
-    }
+    },
   },
   logoText: {
     fontWeight: 500,
     fontSize: '2.2rem',
     lineHeight: 1,
     letterSpacing: '0.05em',
+    marginLeft: theme.spacing(1),
   },
 }));

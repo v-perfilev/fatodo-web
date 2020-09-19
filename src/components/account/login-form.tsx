@@ -14,8 +14,7 @@ import {VisibilityOffIcon} from '../common/icons/visibility-off-icon';
 import {compose} from 'recompose';
 import LoadingButton from '../common/inputs/loading-button';
 import AccountService from '../../services/account.service';
-import {NotificationUtils} from '../../shared/utils/notification.utils';
-import {enqueueSnackbar} from '../../store/actions/notification.actions';
+import {Notification} from '../../shared/notification/notification';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../router';
 import {ResponseUtils} from '../../shared/utils/response.utils';
@@ -24,7 +23,7 @@ import Link from '../common/inputs/link';
 import withCaptchaProvider from '../../shared/hoc/with-captcha-provider';
 import withCaptcha, {CaptchaProps} from '../../shared/hoc/with-capcha';
 
-const mapDispatchToProps = {login, requestAccountData, enqueueSnackbar};
+const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = RouteComponentProps &
@@ -113,7 +112,7 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-    const {login, requestAccountData, history, onSuccess, token, updateToken, enqueueSnackbar} = props;
+    const {login, requestAccountData, history, onSuccess, token, updateToken} = props;
     const data = {
       user: values.user,
       password: values.password,
@@ -132,7 +131,7 @@ const formik = withFormik<Props, FormValues>({
         if (ResponseUtils.getFeedbackCode(response) === 'auth.notActivated') {
           history.push(Routes.NOT_ACTIVATED, {user: values.user});
         } else {
-          NotificationUtils.handleFeedback(response, '*', ['auth.notActivated'], enqueueSnackbar);
+          Notification.handleFeedback(response, '*', ['auth.notActivated']);
           setSubmitting(false);
           updateToken();
         }

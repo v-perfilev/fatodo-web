@@ -2,17 +2,9 @@ import {FC, useEffect} from 'react';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import AccountService from '../../services/account.service';
 import {Routes} from '../router';
-import {compose} from 'recompose';
-import {NotificationUtils} from '../../shared/utils/notification.utils';
-import {enqueueSnackbar} from '../../store/actions/notification.actions';
-import {connect, ConnectedProps} from 'react-redux';
+import {Notification} from '../../shared/notification/notification';
 
-const mapDispatchToProps = {enqueueSnackbar};
-const connector = connect(null, mapDispatchToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-const Activation: FC<Props> = ({enqueueSnackbar}: Props) => {
+const Activation: FC = () => {
   const match = useRouteMatch<{code: string}>();
   const history = useHistory();
   const code = match.params.code;
@@ -23,7 +15,7 @@ const Activation: FC<Props> = ({enqueueSnackbar}: Props) => {
   useEffect(() => {
     AccountService.activate(code)
       .then(() => {
-        NotificationUtils.handleSnack('auth.activated', 'info', enqueueSnackbar);
+        Notification.handleSnack('auth.activated', 'info');
         redirectToHome();
       })
       .catch(() => {
@@ -34,4 +26,4 @@ const Activation: FC<Props> = ({enqueueSnackbar}: Props) => {
   return null;
 };
 
-export default compose(connector)(Activation);
+export default Activation;
