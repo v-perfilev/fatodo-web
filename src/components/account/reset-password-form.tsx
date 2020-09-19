@@ -25,10 +25,10 @@ const connector = connect(null, mapDispatchToProps);
 type Props = FormikProps<any> &
   ConnectedProps<typeof connector> &
   CaptchaProps & {
-    code: string;
-    onSuccess: () => void;
-    onFailure: (status: number) => void;
-  };
+  code: string;
+  onSuccess: () => void;
+  onFailure: (status: number) => void;
+};
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -112,10 +112,11 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
+    const {code, token, updateToken} = props;
     const data = {
-      code: props.code,
+      code: code,
       password: values.password,
-      token: props.token,
+      token: token,
     };
     AccountService.resetPassword(data)
       .then(() => {
@@ -125,6 +126,7 @@ const formik = withFormik<Props, FormValues>({
       .catch((response) => {
         NotificationUtils.handleFeedback(response, '*', '', props.enqueueSnackbar);
         setSubmitting(false);
+        updateToken();
         props.onFailure(response?.status);
       });
   },

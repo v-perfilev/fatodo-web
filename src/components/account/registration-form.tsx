@@ -106,12 +106,13 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
+    const {token, updateToken} = props;
     const data = {
       email: values.email,
       username: values.username,
       password: values.password,
       language: i18n.language,
-      token: props.token,
+      token: token,
     };
 
     AccountService.register(data)
@@ -122,6 +123,7 @@ const formik = withFormik<Props, FormValues>({
       .catch((response) => {
         NotificationUtils.handleFeedback(response, '*', '', props.enqueueSnackbar);
         setSubmitting(false);
+        updateToken();
       });
   },
 });

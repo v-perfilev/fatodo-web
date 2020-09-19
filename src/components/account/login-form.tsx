@@ -113,11 +113,11 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-    const {login, requestAccountData, history, onSuccess, enqueueSnackbar} = props;
+    const {login, requestAccountData, history, onSuccess, token, updateToken, enqueueSnackbar} = props;
     const data = {
       user: values.user,
       password: values.password,
-      token: props.token,
+      token: token,
     };
 
     const onFailure = (): void => setSubmitting(false);
@@ -134,6 +134,7 @@ const formik = withFormik<Props, FormValues>({
         } else {
           NotificationUtils.handleFeedback(response, '*', ['auth.notActivated'], enqueueSnackbar);
           setSubmitting(false);
+          updateToken();
         }
       });
   },
