@@ -89,7 +89,7 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
   return (
     group && (
       <Container className={classes.root}>
-        <PageHeader title={group.title} />
+        <PageHeader title={group.title} color={group.color} />
         <PageDivider color={group.color} height={5} />
         <GroupViewUsers users={group.users} />
         <GroupViewItems items={group.items ?? []} color={group.color} />

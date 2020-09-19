@@ -3,13 +3,15 @@ import {FC, memo, useEffect, useRef, useState} from 'react';
 import {Card} from '@material-ui/core';
 import GroupPreviewCardHeader from './group-preview-card-header';
 import {groupCardStyles} from './_styles';
-import {GroupProps} from '../_types';
 import GroupPreviewCardBody from './group-preview-card-body';
 import {useResize} from '../../../shared/hooks/use-resize';
 import {CARD_RATIO} from '../_constants';
 import {compose} from 'recompose';
+import {Group} from '../../../models/group.model';
 
-type Props = GroupProps;
+type Props = {
+  group: Group
+};
 
 const GroupPreviewCard: FC<Props> = ({group}: Props) => {
   const classes = groupCardStyles();

@@ -16,3 +16,12 @@ export const groupFormStyles = makeStyles((theme: Theme) => ({
     display: 'none',
   },
 }));
+
+export const groupFormImageStyles = makeStyles((theme: Theme) => ({
+  label: {
+    marginBottom: theme.spacing(1),
+  },
+  preview: {
+    marginBottom: theme.spacing(1),
+  },
+}));

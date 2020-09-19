@@ -25,7 +25,7 @@ const GroupPreviewCardHeader: FC<Props> = ({group}: Props) => {
         title={
           <Box className={classes.title}>
             {group.imageFilename && (
-              <RoundPic url={group.imageFilename} whiteBorder size="md" />
+              <RoundPic url={group.imageFilename} size="md" color={group.color} variant={'secondary'} border={1} />
             )}
             <Typography variant={'h6'} className={classes.caption}>
               {group.title}

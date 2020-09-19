@@ -2,6 +2,9 @@ import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import ImageUploader from '../../common/inputs/image-uploader';
 import {Image} from '../../../models/image.model';
+import {Box, FormLabel} from '@material-ui/core';
+import {groupFormImageStyles} from './_styles';
+import RoundPic from '../../common/images/round-pic';
 
 type Props = {
   values: any;
@@ -9,19 +12,37 @@ type Props = {
 };
 
 const GroupFormImage: FC<Props> = ({values, setFieldValue}: Props) => {
+  const classes = groupFormImageStyles();
   const {t} = useTranslation();
 
+  const filenameName = 'imageFilename';
+  const contentName = 'imageContent';
+  const color = values.color;
+  const filename = values.imageFilename;
+
+  console.log(values);
+  console.log(filename);
+
   return (
-    <ImageUploader
-      label={t('groups:fields.image.label')}
-      filenameName="imageFilename"
-      contentName="imageContent"
-      values={values}
-      setFieldValue={setFieldValue}
-      uploadLabel={t('groups:buttons.uploadImage')}
-      updateLabel={t('groups:buttons.updateImage')}
-      clearLabel={t('groups:buttons.clearImage')}
-    />
+    <>
+      <Box className={classes.label}>
+        <FormLabel required>{t('groups:fields.image.label')}</FormLabel>
+      </Box>
+      {filename && (
+        <Box className={classes.preview}>
+          <RoundPic url={filename} size="lg" color={color} border={3} />
+        </Box>
+      )}
+      <ImageUploader
+        filenameName={filenameName}
+        contentName={contentName}
+        values={values}
+        setFieldValue={setFieldValue}
+        uploadLabel={t('groups:buttons.uploadImage')}
+        updateLabel={t('groups:buttons.updateImage')}
+        clearLabel={t('groups:buttons.clearImage')}
+      />
+    </>
   );
 };
 

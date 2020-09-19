@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useRef} from 'react';
 import {groupFormStyles} from './_styles';
-import {Button, Container, Grid} from '@material-ui/core';
+import {Button, Container, Grid, ThemeProvider} from '@material-ui/core';
 import PageHeader from '../../common/layout-page/page-header';
 import PageDivider from '../../common/layout-page/page-divider';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
@@ -12,6 +12,7 @@ import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
 import GroupFormTitle from './group-form-title';
 import {GroupFormUtils, GroupFormValues} from './_form';
+import {testTheme} from '../../../shared/theme';
 
 type Props = FormikProps<any> & {
   group?: Group;
@@ -35,27 +36,29 @@ const GroupForm: FC<Props> = (props: Props) => {
   }, [isValid]);
 
   return (
-    <Container className={classes.root}>
-      <PageHeader title={header} />
-      <PageDivider color={color} height={5} />
-      <Form className={classes.form}>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <GroupFormTitle />
+    <ThemeProvider theme={testTheme}>
+      <Container className={classes.root}>
+        <PageHeader title={header} color={color} />
+        <PageDivider color={color} height={5} />
+        <Form className={classes.form}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <GroupFormTitle />
+            </Grid>
+            <Grid item xs={6} lg={3}>
+              <GroupFormColor />
+            </Grid>
+            <Grid item xs={6} lg={9} />
+            <Grid item xs={6} lg={3}>
+              <GroupFormImage {...props} />
+            </Grid>
           </Grid>
-          <Grid item xs={6} lg={3}>
-            <GroupFormColor />
-          </Grid>
-          <Grid item xs={6} lg={9} />
-          <Grid item xs={6} lg={3}>
-            <GroupFormImage {...props} />
-          </Grid>
-        </Grid>
-        <Button type="submit" disabled={!isValid || isSubmitting} ref={buttonRef} className={classes.submitButton}>
-          Submit
-        </Button>
-      </Form>
-    </Container>
+          <Button type="submit" disabled={!isValid || isSubmitting} ref={buttonRef} className={classes.submitButton}>
+            Submit
+          </Button>
+        </Form>
+      </Container>
+    </ThemeProvider>
   );
 };
 

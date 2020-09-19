@@ -47,7 +47,7 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
   return (
     item && (
       <Container className={classes.root}>
-        <PageHeader title={item.title} />
+        <PageHeader title={item.title} color={item.group.color} />
         <PageDivider color={item.group.color} height={5} />
         <ItemViewData item={item} />
         {item.description && (

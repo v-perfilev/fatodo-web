@@ -65,3 +65,43 @@ export const theme = createMuiTheme({
     fontFamily: 'Roboto, serif',
   },
 });
+
+export const testTheme = createMuiTheme({
+  palette: {
+    type: 'light',
+    primary: {
+      main: COLORS.PURPLE,
+      contrastText: COLORS.WHITE,
+    },
+    secondary: {
+      main: COLORS.SECONDARY,
+      contrastText: COLORS.WHITE,
+    },
+    info: {
+      main: COLORS.INFO,
+      contrastText: COLORS.WHITE,
+    },
+    success: {
+      main: COLORS.SUCCESS,
+      contrastText: COLORS.WHITE,
+    },
+    warning: {
+      main: COLORS.WARNING,
+      contrastText: COLORS.WHITE,
+    },
+    error: {
+      main: COLORS.ERROR,
+      contrastText: COLORS.WHITE,
+    },
+    text: {
+      primary: COLORS.BLACK,
+    },
+    background: {
+      default: COLORS.WHITE,
+    },
+  },
+  typography: {
+    fontFamily: 'Roboto, serif',
+  },
+});
+

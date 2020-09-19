@@ -1,6 +1,6 @@
 import React, {FC, useRef} from 'react';
 import {Box, Button} from '@material-ui/core';
-import {imageUploaderButtonsStyles, imageUploaderPreview} from './_styles';
+import {imageUploaderButtonsStyles} from './_styles';
 import {Image} from '../../../../models/image.model';
 
 type Props = {

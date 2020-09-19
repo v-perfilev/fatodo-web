@@ -1,12 +1,14 @@
 import * as React from 'react';
 import {FC, memo} from 'react';
 import {Grid} from '@material-ui/core';
-import {GroupProps} from '../_types';
 import GroupCard from './group-preview-card';
 import {groupGridItemStyles} from './_styles';
 import {compose} from 'recompose';
+import {Group} from '../../../models/group.model';
 
-type Props = GroupProps;
+type Props = {
+  group: Group
+};
 
 const GroupPreviewGridItem: FC<Props> = ({group}: Props) => {
   const classes = groupGridItemStyles();

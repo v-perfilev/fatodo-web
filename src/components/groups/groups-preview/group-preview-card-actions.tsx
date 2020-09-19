@@ -6,25 +6,23 @@ import {MessageIcon} from '../../common/icons/message-icon';
 import GroupPreviewCardAvatars from './group-preview-card-avatars';
 import {groupCardActionsStyles} from './_styles';
 import {compose} from 'recompose';
-import {User} from '../../../models/user.model';
+import {Group} from '../../../models/group.model';
 
 type Props = {
-  users: User[];
-  notificationCount: number;
-  messageCount: number;
+  group: Group;
 };
 
-const GroupPreviewCardActions: FC<Props> = ({users, notificationCount, messageCount}: Props) => {
+const GroupPreviewCardActions: FC<Props> = ({group}: Props) => {
   const classes = groupCardActionsStyles();
 
   return (
     <CardActions className={classes.actions}>
-      <GroupPreviewCardAvatars users={users} />
+      <GroupPreviewCardAvatars group={group} />
       <Box className={classes.badges}>
-        <Badge color="primary" max={5} badgeContent={notificationCount}>
+        <Badge color="primary" max={5} badgeContent={group.notificationCount}>
           <BellIcon className={classes.icon} />
         </Badge>
-        <Badge color="primary" max={5} badgeContent={messageCount}>
+        <Badge color="primary" max={5} badgeContent={group.messageCount}>
           <MessageIcon className={classes.icon} />
         </Badge>
       </Box>

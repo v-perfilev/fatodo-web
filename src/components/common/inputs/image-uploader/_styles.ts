@@ -1,11 +1,5 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-export const imageUploaderStyles = makeStyles((theme: Theme) => ({
-  label: {
-    marginBottom: theme.spacing(1),
-  },
-}));
-
 export const imageUploaderPreview = makeStyles((theme: Theme) => ({
   image: {
     marginBottom: theme.spacing(1),

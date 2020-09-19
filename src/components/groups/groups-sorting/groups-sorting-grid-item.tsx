@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {Grid} from '@material-ui/core';
-import {GroupProps} from '../_types';
 import {animated} from 'react-spring';
 import {compose} from 'recompose';
 import GroupSortingCard from './group-sorting-card';
 import {groupSortingGridItemStyles} from './_styles';
+import {Group} from '../../../models/group.model';
 
-type Props = HTMLAttributes<any> &
-  GroupProps & {
+type Props = HTMLAttributes<any> & {
+  group: Group;
   bind: (...any) => void;
   setItemRef: (element: HTMLDivElement) => void;
 };

@@ -3,10 +3,12 @@ import {FC} from 'react';
 import {Box} from '@material-ui/core';
 import GroupCardContent from './group-preview-card-content';
 import {groupCardBodyStyles} from './_styles';
-import {GroupProps} from '../_types';
 import GroupCardActions from './group-preview-card-actions';
+import {Group} from '../../../models/group.model';
 
-type Props = GroupProps;
+type Props = {
+  group: Group;
+};
 
 const GroupPreviewCardBody: FC<Props> = ({group}: Props) => {
   const classes = groupCardBodyStyles();
@@ -14,11 +16,7 @@ const GroupPreviewCardBody: FC<Props> = ({group}: Props) => {
   return (
     <Box className={classes.body}>
       <GroupCardContent items={group.items ?? []} />
-      <GroupCardActions
-        users={group.users}
-        messageCount={group.messageCount}
-        notificationCount={group.notificationCount}
-      />
+      <GroupCardActions group={group} />
     </Box>
   );
 };
