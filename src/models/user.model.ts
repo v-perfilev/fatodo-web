@@ -10,5 +10,5 @@ export interface UserAccount {
 export interface User {
   id: string;
   username: string;
-  avatarUrl?: string;
+  imageUrl?: string;
 }

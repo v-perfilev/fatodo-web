@@ -19,7 +19,7 @@ const GroupPreviewCardAvatars: FC<Props> = ({users}: Props) => {
   return (
     <Box className={classes.avatars}>
       {usersToShow.map((user, index) => (
-        <RoundPic key={index} alt={user.username} url={user.avatarUrl} border={1} />
+        <RoundPic key={index} alt={user.username} url={user.imageUrl} border={1} />
       ))}
       {moreThanLimit > 0 && <Typography className={classes.count}>+{moreThanLimit}</Typography>}
     </Box>

@@ -10,7 +10,7 @@ type Props = {
 const GroupViewMessages: FC<Props> = ({}: Props) => {
   const classes = groupMessagesStyles();
 
-  return <Box className={classes.root}>Test</Box>;
+  return <Box className={classes.root}>TODO messages</Box>;
 };
 
 export default GroupViewMessages;
