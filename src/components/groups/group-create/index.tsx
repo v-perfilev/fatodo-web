@@ -10,8 +10,15 @@ import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
 import GroupService from '../../../services/group.service';
 import {Notification} from '../../../shared/notification/notification';
+import {connect, ConnectedProps} from 'react-redux';
+import {compose} from 'recompose';
 
-const GroupCreate: FC = () => {
+const mapDispatchToProps = {setMenu};
+const connector = connect(null, mapDispatchToProps);
+
+type Props = ConnectedProps<typeof connector>;
+
+const GroupCreate: FC<Props> = ({setMenu}: Props) => {
   const history = useHistory();
   const {i18n, t} = useTranslation();
   const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
@@ -59,4 +66,4 @@ const GroupCreate: FC = () => {
   return <GroupForm header={t('groups:headers.create')} setSaveCallback={setSaveCallback} request={request} />;
 };
 
-export default GroupCreate;
+export default compose(connector)(GroupCreate);

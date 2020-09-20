@@ -1,11 +1,8 @@
 import * as React from 'react';
-import {FC, memo} from 'react';
-import {Badge, Box, CardActions} from '@material-ui/core';
-import {BellIcon} from '../../common/icons/bell-icon';
-import {MessageIcon} from '../../common/icons/message-icon';
-import GroupPreviewCardAvatars from './group-preview-card-avatars';
+import {FC, useState} from 'react';
+import {Fade, IconButton, Menu, MenuItem} from '@material-ui/core';
+import {DotsVerticalIcon} from '../../common/icons/dots-vertical-icon';
 import {groupCardActionsStyles} from './_styles';
-import {compose} from 'recompose';
 import {Group} from '../../../models/group.model';
 
 type Props = {
@@ -14,20 +11,39 @@ type Props = {
 
 const GroupPreviewCardActions: FC<Props> = ({group}: Props) => {
   const classes = groupCardActionsStyles();
+  const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
+
+  const isOpen = Boolean(anchorEl);
+
+  const handleClick = (e: React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    setAnchorEl(e.currentTarget);
+  };
+  const handleClose = (e: React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    setAnchorEl(null);
+  };
 
   return (
-    <CardActions className={classes.actions}>
-      <GroupPreviewCardAvatars users={group.users} />
-      <Box className={classes.badges}>
-        <Badge color="primary" max={5} badgeContent={group.notificationCount}>
-          <BellIcon className={classes.icon} />
-        </Badge>
-        <Badge color="primary" max={5} badgeContent={group.messageCount}>
-          <MessageIcon className={classes.icon} />
-        </Badge>
-      </Box>
-    </CardActions>
+    <>
+      <IconButton onClick={handleClick} className={classes.action}>
+        <DotsVerticalIcon />
+      </IconButton>
+      <Menu
+        anchorEl={anchorEl}
+        keepMounted
+        open={isOpen}
+        onClose={handleClose}
+        TransitionComponent={Fade}
+      >
+        <MenuItem onClick={console.log}>
+          Test
+        </MenuItem>
+      </Menu>
+    </>
   );
 };
 
-export default compose(memo)(GroupPreviewCardActions);
+export default GroupPreviewCardActions;

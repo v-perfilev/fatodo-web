@@ -83,13 +83,13 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  const theme = ThemeFactory.getTheme(group.color);
+  const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
   return (
     group && (
       <ThemeProvider theme={theme}>
         <Container className={classes.root}>
-          <PageHeader title={group.title} />
+          <PageHeader title={group.title} imageFilename={group.imageFilename} />
           <PageDivider height={5} />
           <GroupViewUsers users={group.users} />
           <GroupViewItems items={group.items ?? []} />

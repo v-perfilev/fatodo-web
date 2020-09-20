@@ -2,9 +2,9 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Box, CardHeader, Typography} from '@material-ui/core';
 import {groupSortingCardHeaderStyles} from './_styles';
-import {ArrowAllIcon} from '../../common/icons/arrow-all-icon';
 import {Group} from '../../../models/group.model';
 import RoundPic from '../../common/images/round-pic';
+import GroupSortingCardActions from './group-sorting-card-actions';
 
 type Props = {
   group: Group;
@@ -24,7 +24,7 @@ const GroupSortingCardHeader: FC<Props> = ({group, bind}: Props) => {
           </Typography>
         </Box>
       }
-      action={<ArrowAllIcon {...bind} />}
+      action={<GroupSortingCardActions bind={bind} />}
       className={classes.root}
     />
   );

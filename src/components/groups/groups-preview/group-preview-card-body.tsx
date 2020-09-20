@@ -3,7 +3,7 @@ import {FC} from 'react';
 import {Box} from '@material-ui/core';
 import GroupCardContent from './group-preview-card-content';
 import {groupCardBodyStyles} from './_styles';
-import GroupCardActions from './group-preview-card-actions';
+import GroupCardActions from './group-preview-card-notifications';
 import {Group} from '../../../models/group.model';
 
 type Props = {

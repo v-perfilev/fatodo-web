@@ -13,13 +13,13 @@ type Props = HTMLAttributes<any> & {
 
 const LanguageSelect: FC<Props> = ({list, className}: Props) => {
   const classes = languageSelectStyles();
-  const [anchorElement, setAnchorElement] = useState<HTMLElement | null>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
 
-  const isOpen = Boolean(anchorElement);
+  const isOpen = Boolean(anchorEl);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>): void => setAnchorElement(event.currentTarget);
+  const handleClick = (event: React.MouseEvent<HTMLElement>): void => setAnchorEl(event.currentTarget);
 
-  const handleClose = (): void => setAnchorElement(null);
+  const handleClose = (): void => setAnchorEl(null);
 
   const getShortNameByCode = (code, short?): string => {
     const getName = (c): string => LANGUAGES.find((l) => l.code === c)?.name;
@@ -32,7 +32,7 @@ const LanguageSelect: FC<Props> = ({list, className}: Props) => {
 
   const changeLanguage = (code): void => {
     LanguageUtils.setLanguage(code);
-    setAnchorElement(null);
+    setAnchorEl(null);
   };
 
   return (
@@ -53,9 +53,8 @@ const LanguageSelect: FC<Props> = ({list, className}: Props) => {
         </Button>
       )}
       <Menu
-        id="language-menu"
-        anchorEl={anchorElement}
-        keepMounted={true}
+        anchorEl={anchorEl}
+        keepMounted
         open={isOpen}
         onClose={handleClose}
         TransitionComponent={Fade}

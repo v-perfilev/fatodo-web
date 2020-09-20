@@ -16,19 +16,7 @@ export const groupSortingCardHeaderStyles = makeStyles((theme: Theme) => ({
     flexShrink: 0,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
-    // TODO ?
     background: theme.palette.gradient,
-    '& .MuiCardHeader-action': {
-      marginTop: 6,
-      marginRight: theme.spacing(0),
-      alignSelf: 'center',
-      color: theme.palette.primary.contrastText,
-      cursor: 'pointer',
-      '& svg': {
-        width: '1.2em',
-        height: '1.2em',
-      },
-    },
   },
   title: {
     display: 'flex',
@@ -41,6 +29,21 @@ export const groupSortingCardHeaderStyles = makeStyles((theme: Theme) => ({
   caption: {
     fontSize: '1rem',
     color: theme.palette.primary.contrastText,
+  },
+}));
+
+
+export const groupSortingCardActionsStyles = makeStyles((theme: Theme) => ({
+  action: {
+    marginTop: 10,
+    marginRight: 6,
+    alignSelf: 'center',
+    color: theme.palette.primary.contrastText,
+    cursor: 'pointer',
+    '& svg': {
+      width: '1.1em',
+      height: '1.1em',
+    },
   },
 }));
 

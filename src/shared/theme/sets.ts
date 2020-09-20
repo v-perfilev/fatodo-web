@@ -13,6 +13,10 @@ export const defaultPalette = {
     main: COLORS.YELLOW,
     contrastText: COLORS.WHITE,
   },
+  tertiary: {
+    main: COLORS.TURQUOISE,
+    contrastText: COLORS.WHITE,
+  },
   info: {
     main: COLORS.INFO,
     contrastText: COLORS.WHITE,
@@ -48,6 +52,10 @@ export const yellowPalette = {
     main: COLORS.YELLOW,
     contrastText: COLORS.WHITE,
   },
+  tertiary: {
+    main: COLORS.YELLOW,
+    contrastText: COLORS.WHITE,
+  },
   gradient: GRADIENT_COLORS.YELLOW,
 };
 
@@ -59,6 +67,10 @@ export const turquoisePalette = {
   },
   secondary: {
     main: COLORS.YELLOW,
+    contrastText: COLORS.WHITE,
+  },
+  tertiary: {
+    main: COLORS.TURQUOISE,
     contrastText: COLORS.WHITE,
   },
   gradient: GRADIENT_COLORS.TURQUOISE,
@@ -74,6 +86,10 @@ export const purplePalette = {
     main: COLORS.YELLOW,
     contrastText: COLORS.WHITE,
   },
+  tertiary: {
+    main: COLORS.PURPLE,
+    contrastText: COLORS.WHITE,
+  },
   gradient: GRADIENT_COLORS.PURPLE,
 };
 
@@ -87,6 +103,10 @@ export const greenPalette = {
     main: COLORS.YELLOW,
     contrastText: COLORS.WHITE,
   },
+  tertiary: {
+    main: COLORS.GREEN,
+    contrastText: COLORS.WHITE,
+  },
   gradient: GRADIENT_COLORS.GREEN,
 };
 
@@ -98,6 +118,10 @@ export const bluePalette = {
   },
   secondary: {
     main: COLORS.YELLOW,
+    contrastText: COLORS.WHITE,
+  },
+  tertiary: {
+    main: COLORS.BLUE,
     contrastText: COLORS.WHITE,
   },
   gradient: GRADIENT_COLORS.BLUE,

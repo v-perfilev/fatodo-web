@@ -4,7 +4,7 @@ import {Theme} from '@material-ui/core';
 export const roundPicStyles = makeStyles((theme: Theme) => ({
   root: {
     borderStyle: 'solid',
-    borderColor: theme.palette.primary.main,
+    borderColor: theme.palette.tertiary.main,
     '& img': {
       height: '100%',
     },

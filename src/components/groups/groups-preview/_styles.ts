@@ -16,13 +16,7 @@ export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
     flexShrink: 0,
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
-    // TODO ?
     background: theme.palette.gradient,
-    '& .MuiCardHeader-action': {
-      marginTop: 0,
-      marginRight: theme.spacing(-1.5),
-      alignSelf: 'center',
-    },
   },
   title: {
     display: 'flex',
@@ -36,7 +30,12 @@ export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
     fontSize: '1rem',
     color: theme.palette.primary.contrastText,
   },
+}));
+
+export const groupCardActionsStyles = makeStyles((theme: Theme) => ({
   action: {
+    marginTop: -2,
+    marginRight: -4,
     color: theme.palette.primary.contrastText,
   },
 }));
@@ -101,7 +100,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardActionsStyles = makeStyles((theme: Theme) => ({
+export const groupCardNotificationsStyles = makeStyles((theme: Theme) => ({
   actions: {
     display: 'flex',
     flexDirection: 'row',
