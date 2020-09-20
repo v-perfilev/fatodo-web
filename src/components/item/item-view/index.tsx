@@ -9,11 +9,12 @@ import {itemViewStyles} from './_styles';
 import {Item} from '../../../models/item.model';
 import PageHeader from '../../common/layout-page/page-header';
 import ItemViewData from './item-view-data';
-import {generateItem} from '../../_constants';
 import PageDivider from '../../common/layout-page/page-divider';
 import ItemViewProperties from './item-view-properties';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
+import {Routes} from '../../router';
+import {useHistory} from 'react-router-dom';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -23,11 +24,14 @@ type Props = ConnectedProps<typeof connector>;
 const ItemView: FC<Props> = ({setMenu}: Props) => {
   const classes = itemViewStyles();
   const {i18n} = useTranslation();
+  const history = useHistory();
   const [item, setItem] = useState<Item>(null);
+
+  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const loadItem = (): void => {
     // TODO set item
-    setItem(generateItem());
+    redirectToNotFound();
   };
 
   const menu = (
@@ -45,7 +49,7 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  const theme = ThemeFactory.getTheme(item.group.color);
+  const theme = item ? ThemeFactory.getTheme(item.group.color) : ThemeFactory.getDefaultTheme();
 
   return (
     item && (

@@ -33,6 +33,7 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
 
   const submit = (): void => saveCallback();
   const redirectToItem = (): void => history.push(Routes.ITEMS + '/' + itemId);
+  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const loadGroupAndItem = (): void => {
     GroupService.get(groupId)
@@ -40,14 +41,14 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
         setGroup(response.data);
       })
       .catch(() => {
-        redirectToItem();
+        redirectToNotFound();
       });
     ItemService.get(itemId)
       .then((response) => {
         setItem(response.data);
       })
       .catch(() => {
-        redirectToItem();
+        redirectToNotFound();
       });
   };
 

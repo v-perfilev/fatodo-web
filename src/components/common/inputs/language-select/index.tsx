@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {FC, HTMLAttributes, useState} from 'react';
-import {Box, Button, Fade, List, ListItem, ListItemIcon, ListItemText, Menu, MenuItem} from '@material-ui/core';
+import {Box, Button, List, ListItem, ListItemIcon, ListItemText, MenuItem} from '@material-ui/core';
 import {LANGUAGES} from '../../../../shared/i18n';
 import {LanguageIcon} from '../../icons/language-icon';
 import {ArrowDownIcon} from '../../icons/arrow-down-icon';
 import {LanguageUtils} from '../../../../shared/utils/language.utils';
 import {languageSelectStyles} from './_styles';
+import PopupMenu from '../popup-menu';
 
 type Props = HTMLAttributes<any> & {
   list?: boolean;
@@ -52,19 +53,13 @@ const LanguageSelect: FC<Props> = ({list, className}: Props) => {
           <ArrowDownIcon />
         </Button>
       )}
-      <Menu
-        anchorEl={anchorEl}
-        keepMounted
-        open={isOpen}
-        onClose={handleClose}
-        TransitionComponent={Fade}
-      >
+      <PopupMenu anchorEl={anchorEl} isOpen={isOpen} onClose={handleClose}>
         {LANGUAGES.map((language, index) => (
           <MenuItem onClick={(): void => changeLanguage(language.code)} key={index}>
             {language.name}
           </MenuItem>
         ))}
-      </Menu>
+      </PopupMenu>
     </Box>
   );
 };

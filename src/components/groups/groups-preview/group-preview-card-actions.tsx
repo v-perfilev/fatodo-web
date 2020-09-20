@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {FC, useState} from 'react';
-import {Fade, IconButton, Menu, MenuItem} from '@material-ui/core';
+import {IconButton, MenuItem} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../common/icons/dots-vertical-icon';
 import {groupCardActionsStyles} from './_styles';
 import {Group} from '../../../models/group.model';
+import PopupMenu from '../../common/inputs/popup-menu';
 
 type Props = {
   group: Group;
@@ -15,7 +16,7 @@ const GroupPreviewCardActions: FC<Props> = ({group}: Props) => {
 
   const isOpen = Boolean(anchorEl);
 
-  const handleClick = (e: React.MouseEvent<HTMLElement>): void => {
+  const handleClickOnAction = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     e.stopPropagation();
     setAnchorEl(e.currentTarget);
@@ -28,20 +29,14 @@ const GroupPreviewCardActions: FC<Props> = ({group}: Props) => {
 
   return (
     <>
-      <IconButton onClick={handleClick} className={classes.action}>
+      <IconButton onClick={handleClickOnAction} className={classes.action}>
         <DotsVerticalIcon />
       </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        keepMounted
-        open={isOpen}
-        onClose={handleClose}
-        TransitionComponent={Fade}
-      >
+      <PopupMenu anchorEl={anchorEl} isOpen={isOpen} onClose={handleClose}>
         <MenuItem onClick={console.log}>
           Test
         </MenuItem>
-      </Menu>
+      </PopupMenu>
     </>
   );
 };

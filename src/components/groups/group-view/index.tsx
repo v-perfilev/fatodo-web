@@ -39,6 +39,7 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
     history.push((Routes.ITEMS + ItemRoutes.CREATE).replace(':groupId', groupId));
   const redirectToEditGroup = (): void => history.push((Routes.GROUPS + GroupRoutes.EDIT).replace(':groupId', groupId));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
+  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const loadGroup = (): void => {
     GroupService.get(groupId)
@@ -46,7 +47,7 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
         setGroup(response.data);
       })
       .catch(() => {
-        redirectToGroups();
+        redirectToNotFound();
       });
   };
 

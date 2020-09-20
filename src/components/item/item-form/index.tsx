@@ -41,7 +41,7 @@ const ItemForm: FC<Props> = (props: Props) => {
     }
   }, [isValid]);
 
-  const theme = ThemeFactory.getTheme(group.color);
+  const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
   return (
     <ThemeProvider theme={theme}>

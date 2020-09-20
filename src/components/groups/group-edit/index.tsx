@@ -30,6 +30,7 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
 
   const submit = (): void => saveCallback();
   const redirectToGroup = (): void => history.push(Routes.GROUPS + '/' + groupId);
+  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const loadGroup = (): void => {
     GroupService.get(groupId)
@@ -37,7 +38,7 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
         setGroup(response.data);
       })
       .catch(() => {
-        redirectToGroup();
+        redirectToNotFound();
       });
   };
 
