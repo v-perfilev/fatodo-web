@@ -46,7 +46,7 @@ const GroupPreview: FC<Props> = ({setMenu}: Props) => {
       <AdditionalMenuButton
         icon={<ReorderIcon />}
         action={redirectToGroupsSorting}
-        color="primary"
+        color="secondary"
         tooltip={t('groups:tooltips.reorder')}
       />
     </>

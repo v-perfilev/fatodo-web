@@ -9,6 +9,7 @@ import {RouteProps} from 'react-router-dom';
 import {AdditionalMenuState} from '../../../store/rerducers/additional-menu.reducer';
 import {compose} from 'recompose';
 import csx from 'classnames';
+import {ADDITIONAL_MENU_UPDATE} from '../../../constants';
 
 const mapStateToProps = (state: RootState): AdditionalMenuState => state.additionalMenuState;
 const connector = connect(mapStateToProps);
@@ -21,15 +22,30 @@ const AdditionalMenu: FC<Props> = ({menu, reload}: Props) => {
   const [menuForRender, setMenuForRender] = useState(null);
   const [timer, setTimer] = useState(null);
 
+  const updateWithTimer = (): void => {
+    setMenuForRender(null);
+    const newTimer = window.setTimeout(() => {
+      setMenuForRender(menu);
+      setTimer(null);
+    }, ADDITIONAL_MENU_UPDATE);
+    setTimer(newTimer);
+  };
+
+  const updateWithoutTimer = (): void => {
+    if (timer) {
+      window.clearTimeout(timer);
+      updateWithTimer();
+    } else {
+      setMenuForRender(menu);
+    }
+  };
+
   useEffect(() => {
-    window.clearTimeout(timer);
-    setMenuForRender(menu);
+    updateWithoutTimer();
   }, [menu]);
 
   useEffect(() => {
-    setMenuForRender(null);
-    const newTimer = window.setTimeout(() => setMenuForRender(menu), 300);
-    setTimer(newTimer);
+    updateWithTimer();
   }, [reload]);
 
   const drawerClassNames = csx(classes.drawer, isBigDevice ? classes.drawerLeft : classes.drawerBottom);
@@ -47,7 +63,7 @@ const AdditionalMenu: FC<Props> = ({menu, reload}: Props) => {
           <Logo />
         </Box>
       )}
-      <Fade in={Boolean(menuForRender)} timeout={300}>
+      <Fade in={Boolean(menuForRender)} timeout={ADDITIONAL_MENU_UPDATE}>
         <Box className={containerClassNames}>{menuForRender}</Box>
       </Fade>
     </Drawer>
