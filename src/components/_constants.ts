@@ -1,17 +1,7 @@
-import {Group} from '../models/group.model';
 import {User} from '../models/user.model';
 import {Item} from '../models/item.model';
 import {Reminder} from '../models/reminder.model';
 import {ParamDate} from '../models/param-date.model';
-
-const GROUP_BASE: Group = {
-  id: Math.random().toString(),
-  title: 'Test Group',
-  color: 'yellow',
-  imageFilename: null,
-  notificationCount: 3,
-  messageCount: 11,
-};
 
 const GROUP_USERS: User[] = [
   {
@@ -76,7 +66,7 @@ const ITEM_TEMPLATE: Item = {
   createdAt: '01-01-2001',
   updatedBy: GROUP_USERS[0],
   updatedAt: '01-01-2001',
-  group: GROUP_BASE,
+  groupId: 'test',
 };
 
 export const generateItem = (): Item => {
@@ -87,12 +77,4 @@ export const generateItem = (): Item => {
     ...ITEM_TEMPLATE,
     title,
   };
-};
-
-export const TEST_GROUP: Group = {
-  ...GROUP_BASE,
-  users: GROUP_USERS,
-  items: Array.from(Array(10).keys()).map(() => {
-    return generateItem();
-  }),
 };

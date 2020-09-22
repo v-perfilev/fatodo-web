@@ -1,4 +1,5 @@
 import axios, {AxiosPromise} from 'axios';
+import {GroupDTO} from '../models/dto/group.dto';
 
 export default class GroupService {
   private static baseUrl = '/api/group';
@@ -13,13 +14,13 @@ export default class GroupService {
     return axios.get(url);
   };
 
-  public static create = (data: FormData): AxiosPromise => {
+  public static create = (data: GroupDTO): AxiosPromise => {
     const url = GroupService.baseUrl + '/groups';
     const config = {headers: {'Content-Type': 'undefined'}};
     return axios.post(url, data, config);
   };
 
-  public static update = (data: FormData): AxiosPromise => {
+  public static update = (data: GroupDTO): AxiosPromise => {
     const url = GroupService.baseUrl + '/groups';
     const config = {headers: {'Content-Type': 'undefined'}};
     return axios.put(url, data, config);

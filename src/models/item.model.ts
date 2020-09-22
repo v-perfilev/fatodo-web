@@ -1,4 +1,3 @@
-import {Group} from './group.model';
 import {Reminder} from './reminder.model';
 import {AbstractAuditing} from './abstract-auditing.model';
 import {ParamDate} from './param-date.model';
@@ -18,5 +17,5 @@ export interface Item extends AbstractAuditing {
   description?: string;
   reminders?: Reminder[];
   tags?: string[];
-  group: Group;
+  groupId: string;
 }

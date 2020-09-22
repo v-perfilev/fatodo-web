@@ -11,11 +11,12 @@ import {compose} from 'recompose';
 import {Item} from '../../../models/item.model';
 
 type Props = {
-  items: Item[];
+  groupId: string
 };
 
-const GroupPreviewCardContent: FC<Props> = ({items}: Props) => {
+const GroupPreviewCardContent: FC<Props> = ({groupId}: Props) => {
   const classes = groupCardContentStyles();
+  const [items, setItems] = useState<Item[]>([]);
 
   const ref = useRef();
   const [initialized, setInitialized] = useState(false);

@@ -92,8 +92,8 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
         <Container className={classes.root}>
           <PageHeader title={group.title} imageFilename={group.imageFilename} />
           <PageDivider height={5} />
-          <GroupViewUsers users={group.users} />
-          <GroupViewItems items={group.items ?? []} />
+          <GroupViewUsers groupUsers={group.users} />
+          <GroupViewItems groupId={group.id} />
           <GroupViewMessages group={group} />
         </Container>
       </ThemeProvider>

@@ -13,6 +13,8 @@ import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import GroupService from '../../../services/group.service';
 import {Notification} from '../../../shared/notification/notification';
+import {ItemDTO} from '../../../models/dto/item.dto';
+import {GroupDTO} from '../../../models/dto/group.dto';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -64,7 +66,7 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  const request = (data: FormData, stopSubmitting: () => void): void => {
+  const request = (data: GroupDTO, stopSubmitting: () => void): void => {
     GroupService.update(data)
       .then(() => {
         Notification.handleSnack('groups.edited', 'info');

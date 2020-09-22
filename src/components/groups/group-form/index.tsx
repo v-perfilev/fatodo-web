@@ -13,12 +13,13 @@ import i18n from '../../../shared/i18n';
 import GroupFormTitle from './group-form-title';
 import {GroupFormUtils, GroupFormValues} from './_form';
 import {ThemeFactory} from '../../../shared/theme/theme';
+import {GroupDTO} from '../../../models/dto/group.dto';
 
 type Props = FormikProps<any> & {
   group?: Group;
   header: string;
   setSaveCallback: (callback: () => () => void) => void;
-  request: (data: FormData, stopSubmitting: () => void) => void;
+  request: (groupDTO: GroupDTO, stopSubmitting: () => void) => void;
 };
 
 const GroupForm: FC<Props> = (props: Props) => {
@@ -77,7 +78,7 @@ const formik = withFormik<Props, GroupFormValues>({
 
   handleSubmit: (values: GroupFormValues, {setSubmitting, props}: FormikBag<Props, GroupFormValues>) => {
     const {request, group} = props;
-    const data = GroupFormUtils.mapValuesToFormData(values, group);
+    const data = GroupFormUtils.mapValuesToDTO(values, group);
     request(data, () => setSubmitting(false));
   },
 });

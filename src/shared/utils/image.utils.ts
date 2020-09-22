@@ -18,4 +18,13 @@ export class ImageUtils {
     }
     return true;
   };
+
+  public static blobToBase64 = (blob): Promise<string> => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => resolve(reader.result as string));
+      reader.readAsBinaryString(blob);
+    });
+  };
+
 }

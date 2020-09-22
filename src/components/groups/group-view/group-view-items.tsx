@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {groupItemListStyles} from './_styles';
 import GroupViewItem from './group-view-item';
@@ -6,11 +6,16 @@ import PageDivider from '../../common/layout-page/page-divider';
 import {Item} from '../../../models/item.model';
 
 type Props = {
-  items: Item[];
+  groupId: string;
 };
 
-const GroupViewItems: FC<Props> = ({items}: Props) => {
+const GroupViewItems: FC<Props> = ({groupId}: Props) => {
   const classes = groupItemListStyles();
+  const [items, setItems] = useState<Item[]>([]);
+
+  useEffect(() => {
+    // TODO set items
+  }, []);
 
   return (
     <Box className={classes.root}>

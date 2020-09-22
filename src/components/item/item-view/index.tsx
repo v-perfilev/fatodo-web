@@ -15,6 +15,7 @@ import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
+import {Group} from '../../../models/group.model';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -25,12 +26,13 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
   const classes = itemViewStyles();
   const {i18n} = useTranslation();
   const history = useHistory();
-  const [item, setItem] = useState<Item>(null);
+  const [item, setItem] = useState<Item>();
+  const [group, setGroup] = useState<Group>();
 
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
-  const loadItem = (): void => {
-    // TODO set item
+  const loadItemAndGroup = (): void => {
+    // TODO set item and group
     redirectToNotFound();
   };
 
@@ -41,7 +43,7 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
   );
 
   useEffect(() => {
-    loadItem();
+    loadItemAndGroup();
     setMenu(menu, true);
   }, []);
 
@@ -49,26 +51,24 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  const theme = item ? ThemeFactory.getTheme(item.group.color) : ThemeFactory.getDefaultTheme();
+  const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
-  return (
-    item && (
-      <ThemeProvider theme={theme}>
-        <Container className={classes.root}>
-          <PageHeader title={item.title} />
-          <PageDivider height={5} />
-          <ItemViewData item={item} />
-          {item.description && (
-            <>
-              <PageDivider />
-              <ItemViewDescription description={item.description} />
-              <PageDivider />
-            </>
-          )}
-          <ItemViewProperties item={item} />
-        </Container>
-      </ThemeProvider>
-    )
+  return (item && group) && (
+    <ThemeProvider theme={theme}>
+      <Container className={classes.root}>
+        <PageHeader title={item.title} />
+        <PageDivider height={5} />
+        <ItemViewData item={item} />
+        {item.description && (
+          <>
+            <PageDivider />
+            <ItemViewDescription description={item.description} />
+            <PageDivider />
+          </>
+        )}
+        <ItemViewProperties item={item} />
+      </Container>
+    </ThemeProvider>
   );
 };
 

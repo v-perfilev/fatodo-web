@@ -1,5 +1,3 @@
-import {User} from './user.model';
-import {Item} from './item.model';
 import {ColorScheme} from '../shared/theme/colors';
 
 export interface Group {
@@ -7,8 +5,12 @@ export interface Group {
   title: string;
   color: ColorScheme;
   imageFilename: string;
-  items?: Item[];
-  users?: User[];
+  users?: GroupUser[];
   notificationCount: number;
   messageCount: number;
+}
+
+export interface GroupUser {
+  id: string;
+  permission: string;
 }

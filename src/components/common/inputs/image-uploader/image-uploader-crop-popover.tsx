@@ -8,6 +8,7 @@ import {Notification} from '../../../../shared/notification/notification';
 import {IMAGE_MAX_SIZE, IMAGE_MAX_WIDTH, IMAGE_MIN_WIDTH} from '../../../../constants';
 import {ImageError} from './types';
 import csx from 'classnames';
+import {ImageUtils} from '../../../../shared/utils/image.utils';
 
 type Props = {
   source: File;
@@ -45,8 +46,10 @@ const ImageUploaderCropPopover: FC<Props> = ({source, anchorEl, handleClose, cro
     if (!isValid) {
       handleClose(null);
     } else {
-      imageCompression(croppedBlob, compressionOptions).then((compressedBlob: Blob) => {
-        const image = {filename: URL.createObjectURL(compressedBlob), content: compressedBlob};
+      imageCompression(croppedBlob, compressionOptions).then(async (compressedBlob: Blob) => {
+        const filename = URL.createObjectURL(compressedBlob);
+        const content = await ImageUtils.blobToBase64(compressedBlob);
+        const image = {filename, content};
         handleClose(image);
       });
     }
@@ -94,17 +97,11 @@ const ImageUploaderCropPopover: FC<Props> = ({source, anchorEl, handleClose, cro
       0,
       0,
       crop.width,
-      crop.height
+      crop.height,
     );
 
     return new Promise((resolve) => {
-      canvas.toBlob(
-        (blob: Blob) => {
-          resolve(blob);
-        },
-        'image/jpeg',
-        1
-      );
+      canvas.toBlob((blob: Blob) => resolve(blob), 'image/jpeg', 1);
     });
   };
 

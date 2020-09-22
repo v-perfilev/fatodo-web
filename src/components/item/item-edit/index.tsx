@@ -15,6 +15,7 @@ import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import ItemService from '../../../services/item.service';
 import {Notification} from '../../../shared/notification/notification';
+import {ItemDTO} from '../../../models/dto/item.dto';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -74,7 +75,7 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  const request = (data: FormData, stopSubmitting: () => void): void => {
+  const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     ItemService.update(data)
       .then(() => {
         Notification.handleSnack('items.edited', 'info');

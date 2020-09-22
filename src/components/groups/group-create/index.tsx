@@ -12,6 +12,7 @@ import GroupService from '../../../services/group.service';
 import {Notification} from '../../../shared/notification/notification';
 import {connect, ConnectedProps} from 'react-redux';
 import {compose} from 'recompose';
+import {GroupDTO} from '../../../models/dto/group.dto';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -50,7 +51,7 @@ const GroupCreate: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  const request = (data: FormData, stopSubmitting: () => void): void => {
+  const request = (data: GroupDTO, stopSubmitting: () => void): void => {
     GroupService.create(data)
       .then((response) => {
         Notification.handleSnack('groups.created', 'info');

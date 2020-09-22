@@ -14,6 +14,7 @@ import {Notification} from '../../../shared/notification/notification';
 import ItemService from '../../../services/item.service';
 import {Group} from '../../../models/group.model';
 import ItemForm from '../item-form';
+import {ItemDTO} from '../../../models/dto/item.dto';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -65,11 +66,12 @@ const ItemCreate: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  const request = (data: FormData, stopSubmitting: () => void): void => {
+  const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     ItemService.create(data)
       .then((response) => {
         Notification.handleSnack('items.created', 'info');
         const id = response.data.id;
+        console.log(Routes.ITEMS + '/' + id);
         redirectToItem(id);
       })
       .catch((response) => {

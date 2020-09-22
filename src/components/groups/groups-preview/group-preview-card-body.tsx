@@ -15,7 +15,7 @@ const GroupPreviewCardBody: FC<Props> = ({group}: Props) => {
 
   return (
     <Box className={classes.body}>
-      <GroupCardContent items={group.items ?? []} />
+      <GroupCardContent groupId={group.id} />
       <GroupCardActions group={group} />
     </Box>
   );

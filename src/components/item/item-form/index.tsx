@@ -19,13 +19,14 @@ import i18n from '../../../shared/i18n';
 import {ItemFormUtils, ItemFormValues} from './_form';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Group} from '../../../models/group.model';
+import {ItemDTO} from '../../../models/dto/item.dto';
 
 type Props = FormikProps<any> & {
   group: Group;
   item?: Item;
   header: string;
   setSaveCallback: (callback: () => () => void) => void;
-  request: (data: FormData, stopSubmitting: () => void) => void;
+  request: (data: ItemDTO, stopSubmitting: () => void) => void;
 };
 
 const ItemForm: FC<Props> = (props: Props) => {
@@ -96,8 +97,8 @@ const formik = withFormik<Props, ItemFormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: ItemFormValues, {setSubmitting, props}: FormikBag<Props, ItemFormValues>) => {
-    const {request, item} = props;
-    const data = ItemFormUtils.mapValuesToFormData(values, item);
+    const {request, item, group} = props;
+    const data = ItemFormUtils.mapValuesToDTO(values, item, group);
     request(data, () => setSubmitting(false));
   },
 });
