@@ -31,7 +31,7 @@ const getDatesAndWeeksCount = (dayOfWeek, datesInMonth): [number[], number] => {
   return [dates, weekCount];
 };
 
-const CalendarSelect: FC<Props> = (props: Props) => {
+export const CalendarSelect: FC<Props> = (props: Props) => {
   const classes = calendarSelectStyles();
   const {label, required} = props;
   const {dayOfWeek, datesInMonth, firstAllowedDate, selectedDates, showWeekend, handleClick, className} = props;
@@ -85,5 +85,3 @@ const CalendarSelect: FC<Props> = (props: Props) => {
     </Box>
   );
 };
-
-export default CalendarSelect;

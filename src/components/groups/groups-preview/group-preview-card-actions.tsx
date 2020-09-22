@@ -4,7 +4,7 @@ import {IconButton, MenuItem} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../common/icons/dots-vertical-icon';
 import {groupCardActionsStyles} from './_styles';
 import {Group} from '../../../models/group.model';
-import PopupMenu from '../../common/inputs/popup-menu';
+import PopupMenu from '../../common/layouts/popup-menu';
 
 type Props = {
   group: Group;

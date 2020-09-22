@@ -71,7 +71,6 @@ export const remindersInputPopoverItemStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    // justifyContent: 'space-evenly',
     flexGrow: 1,
     '& > *': {
       width: '80%',

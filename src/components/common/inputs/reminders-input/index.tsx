@@ -1,22 +1,21 @@
 import {Reminder} from '../../../../models/reminder.model';
 import React, {FC, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
-import {Field} from 'formik';
+import {Field, useFormikContext} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {remindersInputStyles} from './_styles';
-import RemindersInputChips from './reminders-input-chips';
-import RemindersInputButtons from './reminders-input-buttons';
-import RemindersInputPopover from './reminders-input-popover';
+import {RemindersInputChips} from './reminders-input-chips';
+import {RemindersInputButtons} from './reminders-input-buttons';
+import {RemindersInputPopover} from './reminders-input-popover';
 
 type Props = {
   label: string;
   name: string;
-  values: any;
-  setFieldValue: (field: string, value: Reminder[]) => void;
 };
 
-const RemindersInput: FC<Props> = ({label, name, values, setFieldValue}: Props) => {
+export const RemindersInput: FC<Props> = ({label, name}: Props) => {
   const classes = remindersInputStyles();
+  const {values, setFieldValue} = useFormikContext();
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
   const [reminders, setReminders] = useState<Reminder[]>([]);
 
@@ -57,19 +56,19 @@ const RemindersInput: FC<Props> = ({label, name, values, setFieldValue}: Props) 
     reminders.length > 0
       ? {}
       : {
-          shrink: false,
-        };
+        shrink: false,
+      };
 
   const inputProps =
     reminders.length > 0
       ? {
-          readOnly: true,
-          startAdornment: <RemindersInputChips {...{reminders, removeReminder}} />,
-          endAdornment: <RemindersInputButtons {...{clearReminders}} />,
-        }
+        readOnly: true,
+        startAdornment: <RemindersInputChips {...{reminders, removeReminder}} />,
+        endAdornment: <RemindersInputButtons {...{clearReminders}} />,
+      }
       : {
-          readOnly: true,
-        };
+        readOnly: true,
+      };
 
   return (
     <Box className={classes.root}>
@@ -87,5 +86,3 @@ const RemindersInput: FC<Props> = ({label, name, values, setFieldValue}: Props) 
     </Box>
   );
 };
-
-export default RemindersInput;

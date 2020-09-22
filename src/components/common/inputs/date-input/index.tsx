@@ -1,84 +1,42 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Box, Fade, TextField} from '@material-ui/core';
-import {DateFormatters} from '../../../../shared/utils/date.utils';
-import {dateInputStyles} from './_styles';
-import DateInputDate from './date-input-date';
-import DateInputYears from './date-input-years';
-import DateInputMonths from './date-input-months';
+import React, {FC} from 'react';
+import {Field, useFormikContext} from 'formik';
+import {DatePicker} from 'formik-material-ui-pickers';
+import {DateFormats, DateUtils} from '../../../../shared/utils/date.utils';
+import {IconButton} from '@material-ui/core';
+import {CloseIcon} from '../../icons/close-icon';
 
 type Props = {
+  name: string;
   label: string;
-  required?: boolean;
-  date: Date;
-  setDate: (date: Date) => void;
-  firstInputType?: 'year' | 'month' | 'date';
 };
 
-enum InputType {
-  YEAR,
-  MONTH,
-  DATE,
-}
+export const DateInput: FC<Props> = ({name, label}: Props) => {
+  const {values, setFieldValue} = useFormikContext();
 
-const DateInput: FC<Props> = ({label, required, date: inputDate, setDate: setInputDate, firstInputType}: Props) => {
-  const classes = dateInputStyles();
-  const [date, setDate] = useState<Date>(null);
-  const [inputType, setInputType] = useState<InputType>(null);
+  //need to set locale in moment here cause of bug in material-ui
+  DateUtils.resetLocale();
 
-  useEffect(() => {
-    setDate(inputDate || new Date());
-  }, []);
-
-  const formattedDate = inputDate
-    ? !firstInputType || firstInputType === 'year'
-      ? DateFormatters.formatDateWithYear(inputDate)
-      : DateFormatters.formatDate(inputDate)
-    : '';
-
-  const openInput = (): void => {
-    if (!firstInputType || firstInputType === 'year') {
-      setInputType(InputType.YEAR);
-    } else {
-      const newDate = new Date();
-      newDate.setFullYear(1970);
-      setDate(newDate);
-      setInputType(InputType.MONTH);
-    }
-  };
-
-  const handleChange = (changedDate: Date): void => {
-    if (inputType === InputType.YEAR) {
-      setDate(changedDate);
-      setInputType(InputType.MONTH);
-    } else if (inputType === InputType.MONTH) {
-      setDate(changedDate);
-      setInputType(InputType.DATE);
-    } else if (inputType === InputType.DATE) {
-      setDate(changedDate);
-      setInputDate(changedDate);
-      setInputType(null);
-    }
+  const clear = (e): void => {
+    e.stopPropagation();
+    setFieldValue(name, null);
   };
 
   return (
-    <Box>
-      <TextField
-        label={label}
-        required={required}
-        value={formattedDate}
-        InputProps={{readOnly: true}}
-        onClick={openInput}
-        className={classes.textField}
-      />
-      <Fade in={inputType !== null}>
-        <Box className={classes.box}>
-          {inputType === InputType.YEAR && <DateInputYears {...{date, handleChange}} />}
-          {inputType === InputType.MONTH && <DateInputMonths {...{date, handleChange}} />}
-          {inputType === InputType.DATE && <DateInputDate {...{date, handleChange}} />}
-        </Box>
-      </Fade>
-    </Box>
+    <Field
+      component={DatePicker}
+      type="text"
+      name={name}
+      label={label}
+      format={DateFormats.dateWithYearFormat}
+      variant="inline"
+      fullWidth
+      InputProps={{
+        endAdornment: values[name] && (
+          <IconButton onClick={clear} size="small">
+            <CloseIcon />
+          </IconButton>
+        ),
+      }}
+    />
   );
 };
-
-export default DateInput;

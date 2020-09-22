@@ -3,7 +3,7 @@ import {FC} from 'react';
 import {Box, CardHeader, Typography} from '@material-ui/core';
 import {groupSortingCardHeaderStyles} from './_styles';
 import {Group} from '../../../models/group.model';
-import RoundPic from '../../common/images/round-pic';
+import Index from '../../common/images';
 import GroupSortingCardActions from './group-sorting-card-actions';
 
 type Props = {
@@ -18,7 +18,7 @@ const GroupSortingCardHeader: FC<Props> = ({group, bind}: Props) => {
     <CardHeader
       title={
         <Box className={classes.title}>
-          {group.imageFilename && <RoundPic url={group.imageFilename} size="md" />}
+          {group.imageFilename && <Index url={group.imageFilename} size="md" />}
           <Typography variant={'h6'} className={classes.caption}>
             {group.title}
           </Typography>

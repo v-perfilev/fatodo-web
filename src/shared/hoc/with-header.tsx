@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
-import Header from '../../components/layout/header';
-import {HEADER_HEIGHT} from '../../components/layout/header/_constants';
+import Header from '../../components/common/layouts/header';
+import {HEADER_HEIGHT} from '../../components/common/layouts/header/_constants';
 import {Box} from '@material-ui/core';
 
 const withHeader = (Component: ComponentType): FC => (props): ReactElement => {

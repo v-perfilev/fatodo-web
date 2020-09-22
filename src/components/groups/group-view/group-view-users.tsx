@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {groupUsersStyles} from './_styles';
 import {User} from '../../../models/user.model';
-import PaperBox from '../../common/layout-page/paper-box';
+import PaperBox from '../../common/layouts/paper-box';
 import {GroupUser} from '../../../models/group.model';
 
 type Props = {

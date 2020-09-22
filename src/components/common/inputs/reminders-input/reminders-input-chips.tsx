@@ -1,7 +1,7 @@
 import {Reminder} from '../../../../models/reminder.model';
 import React, {FC} from 'react';
 import {Box, Chip} from '@material-ui/core';
-import ReminderView from '../../layout-item/reminder-view';
+import ReminderView from '../../views/reminder-view';
 import {remindersInputChipsStyles} from './_styles';
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
   removeReminder: (index: number, event) => void;
 };
 
-const RemindersInputChips: FC<Props> = ({reminders, removeReminder}: Props) => {
+export const RemindersInputChips: FC<Props> = ({reminders, removeReminder}: Props) => {
   const classes = remindersInputChipsStyles();
 
   return (
@@ -29,5 +29,3 @@ const RemindersInputChips: FC<Props> = ({reminders, removeReminder}: Props) => {
     </Box>
   );
 };
-
-export default RemindersInputChips;

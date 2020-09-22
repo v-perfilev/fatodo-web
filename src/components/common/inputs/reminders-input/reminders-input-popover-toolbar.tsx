@@ -16,7 +16,7 @@ type Props = {
   setPeriodicity: (periodicity: ReminderPeriodicity) => void;
 };
 
-const RemindersInputPopoverToolbar: FC<Props> = ({periodicity, setPeriodicity}: Props) => {
+export const RemindersInputPopoverToolbar: FC<Props> = ({periodicity, setPeriodicity}: Props) => {
   const classes = remindersInputPopoverToolbarStyles();
   const [show, setShow] = useState(true);
   const {t} = useTranslation();
@@ -56,5 +56,3 @@ const RemindersInputPopoverToolbar: FC<Props> = ({periodicity, setPeriodicity}: 
     </Toolbar>
   );
 };
-
-export default RemindersInputPopoverToolbar;

@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {MenuItem} from '@material-ui/core';
-import ColorView from '../../common/layout-group/color-view';
+import ThemeView from '../../common/views/theme-view';
 import {colorSchemes} from '../../../shared/theme/colors';
 
 const GroupFormColor: FC = () => {
@@ -21,7 +21,7 @@ const GroupFormColor: FC = () => {
     >
       {Object.values(colorSchemes).map((color, index) => (
         <MenuItem value={color} key={index}>
-          <ColorView color={color} />
+          <ThemeView color={color} />
         </MenuItem>
       ))}
     </Field>

@@ -2,7 +2,7 @@ import {setMenu} from '../../../store/actions/additional-menu.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import React, {FC, useEffect, useState} from 'react';
 import {Item} from '../../../models/item.model';
-import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
+import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import ItemForm from '../item-form';
 import {compose} from 'recompose';
@@ -10,7 +10,7 @@ import {useHistory, useParams} from 'react-router-dom';
 import {Group} from '../../../models/group.model';
 import {Routes} from '../../router';
 import GroupService from '../../../services/group.service';
-import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-button';
+import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import ItemService from '../../../services/item.service';
@@ -36,6 +36,19 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
   const redirectToItem = (): void => history.push(Routes.ITEMS + '/' + itemId);
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
+  const menu = (
+    <>
+      <AdditionalMenuSpacer />
+      <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('items:tooltips.ok')} />
+      <AdditionalMenuButton
+        icon={<CloseIcon />}
+        action={redirectToItem}
+        color="secondary"
+        tooltip={t('items:tooltips.cancel')}
+      />
+    </>
+  );
+
   const loadGroupAndItem = (): void => {
     GroupService.get(groupId)
       .then((response) => {
@@ -53,28 +66,6 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
       });
   };
 
-  const menu = (
-    <>
-      <AdditionalMenuSpacer />
-      <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('items:tooltips.ok')} />
-      <AdditionalMenuButton
-        icon={<CloseIcon />}
-        action={redirectToItem}
-        color="secondary"
-        tooltip={t('items:tooltips.cancel')}
-      />
-    </>
-  );
-
-  useEffect(() => {
-    loadGroupAndItem();
-    setMenu(menu, true);
-  }, []);
-
-  useEffect(() => {
-    setMenu(menu);
-  }, [i18n.language, saveCallback]);
-
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     ItemService.update(data)
       .then(() => {
@@ -87,17 +78,23 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
       });
   };
 
-  return (
-    group &&
-    item && (
-      <ItemForm
-        group={group}
-        item={item}
-        header={t('items:headers.edit', {group: group.title})}
-        setSaveCallback={setSaveCallback}
-        request={request}
-      />
-    )
+  useEffect(() => {
+    loadGroupAndItem();
+    setMenu(menu, true);
+  }, []);
+
+  useEffect(() => {
+    setMenu(menu);
+  }, [i18n.language, saveCallback]);
+
+  return (group && item) && (
+    <ItemForm
+      group={group}
+      item={item}
+      header={t('items:headers.edit', {group: group.title})}
+      setSaveCallback={setSaveCallback}
+      request={request}
+    />
   );
 };
 

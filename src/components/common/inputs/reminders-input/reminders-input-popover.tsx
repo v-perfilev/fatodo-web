@@ -2,19 +2,19 @@ import React, {FC, useState} from 'react';
 import {Box, Popover} from '@material-ui/core';
 import {remindersInputPopoverStyles} from './_styles';
 import {Reminder, ReminderPeriodicity} from '../../../../models/reminder.model';
-import RemindersInputPopoverToolbar from './reminders-input-popover-toolbar';
-import RemindersInputPopoverOnce from './reminders-input-popover-once';
-import RemindersInputPopoverDaily from './reminders-input-popover-daily';
-import RemindersInputPopoverWeekly from './reminders-input-popover-weekly';
-import RemindersInputPopoverMonthly from './reminders-input-popover-monthly';
-import RemindersInputPopoverYearly from './reminders-input-popover-yearly';
+import {RemindersInputPopoverToolbar} from './reminders-input-popover-toolbar';
+import {RemindersInputPopoverOnce} from './reminders-input-popover-once';
+import {RemindersInputPopoverDaily} from './reminders-input-popover-daily';
+import {RemindersInputPopoverWeekly} from './reminders-input-popover-weekly';
+import {RemindersInputPopoverMonthly} from './reminders-input-popover-monthly';
+import {RemindersInputPopoverYearly} from './reminders-input-popover-yearly';
 
 type Props = {
   anchorEl: HTMLElement;
   handleClose: (reminder: Reminder) => void;
 };
 
-const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose}: Props) => {
+export const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose}: Props) => {
   const classes = remindersInputPopoverStyles();
   const [reminder, setReminder] = useState<Reminder>(null);
   const [periodicity, setPeriodicity] = useState<ReminderPeriodicity>('once');
@@ -44,5 +44,3 @@ const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose}: Props) => {
     </Popover>
   );
 };
-
-export default RemindersInputPopover;

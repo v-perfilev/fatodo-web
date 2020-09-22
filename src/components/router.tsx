@@ -4,18 +4,18 @@ import {Redirect, Switch} from 'react-router-dom';
 import PublicRoute from '../shared/routes/public-route';
 import Unauthorized from './static/unauthorized';
 import InternalError from './static/internal-error';
-import Activation from './account/activation';
 import Forbidden from './static/forbidden';
 import PageNotFound from './static/page-not-found';
-import Auth from './account/auth';
-import ForgotPassword from './account/forgot-password';
-import ResetPassword from './account/reset-password';
 import NotActivated from './static/not-activated';
-import SocialLogin from './account/social-login';
 import Home from './home';
 import GroupRouter from './groups/_router';
 import ItemRouter from './item/_router';
 import PrivateRoute from '../shared/routes/private-route';
+import Auth from './account/auth';
+import SocialLogin from './account/auth/social-login';
+import Activation from './account/activation';
+import ForgotPassword from './account/forgot-password';
+import ResetPassword from './account/reset-password';
 
 export enum Routes {
   ROOT = '/',

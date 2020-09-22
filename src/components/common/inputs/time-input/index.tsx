@@ -1,66 +1,40 @@
-import React, {FC, useState} from 'react';
-import {Box, Fade, TextField} from '@material-ui/core';
-import {Moment} from 'moment';
-import {ClockView} from '@material-ui/pickers';
-import {timeInputStyles} from './_styles';
-import {DateConverters, DateFormatters} from '../../../../shared/utils/date.utils';
+import React, {FC} from 'react';
+import {Field, useFormikContext} from 'formik';
+import {TimePicker} from 'formik-material-ui-pickers';
+import {DateFormats} from '../../../../shared/utils/date.utils';
+import {IconButton} from '@material-ui/core';
+import {CloseIcon} from '../../icons/close-icon';
 
 type Props = {
+  name: string;
   label: string;
-  required?: boolean;
-  time: Date;
-  setTime: (time: Date) => void;
 };
 
-const TimeInput: FC<Props> = ({label, required, time, setTime}: Props) => {
-  const classes = timeInputStyles();
-  const [showClock, setShowClock] = useState(false);
-  const [showMinutes, setShowMinutes] = useState(false);
+export const TimeInput: FC<Props> = ({name, label}: Props) => {
+  const {values, setFieldValue} = useFormikContext();
 
-  const toggleHoursView = (): void => setShowClock(true);
-  const toggleMinutesView = (): void => setShowMinutes(true);
-  const hideAllViews = (): void => {
-    setShowClock(false);
-    setShowMinutes(false);
+  const clear = (e): void => {
+    e.stopPropagation();
+    setFieldValue(name, null);
   };
-
-  const handleClock = (momentTime: Moment): void => {
-    const timeDate = DateConverters.getTimeFromMoment(momentTime);
-    setTime(timeDate);
-    if (!showMinutes) {
-      toggleMinutesView();
-    } else {
-      hideAllViews();
-    }
-  };
-
-  const formattedTime = time ? DateFormatters.formatTime(time) : '';
-  const timeMoment = DateConverters.getMomentFromTime(time);
 
   return (
-    <Box>
-      <TextField
-        label={label}
-        required={required}
-        value={formattedTime}
-        InputProps={{readOnly: true}}
-        onClick={toggleHoursView}
-        className={classes.textField}
-      />
-      <Fade in={showClock}>
-        <Box className={classes.box}>
-          <ClockView
-            date={timeMoment}
-            type={showMinutes ? 'minutes' : 'hours'}
-            ampm={false}
-            onHourChange={handleClock}
-            onMinutesChange={handleClock}
-            onSecondsChange={handleClock}
-          />
-        </Box>
-      </Fade>
-    </Box>
+    <Field
+      component={TimePicker}
+      type="text"
+      name={name}
+      label={label}
+      format={DateFormats.timeFormat}
+      ampm={false}
+      variant="inline"
+      fullWidth
+      InputProps={{
+        endAdornment: values[name] && (
+          <IconButton onClick={clear} size="small">
+            <CloseIcon />
+          </IconButton>
+        ),
+      }}
+    />
   );
 };
-
-export default TimeInput;

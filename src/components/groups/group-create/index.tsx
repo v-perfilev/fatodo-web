@@ -1,9 +1,9 @@
 import {setMenu} from '../../../store/actions/additional-menu.actions';
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
+import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import GroupForm from '../group-form';
-import AdditionalMenuButton from '../../layout/additional-menu/additional-menu-button';
+import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import {Routes} from '../../router';

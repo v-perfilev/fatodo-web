@@ -11,7 +11,7 @@ type Props = HTMLAttributes<any> & {
   handleClick: (day: number) => void;
 };
 
-const DaysSelect: FC<Props> = ({label, required, selectedDays, handleClick, className}: Props) => {
+export const DaysSelect: FC<Props> = ({label, required, selectedDays, handleClick, className}: Props) => {
   const classes = daysSelectStyles();
 
   const dayNames = DateUtils.getWeekdayNames();
@@ -36,5 +36,3 @@ const DaysSelect: FC<Props> = ({label, required, selectedDays, handleClick, clas
     </Box>
   );
 };
-
-export default DaysSelect;

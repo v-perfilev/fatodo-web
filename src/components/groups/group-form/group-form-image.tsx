@@ -1,10 +1,10 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import ImageUploader from '../../common/inputs/image-uploader';
+import ImageUpload from '../../common/inputs/image-upload';
 import {Image} from '../../../models/image.model';
 import {Box, FormLabel} from '@material-ui/core';
 import {groupFormImageStyles} from './_styles';
-import RoundPic from '../../common/images/round-pic';
+import Index from '../../common/images';
 
 type Props = {
   values: any;
@@ -33,10 +33,10 @@ const GroupFormImage: FC<Props> = ({values, setFieldValue}: Props) => {
       </Box>
       {image.filename && (
         <Box className={classes.preview}>
-          <RoundPic url={image.filename} size="lg" border={3} />
+          <Index url={image.filename} size="lg" border={3} />
         </Box>
       )}
-      <ImageUploader
+      <ImageUpload
         image={image}
         setImage={setImage}
         uploadLabel={t('groups:buttons.uploadImage')}

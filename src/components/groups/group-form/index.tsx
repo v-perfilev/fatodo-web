@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useRef} from 'react';
 import {groupFormStyles} from './_styles';
 import {Button, Container, Grid, ThemeProvider} from '@material-ui/core';
-import PageHeader from '../../common/layout-page/page-header';
-import PageDivider from '../../common/layout-page/page-divider';
+import PageHeader from '../../common/layouts/page-header';
+import PageDivider from '../../common/layouts/page-divider';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
 import {Group} from '../../../models/group.model';

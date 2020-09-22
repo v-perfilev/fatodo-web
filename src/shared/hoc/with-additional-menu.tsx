@@ -2,7 +2,7 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
 import {Box, Theme, useMediaQuery} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
-import AdditionalMenu from '../../components/layout/additional-menu';
+import AdditionalMenu from '../../components/common/layouts/additional-menu';
 import csx from 'classnames';
 
 const withAdditionalMenu = (Component: ComponentType): FC => (props): ReactElement => {

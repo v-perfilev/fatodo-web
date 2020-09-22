@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
-import Header from '../../components/layout/header';
+import Header from '../../components/common/layouts/header';
 import {Box} from '@material-ui/core';
-import {HEADER_HEIGHT} from '../../components/layout/header/_constants';
+import {HEADER_HEIGHT} from '../../components/common/layouts/header/_constants';
 
 const withFlexibleHeader = (Component: ComponentType): FC => (props): ReactElement => {
   const headerSpacerStyle = {height: HEADER_HEIGHT};

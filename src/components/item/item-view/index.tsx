@@ -1,21 +1,26 @@
 import React, {FC, memo, useEffect, useState} from 'react';
 import {setMenu} from '../../../store/actions/additional-menu.actions';
 import {connect, ConnectedProps} from 'react-redux';
-import AdditionalMenuSpacer from '../../layout/additional-menu/additional-menu-spacer';
+import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {itemViewStyles} from './_styles';
 import {Item} from '../../../models/item.model';
-import PageHeader from '../../common/layout-page/page-header';
-import ItemViewData from './item-view-data';
-import PageDivider from '../../common/layout-page/page-divider';
-import ItemViewProperties from './item-view-properties';
+import PageHeader from '../../common/layouts/page-header';
+import PageDivider from '../../common/layouts/page-divider';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
 import {Group} from '../../../models/group.model';
+import ItemViewGroup from './item-view-group';
+import ItemViewType from './item-view-type';
+import ItemViewDate from './item-view-date';
+import ItemViewPriority from './item-view-priority';
+import ItemViewReminders from './item-view-reminders';
+import ItemViewTags from './item-view-tags';
+import ItemViewChanges from './item-view-changes';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -31,16 +36,18 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
 
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
-  const loadItemAndGroup = (): void => {
-    // TODO set item and group
-    redirectToNotFound();
-  };
+  const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
   const menu = (
     <>
       <AdditionalMenuSpacer />
     </>
   );
+
+  const loadItemAndGroup = (): void => {
+    // TODO set item and group
+    redirectToNotFound();
+  };
 
   useEffect(() => {
     loadItemAndGroup();
@@ -51,22 +58,19 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
-
   return (item && group) && (
     <ThemeProvider theme={theme}>
       <Container className={classes.root}>
         <PageHeader title={item.title} />
         <PageDivider height={5} />
-        <ItemViewData item={item} />
-        {item.description && (
-          <>
-            <PageDivider />
-            <ItemViewDescription description={item.description} />
-            <PageDivider />
-          </>
-        )}
-        <ItemViewProperties item={item} />
+        <ItemViewGroup group={group} />
+        <ItemViewType type={item.type} />
+        <ItemViewDate date={item.date} />
+        <ItemViewPriority priority={item.priority} />
+        <ItemViewDescription description={item.description} />
+        <ItemViewReminders reminders={item.reminders} />
+        <ItemViewTags tags={item.tags} />
+        <ItemViewChanges item={item} />
       </Container>
     </ThemeProvider>
   );
