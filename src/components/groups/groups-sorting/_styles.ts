@@ -32,7 +32,6 @@ export const groupSortingCardHeaderStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-
 export const groupSortingCardActionsStyles = makeStyles((theme: Theme) => ({
   action: {
     marginTop: 10,

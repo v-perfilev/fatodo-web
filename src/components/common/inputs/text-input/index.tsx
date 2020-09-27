@@ -8,14 +8,5 @@ type Props = {
 };
 
 export const TextInput: FC<Props> = ({name, label}: Props) => {
-  return (
-    <Field
-      component={TextField}
-      type="text"
-      name={name}
-      label={label}
-      required
-      fullWidth
-    />
-  );
+  return <Field component={TextField} type="text" name={name} label={label} required fullWidth />;
 };

@@ -17,17 +17,13 @@ export const RoundPic: FC<Props> = (props: Props) => {
   const classes = roundPicStyles();
   const {url, alt, size = 'sm', border = 0, className} = props;
 
-  const src = url ?
-    size === 'lg'
-      ? ImageUtils.getImage(url)
-      : ImageUtils.getThumbnail(url)
-    : '.';
+  const src = url ? (size === 'lg' ? ImageUtils.getImage(url) : ImageUtils.getThumbnail(url)) : '.';
 
   const sizeClassName = csx(
     {[classes.xs]: size === 'xs'},
     {[classes.sm]: size === 'sm'},
     {[classes.md]: size === 'md'},
-    {[classes.lg]: size === 'lg'},
+    {[classes.lg]: size === 'lg'}
   );
 
   const classNames = csx(classes.root, sizeClassName, className);

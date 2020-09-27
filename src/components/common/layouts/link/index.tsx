@@ -5,8 +5,8 @@ import {Link as MaterialLink, LinkProps as MaterialLinkProps} from '@material-ui
 
 type Props = LinkProps &
   MaterialLinkProps & {
-  underline?: boolean;
-};
+    underline?: boolean;
+  };
 
 export const Link: FC<Props> = ({underline, to, children, ...props}: Props) => {
   return (

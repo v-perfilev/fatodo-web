@@ -6,9 +6,9 @@ import csx from 'classnames';
 
 type Props = HTMLAttributes<any> &
   CircularProgressProps & {
-  value: number;
-  maxValue: number;
-};
+    value: number;
+    maxValue: number;
+  };
 
 export const CircularProgressTimer: FC<Props> = ({value, maxValue, className, ...props}: Props) => {
   const classes = circularProgressTimerStyles();

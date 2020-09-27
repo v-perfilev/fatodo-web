@@ -40,12 +40,7 @@ export const ImageUpload: FC<Props> = ({filenameName, contentName, label, crop, 
     <>
       <ImageUploadLabel label={label} />
       <ImageUploadPreview image={image} preview={preview} />
-      <ImageUploadButtons
-        image={image}
-        setImage={setImage}
-        setSource={setSource}
-        setAnchorEl={setAnchorEl}
-      />
+      <ImageUploadButtons image={image} setImage={setImage} setSource={setSource} setAnchorEl={setAnchorEl} />
       <ImageUploadPopover cropOptions={crop} source={source} anchorEl={anchorEl} handleClose={handleClose} />
     </>
   );

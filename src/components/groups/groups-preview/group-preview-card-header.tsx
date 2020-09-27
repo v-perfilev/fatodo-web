@@ -26,9 +26,7 @@ const GroupPreviewCardHeader: FC<Props> = ({group}: Props) => {
             </Typography>
           </Box>
         }
-        action={
-          <GroupPreviewCardActions group={group}/>
-        }
+        action={<GroupPreviewCardActions group={group} />}
         className={classes.root}
       />
     </Link>

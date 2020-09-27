@@ -18,8 +18,8 @@ import {PasswordStrengthBar} from '../password-strength-bar';
 
 type Props = FormikProps<any> &
   CaptchaProps & {
-  onSuccess: () => void;
-};
+    onSuccess: () => void;
+  };
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();

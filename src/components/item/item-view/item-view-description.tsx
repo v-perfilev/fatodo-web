@@ -11,14 +11,16 @@ type Props = {
 const ItemViewDescription: FC<Props> = ({description}: Props) => {
   const {t} = useTranslation();
 
-  return description && (
-    <>
-      <PageDivider />
-      <LabeledBox label={t('items:labels.description')}>
-        <Box>{description}</Box>
-      </LabeledBox>
-      <PageDivider />
-    </>
+  return (
+    description && (
+      <>
+        <PageDivider />
+        <LabeledBox label={t('items:labels.description')}>
+          <Box>{description}</Box>
+        </LabeledBox>
+        <PageDivider />
+      </>
+    )
   );
 };
 

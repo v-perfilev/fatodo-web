@@ -12,15 +12,7 @@ type Props = {
 
 const TypeInput: FC<Props> = ({name, label}: Props) => {
   return (
-    <Field
-      component={TextField}
-      type="text"
-      name={name}
-      label={label}
-      select
-      required
-      fullWidth
-    >
+    <Field component={TextField} type="text" name={name} label={label} select required fullWidth>
       {Object.values(itemTypes).map((type, index) => (
         <MenuItem value={type} key={index}>
           <TypeView type={type} />

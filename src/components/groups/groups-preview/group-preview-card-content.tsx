@@ -11,7 +11,7 @@ import {compose} from 'recompose';
 import {Item} from '../../../models/item.model';
 
 type Props = {
-  groupId: string
+  groupId: string;
 };
 
 const GroupPreviewCardContent: FC<Props> = ({groupId}: Props) => {

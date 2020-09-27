@@ -87,14 +87,17 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  return (group && item) && (
-    <ItemForm
-      group={group}
-      item={item}
-      header={t('items:headers.edit', {group: group.title})}
-      setSaveCallback={setSaveCallback}
-      request={request}
-    />
+  return (
+    group &&
+    item && (
+      <ItemForm
+        group={group}
+        item={item}
+        header={t('items:headers.edit', {group: group.title})}
+        setSaveCallback={setSaveCallback}
+        request={request}
+      />
+    )
   );
 };
 

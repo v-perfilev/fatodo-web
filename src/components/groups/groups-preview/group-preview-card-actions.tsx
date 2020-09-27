@@ -33,9 +33,7 @@ const GroupPreviewCardActions: FC<Props> = ({group}: Props) => {
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu anchorEl={anchorEl} isOpen={isOpen} onClose={handleClose}>
-        <MenuItem onClick={console.log}>
-          Test
-        </MenuItem>
+        <MenuItem onClick={console.log}>Test</MenuItem>
       </PopupMenu>
     </>
   );

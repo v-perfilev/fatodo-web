@@ -20,7 +20,13 @@ type Props = {
   firstInputType?: 'year' | 'month' | 'date';
 };
 
-export const DateSelect: FC<Props> = ({label, required, date: inputDate, setDate: setInputDate, firstInputType}: Props) => {
+export const DateSelect: FC<Props> = ({
+  label,
+  required,
+  date: inputDate,
+  setDate: setInputDate,
+  firstInputType,
+}: Props) => {
   const classes = dateInputStyles();
   const [date, setDate] = useState<Date>();
   const [inputType, setInputType] = useState<InputType>();

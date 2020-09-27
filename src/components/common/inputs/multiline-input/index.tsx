@@ -9,15 +9,5 @@ type Props = {
 };
 
 export const MultilineInput: FC<Props> = ({name, label, rows = 10}: Props) => {
-  return (
-    <Field
-      component={TextField}
-      type="text"
-      name={name}
-      label={label}
-      multiline
-      fullWidth
-      rows={rows}
-    />
-  );
+  return <Field component={TextField} type="text" name={name} label={label} multiline fullWidth rows={rows} />;
 };

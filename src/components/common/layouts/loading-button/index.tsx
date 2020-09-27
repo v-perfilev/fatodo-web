@@ -5,9 +5,9 @@ import {loadingButtonStyles} from './_styles';
 
 type Props = ButtonTypeMap['props'] &
   ButtonHTMLAttributes<HTMLButtonElement> & {
-  loading?: boolean;
-  progressValue?: number;
-};
+    loading?: boolean;
+    progressValue?: number;
+  };
 
 export const LoadingButton: FC<Props> = ({children, loading, progressValue, ...props}: Props) => {
   const classes = loadingButtonStyles();

@@ -1,5 +1,4 @@
 import React, {FC} from 'react';
-import {useTranslation} from 'react-i18next';
 import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {colorSchemes} from '../../../../shared/theme/colors';
@@ -11,19 +10,9 @@ type Props = {
   label: string;
 };
 
-export const ThemeSelect: FC<Props> = ({name, label}) => {
-  const {t} = useTranslation();
-
+export const ThemeSelect: FC<Props> = ({name, label}: Props) => {
   return (
-    <Field
-      component={TextField}
-      type="text"
-      name={name}
-      label={label}
-      select
-      required
-      fullWidth
-    >
+    <Field component={TextField} type="text" name={name} label={label} select required fullWidth>
       {Object.values(colorSchemes).map((color, index) => (
         <MenuItem value={color} key={index}>
           <ThemeView color={color} />

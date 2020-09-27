@@ -26,5 +26,4 @@ export class ImageUtils {
       reader.readAsBinaryString(blob);
     });
   };
-
 }

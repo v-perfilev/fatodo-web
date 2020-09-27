@@ -11,10 +11,12 @@ type Props = {
 const ItemViewDate: FC<Props> = ({date}: Props) => {
   const {t} = useTranslation();
 
-  return date && (
-    <LabeledBox label={t('items:labels.date')}>
-      <DateView date={date} />
-    </LabeledBox>
+  return (
+    date && (
+      <LabeledBox label={t('items:labels.date')}>
+        <DateView date={date} />
+      </LabeledBox>
+    )
   );
 };
 

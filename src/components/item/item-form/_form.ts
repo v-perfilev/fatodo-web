@@ -2,7 +2,6 @@ import {Item, itemPriorities, ItemPriority, ItemType, itemTypes} from '../../../
 import {Reminder} from '../../../models/reminder.model';
 import {DateConverters} from '../../../shared/utils/date.utils';
 import {Group} from '../../../models/group.model';
-import {ParamDate} from '../../../models/param-date.model';
 import {ItemDTO} from '../../../models/dto/item.dto';
 
 export interface ItemFormValues {
@@ -31,15 +30,15 @@ export class ItemFormUtils {
   public static mapItemToValues = (item: Item): ItemFormValues =>
     item
       ? {
-        title: item.title,
-        type: item.type,
-        priority: item.priority,
-        time: DateConverters.getTimeFromParamDate(item.date),
-        date: DateConverters.getDateFromParamDate(item.date),
-        description: item.description,
-        reminders: item.reminders,
-        tags: item.tags,
-      }
+          title: item.title,
+          type: item.type,
+          priority: item.priority,
+          time: DateConverters.getTimeFromParamDate(item.date),
+          date: DateConverters.getDateFromParamDate(item.date),
+          description: item.description,
+          reminders: item.reminders,
+          tags: item.tags,
+        }
       : defaultItemFormValues;
 
   public static mapValuesToDTO = (values: ItemFormValues, item: Item, group: Group): ItemDTO => {

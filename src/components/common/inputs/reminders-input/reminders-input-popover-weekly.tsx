@@ -44,8 +44,12 @@ export const RemindersInputPopoverWeekly: FC<Props> = ({setReminder}: Props) => 
   return (
     <Box className={classes.root}>
       <TimeSelect label={t('common:reminders.fields.time')} required time={time} setTime={setTime} />
-      <DaysSelect label={t('common:reminders.fields.weekdays')} required selectedDays={days}
-                  handleClick={handleClick} />
+      <DaysSelect
+        label={t('common:reminders.fields.weekdays')}
+        required
+        selectedDays={days}
+        handleClick={handleClick}
+      />
     </Box>
   );
 };

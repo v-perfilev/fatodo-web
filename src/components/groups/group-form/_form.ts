@@ -20,11 +20,11 @@ export class GroupFormUtils {
   public static mapGroupToValues = (group: Group): GroupFormValues =>
     group
       ? {
-        title: group.title,
-        color: group.color,
-        imageFilename: group.imageFilename,
-        imageContent: null,
-      }
+          title: group.title,
+          color: group.color,
+          imageFilename: group.imageFilename,
+          imageContent: null,
+        }
       : defaultGroupFormValues;
 
   public static mapValuesToDTO = (values: GroupFormValues, group: Group): GroupDTO => {

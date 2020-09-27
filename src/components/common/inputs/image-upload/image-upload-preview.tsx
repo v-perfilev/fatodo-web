@@ -12,9 +12,12 @@ type Props = {
 export const ImageUploadPreview: FC<Props> = ({image, preview}: Props) => {
   const classes = imageUploadPreviewStyles();
 
-  return (image.filename && preview) && (
-    <Box className={classes.root}>
-      <RoundPic url={image.filename} size="lg" border={3} />
-    </Box>
+  return (
+    image.filename &&
+    preview && (
+      <Box className={classes.root}>
+        <RoundPic url={image.filename} size="lg" border={3} />
+      </Box>
+    )
   );
 };

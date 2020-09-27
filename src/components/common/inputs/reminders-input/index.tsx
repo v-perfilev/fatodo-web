@@ -56,19 +56,19 @@ export const RemindersInput: FC<Props> = ({name, label}: Props) => {
     reminders.length > 0
       ? {}
       : {
-        shrink: false,
-      };
+          shrink: false,
+        };
 
   const inputProps =
     reminders.length > 0
       ? {
-        readOnly: true,
-        startAdornment: <RemindersInputChips {...{reminders, removeReminder}} />,
-        endAdornment: <RemindersInputButtons {...{clearReminders}} />,
-      }
+          readOnly: true,
+          startAdornment: <RemindersInputChips {...{reminders, removeReminder}} />,
+          endAdornment: <RemindersInputButtons {...{clearReminders}} />,
+        }
       : {
-        readOnly: true,
-      };
+          readOnly: true,
+        };
 
   return (
     <Box className={classes.root}>

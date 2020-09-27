@@ -14,12 +14,14 @@ const ItemViewReminders: FC<Props> = ({reminders}: Props) => {
 
   const showReminders = reminders && reminders.length > 0;
 
-  return showReminders && (
-    <LabeledBox label={t('items:labels.reminders')}>
-      {reminders.map((reminder, index) => (
-        <Chip key={index} size="medium" label={<ReminderView reminder={reminder} />} />
-      ))}
-    </LabeledBox>
+  return (
+    showReminders && (
+      <LabeledBox label={t('items:labels.reminders')}>
+        {reminders.map((reminder, index) => (
+          <Chip key={index} size="medium" label={<ReminderView reminder={reminder} />} />
+        ))}
+      </LabeledBox>
+    )
   );
 };
 

@@ -1,7 +1,7 @@
 export interface GroupDTO {
-  id: string,
-  title: string,
-  color: string,
-  imageFilename: string,
-  imageContent: number[],
+  id: string;
+  title: string;
+  color: string;
+  imageFilename: string;
+  imageContent: number[];
 }

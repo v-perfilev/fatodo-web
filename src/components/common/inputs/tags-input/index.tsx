@@ -11,7 +11,6 @@ type Props = {
 };
 
 export const TagsInput: FC<Props> = ({name, label, options = [], handleChange}: Props) => {
-
   const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
     if (handleChange) {
       handleChange(event.target.value);

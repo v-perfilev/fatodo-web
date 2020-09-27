@@ -12,12 +12,14 @@ const ItemViewTags: FC<Props> = ({tags}: Props) => {
 
   const showTags = tags && tags.length > 0;
 
-  return showTags && (
-    <LabeledBox label={t('items:labels.tags')}>
-      {tags.map((tag, index) => (
-        <Chip key={index} size="medium" label={tag} />
-      ))}
-    </LabeledBox>
+  return (
+    showTags && (
+      <LabeledBox label={t('items:labels.tags')}>
+        {tags.map((tag, index) => (
+          <Chip key={index} size="medium" label={tag} />
+        ))}
+      </LabeledBox>
+    )
   );
 };
 

@@ -58,21 +58,24 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return (item && group) && (
-    <ThemeProvider theme={theme}>
-      <Container className={classes.root}>
-        <PageHeader title={item.title} />
-        <PageDivider height={5} />
-        <ItemViewGroup group={group} />
-        <ItemViewType type={item.type} />
-        <ItemViewDate date={item.date} />
-        <ItemViewPriority priority={item.priority} />
-        <ItemViewDescription description={item.description} />
-        <ItemViewReminders reminders={item.reminders} />
-        <ItemViewTags tags={item.tags} />
-        <ItemViewChanges item={item} />
-      </Container>
-    </ThemeProvider>
+  return (
+    item &&
+    group && (
+      <ThemeProvider theme={theme}>
+        <Container className={classes.root}>
+          <PageHeader title={item.title} />
+          <PageDivider height={5} />
+          <ItemViewGroup group={group} />
+          <ItemViewType type={item.type} />
+          <ItemViewDate date={item.date} />
+          <ItemViewPriority priority={item.priority} />
+          <ItemViewDescription description={item.description} />
+          <ItemViewReminders reminders={item.reminders} />
+          <ItemViewTags tags={item.tags} />
+          <ItemViewChanges item={item} />
+        </Container>
+      </ThemeProvider>
+    )
   );
 };
 

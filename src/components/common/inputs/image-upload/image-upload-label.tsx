@@ -9,9 +9,11 @@ type Props = {
 export const ImageUploadLabel: FC<Props> = ({label}: Props) => {
   const classes = imageUploadLabelStyles();
 
-  return label && (
-    <Box className={classes.root}>
-      <FormLabel>{label}</FormLabel>
-    </Box>
+  return (
+    label && (
+      <Box className={classes.root}>
+        <FormLabel>{label}</FormLabel>
+      </Box>
+    )
   );
 };

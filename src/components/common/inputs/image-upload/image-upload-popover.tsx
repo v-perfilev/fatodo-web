@@ -98,7 +98,7 @@ export const ImageUploadPopover: FC<Props> = ({source, anchorEl, handleClose, cr
       0,
       0,
       crop.width,
-      crop.height,
+      crop.height
     );
 
     return new Promise((resolve) => {

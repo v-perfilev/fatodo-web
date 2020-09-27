@@ -12,15 +12,7 @@ type Props = {
 
 export const PriorityInput: FC<Props> = ({name, label}: Props) => {
   return (
-    <Field
-      component={TextField}
-      type="text"
-      name={name}
-      label={label}
-      select
-      required
-      fullWidth
-    >
+    <Field component={TextField} type="text" name={name} label={label} select required fullWidth>
       {Object.values(itemPriorities).map((priority, index) => (
         <MenuItem value={priority} key={index}>
           <PriorityView priority={priority} />

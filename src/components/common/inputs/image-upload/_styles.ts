@@ -38,4 +38,3 @@ export const imageUploadPreviewStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(1),
   },
 }));
-
