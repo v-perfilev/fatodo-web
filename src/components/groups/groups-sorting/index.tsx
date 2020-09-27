@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import GroupsSortingGridContainer from './groups-sorting-grid-container';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import {compose} from 'recompose';
@@ -12,6 +11,7 @@ import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additiona
 import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group.model';
 import GroupService from '../../../services/group.service';
+import GroupsSortingContainer from './groups-sorting-container';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -61,7 +61,7 @@ const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
     setMenu(menu);
   }, [i18n.language]);
 
-  return groups && <GroupsSortingGridContainer groups={groups} />;
+  return groups && <GroupsSortingContainer groups={groups} />;
 };
 
 export default compose(connector)(GroupsSorting);

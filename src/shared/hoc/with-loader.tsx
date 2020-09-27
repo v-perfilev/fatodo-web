@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
-import Spinner from '../../components/common/loaders/spinner';
 import {Box, Fade} from '@material-ui/core';
 import {LOADER_TIMEOUT} from '../../constants';
 import {flexStyles} from './_styles';
+import {Spinner} from '../../components/common/loaders/spinner';
 
 const withLoader = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = flexStyles();

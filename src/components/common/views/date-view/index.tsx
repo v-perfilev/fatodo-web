@@ -16,7 +16,7 @@ export const DateView: FC<Props> = ({date: paramDate}: Props) => {
   if (paramDate.time) {
     const timeDate = DateConverters.getTimeFromParamDate(paramDate);
     const time = DateFormatters.formatTime(timeDate);
-    const translatedTime = t('items:paramDate.time', {time});
+    const translatedTime = t('common:paramDate.time', {time});
     description = description.concat(translatedTime);
   }
 
@@ -33,7 +33,7 @@ export const DateView: FC<Props> = ({date: paramDate}: Props) => {
       date = DateFormatters.formatDate(dateDate);
     }
 
-    const translatedDate = t('items:paramDate.date', {date});
+    const translatedDate = t('common:paramDate.date', {date});
     description = description.concat(translatedDate);
   }
 

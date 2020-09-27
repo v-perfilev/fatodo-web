@@ -28,7 +28,7 @@ export const PriorityView: FC<Props> = ({priority}: Props) => {
 
   return (
     <Box className={classes.root}>
-      {icon()} {t('items:priorities.' + priority)}
+      {icon()} {t('common:priorities.' + priority)}
     </Box>
   );
 };

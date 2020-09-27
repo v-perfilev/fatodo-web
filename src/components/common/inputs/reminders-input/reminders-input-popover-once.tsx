@@ -31,8 +31,8 @@ export const RemindersInputPopoverOnce: FC<Props> = ({setReminder}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <TimeSelect label={t('items:fields.time.label')} required time={time} setTime={setTime} />
-      <DateSelect label={t('items:fields.date.label')} required date={date} setDate={setDate} />
+      <TimeSelect label={t('common:reminders.fields.time')} required time={time} setTime={setTime} />
+      <DateSelect label={t('common:reminders.fields.date')} required date={date} setDate={setDate} />
     </Box>
   );
 };

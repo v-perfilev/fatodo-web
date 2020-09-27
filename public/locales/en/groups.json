@@ -16,11 +16,6 @@
       "label": "Image"
     }
   },
-  "buttons": {
-    "uploadImage": "Upload",
-    "updateImage": "Update",
-    "clearImage": "Clear"
-  },
   "tooltips": {
     "ok": "Ok",
     "cancel": "Cancel",

@@ -43,9 +43,9 @@ export const RemindersInputPopoverMonthly: FC<Props> = ({setReminder}: Props) =>
 
   return (
     <Box className={classes.root}>
-      <TimeSelect label={t('items:fields.time.label')} required time={time} setTime={setTime} />
+      <TimeSelect label={t('common:reminders.fields.time')} required time={time} setTime={setTime} />
       <CalendarSelect
-        label={t('items:fields.monthdays.label')}
+        label={t('common:reminders.fields.monthdays')}
         required
         selectedDates={dates}
         handleClick={handleClick}

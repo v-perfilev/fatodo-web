@@ -13,7 +13,7 @@ type Props = HTMLAttributes<any> & {
   setItemRef: (element: HTMLDivElement) => void;
 };
 
-const GroupsSortingGridItem: FC<Props> = ({group, style, bind, setItemRef}: Props) => {
+const GroupsSortingItem: FC<Props> = ({group, style, bind, setItemRef}: Props) => {
   const classes = groupSortingGridItemStyles();
 
   return (
@@ -23,4 +23,4 @@ const GroupsSortingGridItem: FC<Props> = ({group, style, bind, setItemRef}: Prop
   );
 };
 
-export default compose(animated)(GroupsSortingGridItem);
+export default compose(animated)(GroupsSortingItem);

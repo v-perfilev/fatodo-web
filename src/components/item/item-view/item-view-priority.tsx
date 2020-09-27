@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
-import PriorityView from '../../common/layout-item/priority-view';
-import LabeledBox from '../../common/layouts/labeled-box';
 import {ItemPriority} from '../../../models/item.model';
 import {useTranslation} from 'react-i18next';
+import {LabeledBox} from '../../common/layouts/labeled-box';
+import {PriorityView} from '../../common/views/priority-view';
 
 type Props = {
   priority: ItemPriority;

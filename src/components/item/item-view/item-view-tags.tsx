@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
-import LabeledBox from '../../common/layouts/labeled-box';
 import {useTranslation} from 'react-i18next';
 import {Chip} from '@material-ui/core';
+import {LabeledBox} from '../../common/layouts/labeled-box';
 
 type Props = {
   tags: string[];

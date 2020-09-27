@@ -1,0 +1,44 @@
+{
+  "imageUpload": {
+    "buttons": {
+      "upload": "Загрузить",
+      "update": "Изменить",
+      "clear": "Удалить"
+    }
+  },
+  "reminders": {
+    "fields": {
+      "time": "Время",
+      "date": "Дата",
+      "weekdays": "Дни недели",
+      "monthdays": "Дни месяца"
+    },
+    "periodicity": {
+      "once": "однократно",
+      "daily": "ежедневно",
+      "weekly": "еженедельно",
+      "monthly": "ежемесячно",
+      "yearly": "ежегодно"
+    },
+    "once": "в {{time}} {{date}}",
+    "daily": "в {{time}}",
+    "weekly": "в {{time}} в {{weekDays}}",
+    "monthly": "в {{time}} {{monthDates}} каждого месяца",
+    "yearly": "в {{time}} {{date}}"
+  },
+  "types": {
+    "task": "задача",
+    "event": "событие",
+    "repetition": "дата",
+    "note": "заметка"
+  },
+  "paramDate": {
+    "time": "в {{time}}",
+    "date": "{{date}}"
+  },
+  "priorities": {
+    "low": "низкий",
+    "normal": "нормальный",
+    "high": "высокий"
+  }
+}

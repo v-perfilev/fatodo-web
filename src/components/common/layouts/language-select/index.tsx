@@ -6,7 +6,7 @@ import {LanguageIcon} from '../../icons/language-icon';
 import {ArrowDownIcon} from '../../icons/arrow-down-icon';
 import {LanguageUtils} from '../../../../shared/utils/language.utils';
 import {languageSelectStyles} from './_styles';
-import PopupMenu from '../popup-menu';
+import {PopupMenu} from '../popup-menu';
 
 type Props = HTMLAttributes<any> & {
   list?: boolean;

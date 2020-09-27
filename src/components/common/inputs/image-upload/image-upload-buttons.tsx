@@ -2,20 +2,18 @@ import React, {FC, useRef} from 'react';
 import {Box, Button} from '@material-ui/core';
 import {imageUploadButtonsStyles} from './_styles';
 import {Image} from '../../../../models/image.model';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   image: Image;
   setImage: (image) => void;
-  setSource: (image: string | ArrayBuffer) => void;
+  setSource: (source: string | ArrayBuffer) => void;
   setAnchorEl: (e: HTMLElement) => void;
-  uploadLabel: string;
-  updateLabel: string;
-  clearLabel: string;
 };
 
-export const ImageUploadButtons: FC<Props> = (props: Props) => {
+export const ImageUploadButtons: FC<Props> = ({image, setImage, setSource, setAnchorEl}: Props) => {
   const classes = imageUploadButtonsStyles();
-  const {image, setImage, setSource, setAnchorEl, uploadLabel, updateLabel, clearLabel} = props;
+  const {t} = useTranslation();
   const inputRef = useRef<HTMLInputElement>();
   const buttonRef = useRef<HTMLButtonElement>();
 
@@ -45,12 +43,12 @@ export const ImageUploadButtons: FC<Props> = (props: Props) => {
           ref={inputRef}
         />
         <Button color="primary" variant="contained" component="span" ref={buttonRef}>
-          {image ? updateLabel : uploadLabel}
+          {image ? t('common:uploadImage.buttons.update') : t('common:uploadImage.buttons.upload')}
         </Button>
       </label>
       {image && (
         <Button color="secondary" variant="contained" onClick={cleanImage}>
-          {clearLabel}
+          {t('common:uploadImage.buttons.clear')}
         </Button>
       )}
     </Box>

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {passwordStrengthBarStyles} from '../common/_styles';
 import {passwordStrengthMap, passwordStrengthPostfix, passwordStrengthPrefix} from '../common/_validators';
 import {Box} from '@material-ui/core';
+import {passwordStrengthBarStyles} from './_styles';
 
 type Props = {
   password: string;

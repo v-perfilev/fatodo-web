@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {Item} from '../../../models/item.model';
-import LabeledBox from '../../common/layouts/labeled-box';
 import {itemViewChangesStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
+import {LabeledBox} from '../../common/layouts/labeled-box';
 
 type Props = {
   item: Item;

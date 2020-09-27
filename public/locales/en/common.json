@@ -1,0 +1,44 @@
+{
+  "imageUpload": {
+    "buttons": {
+      "upload": "Upload",
+      "update": "Update",
+      "clear": "Clear"
+    }
+  },
+  "reminders": {
+    "fields": {
+      "time": "Time",
+      "date": "Date",
+      "weekdays": "Days of week",
+      "monthdays": "Days of month"
+    },
+    "periodicity": {
+      "once": "once",
+      "daily": "daily",
+      "weekly": "weekly",
+      "monthly": "monthly",
+      "yearly": "yearly"
+    },
+    "once": "at {{time}} on {{date}}",
+    "daily": "at {{time}}",
+    "weekly": "at {{time}} on {{weekDays}}",
+    "monthly": "at {{time}} on {{monthDates}} of every month",
+    "yearly": "at {{time}} on {{date}}"
+  },
+  "types": {
+    "task": "task",
+    "event": "event",
+    "repetition": "repetition",
+    "note": "note"
+  },
+  "paramDate": {
+    "time": "at {{time}}",
+    "date": "on {{date}}"
+  },
+  "priorities": {
+    "low": "low",
+    "normal": "normal",
+    "high": "high"
+  }
+}

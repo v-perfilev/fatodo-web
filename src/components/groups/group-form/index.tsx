@@ -1,19 +1,20 @@
 import React, {FC, useEffect, useRef} from 'react';
 import {groupFormStyles} from './_styles';
 import {Button, Container, Grid, ThemeProvider} from '@material-ui/core';
-import PageHeader from '../../common/layouts/page-header';
-import PageDivider from '../../common/layouts/page-divider';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
 import {Group} from '../../../models/group.model';
-import GroupFormColor from './group-form-color';
-import GroupFormImage from './group-form-image';
 import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
-import GroupFormTitle from './group-form-title';
 import {GroupFormUtils, GroupFormValues} from './_form';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {GroupDTO} from '../../../models/dto/group.dto';
+import {ImageUpload} from '../../common/inputs/image-upload';
+import {useTranslation} from 'react-i18next';
+import {ThemeSelect} from '../../common/inputs/theme-select';
+import {PageHeader} from '../../common/layouts/page-header';
+import {PageDivider} from '../../common/layouts/page-divider';
+import {TextInput} from '../../common/inputs/text-input';
 
 type Props = FormikProps<any> & {
   group?: Group;
@@ -24,6 +25,7 @@ type Props = FormikProps<any> & {
 
 const GroupForm: FC<Props> = (props: Props) => {
   const classes = groupFormStyles();
+  const {t} = useTranslation();
   const {header, setSaveCallback, values, isValid, submitForm, isSubmitting} = props;
   const buttonRef = useRef<HTMLButtonElement>();
 
@@ -47,14 +49,19 @@ const GroupForm: FC<Props> = (props: Props) => {
         <Form className={classes.form}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <GroupFormTitle />
+              <TextInput name="title" label={t('groups:fields.title.label')} />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <GroupFormColor />
+              <ThemeSelect name="color" label={t('groups:fields.color.label')} />
             </Grid>
             <Grid item xs={6} lg={9} />
             <Grid item xs={6} lg={3}>
-              <GroupFormImage {...props} />
+              <ImageUpload
+                filenameName="imageFilename"
+                contentName="imageContent"
+                label={t('groups:fields.image.label')}
+                preview
+              />
             </Grid>
           </Grid>
           <Button type="submit" disabled={!isValid || isSubmitting} ref={buttonRef} className={classes.submitButton}>

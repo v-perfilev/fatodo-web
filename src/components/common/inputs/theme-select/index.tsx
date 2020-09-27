@@ -4,17 +4,22 @@ import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {colorSchemes} from '../../../../shared/theme/colors';
 import {MenuItem} from '@material-ui/core';
-import ThemeView from '../../views/theme-view';
+import {ThemeView} from '../../views/theme-view';
 
-export const ThemeSelect: FC = () => {
+type Props = {
+  name: string;
+  label: string;
+};
+
+export const ThemeSelect: FC<Props> = ({name, label}) => {
   const {t} = useTranslation();
 
   return (
     <Field
       component={TextField}
       type="text"
-      name="color"
-      label={t('groups:fields.color.label')}
+      name={name}
+      label={label}
       select
       required
       fullWidth

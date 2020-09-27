@@ -33,7 +33,7 @@ export const TypeView: FC<Props> = ({type, className}: Props) => {
 
   return (
     <Box className={classNames}>
-      {icon()} {t('items:types.' + type)}
+      {icon()} {t('common:types.' + type)}
     </Box>
   );
 };

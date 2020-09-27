@@ -6,7 +6,7 @@ const Dotenv = require('dotenv-webpack');
 const PATH = require('path');
 
 module.exports = () => ({
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },

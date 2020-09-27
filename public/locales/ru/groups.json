@@ -16,11 +16,6 @@
       "label": "Изображение"
     }
   },
-  "buttons": {
-    "uploadImage": "Загрузить",
-    "updateImage": "Изменить",
-    "clearImage": "Удалить"
-  },
   "tooltips": {
     "ok": "Подтвердить",
     "cancel": "Отменить",

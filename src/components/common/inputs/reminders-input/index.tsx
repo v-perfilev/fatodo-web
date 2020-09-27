@@ -9,11 +9,11 @@ import {RemindersInputButtons} from './reminders-input-buttons';
 import {RemindersInputPopover} from './reminders-input-popover';
 
 type Props = {
-  label: string;
   name: string;
+  label: string;
 };
 
-export const RemindersInput: FC<Props> = ({label, name}: Props) => {
+export const RemindersInput: FC<Props> = ({name, label}: Props) => {
   const classes = remindersInputStyles();
   const {values, setFieldValue} = useFormikContext();
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);

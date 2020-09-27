@@ -42,42 +42,7 @@
     },
     "reminders": {
       "label": "Reminders"
-    },
-    "weekdays": {
-      "label": "Days of week"
-    },
-    "monthdays": {
-      "label": "Days of month"
     }
-  },
-  "types": {
-    "task": "task",
-    "event": "event",
-    "repetition": "repetition",
-    "note": "note"
-  },
-  "paramDate": {
-    "time": "at {{time}}",
-    "date": "on {{date}}"
-  },
-  "priorities": {
-    "low": "low",
-    "normal": "normal",
-    "high": "high"
-  },
-  "reminder": {
-    "periodicity": {
-      "once": "once",
-      "daily": "daily",
-      "weekly": "weekly",
-      "monthly": "monthly",
-      "yearly": "yearly"
-    },
-    "once": "at {{time}} on {{date}}",
-    "daily": "at {{time}}",
-    "weekly": "at {{time}} on {{weekDays}}",
-    "monthly": "at {{time}} on {{monthDates}} of every month",
-    "yearly": "at {{time}} on {{date}}"
   },
   "tooltips": {
     "ok": "Ok",

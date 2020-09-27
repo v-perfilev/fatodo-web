@@ -42,42 +42,7 @@
     },
     "reminders": {
       "label": "Напоминания"
-    },
-    "weekdays": {
-      "label": "Дни недели"
-    },
-    "monthdays": {
-      "label": "Дни месяца"
     }
-  },
-  "types": {
-    "task": "задача",
-    "event": "событие",
-    "repetition": "дата",
-    "note": "заметка"
-  },
-  "paramDate": {
-    "time": "в {{time}}",
-    "date": "{{date}}"
-  },
-  "priorities": {
-    "low": "низкий",
-    "normal": "нормальный",
-    "high": "высокий"
-  },
-  "reminder": {
-    "periodicity": {
-      "once": "однократно",
-      "daily": "ежедневно",
-      "weekly": "еженедельно",
-      "monthly": "ежемесячно",
-      "yearly": "ежегодно"
-    },
-    "once": "в {{time}} {{date}}",
-    "daily": "в {{time}}",
-    "weekly": "в {{time}} в {{weekDays}}",
-    "monthly": "в {{time}} {{monthDates}} каждого месяца",
-    "yearly": "в {{time}} {{date}}"
   },
   "tooltips": {
     "ok": "Подтвердить",

@@ -2,24 +2,25 @@ import React, {FC, useEffect, useRef} from 'react';
 import {itemFormStyles} from './_styles';
 import {Item} from '../../../models/item.model';
 import {Button, Container, Grid, ThemeProvider} from '@material-ui/core';
-import PageHeader from '../../common/layouts/page-header';
-import PageDivider from '../../common/layouts/page-divider';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
-import ItemFormTitle from './item-form-title';
-import ItemFormType from './item-form-type';
-import ItemFormPriority from './item-form-priority';
-import ItemFormTime from './item-form-time';
-import ItemFormDate from './item-form-date';
-import ItemFormDescription from './item-form-description';
-import ItemFormTags from './item-form-tags';
-import ItemFormReminders from './item-form-reminders';
 import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
 import {ItemFormUtils, ItemFormValues} from './_form';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Group} from '../../../models/group.model';
 import {ItemDTO} from '../../../models/dto/item.dto';
+import {PageHeader} from '../../common/layouts/page-header';
+import {PageDivider} from '../../common/layouts/page-divider';
+import {TextInput} from '../../common/inputs/text-input';
+import {useTranslation} from 'react-i18next';
+import TypeInput from '../../common/inputs/type-input';
+import {PriorityInput} from '../../common/inputs/priority-input';
+import {TimeInput} from '../../common/inputs/time-input';
+import {DateInput} from '../../common/inputs/date-input';
+import {MultilineInput} from '../../common/inputs/multiline-input';
+import {RemindersInput} from '../../common/inputs/reminders-input';
+import {TagsInput} from '../../common/inputs/tags-input';
 
 type Props = FormikProps<any> & {
   group: Group;
@@ -31,6 +32,7 @@ type Props = FormikProps<any> & {
 
 const ItemForm: FC<Props> = (props: Props) => {
   const classes = itemFormStyles();
+  const {t} = useTranslation();
   const {group, header, setSaveCallback, isValid, submitForm, isSubmitting} = props;
   const buttonRef = useRef<HTMLButtonElement>();
 
@@ -52,28 +54,28 @@ const ItemForm: FC<Props> = (props: Props) => {
         <Form className={classes.form}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <ItemFormTitle />
+              <TextInput name="title" label={t('items:fields.title.label')} />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <ItemFormType />
+              <TypeInput name="type" label={t('items:fields.type.label')} />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <ItemFormPriority />
+              <PriorityInput name="priority" label={t('items:fields.priority.label')} />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <ItemFormTime {...props} />
+              <TimeInput name="time" label={t('items:fields.time.label')} />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <ItemFormDate {...props} />
+              <DateInput name="date" label={t('items:fields.date.label')} />
             </Grid>
             <Grid item xs={12}>
-              <ItemFormDescription />
+              <MultilineInput name="description" label={t('items:fields.description.label')} />
             </Grid>
             <Grid item xs={12}>
-              <ItemFormReminders {...props} />
+              <RemindersInput name="reminders" label={t('items:fields.reminders.label')} />
             </Grid>
             <Grid item xs={12}>
-              <ItemFormTags />
+              <TagsInput name="tags" label={t('items:fields.tags.label')} />
             </Grid>
           </Grid>
           <Button type="submit" disabled={!isValid || isSubmitting} ref={buttonRef} className={classes.submitButton}>

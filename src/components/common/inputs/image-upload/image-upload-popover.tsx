@@ -12,7 +12,7 @@ import {ImageUtils} from '../../../../shared/utils/image.utils';
 type ImageError = 'tooSmall';
 
 type Props = {
-  source: File;
+  source: string | ArrayBuffer;
   anchorEl: HTMLElement;
   handleClose: (image: Image) => void;
   cropOptions?: any;

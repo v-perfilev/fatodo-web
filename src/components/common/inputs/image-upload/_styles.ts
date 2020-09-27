@@ -26,3 +26,16 @@ export const imageUploadPopoverStyles = makeStyles((theme: Theme) => ({
     background: theme.palette.error.light,
   },
 }));
+
+export const imageUploadLabelStyles = makeStyles((theme: Theme) => ({
+  root: {
+    marginBottom: theme.spacing(1),
+  },
+}));
+
+export const imageUploadPreviewStyles = makeStyles((theme: Theme) => ({
+  root: {
+    marginBottom: theme.spacing(1),
+  },
+}));
+

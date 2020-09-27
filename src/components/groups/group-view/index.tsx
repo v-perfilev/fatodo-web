@@ -9,9 +9,7 @@ import GroupViewItems from './group-view-items';
 import GroupViewUsers from './group-view-users';
 import GroupViewMessages from './group-view-messages';
 import {groupStyles} from './_styles';
-import PageHeader from '../../common/layouts/page-header';
 import {Group} from '../../../models/group.model';
-import PageDivider from '../../common/layouts/page-divider';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
 import {Routes} from '../../router';
@@ -22,6 +20,8 @@ import GroupService from '../../../services/group.service';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import {ItemRoutes} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
+import {PageHeader} from '../../common/layouts/page-header';
+import {PageDivider} from '../../common/layouts/page-divider';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);
@@ -90,10 +90,11 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
     group && (
       <ThemeProvider theme={theme}>
         <Container className={classes.root}>
-          <PageHeader title={group.title} imageFilename={group.imageFilename} />
+          <PageHeader title={group.title} filename={group.imageFilename} />
           <PageDivider height={5} />
           <GroupViewUsers groupUsers={group.users} />
           <GroupViewItems groupId={group.id} />
+          <PageDivider />
           <GroupViewMessages group={group} />
         </Container>
       </ThemeProvider>

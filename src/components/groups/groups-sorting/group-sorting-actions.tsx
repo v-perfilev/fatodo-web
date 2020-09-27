@@ -8,7 +8,7 @@ type Props = {
   bind: (...any) => void;
 };
 
-const GroupSortingCardActions: FC<Props> = ({bind}: Props) => {
+const GroupSortingActions: FC<Props> = ({bind}: Props) => {
   const classes = groupSortingCardActionsStyles();
 
   return (
@@ -18,4 +18,4 @@ const GroupSortingCardActions: FC<Props> = ({bind}: Props) => {
   );
 };
 
-export default GroupSortingCardActions;
+export default GroupSortingActions;

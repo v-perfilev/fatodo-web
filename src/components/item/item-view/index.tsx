@@ -7,8 +7,6 @@ import {compose} from 'recompose';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {itemViewStyles} from './_styles';
 import {Item} from '../../../models/item.model';
-import PageHeader from '../../common/layouts/page-header';
-import PageDivider from '../../common/layouts/page-divider';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Routes} from '../../router';
@@ -21,6 +19,8 @@ import ItemViewPriority from './item-view-priority';
 import ItemViewReminders from './item-view-reminders';
 import ItemViewTags from './item-view-tags';
 import ItemViewChanges from './item-view-changes';
+import {PageDivider} from '../../common/layouts/page-divider';
+import {PageHeader} from '../../common/layouts/page-header';
 
 const mapDispatchToProps = {setMenu};
 const connector = connect(null, mapDispatchToProps);

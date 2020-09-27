@@ -2,8 +2,8 @@ import React, {FC, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {groupItemListStyles} from './_styles';
 import GroupViewItem from './group-view-item';
-import PageDivider from '../../common/layouts/page-divider';
 import {Item} from '../../../models/item.model';
+import {PageDivider} from '../../common/layouts/page-divider';
 
 type Props = {
   groupId: string;

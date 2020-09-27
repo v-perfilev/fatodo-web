@@ -51,7 +51,7 @@ export const RemindersInputPopoverToolbar: FC<Props> = ({periodicity, setPeriodi
         </ToggleButton>
       </ToggleButtonGroup>
       <Zoom in={show} timeout={150}>
-        <Typography>{t('items:reminder.periodicity.' + periodicity)}</Typography>
+        <Typography>{t('common:reminders.periodicity.' + periodicity)}</Typography>
       </Zoom>
     </Toolbar>
   );

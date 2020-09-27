@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
-import LabeledBox from '../../common/layouts/labeled-box';
 import {useTranslation} from 'react-i18next';
-import PageDivider from '../../common/layouts/page-divider';
+import {LabeledBox} from '../../common/layouts/labeled-box';
+import {PageDivider} from '../../common/layouts/page-divider';
 
 type Props = {
   description: string;

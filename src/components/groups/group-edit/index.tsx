@@ -13,7 +13,6 @@ import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import GroupService from '../../../services/group.service';
 import {Notification} from '../../../shared/notification/notification';
-import {ItemDTO} from '../../../models/dto/item.dto';
 import {GroupDTO} from '../../../models/dto/group.dto';
 
 const mapDispatchToProps = {setMenu};
