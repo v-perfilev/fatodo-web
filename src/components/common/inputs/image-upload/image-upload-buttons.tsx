@@ -43,12 +43,12 @@ export const ImageUploadButtons: FC<Props> = ({image, setImage, setSource, setAn
           ref={inputRef}
         />
         <Button color="primary" variant="contained" component="span" ref={buttonRef}>
-          {image ? t('common:uploadImage.buttons.update') : t('common:uploadImage.buttons.upload')}
+          {image ? t('common:imageUpload.buttons.update') : t('common:imageUpload.buttons.upload')}
         </Button>
       </label>
       {image && (
         <Button color="secondary" variant="contained" onClick={cleanImage}>
-          {t('common:uploadImage.buttons.clear')}
+          {t('common:imageUpload.buttons.clear')}
         </Button>
       )}
     </Box>

@@ -1,26 +1,20 @@
 import React, {FC, useEffect, useState} from 'react';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
-import {compose} from 'recompose';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
-import {setMenu} from '../../../store/actions/additional-menu.actions';
-import {connect, ConnectedProps} from 'react-redux';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group.model';
 import GroupService from '../../../services/group.service';
 import GroupsSortingContainer from './groups-sorting-container';
+import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
 
-const mapDispatchToProps = {setMenu};
-const connector = connect(null, mapDispatchToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
+const GroupsSorting: FC = () => {
   const history = useHistory();
   const {t, i18n} = useTranslation();
+  const {updateMenu} = useAdditionalMenuContext();
   const [groups, setGroups] = useState<Group[]>([]);
 
   const saveOrderAndRedirectToGroupsRoot = (): void => {
@@ -54,14 +48,14 @@ const GroupsSorting: FC<Props> = ({setMenu}: Props) => {
 
   useEffect(() => {
     loadGroups();
-    setMenu(menu, true);
+    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {
-    setMenu(menu);
+    updateMenu(menu);
   }, [i18n.language]);
 
   return groups && <GroupsSortingContainer groups={groups} />;
 };
 
-export default compose(connector)(GroupsSorting);
+export default GroupsSorting;

@@ -1,11 +1,8 @@
-import {setMenu} from '../../../store/actions/additional-menu.actions';
-import {connect, ConnectedProps} from 'react-redux';
 import React, {FC, useEffect, useState} from 'react';
 import {Item} from '../../../models/item.model';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import ItemForm from '../item-form';
-import {compose} from 'recompose';
 import {useHistory, useParams} from 'react-router-dom';
 import {Group} from '../../../models/group.model';
 import {Routes} from '../../router';
@@ -16,16 +13,13 @@ import {CloseIcon} from '../../common/icons/close-icon';
 import ItemService from '../../../services/item.service';
 import {Notification} from '../../../shared/notification/notification';
 import {ItemDTO} from '../../../models/dto/item.dto';
+import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
 
-const mapDispatchToProps = {setMenu};
-const connector = connect(null, mapDispatchToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-const ItemEdit: FC<Props> = ({setMenu}: Props) => {
+const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
   const history = useHistory();
   const {groupId, itemId} = useParams();
+  const {updateMenu} = useAdditionalMenuContext();
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
   });
@@ -80,11 +74,11 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
 
   useEffect(() => {
     loadGroupAndItem();
-    setMenu(menu, true);
+    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {
-    setMenu(menu);
+    updateMenu(menu);
   }, [i18n.language, saveCallback]);
 
   return (
@@ -101,4 +95,4 @@ const ItemEdit: FC<Props> = ({setMenu}: Props) => {
   );
 };
 
-export default compose(connector)(ItemEdit);
+export default ItemEdit;

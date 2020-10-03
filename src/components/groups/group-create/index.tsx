@@ -1,4 +1,3 @@
-import {setMenu} from '../../../store/actions/additional-menu.actions';
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
@@ -10,18 +9,13 @@ import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
 import GroupService from '../../../services/group.service';
 import {Notification} from '../../../shared/notification/notification';
-import {connect, ConnectedProps} from 'react-redux';
-import {compose} from 'recompose';
 import {GroupDTO} from '../../../models/dto/group.dto';
+import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
 
-const mapDispatchToProps = {setMenu};
-const connector = connect(null, mapDispatchToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-const GroupCreate: FC<Props> = ({setMenu}: Props) => {
+const GroupCreate: FC = () => {
   const history = useHistory();
   const {i18n, t} = useTranslation();
+  const {updateMenu} = useAdditionalMenuContext();
   const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
     // important stub function
   });
@@ -44,11 +38,11 @@ const GroupCreate: FC<Props> = ({setMenu}: Props) => {
   );
 
   useEffect(() => {
-    setMenu(menu, true);
+    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {
-    setMenu(menu);
+    updateMenu(menu);
   }, [i18n.language, saveCallback]);
 
   const request = (data: GroupDTO, stopSubmitting: () => void): void => {
@@ -67,4 +61,4 @@ const GroupCreate: FC<Props> = ({setMenu}: Props) => {
   return <GroupForm header={t('groups:headers.create')} setSaveCallback={setSaveCallback} request={request} />;
 };
 
-export default compose(connector)(GroupCreate);
+export default GroupCreate;

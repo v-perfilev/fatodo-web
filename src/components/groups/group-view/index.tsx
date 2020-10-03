@@ -1,6 +1,4 @@
 import React, {FC, memo, useEffect, useState} from 'react';
-import {setMenu} from '../../../store/actions/additional-menu.actions';
-import {connect, ConnectedProps} from 'react-redux';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
@@ -22,16 +20,13 @@ import {ItemRoutes} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {PageHeader} from '../../common/layouts/page-header';
 import {PageDivider} from '../../common/layouts/page-divider';
+import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
 
-const mapDispatchToProps = {setMenu};
-const connector = connect(null, mapDispatchToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-const GroupView: FC<Props> = ({setMenu}: Props) => {
+const GroupView: FC = () => {
   const classes = groupStyles();
   const history = useHistory();
   const {groupId} = useParams();
+  const {updateMenu} = useAdditionalMenuContext();
   const {t, i18n} = useTranslation();
   const [group, setGroup] = useState<Group>(null);
 
@@ -77,11 +72,11 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
 
   useEffect(() => {
     loadGroup();
-    setMenu(menu, true);
+    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {
-    setMenu(menu);
+    updateMenu(menu);
   }, [i18n.language]);
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
@@ -102,4 +97,4 @@ const GroupView: FC<Props> = ({setMenu}: Props) => {
   );
 };
 
-export default compose(connector, memo)(GroupView);
+export default compose(memo)(GroupView);

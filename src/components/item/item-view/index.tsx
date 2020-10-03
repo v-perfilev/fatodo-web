@@ -1,6 +1,4 @@
 import React, {FC, memo, useEffect, useState} from 'react';
-import {setMenu} from '../../../store/actions/additional-menu.actions';
-import {connect, ConnectedProps} from 'react-redux';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
@@ -21,16 +19,13 @@ import ItemViewTags from './item-view-tags';
 import ItemViewChanges from './item-view-changes';
 import {PageDivider} from '../../common/layouts/page-divider';
 import {PageHeader} from '../../common/layouts/page-header';
+import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
 
-const mapDispatchToProps = {setMenu};
-const connector = connect(null, mapDispatchToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-const ItemView: FC<Props> = ({setMenu}: Props) => {
+const ItemView: FC = () => {
   const classes = itemViewStyles();
   const {i18n} = useTranslation();
   const history = useHistory();
+  const {updateMenu} = useAdditionalMenuContext();
   const [item, setItem] = useState<Item>();
   const [group, setGroup] = useState<Group>();
 
@@ -51,11 +46,11 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
 
   useEffect(() => {
     loadItemAndGroup();
-    setMenu(menu, true);
+    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {
-    setMenu(menu);
+    updateMenu(menu);
   }, [i18n.language]);
 
   return (
@@ -79,4 +74,4 @@ const ItemView: FC<Props> = ({setMenu}: Props) => {
   );
 };
 
-export default compose(connector, memo)(ItemView);
+export default compose(memo)(ItemView);

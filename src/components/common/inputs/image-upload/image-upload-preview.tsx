@@ -13,6 +13,7 @@ export const ImageUploadPreview: FC<Props> = ({image, preview}: Props) => {
   const classes = imageUploadPreviewStyles();
 
   return (
+    image &&
     image.filename &&
     preview && (
       <Box className={classes.root}>

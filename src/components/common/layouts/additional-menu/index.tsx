@@ -2,22 +2,14 @@ import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 import {Box, Drawer, Fade, Theme, useMediaQuery} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
-import {RootState} from '../../../../store';
-import {connect, ConnectedProps} from 'react-redux';
-import {RouteProps} from 'react-router-dom';
-import {AdditionalMenuState} from '../../../../store/rerducers/additional-menu.reducer';
-import {compose} from 'recompose';
 import csx from 'classnames';
 import {ADDITIONAL_MENU_UPDATE} from '../../../../constants';
 import {Logo} from '../logo';
+import {useAdditionalMenuContext} from '../../../../shared/hoc/with-additional-menu';
 
-const mapStateToProps = (state: RootState): AdditionalMenuState => state.additionalMenuState;
-const connector = connect(mapStateToProps);
-
-type Props = ConnectedProps<typeof connector> & RouteProps;
-
-const AdditionalMenu: FC<Props> = ({menu, reload}: Props) => {
+const AdditionalMenu: FC = () => {
   const classes = additionalMenuStyles();
+  const {menu, reload} = useAdditionalMenuContext();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
   const [menuForRender, setMenuForRender] = useState(null);
   const [timer, setTimer] = useState(null);
@@ -70,4 +62,4 @@ const AdditionalMenu: FC<Props> = ({menu, reload}: Props) => {
   );
 };
 
-export default compose(connector)(AdditionalMenu);
+export default AdditionalMenu;

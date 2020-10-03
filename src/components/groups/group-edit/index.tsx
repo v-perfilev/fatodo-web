@@ -1,9 +1,6 @@
-import {setMenu} from '../../../store/actions/additional-menu.actions';
-import {connect, ConnectedProps} from 'react-redux';
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
-import {compose} from 'recompose';
 import {Group} from '../../../models/group.model';
 import GroupForm from '../group-form';
 import {useHistory, useParams} from 'react-router-dom';
@@ -14,15 +11,12 @@ import {CloseIcon} from '../../common/icons/close-icon';
 import GroupService from '../../../services/group.service';
 import {Notification} from '../../../shared/notification/notification';
 import {GroupDTO} from '../../../models/dto/group.dto';
+import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
 
-const mapDispatchToProps = {setMenu};
-const connector = connect(null, mapDispatchToProps);
-
-type Props = ConnectedProps<typeof connector>;
-
-const GroupEdit: FC<Props> = ({setMenu}: Props) => {
-  const {i18n, t} = useTranslation();
+const GroupEdit: FC = () => {
   const history = useHistory();
+  const {i18n, t} = useTranslation();
+  const {updateMenu} = useAdditionalMenuContext();
   const {groupId} = useParams();
   const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
     // important stub function
@@ -58,11 +52,11 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
 
   useEffect(() => {
     loadGroup();
-    setMenu(menu, true);
+    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {
-    setMenu(menu);
+    updateMenu(menu);
   }, [i18n.language, saveCallback]);
 
   const request = (data: GroupDTO, stopSubmitting: () => void): void => {
@@ -84,4 +78,4 @@ const GroupEdit: FC<Props> = ({setMenu}: Props) => {
   );
 };
 
-export default compose(connector)(GroupEdit);
+export default GroupEdit;

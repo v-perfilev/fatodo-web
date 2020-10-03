@@ -27,13 +27,15 @@ export const ImageUpload: FC<Props> = ({filenameName, contentName, label, crop, 
   };
 
   useEffect(() => {
-    const image = {filename: values[filenameName], content: values[contentName]};
-    setImage(image);
+    if (values[filenameName]) {
+      const image = {filename: values[filenameName], content: values[contentName]};
+      setImage(image);
+    }
   }, []);
 
   useEffect(() => {
-    setFieldValue(filenameName, image.filename);
-    setFieldValue(contentName, image.content);
+    setFieldValue(filenameName, image?.filename);
+    setFieldValue(contentName, image?.content);
   }, [image]);
 
   return (
