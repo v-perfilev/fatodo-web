@@ -9,7 +9,7 @@ import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group.model';
 import GroupService from '../../../services/group.service';
 import GroupsSortingContainer from './groups-sorting-container';
-import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 
 const GroupsSorting: FC = () => {
   const history = useHistory();

@@ -7,19 +7,18 @@ import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import AccountService from '../../../services/account.service';
 import {passwordValidator, repeatPasswordValidator} from '../common/_validators';
-import {Notification} from '../../../shared/notification/notification';
 import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
-import withCaptchaProvider from '../../../shared/hoc/with-captcha-provider';
 import {PasswordInput} from '../../common/inputs/password-input';
 import {LoadingButton} from '../../common/layouts/loading-button';
 import {PasswordStrengthBar} from '../password-strength-bar';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = FormikProps<any> &
   CaptchaProps & {
-    code: string;
-    onSuccess: () => void;
-    onFailure: (status: number) => void;
-  };
+  code: string;
+  onSuccess: () => void;
+  onFailure: (status: number) => void;
+};
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -68,6 +67,8 @@ const formik = withFormik<Props, FormValues>({
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
     const {code, token, updateToken} = props;
+    const {handleCode, handleResponse} = useSnackContext();
+
     const data = {
       code: code,
       password: values.password,
@@ -75,11 +76,11 @@ const formik = withFormik<Props, FormValues>({
     };
     AccountService.resetPassword(data)
       .then(() => {
-        Notification.handleSnack('auth.afterResetPassword', 'info');
+        handleCode('auth.afterResetPassword', 'info');
         props.onSuccess();
       })
       .catch((response) => {
-        Notification.handleFeedback(response);
+        handleResponse(response);
         setSubmitting(false);
         updateToken();
         props.onFailure(response?.status);
@@ -87,4 +88,4 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose(withCaptchaProvider, withCaptcha, formik)(ResetPasswordForm);
+export default compose(withCaptcha, formik)(ResetPasswordForm);

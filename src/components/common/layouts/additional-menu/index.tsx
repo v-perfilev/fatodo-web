@@ -5,7 +5,7 @@ import {additionalMenuStyles} from './_styles';
 import csx from 'classnames';
 import {ADDITIONAL_MENU_UPDATE} from '../../../../constants';
 import {Logo} from '../logo';
-import {useAdditionalMenuContext} from '../../../../shared/hoc/with-additional-menu';
+import {useAdditionalMenuContext} from '../../../../shared/contexts/additional-menu-context';
 
 const AdditionalMenu: FC = () => {
   const classes = additionalMenuStyles();

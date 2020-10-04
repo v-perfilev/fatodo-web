@@ -1,6 +1,9 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
-import {useGoogleReCaptcha} from 'react-google-recaptcha-v3';
+import {GoogleReCaptchaProvider, useGoogleReCaptcha} from 'react-google-recaptcha-v3';
+import {RECAPTCHA_KEY} from '../../constants';
+import {LanguageUtils} from '../utils/language.utils';
+import {compose} from 'recompose';
 
 export type CaptchaProps = {
   token: string;
@@ -39,4 +42,12 @@ const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (props): Rea
   return <Component {...props} token={token} updateToken={updateToken} />;
 };
 
-export default withCaptcha;
+const withCaptchaProvider = (Component: ComponentType): FC => (props): ReactElement => {
+  return (
+    <GoogleReCaptchaProvider reCaptchaKey={RECAPTCHA_KEY} language={LanguageUtils.getLanguage()}>
+      <Component {...props} />
+    </GoogleReCaptchaProvider>
+  );
+};
+
+export default compose(withCaptchaProvider, withCaptcha);

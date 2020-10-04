@@ -11,12 +11,13 @@ import AdditionalMenuButton from '../../common/layouts/additional-menu/additiona
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import ItemService from '../../../services/item.service';
-import {Notification} from '../../../shared/notification/notification';
 import {ItemDTO} from '../../../models/dto/item.dto';
-import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
+  const {handleCode, handleResponse} = useSnackContext();
   const history = useHistory();
   const {groupId, itemId} = useParams();
   const {updateMenu} = useAdditionalMenuContext();
@@ -63,11 +64,11 @@ const ItemEdit: FC = () => {
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     ItemService.update(data)
       .then(() => {
-        Notification.handleSnack('items.edited', 'info');
+        handleCode('items.edited', 'info');
         redirectToItem();
       })
       .catch((response) => {
-        Notification.handleFeedback(response);
+        handleResponse(response);
         stopSubmitting();
       });
   };

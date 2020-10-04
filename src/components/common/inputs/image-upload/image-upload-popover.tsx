@@ -4,10 +4,10 @@ import {Image} from '../../../../models/image.model';
 import ReactCrop from 'react-image-crop';
 import imageCompression from 'browser-image-compression';
 import {imageUploadPopoverStyles} from './_styles';
-import {Notification} from '../../../../shared/notification/notification';
 import {IMAGE_MAX_SIZE, IMAGE_MAX_WIDTH, IMAGE_MIN_WIDTH} from '../../../../constants';
 import csx from 'classnames';
 import {ImageUtils} from '../../../../shared/utils/image.utils';
+import {useSnackContext} from '../../../../shared/contexts/snack-context';
 
 type ImageError = 'tooSmall';
 
@@ -34,6 +34,7 @@ const minWidth = IMAGE_MIN_WIDTH;
 export const ImageUploadPopover: FC<Props> = ({source, anchorEl, handleClose, cropOptions}: Props) => {
   const classes = imageUploadPopoverStyles();
   const imageRef = useRef();
+  const {handleCode} = useSnackContext();
   const [crop, setCrop] = useState({...defaultInitialCrop, ...cropOptions});
   const [croppedBlob, setCroppedBlob] = useState<Blob>(null);
   const [isValid, setIsValid] = useState(true);
@@ -64,7 +65,7 @@ export const ImageUploadPopover: FC<Props> = ({source, anchorEl, handleClose, cr
   const sendErrorNotifications = (errors: ImageError[]): void => {
     if (notificationAllowed && errors.length > 0) {
       errors.forEach((error) => {
-        Notification.handleSnack('image.' + error, 'warning');
+        handleCode('image.' + error, 'warning');
       });
       setNotificationAllowed(false);
       setTimeout(() => setNotificationAllowed(true), 5000);
@@ -98,7 +99,7 @@ export const ImageUploadPopover: FC<Props> = ({source, anchorEl, handleClose, cr
       0,
       0,
       crop.width,
-      crop.height
+      crop.height,
     );
 
     return new Promise((resolve) => {

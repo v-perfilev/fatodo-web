@@ -1,25 +1,26 @@
 import axios, {AxiosPromise, AxiosResponse} from 'axios';
 import {API_TIMEOUT, API_URL} from '../constants';
 import {SecurityUtils} from './utils/security.utils';
-import Snack from '../models/snack.model';
-import {NotificationBuilder} from './notification/notification.builder';
 import {TranslationUtils} from './utils/translation.utils';
 import {ResponseUtils} from './utils/response.utils';
+import {SnackBuilder} from './utils/builders/snack.builder';
+import {useSnackContext} from './contexts/snack-context';
 
 axios.defaults.timeout = API_TIMEOUT;
 axios.defaults.baseURL = API_URL;
 
 interface SetupAxiosActions {
   onUnauthenticated: () => void;
-  enqueueSnackbar: (notification: Snack) => void;
 }
 
 const setupAxiosInterceptors = (actions: SetupAxiosActions): void => {
+  const {enqueueSnack} = useSnackContext();
+
   const handleErrorFeedback = (response: AxiosResponse): void => {
     const status = ResponseUtils.getStatus(response);
     const enqueueErrorNotification = (message: string): void => {
-      const notification = new NotificationBuilder(message).setVariant('error').build();
-      actions.enqueueSnackbar(notification);
+      const snack = new SnackBuilder(message).setVariant('error').build();
+      enqueueSnack(snack);
     };
     if (status >= 500) {
       enqueueErrorNotification(TranslationUtils.getFeedbackTranslation('default'));

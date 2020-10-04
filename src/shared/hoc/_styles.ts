@@ -114,3 +114,18 @@ export const flexStyles = makeStyles(() => ({
     flexGrow: 1,
   },
 }));
+
+export const notificationStyles = makeStyles((theme: Theme) => ({
+  variantSuccess: {
+    backgroundColor: theme.palette.success.main,
+  },
+  variantError: {
+    backgroundColor: theme.palette.error.main,
+  },
+  variantInfo: {
+    backgroundColor: theme.palette.info.main,
+  },
+  variantWarning: {
+    backgroundColor: theme.palette.warning.main,
+  },
+}));

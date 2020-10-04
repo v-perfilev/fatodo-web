@@ -6,58 +6,39 @@ import {bindActionCreators} from 'redux';
 import App from './components/app';
 import setupAxiosInterceptors from './shared/axios';
 import store from './store/store';
-import {Provider} from 'react-redux';
-import {CssBaseline, ThemeProvider} from '@material-ui/core';
-import {ThemeFactory} from './shared/theme/theme';
+import {CssBaseline} from '@material-ui/core';
 import {clearAuth} from './store/actions/auth.actions';
-import {enqueueSnackbar} from './store/actions/notification.actions';
 import {initLanguages} from './shared/i18n';
 import './shared/i18n';
 import {BrowserRouter as Router} from 'react-router-dom';
-import NotificationHandler from './shared/notification/notification-handler';
-import {NotificationProvider} from './shared/notification/notification-provider';
-import {MuiPickersUtilsProvider} from '@material-ui/pickers';
-import MomentUtils from '@date-io/moment';
-import {useTranslation} from 'react-i18next';
-import {setupNotification} from './shared/notification/notification';
+import {compose} from 'recompose';
 
 // import styles
 import 'react-image-crop/dist/ReactCrop.css';
 import './styles.css';
-
-const root = document.getElementById('root');
-
-const actions = bindActionCreators({clearAuth, enqueueSnackbar}, store.dispatch);
-setupAxiosInterceptors({
-  onUnauthenticated: actions.clearAuth,
-  enqueueSnackbar: actions.enqueueSnackbar,
-});
-setupNotification({
-  enqueueSnackbar: actions.enqueueSnackbar,
-});
-
-const defaultTheme = ThemeFactory.getDefaultTheme();
+import withStore from './shared/hoc/with-store';
+import withDefaultTheme from './shared/hoc/with-default-theme';
+import withMui from './shared/hoc/with-mui';
+import withSnack from './shared/hoc/with-snack';
 
 const Root: FC = () => {
-  const {i18n} = useTranslation();
+  // setup axios
+  const actions = bindActionCreators({clearAuth}, store.dispatch);
+  setupAxiosInterceptors({
+    onUnauthenticated: actions.clearAuth,
+  });
 
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={defaultTheme}>
-        <MuiPickersUtilsProvider utils={MomentUtils} locale={i18n.language}>
-          <NotificationProvider>
-            <NotificationHandler />
-            <Router>
-              <CssBaseline />
-              <App />
-            </Router>
-          </NotificationProvider>
-        </MuiPickersUtilsProvider>
-      </ThemeProvider>
-    </Provider>
+    <Router>
+      <CssBaseline />
+      <App />
+    </Router>
   );
 };
 
+const WrappedRoot = compose(withStore, withDefaultTheme, withMui, withSnack)(Root);
+
+const root = document.getElementById('root');
 initLanguages.then(() => {
-  ReactDOM.render(<Root />, root);
+  ReactDOM.render(<WrappedRoot />, root);
 });

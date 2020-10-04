@@ -20,7 +20,7 @@ import {ItemRoutes} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {PageHeader} from '../../common/layouts/page-header';
 import {PageDivider} from '../../common/layouts/page-divider';
-import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 
 const GroupView: FC = () => {
   const classes = groupStyles();

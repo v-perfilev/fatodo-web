@@ -11,7 +11,7 @@ import {useTranslation} from 'react-i18next';
 import {Group} from '../../../models/group.model';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import GroupService from '../../../services/group.service';
-import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 
 const GroupPreview: FC = () => {
   const history = useHistory();

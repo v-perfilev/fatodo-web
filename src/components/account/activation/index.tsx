@@ -2,11 +2,12 @@ import {FC, useEffect} from 'react';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import AccountService from '../../../services/account.service';
 import {Routes} from '../../router';
-import {Notification} from '../../../shared/notification/notification';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 const Activation: FC = () => {
   const match = useRouteMatch<{code: string}>();
   const history = useHistory();
+  const {handleCode} = useSnackContext();
   const code = match.params.code;
 
   const redirectToHome = (): void => history.push(Routes.ROOT);
@@ -15,7 +16,7 @@ const Activation: FC = () => {
   useEffect(() => {
     AccountService.activate(code)
       .then(() => {
-        Notification.handleSnack('auth.activated', 'info');
+        handleCode('auth.activated', 'info');
         redirectToHome();
       })
       .catch(() => {

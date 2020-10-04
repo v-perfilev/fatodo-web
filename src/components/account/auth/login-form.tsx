@@ -11,17 +11,17 @@ import {authFormStyles} from '../common/_styles';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import AccountService from '../../../services/account.service';
-import {Notification} from '../../../shared/notification/notification';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../../router';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {SecurityUtils} from '../../../shared/utils/security.utils';
-import withCaptchaProvider from '../../../shared/hoc/with-captcha-provider';
 import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
 import {TextInput} from '../../common/inputs/text-input';
 import {PasswordInput} from '../../common/inputs/password-input';
 import {LoadingButton} from '../../common/layouts/loading-button';
 import {Link} from '../../common/layouts/link';
+import {withSnackContext} from '../../../shared/hoc/with-snack';
+import {SnackState} from '../../../shared/contexts/snack-context';
 
 const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);
@@ -29,9 +29,10 @@ const connector = connect(null, mapDispatchToProps);
 type Props = RouteComponentProps &
   FormikProps<any> &
   ConnectedProps<typeof connector> &
-  CaptchaProps & {
-    onSuccess: () => void;
-  };
+  CaptchaProps &
+  SnackState & {
+  onSuccess: () => void;
+};
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -93,7 +94,8 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-    const {login, requestAccountData, history, onSuccess, token, updateToken} = props;
+    const {login, requestAccountData, history, onSuccess, token, updateToken, handleResponse} = props;
+
     const data = {
       user: values.user,
       password: values.password,
@@ -112,7 +114,7 @@ const formik = withFormik<Props, FormValues>({
         if (ResponseUtils.getFeedbackCode(response) === 'auth.notActivated') {
           history.push(Routes.NOT_ACTIVATED, {user: values.user});
         } else {
-          Notification.handleFeedback(response, '*', ['auth.notActivated']);
+          handleResponse(response, '*', ['auth.notActivated']);
           setSubmitting(false);
           updateToken();
         }
@@ -120,4 +122,4 @@ const formik = withFormik<Props, FormValues>({
   },
 });
 
-export default compose(withRouter, withCaptchaProvider, withCaptcha, connector, formik)(LoginForm);
+export default compose(withRouter, withCaptcha, withSnackContext, connector, formik)(LoginForm);

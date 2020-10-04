@@ -7,18 +7,19 @@ import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import {useHistory, useParams} from 'react-router-dom';
 import GroupService from '../../../services/group.service';
-import {Notification} from '../../../shared/notification/notification';
 import ItemService from '../../../services/item.service';
 import {Group} from '../../../models/group.model';
 import ItemForm from '../item-form';
 import {ItemDTO} from '../../../models/dto/item.dto';
-import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 const ItemCreate: FC = () => {
   const {i18n, t} = useTranslation();
   const history = useHistory();
   const {groupId} = useParams();
   const {updateMenu} = useAdditionalMenuContext();
+  const {handleCode, handleResponse} = useSnackContext();
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
   });
@@ -63,13 +64,13 @@ const ItemCreate: FC = () => {
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     ItemService.create(data)
       .then((response) => {
-        Notification.handleSnack('items.created', 'info');
+        handleCode('items.created', 'info');
         const id = response.data.id;
         console.log(Routes.ITEMS + '/' + id);
         redirectToItem(id);
       })
       .catch((response) => {
-        Notification.handleFeedback(response);
+        handleResponse(response);
         stopSubmitting();
       });
   };

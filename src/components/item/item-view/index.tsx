@@ -19,7 +19,7 @@ import ItemViewTags from './item-view-tags';
 import ItemViewChanges from './item-view-changes';
 import {PageDivider} from '../../common/layouts/page-divider';
 import {PageHeader} from '../../common/layouts/page-header';
-import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 
 const ItemView: FC = () => {
   const classes = itemViewStyles();

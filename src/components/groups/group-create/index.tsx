@@ -8,14 +8,15 @@ import {CloseIcon} from '../../common/icons/close-icon';
 import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
 import GroupService from '../../../services/group.service';
-import {Notification} from '../../../shared/notification/notification';
 import {GroupDTO} from '../../../models/dto/group.dto';
-import {useAdditionalMenuContext} from '../../../shared/hoc/with-additional-menu';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 const GroupCreate: FC = () => {
   const history = useHistory();
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
+  const {handleCode, handleResponse} = useSnackContext();
   const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
     // important stub function
   });
@@ -48,12 +49,12 @@ const GroupCreate: FC = () => {
   const request = (data: GroupDTO, stopSubmitting: () => void): void => {
     GroupService.create(data)
       .then((response) => {
-        Notification.handleSnack('groups.created', 'info');
+        handleCode('groups.created', 'info');
         const id = response.data.id;
         redirectToGroup(id);
       })
       .catch((response) => {
-        Notification.handleFeedback(response);
+        handleResponse(response);
         stopSubmitting();
       });
   };

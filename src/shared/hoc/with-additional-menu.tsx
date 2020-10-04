@@ -1,19 +1,10 @@
 import * as React from 'react';
-import {ComponentType, FC, ReactElement, useContext, useState} from 'react';
+import {ComponentType, FC, ReactElement, useState} from 'react';
 import {Box, Theme, useMediaQuery} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
 import AdditionalMenu from '../../components/common/layouts/additional-menu';
 import csx from 'classnames';
-
-interface AdditionalMenuState {
-  menu: ReactElement;
-  reload: boolean;
-  updateMenu: (menu: ReactElement, reload?: boolean) => void;
-}
-
-export const AdditionalMenuContext = React.createContext<AdditionalMenuState>(null);
-const AdditionalMenuProvider = AdditionalMenuContext.Provider;
-export const useAdditionalMenuContext = (): AdditionalMenuState => useContext(AdditionalMenuContext);
+import {AdditionalMenuProvider} from '../contexts/additional-menu-context';
 
 const withAdditionalMenu = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = additionalMenuStyles();

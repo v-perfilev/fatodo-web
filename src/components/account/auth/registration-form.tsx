@@ -8,18 +8,19 @@ import {emailValidator, passwordValidator, usernameValidator} from '../common/_v
 import {authFormStyles} from '../common/_styles';
 import i18n from '../../../shared/i18n';
 import {compose} from 'recompose';
-import {Notification} from '../../../shared/notification/notification';
-import withCaptchaProvider from '../../../shared/hoc/with-captcha-provider';
 import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
 import {TextInput} from '../../common/inputs/text-input';
 import {PasswordInput} from '../../common/inputs/password-input';
 import {LoadingButton} from '../../common/layouts/loading-button';
 import {PasswordStrengthBar} from '../password-strength-bar';
+import {SnackState} from '../../../shared/contexts/snack-context';
+import {withSnackContext} from '../../../shared/hoc/with-snack';
 
 type Props = FormikProps<any> &
-  CaptchaProps & {
-    onSuccess: () => void;
-  };
+  CaptchaProps &
+  SnackState & {
+  onSuccess: () => void;
+};
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -72,7 +73,8 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-    const {token, updateToken} = props;
+    const {token, updateToken, handleCode, handleResponse} = props;
+
     const data = {
       email: values.email,
       username: values.username,
@@ -83,15 +85,15 @@ const formik = withFormik<Props, FormValues>({
 
     AccountService.register(data)
       .then(() => {
-        Notification.handleSnack('auth.registered', 'info');
+        handleCode('auth.registered', 'info');
         props.onSuccess();
       })
       .catch((response) => {
-        Notification.handleFeedback(response);
+        handleResponse(response);
         setSubmitting(false);
         updateToken();
       });
   },
 });
 
-export default compose(withCaptchaProvider, withCaptcha, formik)(RegistrationForm);
+export default compose(withCaptcha, withSnackContext, formik)(RegistrationForm);

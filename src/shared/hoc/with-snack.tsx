@@ -1,0 +1,87 @@
+import * as React from 'react';
+import {ComponentType, FC, ReactElement} from 'react';
+import {SnackbarKey, SnackbarProvider as SnackbarWrapper, useSnackbar, VariantType} from 'notistack';
+import {AxiosResponse} from 'axios';
+import {ResponseUtils} from '../utils/response.utils';
+import {TranslationUtils} from '../utils/translation.utils';
+import {SnackBuilder} from '../utils/builders/snack.builder';
+import {compose} from 'recompose';
+import {notificationStyles} from './_styles';
+import {SnackConsumer, SnackProvider, SnackState} from '../contexts/snack-context';
+import Snack from '../../models/snack.model';
+
+const withSnack = (Component: ComponentType): FC => (props): ReactElement => {
+  const {enqueueSnackbar, closeSnackbar} = useSnackbar();
+
+  const enqueueSnack = (snack: Snack): SnackbarKey => {
+    return enqueueSnackbar(snack.message, snack.options);
+  };
+
+  const closeSnack = (key: SnackbarKey): void => {
+    closeSnackbar(key);
+  };
+
+  const getVariantFromStatus = (status: number): VariantType => {
+    if (status >= 400 && status < 500) {
+      return 'warning';
+    } else if (status >= 500) {
+      return 'error';
+    } else {
+      return 'info';
+    }
+  };
+
+  const handleResponse = (
+    response: AxiosResponse,
+    allowedCodes: string[] | '*' = '*',
+    excludedCodes: string[] | '' = '',
+  ): SnackbarKey => {
+    const feedbackCode = ResponseUtils.getFeedbackCode(response);
+    const status = ResponseUtils.getStatus(response);
+    const isFeedBackCorrect =
+      feedbackCode &&
+      (allowedCodes === '*' || allowedCodes.includes(feedbackCode)) &&
+      (excludedCodes === '' || !excludedCodes.includes(feedbackCode));
+    const isStatusCorrect = status && status < 500;
+    const message = TranslationUtils.getFeedbackTranslation(feedbackCode);
+    const snack = isFeedBackCorrect && isStatusCorrect && message
+      ? new SnackBuilder(message).setVariant(getVariantFromStatus(status)).build()
+      : null;
+    return snack ? enqueueSnack(snack) : null;
+  };
+
+  const handleCode = (code: string, variant: VariantType): SnackbarKey => {
+    const message = TranslationUtils.getSnackTranslation(code);
+    const snack = message ? new SnackBuilder(message).setVariant(variant).build() : null;
+    return snack ? enqueueSnack(snack) : null;
+  };
+
+  const context = {handleResponse, handleCode, enqueueSnack, closeSnack};
+
+  return (
+    <SnackProvider value={context}>
+      <Component {...props} />
+    </SnackProvider>
+  );
+};
+
+const withSnackWrapper = (Component: ComponentType): FC => (props): ReactElement => {
+  const classes = notificationStyles();
+
+  return (
+    <SnackbarWrapper classes={classes} anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>
+      <Component {...props} />
+    </SnackbarWrapper>
+  );
+};
+
+export const withSnackContext = (Component: ComponentType<SnackState>): FC =>
+  (props): ReactElement => {
+    return (
+      <SnackConsumer>
+        {value => <Component {...props} {...value} />}
+      </SnackConsumer>
+    );
+  };
+
+export default compose(withSnackWrapper, withSnack);

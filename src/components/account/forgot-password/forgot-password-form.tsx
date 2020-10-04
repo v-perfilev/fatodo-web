@@ -9,18 +9,18 @@ import {authFormStyles} from '../common/_styles';
 import {TextInput} from '../../common/inputs/text-input';
 import {LoadingButton} from '../../common/layouts/loading-button';
 import i18n from '../../../shared/i18n';
-import {Notification} from '../../../shared/notification/notification';
-import withCaptchaProvider from '../../../shared/hoc/with-captcha-provider';
 import AccountService from '../../../services/account.service';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = FormikProps<any> &
   CaptchaProps & {
-    onSuccess?: () => void;
-  };
+  onSuccess?: () => void;
+};
 
 const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
+
   return (
     <Form className={classes.root + ' ' + classes.form}>
       <TextInput name="user" label={t('account:fields.user.label')} />
@@ -58,6 +58,8 @@ const formik = withFormik<Props, FormValues>({
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
     const {token, updateToken} = props;
+    const {handleCode, handleResponse} = useSnackContext();
+
     const data = {
       user: values.user,
       token: token,
@@ -65,15 +67,15 @@ const formik = withFormik<Props, FormValues>({
 
     AccountService.requestResetPasswordCode(data)
       .then(() => {
-        Notification.handleSnack('auth.afterForgotPassword', 'info');
+        handleCode('auth.afterForgotPassword', 'info');
         props.onSuccess();
       })
       .catch((response) => {
-        Notification.handleFeedback(response);
+        handleResponse(response);
         setSubmitting(false);
         updateToken();
       });
   },
 });
 
-export default compose(withCaptchaProvider, withCaptcha, formik)(ForgotPasswordForm);
+export default compose(withCaptcha, formik)(ForgotPasswordForm);
