@@ -15,10 +15,10 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = FormikProps<any> &
   CaptchaProps & {
-  code: string;
-  onSuccess: () => void;
-  onFailure: (status: number) => void;
-};
+    code: string;
+    onSuccess: () => void;
+    onFailure: (status: number) => void;
+  };
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();

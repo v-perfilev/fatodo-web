@@ -4,7 +4,6 @@ import store from '../../store/store';
 import {Provider} from 'react-redux';
 
 const withStore = (Component: ComponentType): FC => (props): ReactElement => {
-
   return (
     <Provider store={store}>
       <Component {...props} />

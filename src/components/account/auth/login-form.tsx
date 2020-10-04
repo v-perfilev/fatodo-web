@@ -31,8 +31,8 @@ type Props = RouteComponentProps &
   ConnectedProps<typeof connector> &
   CaptchaProps &
   SnackState & {
-  onSuccess: () => void;
-};
+    onSuccess: () => void;
+  };
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();

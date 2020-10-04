@@ -34,7 +34,7 @@ const withSnack = (Component: ComponentType): FC => (props): ReactElement => {
   const handleResponse = (
     response: AxiosResponse,
     allowedCodes: string[] | '*' = '*',
-    excludedCodes: string[] | '' = '',
+    excludedCodes: string[] | '' = ''
   ): SnackbarKey => {
     const feedbackCode = ResponseUtils.getFeedbackCode(response);
     const status = ResponseUtils.getStatus(response);
@@ -44,9 +44,10 @@ const withSnack = (Component: ComponentType): FC => (props): ReactElement => {
       (excludedCodes === '' || !excludedCodes.includes(feedbackCode));
     const isStatusCorrect = status && status < 500;
     const message = TranslationUtils.getFeedbackTranslation(feedbackCode);
-    const snack = isFeedBackCorrect && isStatusCorrect && message
-      ? new SnackBuilder(message).setVariant(getVariantFromStatus(status)).build()
-      : null;
+    const snack =
+      isFeedBackCorrect && isStatusCorrect && message
+        ? new SnackBuilder(message).setVariant(getVariantFromStatus(status)).build()
+        : null;
     return snack ? enqueueSnack(snack) : null;
   };
 
@@ -75,13 +76,8 @@ const withSnackWrapper = (Component: ComponentType): FC => (props): ReactElement
   );
 };
 
-export const withSnackContext = (Component: ComponentType<SnackState>): FC =>
-  (props): ReactElement => {
-    return (
-      <SnackConsumer>
-        {value => <Component {...props} {...value} />}
-      </SnackConsumer>
-    );
-  };
+export const withSnackContext = (Component: ComponentType<SnackState>): FC => (props): ReactElement => {
+  return <SnackConsumer>{(value): ReactElement => <Component {...props} {...value} />}</SnackConsumer>;
+};
 
 export default compose(withSnackWrapper, withSnack);

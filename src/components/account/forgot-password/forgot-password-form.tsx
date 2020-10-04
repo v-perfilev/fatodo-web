@@ -14,8 +14,8 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = FormikProps<any> &
   CaptchaProps & {
-  onSuccess?: () => void;
-};
+    onSuccess?: () => void;
+  };
 
 const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
