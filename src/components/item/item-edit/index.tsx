@@ -14,6 +14,7 @@ import ItemService from '../../../services/item.service';
 import {ItemDTO} from '../../../models/dto/item.dto';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {ResponseUtils} from '../../../shared/utils/response.utils';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -29,6 +30,7 @@ const ItemEdit: FC = () => {
 
   const submit = (): void => saveCallback();
   const redirectToItem = (): void => history.push(Routes.ITEMS + '/' + itemId);
+  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menu = (
     <>
@@ -49,6 +51,10 @@ const ItemEdit: FC = () => {
         setItem(response.data);
       })
       .catch((response) => {
+        const status = ResponseUtils.getStatus(response);
+        if (status === 404) {
+          redirectToNotFound();
+        }
         handleResponse(response);
       });
   };
@@ -59,6 +65,10 @@ const ItemEdit: FC = () => {
         setGroup(response.data);
       })
       .catch((response) => {
+        const status = ResponseUtils.getStatus(response);
+        if (status === 404) {
+          redirectToNotFound();
+        }
         handleResponse(response);
       });
   };

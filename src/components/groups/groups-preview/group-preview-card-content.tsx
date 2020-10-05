@@ -31,6 +31,7 @@ const GroupPreviewCardContent: FC<Props> = ({groupId}: Props) => {
   const onDownClick = (): void => setFirstShowedItem((prevState) => prevState + ITEMS_IN_GROUP_CARD);
 
   useEffect(() => {
+    // TODO set items
     setTimeout(() => setInitialized(true), 500);
   }, []);
 

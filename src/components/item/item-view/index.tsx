@@ -7,7 +7,7 @@ import {itemViewStyles} from './_styles';
 import {Item} from '../../../models/item.model';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
-import {useParams} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {Group} from '../../../models/group.model';
 import ItemViewGroup from './item-view-group';
 import ItemViewType from './item-view-type';
@@ -22,10 +22,13 @@ import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu
 import GroupService from '../../../services/group.service';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {ResponseUtils} from '../../../shared/utils/response.utils';
+import {Routes} from '../../router';
 
 const ItemView: FC = () => {
   const classes = itemViewStyles();
   const {i18n} = useTranslation();
+  const history = useHistory();
   const {itemId} = useParams();
   const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
@@ -33,6 +36,8 @@ const ItemView: FC = () => {
   const [group, setGroup] = useState<Group>();
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
+
+  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menu = (
     <>
@@ -46,6 +51,10 @@ const ItemView: FC = () => {
         setItem(response.data);
       })
       .catch((response) => {
+        const status = ResponseUtils.getStatus(response);
+        if (status === 404) {
+          redirectToNotFound();
+        }
         handleResponse(response);
       });
   };
@@ -56,6 +65,10 @@ const ItemView: FC = () => {
         setGroup(response.data);
       })
       .catch((response) => {
+        const status = ResponseUtils.getStatus(response);
+        if (status === 404) {
+          redirectToNotFound();
+        }
         handleResponse(response);
       });
   };

@@ -13,6 +13,7 @@ import ItemForm from '../item-form';
 import {ItemDTO} from '../../../models/dto/item.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {ResponseUtils} from '../../../shared/utils/response.utils';
 
 const ItemCreate: FC = () => {
   const {i18n, t} = useTranslation();
@@ -28,6 +29,7 @@ const ItemCreate: FC = () => {
   const submit = (): void => saveCallback();
   const redirectToItem = (id: string): void => history.push(Routes.ITEMS + '/' + id);
   const redirectToGroup = (): void => history.push(Routes.GROUPS + '/' + groupId);
+  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menu = (
     <>
@@ -48,6 +50,10 @@ const ItemCreate: FC = () => {
         setGroup(response.data);
       })
       .catch((response) => {
+        const status = ResponseUtils.getStatus(response);
+        if (status === 404) {
+          redirectToNotFound();
+        }
         handleResponse(response);
         redirectToGroup();
       });

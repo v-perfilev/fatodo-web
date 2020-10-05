@@ -12,6 +12,7 @@ import GroupService from '../../../services/group.service';
 import {GroupDTO} from '../../../models/dto/group.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {ResponseUtils} from '../../../shared/utils/response.utils';
 
 const GroupEdit: FC = () => {
   const history = useHistory();
@@ -26,6 +27,7 @@ const GroupEdit: FC = () => {
 
   const submit = (): void => saveCallback();
   const redirectToGroup = (): void => history.push(Routes.GROUPS + '/' + groupId);
+  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const loadGroup = (): void => {
     GroupService.get(groupId)
@@ -33,6 +35,10 @@ const GroupEdit: FC = () => {
         setGroup(response.data);
       })
       .catch((response) => {
+        const status = ResponseUtils.getStatus(response);
+        if (status === 404) {
+          redirectToNotFound();
+        }
         handleResponse(response);
         redirectToGroup();
       });

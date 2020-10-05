@@ -22,6 +22,7 @@ import {PageHeader} from '../../common/layouts/page-header';
 import {PageDivider} from '../../common/layouts/page-divider';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {ResponseUtils} from '../../../shared/utils/response.utils';
 
 const GroupView: FC = () => {
   const classes = groupStyles();
@@ -36,6 +37,7 @@ const GroupView: FC = () => {
     history.push((Routes.ITEMS + ItemRoutes.CREATE).replace(':groupId', groupId));
   const redirectToEditGroup = (): void => history.push((Routes.GROUPS + GroupRoutes.EDIT).replace(':groupId', groupId));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
+  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const loadGroup = (): void => {
     GroupService.get(groupId)
@@ -43,6 +45,10 @@ const GroupView: FC = () => {
         setGroup(response.data);
       })
       .catch((response) => {
+        const status = ResponseUtils.getStatus(response);
+        if (status === 404) {
+          redirectToNotFound();
+        }
         handleResponse(response);
         redirectToGroups();
       });

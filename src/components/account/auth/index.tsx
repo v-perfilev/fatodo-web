@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Box, Tab, Tabs} from '@material-ui/core';
 import {compose} from 'recompose';
 import withBackground from '../../../shared/hoc/with-background';
@@ -7,7 +7,7 @@ import {Routes} from '../../router';
 import {useTranslation} from 'react-i18next';
 import {authPageStyles} from '../common/_styles';
 import {useHistory, useRouteMatch} from 'react-router-dom';
-import {LOADER_TIMEOUT, SOCIAL_LOGIN} from '../../../constants';
+import {SOCIAL_LOGIN} from '../../../constants';
 import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {connect, ConnectedProps} from 'react-redux';
@@ -37,9 +37,11 @@ const Auth: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
     history.push(Routes.ROOT);
   };
 
-  if (isAuthenticated) {
-    setTimeout(() => redirectToHome(), LOADER_TIMEOUT);
-  }
+  useEffect(() => {
+    if (isAuthenticated) {
+      redirectToHome();
+    }
+  }, []);
 
   const tabsStyle = {width: '100%'};
 
