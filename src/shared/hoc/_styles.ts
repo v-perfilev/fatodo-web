@@ -115,7 +115,7 @@ export const flexStyles = makeStyles(() => ({
   },
 }));
 
-export const notificationStyles = makeStyles((theme: Theme) => ({
+export const snackStyles = makeStyles((theme: Theme) => ({
   variantSuccess: {
     backgroundColor: theme.palette.success.main,
   },

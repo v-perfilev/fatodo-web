@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
-import {SnackbarKey, SnackbarProvider as SnackbarWrapper, useSnackbar, VariantType} from 'notistack';
+import {SnackbarKey, SnackbarProvider, useSnackbar, VariantType} from 'notistack';
 import {AxiosResponse} from 'axios';
 import {ResponseUtils} from '../utils/response.utils';
 import {TranslationUtils} from '../utils/translation.utils';
 import {SnackBuilder} from '../utils/builders/snack.builder';
-import {compose} from 'recompose';
-import {notificationStyles} from './_styles';
 import {SnackConsumer, SnackProvider, SnackState} from '../contexts/snack-context';
 import Snack from '../../models/snack.model';
+import {snackStyles} from './_styles';
+import {compose} from 'recompose';
 
 const withSnack = (Component: ComponentType): FC => (props): ReactElement => {
   const {enqueueSnackbar, closeSnackbar} = useSnackbar();
@@ -34,7 +34,7 @@ const withSnack = (Component: ComponentType): FC => (props): ReactElement => {
   const handleResponse = (
     response: AxiosResponse,
     allowedCodes: string[] | '*' = '*',
-    excludedCodes: string[] | '' = ''
+    excludedCodes: string[] | '' = '',
   ): SnackbarKey => {
     const feedbackCode = ResponseUtils.getFeedbackCode(response);
     const status = ResponseUtils.getStatus(response);
@@ -66,13 +66,12 @@ const withSnack = (Component: ComponentType): FC => (props): ReactElement => {
   );
 };
 
-const withSnackWrapper = (Component: ComponentType): FC => (props): ReactElement => {
-  const classes = notificationStyles();
-
+const withSnackProvider = (Component: ComponentType): FC => (props): ReactElement => {
+  const classes = snackStyles();
   return (
-    <SnackbarWrapper classes={classes} anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>
+    <SnackbarProvider classes={classes} anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>
       <Component {...props} />
-    </SnackbarWrapper>
+    </SnackbarProvider>
   );
 };
 
@@ -80,4 +79,4 @@ export const withSnackContext = (Component: ComponentType<SnackState>): FC => (p
   return <SnackConsumer>{(value): ReactElement => <Component {...props} {...value} />}</SnackConsumer>;
 };
 
-export default compose(withSnackWrapper, withSnack);
+export default compose(withSnackProvider, withSnack);
