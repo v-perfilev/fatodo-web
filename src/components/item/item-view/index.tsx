@@ -8,7 +8,7 @@ import {Item} from '../../../models/item.model';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Routes} from '../../router';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {Group} from '../../../models/group.model';
 import ItemViewGroup from './item-view-group';
 import ItemViewType from './item-view-type';
@@ -20,11 +20,14 @@ import ItemViewChanges from './item-view-changes';
 import {PageDivider} from '../../common/layouts/page-divider';
 import {PageHeader} from '../../common/layouts/page-header';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import GroupService from '../../../services/group.service';
+import ItemService from '../../../services/item.service';
 
 const ItemView: FC = () => {
   const classes = itemViewStyles();
   const {i18n} = useTranslation();
   const history = useHistory();
+  const {groupId, itemId} = useParams();
   const {updateMenu} = useAdditionalMenuContext();
   const [item, setItem] = useState<Item>();
   const [group, setGroup] = useState<Group>();
@@ -40,8 +43,20 @@ const ItemView: FC = () => {
   );
 
   const loadItemAndGroup = (): void => {
-    // TODO set item and group
-    redirectToNotFound();
+    ItemService.get(itemId)
+      .then((response) => {
+        setItem(response.data);
+      })
+      .catch(() => {
+        redirectToNotFound();
+      });
+    GroupService.get(groupId)
+      .then((response) => {
+        setGroup(response.data);
+      })
+      .catch(() => {
+        redirectToNotFound();
+      });
   };
 
   useEffect(() => {

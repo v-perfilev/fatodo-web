@@ -4,6 +4,11 @@ import {ItemDTO} from '../models/dto/item.dto';
 export default class ItemService {
   private static baseUrl = '/api/item';
 
+  public static getAllByGroupId = (groupId: string): AxiosPromise => {
+    const url = ItemService.baseUrl + '/item/all-by-group-id/' + groupId;
+    return axios.get(url);
+  };
+
   public static get = (id: string): AxiosPromise => {
     const url = ItemService.baseUrl + '/items/' + id;
     return axios.get(url);

@@ -3,6 +3,11 @@ import axios, {AxiosPromise} from 'axios';
 export default class UserService {
   private static baseUrl = '/api/user';
 
+  public static getAllByIds = (ids: string[]): AxiosPromise => {
+    const url = UserService.baseUrl + '/user/all-by-ids';
+    return axios.post(url, ids);
+  };
+
   public static getCurrent = (): AxiosPromise => {
     const url = UserService.baseUrl + '/user';
     return axios.get(url);

@@ -23,7 +23,7 @@ const ItemCreate: FC = () => {
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
   });
-  const [group, setGroup] = useState<Group>();
+  const [group, setGroup] = useState<Group>(null);
 
   const submit = (): void => saveCallback();
   const redirectToItem = (id: string): void => history.push(Routes.ITEMS + '/' + id);

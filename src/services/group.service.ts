@@ -16,14 +16,12 @@ export default class GroupService {
 
   public static create = (data: GroupDTO): AxiosPromise => {
     const url = GroupService.baseUrl + '/groups';
-    const config = {headers: {'Content-Type': 'undefined'}};
-    return axios.post(url, data, config);
+    return axios.post(url, data);
   };
 
   public static update = (data: GroupDTO): AxiosPromise => {
     const url = GroupService.baseUrl + '/groups';
-    const config = {headers: {'Content-Type': 'undefined'}};
-    return axios.put(url, data, config);
+    return axios.put(url, data);
   };
 
   public static delete = (id: string): AxiosPromise => {
