@@ -22,20 +22,20 @@ export const ReminderView: FC<Props> = ({reminder, className}: Props) => {
   const time = DateFormatters.formatTime(timeDate);
 
   let description = '';
-  if (reminder.periodicity === 'once') {
+  if (reminder.periodicity === 'ONCE') {
     const date = DateFormatters.formatDateWithYear(dateDate);
     description = t('common:reminders.' + reminder.periodicity, {time, date});
-  } else if (reminder.periodicity === 'daily') {
+  } else if (reminder.periodicity === 'DAILY') {
     description = t('common:reminders.' + reminder.periodicity, {time});
-  } else if (reminder.periodicity === 'weekly') {
+  } else if (reminder.periodicity === 'WEEKLY') {
     const weekDays = DateUtils.getDayNamesByNumbers(reminder.weekDays)
       .map((str) => str.toUpperCase())
       .join(', ');
     description = t('common:reminders.' + reminder.periodicity, {time, weekDays});
-  } else if (reminder.periodicity === 'monthly') {
+  } else if (reminder.periodicity === 'MONTHLY') {
     const monthDates = reminder.monthDates.join(', ');
     description = t('common:reminders.' + reminder.periodicity, {time, monthDates});
-  } else if (reminder.periodicity === 'yearly') {
+  } else if (reminder.periodicity === 'YEARLY') {
     const date = DateFormatters.formatDate(dateDate);
     description = t('common:reminders.' + reminder.periodicity, {time, date});
   }

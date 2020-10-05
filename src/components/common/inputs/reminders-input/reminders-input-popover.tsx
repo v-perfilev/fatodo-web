@@ -17,7 +17,7 @@ type Props = {
 export const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose}: Props) => {
   const classes = remindersInputPopoverStyles();
   const [reminder, setReminder] = useState<Reminder>(null);
-  const [periodicity, setPeriodicity] = useState<ReminderPeriodicity>('once');
+  const [periodicity, setPeriodicity] = useState<ReminderPeriodicity>('ONCE');
 
   const isOpen = Boolean(anchorEl);
 
@@ -35,11 +35,11 @@ export const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose}: Props)
     >
       <RemindersInputPopoverToolbar periodicity={periodicity} setPeriodicity={setPeriodicity} />
       <Box className={classes.popoverBody}>
-        {periodicity === 'once' && <RemindersInputPopoverOnce setReminder={setReminder} />}
-        {periodicity === 'daily' && <RemindersInputPopoverDaily setReminder={setReminder} />}
-        {periodicity === 'weekly' && <RemindersInputPopoverWeekly setReminder={setReminder} />}
-        {periodicity === 'monthly' && <RemindersInputPopoverMonthly setReminder={setReminder} />}
-        {periodicity === 'yearly' && <RemindersInputPopoverYearly setReminder={setReminder} />}
+        {periodicity === 'ONCE' && <RemindersInputPopoverOnce setReminder={setReminder} />}
+        {periodicity === 'DAILY' && <RemindersInputPopoverDaily setReminder={setReminder} />}
+        {periodicity === 'WEEKLY' && <RemindersInputPopoverWeekly setReminder={setReminder} />}
+        {periodicity === 'MONTHLY' && <RemindersInputPopoverMonthly setReminder={setReminder} />}
+        {periodicity === 'YEARLY' && <RemindersInputPopoverYearly setReminder={setReminder} />}
       </Box>
     </Popover>
   );

@@ -14,31 +14,31 @@
       "monthdays": "Days of month"
     },
     "periodicity": {
-      "once": "once",
-      "daily": "daily",
-      "weekly": "weekly",
-      "monthly": "monthly",
-      "yearly": "yearly"
+      "ONCE": "once",
+      "DAILY": "daily",
+      "WEEKLY": "weekly",
+      "MONTHLY": "monthly",
+      "YEARLY": "yearly"
     },
-    "once": "at {{time}} on {{date}}",
-    "daily": "at {{time}}",
-    "weekly": "at {{time}} on {{weekDays}}",
-    "monthly": "at {{time}} on {{monthDates}} of every month",
-    "yearly": "at {{time}} on {{date}}"
+    "ONCE": "at {{time}} on {{date}}",
+    "DAILY": "at {{time}}",
+    "WEEKLY": "at {{time}} on {{weekDays}}",
+    "MONTHLY": "at {{time}} on {{monthDates}} of every month",
+    "YEARLY": "at {{time}} on {{date}}"
   },
   "types": {
-    "task": "task",
-    "event": "event",
-    "repetition": "repetition",
-    "note": "note"
+    "TASK": "task",
+    "EVENT": "event",
+    "REPETITION": "repetition",
+    "NOTE": "note"
   },
   "paramDate": {
     "time": "at {{time}}",
     "date": "on {{date}}"
   },
   "priorities": {
-    "low": "low",
-    "normal": "normal",
-    "high": "high"
+    "LOW": "low",
+    "NORMAL": "normal",
+    "HIGH": "high"
   }
 }

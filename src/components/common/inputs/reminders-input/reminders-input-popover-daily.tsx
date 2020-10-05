@@ -23,7 +23,7 @@ export const RemindersInputPopoverDaily: FC<Props> = ({setReminder}: Props) => {
   useEffect(() => {
     if (time) {
       const paramDate: ParamDate = DateConverters.getParamDateFromTime(time);
-      setReminder({date: paramDate, periodicity: 'daily'});
+      setReminder({date: paramDate, periodicity: 'DAILY'});
     }
   }, [time]);
 

@@ -25,7 +25,7 @@ export const RemindersInputPopoverYearly: FC<Props> = ({setReminder}: Props) => 
   useEffect(() => {
     if (time && date) {
       const paramDate: ParamDate = DateConverters.getParamDateFromTimeAndDateWithoutYear(time, date);
-      setReminder({date: paramDate, periodicity: 'yearly'});
+      setReminder({date: paramDate, periodicity: 'YEARLY'});
     }
   }, [time, date]);
 

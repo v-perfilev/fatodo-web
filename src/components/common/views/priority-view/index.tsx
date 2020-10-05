@@ -17,9 +17,9 @@ export const PriorityView: FC<Props> = ({priority}: Props) => {
   const {t} = useTranslation();
 
   const icon = (): ReactNode => {
-    if (priority === 'low') {
+    if (priority === 'LOW') {
       return <LowPriorityIcon className="low" />;
-    } else if (priority === 'normal') {
+    } else if (priority === 'NORMAL') {
       return <NormalPriorityIcon className="normal" />;
     } else {
       return <HighPriorityIcon className="high" />;

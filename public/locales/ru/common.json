@@ -14,31 +14,31 @@
       "monthdays": "Дни месяца"
     },
     "periodicity": {
-      "once": "однократно",
-      "daily": "ежедневно",
-      "weekly": "еженедельно",
-      "monthly": "ежемесячно",
-      "yearly": "ежегодно"
+      "ONCE": "однократно",
+      "DAILY": "ежедневно",
+      "WEEKLY": "еженедельно",
+      "MONTHLY": "ежемесячно",
+      "YEARLY": "ежегодно"
     },
-    "once": "в {{time}} {{date}}",
-    "daily": "в {{time}}",
-    "weekly": "в {{time}} в {{weekDays}}",
-    "monthly": "в {{time}} {{monthDates}} каждого месяца",
-    "yearly": "в {{time}} {{date}}"
+    "ONCE": "в {{time}} {{date}}",
+    "DAILY": "в {{time}}",
+    "WEEKLY": "в {{time}} в {{weekDays}}",
+    "MONTHLY": "в {{time}} {{monthDates}} каждого месяца",
+    "YEARLY": "в {{time}} {{date}}"
   },
   "types": {
-    "task": "задача",
-    "event": "событие",
-    "repetition": "дата",
-    "note": "заметка"
+    "TASK": "задача",
+    "EVENT": "событие",
+    "REPETITION": "дата",
+    "NOTE": "заметка"
   },
   "paramDate": {
     "time": "в {{time}}",
     "date": "{{date}}"
   },
   "priorities": {
-    "low": "низкий",
-    "normal": "нормальный",
-    "high": "высокий"
+    "LOW": "низкий",
+    "NORMAL": "нормальный",
+    "HIGH": "высокий"
   }
 }

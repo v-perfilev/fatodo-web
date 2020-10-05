@@ -25,7 +25,7 @@ export const RemindersInputPopoverWeekly: FC<Props> = ({setReminder}: Props) => 
   useEffect(() => {
     if (time && days && days.length > 0) {
       const paramDate: ParamDate = DateConverters.getParamDateFromTime(time);
-      setReminder({date: paramDate, weekDays: days, periodicity: 'weekly'});
+      setReminder({date: paramDate, weekDays: days, periodicity: 'WEEKLY'});
     }
   }, [time, days]);
 

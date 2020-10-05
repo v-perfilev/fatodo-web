@@ -20,11 +20,11 @@ export const TypeView: FC<Props> = ({type, className}: Props) => {
   const {t} = useTranslation();
 
   const icon = (): ReactNode => {
-    if (type === 'task') {
+    if (type === 'TASK') {
       return <TaskIcon />;
-    } else if (type === 'event') {
+    } else if (type === 'EVENT') {
       return <EventIcon />;
-    } else if (type === 'repetition') {
+    } else if (type === 'REPETITION') {
       return <RepetitionIcon />;
     } else {
       return <NoteIcon />;

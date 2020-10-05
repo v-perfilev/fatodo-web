@@ -25,7 +25,7 @@ export const RemindersInputPopoverOnce: FC<Props> = ({setReminder}: Props) => {
   useEffect(() => {
     if (time && date) {
       const paramDate: ParamDate = DateConverters.getParamDateFromTimeAndDate(time, date);
-      setReminder({date: paramDate, periodicity: 'once'});
+      setReminder({date: paramDate, periodicity: 'ONCE'});
     }
   }, [time, date]);
 
