@@ -17,7 +17,7 @@ const GroupViewUsers: FC<Props> = ({groupUsers}: Props) => {
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    const ids = groupUsers.map(u => u.id);
+    const ids = groupUsers.map((u) => u.id);
     UserService.getAllByIds(ids)
       .then((response) => {
         setUsers(response.data);

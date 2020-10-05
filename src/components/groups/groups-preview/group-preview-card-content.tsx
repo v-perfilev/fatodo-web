@@ -46,15 +46,12 @@ const GroupPreviewCardContent: FC<Props> = ({groupId}: Props) => {
     setItemsToShow(items.slice(firstShowedItem, firstShowedItem + ITEMS_IN_GROUP_CARD));
   }, [items, firstShowedItem]);
 
-  const trail = useTrail(
-    itemsToShow.length,
-    {
-      reset: true,
-      delay: 50,
-      opacity: 1,
-      from: {opacity: 0},
-    },
-  );
+  const trail = useTrail(itemsToShow.length, {
+    reset: true,
+    delay: 50,
+    opacity: 1,
+    from: {opacity: 0},
+  });
 
   return (
     <CardContent className={classes.content}>

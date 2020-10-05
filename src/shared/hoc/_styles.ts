@@ -117,15 +117,15 @@ export const flexStyles = makeStyles(() => ({
 
 export const snackStyles = makeStyles((theme: Theme) => ({
   variantSuccess: {
-    backgroundColor: theme.palette.success.main,
+    backgroundColor: theme.palette.success.main + ' !important',
   },
   variantError: {
-    backgroundColor: theme.palette.error.main,
+    backgroundColor: theme.palette.error.main + ' !important',
   },
   variantInfo: {
-    backgroundColor: theme.palette.info.main,
+    backgroundColor: theme.palette.info.main + ' !important',
   },
   variantWarning: {
-    backgroundColor: theme.palette.warning.main,
+    backgroundColor: theme.palette.warning.main + ' !important',
   },
 }));

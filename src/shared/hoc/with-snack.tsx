@@ -34,7 +34,7 @@ const withSnack = (Component: ComponentType): FC => (props): ReactElement => {
   const handleResponse = (
     response: AxiosResponse,
     allowedCodes: string[] | '*' = '*',
-    excludedCodes: string[] | '' = '',
+    excludedCodes: string[] | '' = ''
   ): SnackbarKey => {
     const feedbackCode = ResponseUtils.getFeedbackCode(response);
     const status = ResponseUtils.getStatus(response);

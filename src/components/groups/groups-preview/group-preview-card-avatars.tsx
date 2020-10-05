@@ -22,7 +22,7 @@ const GroupPreviewCardAvatars: FC<Props> = ({groupUsers}: Props) => {
   const moreThanLimit = users.length > AVATARS_IN_GROUP_CARD ? users.length - AVATARS_IN_GROUP_CARD : 0;
 
   useEffect(() => {
-    const ids = groupUsers.map(u => u.id);
+    const ids = groupUsers.map((u) => u.id);
     UserService.getAllByIds(ids)
       .then((response) => {
         setUsers(response.data);

@@ -15,7 +15,7 @@ type Props = ConnectedProps<typeof connector> & RouteProps;
 const PrivateRoute: FC<Props> = ({authState, ...props}: Props) => {
   const {isAuthenticated} = authState;
   const history = useHistory();
-  
+
   if (!isAuthenticated) {
     history.push(Routes.UNAUTHORIZED);
   }

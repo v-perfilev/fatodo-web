@@ -9,9 +9,10 @@ import {compose} from 'recompose';
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
 
-type Props = ConnectedProps<typeof connector> & RouteProps & {
-  redirect: string;
-};
+type Props = ConnectedProps<typeof connector> &
+  RouteProps & {
+    redirect: string;
+  };
 
 const MixedRoute: FC<Props> = ({authState, redirect, ...props}: Props) => {
   const {isAuthenticated} = authState;
