@@ -47,7 +47,8 @@ const ItemCreate: FC = () => {
       .then((response) => {
         setGroup(response.data);
       })
-      .catch(() => {
+      .catch((response) => {
+        handleResponse(response);
         redirectToGroup();
       });
   };
@@ -66,7 +67,6 @@ const ItemCreate: FC = () => {
       .then((response) => {
         handleCode('items.created', 'info');
         const id = response.data.id;
-        console.log(Routes.ITEMS + '/' + id);
         redirectToItem(id);
       })
       .catch((response) => {

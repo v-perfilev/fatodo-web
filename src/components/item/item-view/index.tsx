@@ -7,8 +7,7 @@ import {itemViewStyles} from './_styles';
 import {Item} from '../../../models/item.model';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
-import {Routes} from '../../router';
-import {useHistory, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {Group} from '../../../models/group.model';
 import ItemViewGroup from './item-view-group';
 import ItemViewType from './item-view-type';
@@ -22,17 +21,16 @@ import {PageHeader} from '../../common/layouts/page-header';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import GroupService from '../../../services/group.service';
 import ItemService from '../../../services/item.service';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 const ItemView: FC = () => {
   const classes = itemViewStyles();
   const {i18n} = useTranslation();
-  const history = useHistory();
-  const {groupId, itemId} = useParams();
+  const {itemId} = useParams();
+  const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
   const [item, setItem] = useState<Item>();
   const [group, setGroup] = useState<Group>();
-
-  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
@@ -42,27 +40,36 @@ const ItemView: FC = () => {
     </>
   );
 
-  const loadItemAndGroup = (): void => {
+  const loadItem = (): void => {
     ItemService.get(itemId)
       .then((response) => {
         setItem(response.data);
       })
-      .catch(() => {
-        redirectToNotFound();
+      .catch((response) => {
+        handleResponse(response);
       });
-    GroupService.get(groupId)
+  };
+
+  const loadGroup = (): void => {
+    GroupService.get(item?.groupId)
       .then((response) => {
         setGroup(response.data);
       })
-      .catch(() => {
-        redirectToNotFound();
+      .catch((response) => {
+        handleResponse(response);
       });
   };
 
   useEffect(() => {
-    loadItemAndGroup();
+    loadItem();
     updateMenu(menu, true);
   }, []);
+
+  useEffect(() => {
+    if (item) {
+      loadGroup();
+    }
+  }, [item]);
 
   useEffect(() => {
     updateMenu(menu);

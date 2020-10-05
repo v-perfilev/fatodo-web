@@ -19,7 +19,7 @@ const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const history = useHistory();
-  const {groupId, itemId} = useParams();
+  const {itemId} = useParams();
   const {updateMenu} = useAdditionalMenuContext();
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
@@ -29,7 +29,6 @@ const ItemEdit: FC = () => {
 
   const submit = (): void => saveCallback();
   const redirectToItem = (): void => history.push(Routes.ITEMS + '/' + itemId);
-  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menu = (
     <>
@@ -44,20 +43,23 @@ const ItemEdit: FC = () => {
     </>
   );
 
-  const loadGroupAndItem = (): void => {
-    GroupService.get(groupId)
-      .then((response) => {
-        setGroup(response.data);
-      })
-      .catch(() => {
-        redirectToNotFound();
-      });
+  const loadItem = (): void => {
     ItemService.get(itemId)
       .then((response) => {
         setItem(response.data);
       })
-      .catch(() => {
-        redirectToNotFound();
+      .catch((response) => {
+        handleResponse(response);
+      });
+  };
+
+  const loadGroup = (): void => {
+    GroupService.get(item?.groupId)
+      .then((response) => {
+        setGroup(response.data);
+      })
+      .catch((response) => {
+        handleResponse(response);
       });
   };
 
@@ -74,9 +76,15 @@ const ItemEdit: FC = () => {
   };
 
   useEffect(() => {
-    loadGroupAndItem();
+    loadItem();
     updateMenu(menu, true);
   }, []);
+
+  useEffect(() => {
+    if (item) {
+      loadGroup();
+    }
+  }, [item]);
 
   useEffect(() => {
     updateMenu(menu);

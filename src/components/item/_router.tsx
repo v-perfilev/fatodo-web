@@ -14,7 +14,7 @@ import ItemCreate from './item-create';
 
 export enum ItemRoutes {
   CREATE = '/create/:groupId',
-  EDIT = 'edit/:groupId/:itemId',
+  EDIT = 'edit/:itemId',
   VIEW = '/:itemId',
 }
 

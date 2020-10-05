@@ -21,11 +21,13 @@ import {ThemeFactory} from '../../../shared/theme/theme';
 import {PageHeader} from '../../common/layouts/page-header';
 import {PageDivider} from '../../common/layouts/page-divider';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 const GroupView: FC = () => {
   const classes = groupStyles();
   const history = useHistory();
   const {groupId} = useParams();
+  const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
   const {t, i18n} = useTranslation();
   const [group, setGroup] = useState<Group>(null);
@@ -34,15 +36,15 @@ const GroupView: FC = () => {
     history.push((Routes.ITEMS + ItemRoutes.CREATE).replace(':groupId', groupId));
   const redirectToEditGroup = (): void => history.push((Routes.GROUPS + GroupRoutes.EDIT).replace(':groupId', groupId));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
-  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const loadGroup = (): void => {
     GroupService.get(groupId)
       .then((response) => {
         setGroup(response.data);
       })
-      .catch(() => {
-        redirectToNotFound();
+      .catch((response) => {
+        handleResponse(response);
+        redirectToGroups();
       });
   };
 

@@ -26,15 +26,15 @@ const GroupEdit: FC = () => {
 
   const submit = (): void => saveCallback();
   const redirectToGroup = (): void => history.push(Routes.GROUPS + '/' + groupId);
-  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const loadGroup = (): void => {
     GroupService.get(groupId)
       .then((response) => {
         setGroup(response.data);
       })
-      .catch(() => {
-        redirectToNotFound();
+      .catch((response) => {
+        handleResponse(response);
+        redirectToGroup();
       });
   };
 

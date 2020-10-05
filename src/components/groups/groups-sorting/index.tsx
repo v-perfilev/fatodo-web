@@ -10,10 +10,12 @@ import {Group} from '../../../models/group.model';
 import GroupService from '../../../services/group.service';
 import GroupsSortingContainer from './groups-sorting-container';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 const GroupsSorting: FC = () => {
   const history = useHistory();
   const {t, i18n} = useTranslation();
+  const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
   const [groups, setGroups] = useState<Group[]>([]);
 
@@ -23,9 +25,13 @@ const GroupsSorting: FC = () => {
   const redirectToGroupsRoot = (): void => history.push(Routes.GROUPS);
 
   const loadGroups = (): void => {
-    GroupService.getAll().then((response) => {
-      setGroups(response.data);
-    });
+    GroupService.getAll()
+      .then((response) => {
+        setGroups(response.data);
+      })
+      .catch((response) => {
+        handleResponse(response);
+      });
   };
 
   const menu = (
