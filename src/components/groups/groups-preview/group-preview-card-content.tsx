@@ -9,6 +9,8 @@ import GroupCardItem from './group-preview-card-item';
 import {ITEMS_IN_GROUP_CARD} from '../_constants';
 import {compose} from 'recompose';
 import {Item} from '../../../models/item.model';
+import ItemService from '../../../services/item.service';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = {
   groupId: string;
@@ -16,10 +18,10 @@ type Props = {
 
 const GroupPreviewCardContent: FC<Props> = ({groupId}: Props) => {
   const classes = groupCardContentStyles();
+  const {handleResponse} = useSnackContext();
   const [items, setItems] = useState<Item[]>([]);
 
   const ref = useRef();
-  const [initialized, setInitialized] = useState(false);
   const [firstShowedItem, setFirstShowedItem] = useState(0);
   const [itemsToShow, setItemsToShow] = useState<Item[]>([]);
 
@@ -31,22 +33,27 @@ const GroupPreviewCardContent: FC<Props> = ({groupId}: Props) => {
   const onDownClick = (): void => setFirstShowedItem((prevState) => prevState + ITEMS_IN_GROUP_CARD);
 
   useEffect(() => {
-    // TODO set items
-    setTimeout(() => setInitialized(true), 500);
+    ItemService.getAllByGroupId(groupId)
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch((response) => {
+        handleResponse(response);
+      });
   }, []);
 
   useEffect(() => {
     setItemsToShow(items.slice(firstShowedItem, firstShowedItem + ITEMS_IN_GROUP_CARD));
-  }, [firstShowedItem]);
+  }, [items, firstShowedItem]);
 
   const trail = useTrail(
     itemsToShow.length,
-    initialized && {
+    {
       reset: true,
       delay: 50,
       opacity: 1,
       from: {opacity: 0},
-    }
+    },
   );
 
   return (

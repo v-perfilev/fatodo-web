@@ -5,8 +5,7 @@ import GroupViewItem from './group-view-item';
 import {Item} from '../../../models/item.model';
 import {PageDivider} from '../../common/layouts/page-divider';
 import ItemService from '../../../services/item.service';
-import {Routes} from '../../router';
-import {useHistory} from 'react-router-dom';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = {
   groupId: string;
@@ -14,18 +13,16 @@ type Props = {
 
 const GroupViewItems: FC<Props> = ({groupId}: Props) => {
   const classes = groupItemListStyles();
-  const history = useHistory();
+  const {handleResponse} = useSnackContext();
   const [items, setItems] = useState<Item[]>([]);
-
-  const redirectToGroups = (): void => history.push(Routes.GROUPS);
 
   useEffect(() => {
     ItemService.getAllByGroupId(groupId)
       .then((response) => {
         setItems(response.data);
       })
-      .catch(() => {
-        redirectToGroups();
+      .catch((response) => {
+        handleResponse(response);
       });
   }, []);
 

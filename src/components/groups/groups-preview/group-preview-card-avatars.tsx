@@ -6,6 +6,8 @@ import {AVATARS_IN_GROUP_CARD} from '../_constants';
 import {GroupUser} from '../../../models/group.model';
 import {User} from '../../../models/user.model';
 import {RoundPic} from '../../common/images/round-pic';
+import UserService from '../../../services/user.service';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = {
   groupUsers: GroupUser[];
@@ -13,13 +15,21 @@ type Props = {
 
 const GroupPreviewCardAvatars: FC<Props> = ({groupUsers}: Props) => {
   const classes = groupCardAvatarsStyles();
+  const {handleResponse} = useSnackContext();
   const [users, setUsers] = useState<User[]>([]);
 
   const usersToShow = users.slice(0, AVATARS_IN_GROUP_CARD);
   const moreThanLimit = users.length > AVATARS_IN_GROUP_CARD ? users.length - AVATARS_IN_GROUP_CARD : 0;
 
   useEffect(() => {
-    // set users
+    const ids = groupUsers.map(u => u.id);
+    UserService.getAllByIds(ids)
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((response) => {
+        handleResponse(response);
+      });
   }, []);
 
   return (

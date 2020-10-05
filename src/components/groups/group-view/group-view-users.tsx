@@ -5,8 +5,7 @@ import {User} from '../../../models/user.model';
 import {GroupUser} from '../../../models/group.model';
 import {PaperBox} from '../../common/layouts/paper-box';
 import UserService from '../../../services/user.service';
-import {Routes} from '../../router';
-import {useHistory} from 'react-router-dom';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = {
   groupUsers: GroupUser[];
@@ -14,10 +13,8 @@ type Props = {
 
 const GroupViewUsers: FC<Props> = ({groupUsers}: Props) => {
   const classes = groupUsersStyles();
-  const history = useHistory();
+  const {handleResponse} = useSnackContext();
   const [users, setUsers] = useState<User[]>([]);
-
-  const redirectToGroups = (): void => history.push(Routes.GROUPS);
 
   useEffect(() => {
     const ids = groupUsers.map(u => u.id);
@@ -25,8 +22,8 @@ const GroupViewUsers: FC<Props> = ({groupUsers}: Props) => {
       .then((response) => {
         setUsers(response.data);
       })
-      .catch(() => {
-        redirectToGroups();
+      .catch((response) => {
+        handleResponse(response);
       });
   }, []);
 
