@@ -1,8 +1,6 @@
-import {User} from './user.model';
-
 export interface AbstractAuditing {
-  createdBy?: User;
+  createdBy?: string;
   createdAt?: string;
-  updatedBy?: User;
-  updatedAt?: string;
+  lastModifiedBy?: string;
+  lastModifiedAt?: string;
 }

@@ -44,8 +44,6 @@ const ItemView: FC = () => {
   const redirectToGroup = (): void => history.push((Routes.GROUPS + GroupRoutes.VIEW).replace(':groupId', group.id));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
-  console.log((Routes.ITEMS + ItemRoutes.EDIT).replace(':itemId', itemId));
-
   const menu = (
     <>
       <AdditionalMenuSpacer />
