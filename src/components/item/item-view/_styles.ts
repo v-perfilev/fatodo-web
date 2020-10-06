@@ -8,6 +8,10 @@ export const itemViewStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
+  box: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
 }));
 
 export const itemViewChangesStyles = makeStyles((theme: Theme) => ({
@@ -26,3 +30,14 @@ export const itemViewChangesStyles = makeStyles((theme: Theme) => ({
     },
   },
 }));
+
+export const itemViewInfoStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    '& > *': {
+      marginRight: theme.spacing(4),
+    },
+  },
+}));
+

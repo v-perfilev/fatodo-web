@@ -46,6 +46,10 @@
   },
   "tooltips": {
     "ok": "Ok",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "create": "Create item",
+    "edit": "Edit item",
+    "delete": "Delete item",
+    "list": "List of items"
   }
 }

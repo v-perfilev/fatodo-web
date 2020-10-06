@@ -1,21 +1,20 @@
-import React, {FC} from 'react';
+import React, {FC, HTMLAttributes} from 'react';
 import {Box} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {LabeledBox} from '../../common/layouts/labeled-box';
 import {PageDivider} from '../../common/layouts/page-divider';
 
-type Props = {
+type Props = HTMLAttributes<any> & {
   description: string;
 };
 
-const ItemViewDescription: FC<Props> = ({description}: Props) => {
+const ItemViewDescription: FC<Props> = ({description, className}: Props) => {
   const {t} = useTranslation();
 
   return (
     description && (
       <>
-        <PageDivider />
-        <LabeledBox label={t('items:labels.description')}>
+        <LabeledBox label={t('items:labels.description')} className={className}>
           <Box>{description}</Box>
         </LabeledBox>
         <PageDivider />

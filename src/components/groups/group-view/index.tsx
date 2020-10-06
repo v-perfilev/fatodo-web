@@ -23,6 +23,8 @@ import {PageDivider} from '../../common/layouts/page-divider';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
+import {PageSpacer} from '../../common/layouts/page-spacer';
+import {DeleteIcon} from '../../common/icons/delete-icon';
 
 const GroupView: FC = () => {
   const classes = groupStyles();
@@ -61,13 +63,19 @@ const GroupView: FC = () => {
         icon={<PlusIcon />}
         action={redirectToCreateItem}
         color="primary"
-        tooltip={t('groups:tooltips.createItem')}
+        tooltip={t('items:tooltips.create')}
       />
       <AdditionalMenuButton
         icon={<EditIcon />}
         action={redirectToEditGroup}
         color="primary"
         tooltip={t('groups:tooltips.edit')}
+      />
+      <AdditionalMenuButton
+        icon={<DeleteIcon />}
+        action={console.log}
+        color="primary"
+        tooltip={t('groups:tooltips.delete')}
       />
       <AdditionalMenuButton
         icon={<GroupsIcon />}
@@ -97,7 +105,7 @@ const GroupView: FC = () => {
           <PageDivider height={5} />
           <GroupViewUsers groupUsers={group.users} />
           <GroupViewItems groupId={group.id} />
-          <PageDivider />
+          <PageSpacer />
           <GroupViewMessages group={group} />
         </Container>
       </ThemeProvider>

@@ -7,6 +7,9 @@ import {compose} from 'recompose';
 import {animated} from 'react-spring';
 import Truncate from 'react-truncate';
 import {Item} from '../../../models/item.model';
+import {Routes} from '../../router';
+import {ItemRoutes} from '../../item/_router';
+import {Link} from '../../common/layouts/link';
 
 type Props = HTMLAttributes<any> & {
   item: Item;
@@ -17,12 +20,14 @@ const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
 
   return (
     <Box className={classes.item}>
-      <Card square variant="outlined" className={classes.card} style={style}>
-        <CheckIcon className={classes.icon} />
-        <Typography className={classes.typography}>
-          <Truncate>{item.title}</Truncate>
-        </Typography>
-      </Card>
+      <Link to={(Routes.ITEMS + ItemRoutes.VIEW).replace(':itemId', item.id)}>
+        <Card square variant="outlined" className={classes.card} style={style}>
+          <CheckIcon className={classes.icon} />
+          <Typography className={classes.typography}>
+            <Truncate>{item.title}</Truncate>
+          </Typography>
+        </Card>
+      </Link>
     </Box>
   );
 };

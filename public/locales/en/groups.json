@@ -22,6 +22,7 @@
     "reorder": "Reorder groups",
     "create": "Create group",
     "edit": "Edit group",
+    "delete": "Delete group",
     "list": "List of groups",
     "createItem": "Create item"
   }

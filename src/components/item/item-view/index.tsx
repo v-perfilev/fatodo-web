@@ -1,7 +1,6 @@
 import React, {FC, memo, useEffect, useState} from 'react';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
-import {compose} from 'recompose';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {itemViewStyles} from './_styles';
 import {Item} from '../../../models/item.model';
@@ -9,13 +8,6 @@ import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
 import {Group} from '../../../models/group.model';
-import ItemViewGroup from './item-view-group';
-import ItemViewType from './item-view-type';
-import ItemViewDate from './item-view-date';
-import ItemViewPriority from './item-view-priority';
-import ItemViewReminders from './item-view-reminders';
-import ItemViewTags from './item-view-tags';
-import ItemViewChanges from './item-view-changes';
 import {PageDivider} from '../../common/layouts/page-divider';
 import {PageHeader} from '../../common/layouts/page-header';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
@@ -24,12 +16,23 @@ import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {Routes} from '../../router';
+import ItemViewReminders from './item-view-reminders';
+import ItemViewTags from './item-view-tags';
+import ItemViewChanges from './item-view-changes';
+import {compose} from 'recompose';
+import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
+import {EditIcon} from '../../common/icons/edit-icon';
+import {ItemRoutes} from '../_router';
+import {ItemsIcon} from '../../common/icons/items-icon';
+import {GroupRoutes} from '../../groups/_router';
+import ItemViewInfo from './item-view-info';
+import {DeleteIcon} from '../../common/icons/delete-icon';
 
 const ItemView: FC = () => {
   const classes = itemViewStyles();
-  const {i18n} = useTranslation();
   const history = useHistory();
   const {itemId} = useParams();
+  const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
   const [item, setItem] = useState<Item>();
@@ -37,11 +40,33 @@ const ItemView: FC = () => {
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
+  const redirectToEditItem = (): void => history.push((Routes.ITEMS + ItemRoutes.EDIT).replace(':itemId', itemId));
+  const redirectToGroup = (): void => history.push((Routes.GROUPS + GroupRoutes.VIEW).replace(':groupId', group.id));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
+
+  console.log((Routes.ITEMS + ItemRoutes.EDIT).replace(':itemId', itemId));
 
   const menu = (
     <>
       <AdditionalMenuSpacer />
+      <AdditionalMenuButton
+        icon={<EditIcon />}
+        action={redirectToEditItem}
+        color="primary"
+        tooltip={t('items:tooltips.edit')}
+      />
+      <AdditionalMenuButton
+        icon={<DeleteIcon />}
+        action={console.log}
+        color="primary"
+        tooltip={t('items:tooltips.delete')}
+      />
+      <AdditionalMenuButton
+        icon={<ItemsIcon />}
+        action={redirectToGroup}
+        color="secondary"
+        tooltip={t('items:tooltips.list')}
+      />
     </>
   );
 
@@ -86,6 +111,10 @@ const ItemView: FC = () => {
 
   useEffect(() => {
     updateMenu(menu);
+  }, [group]);
+
+  useEffect(() => {
+    updateMenu(menu);
   }, [i18n.language]);
 
   return (
@@ -95,14 +124,12 @@ const ItemView: FC = () => {
         <Container className={classes.root}>
           <PageHeader title={item.title} />
           <PageDivider height={5} />
-          <ItemViewGroup group={group} />
-          <ItemViewType type={item.type} />
-          <ItemViewDate date={item.date} />
-          <ItemViewPriority priority={item.priority} />
-          <ItemViewDescription description={item.description} />
-          <ItemViewReminders reminders={item.reminders} />
-          <ItemViewTags tags={item.tags} />
-          <ItemViewChanges item={item} />
+          <ItemViewInfo item={item} group={group} className={classes.box} />
+          <PageDivider />
+          <ItemViewDescription description={item.description} className={classes.box} />
+          <ItemViewReminders reminders={item.reminders} className={classes.box} />
+          <ItemViewTags tags={item.tags} className={classes.box} />
+          <ItemViewChanges item={item} className={classes.box} />
         </Container>
       </ThemeProvider>
     )

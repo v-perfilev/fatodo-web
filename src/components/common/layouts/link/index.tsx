@@ -5,12 +5,12 @@ import {Link as MaterialLink, LinkProps as MaterialLinkProps} from '@material-ui
 
 type Props = LinkProps &
   MaterialLinkProps & {
-    underline?: boolean;
-  };
+  withUnderline?: boolean;
+};
 
-export const Link: FC<Props> = ({underline, to, children, ...props}: Props) => {
+export const Link: FC<Props> = ({withUnderline, to, children, ...props}: Props) => {
   return (
-    <MaterialLink {...props} component={RouterLink} to={to} underline={underline ? 'hover' : 'none'}>
+    <MaterialLink {...props} component={RouterLink} to={to} underline={withUnderline ? 'hover' : 'none'}>
       {children}
     </MaterialLink>
   );
