@@ -98,7 +98,6 @@ const ItemView: FC = () => {
 
   useEffect(() => {
     loadItem();
-    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {
@@ -109,11 +108,7 @@ const ItemView: FC = () => {
 
   useEffect(() => {
     updateMenu(menu);
-  }, [group]);
-
-  useEffect(() => {
-    updateMenu(menu);
-  }, [i18n.language]);
+  }, [group, i18n.language]);
 
   return (
     item &&

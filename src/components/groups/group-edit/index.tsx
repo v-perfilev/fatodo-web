@@ -59,7 +59,6 @@ const GroupEdit: FC = () => {
 
   useEffect(() => {
     loadGroup();
-    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {

@@ -61,7 +61,6 @@ const ItemCreate: FC = () => {
 
   useEffect(() => {
     loadGroup();
-    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {

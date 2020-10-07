@@ -12,17 +12,19 @@ type Props = {
 const AdditionalMenuButton: FC<Props> = ({icon, action, color, tooltip}: Props) => {
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
 
-  return tooltip !== null ? (
-    <Tooltip enterDelay={500} title={tooltip} placement={isBigDevice ? 'right' : 'top'}>
-      <Fab color={color} onClick={action}>
-        {icon}
-      </Fab>
-    </Tooltip>
-  ) : (
+  const FabWithoutTooltip = (): ReactElement => (
     <Fab color={color} onClick={action}>
       {icon}
     </Fab>
   );
+
+  const FabWithTooltip = (): ReactElement => (
+    <Tooltip enterDelay={500} title={tooltip} placement={isBigDevice ? 'right' : 'top'}>
+      <FabWithoutTooltip />
+    </Tooltip>
+  );
+
+  return tooltip !== null ? <FabWithTooltip /> : <FabWithoutTooltip />;
 };
 
 export default AdditionalMenuButton;

@@ -39,10 +39,6 @@ const GroupCreate: FC = () => {
   );
 
   useEffect(() => {
-    updateMenu(menu, true);
-  }, []);
-
-  useEffect(() => {
     updateMenu(menu);
   }, [i18n.language, saveCallback]);
 

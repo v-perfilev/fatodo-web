@@ -88,7 +88,6 @@ const GroupView: FC = () => {
 
   useEffect(() => {
     loadGroup();
-    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {

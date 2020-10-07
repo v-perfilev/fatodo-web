@@ -9,19 +9,15 @@ import {AdditionalMenuProvider} from '../contexts/additional-menu-context';
 const withAdditionalMenu = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = additionalMenuStyles();
   const [menu, setMenu] = useState<ReactElement>();
-  const [reload, setReload] = useState<boolean>();
-
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
+
   const rootClassNames = csx(classes.root, isBigDevice ? classes.rootMenuLeft : classes.rootMenuBottom);
 
-  const updateMenu = (menu: ReactElement, reload?: boolean): void => {
+  const updateMenu = (menu: ReactElement): void => {
     setMenu(menu);
-    if (reload) {
-      setReload((prevState) => !prevState);
-    }
   };
 
-  const context = {menu, reload, updateMenu};
+  const context = {menu, updateMenu};
 
   return (
     <AdditionalMenuProvider value={context}>

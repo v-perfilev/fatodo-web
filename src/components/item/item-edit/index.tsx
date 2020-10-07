@@ -87,7 +87,6 @@ const ItemEdit: FC = () => {
 
   useEffect(() => {
     loadItem();
-    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {

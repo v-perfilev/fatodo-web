@@ -54,7 +54,6 @@ const GroupPreview: FC = () => {
 
   useEffect(() => {
     loadGroups();
-    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {

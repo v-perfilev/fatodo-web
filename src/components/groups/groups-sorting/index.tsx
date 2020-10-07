@@ -54,7 +54,6 @@ const GroupsSorting: FC = () => {
 
   useEffect(() => {
     loadGroups();
-    updateMenu(menu, true);
   }, []);
 
   useEffect(() => {
