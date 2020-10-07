@@ -51,5 +51,9 @@
     "edit": "Edit item",
     "delete": "Delete item",
     "list": "List of items"
+  },
+  "modals": {
+    "deleteTitle": "Delete item",
+    "deleteText": "Are you sure you want to delete item {{title}}?"
   }
 }

@@ -10,6 +10,8 @@
   "buttons": {
     "toHomePage": "To home page",
     "sendActivationCode": "Send code again",
-    "forgotPassword": "Forgot password?"
+    "forgotPassword": "Forgot password?",
+    "agree": "Agree",
+    "disagree": "Disagree"
   }
 }

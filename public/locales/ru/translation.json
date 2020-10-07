@@ -10,6 +10,8 @@
   "buttons": {
     "toHomePage": "На главную страницу",
     "sendActivationCode": "Отправить код снова",
-    "forgotPassword": "Забыли пароль?"
+    "forgotPassword": "Забыли пароль?",
+    "agree": "Подтвердить",
+    "disagree": "Отменить"
   }
 }
