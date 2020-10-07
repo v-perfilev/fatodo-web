@@ -40,4 +40,3 @@ export const itemViewInfoStyles = makeStyles((theme: Theme) => ({
     },
   },
 }));
-

@@ -3,6 +3,7 @@ import {Theme} from '@material-ui/core';
 
 export const paperBoxStyles = makeStyles((theme: Theme) => ({
   root: {
+    display: 'inline-flex',
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
     paddingLeft: theme.spacing(1),

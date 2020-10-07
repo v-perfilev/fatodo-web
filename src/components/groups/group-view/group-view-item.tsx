@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
-import {groupItemViewStyles} from './_styles';
+import {groupViewItemStyles} from './_styles';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {PackageDownIcon} from '../../common/icons/package-down-icon';
 import {EditIcon} from '../../common/icons/edit-icon';
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const GroupViewItem: FC<Props> = ({item}: Props) => {
-  const classes = groupItemViewStyles();
+  const classes = groupViewItemStyles();
 
   return (
     <Box className={classes.root}>

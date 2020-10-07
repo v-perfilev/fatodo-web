@@ -23,26 +23,23 @@ const ItemViewChanges: FC<Props> = ({item, className}: Props) => {
 
   const getDate = (timestamp: string): string => {
     const timestampNumber = Number(timestamp) * 1000;
-    return DateFormatters.formatTime(new Date(timestampNumber))
-      + ' ' + DateFormatters.formatDateWithYear(new Date(timestampNumber));
+    return (
+      DateFormatters.formatTime(new Date(timestampNumber)) +
+      ' ' +
+      DateFormatters.formatDateWithYear(new Date(timestampNumber))
+    );
   };
 
   const loadUsernames = (): void => {
-    UserService.getAllByIds([item.createdBy, item.lastModifiedBy].filter(id => id != null))
+    UserService.getAllByIds([item.createdBy, item.lastModifiedBy].filter((id) => id != null))
       .then((response) => {
         const users: User[] = response.data;
         if (item.createdBy) {
-          const username = users.length > 0
-            ? users[0].username
-            : item.createdBy;
+          const username = users.length > 0 ? users[0].username : item.createdBy;
           setCreator(username);
         }
         if (item.lastModifiedBy) {
-          const username = users.length > 1
-            ? users[1].username
-            : users.length > 0
-              ? users[0].username
-              : item.createdBy;
+          const username = users.length > 1 ? users[1].username : users.length > 0 ? users[0].username : item.createdBy;
           setUpdater(username);
         }
       })
@@ -72,7 +69,7 @@ const ItemViewChanges: FC<Props> = ({item, className}: Props) => {
           </LabeledBox>
         </>
       )}
-      {(updater && item.createdAt !== item.lastModifiedAt) && (
+      {updater && item.createdAt !== item.lastModifiedAt && (
         <>
           <LabeledBox label={t('items:labels.updatedBy')}>
             <Box>{updater}</Box>

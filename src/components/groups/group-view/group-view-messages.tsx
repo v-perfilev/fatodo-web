@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
-import {groupMessagesStyles} from './_styles';
+import {groupViewMessagesStyles} from './_styles';
 import {Group} from '../../../models/group.model';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 const GroupViewMessages: FC<Props> = ({}: Props) => {
-  const classes = groupMessagesStyles();
+  const classes = groupViewMessagesStyles();
 
   return <Box className={classes.root}>TODO messages</Box>;
 };

@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
-import {groupUsersStyles} from './_styles';
+import {groupViewUsersStyles} from './_styles';
 import {User} from '../../../models/user.model';
 import {GroupUser} from '../../../models/group.model';
 import {PaperBox} from '../../common/layouts/paper-box';
@@ -12,7 +12,7 @@ type Props = {
 };
 
 const GroupViewUsers: FC<Props> = ({groupUsers}: Props) => {
-  const classes = groupUsersStyles();
+  const classes = groupViewUsersStyles();
   const {handleResponse} = useSnackContext();
   const [users, setUsers] = useState<User[]>([]);
 

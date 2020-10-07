@@ -1,6 +1,6 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-export const groupStyles = makeStyles((theme: Theme) => ({
+export const groupViewStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -10,16 +10,14 @@ export const groupStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupUsersStyles = makeStyles((theme: Theme) => ({
+export const groupViewUsersStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex',
-    alignItems: 'center',
-    flexGrow: 1,
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
     '& > *': {
+      marginTop: theme.spacing(0.5),
       marginRight: theme.spacing(2),
-      marginBottom: theme.spacing(1),
+      marginBottom: theme.spacing(0.5),
     },
   },
   avatar: {
@@ -29,7 +27,7 @@ export const groupUsersStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupItemListStyles = makeStyles((theme: Theme) => ({
+export const groupViewItemsStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -39,11 +37,10 @@ export const groupItemListStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupItemViewStyles = makeStyles((theme: Theme) => ({
+export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
-    flexGrow: 1,
     alignItems: 'center',
     paddingTop: theme.spacing(1.2),
     paddingBottom: theme.spacing(1.2),
@@ -57,7 +54,6 @@ export const groupItemViewStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     minWidth: 50,
     '& > *': {
-      marginLeft: theme.spacing(0.5),
       marginRight: theme.spacing(1),
     },
   },
@@ -69,14 +65,12 @@ export const groupItemViewStyles = makeStyles((theme: Theme) => ({
   managementBox: {
     display: 'flex',
     '& > *': {
-      marginLeft: theme.spacing(2),
-      marginRight: theme.spacing(0.5),
+      marginLeft: theme.spacing(3),
     },
   },
   toggleIcon: {
     fontSize: '1.8rem',
     color: theme.palette.grey['400'],
-    marginRight: theme.spacing(1),
     cursor: 'pointer',
     '&:hover': {
       color: theme.palette.primary.main,
@@ -85,7 +79,6 @@ export const groupItemViewStyles = makeStyles((theme: Theme) => ({
   editIcon: {
     fontSize: '1.8rem',
     color: theme.palette.grey['400'],
-    marginRight: theme.spacing(1),
     cursor: 'pointer',
     '&:hover': {
       color: theme.palette.secondary.main,
@@ -94,7 +87,6 @@ export const groupItemViewStyles = makeStyles((theme: Theme) => ({
   deleteIcon: {
     fontSize: '1.8rem',
     color: theme.palette.grey['400'],
-    marginRight: theme.spacing(1),
     cursor: 'pointer',
     '&:hover': {
       color: theme.palette.error.main,
@@ -102,11 +94,9 @@ export const groupItemViewStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupMessagesStyles = makeStyles((theme: Theme) => ({
+export const groupViewMessagesStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
+    minHeight: 200,
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },

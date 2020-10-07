@@ -6,7 +6,7 @@ import {Container, ThemeProvider} from '@material-ui/core';
 import GroupViewItems from './group-view-items';
 import GroupViewUsers from './group-view-users';
 import GroupViewMessages from './group-view-messages';
-import {groupStyles} from './_styles';
+import {groupViewStyles} from './_styles';
 import {Group} from '../../../models/group.model';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
@@ -27,7 +27,7 @@ import {PageSpacer} from '../../common/layouts/page-spacer';
 import {DeleteIcon} from '../../common/icons/delete-icon';
 
 const GroupView: FC = () => {
-  const classes = groupStyles();
+  const classes = groupViewStyles();
   const history = useHistory();
   const {groupId} = useParams();
   const {handleResponse} = useSnackContext();
