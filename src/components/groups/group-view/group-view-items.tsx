@@ -16,7 +16,7 @@ const GroupViewItems: FC<Props> = ({groupId}: Props) => {
   const {handleResponse} = useSnackContext();
   const [items, setItems] = useState<Item[]>([]);
 
-  useEffect(() => {
+  const loadItems = (): void => {
     ItemService.getAllByGroupId(groupId)
       .then((response) => {
         setItems(response.data);
@@ -24,6 +24,10 @@ const GroupViewItems: FC<Props> = ({groupId}: Props) => {
       .catch((response) => {
         handleResponse(response);
       });
+  };
+
+  useEffect(() => {
+    loadItems();
   }, []);
 
   return (
@@ -31,7 +35,7 @@ const GroupViewItems: FC<Props> = ({groupId}: Props) => {
       {items.map((item, index) => (
         <Box key={index}>
           {index !== 0 && <PageDivider />}
-          <GroupViewItem item={item} />
+          <GroupViewItem item={item} loadItems={loadItems} />
         </Box>
       ))}
     </Box>

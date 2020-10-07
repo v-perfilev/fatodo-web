@@ -27,6 +27,7 @@ import {ItemsIcon} from '../../common/icons/items-icon';
 import {GroupRouteUtils} from '../../groups/_router';
 import ItemViewInfo from './item-view-info';
 import {DeleteIcon} from '../../common/icons/delete-icon';
+import {DeleteItemDialog} from '../../common/dialogs/delete-item-dialog';
 
 const ItemView: FC = () => {
   const classes = itemViewStyles();
@@ -37,12 +38,17 @@ const ItemView: FC = () => {
   const {updateMenu} = useAdditionalMenuContext();
   const [item, setItem] = useState<Item>();
   const [group, setGroup] = useState<Group>();
+  const [itemToDelete, setItemToDelete] = useState<Item>(null);
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
   const redirectToEditItem = (): void => history.push(ItemRouteUtils.getEditUrl(itemId));
   const redirectToViewGroup = (): void => history.push(GroupRouteUtils.getViewUrl(group?.id));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
+
+  const openDeleteDialog = (): void => {
+    setItemToDelete(item);
+  };
 
   const menu = (
     <>
@@ -55,7 +61,7 @@ const ItemView: FC = () => {
       />
       <AdditionalMenuButton
         icon={<DeleteIcon />}
-        action={console.log}
+        action={openDeleteDialog}
         color="primary"
         tooltip={t('items:tooltips.delete')}
       />
@@ -123,6 +129,7 @@ const ItemView: FC = () => {
           <ItemViewReminders reminders={item.reminders} className={classes.box} />
           <ItemViewTags tags={item.tags} className={classes.box} />
           <ItemViewChanges item={item} className={classes.box} />
+          <DeleteItemDialog item={itemToDelete} setItem={setItemToDelete} onSuccess={redirectToViewGroup} />
         </Container>
       </ThemeProvider>
     )
