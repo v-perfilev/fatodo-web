@@ -11,12 +11,12 @@ import {Group} from '../../../models/group.model';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
 import {Routes} from '../../router';
-import {GroupRoutes} from '../_router';
+import {GroupRouteUtils} from '../_router';
 import {useHistory, useParams} from 'react-router-dom';
 import {GroupsIcon} from '../../common/icons/groups-icon';
 import GroupService from '../../../services/group.service';
 import {PlusIcon} from '../../common/icons/plus-icon';
-import {ItemRoutes} from '../../item/_router';
+import {ItemRouteUtils} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {PageHeader} from '../../common/layouts/page-header';
 import {PageDivider} from '../../common/layouts/page-divider';
@@ -35,9 +35,8 @@ const GroupView: FC = () => {
   const {t, i18n} = useTranslation();
   const [group, setGroup] = useState<Group>(null);
 
-  const redirectToCreateItem = (): void =>
-    history.push((Routes.ITEMS + ItemRoutes.CREATE).replace(':groupId', groupId));
-  const redirectToEditGroup = (): void => history.push((Routes.GROUPS + GroupRoutes.EDIT).replace(':groupId', groupId));
+  const redirectToCreateItem = (): void => history.push(ItemRouteUtils.getCreateUrl(groupId));
+  const redirectToEditGroup = (): void => history.push(GroupRouteUtils.getEditUrl(groupId));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 

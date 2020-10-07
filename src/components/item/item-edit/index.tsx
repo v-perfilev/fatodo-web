@@ -15,6 +15,7 @@ import {ItemDTO} from '../../../models/dto/item.dto';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
+import {ItemRouteUtils} from '../_router';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -29,7 +30,7 @@ const ItemEdit: FC = () => {
   const [item, setItem] = useState<Item>(null);
 
   const submit = (): void => saveCallback();
-  const redirectToItem = (): void => history.push(Routes.ITEMS + '/' + itemId);
+  const redirectToViewItem = (): void => history.push(ItemRouteUtils.getViewUrl(itemId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menu = (
@@ -38,7 +39,7 @@ const ItemEdit: FC = () => {
       <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('items:tooltips.ok')} />
       <AdditionalMenuButton
         icon={<CloseIcon />}
-        action={redirectToItem}
+        action={redirectToViewItem}
         color="secondary"
         tooltip={t('items:tooltips.cancel')}
       />
@@ -77,7 +78,7 @@ const ItemEdit: FC = () => {
     ItemService.update(data)
       .then(() => {
         handleCode('items.edited', 'info');
-        redirectToItem();
+        redirectToViewItem();
       })
       .catch((response) => {
         handleResponse(response);

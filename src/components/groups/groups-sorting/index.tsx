@@ -19,10 +19,10 @@ const GroupsSorting: FC = () => {
   const {updateMenu} = useAdditionalMenuContext();
   const [groups, setGroups] = useState<Group[]>([]);
 
-  const saveOrderAndRedirectToGroupsRoot = (): void => {
+  const redirectToGroupsRoot = (): void => history.push(Routes.GROUPS);
+  const saveOrderAndRedirect = (): void => {
     history.push(Routes.GROUPS);
   };
-  const redirectToGroupsRoot = (): void => history.push(Routes.GROUPS);
 
   const loadGroups = (): void => {
     GroupService.getAll()
@@ -39,7 +39,7 @@ const GroupsSorting: FC = () => {
       <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<CheckIcon />}
-        action={saveOrderAndRedirectToGroupsRoot}
+        action={saveOrderAndRedirect}
         color="primary"
         tooltip={t('groups:tooltips.ok')}
       />

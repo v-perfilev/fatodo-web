@@ -19,6 +19,13 @@ export enum GroupRoutes {
   VIEW = '/:groupId',
 }
 
+export class GroupRouteUtils {
+  public static getSortingUrl = (): string => Routes.GROUPS + GroupRoutes.SORTING;
+  public static getCreateUrl = (): string => Routes.GROUPS + GroupRoutes.CREATE;
+  public static getEditUrl = (id: string): string => (Routes.GROUPS + GroupRoutes.EDIT).replace(':groupId', id);
+  public static getViewUrl = (id: string): string => (Routes.GROUPS + GroupRoutes.VIEW).replace(':groupId', id);
+}
+
 const GroupRouter: FC = () => {
   const match = useRouteMatch();
 

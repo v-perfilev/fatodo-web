@@ -11,6 +11,7 @@ import GroupService from '../../../services/group.service';
 import {GroupDTO} from '../../../models/dto/group.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {GroupRouteUtils} from '../_router';
 
 const GroupCreate: FC = () => {
   const history = useHistory();
@@ -22,7 +23,7 @@ const GroupCreate: FC = () => {
   });
 
   const submit = (): void => saveCallback();
-  const redirectToGroup = (id: string): void => history.push(Routes.GROUPS + '/' + id);
+  const redirectToViewGroup = (id: string): void => history.push(GroupRouteUtils.getViewUrl(id));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
 
   const menu = (
@@ -47,7 +48,7 @@ const GroupCreate: FC = () => {
       .then((response) => {
         handleCode('groups.created', 'info');
         const id = response.data.id;
-        redirectToGroup(id);
+        redirectToViewGroup(id);
       })
       .catch((response) => {
         handleResponse(response);

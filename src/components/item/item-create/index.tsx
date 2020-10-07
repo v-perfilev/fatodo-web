@@ -14,6 +14,8 @@ import {ItemDTO} from '../../../models/dto/item.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
+import {ItemRouteUtils} from '../_router';
+import {GroupRouteUtils} from '../../groups/_router';
 
 const ItemCreate: FC = () => {
   const {i18n, t} = useTranslation();
@@ -27,8 +29,8 @@ const ItemCreate: FC = () => {
   const [group, setGroup] = useState<Group>(null);
 
   const submit = (): void => saveCallback();
-  const redirectToItem = (id: string): void => history.push(Routes.ITEMS + '/' + id);
-  const redirectToGroup = (): void => history.push(Routes.GROUPS + '/' + groupId);
+  const redirectToViewItem = (id: string): void => history.push(ItemRouteUtils.getViewUrl(id));
+  const redirectToViewGroup = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menu = (
@@ -37,7 +39,7 @@ const ItemCreate: FC = () => {
       <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('items:tooltips.ok')} />
       <AdditionalMenuButton
         icon={<CloseIcon />}
-        action={redirectToGroup}
+        action={redirectToViewGroup}
         color="secondary"
         tooltip={t('items:tooltips.cancel')}
       />
@@ -55,7 +57,7 @@ const ItemCreate: FC = () => {
           redirectToNotFound();
         }
         handleResponse(response);
-        redirectToGroup();
+        redirectToViewGroup();
       });
   };
 
@@ -72,7 +74,7 @@ const ItemCreate: FC = () => {
       .then((response) => {
         handleCode('items.created', 'info');
         const id = response.data.id;
-        redirectToItem(id);
+        redirectToViewItem(id);
       })
       .catch((response) => {
         handleResponse(response);

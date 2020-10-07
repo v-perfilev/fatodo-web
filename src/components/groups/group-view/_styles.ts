@@ -65,29 +65,26 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   managementBox: {
     display: 'flex',
     '& > *': {
+      color: theme.palette.grey['400'],
       marginLeft: theme.spacing(3),
     },
   },
-  toggleIcon: {
-    fontSize: '1.8rem',
-    color: theme.palette.grey['400'],
-    cursor: 'pointer',
+  showIcon: {
     '&:hover': {
       color: theme.palette.primary.main,
     },
   },
   editIcon: {
-    fontSize: '1.8rem',
-    color: theme.palette.grey['400'],
-    cursor: 'pointer',
+    '&:hover': {
+      color: theme.palette.secondary.main,
+    },
+  },
+  toggleIcon: {
     '&:hover': {
       color: theme.palette.secondary.main,
     },
   },
   deleteIcon: {
-    fontSize: '1.8rem',
-    color: theme.palette.grey['400'],
-    cursor: 'pointer',
     '&:hover': {
       color: theme.palette.error.main,
     },

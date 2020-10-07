@@ -13,6 +13,7 @@ import {GroupDTO} from '../../../models/dto/group.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
+import {GroupRouteUtils} from '../_router';
 
 const GroupEdit: FC = () => {
   const history = useHistory();
@@ -25,9 +26,9 @@ const GroupEdit: FC = () => {
   });
   const [group, setGroup] = useState<Group>(null);
 
-  const submit = (): void => saveCallback();
-  const redirectToGroup = (): void => history.push(Routes.GROUPS + '/' + groupId);
+  const redirectToViewGroup = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
+  const submit = (): void => saveCallback();
 
   const loadGroup = (): void => {
     GroupService.get(groupId)
@@ -40,7 +41,7 @@ const GroupEdit: FC = () => {
           redirectToNotFound();
         }
         handleResponse(response);
-        redirectToGroup();
+        redirectToViewGroup();
       });
   };
 
@@ -50,7 +51,7 @@ const GroupEdit: FC = () => {
       <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('groups:tooltips.ok')} />
       <AdditionalMenuButton
         icon={<CloseIcon />}
-        action={redirectToGroup}
+        action={redirectToViewGroup}
         color="secondary"
         tooltip={t('groups:tooltips.cancel')}
       />
@@ -69,7 +70,7 @@ const GroupEdit: FC = () => {
     GroupService.update(data)
       .then(() => {
         handleCode('groups.edited', 'info');
-        redirectToGroup();
+        redirectToViewGroup();
       })
       .catch((response) => {
         handleResponse(response);

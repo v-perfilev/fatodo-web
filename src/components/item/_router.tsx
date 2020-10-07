@@ -17,6 +17,12 @@ export enum ItemRoutes {
   VIEW = '/:itemId',
 }
 
+export class ItemRouteUtils {
+  public static getCreateUrl = (id: string): string => (Routes.ITEMS + ItemRoutes.CREATE).replace(':groupId', id);
+  public static getEditUrl = (id: string): string => (Routes.ITEMS + ItemRoutes.EDIT).replace(':itemId', id);
+  public static getViewUrl = (id: string): string => (Routes.ITEMS + ItemRoutes.VIEW).replace(':itemId', id);
+}
+
 const ItemRouter: FC = () => {
   const match = useRouteMatch();
 

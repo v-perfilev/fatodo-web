@@ -2,8 +2,7 @@ import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 import GroupPreviewGridContainer from './group-preview-grid-container';
 import {useHistory} from 'react-router-dom';
-import {Routes} from '../../router';
-import {GroupRoutes} from '../_router';
+import {GroupRouteUtils} from '../_router';
 import {ReorderIcon} from '../../common/icons/reorder-icon';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
@@ -21,8 +20,8 @@ const GroupPreview: FC = () => {
   const {updateMenu} = useAdditionalMenuContext();
   const [groups, setGroups] = useState<Group[]>([]);
 
-  const redirectToAddGroup = (): void => history.push(Routes.GROUPS + GroupRoutes.CREATE);
-  const redirectToGroupsSorting = (): void => history.push(Routes.GROUPS + GroupRoutes.SORTING);
+  const redirectToCreateGroup = (): void => history.push(GroupRouteUtils.getCreateUrl());
+  const redirectToSortingGroups = (): void => history.push(GroupRouteUtils.getSortingUrl());
 
   const loadGroups = (): void => {
     GroupService.getAll()
@@ -39,13 +38,13 @@ const GroupPreview: FC = () => {
       <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<PlusIcon />}
-        action={redirectToAddGroup}
+        action={redirectToCreateGroup}
         color="primary"
         tooltip={t('groups:tooltips.create')}
       />
       <AdditionalMenuButton
         icon={<ReorderIcon />}
-        action={redirectToGroupsSorting}
+        action={redirectToSortingGroups}
         color="secondary"
         tooltip={t('groups:tooltips.reorder')}
       />

@@ -22,9 +22,9 @@ import ItemViewChanges from './item-view-changes';
 import {compose} from 'recompose';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
-import {ItemRoutes} from '../_router';
+import {ItemRouteUtils} from '../_router';
 import {ItemsIcon} from '../../common/icons/items-icon';
-import {GroupRoutes} from '../../groups/_router';
+import {GroupRouteUtils} from '../../groups/_router';
 import ItemViewInfo from './item-view-info';
 import {DeleteIcon} from '../../common/icons/delete-icon';
 
@@ -40,8 +40,8 @@ const ItemView: FC = () => {
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
-  const redirectToEditItem = (): void => history.push((Routes.ITEMS + ItemRoutes.EDIT).replace(':itemId', itemId));
-  const redirectToGroup = (): void => history.push((Routes.GROUPS + GroupRoutes.VIEW).replace(':groupId', group.id));
+  const redirectToEditItem = (): void => history.push(ItemRouteUtils.getEditUrl(itemId));
+  const redirectToViewGroup = (): void => history.push(GroupRouteUtils.getViewUrl(group?.id));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menu = (
@@ -61,7 +61,7 @@ const ItemView: FC = () => {
       />
       <AdditionalMenuButton
         icon={<ItemsIcon />}
-        action={redirectToGroup}
+        action={redirectToViewGroup}
         color="secondary"
         tooltip={t('items:tooltips.list')}
       />
