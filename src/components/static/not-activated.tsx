@@ -11,7 +11,7 @@ import {Routes} from '../router';
 import AccountService from '../../services/account.service';
 import {HomeIcon} from '../common/icons/home-icon';
 import {EmailIcon} from '../common/icons/email-icon';
-import {LoadingButton} from '../common/layouts/loading-button';
+import {LoadingButton} from '../common/controls/loading-button';
 
 type Props = RedirectTimerProps;
 

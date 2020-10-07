@@ -4,8 +4,8 @@ import {Routes} from '../../../router';
 import {logoStyles, logoWithTextStyles} from './_styles';
 import csx from 'classnames';
 import {Typography} from '@material-ui/core';
-import {Link} from '../';
 import {LogoPic} from '../../images';
+import {Link} from '../../controls/link';
 
 type Props = HTMLAttributes<any>;
 

@@ -3,7 +3,7 @@ import {Box} from '@material-ui/core';
 import {Item} from '../../../models/item.model';
 import {itemViewChangesStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
-import {LabeledBox} from '../../common/layouts/labeled-box';
+import {LabeledBox} from '../../common/surfaces/labeled-box';
 import {DateFormatters} from '../../../shared/utils/date.utils';
 import csx from 'classnames';
 import UserService from '../../../services/user.service';

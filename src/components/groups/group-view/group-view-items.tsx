@@ -3,7 +3,7 @@ import {Box} from '@material-ui/core';
 import {groupViewItemsStyles} from './_styles';
 import GroupViewItem from './group-view-item';
 import {Item} from '../../../models/item.model';
-import {PageDivider} from '../../common/layouts/page-divider';
+import {PageDivider} from '../../common/surfaces/page-divider';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 

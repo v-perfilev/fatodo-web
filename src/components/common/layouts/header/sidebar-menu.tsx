@@ -4,7 +4,7 @@ import {Box, Divider, Fab, SwipeableDrawer, Toolbar} from '@material-ui/core';
 import {ArrowRightIcon} from '../../icons/arrow-right-icon';
 import VerticalMenu from './vertical-menu';
 import {sidebarMenuStyles} from './_styles';
-import {LanguageSelect} from '../language-select';
+import {LanguageSelect} from '../../controls/language-select';
 
 type Props = {
   show: boolean;

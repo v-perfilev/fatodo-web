@@ -9,7 +9,7 @@ import AccountService from '../../../services/account.service';
 import {passwordValidator, repeatPasswordValidator} from '../common/_validators';
 import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
 import {PasswordInput} from '../../common/inputs/password-input';
-import {LoadingButton} from '../../common/layouts/loading-button';
+import {LoadingButton} from '../../common/controls/loading-button';
 import {PasswordStrengthBar} from '../password-strength-bar';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 

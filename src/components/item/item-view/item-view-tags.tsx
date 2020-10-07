@@ -1,7 +1,7 @@
 import React, {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Chip} from '@material-ui/core';
-import {LabeledBox} from '../../common/layouts/labeled-box';
+import {LabeledBox} from '../../common/surfaces/labeled-box';
 
 type Props = HTMLAttributes<any> & {
   tags: string[];

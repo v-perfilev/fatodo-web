@@ -1,8 +1,8 @@
 import React, {FC, HTMLAttributes} from 'react';
 import {Box} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
-import {LabeledBox} from '../../common/layouts/labeled-box';
-import {PageDivider} from '../../common/layouts/page-divider';
+import {LabeledBox} from '../../common/surfaces/labeled-box';
+import {PageDivider} from '../../common/surfaces/page-divider';
 
 type Props = HTMLAttributes<any> & {
   description: string;

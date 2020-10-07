@@ -18,8 +18,8 @@ import {SecurityUtils} from '../../../shared/utils/security.utils';
 import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
 import {TextInput} from '../../common/inputs/text-input';
 import {PasswordInput} from '../../common/inputs/password-input';
-import {LoadingButton} from '../../common/layouts/loading-button';
-import {Link} from '../../common/layouts/link';
+import {LoadingButton} from '../../common/controls/loading-button';
+import {Link} from '../../common/controls/link';
 import {withSnackContext} from '../../../shared/hoc/with-snack';
 import {SnackState} from '../../../shared/contexts/snack-context';
 

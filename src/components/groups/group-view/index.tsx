@@ -18,12 +18,12 @@ import GroupService from '../../../services/group.service';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import {ItemRouteUtils} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
-import {PageHeader} from '../../common/layouts/page-header';
-import {PageDivider} from '../../common/layouts/page-divider';
+import {PageHeader} from '../../common/surfaces/page-header';
+import {PageDivider} from '../../common/surfaces/page-divider';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
-import {PageSpacer} from '../../common/layouts/page-spacer';
+import {PageSpacer} from '../../common/surfaces/page-spacer';
 import {DeleteIcon} from '../../common/icons/delete-icon';
 
 const GroupView: FC = () => {

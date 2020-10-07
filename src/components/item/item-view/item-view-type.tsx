@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {ItemType} from '../../../models/item.model';
 import {useTranslation} from 'react-i18next';
 import {TypeView} from '../../common/views/type-view';
-import {LabeledBox} from '../../common/layouts/labeled-box';
+import {LabeledBox} from '../../common/surfaces/labeled-box';
 
 type Props = {
   type: ItemType;

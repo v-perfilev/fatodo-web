@@ -6,7 +6,7 @@ import {Routes} from '../../router';
 import {Group} from '../../../models/group.model';
 import GroupPreviewCardActions from './group-preview-card-actions';
 import {RoundPic} from '../../common/images/round-pic';
-import {Link} from '../../common/layouts/link';
+import {Link} from '../../common/controls/link';
 
 type Props = {
   group: Group;

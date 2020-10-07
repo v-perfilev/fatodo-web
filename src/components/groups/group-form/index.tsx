@@ -12,8 +12,8 @@ import {GroupDTO} from '../../../models/dto/group.dto';
 import {ImageUpload} from '../../common/inputs/image-upload';
 import {useTranslation} from 'react-i18next';
 import {ThemeSelect} from '../../common/inputs/theme-select';
-import {PageHeader} from '../../common/layouts/page-header';
-import {PageDivider} from '../../common/layouts/page-divider';
+import {PageHeader} from '../../common/surfaces/page-header';
+import {PageDivider} from '../../common/surfaces/page-divider';
 import {TextInput} from '../../common/inputs/text-input';
 
 type Props = FormikProps<any> & {

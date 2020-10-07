@@ -14,7 +14,7 @@ import {SignUpIcon} from '../../icons/signup-icon';
 import {compose} from 'recompose';
 import {Routes} from '../../../router';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
-import {LanguageSelect} from '../language-select';
+import {LanguageSelect} from '../../controls/language-select';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout};

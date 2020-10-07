@@ -7,7 +7,7 @@ import {compose} from 'recompose';
 import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
 import {authFormStyles} from '../common/_styles';
 import {TextInput} from '../../common/inputs/text-input';
-import {LoadingButton} from '../../common/layouts/loading-button';
+import {LoadingButton} from '../../common/controls/loading-button';
 import i18n from '../../../shared/i18n';
 import AccountService from '../../../services/account.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';

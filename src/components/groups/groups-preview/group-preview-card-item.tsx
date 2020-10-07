@@ -9,7 +9,7 @@ import Truncate from 'react-truncate';
 import {Item} from '../../../models/item.model';
 import {Routes} from '../../router';
 import {ItemRoutes} from '../../item/_router';
-import {Link} from '../../common/layouts/link';
+import {Link} from '../../common/controls/link';
 
 type Props = HTMLAttributes<any> & {
   item: Item;

@@ -3,7 +3,7 @@ import {Box} from '@material-ui/core';
 import {groupViewUsersStyles} from './_styles';
 import {User} from '../../../models/user.model';
 import {GroupUser} from '../../../models/group.model';
-import {PaperBox} from '../../common/layouts/paper-box';
+import {PaperBox} from '../../common/surfaces/paper-box';
 import UserService from '../../../services/user.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 

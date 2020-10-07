@@ -3,7 +3,7 @@ import {ComponentType, FC, ReactElement} from 'react';
 import {Box, Grid, Hidden} from '@material-ui/core';
 import {backgroundStyles} from './_styles';
 import {LogoWithText} from '../../components/common/layouts/logo';
-import {LanguageSelect} from '../../components/common/layouts/language-select';
+import {LanguageSelect} from '../../components/common/controls/language-select';
 
 const withBackground = (imgSrc: string) => (Component: ComponentType): FC => (props): ReactElement => {
   const classes = backgroundStyles();
