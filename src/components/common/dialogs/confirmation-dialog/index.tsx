@@ -41,16 +41,10 @@ export const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDis
   return (
     <ThemeProvider theme={theme}>
       <Dialog open={open}>
-        {title && (
-          <DialogTitle>
-            {title}
-          </DialogTitle>
-        )}
+        {title && <DialogTitle>{title}</DialogTitle>}
         {text && (
           <DialogContent>
-            <DialogContentText>
-              {text}
-            </DialogContentText>
+            <DialogContentText>{text}</DialogContentText>
           </DialogContent>
         )}
         <DialogActions>

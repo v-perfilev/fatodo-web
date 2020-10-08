@@ -17,12 +17,14 @@ const AdditionalMenuButton: FC<Props> = ({icon, action, color, tooltip}: Props) 
       {icon}
     </Fab>
   ));
+  FabWithoutTooltip.displayName = 'FabWithoutTooltip';
 
   const FabWithTooltip = forwardRef(() => (
     <Tooltip enterDelay={500} title={tooltip} placement={isBigDevice ? 'right' : 'top'}>
       <FabWithoutTooltip />
     </Tooltip>
   ));
+  FabWithTooltip.displayName = 'FabWithTooltip';
 
   return tooltip !== null ? <FabWithTooltip /> : <FabWithoutTooltip />;
 };

@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {Box, IconButton} from '@material-ui/core';
 import {groupViewItemStyles} from './_styles';
 import {CheckIcon} from '../../common/icons/check-icon';
@@ -10,7 +10,7 @@ import {Link} from '../../common/controls/link';
 import {ItemRouteUtils} from '../../item/_router';
 import {EyeIcon} from '../../common/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
-import {DeleteItemDialog} from '../../common/dialogs/delete-item-dialog';
+import {useDeleteItemContext} from '../../../shared/contexts/delete-item-context';
 
 type Props = {
   item: Item;
@@ -20,13 +20,14 @@ type Props = {
 const GroupViewItem: FC<Props> = ({item, loadItems}: Props) => {
   const classes = groupViewItemStyles();
   const history = useHistory();
-  const [itemToDelete, setItemToDelete] = useState<Item>(null);
+  const {setItemToDelete, setOnDeleteItemSuccess} = useDeleteItemContext();
 
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
   const redirectToViewItem = (): void => history.push(viewItemUrl);
   const redirectToEditItem = (): void => history.push(ItemRouteUtils.getEditUrl(item.id));
 
   const openDeleteDialog = (): void => {
+    setOnDeleteItemSuccess(() => (): void => loadItems());
     setItemToDelete(item);
   };
 
@@ -54,7 +55,6 @@ const GroupViewItem: FC<Props> = ({item, loadItems}: Props) => {
           <DeleteIcon />
         </IconButton>
       </Box>
-      <DeleteItemDialog item={itemToDelete} setItem={setItemToDelete} onSuccess={loadItems} />
     </Box>
   );
 };

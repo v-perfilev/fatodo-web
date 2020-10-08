@@ -14,7 +14,6 @@ import {ItemDTO} from '../../../models/dto/item.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
-import {ItemRouteUtils} from '../_router';
 import {GroupRouteUtils} from '../../groups/_router';
 
 const ItemCreate: FC = () => {
@@ -29,7 +28,6 @@ const ItemCreate: FC = () => {
   const [group, setGroup] = useState<Group>(null);
 
   const submit = (): void => saveCallback();
-  const redirectToViewItem = (id: string): void => history.push(ItemRouteUtils.getViewUrl(id));
   const redirectToViewGroup = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
@@ -71,10 +69,9 @@ const ItemCreate: FC = () => {
 
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     ItemService.create(data)
-      .then((response) => {
+      .then(() => {
         handleCode('items.created', 'info');
-        const id = response.data.id;
-        redirectToViewItem(id);
+        redirectToViewGroup();
       })
       .catch((response) => {
         handleResponse(response);

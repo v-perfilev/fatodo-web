@@ -16,6 +16,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {ItemRouteUtils} from '../_router';
+import {GroupRouteUtils} from '../../groups/_router';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -30,6 +31,7 @@ const ItemEdit: FC = () => {
   const [item, setItem] = useState<Item>(null);
 
   const submit = (): void => saveCallback();
+  const redirectToViewGroup = (): void => history.push(GroupRouteUtils.getViewUrl(item.groupId));
   const redirectToViewItem = (): void => history.push(ItemRouteUtils.getViewUrl(itemId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
@@ -78,7 +80,7 @@ const ItemEdit: FC = () => {
     ItemService.update(data)
       .then(() => {
         handleCode('items.edited', 'info');
-        redirectToViewItem();
+        redirectToViewGroup();
       })
       .catch((response) => {
         handleResponse(response);

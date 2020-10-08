@@ -11,6 +11,7 @@ import {Routes} from '../router';
 import GroupView from './group-view';
 import GroupCreate from './group-create';
 import GroupEdit from './group-edit';
+import withDeleteItemDialog from '../../shared/hoc/with-delete-item-dialog';
 
 export enum GroupRoutes {
   SORTING = '/sorting',
@@ -41,4 +42,4 @@ const GroupRouter: FC = () => {
   );
 };
 
-export default compose(withFlexibleHeader, withAdditionalMenu)(GroupRouter);
+export default compose(withFlexibleHeader, withAdditionalMenu, withDeleteItemDialog)(GroupRouter);
