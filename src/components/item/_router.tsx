@@ -10,7 +10,7 @@ import {Routes} from '../router';
 import ItemView from './item-view';
 import ItemEdit from './item-edit';
 import ItemCreate from './item-create';
-import withDeleteItemDialog from '../../shared/hoc/with-delete-item-dialog';
+import withItemDeleteDialog from '../../shared/hoc/with-item-delete-dialog';
 
 export enum ItemRoutes {
   CREATE = '/create/:groupId',
@@ -37,4 +37,4 @@ const ItemRouter: FC = () => {
   );
 };
 
-export default compose(withFlexibleHeader, withAdditionalMenu, withDeleteItemDialog)(ItemRouter);
+export default compose(withFlexibleHeader, withAdditionalMenu, withItemDeleteDialog)(ItemRouter);

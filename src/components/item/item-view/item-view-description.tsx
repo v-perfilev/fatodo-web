@@ -3,19 +3,19 @@ import {Box} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {LabeledBox} from '../../common/surfaces/labeled-box';
 import {PageDivider} from '../../common/surfaces/page-divider';
+import {useItemViewContext} from '../../../shared/contexts/item-view-context';
 
-type Props = HTMLAttributes<any> & {
-  description: string;
-};
+type Props = HTMLAttributes<any>;
 
-const ItemViewDescription: FC<Props> = ({description, className}: Props) => {
+const ItemViewDescription: FC<Props> = ({className}: Props) => {
   const {t} = useTranslation();
+  const {item} = useItemViewContext();
 
   return (
-    description && (
+    item.description && (
       <>
         <LabeledBox label={t('items:labels.description')} className={className}>
-          <Box>{description}</Box>
+          <Box>{item.description}</Box>
         </LabeledBox>
         <PageDivider />
       </>

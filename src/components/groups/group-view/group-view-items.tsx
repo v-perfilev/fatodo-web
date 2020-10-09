@@ -1,23 +1,23 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewItemsStyles} from './_styles';
 import GroupViewItem from './group-view-item';
-import {Item} from '../../../models/item.model';
 import {PageDivider} from '../../common/surfaces/page-divider';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {compose} from 'recompose';
+import withItemList from '../../../shared/hoc/with-item-list';
+import {useItemListContext} from '../../../shared/contexts/item-list-context';
 
-type Props = {
-  groupId: string;
-};
-
-const GroupViewItems: FC<Props> = ({groupId}: Props) => {
+const GroupViewItems: FC = () => {
   const classes = groupViewItemsStyles();
   const {handleResponse} = useSnackContext();
-  const [items, setItems] = useState<Item[]>([]);
+  const {group} = useGroupViewContext();
+  const {items, setItems, setLoadItems} = useItemListContext();
 
   const loadItems = (): void => {
-    ItemService.getAllByGroupId(groupId)
+    ItemService.getAllByGroupId(group.id)
       .then((response) => {
         setItems(response.data);
       })
@@ -28,6 +28,7 @@ const GroupViewItems: FC<Props> = ({groupId}: Props) => {
 
   useEffect(() => {
     loadItems();
+    setLoadItems(() => (): void => loadItems());
   }, []);
 
   return (
@@ -35,11 +36,11 @@ const GroupViewItems: FC<Props> = ({groupId}: Props) => {
       {items.map((item, index) => (
         <Box key={index}>
           {index !== 0 && <PageDivider />}
-          <GroupViewItem item={item} loadItems={loadItems} />
+          <GroupViewItem item={item} />
         </Box>
       ))}
     </Box>
   );
 };
 
-export default GroupViewItems;
+export default compose(withItemList)(GroupViewItems);

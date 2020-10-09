@@ -1,16 +1,14 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewMessagesStyles} from './_styles';
-import {Group} from '../../../models/group.model';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
 
-type Props = {
-  group: Group;
-};
-
-const GroupViewMessages: FC<Props> = ({}: Props) => {
+const GroupViewMessages: FC = () => {
   const classes = groupViewMessagesStyles();
+  const {group} = useGroupViewContext();
 
-  return <Box className={classes.root}>TODO messages</Box>;
+  // TODO messages
+  return <Box className={classes.root}>{group.messageCount}</Box>;
 };
 
 export default GroupViewMessages;

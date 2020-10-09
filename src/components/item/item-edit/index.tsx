@@ -24,15 +24,15 @@ const ItemEdit: FC = () => {
   const history = useHistory();
   const {itemId} = useParams();
   const {updateMenu} = useAdditionalMenuContext();
+  const [group, setGroup] = useState<Group>(null);
+  const [item, setItem] = useState<Item>(null);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
   });
-  const [group, setGroup] = useState<Group>(null);
-  const [item, setItem] = useState<Item>(null);
 
   const submit = (): void => saveCallback();
-  const redirectToViewGroup = (): void => history.push(GroupRouteUtils.getViewUrl(item.groupId));
-  const redirectToViewItem = (): void => history.push(ItemRouteUtils.getViewUrl(itemId));
+  const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(item.groupId));
+  const redirectToItemView = (): void => history.push(ItemRouteUtils.getViewUrl(itemId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menu = (
@@ -41,7 +41,7 @@ const ItemEdit: FC = () => {
       <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('items:tooltips.ok')} />
       <AdditionalMenuButton
         icon={<CloseIcon />}
-        action={redirectToViewItem}
+        action={redirectToItemView}
         color="secondary"
         tooltip={t('items:tooltips.cancel')}
       />
@@ -80,7 +80,7 @@ const ItemEdit: FC = () => {
     ItemService.update(data)
       .then(() => {
         handleCode('items.edited', 'info');
-        redirectToViewGroup();
+        redirectToGroupView();
       })
       .catch((response) => {
         handleResponse(response);

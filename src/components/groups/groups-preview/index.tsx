@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect} from 'react';
 import GroupPreviewGridContainer from './group-preview-grid-container';
 import {useHistory} from 'react-router-dom';
 import {GroupRouteUtils} from '../_router';
@@ -7,21 +7,23 @@ import {ReorderIcon} from '../../common/icons/reorder-icon';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
-import {Group} from '../../../models/group.model';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import GroupService from '../../../services/group.service';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {compose} from 'recompose';
+import withGroupList from '../../../shared/hoc/with-group-list';
+import {useGroupListContext} from '../../../shared/contexts/group-list-context';
 
 const GroupPreview: FC = () => {
   const history = useHistory();
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
-  const [groups, setGroups] = useState<Group[]>([]);
+  const {setGroups, setLoadGroups} = useGroupListContext();
 
-  const redirectToCreateGroup = (): void => history.push(GroupRouteUtils.getCreateUrl());
-  const redirectToSortingGroups = (): void => history.push(GroupRouteUtils.getSortingUrl());
+  const redirectToGroupCreate = (): void => history.push(GroupRouteUtils.getCreateUrl());
+  const redirectToGroupsSorting = (): void => history.push(GroupRouteUtils.getSortingUrl());
 
   const loadGroups = (): void => {
     GroupService.getAll()
@@ -38,13 +40,13 @@ const GroupPreview: FC = () => {
       <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<PlusIcon />}
-        action={redirectToCreateGroup}
+        action={redirectToGroupCreate}
         color="primary"
         tooltip={t('groups:tooltips.create')}
       />
       <AdditionalMenuButton
         icon={<ReorderIcon />}
-        action={redirectToSortingGroups}
+        action={redirectToGroupsSorting}
         color="secondary"
         tooltip={t('groups:tooltips.reorder')}
       />
@@ -52,14 +54,14 @@ const GroupPreview: FC = () => {
   );
 
   useEffect(() => {
-    loadGroups();
+    setLoadGroups(() => (): void => loadGroups());
   }, []);
 
   useEffect(() => {
     updateMenu(menu);
   }, [i18n.language]);
 
-  return <GroupPreviewGridContainer groups={groups} />;
+  return <GroupPreviewGridContainer />;
 };
 
-export default GroupPreview;
+export default compose(withGroupList)(GroupPreview);

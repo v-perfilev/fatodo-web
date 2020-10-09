@@ -3,14 +3,11 @@ import {FC} from 'react';
 import {Grid} from '@material-ui/core';
 import GroupGridItem from './group-preview-grid-item';
 import {groupGridContainerStyles} from './_styles';
-import {Group} from '../../../models/group.model';
+import {useGroupListContext} from '../../../shared/contexts/group-list-context';
 
-interface Props {
-  groups: Group[];
-}
-
-const GroupPreviewGridContainer: FC<Props> = ({groups}: Props) => {
+const GroupPreviewGridContainer: FC = () => {
   const classes = groupGridContainerStyles();
+  const {groups} = useGroupListContext();
 
   return (
     <Grid container className={classes.container}>

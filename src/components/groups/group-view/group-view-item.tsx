@@ -10,17 +10,18 @@ import {Link} from '../../common/controls/link';
 import {ItemRouteUtils} from '../../item/_router';
 import {EyeIcon} from '../../common/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
-import {useDeleteItemContext} from '../../../shared/contexts/delete-item-context';
+import {useItemDeleteContext} from '../../../shared/contexts/item-delete-context';
+import {useItemListContext} from '../../../shared/contexts/item-list-context';
 
 type Props = {
   item: Item;
-  loadItems: () => void;
 };
 
-const GroupViewItem: FC<Props> = ({item, loadItems}: Props) => {
+const GroupViewItem: FC<Props> = ({item}: Props) => {
   const classes = groupViewItemStyles();
   const history = useHistory();
-  const {setItemToDelete, setOnDeleteItemSuccess} = useDeleteItemContext();
+  const {loadItems} = useItemListContext();
+  const {setItemToDelete, setOnDeleteItemSuccess} = useItemDeleteContext();
 
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
   const redirectToViewItem = (): void => history.push(viewItemUrl);

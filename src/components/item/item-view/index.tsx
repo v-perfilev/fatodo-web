@@ -1,13 +1,11 @@
-import React, {FC, memo, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {itemViewStyles} from './_styles';
-import {Item} from '../../../models/item.model';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
-import {Group} from '../../../models/group.model';
 import {PageDivider} from '../../common/surfaces/page-divider';
 import {PageHeader} from '../../common/surfaces/page-header';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
@@ -27,7 +25,11 @@ import {ItemsIcon} from '../../common/icons/items-icon';
 import {GroupRouteUtils} from '../../groups/_router';
 import ItemViewInfo from './item-view-info';
 import {DeleteIcon} from '../../common/icons/delete-icon';
-import {useDeleteItemContext} from '../../../shared/contexts/delete-item-context';
+import {useItemDeleteContext} from '../../../shared/contexts/item-delete-context';
+import withGroupView from '../../../shared/hoc/with-group-view';
+import withItemView from '../../../shared/hoc/with-item-view';
+import {useItemViewContext} from '../../../shared/contexts/item-view-context';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
 
 const ItemView: FC = () => {
   const classes = itemViewStyles();
@@ -36,18 +38,18 @@ const ItemView: FC = () => {
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
-  const {setItemToDelete, setOnDeleteItemSuccess} = useDeleteItemContext();
-  const [item, setItem] = useState<Item>();
-  const [group, setGroup] = useState<Group>();
+  const {item, setItem} = useItemViewContext();
+  const {group, setGroup} = useGroupViewContext();
+  const {setItemToDelete, setOnDeleteItemSuccess} = useItemDeleteContext();
 
-  const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
+  const theme = ThemeFactory.getTheme(group?.color);
 
-  const redirectToEditItem = (): void => history.push(ItemRouteUtils.getEditUrl(itemId));
-  const redirectToViewGroup = (): void => history.push(GroupRouteUtils.getViewUrl(group?.id));
+  const redirectToItemEdit = (): void => history.push(ItemRouteUtils.getEditUrl(itemId));
+  const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(group?.id));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const openDeleteDialog = (): void => {
-    setOnDeleteItemSuccess(() => (): void => redirectToViewGroup());
+    setOnDeleteItemSuccess(() => (): void => redirectToGroupView());
     setItemToDelete(item);
   };
 
@@ -56,7 +58,7 @@ const ItemView: FC = () => {
       <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<EditIcon />}
-        action={redirectToEditItem}
+        action={redirectToItemEdit}
         color="primary"
         tooltip={t('items:tooltips.edit')}
       />
@@ -68,7 +70,7 @@ const ItemView: FC = () => {
       />
       <AdditionalMenuButton
         icon={<ItemsIcon />}
-        action={redirectToViewGroup}
+        action={redirectToGroupView}
         color="secondary"
         tooltip={t('items:tooltips.list')}
       />
@@ -115,7 +117,7 @@ const ItemView: FC = () => {
 
   useEffect(() => {
     updateMenu(menu);
-  }, [group, i18n.language]);
+  }, [item, group, i18n.language]);
 
   return (
     item &&
@@ -124,16 +126,16 @@ const ItemView: FC = () => {
         <Container className={classes.root}>
           <PageHeader title={item.title} />
           <PageDivider height={5} />
-          <ItemViewInfo item={item} group={group} className={classes.box} />
+          <ItemViewInfo className={classes.box} />
           <PageDivider />
-          <ItemViewDescription description={item.description} className={classes.box} />
-          <ItemViewReminders reminders={item.reminders} className={classes.box} />
-          <ItemViewTags tags={item.tags} className={classes.box} />
-          <ItemViewChanges item={item} className={classes.box} />
+          <ItemViewDescription className={classes.box} />
+          <ItemViewReminders className={classes.box} />
+          <ItemViewTags className={classes.box} />
+          <ItemViewChanges className={classes.box} />
         </Container>
       </ThemeProvider>
     )
   );
 };
 
-export default compose(memo)(ItemView);
+export default compose(withGroupView, withItemView)(ItemView);

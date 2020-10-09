@@ -54,6 +54,6 @@
   },
   "modals": {
     "deleteTitle": "Delete item",
-    "deleteText": "Are you sure you want to delete item {{title}}?"
+    "deleteText": "Are you sure you want to delete item \"{{title}}\"?"
   }
 }

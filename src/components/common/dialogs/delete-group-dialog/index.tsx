@@ -1,27 +1,27 @@
 import React, {FC, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ConfirmationDialog} from '../confirmation-dialog';
-import {Item} from '../../../../models/item.model';
-import ItemService from '../../../../services/item.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
+import {Group} from '../../../../models/group.model';
+import GroupService from '../../../../services/group.service';
 
 type Props = {
-  item: Item;
-  setItem: (item: Item) => void;
+  group: Group;
+  setGroup: (group: Group) => void;
   onSuccess?: () => void;
 };
 
-export const DeleteItemDialog: FC<Props> = ({item, setItem, onSuccess}: Props) => {
+export const DeleteGroupDialog: FC<Props> = ({group, setGroup, onSuccess}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
 
   const onAgree = (): void => {
     setLoading(true);
-    ItemService.delete(item?.id)
+    GroupService.delete(group?.id)
       .then(() => {
-        handleCode('items.deleted', 'info');
-        setItem(null);
+        handleCode('groups.deleted', 'info');
+        setGroup(null);
         if (onSuccess) {
           onSuccess();
         }
@@ -33,16 +33,16 @@ export const DeleteItemDialog: FC<Props> = ({item, setItem, onSuccess}: Props) =
   };
 
   const onDisagree = (): void => {
-    setItem(null);
+    setGroup(null);
   };
 
   return (
     <ConfirmationDialog
-      open={item !== null}
+      open={group !== null}
       onAgree={onAgree}
       onDisagree={onDisagree}
-      title={t('items:modals.deleteTitle')}
-      text={t('items:modals.deleteText', {title: item?.title})}
+      title={t('groups:modals.deleteTitle')}
+      text={t('groups:modals.deleteText', {title: group?.title})}
       loading={loading}
     />
   );

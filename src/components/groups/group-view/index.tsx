@@ -1,4 +1,4 @@
-import React, {FC, memo, useEffect, useState} from 'react';
+import React, {FC, useEffect} from 'react';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
@@ -7,7 +7,6 @@ import GroupViewItems from './group-view-items';
 import GroupViewUsers from './group-view-users';
 import GroupViewMessages from './group-view-messages';
 import {groupViewStyles} from './_styles';
-import {Group} from '../../../models/group.model';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
 import {Routes} from '../../router';
@@ -25,20 +24,29 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {PageSpacer} from '../../common/surfaces/page-spacer';
 import {DeleteIcon} from '../../common/icons/delete-icon';
+import {useGroupDeleteContext} from '../../../shared/contexts/group-delete-context';
+import withGroupView from '../../../shared/hoc/with-group-view';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
 
 const GroupView: FC = () => {
   const classes = groupViewStyles();
   const history = useHistory();
   const {groupId} = useParams();
+  const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
-  const {t, i18n} = useTranslation();
-  const [group, setGroup] = useState<Group>(null);
+  const {group, setGroup} = useGroupViewContext();
+  const {setGroupToDelete, setOnDeleteGroupSuccess} = useGroupDeleteContext();
 
-  const redirectToCreateItem = (): void => history.push(ItemRouteUtils.getCreateUrl(groupId));
-  const redirectToEditGroup = (): void => history.push(GroupRouteUtils.getEditUrl(groupId));
+  const redirectToItemCreate = (): void => history.push(ItemRouteUtils.getCreateUrl(groupId));
+  const redirectToGroupEdit = (): void => history.push(GroupRouteUtils.getEditUrl(groupId));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
+
+  const openDeleteDialog = (): void => {
+    setOnDeleteGroupSuccess(() => (): void => redirectToGroups());
+    setGroupToDelete(group);
+  };
 
   const loadGroup = (): void => {
     GroupService.get(groupId)
@@ -60,19 +68,19 @@ const GroupView: FC = () => {
       <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<PlusIcon />}
-        action={redirectToCreateItem}
+        action={redirectToItemCreate}
         color="primary"
         tooltip={t('items:tooltips.create')}
       />
       <AdditionalMenuButton
         icon={<EditIcon />}
-        action={redirectToEditGroup}
+        action={redirectToGroupEdit}
         color="primary"
         tooltip={t('groups:tooltips.edit')}
       />
       <AdditionalMenuButton
         icon={<DeleteIcon />}
-        action={console.log}
+        action={openDeleteDialog}
         color="primary"
         tooltip={t('groups:tooltips.delete')}
       />
@@ -91,7 +99,7 @@ const GroupView: FC = () => {
 
   useEffect(() => {
     updateMenu(menu);
-  }, [i18n.language]);
+  }, [group, i18n.language]);
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
@@ -101,14 +109,14 @@ const GroupView: FC = () => {
         <Container className={classes.root}>
           <PageHeader title={group.title} filename={group.imageFilename} />
           <PageDivider height={5} />
-          <GroupViewUsers groupUsers={group.users} />
-          <GroupViewItems groupId={group.id} />
+          <GroupViewUsers />
+          <GroupViewItems />
           <PageSpacer />
-          <GroupViewMessages group={group} />
+          <GroupViewMessages />
         </Container>
       </ThemeProvider>
     )
   );
 };
 
-export default compose(memo)(GroupView);
+export default compose(withGroupView)(GroupView);

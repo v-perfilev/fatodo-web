@@ -1,6 +1,5 @@
 import React, {FC, HTMLAttributes, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
-import {Item} from '../../../models/item.model';
 import {itemViewChangesStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
 import {LabeledBox} from '../../common/surfaces/labeled-box';
@@ -8,14 +7,14 @@ import {DateFormatters} from '../../../shared/utils/date.utils';
 import csx from 'classnames';
 import UserService from '../../../services/user.service';
 import {User} from '../../../models/user.model';
+import {useItemViewContext} from '../../../shared/contexts/item-view-context';
 
-type Props = HTMLAttributes<any> & {
-  item: Item;
-};
+type Props = HTMLAttributes<any>;
 
-const ItemViewChanges: FC<Props> = ({item, className}: Props) => {
+const ItemViewChanges: FC<Props> = ({className}: Props) => {
   const classes = itemViewChangesStyles();
   const {t} = useTranslation();
+  const {item} = useItemViewContext();
   const [creator, setCreator] = useState<string>();
   const [updater, setUpdater] = useState<string>();
 

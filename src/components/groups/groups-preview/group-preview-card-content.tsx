@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, memo, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import {Box, Button, CardContent, Typography} from '@material-ui/core';
 import {groupCardContentStyles} from './_styles';
 import {ArrowDownIcon} from '../../common/icons/arrow-down-icon';
@@ -7,33 +7,32 @@ import {ArrowUpIcon} from '../../common/icons/arrow-up-icon';
 import {useTrail} from 'react-spring';
 import GroupCardItem from './group-preview-card-item';
 import {ITEMS_IN_GROUP_CARD} from '../_constants';
-import {compose} from 'recompose';
-import {Item} from '../../../models/item.model';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {compose} from 'recompose';
+import withItemList from '../../../shared/hoc/with-item-list';
+import {useItemListContext} from '../../../shared/contexts/item-list-context';
 
-type Props = {
-  groupId: string;
-};
-
-const GroupPreviewCardContent: FC<Props> = ({groupId}: Props) => {
+const GroupPreviewCardContent: FC = () => {
   const classes = groupCardContentStyles();
   const {handleResponse} = useSnackContext();
-  const [items, setItems] = useState<Item[]>([]);
-
-  const ref = useRef();
+  const {group} = useGroupViewContext();
+  const {items, setItems} = useItemListContext();
   const [firstShowedItem, setFirstShowedItem] = useState(0);
-  const [itemsToShow, setItemsToShow] = useState<Item[]>([]);
+  const ref = useRef();
 
   const isMultiPage = items.length > ITEMS_IN_GROUP_CARD;
   const isNotFirstPage = firstShowedItem > 0;
   const isNotLastPage = firstShowedItem + ITEMS_IN_GROUP_CARD < items.length;
 
+  const itemsToShow = items.slice(firstShowedItem, firstShowedItem + ITEMS_IN_GROUP_CARD);
+
   const onUpClick = (): void => setFirstShowedItem((prevState) => prevState - ITEMS_IN_GROUP_CARD);
   const onDownClick = (): void => setFirstShowedItem((prevState) => prevState + ITEMS_IN_GROUP_CARD);
 
   useEffect(() => {
-    ItemService.getAllByGroupId(groupId)
+    ItemService.getAllByGroupId(group.id)
       .then((response) => {
         setItems(response.data);
       })
@@ -41,10 +40,6 @@ const GroupPreviewCardContent: FC<Props> = ({groupId}: Props) => {
         handleResponse(response);
       });
   }, []);
-
-  useEffect(() => {
-    setItemsToShow(items.slice(firstShowedItem, firstShowedItem + ITEMS_IN_GROUP_CARD));
-  }, [items, firstShowedItem]);
 
   const trail = useTrail(itemsToShow.length, {
     reset: true,
@@ -79,4 +74,4 @@ const GroupPreviewCardContent: FC<Props> = ({groupId}: Props) => {
   );
 };
 
-export default compose(memo)(GroupPreviewCardContent);
+export default compose(withItemList)(GroupPreviewCardContent);

@@ -3,20 +3,20 @@ import {FC, useState} from 'react';
 import {IconButton, MenuItem} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../common/icons/dots-vertical-icon';
 import {groupCardActionsStyles} from './_styles';
-import {Group} from '../../../models/group.model';
 import {PopupMenu} from '../../common/surfaces/popup-menu';
 import {useHistory} from 'react-router-dom';
-import {Routes} from '../../router';
-import {GroupRoutes} from '../_router';
-import {ItemRoutes} from '../../item/_router';
+import {GroupRouteUtils} from '../_router';
+import {ItemRouteUtils} from '../../item/_router';
+import {useGroupListContext} from '../../../shared/contexts/group-list-context';
+import {useGroupDeleteContext} from '../../../shared/contexts/group-delete-context';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
 
-type Props = {
-  group: Group;
-};
-
-const GroupPreviewCardActions: FC<Props> = ({group}: Props) => {
+const GroupPreviewCardActions: FC = () => {
   const classes = groupCardActionsStyles();
   const history = useHistory();
+  const {loadGroups} = useGroupListContext();
+  const {group} = useGroupViewContext();
+  const {setGroupToDelete, setOnDeleteGroupSuccess} = useGroupDeleteContext();
   const [anchorEl, setAnchorEl] = useState<HTMLElement>(null);
 
   const isOpen = Boolean(anchorEl);
@@ -33,18 +33,24 @@ const GroupPreviewCardActions: FC<Props> = ({group}: Props) => {
     setAnchorEl(null);
   };
 
+  const redirectToItemCreate = (e: React.MouseEvent<HTMLElement>): void => {
+    history.push(ItemRouteUtils.getCreateUrl(group.id));
+    handleClose(e);
+  };
+
   const redirectToGroupView = (e: React.MouseEvent<HTMLElement>): void => {
-    history.push((Routes.GROUPS + GroupRoutes.VIEW).replace(':groupId', group.id));
+    history.push(GroupRouteUtils.getViewUrl(group.id));
     handleClose(e);
   };
 
   const redirectToGroupEdit = (e: React.MouseEvent<HTMLElement>): void => {
-    history.push((Routes.GROUPS + GroupRoutes.EDIT).replace(':groupId', group.id));
+    history.push(GroupRouteUtils.getEditUrl(group.id));
     handleClose(e);
   };
 
-  const redirectToItemCreate = (e: React.MouseEvent<HTMLElement>): void => {
-    history.push((Routes.ITEMS + ItemRoutes.CREATE).replace(':groupId', group.id));
+  const openDeleteDialog = (e: React.MouseEvent<HTMLElement>): void => {
+    setOnDeleteGroupSuccess(() => (): void => loadGroups());
+    setGroupToDelete(group);
     handleClose(e);
   };
 
@@ -54,9 +60,10 @@ const GroupPreviewCardActions: FC<Props> = ({group}: Props) => {
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu anchorEl={anchorEl} isOpen={isOpen} onClose={handleClose}>
+        <MenuItem onClick={redirectToItemCreate}>Create item</MenuItem>
         <MenuItem onClick={redirectToGroupView}>View</MenuItem>
         <MenuItem onClick={redirectToGroupEdit}>Edit</MenuItem>
-        <MenuItem onClick={redirectToItemCreate}>Create item</MenuItem>
+        <MenuItem onClick={openDeleteDialog}>Delete</MenuItem>
       </PopupMenu>
     </>
   );

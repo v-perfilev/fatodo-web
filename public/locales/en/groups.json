@@ -25,5 +25,9 @@
     "delete": "Delete group",
     "list": "List of groups",
     "createItem": "Create item"
+  },
+  "modals": {
+    "deleteTitle": "Delete group",
+    "deleteText": "Are you sure you want to delete group \"{{title}}\"?"
   }
 }

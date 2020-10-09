@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, HTMLAttributes} from 'react';
+import {FC, HTMLAttributes, useEffect} from 'react';
 import {Box, Card, Typography} from '@material-ui/core';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {groupCardItemStyles} from './_styles';
@@ -10,6 +10,8 @@ import {Item} from '../../../models/item.model';
 import {Routes} from '../../router';
 import {ItemRoutes} from '../../item/_router';
 import {Link} from '../../common/controls/link';
+import withItemView from '../../../shared/hoc/with-item-view';
+import {useItemViewContext} from '../../../shared/contexts/item-view-context';
 
 type Props = HTMLAttributes<any> & {
   item: Item;
@@ -17,6 +19,11 @@ type Props = HTMLAttributes<any> & {
 
 const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
   const classes = groupCardItemStyles();
+  const {setItem} = useItemViewContext();
+
+  useEffect(() => {
+    setItem(item);
+  }, [item]);
 
   return (
     <Box className={classes.item}>
@@ -32,4 +39,4 @@ const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
   );
 };
 
-export default compose(animated)(GroupPreviewCardItem);
+export default compose(animated, withItemView)(GroupPreviewCardItem);

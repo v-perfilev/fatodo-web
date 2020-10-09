@@ -1,23 +1,19 @@
 import * as React from 'react';
-import {FC, memo} from 'react';
+import {FC} from 'react';
 import {Badge, Box, CardActions} from '@material-ui/core';
 import {BellIcon} from '../../common/icons/bell-icon';
 import {MessageIcon} from '../../common/icons/message-icon';
 import GroupPreviewCardAvatars from './group-preview-card-avatars';
 import {groupCardNotificationsStyles} from './_styles';
-import {compose} from 'recompose';
-import {Group} from '../../../models/group.model';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
 
-type Props = {
-  group: Group;
-};
-
-const GroupPreviewCardNotifications: FC<Props> = ({group}: Props) => {
+const GroupPreviewCardNotifications: FC = () => {
   const classes = groupCardNotificationsStyles();
+  const {group} = useGroupViewContext();
 
   return (
     <CardActions className={classes.actions}>
-      <GroupPreviewCardAvatars groupUsers={group.users} />
+      <GroupPreviewCardAvatars />
       <Box className={classes.badges}>
         <Badge color="primary" max={5} badgeContent={group.notificationCount}>
           <BellIcon className={classes.icon} />
@@ -30,4 +26,4 @@ const GroupPreviewCardNotifications: FC<Props> = ({group}: Props) => {
   );
 };
 
-export default compose(memo)(GroupPreviewCardNotifications);
+export default GroupPreviewCardNotifications;

@@ -3,17 +3,14 @@ import {FC} from 'react';
 import {Box, CardHeader, Typography} from '@material-ui/core';
 import {groupCardHeaderStyles} from './_styles';
 import {Routes} from '../../router';
-import {Group} from '../../../models/group.model';
 import GroupPreviewCardActions from './group-preview-card-actions';
 import {RoundPic} from '../../common/images/round-pic';
 import {Link} from '../../common/controls/link';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
 
-type Props = {
-  group: Group;
-};
-
-const GroupPreviewCardHeader: FC<Props> = ({group}: Props) => {
+const GroupPreviewCardHeader: FC = () => {
   const classes = groupCardHeaderStyles();
+  const {group} = useGroupViewContext();
 
   return (
     <Link to={Routes.GROUPS + '/' + group.id}>
@@ -26,7 +23,7 @@ const GroupPreviewCardHeader: FC<Props> = ({group}: Props) => {
             </Typography>
           </Box>
         }
-        action={<GroupPreviewCardActions group={group} />}
+        action={<GroupPreviewCardActions />}
         className={classes.root}
       />
     </Link>

@@ -2,17 +2,17 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Box, CardHeader, Typography} from '@material-ui/core';
 import {groupSortingCardHeaderStyles} from './_styles';
-import {Group} from '../../../models/group.model';
 import GroupSortingActions from './group-sorting-actions';
 import {RoundPic} from '../../common/images/round-pic';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
 
 type Props = {
-  group: Group;
   bind: (...any) => void;
 };
 
-const GroupSortingHeader: FC<Props> = ({group, bind}: Props) => {
+const GroupSortingHeader: FC<Props> = ({bind}: Props) => {
   const classes = groupSortingCardHeaderStyles();
+  const {group} = useGroupViewContext();
 
   return (
     <CardHeader

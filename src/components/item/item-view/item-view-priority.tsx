@@ -1,19 +1,16 @@
-import React, {FC, HTMLAttributes} from 'react';
-import {ItemPriority} from '../../../models/item.model';
+import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {LabeledBox} from '../../common/surfaces/labeled-box';
 import {PriorityView} from '../../common/views/priority-view';
+import {useItemViewContext} from '../../../shared/contexts/item-view-context';
 
-type Props = HTMLAttributes<any> & {
-  priority: ItemPriority;
-};
-
-const ItemViewPriority: FC<Props> = ({priority, className}: Props) => {
+const ItemViewPriority: FC = () => {
   const {t} = useTranslation();
+  const {item} = useItemViewContext();
 
   return (
-    <LabeledBox label={t('items:labels.priority')} className={className}>
-      <PriorityView priority={priority} />
+    <LabeledBox label={t('items:labels.priority')}>
+      <PriorityView priority={item.priority} />
     </LabeledBox>
   );
 };

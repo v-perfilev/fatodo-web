@@ -22,13 +22,13 @@ const ItemCreate: FC = () => {
   const {groupId} = useParams();
   const {updateMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
+  const [group, setGroup] = useState<Group>(null);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
   });
-  const [group, setGroup] = useState<Group>(null);
 
   const submit = (): void => saveCallback();
-  const redirectToViewGroup = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
+  const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menu = (
@@ -37,7 +37,7 @@ const ItemCreate: FC = () => {
       <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('items:tooltips.ok')} />
       <AdditionalMenuButton
         icon={<CloseIcon />}
-        action={redirectToViewGroup}
+        action={redirectToGroupView}
         color="secondary"
         tooltip={t('items:tooltips.cancel')}
       />
@@ -55,7 +55,7 @@ const ItemCreate: FC = () => {
           redirectToNotFound();
         }
         handleResponse(response);
-        redirectToViewGroup();
+        redirectToGroupView();
       });
   };
 
@@ -71,7 +71,7 @@ const ItemCreate: FC = () => {
     ItemService.create(data)
       .then(() => {
         handleCode('items.created', 'info');
-        redirectToViewGroup();
+        redirectToGroupView();
       })
       .catch((response) => {
         handleResponse(response);

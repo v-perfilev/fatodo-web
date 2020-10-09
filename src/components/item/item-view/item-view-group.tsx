@@ -1,15 +1,12 @@
 import React, {FC} from 'react';
-import {Group} from '../../../models/group.model';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {LabeledBox} from '../../common/surfaces/labeled-box';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
 
-type Props = {
-  group: Group;
-};
-
-const ItemViewGroup: FC<Props> = ({group}: Props) => {
+const ItemViewGroup: FC = () => {
   const {t} = useTranslation();
+  const {group} = useGroupViewContext();
 
   return (
     <LabeledBox label={t('items:labels.group')}>

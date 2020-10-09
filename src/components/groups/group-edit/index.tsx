@@ -21,12 +21,12 @@ const GroupEdit: FC = () => {
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
+  const [group, setGroup] = useState<Group>(null);
   const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
     // important stub function
   });
-  const [group, setGroup] = useState<Group>(null);
 
-  const redirectToViewGroup = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
+  const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
   const submit = (): void => saveCallback();
 
@@ -41,7 +41,7 @@ const GroupEdit: FC = () => {
           redirectToNotFound();
         }
         handleResponse(response);
-        redirectToViewGroup();
+        redirectToGroupView();
       });
   };
 
@@ -51,7 +51,7 @@ const GroupEdit: FC = () => {
       <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('groups:tooltips.ok')} />
       <AdditionalMenuButton
         icon={<CloseIcon />}
-        action={redirectToViewGroup}
+        action={redirectToGroupView}
         color="secondary"
         tooltip={t('groups:tooltips.cancel')}
       />
@@ -70,7 +70,7 @@ const GroupEdit: FC = () => {
     GroupService.update(data)
       .then(() => {
         handleCode('groups.edited', 'info');
-        redirectToViewGroup();
+        redirectToGroupView();
       })
       .catch((response) => {
         handleResponse(response);

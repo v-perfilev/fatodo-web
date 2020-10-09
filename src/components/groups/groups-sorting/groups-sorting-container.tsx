@@ -5,17 +5,15 @@ import {groupSortingGridContainerStyles} from './_styles';
 import withSortableGrid from '../../../shared/hoc/with-sortable-grid';
 import {animated} from 'react-spring';
 import {compose} from 'recompose';
-import {Group} from '../../../models/group.model';
 import {SortProps} from '../../../shared/hoc/types';
 import GroupsSortingItem from './groups-sorting-item';
+import {useGroupListContext} from '../../../shared/contexts/group-list-context';
 
-type Props = SortProps & {
-  groups: Group[];
-};
+type Props = SortProps;
 
 const GroupsSortingContainer: FC<Props> = (props: Props) => {
   const classes = groupSortingGridContainerStyles();
-  const {groups} = props;
+  const {groups} = useGroupListContext();
   const {setSortItems, setSortContainerRef, setSortItemRef, sortContainerHeight, sortSprings, sortBind} = props;
 
   const gridStyle = {minHeight: sortContainerHeight};

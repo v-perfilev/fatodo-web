@@ -23,7 +23,7 @@ const GroupCreate: FC = () => {
   });
 
   const submit = (): void => saveCallback();
-  const redirectToViewGroup = (id: string): void => history.push(GroupRouteUtils.getViewUrl(id));
+  const redirectToGroupView = (id: string): void => history.push(GroupRouteUtils.getViewUrl(id));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
 
   const menu = (
@@ -48,7 +48,7 @@ const GroupCreate: FC = () => {
       .then((response) => {
         handleCode('groups.created', 'info');
         const id = response.data.id;
-        redirectToViewGroup(id);
+        redirectToGroupView(id);
       })
       .catch((response) => {
         handleResponse(response);

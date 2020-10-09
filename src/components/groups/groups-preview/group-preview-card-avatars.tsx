@@ -3,26 +3,23 @@ import {FC, useEffect, useState} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {groupCardAvatarsStyles} from './_styles';
 import {AVATARS_IN_GROUP_CARD} from '../_constants';
-import {GroupUser} from '../../../models/group.model';
 import {User} from '../../../models/user.model';
 import {RoundPic} from '../../common/images/round-pic';
 import UserService from '../../../services/user.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
 
-type Props = {
-  groupUsers: GroupUser[];
-};
-
-const GroupPreviewCardAvatars: FC<Props> = ({groupUsers}: Props) => {
+const GroupPreviewCardAvatars: FC = () => {
   const classes = groupCardAvatarsStyles();
   const {handleResponse} = useSnackContext();
+  const {group} = useGroupViewContext();
   const [users, setUsers] = useState<User[]>([]);
 
   const usersToShow = users.slice(0, AVATARS_IN_GROUP_CARD);
   const moreThanLimit = users.length > AVATARS_IN_GROUP_CARD ? users.length - AVATARS_IN_GROUP_CARD : 0;
 
   useEffect(() => {
-    const ids = groupUsers.map((u) => u.id);
+    const ids = group.users.map((u) => u.id);
     UserService.getAllByIds(ids)
       .then((response) => {
         setUsers(response.data);
