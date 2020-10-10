@@ -9,7 +9,6 @@ import AdditionalMenuButton from '../../common/layouts/additional-menu/additiona
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import GroupService from '../../../services/group.service';
-import {GroupDTO} from '../../../models/dto/group.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
@@ -66,8 +65,8 @@ const GroupEdit: FC = () => {
     updateMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  const request = (data: GroupDTO, stopSubmitting: () => void): void => {
-    GroupService.update(data)
+  const request = (formData: FormData, stopSubmitting: () => void): void => {
+    GroupService.update(formData)
       .then(() => {
         handleCode('groups.edited', 'info');
         redirectToGroupView();

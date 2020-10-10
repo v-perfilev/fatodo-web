@@ -8,5 +8,4 @@ interface GroupViewState {
 }
 
 export const GroupViewContext = React.createContext<GroupViewState>(null);
-export const GroupViewProvider = GroupViewContext.Provider;
 export const useGroupViewContext = (): GroupViewState => useContext(GroupViewContext);

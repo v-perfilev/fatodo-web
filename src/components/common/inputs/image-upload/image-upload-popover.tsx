@@ -6,7 +6,6 @@ import imageCompression from 'browser-image-compression';
 import {imageUploadPopoverStyles} from './_styles';
 import {IMAGE_MAX_SIZE, IMAGE_MAX_WIDTH, IMAGE_MIN_WIDTH} from '../../../../constants';
 import csx from 'classnames';
-import {ImageUtils} from '../../../../shared/utils/image.utils';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 
 type ImageError = 'tooSmall';
@@ -50,8 +49,7 @@ export const ImageUploadPopover: FC<Props> = ({source, anchorEl, handleClose, cr
     } else {
       imageCompression(croppedBlob, compressionOptions).then(async (compressedBlob: Blob) => {
         const filename = URL.createObjectURL(compressedBlob);
-        const content = await ImageUtils.blobToBase64(compressedBlob);
-        const image = {filename, content};
+        const image = {filename, content: compressedBlob};
         handleClose(image);
       });
     }

@@ -8,5 +8,4 @@ interface ItemViewState {
 }
 
 export const ItemViewContext = React.createContext<ItemViewState>(null);
-export const ItemViewProvider = ItemViewContext.Provider;
 export const useItemViewContext = (): ItemViewState => useContext(ItemViewContext);

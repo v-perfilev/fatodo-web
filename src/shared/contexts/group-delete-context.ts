@@ -8,5 +8,4 @@ interface GroupDeleteState {
 }
 
 export const GroupDeleteContext = React.createContext<GroupDeleteState>(null);
-export const GroupDeleteProvider = GroupDeleteContext.Provider;
 export const useGroupDeleteContext = (): GroupDeleteState => useContext(GroupDeleteContext);

@@ -10,5 +10,4 @@ interface ItemListState {
 }
 
 export const ItemListContext = React.createContext<ItemListState>(null);
-export const ItemListProvider = ItemListContext.Provider;
 export const useItemListContext = (): ItemListState => useContext(ItemListContext);

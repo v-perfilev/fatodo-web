@@ -16,6 +16,4 @@ export interface SnackState {
 }
 
 export const SnackContext = React.createContext<SnackState>(null);
-export const SnackProvider = SnackContext.Provider;
-export const SnackConsumer = SnackContext.Consumer;
 export const useSnackContext = (): SnackState => useContext(SnackContext);

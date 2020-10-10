@@ -8,7 +8,6 @@ import {CloseIcon} from '../../common/icons/close-icon';
 import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
 import GroupService from '../../../services/group.service';
-import {GroupDTO} from '../../../models/dto/group.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {GroupRouteUtils} from '../_router';
@@ -43,8 +42,8 @@ const GroupCreate: FC = () => {
     updateMenu(menu);
   }, [i18n.language, saveCallback]);
 
-  const request = (data: GroupDTO, stopSubmitting: () => void): void => {
-    GroupService.create(data)
+  const request = (formData: FormData, stopSubmitting: () => void): void => {
+    GroupService.create(formData)
       .then((response) => {
         handleCode('groups.created', 'info');
         const id = response.data.id;

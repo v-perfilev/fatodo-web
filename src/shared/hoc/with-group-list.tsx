@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
 import {Group} from '../../models/group.model';
-import {GroupListProvider} from '../contexts/group-list-context';
+import {GroupListContext} from '../contexts/group-list-context';
 
 const withGroupList = (Component: ComponentType): FC => (props): ReactElement => {
   const [groups, setGroups] = useState<Group[]>([]);
@@ -16,9 +16,9 @@ const withGroupList = (Component: ComponentType): FC => (props): ReactElement =>
   }, [loadGroups]);
 
   return (
-    <GroupListProvider value={context}>
+    <GroupListContext.Provider value={context}>
       <Component {...props} />
-    </GroupListProvider>
+    </GroupListContext.Provider>
   );
 };
 

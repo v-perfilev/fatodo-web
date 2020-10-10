@@ -28,6 +28,8 @@ export const DeleteGroupDialog: FC<Props> = ({group, setGroup, onSuccess}: Props
       })
       .catch((response) => {
         handleResponse(response);
+      })
+      .finally(() => {
         setLoading(false);
       });
   };

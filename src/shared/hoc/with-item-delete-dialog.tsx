@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useState} from 'react';
-import {ItemDeleteProvider} from '../contexts/item-delete-context';
+import {ItemDeleteContext} from '../contexts/item-delete-context';
 import {DeleteItemDialog} from '../../components/common/dialogs/delete-item-dialog';
 import {Item} from '../../models/item.model';
 
@@ -13,10 +13,10 @@ const withItemDeleteDialog = (Component: ComponentType): FC => (props): ReactEle
   const context = {setItemToDelete, setOnDeleteItemSuccess};
 
   return (
-    <ItemDeleteProvider value={context}>
+    <ItemDeleteContext.Provider value={context}>
       <DeleteItemDialog item={itemToDelete} setItem={setItemToDelete} onSuccess={onDeleteItemSuccess} />
       <Component {...props} />
-    </ItemDeleteProvider>
+    </ItemDeleteContext.Provider>
   );
 };
 

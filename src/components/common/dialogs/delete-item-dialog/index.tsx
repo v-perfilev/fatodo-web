@@ -28,6 +28,8 @@ export const DeleteItemDialog: FC<Props> = ({item, setItem, onSuccess}: Props) =
       })
       .catch((response) => {
         handleResponse(response);
+      })
+      .finally(() => {
         setLoading(false);
       });
   };

@@ -8,7 +8,6 @@ import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
 import {GroupFormUtils, GroupFormValues} from './_form';
 import {ThemeFactory} from '../../../shared/theme/theme';
-import {GroupDTO} from '../../../models/dto/group.dto';
 import {ImageUpload} from '../../common/inputs/image-upload';
 import {useTranslation} from 'react-i18next';
 import {ThemeSelect} from '../../common/inputs/theme-select';
@@ -20,16 +19,13 @@ type Props = FormikProps<any> & {
   group?: Group;
   header: string;
   setSaveCallback: (callback: () => () => void) => void;
-  request: (groupDTO: GroupDTO, stopSubmitting: () => void) => void;
+  request: (formData: FormData, stopSubmitting: () => void) => void;
 };
 
-const GroupForm: FC<Props> = (props: Props) => {
+const GroupForm: FC<Props> = ({header, setSaveCallback, values, isValid, submitForm, isSubmitting}: Props) => {
   const classes = groupFormStyles();
   const {t} = useTranslation();
-  const {header, setSaveCallback, values, isValid, submitForm, isSubmitting} = props;
   const buttonRef = useRef<HTMLButtonElement>();
-
-  const color = values.color;
 
   useEffect(() => {
     if (isValid) {
@@ -39,7 +35,7 @@ const GroupForm: FC<Props> = (props: Props) => {
     }
   }, [isValid]);
 
-  const theme = ThemeFactory.getTheme(color);
+  const theme = ThemeFactory.getTheme(values.color);
 
   return (
     <ThemeProvider theme={theme}>
@@ -85,7 +81,7 @@ const formik = withFormik<Props, GroupFormValues>({
 
   handleSubmit: (values: GroupFormValues, {setSubmitting, props}: FormikBag<Props, GroupFormValues>) => {
     const {request, group} = props;
-    const data = GroupFormUtils.mapValuesToDTO(values, group);
+    const data = GroupFormUtils.mapValuesToFormData(values, group);
     request(data, () => setSubmitting(false));
   },
 });

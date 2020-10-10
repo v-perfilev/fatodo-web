@@ -8,5 +8,4 @@ interface ItemDeleteState {
 }
 
 export const ItemDeleteContext = React.createContext<ItemDeleteState>(null);
-export const ItemDeleteProvider = ItemDeleteContext.Provider;
 export const useItemDeleteContext = (): ItemDeleteState => useContext(ItemDeleteContext);

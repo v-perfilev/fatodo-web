@@ -7,5 +7,4 @@ interface AdditionalMenuState {
 }
 
 export const AdditionalMenuContext = React.createContext<AdditionalMenuState>(null);
-export const AdditionalMenuProvider = AdditionalMenuContext.Provider;
 export const useAdditionalMenuContext = (): AdditionalMenuState => useContext(AdditionalMenuContext);

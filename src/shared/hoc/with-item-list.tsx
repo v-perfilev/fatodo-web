@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
-import {ItemListProvider} from '../contexts/item-list-context';
+import {ItemListContext} from '../contexts/item-list-context';
 import {Item} from '../../models/item.model';
 
 const withItemList = (Component: ComponentType): FC => (props): ReactElement => {
@@ -16,9 +16,9 @@ const withItemList = (Component: ComponentType): FC => (props): ReactElement => 
   }, [loadItems]);
 
   return (
-    <ItemListProvider value={context}>
+    <ItemListContext.Provider value={context}>
       <Component {...props} />
-    </ItemListProvider>
+    </ItemListContext.Provider>
   );
 };
 

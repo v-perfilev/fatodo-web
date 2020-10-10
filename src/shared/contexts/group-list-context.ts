@@ -10,5 +10,4 @@ interface GroupListState {
 }
 
 export const GroupListContext = React.createContext<GroupListState>(null);
-export const GroupListProvider = GroupListContext.Provider;
 export const useGroupListContext = (): GroupListState => useContext(GroupListContext);

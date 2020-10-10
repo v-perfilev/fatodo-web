@@ -5,7 +5,7 @@ import {AxiosResponse} from 'axios';
 import {ResponseUtils} from '../utils/response.utils';
 import {TranslationUtils} from '../utils/translation.utils';
 import {SnackBuilder} from '../utils/builders/snack.builder';
-import {SnackConsumer, SnackProvider, SnackState} from '../contexts/snack-context';
+import {SnackContext, SnackState} from '../contexts/snack-context';
 import Snack from '../../models/snack.model';
 import {snackStyles} from './_styles';
 import {compose} from 'recompose';
@@ -60,9 +60,9 @@ const withSnack = (Component: ComponentType): FC => (props): ReactElement => {
   const context = {handleResponse, handleCode, enqueueSnack, closeSnack};
 
   return (
-    <SnackProvider value={context}>
+    <SnackContext.Provider value={context}>
       <Component {...props} />
-    </SnackProvider>
+    </SnackContext.Provider>
   );
 };
 
@@ -76,7 +76,7 @@ const withSnackProvider = (Component: ComponentType): FC => (props): ReactElemen
 };
 
 export const withSnackContext = (Component: ComponentType<SnackState>): FC => (props): ReactElement => {
-  return <SnackConsumer>{(value): ReactElement => <Component {...props} {...value} />}</SnackConsumer>;
+  return <SnackContext.Consumer>{(value): ReactElement => <Component {...props} {...value} />}</SnackContext.Consumer>;
 };
 
 export default compose(withSnackProvider, withSnack);

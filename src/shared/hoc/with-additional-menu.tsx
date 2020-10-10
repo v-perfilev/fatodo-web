@@ -4,7 +4,7 @@ import {Box, Theme, useMediaQuery} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
 import AdditionalMenu from '../../components/common/layouts/additional-menu';
 import csx from 'classnames';
-import {AdditionalMenuProvider} from '../contexts/additional-menu-context';
+import {AdditionalMenuContext} from '../contexts/additional-menu-context';
 
 const withAdditionalMenu = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = additionalMenuStyles();
@@ -20,14 +20,14 @@ const withAdditionalMenu = (Component: ComponentType): FC => (props): ReactEleme
   const context = {menu, updateMenu};
 
   return (
-    <AdditionalMenuProvider value={context}>
+    <AdditionalMenuContext.Provider value={context}>
       <Box className={rootClassNames}>
         <Box className={classes.container}>
           <Component {...props} />
         </Box>
         <AdditionalMenu />
       </Box>
-    </AdditionalMenuProvider>
+    </AdditionalMenuContext.Provider>
   );
 };
 
