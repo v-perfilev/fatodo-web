@@ -7,6 +7,7 @@
     "type": "Type",
     "date": "Date",
     "priority": "Priority",
+    "description": "Description",
     "reminders": "Reminders",
     "tags": "Tags",
     "group": "Group",

@@ -18,8 +18,8 @@ const ItemViewInfo: FC<Props> = ({className}: Props) => {
     <Box className={classNames}>
       <ItemViewGroup />
       <ItemViewType />
-      <ItemViewDate />
       <ItemViewPriority />
+      <ItemViewDate />
     </Box>
   );
 };

@@ -1,67 +1,55 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Box, Fade, TextField} from '@material-ui/core';
-import {DateFormatters} from '../../../../shared/utils/date.utils';
-import {dateInputStyles} from './_styles';
-import {DateSelectYear} from './date-select-year';
-import {DateSelectMonth} from './date-select-month';
-import {DateSelectDate} from './date-select-date';
+import React, { FC, useEffect, useState } from 'react';
+import { Box, Fade, TextField } from '@material-ui/core';
+import { DateFormatters } from '../../../../shared/utils/date.utils';
+import { dateInputStyles } from './_styles';
+import { DateSelectYear } from './date-select-year';
+import { DateSelectMonth } from './date-select-month';
+import { DateSelectDate } from './date-select-date';
 
-enum InputType {
-  YEAR,
-  MONTH,
-  DATE,
-}
+type InputType = 'year' | 'month' | 'date';
 
 type Props = {
   label: string;
   required?: boolean;
   date: Date;
   setDate: (date: Date) => void;
-  firstInputType?: 'year' | 'month' | 'date';
+  firstInputType?: InputType;
 };
 
-export const DateSelect: FC<Props> = ({
-  label,
-  required,
-  date: inputDate,
-  setDate: setInputDate,
-  firstInputType,
-}: Props) => {
+export const DateSelect: FC<Props> = ({ label, required, date, setDate, firstInputType }: Props) => {
   const classes = dateInputStyles();
-  const [date, setDate] = useState<Date>();
   const [inputType, setInputType] = useState<InputType>();
 
   useEffect(() => {
-    setDate(inputDate || new Date());
+    setDate(date);
   }, []);
 
-  const formattedDate = inputDate
+  const formattedDate = date
     ? !firstInputType || firstInputType === 'year'
-      ? DateFormatters.formatDateWithYear(inputDate)
-      : DateFormatters.formatDate(inputDate)
+      ? DateFormatters.formatDateWithYear(date)
+      : DateFormatters.formatDate(date)
     : '';
 
   const openInput = (): void => {
+    const newDate = date ?? new Date();
     if (!firstInputType || firstInputType === 'year') {
-      setInputType(InputType.YEAR);
+      setInputType('year');
     } else {
-      const newDate = new Date();
       newDate.setFullYear(1970);
-      setDate(newDate);
-      setInputType(InputType.MONTH);
+      setInputType('month');
     }
+    setDate(newDate);
   };
 
   const handleChange = (changedDate: Date): void => {
-    if (inputType === InputType.YEAR) {
+    if (inputType === 'year') {
       setDate(changedDate);
-      setInputType(InputType.MONTH);
-    } else if (inputType === InputType.MONTH) {
+      setInputType('month');
+    } else if (inputType === 'month') {
       setDate(changedDate);
-      setInputType(InputType.DATE);
-    } else if (inputType === InputType.DATE) {
+      setInputType('date');
+    } else if (inputType === 'date') {
       setDate(changedDate);
-      setInputDate(changedDate);
       setInputType(null);
     }
   };
@@ -72,15 +60,15 @@ export const DateSelect: FC<Props> = ({
         label={label}
         required={required}
         value={formattedDate}
-        InputProps={{readOnly: true}}
+        InputProps={{ readOnly: true }}
         onClick={openInput}
         className={classes.textField}
       />
-      <Fade in={inputType !== null}>
+      <Fade in={!!inputType}>
         <Box className={classes.box}>
-          {inputType === InputType.YEAR && <DateSelectYear {...{date, handleChange}} />}
-          {inputType === InputType.MONTH && <DateSelectMonth {...{date, handleChange}} />}
-          {inputType === InputType.DATE && <DateSelectDate {...{date, handleChange}} />}
+          {inputType === 'year' && <DateSelectYear {...{ date, handleChange }} />}
+          {inputType === 'month' && <DateSelectMonth {...{ date, handleChange }} />}
+          {inputType === 'date' && <DateSelectDate {...{ date, handleChange }} />}
         </Box>
       </Fade>
     </Box>

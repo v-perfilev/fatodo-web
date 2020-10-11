@@ -1,4 +1,4 @@
-import {makeStyles, Theme} from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
 
 export const remindersInputStyles = makeStyles(() => ({
   root: {
@@ -41,29 +41,27 @@ export const remindersInputPopoverToolbarStyles = makeStyles((theme: Theme) => (
     justifyContent: 'center',
     backgroundColor: theme.palette.primary.main,
     paddingTop: theme.spacing(1),
-
-    '& .MuiTypography-root': {
-      color: theme.palette.primary.contrastText,
-      fontSize: '1.2rem',
-      fontWeight: 500,
-      marginTop: theme.spacing(0.5),
+  },
+  button: {
+    color: 'rgba(255, 255, 255, 0.7) !important',
+    border: '1px solid ' + 'rgba(255, 255, 255, 0.7) !important',
+    '&:hover': {
+      backgroundColor: 'rgba(255, 255, 255, 0.15) !important',
     },
-
-    '& .MuiToggleButton-root': {
-      color: 'rgba(255, 255, 255, 0.7)',
-      border: '1px solid ' + 'rgba(255, 255, 255, 0.7)',
+    '&.Mui-selected': {
+      color: 'rgba(255, 255, 255, 1) !important',
+      backgroundColor: 'rgba(255, 255, 255, 0.2) !important',
       '&:hover': {
-        backgroundColor: 'rgba(255, 255, 255, 0.15)',
-      },
-      '&.Mui-selected': {
-        color: 'rgba(255, 255, 255, 1)',
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
-        '&:hover': {
-          backgroundColor: 'rgba(255, 255, 255, 0.25)',
-        },
+        backgroundColor: 'rgba(255, 255, 255, 0.25) !important',
       },
     },
   },
+  typography: {
+    color: theme.palette.primary.contrastText,
+    fontSize: '1.2rem',
+    fontWeight: 500,
+    marginTop: theme.spacing(0.5),
+  }
 }));
 
 export const remindersInputPopoverItemStyles = makeStyles((theme: Theme) => ({

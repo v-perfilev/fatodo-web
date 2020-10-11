@@ -25,7 +25,7 @@ export const RemindersInputPopoverMonthly: FC<Props> = ({setReminder}: Props) =>
   useEffect(() => {
     if (time && dates && dates.length > 0) {
       const paramDate: ParamDate = DateConverters.getParamDateFromTime(time);
-      setReminder({date: paramDate, monthDates: dates, periodicity: 'MONTHLY'});
+      setReminder({date: paramDate, monthDays: dates, periodicity: 'MONTHLY'});
     }
   }, [time, dates]);
 

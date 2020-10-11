@@ -7,5 +7,5 @@ export interface Reminder {
   periodicity: ReminderPeriodicity;
   date: ParamDate;
   weekDays?: number[];
-  monthDates?: number[];
+  monthDays?: number[];
 }

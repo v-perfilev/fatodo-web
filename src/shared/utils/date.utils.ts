@@ -1,5 +1,5 @@
-import moment, {Moment} from 'moment';
-import {ParamDate} from '../../models/param-date.model';
+import moment, { Moment } from 'moment';
+import { ParamDate } from '../../models/param-date.model';
 import i18n from '../i18n';
 
 export class DateFormats {
@@ -35,7 +35,7 @@ export class DateConverters {
     if (!time) {
       return null;
     }
-    return {time: time.getHours() * 60 + time.getMinutes()};
+    return { time: time.getHours() * 60 + time.getMinutes() };
   };
 
   static getParamDateFromTimeAndDate = (time: Date, date: Date): ParamDate => {
@@ -119,6 +119,14 @@ export class DateConverters {
     }
     return date;
   };
+
+  static getDateFromMoment = (moment: Moment): Date => {
+    let date = new Date();
+    if (moment) {
+      date = moment.toDate();
+    }
+    return date;
+  };
 }
 
 export class DateUtils {
@@ -134,7 +142,7 @@ export class DateUtils {
 
   static getWeekdayNumbers = (): number[] => {
     const firstDayOfWeek = moment().startOf('week').day();
-    return Array.from({length: 7}, (_, i) => (i + firstDayOfWeek) % 7);
+    return Array.from({ length: 7 }, (_, i) => (i + firstDayOfWeek) % 7);
   };
 
   static getDayNamesByNumbers = (numbers: number[]): string[] => {
