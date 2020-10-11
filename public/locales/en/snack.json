@@ -11,7 +11,8 @@
   "groups": {
     "created": "Group created",
     "edited": "Group edited",
-    "deleted": "Group deleted"
+    "deleted": "Group deleted",
+    "sorted": "Groups resorted"
   },
   "items": {
     "created": "Item created",
