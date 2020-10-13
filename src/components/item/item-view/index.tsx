@@ -30,7 +30,6 @@ import withGroupView from '../../../shared/hoc/with-group-view';
 import withItemView from '../../../shared/hoc/with-item-view';
 import { useItemViewContext } from '../../../shared/contexts/item-view-context';
 import { useGroupViewContext } from '../../../shared/contexts/group-view-context';
-import ItemViewDate from './item-view-date';
 
 const ItemView: FC = () => {
   const classes = itemViewStyles();
@@ -127,13 +126,12 @@ const ItemView: FC = () => {
         <Container className={classes.root}>
           <PageHeader title={item.title} />
           <PageDivider height={5} />
-          <ItemViewInfo className={classes.box} />
-          <ItemViewDate className={classes.box} />
+          <ItemViewInfo />
           <PageDivider />
-          <ItemViewDescription className={classes.box} />
-          <ItemViewReminders className={classes.box} />
-          <ItemViewTags className={classes.box} />
-          <ItemViewChanges className={classes.box} />
+          <ItemViewDescription />
+          <ItemViewReminders />
+          <ItemViewTags />
+          <ItemViewChanges />
         </Container>
       </ThemeProvider>
     )

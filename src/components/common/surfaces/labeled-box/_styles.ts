@@ -1,9 +1,10 @@
-import {makeStyles} from '@material-ui/core/styles';
-import {Theme} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { Theme } from '@material-ui/core';
 
 export const labeledBoxStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
+    flexWrap: 'wrap',
     alignItems: 'center',
     '& > *': {
       marginRight: theme.spacing(2),

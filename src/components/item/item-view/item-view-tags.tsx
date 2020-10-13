@@ -1,12 +1,12 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Chip } from '@material-ui/core';
 import { LabeledBox } from '../../common/surfaces/labeled-box';
 import { useItemViewContext } from '../../../shared/contexts/item-view-context';
+import { itemViewCommonStyles } from './_styles';
 
-type Props = HTMLAttributes<any>;
-
-const ItemViewTags: FC<Props> = ({ className }: Props) => {
+const ItemViewTags: FC = () => {
+  const commonClasses = itemViewCommonStyles();
   const { t } = useTranslation();
   const { item } = useItemViewContext();
 
@@ -14,9 +14,9 @@ const ItemViewTags: FC<Props> = ({ className }: Props) => {
 
   return (
     showTags && (
-      <LabeledBox label={t('items:labels.tags')} className={className}>
+      <LabeledBox label={t('items:labels.tags')}>
         {item.tags.map((tag, index) => (
-          <Chip key={index} size="medium" label={tag} />
+          <Chip key={index} size="medium" label={tag} className={commonClasses.box} />
         ))}
       </LabeledBox>
     )

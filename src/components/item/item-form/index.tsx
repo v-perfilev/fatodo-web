@@ -100,7 +100,6 @@ const formik = withFormik<Props, ItemFormValues>({
 
   handleSubmit: (values: ItemFormValues, { setSubmitting, props }: FormikBag<Props, ItemFormValues>) => {
     const { request, item, group } = props;
-    console.log(values);
     const data = ItemFormUtils.mapValuesToDTO(values, item, group);
     request(data, () => setSubmitting(false));
   },

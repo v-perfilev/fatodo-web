@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
 import { Box } from '@material-ui/core';
-import { itemViewChangesStyles } from './_styles';
+import { itemViewChangesStyles, itemViewCommonStyles } from './_styles';
 import { useTranslation } from 'react-i18next';
 import { LabeledBox } from '../../common/surfaces/labeled-box';
 import { DateFormatters } from '../../../shared/utils/date.utils';
@@ -13,6 +13,7 @@ type Props = HTMLAttributes<any>;
 
 const ItemViewChanges: FC<Props> = ({ className }: Props) => {
   const classes = itemViewChangesStyles();
+  const commonClasses = itemViewCommonStyles();
   const { t } = useTranslation();
   const { item } = useItemViewContext();
   const [creator, setCreator] = useState<string>();
@@ -60,20 +61,20 @@ const ItemViewChanges: FC<Props> = ({ className }: Props) => {
     <Box className={classNames}>
       {creator && (
         <Box className={classes.box}>
-          <LabeledBox label={t('items:labels.createdBy')}>
+          <LabeledBox label={t('items:labels.createdBy')} className={commonClasses.box}>
             <Box>{creator}</Box>
           </LabeledBox>
-          <LabeledBox label={t('items:labels.createdAt')}>
+          <LabeledBox label={t('items:labels.createdAt')} className={commonClasses.box}>
             <Box>{getDate(item.createdAt)}</Box>
           </LabeledBox>
         </Box>
       )}
       {updater && item.createdAt !== item.lastModifiedAt && (
         <Box className={classes.box}>
-          <LabeledBox label={t('items:labels.updatedBy')}>
+          <LabeledBox label={t('items:labels.updatedBy')} className={commonClasses.box}>
             <Box>{updater}</Box>
           </LabeledBox>
-          <LabeledBox label={t('items:labels.updatedAt')}>
+          <LabeledBox label={t('items:labels.updatedAt')} className={commonClasses.box}>
             <Box>{getDate(item.lastModifiedAt)}</Box>
           </LabeledBox>
         </Box>
