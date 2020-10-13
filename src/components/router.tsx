@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { FC } from 'react';
-import { Redirect, Switch } from 'react-router-dom';
+import {FC} from 'react';
+import {Redirect, Switch} from 'react-router-dom';
 import PublicRoute from '../shared/routes/public-route';
 import Unauthorized from './static/unauthorized';
 import InternalError from './static/internal-error';

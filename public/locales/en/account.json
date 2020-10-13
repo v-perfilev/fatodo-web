@@ -57,5 +57,9 @@
       "max20": "Can not be longer than 20 characters",
       "notUnique": "Should be unique"
     }
+  },
+  "tooltips": {
+    "save": "Save",
+    "cancel": "Cancel"
   }
 }
