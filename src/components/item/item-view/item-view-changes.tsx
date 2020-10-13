@@ -1,20 +1,20 @@
-import React, {FC, HTMLAttributes, useEffect, useState} from 'react';
-import {Box} from '@material-ui/core';
-import {itemViewChangesStyles} from './_styles';
-import {useTranslation} from 'react-i18next';
-import {LabeledBox} from '../../common/surfaces/labeled-box';
-import {DateFormatters} from '../../../shared/utils/date.utils';
+import React, { FC, HTMLAttributes, useEffect, useState } from 'react';
+import { Box } from '@material-ui/core';
+import { itemViewChangesStyles } from './_styles';
+import { useTranslation } from 'react-i18next';
+import { LabeledBox } from '../../common/surfaces/labeled-box';
+import { DateFormatters } from '../../../shared/utils/date.utils';
 import csx from 'classnames';
 import UserService from '../../../services/user.service';
-import {User} from '../../../models/user.model';
-import {useItemViewContext} from '../../../shared/contexts/item-view-context';
+import { User } from '../../../models/user.model';
+import { useItemViewContext } from '../../../shared/contexts/item-view-context';
 
 type Props = HTMLAttributes<any>;
 
-const ItemViewChanges: FC<Props> = ({className}: Props) => {
+const ItemViewChanges: FC<Props> = ({ className }: Props) => {
   const classes = itemViewChangesStyles();
-  const {t} = useTranslation();
-  const {item} = useItemViewContext();
+  const { t } = useTranslation();
+  const { item } = useItemViewContext();
   const [creator, setCreator] = useState<string>();
   const [updater, setUpdater] = useState<string>();
 
@@ -59,24 +59,24 @@ const ItemViewChanges: FC<Props> = ({className}: Props) => {
   return (
     <Box className={classNames}>
       {creator && (
-        <>
+        <Box className={classes.box}>
           <LabeledBox label={t('items:labels.createdBy')}>
             <Box>{creator}</Box>
           </LabeledBox>
           <LabeledBox label={t('items:labels.createdAt')}>
             <Box>{getDate(item.createdAt)}</Box>
           </LabeledBox>
-        </>
+        </Box>
       )}
       {updater && item.createdAt !== item.lastModifiedAt && (
-        <>
+        <Box className={classes.box}>
           <LabeledBox label={t('items:labels.updatedBy')}>
             <Box>{updater}</Box>
           </LabeledBox>
           <LabeledBox label={t('items:labels.updatedAt')}>
             <Box>{getDate(item.lastModifiedAt)}</Box>
           </LabeledBox>
-        </>
+        </Box>
       )}
     </Box>
   );
