@@ -15,6 +15,10 @@
     "header": "Reset password",
     "submit": "Submit"
   },
+  "accountSettings": {
+    "title": "Edit account data",
+    "submit": "Save"
+  },
   "fields": {
     "user": {
       "label": "Email / Username",

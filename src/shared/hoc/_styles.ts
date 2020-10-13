@@ -1,4 +1,5 @@
-import {makeStyles, Theme} from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles';
+import { HEADER_HEIGHT } from '../../components/common/layouts/header/_constants';
 
 export const centeringStyles = makeStyles(() => ({
   root: {
@@ -128,5 +129,11 @@ export const snackStyles = makeStyles((theme: Theme) => ({
   },
   variantWarning: {
     backgroundColor: theme.palette.warning.main + ' !important',
+  },
+}));
+
+export const headerStyles = makeStyles(() => ({
+  spacer: {
+    height: HEADER_HEIGHT,
   },
 }));

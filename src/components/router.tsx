@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {FC} from 'react';
-import {Redirect, Switch} from 'react-router-dom';
+import { FC } from 'react';
+import { Redirect, Switch } from 'react-router-dom';
 import PublicRoute from '../shared/routes/public-route';
 import Unauthorized from './static/unauthorized';
 import InternalError from './static/internal-error';
@@ -17,6 +17,7 @@ import Activation from './account/activation';
 import ForgotPassword from './account/forgot-password';
 import ResetPassword from './account/reset-password';
 import MixedRoute from '../shared/routes/mixed-route';
+import AccountSettings from './account/settings';
 
 export enum Routes {
   ROOT = '/',
@@ -43,6 +44,7 @@ const Router: FC = () => (
     {/*Private Routes*/}
     <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
     <PrivateRoute path={Routes.ITEMS} component={ItemRouter} />
+    <PrivateRoute path={Routes.ACCOUNT} component={AccountSettings} />
     {/*Auth Routes*/}
     <PublicRoute path={Routes.LOGIN} component={Auth} />
     <PublicRoute path={Routes.REGISTRATION} component={Auth} />
