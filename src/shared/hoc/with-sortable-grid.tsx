@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ComponentType, FC, ReactElement, useEffect, useMemo, useRef, useState } from 'react';
-import { UseSpringProps, useSprings } from 'react-spring';
-import { useDrag } from 'react-use-gesture';
-import { clamp } from 'lodash-es';
+import {ComponentType, FC, ReactElement, useEffect, useMemo, useRef, useState} from 'react';
+import {UseSpringProps, useSprings} from 'react-spring';
+import {useDrag} from 'react-use-gesture';
+import {clamp} from 'lodash-es';
 import move from 'lodash-move';
-import { useResize } from '../hooks/use-resize';
-import { SortingSize, SortingSizes, SortProps, StyleArgs } from './types';
+import {useResize} from '../hooks/use-resize';
+import {SortingSize, SortingSizes, SortProps, StyleArgs} from './types';
 
 const defaultSize: Readonly<SortingSize> = {
   width: 1,
@@ -30,17 +30,17 @@ const withSortableGrid = (Component: ComponentType<SortProps>): FC => (props): R
   const rowCount = useMemo(() => Math.ceil(items.length / colCount), [sizes]);
 
   const calculateStyle = (args: StyleArgs) => (index): UseSpringProps<any> => {
-    const { indexOrder, down, originalIndex, currentIndex, x, y, immediate } = args;
+    const {indexOrder, down, originalIndex, currentIndex, x, y, immediate} = args;
     const calculateX = (index): number => (index % colCount) * sizes.item.width;
     const calculateY = (index): number => Math.floor(index / colCount) * sizes.item.height;
     if (down && index === originalIndex) {
       const xOffset = calculateX(currentIndex) + x;
       const yOffset = calculateY(currentIndex) + y;
-      return { transform: `translate3d(${xOffset}px,${yOffset}px,0)`, zIndex: 10000, immediate: true };
+      return {transform: `translate3d(${xOffset}px,${yOffset}px,0)`, zIndex: 10000, immediate: true};
     } else {
       const xOffset = calculateX(indexOrder.indexOf(index));
       const yOffset = calculateY(indexOrder.indexOf(index));
-      return { transform: `translate3d(${xOffset}px,${yOffset}px,0)`, zIndex: 0, immediate: immediate };
+      return {transform: `translate3d(${xOffset}px,${yOffset}px,0)`, zIndex: 0, immediate: immediate};
     }
   };
 
@@ -52,28 +52,28 @@ const withSortableGrid = (Component: ComponentType<SortProps>): FC => (props): R
     return clamp(newCol + newRow * colCount, 0, count - 1);
   };
 
-  const [springs, setSprings] = useSprings(items.length, calculateStyle({ indexOrder: order.current }));
+  const [springs, setSprings] = useSprings(items.length, calculateStyle({indexOrder: order.current}));
 
-  const bind = useDrag(({ args: [originalIndex], down, movement: [x, y] }) => {
+  const bind = useDrag(({args: [originalIndex], down, movement: [x, y]}) => {
     const currentIndex = order.current.indexOf(originalIndex);
     const newIndex = calculateNewIndex(items.length, currentIndex, x, y);
     const newOrder = move(order.current, currentIndex, newIndex);
-    setSprings(calculateStyle({ indexOrder: newOrder, down, originalIndex, currentIndex, x, y }));
+    setSprings(calculateStyle({indexOrder: newOrder, down, originalIndex, currentIndex, x, y}));
     if (!down) order.current = newOrder;
   });
 
   useEffect(() => {
     if (containerRef && itemRef && itemRef) {
       setSizes({
-        container: { width: containerRef.clientWidth, height: containerRef.clientHeight },
-        item: { width: itemRef.clientWidth, height: itemRef.clientHeight },
+        container: {width: containerRef.clientWidth, height: containerRef.clientHeight},
+        item: {width: itemRef.clientWidth, height: itemRef.clientHeight},
       });
     }
   }, [containerRef, itemRef, resize]);
 
   useEffect(() => {
     order.current = items.map((_, index) => index);
-    setSprings(calculateStyle({ indexOrder: order.current, immediate: true }));
+    setSprings(calculateStyle({indexOrder: order.current, immediate: true}));
     setHeight(sizes.item.height * rowCount);
   }, [items, sizes]);
 

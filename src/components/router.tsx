@@ -22,6 +22,7 @@ export enum Routes {
   ROOT = '/',
   GROUPS = '/groups',
   ITEMS = '/items',
+  ACCOUNT = '/account',
   LOGIN = '/login',
   REGISTRATION = '/registration',
   SOCIAL_LOGIN = '/social-login',

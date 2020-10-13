@@ -30,12 +30,17 @@ export const horizontalMenuStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
+    alignItems: 'center',
     '& > *': {
       marginRight: theme.spacing(2),
       '&:last-child': {
         marginRight: theme.spacing(0),
       },
     },
+  },
+  image: {
+    color: theme.palette.primary.main,
+    marginRight: theme.spacing(1),
   },
 }));
 
@@ -52,7 +57,17 @@ export const sidebarMenuStyles = makeStyles((theme: Theme) => ({
   icon: {
     color: theme.palette.primary.main,
   },
-  menuButton: {
-    marginLeft: theme.spacing(-1) + 'px !important',
+  toolbar: {
+    display: 'flex',
+    flexDirection: 'row-reverse',
+    justifyContent: 'space-between',
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
+  },
+  username: {
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
 }));

@@ -1,25 +1,25 @@
 import * as React from 'react';
-import { FC, useRef, useState } from 'react';
-import { IconButton, MenuItem } from '@material-ui/core';
-import { DotsVerticalIcon } from '../../common/icons/dots-vertical-icon';
-import { groupCardActionsStyles } from './_styles';
-import { PopupMenu } from '../../common/surfaces/popup-menu';
-import { useHistory } from 'react-router-dom';
-import { GroupRouteUtils } from '../_router';
-import { ItemRouteUtils } from '../../item/_router';
-import { useGroupListContext } from '../../../shared/contexts/group-list-context';
-import { useGroupDeleteContext } from '../../../shared/contexts/group-delete-context';
-import { useGroupViewContext } from '../../../shared/contexts/group-view-context';
-import { useTranslation } from 'react-i18next';
+import {FC, useRef, useState} from 'react';
+import {IconButton, MenuItem} from '@material-ui/core';
+import {DotsVerticalIcon} from '../../common/icons/dots-vertical-icon';
+import {groupCardActionsStyles} from './_styles';
+import {PopupMenu} from '../../common/surfaces/popup-menu';
+import {useHistory} from 'react-router-dom';
+import {GroupRouteUtils} from '../_router';
+import {ItemRouteUtils} from '../../item/_router';
+import {useGroupListContext} from '../../../shared/contexts/group-list-context';
+import {useGroupDeleteContext} from '../../../shared/contexts/group-delete-context';
+import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useTranslation} from 'react-i18next';
 
 const GroupPreviewCardActions: FC = () => {
   const classes = groupCardActionsStyles();
   const history = useHistory();
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const ref = useRef();
-  const { loadGroups } = useGroupListContext();
-  const { group } = useGroupViewContext();
-  const { setGroupToDelete, setOnDeleteGroupSuccess } = useGroupDeleteContext();
+  const {loadGroups} = useGroupListContext();
+  const {group} = useGroupViewContext();
+  const {setGroupToDelete, setOnDeleteGroupSuccess} = useGroupDeleteContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOnAction = (e: React.MouseEvent<HTMLElement>): void => {

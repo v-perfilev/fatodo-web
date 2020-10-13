@@ -1,4 +1,4 @@
-import axios, { AxiosPromise } from 'axios';
+import axios, {AxiosPromise} from 'axios';
 
 export default class GroupService {
   private static baseUrl = '/api/group';
@@ -15,13 +15,13 @@ export default class GroupService {
 
   public static create = (data: FormData): AxiosPromise => {
     const url = GroupService.baseUrl + '/groups';
-    const config = { headers: { 'content-type': 'multipart/form-data' } };
+    const config = {headers: {'content-type': 'multipart/form-data'}};
     return axios.post(url, data, config);
   };
 
   public static update = (data: FormData): AxiosPromise => {
     const url = GroupService.baseUrl + '/groups';
-    const config = { headers: { 'content-type': 'multipart/form-data' } };
+    const config = {headers: {'content-type': 'multipart/form-data'}};
     return axios.put(url, data, config);
   };
 
@@ -34,5 +34,4 @@ export default class GroupService {
     const url = GroupService.baseUrl + '/configuration/order';
     return axios.post(url, order);
   };
-
 }

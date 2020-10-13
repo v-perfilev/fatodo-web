@@ -1,4 +1,4 @@
-import { makeStyles, Theme } from '@material-ui/core/styles';
+import {makeStyles, Theme} from '@material-ui/core/styles';
 
 export const remindersInputStyles = makeStyles(() => ({
   root: {
@@ -61,7 +61,7 @@ export const remindersInputPopoverToolbarStyles = makeStyles((theme: Theme) => (
     fontSize: '1.2rem',
     fontWeight: 500,
     marginTop: theme.spacing(0.5),
-  }
+  },
 }));
 
 export const remindersInputPopoverItemStyles = makeStyles((theme: Theme) => ({

@@ -2,7 +2,8 @@
   "header": {
     "logout": "Log Out",
     "register": "Sign Up",
-    "login": "Log In"
+    "login": "Log In",
+    "account": "Account"
   },
   "auth": {
     "socialLogin": "or log in with"

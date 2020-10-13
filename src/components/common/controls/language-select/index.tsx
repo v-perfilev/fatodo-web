@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { FC, HTMLAttributes, useRef, useState } from 'react';
-import { Box, Button, List, ListItem, ListItemIcon, ListItemText, MenuItem, PopoverOrigin } from '@material-ui/core';
-import { LANGUAGES } from '../../../../shared/i18n';
-import { LanguageIcon } from '../../icons/language-icon';
-import { ArrowDownIcon } from '../../icons/arrow-down-icon';
-import { LanguageUtils } from '../../../../shared/utils/language.utils';
-import { languageSelectStyles } from './_styles';
-import { PopupMenu } from '../../surfaces/popup-menu';
+import {FC, HTMLAttributes, useRef, useState} from 'react';
+import {Box, Button, List, ListItem, ListItemIcon, ListItemText, MenuItem} from '@material-ui/core';
+import {LANGUAGES} from '../../../../shared/i18n';
+import {LanguageIcon} from '../../icons/language-icon';
+import {ArrowDownIcon} from '../../icons/arrow-down-icon';
+import {LanguageUtils} from '../../../../shared/utils/language.utils';
+import {languageSelectStyles} from './_styles';
+import {PopupMenu} from '../../surfaces/popup-menu';
 
 type Props = HTMLAttributes<any> & {
   list?: boolean;
 };
 
-export const LanguageSelect: FC<Props> = ({ list, className }: Props) => {
+export const LanguageSelect: FC<Props> = ({list, className}: Props) => {
   const classes = languageSelectStyles();
   const ref = useRef();
   const [isOpen, setIsOpen] = useState(false);

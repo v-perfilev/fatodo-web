@@ -2,7 +2,8 @@
   "header": {
     "logout": "Выход",
     "register": "Регистрация",
-    "login": "Вход"
+    "login": "Вход",
+    "account": "Учётная запись"
   },
   "auth": {
     "socialLogin": "или войдите через"

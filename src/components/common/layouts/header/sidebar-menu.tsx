@@ -17,8 +17,8 @@ export const SidebarMenu: FC<Props> = ({show, onToggle}: Props) => {
   return (
     <SwipeableDrawer anchor="right" open={show} onOpen={onToggle} onClose={onToggle}>
       <Box className={classes.root}>
-        <Toolbar>
-          <Fab size="small" color="primary" onClick={onToggle} className={classes.menuButton}>
+        <Toolbar className={classes.toolbar}>
+          <Fab size="small" color="primary" onClick={onToggle}>
             <ArrowRightIcon />
           </Fab>
         </Toolbar>

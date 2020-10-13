@@ -1,25 +1,25 @@
-import React, { FC, useState } from 'react';
-import { Toolbar, Typography, Zoom } from '@material-ui/core';
-import { remindersInputPopoverToolbarStyles } from './_styles';
+import React, {FC, useState} from 'react';
+import {Toolbar, Typography, Zoom} from '@material-ui/core';
+import {remindersInputPopoverToolbarStyles} from './_styles';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import { ToggleButton } from '@material-ui/lab';
-import { ReminderPeriodicity } from '../../../../models/reminder.model';
-import { OnceIcon } from '../../icons/once-icon';
-import { DayIcon } from '../../icons/day-icon';
-import { WeekIcon } from '../../icons/week-icon';
-import { MonthIcon } from '../../icons/month-icon';
-import { YearIcon } from '../../icons/year-icon';
-import { useTranslation } from 'react-i18next';
+import {ToggleButton} from '@material-ui/lab';
+import {ReminderPeriodicity} from '../../../../models/reminder.model';
+import {OnceIcon} from '../../icons/once-icon';
+import {DayIcon} from '../../icons/day-icon';
+import {WeekIcon} from '../../icons/week-icon';
+import {MonthIcon} from '../../icons/month-icon';
+import {YearIcon} from '../../icons/year-icon';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   periodicity: ReminderPeriodicity;
   setPeriodicity: (periodicity: ReminderPeriodicity) => void;
 };
 
-export const RemindersInputPopoverToolbar: FC<Props> = ({ periodicity, setPeriodicity }: Props) => {
+export const RemindersInputPopoverToolbar: FC<Props> = ({periodicity, setPeriodicity}: Props) => {
   const classes = remindersInputPopoverToolbarStyles();
   const [show, setShow] = useState(true);
-  const { t } = useTranslation();
+  const {t} = useTranslation();
 
   const handlePeriodicity = (event: React.MouseEvent<HTMLElement>, newPeriodicity: ReminderPeriodicity): void => {
     if (newPeriodicity !== null && periodicity !== newPeriodicity) {

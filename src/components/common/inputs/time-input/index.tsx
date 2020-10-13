@@ -1,18 +1,18 @@
-import React, { FC } from 'react';
-import { Field, useFormikContext } from 'formik';
-import { TimePicker } from 'formik-material-ui-pickers';
-import { DateConverters, DateFormats } from '../../../../shared/utils/date.utils';
-import { IconButton } from '@material-ui/core';
-import { CloseIcon } from '../../icons/close-icon';
-import { Moment } from 'moment';
+import React, {FC} from 'react';
+import {Field, useFormikContext} from 'formik';
+import {TimePicker} from 'formik-material-ui-pickers';
+import {DateConverters, DateFormats} from '../../../../shared/utils/date.utils';
+import {IconButton} from '@material-ui/core';
+import {CloseIcon} from '../../icons/close-icon';
+import {Moment} from 'moment';
 
 type Props = {
   name: string;
   label: string;
 };
 
-export const TimeInput: FC<Props> = ({ name, label }: Props) => {
-  const { values, setFieldValue } = useFormikContext();
+export const TimeInput: FC<Props> = ({name, label}: Props) => {
+  const {values, setFieldValue} = useFormikContext();
 
   const clear = (e): void => {
     e.stopPropagation();
@@ -22,7 +22,7 @@ export const TimeInput: FC<Props> = ({ name, label }: Props) => {
   const onChange = (moment: Moment): void => {
     const time = DateConverters.getTimeFromMoment(moment);
     setFieldValue(name, time);
-  }
+  };
 
   return (
     <Field

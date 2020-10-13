@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {LabeledBox} from '../../common/surfaces/labeled-box';

@@ -1,5 +1,5 @@
-import axios, { AxiosPromise } from 'axios';
-import { ItemDTO } from '../models/dto/item.dto';
+import axios, {AxiosPromise} from 'axios';
+import {ItemDTO} from '../models/dto/item.dto';
 
 export default class ItemService {
   private static baseUrl = '/api/item';

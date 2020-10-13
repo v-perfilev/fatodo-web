@@ -5,6 +5,7 @@ export interface UserAccount {
   provider: string;
   authorities: string[];
   language: string;
+  imageFilename?: string;
 }
 
 export interface User {

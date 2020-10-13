@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Box, Fade, TextField } from '@material-ui/core';
-import { DateFormatters } from '../../../../shared/utils/date.utils';
-import { dateInputStyles } from './_styles';
-import { DateSelectYear } from './date-select-year';
-import { DateSelectMonth } from './date-select-month';
-import { DateSelectDate } from './date-select-date';
+import React, {FC, useEffect, useState} from 'react';
+import {Box, Fade, TextField} from '@material-ui/core';
+import {DateFormatters} from '../../../../shared/utils/date.utils';
+import {dateInputStyles} from './_styles';
+import {DateSelectYear} from './date-select-year';
+import {DateSelectMonth} from './date-select-month';
+import {DateSelectDate} from './date-select-date';
 
 type InputType = 'year' | 'month' | 'date';
 
@@ -16,7 +16,7 @@ type Props = {
   firstInputType?: InputType;
 };
 
-export const DateSelect: FC<Props> = ({ label, required, date, setDate, firstInputType }: Props) => {
+export const DateSelect: FC<Props> = ({label, required, date, setDate, firstInputType}: Props) => {
   const classes = dateInputStyles();
   const [inputType, setInputType] = useState<InputType>();
 
@@ -60,15 +60,15 @@ export const DateSelect: FC<Props> = ({ label, required, date, setDate, firstInp
         label={label}
         required={required}
         value={formattedDate}
-        InputProps={{ readOnly: true }}
+        InputProps={{readOnly: true}}
         onClick={openInput}
         className={classes.textField}
       />
       <Fade in={!!inputType}>
         <Box className={classes.box}>
-          {inputType === 'year' && <DateSelectYear {...{ date, handleChange }} />}
-          {inputType === 'month' && <DateSelectMonth {...{ date, handleChange }} />}
-          {inputType === 'date' && <DateSelectDate {...{ date, handleChange }} />}
+          {inputType === 'year' && <DateSelectYear {...{date, handleChange}} />}
+          {inputType === 'month' && <DateSelectMonth {...{date, handleChange}} />}
+          {inputType === 'date' && <DateSelectDate {...{date, handleChange}} />}
         </Box>
       </Fade>
     </Box>

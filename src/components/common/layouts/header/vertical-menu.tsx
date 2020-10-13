@@ -2,7 +2,7 @@ import {RootState} from '../../../../store';
 import * as React from 'react';
 import {FC} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
-import {List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
+import {Box, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core';
 import {logout} from '../../../../store/actions/auth.actions';
 import {useTranslation} from 'react-i18next';
 import {sidebarMenuStyles} from './_styles';
@@ -12,52 +12,75 @@ import {compose} from 'recompose';
 import {Routes} from '../../../router';
 import {LoginIcon} from '../../icons/login-icon';
 import {SignUpIcon} from '../../icons/signup-icon';
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {useHistory, withRouter} from 'react-router-dom';
+import {AccountIcon} from '../../icons/account-icon';
+import Username from '../username';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type Props = ConnectedProps<typeof connector> & RouteComponentProps;
+type Props = ConnectedProps<typeof connector>;
 
-const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout, history}: Props) => {
+const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) => {
   const classes = sidebarMenuStyles();
   const {t} = useTranslation();
+  const history = useHistory();
 
   const redirectToLogin = (): void => history.push(Routes.LOGIN);
   const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
+  const redirectToAccount = (): void => history.push(Routes.ACCOUNT);
   const redirectAndLogout = (): void => {
     history.push(Routes.ROOT);
     logout();
   };
 
+  const unauthenticatedMenu = (
+    <>
+      <ListItem button onClick={redirectToLogin}>
+        <ListItemIcon>
+          <LoginIcon className={classes.icon} />
+        </ListItemIcon>
+        <ListItemText>{t('header.login')}</ListItemText>
+      </ListItem>
+      <ListItem color="primary" button onClick={redirectToRegistration}>
+        <ListItemIcon>
+          <SignUpIcon className={classes.icon} />
+        </ListItemIcon>
+        <ListItemText>{t('header.register')}</ListItemText>
+      </ListItem>
+    </>
+  );
+
+  const authenticatedMenu = (
+    <>
+      <ListItem button onClick={redirectToAccount}>
+        <ListItemIcon>
+          <AccountIcon className={classes.icon} />
+        </ListItemIcon>
+        <ListItemText>{t('header.account')}</ListItemText>
+      </ListItem>
+      <ListItem button onClick={redirectAndLogout}>
+        <ListItemIcon>
+          <LogoutIcon className={classes.icon} />
+        </ListItemIcon>
+        <ListItemText>{t('header.logout')}</ListItemText>
+      </ListItem>
+    </>
+  );
+
   return (
-    <List component="nav">
+    <>
       {isAuthenticated && (
-        <ListItem button onClick={redirectAndLogout}>
-          <ListItemIcon>
-            <LogoutIcon className={classes.icon} />
-          </ListItemIcon>
-          <ListItemText>{t('header.logout')}</ListItemText>
-        </ListItem>
+        <Box className={classes.username}>
+          <Username />
+        </Box>
       )}
-      {!isAuthenticated && (
-        <ListItem button onClick={redirectToLogin}>
-          <ListItemIcon>
-            <LoginIcon className={classes.icon} />
-          </ListItemIcon>
-          <ListItemText>{t('header.login')}</ListItemText>
-        </ListItem>
-      )}
-      {!isAuthenticated && (
-        <ListItem color="primary" button onClick={redirectToRegistration}>
-          <ListItemIcon>
-            <SignUpIcon className={classes.icon} />
-          </ListItemIcon>
-          <ListItemText>{t('header.register')}</ListItemText>
-        </ListItem>
-      )}
-    </List>
+      <List component="nav">
+        {!isAuthenticated && unauthenticatedMenu}
+        {isAuthenticated && authenticatedMenu}
+      </List>
+    </>
   );
 };
 

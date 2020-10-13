@@ -1,26 +1,26 @@
-import React, { FC, useEffect, useRef } from 'react';
-import { itemFormStyles } from './_styles';
-import { Item } from '../../../models/item.model';
-import { Button, Container, Grid, ThemeProvider } from '@material-ui/core';
-import { Form, FormikBag, FormikProps, withFormik } from 'formik';
-import { compose } from 'recompose';
+import React, {FC, useEffect, useRef} from 'react';
+import {itemFormStyles} from './_styles';
+import {Item} from '../../../models/item.model';
+import {Button, Container, Grid, ThemeProvider} from '@material-ui/core';
+import {Form, FormikBag, FormikProps, withFormik} from 'formik';
+import {compose} from 'recompose';
 import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
-import { ItemFormUtils, ItemFormValues } from './_form';
-import { ThemeFactory } from '../../../shared/theme/theme';
-import { Group } from '../../../models/group.model';
-import { ItemDTO } from '../../../models/dto/item.dto';
-import { PageHeader } from '../../common/surfaces/page-header';
-import { PageDivider } from '../../common/surfaces/page-divider';
-import { TextInput } from '../../common/inputs/text-input';
-import { useTranslation } from 'react-i18next';
+import {ItemFormUtils, ItemFormValues} from './_form';
+import {ThemeFactory} from '../../../shared/theme/theme';
+import {Group} from '../../../models/group.model';
+import {ItemDTO} from '../../../models/dto/item.dto';
+import {PageHeader} from '../../common/surfaces/page-header';
+import {PageDivider} from '../../common/surfaces/page-divider';
+import {TextInput} from '../../common/inputs/text-input';
+import {useTranslation} from 'react-i18next';
 import TypeInput from '../../common/inputs/type-input';
-import { PriorityInput } from '../../common/inputs/priority-input';
-import { TimeInput } from '../../common/inputs/time-input';
-import { DateInput } from '../../common/inputs/date-input';
-import { MultilineInput } from '../../common/inputs/multiline-input';
-import { RemindersInput } from '../../common/inputs/reminders-input';
-import { TagsInput } from '../../common/inputs/tags-input';
+import {PriorityInput} from '../../common/inputs/priority-input';
+import {TimeInput} from '../../common/inputs/time-input';
+import {DateInput} from '../../common/inputs/date-input';
+import {MultilineInput} from '../../common/inputs/multiline-input';
+import {RemindersInput} from '../../common/inputs/reminders-input';
+import {TagsInput} from '../../common/inputs/tags-input';
 
 type Props = FormikProps<any> & {
   group: Group;
@@ -32,8 +32,8 @@ type Props = FormikProps<any> & {
 
 const ItemForm: FC<Props> = (props: Props) => {
   const classes = itemFormStyles();
-  const { t } = useTranslation();
-  const { group, header, setSaveCallback, isValid, submitForm, isSubmitting } = props;
+  const {t} = useTranslation();
+  const {group, header, setSaveCallback, isValid, submitForm, isSubmitting} = props;
   const buttonRef = useRef<HTMLButtonElement>();
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const ItemForm: FC<Props> = (props: Props) => {
 };
 
 const formik = withFormik<Props, ItemFormValues>({
-  mapPropsToValues: ({ item }: Props) => ItemFormUtils.mapItemToValues(item),
+  mapPropsToValues: ({item}: Props) => ItemFormUtils.mapItemToValues(item),
 
   validationSchema: Yup.object().shape({
     title: Yup.string().required(() => i18n.t('items:fields.title.required')),
@@ -98,8 +98,8 @@ const formik = withFormik<Props, ItemFormValues>({
 
   validateOnMount: true,
 
-  handleSubmit: (values: ItemFormValues, { setSubmitting, props }: FormikBag<Props, ItemFormValues>) => {
-    const { request, item, group } = props;
+  handleSubmit: (values: ItemFormValues, {setSubmitting, props}: FormikBag<Props, ItemFormValues>) => {
+    const {request, item, group} = props;
     const data = ItemFormUtils.mapValuesToDTO(values, item, group);
     request(data, () => setSubmitting(false));
   },
