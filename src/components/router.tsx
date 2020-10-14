@@ -11,13 +11,13 @@ import Home from './home';
 import GroupRouter from './groups/_router';
 import ItemRouter from './item/_router';
 import PrivateRoute from '../shared/routes/private-route';
-import Auth from './account/auth';
-import SocialLogin from './account/auth/social-login';
-import Activation from './account/activation';
-import ForgotPassword from './account/forgot-password';
-import ResetPassword from './account/reset-password';
 import MixedRoute from '../shared/routes/mixed-route';
-import AccountSettings from './account/settings';
+import AccountSettings from './user/account';
+import Auth from './user/auth';
+import SocialLogin from './user/auth/social-login';
+import Activation from './user/activation';
+import ForgotPassword from './user/forgot-password';
+import ResetPassword from './user/reset-password';
 
 export enum Routes {
   ROOT = '/',

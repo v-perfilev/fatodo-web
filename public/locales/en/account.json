@@ -15,8 +15,8 @@
     "header": "Reset password",
     "submit": "Submit"
   },
-  "accountSettings": {
-    "title": "Edit account data",
+  "account": {
+    "title": "Account settings",
     "submit": "Save"
   },
   "fields": {
@@ -56,10 +56,16 @@
       "min5": "Can not be shorter than 5 characters",
       "max20": "Can not be longer than 20 characters",
       "notUnique": "Should be unique"
+    },
+    "language": {
+      "label": "Language",
+      "required": "Required"
+    },
+    "image": {
+      "label": "Image"
     }
   },
   "tooltips": {
-    "save": "Save",
-    "cancel": "Cancel"
+    "back": "Back"
   }
 }
