@@ -19,8 +19,8 @@ import {withSnackContext} from '../../../shared/hoc/with-snack';
 type Props = FormikProps<any> &
   CaptchaProps &
   SnackState & {
-    onSuccess: () => void;
-  };
+  onSuccess: () => void;
+};
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -28,8 +28,8 @@ const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => 
 
   return (
     <Form className={classes.root + ' ' + classes.minHeightBox + ' ' + classes.form}>
-      <TextInput name="email" label={t('account:fields.email.label')} />
-      <TextInput name="username" label={t('account:fields.username.label')} />
+      <TextInput name="email" label={t('account:fields.email.label')} required />
+      <TextInput name="username" label={t('account:fields.username.label')} required />
       <PasswordInput name="password" label={t('account:fields.password.label')} />
       <PasswordStrengthBar password={values.password} />
       <LoadingButton
@@ -55,19 +55,19 @@ const formik = withFormik<Props, FormValues>({
   mapPropsToValues: () => ({
     email: '',
     username: '',
-    password: '',
+    password: ''
   }),
 
   mapPropsToErrors: () => ({
     email: '',
     username: '',
-    password: '',
+    password: ''
   }),
 
   validationSchema: Yup.object().shape({
     email: emailValidator.check(),
     username: usernameValidator.check(),
-    password: passwordValidator,
+    password: passwordValidator
   }),
 
   validateOnMount: true,
@@ -80,7 +80,7 @@ const formik = withFormik<Props, FormValues>({
       username: values.username,
       password: values.password,
       language: i18n.language,
-      token: token,
+      token: token
     };
 
     AccountService.register(data)
@@ -93,7 +93,7 @@ const formik = withFormik<Props, FormValues>({
         setSubmitting(false);
         updateToken();
       });
-  },
+  }
 });
 
 export default compose(withCaptcha, withSnackContext, formik)(RegistrationForm);

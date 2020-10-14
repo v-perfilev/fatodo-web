@@ -12,6 +12,8 @@ import * as Yup from 'yup';
 import {LoadingButton} from '../../common/controls/loading-button';
 import {PageSpacer} from '../../common/surfaces/page-spacer';
 import {usernameChangeValidator} from '../common/_validators';
+import {SelectInput} from '../../common/inputs/select-input';
+import {LANGUAGES} from '../../../shared/i18n';
 
 type Props = FormikProps<any> & {
   account: UserAccount;
@@ -21,14 +23,17 @@ const AccountForm: FC<Props> = ({account, isValid, isSubmitting}: Props) => {
   const classes = accountFormStyles();
   const {t} = useTranslation();
 
+  const languageMap = new Map();
+  LANGUAGES.forEach(value => languageMap.set(value.code, value.name));
+
   return (
     <Form className={classes.form}>
       <Grid container spacing={3}>
         <Grid item xs={12}>
-          <TextInput name="username" label={t('account:fields.username.label')} />
+          <TextInput name="username" label={t('account:fields.username.label')} required />
         </Grid>
         <Grid item xs={12}>
-          <TextInput name="language" label={t('account:fields.language.label')} />
+          <SelectInput name="language" label={t('account:fields.language.label')} options={languageMap} required />
         </Grid>
         <Grid item xs={12}>
           <ImageUpload

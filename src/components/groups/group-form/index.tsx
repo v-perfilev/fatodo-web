@@ -45,7 +45,7 @@ const GroupForm: FC<Props> = ({header, setSaveCallback, values, isValid, submitF
         <Form className={classes.form}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <TextInput name="title" label={t('groups:fields.title.label')} />
+              <TextInput name="title" label={t('groups:fields.title.label')} required />
             </Grid>
             <Grid item xs={6} lg={3}>
               <ThemeSelect name="color" label={t('groups:fields.color.label')} />
@@ -74,7 +74,7 @@ const formik = withFormik<Props, GroupFormValues>({
 
   validationSchema: Yup.object().shape({
     title: Yup.string().required(() => i18n.t('groups:fields.title.required')),
-    color: Yup.string().required(() => i18n.t('groups:fields.color.required')),
+    color: Yup.string().required(() => i18n.t('groups:fields.color.required'))
   }),
 
   validateOnMount: true,
@@ -83,7 +83,7 @@ const formik = withFormik<Props, GroupFormValues>({
     const {request, group} = props;
     const data = GroupFormUtils.mapValuesToFormData(values, group);
     request(data, () => setSubmitting(false));
-  },
+  }
 });
 
 export default compose(formik)(GroupForm);

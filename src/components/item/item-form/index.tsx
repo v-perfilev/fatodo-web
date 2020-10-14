@@ -54,7 +54,7 @@ const ItemForm: FC<Props> = (props: Props) => {
         <Form className={classes.form}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <TextInput name="title" label={t('items:fields.title.label')} />
+              <TextInput name="title" label={t('items:fields.title.label')} required />
             </Grid>
             <Grid item xs={6} lg={3}>
               <TypeInput name="type" label={t('items:fields.type.label')} />
@@ -93,7 +93,7 @@ const formik = withFormik<Props, ItemFormValues>({
   validationSchema: Yup.object().shape({
     title: Yup.string().required(() => i18n.t('items:fields.title.required')),
     type: Yup.string().required(() => i18n.t('items:fields.type.required')),
-    priority: Yup.string().required(() => i18n.t('items:fields.priority.required')),
+    priority: Yup.string().required(() => i18n.t('items:fields.priority.required'))
   }),
 
   validateOnMount: true,
@@ -102,7 +102,7 @@ const formik = withFormik<Props, ItemFormValues>({
     const {request, item, group} = props;
     const data = ItemFormUtils.mapValuesToDTO(values, item, group);
     request(data, () => setSubmitting(false));
-  },
+  }
 });
 
 export default compose(formik)(ItemForm);

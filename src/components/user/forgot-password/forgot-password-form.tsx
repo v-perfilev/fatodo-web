@@ -14,8 +14,8 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = FormikProps<any> &
   CaptchaProps & {
-    onSuccess?: () => void;
-  };
+  onSuccess?: () => void;
+};
 
 const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -23,7 +23,7 @@ const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
 
   return (
     <Form className={classes.root + ' ' + classes.form}>
-      <TextInput name="user" label={t('account:fields.user.label')} />
+      <TextInput name="user" label={t('account:fields.user.label')} required />
       <LoadingButton
         type="submit"
         color="secondary"
@@ -43,15 +43,15 @@ interface FormValues {
 
 const formik = withFormik<Props, FormValues>({
   mapPropsToValues: () => ({
-    user: '',
+    user: ''
   }),
 
   mapPropsToErrors: () => ({
-    user: '',
+    user: ''
   }),
 
   validationSchema: Yup.object().shape({
-    user: Yup.string().required(() => i18n.t('account:fields.user.required')),
+    user: Yup.string().required(() => i18n.t('account:fields.user.required'))
   }),
 
   validateOnMount: true,
@@ -62,7 +62,7 @@ const formik = withFormik<Props, FormValues>({
 
     const data = {
       user: values.user,
-      token: token,
+      token: token
     };
 
     AccountService.requestResetPasswordCode(data)
@@ -75,7 +75,7 @@ const formik = withFormik<Props, FormValues>({
         setSubmitting(false);
         updateToken();
       });
-  },
+  }
 });
 
 export default compose(withCaptcha, formik)(ForgotPasswordForm);
