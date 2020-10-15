@@ -51,7 +51,8 @@
     "create": "Create item",
     "edit": "Edit item",
     "delete": "Delete item",
-    "list": "List of items"
+    "list": "List of items",
+    "groupList": "List of groups"
   },
   "modals": {
     "deleteTitle": "Delete item",

@@ -27,6 +27,7 @@ import {DeleteIcon} from '../../common/icons/delete-icon';
 import {useGroupDeleteContext} from '../../../shared/contexts/group-delete-context';
 import withGroupView from '../../../shared/hoc/with-group-view';
 import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
 const GroupView: FC = () => {
   const classes = groupViewStyles();
@@ -104,7 +105,7 @@ const GroupView: FC = () => {
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
   return (
-    group && (
+    group ? (
       <ThemeProvider theme={theme}>
         <Container className={classes.root}>
           <PageHeader title={group.title} filename={group.imageFilename} />
@@ -115,6 +116,8 @@ const GroupView: FC = () => {
           <GroupViewMessages />
         </Container>
       </ThemeProvider>
+    ) : (
+      <CircularSpinner />
     )
   );
 };

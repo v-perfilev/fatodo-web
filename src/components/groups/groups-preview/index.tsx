@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {FC, useEffect} from 'react';
-import GroupPreviewGridContainer from './group-preview-grid-container';
 import {useHistory} from 'react-router-dom';
 import {GroupRouteUtils} from '../_router';
 import {ReorderIcon} from '../../common/icons/reorder-icon';
@@ -14,13 +13,15 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {compose} from 'recompose';
 import withGroupList from '../../../shared/hoc/with-group-list';
 import {useGroupListContext} from '../../../shared/contexts/group-list-context';
+import {CircularSpinner} from '../../common/loaders/circular-spinner';
+import GroupPreviewGridContainer from './group-preview-grid-container';
 
 const GroupPreview: FC = () => {
   const history = useHistory();
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
-  const {setGroups, setLoadGroups} = useGroupListContext();
+  const {groups, setGroups, setLoadGroups} = useGroupListContext();
 
   const redirectToGroupCreate = (): void => history.push(GroupRouteUtils.getCreateUrl());
   const redirectToGroupsSorting = (): void => history.push(GroupRouteUtils.getSortingUrl());
@@ -61,7 +62,13 @@ const GroupPreview: FC = () => {
     updateMenu(menu);
   }, [i18n.language]);
 
-  return <GroupPreviewGridContainer />;
+  return (
+    groups ? (
+      <GroupPreviewGridContainer />
+    ) : (
+      <CircularSpinner />
+    )
+  );
 };
 
 export default compose(withGroupList)(GroupPreview);

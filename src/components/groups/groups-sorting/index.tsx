@@ -13,6 +13,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupListContext} from '../../../shared/contexts/group-list-context';
 import {compose} from 'recompose';
 import withGroupList from '../../../shared/hoc/with-group-list';
+import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
 const GroupsSorting: FC = () => {
   const history = useHistory();
@@ -67,7 +68,11 @@ const GroupsSorting: FC = () => {
     updateMenu(menu);
   }, [i18n.language, order, groups]);
 
-  return groups && <GroupsSortingContainer setOrder={setOrder} />;
+  return groups ? (
+    <GroupsSortingContainer setOrder={setOrder} />
+  ) : (
+    <CircularSpinner />
+  );
 };
 
 export default compose(withGroupList)(GroupsSorting);

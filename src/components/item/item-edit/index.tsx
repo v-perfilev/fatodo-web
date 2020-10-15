@@ -17,6 +17,7 @@ import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {ItemRouteUtils} from '../_router';
 import {GroupRouteUtils} from '../../groups/_router';
+import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -103,8 +104,7 @@ const ItemEdit: FC = () => {
   }, [i18n.language, saveCallback]);
 
   return (
-    group &&
-    item && (
+    (group && item) ? (
       <ItemForm
         group={group}
         item={item}
@@ -112,6 +112,8 @@ const ItemEdit: FC = () => {
         setSaveCallback={setSaveCallback}
         request={request}
       />
+    ) : (
+      <CircularSpinner />
     )
   );
 };

@@ -15,6 +15,7 @@ import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../../groups/_router';
+import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
 const ItemCreate: FC = () => {
   const {i18n, t} = useTranslation();
@@ -80,13 +81,15 @@ const ItemCreate: FC = () => {
   };
 
   return (
-    group && (
+    group ? (
       <ItemForm
         group={group}
         header={t('items:headers.create', {group: group.title})}
         setSaveCallback={setSaveCallback}
         request={request}
       />
+    ) : (
+      <CircularSpinner />
     )
   );
 };

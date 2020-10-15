@@ -13,6 +13,7 @@ import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../_router';
+import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
 const GroupEdit: FC = () => {
   const history = useHistory();
@@ -78,8 +79,10 @@ const GroupEdit: FC = () => {
   };
 
   return (
-    group && (
+    group ? (
       <GroupForm group={group} header={t('groups:headers.edit')} setSaveCallback={setSaveCallback} request={request} />
+    ) : (
+      <CircularSpinner />
     )
   );
 };

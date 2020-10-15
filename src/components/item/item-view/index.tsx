@@ -30,6 +30,8 @@ import withGroupView from '../../../shared/hoc/with-group-view';
 import withItemView from '../../../shared/hoc/with-item-view';
 import {useItemViewContext} from '../../../shared/contexts/item-view-context';
 import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {CircularSpinner} from '../../common/loaders/circular-spinner';
+import {GroupsIcon} from '../../common/icons/groups-icon';
 
 const ItemView: FC = () => {
   const classes = itemViewStyles();
@@ -46,6 +48,7 @@ const ItemView: FC = () => {
 
   const redirectToItemEdit = (): void => history.push(ItemRouteUtils.getEditUrl(itemId));
   const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(group?.id));
+  const redirectToGroups = (): void => history.push(Routes.GROUPS);
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const openDeleteDialog = (): void => {
@@ -73,6 +76,12 @@ const ItemView: FC = () => {
         action={redirectToGroupView}
         color="secondary"
         tooltip={t('items:tooltips.list')}
+      />
+      <AdditionalMenuButton
+        icon={<GroupsIcon />}
+        action={redirectToGroups}
+        color="secondary"
+        tooltip={t('items:tooltips.groupList')}
       />
     </>
   );
@@ -120,8 +129,7 @@ const ItemView: FC = () => {
   }, [item, group, i18n.language]);
 
   return (
-    item &&
-    group && (
+    (item && group) ? (
       <ThemeProvider theme={theme}>
         <Container className={classes.root}>
           <PageHeader title={item.title} />
@@ -134,6 +142,8 @@ const ItemView: FC = () => {
           <ItemViewChanges />
         </Container>
       </ThemeProvider>
+    ) : (
+      <CircularSpinner />
     )
   );
 };
