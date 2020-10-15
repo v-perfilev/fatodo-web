@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {accountFormStyles} from './_styles';
-import {Box, Grid} from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import {TextInput} from '../../common/inputs/text-input';
 import {ImageUpload} from '../../common/inputs/image-upload';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
@@ -14,12 +14,16 @@ import {PageSpacer} from '../../common/surfaces/page-spacer';
 import {usernameChangeValidator} from '../common/_validators';
 import {SelectInput} from '../../common/inputs/select-input';
 import {LANGUAGES} from '../../../shared/i18n';
+import {withSnackContext} from '../../../shared/hoc/with-snack';
+import {SnackState} from '../../../shared/contexts/snack-context';
+import UserService from '../../../services/user.service';
 
-type Props = FormikProps<any> & {
+type Props = FormikProps<any> &
+  SnackState & {
   account: UserAccount;
 };
 
-const AccountForm: FC<Props> = ({account, isValid, isSubmitting}: Props) => {
+const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = accountFormStyles();
   const {t} = useTranslation();
 
@@ -28,22 +32,14 @@ const AccountForm: FC<Props> = ({account, isValid, isSubmitting}: Props) => {
 
   return (
     <Form className={classes.form}>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <TextInput name="username" label={t('account:fields.username.label')} required />
-        </Grid>
-        <Grid item xs={12}>
-          <SelectInput name="language" label={t('account:fields.language.label')} options={languageMap} required />
-        </Grid>
-        <Grid item xs={12}>
-          <ImageUpload
-            filenameName="imageFilename"
-            contentName="imageContent"
-            label={t('account:fields.image.label')}
-            preview
-          />
-        </Grid>
-      </Grid>
+      <TextInput name="username" label={t('account:fields.username.label')} required />
+      <SelectInput name="language" label={t('account:fields.language.label')} options={languageMap} required />
+      <ImageUpload
+        filenameName="imageFilename"
+        contentName="imageContent"
+        label={t('account:fields.image.label')}
+        preview
+      />
       <PageSpacer />
       <Box className={classes.buttons}>
         <LoadingButton
@@ -69,9 +65,20 @@ const formik = withFormik<Props, AccountFormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: AccountFormValues, {setSubmitting, props}: FormikBag<Props, AccountFormValues>) => {
-    const {account} = props;
+    const {account,handleCode, handleResponse} = props;
     const data = AccountFormUtils.mapValuesToFormData(values, account);
+
+    UserService.updateData(data)
+      .then(() => {
+        handleCode('auth.afterChangePassword', 'info');
+      })
+      .catch((response) => {
+        handleResponse(response);
+      })
+      .finally(() => {
+        setSubmitting(false);
+      });
   }
 });
 
-export default compose(formik)(AccountForm);
+export default compose(withSnackContext, formik)(AccountForm);

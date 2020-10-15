@@ -1,4 +1,5 @@
 import axios, {AxiosPromise} from 'axios';
+import {ChangePasswordDTO} from '../models/dto/change-password.dto';
 
 export default class UserService {
   private static baseUrl = '/api/user';
@@ -11,6 +12,17 @@ export default class UserService {
   public static getCurrent = (): AxiosPromise => {
     const url = UserService.baseUrl + '/user';
     return axios.get(url);
+  };
+
+  public static updateData = (data: FormData): AxiosPromise => {
+    const url = UserService.baseUrl + '/user/update';
+    const config = {headers: {'content-type': 'multipart/form-data'}};
+    return axios.post(url, data, config);
+  };
+
+  public static changePassword = (data: ChangePasswordDTO): AxiosPromise => {
+    const url = UserService.baseUrl + '/user/change-password';
+    return axios.post(url, data);
   };
 
   public static isEmailUnique = (value: string): AxiosPromise => {

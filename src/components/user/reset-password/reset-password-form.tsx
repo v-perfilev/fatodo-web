@@ -11,14 +11,16 @@ import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
 import {PasswordInput} from '../../common/inputs/password-input';
 import {LoadingButton} from '../../common/controls/loading-button';
 import {PasswordStrengthBar} from '../password-strength-bar';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {withSnackContext} from '../../../shared/hoc/with-snack';
+import {SnackState} from '../../../shared/contexts/snack-context';
 
 type Props = FormikProps<any> &
-  CaptchaProps & {
-    code: string;
-    onSuccess: () => void;
-    onFailure: (status: number) => void;
-  };
+  CaptchaProps &
+  SnackState & {
+  code: string;
+  onSuccess: () => void;
+  onFailure: () => void;
+};
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -50,42 +52,41 @@ interface FormValues {
 const formik = withFormik<Props, FormValues>({
   mapPropsToValues: () => ({
     password: '',
-    repeatPassword: '',
+    repeatPassword: ''
   }),
 
   mapPropsToErrors: () => ({
     password: '',
-    repeatPassword: '',
+    repeatPassword: ''
   }),
 
   validationSchema: Yup.object().shape({
     password: passwordValidator,
-    repeatPassword: repeatPasswordValidator,
+    repeatPassword: repeatPasswordValidator
   }),
 
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-    const {code, token, updateToken} = props;
-    const {handleCode, handleResponse} = useSnackContext();
+    const {code, token, updateToken, onSuccess, onFailure, handleCode, handleResponse} = props;
 
     const data = {
       code: code,
       password: values.password,
-      token: token,
+      token: token
     };
     AccountService.resetPassword(data)
       .then(() => {
         handleCode('auth.afterResetPassword', 'info');
-        props.onSuccess();
+        onSuccess();
       })
       .catch((response) => {
         handleResponse(response);
         setSubmitting(false);
         updateToken();
-        props.onFailure(response?.status);
+        onFailure();
       });
-  },
+  }
 });
 
-export default compose(withCaptcha, formik)(ResetPasswordForm);
+export default compose(withCaptcha, withSnackContext, formik)(ResetPasswordForm);

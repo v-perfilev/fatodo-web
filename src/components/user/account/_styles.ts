@@ -19,8 +19,10 @@ export const accountFormStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(1)
   },
   form: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
+    '& > *': {
+      marginTop: theme.spacing(1.5),
+      marginBottom: theme.spacing(1.5)
+    }
   },
   buttons: {
     display: 'flex',

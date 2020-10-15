@@ -19,6 +19,10 @@
     "title": "Account settings",
     "submit": "Save"
   },
+  "changePassword": {
+    "title": "Change password",
+    "submit": "Save"
+  },
   "fields": {
     "user": {
       "label": "Email / Username",
@@ -31,6 +35,9 @@
       "strength": "Should contain uppercase and lowercase characters and numbers",
       "min8": "Can not be shorter than 8 characters",
       "max20": "Can not be longer than 20 characters"
+    },
+    "oldPassword": {
+      "label": "Current password"
     },
     "newPassword": {
       "label": "New password"

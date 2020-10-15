@@ -3,7 +3,9 @@
     "registered": "You have registered, the activation link was sent to your email address",
     "activated": "Account was successfully activated, now you can sign in!",
     "afterForgotPassword": "The link for changing password was sent to your email address",
-    "afterResetPassword": "The password was changed, now you can sign in!"
+    "afterResetPassword": "The password was changed, now you can sign in!",
+    "afterChangePassword": "Password was changed",
+    "afterUpdateData": "Account data updated",
   },
   "image": {
     "tooSmall": "Too small image selected"

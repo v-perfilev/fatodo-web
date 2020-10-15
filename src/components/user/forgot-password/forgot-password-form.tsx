@@ -10,10 +10,12 @@ import {TextInput} from '../../common/inputs/text-input';
 import {LoadingButton} from '../../common/controls/loading-button';
 import i18n from '../../../shared/i18n';
 import AccountService from '../../../services/account.service';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {SnackState} from '../../../shared/contexts/snack-context';
+import {withSnackContext} from '../../../shared/hoc/with-snack';
 
 type Props = FormikProps<any> &
-  CaptchaProps & {
+  CaptchaProps &
+  SnackState & {
   onSuccess?: () => void;
 };
 
@@ -57,8 +59,7 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-    const {token, updateToken} = props;
-    const {handleCode, handleResponse} = useSnackContext();
+    const {token, updateToken, handleCode, handleResponse} = props;
 
     const data = {
       user: values.user,
@@ -78,4 +79,4 @@ const formik = withFormik<Props, FormValues>({
   }
 });
 
-export default compose(withCaptcha, formik)(ForgotPasswordForm);
+export default compose(withCaptcha, withSnackContext, formik)(ForgotPasswordForm);

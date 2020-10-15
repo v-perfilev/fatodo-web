@@ -12,12 +12,12 @@ import AdditionalMenuButton from '../../common/layouts/additional-menu/additiona
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {ArrowBackIcon} from '../../common/icons/arrow-back-icon';
 import {useHistory} from 'react-router-dom';
-import {AccountPasswordForm} from './account-password-form';
 import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {connect, ConnectedProps} from 'react-redux';
 import AccountForm from './account-form';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
+import AccountPasswordForm from './account-password-form';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps, null);
@@ -53,8 +53,8 @@ const Account: FC<Props> = ({authState}: Props) => {
     <Container className={classes.root} maxWidth="sm">
       <PageHeader title={t('account:account.title')} />
       <PageDivider height={5} />
-      {account?.id && <AccountForm account={account} />}
-      <AccountPasswordForm />
+      <AccountForm account={account} />
+      <AccountPasswordForm account={account} />
     </Container>
   ) : (
     <CircularSpinner />

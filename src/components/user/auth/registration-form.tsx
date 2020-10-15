@@ -73,7 +73,7 @@ const formik = withFormik<Props, FormValues>({
   validateOnMount: true,
 
   handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
-    const {token, updateToken, handleCode, handleResponse} = props;
+    const {token, updateToken, onSuccess, handleCode, handleResponse} = props;
 
     const data = {
       email: values.email,
@@ -86,7 +86,7 @@ const formik = withFormik<Props, FormValues>({
     AccountService.register(data)
       .then(() => {
         handleCode('auth.registered', 'info');
-        props.onSuccess();
+        onSuccess();
       })
       .catch((response) => {
         handleResponse(response);
