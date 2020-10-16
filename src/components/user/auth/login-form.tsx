@@ -10,7 +10,7 @@ import i18n from '../../../shared/i18n';
 import {authFormStyles} from '../common/_styles';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
-import AccountService from '../../../services/account.service';
+import AuthService from '../../../services/auth.service';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../../router';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
@@ -104,7 +104,7 @@ const formik = withFormik<Props, FormValues>({
 
     const onFailure = (): void => setSubmitting(false);
 
-    AccountService.authenticate(data)
+    AuthService.authenticate(data)
       .then((response) => {
         const token = SecurityUtils.parseTokenFromResponse(response);
         login(token, values.rememberMe);

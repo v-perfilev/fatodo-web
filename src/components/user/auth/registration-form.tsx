@@ -3,7 +3,7 @@ import {FC} from 'react';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {useTranslation} from 'react-i18next';
-import AccountService from '../../../services/account.service';
+import AuthService from '../../../services/auth.service';
 import {emailValidator, passwordValidator, usernameValidator} from '../common/_validators';
 import {authFormStyles} from '../common/_styles';
 import i18n from '../../../shared/i18n';
@@ -83,7 +83,7 @@ const formik = withFormik<Props, FormValues>({
       token: token
     };
 
-    AccountService.register(data)
+    AuthService.register(data)
       .then(() => {
         handleCode('auth.registered', 'info');
         onSuccess();

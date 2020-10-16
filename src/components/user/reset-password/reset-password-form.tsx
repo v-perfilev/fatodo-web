@@ -5,7 +5,7 @@ import {FC} from 'react';
 import {authFormStyles} from '../common/_styles';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
-import AccountService from '../../../services/account.service';
+import AuthService from '../../../services/auth.service';
 import {passwordValidator, repeatPasswordValidator} from '../common/_validators';
 import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
 import {PasswordInput} from '../../common/inputs/password-input';
@@ -75,7 +75,7 @@ const formik = withFormik<Props, FormValues>({
       password: values.password,
       token: token
     };
-    AccountService.resetPassword(data)
+    AuthService.resetPassword(data)
       .then(() => {
         handleCode('auth.afterResetPassword', 'info');
         onSuccess();

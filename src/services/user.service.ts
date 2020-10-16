@@ -10,18 +10,18 @@ export default class UserService {
   };
 
   public static getCurrent = (): AxiosPromise => {
-    const url = UserService.baseUrl + '/user';
+    const url = UserService.baseUrl + '/account/current';
     return axios.get(url);
   };
 
   public static updateData = (data: FormData): AxiosPromise => {
-    const url = UserService.baseUrl + '/user/update';
+    const url = UserService.baseUrl + '/account/update';
     const config = {headers: {'content-type': 'multipart/form-data'}};
     return axios.post(url, data, config);
   };
 
   public static changePassword = (data: ChangePasswordDTO): AxiosPromise => {
-    const url = UserService.baseUrl + '/user/change-password';
+    const url = UserService.baseUrl + '/account/change-password';
     return axios.post(url, data);
   };
 

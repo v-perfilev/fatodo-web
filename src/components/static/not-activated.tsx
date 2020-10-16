@@ -8,7 +8,7 @@ import {staticPageStyles} from './_styles';
 import withBackground from '../../shared/hoc/with-background';
 import {useHistory, useLocation} from 'react-router-dom';
 import {Routes} from '../router';
-import AccountService from '../../services/account.service';
+import AuthService from '../../services/auth.service';
 import {HomeIcon} from '../common/icons/home-icon';
 import {EmailIcon} from '../common/icons/email-icon';
 import {LoadingButton} from '../common/controls/loading-button';
@@ -41,7 +41,7 @@ const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
 
   const sendActivationCode = (): void => {
     setActivationLoading(true);
-    AccountService.requestActivationCode(user)
+    AuthService.requestActivationCode(user)
       .then(() => setActivationTimer(activationTimerMax))
       .catch(() => setActivationTimer(0))
       .finally(() => setActivationLoading(false));

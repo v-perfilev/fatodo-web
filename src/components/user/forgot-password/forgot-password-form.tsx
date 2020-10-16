@@ -9,7 +9,7 @@ import {authFormStyles} from '../common/_styles';
 import {TextInput} from '../../common/inputs/text-input';
 import {LoadingButton} from '../../common/controls/loading-button';
 import i18n from '../../../shared/i18n';
-import AccountService from '../../../services/account.service';
+import AuthService from '../../../services/auth.service';
 import {SnackState} from '../../../shared/contexts/snack-context';
 import {withSnackContext} from '../../../shared/hoc/with-snack';
 
@@ -66,7 +66,7 @@ const formik = withFormik<Props, FormValues>({
       token: token
     };
 
-    AccountService.requestResetPasswordCode(data)
+    AuthService.requestResetPasswordCode(data)
       .then(() => {
         handleCode('auth.afterForgotPassword', 'info');
         props.onSuccess();
