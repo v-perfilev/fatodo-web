@@ -8,6 +8,6 @@ export const pageHeaderStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     color: theme.palette.primary.main,
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  }
+    marginBottom: theme.spacing(1),
+  },
 }));

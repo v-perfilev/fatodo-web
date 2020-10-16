@@ -80,17 +80,15 @@ const ItemCreate: FC = () => {
       });
   };
 
-  return (
-    group ? (
-      <ItemForm
-        group={group}
-        header={t('items:headers.create', {group: group.title})}
-        setSaveCallback={setSaveCallback}
-        request={request}
-      />
-    ) : (
-      <CircularSpinner />
-    )
+  return group ? (
+    <ItemForm
+      group={group}
+      header={t('items:headers.create', {group: group.title})}
+      setSaveCallback={setSaveCallback}
+      request={request}
+    />
+  ) : (
+    <CircularSpinner />
   );
 };
 

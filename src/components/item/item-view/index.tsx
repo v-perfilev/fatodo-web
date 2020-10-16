@@ -128,23 +128,21 @@ const ItemView: FC = () => {
     updateMenu(menu);
   }, [item, group, i18n.language]);
 
-  return (
-    (item && group) ? (
-      <ThemeProvider theme={theme}>
-        <Container className={classes.root}>
-          <PageHeader title={item.title} />
-          <PageDivider height={5} />
-          <ItemViewInfo />
-          <PageDivider />
-          <ItemViewDescription />
-          <ItemViewReminders />
-          <ItemViewTags />
-          <ItemViewChanges />
-        </Container>
-      </ThemeProvider>
-    ) : (
-      <CircularSpinner />
-    )
+  return item && group ? (
+    <ThemeProvider theme={theme}>
+      <Container className={classes.root}>
+        <PageHeader title={item.title} />
+        <PageDivider height={5} />
+        <ItemViewInfo />
+        <PageDivider />
+        <ItemViewDescription />
+        <ItemViewReminders />
+        <ItemViewTags />
+        <ItemViewChanges />
+      </Container>
+    </ThemeProvider>
+  ) : (
+    <CircularSpinner />
   );
 };
 

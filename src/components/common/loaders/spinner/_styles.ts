@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 export const spinnerStyles = makeStyles(() => ({
   root: {
     position: 'relative',
-    display: 'flex'
+    display: 'flex',
   },
   image: {
     width: 270,
@@ -12,6 +12,6 @@ export const spinnerStyles = makeStyles(() => ({
     position: 'fixed',
     top: '50%',
     left: '50%',
-    transform: 'translate(-50%, -50%)'
-  }
+    transform: 'translate(-50%, -50%)',
+  },
 }));

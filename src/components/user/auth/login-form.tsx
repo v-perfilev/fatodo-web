@@ -31,8 +31,8 @@ type Props = RouteComponentProps &
   ConnectedProps<typeof connector> &
   CaptchaProps &
   SnackState & {
-  onSuccess: () => void;
-};
+    onSuccess: () => void;
+  };
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -77,18 +77,18 @@ const formik = withFormik<Props, FormValues>({
   mapPropsToValues: () => ({
     user: '',
     password: '',
-    rememberMe: false
+    rememberMe: false,
   }),
 
   mapPropsToErrors: () => ({
     user: '',
     password: '',
-    rememberMe: ''
+    rememberMe: '',
   }),
 
   validationSchema: Yup.object().shape({
     user: Yup.string().required(() => i18n.t('account:fields.user.required')),
-    password: Yup.string().required(() => i18n.t('account:fields.password.required'))
+    password: Yup.string().required(() => i18n.t('account:fields.password.required')),
   }),
 
   validateOnMount: true,
@@ -99,7 +99,7 @@ const formik = withFormik<Props, FormValues>({
     const data = {
       user: values.user,
       password: values.password,
-      token: token
+      token: token,
     };
 
     const onFailure = (): void => setSubmitting(false);
@@ -119,7 +119,7 @@ const formik = withFormik<Props, FormValues>({
           updateToken();
         }
       });
-  }
+  },
 });
 
 export default compose(withRouter, withCaptcha, withSnackContext, connector, formik)(LoginForm);

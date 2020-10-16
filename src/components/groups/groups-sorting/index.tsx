@@ -68,11 +68,7 @@ const GroupsSorting: FC = () => {
     updateMenu(menu);
   }, [i18n.language, order, groups]);
 
-  return groups ? (
-    <GroupsSortingContainer setOrder={setOrder} />
-  ) : (
-    <CircularSpinner />
-  );
+  return groups ? <GroupsSortingContainer setOrder={setOrder} /> : <CircularSpinner />;
 };
 
 export default compose(withGroupList)(GroupsSorting);

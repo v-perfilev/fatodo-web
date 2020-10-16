@@ -54,7 +54,7 @@ const Account: FC<Props> = ({authState}: Props) => {
       <PageHeader title={t('account:account.title')} />
       <PageDivider height={5} />
       <AccountForm account={account} />
-      <AccountPasswordForm account={account} />
+      <AccountPasswordForm />
     </Container>
   ) : (
     <CircularSpinner />

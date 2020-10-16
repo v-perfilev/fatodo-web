@@ -93,7 +93,7 @@ const formik = withFormik<Props, ItemFormValues>({
   validationSchema: Yup.object().shape({
     title: Yup.string().required(() => i18n.t('items:fields.title.required')),
     type: Yup.string().required(() => i18n.t('items:fields.type.required')),
-    priority: Yup.string().required(() => i18n.t('items:fields.priority.required'))
+    priority: Yup.string().required(() => i18n.t('items:fields.priority.required')),
   }),
 
   validateOnMount: true,
@@ -102,7 +102,7 @@ const formik = withFormik<Props, ItemFormValues>({
     const {request, item, group} = props;
     const data = ItemFormUtils.mapValuesToDTO(values, item, group);
     request(data, () => setSubmitting(false));
-  }
+  },
 });
 
 export default compose(formik)(ItemForm);

@@ -10,7 +10,7 @@ export const emailValidator = new AsyncValidator(
   {
     name: 'unique',
     message: (): string => i18n.t('account:fields.email.notUnique'),
-    test: async (value): Promise<boolean> => (await UserService.isEmailUnique(value)).data === true
+    test: async (value): Promise<boolean> => (await UserService.isEmailUnique(value)).data === true,
   }
 );
 
@@ -24,23 +24,24 @@ export const usernameValidator = new AsyncValidator(
   {
     name: 'unique',
     message: (): string => i18n.t('account:fields.username.notUnique'),
-    test: async (value): Promise<boolean> => (await UserService.isUsernameUnique(value)).data === true
+    test: async (value): Promise<boolean> => (await UserService.isUsernameUnique(value)).data === true,
   }
 );
 
-export const usernameChangeValidator = (currentLogin: string): AsyncValidator => new AsyncValidator(
-  Yup.string()
-    .required(() => i18n.t('account:fields.username.required'))
-    .matches(usernameRegex, {message: () => i18n.t('account:fields.username.invalid')})
-    .min(5, () => i18n.t('account:fields.username.min5'))
-    .max(20, () => i18n.t('account:fields.username.max20')),
-  {
-    name: 'unique',
-    message: (): string => i18n.t('account:fields.username.notUnique'),
-    test: async (value): Promise<boolean> =>
-      value == currentLogin || (await UserService.isUsernameUnique(value)).data === true
-  }
-);
+export const usernameChangeValidator = (currentLogin: string): AsyncValidator =>
+  new AsyncValidator(
+    Yup.string()
+      .required(() => i18n.t('account:fields.username.required'))
+      .matches(usernameRegex, {message: () => i18n.t('account:fields.username.invalid')})
+      .min(5, () => i18n.t('account:fields.username.min5'))
+      .max(20, () => i18n.t('account:fields.username.max20')),
+    {
+      name: 'unique',
+      message: (): string => i18n.t('account:fields.username.notUnique'),
+      test: async (value): Promise<boolean> =>
+        value == currentLogin || (await UserService.isUsernameUnique(value)).data === true,
+    }
+  );
 
 const passwordRegex = /^[A-Za-z\d]+$/;
 export const passwordStrengthMap = ['(?=.*[A-Z])', '(?=.*[a-z])', '(?=.*\\d)'];
@@ -62,5 +63,5 @@ export const repeatPasswordValidator = Yup.string()
   .required(() => i18n.t('account:fields.repeatPassword.required'))
   .when('password', {
     is: (val) => val && val.length > 0,
-    then: Yup.string().oneOf([Yup.ref('password')], () => i18n.t('account:fields.repeatPassword.notEqual'))
+    then: Yup.string().oneOf([Yup.ref('password')], () => i18n.t('account:fields.repeatPassword.notEqual')),
   });

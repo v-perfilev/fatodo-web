@@ -104,21 +104,19 @@ const GroupView: FC = () => {
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
-  return (
-    group ? (
-      <ThemeProvider theme={theme}>
-        <Container className={classes.root}>
-          <PageHeader title={group.title} filename={group.imageFilename} />
-          <PageDivider height={5} />
-          <GroupViewUsers />
-          <GroupViewItems />
-          <PageSpacer />
-          <GroupViewMessages />
-        </Container>
-      </ThemeProvider>
-    ) : (
-      <CircularSpinner />
-    )
+  return group ? (
+    <ThemeProvider theme={theme}>
+      <Container className={classes.root}>
+        <PageHeader title={group.title} filename={group.imageFilename} />
+        <PageDivider height={5} />
+        <GroupViewUsers />
+        <GroupViewItems />
+        <PageSpacer />
+        <GroupViewMessages />
+      </Container>
+    </ThemeProvider>
+  ) : (
+    <CircularSpinner />
   );
 };
 

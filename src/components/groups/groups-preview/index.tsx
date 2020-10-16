@@ -62,13 +62,7 @@ const GroupPreview: FC = () => {
     updateMenu(menu);
   }, [i18n.language]);
 
-  return (
-    groups ? (
-      <GroupPreviewGridContainer />
-    ) : (
-      <CircularSpinner />
-    )
-  );
+  return groups ? <GroupPreviewGridContainer /> : <CircularSpinner />;
 };
 
 export default compose(withGroupList)(GroupPreview);

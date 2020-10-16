@@ -20,15 +20,15 @@ import UserService from '../../../services/user.service';
 
 type Props = FormikProps<any> &
   SnackState & {
-  account: UserAccount;
-};
+    account: UserAccount;
+  };
 
 const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = accountFormStyles();
   const {t} = useTranslation();
 
   const languageMap = new Map();
-  LANGUAGES.forEach(value => languageMap.set(value.code, value.name));
+  LANGUAGES.forEach((value) => languageMap.set(value.code, value.name));
 
   return (
     <Form className={classes.form}>
@@ -42,12 +42,7 @@ const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
       />
       <PageSpacer />
       <Box className={classes.buttons}>
-        <LoadingButton
-          type="submit"
-          color="secondary"
-          disabled={!isValid || isSubmitting}
-          loading={isSubmitting}
-        >
+        <LoadingButton type="submit" color="secondary" disabled={!isValid || isSubmitting} loading={isSubmitting}>
           {t('account:account.submit')}
         </LoadingButton>
       </Box>
@@ -58,14 +53,15 @@ const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
 const formik = withFormik<Props, AccountFormValues>({
   mapPropsToValues: ({account}: Props) => AccountFormUtils.mapAccountToValues(account),
 
-  validationSchema: ({account}: Props) => Yup.object().shape({
-    username: usernameChangeValidator(account.username).check()
-  }),
+  validationSchema: ({account}: Props) =>
+    Yup.object().shape({
+      username: usernameChangeValidator(account.username).check(),
+    }),
 
   validateOnMount: true,
 
   handleSubmit: (values: AccountFormValues, {setSubmitting, props}: FormikBag<Props, AccountFormValues>) => {
-    const {account,handleCode, handleResponse} = props;
+    const {account, handleCode, handleResponse} = props;
     const data = AccountFormUtils.mapValuesToFormData(values, account);
 
     UserService.updateData(data)
@@ -78,7 +74,7 @@ const formik = withFormik<Props, AccountFormValues>({
       .finally(() => {
         setSubmitting(false);
       });
-  }
+  },
 });
 
 export default compose(withSnackContext, formik)(AccountForm);

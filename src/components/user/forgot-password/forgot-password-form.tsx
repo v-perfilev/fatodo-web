@@ -16,8 +16,8 @@ import {withSnackContext} from '../../../shared/hoc/with-snack';
 type Props = FormikProps<any> &
   CaptchaProps &
   SnackState & {
-  onSuccess?: () => void;
-};
+    onSuccess?: () => void;
+  };
 
 const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -45,15 +45,15 @@ interface FormValues {
 
 const formik = withFormik<Props, FormValues>({
   mapPropsToValues: () => ({
-    user: ''
+    user: '',
   }),
 
   mapPropsToErrors: () => ({
-    user: ''
+    user: '',
   }),
 
   validationSchema: Yup.object().shape({
-    user: Yup.string().required(() => i18n.t('account:fields.user.required'))
+    user: Yup.string().required(() => i18n.t('account:fields.user.required')),
   }),
 
   validateOnMount: true,
@@ -63,7 +63,7 @@ const formik = withFormik<Props, FormValues>({
 
     const data = {
       user: values.user,
-      token: token
+      token: token,
     };
 
     AuthService.requestResetPasswordCode(data)
@@ -76,7 +76,7 @@ const formik = withFormik<Props, FormValues>({
         setSubmitting(false);
         updateToken();
       });
-  }
+  },
 });
 
 export default compose(withCaptcha, withSnackContext, formik)(ForgotPasswordForm);

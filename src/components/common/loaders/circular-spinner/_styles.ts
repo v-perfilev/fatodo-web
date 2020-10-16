@@ -5,6 +5,6 @@ export const circularSpinnerStyles = makeStyles(() => ({
     display: 'flex',
     flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 }));

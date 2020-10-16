@@ -78,12 +78,10 @@ const GroupEdit: FC = () => {
       });
   };
 
-  return (
-    group ? (
-      <GroupForm group={group} header={t('groups:headers.edit')} setSaveCallback={setSaveCallback} request={request} />
-    ) : (
-      <CircularSpinner />
-    )
+  return group ? (
+    <GroupForm group={group} header={t('groups:headers.edit')} setSaveCallback={setSaveCallback} request={request} />
+  ) : (
+    <CircularSpinner />
   );
 };
 

@@ -17,10 +17,10 @@ import {SnackState} from '../../../shared/contexts/snack-context';
 type Props = FormikProps<any> &
   CaptchaProps &
   SnackState & {
-  code: string;
-  onSuccess: () => void;
-  onFailure: () => void;
-};
+    code: string;
+    onSuccess: () => void;
+    onFailure: () => void;
+  };
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -52,17 +52,17 @@ interface FormValues {
 const formik = withFormik<Props, FormValues>({
   mapPropsToValues: () => ({
     password: '',
-    repeatPassword: ''
+    repeatPassword: '',
   }),
 
   mapPropsToErrors: () => ({
     password: '',
-    repeatPassword: ''
+    repeatPassword: '',
   }),
 
   validationSchema: Yup.object().shape({
     password: passwordValidator,
-    repeatPassword: repeatPasswordValidator
+    repeatPassword: repeatPasswordValidator,
   }),
 
   validateOnMount: true,
@@ -73,7 +73,7 @@ const formik = withFormik<Props, FormValues>({
     const data = {
       code: code,
       password: values.password,
-      token: token
+      token: token,
     };
     AuthService.resetPassword(data)
       .then(() => {
@@ -86,7 +86,7 @@ const formik = withFormik<Props, FormValues>({
         updateToken();
         onFailure();
       });
-  }
+  },
 });
 
 export default compose(withCaptcha, withSnackContext, formik)(ResetPasswordForm);
