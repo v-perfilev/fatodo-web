@@ -14,7 +14,7 @@ export default class UserService {
     return axios.get(url);
   };
 
-  public static updateData = (data: FormData): AxiosPromise => {
+  public static updateAccount = (data: FormData): AxiosPromise => {
     const url = UserService.baseUrl + '/account/update';
     const config = {headers: {'content-type': 'multipart/form-data'}};
     return axios.post(url, data, config);

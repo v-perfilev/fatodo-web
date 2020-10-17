@@ -18,13 +18,15 @@ import {connect, ConnectedProps} from 'react-redux';
 import AccountForm from './account-form';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 import AccountPasswordForm from './account-password-form';
+import {requestAccountData} from '../../../store/actions/auth.actions';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
-const connector = connect(mapStateToProps, null);
+const mapDispatchToProps = {requestAccountData};
+const connector = connect(mapStateToProps, mapDispatchToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
-const Account: FC<Props> = ({authState}: Props) => {
+const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
   const classes = accountStyles();
   const {account} = authState;
   const history = useHistory();
@@ -53,7 +55,7 @@ const Account: FC<Props> = ({authState}: Props) => {
     <Container className={classes.root} maxWidth="sm">
       <PageHeader title={t('account:account.title')} />
       <PageDivider height={5} />
-      <AccountForm account={account} />
+      <AccountForm account={account} requestAccountData={requestAccountData} />
       {account.provider === 'LOCAL' && <AccountPasswordForm />}
     </Container>
   ) : (

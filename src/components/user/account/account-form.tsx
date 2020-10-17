@@ -20,8 +20,9 @@ import UserService from '../../../services/user.service';
 
 type Props = FormikProps<any> &
   SnackState & {
-    account: UserAccount;
-  };
+  account: UserAccount;
+  requestAccountData: () => void;
+};
 
 const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = accountFormStyles();
@@ -55,18 +56,19 @@ const formik = withFormik<Props, AccountFormValues>({
 
   validationSchema: ({account}: Props) =>
     Yup.object().shape({
-      username: usernameChangeValidator(account.username).check(),
+      username: usernameChangeValidator(account.username).check()
     }),
 
   validateOnMount: true,
 
   handleSubmit: (values: AccountFormValues, {setSubmitting, props}: FormikBag<Props, AccountFormValues>) => {
-    const {account, handleCode, handleResponse} = props;
+    const {account, requestAccountData, handleCode, handleResponse} = props;
     const data = AccountFormUtils.mapValuesToFormData(values, account);
 
-    UserService.updateData(data)
+    UserService.updateAccount(data)
       .then(() => {
-        handleCode('auth.afterChangePassword', 'info');
+        handleCode('auth.afterUpdateAccount', 'info');
+        requestAccountData();
       })
       .catch((response) => {
         handleResponse(response);
@@ -74,7 +76,7 @@ const formik = withFormik<Props, AccountFormValues>({
       .finally(() => {
         setSubmitting(false);
       });
-  },
+  }
 });
 
 export default compose(withSnackContext, formik)(AccountForm);

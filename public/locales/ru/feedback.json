@@ -6,7 +6,9 @@
   },
   "auth": {
     "alreadyActivated": "Аккаунт уже был активирован",
-    "notActivated": "Аккаунт не активирован"
+    "notActivated": "Аккаунт не активирован",
+    "wrongPassword": "Неверный пароль",
+    "wrongProvider": "Невозможно выполнить операцию"
   },
   "security": {
     "forbidden": "Доступ запрещён",

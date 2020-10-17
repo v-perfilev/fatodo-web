@@ -6,7 +6,9 @@
   },
   "auth": {
     "alreadyActivated": "Account is already activated",
-    "notActivated": "Account is not activated"
+    "notActivated": "Account is not activated",
+    "wrongPassword": "Wrong current password",
+    "wrongProvider": "Operation not possible for your account provider"
   },
   "security": {
     "forbidden": "Access is forbidden",
