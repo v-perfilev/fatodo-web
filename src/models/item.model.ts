@@ -1,6 +1,6 @@
 import {Reminder} from './reminder.model';
 import {AbstractAuditing} from './abstract-auditing.model';
-import {ParamDate} from './param-date.model';
+import {DateParams} from './date-params.model';
 
 export type ItemType = 'TASK' | 'EVENT' | 'REPETITION' | 'NOTE';
 export type ItemPriority = 'LOW' | 'NORMAL' | 'HIGH';
@@ -14,7 +14,7 @@ export interface Item extends AbstractAuditing {
   title: string;
   type: ItemType;
   priority: ItemPriority;
-  date?: ParamDate;
+  date?: DateParams;
   description?: string;
   reminders?: Reminder[];
   tags?: string[];

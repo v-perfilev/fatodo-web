@@ -3,10 +3,10 @@ import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {DateConverters, DateFormatters} from '../../../../shared/utils/date.utils';
-import {ParamDate} from '../../../../models/param-date.model';
+import {DateParams} from '../../../../models/date-params.model';
 
 type Props = {
-  date: ParamDate;
+  date: DateParams;
 };
 
 export const DateView: FC<Props> = ({date: paramDate}: Props) => {

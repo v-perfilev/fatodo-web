@@ -1,5 +1,5 @@
 import moment, {Moment} from 'moment';
-import {ParamDate} from '../../models/param-date.model';
+import {DateParams} from '../../models/date-params.model';
 import i18n from '../i18n';
 
 export class DateFormats {
@@ -31,14 +31,14 @@ export class DateFormatters {
 }
 
 export class DateConverters {
-  static getParamDateFromTime = (time: Date): ParamDate => {
+  static getParamDateFromTime = (time: Date): DateParams => {
     if (!time) {
       return null;
     }
     return {time: time.getHours() * 60 + time.getMinutes()};
   };
 
-  static getParamDateFromTimeAndDate = (time: Date, date: Date): ParamDate => {
+  static getParamDateFromTimeAndDate = (time: Date, date: Date): DateParams => {
     if (!time && !date) {
       return null;
     }
@@ -60,7 +60,7 @@ export class DateConverters {
     return result;
   };
 
-  static getParamDateFromTimeAndDateWithoutYear = (time: Date, date: Date): ParamDate => {
+  static getParamDateFromTimeAndDateWithoutYear = (time: Date, date: Date): DateParams => {
     if (!time && !date) {
       return null;
     }
@@ -81,7 +81,7 @@ export class DateConverters {
     return result;
   };
 
-  static getTimeFromParamDate = (paramDate: ParamDate): Date => {
+  static getTimeFromParamDate = (paramDate: DateParams): Date => {
     if (!paramDate || !paramDate.time) {
       return null;
     }
@@ -92,7 +92,7 @@ export class DateConverters {
     return date;
   };
 
-  static getDateFromParamDate = (paramDate: ParamDate): Date => {
+  static getDateFromParamDate = (paramDate: DateParams): Date => {
     if (paramDate == null || (!paramDate.date && !paramDate.month && !paramDate.year)) {
       return null;
     }

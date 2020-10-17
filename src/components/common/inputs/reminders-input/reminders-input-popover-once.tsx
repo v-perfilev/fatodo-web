@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {Reminder} from '../../../../models/reminder.model';
 import {remindersInputPopoverItemStyles} from './_styles';
 import {Box} from '@material-ui/core';
-import {ParamDate} from '../../../../models/param-date.model';
+import {DateParams} from '../../../../models/date-params.model';
 import {DateConverters} from '../../../../shared/utils/date.utils';
 import {useTranslation} from 'react-i18next';
 import {TimeSelect} from '../time-select';
@@ -24,7 +24,7 @@ export const RemindersInputPopoverOnce: FC<Props> = ({setReminder}: Props) => {
 
   useEffect(() => {
     if (time && date) {
-      const paramDate: ParamDate = DateConverters.getParamDateFromTimeAndDate(time, date);
+      const paramDate: DateParams = DateConverters.getParamDateFromTimeAndDate(time, date);
       setReminder({date: paramDate, periodicity: 'ONCE'});
     }
   }, [time, date]);

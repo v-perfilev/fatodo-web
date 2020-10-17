@@ -1,4 +1,4 @@
-export interface ParamDate {
+export interface DateParams {
   time?: number;
   date?: number;
   month?: number;

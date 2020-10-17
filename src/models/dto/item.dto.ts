@@ -1,4 +1,4 @@
-import {ParamDate} from '../param-date.model';
+import {DateParams} from '../date-params.model';
 import {Reminder} from '../reminder.model';
 
 export interface ItemDTO {
@@ -6,7 +6,7 @@ export interface ItemDTO {
   title: string;
   type: string;
   priority: string;
-  date: ParamDate;
+  date: DateParams;
   description: string;
   reminders: Reminder[];
   tags: string[];
