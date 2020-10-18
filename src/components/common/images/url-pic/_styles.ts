@@ -1,7 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const roundPicStyles = makeStyles((theme: Theme) => ({
+export const urlPicStyles = makeStyles((theme: Theme) => ({
   root: {
     borderStyle: 'solid',
     borderColor: theme.palette.tertiary.main,

@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {imageUploadPreviewStyles} from './_styles';
 import {Image} from '../../../../models/image.model';
-import {RoundPic} from '../../images/round-pic';
+import {UrlPic} from '../../images/url-pic';
 
 type Props = {
   image: Image;
@@ -17,7 +17,7 @@ export const ImageUploadPreview: FC<Props> = ({image, preview}: Props) => {
     image.filename &&
     preview && (
       <Box className={classes.root}>
-        <RoundPic url={image.filename} size="lg" border={3} />
+        <UrlPic url={image.filename} size="lg" border={3} />
       </Box>
     )
   );

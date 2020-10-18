@@ -1,7 +1,7 @@
 import React, {FC, ReactNode} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {pageHeaderStyles} from './_styles';
-import {RoundPic} from '../../images';
+import {UrlPic} from '../../images';
 
 type Props = {
   title: ReactNode;
@@ -13,7 +13,7 @@ export const PageHeader: FC<Props> = ({title, filename}: Props) => {
 
   return (
     <Box className={classes.root}>
-      {filename && <RoundPic url={filename} size="md" border={2} />}
+      {filename && <UrlPic url={filename} size="md" border={2} />}
       <Typography variant="h6">
         <Box fontWeight="fontWeightMedium">{title}</Box>
       </Typography>

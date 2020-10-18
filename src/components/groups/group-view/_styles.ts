@@ -12,6 +12,7 @@ export const groupViewStyles = makeStyles((theme: Theme) => ({
 
 export const groupViewUsersStyles = makeStyles((theme: Theme) => ({
   root: {
+    alignSelf: 'flex-start',
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
     '& > *': {
@@ -19,11 +20,6 @@ export const groupViewUsersStyles = makeStyles((theme: Theme) => ({
       marginRight: theme.spacing(2),
       marginBottom: theme.spacing(0.5),
     },
-  },
-  avatar: {
-    width: 25,
-    height: 25,
-    marginRight: theme.spacing(0.5),
   },
 }));
 

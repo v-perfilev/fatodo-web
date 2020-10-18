@@ -5,7 +5,7 @@ import {User} from '../../../models/user.model';
 import UserService from '../../../services/user.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
-import {UserView} from '../../common/views/user-view';
+import {UserWithPopupView} from '../../common/views/user-with-popup-view';
 
 const GroupViewUsers: FC = () => {
   const classes = groupViewUsersStyles();
@@ -27,7 +27,7 @@ const GroupViewUsers: FC = () => {
   return (
     <Box className={classes.root}>
       {users.map((user, index) => (
-        <UserView user={user} withUsername withPaperBox key={index} />
+        <UserWithPopupView user={user} withUsername withPaperBox key={index} />
       ))}
     </Box>
   );

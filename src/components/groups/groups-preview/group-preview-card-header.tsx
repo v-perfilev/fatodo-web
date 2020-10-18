@@ -4,9 +4,9 @@ import {Box, CardHeader, Typography} from '@material-ui/core';
 import {groupCardHeaderStyles} from './_styles';
 import {Routes} from '../../router';
 import GroupPreviewCardActions from './group-preview-card-actions';
-import {RoundPic} from '../../common/images/round-pic';
 import {Link} from '../../common/controls/link';
 import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {UrlPic} from '../../common/images/url-pic';
 
 const GroupPreviewCardHeader: FC = () => {
   const classes = groupCardHeaderStyles();
@@ -17,7 +17,7 @@ const GroupPreviewCardHeader: FC = () => {
       <CardHeader
         title={
           <Box className={classes.title}>
-            {group.imageFilename && <RoundPic url={group.imageFilename} size="md" />}
+            {group.imageFilename && <UrlPic url={group.imageFilename} size="md" />}
             <Typography variant={'h6'} className={classes.caption}>
               {group.title}
             </Typography>

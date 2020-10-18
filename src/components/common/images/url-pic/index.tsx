@@ -2,20 +2,22 @@ import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {Avatar} from '@material-ui/core';
 import csx from 'classnames';
-import {roundPicStyles} from './_styles';
+import {urlPicStyles} from './_styles';
 import {ImageUtils} from '../../../../shared/utils/image.utils';
 import {FallbackPic} from '../fallback-pic';
+import {SizeType} from '../types';
 
-type Props = HTMLAttributes<any> & {
+type Props = HTMLAttributes<HTMLElement> & {
   url: string;
   alt?: string;
-  size?: 'xs' | 'sm' | 'md' | 'lg';
+  size?: SizeType;
   border?: number;
+  variant?: 'circle' | 'rounded' | 'square';
 };
 
-export const RoundPic: FC<Props> = (props: Props) => {
-  const classes = roundPicStyles();
-  const {url, alt, size = 'sm', border = 0, className} = props;
+export const UrlPic: FC<Props> = (props: Props) => {
+  const classes = urlPicStyles();
+  const {url, alt, size = 'sm', border = 0, variant, className} = props;
 
   const src = url ? (size === 'lg' ? ImageUtils.getImage(url) : ImageUtils.getThumbnail(url)) : '.';
 
@@ -31,7 +33,7 @@ export const RoundPic: FC<Props> = (props: Props) => {
   const styles = {borderWidth: border};
 
   return (
-    <Avatar alt={alt} src={src} className={classNames} style={styles}>
+    <Avatar alt={alt} src={src} variant={variant} className={classNames} style={styles}>
       <FallbackPic />
     </Avatar>
   );

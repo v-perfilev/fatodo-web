@@ -15,7 +15,7 @@ import {compose} from 'recompose';
 import {Routes} from '../../../router';
 import {useHistory, withRouter} from 'react-router-dom';
 import {LanguageSelect} from '../../controls/language-select';
-import Username from '../username';
+import CurrentUser from '../current-user';
 import {ArrowDownIcon} from '../../icons/arrow-down-icon';
 import {PopupMenu} from '../../surfaces/popup-menu';
 import {AccountIcon} from '../../icons/account-icon';
@@ -58,7 +58,7 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
   const authenticatedMenu = (
     <>
       <Button color="primary" onClick={handleClick} ref={ref}>
-        <Username />
+        <CurrentUser />
         <ArrowDownIcon />
       </Button>
       <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>

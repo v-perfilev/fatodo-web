@@ -7,7 +7,7 @@ import {User} from '../../../models/user.model';
 import UserService from '../../../services/user.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
-import {UserView} from '../../common/views/user-view';
+import {UserWithPopupView} from '../../common/views/user-with-popup-view';
 
 const GroupPreviewCardAvatars: FC = () => {
   const classes = groupCardAvatarsStyles();
@@ -32,7 +32,7 @@ const GroupPreviewCardAvatars: FC = () => {
   return (
     <Box className={classes.avatars}>
       {usersToShow.map((user, index) => (
-        <UserView user={user} picSize='sm' key={index} />
+        <UserWithPopupView user={user} picSize="sm" key={index} />
       ))}
       {moreThanLimit > 0 && <Typography className={classes.count}>+{moreThanLimit}</Typography>}
     </Box>

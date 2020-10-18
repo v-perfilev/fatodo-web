@@ -14,7 +14,7 @@ import {LoginIcon} from '../../icons/login-icon';
 import {SignUpIcon} from '../../icons/signup-icon';
 import {useHistory, withRouter} from 'react-router-dom';
 import {AccountIcon} from '../../icons/account-icon';
-import Username from '../username';
+import CurrentUser from '../current-user';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout};
@@ -73,7 +73,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) 
     <>
       {isAuthenticated && (
         <Box className={classes.username}>
-          <Username />
+          <CurrentUser />
         </Box>
       )}
       <List component="nav">
