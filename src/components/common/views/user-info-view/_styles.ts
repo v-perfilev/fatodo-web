@@ -1,10 +1,9 @@
-import {makeStyles, Theme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
-export const userInfoViewStyles = makeStyles((theme: Theme) => ({
+export const userInfoViewStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    padding: theme.spacing(1),
-  },
+    alignItems: 'center'
+  }
 }));
