@@ -1,20 +1,21 @@
 import * as React from 'react';
 import {FC, ReactElement} from 'react';
-import {Fab, Theme, Tooltip, useMediaQuery} from '@material-ui/core';
+import {CircularProgress, Fab, Theme, Tooltip, useMediaQuery} from '@material-ui/core';
 
 type Props = {
   icon: ReactElement;
   action?: () => void;
   color?: 'primary' | 'secondary';
   tooltip?: string;
+  loading?: boolean;
 };
 
-const AdditionalMenuButton: FC<Props> = ({icon, action, color, tooltip}: Props) => {
+const AdditionalMenuButton: FC<Props> = ({icon, action, color, tooltip, loading}: Props) => {
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
 
   const fabWithoutTooltip = (
     <Fab color={color} onClick={action}>
-      {icon}
+      {!loading ? icon : <CircularProgress size={26} color="inherit" />}
     </Fab>
   );
 

@@ -22,13 +22,13 @@ const GroupEdit: FC = () => {
   const {updateMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
   const [group, setGroup] = useState<Group>(null);
+  const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
     // important stub function
   });
 
   const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
-  const submit = (): void => saveCallback();
 
   const loadGroup = (): void => {
     GroupService.get(groupId)
@@ -48,7 +48,13 @@ const GroupEdit: FC = () => {
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('groups:tooltips.ok')} />
+      <AdditionalMenuButton
+        icon={<CheckIcon />}
+        action={saveCallback}
+        color="primary"
+        tooltip={t('groups:tooltips.ok')}
+        loading={isSaving}
+      />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroupView}
@@ -58,15 +64,8 @@ const GroupEdit: FC = () => {
     </>
   );
 
-  useEffect(() => {
-    loadGroup();
-  }, []);
-
-  useEffect(() => {
-    updateMenu(menu);
-  }, [i18n.language, saveCallback]);
-
   const request = (formData: FormData, stopSubmitting: () => void): void => {
+    setIsSaving(true);
     GroupService.update(formData)
       .then(() => {
         handleCode('groups.edited', 'info');
@@ -75,8 +74,17 @@ const GroupEdit: FC = () => {
       .catch((response) => {
         handleResponse(response);
         stopSubmitting();
+        setIsSaving(false);
       });
   };
+
+  useEffect(() => {
+    loadGroup();
+  }, []);
+
+  useEffect(() => {
+    updateMenu(menu);
+  }, [i18n.language, isSaving, saveCallback]);
 
   return group ? (
     <GroupForm group={group} header={t('groups:headers.edit')} setSaveCallback={setSaveCallback} request={request} />

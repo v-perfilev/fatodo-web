@@ -21,6 +21,7 @@ const GroupsSorting: FC = () => {
   const {handleCode, handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
   const {groups, setGroups} = useGroupListContext();
+  const [isSaving, setIsSaving] = useState(false);
   const [order, setOrder] = useState<MutableRefObject<number[]>>();
 
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
@@ -36,6 +37,7 @@ const GroupsSorting: FC = () => {
   };
 
   const saveOrder = (): void => {
+    setIsSaving(true);
     const orderedGroupIds = order.current.map((o) => groups[o].id);
     GroupService.setGroupOrder(orderedGroupIds)
       .then(() => {
@@ -44,13 +46,20 @@ const GroupsSorting: FC = () => {
       })
       .catch((response) => {
         handleResponse(response);
+        setIsSaving(false);
       });
   };
 
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <AdditionalMenuButton icon={<CheckIcon />} action={saveOrder} color="primary" tooltip={t('groups:tooltips.ok')} />
+      <AdditionalMenuButton
+        icon={<CheckIcon />}
+        action={saveOrder}
+        color="primary"
+        tooltip={t('groups:tooltips.ok')}
+        loading={isSaving}
+      />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroups}
@@ -66,7 +75,7 @@ const GroupsSorting: FC = () => {
 
   useEffect(() => {
     updateMenu(menu);
-  }, [i18n.language, order, groups]);
+  }, [i18n.language, isSaving, order, groups]);
 
   return groups ? <GroupsSortingContainer setOrder={setOrder} /> : <CircularSpinner />;
 };

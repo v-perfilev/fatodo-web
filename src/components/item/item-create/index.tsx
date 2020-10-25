@@ -24,18 +24,24 @@ const ItemCreate: FC = () => {
   const {updateMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
   const [group, setGroup] = useState<Group>(null);
+  const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
   });
 
-  const submit = (): void => saveCallback();
   const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('items:tooltips.ok')} />
+      <AdditionalMenuButton
+        icon={<CheckIcon />}
+        action={saveCallback}
+        color="primary"
+        tooltip={t('items:tooltips.ok')}
+        loading={isSaving}
+      />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroupView}
@@ -60,15 +66,8 @@ const ItemCreate: FC = () => {
       });
   };
 
-  useEffect(() => {
-    loadGroup();
-  }, []);
-
-  useEffect(() => {
-    updateMenu(menu);
-  }, [i18n.language, saveCallback]);
-
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
+    setIsSaving(true);
     ItemService.create(data)
       .then(() => {
         handleCode('items.created', 'info');
@@ -77,8 +76,17 @@ const ItemCreate: FC = () => {
       .catch((response) => {
         handleResponse(response);
         stopSubmitting();
+        setIsSaving(false);
       });
   };
+
+  useEffect(() => {
+    loadGroup();
+  }, []);
+
+  useEffect(() => {
+    updateMenu(menu);
+  }, [i18n.language, isSaving, saveCallback]);
 
   return group ? (
     <ItemForm

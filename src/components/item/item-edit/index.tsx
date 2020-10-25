@@ -27,11 +27,11 @@ const ItemEdit: FC = () => {
   const {updateMenu} = useAdditionalMenuContext();
   const [group, setGroup] = useState<Group>(null);
   const [item, setItem] = useState<Item>(null);
+  const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
   });
 
-  const submit = (): void => saveCallback();
   const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(item.groupId));
   const redirectToItemView = (): void => history.push(ItemRouteUtils.getViewUrl(itemId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
@@ -39,7 +39,13 @@ const ItemEdit: FC = () => {
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('items:tooltips.ok')} />
+      <AdditionalMenuButton
+        icon={<CheckIcon />}
+        action={saveCallback}
+        color="primary"
+        tooltip={t('items:tooltips.ok')}
+        loading={isSaving}
+      />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToItemView}
@@ -78,6 +84,7 @@ const ItemEdit: FC = () => {
   };
 
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
+    setIsSaving(true);
     ItemService.update(data)
       .then(() => {
         handleCode('items.edited', 'info');
@@ -86,6 +93,7 @@ const ItemEdit: FC = () => {
       .catch((response) => {
         handleResponse(response);
         stopSubmitting();
+        setIsSaving(false);
       });
   };
 
@@ -101,7 +109,7 @@ const ItemEdit: FC = () => {
 
   useEffect(() => {
     updateMenu(menu);
-  }, [i18n.language, saveCallback]);
+  }, [i18n.language, isSaving, saveCallback]);
 
   return group && item ? (
     <ItemForm

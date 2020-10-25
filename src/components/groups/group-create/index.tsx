@@ -17,18 +17,24 @@ const GroupCreate: FC = () => {
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
-  const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
   });
 
-  const submit = (): void => saveCallback();
   const redirectToGroupView = (id: string): void => history.push(GroupRouteUtils.getViewUrl(id));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
 
   const menu = (
     <>
       <AdditionalMenuSpacer />
-      <AdditionalMenuButton icon={<CheckIcon />} action={submit} color="primary" tooltip={t('groups:tooltips.ok')} />
+      <AdditionalMenuButton
+        icon={<CheckIcon />}
+        action={saveCallback}
+        color="primary"
+        tooltip={t('groups:tooltips.ok')}
+        loading={isSaving}
+      />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroups}
@@ -38,11 +44,8 @@ const GroupCreate: FC = () => {
     </>
   );
 
-  useEffect(() => {
-    updateMenu(menu);
-  }, [i18n.language, saveCallback]);
-
   const request = (formData: FormData, stopSubmitting: () => void): void => {
+    setIsSaving(true);
     GroupService.create(formData)
       .then((response) => {
         handleCode('groups.created', 'info');
@@ -52,8 +55,14 @@ const GroupCreate: FC = () => {
       .catch((response) => {
         handleResponse(response);
         stopSubmitting();
+        setIsSaving(false);
       });
   };
+
+  useEffect(() => {
+    console.log(isSaving);
+    updateMenu(menu);
+  }, [i18n.language, isSaving, saveCallback]);
 
   return <GroupForm header={t('groups:headers.create')} setSaveCallback={setSaveCallback} request={request} />;
 };

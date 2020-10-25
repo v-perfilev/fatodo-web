@@ -36,6 +36,7 @@ const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (props): Rea
 
   useEffect(() => {
     updateCaptcha();
+    window.clearInterval(interval);
     interval = window.setInterval(() => updateCaptcha(), 30 * 1000);
   }, [shouldUpdate]);
 
