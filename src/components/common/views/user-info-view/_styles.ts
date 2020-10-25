@@ -4,6 +4,6 @@ export const userInfoViewStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 }));

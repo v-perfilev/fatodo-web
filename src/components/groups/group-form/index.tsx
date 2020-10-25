@@ -28,7 +28,7 @@ const GroupForm: FC<Props> = ({header, setSaveCallback, values, isValid, submitF
   const buttonRef = useRef<HTMLButtonElement>();
 
   useEffect(() => {
-    setSaveCallback(() => (): void | Promise<void> => isValid ? buttonRef.current.click() : submitForm());
+    setSaveCallback(() => (): void | Promise<void> => (isValid ? buttonRef.current.click() : submitForm()));
   }, [isValid]);
 
   const theme = ThemeFactory.getTheme(values.color);
@@ -70,7 +70,7 @@ const formik = withFormik<Props, GroupFormValues>({
 
   validationSchema: Yup.object().shape({
     title: Yup.string().required(() => i18n.t('groups:fields.title.required')),
-    color: Yup.string().required(() => i18n.t('groups:fields.color.required'))
+    color: Yup.string().required(() => i18n.t('groups:fields.color.required')),
   }),
 
   validateOnMount: true,
@@ -79,7 +79,7 @@ const formik = withFormik<Props, GroupFormValues>({
     const {request, group} = props;
     const data = GroupFormUtils.mapValuesToFormData(values, group);
     request(data, () => setSubmitting(false));
-  }
+  },
 });
 
 export default compose(formik)(GroupForm);

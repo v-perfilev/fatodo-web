@@ -5,19 +5,18 @@ import {Fade, Menu, PopoverOrigin, PopoverProps} from '@material-ui/core';
 type Props = HTMLAttributes<HTMLElement> & PopoverProps;
 
 export const PopupMenu: FC<Props> = ({children, className, ...props}: Props) => {
-
   const menuListProps = {
-    disablePadding: true
+    disablePadding: true,
   };
 
   const anchorOrigin = {
     vertical: 'bottom',
-    horizontal: 'center'
+    horizontal: 'center',
   } as PopoverOrigin;
 
   const transformOrigin = {
     vertical: 'top',
-    horizontal: 'center'
+    horizontal: 'center',
   } as PopoverOrigin;
 
   return (

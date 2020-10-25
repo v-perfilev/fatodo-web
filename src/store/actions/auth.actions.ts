@@ -6,7 +6,7 @@ export const ACTION_TYPES = {
   LOGIN: 'authState/LOGIN',
   LOGOUT: 'authState/LOGOUT',
   ACCOUNT: 'authState/ACCOUNT',
-  CLEAR_AUTH: 'authState/CLEAR_AUTH'
+  CLEAR_AUTH: 'authState/CLEAR_AUTH',
 };
 
 export const clearAuth = () => (dispatch): void => {
