@@ -20,12 +20,12 @@ type Props = {
 const defaultInitialCrop = {
   unit: '%',
   width: 100,
-  aspect: 1,
+  aspect: 1
 };
 
 const compressionOptions = {
   maxWidthOrHeight: IMAGE_MAX_WIDTH,
-  maxSizeMB: IMAGE_MAX_SIZE,
+  maxSizeMB: IMAGE_MAX_SIZE
 };
 
 const minWidth = IMAGE_MIN_WIDTH;
@@ -43,17 +43,21 @@ export const ImageUploadPopover: FC<Props> = ({source, anchorEl, handleClose, cr
 
   const classNames = csx(classes.popoverBody, {[classes.invalidBody]: !isValid});
 
+  const resetCropAndHandleClose = (image: Image): void => {
+    setCrop({...defaultInitialCrop, ...cropOptions});
+    handleClose(image);
+  };
+
   const onClose = (): void => {
     if (!isValid) {
-      handleClose(null);
+      resetCropAndHandleClose(null);
     } else {
       imageCompression(croppedBlob, compressionOptions).then(async (compressedBlob: Blob) => {
         const filename = URL.createObjectURL(compressedBlob);
         const image = {filename, content: compressedBlob};
-        handleClose(image);
+        resetCropAndHandleClose(image);
       });
     }
-    setCrop({...defaultInitialCrop, ...cropOptions});
   };
 
   const onImageLoad = (image): void => {
