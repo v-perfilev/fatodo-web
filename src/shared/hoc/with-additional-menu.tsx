@@ -22,10 +22,10 @@ const withAdditionalMenu = (Component: ComponentType): FC => (props): ReactEleme
   return (
     <AdditionalMenuContext.Provider value={context}>
       <Box className={rootClassNames}>
+        <AdditionalMenu />
         <Box className={classes.container}>
           <Component {...props} />
         </Box>
-        <AdditionalMenu />
       </Box>
     </AdditionalMenuContext.Provider>
   );

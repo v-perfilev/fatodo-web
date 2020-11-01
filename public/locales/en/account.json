@@ -64,6 +64,12 @@
       "max20": "Can not be longer than 20 characters",
       "notUnique": "Should be unique"
     },
+    "firstname": {
+      "label": "Firstname"
+    },
+    "lastname": {
+      "label": "Lastname"
+    },
     "language": {
       "label": "Language",
       "required": "Required"

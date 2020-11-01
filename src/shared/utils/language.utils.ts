@@ -14,7 +14,7 @@ export class LanguageUtils {
   };
 
   public static setLanguageFromUser = (account: UserAccount): void => {
-    const code = account?.language;
+    const code = account?.info?.language;
     if (code && LanguageUtils.getLanguage() !== code) {
       LanguageUtils.setLanguage(code);
     }

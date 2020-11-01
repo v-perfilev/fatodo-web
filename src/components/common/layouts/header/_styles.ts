@@ -4,7 +4,7 @@ import {HEADER_HEIGHT} from './_constants';
 
 export const headerStyles = makeStyles((theme: Theme) => ({
   appbar: {
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.paper
   },
   toolbar: {
     height: HEADER_HEIGHT,
@@ -14,16 +14,16 @@ export const headerStyles = makeStyles((theme: Theme) => ({
     '& > *': {
       marginRight: theme.spacing(2),
       '&:last-child': {
-        marginRight: theme.spacing(0),
-      },
-    },
+        marginRight: theme.spacing(0)
+      }
+    }
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
-    marginRight: theme.spacing(-1) + 'px !important',
-  },
+    marginRight: theme.spacing(-1) + 'px !important'
+  }
 }));
 
 export const horizontalMenuStyles = makeStyles((theme: Theme) => ({
@@ -34,14 +34,14 @@ export const horizontalMenuStyles = makeStyles((theme: Theme) => ({
     '& > *': {
       marginRight: theme.spacing(2),
       '&:last-child': {
-        marginRight: theme.spacing(0),
-      },
-    },
+        marginRight: theme.spacing(0)
+      }
+    }
   },
   image: {
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(1),
-  },
+    marginRight: theme.spacing(1)
+  }
 }));
 
 export const sidebarMenuStyles = makeStyles((theme: Theme) => ({
@@ -49,25 +49,25 @@ export const sidebarMenuStyles = makeStyles((theme: Theme) => ({
     minWidth: 200,
     height: '100%',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   icon: {
-    color: theme.palette.primary.main,
+    color: theme.palette.primary.main
   },
   toolbar: {
     display: 'flex',
     flexDirection: 'row-reverse',
     justifyContent: 'space-between',
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
+    paddingRight: theme.spacing(2)
   },
   username: {
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(1),
-  },
+    marginBottom: theme.spacing(1)
+  }
 }));

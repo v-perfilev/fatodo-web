@@ -20,9 +20,9 @@ import UserService from '../../../services/user.service';
 
 type Props = FormikProps<any> &
   SnackState & {
-    account: UserAccount;
-    requestAccountData: () => void;
-  };
+  account: UserAccount;
+  requestAccountData: () => void;
+};
 
 const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = accountFormStyles();
@@ -34,6 +34,8 @@ const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   return (
     <Form className={classes.form}>
       <TextInput name="username" label={t('account:fields.username.label')} required />
+      <TextInput name="firstname" label={t('account:fields.firstname.label')} />
+      <TextInput name="lastname" label={t('account:fields.lastname.label')} />
       <SelectInput name="language" label={t('account:fields.language.label')} options={languageMap} required />
       <ImageUpload
         filenameName="imageFilename"
@@ -56,7 +58,7 @@ const formik = withFormik<Props, AccountFormValues>({
 
   validationSchema: ({account}: Props) =>
     Yup.object().shape({
-      username: usernameChangeValidator(account.username).check(),
+      username: usernameChangeValidator(account.username).check()
     }),
 
   validateOnMount: true,
@@ -76,7 +78,7 @@ const formik = withFormik<Props, AccountFormValues>({
       .finally(() => {
         setSubmitting(false);
       });
-  },
+  }
 });
 
 export default compose(withSnackContext, formik)(AccountForm);

@@ -4,12 +4,30 @@ export interface UserAccount {
   email: string;
   provider: string;
   authorities: string[];
-  language: string;
-  imageFilename?: string;
+  info: UserInfo;
 }
 
 export interface User {
   id: string;
   username: string;
+  firstname?: string;
+  lastname?: string;
   imageFilename?: string;
 }
+
+export interface UserInfo {
+  firstname?: string;
+  lastname?: string;
+  language: string;
+  imageFilename?: string;
+}
+
+export const convertAccountToUser = (account: UserAccount): User => {
+  return {
+    id: account?.username,
+    username: account?.username,
+    firstname: account?.info?.firstname,
+    lastname: account?.info?.lastname,
+    imageFilename: account?.info?.imageFilename
+  };
+};

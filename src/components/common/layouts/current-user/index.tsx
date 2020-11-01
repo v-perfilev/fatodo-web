@@ -6,6 +6,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import csx from 'classnames';
 import {currentUserStyles} from './_styles';
 import {UserView} from '../../views/user-view';
+import {convertAccountToUser} from '../../../../models/user.model';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
@@ -17,8 +18,9 @@ const CurrentUser: FC<Props> = ({authState, className}: Props) => {
   const classNames = csx(classes.root, className);
 
   const account = authState.account;
+  const user = convertAccountToUser(account);
 
-  return <UserView user={account} picSize="sm" withUsername className={classNames} />;
+  return <UserView user={user} picSize="sm" withUsername className={classNames} />;
 };
 
 export default compose(connector)(CurrentUser);

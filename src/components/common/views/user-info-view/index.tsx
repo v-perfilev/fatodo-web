@@ -17,7 +17,7 @@ export const UserInfoView: FC<Props> = ({user, className}: Props) => {
   return (
     <Box className={classNames}>
       <PageSubheader title={user.username} />
-      <UrlPic alt={user.username} url={user.imageFilename} size="lg" border={2} variant="rounded" />
+      <UrlPic alt={user.username} url={user.imageFilename} size="lg" border={2} variant="square" />
     </Box>
   );
 };
