@@ -25,13 +25,13 @@ export default class UserService {
     return axios.post(url, data);
   };
 
-  public static isEmailUnique = (value: string): AxiosPromise => {
-    const url = UserService.baseUrl + '/check/email/' + value + '/unique';
+  public static doesEmailExist = (value: string): AxiosPromise => {
+    const url = UserService.baseUrl + '/check/email-exists/' + value;
     return axios.get(url);
   };
 
-  public static isUsernameUnique = (value: string): AxiosPromise => {
-    const url = UserService.baseUrl + '/check/username/' + value + '/unique';
+  public static doesUsernameExist = (value: string): AxiosPromise => {
+    const url = UserService.baseUrl + '/check/username-exists/' + value;
     return axios.get(url);
   };
 }

@@ -10,7 +10,7 @@ export const emailValidator = new AsyncValidator(
   {
     name: 'unique',
     message: (): string => i18n.t('account:fields.email.notUnique'),
-    test: async (value): Promise<boolean> => (await UserService.isEmailUnique(value)).data === true,
+    test: async (value): Promise<boolean> => (await UserService.doesEmailExist(value)).data === false,
   }
 );
 
@@ -24,7 +24,7 @@ export const usernameValidator = new AsyncValidator(
   {
     name: 'unique',
     message: (): string => i18n.t('account:fields.username.notUnique'),
-    test: async (value): Promise<boolean> => (await UserService.isUsernameUnique(value)).data === true,
+    test: async (value): Promise<boolean> => (await UserService.doesUsernameExist(value)).data === false,
   }
 );
 
@@ -39,7 +39,7 @@ export const usernameChangeValidator = (currentLogin: string): AsyncValidator =>
       name: 'unique',
       message: (): string => i18n.t('account:fields.username.notUnique'),
       test: async (value): Promise<boolean> =>
-        value == currentLogin || (await UserService.isUsernameUnique(value)).data === true,
+        value == currentLogin || (await UserService.doesUsernameExist(value)).data === false,
     }
   );
 
