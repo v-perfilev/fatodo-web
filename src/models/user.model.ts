@@ -28,6 +28,6 @@ export const convertAccountToUser = (account: UserAccount): User => {
     username: account?.username,
     firstname: account?.info?.firstname,
     lastname: account?.info?.lastname,
-    imageFilename: account?.info?.imageFilename
+    imageFilename: account?.info?.imageFilename,
   };
 };

@@ -16,7 +16,7 @@ const defaultAccountFormValues: Readonly<AccountFormValues> = {
   lastname: '',
   language: 'en',
   imageFilename: null,
-  imageContent: null
+  imageContent: null,
 };
 
 export class AccountFormUtils {
@@ -26,7 +26,7 @@ export class AccountFormUtils {
     lastname: account?.info?.lastname ?? defaultAccountFormValues.lastname,
     language: account?.info?.language ?? defaultAccountFormValues.language,
     imageFilename: account?.info?.imageFilename ?? defaultAccountFormValues.imageFilename,
-    imageContent: null
+    imageContent: null,
   });
 
   public static mapValuesToFormData = (values: AccountFormValues, account: UserAccount): FormData => {
@@ -55,7 +55,7 @@ export interface AccountPasswordFormValues {
 
 const defaultAccountPasswordFormValues: Readonly<AccountPasswordFormValues> = {
   oldPassword: '',
-  newPassword: ''
+  newPassword: '',
 };
 
 export class AccountPasswordFormUtils {
@@ -64,7 +64,7 @@ export class AccountPasswordFormUtils {
   public static mapValuesToDTO = (values: AccountPasswordFormValues): ChangePasswordDTO => {
     return {
       oldPassword: values.oldPassword,
-      newPassword: values.newPassword
+      newPassword: values.newPassword,
     };
   };
 }

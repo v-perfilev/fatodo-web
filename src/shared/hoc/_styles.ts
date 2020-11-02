@@ -6,8 +6,8 @@ export const centeringStyles = makeStyles(() => ({
     display: 'flex',
     flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 }));
 
 export const wrapperStyles = makeStyles(() => ({
@@ -15,21 +15,21 @@ export const wrapperStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    minWidth: '100vw'
-  }
+    minWidth: '100vw',
+  },
 }));
 
 export const backgroundStyles = makeStyles(() => ({
   container: {
     minHeight: '100vh',
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   header: {
     height: 150,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   body: {
     display: 'flex',
@@ -37,17 +37,17 @@ export const backgroundStyles = makeStyles(() => ({
     alignItems: 'center',
     justifyContent: 'center',
     '& > *': {
-      maxWidth: '80%'
-    }
+      maxWidth: '80%',
+    },
   },
   footer: {
     height: 150,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   rightBox: {
-    position: 'relative'
+    position: 'relative',
   },
   imgBox: {
     position: 'fixed',
@@ -56,12 +56,12 @@ export const backgroundStyles = makeStyles(() => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   img: {
     minWidth: '100%',
-    minHeight: '100%'
-  }
+    minHeight: '100%',
+  },
 }));
 
 export const developmentRibbonStyles = makeStyles((theme: Theme) => ({
@@ -78,7 +78,7 @@ export const developmentRibbonStyles = makeStyles((theme: Theme) => ({
     transform: 'rotate(-45deg)',
     fontSize: '1em',
     fontWeight: 600,
-    color: theme.palette.error.contrastText
+    color: theme.palette.error.contrastText,
   },
   background: {
     zIndex: -1,
@@ -86,53 +86,53 @@ export const developmentRibbonStyles = makeStyles((theme: Theme) => ({
     width: '100%',
     height: '100%',
     background: theme.palette.error.main,
-    opacity: 0.7
-  }
+    opacity: 0.7,
+  },
 }));
 
 export const additionalMenuStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexGrow: 1,
-    width: '100%'
+    width: '100%',
   },
   rootMenuBottom: {
-    flexDirection: 'column-reverse'
+    flexDirection: 'column-reverse',
   },
   rootMenuLeft: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   container: {
     position: 'relative',
     display: 'flex',
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
 export const flexStyles = makeStyles(() => ({
   container: {
     display: 'flex',
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
 export const snackStyles = makeStyles((theme: Theme) => ({
   variantSuccess: {
-    backgroundColor: theme.palette.success.main + ' !important'
+    backgroundColor: theme.palette.success.main + ' !important',
   },
   variantError: {
-    backgroundColor: theme.palette.error.main + ' !important'
+    backgroundColor: theme.palette.error.main + ' !important',
   },
   variantInfo: {
-    backgroundColor: theme.palette.info.main + ' !important'
+    backgroundColor: theme.palette.info.main + ' !important',
   },
   variantWarning: {
-    backgroundColor: theme.palette.warning.main + ' !important'
-  }
+    backgroundColor: theme.palette.warning.main + ' !important',
+  },
 }));
 
 export const headerStyles = makeStyles(() => ({
   spacer: {
-    height: HEADER_HEIGHT
-  }
+    height: HEADER_HEIGHT,
+  },
 }));
