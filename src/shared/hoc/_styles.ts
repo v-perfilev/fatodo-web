@@ -66,7 +66,7 @@ export const backgroundStyles = makeStyles(() => ({
 
 export const developmentRibbonStyles = makeStyles((theme: Theme) => ({
   root: {
-    zIndex: 10000,
+    zIndex: 1200,
     position: 'fixed',
     top: 30,
     left: -100,
@@ -105,8 +105,7 @@ export const additionalMenuStyles = makeStyles(() => ({
   container: {
     position: 'relative',
     display: 'flex',
-    flexGrow: 1,
-    overflow: 'hidden'
+    flexGrow: 1
   }
 }));
 

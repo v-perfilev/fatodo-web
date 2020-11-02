@@ -11,12 +11,14 @@ type Props = HTMLAttributes<HTMLElement> & {
 export const HoverPopup: FC<Props> = ({AnchorComponent, PopupComponent}: Props) => {
   const classes = hoverPopupStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const [tmpAnchorEl, setTmpAnchorEl] = useState<HTMLElement | null>(null);
   const [isOverBox, setIsOverBox] = useState(false);
   const [isOverPopover, setIsOverPopover] = useState(false);
 
   const onBoxOver = (event: React.MouseEvent<HTMLElement, MouseEvent>): void => {
-    setAnchorEl(event.currentTarget);
     setIsOverBox(true);
+    setTmpAnchorEl(event.currentTarget);
+    window.setTimeout(() => setAnchorEl(tmpAnchorEl), 500);
   };
 
   const onBoxLeave = (): void => {
@@ -31,11 +33,15 @@ export const HoverPopup: FC<Props> = ({AnchorComponent, PopupComponent}: Props) 
     window.setTimeout(() => setIsOverPopover(false), 50);
   };
 
+  const clearAnchor = (): void => {
+    setAnchorEl(null);
+  };
+
   useEffect(() => {
     if (!isOverBox && !isOverPopover) {
-      setAnchorEl(null);
+      clearAnchor();
     }
-  }, [isOverBox, isOverPopover]);
+  }, [isOverBox, isOverPopover, anchorEl]);
 
   return (
     <>
