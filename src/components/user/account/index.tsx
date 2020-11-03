@@ -19,6 +19,8 @@ import AccountForm from './account-form';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 import AccountPasswordForm from './account-password-form';
 import {requestAccountData} from '../../../store/actions/auth.actions';
+import {useLastLocation} from 'react-router-last-location';
+import {Routes} from '../../router';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {requestAccountData};
@@ -30,10 +32,11 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
   const classes = accountStyles();
   const {account} = authState;
   const history = useHistory();
+  const lastLocation = useLastLocation();
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
 
-  const redirectToPreviousLocation = (): void => history.goBack();
+  const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
   const menu = (
     <>

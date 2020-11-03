@@ -6,13 +6,16 @@ import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {ArrowBackIcon} from '../../common/icons/arrow-back-icon';
+import {useLastLocation} from 'react-router-last-location';
+import {Routes} from '../../router';
 
 const ContactList: FC = () => {
   const history = useHistory();
+  const lastLocation = useLastLocation();
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
 
-  const redirectToPreviousLocation = (): void => history.goBack();
+  const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
   const menu = (
     <>

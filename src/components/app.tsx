@@ -10,6 +10,7 @@ import withDevelopmentRibbon from '../shared/hoc/with-development-ribbon';
 import {SecurityUtils} from '../shared/utils/security.utils';
 import {login, requestAccountData} from '../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
+import withLastLocation from '../shared/hoc/with-last-location';
 
 const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);
@@ -31,4 +32,4 @@ const App: FC<Props> = ({login, requestAccountData}: Props) => {
   return ready && <Router />;
 };
 
-export default compose(hot(module), withDevelopmentRibbon, withLoader, withWrapper, connector)(App);
+export default compose(hot(module), withDevelopmentRibbon, withLastLocation, withLoader, withWrapper, connector)(App);
