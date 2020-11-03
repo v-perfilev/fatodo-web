@@ -22,7 +22,7 @@ import AdditionalMenuButton from '../../common/layouts/additional-menu/additiona
 import {EditIcon} from '../../common/icons/edit-icon';
 import {ItemRouteUtils} from '../_router';
 import {ItemsIcon} from '../../common/icons/items-icon';
-import {GroupRouteUtils} from '../../groups/_router';
+import {GroupRouteUtils} from '../../group/_router';
 import ItemViewInfo from './item-view-info';
 import {DeleteIcon} from '../../common/icons/delete-icon';
 import {useItemDeleteContext} from '../../../shared/contexts/item-delete-context';
@@ -63,25 +63,25 @@ const ItemView: FC = () => {
         icon={<EditIcon />}
         action={redirectToItemEdit}
         color="primary"
-        tooltip={t('items:tooltips.edit')}
+        tooltip={t('item:tooltips.edit')}
       />
       <AdditionalMenuButton
         icon={<DeleteIcon />}
         action={openDeleteDialog}
         color="primary"
-        tooltip={t('items:tooltips.delete')}
+        tooltip={t('item:tooltips.delete')}
       />
       <AdditionalMenuButton
         icon={<ItemsIcon />}
         action={redirectToGroupView}
         color="secondary"
-        tooltip={t('items:tooltips.list')}
+        tooltip={t('item:tooltips.list')}
       />
       <AdditionalMenuButton
         icon={<GroupsIcon />}
         action={redirectToGroups}
         color="secondary"
-        tooltip={t('items:tooltips.groupList')}
+        tooltip={t('item:tooltips.groupList')}
       />
     </>
   );

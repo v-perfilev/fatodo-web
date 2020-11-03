@@ -11,7 +11,7 @@ const ItemViewType: FC<Props> = ({className}: Props) => {
   const {item} = useItemViewContext();
 
   return (
-    <LabeledBox label={t('items:labels.type')} className={className}>
+    <LabeledBox label={t('item:labels.type')} className={className}>
       <TypeView type={item.type} />
     </LabeledBox>
   );

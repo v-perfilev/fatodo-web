@@ -11,7 +11,7 @@ const ItemViewGroup: FC<Props> = ({className}: Props) => {
   const {group} = useGroupViewContext();
 
   return (
-    <LabeledBox label={t('items:labels.group')} className={className}>
+    <LabeledBox label={t('item:labels.group')} className={className}>
       <Box>{group.title}</Box>
     </LabeledBox>
   );

@@ -41,17 +41,17 @@ const GroupForm: FC<Props> = ({header, setSaveCallback, values, isValid, submitF
         <Form className={classes.form}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <TextInput name="title" label={t('groups:fields.title.label')} required />
+              <TextInput name="title" label={t('group:fields.title.label')} required />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <ThemeSelect name="color" label={t('groups:fields.color.label')} />
+              <ThemeSelect name="color" label={t('group:fields.color.label')} />
             </Grid>
             <Grid item xs={6} lg={9} />
             <Grid item xs={6} lg={3}>
               <ImageUpload
                 filenameName="imageFilename"
                 contentName="imageContent"
-                label={t('groups:fields.image.label')}
+                label={t('group:fields.image.label')}
                 preview
               />
             </Grid>
@@ -69,8 +69,8 @@ const formik = withFormik<Props, GroupFormValues>({
   mapPropsToValues: ({group}: Props) => GroupFormUtils.mapGroupToValues(group),
 
   validationSchema: Yup.object().shape({
-    title: Yup.string().required(() => i18n.t('groups:fields.title.required')),
-    color: Yup.string().required(() => i18n.t('groups:fields.color.required')),
+    title: Yup.string().required(() => i18n.t('group:fields.title.required')),
+    color: Yup.string().required(() => i18n.t('group:fields.color.required')),
   }),
 
   validateOnMount: true,

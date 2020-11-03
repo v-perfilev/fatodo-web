@@ -43,13 +43,13 @@ const GroupPreview: FC = () => {
         icon={<PlusIcon />}
         action={redirectToGroupCreate}
         color="primary"
-        tooltip={t('groups:tooltips.create')}
+        tooltip={t('group:tooltips.create')}
       />
       <AdditionalMenuButton
         icon={<ReorderIcon />}
         action={redirectToGroupsSorting}
         color="secondary"
-        tooltip={t('groups:tooltips.reorder')}
+        tooltip={t('group:tooltips.reorder')}
       />
     </>
   );

@@ -11,7 +11,7 @@ const ItemViewPriority: FC<Props> = ({className}: Props) => {
   const {item} = useItemViewContext();
 
   return (
-    <LabeledBox label={t('items:labels.priority')} className={className}>
+    <LabeledBox label={t('item:labels.priority')} className={className}>
       <PriorityView priority={item.priority} />
     </LabeledBox>
   );

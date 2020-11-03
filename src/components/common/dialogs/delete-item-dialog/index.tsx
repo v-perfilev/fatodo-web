@@ -20,7 +20,7 @@ export const DeleteItemDialog: FC<Props> = ({item, setItem, onSuccess}: Props) =
     setLoading(true);
     ItemService.delete(item?.id)
       .then(() => {
-        handleCode('items.deleted', 'info');
+        handleCode('item.deleted', 'info');
         setItem(null);
         if (onSuccess) {
           onSuccess();
@@ -43,8 +43,8 @@ export const DeleteItemDialog: FC<Props> = ({item, setItem, onSuccess}: Props) =
       open={item !== null}
       onAgree={onAgree}
       onDisagree={onDisagree}
-      title={t('items:modals.deleteTitle')}
-      text={t('items:modals.deleteText', {title: item?.title})}
+      title={t('item:modals.deleteTitle')}
+      text={t('item:modals.deleteText', {title: item?.title})}
       loading={loading}
     />
   );

@@ -61,20 +61,20 @@ const ItemViewChanges: FC<Props> = ({className}: Props) => {
     <Box className={classNames}>
       {creator && (
         <Box className={classes.box}>
-          <LabeledBox label={t('items:labels.createdBy')} className={commonClasses.box}>
+          <LabeledBox label={t('item:labels.createdBy')} className={commonClasses.box}>
             <Box>{creator}</Box>
           </LabeledBox>
-          <LabeledBox label={t('items:labels.createdAt')} className={commonClasses.box}>
+          <LabeledBox label={t('item:labels.createdAt')} className={commonClasses.box}>
             <Box>{getDate(item.createdAt)}</Box>
           </LabeledBox>
         </Box>
       )}
       {updater && item.createdAt !== item.lastModifiedAt && (
         <Box className={classes.box}>
-          <LabeledBox label={t('items:labels.updatedBy')} className={commonClasses.box}>
+          <LabeledBox label={t('item:labels.updatedBy')} className={commonClasses.box}>
             <Box>{updater}</Box>
           </LabeledBox>
-          <LabeledBox label={t('items:labels.updatedAt')} className={commonClasses.box}>
+          <LabeledBox label={t('item:labels.updatedAt')} className={commonClasses.box}>
             <Box>{getDate(item.lastModifiedAt)}</Box>
           </LabeledBox>
         </Box>

@@ -14,7 +14,7 @@ const ItemViewDescription: FC = () => {
   return (
     item.description && (
       <>
-        <LabeledBox label={t('items:labels.description')} className={commonClasses.box}>
+        <LabeledBox label={t('item:labels.description')} className={commonClasses.box}>
           <Box>{item.description}</Box>
         </LabeledBox>
         <PageDivider />

@@ -1,49 +1,29 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
-import {Group} from '../../../models/group.model';
 import GroupForm from '../group-form';
-import {useHistory, useParams} from 'react-router-dom';
-import {Routes} from '../../router';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
+import {Routes} from '../../router';
+import {useHistory} from 'react-router-dom';
 import GroupService from '../../../services/group.service';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../_router';
-import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
-const GroupEdit: FC = () => {
+const GroupCreate: FC = () => {
   const history = useHistory();
-  const {groupId} = useParams();
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
-  const [group, setGroup] = useState<Group>(null);
   const [isSaving, setIsSaving] = useState(false);
-  const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
+  const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
   });
 
-  const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
-  const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
-
-  const loadGroup = (): void => {
-    GroupService.get(groupId)
-      .then((response) => {
-        setGroup(response.data);
-      })
-      .catch((response) => {
-        const status = ResponseUtils.getStatus(response);
-        if (status === 404) {
-          redirectToNotFound();
-        }
-        handleResponse(response);
-        redirectToGroupView();
-      });
-  };
+  const redirectToGroupView = (id: string): void => history.push(GroupRouteUtils.getViewUrl(id));
+  const redirectToGroups = (): void => history.push(Routes.GROUPS);
 
   const menu = (
     <>
@@ -52,24 +32,25 @@ const GroupEdit: FC = () => {
         icon={<CheckIcon />}
         action={saveCallback}
         color="primary"
-        tooltip={t('groups:tooltips.ok')}
+        tooltip={t('group:tooltips.ok')}
         loading={isSaving}
       />
       <AdditionalMenuButton
         icon={<CloseIcon />}
-        action={redirectToGroupView}
+        action={redirectToGroups}
         color="secondary"
-        tooltip={t('groups:tooltips.cancel')}
+        tooltip={t('group:tooltips.cancel')}
       />
     </>
   );
 
   const request = (formData: FormData, stopSubmitting: () => void): void => {
     setIsSaving(true);
-    GroupService.update(formData)
-      .then(() => {
-        handleCode('groups.edited', 'info');
-        redirectToGroupView();
+    GroupService.create(formData)
+      .then((response) => {
+        handleCode('group.created', 'info');
+        const id = response.data.id;
+        redirectToGroupView(id);
       })
       .catch((response) => {
         handleResponse(response);
@@ -79,18 +60,11 @@ const GroupEdit: FC = () => {
   };
 
   useEffect(() => {
-    loadGroup();
-  }, []);
-
-  useEffect(() => {
+    console.log(isSaving);
     updateMenu(menu);
   }, [i18n.language, isSaving, saveCallback]);
 
-  return group ? (
-    <GroupForm group={group} header={t('groups:headers.edit')} setSaveCallback={setSaveCallback} request={request} />
-  ) : (
-    <CircularSpinner />
-  );
+  return <GroupForm header={t('group:headers.create')} setSaveCallback={setSaveCallback} request={request} />;
 };
 
-export default GroupEdit;
+export default GroupCreate;

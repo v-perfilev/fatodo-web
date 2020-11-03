@@ -8,7 +8,7 @@ import Forbidden from './static/forbidden';
 import PageNotFound from './static/page-not-found';
 import NotActivated from './static/not-activated';
 import Home from './home';
-import GroupRouter from './groups/_router';
+import GroupRouter from './group/_router';
 import ItemRouter from './item/_router';
 import PrivateRoute from '../shared/routes/private-route';
 import MixedRoute from '../shared/routes/mixed-route';
@@ -18,11 +18,13 @@ import SocialLogin from './user/auth/social-login';
 import Activation from './user/activation';
 import ForgotPassword from './user/forgot-password';
 import ResetPassword from './user/reset-password';
+import ContactRouter from './contact/_router';
 
 export enum Routes {
   ROOT = '/',
   GROUPS = '/groups',
   ITEMS = '/items',
+  CONTACT = '/contact',
   ACCOUNT = '/account',
   LOGIN = '/login',
   REGISTRATION = '/registration',
@@ -44,6 +46,7 @@ const Router: FC = () => (
     {/*Private Routes*/}
     <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
     <PrivateRoute path={Routes.ITEMS} component={ItemRouter} />
+    <PrivateRoute path={Routes.CONTACT} component={ContactRouter} />
     <PrivateRoute path={Routes.ACCOUNT} component={AccountSettings} />
     {/*Auth Routes*/}
     <PublicRoute path={Routes.LOGIN} component={Auth} />

@@ -71,25 +71,25 @@ const GroupView: FC = () => {
         icon={<PlusIcon />}
         action={redirectToItemCreate}
         color="primary"
-        tooltip={t('items:tooltips.create')}
+        tooltip={t('item:tooltips.create')}
       />
       <AdditionalMenuButton
         icon={<EditIcon />}
         action={redirectToGroupEdit}
         color="primary"
-        tooltip={t('groups:tooltips.edit')}
+        tooltip={t('group:tooltips.edit')}
       />
       <AdditionalMenuButton
         icon={<DeleteIcon />}
         action={openDeleteDialog}
         color="primary"
-        tooltip={t('groups:tooltips.delete')}
+        tooltip={t('group:tooltips.delete')}
       />
       <AdditionalMenuButton
         icon={<GroupsIcon />}
         action={redirectToGroups}
         color="secondary"
-        tooltip={t('groups:tooltips.list')}
+        tooltip={t('group:tooltips.list')}
       />
     </>
   );

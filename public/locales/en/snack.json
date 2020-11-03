@@ -10,13 +10,13 @@
   "image": {
     "tooSmall": "Too small image selected"
   },
-  "groups": {
+  "group": {
     "created": "Group created",
     "edited": "Group edited",
     "deleted": "Group deleted",
     "sorted": "Groups resorted"
   },
-  "items": {
+  "item": {
     "created": "Item created",
     "edited": "Item edited",
     "deleted": "Item deleted"

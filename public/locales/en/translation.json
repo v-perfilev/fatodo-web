@@ -3,7 +3,8 @@
     "logout": "Log Out",
     "register": "Sign Up",
     "login": "Log In",
-    "account": "Account"
+    "account": "Account",
+    "contacts": "Contacts"
   },
   "auth": {
     "socialLogin": "or log in with"

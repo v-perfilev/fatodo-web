@@ -15,6 +15,7 @@ import {SignUpIcon} from '../../icons/signup-icon';
 import {useHistory, withRouter} from 'react-router-dom';
 import {AccountIcon} from '../../icons/account-icon';
 import CurrentUser from '../current-user';
+import {UserListIcon} from '../../icons/user-list-icon';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout};
@@ -30,6 +31,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) 
   const redirectToLogin = (): void => history.push(Routes.LOGIN);
   const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
   const redirectToAccount = (): void => history.push(Routes.ACCOUNT);
+  const redirectToContacts = (): void => history.push(Routes.CONTACT);
   const redirectAndLogout = (): void => {
     history.push(Routes.ROOT);
     logout();
@@ -54,6 +56,12 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) 
 
   const authenticatedMenu = (
     <>
+      <ListItem button onClick={redirectToContacts}>
+        <ListItemIcon>
+          <UserListIcon className={classes.icon} />
+        </ListItemIcon>
+        <ListItemText>{t('header.contacts')}</ListItemText>
+      </ListItem>
       <ListItem button onClick={redirectToAccount}>
         <ListItemIcon>
           <AccountIcon className={classes.icon} />
@@ -76,10 +84,7 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) 
           <CurrentUser />
         </Box>
       )}
-      <List component="nav">
-        {!isAuthenticated && unauthenticatedMenu}
-        {isAuthenticated && authenticatedMenu}
-      </List>
+      <List component="nav">{isAuthenticated ? authenticatedMenu : unauthenticatedMenu}</List>
     </>
   );
 };

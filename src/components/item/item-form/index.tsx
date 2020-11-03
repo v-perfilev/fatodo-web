@@ -50,28 +50,28 @@ const ItemForm: FC<Props> = (props: Props) => {
         <Form className={classes.form}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <TextInput name="title" label={t('items:fields.title.label')} required />
+              <TextInput name="title" label={t('item:fields.title.label')} required />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <TypeInput name="type" label={t('items:fields.type.label')} />
+              <TypeInput name="type" label={t('item:fields.type.label')} />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <PriorityInput name="priority" label={t('items:fields.priority.label')} />
+              <PriorityInput name="priority" label={t('item:fields.priority.label')} />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <TimeInput name="time" label={t('items:fields.time.label')} />
+              <TimeInput name="time" label={t('item:field.time.label')} />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <DateInput name="date" label={t('items:fields.date.label')} />
+              <DateInput name="date" label={t('item:field.date.label')} />
             </Grid>
             <Grid item xs={12}>
-              <MultilineInput name="description" label={t('items:fields.description.label')} />
+              <MultilineInput name="description" label={t('item:fields.description.label')} />
             </Grid>
             <Grid item xs={12}>
-              <RemindersInput name="reminders" label={t('items:fields.reminders.label')} />
+              <RemindersInput name="reminders" label={t('item:fields.reminders.label')} />
             </Grid>
             <Grid item xs={12}>
-              <TagsInput name="tags" label={t('items:fields.tags.label')} />
+              <TagsInput name="tags" label={t('item:fields.tags.label')} />
             </Grid>
           </Grid>
           <Button type="submit" disabled={!isValid || isSubmitting} ref={buttonRef} className={classes.submitButton}>
@@ -87,9 +87,9 @@ const formik = withFormik<Props, ItemFormValues>({
   mapPropsToValues: ({item}: Props) => ItemFormUtils.mapItemToValues(item),
 
   validationSchema: Yup.object().shape({
-    title: Yup.string().required(() => i18n.t('items:fields.title.required')),
-    type: Yup.string().required(() => i18n.t('items:fields.type.required')),
-    priority: Yup.string().required(() => i18n.t('items:fields.priority.required')),
+    title: Yup.string().required(() => i18n.t('item:fields.title.required')),
+    type: Yup.string().required(() => i18n.t('item:fields.type.required')),
+    priority: Yup.string().required(() => i18n.t('item:fields.priority.required')),
   }),
 
   validateOnMount: true,

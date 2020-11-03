@@ -12,7 +12,7 @@ const ItemViewDate: FC<Props> = ({className}: Props) => {
 
   return (
     item?.date && (
-      <LabeledBox label={t('items:labels.date')} className={className}>
+      <LabeledBox label={t('item:labels.date')} className={className}>
         <DateView date={item.date} />
       </LabeledBox>
     )

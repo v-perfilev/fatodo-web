@@ -14,7 +14,7 @@ import {ItemDTO} from '../../../models/dto/item.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
-import {GroupRouteUtils} from '../../groups/_router';
+import {GroupRouteUtils} from '../../group/_router';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
 const ItemCreate: FC = () => {
@@ -39,14 +39,14 @@ const ItemCreate: FC = () => {
         icon={<CheckIcon />}
         action={saveCallback}
         color="primary"
-        tooltip={t('items:tooltips.ok')}
+        tooltip={t('item:tooltips.ok')}
         loading={isSaving}
       />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroupView}
         color="secondary"
-        tooltip={t('items:tooltips.cancel')}
+        tooltip={t('item:tooltips.cancel')}
       />
     </>
   );
@@ -70,7 +70,7 @@ const ItemCreate: FC = () => {
     setIsSaving(true);
     ItemService.create(data)
       .then(() => {
-        handleCode('items.created', 'info');
+        handleCode('item.created', 'info');
         redirectToGroupView();
       })
       .catch((response) => {
@@ -91,7 +91,7 @@ const ItemCreate: FC = () => {
   return group ? (
     <ItemForm
       group={group}
-      header={t('items:headers.create', {group: group.title})}
+      header={t('item:headers.create', {group: group.title})}
       setSaveCallback={setSaveCallback}
       request={request}
     />

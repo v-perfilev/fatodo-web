@@ -20,7 +20,7 @@ export const DeleteGroupDialog: FC<Props> = ({group, setGroup, onSuccess}: Props
     setLoading(true);
     GroupService.delete(group?.id)
       .then(() => {
-        handleCode('groups.deleted', 'info');
+        handleCode('group.deleted', 'info');
         setGroup(null);
         if (onSuccess) {
           onSuccess();
@@ -43,8 +43,8 @@ export const DeleteGroupDialog: FC<Props> = ({group, setGroup, onSuccess}: Props
       open={group !== null}
       onAgree={onAgree}
       onDisagree={onDisagree}
-      title={t('groups:modals.deleteTitle')}
-      text={t('groups:modals.deleteText', {title: group?.title})}
+      title={t('group:modals.deleteTitle')}
+      text={t('group:modals.deleteText', {title: group?.title})}
       loading={loading}
     />
   );

@@ -3,7 +3,8 @@
     "logout": "Выход",
     "register": "Регистрация",
     "login": "Вход",
-    "account": "Учётная запись"
+    "account": "Учётная запись",
+    "contacts": "Контакты"
   },
   "auth": {
     "socialLogin": "или войдите через"

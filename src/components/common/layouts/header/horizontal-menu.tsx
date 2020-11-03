@@ -19,6 +19,7 @@ import CurrentUser from '../current-user';
 import {ArrowDownIcon} from '../../icons/arrow-down-icon';
 import {PopupMenu} from '../../surfaces/popup-menu';
 import {AccountIcon} from '../../icons/account-icon';
+import {UserListIcon} from '../../icons/user-list-icon';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout};
@@ -36,6 +37,7 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
   const redirectToLogin = (): void => history.push(Routes.LOGIN);
   const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
   const redirectToAccount = (): void => history.push(Routes.ACCOUNT);
+  const redirectToContacts = (): void => history.push(Routes.CONTACT);
   const redirectAndLogout = (): void => {
     history.push(Routes.ROOT);
     logout();
@@ -57,6 +59,9 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
 
   const authenticatedMenu = (
     <>
+      <Button color="primary" startIcon={<UserListIcon />} onClick={redirectToContacts}>
+        {t('header.contacts')}
+      </Button>
       <Button color="primary" onClick={handleClick} ref={ref}>
         <CurrentUser />
         <ArrowDownIcon />
@@ -77,8 +82,7 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
   return (
     <Box className={classes.root}>
       <LanguageSelect />
-      {!isAuthenticated && unauthenticatedMenu}
-      {isAuthenticated && authenticatedMenu}
+      {isAuthenticated ? authenticatedMenu : unauthenticatedMenu}
     </Box>
   );
 };

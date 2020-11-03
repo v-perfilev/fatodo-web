@@ -16,7 +16,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {ItemRouteUtils} from '../_router';
-import {GroupRouteUtils} from '../../groups/_router';
+import {GroupRouteUtils} from '../../group/_router';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
 const ItemEdit: FC = () => {
@@ -43,14 +43,14 @@ const ItemEdit: FC = () => {
         icon={<CheckIcon />}
         action={saveCallback}
         color="primary"
-        tooltip={t('items:tooltips.ok')}
+        tooltip={t('item:tooltips.ok')}
         loading={isSaving}
       />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToItemView}
         color="secondary"
-        tooltip={t('items:tooltips.cancel')}
+        tooltip={t('item:tooltips.cancel')}
       />
     </>
   );
@@ -87,7 +87,7 @@ const ItemEdit: FC = () => {
     setIsSaving(true);
     ItemService.update(data)
       .then(() => {
-        handleCode('items.edited', 'info');
+        handleCode('item.edited', 'info');
         redirectToGroupView();
       })
       .catch((response) => {
@@ -115,7 +115,7 @@ const ItemEdit: FC = () => {
     <ItemForm
       group={group}
       item={item}
-      header={t('items:headers.edit', {group: group.title})}
+      header={t('item:headers.edit', {group: group.title})}
       setSaveCallback={setSaveCallback}
       request={request}
     />

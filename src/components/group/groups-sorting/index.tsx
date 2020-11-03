@@ -41,7 +41,7 @@ const GroupsSorting: FC = () => {
     const orderedGroupIds = order.current.map((o) => groups[o].id);
     GroupService.setGroupOrder(orderedGroupIds)
       .then(() => {
-        handleCode('groups.sorted', 'info');
+        handleCode('group.sorted', 'info');
         redirectToGroups();
       })
       .catch((response) => {
@@ -57,14 +57,14 @@ const GroupsSorting: FC = () => {
         icon={<CheckIcon />}
         action={saveOrder}
         color="primary"
-        tooltip={t('groups:tooltips.ok')}
+        tooltip={t('group:tooltips.ok')}
         loading={isSaving}
       />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroups}
         color="secondary"
-        tooltip={t('groups:tooltips.cancel')}
+        tooltip={t('group:tooltips.cancel')}
       />
     </>
   );

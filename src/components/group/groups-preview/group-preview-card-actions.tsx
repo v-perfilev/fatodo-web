@@ -61,10 +61,10 @@ const GroupPreviewCardActions: FC = () => {
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        <MenuItem onClick={redirectToItemCreate}>{t('groups:menu.createItem')}</MenuItem>
-        <MenuItem onClick={redirectToGroupView}>{t('groups:menu.viewGroup')}</MenuItem>
-        <MenuItem onClick={redirectToGroupEdit}>{t('groups:menu.editGroup')}</MenuItem>
-        <MenuItem onClick={openDeleteDialog}>{t('groups:menu.deleteGroup')}</MenuItem>
+        <MenuItem onClick={redirectToItemCreate}>{t('group:menu.createItem')}</MenuItem>
+        <MenuItem onClick={redirectToGroupView}>{t('group:menu.viewGroup')}</MenuItem>
+        <MenuItem onClick={redirectToGroupEdit}>{t('group:menu.editGroup')}</MenuItem>
+        <MenuItem onClick={openDeleteDialog}>{t('group:menu.deleteGroup')}</MenuItem>
       </PopupMenu>
     </>
   );
