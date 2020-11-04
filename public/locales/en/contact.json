@@ -1,5 +1,8 @@
 {
+  "contact-list": {
+    "title": "List of contacts"
+  },
   "tooltips": {
-    "back": "К предыдущей странице"
+    "back": "Back"
   }
 }
