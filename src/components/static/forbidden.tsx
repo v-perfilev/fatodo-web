@@ -5,7 +5,7 @@ import {compose} from 'recompose';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hoc/with-redirect-timer';
 import {useTranslation} from 'react-i18next';
 import {staticPageStyles} from './_styles';
-import withBackground from '../../shared/hoc/with-background';
+import withBackground from '../../shared/hoc/with-background/with-background';
 import {HomeIcon} from '../common/icons/home-icon';
 
 type Props = RedirectTimerProps;

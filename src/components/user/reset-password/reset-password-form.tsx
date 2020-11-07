@@ -11,7 +11,7 @@ import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
 import {PasswordInput} from '../../common/inputs/password-input';
 import {LoadingButton} from '../../common/controls/loading-button';
 import {PasswordStrengthBar} from '../password-strength-bar';
-import {withSnackContext} from '../../../shared/hoc/with-snack';
+import {withSnackContext} from '../../../shared/hoc/with-snack/with-snack';
 import {SnackState} from '../../../shared/contexts/snack-context';
 
 type Props = FormikProps<any> &

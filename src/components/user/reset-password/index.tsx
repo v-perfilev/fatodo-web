@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {compose} from 'recompose';
-import withBackground from '../../../shared/hoc/with-background';
+import withBackground from '../../../shared/hoc/with-background/with-background';
 import {Routes} from '../../router';
 import {useTranslation} from 'react-i18next';
 import {authPageStyles} from '../common/_styles';

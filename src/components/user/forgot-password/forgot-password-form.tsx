@@ -11,7 +11,7 @@ import {LoadingButton} from '../../common/controls/loading-button';
 import i18n from '../../../shared/i18n';
 import AuthService from '../../../services/auth.service';
 import {SnackState} from '../../../shared/contexts/snack-context';
-import {withSnackContext} from '../../../shared/hoc/with-snack';
+import {withSnackContext} from '../../../shared/hoc/with-snack/with-snack';
 
 type Props = FormikProps<any> &
   CaptchaProps &

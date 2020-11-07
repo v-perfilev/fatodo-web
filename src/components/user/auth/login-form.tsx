@@ -20,7 +20,7 @@ import {TextInput} from '../../common/inputs/text-input';
 import {PasswordInput} from '../../common/inputs/password-input';
 import {LoadingButton} from '../../common/controls/loading-button';
 import {Link} from '../../common/controls/link';
-import {withSnackContext} from '../../../shared/hoc/with-snack';
+import {withSnackContext} from '../../../shared/hoc/with-snack/with-snack';
 import {SnackState} from '../../../shared/contexts/snack-context';
 
 const mapDispatchToProps = {login, requestAccountData};

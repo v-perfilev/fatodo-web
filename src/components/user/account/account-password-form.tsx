@@ -16,7 +16,7 @@ import i18n from 'i18next';
 import {compose} from 'recompose';
 import {SnackState} from '../../../shared/contexts/snack-context';
 import UserService from '../../../services/user.service';
-import {withSnackContext} from '../../../shared/hoc/with-snack';
+import {withSnackContext} from '../../../shared/hoc/with-snack/with-snack';
 
 type Props = FormikProps<any> & SnackState;
 

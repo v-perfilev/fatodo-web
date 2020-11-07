@@ -4,7 +4,7 @@ import {UseSpringProps, useSprings} from 'react-spring';
 import {useDrag} from 'react-use-gesture';
 import {clamp} from 'lodash-es';
 import move from 'lodash-move';
-import {useResize} from '../hooks/use-resize';
+import {useResize} from '../../hooks/use-resize';
 import {SortingSize, SortingSizes, SortProps, StyleArgs} from './types';
 
 const defaultSize: Readonly<SortingSize> = {

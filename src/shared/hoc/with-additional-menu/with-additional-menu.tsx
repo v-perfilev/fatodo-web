@@ -2,9 +2,9 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement, useState} from 'react';
 import {Box, Theme, useMediaQuery} from '@material-ui/core';
 import {additionalMenuStyles} from './_styles';
-import AdditionalMenu from '../../components/common/layouts/additional-menu';
+import AdditionalMenu from '../../../components/common/layouts/additional-menu';
 import csx from 'classnames';
-import {AdditionalMenuContext} from '../contexts/additional-menu-context';
+import {AdditionalMenuContext} from '../../contexts/additional-menu-context';
 
 const withAdditionalMenu = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = additionalMenuStyles();

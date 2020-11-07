@@ -14,7 +14,7 @@ import {PageSpacer} from '../../common/surfaces/page-spacer';
 import {usernameChangeValidator} from '../common/_validators';
 import {SelectInput} from '../../common/inputs/select-input';
 import {LANGUAGES} from '../../../shared/i18n';
-import {withSnackContext} from '../../../shared/hoc/with-snack';
+import {withSnackContext} from '../../../shared/hoc/with-snack/with-snack';
 import {SnackState} from '../../../shared/contexts/snack-context';
 import UserService from '../../../services/user.service';
 

@@ -1,12 +1,12 @@
 import React, {FC, useEffect} from 'react';
-import withHeader from '../../../shared/hoc/with-header';
+import withHeader from '../../../shared/hoc/with-header/with-header';
 import {compose} from 'recompose';
 import {Container} from '@material-ui/core';
 import {PageHeader} from '../../common/surfaces/page-header';
 import {useTranslation} from 'react-i18next';
 import {PageDivider} from '../../common/surfaces/page-divider';
 import {accountStyles} from './_styles';
-import withAdditionalMenu from '../../../shared/hoc/with-additional-menu';
+import withAdditionalMenu from '../../../shared/hoc/with-additional-menu/with-additional-menu';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';

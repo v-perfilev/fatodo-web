@@ -2,11 +2,11 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
 import {SnackbarKey, SnackbarProvider, useSnackbar, VariantType} from 'notistack';
 import {AxiosResponse} from 'axios';
-import {ResponseUtils} from '../utils/response.utils';
-import {TranslationUtils} from '../utils/translation.utils';
-import {SnackBuilder} from '../utils/builders/snack.builder';
-import {SnackContext, SnackState} from '../contexts/snack-context';
-import Snack from '../../models/snack.model';
+import {ResponseUtils} from '../../utils/response.utils';
+import {TranslationUtils} from '../../utils/translation.utils';
+import {SnackBuilder} from '../../utils/builders/snack.builder';
+import {SnackContext, SnackState} from '../../contexts/snack-context';
+import Snack from '../../../models/snack.model';
 import {snackStyles} from './_styles';
 import {compose} from 'recompose';
 

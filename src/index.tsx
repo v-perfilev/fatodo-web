@@ -19,7 +19,7 @@ import './styles.css';
 import withStore from './shared/hoc/with-store';
 import withDefaultTheme from './shared/hoc/with-default-theme';
 import withMui from './shared/hoc/with-mui';
-import withSnack from './shared/hoc/with-snack';
+import withSnack from './shared/hoc/with-snack/with-snack';
 
 const Root: FC = () => {
   // setup axios

@@ -10,7 +10,7 @@ export type SortingSizes = {
   item: SortingSize;
 };
 
-export interface StyleArgs {
+export type StyleArgs = {
   indexOrder: any;
   down?: boolean;
   originalIndex?: number;
@@ -18,7 +18,7 @@ export interface StyleArgs {
   x?: number;
   y?: number;
   immediate?: boolean;
-}
+};
 
 export type SortProps = {
   setSortItems: (items: any[]) => void;

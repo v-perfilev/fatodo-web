@@ -11,7 +11,7 @@ import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {authPageStyles} from '../common/_styles';
 import {Routes} from '../../router';
 import {LOADER_TIMEOUT} from '../../../constants';
-import withBackground from '../../../shared/hoc/with-background';
+import withBackground from '../../../shared/hoc/with-background/with-background';
 import {Link} from '../../common/controls/link';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});

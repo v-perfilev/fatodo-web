@@ -2,11 +2,11 @@ import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 
 import Router from './router';
-import withLoader from '../shared/hoc/with-loader';
+import withLoader from '../shared/hoc/with-loader/with-loader';
 import {compose} from 'recompose';
 import {hot} from 'react-hot-loader';
-import withWrapper from '../shared/hoc/with-wrapper';
-import withDevelopmentRibbon from '../shared/hoc/with-development-ribbon';
+import withWrapper from '../shared/hoc/with-wrapper/with-wrapper';
+import withDevelopmentRibbon from '../shared/hoc/with-development-ribbon/with-development-ribbon';
 import {SecurityUtils} from '../shared/utils/security.utils';
 import {login, requestAccountData} from '../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
