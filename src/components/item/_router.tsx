@@ -10,7 +10,7 @@ import {Routes} from '../router';
 import ItemView from './item-view';
 import ItemEdit from './item-edit';
 import ItemCreate from './item-create';
-import withItemDeleteDialog from '../../shared/hoc/with-item-delete-dialog';
+import withItemDeleteDialog from '../../shared/hoc/with-delete-dialog/with-item-delete-dialog';
 
 export enum ItemRoutes {
   CREATE = '/create/:groupId',

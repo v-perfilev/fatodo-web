@@ -10,9 +10,9 @@ import GroupService from '../../../services/group.service';
 import GroupsSortingContainer from './groups-sorting-container';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {useGroupListContext} from '../../../shared/contexts/group-list-context';
+import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import {compose} from 'recompose';
-import withGroupList from '../../../shared/hoc/with-group-list';
+import withGroupList from '../../../shared/hoc/with-list/with-group-list';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
 const GroupsSorting: FC = () => {
@@ -20,7 +20,7 @@ const GroupsSorting: FC = () => {
   const {t, i18n} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
-  const {groups, setGroups} = useGroupListContext();
+  const {objs: groups, setObjs: setGroups, setLoad: setLoadGroups, loading: groupsLoading} = useGroupListContext();
   const [isSaving, setIsSaving] = useState(false);
   const [order, setOrder] = useState<MutableRefObject<number[]>>();
 
@@ -70,14 +70,14 @@ const GroupsSorting: FC = () => {
   );
 
   useEffect(() => {
-    loadGroups();
+    setLoadGroups(() => (): void => loadGroups());
   }, []);
 
   useEffect(() => {
     updateMenu(menu);
   }, [i18n.language, isSaving, order, groups]);
 
-  return groups ? <GroupsSortingContainer setOrder={setOrder} /> : <CircularSpinner />;
+  return groupsLoading ? <CircularSpinner /> : <GroupsSortingContainer setOrder={setOrder} />;
 };
 
 export default compose(withGroupList)(GroupsSorting);

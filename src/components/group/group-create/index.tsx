@@ -25,6 +25,21 @@ const GroupCreate: FC = () => {
   const redirectToGroupView = (id: string): void => history.push(GroupRouteUtils.getViewUrl(id));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
 
+  const request = (formData: FormData, stopSubmitting: () => void): void => {
+    setIsSaving(true);
+    GroupService.create(formData)
+      .then((response) => {
+        handleCode('group.created', 'info');
+        const id = response.data.id;
+        redirectToGroupView(id);
+      })
+      .catch((response) => {
+        handleResponse(response);
+        stopSubmitting();
+        setIsSaving(false);
+      });
+  };
+
   const menu = (
     <>
       <AdditionalMenuSpacer />
@@ -44,23 +59,7 @@ const GroupCreate: FC = () => {
     </>
   );
 
-  const request = (formData: FormData, stopSubmitting: () => void): void => {
-    setIsSaving(true);
-    GroupService.create(formData)
-      .then((response) => {
-        handleCode('group.created', 'info');
-        const id = response.data.id;
-        redirectToGroupView(id);
-      })
-      .catch((response) => {
-        handleResponse(response);
-        stopSubmitting();
-        setIsSaving(false);
-      });
-  };
-
   useEffect(() => {
-    console.log(isSaving);
     updateMenu(menu);
   }, [i18n.language, isSaving, saveCallback]);
 

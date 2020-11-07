@@ -4,15 +4,10 @@ import {User} from '../../../models/user.model';
 
 type Props = {
   user: User;
-}
+};
 
 const ContactListUser: FC<Props> = ({user}: Props) => {
-
-  return (
-    <Box>
-      {user}
-    </Box>
-  );
+  return <Box>{user}</Box>;
 };
 
 export default ContactListUser;

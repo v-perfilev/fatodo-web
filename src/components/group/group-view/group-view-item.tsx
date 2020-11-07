@@ -10,8 +10,8 @@ import {Link} from '../../common/controls/link';
 import {ItemRouteUtils} from '../../item/_router';
 import {EyeIcon} from '../../common/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
-import {useItemDeleteContext} from '../../../shared/contexts/item-delete-context';
-import {useItemListContext} from '../../../shared/contexts/item-list-context';
+import {useItemDeleteContext} from '../../../shared/contexts/delete-contexts/item-delete-context';
+import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 
 type Props = {
   item: Item;
@@ -20,8 +20,8 @@ type Props = {
 const GroupViewItem: FC<Props> = ({item}: Props) => {
   const classes = groupViewItemStyles();
   const history = useHistory();
-  const {loadItems} = useItemListContext();
-  const {setItemToDelete, setOnDeleteItemSuccess} = useItemDeleteContext();
+  const {load: loadItems} = useItemListContext();
+  const {setObj: setItemToDelete, setOnSuccess: setOnDeleteItemSuccess} = useItemDeleteContext();
 
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
   const redirectToViewItem = (): void => history.push(viewItemUrl);

@@ -5,16 +5,16 @@ import GroupViewItem from './group-view-item';
 import {PageDivider} from '../../common/surfaces/page-divider';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {compose} from 'recompose';
-import withItemList from '../../../shared/hoc/with-item-list';
-import {useItemListContext} from '../../../shared/contexts/item-list-context';
+import withItemList from '../../../shared/hoc/with-list/with-item-list';
+import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 
 const GroupViewItems: FC = () => {
   const classes = groupViewItemsStyles();
   const {handleResponse} = useSnackContext();
-  const {group} = useGroupViewContext();
-  const {items, setItems, setLoadItems} = useItemListContext();
+  const {obj: group} = useGroupViewContext();
+  const {objs: items, setObjs: setItems, setLoad: setLoadItems} = useItemListContext();
 
   const loadItems = (): void => {
     ItemService.getAllByGroupId(group.id)
@@ -27,7 +27,6 @@ const GroupViewItems: FC = () => {
   };
 
   useEffect(() => {
-    loadItems();
     setLoadItems(() => (): void => loadItems());
   }, []);
 
@@ -42,5 +41,4 @@ const GroupViewItems: FC = () => {
     </Box>
   );
 };
-
 export default compose(withItemList)(GroupViewItems);

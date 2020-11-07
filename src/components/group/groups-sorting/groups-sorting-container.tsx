@@ -7,7 +7,7 @@ import {animated} from 'react-spring';
 import {compose} from 'recompose';
 import {SortProps} from '../../../shared/hoc/types';
 import GroupsSortingItem from './groups-sorting-item';
-import {useGroupListContext} from '../../../shared/contexts/group-list-context';
+import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 
 type Props = SortProps & {
   setOrder: (order: MutableRefObject<number[]>) => void;
@@ -15,7 +15,7 @@ type Props = SortProps & {
 
 const GroupsSortingContainer: FC<Props> = (props: Props) => {
   const classes = groupSortingGridContainerStyles();
-  const {groups} = useGroupListContext();
+  const {objs: groups} = useGroupListContext();
   const {setSortItems, setSortContainerRef, setSortItemRef} = props;
   const {sortContainerHeight, sortSprings, sortBind, sortOrder} = props;
   const {setOrder} = props;

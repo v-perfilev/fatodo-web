@@ -3,7 +3,7 @@ import {FC} from 'react';
 import {Box, CardHeader, Typography} from '@material-ui/core';
 import {groupSortingCardHeaderStyles} from './_styles';
 import GroupSortingActions from './group-sorting-actions';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {UrlPic} from '../../common/images/url-pic';
 
 type Props = {
@@ -12,7 +12,7 @@ type Props = {
 
 const GroupSortingHeader: FC<Props> = ({bind}: Props) => {
   const classes = groupSortingCardHeaderStyles();
-  const {group} = useGroupViewContext();
+  const {obj: group} = useGroupViewContext();
 
   return (
     <CardHeader

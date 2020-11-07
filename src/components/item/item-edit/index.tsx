@@ -1,10 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Item} from '../../../models/item.model';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import ItemForm from '../item-form';
 import {useHistory, useParams} from 'react-router-dom';
-import {Group} from '../../../models/group.model';
 import {Routes} from '../../router';
 import GroupService from '../../../services/group.service';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
@@ -18,6 +16,11 @@ import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {ItemRouteUtils} from '../_router';
 import {GroupRouteUtils} from '../../group/_router';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
+import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
+import withItemView from '../../../shared/hoc/with-view/with-item-view';
+import {compose} from 'recompose';
+import withGroupView from '../../../shared/hoc/with-view/with-group-view';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -25,8 +28,8 @@ const ItemEdit: FC = () => {
   const history = useHistory();
   const {itemId} = useParams();
   const {updateMenu} = useAdditionalMenuContext();
-  const [group, setGroup] = useState<Group>(null);
-  const [item, setItem] = useState<Item>(null);
+  const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
+  const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
@@ -98,12 +101,12 @@ const ItemEdit: FC = () => {
   };
 
   useEffect(() => {
-    loadItem();
+    setLoadItem(() => (): void => loadItem());
   }, []);
 
   useEffect(() => {
     if (item) {
-      loadGroup();
+      setLoadGroup(() => (): void => loadGroup());
     }
   }, [item]);
 
@@ -111,7 +114,9 @@ const ItemEdit: FC = () => {
     updateMenu(menu);
   }, [i18n.language, isSaving, saveCallback]);
 
-  return group && item ? (
+  return groupLoading || itemLoading ? (
+    <CircularSpinner />
+  ) : (
     <ItemForm
       group={group}
       item={item}
@@ -119,9 +124,7 @@ const ItemEdit: FC = () => {
       setSaveCallback={setSaveCallback}
       request={request}
     />
-  ) : (
-    <CircularSpinner />
   );
 };
 
-export default ItemEdit;
+export default compose(withGroupView, withItemView)(ItemEdit);

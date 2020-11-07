@@ -7,7 +7,7 @@ import {DateFormatters} from '../../../shared/utils/date.utils';
 import csx from 'classnames';
 import UserService from '../../../services/user.service';
 import {User} from '../../../models/user.model';
-import {useItemViewContext} from '../../../shared/contexts/item-view-context';
+import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 
 type Props = HTMLAttributes<any>;
 
@@ -15,7 +15,7 @@ const ItemViewChanges: FC<Props> = ({className}: Props) => {
   const classes = itemViewChangesStyles();
   const commonClasses = itemViewCommonStyles();
   const {t} = useTranslation();
-  const {item} = useItemViewContext();
+  const {obj: item} = useItemViewContext();
   const [creator, setCreator] = useState<string>();
   const [updater, setUpdater] = useState<string>();
 

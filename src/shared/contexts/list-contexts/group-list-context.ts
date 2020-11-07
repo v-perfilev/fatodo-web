@@ -1,13 +1,8 @@
 import * as React from 'react';
 import {useContext} from 'react';
-import {Group} from '../../models/group.model';
+import {Group} from '../../../models/group.model';
 
-interface GroupListState {
-  groups: Group[];
-  setGroups: (groups: Group[]) => void;
-  loadGroups: () => void;
-  setLoadGroups: (loadGroups: () => void) => void;
-}
+type GroupListState = ListState<Group>;
 
 export const GroupListContext = React.createContext<GroupListState>(null);
 export const useGroupListContext = (): GroupListState => useContext(GroupListContext);

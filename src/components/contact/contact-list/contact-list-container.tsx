@@ -7,7 +7,7 @@ import ContactListUser from './contact-list-user';
 
 type Props = {
   users: User[];
-}
+};
 
 const ContactListContainer: FC<Props> = ({users}: Props) => {
   const classes = contactListContainerStyles();

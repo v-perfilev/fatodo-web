@@ -42,5 +42,4 @@ export default class ContactService {
     const url = ContactService.baseUrl + '/requests/decline/' + userId;
     return axios.get(url);
   };
-
 }

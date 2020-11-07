@@ -41,7 +41,7 @@ const ContactList: FC = () => {
   };
 
   const loadUsers = (): void => {
-    const userIds = relations.map(r => r.id);
+    const userIds = relations.map((r) => r.id);
     UserService.getAllByIds(userIds)
       .then((response) => {
         setUsers(response.data);
@@ -81,7 +81,6 @@ const ContactList: FC = () => {
     <Container className={classes.root} maxWidth="sm">
       <PageHeader title={t('contact:contact-list.title')} />
       <PageDivider height={5} />
-
     </Container>
   ) : (
     <CircularSpinner />

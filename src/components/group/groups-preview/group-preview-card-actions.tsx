@@ -7,9 +7,9 @@ import {PopupMenu} from '../../common/surfaces/popup-menu';
 import {useHistory} from 'react-router-dom';
 import {GroupRouteUtils} from '../_router';
 import {ItemRouteUtils} from '../../item/_router';
-import {useGroupListContext} from '../../../shared/contexts/group-list-context';
-import {useGroupDeleteContext} from '../../../shared/contexts/group-delete-context';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
+import {useGroupDeleteContext} from '../../../shared/contexts/delete-contexts/group-delete-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {useTranslation} from 'react-i18next';
 
 const GroupPreviewCardActions: FC = () => {
@@ -17,9 +17,9 @@ const GroupPreviewCardActions: FC = () => {
   const history = useHistory();
   const {t} = useTranslation();
   const ref = useRef();
-  const {loadGroups} = useGroupListContext();
-  const {group} = useGroupViewContext();
-  const {setGroupToDelete, setOnDeleteGroupSuccess} = useGroupDeleteContext();
+  const {load: loadGroups} = useGroupListContext();
+  const {obj: group} = useGroupViewContext();
+  const {setObj: setGroupToDelete, setOnSuccess: setOnDeleteGroupSuccess} = useGroupDeleteContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOnAction = (e: React.MouseEvent<HTMLElement>): void => {

@@ -25,11 +25,11 @@ import {ItemsIcon} from '../../common/icons/items-icon';
 import {GroupRouteUtils} from '../../group/_router';
 import ItemViewInfo from './item-view-info';
 import {DeleteIcon} from '../../common/icons/delete-icon';
-import {useItemDeleteContext} from '../../../shared/contexts/item-delete-context';
-import withGroupView from '../../../shared/hoc/with-group-view';
-import withItemView from '../../../shared/hoc/with-item-view';
-import {useItemViewContext} from '../../../shared/contexts/item-view-context';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useItemDeleteContext} from '../../../shared/contexts/delete-contexts/item-delete-context';
+import withGroupView from '../../../shared/hoc/with-view/with-group-view';
+import withItemView from '../../../shared/hoc/with-view/with-item-view';
+import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 import {GroupsIcon} from '../../common/icons/groups-icon';
 
@@ -40,9 +40,9 @@ const ItemView: FC = () => {
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
-  const {item, setItem} = useItemViewContext();
-  const {group, setGroup} = useGroupViewContext();
-  const {setItemToDelete, setOnDeleteItemSuccess} = useItemDeleteContext();
+  const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
+  const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
+  const {setObj: setItemToDelete, setOnSuccess: setOnDeleteItemSuccess} = useItemDeleteContext();
 
   const theme = ThemeFactory.getTheme(group?.color);
 
@@ -54,6 +54,34 @@ const ItemView: FC = () => {
   const openDeleteDialog = (): void => {
     setOnDeleteItemSuccess(() => (): void => redirectToGroupView());
     setItemToDelete(item);
+  };
+
+  const loadItem = (): void => {
+    ItemService.get(itemId)
+      .then((response) => {
+        setItem(response.data);
+      })
+      .catch((response) => {
+        const status = ResponseUtils.getStatus(response);
+        if (status === 404) {
+          redirectToNotFound();
+        }
+        handleResponse(response);
+      });
+  };
+
+  const loadGroup = (): void => {
+    GroupService.get(item?.groupId)
+      .then((response) => {
+        setGroup(response.data);
+      })
+      .catch((response) => {
+        const status = ResponseUtils.getStatus(response);
+        if (status === 404) {
+          redirectToNotFound();
+        }
+        handleResponse(response);
+      });
   };
 
   const menu = (
@@ -86,41 +114,13 @@ const ItemView: FC = () => {
     </>
   );
 
-  const loadItem = (): void => {
-    ItemService.get(itemId)
-      .then((response) => {
-        setItem(response.data);
-      })
-      .catch((response) => {
-        const status = ResponseUtils.getStatus(response);
-        if (status === 404) {
-          redirectToNotFound();
-        }
-        handleResponse(response);
-      });
-  };
-
-  const loadGroup = (): void => {
-    GroupService.get(item?.groupId)
-      .then((response) => {
-        setGroup(response.data);
-      })
-      .catch((response) => {
-        const status = ResponseUtils.getStatus(response);
-        if (status === 404) {
-          redirectToNotFound();
-        }
-        handleResponse(response);
-      });
-  };
-
   useEffect(() => {
-    loadItem();
+    setLoadItem(() => (): void => loadItem());
   }, []);
 
   useEffect(() => {
     if (item) {
-      loadGroup();
+      setLoadGroup(() => (): void => loadGroup());
     }
   }, [item]);
 
@@ -128,7 +128,9 @@ const ItemView: FC = () => {
     updateMenu(menu);
   }, [item, group, i18n.language]);
 
-  return item && group ? (
+  return itemLoading || groupLoading ? (
+    <CircularSpinner />
+  ) : (
     <ThemeProvider theme={theme}>
       <Container className={classes.root}>
         <PageHeader title={item.title} />
@@ -141,8 +143,6 @@ const ItemView: FC = () => {
         <ItemViewChanges />
       </Container>
     </ThemeProvider>
-  ) : (
-    <CircularSpinner />
   );
 };
 

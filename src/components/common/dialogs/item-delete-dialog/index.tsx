@@ -4,14 +4,11 @@ import {ConfirmationDialog} from '../confirmation-dialog';
 import {Item} from '../../../../models/item.model';
 import ItemService from '../../../../services/item.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
+import {DeleteDialogProps} from '../../../../shared/contexts/delete-contexts/types';
 
-type Props = {
-  item: Item;
-  setItem: (item: Item) => void;
-  onSuccess?: () => void;
-};
+type Props = DeleteDialogProps<Item>;
 
-export const DeleteItemDialog: FC<Props> = ({item, setItem, onSuccess}: Props) => {
+export const ItemDeleteDialog: FC<Props> = ({obj: item, setObj: setItem, onSuccess}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);

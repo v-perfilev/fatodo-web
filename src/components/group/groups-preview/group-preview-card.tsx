@@ -7,12 +7,12 @@ import GroupPreviewCardBody from './group-preview-card-body';
 import {useResize} from '../../../shared/hooks/use-resize';
 import {CARD_RATIO} from '../_constants';
 import {ThemeFactory} from '../../../shared/theme/theme';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
 const GroupPreviewCard: FC = () => {
   const classes = groupCardStyles();
   const sizes = useResize();
-  const {group} = useGroupViewContext();
+  const {obj: group} = useGroupViewContext();
   const ref = useRef(null);
   const [height, setHeight] = useState(0);
 

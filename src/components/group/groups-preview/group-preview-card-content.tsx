@@ -9,16 +9,16 @@ import GroupCardItem from './group-preview-card-item';
 import {ITEMS_IN_GROUP_CARD} from '../_constants';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {compose} from 'recompose';
-import withItemList from '../../../shared/hoc/with-item-list';
-import {useItemListContext} from '../../../shared/contexts/item-list-context';
+import withItemList from '../../../shared/hoc/with-list/with-item-list';
+import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 
 const GroupPreviewCardContent: FC = () => {
   const classes = groupCardContentStyles();
   const {handleResponse} = useSnackContext();
-  const {group} = useGroupViewContext();
-  const {items, setItems} = useItemListContext();
+  const {obj: group} = useGroupViewContext();
+  const {objs: items, setObjs: setItems} = useItemListContext();
   const [firstShowedItem, setFirstShowedItem] = useState(0);
   const ref = useRef();
 
@@ -31,7 +31,7 @@ const GroupPreviewCardContent: FC = () => {
   const onUpClick = (): void => setFirstShowedItem((prevState) => prevState - ITEMS_IN_GROUP_CARD);
   const onDownClick = (): void => setFirstShowedItem((prevState) => prevState + ITEMS_IN_GROUP_CARD);
 
-  useEffect(() => {
+  const loadItems = (): void => {
     ItemService.getAllByGroupId(group.id)
       .then((response) => {
         setItems(response.data);
@@ -39,7 +39,7 @@ const GroupPreviewCardContent: FC = () => {
       .catch((response) => {
         handleResponse(response);
       });
-  }, []);
+  };
 
   const trail = useTrail(itemsToShow.length, {
     reset: true,
@@ -47,6 +47,10 @@ const GroupPreviewCardContent: FC = () => {
     opacity: 1,
     from: {opacity: 0},
   });
+
+  useEffect(() => {
+    loadItems();
+  }, []);
 
   return (
     <CardContent className={classes.content}>

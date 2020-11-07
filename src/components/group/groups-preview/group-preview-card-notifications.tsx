@@ -5,11 +5,11 @@ import {BellIcon} from '../../common/icons/bell-icon';
 import {MessageIcon} from '../../common/icons/message-icon';
 import GroupPreviewCardAvatars from './group-preview-card-avatars';
 import {groupCardNotificationsStyles} from './_styles';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
 const GroupPreviewCardNotifications: FC = () => {
   const classes = groupCardNotificationsStyles();
-  const {group} = useGroupViewContext();
+  const {obj: group} = useGroupViewContext();
 
   return (
     <CardActions className={classes.actions}>

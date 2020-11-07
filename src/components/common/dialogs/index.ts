@@ -1,3 +1,3 @@
 export * from './confirmation-dialog';
-export * from './delete-group-dialog';
-export * from './delete-item-dialog';
+export * from './group-delete-dialog';
+export * from './item-delete-dialog';

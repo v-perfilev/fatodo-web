@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {FC, memo, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
-import GroupCard from './group-preview-card';
 import {groupGridItemStyles} from './_styles';
 import {compose} from 'recompose';
-import withGroupView from '../../../shared/hoc/with-group-view';
+import withGroupView from '../../../shared/hoc/with-view/with-group-view';
 import {Group} from '../../../models/group.model';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
+import GroupPreviewCard from './group-preview-card';
 
 type Props = {
   group: Group;
@@ -14,7 +14,7 @@ type Props = {
 
 const GroupPreviewGridItem: FC<Props> = ({group}: Props) => {
   const classes = groupGridItemStyles();
-  const {setGroup} = useGroupViewContext();
+  const {setObj: setGroup} = useGroupViewContext();
 
   useEffect(() => {
     setGroup(group);
@@ -22,7 +22,7 @@ const GroupPreviewGridItem: FC<Props> = ({group}: Props) => {
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.item}>
-      <GroupCard />
+      <GroupPreviewCard />
     </Grid>
   );
 };

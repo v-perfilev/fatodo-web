@@ -6,8 +6,8 @@ import {compose} from 'recompose';
 import GroupSortingCard from './group-sorting-card';
 import {groupSortingGridItemStyles} from './_styles';
 import {Group} from '../../../models/group.model';
-import withGroupView from '../../../shared/hoc/with-group-view';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import withGroupView from '../../../shared/hoc/with-view/with-group-view';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
 type Props = HTMLAttributes<any> & {
   group: Group;
@@ -17,7 +17,7 @@ type Props = HTMLAttributes<any> & {
 
 const GroupsSortingItem: FC<Props> = ({group, style, bind, setItemRef}: Props) => {
   const classes = groupSortingGridItemStyles();
-  const {setGroup} = useGroupViewContext();
+  const {setObj: setGroup} = useGroupViewContext();
 
   useEffect(() => {
     setGroup(group);

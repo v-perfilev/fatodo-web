@@ -24,9 +24,9 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {PageSpacer} from '../../common/surfaces/page-spacer';
 import {DeleteIcon} from '../../common/icons/delete-icon';
-import {useGroupDeleteContext} from '../../../shared/contexts/group-delete-context';
-import withGroupView from '../../../shared/hoc/with-group-view';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useGroupDeleteContext} from '../../../shared/contexts/delete-contexts/group-delete-context';
+import withGroupView from '../../../shared/hoc/with-view/with-group-view';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
 const GroupView: FC = () => {
@@ -36,8 +36,10 @@ const GroupView: FC = () => {
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
-  const {group, setGroup} = useGroupViewContext();
-  const {setGroupToDelete, setOnDeleteGroupSuccess} = useGroupDeleteContext();
+  const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
+  const {setObj: setGroupToDelete, setOnSuccess: setOnDeleteGroupSuccess} = useGroupDeleteContext();
+
+  const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
   const redirectToItemCreate = (): void => history.push(ItemRouteUtils.getCreateUrl(groupId));
   const redirectToGroupEdit = (): void => history.push(GroupRouteUtils.getEditUrl(groupId));
@@ -95,16 +97,16 @@ const GroupView: FC = () => {
   );
 
   useEffect(() => {
-    loadGroup();
+    setLoadGroup(() => (): void => loadGroup());
   }, []);
 
   useEffect(() => {
     updateMenu(menu);
   }, [group, i18n.language]);
 
-  const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
-
-  return group ? (
+  return groupLoading ? (
+    <CircularSpinner />
+  ) : (
     <ThemeProvider theme={theme}>
       <Container className={classes.root}>
         <PageHeader title={group.title} filename={group.imageFilename} />
@@ -115,8 +117,6 @@ const GroupView: FC = () => {
         <GroupViewMessages />
       </Container>
     </ThemeProvider>
-  ) : (
-    <CircularSpinner />
   );
 };
 

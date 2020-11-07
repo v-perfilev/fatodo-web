@@ -27,11 +27,11 @@ const GroupForm: FC<Props> = ({header, setSaveCallback, values, isValid, submitF
   const {t} = useTranslation();
   const buttonRef = useRef<HTMLButtonElement>();
 
+  const theme = ThemeFactory.getTheme(values.color);
+
   useEffect(() => {
     setSaveCallback(() => (): void | Promise<void> => (isValid ? buttonRef.current.click() : submitForm()));
   }, [isValid]);
-
-  const theme = ThemeFactory.getTheme(values.color);
 
   return (
     <ThemeProvider theme={theme}>

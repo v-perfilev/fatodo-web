@@ -3,13 +3,13 @@ import {useTranslation} from 'react-i18next';
 import {Chip} from '@material-ui/core';
 import {LabeledBox} from '../../common/surfaces/labeled-box';
 import {ReminderView} from '../../common/views/reminder-view';
-import {useItemViewContext} from '../../../shared/contexts/item-view-context';
+import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 import {itemViewCommonStyles} from './_styles';
 
 const ItemViewReminders: FC = () => {
   const commonClasses = itemViewCommonStyles();
   const {t} = useTranslation();
-  const {item} = useItemViewContext();
+  const {obj: item} = useItemViewContext();
 
   const showReminders = item.reminders?.length > 0;
 

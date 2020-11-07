@@ -5,12 +5,12 @@ import {groupCardHeaderStyles} from './_styles';
 import {Routes} from '../../router';
 import GroupPreviewCardActions from './group-preview-card-actions';
 import {Link} from '../../common/controls/link';
-import {useGroupViewContext} from '../../../shared/contexts/group-view-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {UrlPic} from '../../common/images/url-pic';
 
 const GroupPreviewCardHeader: FC = () => {
   const classes = groupCardHeaderStyles();
-  const {group} = useGroupViewContext();
+  const {obj: group} = useGroupViewContext();
 
   return (
     <Link to={Routes.GROUPS + '/' + group.id}>

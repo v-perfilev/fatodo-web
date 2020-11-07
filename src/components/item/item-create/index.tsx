@@ -8,7 +8,6 @@ import {CloseIcon} from '../../common/icons/close-icon';
 import {useHistory, useParams} from 'react-router-dom';
 import GroupService from '../../../services/group.service';
 import ItemService from '../../../services/item.service';
-import {Group} from '../../../models/group.model';
 import ItemForm from '../item-form';
 import {ItemDTO} from '../../../models/dto/item.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
@@ -16,6 +15,9 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../../group/_router';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
+import withGroupView from '../../../shared/hoc/with-view/with-group-view';
+import {compose} from 'recompose';
 
 const ItemCreate: FC = () => {
   const {i18n, t} = useTranslation();
@@ -23,7 +25,7 @@ const ItemCreate: FC = () => {
   const {groupId} = useParams();
   const {updateMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
-  const [group, setGroup] = useState<Group>(null);
+  const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoad} = useGroupViewContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
@@ -81,23 +83,23 @@ const ItemCreate: FC = () => {
   };
 
   useEffect(() => {
-    loadGroup();
+    setLoadGroup(() => (): void => loadGroup());
   }, []);
 
   useEffect(() => {
     updateMenu(menu);
   }, [i18n.language, isSaving, saveCallback]);
 
-  return group ? (
+  return groupLoad ? (
+    <CircularSpinner />
+  ) : (
     <ItemForm
       group={group}
       header={t('item:headers.create', {group: group.title})}
       setSaveCallback={setSaveCallback}
       request={request}
     />
-  ) : (
-    <CircularSpinner />
   );
 };
 
-export default ItemCreate;
+export default compose(withGroupView)(ItemCreate);

@@ -1,11 +1,9 @@
 import * as React from 'react';
 import {useContext} from 'react';
-import {Group} from '../../models/group.model';
+import {Group} from '../../../models/group.model';
+import {ViewState} from './types';
 
-interface GroupViewState {
-  group: Group;
-  setGroup: (group: Group) => void;
-}
+type GroupViewState = ViewState<Group>;
 
 export const GroupViewContext = React.createContext<GroupViewState>(null);
 export const useGroupViewContext = (): GroupViewState => useContext(GroupViewContext);

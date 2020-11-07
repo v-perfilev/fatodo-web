@@ -36,11 +36,11 @@ const ItemForm: FC<Props> = (props: Props) => {
   const {group, header, setSaveCallback, isValid, submitForm, isSubmitting} = props;
   const buttonRef = useRef<HTMLButtonElement>();
 
+  const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
+
   useEffect(() => {
     setSaveCallback(() => (): void | Promise<void> => (isValid ? buttonRef.current.click() : submitForm()));
   }, [isValid]);
-
-  const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
   return (
     <ThemeProvider theme={theme}>
@@ -59,10 +59,10 @@ const ItemForm: FC<Props> = (props: Props) => {
               <PriorityInput name="priority" label={t('item:fields.priority.label')} />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <TimeInput name="time" label={t('item:field.time.label')} />
+              <TimeInput name="time" label={t('item:fields.time.label')} />
             </Grid>
             <Grid item xs={6} lg={3}>
-              <DateInput name="date" label={t('item:field.date.label')} />
+              <DateInput name="date" label={t('item:fields.date.label')} />
             </Grid>
             <Grid item xs={12}>
               <MultilineInput name="description" label={t('item:fields.description.label')} />

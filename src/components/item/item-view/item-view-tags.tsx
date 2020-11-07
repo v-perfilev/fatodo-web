@@ -2,13 +2,13 @@ import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Chip} from '@material-ui/core';
 import {LabeledBox} from '../../common/surfaces/labeled-box';
-import {useItemViewContext} from '../../../shared/contexts/item-view-context';
+import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 import {itemViewCommonStyles} from './_styles';
 
 const ItemViewTags: FC = () => {
   const commonClasses = itemViewCommonStyles();
   const {t} = useTranslation();
-  const {item} = useItemViewContext();
+  const {obj: item} = useItemViewContext();
 
   const showTags = item.tags?.length > 0;
 

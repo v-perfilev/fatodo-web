@@ -4,14 +4,11 @@ import {ConfirmationDialog} from '../confirmation-dialog';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {Group} from '../../../../models/group.model';
 import GroupService from '../../../../services/group.service';
+import {DeleteDialogProps} from '../../../../shared/contexts/delete-contexts/types';
 
-type Props = {
-  group: Group;
-  setGroup: (group: Group) => void;
-  onSuccess?: () => void;
-};
+type Props = DeleteDialogProps<Group>;
 
-export const DeleteGroupDialog: FC<Props> = ({group, setGroup, onSuccess}: Props) => {
+export const GroupDeleteDialog: FC<Props> = ({obj: group, setObj: setGroup, onSuccess}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);

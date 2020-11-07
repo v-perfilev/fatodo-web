@@ -6,21 +6,21 @@ export const contactListStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     flexGrow: 1,
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  }
+    marginBottom: theme.spacing(1),
+  },
 }));
 
-export const contactListContainerStyles = makeStyles((theme: Theme) => ({
+export const contactListContainerStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
-export const contactListFilterStyles = makeStyles((theme: Theme) => ({
+export const contactListFilterStyles = makeStyles(() => ({
   root: {
     display: 'flex',
-    justifyContent: 'flex-end'
-  }
+    justifyContent: 'flex-end',
+  },
 }));
