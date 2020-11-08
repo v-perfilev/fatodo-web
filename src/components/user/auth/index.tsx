@@ -21,15 +21,33 @@ const connector = connect(mapStateToProps);
 
 type Props = ConnectedProps<typeof connector>;
 
+const calculateTabFromRoute = (path: string): number => {
+  switch (path) {
+    case Routes.REGISTRATION:
+      return 1;
+    default:
+      return 0;
+  }
+};
+
+const calculateRouteFromTab = (tab: number): string => {
+  switch (tab) {
+    case 1:
+      return Routes.REGISTRATION;
+    default:
+      return Routes.LOGIN;
+  }
+};
+
 const Auth: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   const classes = authPageStyles();
   const history = useHistory();
   const match = useRouteMatch();
   const {t} = useTranslation();
-  const [activeTab, setActiveTab] = useState<number>(match.path === Routes.LOGIN ? 0 : 1);
+  const [activeTab, setActiveTab] = useState<number>(calculateTabFromRoute(match.path));
 
   const handleChange = (event: React.ChangeEvent<{}>, newTab: number): void => {
-    history.replace(newTab === 0 ? Routes.LOGIN : Routes.REGISTRATION);
+    history.replace(calculateRouteFromTab(newTab));
     setActiveTab(newTab);
   };
 

@@ -6,25 +6,27 @@ import {compose} from 'recompose';
 import withFlexibleHeader from '../../shared/hoc/with-header/with-flexible-header';
 import withAdditionalMenu from '../../shared/hoc/with-additional-menu/with-additional-menu';
 import {Routes} from '../router';
-import ContactList from './contact-list';
-import ContactIncoming from './contact-incoming';
-import ContactOutcoming from './contact-outcoming';
+import ContactMain from './contact-main';
 
 export enum ContactRoutes {
   INCOMING = '/incoming',
   OUTCOMING = '/outcoming',
 }
 
-export class ContactRouteUtils {}
+export class ContactRouteUtils {
+  public static getListUrl = (): string => Routes.CONTACT;
+  public static getOutcomingUrl = (): string => Routes.CONTACT + ContactRoutes.OUTCOMING;
+  public static getIncomingUrl = (): string => Routes.CONTACT + ContactRoutes.INCOMING;
+}
 
 const ContactRouter: FC = () => {
   const match = useRouteMatch();
 
   return (
     <Switch>
-      <PublicRoute exact path={match.path} component={ContactList} />
-      <PublicRoute path={match.path + ContactRoutes.INCOMING} component={ContactIncoming} />
-      <PublicRoute path={match.path + ContactRoutes.OUTCOMING} component={ContactOutcoming} />
+      <PublicRoute exact path={match.path} component={ContactMain} />
+      <PublicRoute path={match.path + ContactRoutes.OUTCOMING} component={ContactMain} />
+      <PublicRoute path={match.path + ContactRoutes.INCOMING} component={ContactMain} />
       <Redirect to={Routes.PAGE_NOT_FOUND} />
     </Switch>
   );

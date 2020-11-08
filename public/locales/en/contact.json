@@ -1,8 +1,15 @@
 {
-  "contact-list": {
+  "list": {
     "title": "List of contacts"
   },
+  "outcoming": {
+    "title": "Outcoming requests"
+  },
+  "incoming": {
+    "title": "Incoming requests"
+  },
   "tooltips": {
+    "addContact": "Add contact",
     "back": "Back"
   }
 }

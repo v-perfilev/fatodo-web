@@ -44,7 +44,7 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
       <AdditionalMenuButton
         icon={<ArrowBackIcon />}
         action={redirectToPreviousLocation}
-        color="primary"
+        color="secondary"
         tooltip={t('account:tooltips.back')}
       />
     </>

@@ -1,48 +1,36 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Container} from '@material-ui/core';
-import {useHistory} from 'react-router-dom';
+import React, {FC, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
-import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
-import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
-import {ArrowBackIcon} from '../../common/icons/arrow-back-icon';
-import {useLastLocation} from 'react-router-last-location';
-import {Routes} from '../../router';
 import ContactService from '../../../services/contact.service';
 import {ContactRelation} from '../../../models/contact-relation.model';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {PageHeader} from '../../common/surfaces/page-header';
-import {PageDivider} from '../../common/surfaces/page-divider';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 import {contactListStyles} from './_styles';
 import UserService from '../../../services/user.service';
-import {User} from '../../../models/user.model';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import {compose} from 'recompose';
+import withUserList from '../../../shared/hoc/with-list/with-user-list';
+import {Box} from '@material-ui/core';
 
 const ContactList: FC = () => {
   const classes = contactListStyles();
-  const history = useHistory();
-  const lastLocation = useLastLocation();
-  const {i18n, t} = useTranslation();
+  const {t} = useTranslation();
   const {handleResponse} = useSnackContext();
-  const {updateMenu} = useAdditionalMenuContext();
-  const [relations, setRelations] = useState<ContactRelation[]>([]);
-  const [users, setUsers] = useState<User[]>([]);
+  const {setObjs: setUsers, setLoad: setUserLoad, loading: usersLoading} = useUserListContext();
 
-  const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
+  const loadRelations = (): Promise<ContactRelation[]> =>
+    new Promise((resolve) => {
+      ContactService.getAllRelations()
+        .then((response) => {
+          resolve(response.data);
+        })
+        .catch((response) => {
+          handleResponse(response);
+          resolve([]);
+        });
+    });
 
-  const loadRelations = (): void => {
-    ContactService.getAllRelations()
-      .then((response) => {
-        setRelations(response.data);
-      })
-      .catch((response) => {
-        handleResponse(response);
-      });
-  };
-
-  const loadUsers = (): void => {
-    const userIds = relations.map((r) => r.id);
-    UserService.getAllByIds(userIds)
+  const loadUsersByIds = (ids: string[]): void => {
+    UserService.getAllByIds(ids)
       .then((response) => {
         setUsers(response.data);
       })
@@ -51,40 +39,22 @@ const ContactList: FC = () => {
       });
   };
 
-  const menu = (
-    <>
-      <AdditionalMenuSpacer />
-      <AdditionalMenuButton
-        icon={<ArrowBackIcon />}
-        action={redirectToPreviousLocation}
-        color="primary"
-        tooltip={t('contact:tooltips.back')}
-      />
-    </>
-  );
+  const loadUsers = (): void => {
+    loadRelations().then((relations) => {
+      const ids = relations.map((r) => r.id);
+      if (ids.length > 0) {
+        loadUsersByIds(ids);
+      } else {
+        setUsers([]);
+      }
+    });
+  };
 
   useEffect(() => {
-    loadRelations();
+    setUserLoad(() => (): void => loadUsers());
   }, []);
 
-  useEffect(() => {
-    if (relations.length > 0) {
-      loadUsers();
-    }
-  }, [relations]);
-
-  useEffect(() => {
-    updateMenu(menu);
-  }, [i18n.language]);
-
-  return users.length ? (
-    <Container className={classes.root} maxWidth="sm">
-      <PageHeader title={t('contact:contact-list.title')} />
-      <PageDivider height={5} />
-    </Container>
-  ) : (
-    <CircularSpinner />
-  );
+  return usersLoading ? <CircularSpinner /> : <Box>Contact List</Box>;
 };
 
-export default ContactList;
+export default compose(withUserList)(ContactList);

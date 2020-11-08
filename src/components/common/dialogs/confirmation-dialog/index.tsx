@@ -24,6 +24,8 @@ type Props = {
 export const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDisagree, loading}: Props) => {
   const {t} = useTranslation();
 
+  const theme = ThemeFactory.getDefaultTheme();
+
   const DisagreeButton = (): ReactElement => (
     <Button onClick={onDisagree} color="primary">
       {t('buttons.disagree')}
@@ -35,8 +37,6 @@ export const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDis
       {t('buttons.agree')}
     </LoadingButton>
   );
-
-  const theme = ThemeFactory.getDefaultTheme();
 
   return (
     <ThemeProvider theme={theme}>

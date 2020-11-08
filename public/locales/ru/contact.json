@@ -1,8 +1,15 @@
 {
-  "contact-list": {
+  "list": {
     "title": "Список контактов"
   },
+  "outcoming": {
+    "title": "Исходящие запросы"
+  },
+  "incoming": {
+    "title": "Входящие запросы"
+  },
   "tooltips": {
+    "addContact": "Добавить контакт",
     "back": "К предыдущей странице"
   }
 }
