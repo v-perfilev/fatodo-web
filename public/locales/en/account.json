@@ -25,7 +25,7 @@
   },
   "fields": {
     "user": {
-      "label": "Email / Username",
+      "label": "Username / Email",
       "required": "Required"
     },
     "password": {

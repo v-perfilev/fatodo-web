@@ -3,6 +3,7 @@ import {FC} from 'react';
 import {Container, Typography} from '@material-ui/core';
 import {compose} from 'recompose';
 import withHeader from '../shared/hocs/with-header/with-header';
+import withVerticalPadding from '../shared/hocs/with-vertical-padding/with-vertical-padding';
 
 const Home: FC = () => {
   return (
@@ -45,4 +46,4 @@ const Home: FC = () => {
   );
 };
 
-export default compose(withHeader)(Home);
+export default compose(withHeader, withVerticalPadding)(Home);

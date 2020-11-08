@@ -9,7 +9,20 @@
     "title": "Incoming"
   },
   "addContact": {
-
+    "title": "Add user to list of contacts",
+    "fields": {
+      "user": {
+        "label": "Username / Email",
+        "required": "Required",
+        "current": "Enter identifier of another user",
+        "notRegistered": "User not registered"
+      },
+      "message": {
+        "label": "Message"
+      }
+    },
+    "send": "Send request",
+    "cancel": "Cancel"
   },
   "tooltips": {
     "addContact": "Add contact",

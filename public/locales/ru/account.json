@@ -25,7 +25,7 @@
   },
   "fields": {
     "user": {
-      "label": "Email / Имя пользователя",
+      "label": "Имя пользователя / Email",
       "required": "Обязательное поле"
     },
     "password": {
