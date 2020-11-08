@@ -7,7 +7,7 @@ import {Routes} from '../../router';
 import {FacebookIcon} from '../../common/icons/facebook-icon';
 import {GoogleIcon} from '../../common/icons/google-icon';
 import {Box, Divider, Typography} from '@material-ui/core';
-import {socialLoginStyles} from '../common/_styles';
+import {socialLoginStyles} from '../_styles';
 import {LoadingButton} from '../../common/controls/loading-button';
 
 export const SocialButtons: FC = () => {

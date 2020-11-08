@@ -8,10 +8,10 @@ import ForgotPasswordForm from './forgot-password-form';
 import {connect, ConnectedProps} from 'react-redux';
 import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {authPageStyles} from '../common/_styles';
+import {authPageStyles} from '../_styles';
 import {Routes} from '../../router';
 import {LOADER_TIMEOUT} from '../../../constants';
-import withBackground from '../../../shared/hoc/with-background/with-background';
+import withBackground from '../../../shared/hocs/with-background/with-background';
 import {Link} from '../../common/controls/link';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});

@@ -12,7 +12,7 @@ import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import {compose} from 'recompose';
-import withGroupList from '../../../shared/hoc/with-list/with-group-list';
+import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 
 const GroupsSorting: FC = () => {

@@ -16,10 +16,10 @@ import {compose} from 'recompose';
 // import styles
 import 'react-image-crop/dist/ReactCrop.css';
 import './styles.css';
-import withStore from './shared/hoc/with-store';
-import withDefaultTheme from './shared/hoc/with-default-theme';
-import withMui from './shared/hoc/with-mui';
-import withSnack from './shared/hoc/with-snack/with-snack';
+import withStore from './shared/hocs/with-store';
+import withDefaultTheme from './shared/hocs/with-default-theme';
+import withMui from './shared/hocs/with-mui';
+import withSnack from './shared/hocs/with-snack/with-snack';
 
 const Root: FC = () => {
   // setup axios

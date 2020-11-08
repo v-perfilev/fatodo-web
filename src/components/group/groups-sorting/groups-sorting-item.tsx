@@ -6,7 +6,7 @@ import {compose} from 'recompose';
 import GroupSortingCard from './group-sorting-card';
 import {groupSortingGridItemStyles} from './_styles';
 import {Group} from '../../../models/group.model';
-import withGroupView from '../../../shared/hoc/with-view/with-group-view';
+import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
 type Props = HTMLAttributes<any> & {

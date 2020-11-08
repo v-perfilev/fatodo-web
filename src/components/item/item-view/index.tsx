@@ -25,13 +25,13 @@ import {GroupRouteUtils} from '../../group/_router';
 import ItemViewInfo from './item-view-info';
 import {DeleteIcon} from '../../common/icons/delete-icon';
 import {useItemDeleteContext} from '../../../shared/contexts/delete-contexts/item-delete-context';
-import withGroupView from '../../../shared/hoc/with-view/with-group-view';
-import withItemView from '../../../shared/hoc/with-view/with-item-view';
+import withGroupView from '../../../shared/hocs/with-view/with-group-view';
+import withItemView from '../../../shared/hocs/with-view/with-item-view';
 import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 import {GroupsIcon} from '../../common/icons/groups-icon';
-import withVerticalPadding from '../../../shared/hoc/with-vertical-padding/with-vertical-padding';
+import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 
 const ItemView: FC = () => {
   const history = useHistory();

@@ -11,7 +11,7 @@ import GroupService from '../../../services/group.service';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {compose} from 'recompose';
-import withGroupList from '../../../shared/hoc/with-list/with-group-list';
+import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 import GroupPreviewGridContainer from './group-preview-grid-container';

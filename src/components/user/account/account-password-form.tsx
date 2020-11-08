@@ -9,14 +9,14 @@ import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {useTranslation} from 'react-i18next';
 import {AccountPasswordFormUtils, AccountPasswordFormValues} from './_form';
 import * as Yup from 'yup';
-import {passwordValidator} from '../common/_validators';
 import {PasswordInput} from '../../common/inputs/password-input';
 import {PasswordStrengthBar} from '../password-strength-bar';
 import i18n from 'i18next';
 import {compose} from 'recompose';
 import {SnackState} from '../../../shared/contexts/snack-context';
 import UserService from '../../../services/user.service';
-import {withSnackContext} from '../../../shared/hoc/with-snack/with-snack';
+import {withSnackContext} from '../../../shared/hocs/with-snack/with-snack';
+import {passwordValidator} from '../../../shared/forms/validators/password.validator';
 
 type Props = FormikProps<any> & SnackState;
 

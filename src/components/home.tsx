@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Container, Typography} from '@material-ui/core';
 import {compose} from 'recompose';
-import withHeader from '../shared/hoc/with-header/with-header';
+import withHeader from '../shared/hocs/with-header/with-header';
 
 const Home: FC = () => {
   return (

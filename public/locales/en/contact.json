@@ -8,6 +8,9 @@
   "incoming": {
     "title": "Incoming"
   },
+  "addContact": {
+
+  },
   "tooltips": {
     "addContact": "Add contact",
     "back": "Back"

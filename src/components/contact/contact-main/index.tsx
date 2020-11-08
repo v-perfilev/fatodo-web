@@ -8,14 +8,14 @@ import AdditionalMenuButton from '../../common/layouts/additional-menu/additiona
 import {ArrowBackIcon} from '../../common/icons/arrow-back-icon';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
-import {contactListStyles} from './_styles';
+import {contactMainStyles} from './_styles';
 import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import ContactRequestDialog from '../../common/dialogs/contact-request-dialog';
 import ContactList from '../contact-list';
 import ContactOutcoming from '../contact-outcoming';
 import ContactIncoming from '../contact-incoming';
-import withVerticalPadding from '../../../shared/hoc/with-vertical-padding/with-vertical-padding';
+import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {ContactRouteUtils} from '../_router';
 
 const calculateTabFromRoute = (path: string): number => {
@@ -41,7 +41,7 @@ const calculateRouteFromTab = (tab: number): string => {
 };
 
 const ContactMain: FC = () => {
-  const classes = contactListStyles();
+  const classes = contactMainStyles();
   const history = useHistory();
   const lastLocation = useLastLocation();
   const match = useRouteMatch();
@@ -83,7 +83,7 @@ const ContactMain: FC = () => {
 
   return (
     <>
-      <Container>
+      <Container className={classes.root}>
         <Tabs variant="fullWidth" textColor="primary" value={activeTab} onChange={handleChange}>
           <Tab label={t('contact:list.title')} />
           <Tab label={t('contact:outcoming.title')} />

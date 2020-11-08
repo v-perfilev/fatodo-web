@@ -4,17 +4,19 @@ import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import {useTranslation} from 'react-i18next';
 import AuthService from '../../../services/auth.service';
-import {emailValidator, passwordValidator, usernameValidator} from '../common/_validators';
-import {authFormStyles} from '../common/_styles';
+import {authFormStyles} from '../_styles';
 import i18n from '../../../shared/i18n';
 import {compose} from 'recompose';
-import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
+import withCaptcha, {CaptchaProps} from '../../../shared/hocs/with-capcha';
 import {TextInput} from '../../common/inputs/text-input';
 import {PasswordInput} from '../../common/inputs/password-input';
 import {LoadingButton} from '../../common/controls/loading-button';
 import {PasswordStrengthBar} from '../password-strength-bar';
 import {SnackState} from '../../../shared/contexts/snack-context';
-import {withSnackContext} from '../../../shared/hoc/with-snack/with-snack';
+import {withSnackContext} from '../../../shared/hocs/with-snack/with-snack';
+import {emailValidator} from '../../../shared/forms/validators/email.validator';
+import {usernameValidator} from '../../../shared/forms/validators/username.validator';
+import {passwordValidator} from '../../../shared/forms/validators/password.validator';
 
 type Props = FormikProps<any> &
   CaptchaProps &

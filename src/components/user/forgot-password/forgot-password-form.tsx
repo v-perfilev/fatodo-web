@@ -4,14 +4,14 @@ import * as React from 'react';
 import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
-import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
-import {authFormStyles} from '../common/_styles';
+import withCaptcha, {CaptchaProps} from '../../../shared/hocs/with-capcha';
+import {authFormStyles} from '../_styles';
 import {TextInput} from '../../common/inputs/text-input';
 import {LoadingButton} from '../../common/controls/loading-button';
 import i18n from '../../../shared/i18n';
 import AuthService from '../../../services/auth.service';
 import {SnackState} from '../../../shared/contexts/snack-context';
-import {withSnackContext} from '../../../shared/hoc/with-snack/with-snack';
+import {withSnackContext} from '../../../shared/hocs/with-snack/with-snack';
 
 type Props = FormikProps<any> &
   CaptchaProps &

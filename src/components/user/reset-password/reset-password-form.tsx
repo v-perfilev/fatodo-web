@@ -2,17 +2,18 @@ import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as Yup from 'yup';
 import * as React from 'react';
 import {FC} from 'react';
-import {authFormStyles} from '../common/_styles';
+import {authFormStyles} from '../_styles';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
 import AuthService from '../../../services/auth.service';
-import {passwordValidator, repeatPasswordValidator} from '../common/_validators';
-import withCaptcha, {CaptchaProps} from '../../../shared/hoc/with-capcha';
+import withCaptcha, {CaptchaProps} from '../../../shared/hocs/with-capcha';
 import {PasswordInput} from '../../common/inputs/password-input';
 import {LoadingButton} from '../../common/controls/loading-button';
 import {PasswordStrengthBar} from '../password-strength-bar';
-import {withSnackContext} from '../../../shared/hoc/with-snack/with-snack';
+import {withSnackContext} from '../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../shared/contexts/snack-context';
+import {passwordValidator} from '../../../shared/forms/validators/password.validator';
+import {passwordRepeatValidator} from '../../../shared/forms/validators/password-repeat.validator';
 
 type Props = FormikProps<any> &
   CaptchaProps &
@@ -62,7 +63,7 @@ const formik = withFormik<Props, FormValues>({
 
   validationSchema: Yup.object().shape({
     password: passwordValidator,
-    repeatPassword: repeatPasswordValidator,
+    repeatPassword: passwordRepeatValidator,
   }),
 
   validateOnMount: true,

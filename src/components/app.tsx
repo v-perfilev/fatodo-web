@@ -2,15 +2,15 @@ import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 
 import Router from './router';
-import withLoader from '../shared/hoc/with-loader/with-loader';
+import withLoader from '../shared/hocs/with-loader/with-loader';
 import {compose} from 'recompose';
 import {hot} from 'react-hot-loader';
-import withWrapper from '../shared/hoc/with-wrapper/with-wrapper';
-import withDevelopmentRibbon from '../shared/hoc/with-development-ribbon/with-development-ribbon';
+import withWrapper from '../shared/hocs/with-wrapper/with-wrapper';
+import withDevelopmentRibbon from '../shared/hocs/with-development-ribbon/with-development-ribbon';
 import {SecurityUtils} from '../shared/utils/security.utils';
 import {login, requestAccountData} from '../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
-import withLastLocation from '../shared/hoc/with-last-location';
+import withLastLocation from '../shared/hocs/with-last-location';
 
 const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);

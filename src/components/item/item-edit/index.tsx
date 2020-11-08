@@ -18,9 +18,9 @@ import {GroupRouteUtils} from '../../group/_router';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import withItemView from '../../../shared/hoc/with-view/with-item-view';
+import withItemView from '../../../shared/hocs/with-view/with-item-view';
 import {compose} from 'recompose';
-import withGroupView from '../../../shared/hoc/with-view/with-group-view';
+import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();

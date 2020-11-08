@@ -11,12 +11,12 @@ import {UserAccount} from '../../../models/user.model';
 import * as Yup from 'yup';
 import {LoadingButton} from '../../common/controls/loading-button';
 import {PageSpacer} from '../../common/surfaces/page-spacer';
-import {usernameChangeValidator} from '../common/_validators';
 import {SelectInput} from '../../common/inputs/select-input';
 import {LANGUAGES} from '../../../shared/i18n';
-import {withSnackContext} from '../../../shared/hoc/with-snack/with-snack';
+import {withSnackContext} from '../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../shared/contexts/snack-context';
 import UserService from '../../../services/user.service';
+import {usernameChangeValidator} from '../../../shared/forms/validators/username-change.validator';
 
 type Props = FormikProps<any> &
   SnackState & {

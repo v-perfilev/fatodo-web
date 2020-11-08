@@ -1,11 +1,11 @@
 import React, {FC, useEffect} from 'react';
-import withHeader from '../../../shared/hoc/with-header/with-header';
+import withHeader from '../../../shared/hocs/with-header/with-header';
 import {compose} from 'recompose';
 import {Container} from '@material-ui/core';
 import {PageHeader} from '../../common/surfaces/page-header';
 import {useTranslation} from 'react-i18next';
 import {PageDivider} from '../../common/surfaces/page-divider';
-import withAdditionalMenu from '../../../shared/hoc/with-additional-menu/with-additional-menu';
+import withAdditionalMenu from '../../../shared/hocs/with-additional-menu/with-additional-menu';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
@@ -20,7 +20,7 @@ import AccountPasswordForm from './account-password-form';
 import {requestAccountData} from '../../../store/actions/auth.actions';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
-import withVerticalPadding from '../../../shared/hoc/with-vertical-padding/with-vertical-padding';
+import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {requestAccountData};

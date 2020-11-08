@@ -8,7 +8,7 @@ import {contactListStyles} from './_styles';
 import UserService from '../../../services/user.service';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {compose} from 'recompose';
-import withUserList from '../../../shared/hoc/with-list/with-user-list';
+import withUserList from '../../../shared/hocs/with-list/with-user-list';
 import {Box} from '@material-ui/core';
 
 const ContactList: FC = () => {

@@ -3,8 +3,8 @@ import {FC} from 'react';
 import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
 import {compose} from 'recompose';
-import withFlexibleHeader from '../../shared/hoc/with-header/with-flexible-header';
-import withAdditionalMenu from '../../shared/hoc/with-additional-menu/with-additional-menu';
+import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
+import withAdditionalMenu from '../../shared/hocs/with-additional-menu/with-additional-menu';
 import {Routes} from '../router';
 import ContactMain from './contact-main';
 

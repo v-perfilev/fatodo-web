@@ -24,10 +24,10 @@ import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {PageSpacer} from '../../common/surfaces/page-spacer';
 import {DeleteIcon} from '../../common/icons/delete-icon';
 import {useGroupDeleteContext} from '../../../shared/contexts/delete-contexts/group-delete-context';
-import withGroupView from '../../../shared/hoc/with-view/with-group-view';
+import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
-import withVerticalPadding from '../../../shared/hoc/with-vertical-padding/with-vertical-padding';
+import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 
 const GroupView: FC = () => {
   const history = useHistory();

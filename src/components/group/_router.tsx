@@ -5,14 +5,14 @@ import PublicRoute from '../../shared/routes/public-route';
 import GroupsPreview from './groups-preview';
 import GroupsSorting from './groups-sorting';
 import {compose} from 'recompose';
-import withFlexibleHeader from '../../shared/hoc/with-header/with-flexible-header';
-import withAdditionalMenu from '../../shared/hoc/with-additional-menu/with-additional-menu';
+import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
+import withAdditionalMenu from '../../shared/hocs/with-additional-menu/with-additional-menu';
 import {Routes} from '../router';
 import GroupView from './group-view';
 import GroupCreate from './group-create';
 import GroupEdit from './group-edit';
-import withGroupDeleteDialog from '../../shared/hoc/with-delete-dialog/with-group-delete-dialog';
-import withItemDeleteDialog from '../../shared/hoc/with-delete-dialog/with-item-delete-dialog';
+import withGroupDeleteDialog from '../../shared/hocs/with-delete-dialog/with-group-delete-dialog';
+import withItemDeleteDialog from '../../shared/hocs/with-delete-dialog/with-item-delete-dialog';
 
 export enum GroupRoutes {
   SORTING = '/sorting',
