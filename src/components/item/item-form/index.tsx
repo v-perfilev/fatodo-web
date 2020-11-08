@@ -21,6 +21,7 @@ import {DateInput} from '../../common/inputs/date-input';
 import {MultilineInput} from '../../common/inputs/multiline-input';
 import {RemindersInput} from '../../common/inputs/reminders-input';
 import {TagsInput} from '../../common/inputs/tags-input';
+import withVerticalPadding from '../../../shared/hoc/with-vertical-padding/with-vertical-padding';
 
 type Props = FormikProps<any> & {
   group: Group;
@@ -44,7 +45,7 @@ const ItemForm: FC<Props> = (props: Props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container className={classes.root}>
+      <Container>
         <PageHeader title={header} />
         <PageDivider height={5} />
         <Form className={classes.form}>
@@ -101,4 +102,4 @@ const formik = withFormik<Props, ItemFormValues>({
   },
 });
 
-export default compose(formik)(ItemForm);
+export default compose(formik, withVerticalPadding)(ItemForm);

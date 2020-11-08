@@ -14,6 +14,7 @@ import {ThemeSelect} from '../../common/inputs/theme-select';
 import {PageHeader} from '../../common/surfaces/page-header';
 import {PageDivider} from '../../common/surfaces/page-divider';
 import {TextInput} from '../../common/inputs/text-input';
+import withVerticalPadding from '../../../shared/hoc/with-vertical-padding/with-vertical-padding';
 
 type Props = FormikProps<any> & {
   group?: Group;
@@ -35,7 +36,7 @@ const GroupForm: FC<Props> = ({header, setSaveCallback, values, isValid, submitF
 
   return (
     <ThemeProvider theme={theme}>
-      <Container className={classes.root}>
+      <Container>
         <PageHeader title={header} />
         <PageDivider height={5} />
         <Form className={classes.form}>
@@ -82,4 +83,4 @@ const formik = withFormik<Props, GroupFormValues>({
   },
 });
 
-export default compose(formik)(GroupForm);
+export default compose(formik, withVerticalPadding)(GroupForm);

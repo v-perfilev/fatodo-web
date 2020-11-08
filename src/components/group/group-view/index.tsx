@@ -6,7 +6,6 @@ import {Container, ThemeProvider} from '@material-ui/core';
 import GroupViewItems from './group-view-items';
 import GroupViewUsers from './group-view-users';
 import GroupViewMessages from './group-view-messages';
-import {groupViewStyles} from './_styles';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
 import {Routes} from '../../router';
@@ -28,9 +27,9 @@ import {useGroupDeleteContext} from '../../../shared/contexts/delete-contexts/gr
 import withGroupView from '../../../shared/hoc/with-view/with-group-view';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
+import withVerticalPadding from '../../../shared/hoc/with-vertical-padding/with-vertical-padding';
 
 const GroupView: FC = () => {
-  const classes = groupViewStyles();
   const history = useHistory();
   const {groupId} = useParams();
   const {t, i18n} = useTranslation();
@@ -108,7 +107,7 @@ const GroupView: FC = () => {
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>
-      <Container className={classes.root}>
+      <Container>
         <PageHeader title={group.title} filename={group.imageFilename} />
         <PageDivider height={5} />
         <GroupViewUsers />
@@ -120,4 +119,4 @@ const GroupView: FC = () => {
   );
 };
 
-export default compose(withGroupView)(GroupView);
+export default compose(withVerticalPadding, withGroupView)(GroupView);

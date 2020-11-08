@@ -5,7 +5,6 @@ import {Container} from '@material-ui/core';
 import {PageHeader} from '../../common/surfaces/page-header';
 import {useTranslation} from 'react-i18next';
 import {PageDivider} from '../../common/surfaces/page-divider';
-import {accountStyles} from './_styles';
 import withAdditionalMenu from '../../../shared/hoc/with-additional-menu/with-additional-menu';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
@@ -21,6 +20,7 @@ import AccountPasswordForm from './account-password-form';
 import {requestAccountData} from '../../../store/actions/auth.actions';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
+import withVerticalPadding from '../../../shared/hoc/with-vertical-padding/with-vertical-padding';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {requestAccountData};
@@ -29,7 +29,6 @@ const connector = connect(mapStateToProps, mapDispatchToProps);
 type Props = ConnectedProps<typeof connector>;
 
 const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
-  const classes = accountStyles();
   const {account} = authState;
   const history = useHistory();
   const lastLocation = useLastLocation();
@@ -55,7 +54,7 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
   }, [i18n.language]);
 
   return account.id ? (
-    <Container className={classes.root} maxWidth="sm">
+    <Container maxWidth="sm">
       <PageHeader title={t('account:account.title')} />
       <PageDivider height={5} />
       <AccountForm account={account} requestAccountData={requestAccountData} />
@@ -66,4 +65,4 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
   );
 };
 
-export default compose(withHeader, withAdditionalMenu, connector)(Account);
+export default compose(withHeader, withAdditionalMenu, withVerticalPadding, connector)(Account);

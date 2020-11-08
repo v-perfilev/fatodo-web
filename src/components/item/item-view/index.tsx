@@ -2,7 +2,6 @@ import React, {FC, useEffect} from 'react';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {Container, ThemeProvider} from '@material-ui/core';
-import {itemViewStyles} from './_styles';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
@@ -32,9 +31,9 @@ import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-vi
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {CircularSpinner} from '../../common/loaders/circular-spinner';
 import {GroupsIcon} from '../../common/icons/groups-icon';
+import withVerticalPadding from '../../../shared/hoc/with-vertical-padding/with-vertical-padding';
 
 const ItemView: FC = () => {
-  const classes = itemViewStyles();
   const history = useHistory();
   const {itemId} = useParams();
   const {t, i18n} = useTranslation();
@@ -132,7 +131,7 @@ const ItemView: FC = () => {
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>
-      <Container className={classes.root}>
+      <Container>
         <PageHeader title={item.title} />
         <PageDivider height={5} />
         <ItemViewInfo />
@@ -146,4 +145,4 @@ const ItemView: FC = () => {
   );
 };
 
-export default compose(withGroupView, withItemView)(ItemView);
+export default compose(withVerticalPadding, withGroupView, withItemView)(ItemView);
