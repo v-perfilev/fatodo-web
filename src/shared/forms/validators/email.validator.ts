@@ -13,4 +13,3 @@ export const emailValidator = new AsyncValidator(
     test: async (value): Promise<boolean> => (await UserService.doesEmailExist(value)).data === false,
   }
 );
-

@@ -18,33 +18,35 @@ import {contactRequestDialogStyles} from './_styles';
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
 
-type Props = ConnectedProps<typeof connector> & FormikProps<ContactRequestFormValues> & {
-  show: boolean;
-  setShow: (show: boolean) => void;
-};
+type Props = ConnectedProps<typeof connector> &
+  FormikProps<ContactRequestFormValues> & {
+    show: boolean;
+    setShow: (show: boolean) => void;
+  };
 
 const ContactRequestDialog: FC<Props> = ({show, setShow, ...props}: Props) => {
   const classes = contactRequestDialogStyles();
-  const {values, setFieldValue, isValid, isSubmitting, resetForm} = props;
+  const {values, setFieldValue, isValid, isSubmitting, validateForm, setErrors, resetForm} = props;
   const {t} = useTranslation();
 
   const close = (): void => {
     setShow(false);
     resetForm();
+    validateForm().then((errors) => setErrors(errors));
   };
 
   useEffect(() => {
     if (values.user) {
+      setFieldValue('userId', '');
       UserService.getByUserNameOrEmail(values.user)
         .then((response) => {
           setFieldValue('userId', response.data.id);
         })
         .catch(() => {
-          setFieldValue('userId', '');
+          // skip
         });
     }
   }, [values.user]);
-
 
   const CancelButton = (): ReactElement => (
     <Button onClick={close} color="primary" disabled={isSubmitting}>
@@ -53,8 +55,7 @@ const ContactRequestDialog: FC<Props> = ({show, setShow, ...props}: Props) => {
   );
 
   const SendButton = (): ReactElement => (
-    <LoadingButton type="submit" color="secondary" disabled={isSubmitting || !isValid}
-                   loading={isSubmitting}>
+    <LoadingButton type="submit" color="secondary" disabled={isSubmitting || !isValid} loading={isSubmitting}>
       {t('contact:addContact.send')}
     </LoadingButton>
   );
@@ -62,9 +63,7 @@ const ContactRequestDialog: FC<Props> = ({show, setShow, ...props}: Props) => {
   return (
     <Form>
       <Dialog open={show} onClose={close}>
-        <DialogTitle className={classes.title}>
-          {t('contact:addContact.title')}
-        </DialogTitle>
+        <DialogTitle className={classes.title}>{t('contact:addContact.title')}</DialogTitle>
         <DialogContent className={classes.content}>
           <TextInput name="user" label={t('contact:addContact.fields.user.label')} required />
           <MultilineInput name="message" label={t('contact:addContact.fields.message.label')} rows={4} />
@@ -96,18 +95,16 @@ const formik = withFormik<Props, ContactRequestFormValues>({
             'userNotExist',
             () => i18n.t('contact:addContact.fields.user.notRegistered'),
             () => false
-          )
+          ),
         }),
-      userId: Yup.string().required()
+      userId: Yup.string().required(),
     }),
 
   validateOnMount: true,
 
-  enableReinitialize: true,
-
   handleSubmit: (values: ContactRequestFormValues, {setSubmitting}: FormikBag<Props, ContactRequestFormValues>) => {
     console.log('!');
-  }
+  },
 });
 
 export default compose(connector, formik)(ContactRequestDialog);

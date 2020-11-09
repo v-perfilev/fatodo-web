@@ -7,5 +7,5 @@ export interface ContactRequestFormValues {
 export const defaultContactRequestFormValues: Readonly<ContactRequestFormValues> = {
   user: '',
   userId: '',
-  message: ''
+  message: '',
 };
