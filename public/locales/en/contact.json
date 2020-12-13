@@ -3,10 +3,13 @@
     "title": "Contacts"
   },
   "outcoming": {
-    "title": "Outcoming"
+    "title": "Outcoming",
+    "remove": "Remove"
   },
   "incoming": {
-    "title": "Incoming"
+    "title": "Incoming",
+    "accept": "Accept",
+    "decline": "Decline"
   },
   "addContact": {
     "title": "Add user to list of contacts",

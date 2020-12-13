@@ -13,7 +13,7 @@ export interface ContactRequestFormValues {
 export const defaultContactRequestFormValues: Readonly<ContactRequestFormValues> = {
   user: '',
   userId: '',
-  message: ''
+  message: '',
 };
 
 export class ContactRequestFormUtils {
@@ -34,13 +34,13 @@ export class ContactRequestFormUtils {
             'userNotExist',
             () => i18n.t('contact:addContact.fields.user.notRegistered'),
             () => false
-          )
+          ),
         }),
-      userId: Yup.string().required()
+      userId: Yup.string().required(),
     });
 
   public static mapValuesToDTO = (values: ContactRequestFormValues): ContactRequestDTO => ({
     recipientId: values.userId,
-    message: values.message
+    message: values.message,
   });
 }

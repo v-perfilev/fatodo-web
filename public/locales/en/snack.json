@@ -22,6 +22,9 @@
     "deleted": "Item deleted"
   },
   "contact": {
-    "requestSent": "Contact request sent"
+    "requestSent": "Contact request sent",
+    "requestRemoved": "Contact request removed",
+    "requestAccepted": "Contact request accepted",
+    "requestDeclined": "Contact request declined"
   }
 }

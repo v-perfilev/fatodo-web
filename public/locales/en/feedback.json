@@ -39,5 +39,13 @@
     "group": {
       "invalid": "Group contains invalid data"
     }
+  },
+  "contact": {
+    "relation": {
+      "exists": "Relation already exists"
+    },
+    "request": {
+      "exists": "Request already sent"
+    }
   }
 }

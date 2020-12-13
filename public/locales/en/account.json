@@ -23,6 +23,9 @@
     "title": "Change password",
     "submit": "Save"
   },
+  "info": {
+    "fieldNotSet": "Not set"
+  },
   "fields": {
     "user": {
       "label": "Username / Email",

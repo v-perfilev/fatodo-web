@@ -23,6 +23,9 @@
     "title": "Смена пароля",
     "submit": "Сохранить"
   },
+  "info": {
+    "fieldNotSet": "Не установлено"
+  },
   "fields": {
     "user": {
       "label": "Имя пользователя / Email",

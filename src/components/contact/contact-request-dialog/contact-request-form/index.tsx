@@ -16,11 +16,10 @@ import ContactService from '../../../../services/contact.service';
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
 
-type Props =
-  ConnectedProps<typeof connector>
-  & FormikProps<ContactRequestFormValues>
-  & FormDialogComponentProps
-  & SnackState;
+type Props = ConnectedProps<typeof connector> &
+  FormikProps<ContactRequestFormValues> &
+  FormDialogComponentProps &
+  SnackState;
 
 const ContactRequestForm: FC<Props> = (props: Props) => {
   const {setIsSubmitting, setIsValid, setSubmitForm, setResetForm} = props;
@@ -71,10 +70,10 @@ const formik = withFormik<Props, ContactRequestFormValues>({
   validationSchema: ({authState: {account}}: Props) => ContactRequestFormUtils.validationSchema(account),
   validateOnMount: true,
 
-  handleSubmit: (values: ContactRequestFormValues, {
-    props,
-    setSubmitting
-  }: FormikBag<Props, ContactRequestFormValues>) => {
+  handleSubmit: (
+    values: ContactRequestFormValues,
+    {props, setSubmitting}: FormikBag<Props, ContactRequestFormValues>
+  ) => {
     const {handleCode, handleResponse} = props;
 
     const dto = ContactRequestFormUtils.mapValuesToDTO(values);
@@ -88,7 +87,7 @@ const formik = withFormik<Props, ContactRequestFormValues>({
         handleResponse(response);
         setSubmitting(false);
       });
-  }
+  },
 });
 
 export default compose<FormDialogComponentProps>(withSnackContext, connector, formik)(ContactRequestForm);

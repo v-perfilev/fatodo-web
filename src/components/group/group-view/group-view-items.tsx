@@ -2,7 +2,7 @@ import React, {FC, useEffect} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewItemsStyles} from './_styles';
 import GroupViewItem from './group-view-item';
-import {PageDivider} from '../../common/surfaces/page-divider';
+import {PageDivider} from '../../common/surfaces';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';

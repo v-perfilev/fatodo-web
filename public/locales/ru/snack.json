@@ -22,6 +22,9 @@
     "deleted": "Запись удалена"
   },
   "contact": {
-    "requestSent": "Запрос контакта отправлен"
+    "requestSent": "Запрос отправлен",
+    "requestRemoved": "Запрос удалён",
+    "requestAccepted": "Запрос принят",
+    "requestDeclined": "Запрос отклонён"
   }
 }

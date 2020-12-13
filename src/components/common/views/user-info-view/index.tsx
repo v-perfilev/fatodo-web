@@ -1,7 +1,7 @@
 import React, {FC, HTMLAttributes} from 'react';
 import {User} from '../../../../models/user.model';
 import {Button, Grid} from '@material-ui/core';
-import {UrlPic} from '../../images/url-pic';
+import {UrlPic} from '../../images';
 import {PageSubheader} from '../../surfaces/page-subheader';
 import {userInfoViewStyles} from './_styles';
 import csx from 'classnames';
@@ -25,8 +25,14 @@ export const UserInfoView: FC<Props> = ({user, className}: Props) => {
       </Grid>
       <Grid item xs={7} className={classes.infoItem}>
         <PageSubheader title={user.username} />
-        {user.firstname && <UserInfoViewField label={t('account:fields.firstname.label')} text={user.firstname} />}
-        {user.lastname && <UserInfoViewField label={t('account:fields.lastname.label')} text={user.lastname} />}
+        <UserInfoViewField
+          label={t('account:fields.firstname.label')}
+          text={user.firstname ?? t('account:info.fieldNotSet')}
+        />
+        <UserInfoViewField
+          label={t('account:fields.lastname.label')}
+          text={user.lastname ?? t('account:info.fieldNotSet')}
+        />
       </Grid>
       <Grid item xs={12} className={classes.buttonsItem}>
         <Button variant="contained" color="secondary">

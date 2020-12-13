@@ -13,7 +13,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {compose} from 'recompose';
 import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
-import {CircularSpinner} from '../../common/loaders/circular-spinner';
+import {CircularSpinner} from '../../common/loaders';
 import GroupPreviewGridContainer from './group-preview-grid-container';
 
 const GroupPreview: FC = () => {

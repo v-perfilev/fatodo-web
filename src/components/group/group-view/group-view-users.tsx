@@ -5,7 +5,7 @@ import {User} from '../../../models/user.model';
 import UserService from '../../../services/user.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {UserWithPopupView} from '../../common/views/user-with-popup-view';
+import {UserWithPopupView} from '../../common/views';
 
 const GroupViewUsers: FC = () => {
   const classes = groupViewUsersStyles();

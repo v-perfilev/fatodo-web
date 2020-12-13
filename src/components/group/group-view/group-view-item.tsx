@@ -6,7 +6,7 @@ import {PackageDownIcon} from '../../common/icons/package-down-icon';
 import {EditIcon} from '../../common/icons/edit-icon';
 import {DeleteIcon} from '../../common/icons/delete-icon';
 import {Item} from '../../../models/item.model';
-import {Link} from '../../common/controls/link';
+import {Link} from '../../common/controls';
 import {ItemRouteUtils} from '../../item/_router';
 import {EyeIcon} from '../../common/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
