@@ -1,4 +1,5 @@
 import axios, {AxiosPromise} from 'axios';
+import {ContactRequestDTO} from '../models/dto/contact-request.dto';
 
 export default class ContactService {
   private static baseUrl = '/api/contact';
@@ -23,9 +24,9 @@ export default class ContactService {
     return axios.get(url);
   };
 
-  public static sendRequest = (userId: string): AxiosPromise => {
-    const url = ContactService.baseUrl + '/requests/send/' + userId;
-    return axios.get(url);
+  public static sendRequest = (dto: ContactRequestDTO): AxiosPromise => {
+    const url = ContactService.baseUrl + '/requests/send';
+    return axios.post(url, dto);
   };
 
   public static removeRequest = (userId: string): AxiosPromise => {

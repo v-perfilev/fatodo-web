@@ -20,15 +20,15 @@ export default class UserService {
     return axios.get(url);
   };
 
-  public static updateAccount = (data: FormData): AxiosPromise => {
+  public static updateAccount = (formData: FormData): AxiosPromise => {
     const url = UserService.baseUrl + '/account/update';
     const config = {headers: {'content-type': 'multipart/form-data'}};
-    return axios.post(url, data, config);
+    return axios.post(url, formData, config);
   };
 
-  public static changePassword = (data: ChangePasswordDTO): AxiosPromise => {
+  public static changePassword = (dto: ChangePasswordDTO): AxiosPromise => {
     const url = UserService.baseUrl + '/account/change-password';
-    return axios.post(url, data);
+    return axios.post(url, dto);
   };
 
   public static doesEmailExist = (value: string): AxiosPromise => {

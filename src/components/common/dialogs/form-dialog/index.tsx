@@ -4,6 +4,7 @@ import {formDialogStyles} from './_styles';
 import {LoadingButton} from '../../controls';
 
 export type FormDialogComponentProps = {
+  close: () => void;
   setIsSubmitting: (isSubmitting: boolean) => void;
   setIsValid: (isValid: boolean) => void;
   setSubmitForm: (callback: () => () => void) => void;
@@ -51,7 +52,7 @@ const FormDialog: FC<Props> = ({show, setShow, title, sendText, cancelText, Form
     <Dialog open={show} onClose={close}>
       <DialogTitle className={classes.title}>{title}</DialogTitle>
       <DialogContent className={classes.content}>
-        <FormComponent {...{setIsSubmitting, setIsValid, setSubmitForm, setResetForm}} />
+        <FormComponent {...{close, setIsSubmitting, setIsValid, setSubmitForm, setResetForm}} />
       </DialogContent>
       <DialogActions>
         {cancelButton}

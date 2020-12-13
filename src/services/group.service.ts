@@ -13,16 +13,16 @@ export default class GroupService {
     return axios.get(url);
   };
 
-  public static create = (data: FormData): AxiosPromise => {
+  public static create = (formData: FormData): AxiosPromise => {
     const url = GroupService.baseUrl + '/groups';
     const config = {headers: {'content-type': 'multipart/form-data'}};
-    return axios.post(url, data, config);
+    return axios.post(url, formData, config);
   };
 
-  public static update = (data: FormData): AxiosPromise => {
+  public static update = (formData: FormData): AxiosPromise => {
     const url = GroupService.baseUrl + '/groups';
     const config = {headers: {'content-type': 'multipart/form-data'}};
-    return axios.put(url, data, config);
+    return axios.put(url, formData, config);
   };
 
   public static delete = (id: string): AxiosPromise => {

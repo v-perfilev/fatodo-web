@@ -20,5 +20,8 @@
     "created": "Item created",
     "edited": "Item edited",
     "deleted": "Item deleted"
+  },
+  "contact": {
+    "requestSent": "Contact request sent"
   }
 }

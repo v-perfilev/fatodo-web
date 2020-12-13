@@ -14,14 +14,14 @@ export default class ItemService {
     return axios.get(url);
   };
 
-  public static create = (data: ItemDTO): AxiosPromise => {
+  public static create = (dto: ItemDTO): AxiosPromise => {
     const url = ItemService.baseUrl + '/items';
-    return axios.post(url, data);
+    return axios.post(url, dto);
   };
 
-  public static update = (data: ItemDTO): AxiosPromise => {
+  public static update = (dto: ItemDTO): AxiosPromise => {
     const url = ItemService.baseUrl + '/items';
-    return axios.put(url, data);
+    return axios.put(url, dto);
   };
 
   public static delete = (id: string): AxiosPromise => {

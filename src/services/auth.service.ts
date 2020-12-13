@@ -1,20 +1,20 @@
 import axios, {AxiosPromise} from 'axios';
 import {LoginDTO} from '../models/dto/login.dto';
-import {RegistrationDTO} from '../models/dto/registrationDTO';
+import {RegistrationDTO} from '../models/dto/registration.dto';
 import {ResetPasswordDTO} from '../models/dto/reset-password.dto';
 import {ForgotPasswordDTO} from '../models/dto/forgot-password.dto';
 
 export default class AuthService {
   private static baseUrl = '/api/auth/';
 
-  public static authenticate = (data: LoginDTO): AxiosPromise => {
+  public static authenticate = (dto: LoginDTO): AxiosPromise => {
     const url = AuthService.baseUrl + 'authenticate';
-    return axios.post(url, data);
+    return axios.post(url, dto);
   };
 
-  public static register = (data: RegistrationDTO): AxiosPromise => {
+  public static register = (dto: RegistrationDTO): AxiosPromise => {
     const url = AuthService.baseUrl + 'register';
-    return axios.post(url, data);
+    return axios.post(url, dto);
   };
 
   public static activate = (code: string): AxiosPromise => {
@@ -27,13 +27,13 @@ export default class AuthService {
     return axios.get(url);
   };
 
-  public static resetPassword = (data: ResetPasswordDTO): AxiosPromise => {
+  public static resetPassword = (dto: ResetPasswordDTO): AxiosPromise => {
     const url = AuthService.baseUrl + 'account/reset-password';
-    return axios.post(url, data);
+    return axios.post(url, dto);
   };
 
-  public static requestResetPasswordCode = (data: ForgotPasswordDTO): AxiosPromise => {
+  public static requestResetPasswordCode = (dto: ForgotPasswordDTO): AxiosPromise => {
     const url = AuthService.baseUrl + 'account/request-reset-password-code';
-    return axios.post(url, data);
+    return axios.post(url, dto);
   };
 }

@@ -1,9 +1,8 @@
 import * as Yup from 'yup';
 import {ObjectSchema} from 'yup';
 import i18n from '../../../../shared/i18n';
-import {ForgotPasswordDTO} from '../../../../models/dto/forgot-password.dto';
-import {ForgotPasswordFormValues} from '../../../user/forgot-password/forgot-password-form/_form';
 import {UserAccount} from '../../../../models/user.model';
+import {ContactRequestDTO} from '../../../../models/dto/contact-request.dto';
 
 export interface ContactRequestFormValues {
   user: string;
@@ -14,7 +13,7 @@ export interface ContactRequestFormValues {
 export const defaultContactRequestFormValues: Readonly<ContactRequestFormValues> = {
   user: '',
   userId: '',
-  message: '',
+  message: ''
 };
 
 export class ContactRequestFormUtils {
@@ -35,13 +34,13 @@ export class ContactRequestFormUtils {
             'userNotExist',
             () => i18n.t('contact:addContact.fields.user.notRegistered'),
             () => false
-          ),
+          )
         }),
-      userId: Yup.string().required(),
+      userId: Yup.string().required()
     });
 
-  public static mapValuesToDTO = (values: ForgotPasswordFormValues, token: string): ForgotPasswordDTO => ({
-    user: values.user,
-    token: token,
+  public static mapValuesToDTO = (values: ContactRequestFormValues): ContactRequestDTO => ({
+    recipientId: values.userId,
+    message: values.message
   });
 }

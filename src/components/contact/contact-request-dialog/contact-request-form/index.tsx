@@ -9,11 +9,18 @@ import {RootState} from '../../../../store';
 import UserService from '../../../../services/user.service';
 import {MultilineInput, TextInput} from '../../../common/inputs';
 import {FormDialogComponentProps} from '../../../common/dialogs';
+import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
+import {SnackState} from '../../../../shared/contexts/snack-context';
+import ContactService from '../../../../services/contact.service';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
 
-type Props = ConnectedProps<typeof connector> & FormikProps<ContactRequestFormValues> & FormDialogComponentProps;
+type Props =
+  ConnectedProps<typeof connector>
+  & FormikProps<ContactRequestFormValues>
+  & FormDialogComponentProps
+  & SnackState;
 
 const ContactRequestForm: FC<Props> = (props: Props) => {
   const {setIsSubmitting, setIsValid, setSubmitForm, setResetForm} = props;
@@ -64,10 +71,24 @@ const formik = withFormik<Props, ContactRequestFormValues>({
   validationSchema: ({authState: {account}}: Props) => ContactRequestFormUtils.validationSchema(account),
   validateOnMount: true,
 
-  handleSubmit: (values: ContactRequestFormValues, {setSubmitting}: FormikBag<Props, ContactRequestFormValues>) => {
-    console.log('!');
-    setSubmitting(false);
-  },
+  handleSubmit: (values: ContactRequestFormValues, {
+    props,
+    setSubmitting
+  }: FormikBag<Props, ContactRequestFormValues>) => {
+    const {handleCode, handleResponse} = props;
+
+    const dto = ContactRequestFormUtils.mapValuesToDTO(values);
+
+    ContactService.sendRequest(dto)
+      .then(() => {
+        handleCode('contact.requestSent', 'info');
+        props.close();
+      })
+      .catch((response) => {
+        handleResponse(response);
+        setSubmitting(false);
+      });
+  }
 });
 
-export default compose<FormDialogComponentProps>(connector, formik)(ContactRequestForm);
+export default compose<FormDialogComponentProps>(withSnackContext, connector, formik)(ContactRequestForm);
