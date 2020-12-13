@@ -1,5 +1,7 @@
 import {Group} from '../../../models/group.model';
 import {ColorScheme} from '../../../shared/theme/colors';
+import * as Yup from 'yup';
+import i18n from '../../../shared/i18n';
 
 export interface GroupFormValues {
   title: string;
@@ -16,7 +18,7 @@ const defaultGroupFormValues: Readonly<GroupFormValues> = {
 };
 
 export class GroupFormUtils {
-  public static mapGroupToValues = (group: Group): GroupFormValues =>
+  public static mapPropsToValues = (group: Group): GroupFormValues =>
     group
       ? {
           title: group.title,
@@ -25,6 +27,11 @@ export class GroupFormUtils {
           imageContent: null,
         }
       : defaultGroupFormValues;
+
+  public static validationSchema = Yup.object().shape({
+    title: Yup.string().required(() => i18n.t('group:fields.title.required')),
+    color: Yup.string().required(() => i18n.t('group:fields.color.required')),
+  });
 
   public static mapValuesToFormData = (values: GroupFormValues, group: Group): FormData => {
     const formData = new FormData();

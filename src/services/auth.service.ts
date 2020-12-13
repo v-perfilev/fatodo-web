@@ -1,6 +1,6 @@
 import axios, {AxiosPromise} from 'axios';
 import {LoginDTO} from '../models/dto/login.dto';
-import {RegistrationDto} from '../models/dto/registration.dto';
+import {RegistrationDTO} from '../models/dto/registrationDTO';
 import {ResetPasswordDTO} from '../models/dto/reset-password.dto';
 import {ForgotPasswordDTO} from '../models/dto/forgot-password.dto';
 
@@ -12,7 +12,7 @@ export default class AuthService {
     return axios.post(url, data);
   };
 
-  public static register = (data: RegistrationDto): AxiosPromise => {
+  public static register = (data: RegistrationDTO): AxiosPromise => {
     const url = AuthService.baseUrl + 'register';
     return axios.post(url, data);
   };

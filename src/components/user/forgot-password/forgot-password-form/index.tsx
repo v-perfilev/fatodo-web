@@ -1,19 +1,18 @@
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
-import * as Yup from 'yup';
 import * as React from 'react';
 import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
-import withCaptcha, {CaptchaProps} from '../../../shared/hocs/with-capcha';
-import {authFormStyles} from '../_styles';
-import {TextInput} from '../../common/inputs/text-input';
-import {LoadingButton} from '../../common/controls/loading-button';
-import i18n from '../../../shared/i18n';
-import AuthService from '../../../services/auth.service';
-import {SnackState} from '../../../shared/contexts/snack-context';
-import {withSnackContext} from '../../../shared/hocs/with-snack/with-snack';
+import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha';
+import {authFormStyles} from '../../_styles';
+import {TextInput} from '../../../common/inputs';
+import {LoadingButton} from '../../../common/controls';
+import AuthService from '../../../../services/auth.service';
+import {SnackState} from '../../../../shared/contexts/snack-context';
+import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
+import {ForgotPasswordFormUtils, ForgotPasswordFormValues} from './_form';
 
-type Props = FormikProps<any> &
+type Props = FormikProps<ForgotPasswordFormValues> &
   CaptchaProps &
   SnackState & {
     onSuccess?: () => void;
@@ -39,34 +38,20 @@ const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   );
 };
 
-interface FormValues {
-  user: string;
-}
-
-const formik = withFormik<Props, FormValues>({
-  mapPropsToValues: () => ({
-    user: '',
-  }),
-
-  mapPropsToErrors: () => ({
-    user: '',
-  }),
-
-  validationSchema: Yup.object().shape({
-    user: Yup.string().required(() => i18n.t('account:fields.user.required')),
-  }),
-
+const formik = withFormik<Props, ForgotPasswordFormValues>({
+  mapPropsToValues: ForgotPasswordFormUtils.mapPropsToValues,
+  validationSchema: ForgotPasswordFormUtils.validationSchema,
   validateOnMount: true,
 
-  handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
+  handleSubmit: (
+    values: ForgotPasswordFormValues,
+    {setSubmitting, props}: FormikBag<Props, ForgotPasswordFormValues>
+  ) => {
     const {token, updateToken, handleCode, handleResponse} = props;
 
-    const data = {
-      user: values.user,
-      token: token,
-    };
+    const dto = ForgotPasswordFormUtils.mapValuesToDTO(values, token);
 
-    AuthService.requestResetPasswordCode(data)
+    AuthService.requestResetPasswordCode(dto)
       .then(() => {
         handleCode('auth.afterForgotPassword', 'info');
         props.onSuccess();

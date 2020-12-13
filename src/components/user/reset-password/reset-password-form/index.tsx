@@ -1,21 +1,19 @@
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
-import * as Yup from 'yup';
 import * as React from 'react';
 import {FC} from 'react';
-import {authFormStyles} from '../_styles';
+import {authFormStyles} from '../../_styles';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
-import AuthService from '../../../services/auth.service';
-import withCaptcha, {CaptchaProps} from '../../../shared/hocs/with-capcha';
-import {PasswordInput} from '../../common/inputs/password-input';
-import {LoadingButton} from '../../common/controls/loading-button';
-import {PasswordStrengthBar} from '../password-strength-bar';
-import {withSnackContext} from '../../../shared/hocs/with-snack/with-snack';
-import {SnackState} from '../../../shared/contexts/snack-context';
-import {passwordValidator} from '../../../shared/forms/validators/password.validator';
-import {passwordRepeatValidator} from '../../../shared/forms/validators/password-repeat.validator';
+import AuthService from '../../../../services/auth.service';
+import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha';
+import {PasswordInput} from '../../../common/inputs';
+import {LoadingButton} from '../../../common/controls';
+import {PasswordStrengthBar} from '../../password-strength-bar';
+import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
+import {SnackState} from '../../../../shared/contexts/snack-context';
+import {ResetPasswordFormUtils, ResetPasswordFormValues} from './_form';
 
-type Props = FormikProps<any> &
+type Props = FormikProps<ResetPasswordFormValues> &
   CaptchaProps &
   SnackState & {
     code: string;
@@ -45,38 +43,20 @@ const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) =>
   );
 };
 
-interface FormValues {
-  password: string;
-  repeatPassword: string;
-}
-
-const formik = withFormik<Props, FormValues>({
-  mapPropsToValues: () => ({
-    password: '',
-    repeatPassword: '',
-  }),
-
-  mapPropsToErrors: () => ({
-    password: '',
-    repeatPassword: '',
-  }),
-
-  validationSchema: Yup.object().shape({
-    password: passwordValidator,
-    repeatPassword: passwordRepeatValidator,
-  }),
-
+const formik = withFormik<Props, ResetPasswordFormValues>({
+  mapPropsToValues: ResetPasswordFormUtils.mapPropsToValues,
+  validationSchema: ResetPasswordFormUtils.validationSchema,
   validateOnMount: true,
 
-  handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
+  handleSubmit: (
+    values: ResetPasswordFormValues,
+    {setSubmitting, props}: FormikBag<Props, ResetPasswordFormValues>
+  ) => {
     const {code, token, updateToken, onSuccess, onFailure, handleCode, handleResponse} = props;
 
-    const data = {
-      code: code,
-      password: values.password,
-      token: token,
-    };
-    AuthService.resetPassword(data)
+    const dto = ResetPasswordFormUtils.mapValuesToDTO(values, code, token);
+
+    AuthService.resetPassword(dto)
       .then(() => {
         handleCode('auth.afterResetPassword', 'info');
         onSuccess();

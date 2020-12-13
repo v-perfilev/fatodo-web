@@ -1,21 +1,18 @@
 import React, {FC} from 'react';
-import {accountFormStyles} from './_styles';
-import {PageSubheader} from '../../common/surfaces/page-subheader';
-import {PageDivider, PageSpacer} from '../../common/surfaces';
+import {accountFormStyles} from '../_styles';
+import {PageSubheader} from '../../../common/surfaces/page-subheader';
+import {PageDivider, PageSpacer} from '../../../common/surfaces';
 import {Box} from '@material-ui/core';
-import {LoadingButton} from '../../common/controls';
+import {LoadingButton} from '../../../common/controls';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {useTranslation} from 'react-i18next';
 import {AccountPasswordFormUtils, AccountPasswordFormValues} from './_form';
-import * as Yup from 'yup';
-import {PasswordInput} from '../../common/inputs';
-import {PasswordStrengthBar} from '../password-strength-bar';
-import i18n from 'i18next';
+import {PasswordInput} from '../../../common/inputs';
+import {PasswordStrengthBar} from '../../password-strength-bar';
 import {compose} from 'recompose';
-import {SnackState} from '../../../shared/contexts/snack-context';
-import UserService from '../../../services/user.service';
-import {withSnackContext} from '../../../shared/hocs/with-snack/with-snack';
-import {passwordValidator} from '../../../shared/forms/validators/password.validator';
+import {SnackState} from '../../../../shared/contexts/snack-context';
+import UserService from '../../../../services/user.service';
+import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 
 type Props = FormikProps<any> & SnackState;
 
@@ -43,14 +40,8 @@ const AccountPasswordForm: FC<Props> = ({values, isValid, isSubmitting}: Props) 
 };
 
 const formik = withFormik<Props, AccountPasswordFormValues>({
-  mapPropsToValues: () => AccountPasswordFormUtils.mapAccountToValues(),
-
-  validationSchema: () =>
-    Yup.object().shape({
-      oldPassword: Yup.string().required(i18n.t('account:fields.password.required')),
-      newPassword: passwordValidator
-    }),
-
+  mapPropsToValues: AccountPasswordFormUtils.mapPropsToValues,
+  validationSchema: AccountPasswordFormUtils.validationSchema,
   validateOnMount: true,
 
   handleSubmit: (
@@ -72,7 +63,7 @@ const formik = withFormik<Props, AccountPasswordFormValues>({
       .finally(() => {
         setSubmitting(false);
       });
-  }
+  },
 });
 
 export default compose(withSnackContext, formik)(AccountPasswordForm);

@@ -4,8 +4,6 @@ import {Item} from '../../../models/item.model';
 import {Button, Container, Grid, ThemeProvider} from '@material-ui/core';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
-import * as Yup from 'yup';
-import i18n from '../../../shared/i18n';
 import {ItemFormUtils, ItemFormValues} from './_form';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Group} from '../../../models/group.model';
@@ -18,13 +16,13 @@ import {
   RemindersInput,
   TagsInput,
   TextInput,
-  TimeInput
+  TimeInput,
 } from '../../common/inputs';
 import {useTranslation} from 'react-i18next';
 import TypeInput from '../../common/inputs/type-input';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 
-type Props = FormikProps<any> & {
+type Props = FormikProps<ItemFormValues> & {
   group: Group;
   item?: Item;
   header: string;
@@ -86,21 +84,15 @@ const ItemForm: FC<Props> = (props: Props) => {
 };
 
 const formik = withFormik<Props, ItemFormValues>({
-  mapPropsToValues: ({item}: Props) => ItemFormUtils.mapItemToValues(item),
-
-  validationSchema: Yup.object().shape({
-    title: Yup.string().required(() => i18n.t('item:fields.title.required')),
-    type: Yup.string().required(() => i18n.t('item:fields.type.required')),
-    priority: Yup.string().required(() => i18n.t('item:fields.priority.required'))
-  }),
-
+  mapPropsToValues: ({item}: Props) => ItemFormUtils.mapPropsToValues(item),
+  validationSchema: ItemFormUtils.validationSchema,
   validateOnMount: true,
 
   handleSubmit: (values: ItemFormValues, {setSubmitting, props}: FormikBag<Props, ItemFormValues>) => {
     const {request, item, group} = props;
-    const data = ItemFormUtils.mapValuesToDTO(values, item, group);
-    request(data, () => setSubmitting(false));
-  }
+    const dto = ItemFormUtils.mapValuesToDTO(values, item, group);
+    request(dto, () => setSubmitting(false));
+  },
 });
 
 export default compose(formik, withVerticalPadding)(ItemForm);

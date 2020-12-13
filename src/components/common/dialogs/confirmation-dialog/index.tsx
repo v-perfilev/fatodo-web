@@ -1,4 +1,4 @@
-import React, {FC, ReactElement} from 'react';
+import React, {FC} from 'react';
 import {
   Button,
   Dialog,
@@ -9,7 +9,7 @@ import {
   ThemeProvider,
 } from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
-import {LoadingButton} from '../../controls/loading-button';
+import {LoadingButton} from '../../controls';
 import {ThemeFactory} from '../../../../shared/theme/theme';
 import {confirmationDialogStyles} from './_styles';
 
@@ -28,13 +28,13 @@ export const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDis
 
   const theme = ThemeFactory.getDefaultTheme();
 
-  const DisagreeButton = (): ReactElement => (
+  const disagreeButton = (
     <Button onClick={onDisagree} color="primary">
       {t('buttons.disagree')}
     </Button>
   );
 
-  const AgreeButton = (): ReactElement => (
+  const agreeButton = (
     <LoadingButton onClick={onAgree} color="secondary" autoFocus loading={loading}>
       {t('buttons.agree')}
     </LoadingButton>
@@ -50,8 +50,8 @@ export const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDis
           </DialogContent>
         )}
         <DialogActions>
-          <DisagreeButton />
-          <AgreeButton />
+          {disagreeButton}
+          {agreeButton}
         </DialogActions>
       </Dialog>
     </ThemeProvider>

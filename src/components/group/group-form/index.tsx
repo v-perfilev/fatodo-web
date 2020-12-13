@@ -4,19 +4,14 @@ import {Button, Container, Grid, ThemeProvider} from '@material-ui/core';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
 import {Group} from '../../../models/group.model';
-import * as Yup from 'yup';
-import i18n from '../../../shared/i18n';
 import {GroupFormUtils, GroupFormValues} from './_form';
 import {ThemeFactory} from '../../../shared/theme/theme';
-import {ImageUpload} from '../../common/inputs/image-upload';
+import {ImageUpload, TextInput, ThemeSelect} from '../../common/inputs';
 import {useTranslation} from 'react-i18next';
-import {ThemeSelect} from '../../common/inputs/theme-select';
-import {PageHeader} from '../../common/surfaces/page-header';
-import {PageDivider} from '../../common/surfaces/page-divider';
-import {TextInput} from '../../common/inputs/text-input';
+import {PageDivider, PageHeader} from '../../common/surfaces';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 
-type Props = FormikProps<any> & {
+type Props = FormikProps<GroupFormValues> & {
   group?: Group;
   header: string;
   setSaveCallback: (callback: () => () => void) => void;
@@ -67,19 +62,14 @@ const GroupForm: FC<Props> = ({header, setSaveCallback, values, isValid, submitF
 };
 
 const formik = withFormik<Props, GroupFormValues>({
-  mapPropsToValues: ({group}: Props) => GroupFormUtils.mapGroupToValues(group),
-
-  validationSchema: Yup.object().shape({
-    title: Yup.string().required(() => i18n.t('group:fields.title.required')),
-    color: Yup.string().required(() => i18n.t('group:fields.color.required')),
-  }),
-
+  mapPropsToValues: ({group}: Props) => GroupFormUtils.mapPropsToValues(group),
+  validationSchema: GroupFormUtils.validationSchema,
   validateOnMount: true,
 
   handleSubmit: (values: GroupFormValues, {setSubmitting, props}: FormikBag<Props, GroupFormValues>) => {
     const {request, group} = props;
-    const data = GroupFormUtils.mapValuesToFormData(values, group);
-    request(data, () => setSubmitting(false));
+    const formData = GroupFormUtils.mapValuesToFormData(values, group);
+    request(formData, () => setSubmitting(false));
   },
 });
 

@@ -1,10 +1,8 @@
 import React, {FC, useEffect} from 'react';
-import {useTranslation} from 'react-i18next';
 import ContactService from '../../../services/contact.service';
 import {ContactRelation} from '../../../models/contact-relation.model';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {CircularSpinner} from '../../common/loaders/circular-spinner';
-import {contactListStyles} from './_styles';
+import {CircularSpinner} from '../../common/loaders';
 import UserService from '../../../services/user.service';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {compose} from 'recompose';
@@ -12,8 +10,6 @@ import withUserList from '../../../shared/hocs/with-list/with-user-list';
 import {Box} from '@material-ui/core';
 
 const ContactList: FC = () => {
-  const classes = contactListStyles();
-  const {t} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {setObjs: setUsers, setLoad: setUserLoad, loading: usersLoading} = useUserListContext();
 

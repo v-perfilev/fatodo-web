@@ -3,6 +3,8 @@ import {Reminder} from '../../../models/reminder.model';
 import {DateConverters} from '../../../shared/utils/date.utils';
 import {Group} from '../../../models/group.model';
 import {ItemDTO} from '../../../models/dto/item.dto';
+import * as Yup from 'yup';
+import i18n from '../../../shared/i18n';
 
 export interface ItemFormValues {
   title: string;
@@ -27,7 +29,7 @@ const defaultItemFormValues: Readonly<ItemFormValues> = {
 };
 
 export class ItemFormUtils {
-  public static mapItemToValues = (item: Item): ItemFormValues =>
+  public static mapPropsToValues = (item: Item): ItemFormValues =>
     item
       ? {
           title: item.title,
@@ -40,6 +42,12 @@ export class ItemFormUtils {
           tags: item.tags,
         }
       : defaultItemFormValues;
+
+  public static validationSchema = Yup.object().shape({
+    title: Yup.string().required(() => i18n.t('item:fields.title.required')),
+    type: Yup.string().required(() => i18n.t('item:fields.type.required')),
+    priority: Yup.string().required(() => i18n.t('item:fields.priority.required')),
+  });
 
   public static mapValuesToDTO = (values: ItemFormValues, item: Item, group: Group): ItemDTO => {
     return {

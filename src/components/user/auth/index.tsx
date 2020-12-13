@@ -11,7 +11,7 @@ import {SOCIAL_LOGIN} from '../../../constants';
 import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {connect, ConnectedProps} from 'react-redux';
-import {Link} from '../../common/controls/link';
+import {Link} from '../../common/controls';
 import {SocialButtons} from './social-buttons';
 import LoginForm from './login-form';
 import RegistrationForm from './registration-form';

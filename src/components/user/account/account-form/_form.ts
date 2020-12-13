@@ -1,5 +1,7 @@
-import {UserAccount} from '../../../models/user.model';
-import {ChangePasswordDTO} from '../../../models/dto/change-password.dto';
+import {UserAccount} from '../../../../models/user.model';
+import * as Yup from 'yup';
+import {usernameChangeValidator} from '../../../../shared/forms/validators/username-change.validator';
+import {ObjectSchema} from 'yup';
 
 export interface AccountFormValues {
   username: string;
@@ -20,7 +22,7 @@ const defaultAccountFormValues: Readonly<AccountFormValues> = {
 };
 
 export class AccountFormUtils {
-  public static mapAccountToValues = (account: UserAccount): AccountFormValues => ({
+  public static mapPropsToValues = (account: UserAccount): AccountFormValues => ({
     username: account?.username ?? defaultAccountFormValues.username,
     firstname: account?.info?.firstname ?? defaultAccountFormValues.firstname,
     lastname: account?.info?.lastname ?? defaultAccountFormValues.lastname,
@@ -28,6 +30,11 @@ export class AccountFormUtils {
     imageFilename: account?.info?.imageFilename ?? defaultAccountFormValues.imageFilename,
     imageContent: null,
   });
+
+  public static validationSchema = (account: UserAccount): ObjectSchema =>
+    Yup.object().shape({
+      username: usernameChangeValidator(account.username).check(),
+    });
 
   public static mapValuesToFormData = (values: AccountFormValues, account: UserAccount): FormData => {
     const formData = new FormData();
@@ -45,26 +52,5 @@ export class AccountFormUtils {
     if (value) {
       formData.append(name, value);
     }
-  };
-}
-
-export interface AccountPasswordFormValues {
-  oldPassword: string;
-  newPassword: string;
-}
-
-const defaultAccountPasswordFormValues: Readonly<AccountPasswordFormValues> = {
-  oldPassword: '',
-  newPassword: '',
-};
-
-export class AccountPasswordFormUtils {
-  public static mapAccountToValues = (): AccountPasswordFormValues => defaultAccountPasswordFormValues;
-
-  public static mapValuesToDTO = (values: AccountPasswordFormValues): ChangePasswordDTO => {
-    return {
-      oldPassword: values.oldPassword,
-      newPassword: values.newPassword,
-    };
   };
 }

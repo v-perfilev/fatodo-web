@@ -1,33 +1,30 @@
 import {Field, Form, FormikBag, FormikProps, withFormik} from 'formik';
-import * as Yup from 'yup';
 import {CheckboxWithLabel} from 'formik-material-ui';
 import {Box} from '@material-ui/core';
-import {login, requestAccountData} from '../../../store/actions/auth.actions';
+import {login, requestAccountData} from '../../../../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import * as React from 'react';
 import {FC} from 'react';
-import i18n from '../../../shared/i18n';
-import {authFormStyles} from '../_styles';
+import {authFormStyles} from '../../_styles';
 import {useTranslation} from 'react-i18next';
 import {compose} from 'recompose';
-import AuthService from '../../../services/auth.service';
+import AuthService from '../../../../services/auth.service';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
-import {Routes} from '../../router';
-import {ResponseUtils} from '../../../shared/utils/response.utils';
-import {SecurityUtils} from '../../../shared/utils/security.utils';
-import withCaptcha, {CaptchaProps} from '../../../shared/hocs/with-capcha';
-import {TextInput} from '../../common/inputs/text-input';
-import {PasswordInput} from '../../common/inputs/password-input';
-import {LoadingButton} from '../../common/controls/loading-button';
-import {Link} from '../../common/controls/link';
-import {withSnackContext} from '../../../shared/hocs/with-snack/with-snack';
-import {SnackState} from '../../../shared/contexts/snack-context';
+import {Routes} from '../../../router';
+import {ResponseUtils} from '../../../../shared/utils/response.utils';
+import {SecurityUtils} from '../../../../shared/utils/security.utils';
+import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha';
+import {PasswordInput, TextInput} from '../../../common/inputs';
+import {Link, LoadingButton} from '../../../common/controls';
+import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
+import {SnackState} from '../../../../shared/contexts/snack-context';
+import {LoginFormUtils, LoginFormValues} from './_form';
 
 const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);
 
 type Props = RouteComponentProps &
-  FormikProps<any> &
+  FormikProps<LoginFormValues> &
   ConnectedProps<typeof connector> &
   CaptchaProps &
   SnackState & {
@@ -67,44 +64,19 @@ const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   );
 };
 
-interface FormValues {
-  user: string;
-  password: string;
-  rememberMe: boolean;
-}
-
-const formik = withFormik<Props, FormValues>({
-  mapPropsToValues: () => ({
-    user: '',
-    password: '',
-    rememberMe: false,
-  }),
-
-  mapPropsToErrors: () => ({
-    user: '',
-    password: '',
-    rememberMe: '',
-  }),
-
-  validationSchema: Yup.object().shape({
-    user: Yup.string().required(() => i18n.t('account:fields.user.required')),
-    password: Yup.string().required(() => i18n.t('account:fields.password.required')),
-  }),
-
+const formik = withFormik<Props, LoginFormValues>({
+  mapPropsToValues: LoginFormUtils.mapPropsToValues,
+  validationSchema: LoginFormUtils.validationSchema,
   validateOnMount: true,
 
-  handleSubmit: (values: FormValues, {setSubmitting, props}: FormikBag<Props, FormValues>) => {
+  handleSubmit: (values: LoginFormValues, {setSubmitting, props}: FormikBag<Props, LoginFormValues>) => {
     const {login, requestAccountData, history, onSuccess, token, updateToken, handleResponse} = props;
 
-    const data = {
-      user: values.user,
-      password: values.password,
-      token: token,
-    };
+    const dto = LoginFormUtils.mapValuesToDTO(values, token);
 
     const onFailure = (): void => setSubmitting(false);
 
-    AuthService.authenticate(data)
+    AuthService.authenticate(dto)
       .then((response) => {
         const token = SecurityUtils.parseTokenFromResponse(response);
         login(token, values.rememberMe);
