@@ -1,10 +1,9 @@
 import {useTranslation} from 'react-i18next';
-import React, {FC, ReactElement, useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle} from '@material-ui/core';
-import {LoadingButton} from '../../controls/loading-button';
-import {TextInput} from '../../inputs/text-input';
+import {LoadingButton} from '../../controls';
+import {MultilineInput, TextInput} from '../../inputs';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
-import {MultilineInput} from '../../inputs/multiline-input';
 import * as Yup from 'yup';
 import i18n from '../../../../shared/i18n';
 import {compose} from 'recompose';
@@ -20,9 +19,9 @@ const connector = connect(mapStateToProps);
 
 type Props = ConnectedProps<typeof connector> &
   FormikProps<ContactRequestFormValues> & {
-    show: boolean;
-    setShow: (show: boolean) => void;
-  };
+  show: boolean;
+  setShow: (show: boolean) => void;
+};
 
 const ContactRequestDialog: FC<Props> = ({show, setShow, ...props}: Props) => {
   const classes = contactRequestDialogStyles();
@@ -48,32 +47,32 @@ const ContactRequestDialog: FC<Props> = ({show, setShow, ...props}: Props) => {
     }
   }, [values.user]);
 
-  const CancelButton = (): ReactElement => (
+  const cancelButton = (
     <Button onClick={close} color="primary" disabled={isSubmitting}>
       {t('contact:addContact.cancel')}
     </Button>
   );
 
-  const SendButton = (): ReactElement => (
+  const sendButton = (
     <LoadingButton type="submit" color="secondary" disabled={isSubmitting || !isValid} loading={isSubmitting}>
       {t('contact:addContact.send')}
     </LoadingButton>
   );
 
   return (
-    <Form>
-      <Dialog open={show} onClose={close}>
+    <Dialog open={show} onClose={close}>
+      <Form>
         <DialogTitle className={classes.title}>{t('contact:addContact.title')}</DialogTitle>
         <DialogContent className={classes.content}>
           <TextInput name="user" label={t('contact:addContact.fields.user.label')} required />
           <MultilineInput name="message" label={t('contact:addContact.fields.message.label')} rows={4} />
         </DialogContent>
         <DialogActions>
-          <CancelButton />
-          <SendButton />
+          {cancelButton}
+          {sendButton}
         </DialogActions>
-      </Dialog>
-    </Form>
+      </Form>
+    </Dialog>
   );
 };
 
@@ -95,16 +94,16 @@ const formik = withFormik<Props, ContactRequestFormValues>({
             'userNotExist',
             () => i18n.t('contact:addContact.fields.user.notRegistered'),
             () => false
-          ),
+          )
         }),
-      userId: Yup.string().required(),
+      userId: Yup.string().required()
     }),
 
   validateOnMount: true,
 
   handleSubmit: (values: ContactRequestFormValues, {setSubmitting}: FormikBag<Props, ContactRequestFormValues>) => {
     console.log('!');
-  },
+  }
 });
 
 export default compose(connector, formik)(ContactRequestDialog);

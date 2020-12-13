@@ -10,17 +10,18 @@ import {ItemFormUtils, ItemFormValues} from './_form';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Group} from '../../../models/group.model';
 import {ItemDTO} from '../../../models/dto/item.dto';
-import {PageHeader} from '../../common/surfaces/page-header';
-import {PageDivider} from '../../common/surfaces/page-divider';
-import {TextInput} from '../../common/inputs/text-input';
+import {PageDivider, PageHeader} from '../../common/surfaces';
+import {
+  DateInput,
+  MultilineInput,
+  PriorityInput,
+  RemindersInput,
+  TagsInput,
+  TextInput,
+  TimeInput
+} from '../../common/inputs';
 import {useTranslation} from 'react-i18next';
 import TypeInput from '../../common/inputs/type-input';
-import {PriorityInput} from '../../common/inputs/priority-input';
-import {TimeInput} from '../../common/inputs/time-input';
-import {DateInput} from '../../common/inputs/date-input';
-import {MultilineInput} from '../../common/inputs/multiline-input';
-import {RemindersInput} from '../../common/inputs/reminders-input';
-import {TagsInput} from '../../common/inputs/tags-input';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 
 type Props = FormikProps<any> & {
@@ -90,7 +91,7 @@ const formik = withFormik<Props, ItemFormValues>({
   validationSchema: Yup.object().shape({
     title: Yup.string().required(() => i18n.t('item:fields.title.required')),
     type: Yup.string().required(() => i18n.t('item:fields.type.required')),
-    priority: Yup.string().required(() => i18n.t('item:fields.priority.required')),
+    priority: Yup.string().required(() => i18n.t('item:fields.priority.required'))
   }),
 
   validateOnMount: true,
@@ -99,7 +100,7 @@ const formik = withFormik<Props, ItemFormValues>({
     const {request, item, group} = props;
     const data = ItemFormUtils.mapValuesToDTO(values, item, group);
     request(data, () => setSubmitting(false));
-  },
+  }
 });
 
 export default compose(formik, withVerticalPadding)(ItemForm);

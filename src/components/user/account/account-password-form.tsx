@@ -1,15 +1,14 @@
 import React, {FC} from 'react';
 import {accountFormStyles} from './_styles';
 import {PageSubheader} from '../../common/surfaces/page-subheader';
-import {PageDivider} from '../../common/surfaces/page-divider';
-import {PageSpacer} from '../../common/surfaces/page-spacer';
+import {PageDivider, PageSpacer} from '../../common/surfaces';
 import {Box} from '@material-ui/core';
-import {LoadingButton} from '../../common/controls/loading-button';
+import {LoadingButton} from '../../common/controls';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {useTranslation} from 'react-i18next';
 import {AccountPasswordFormUtils, AccountPasswordFormValues} from './_form';
 import * as Yup from 'yup';
-import {PasswordInput} from '../../common/inputs/password-input';
+import {PasswordInput} from '../../common/inputs';
 import {PasswordStrengthBar} from '../password-strength-bar';
 import i18n from 'i18next';
 import {compose} from 'recompose';
@@ -49,7 +48,7 @@ const formik = withFormik<Props, AccountPasswordFormValues>({
   validationSchema: () =>
     Yup.object().shape({
       oldPassword: Yup.string().required(i18n.t('account:fields.password.required')),
-      newPassword: passwordValidator,
+      newPassword: passwordValidator
     }),
 
   validateOnMount: true,
@@ -73,7 +72,7 @@ const formik = withFormik<Props, AccountPasswordFormValues>({
       .finally(() => {
         setSubmitting(false);
       });
-  },
+  }
 });
 
 export default compose(withSnackContext, formik)(AccountPasswordForm);

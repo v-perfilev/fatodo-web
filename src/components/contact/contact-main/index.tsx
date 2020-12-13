@@ -13,10 +13,10 @@ import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import ContactRequestDialog from '../../common/dialogs/contact-request-dialog';
 import ContactList from '../contact-list';
-import ContactOutcoming from '../contact-outcoming';
 import ContactIncoming from '../contact-incoming';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {ContactRouteUtils} from '../_router';
+import ContactOutcoming from '../contact-outcoming';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {

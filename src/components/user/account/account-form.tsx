@@ -1,16 +1,15 @@
 import React, {FC} from 'react';
 import {accountFormStyles} from './_styles';
 import {Box} from '@material-ui/core';
-import {TextInput} from '../../common/inputs/text-input';
-import {ImageUpload} from '../../common/inputs/image-upload';
+import {ImageUpload, TextInput} from '../../common/inputs';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {AccountFormUtils, AccountFormValues} from './_form';
 import {compose} from 'recompose';
 import {useTranslation} from 'react-i18next';
 import {UserAccount} from '../../../models/user.model';
 import * as Yup from 'yup';
-import {LoadingButton} from '../../common/controls/loading-button';
-import {PageSpacer} from '../../common/surfaces/page-spacer';
+import {LoadingButton} from '../../common/controls';
+import {PageSpacer} from '../../common/surfaces';
 import {SelectInput} from '../../common/inputs/select-input';
 import {LANGUAGES} from '../../../shared/i18n';
 import {withSnackContext} from '../../../shared/hocs/with-snack/with-snack';
@@ -20,9 +19,9 @@ import {usernameChangeValidator} from '../../../shared/forms/validators/username
 
 type Props = FormikProps<any> &
   SnackState & {
-    account: UserAccount;
-    requestAccountData: () => void;
-  };
+  account: UserAccount;
+  requestAccountData: () => void;
+};
 
 const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = accountFormStyles();
@@ -58,7 +57,7 @@ const formik = withFormik<Props, AccountFormValues>({
 
   validationSchema: ({account}: Props) =>
     Yup.object().shape({
-      username: usernameChangeValidator(account.username).check(),
+      username: usernameChangeValidator(account.username).check()
     }),
 
   validateOnMount: true,
@@ -78,7 +77,7 @@ const formik = withFormik<Props, AccountFormValues>({
       .finally(() => {
         setSubmitting(false);
       });
-  },
+  }
 });
 
 export default compose(withSnackContext, formik)(AccountForm);
