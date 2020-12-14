@@ -3,7 +3,7 @@ import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {PageDivider} from '../../common/surfaces';
 import {contactOutcomingListStyles} from './_styles';
-import ContactOutcomingRequest from './contact-outcoming-request';
+import ContactOutcomingRequest from './contact-outcoming-item';
 
 type Props = {
   requests: ContactRequestWithUser[];

@@ -1,6 +1,7 @@
 {
-  "list": {
-    "title": "Contacts"
+  "relations": {
+    "title": "Contacts",
+    "remove": "Remove"
   },
   "outcoming": {
     "title": "Outcoming",

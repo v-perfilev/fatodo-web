@@ -1,24 +1,24 @@
 import React, {FC, useEffect, useState} from 'react';
-import {ContactRequest, ContactRequestWithUser} from '../../../models/contact-request.model';
 import ContactService from '../../../services/contact.service';
+import {ContactRelation, ContactRelationWithUser} from '../../../models/contact-relation.model';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import ContactIncomingList from './contact-incoming-list';
-import {User} from '../../../models/user.model';
-import UserService from '../../../services/user.service';
 import {CircularSpinner} from '../../common/loaders';
+import UserService from '../../../services/user.service';
+import {User} from '../../../models/user.model';
+import ContactRelationsContainer from './contact-relations-container';
 
-const ContactIncoming: FC = () => {
+const ContactRelations: FC = () => {
   const {handleResponse} = useSnackContext();
-  const [requests, setRequests] = useState<ContactRequest[]>([]);
+  const [relations, setRelations] = useState<ContactRelation[]>([]);
   const [users, setUsers] = useState<User[]>([]);
-  const [userRequests, setUserRequests] = useState<ContactRequestWithUser[]>([]);
+  const [userRelations, setUserRelations] = useState<ContactRelationWithUser[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const loadRequests = (): void => {
+  const loadRelations = (): void => {
     setLoading(true);
-    ContactService.getIncomingRequests()
+    ContactService.getAllRelations()
       .then((response) => {
-        setRequests(response.data);
+        setRelations(response.data);
       })
       .catch((response) => {
         handleResponse(response);
@@ -27,7 +27,7 @@ const ContactIncoming: FC = () => {
   };
 
   const loadUsers = (): void => {
-    const ids = requests.map((r) => r.requesterId);
+    const ids = relations.map((r) => r.secondUserId);
     UserService.getAllByIds(ids)
       .then((response) => {
         setUsers(response.data);
@@ -38,30 +38,30 @@ const ContactIncoming: FC = () => {
       });
   };
 
-  const combineRequestsWithUsers = (): void => {
+  const combineRelationsWithUsers = (): void => {
     const userMap = new Map(users.map((user) => [user.id, user]));
-    const userRequests = requests
-      .map((r) => ({...r, user: userMap.get(r.requesterId)}))
+    const userRelations = relations
+      .map((r) => ({...r, user: userMap.get(r.secondUserId)}))
       .filter((r) => r.user);
-    setUserRequests(userRequests);
+    setUserRelations(userRelations);
     setLoading(false);
   };
 
   useEffect(() => {
-    loadRequests();
+    loadRelations();
   }, []);
 
   useEffect(() => {
     loadUsers();
-  }, [requests]);
+  }, [relations]);
 
   useEffect(() => {
-    combineRequestsWithUsers();
+    combineRelationsWithUsers();
   }, [users]);
 
   return loading
-    ? <CircularSpinner />
-    : <ContactIncomingList requests={userRequests} loadRequests={loadRequests} />;
+    ? <CircularSpinner /> :
+    <ContactRelationsContainer relations={userRelations} loadRelations={loadRelations} />;
 };
 
-export default ContactIncoming;
+export default ContactRelations;

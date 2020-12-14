@@ -11,7 +11,7 @@ import {Routes} from '../../router';
 import {contactMainStyles} from './_styles';
 import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
-import ContactList from '../contact-list';
+import ContactRelations from '../contact-relations';
 import ContactIncoming from '../contact-incoming';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {ContactRouteUtils} from '../_router';
@@ -83,13 +83,13 @@ const ContactMain: FC = () => {
 
   return (
     <>
-      <Container className={classes.root}>
+      <Container className={classes.root} maxWidth="md">
         <Tabs variant="fullWidth" textColor="primary" value={activeTab} onChange={handleChange}>
-          <Tab label={t('contact:list.title')} />
+          <Tab label={t('contact:relations.title')} />
           <Tab label={t('contact:outcoming.title')} />
           <Tab label={t('contact:incoming.title')} />
         </Tabs>
-        {activeTab === 0 && <ContactList />}
+        {activeTab === 0 && <ContactRelations />}
         {activeTab === 1 && <ContactOutcoming />}
         {activeTab === 2 && <ContactIncoming />}
       </Container>

@@ -1,6 +1,7 @@
 {
-  "list": {
-    "title": "Контакты"
+  "relations": {
+    "title": "Контакты",
+    "remove": "Удалить"
   },
   "outcoming": {
     "title": "Исходящие",

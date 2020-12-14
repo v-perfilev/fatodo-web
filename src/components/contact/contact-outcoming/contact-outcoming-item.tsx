@@ -1,7 +1,7 @@
 import {ContactRequestWithUser} from '../../../models/contact-request.model';
 import React, {FC, memo, useState} from 'react';
 import {Box} from '@material-ui/core';
-import {contactIncomingRequestStyles} from './_styles';
+import {contactOutcomingRequestStyles} from './_styles';
 import {LoadingButton} from '../../common/controls';
 import {UserWithPopupView} from '../../common/views';
 import {useTranslation} from 'react-i18next';
@@ -13,30 +13,17 @@ type Props = {
   loadRequests: () => void;
 };
 
-const ContactIncomingRequest: FC<Props> = ({request, loadRequests}: Props) => {
-  const classes = contactIncomingRequestStyles();
+const ContactOutcomingItem: FC<Props> = ({request, loadRequests}: Props) => {
+  const classes = contactOutcomingRequestStyles();
   const {handleCode, handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [disabled, setDisabled] = useState(false);
 
-  const acceptRequest = (): void => {
+  const removeRequest = (): void => {
     setDisabled(true);
-    ContactService.acceptRequest(request.user.id)
+    ContactService.removeRequest(request.user.id)
       .then(() => {
-        handleCode('contact.requestAccepted', 'info');
-        loadRequests();
-      })
-      .catch((response) => {
-        handleResponse(response);
-        setDisabled(false);
-      });
-  };
-
-  const declineRequest = (): void => {
-    setDisabled(true);
-    ContactService.declineRequest(request.user.id)
-      .then(() => {
-        handleCode('contact.requestDeclined', 'info');
+        handleCode('contact.requestRemoved', 'info');
         loadRequests();
       })
       .catch((response) => {
@@ -51,15 +38,12 @@ const ContactIncomingRequest: FC<Props> = ({request, loadRequests}: Props) => {
         <UserWithPopupView user={request.user} withUsername picSize="sm" />
       </Box>
       <Box className={classes.managementBox}>
-        <LoadingButton size="medium" disabled={disabled} onClick={acceptRequest}>
-          {t('contact:incoming.accept')}
-        </LoadingButton>
-        <LoadingButton color="secondary" size="medium" disabled={disabled} onClick={declineRequest}>
-          {t('contact:incoming.decline')}
+        <LoadingButton color="secondary" size="medium" disabled={disabled} onClick={removeRequest}>
+          {t('contact:outcoming.remove')}
         </LoadingButton>
       </Box>
     </Box>
   );
 };
 
-export default memo(ContactIncomingRequest);
+export default memo(ContactOutcomingItem);
