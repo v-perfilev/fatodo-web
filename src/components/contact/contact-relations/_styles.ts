@@ -14,14 +14,19 @@ export const contactRelationsListStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     flexGrow: 1,
     paddingTop: theme.spacing(2),
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(1)
   }
 }));
 
-export const contactRelationsFilterStyles = makeStyles(() => ({
+export const contactRelationsFilterStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5)
+  },
+  input: {
+    width: 400
   }
 }));
 

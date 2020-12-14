@@ -1,6 +1,7 @@
 {
   "relations": {
     "title": "Contacts",
+    "filter": "Filter",
     "remove": "Remove"
   },
   "outcoming": {

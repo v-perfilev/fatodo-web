@@ -1,6 +1,7 @@
 {
   "relations": {
     "title": "Контакты",
+    "filter": "Фильтр",
     "remove": "Удалить"
   },
   "outcoming": {
