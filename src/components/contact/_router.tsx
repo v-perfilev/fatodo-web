@@ -14,9 +14,9 @@ export enum ContactRoutes {
 }
 
 export class ContactRouteUtils {
-  public static getListUrl = (): string => Routes.CONTACT;
-  public static getOutcomingUrl = (): string => Routes.CONTACT + ContactRoutes.OUTCOMING;
-  public static getIncomingUrl = (): string => Routes.CONTACT + ContactRoutes.INCOMING;
+  public static getListUrl = (): string => Routes.CONTACTS;
+  public static getOutcomingUrl = (): string => Routes.CONTACTS + ContactRoutes.OUTCOMING;
+  public static getIncomingUrl = (): string => Routes.CONTACTS + ContactRoutes.INCOMING;
 }
 
 const ContactRouter: FC = () => {

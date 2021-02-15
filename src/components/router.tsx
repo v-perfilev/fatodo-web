@@ -19,12 +19,14 @@ import Activation from './user/activation';
 import ForgotPassword from './user/forgot-password';
 import ResetPassword from './user/reset-password';
 import ContactRouter from './contact/_router';
+import MessageRouter from './message/_router';
 
 export enum Routes {
   ROOT = '/',
   GROUPS = '/groups',
   ITEMS = '/items',
-  CONTACT = '/contact',
+  CONTACTS = '/contacts',
+  MESSAGES = '/messages',
   ACCOUNT = '/account',
   LOGIN = '/login',
   REGISTRATION = '/registration',
@@ -46,7 +48,8 @@ const Router: FC = () => (
     {/*Private Routes*/}
     <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
     <PrivateRoute path={Routes.ITEMS} component={ItemRouter} />
-    <PrivateRoute path={Routes.CONTACT} component={ContactRouter} />
+    <PrivateRoute path={Routes.CONTACTS} component={ContactRouter} />
+    <PrivateRoute path={Routes.MESSAGES} component={MessageRouter} />
     <PrivateRoute path={Routes.ACCOUNT} component={AccountSettings} />
     {/*Auth Routes*/}
     <PublicRoute path={Routes.LOGIN} component={Auth} />

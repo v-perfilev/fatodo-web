@@ -4,7 +4,8 @@
     "register": "Регистрация",
     "login": "Вход",
     "account": "Учётная запись",
-    "contacts": "Контакты"
+    "contacts": "Контакты",
+    "messages": "Сообщения"
   },
   "auth": {
     "socialLogin": "или войдите через"

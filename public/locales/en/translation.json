@@ -4,7 +4,8 @@
     "register": "Sign Up",
     "login": "Log In",
     "account": "Account",
-    "contacts": "Contacts"
+    "contacts": "Contacts",
+    "messages": "Messages"
   },
   "auth": {
     "socialLogin": "or log in with"

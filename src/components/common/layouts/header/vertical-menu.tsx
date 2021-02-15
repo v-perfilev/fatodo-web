@@ -16,6 +16,7 @@ import {useHistory, withRouter} from 'react-router-dom';
 import {AccountIcon} from '../../icons/account-icon';
 import CurrentUser from '../current-user';
 import {UserListIcon} from '../../icons/user-list-icon';
+import {MessageIcon} from '../../icons/message-icon';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout};
@@ -31,7 +32,8 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) 
   const redirectToLogin = (): void => history.push(Routes.LOGIN);
   const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
   const redirectToAccount = (): void => history.push(Routes.ACCOUNT);
-  const redirectToContacts = (): void => history.push(Routes.CONTACT);
+  const redirectToMessages = (): void => history.push(Routes.MESSAGES);
+  const redirectToContacts = (): void => history.push(Routes.CONTACTS);
   const redirectAndLogout = (): void => {
     history.push(Routes.ROOT);
     logout();
@@ -56,6 +58,12 @@ const VerticalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) 
 
   const authenticatedMenu = (
     <>
+      <ListItem button onClick={redirectToMessages}>
+        <ListItemIcon>
+          <MessageIcon className={classes.icon} />
+        </ListItemIcon>
+        <ListItemText>{t('header.messages')}</ListItemText>
+      </ListItem>
       <ListItem button onClick={redirectToContacts}>
         <ListItemIcon>
           <UserListIcon className={classes.icon} />

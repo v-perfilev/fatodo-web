@@ -14,12 +14,13 @@ import {SignUpIcon} from '../../icons/signup-icon';
 import {compose} from 'recompose';
 import {Routes} from '../../../router';
 import {useHistory, withRouter} from 'react-router-dom';
-import {LanguageSelect} from '../../controls/language-select';
+import {LanguageSelect} from '../../controls';
 import CurrentUser from '../current-user';
 import {ArrowDownIcon} from '../../icons/arrow-down-icon';
-import {PopupMenu} from '../../surfaces/popup-menu';
+import {PopupMenu} from '../../surfaces';
 import {AccountIcon} from '../../icons/account-icon';
 import {UserListIcon} from '../../icons/user-list-icon';
+import {MessageIcon} from '../../icons/message-icon';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout};
@@ -37,7 +38,8 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
   const redirectToLogin = (): void => history.push(Routes.LOGIN);
   const redirectToRegistration = (): void => history.push(Routes.REGISTRATION);
   const redirectToAccount = (): void => history.push(Routes.ACCOUNT);
-  const redirectToContacts = (): void => history.push(Routes.CONTACT);
+  const redirectToMessages = (): void => history.push(Routes.MESSAGES);
+  const redirectToContacts = (): void => history.push(Routes.CONTACTS);
   const redirectAndLogout = (): void => {
     history.push(Routes.ROOT);
     logout();
@@ -59,6 +61,9 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
 
   const authenticatedMenu = (
     <>
+      <Button color="primary" startIcon={<MessageIcon />} onClick={redirectToMessages}>
+        {t('header.messages')}
+      </Button>
       <Button color="primary" startIcon={<UserListIcon />} onClick={redirectToContacts}>
         {t('header.contacts')}
       </Button>
