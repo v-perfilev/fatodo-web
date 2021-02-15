@@ -50,6 +50,7 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
 
   const unauthenticatedMenu = (
     <>
+      <LanguageSelect />
       <Button color="primary" startIcon={<LoginIcon />} onClick={redirectToLogin}>
         {t('header.login')}
       </Button>
@@ -67,6 +68,7 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
       <Button color="primary" startIcon={<UserListIcon />} onClick={redirectToContacts}>
         {t('header.contacts')}
       </Button>
+      <LanguageSelect />
       <Button color="primary" onClick={handleClick} ref={ref}>
         <CurrentUser />
         <ArrowDownIcon />
@@ -86,7 +88,6 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
 
   return (
     <Box className={classes.root}>
-      <LanguageSelect />
       {isAuthenticated ? authenticatedMenu : unauthenticatedMenu}
     </Box>
   );
