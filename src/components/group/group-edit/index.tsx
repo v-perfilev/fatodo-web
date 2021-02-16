@@ -12,7 +12,7 @@ import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../_router';
-import {CircularSpinner} from '../../common/loaders/circular-spinner';
+import {CircularSpinner} from '../../common/loaders';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {compose} from 'recompose';

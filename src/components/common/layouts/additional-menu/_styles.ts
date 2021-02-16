@@ -29,7 +29,7 @@ export const additionalMenuStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
   },
   containerBottom: {
-    flexDirection: 'row',
+    flexDirection: 'row-reverse',
   },
   logo: {
     width: '100%',

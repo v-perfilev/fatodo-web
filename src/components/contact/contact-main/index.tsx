@@ -61,13 +61,13 @@ const ContactMain: FC = () => {
 
   const menu = (
     <>
-      <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<PlusIcon />}
         action={openRequestDialog}
         color="primary"
         tooltip={t('contact:tooltips.addContact')}
       />
+      <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<ArrowBackIcon />}
         action={redirectToPreviousLocation}

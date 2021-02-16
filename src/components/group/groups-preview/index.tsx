@@ -38,13 +38,13 @@ const GroupPreview: FC = () => {
 
   const menu = (
     <>
-      <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<PlusIcon />}
         action={redirectToGroupCreate}
         color="primary"
         tooltip={t('group:tooltips.create')}
       />
+      <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<ReorderIcon />}
         action={redirectToGroupsSorting}

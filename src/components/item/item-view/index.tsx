@@ -85,7 +85,6 @@ const ItemView: FC = () => {
 
   const menu = (
     <>
-      <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<EditIcon />}
         action={redirectToItemEdit}
@@ -98,6 +97,7 @@ const ItemView: FC = () => {
         color="primary"
         tooltip={t('item:tooltips.delete')}
       />
+      <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<ItemsIcon />}
         action={redirectToGroupView}

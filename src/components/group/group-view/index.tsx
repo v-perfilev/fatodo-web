@@ -16,17 +16,15 @@ import GroupService from '../../../services/group.service';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import {ItemRouteUtils} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
-import {PageHeader} from '../../common/surfaces/page-header';
-import {PageDivider} from '../../common/surfaces/page-divider';
+import {PageDivider, PageHeader, PageSpacer} from '../../common/surfaces';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
-import {PageSpacer} from '../../common/surfaces/page-spacer';
 import {DeleteIcon} from '../../common/icons/delete-icon';
 import {useGroupDeleteContext} from '../../../shared/contexts/delete-contexts/group-delete-context';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {CircularSpinner} from '../../common/loaders/circular-spinner';
+import {CircularSpinner} from '../../common/loaders';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 
 const GroupView: FC = () => {
@@ -67,7 +65,6 @@ const GroupView: FC = () => {
 
   const menu = (
     <>
-      <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<PlusIcon />}
         action={redirectToItemCreate}
@@ -86,6 +83,7 @@ const GroupView: FC = () => {
         color="primary"
         tooltip={t('group:tooltips.delete')}
       />
+      <AdditionalMenuSpacer />
       <AdditionalMenuButton
         icon={<GroupsIcon />}
         action={redirectToGroups}
