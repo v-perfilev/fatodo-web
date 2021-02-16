@@ -8,12 +8,17 @@ import withAdditionalMenu from '../../shared/hocs/with-additional-menu/with-addi
 import {Routes} from '../router';
 import MessageMain from './message-main';
 
+export enum MessageRoutes {
+  CHAT = '/:chatId',
+}
+
 const MessageRouter: FC = () => {
   const match = useRouteMatch();
 
   return (
     <Switch>
       <PublicRoute exact path={match.path} component={MessageMain} />
+      <PublicRoute exact path={match.path + MessageRoutes.CHAT} component={MessageMain} />
       <Redirect to={Routes.PAGE_NOT_FOUND} />
     </Switch>
   );

@@ -4,7 +4,7 @@ import {HEADER_HEIGHT} from '../header/_constants';
 
 export const additionalMenuStyles = makeStyles((theme: Theme) => ({
   drawer: {
-    zIndex: 0,
+    zIndex: 10,
   },
   drawerLeft: {
     width: LEFT_DRAWER_WIDTH,
