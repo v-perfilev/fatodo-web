@@ -1,7 +1,7 @@
 import React, {FC, ReactNode} from 'react';
 
 
-const MessageChatList: FC = () => {
+const MessageContent: FC = () => {
 
   const renderNumbers = (): ReactNode => {
     const a = Array.from({length: 1000}, (_, i) => i);
@@ -19,4 +19,4 @@ const MessageChatList: FC = () => {
   );
 };
 
-export default MessageChatList;
+export default MessageContent;

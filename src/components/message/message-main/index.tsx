@@ -9,8 +9,8 @@ import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
 import {messageMainStyles} from './_styles';
 import {Box, Grid, Theme, useMediaQuery} from '@material-ui/core';
-import MessageChatList from '../message-chat-list';
-import MessageChatView from '../message-chat-view';
+import MessageControl from '../message-control';
+import MessageContent from '../message-content';
 
 
 const MessageMain: FC = () => {
@@ -43,18 +43,18 @@ const MessageMain: FC = () => {
 
   const bigView = (): ReactNode => (
     <Grid container className={classes.bigViewRoot}>
-      <Grid item xs={3} className={classes.sidebar}>
-        <MessageChatList />
+      <Grid item xs={4} className={classes.sidebar}>
+        <MessageControl />
       </Grid>
-      <Grid item xs={9} className={classes.content}>
-        <MessageChatView />
+      <Grid item xs={8} className={classes.content}>
+        <MessageContent />
       </Grid>
     </Grid>
   );
 
   const smallView = (): ReactNode => (
     <Box className={classes.smallViewRoot}>
-      {chatId ? <MessageChatView /> : <MessageChatList />}
+      {chatId ? <MessageContent /> : <MessageControl />}
     </Box>
   );
 
