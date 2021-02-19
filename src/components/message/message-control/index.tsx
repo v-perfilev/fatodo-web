@@ -1,25 +1,22 @@
-import React, {FC, ReactNode} from 'react';
+import React, {FC, useState} from 'react';
 import {messageControlStyles} from './_styles';
 import MessageChatFilter from '../message-chat-filter';
 import {Box} from '@material-ui/core';
+import MessageChatFilteredList from '../message-chat-filtered-list';
+import MessageChatList from '../message-chat-list';
 
 
 const MessageControl: FC = () => {
   const classes = messageControlStyles();
+  const [filter, setFilter] = useState<string>('');
 
-  const renderNumbers = (): ReactNode => {
-    const a = Array.from({length: 1000}, (_, i) => i);
-    return (
-      <>
-        {a.map((value, index) => <div key={index}>{value}</div>)}
-      </>
-    );
-  };
+  const showFiltered = filter.trim().length > 0;
 
   return (
     <Box className={classes.root}>
       <MessageChatFilter />
-      {renderNumbers()}
+      {!showFiltered && <MessageChatList />}
+      {showFiltered && <MessageChatFilteredList />}
     </Box>
   );
 };
