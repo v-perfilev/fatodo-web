@@ -14,7 +14,7 @@ const MessageControl: FC = () => {
 
   return (
     <Box className={classes.root}>
-      <MessageChatFilter />
+      <MessageChatFilter setFilter={setFilter} />
       {!showFiltered && <MessageChatList />}
       {showFiltered && <MessageChatFilteredList />}
     </Box>

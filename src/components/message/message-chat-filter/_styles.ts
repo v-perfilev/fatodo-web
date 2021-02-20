@@ -16,5 +16,7 @@ export const messageChatFilterStyles = makeStyles((theme: Theme) => ({
     borderBottomStyle: 'solid',
     borderBottomColor: theme.palette.grey['300']
   },
-  input: {}
+  input: {
+    width: '100%',
+  }
 }));

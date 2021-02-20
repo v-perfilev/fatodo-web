@@ -43,7 +43,7 @@ const MessageMain: FC = () => {
 
   const bigView = (): ReactNode => (
     <Grid container className={classes.bigViewRoot}>
-      <Grid item xs={4} className={classes.sidebar}>
+      <Grid item xs={4} className={classes.control}>
         <MessageControl />
       </Grid>
       <Grid item xs={8} className={classes.content}>
