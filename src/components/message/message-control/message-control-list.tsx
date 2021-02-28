@@ -1,22 +1,19 @@
-import React, {FC, ReactNode} from 'react';
+import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {messageControlListStyles} from './_styles';
+import MessageControlChat from './message-control-chat';
 
 const MessageControlList: FC = () => {
   const classes = messageControlListStyles();
 
-  const renderNumbers = (): ReactNode => {
-    const a = Array.from({length: 1000}, (_, i) => i);
-    return (
-      <>
-        {a.map((value, index) => <div key={index}>{value}</div>)}
-      </>
-    );
-  };
+  const array = Array.from({length: 1000}, (_, i) => i);
+
 
   return (
     <Box className={classes.root}>
-      {renderNumbers()}
+      {array.map((value, index) => (
+        <MessageControlChat key={index} n={value} />
+      ))}
     </Box>
   );
 };
