@@ -24,19 +24,19 @@ export const ClearableTextInput: FC<Props> = ({onChange, ...props}: Props) => {
   };
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    console.log('change');
     onChange(event);
     updateShowClearButton();
   };
 
-  return <TextField {...props}
-                    onChange={handleOnChange}
-                    inputRef={inputRef}
-                    InputProps={{
-                      endAdornment: showClearButton && (
-                        <IconButton onClick={clear} size="small">
-                          <CloseIcon />
-                        </IconButton>
-                      )
-                    }} />;
+  return <TextField
+    {...props}
+    onChange={handleOnChange}
+    inputRef={inputRef}
+    InputProps={{
+      endAdornment: showClearButton && (
+        <IconButton onClick={clear} size="small">
+          <CloseIcon />
+        </IconButton>
+      )
+    }} />;
 };

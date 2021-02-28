@@ -48,7 +48,7 @@ const ItemEdit: FC = () => {
         tooltip={t('item:tooltips.ok')}
         loading={isSaving}
       />
-      <AdditionalMenuSpacer />
+      <AdditionalMenuSpacer showOnSmallDevices />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToItemView}

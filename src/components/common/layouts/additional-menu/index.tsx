@@ -5,6 +5,7 @@ import {additionalMenuStyles} from './_styles';
 import csx from 'classnames';
 import {Logo} from '../logo';
 import {useAdditionalMenuContext} from '../../../../shared/contexts/additional-menu-context';
+import AdditionalMenuSpacer from './additional-menu-spacer';
 
 const AdditionalMenu: FC = () => {
   const classes = additionalMenuStyles();
@@ -26,7 +27,10 @@ const AdditionalMenu: FC = () => {
           <Logo />
         </Box>
       )}
-      <Box className={containerClassNames}>{menu}</Box>
+      <Box className={containerClassNames}>
+        <AdditionalMenuSpacer showOnBigDevices />
+        {menu}
+      </Box>
     </Drawer>
   );
 };

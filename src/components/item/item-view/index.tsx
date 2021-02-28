@@ -5,8 +5,7 @@ import {Container, ThemeProvider} from '@material-ui/core';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
-import {PageDivider} from '../../common/surfaces';
-import {PageHeader} from '../../common/surfaces';
+import {PageDivider, PageHeader} from '../../common/surfaces';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import GroupService from '../../../services/group.service';
 import ItemService from '../../../services/item.service';
@@ -97,7 +96,7 @@ const ItemView: FC = () => {
         color="primary"
         tooltip={t('item:tooltips.delete')}
       />
-      <AdditionalMenuSpacer />
+      <AdditionalMenuSpacer showOnSmallDevices />
       <AdditionalMenuButton
         icon={<ItemsIcon />}
         action={redirectToGroupView}

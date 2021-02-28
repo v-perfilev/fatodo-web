@@ -59,7 +59,7 @@ const GroupsSorting: FC = () => {
         tooltip={t('group:tooltips.ok')}
         loading={isSaving}
       />
-      <AdditionalMenuSpacer />
+      <AdditionalMenuSpacer showOnSmallDevices />
       <AdditionalMenuButton
         icon={<CloseIcon />}
         action={redirectToGroups}

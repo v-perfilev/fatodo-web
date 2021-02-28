@@ -67,7 +67,7 @@ const ContactMain: FC = () => {
         color="primary"
         tooltip={t('contact:tooltips.addContact')}
       />
-      <AdditionalMenuSpacer />
+      <AdditionalMenuSpacer showOnSmallDevices />
       <AdditionalMenuButton
         icon={<ArrowBackIcon />}
         action={redirectToPreviousLocation}

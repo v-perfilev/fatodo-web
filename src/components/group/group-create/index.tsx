@@ -42,7 +42,7 @@ const GroupCreate: FC = () => {
 
   const menu = (
     <>
-      <AdditionalMenuSpacer />
+      <AdditionalMenuSpacer showOnSmallDevices />
       <AdditionalMenuButton
         icon={<CheckIcon />}
         action={saveCallback}

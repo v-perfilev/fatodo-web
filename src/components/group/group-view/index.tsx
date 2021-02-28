@@ -83,7 +83,7 @@ const GroupView: FC = () => {
         color="primary"
         tooltip={t('group:tooltips.delete')}
       />
-      <AdditionalMenuSpacer />
+      <AdditionalMenuSpacer showOnSmallDevices />
       <AdditionalMenuButton
         icon={<GroupsIcon />}
         action={redirectToGroups}

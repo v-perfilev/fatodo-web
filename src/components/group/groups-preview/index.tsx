@@ -44,7 +44,7 @@ const GroupPreview: FC = () => {
         color="primary"
         tooltip={t('group:tooltips.create')}
       />
-      <AdditionalMenuSpacer />
+      <AdditionalMenuSpacer showOnSmallDevices />
       <AdditionalMenuButton
         icon={<ReorderIcon />}
         action={redirectToGroupsSorting}

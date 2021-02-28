@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC} from 'react';
 import {Box} from '@material-ui/core';
-import {messageChatFilterStyles} from './_styles';
 import {ClearableTextInput} from '../../common/inputs';
+import {messageChatFilterStyles} from './_styles';
 
 type Props = {
   setFilter: (filter: string) => void;

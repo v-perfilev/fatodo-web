@@ -38,7 +38,7 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
 
   const menu = (
     <>
-      <AdditionalMenuSpacer />
+      <AdditionalMenuSpacer showOnSmallDevices />
       <AdditionalMenuButton
         icon={<ArrowBackIcon />}
         action={redirectToPreviousLocation}
