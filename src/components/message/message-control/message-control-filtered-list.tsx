@@ -1,12 +1,13 @@
 import React, {FC, ReactNode} from 'react';
 import {Box} from '@material-ui/core';
-import {messageChatListStyles} from './_styles';
+import {messageControlFilteredListStyles} from './_styles';
 
-const MessageChatList: FC = () => {
-  const classes = messageChatListStyles();
+
+const MessageControlFilteredList: FC = () => {
+  const classes = messageControlFilteredListStyles();
 
   const renderNumbers = (): ReactNode => {
-    const a = Array.from({length: 1000}, (_, i) => i);
+    const a = Array.from({length: 1000}, (_, i) => 1000 - i);
     return (
       <>
         {a.map((value, index) => <div key={index}>{value}</div>)}
@@ -21,4 +22,4 @@ const MessageChatList: FC = () => {
   );
 };
 
-export default MessageChatList;
+export default MessageControlFilteredList;

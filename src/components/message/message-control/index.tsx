@@ -1,9 +1,9 @@
 import React, {FC, useState} from 'react';
 import {messageControlStyles} from './_styles';
-import MessageChatFilter from './message-chat-filter';
+import MessageControlHeader from './message-control-header';
 import {Box} from '@material-ui/core';
-import MessageChatFilteredList from './message-chat-filtered-list';
-import MessageChatList from './message-chat-list';
+import MessageControlFilteredList from './message-control-filtered-list';
+import MessageControlList from './message-control-list';
 
 
 const MessageControl: FC = () => {
@@ -14,9 +14,9 @@ const MessageControl: FC = () => {
 
   return (
     <Box className={classes.root}>
-      <MessageChatFilter setFilter={setFilter} />
-      {!showFiltered && <MessageChatList />}
-      {showFiltered && <MessageChatFilteredList />}
+      <MessageControlHeader setFilter={setFilter} />
+      {!showFiltered && <MessageControlList />}
+      {showFiltered && <MessageControlFilteredList />}
     </Box>
   );
 };

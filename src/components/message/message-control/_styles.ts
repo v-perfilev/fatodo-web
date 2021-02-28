@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 import {CHAT_FILTER_HEADER_HEIGHT} from '../_constants';
 
-export const messageControlStyles = makeStyles((theme: Theme) => ({
+export const messageControlStyles = makeStyles(() => ({
   root: {
     position: 'relative',
     display: 'flex',
@@ -12,7 +12,7 @@ export const messageControlStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export const messageChatFilterStyles = makeStyles((theme: Theme) => ({
+export const messageControlHeaderStyles = makeStyles((theme: Theme) => ({
   root: {
     height: CHAT_FILTER_HEADER_HEIGHT,
     minHeight: CHAT_FILTER_HEADER_HEIGHT,
@@ -31,17 +31,24 @@ export const messageChatFilterStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export const messageChatListStyles = makeStyles(() => ({
+export const messageControlListStyles = makeStyles(() => ({
   root: {
     height: 'calc(100vh - ' + CHAT_FILTER_HEADER_HEIGHT + 'px)',
     overflowY: 'auto'
   }
 }));
 
-export const messageChatFilteredListStyles = makeStyles(() => ({
+export const messageControlFilteredListStyles = makeStyles(() => ({
   root: {
     height: 'calc(100vh - ' + CHAT_FILTER_HEADER_HEIGHT + 'px)',
     overflowY: 'auto'
+  }
+}));
+
+export const messageControlChatButtonStyles = makeStyles((theme: Theme) => ({
+  root: {
+    marginLeft: theme.spacing(2),
+    flexShrink: 0
   }
 }));
 
