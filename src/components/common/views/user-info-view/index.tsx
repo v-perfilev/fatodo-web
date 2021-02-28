@@ -21,7 +21,7 @@ export const UserInfoView: FC<Props> = ({user, className}: Props) => {
   return (
     <Grid container className={classNames}>
       <Grid item xs={5} className={classes.imageItem}>
-        <UrlPic alt={user.username} url={user.imageFilename} size="lg" border={2} />
+        <UrlPic alt={user.username} url={user.imageFilename} size="xl" border={2} />
       </Grid>
       <Grid item xs={7} className={classes.infoItem}>
         <PageSubheader title={user.username} />

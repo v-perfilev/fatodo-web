@@ -25,7 +25,8 @@ export const UrlPic: FC<Props> = (props: Props) => {
     {[classes.xs]: size === 'xs'},
     {[classes.sm]: size === 'sm'},
     {[classes.md]: size === 'md'},
-    {[classes.lg]: size === 'lg'}
+    {[classes.lg]: size === 'lg'},
+    {[classes.xl]: size === 'xl'}
   );
 
   const classNames = csx(classes.root, sizeClassName, className);

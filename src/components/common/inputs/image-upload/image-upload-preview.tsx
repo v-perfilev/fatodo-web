@@ -17,7 +17,7 @@ export const ImageUploadPreview: FC<Props> = ({image, preview}: Props) => {
     image.filename &&
     preview && (
       <Box className={classes.root}>
-        <UrlPic url={image.filename} size="lg" border={3} />
+        <UrlPic url={image.filename} size="xl" border={3} />
       </Box>
     )
   );

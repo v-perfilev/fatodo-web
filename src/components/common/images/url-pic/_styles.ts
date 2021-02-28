@@ -23,6 +23,10 @@ export const urlPicStyles = makeStyles((theme: Theme) => ({
     height: 40,
   },
   lg: {
+    width: 50,
+    height: 50,
+  },
+  xl: {
     width: 100,
     height: 100,
   },
