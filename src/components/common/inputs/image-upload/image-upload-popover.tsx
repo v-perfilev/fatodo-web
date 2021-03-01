@@ -4,9 +4,9 @@ import {Image} from '../../../../models/image.model';
 import ReactCrop from 'react-image-crop';
 import imageCompression from 'browser-image-compression';
 import {imageUploadPopoverStyles} from './_styles';
-import {IMAGE_MAX_SIZE, IMAGE_MAX_WIDTH, IMAGE_MIN_WIDTH} from '../../../../constants';
 import csx from 'classnames';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
+import {IMAGE_MAX_SIZE, IMAGE_MAX_WIDTH, IMAGE_MIN_WIDTH} from './_constants';
 
 type ImageError = 'tooSmall';
 
@@ -20,12 +20,12 @@ type Props = {
 const defaultInitialCrop = {
   unit: '%',
   width: 100,
-  aspect: 1,
+  aspect: 1
 };
 
 const compressionOptions = {
   maxWidthOrHeight: IMAGE_MAX_WIDTH,
-  maxSizeMB: IMAGE_MAX_SIZE,
+  maxSizeMB: IMAGE_MAX_SIZE
 };
 
 const minWidth = IMAGE_MIN_WIDTH;
