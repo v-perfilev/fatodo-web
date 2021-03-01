@@ -1,12 +1,14 @@
-import React, {FC} from 'react';
+import React, {FC, ReactElement} from 'react';
 import {Box} from '@material-ui/core';
 import {messageControlListStyles} from './_styles';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import {FixedSizeList} from 'react-window';
 import MessageControlChat from './message-control-chat';
 
 const MessageControlList: FC = () => {
   const classes = messageControlListStyles();
 
-  const array = Array.from({length: 50}, (_, i) => i);
+  const array = Array.from({length: 5000}, (_, i) => i);
 
   const chats = array.map((value) => {
     const message = {
@@ -28,11 +30,27 @@ const MessageControlList: FC = () => {
     };
   });
 
+  const RowRenderer = ({index, style}): ReactElement => (
+    <MessageControlChat chat={chats[index]} style={style} />
+  );
+
+  const ListRenderer = ({height, width}): ReactElement => (
+    <FixedSizeList
+      height={height}
+      width={width}
+      itemCount={chats.length}
+      itemSize={55}
+      overscanCount={50}
+    >
+      {RowRenderer}
+    </FixedSizeList>
+  );
+
   return (
     <Box className={classes.root}>
-      {chats.map((chat, index) => (
-        <MessageControlChat key={index} chat={chat} />
-      ))}
+      <AutoSizer>
+        {ListRenderer}
+      </AutoSizer>
     </Box>
   );
 };

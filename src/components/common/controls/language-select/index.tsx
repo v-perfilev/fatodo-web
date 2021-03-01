@@ -6,9 +6,9 @@ import {LanguageIcon} from '../../icons/language-icon';
 import {ArrowDownIcon} from '../../icons/arrow-down-icon';
 import {LanguageUtils} from '../../../../shared/utils/language.utils';
 import {languageSelectStyles} from './_styles';
-import {PopupMenu} from '../../surfaces/popup-menu';
+import {PopupMenu} from '../../surfaces';
 
-type Props = HTMLAttributes<any> & {
+type Props = HTMLAttributes<HTMLElement> & {
   list?: boolean;
 };
 
