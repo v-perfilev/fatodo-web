@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useEffect} from 'react';
+import React, {FC, ReactNode, useEffect, useState} from 'react';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
@@ -21,7 +21,7 @@ const MessageMain: FC = () => {
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
-  const chatId = match.params['chatId'];
+  const [chatId, setChatId] = useState<string>();
 
   const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
@@ -38,23 +38,33 @@ const MessageMain: FC = () => {
   );
 
   useEffect(() => {
+    setChatId(match.params['chatId']);
+  }, []);
+
+  useEffect(() => {
+    console.log(chatId);
+  }, [chatId]);
+
+  useEffect(() => {
     updateMenu(menu);
   }, [i18n.language]);
 
   const bigView = (): ReactNode => (
     <Grid container className={classes.bigViewRoot}>
       <Grid item xs={4} className={classes.control}>
-        <MessageControl />
+        <MessageControl setChatId={setChatId} />
       </Grid>
       <Grid item xs={8} className={classes.content}>
-        <MessageContent />
+        <MessageContent chatId={chatId} />
       </Grid>
     </Grid>
   );
 
   const smallView = (): ReactNode => (
     <Box className={classes.smallViewRoot}>
-      {chatId ? <MessageContent /> : <MessageControl />}
+      {chatId
+        ? <MessageContent chatId={chatId} />
+        : <MessageControl setChatId={setChatId} />}
     </Box>
   );
 

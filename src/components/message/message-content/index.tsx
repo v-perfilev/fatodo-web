@@ -1,21 +1,21 @@
-import React, {FC, ReactNode} from 'react';
+import React, {FC} from 'react';
+import {messageContentStyles} from './_styles';
+import {Box} from '@material-ui/core';
+import MessageContentHeader from './message-content-header';
+import MessageContentList from './message-content-list';
 
+type Props = {
+  chatId: string;
+}
 
-const MessageContent: FC = () => {
-
-  const renderNumbers = (): ReactNode => {
-    const a = Array.from({length: 1000}, (_, i) => i);
-    return (
-      <>
-        {a.map((value, index) => <div key={index}>{value}</div>)}
-      </>
-    );
-  };
+const MessageContent: FC<Props> = ({chatId}: Props) => {
+  const classes = messageContentStyles();
 
   return (
-    <>
-      {renderNumbers()}
-    </>
+    <Box className={classes.root}>
+      <MessageContentHeader />
+      <MessageContentList />
+    </Box>
   );
 };
 
