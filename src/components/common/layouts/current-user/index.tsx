@@ -5,7 +5,7 @@ import {AuthState} from '../../../../store/rerducers/auth.reducer';
 import {connect, ConnectedProps} from 'react-redux';
 import csx from 'classnames';
 import {currentUserStyles} from './_styles';
-import {UserView} from '../../views/user-view';
+import {UserView} from '../../views';
 import {convertAccountToUser} from '../../../../models/user.model';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});

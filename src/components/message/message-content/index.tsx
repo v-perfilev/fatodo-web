@@ -14,7 +14,7 @@ const MessageContent: FC<Props> = ({chat}: Props) => {
 
   return (
     <Box className={classes.root}>
-      {chat && <MessageContentChat />}
+      {chat && <MessageContentChat chat={chat} />}
       {!chat && <MessageContentPlaceholder />}
     </Box>
   );
