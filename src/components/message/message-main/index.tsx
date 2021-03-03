@@ -11,6 +11,7 @@ import {messageMainStyles} from './_styles';
 import {Box, Grid, Theme, useMediaQuery} from '@material-ui/core';
 import MessageControl from '../message-control';
 import MessageContent from '../message-content';
+import {Chat} from '../../../models/chat.model';
 
 
 const MessageMain: FC = () => {
@@ -21,7 +22,7 @@ const MessageMain: FC = () => {
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
-  const [chatId, setChatId] = useState<string>();
+  const [chat, setChat] = useState<Chat>();
 
   const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
@@ -38,12 +39,12 @@ const MessageMain: FC = () => {
   );
 
   useEffect(() => {
-    setChatId(match.params['chatId']);
+    setChat(match.params['chatId']);
   }, []);
 
   useEffect(() => {
-    console.log(chatId);
-  }, [chatId]);
+    console.log(chat);
+  }, [chat]);
 
   useEffect(() => {
     updateMenu(menu);
@@ -52,19 +53,19 @@ const MessageMain: FC = () => {
   const bigView = (): ReactNode => (
     <Grid container className={classes.bigViewRoot}>
       <Grid item xs={4} className={classes.control}>
-        <MessageControl setChatId={setChatId} />
+        <MessageControl setChat={setChat} />
       </Grid>
       <Grid item xs={8} className={classes.content}>
-        <MessageContent chatId={chatId} />
+        <MessageContent chat={chat} />
       </Grid>
     </Grid>
   );
 
   const smallView = (): ReactNode => (
     <Box className={classes.smallViewRoot}>
-      {chatId
-        ? <MessageContent chatId={chatId} />
-        : <MessageControl setChatId={setChatId} />}
+      {chat
+        ? <MessageContent chat={chat} />
+        : <MessageControl setChatId={setChat} />}
     </Box>
   );
 

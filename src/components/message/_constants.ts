@@ -1,3 +1,4 @@
 export const CHAT_CONTROL_HEADER_HEIGHT = 60;
 export const CHAT_CONTENT_HEADER_HEIGHT = 60;
+export const CHAT_CONTENT_FOOTER_HEIGHT = 160;
 export const CHAT_HEIGHT = 60;

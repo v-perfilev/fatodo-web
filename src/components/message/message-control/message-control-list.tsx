@@ -5,12 +5,13 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import {FixedSizeList} from 'react-window';
 import MessageControlChat from './message-control-chat';
 import {CHAT_HEIGHT} from '../_constants';
+import {Chat} from '../../../models/chat.model';
 
 type Props = {
-  setChatId: (chatId: string) => void;
+  setChat: (chat: Chat) => void;
 }
 
-const MessageControlList: FC<Props> = ({setChatId}: Props) => {
+const MessageControlList: FC<Props> = ({setChat}: Props) => {
   const classes = messageControlListStyles();
 
   const array = Array.from({length: 5000}, (_, i) => i);
@@ -35,13 +36,13 @@ const MessageControlList: FC<Props> = ({setChatId}: Props) => {
     };
   });
 
-  const selectChat = (index: number) => (): void => {
-    const chatId = chats[index].id;
-    setChatId(chatId);
+  const handleOnChatClick = (index: number) => (): void => {
+    const chat = chats[index];
+    setChat(chat);
   };
 
   const RowRenderer = ({index, style}): ReactElement => (
-    <MessageControlChat chat={chats[index]} style={style} onClick={selectChat(index)} />
+    <MessageControlChat chat={chats[index]} style={style} onClick={handleOnChatClick(index)} />
   );
 
   const ListRenderer = ({height, width}): ReactElement => (
