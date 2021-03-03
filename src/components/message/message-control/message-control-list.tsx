@@ -1,17 +1,17 @@
 import React, {FC, ReactElement} from 'react';
 import {Box} from '@material-ui/core';
 import {messageControlListStyles} from './_styles';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import {FixedSizeList} from 'react-window';
 import MessageControlChat from './message-control-chat';
 import {CHAT_HEIGHT} from '../_constants';
+import {AutoSizer, List} from 'react-virtualized';
 import {Chat} from '../../../models/chat.model';
 
 type Props = {
+  chat: Chat;
   setChat: (chat: Chat) => void;
 }
 
-const MessageControlList: FC<Props> = ({setChat}: Props) => {
+const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
   const classes = messageControlListStyles();
 
   const array = Array.from({length: 5000}, (_, i) => i);
@@ -41,26 +41,25 @@ const MessageControlList: FC<Props> = ({setChat}: Props) => {
     setChat(chat);
   };
 
-  const RowRenderer = ({index, style}): ReactElement => (
-    <MessageControlChat chat={chats[index]} style={style} onClick={handleOnChatClick(index)} />
+  const rowRenderer = ({index, key, style}): ReactElement => (
+    <MessageControlChat chat={chats[index]} isSelected={chat?.id === chats[index].id} key={key} style={style}
+                        onClick={handleOnChatClick(index)} />
   );
 
-  const ListRenderer = ({height, width}): ReactElement => (
-    <FixedSizeList
+  const listRenderer = ({height, width}): ReactElement => (
+    <List
       height={height}
       width={width}
-      itemCount={chats.length}
-      itemSize={CHAT_HEIGHT}
-      overscanCount={50}
-    >
-      {RowRenderer}
-    </FixedSizeList>
+      rowCount={chats.length}
+      rowHeight={CHAT_HEIGHT}
+      rowRenderer={rowRenderer}
+    />
   );
 
   return (
     <Box className={classes.root}>
       <AutoSizer>
-        {ListRenderer}
+        {listRenderer}
       </AutoSizer>
     </Box>
   );

@@ -31,7 +31,11 @@ export const messageControlHeaderStyles = makeStyles((theme: Theme) => ({
 export const messageControlListStyles = makeStyles(() => ({
   root: {
     height: 'calc(100vh - ' + CHAT_CONTROL_HEADER_HEIGHT + 'px)',
-    overflowY: 'auto'
+    overflowY: 'auto',
+
+    '& .ReactVirtualized__List:focus': {
+      outline: 'none'
+    }
   }
 }));
 
@@ -63,7 +67,7 @@ export const messageControlChatStyles = makeStyles((theme: Theme) => ({
     borderBottomColor: theme.palette.grey['200'],
     cursor: 'pointer',
 
-    '&:hover': {
+    '&:hover, &.selected': {
       backgroundColor: theme.palette.grey['100']
     }
   },

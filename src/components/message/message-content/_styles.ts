@@ -31,7 +31,11 @@ export const messageContentHeaderStyles = makeStyles((theme: Theme) => ({
 export const messageContentListStyles = makeStyles(() => ({
   root: {
     height: 'calc(100vh - ' + CHAT_CONTENT_HEADER_HEIGHT + 'px - ' + CHAT_CONTENT_FOOTER_HEIGHT + 'px)',
-    overflowY: 'auto'
+    overflowY: 'auto',
+
+    '& .ReactVirtualized__List:focus': {
+      outline: 'none'
+    }
   }
 }));
 

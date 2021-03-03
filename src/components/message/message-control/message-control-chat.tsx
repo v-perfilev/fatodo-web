@@ -4,12 +4,14 @@ import {Chat} from '../../../models/chat.model';
 import {messageControlChatStyles} from './_styles';
 import {UrlPic} from '../../common/images';
 import {DateFormatters} from '../../../shared/utils/date.utils';
+import csx from 'classnames';
 
 type Props = HTMLAttributes<HTMLElement> & {
   chat: Chat;
+  isSelected: boolean;
 };
 
-const MessageControlChat: FC<Props> = ({chat, ...props}: Props) => {
+const MessageControlChat: FC<Props> = ({chat, isSelected, ...props}: Props) => {
   const classes = messageControlChatStyles();
 
   const getDate = (timestamp: string): string => {
@@ -21,8 +23,10 @@ const MessageControlChat: FC<Props> = ({chat, ...props}: Props) => {
     );
   };
 
+  const classNames = csx(classes.root, {'selected': isSelected});
+
   return (
-    <Box className={classes.root} {...props}>
+    <Box className={classNames} {...props}>
       <UrlPic className={classes.image} alt={null} url={null} size="lg" border={1} />
       <Box className={classes.chatContainer}>
         <Box className={classes.topContainer}>

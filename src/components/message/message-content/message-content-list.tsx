@@ -1,9 +1,8 @@
-import React, {FC, MutableRefObject, ReactElement, useRef} from 'react';
+import React, {FC, ReactElement} from 'react';
 import {Box} from '@material-ui/core';
 import {messageContentListStyles} from './_styles';
 import {Chat} from '../../../models/chat.model';
-import AutoSizer from 'react-virtualized-auto-sizer';
-import {VariableSizeList} from 'react-window';
+import {AutoSizer, CellMeasurer, CellMeasurerCache, List} from 'react-virtualized';
 import MessageBox from '../message-box';
 import {User} from '../../../models/user.model';
 
@@ -12,9 +11,13 @@ type Props = {
   account: User;
 };
 
+const cellMeasurerCache = new CellMeasurerCache({
+  defaultHeight: 100,
+  fixedWidth: true
+});
+
 const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   const classes = messageContentListStyles();
-  const messageRefs = useRef<HTMLDivElement>();
 
   const array = Array.from({length: 5000}, (_, i) => i);
 
@@ -31,34 +34,33 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
     };
   });
 
-  const setMessageRef = (index: number) => (ref: MutableRefObject<HTMLDivElement>): void => {
-    messageRefs.current = {...messageRefs.current, [index]: ref};
-  };
-
-  const getMessageHeight = (index: number): number => {
-    return messageRefs.current ? messageRefs.current[index].clientHeight : 50;
-  };
-
-  const RowRenderer = ({index}): ReactElement => (
-    <MessageBox message={messages[index]} account={account} setRef={setMessageRef(index)} />
+  const rowRenderer = ({index, key, parent, style}): ReactElement => (
+    <CellMeasurer
+      cache={cellMeasurerCache}
+      columnIndex={0}
+      key={key}
+      parent={parent}
+      rowIndex={index}
+    >
+      <MessageBox message={messages[index]} account={account} key={key} style={style} />
+    </CellMeasurer>
   );
 
-  const ListRenderer = ({height, width}): ReactElement => (
-    <VariableSizeList
+  const listRenderer = ({height, width}): ReactElement => (
+    <List
       height={height}
       width={width}
-      itemCount={messages.length}
-      itemSize={getMessageHeight}
-      // overscanCount={50}
-    >
-      {RowRenderer}
-    </VariableSizeList>
+      deferredMeasurementCache={cellMeasurerCache}
+      rowCount={messages.length}
+      rowHeight={cellMeasurerCache.rowHeight}
+      rowRenderer={rowRenderer}
+    />
   );
 
   return (
     <Box className={classes.root}>
       <AutoSizer>
-        {ListRenderer}
+        {listRenderer}
       </AutoSizer>
     </Box>
   );

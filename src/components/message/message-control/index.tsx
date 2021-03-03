@@ -8,10 +8,11 @@ import {compose} from 'recompose';
 import {Chat} from '../../../models/chat.model';
 
 type Props = {
+  chat: Chat;
   setChat: (chat: Chat) => void;
 }
 
-const MessageControl: FC<Props> = ({setChat}: Props) => {
+const MessageControl: FC<Props> = ({chat, setChat}: Props) => {
   const classes = messageControlStyles();
   const [filter, setFilter] = useState<string>('');
 
@@ -20,7 +21,7 @@ const MessageControl: FC<Props> = ({setChat}: Props) => {
   return (
     <Box className={classes.root}>
       <MessageControlHeader setFilter={setFilter} />
-      {!showFiltered && <MessageControlList setChat={setChat} />}
+      {!showFiltered && <MessageControlList chat={chat} setChat={setChat} />}
       {showFiltered && <MessageControlFilteredList />}
     </Box>
   );

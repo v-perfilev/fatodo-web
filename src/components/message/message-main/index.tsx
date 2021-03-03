@@ -54,7 +54,7 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   const account = {
     id: 'test',
     username: 'test'
-  }
+  };
 
   useEffect(() => {
     updateMenu(menu);
@@ -63,7 +63,7 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   const bigView = (): ReactNode => (
     <Grid container className={classes.bigViewRoot}>
       <Grid item xs={4} className={classes.control}>
-        <MessageControl setChat={setChat} />
+        <MessageControl chat={chat} setChat={setChat} />
       </Grid>
       <Grid item xs={8} className={classes.content}>
         <MessageContent chat={chat} account={account} />
@@ -75,7 +75,7 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
     <Box className={classes.smallViewRoot}>
       {chat
         ? <MessageContent chat={chat} account={account} />
-        : <MessageControl setChatId={setChat} />}
+        : <MessageControl chat={chat} setChatId={setChat} />}
     </Box>
   );
 
