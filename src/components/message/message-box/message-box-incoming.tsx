@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {Message} from '../../../models/message.model';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 const MessageBoxIncoming: FC<Props> = ({message}: Props) => {
 
   return (
-    <></>
+    <>{message.text}</>
   );
 };
 

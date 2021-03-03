@@ -12,9 +12,16 @@ import {Box, Grid, Theme, useMediaQuery} from '@material-ui/core';
 import MessageControl from '../message-control';
 import MessageContent from '../message-content';
 import {Chat} from '../../../models/chat.model';
+import {RootState} from '../../../store';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
+import {connect, ConnectedProps} from 'react-redux';
 
+const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
+const connector = connect(mapStateToProps);
 
-const MessageMain: FC = () => {
+type Props = ConnectedProps<typeof connector>;
+
+const MessageMain: FC<Props> = ({authState}: Props) => {
   const classes = messageMainStyles();
   const history = useHistory();
   const lastLocation = useLastLocation();
@@ -38,13 +45,16 @@ const MessageMain: FC = () => {
     </>
   );
 
-  useEffect(() => {
-    setChat(match.params['chatId']);
-  }, []);
+  // TODO open chat if id specified
+  // useEffect(() => {
+  //   setChat(match.params['chatId']);
+  // }, []);
 
-  useEffect(() => {
-    console.log(chat);
-  }, [chat]);
+  // TODO remove it for production
+  const account = {
+    id: 'test',
+    username: 'test'
+  }
 
   useEffect(() => {
     updateMenu(menu);
@@ -56,7 +66,7 @@ const MessageMain: FC = () => {
         <MessageControl setChat={setChat} />
       </Grid>
       <Grid item xs={8} className={classes.content}>
-        <MessageContent chat={chat} />
+        <MessageContent chat={chat} account={account} />
       </Grid>
     </Grid>
   );
@@ -64,7 +74,7 @@ const MessageMain: FC = () => {
   const smallView = (): ReactNode => (
     <Box className={classes.smallViewRoot}>
       {chat
-        ? <MessageContent chat={chat} />
+        ? <MessageContent chat={chat} account={account} />
         : <MessageControl setChatId={setChat} />}
     </Box>
   );
