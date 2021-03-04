@@ -53,6 +53,7 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
       deferredMeasurementCache={cellMeasurerCache}
       rowCount={messages.length}
       rowHeight={cellMeasurerCache.rowHeight}
+      overscanRowCount={10}
       rowRenderer={rowRenderer}
     />
   );

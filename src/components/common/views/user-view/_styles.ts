@@ -4,9 +4,9 @@ export const userViewStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-  username: {
-    marginLeft: theme.spacing(1),
-  },
+  divider: {
+    width: theme.spacing(1)
+  }
 }));

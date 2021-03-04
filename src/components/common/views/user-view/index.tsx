@@ -10,29 +10,33 @@ import csx from 'classnames';
 
 type Props = HTMLAttributes<HTMLElement> & {
   user: User;
-  picSize: SizeType;
+  picSize?: SizeType;
+  withUserPic?: boolean;
   withUsername?: boolean;
   withPaperBox?: boolean;
 };
 
 export const UserView: FC<Props> = (props: Props) => {
-  const classes = userViewStyles();
-  const {user, picSize, withUsername, withPaperBox, onMouseOver, onMouseLeave, className} = props;
+    const classes = userViewStyles();
+    const {user, picSize = 'xs', withUserPic = true, withUsername = false, withPaperBox = false} = props;
+    const {onMouseOver, onMouseLeave, className} = props;
 
-  const classNames = csx(className, classes.root);
+    const classNames = csx(className, classes.root);
 
-  const imageWithUsername = (
-    <>
-      <UrlPic alt={user.username} url={user.imageFilename} size={picSize} border={1} />
-      {withUsername && <Box className={classes.username}>{user.username}</Box>}
-    </>
-  );
+    const imageWithUsername = (
+      <>
+        {withUserPic && <UrlPic alt={user.username} url={user.imageFilename} size={picSize} border={1} />}
+        {withUserPic && withUsername && <Box className={classes.divider} />}
+        {withUsername && <Box>{user.username}</Box>}
+      </>
+    );
 
-  const userView = withPaperBox ? <PaperBox>{imageWithUsername}</PaperBox> : imageWithUsername;
+    const userView = withPaperBox ? <PaperBox>{imageWithUsername}</PaperBox> : imageWithUsername;
 
-  return (
-    <Box onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} className={classNames}>
-      {userView}
-    </Box>
-  );
-};
+    return (
+      <Box onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} className={classNames}>
+        {userView}
+      </Box>
+    );
+  }
+;
