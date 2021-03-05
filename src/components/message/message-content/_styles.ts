@@ -53,3 +53,17 @@ export const messageContentFooterStyles = makeStyles((theme: Theme) => ({
     borderTopColor: theme.palette.grey['300']
   }
 }));
+
+export const messageContentInputStyles = makeStyles(() => ({
+  root: {
+    flexGrow: 1
+  }
+}));
+
+export const messageContentSendButtonStyles = makeStyles((theme: Theme) => ({
+  root: {
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(1),
+    flexShrink: 0
+  }
+}));

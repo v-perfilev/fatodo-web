@@ -15,8 +15,14 @@ export const ClearableTextInput: FC<Props> = ({onChange, ...props}: Props) => {
 
   const clear = (event: React.MouseEvent<HTMLInputElement>): void => {
     event.stopPropagation();
-    const nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-    nativeInputValueSetter.call(inputRef.current, '');
+    let nativeInputValueSetter;
+    try {
+      nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+      nativeInputValueSetter.call(inputRef.current, '');
+    } catch (e) {
+      nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
+      nativeInputValueSetter.call(inputRef.current, '');
+    }
     const simulatedEvent = new Event('input', {bubbles: true});
     inputRef.current.dispatchEvent(simulatedEvent);
     updateShowClearButton();
