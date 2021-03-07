@@ -1,6 +1,7 @@
 import React, {ChangeEvent, FC, KeyboardEvent} from 'react';
 import {ClearableTextInput} from '../../common/inputs';
 import {messageContentInputStyles} from './_styles';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   send: () => void;
@@ -9,6 +10,7 @@ type Props = {
 
 const MessageContentInput: FC<Props> = ({send, setMessage}: Props) => {
   const classes = messageContentInputStyles();
+  const {t} = useTranslation();
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const text = event.target.value;
@@ -29,7 +31,7 @@ const MessageContentInput: FC<Props> = ({send, setMessage}: Props) => {
 
   return (
     <ClearableTextInput className={classes.root}
-                        placeholder="Type your message..."
+                        placeholder={t('message:content.inputPlaceholder')}
                         fullWidth
                         variant="outlined"
                         multiline

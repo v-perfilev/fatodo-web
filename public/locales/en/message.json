@@ -1,0 +1,16 @@
+{
+  "control": {
+    "filter": "Filter"
+  },
+  "content": {
+    "inputPlaceholder": "Type your message..."
+  },
+  "tooltips": {
+    "back": "Back"
+  },
+  "menu": {
+    "cleanChat": "Clean",
+    "leaveChat": "Leave",
+    "deleteChat": "Delete"
+  }
+}

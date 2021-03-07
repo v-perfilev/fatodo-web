@@ -1,0 +1,16 @@
+{
+  "control": {
+    "filter": "Фильтр"
+  },
+  "content": {
+    "inputPlaceholder": "Введите сообщение..."
+  },
+  "tooltips": {
+    "back": "К предыдущей страницы"
+  },
+  "menu": {
+    "cleanChat": "Очистить чат",
+    "leaveChat": "Покинуть чат",
+    "deleteChat": "Удалить чат"
+  }
+}

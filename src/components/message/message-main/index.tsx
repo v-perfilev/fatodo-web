@@ -40,7 +40,7 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
         icon={<ArrowBackIcon />}
         action={redirectToPreviousLocation}
         color="secondary"
-        tooltip={t('contact:tooltips.back')}
+        tooltip={t('message:tooltips.back')}
       />
     </>
   );

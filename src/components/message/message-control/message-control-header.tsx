@@ -3,6 +3,7 @@ import {Box} from '@material-ui/core';
 import {ClearableTextInput} from '../../common/inputs';
 import {messageControlHeaderStyles} from './_styles';
 import MessageControlChatButton from './message-control-chat-button';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   setFilter: (filter: string) => void;
@@ -10,6 +11,7 @@ type Props = {
 
 const MessageControlHeader: FC<Props> = ({setFilter}: Props) => {
   const classes = messageControlHeaderStyles();
+  const {t} = useTranslation();
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const filter = event.target.value;
@@ -18,7 +20,10 @@ const MessageControlHeader: FC<Props> = ({setFilter}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <ClearableTextInput placeholder="Filter" onChange={handleOnChange} fullWidth />
+      <ClearableTextInput
+        placeholder={t('message:control.filter')}
+        onChange={handleOnChange}
+        fullWidth />
       <MessageControlChatButton />
     </Box>
   );

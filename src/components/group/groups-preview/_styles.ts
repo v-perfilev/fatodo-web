@@ -33,7 +33,7 @@ export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const groupCardActionsStyles = makeStyles((theme: Theme) => ({
-  action: {
+  root: {
     marginTop: -2,
     marginRight: -4,
     color: theme.palette.primary.contrastText,
