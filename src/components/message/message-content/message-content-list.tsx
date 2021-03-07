@@ -1,10 +1,14 @@
-import React, {FC, ReactElement} from 'react';
+import React, {FC, ReactElement, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {messageContentListStyles} from './_styles';
 import {Chat} from '../../../models/chat.model';
 import {AutoSizer, CellMeasurer, CellMeasurerCache, List} from 'react-virtualized';
 import MessageBox from '../message-box';
 import {User} from '../../../models/user.model';
+import MessageContentLoader from './message-content-loader';
+import MessageService from '../../../services/message.service';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {Message} from '../../../models/message.model';
 
 type Props = {
   chat: Chat;
@@ -18,21 +22,22 @@ const cellMeasurerCache = new CellMeasurerCache({
 
 const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   const classes = messageContentListStyles();
+  const {handleResponse} = useSnackContext();
+  const [messages, setMessages] = useState<Message[]>([]);
 
-  const array = Array.from({length: 5000}, (_, i) => i);
+  const loadMessages = (): void => {
+    MessageService.getAllMessagesByChatIdPageable(chat.id)
+      .then((response) => {
+        setMessages(response.data);
+      })
+      .catch((response) => {
+        handleResponse(response);
+      });
+  };
 
-  const messages = array.map((value) => {
-    return {
-      chatId: chat.id,
-      userId: 'test',
-      text: `message_${value}`,
-      forwardedMessage: null,
-      isEvent: false,
-      createdAt: new Date().getTime() + '',
-      statuses: [],
-      reactions: []
-    };
-  });
+  useEffect(() => {
+    loadMessages();
+  }, [chat]);
 
   const rowRenderer = ({index, key, parent, style}): ReactElement => (
     <CellMeasurer
@@ -46,6 +51,10 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
     </CellMeasurer>
   );
 
+  const noRowsRenderer = (): ReactElement => (
+    <MessageContentLoader />
+  );
+
   const listRenderer = ({height, width}): ReactElement => (
     <List
       height={height}
@@ -56,6 +65,7 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
       overscanRowCount={10}
       scrollToIndex={messages.length - 1}
       rowRenderer={rowRenderer}
+      noRowsRenderer={noRowsRenderer}
     />
   );
 

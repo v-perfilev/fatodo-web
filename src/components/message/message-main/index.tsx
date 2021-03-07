@@ -50,12 +50,6 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   //   setChat(match.params['chatId']);
   // }, []);
 
-  // TODO remove it for production
-  const account = {
-    id: 'test',
-    username: 'test'
-  };
-
   useEffect(() => {
     updateMenu(menu);
   }, [i18n.language]);
@@ -66,7 +60,7 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
         <MessageControl chat={chat} setChat={setChat} />
       </Grid>
       <Grid item xs={8} className={classes.content}>
-        <MessageContent chat={chat} account={account} />
+        <MessageContent chat={chat} account={authState.account} />
       </Grid>
     </Grid>
   );
@@ -74,7 +68,7 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   const smallView = (): ReactNode => (
     <Box className={classes.smallViewRoot}>
       {chat
-        ? <MessageContent chat={chat} account={account} />
+        ? <MessageContent chat={chat} account={authState.account} />
         : <MessageControl chat={chat} setChatId={setChat} />}
     </Box>
   );

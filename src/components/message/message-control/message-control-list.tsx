@@ -1,10 +1,13 @@
-import React, {FC, ReactElement} from 'react';
+import React, {FC, ReactElement, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {messageControlListStyles} from './_styles';
 import MessageControlChat from './message-control-chat';
 import {CHAT_HEIGHT} from '../_constants';
 import {AutoSizer, List} from 'react-virtualized';
 import {Chat} from '../../../models/chat.model';
+import MessageControlLoader from './message-control-loader';
+import MessageService from '../../../services/message.service';
+import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = {
   chat: Chat;
@@ -13,37 +16,35 @@ type Props = {
 
 const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
   const classes = messageControlListStyles();
-
-  const array = Array.from({length: 1000}, (_, i) => i);
-
-  const chats = array.map((value) => {
-    const message = {
-      chatId: `chat_id_${value}`,
-      userId: 'test',
-      text: `message_${value}`,
-      forwardedMessage: null,
-      isEvent: false,
-      createdAt: new Date().getTime() + '',
-      statuses: [],
-      reactions: []
-    };
-    return {
-      id: `chat_id_${value}`,
-      title: `test_${value}`,
-      isDirect: false,
-      members: [],
-      lastMessage: message
-    };
-  });
+  const {handleResponse} = useSnackContext();
+  const [chats, setChats] = useState<Chat[]>([]);
 
   const handleOnChatClick = (index: number) => (): void => {
     const chat = chats[index];
     setChat(chat);
   };
 
+  const loadChats = (): void => {
+    MessageService.getAllChatsPageable()
+      .then((response) => {
+        setChats(response.data);
+      })
+      .catch((response) => {
+        handleResponse(response);
+      });
+  };
+
+  useEffect(() => {
+    loadChats();
+  }, [chat]);
+
   const rowRenderer = ({index, key, style}): ReactElement => (
     <MessageControlChat chat={chats[index]} isSelected={chat?.id === chats[index].id} key={key} style={style}
                         onClick={handleOnChatClick(index)} />
+  );
+
+  const noRowsRenderer = (): ReactElement => (
+    <MessageControlLoader />
   );
 
   const listRenderer = ({height, width}): ReactElement => (
@@ -53,6 +54,7 @@ const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
       rowCount={chats.length}
       rowHeight={CHAT_HEIGHT}
       rowRenderer={rowRenderer}
+      noRowsRenderer={noRowsRenderer}
     />
   );
 
