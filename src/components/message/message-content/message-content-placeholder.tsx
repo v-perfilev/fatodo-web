@@ -1,10 +1,12 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
+import {messageContentPlaceholderStyles} from './_styles';
 
 const MessageContentPlaceholder: FC = () => {
+  const classes = messageContentPlaceholderStyles();
 
   return (
-    <Box />
+    <Box className={classes.root} />
   );
 };
 

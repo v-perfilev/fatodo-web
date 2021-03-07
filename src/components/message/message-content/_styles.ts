@@ -12,6 +12,24 @@ export const messageContentStyles = makeStyles(() => ({
   }
 }));
 
+export const messageContentPlaceholderStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+}));
+
+export const messageContentLoaderStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+}));
+
 export const messageContentHeaderStyles = makeStyles((theme: Theme) => ({
   root: {
     height: CHAT_CONTENT_HEADER_HEIGHT,
