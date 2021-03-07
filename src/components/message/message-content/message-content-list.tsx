@@ -23,15 +23,20 @@ const cellMeasurerCache = new CellMeasurerCache({
 const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   const classes = messageContentListStyles();
   const {handleResponse} = useSnackContext();
+  const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
 
   const loadMessages = (): void => {
+    setLoading(true);
     MessageService.getAllMessagesByChatIdPageable(chat.id)
       .then((response) => {
         setMessages(response.data);
       })
       .catch((response) => {
         handleResponse(response);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -51,10 +56,6 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
     </CellMeasurer>
   );
 
-  const noRowsRenderer = (): ReactElement => (
-    <MessageContentLoader />
-  );
-
   const listRenderer = ({height, width}): ReactElement => (
     <List
       height={height}
@@ -65,11 +66,12 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
       overscanRowCount={10}
       scrollToIndex={messages.length - 1}
       rowRenderer={rowRenderer}
-      noRowsRenderer={noRowsRenderer}
     />
   );
 
-  return (
+  return loading ? (
+    <MessageContentLoader />
+  ) : (
     <Box className={classes.root}>
       <AutoSizer>
         {listRenderer}

@@ -17,6 +17,7 @@ type Props = {
 const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
   const classes = messageControlListStyles();
   const {handleResponse} = useSnackContext();
+  const [loading, setLoading] = useState(false);
   const [chats, setChats] = useState<Chat[]>([]);
 
   const handleOnChatClick = (index: number) => (): void => {
@@ -25,12 +26,16 @@ const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
   };
 
   const loadChats = (): void => {
+    setLoading(true);
     MessageService.getAllChatsPageable()
       .then((response) => {
         setChats(response.data);
       })
       .catch((response) => {
         handleResponse(response);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -43,10 +48,6 @@ const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
                         onClick={handleOnChatClick(index)} />
   );
 
-  const noRowsRenderer = (): ReactElement => (
-    <MessageControlLoader />
-  );
-
   const listRenderer = ({height, width}): ReactElement => (
     <List
       height={height}
@@ -54,11 +55,12 @@ const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
       rowCount={chats.length}
       rowHeight={CHAT_HEIGHT}
       rowRenderer={rowRenderer}
-      noRowsRenderer={noRowsRenderer}
     />
   );
 
-  return (
+  return loading ? (
+    <MessageControlLoader />
+  ) : (
     <Box className={classes.root}>
       <AutoSizer>
         {listRenderer}

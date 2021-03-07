@@ -1,5 +1,5 @@
 import React, {FC, ReactNode, useEffect, useState} from 'react';
-import {useHistory, useRouteMatch} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
@@ -15,6 +15,7 @@ import {Chat} from '../../../models/chat.model';
 import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {connect, ConnectedProps} from 'react-redux';
+import {compose} from 'recompose';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
@@ -25,7 +26,6 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   const classes = messageMainStyles();
   const history = useHistory();
   const lastLocation = useLastLocation();
-  const match = useRouteMatch();
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
@@ -44,11 +44,6 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
       />
     </>
   );
-
-  // TODO open chat if id specified
-  // useEffect(() => {
-  //   setChat(match.params['chatId']);
-  // }, []);
 
   useEffect(() => {
     updateMenu(menu);
@@ -80,4 +75,4 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   );
 };
 
-export default MessageMain;
+export default compose(connector)(MessageMain);

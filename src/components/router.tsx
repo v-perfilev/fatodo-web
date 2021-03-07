@@ -49,8 +49,7 @@ const Router: FC = () => (
     <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
     <PrivateRoute path={Routes.ITEMS} component={ItemRouter} />
     <PrivateRoute path={Routes.CONTACTS} component={ContactRouter} />
-    {/*TODO make route private*/}
-    <PublicRoute path={Routes.MESSAGES} component={MessageRouter} />
+    <PrivateRoute path={Routes.MESSAGES} component={MessageRouter} />
     <PrivateRoute path={Routes.ACCOUNT} component={AccountSettings} />
     {/*Auth Routes*/}
     <PublicRoute path={Routes.LOGIN} component={Auth} />

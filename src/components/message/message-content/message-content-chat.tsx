@@ -16,7 +16,7 @@ const MessageContentChat: FC<Props> = ({chat, account}: Props) => {
     <>
       <MessageContentHeader chat={chat} />
       <MessageContentList chat={chat} account={account} />
-      <MessageContentFooter />
+      <MessageContentFooter chatId={chat.id} />
     </>
   );
 };
