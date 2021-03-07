@@ -12,13 +12,21 @@ export const messageControlStyles = makeStyles(() => ({
   }
 }));
 
+export const messageControlLoaderStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+}));
+
 export const messageControlHeaderStyles = makeStyles((theme: Theme) => ({
   root: {
     height: CHAT_CONTROL_HEADER_HEIGHT,
     minHeight: CHAT_CONTROL_HEADER_HEIGHT,
     display: 'flex',
     flexDirection: 'row',
-    flexGrow: 1,
     alignItems: 'center',
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),

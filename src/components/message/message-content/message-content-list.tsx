@@ -5,7 +5,6 @@ import {Chat} from '../../../models/chat.model';
 import {AutoSizer, CellMeasurer, CellMeasurerCache, List} from 'react-virtualized';
 import MessageBox from '../message-box';
 import {User} from '../../../models/user.model';
-import {useTranslation} from 'react-i18next';
 
 type Props = {
   chat: Chat;
@@ -55,6 +54,7 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
       rowCount={messages.length}
       rowHeight={cellMeasurerCache.rowHeight}
       overscanRowCount={10}
+      scrollToIndex={messages.length - 1}
       rowRenderer={rowRenderer}
     />
   );

@@ -14,7 +14,7 @@ type Props = {
 const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
   const classes = messageControlListStyles();
 
-  const array = Array.from({length: 5000}, (_, i) => i);
+  const array = Array.from({length: 1000}, (_, i) => i);
 
   const chats = array.map((value) => {
     const message = {
