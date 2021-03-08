@@ -4,9 +4,9 @@ import {Box, CardHeader, Typography} from '@material-ui/core';
 import {groupCardHeaderStyles} from './_styles';
 import {Routes} from '../../router';
 import GroupPreviewCardActions from './group-preview-card-actions';
-import {Link} from '../../common/controls/link';
+import {Link} from '../../common/controls';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {UrlPic} from '../../common/images/url-pic';
+import {UrlPic} from '../../common/images';
 
 const GroupPreviewCardHeader: FC = () => {
   const classes = groupCardHeaderStyles();

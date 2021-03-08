@@ -1,9 +1,14 @@
 import React, {FC, ReactNode} from 'react';
 import {Box} from '@material-ui/core';
 import {messageControlFilteredListStyles} from './_styles';
+import {Chat} from '../../../models/chat.model';
 
+type Props = {
+  chat: Chat;
+  setChat: (chat: Chat) => void;
+}
 
-const MessageControlFilteredList: FC = () => {
+const MessageControlFilteredList: FC<Props> = () => {
   const classes = messageControlFilteredListStyles();
 
   const renderNumbers = (): ReactNode => {

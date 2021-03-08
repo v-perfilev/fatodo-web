@@ -1,10 +1,9 @@
-import React, {FC, memo, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {messageControlStyles} from './_styles';
 import MessageControlHeader from './message-control-header';
 import {Box} from '@material-ui/core';
 import MessageControlFilteredList from './message-control-filtered-list';
 import MessageControlList from './message-control-list';
-import {compose} from 'recompose';
 import {Chat} from '../../../models/chat.model';
 
 type Props = {
@@ -22,9 +21,9 @@ const MessageControl: FC<Props> = ({chat, setChat}: Props) => {
     <Box className={classes.root}>
       <MessageControlHeader setFilter={setFilter} />
       {!showFiltered && <MessageControlList chat={chat} setChat={setChat} />}
-      {showFiltered && <MessageControlFilteredList />}
+      {showFiltered && <MessageControlFilteredList chat={chat} setChat={setChat} />}
     </Box>
   );
 };
 
-export default compose(memo)(MessageControl);
+export default MessageControl;

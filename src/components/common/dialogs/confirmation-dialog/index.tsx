@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  ThemeProvider,
+  ThemeProvider
 } from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {LoadingButton} from '../../controls';
@@ -22,7 +22,7 @@ type Props = {
   loading?: boolean;
 };
 
-export const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDisagree, loading}: Props) => {
+const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDisagree, loading}: Props) => {
   const classes = confirmationDialogStyles();
   const {t} = useTranslation();
 
@@ -57,3 +57,5 @@ export const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDis
     </ThemeProvider>
   );
 };
+
+export default ConfirmationDialog;

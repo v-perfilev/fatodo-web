@@ -1,10 +1,10 @@
 import React, {FC, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {ConfirmationDialog} from '../../common/dialogs';
 import {Item} from '../../../models/item.model';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {DeleteDialogProps} from '../../../shared/contexts/delete-contexts/types';
+import ConfirmationDialog from '../../common/dialogs/confirmation-dialog';
 
 type Props = DeleteDialogProps<Item>;
 

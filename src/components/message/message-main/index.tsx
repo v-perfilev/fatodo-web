@@ -1,4 +1,4 @@
-import React, {FC, ReactNode, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
@@ -16,6 +16,8 @@ import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {connect, ConnectedProps} from 'react-redux';
 import {compose} from 'recompose';
+import {PlusIcon} from '../../common/icons/plus-icon';
+import CreateChatDialog from '../create-chat-dialog';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
@@ -28,13 +30,22 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   const lastLocation = useLastLocation();
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
-  const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
+  const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'), {noSsr: true});
+  const [showCreateChatDialog, setShowCreateChatDialog] = useState<boolean>(false);
   const [chat, setChat] = useState<Chat>();
+
+  const openRequestDialog = (): void => setShowCreateChatDialog(true);
 
   const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
   const menu = (
     <>
+      <AdditionalMenuButton
+        icon={<PlusIcon />}
+        action={openRequestDialog}
+        color="primary"
+        tooltip={t('contact:tooltips.addContact')}
+      />
       <AdditionalMenuSpacer showOnSmallDevices />
       <AdditionalMenuButton
         icon={<ArrowBackIcon />}
@@ -49,7 +60,7 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
     updateMenu(menu);
   }, [i18n.language]);
 
-  const bigView = (): ReactNode => (
+  const bigView = (
     <Grid container className={classes.bigViewRoot}>
       <Grid item xs={4} className={classes.control}>
         <MessageControl chat={chat} setChat={setChat} />
@@ -60,17 +71,18 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
     </Grid>
   );
 
-  const smallView = (): ReactNode => (
+  const smallView = (
     <Box className={classes.smallViewRoot}>
       {chat
         ? <MessageContent chat={chat} account={authState.account} />
-        : <MessageControl chat={chat} setChatId={setChat} />}
+        : <MessageControl chat={chat} setChat={setChat} />}
     </Box>
   );
 
   return (
     <>
-      {isBigDevice ? bigView() : smallView()}
+      {isBigDevice ? bigView : smallView}
+      <CreateChatDialog show={showCreateChatDialog} setShow={setShowCreateChatDialog} />
     </>
   );
 };

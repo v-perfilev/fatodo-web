@@ -41,7 +41,7 @@ const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
 
   useEffect(() => {
     loadChats();
-  }, [chat]);
+  }, []);
 
   const rowRenderer = ({index, key, style}): ReactElement => (
     <MessageControlChat chat={chats[index]} isSelected={chat?.id === chats[index].id} key={key} style={style}
@@ -67,6 +67,7 @@ const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
       </AutoSizer>
     </Box>
   );
+
 };
 
 export default MessageControlList;

@@ -9,7 +9,7 @@ import Truncate from 'react-truncate';
 import {Item} from '../../../models/item.model';
 import {Routes} from '../../router';
 import {ItemRoutes} from '../../item/_router';
-import {Link} from '../../common/controls/link';
+import {Link} from '../../common/controls';
 import withItemView from '../../../shared/hocs/with-view/with-item-view';
 import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 
