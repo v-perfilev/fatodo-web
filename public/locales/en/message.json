@@ -14,7 +14,10 @@
     "title": "Create chat",
     "fields": {
       "users": {
-        "label": "Users"
+        "label": "Users",
+        "required": "Required",
+        "current": "Enter identifier of another user",
+        "notRegistered": "User not registered"
       }
     },
     "send": "Create",

@@ -1,7 +1,7 @@
-import {AsyncValidator} from '../../utils/yup.utils';
+import {AsyncValidator} from '../../../../../shared/utils/yup.utils';
 import * as Yup from 'yup';
 import i18n from 'i18next';
-import UserService from '../../../services/user.service';
+import UserService from '../../../../../services/user.service';
 
 export const emailValidator = new AsyncValidator(
   Yup.string()

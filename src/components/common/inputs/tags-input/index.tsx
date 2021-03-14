@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC, KeyboardEvent, ReactElement} from 'react';
+import React, {FC, KeyboardEvent, ReactElement} from 'react';
 import {Field} from 'formik';
 import {Autocomplete, AutocompleteRenderInputParams} from 'formik-material-ui-lab';
 import {TextInput} from '../text-input';
@@ -7,12 +7,19 @@ type Props = {
   name: string;
   label: string;
   options?: string[];
-  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  inputName?: string;
   preventEnter?: boolean;
   required?: boolean
 };
 
-export const TagsInput: FC<Props> = ({name, label, options = [], onChange, required, preventEnter = false}: Props) => {
+export const TagsInput: FC<Props> = ({
+                                       name,
+                                       label,
+                                       options = [],
+                                       inputName = 'tagsInput',
+                                       preventEnter = false,
+                                       required
+                                     }: Props) => {
 
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>): void => {
     if (event.key === 'Enter' && preventEnter) {
@@ -30,10 +37,9 @@ export const TagsInput: FC<Props> = ({name, label, options = [], onChange, requi
       fullWidth
       options={options}
       getOptionLabel={(option): string => option}
-      onChange={onChange}
       onKeyDown={handleKeyPress}
       renderInput={(params: AutocompleteRenderInputParams): ReactElement => (
-        <TextInput name="test" {...params} label={label} required={required} onKeyDown={handleKeyPress} />
+        <TextInput name={inputName} {...params} label={label} required={required} onKeyDown={handleKeyPress} />
       )}
     />
   );

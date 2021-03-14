@@ -40,4 +40,9 @@ export default class UserService {
     const url = UserService.baseUrl + '/check/username-exists/' + value;
     return axios.get(url);
   };
+
+  public static doesEmailOrUsernameExist = (value: string): AxiosPromise => {
+    const url = UserService.baseUrl + '/check/email-or-username-exists/' + value;
+    return axios.get(url);
+  };
 }

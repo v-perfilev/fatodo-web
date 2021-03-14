@@ -1,6 +1,6 @@
 import {UserAccount} from '../../../../models/user.model';
 import * as Yup from 'yup';
-import {usernameChangeValidator} from '../../../../shared/forms/validators/username-change.validator';
+import {usernameChangeValidator} from './validators/username-change.validator';
 import {ObjectSchema} from 'yup';
 
 export interface AccountFormValues {

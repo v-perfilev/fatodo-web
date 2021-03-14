@@ -1,8 +1,8 @@
-import {AsyncValidator} from '../../utils/yup.utils';
+import {AsyncValidator} from '../../../../../shared/utils/yup.utils';
 import * as Yup from 'yup';
 import i18n from 'i18next';
-import UserService from '../../../services/user.service';
-import {usernameRegex} from './_constants';
+import UserService from '../../../../../services/user.service';
+import {usernameRegex} from '../../../../../shared/forms/validators/_constants';
 
 export const usernameChangeValidator = (currentLogin: string): AsyncValidator =>
   new AsyncValidator(

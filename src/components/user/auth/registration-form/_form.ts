@@ -1,8 +1,8 @@
 import * as Yup from 'yup';
-import {emailValidator} from '../../../../shared/forms/validators/email.validator';
-import {usernameValidator} from '../../../../shared/forms/validators/username.validator';
-import {passwordValidator} from '../../../../shared/forms/validators/password.validator';
 import {RegistrationDTO} from '../../../../models/dto/registration.dto';
+import {emailValidator} from './validators/email.validator';
+import {usernameValidator} from './validators/username.validator';
+import {passwordValidator} from './validators/password.validator';
 
 export interface RegistrationFormValues {
   email: string;

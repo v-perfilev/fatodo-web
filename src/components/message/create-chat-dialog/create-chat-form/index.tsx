@@ -3,21 +3,40 @@ import React, {FC, useEffect} from 'react';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
 import {CreateChatFormUtils, CreateChatValues} from './_form';
-import UserService from '../../../../services/user.service';
 import {TagsInput} from '../../../common/inputs';
 import {FormDialogComponentProps} from '../../../common/dialogs';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import MessageService from '../../../../services/message.service';
+import {RootState} from '../../../../store';
+import {AuthState} from '../../../../store/rerducers/auth.reducer';
+import {connect, ConnectedProps} from 'react-redux';
 
-type Props = FormikProps<CreateChatValues> &
+const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
+const connector = connect(mapStateToProps);
+
+type Props = ConnectedProps<typeof connector> &
+  FormikProps<CreateChatValues> &
   FormDialogComponentProps &
   SnackState;
 
 const CreateChatForm: FC<Props> = (props: Props) => {
   const {setIsSubmitting, setIsValid, setSubmitForm, setResetForm} = props;
-  const {values, setFieldValue, isValid, isSubmitting, submitForm, validateForm, setErrors, resetForm} = props;
+  const {
+    values,
+    errors,
+    setFieldValue,
+    setFieldTouched,
+    isValid,
+    isSubmitting,
+    submitForm,
+    validateForm,
+    setErrors,
+    resetForm
+  } = props;
   const {t} = useTranslation();
+
+  const inputInvalid = !!errors.user;
 
   useEffect(() => {
     setSubmitForm(() => (): void => {
@@ -27,6 +46,7 @@ const CreateChatForm: FC<Props> = (props: Props) => {
       resetForm();
       validateForm().then((errors) => setErrors(errors));
     });
+    validateForm().finally();
   }, []);
 
   useEffect(() => {
@@ -38,29 +58,35 @@ const CreateChatForm: FC<Props> = (props: Props) => {
   }, [isSubmitting]);
 
   useEffect(() => {
-    if (values.users) {
-      setFieldValue('userIds', '');
-      UserService.getByUserNameOrEmail(values.users[0])
-        .then((response) => {
-          setFieldValue('userId', response.data.id);
-        })
-        .catch(() => {
-          // skip
-        });
+    if (values.user.length > 0) {
+      setFieldTouched('user');
     }
-  }, [values.users]);
+  }, [values.user]);
 
+  useEffect(() => {
+    // if (values.users) {
+    //   setFieldValue('userIds', '');
+    //   UserService.getByUserNameOrEmail(values.users[0])
+    //     .then((response) => {
+    //       setFieldValue('userId', response.data.id);
+    //     })
+    //     .catch(() => {
+    //       // skip
+    //     });
+    // }
+  }, [values.users]);
 
   return (
     <Form>
-      <TagsInput name="users" label={t('message:createChat.fields.users.label')} />
+      <TagsInput name="users" label={t('message:createChat.fields.users.label')} inputName="user"
+                 preventEnter={inputInvalid} />
     </Form>
   );
 };
 
 const formik = withFormik<Props, CreateChatValues>({
   mapPropsToValues: () => CreateChatFormUtils.mapPropsToValues(),
-  validationSchema: CreateChatFormUtils.validationSchema,
+  validationSchema: ({authState: {account}}: Props) => CreateChatFormUtils.validationSchema(account),
   validateOnMount: true,
 
   handleSubmit: (
@@ -87,4 +113,4 @@ const formik = withFormik<Props, CreateChatValues>({
   }
 });
 
-export default compose<FormDialogComponentProps>(withSnackContext, formik)(CreateChatForm);
+export default compose<FormDialogComponentProps>(withSnackContext, connector, formik)(CreateChatForm);

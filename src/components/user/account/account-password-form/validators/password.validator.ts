@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import i18n from 'i18next';
-import {passwordRegex, passwordStrengthRegex} from './_constants';
+import {passwordRegex, passwordStrengthRegex} from '../../../../../shared/forms/validators/_constants';
 
 export const passwordValidator = Yup.string()
   .required(() => i18n.t('account:fields.password.required'))

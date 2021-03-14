@@ -1,7 +1,7 @@
 import {ChangePasswordDTO} from '../../../../models/dto/change-password.dto';
 import * as Yup from 'yup';
 import i18n from 'i18next';
-import {passwordValidator} from '../../../../shared/forms/validators/password.validator';
+import {passwordValidator} from './validators/password.validator';
 
 export interface AccountPasswordFormValues {
   oldPassword: string;
