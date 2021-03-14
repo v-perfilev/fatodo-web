@@ -13,6 +13,9 @@
   "createChat": {
     "title": "Create chat",
     "fields": {
+      "users": {
+        "label": "Users"
+      }
     },
     "send": "Create",
     "cancel": "Cancel"

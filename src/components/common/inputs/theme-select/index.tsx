@@ -3,7 +3,7 @@ import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {colorSchemes} from '../../../../shared/theme/colors';
 import {MenuItem} from '@material-ui/core';
-import {ThemeView} from '../../views/theme-view';
+import {ThemeView} from '../../views';
 
 type Props = {
   name: string;

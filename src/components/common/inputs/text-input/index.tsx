@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
-import {Field} from 'formik';
+import {Field, FieldAttributes} from 'formik';
 import {TextField} from 'formik-material-ui';
 
-type Props = {
+type Props = FieldAttributes<any> & {
   name: string;
   label: string;
   required?: boolean;
 };
 
-export const TextInput: FC<Props> = ({name, label, required}: Props) => {
-  return <Field component={TextField} type="text" name={name} label={label} required={required} fullWidth />;
+export const TextInput: FC<Props> = ({name, label, required, ...props}: Props) => {
+  return <Field component={TextField} type="text" name={name} label={label} required={required} fullWidth {...props} />;
 };

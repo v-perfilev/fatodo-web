@@ -2,9 +2,9 @@ import {useTranslation} from 'react-i18next';
 import React, {FC, useEffect} from 'react';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
-import {ContactRequestFormUtils, CreateChatValues} from './_form';
+import {CreateChatFormUtils, CreateChatValues} from './_form';
 import UserService from '../../../../services/user.service';
-import {TextInput} from '../../../common/inputs';
+import {TagsInput} from '../../../common/inputs';
 import {FormDialogComponentProps} from '../../../common/dialogs';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
@@ -50,16 +50,17 @@ const CreateChatForm: FC<Props> = (props: Props) => {
     }
   }, [values.users]);
 
+
   return (
     <Form>
-      <TextInput name="users" label={t('contact:addContact.fields.user.label')} required />
+      <TagsInput name="users" label={t('message:createChat.fields.users.label')} />
     </Form>
   );
 };
 
 const formik = withFormik<Props, CreateChatValues>({
-  mapPropsToValues: () => ContactRequestFormUtils.mapPropsToValues(),
-  validationSchema: ContactRequestFormUtils.validationSchema,
+  mapPropsToValues: () => CreateChatFormUtils.mapPropsToValues(),
+  validationSchema: CreateChatFormUtils.validationSchema,
   validateOnMount: true,
 
   handleSubmit: (
@@ -68,7 +69,7 @@ const formik = withFormik<Props, CreateChatValues>({
   ) => {
     const {handleCode, handleResponse} = props;
 
-    const userIds = ContactRequestFormUtils.mapValuesToDTO(values);
+    const userIds = CreateChatFormUtils.mapValuesToDTO(values);
 
     const createChat = userIds.length === 1
       ? MessageService.createDirectChat(userIds[0])

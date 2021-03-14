@@ -1,16 +1,16 @@
 import React, {FC, useState} from 'react';
-import {Field} from 'formik';
+import {Field, FieldAttributes} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {IconButton, InputAdornment} from '@material-ui/core';
 import {VisibilityOnIcon} from '../../icons/visibility-on-icon';
 import {VisibilityOffIcon} from '../../icons/visibility-off-icon';
 
-type Props = {
+type Props = FieldAttributes<any> & {
   name: string;
   label: string;
 };
 
-export const PasswordInput: FC<Props> = ({name, label}: Props) => {
+export const PasswordInput: FC<Props> = ({name, label, ...props}: Props) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleShowPassword = (e): void => {
@@ -32,8 +32,9 @@ export const PasswordInput: FC<Props> = ({name, label}: Props) => {
               {showPassword ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
             </IconButton>
           </InputAdornment>
-        ),
+        )
       }}
+      {...props}
     />
   );
 };

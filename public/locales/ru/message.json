@@ -13,6 +13,9 @@
   "createChat": {
     "title": "Создать чат",
     "fields": {
+      "users": {
+        "label": "Пользователи"
+      }
     },
     "send": "Создать",
     "cancel": "Отменить"

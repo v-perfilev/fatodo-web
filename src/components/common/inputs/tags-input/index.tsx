@@ -1,19 +1,23 @@
-import React, {ChangeEvent, FC, ReactElement} from 'react';
+import React, {ChangeEvent, FC, KeyboardEvent, ReactElement} from 'react';
 import {Field} from 'formik';
 import {Autocomplete, AutocompleteRenderInputParams} from 'formik-material-ui-lab';
-import TextField from '@material-ui/core/TextField';
+import {TextInput} from '../text-input';
 
 type Props = {
   name: string;
   label: string;
   options?: string[];
-  handleChange?: (input: string) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
+  preventEnter?: boolean;
+  required?: boolean
 };
 
-export const TagsInput: FC<Props> = ({name, label, options = [], handleChange}: Props) => {
-  const onChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (handleChange) {
-      handleChange(event.target.value);
+export const TagsInput: FC<Props> = ({name, label, options = [], onChange, required, preventEnter = false}: Props) => {
+
+  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>): void => {
+    if (event.key === 'Enter' && preventEnter) {
+      event.preventDefault();
+      event.stopPropagation();
     }
   };
 
@@ -26,8 +30,10 @@ export const TagsInput: FC<Props> = ({name, label, options = [], handleChange}: 
       fullWidth
       options={options}
       getOptionLabel={(option): string => option}
+      onChange={onChange}
+      onKeyDown={handleKeyPress}
       renderInput={(params: AutocompleteRenderInputParams): ReactElement => (
-        <TextField {...params} label={label} onChange={onChange} />
+        <TextInput name="test" {...params} label={label} required={required} onKeyDown={handleKeyPress} />
       )}
     />
   );

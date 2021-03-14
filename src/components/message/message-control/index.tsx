@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {messageControlStyles} from './_styles';
 import MessageControlHeader from './message-control-header';
 import {Box} from '@material-ui/core';
@@ -11,17 +11,23 @@ type Props = {
   setChat: (chat: Chat) => void;
 }
 
+type ControlType = 'list' | 'filtered';
+
 const MessageControl: FC<Props> = ({chat, setChat}: Props) => {
   const classes = messageControlStyles();
+  const [type, setType] = useState<ControlType>('list');
   const [filter, setFilter] = useState<string>('');
 
-  const showFiltered = filter.trim().length > 0;
+  useEffect(() => {
+    const showFiltered = filter.trim().length > 0;
+    setType(showFiltered ? 'filtered' : 'list');
+  }, [filter]);
 
   return (
     <Box className={classes.root}>
       <MessageControlHeader setFilter={setFilter} />
-      {!showFiltered && <MessageControlList chat={chat} setChat={setChat} />}
-      {showFiltered && <MessageControlFilteredList chat={chat} setChat={setChat} />}
+      {type === 'list' && <MessageControlList chat={chat} setChat={setChat} />}
+      {type === 'filtered' && <MessageControlFilteredList chat={chat} setChat={setChat} />}
     </Box>
   );
 };
