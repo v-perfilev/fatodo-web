@@ -5,12 +5,19 @@
   "content": {
     "inputPlaceholder": "Введите сообщение..."
   },
-  "tooltips": {
-    "back": "К предыдущей страницы"
-  },
   "menu": {
     "cleanChat": "Очистить чат",
     "leaveChat": "Покинуть чат",
     "deleteChat": "Удалить чат"
+  },
+  "createChat": {
+    "title": "Создать чат",
+    "fields": {
+    },
+    "send": "Создать",
+    "cancel": "Отменить"
+  },
+  "tooltips": {
+    "back": "К предыдущей страницы"
   }
 }

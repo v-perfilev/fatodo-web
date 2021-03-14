@@ -16,9 +16,9 @@ const CreateChatDialog: FC<Props> = ({show, setShow}: Props) => {
       show={show}
       setShow={setShow}
       FormComponent={CreateChatForm}
-      title={t('contact:addContact.title')}
-      sendText={t('contact:addContact.send')}
-      cancelText={t('contact:addContact.cancel')}
+      title={t('message:createChat.title')}
+      sendText={t('message:createChat.send')}
+      cancelText={t('message:createChat.cancel')}
     />
   );
 };
