@@ -15,7 +15,6 @@
     "fields": {
       "users": {
         "label": "Users",
-        "required": "Required",
         "current": "Enter identifier of another user",
         "notRegistered": "User not registered"
       }

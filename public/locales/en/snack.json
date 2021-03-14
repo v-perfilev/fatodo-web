@@ -26,5 +26,8 @@
     "requestRemoved": "Contact request removed",
     "requestAccepted": "Contact request accepted",
     "requestDeclined": "Contact request declined"
+  },
+  "message": {
+    "chatCreated": "Chat created"
   }
 }

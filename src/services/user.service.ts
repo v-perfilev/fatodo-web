@@ -10,7 +10,12 @@ export default class UserService {
     return axios.post(url, ids);
   };
 
-  public static getByUserNameOrEmail = (user: string): AxiosPromise<User> => {
+  public static getByUsername = (username: string): AxiosPromise<User> => {
+    const url = UserService.baseUrl + '/user/username/' + username;
+    return axios.get(url);
+  };
+
+  public static getByUsernameOrEmail = (user: string): AxiosPromise<User> => {
     const url = UserService.baseUrl + '/user/username-or-email/' + user;
     return axios.get(url);
   };
@@ -41,8 +46,8 @@ export default class UserService {
     return axios.get(url);
   };
 
-  public static doesEmailOrUsernameExist = (value: string): AxiosPromise => {
-    const url = UserService.baseUrl + '/check/email-or-username-exists/' + value;
+  public static doesUsernameOrEmailExist = (value: string): AxiosPromise => {
+    const url = UserService.baseUrl + '/check/username-or-email-exists/' + value;
     return axios.get(url);
   };
 }

@@ -47,7 +47,7 @@ const ContactRequestForm: FC<Props> = (props: Props) => {
   useEffect(() => {
     if (values.user) {
       setFieldValue('userId', '');
-      UserService.getByUserNameOrEmail(values.user)
+      UserService.getByUsernameOrEmail(values.user)
         .then((response) => {
           setFieldValue('userId', response.data.id);
         })

@@ -1,17 +1,17 @@
 import * as Yup from 'yup';
 import {ObjectSchema} from 'yup';
-import {UserAccount} from '../../../../models/user.model';
+import {User, UserAccount} from '../../../../models/user.model';
 import {userValidator} from './validators/user.validator';
 
 export interface CreateChatValues {
-  users: string[];
-  userIds: string[];
+  usernames: string[];
+  users: User[];
   user: string;
 }
 
 export const defaultCreateChatFormValues: Readonly<CreateChatValues> = {
+  usernames: [],
   users: [],
-  userIds: [],
   user: ''
 };
 
@@ -20,9 +20,9 @@ export class CreateChatFormUtils {
 
   public static validationSchema = (account: UserAccount): ObjectSchema =>
     Yup.object().shape({
-      users: Yup.string().required(),
-      user: userValidator(account.username, account.email).check()
+      users: Yup.array().required(),
+      user: userValidator(account.username).check()
     });
 
-  public static mapValuesToDTO = (values: CreateChatValues): string[] => values.userIds;
+  public static mapValuesToDTO = (values: CreateChatValues): string[] => values.users.map((user) => user.id);
 }

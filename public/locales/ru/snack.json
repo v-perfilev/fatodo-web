@@ -26,5 +26,8 @@
     "requestRemoved": "Запрос удалён",
     "requestAccepted": "Запрос принят",
     "requestDeclined": "Запрос отклонён"
+  },
+  "message": {
+    "chatCreated": "Чат создан"
   }
 }

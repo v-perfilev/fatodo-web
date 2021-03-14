@@ -12,6 +12,6 @@ export const userValidator = (currentLogin: string, currentEmail: string): Async
     {
       name: 'exists',
       message: (): string => i18n.t('contact:addContact.fields.user.notRegistered'),
-      test: async (value): Promise<boolean> => (await UserService.doesEmailOrUsernameExist(value)).data === false
+      test: async (value): Promise<boolean> => (await UserService.doesUsernameOrEmailExist(value)).data === true
     }
   );
