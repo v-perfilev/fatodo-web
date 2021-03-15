@@ -1,7 +1,8 @@
-import React, {ChangeEvent, FC, KeyboardEvent} from 'react';
+import React, {ChangeEvent, FC, KeyboardEvent, useRef} from 'react';
 import {ClearableTextInput} from '../../common/inputs';
 import {messageContentInputStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
+import {InputUtils} from '../../../shared/utils/input.utils';
 
 type Props = {
   send: () => void;
@@ -10,6 +11,7 @@ type Props = {
 
 const MessageContentInput: FC<Props> = ({send, setMessage}: Props) => {
   const classes = messageContentInputStyles();
+  const ref = useRef<HTMLInputElement>();
   const {t} = useTranslation();
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -21,11 +23,10 @@ const MessageContentInput: FC<Props> = ({send, setMessage}: Props) => {
     const isHelpKeyPressed = event.ctrlKey || event.altKey || event.shiftKey;
     const isEnterKeyPressed = event.key === 'Enter';
 
-    if (isEnterKeyPressed && isHelpKeyPressed) {
-
-    } else if (isEnterKeyPressed) {
+    if (isEnterKeyPressed && !isHelpKeyPressed) {
       event.preventDefault();
       send();
+      InputUtils.clear(ref);
     }
   };
 
@@ -36,6 +37,7 @@ const MessageContentInput: FC<Props> = ({send, setMessage}: Props) => {
                         variant="outlined"
                         multiline
                         rows={3}
+                        inputRef={ref}
                         onKeyPress={handleKeyPress}
                         onChange={handleOnChange} />
   );

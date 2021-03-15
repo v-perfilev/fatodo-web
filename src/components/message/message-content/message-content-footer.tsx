@@ -19,12 +19,8 @@ const MessageContentFooter: FC<Props> = ({chatId}: Props) => {
   const send = (): void => {
     const dto = {text: message} as MessageDTO;
     MessageService.sendIndirectMessage(chatId, dto)
-      .then(() => {
-        console.log('message sent successfully');
-      })
       .catch((response) => {
         handleResponse(response);
-        console.log('error during message sending');
       });
   };
 

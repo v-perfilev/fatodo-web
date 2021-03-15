@@ -1,32 +1,24 @@
 import React, {ChangeEvent, FC, useRef, useState} from 'react';
 import {IconButton, TextField, TextFieldProps} from '@material-ui/core';
 import {CloseIcon} from '../../icons/close-icon';
+import {InputUtils} from '../../../../shared/utils/input.utils';
+import {RefUtils} from '../../../../shared/utils/ref.utils';
 
 type Props = TextFieldProps;
 
-export const ClearableTextInput: FC<Props> = ({onChange, ...props}: Props) => {
-  const inputRef = useRef<HTMLInputElement>();
+export const ClearableTextInput: FC<Props> = ({onChange, inputRef, ...props}: Props) => {
+  const ref = useRef<HTMLInputElement>();
   const [showClearButton, setShowClearButton] = useState(false);
 
   const updateShowClearButton = (): void => {
-    const filterIsNotEmpty = inputRef.current.value.length > 0;
+    const filterIsNotEmpty = ref.current.value.length > 0;
     setShowClearButton(filterIsNotEmpty);
   };
 
   const clear = (event: React.MouseEvent<HTMLInputElement>): void => {
     event.stopPropagation();
-    let nativeInputValueSetter;
-    try {
-      nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-      nativeInputValueSetter.call(inputRef.current, '');
-    } catch (e) {
-      nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLTextAreaElement.prototype, 'value').set;
-      nativeInputValueSetter.call(inputRef.current, '');
-    }
-    const simulatedEvent = new Event('input', {bubbles: true});
-    inputRef.current.dispatchEvent(simulatedEvent);
     updateShowClearButton();
-
+    InputUtils.clear(ref);
   };
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -37,7 +29,7 @@ export const ClearableTextInput: FC<Props> = ({onChange, ...props}: Props) => {
   return <TextField
     {...props}
     onChange={handleOnChange}
-    inputRef={inputRef}
+    inputRef={RefUtils.mergeRefs(ref, inputRef)}
     InputProps={{
       endAdornment: showClearButton && (
         <IconButton onClick={clear} size="small">

@@ -3,6 +3,7 @@ import {Message} from '../../../models/message.model';
 import {messageBoxOutcomingStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import {User} from '../../../models/user.model';
+import {DateFormatters} from '../../../shared/utils/date.utils';
 
 type Props = {
   message: Message,
@@ -12,6 +13,8 @@ type Props = {
 const MessageBoxOutcoming: FC<Props> = ({message, user}: Props) => {
   const classes = messageBoxOutcomingStyles();
 
+  const date = DateFormatters.formatTimeAndDateWithYear(new Date(message.createdAt));
+
   return (
     <Box className={classes.root}>
       <Box className={classes.message}>
@@ -20,7 +23,7 @@ const MessageBoxOutcoming: FC<Props> = ({message, user}: Props) => {
             {user.username}
           </Box>
           <Box className={classes.date}>
-            {message.createdAt}
+            {date}
           </Box>
         </Box>
         <Box className={classes.body}>
