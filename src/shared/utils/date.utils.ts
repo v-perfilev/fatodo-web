@@ -10,6 +10,8 @@ export class DateFormats {
   static dateWithYearFormat = 'DD.MM.YYYY';
 
   static monthFormat = 'MMMM';
+
+  static timeAndDateWithYearFormat = 'HH:mm DD.MM.YYYY';
 }
 
 export class DateFormatters {
@@ -27,6 +29,10 @@ export class DateFormatters {
 
   static formatMonth = (date: Date): string => {
     return moment(date).format(DateFormats.monthFormat);
+  };
+
+  static formatTimeAndDateWithYear = (date: Date): string => {
+    return moment(date).format(DateFormats.timeAndDateWithYearFormat);
   };
 }
 
@@ -46,7 +52,7 @@ export class DateConverters {
     if (time) {
       result = {
         ...result,
-        time: time.getHours() * 60 + time.getMinutes(),
+        time: time.getHours() * 60 + time.getMinutes()
       };
     }
     if (date) {
@@ -54,7 +60,7 @@ export class DateConverters {
         ...result,
         date: date.getDate(),
         month: date.getMonth(),
-        year: date.getFullYear(),
+        year: date.getFullYear()
       };
     }
     return result;
@@ -68,14 +74,14 @@ export class DateConverters {
     if (time) {
       result = {
         ...result,
-        time: time.getHours() * 60 + time.getMinutes(),
+        time: time.getHours() * 60 + time.getMinutes()
       };
     }
     if (date) {
       result = {
         ...result,
         date: date.getDate(),
-        month: date.getMonth(),
+        month: date.getMonth()
       };
     }
     return result;

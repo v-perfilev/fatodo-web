@@ -2,7 +2,10 @@ import * as React from 'react';
 import {useContext} from 'react';
 import {User} from '../../../models/user.model';
 
-type UserListContextState = ListState<User>;
+export interface UserListState {
+  users: User[],
+  addIds: (ids: string[]) => void
+}
 
-export const UserListContext = React.createContext<UserListContextState>(null);
-export const useUserListContext = (): UserListContextState => useContext(UserListContext);
+export const UserListContext = React.createContext<UserListState>(null);
+export const useUserListContext = (): UserListState => useContext(UserListContext);

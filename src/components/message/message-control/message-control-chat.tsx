@@ -1,29 +1,32 @@
-import React, {FC, HTMLAttributes} from 'react';
+import React, {FC, HTMLAttributes, useEffect} from 'react';
 import {Box} from '@material-ui/core';
 import {Chat} from '../../../models/chat.model';
 import {messageControlChatStyles} from './_styles';
 import {UrlPic} from '../../common/images';
 import {DateFormatters} from '../../../shared/utils/date.utils';
 import csx from 'classnames';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import {User} from '../../../models/user.model';
+import {ChatUtils} from '../../../shared/utils/chat.utils';
 
 type Props = HTMLAttributes<HTMLElement> & {
   chat: Chat;
   isSelected: boolean;
+  account: User;
 };
 
-const MessageControlChat: FC<Props> = ({chat, isSelected, ...props}: Props) => {
+const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Props) => {
   const classes = messageControlChatStyles();
+  const {users, addIds} = useUserListContext();
 
-  const getDate = (timestamp: string): string => {
-    const timestampNumber = Number(timestamp) * 1000;
-    return (
-      DateFormatters.formatTime(new Date(timestampNumber)) +
-      ' ' +
-      DateFormatters.formatDateWithYear(new Date(timestampNumber))
-    );
-  };
+  const title = ChatUtils.getTitle(chat, users, account);
+  const date = DateFormatters.formatTimeAndDateWithYear(new Date(chat.lastMessage.createdAt));
 
   const classNames = csx(classes.root, {'selected': isSelected});
+
+  useEffect(() => {
+    addIds(chat.members);
+  }, []);
 
   return (
     <Box className={classNames} {...props}>
@@ -31,10 +34,10 @@ const MessageControlChat: FC<Props> = ({chat, isSelected, ...props}: Props) => {
       <Box className={classes.chatContainer}>
         <Box className={classes.topContainer}>
           <Box className={classes.title}>
-            {chat.title}
+            {title}
           </Box>
           <Box className={classes.date}>
-            {getDate(chat.lastMessage.createdAt)}
+            {date}
           </Box>
         </Box>
         <Box className={classes.text}>

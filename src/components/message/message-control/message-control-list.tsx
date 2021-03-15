@@ -8,13 +8,15 @@ import {Chat} from '../../../models/chat.model';
 import MessageControlLoader from './message-control-loader';
 import MessageService from '../../../services/message.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {User} from '../../../models/user.model';
 
 type Props = {
   chat: Chat;
   setChat: (chat: Chat) => void;
+  account: User;
 }
 
-const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
+const MessageControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   const classes = messageControlListStyles();
   const {handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
@@ -44,7 +46,8 @@ const MessageControlList: FC<Props> = ({chat, setChat}: Props) => {
   }, []);
 
   const rowRenderer = ({index, key, style}): ReactElement => (
-    <MessageControlChat chat={chats[index]} isSelected={chat?.id === chats[index].id} key={key} style={style}
+    <MessageControlChat chat={chats[index]} account={account}
+                        isSelected={chat?.id === chats[index].id} key={key} style={style}
                         onClick={handleOnChatClick(index)} />
   );
 

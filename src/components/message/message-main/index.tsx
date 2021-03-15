@@ -18,6 +18,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import CreateChatDialog from '../create-chat-dialog';
+import withUserList from '../../../shared/hocs/with-list/with-user-list';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
@@ -63,7 +64,7 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   const bigView = (
     <Grid container className={classes.bigViewRoot}>
       <Grid item xs={4} className={classes.control}>
-        <MessageControl chat={chat} setChat={setChat} />
+        <MessageControl chat={chat} setChat={setChat} account={authState.account} />
       </Grid>
       <Grid item xs={8} className={classes.content}>
         <MessageContent chat={chat} account={authState.account} />
@@ -75,7 +76,7 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
     <Box className={classes.smallViewRoot}>
       {chat
         ? <MessageContent chat={chat} account={authState.account} />
-        : <MessageControl chat={chat} setChat={setChat} />}
+        : <MessageControl chat={chat} setChat={setChat} account={authState.account} />}
     </Box>
   );
 
@@ -87,4 +88,4 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   );
 };
 
-export default compose(connector)(MessageMain);
+export default compose(connector, withUserList)(MessageMain);
