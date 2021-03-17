@@ -19,6 +19,7 @@ import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import CreateChatDialog from '../create-chat-dialog';
 import withUserList from '../../../shared/hocs/with-list/with-user-list';
+import WsMessageClient from '../ws-message-client';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
@@ -84,6 +85,7 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
     <>
       {isBigDevice ? bigView : smallView}
       <CreateChatDialog show={showCreateChatDialog} setShow={setShowCreateChatDialog} />
+      <WsMessageClient />
     </>
   );
 };

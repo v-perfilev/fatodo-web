@@ -1,4 +1,4 @@
-import {AUTHORIZATION_HEADER} from '../../constants';
+import {AUTHORIZATION_HEADER, AUTHORIZATION_PREFIX} from '../../constants';
 import {AxiosResponse} from 'axios';
 
 const AUTH_TOKEN_KEY = 'token';
@@ -29,6 +29,9 @@ export class SecurityUtils {
 
   public static parseTokenFromResponse = (response: AxiosResponse): string => {
     const token = response?.headers?.[AUTHORIZATION_HEADER];
-    return token && token.slice(0, 7) === 'Bearer ' ? token.slice(7, token.length) : null;
+    const prefixLength = AUTHORIZATION_PREFIX.length;
+    return token && token.slice(0, prefixLength) === AUTHORIZATION_PREFIX
+      ? token.slice(prefixLength, token.length)
+      : null;
   };
 }
