@@ -19,7 +19,7 @@ const WsMessageClient: FC = () => {
   };
 
   const onMessageReceived = (msg: any): void => {
-    console.log('message received');
+    console.log('message received', msg);
   };
 
   return (
