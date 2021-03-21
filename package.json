@@ -76,7 +76,7 @@
     "notistack": "^0.9.11",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-google-recaptcha-v3": "^1.5.2",
+    "react-google-recaptcha-v3": "1.5.5",
     "react-hot-loader": "^4.12.20",
     "react-i18next": "^11.4.0",
     "react-image-crop": "^8.6.5",

@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
-import {GoogleReCaptchaProvider, useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 import {RECAPTCHA_KEY} from '../../constants';
 import {LanguageUtils} from '../utils/language.utils';
 import {compose} from 'recompose';
+import {GoogleReCaptchaProvider, useGoogleReCaptcha} from 'react-google-recaptcha-v3';
+import {PromiseUtils} from '../utils/promise.utils';
 
 export type CaptchaProps = {
   token: string;
@@ -19,12 +20,21 @@ const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (props): Rea
 
   const updateToken = (): void => setShouldUpdate((prevState) => !prevState);
 
-  const updateCaptcha = (): void => {
-    executeRecaptcha().then((token) => {
-      if (isMounted) {
-        setToken(token);
-      }
-    });
+  const handleToken = (token: string): void => {
+    console.log('updated');
+    if (isMounted) {
+      setToken(token);
+    }
+  };
+
+  const executeUpdate = (): void => {
+    executeRecaptcha().then((token) => handleToken(token));
+  };
+
+  const updateCaptchaWithRepeat = (): void => {
+    PromiseUtils.promiseTimeout(1000, executeRecaptcha())
+      .then((token) => handleToken(token))
+      .catch(() => executeUpdate());
   };
 
   useEffect(() => {
@@ -35,9 +45,9 @@ const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (props): Rea
   }, []);
 
   useEffect(() => {
-    updateCaptcha();
+    updateCaptchaWithRepeat();
     window.clearInterval(interval);
-    interval = window.setInterval(() => updateCaptcha(), 30 * 1000);
+    interval = window.setInterval(() => updateCaptchaWithRepeat(), 30 * 1000);
   }, [shouldUpdate]);
 
   return <Component {...props} token={token} updateToken={updateToken} />;
