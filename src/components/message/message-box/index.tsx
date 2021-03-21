@@ -21,7 +21,7 @@ const MessageBox: FC<Props> = ({message, account, style}: Props) => {
 
   return (
     <div style={style}>
-      <Container maxWidth="sm">
+      <Container maxWidth="md">
         {isMessageOutcoming && <MessageBoxOutcoming message={message} user={user} />}
         {!isMessageOutcoming && <MessageBoxIncoming message={message} user={user} />}
       </Container>

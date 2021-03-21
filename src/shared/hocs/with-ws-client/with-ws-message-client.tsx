@@ -7,15 +7,15 @@ import {Chat} from '../../../models/chat.model';
 import {Message} from '../../../models/message.model';
 
 const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElement => {
-  const [chats, setChats] = useState<Chat[]>([]);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [chatEvent, setChatEvent] = useState<Chat>(null);
+  const [messageEvent, setMessageEvent] = useState<Message>(null);
 
   const handleChatEvent = (chat: Chat): void => {
-    setChats(prevState => [...prevState, chat]);
+    setChatEvent(chat);
   };
 
   const handleMessageEvent = (message: Message): void => {
-    setMessages(prevState => [...prevState, message]);
+    setMessageEvent(message);
   };
 
   const onMessage = (msg: any, topic: string): void => {
@@ -26,16 +26,12 @@ const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElem
     }
   };
 
-  const context = {chats, messages};
+  const context = {chatEvent, messageEvent};
 
   return (
     <WsMessagesContext.Provider value={context}>
       <Component {...props} />
-      <WsClient
-        url={MESSAGE_WS_URL}
-        topics={[CHAT_ROOT_TOPIC, CHAT_MESSAGE_TOPIC]}
-        onMessage={onMessage}
-      />
+      <WsClient url={MESSAGE_WS_URL} topics={[CHAT_ROOT_TOPIC, CHAT_MESSAGE_TOPIC]} onMessage={onMessage} />
     </WsMessagesContext.Provider>
   );
 };

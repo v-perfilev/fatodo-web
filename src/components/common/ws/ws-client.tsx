@@ -7,22 +7,14 @@ type Props = {
   url: string;
   topics: string[];
   onMessage: (msg: any, topic: string) => void;
-}
+};
 
 const WsClient: FC<Props> = ({url, topics, onMessage}: Props) => {
   const headers = {
-    [AUTHORIZATION_HEADER]: AUTHORIZATION_PREFIX + SecurityUtils.getAuthToken()
+    [AUTHORIZATION_HEADER]: AUTHORIZATION_PREFIX + SecurityUtils.getAuthToken(),
   };
 
-  return (
-    <SockJsClient
-      headers={headers}
-      url={url}
-      topics={topics}
-      onMessage={onMessage}
-      debug={false}
-    />
-  );
+  return <SockJsClient headers={headers} url={url} topics={topics} onMessage={onMessage} debug={false} />;
 };
 
 export default WsClient;

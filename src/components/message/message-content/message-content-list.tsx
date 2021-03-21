@@ -18,12 +18,12 @@ type Props = {
 
 const cellMeasurerCache = new CellMeasurerCache({
   defaultHeight: 100,
-  fixedWidth: true
+  fixedWidth: true,
 });
 
 const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   const classes = messageContentListStyles();
-  const {messages: messageEvents} = useWsMessagesContext();
+  const {messageEvent} = useWsMessagesContext();
   const {handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -47,11 +47,10 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   }, [chat]);
 
   useEffect(() => {
-    if (messageEvents.length > 0) {
-      const lastMessage = messageEvents[messageEvents.length - 1];
-      setMessages(prevState => [...prevState, lastMessage]);
+    if (messageEvent?.chatId === chat?.id) {
+      setMessages((prevState) => [...prevState, messageEvent]);
     }
-  }, [messageEvents]);
+  }, [messageEvent]);
 
   const rowRenderer = ({index, key, parent, style}: any): ReactElement => (
     <CellMeasurer cache={cellMeasurerCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
