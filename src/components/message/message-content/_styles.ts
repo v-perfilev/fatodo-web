@@ -8,8 +8,8 @@ export const messageContentStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    height: '100%'
-  }
+    height: '100%',
+  },
 }));
 
 export const messageContentPlaceholderStyles = makeStyles(() => ({
@@ -17,8 +17,8 @@ export const messageContentPlaceholderStyles = makeStyles(() => ({
     display: 'flex',
     flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 }));
 
 export const messageContentLoaderStyles = makeStyles(() => ({
@@ -26,8 +26,8 @@ export const messageContentLoaderStyles = makeStyles(() => ({
     display: 'flex',
     flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 }));
 
 export const messageContentHeaderStyles = makeStyles((theme: Theme) => ({
@@ -41,32 +41,32 @@ export const messageContentHeaderStyles = makeStyles((theme: Theme) => ({
     paddingRight: theme.spacing(1),
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: theme.palette.grey['300']
+    borderBottomColor: theme.palette.grey['300'],
   },
   title: {
     flexGrow: 1,
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
 }));
 
 export const messageContentHeaderActionsStyles = makeStyles((theme: Theme) => ({
   popupMenu: {
     '& .MuiListItem-root': {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     '& .MuiSvgIcon-root': {
       color: theme.palette.primary.main,
       marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(0.5)
-    }
+      marginRight: theme.spacing(0.5),
+    },
   },
   red: {
     color: theme.palette.error.main,
     '& .MuiSvgIcon-root': {
-      color: theme.palette.error.main
-    }
-  }
+      color: theme.palette.error.main,
+    },
+  },
 }));
 
 export const messageContentListStyles = makeStyles(() => ({
@@ -74,9 +74,9 @@ export const messageContentListStyles = makeStyles(() => ({
     height: 'calc(100vh - ' + CHAT_CONTENT_HEADER_HEIGHT + 'px - ' + CHAT_CONTENT_FOOTER_HEIGHT + 'px)',
 
     '& .ReactVirtualized__List:focus': {
-      outline: 'none'
-    }
-  }
+      outline: 'none',
+    },
+  },
 }));
 
 export const messageContentFooterStyles = makeStyles((theme: Theme) => ({
@@ -90,20 +90,20 @@ export const messageContentFooterStyles = makeStyles((theme: Theme) => ({
     paddingRight: theme.spacing(1),
     borderTopWidth: 1,
     borderTopStyle: 'solid',
-    borderTopColor: theme.palette.grey['300']
-  }
+    borderTopColor: theme.palette.grey['300'],
+  },
 }));
 
 export const messageContentInputStyles = makeStyles(() => ({
   root: {
-    flexGrow: 1
-  }
+    flexGrow: 1,
+  },
 }));
 
 export const messageContentSendButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(1),
-    flexShrink: 0
-  }
+    flexShrink: 0,
+  },
 }));

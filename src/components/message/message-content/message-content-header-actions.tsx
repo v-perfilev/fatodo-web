@@ -13,7 +13,7 @@ type Props = {
   chat: Chat;
 };
 
-const MessageContentHeaderActions: FC<Props> = ({chat}: Props) => {
+const MessageContentHeaderActions: FC<Props> = ({}: Props) => {
   const classes = messageContentHeaderActionsStyles();
   const {t} = useTranslation();
   const ref = useRef();
@@ -52,13 +52,21 @@ const MessageContentHeaderActions: FC<Props> = ({chat}: Props) => {
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        <MenuItem onClick={cleanChat}><BroomIcon />{t('message:menu.cleanChat')}</MenuItem>
-        <MenuItem onClick={leaveChat}><LeaveIcon />{t('message:menu.leaveChat')}</MenuItem>
-        <MenuItem className={classes.red} onClick={deleteChat}><DeleteIcon />{t('message:menu.deleteChat')}</MenuItem>
+        <MenuItem onClick={cleanChat}>
+          <BroomIcon />
+          {t('message:menu.cleanChat')}
+        </MenuItem>
+        <MenuItem onClick={leaveChat}>
+          <LeaveIcon />
+          {t('message:menu.leaveChat')}
+        </MenuItem>
+        <MenuItem className={classes.red} onClick={deleteChat}>
+          <DeleteIcon />
+          {t('message:menu.deleteChat')}
+        </MenuItem>
       </PopupMenu>
     </>
   );
-
 };
 
 export default MessageContentHeaderActions;

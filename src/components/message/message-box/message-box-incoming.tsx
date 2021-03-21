@@ -7,9 +7,9 @@ import {UrlPic} from '../../common/images';
 import {DateFormatters} from '../../../shared/utils/date.utils';
 
 type Props = {
-  message: Message,
-  user: User
-}
+  message: Message;
+  user: User;
+};
 
 const MessageBoxIncoming: FC<Props> = ({message, user}: Props) => {
   const classes = messageBoxIncomingStyles();
@@ -21,16 +21,10 @@ const MessageBoxIncoming: FC<Props> = ({message, user}: Props) => {
       <UrlPic className={user.imageFilename} alt={user.username} url={user.imageFilename} size="lg" border={1} />
       <Box className={classes.message}>
         <Box className={classes.header}>
-          <Box className={classes.name}>
-            {user.username}
-          </Box>
-          <Box className={classes.date}>
-            {date}
-          </Box>
+          <Box className={classes.name}>{user.username}</Box>
+          <Box className={classes.date}>{date}</Box>
         </Box>
-        <Box className={classes.body}>
-          {message.text}
-        </Box>
+        <Box className={classes.body}>{message.text}</Box>
       </Box>
     </Box>
   );

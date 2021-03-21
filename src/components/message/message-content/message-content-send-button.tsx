@@ -5,8 +5,8 @@ import {messageContentSendButtonStyles} from './_styles';
 import {SendMessageIcon} from '../../common/icons/send-message-icon';
 
 type Props = {
-  send: () => void
-}
+  send: () => void;
+};
 
 const MessageContentSendButton: FC<Props> = ({send}: Props) => {
   const classes = messageContentSendButtonStyles();
@@ -16,7 +16,6 @@ const MessageContentSendButton: FC<Props> = ({send}: Props) => {
       <SendMessageIcon />
     </Fab>
   );
-
 };
 
 export default MessageContentSendButton;

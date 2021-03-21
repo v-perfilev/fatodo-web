@@ -31,17 +31,18 @@ const MessageContentInput: FC<Props> = ({send, setMessage}: Props) => {
   };
 
   return (
-    <ClearableTextInput className={classes.root}
-                        placeholder={t('message:content.inputPlaceholder')}
-                        fullWidth
-                        variant="outlined"
-                        multiline
-                        rows={3}
-                        inputRef={ref}
-                        onKeyPress={handleKeyPress}
-                        onChange={handleOnChange} />
+    <ClearableTextInput
+      className={classes.root}
+      placeholder={t('message:content.inputPlaceholder')}
+      fullWidth
+      variant="outlined"
+      multiline
+      rows={3}
+      inputRef={ref}
+      onKeyPress={handleKeyPress}
+      onChange={handleOnChange}
+    />
   );
-
 };
 
 export default MessageContentInput;

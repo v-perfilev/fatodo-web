@@ -40,9 +40,7 @@ const ContactRelations: FC = () => {
 
   const combineRelationsWithUsers = (): void => {
     const userMap = new Map(users.map((user) => [user.id, user]));
-    const userRelations = relations
-      .map((r) => ({...r, user: userMap.get(r.secondUserId)}))
-      .filter((r) => r.user);
+    const userRelations = relations.map((r) => ({...r, user: userMap.get(r.secondUserId)})).filter((r) => r.user);
     setUserRelations(userRelations);
     setLoading(false);
   };
@@ -59,9 +57,11 @@ const ContactRelations: FC = () => {
     combineRelationsWithUsers();
   }, [users]);
 
-  return loading
-    ? <CircularSpinner /> :
-    <ContactRelationsContainer relations={userRelations} loadRelations={loadRelations} />;
+  return loading ? (
+    <CircularSpinner />
+  ) : (
+    <ContactRelationsContainer relations={userRelations} loadRelations={loadRelations} />
+  );
 };
 
 export default ContactRelations;

@@ -12,7 +12,7 @@ export interface CreateChatValues {
 export const defaultCreateChatFormValues: Readonly<CreateChatValues> = {
   usernames: [],
   users: [],
-  user: ''
+  user: '',
 };
 
 export class CreateChatFormUtils {
@@ -21,7 +21,7 @@ export class CreateChatFormUtils {
   public static validationSchema = (account: UserAccount): ObjectSchema =>
     Yup.object().shape({
       users: Yup.array().required(),
-      user: userValidator(account.username).check()
+      user: userValidator(account.username).check(),
     });
 
   public static mapValuesToDTO = (values: CreateChatValues): string[] => values.users.map((user) => user.id);

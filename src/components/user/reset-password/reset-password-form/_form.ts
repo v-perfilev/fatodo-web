@@ -10,7 +10,7 @@ export interface ResetPasswordFormValues {
 
 const defaultResetPasswordValues: Readonly<ResetPasswordFormValues> = {
   password: '',
-  repeatPassword: ''
+  repeatPassword: '',
 };
 
 export class ResetPasswordFormUtils {
@@ -18,12 +18,12 @@ export class ResetPasswordFormUtils {
 
   public static validationSchema = Yup.object().shape({
     password: passwordValidator,
-    repeatPassword: passwordRepeatValidator
+    repeatPassword: passwordRepeatValidator,
   });
 
   public static mapValuesToDTO = (values: ResetPasswordFormValues, code: string, token: string): ResetPasswordDTO => ({
     code: code,
     password: values.password,
-    token: token
+    token: token,
   });
 }

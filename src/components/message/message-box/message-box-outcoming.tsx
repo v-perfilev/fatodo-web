@@ -6,9 +6,9 @@ import {User} from '../../../models/user.model';
 import {DateFormatters} from '../../../shared/utils/date.utils';
 
 type Props = {
-  message: Message,
-  user: User
-}
+  message: Message;
+  user: User;
+};
 
 const MessageBoxOutcoming: FC<Props> = ({message, user}: Props) => {
   const classes = messageBoxOutcomingStyles();
@@ -19,16 +19,10 @@ const MessageBoxOutcoming: FC<Props> = ({message, user}: Props) => {
     <Box className={classes.root}>
       <Box className={classes.message}>
         <Box className={classes.header}>
-          <Box className={classes.name}>
-            {user.username}
-          </Box>
-          <Box className={classes.date}>
-            {date}
-          </Box>
+          <Box className={classes.name}>{user.username}</Box>
+          <Box className={classes.date}>{date}</Box>
         </Box>
-        <Box className={classes.body}>
-          {message.text}
-        </Box>
+        <Box className={classes.body}>{message.text}</Box>
       </Box>
     </Box>
   );

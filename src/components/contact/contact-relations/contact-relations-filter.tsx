@@ -15,7 +15,7 @@ const ContactRelationsFilter: FC<Props> = ({relations, setRelationsToShow}: Prop
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const filter = event.target.value;
-    const relationsToShow = relations.filter(r => {
+    const relationsToShow = relations.filter((r) => {
       const str = r.user.username + r.user.firstname + r.user.lastname;
       return str.includes(filter);
     });

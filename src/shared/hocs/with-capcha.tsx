@@ -21,7 +21,6 @@ const withCaptcha = (Component: ComponentType<CaptchaProps>): FC => (props): Rea
   const updateToken = (): void => setShouldUpdate((prevState) => !prevState);
 
   const handleToken = (token: string): void => {
-    console.log('updated');
     if (isMounted) {
       setToken(token);
     }

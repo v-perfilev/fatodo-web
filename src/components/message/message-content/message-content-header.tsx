@@ -20,13 +20,10 @@ const MessageContentHeader: FC<Props> = ({chat, account}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <Box className={classes.title}>
-        {title}
-      </Box>
+      <Box className={classes.title}>{title}</Box>
       <MessageContentHeaderActions chat={chat} />
     </Box>
   );
-
 };
 
 export default MessageContentHeader;

@@ -40,9 +40,7 @@ const ContactIncoming: FC = () => {
 
   const combineRequestsWithUsers = (): void => {
     const userMap = new Map(users.map((user) => [user.id, user]));
-    const userRequests = requests
-      .map((r) => ({...r, user: userMap.get(r.requesterId)}))
-      .filter((r) => r.user);
+    const userRequests = requests.map((r) => ({...r, user: userMap.get(r.requesterId)})).filter((r) => r.user);
     setUserRequests(userRequests);
     setLoading(false);
   };
@@ -59,9 +57,7 @@ const ContactIncoming: FC = () => {
     combineRequestsWithUsers();
   }, [users]);
 
-  return loading
-    ? <CircularSpinner />
-    : <ContactIncomingList requests={userRequests} loadRequests={loadRequests} />;
+  return loading ? <CircularSpinner /> : <ContactIncomingList requests={userRequests} loadRequests={loadRequests} />;
 };
 
 export default ContactIncoming;

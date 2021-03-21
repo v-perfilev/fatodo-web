@@ -32,7 +32,7 @@ export const PasswordInput: FC<Props> = ({name, label, ...props}: Props) => {
               {showPassword ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
             </IconButton>
           </InputAdornment>
-        )
+        ),
       }}
       {...props}
     />

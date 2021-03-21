@@ -1,16 +1,15 @@
 import {Fab} from '@material-ui/core';
 import * as React from 'react';
-import {useState} from 'react';
+import {FC, useState} from 'react';
 import {messageControlChatButtonStyles} from './_styles';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import CreateChatDialog from '../create-chat-dialog';
 
-
-const MessageControlChatButton = () => {
+const MessageControlChatButton: FC = () => {
   const classes = messageControlChatButtonStyles();
   const [showCreateChatDialog, setShowCreateChatDialog] = useState<boolean>(false);
 
-  const showDialog = () => {
+  const showDialog = (): void => {
     setShowCreateChatDialog(true);
   };
 
@@ -22,7 +21,6 @@ const MessageControlChatButton = () => {
       <CreateChatDialog show={showCreateChatDialog} setShow={setShowCreateChatDialog} />
     </>
   );
-
 };
 
 export default MessageControlChatButton;

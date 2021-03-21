@@ -13,7 +13,7 @@ export interface ContactRequestFormValues {
 export const defaultContactRequestFormValues: Readonly<ContactRequestFormValues> = {
   user: '',
   userId: '',
-  message: ''
+  message: '',
 };
 
 export class ContactRequestFormUtils {
@@ -22,11 +22,11 @@ export class ContactRequestFormUtils {
   public static validationSchema = (account: UserAccount): ObjectSchema =>
     Yup.object().shape({
       user: userValidator(account.username, account.email).check(),
-      userId: Yup.string().required()
+      userId: Yup.string().required(),
     });
 
   public static mapValuesToDTO = (values: ContactRequestFormValues): ContactRequestDTO => ({
     recipientId: values.userId,
-    message: values.message
+    message: values.message,
   });
 }

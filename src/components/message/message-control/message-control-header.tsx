@@ -20,14 +20,10 @@ const MessageControlHeader: FC<Props> = ({setFilter}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <ClearableTextInput
-        placeholder={t('message:control.filter')}
-        onChange={handleOnChange}
-        fullWidth />
+      <ClearableTextInput placeholder={t('message:control.filter')} onChange={handleOnChange} fullWidth />
       <MessageControlChatButton />
     </Box>
   );
-
 };
 
 export default MessageControlHeader;

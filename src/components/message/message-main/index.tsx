@@ -75,9 +75,11 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
 
   const smallView = (
     <Box className={classes.smallViewRoot}>
-      {chat
-        ? <MessageContent chat={chat} account={authState.account} />
-        : <MessageControl chat={chat} setChat={setChat} account={authState.account} />}
+      {chat ? (
+        <MessageContent chat={chat} account={authState.account} />
+      ) : (
+        <MessageControl chat={chat} setChat={setChat} account={authState.account} />
+      )}
     </Box>
   );
 

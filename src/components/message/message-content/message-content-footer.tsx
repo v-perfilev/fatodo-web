@@ -9,7 +9,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 
 type Props = {
   chatId: string;
-}
+};
 
 const MessageContentFooter: FC<Props> = ({chatId}: Props) => {
   const classes = messageContentFooterStyles();
@@ -18,10 +18,9 @@ const MessageContentFooter: FC<Props> = ({chatId}: Props) => {
 
   const send = (): void => {
     const dto = {text: message} as MessageDTO;
-    MessageService.sendIndirectMessage(chatId, dto)
-      .catch((response) => {
-        handleResponse(response);
-      });
+    MessageService.sendIndirectMessage(chatId, dto).catch((response) => {
+      handleResponse(response);
+    });
   };
 
   return (
@@ -30,7 +29,6 @@ const MessageContentFooter: FC<Props> = ({chatId}: Props) => {
       <MessageContentSendButton send={send} />
     </Box>
   );
-
 };
 
 export default MessageContentFooter;

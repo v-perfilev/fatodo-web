@@ -115,5 +115,4 @@ export default class MessageService {
     const url = MessageService.baseUrl + '/status/read/' + messageId;
     return axios.get(url);
   };
-
 }

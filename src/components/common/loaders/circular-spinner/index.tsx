@@ -6,7 +6,7 @@ import csx from 'classnames';
 import {SizeType} from '../types';
 
 type Props = HTMLAttributes<any> & {
-  size?: SizeType
+  size?: SizeType;
 };
 
 export const CircularSpinner: FC<Props> = ({size, className}: Props) => {

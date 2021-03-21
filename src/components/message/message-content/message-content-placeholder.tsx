@@ -5,9 +5,7 @@ import {messageContentPlaceholderStyles} from './_styles';
 const MessageContentPlaceholder: FC = () => {
   const classes = messageContentPlaceholderStyles();
 
-  return (
-    <Box className={classes.root} />
-  );
+  return <Box className={classes.root} />;
 };
 
 export default MessageContentPlaceholder;

@@ -17,10 +17,7 @@ import {User} from '../../../../models/user.model';
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
 
-type Props = ConnectedProps<typeof connector> &
-  FormikProps<CreateChatValues> &
-  FormDialogComponentProps &
-  SnackState;
+type Props = ConnectedProps<typeof connector> & FormikProps<CreateChatValues> & FormDialogComponentProps & SnackState;
 
 const CreateChatForm: FC<Props> = (props: Props) => {
   const {setIsSubmitting, setIsValid, setSubmitForm, setResetForm} = props;
@@ -74,9 +71,12 @@ const CreateChatForm: FC<Props> = (props: Props) => {
 
   return (
     <Form>
-      <TagsInput name="usernames" label={t('message:createChat.fields.users.label')}
-                 inputName="user"
-                 preventEnter={!!errors.user} />
+      <TagsInput
+        name="usernames"
+        label={t('message:createChat.fields.users.label')}
+        inputName="user"
+        preventEnter={!!errors.user}
+      />
     </Form>
   );
 };
@@ -86,17 +86,13 @@ const formik = withFormik<Props, CreateChatValues>({
   validationSchema: ({authState: {account}}: Props) => CreateChatFormUtils.validationSchema(account),
   validateOnMount: true,
 
-  handleSubmit: (
-    values: CreateChatValues,
-    {props, setSubmitting}: FormikBag<Props, CreateChatValues>
-  ) => {
+  handleSubmit: (values: CreateChatValues, {props, setSubmitting}: FormikBag<Props, CreateChatValues>) => {
     const {handleCode, handleResponse} = props;
 
     const userIds = CreateChatFormUtils.mapValuesToDTO(values);
 
-    const createChat = userIds.length === 1
-      ? MessageService.createDirectChat(userIds[0])
-      : MessageService.createIndirectChat(userIds);
+    const createChat =
+      userIds.length === 1 ? MessageService.createDirectChat(userIds[0]) : MessageService.createIndirectChat(userIds);
 
     createChat
       .then(() => {
@@ -107,7 +103,7 @@ const formik = withFormik<Props, CreateChatValues>({
         handleResponse(response);
         setSubmitting(false);
       });
-  }
+  },
 });
 
 export default compose<FormDialogComponentProps>(withSnackContext, connector, formik)(CreateChatForm);

@@ -1,9 +1,6 @@
-import {Chat} from '../../models/chat.model';
-import {User} from '../../models/user.model';
 import {MutableRefObject} from 'react';
 
 export class InputUtils {
-
   public static clear = (ref: MutableRefObject<HTMLInputElement>): void => {
     let nativeInputValueSetter;
     try {
@@ -16,5 +13,4 @@ export class InputUtils {
     const simulatedEvent = new Event('input', {bubbles: true});
     ref.current.dispatchEvent(simulatedEvent);
   };
-
 }

@@ -22,7 +22,7 @@ const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Pr
   const title = ChatUtils.getTitle(chat, users, account);
   const date = DateFormatters.formatTimeAndDateWithYear(new Date(chat.lastMessage.createdAt));
 
-  const classNames = csx(classes.root, {'selected': isSelected});
+  const classNames = csx(classes.root, {selected: isSelected});
 
   useEffect(() => {
     addIds(chat.members);
@@ -33,20 +33,13 @@ const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Pr
       <UrlPic className={classes.image} alt={null} url={null} size="lg" border={1} />
       <Box className={classes.chatContainer}>
         <Box className={classes.topContainer}>
-          <Box className={classes.title}>
-            {title}
-          </Box>
-          <Box className={classes.date}>
-            {date}
-          </Box>
+          <Box className={classes.title}>{title}</Box>
+          <Box className={classes.date}>{date}</Box>
         </Box>
-        <Box className={classes.text}>
-          {chat.lastMessage.text}
-        </Box>
+        <Box className={classes.text}>{chat.lastMessage.text}</Box>
       </Box>
     </Box>
   );
 };
 
 export default MessageControlChat;
-

@@ -9,18 +9,17 @@ type Props = {
   options?: string[];
   inputName?: string;
   preventEnter?: boolean;
-  required?: boolean
+  required?: boolean;
 };
 
 export const TagsInput: FC<Props> = ({
-                                       name,
-                                       label,
-                                       options = [],
-                                       inputName = 'tagsInput',
-                                       preventEnter = false,
-                                       required
-                                     }: Props) => {
-
+  name,
+  label,
+  options = [],
+  inputName = 'tagsInput',
+  preventEnter = false,
+  required,
+}: Props) => {
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>): void => {
     if (event.key === 'Enter' && preventEnter) {
       event.preventDefault();

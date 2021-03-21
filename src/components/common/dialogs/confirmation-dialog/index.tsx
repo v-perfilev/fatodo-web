@@ -6,7 +6,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  ThemeProvider
+  ThemeProvider,
 } from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {LoadingButton} from '../../controls';

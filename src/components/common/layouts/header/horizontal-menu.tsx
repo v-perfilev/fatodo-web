@@ -86,11 +86,7 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
     </>
   );
 
-  return (
-    <Box className={classes.root}>
-      {isAuthenticated ? authenticatedMenu : unauthenticatedMenu}
-    </Box>
-  );
+  return <Box className={classes.root}>{isAuthenticated ? authenticatedMenu : unauthenticatedMenu}</Box>;
 };
 
 export default compose(connector, withRouter)(HorizontalMenu);

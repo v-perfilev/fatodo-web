@@ -20,12 +20,12 @@ type Props = {
 const defaultInitialCrop = {
   unit: '%',
   width: 100,
-  aspect: 1
+  aspect: 1,
 };
 
 const compressionOptions = {
   maxWidthOrHeight: IMAGE_MAX_WIDTH,
-  maxSizeMB: IMAGE_MAX_SIZE
+  maxSizeMB: IMAGE_MAX_SIZE,
 };
 
 const minWidth = IMAGE_MIN_WIDTH;

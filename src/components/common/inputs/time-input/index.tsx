@@ -40,7 +40,7 @@ export const TimeInput: FC<Props> = ({name, label}: Props) => {
           <IconButton onClick={clear} size="small">
             <CloseIcon />
           </IconButton>
-        )
+        ),
       }}
     />
   );

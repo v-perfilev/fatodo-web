@@ -3,8 +3,8 @@ import {useContext} from 'react';
 import {User} from '../../../models/user.model';
 
 export interface UserListState {
-  users: User[],
-  addIds: (ids: string[]) => void
+  users: User[];
+  addIds: (ids: string[]) => void;
 }
 
 export const UserListContext = React.createContext<UserListState>(null);

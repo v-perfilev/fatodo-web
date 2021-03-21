@@ -3,8 +3,8 @@ import {FC} from 'react';
 import {Box, Theme, useMediaQuery} from '@material-ui/core';
 
 type Props = {
-  showOnBigDevices?: boolean,
-  showOnSmallDevices?: boolean,
+  showOnBigDevices?: boolean;
+  showOnSmallDevices?: boolean;
 };
 
 const AdditionalMenuSpacer: FC<Props> = ({showOnBigDevices, showOnSmallDevices}: Props) => {

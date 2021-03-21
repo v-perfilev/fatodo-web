@@ -3,11 +3,9 @@ import SockJsClient from 'react-stomp';
 import {AUTHORIZATION_HEADER, AUTHORIZATION_PREFIX, MESSAGE_API_URL} from '../../../constants';
 import {SecurityUtils} from '../../../shared/utils/security.utils';
 
-
 const WsMessageClient: FC = () => {
-
   const headers = {
-    [AUTHORIZATION_HEADER]: AUTHORIZATION_PREFIX + SecurityUtils.getAuthToken()
+    [AUTHORIZATION_HEADER]: AUTHORIZATION_PREFIX + SecurityUtils.getAuthToken(),
   };
 
   const onConnected = (): void => {

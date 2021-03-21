@@ -8,9 +8,9 @@ import {Container} from '@material-ui/core';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 type Props = HTMLAttributes<HTMLElement> & {
-  message: Message,
-  account: User,
-}
+  message: Message;
+  account: User;
+};
 
 const MessageBox: FC<Props> = ({message, account, style}: Props) => {
   const {users} = useUserListContext();

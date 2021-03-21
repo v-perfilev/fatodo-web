@@ -8,7 +8,7 @@ export const messageBoxIncomingStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'row',
     alignItems: 'start',
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(1),
   },
   message: {
     display: 'flex',
@@ -18,7 +18,7 @@ export const messageBoxIncomingStyles = makeStyles((theme: Theme) => ({
     borderStyle: 'solid',
     borderColor: theme.palette.grey['300'],
     borderRadius: 5,
-    backgroundColor: theme.palette.grey['100']
+    backgroundColor: theme.palette.grey['100'],
   },
   header: {
     display: 'flex',
@@ -26,20 +26,20 @@ export const messageBoxIncomingStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-evenly',
     flexGrow: 1,
     margin: theme.spacing(1),
-    marginBottom: theme.spacing(0.5)
+    marginBottom: theme.spacing(0.5),
   },
   name: {
     fontWeight: 'bold',
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   date: {
-    color: theme.palette.grey['500']
+    color: theme.palette.grey['500'],
   },
   body: {
     margin: theme.spacing(1),
-    marginTop: theme.spacing(0.5)
-  }
+    marginTop: theme.spacing(0.5),
+  },
 }));
 
 export const messageBoxOutcomingStyles = makeStyles((theme: Theme) => ({
@@ -51,7 +51,7 @@ export const messageBoxOutcomingStyles = makeStyles((theme: Theme) => ({
     alignItems: 'start',
     justifyContent: 'flex-end',
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(1),
   },
   message: {
     display: 'flex',
@@ -61,7 +61,7 @@ export const messageBoxOutcomingStyles = makeStyles((theme: Theme) => ({
     borderStyle: 'solid',
     borderColor: theme.palette.grey['300'],
     borderRadius: 5,
-    backgroundColor: theme.palette.grey['100']
+    backgroundColor: theme.palette.grey['100'],
   },
   header: {
     display: 'flex',
@@ -69,19 +69,18 @@ export const messageBoxOutcomingStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-evenly',
     flexGrow: 1,
     margin: theme.spacing(1),
-    marginBottom: theme.spacing(0.5)
+    marginBottom: theme.spacing(0.5),
   },
   name: {
     fontWeight: 'bold',
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   date: {
-    color: theme.palette.grey['500']
+    color: theme.palette.grey['500'],
   },
   body: {
     margin: theme.spacing(1),
-    marginTop: theme.spacing(0.5)
-  }
+    marginTop: theme.spacing(0.5),
+  },
 }));
-

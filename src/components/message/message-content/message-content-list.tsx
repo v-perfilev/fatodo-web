@@ -17,7 +17,7 @@ type Props = {
 
 const cellMeasurerCache = new CellMeasurerCache({
   defaultHeight: 100,
-  fixedWidth: true
+  fixedWidth: true,
 });
 
 const MessageContentList: FC<Props> = ({chat, account}: Props) => {
@@ -44,19 +44,13 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
     loadMessages();
   }, [chat]);
 
-  const rowRenderer = ({index, key, parent, style}): ReactElement => (
-    <CellMeasurer
-      cache={cellMeasurerCache}
-      columnIndex={0}
-      key={key}
-      parent={parent}
-      rowIndex={index}
-    >
+  const rowRenderer = ({index, key, parent, style}: any): ReactElement => (
+    <CellMeasurer cache={cellMeasurerCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
       <MessageBox message={messages[index]} account={account} key={key} style={style} />
     </CellMeasurer>
   );
 
-  const listRenderer = ({height, width}): ReactElement => (
+  const listRenderer = ({height, width}: any): ReactElement => (
     <List
       height={height}
       width={width}
@@ -73,12 +67,9 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
     <MessageContentLoader />
   ) : (
     <Box className={classes.root}>
-      <AutoSizer>
-        {listRenderer}
-      </AutoSizer>
+      <AutoSizer>{listRenderer}</AutoSizer>
     </Box>
   );
-
 };
 
 export default MessageContentList;

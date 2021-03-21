@@ -14,7 +14,7 @@ type Props = {
   chat: Chat;
   setChat: (chat: Chat) => void;
   account: User;
-}
+};
 
 const MessageControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   const classes = messageControlListStyles();
@@ -45,32 +45,28 @@ const MessageControlList: FC<Props> = ({chat, setChat, account}: Props) => {
     loadChats();
   }, []);
 
-  const rowRenderer = ({index, key, style}): ReactElement => (
-    <MessageControlChat chat={chats[index]} account={account}
-                        isSelected={chat?.id === chats[index].id} key={key} style={style}
-                        onClick={handleOnChatClick(index)} />
+  const rowRenderer = ({index, key, style}: any): ReactElement => (
+    <MessageControlChat
+      chat={chats[index]}
+      account={account}
+      isSelected={chat?.id === chats[index].id}
+      key={key}
+      style={style}
+      onClick={handleOnChatClick(index)}
+    />
   );
 
-  const listRenderer = ({height, width}): ReactElement => (
-    <List
-      height={height}
-      width={width}
-      rowCount={chats.length}
-      rowHeight={CHAT_HEIGHT}
-      rowRenderer={rowRenderer}
-    />
+  const listRenderer = ({height, width}: any): ReactElement => (
+    <List height={height} width={width} rowCount={chats.length} rowHeight={CHAT_HEIGHT} rowRenderer={rowRenderer} />
   );
 
   return loading ? (
     <MessageControlLoader />
   ) : (
     <Box className={classes.root}>
-      <AutoSizer>
-        {listRenderer}
-      </AutoSizer>
+      <AutoSizer>{listRenderer}</AutoSizer>
     </Box>
   );
-
 };
 
 export default MessageControlList;

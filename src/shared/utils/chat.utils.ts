@@ -2,7 +2,6 @@ import {Chat} from '../../models/chat.model';
 import {User} from '../../models/user.model';
 
 export class ChatUtils {
-
   public static getUsernames = (chat: Chat, users: User[]): string => {
     return users
       .filter((user) => chat.members.includes(user.id))
@@ -14,9 +13,8 @@ export class ChatUtils {
     return chat.title
       ? chat.title
       : users
-        .filter((user) => chat.members.includes(user.id) && user.id !== account.id)
-        .map((user) => user.username)
-        .join(', ');
+          .filter((user) => chat.members.includes(user.id) && user.id !== account.id)
+          .map((user) => user.username)
+          .join(', ');
   };
-
 }

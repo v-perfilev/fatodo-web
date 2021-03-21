@@ -11,7 +11,7 @@ type Props = {
   chat: Chat;
   setChat: (chat: Chat) => void;
   account: User;
-}
+};
 
 type ControlType = 'list' | 'filtered';
 
