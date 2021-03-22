@@ -1,12 +1,10 @@
 export const BASE_URL = process.env.BASE_URL;
 export const API_URL = process.env.API_URL;
-export const API_TIMEOUT = 60 * 1000;
-export const LOADER_TIMEOUT = 500;
-
 export const IMAGE_API_URL = API_URL + '/api/image/store/';
 export const MESSAGE_WS_URL = API_URL + '/ws/message/';
-export const CHAT_ROOT_TOPIC = '/user/chat/root';
-export const CHAT_MESSAGE_TOPIC = '/user/chat/message';
+
+export const API_TIMEOUT = 60 * 1000;
+export const LOADER_TIMEOUT = 500;
 
 export const AUTHORIZATION_HEADER = 'authorization';
 export const AUTHORIZATION_PREFIX = 'Bearer ';

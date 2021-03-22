@@ -4,6 +4,7 @@ export type MessageStatusType = 'READ';
 export type MessageReactionType = 'LIKE' | 'DISLIKE';
 
 export interface Message extends AbstractAuditing {
+  id: string;
   chatId: string;
   userId: string;
   text: string;

@@ -2,36 +2,57 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement, useState} from 'react';
 import {WsMessagesContext} from '../../contexts/ws-contexts/ws-messages-context';
 import WsClient from '../../../components/common/ws/ws-client';
-import {CHAT_MESSAGE_TOPIC, CHAT_ROOT_TOPIC, MESSAGE_WS_URL} from '../../../constants';
 import {Chat} from '../../../models/chat.model';
 import {Message} from '../../../models/message.model';
+import {WsMessageDestinations} from './types';
+import {MESSAGE_WS_URL} from '../../../constants';
 
 const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElement => {
-  const [chatEvent, setChatEvent] = useState<Chat>(null);
-  const [messageEvent, setMessageEvent] = useState<Message>(null);
+  const [chatNewEvent, setChatNewEvent] = useState<Chat>(null);
+  const [chatUpdateEvent, setChatUpdateEvent] = useState<Chat>(null);
+  const [chatDeleteEvent, setChatDeleteEvent] = useState<Chat>(null);
+  const [chatLastMessageEvent, setChatLastMessageEvent] = useState<Message>(null);
+  const [messageNewEvent, setMessageNewEvent] = useState<Message>(null);
+  const [messageUpdateEvent, setMessageUpdateEvent] = useState<Message>(null);
 
-  const handleChatEvent = (chat: Chat): void => {
-    setChatEvent(chat);
-  };
-
-  const handleMessageEvent = (message: Message): void => {
-    setMessageEvent(message);
-  };
+  const topics = [
+    WsMessageDestinations.CHAT_NEW,
+    WsMessageDestinations.CHAT_UPDATE,
+    WsMessageDestinations.CHAT_DELETE,
+    WsMessageDestinations.CHAT_LAST_MESSAGE,
+    WsMessageDestinations.MESSAGE_NEW,
+    WsMessageDestinations.MESSAGE_UPDATE
+  ];
 
   const onMessage = (msg: any, topic: string): void => {
-    if (topic === CHAT_ROOT_TOPIC) {
-      handleChatEvent(msg);
-    } else if (topic === CHAT_MESSAGE_TOPIC) {
-      handleMessageEvent(msg);
+    if (topic === WsMessageDestinations.CHAT_NEW) {
+      setChatNewEvent(msg);
+    } else if (topic === WsMessageDestinations.CHAT_UPDATE) {
+      setChatUpdateEvent(msg);
+    } else if (topic === WsMessageDestinations.CHAT_DELETE) {
+      setChatDeleteEvent(msg);
+    } else if (topic === WsMessageDestinations.CHAT_LAST_MESSAGE) {
+      setChatLastMessageEvent(msg);
+    } else if (topic === WsMessageDestinations.MESSAGE_NEW) {
+      setMessageNewEvent(msg);
+    } else if (topic === WsMessageDestinations.MESSAGE_UPDATE) {
+      setMessageUpdateEvent(msg);
     }
   };
 
-  const context = {chatEvent, messageEvent};
+  const context = {
+    chatNewEvent,
+    chatUpdateEvent,
+    chatDeleteEvent,
+    chatLastMessageEvent,
+    messageNewEvent,
+    messageUpdateEvent
+  };
 
   return (
     <WsMessagesContext.Provider value={context}>
       <Component {...props} />
-      <WsClient url={MESSAGE_WS_URL} topics={[CHAT_ROOT_TOPIC, CHAT_MESSAGE_TOPIC]} onMessage={onMessage} />
+      <WsClient url={MESSAGE_WS_URL} topics={topics} onMessage={onMessage} />
     </WsMessagesContext.Provider>
   );
 };

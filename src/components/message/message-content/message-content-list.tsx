@@ -10,6 +10,7 @@ import MessageService from '../../../services/message.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {Message} from '../../../models/message.model';
 import {useWsMessagesContext} from '../../../shared/contexts/ws-contexts/ws-messages-context';
+import {WsUtils} from '../../../shared/utils/ws.utils';
 
 type Props = {
   chat: Chat;
@@ -18,12 +19,12 @@ type Props = {
 
 const cellMeasurerCache = new CellMeasurerCache({
   defaultHeight: 100,
-  fixedWidth: true,
+  fixedWidth: true
 });
 
 const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   const classes = messageContentListStyles();
-  const {messageEvent} = useWsMessagesContext();
+  const {messageNewEvent, messageUpdateEvent} = useWsMessagesContext();
   const {handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -47,10 +48,12 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   }, [chat]);
 
   useEffect(() => {
-    if (messageEvent?.chatId === chat?.id) {
-      setMessages((prevState) => [...prevState, messageEvent]);
-    }
-  }, [messageEvent]);
+    WsUtils.handleMessageNewEvent(chat, messageNewEvent, setMessages);
+  }, [messageNewEvent]);
+
+  useEffect(() => {
+    WsUtils.handleMessageUpdateEvent(chat, messageUpdateEvent, setMessages);
+  }, [messageUpdateEvent]);
 
   const rowRenderer = ({index, key, parent, style}: any): ReactElement => (
     <CellMeasurer cache={cellMeasurerCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
