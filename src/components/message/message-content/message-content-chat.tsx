@@ -12,10 +12,10 @@ type Props = {
 };
 
 const MessageContentChat: FC<Props> = ({chat, account}: Props) => {
-  const {addIds} = useUserListContext();
+  const {handleUserIds} = useUserListContext();
 
   useEffect(() => {
-    addIds(chat.members);
+    handleUserIds(chat.members);
   }, [chat]);
 
   return (

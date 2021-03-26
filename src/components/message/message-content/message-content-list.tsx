@@ -10,7 +10,7 @@ import MessageService from '../../../services/message.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {Message} from '../../../models/message.model';
 import {useWsMessagesContext} from '../../../shared/contexts/ws-contexts/ws-messages-context';
-import {WsUtils} from '../../../shared/utils/ws.utils';
+import {MessageUtils} from '../message.utils';
 
 type Props = {
   chat: Chat;
@@ -48,11 +48,11 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   }, [chat]);
 
   useEffect(() => {
-    WsUtils.handleMessageNewEvent(chat, messageNewEvent, setMessages);
+    MessageUtils.handleMessageNewEvent(chat, messageNewEvent, setMessages);
   }, [messageNewEvent]);
 
   useEffect(() => {
-    WsUtils.handleMessageUpdateEvent(chat, messageUpdateEvent, setMessages);
+    MessageUtils.handleMessageUpdateEvent(chat, messageUpdateEvent, setMessages);
   }, [messageUpdateEvent]);
 
   const rowRenderer = ({index, key, parent, style}: any): ReactElement => (

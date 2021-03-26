@@ -24,7 +24,7 @@ const withUserList = (Component: ComponentType): FC => (props): ReactElement => 
       });
   };
 
-  const context = {users, addIds: setIds};
+  const context = {users, handleUserIds: setIds};
 
   useEffect(() => {
     const cachedIds = users.map((user) => user.id);

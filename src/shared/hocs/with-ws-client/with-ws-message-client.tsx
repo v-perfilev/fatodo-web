@@ -28,7 +28,7 @@ const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElem
   const [chatNewEvent, setChatNewEvent] = useState<Chat>(null);
   const [chatUpdateEvent, setChatUpdateEvent] = useState<Chat>(null);
   const [chatDeleteEvent, setChatDeleteEvent] = useState<Chat>(null);
-  const [chatLastMessageEvent, setChatLastMessageEvent] = useState<Message>(null);
+  const [chatLastMessageEvent, setChatLastMessageEvent] = useState<Chat>(null);
   const [messageNewEvent, setMessageNewEvent] = useState<Message>(null);
   const [messageUpdateEvent, setMessageUpdateEvent] = useState<Message>(null);
 

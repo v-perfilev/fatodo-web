@@ -9,6 +9,8 @@ import MessageControlLoader from './message-control-loader';
 import MessageService from '../../../services/message.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {User} from '../../../models/user.model';
+import {MessageUtils} from '../message.utils';
+import {useWsMessagesContext} from '../../../shared/contexts/ws-contexts/ws-messages-context';
 
 type Props = {
   chat: Chat;
@@ -18,6 +20,7 @@ type Props = {
 
 const MessageControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   const classes = messageControlListStyles();
+  const {chatNewEvent, chatUpdateEvent, chatDeleteEvent, chatLastMessageEvent} = useWsMessagesContext();
   const {handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
   const [chats, setChats] = useState<Chat[]>([]);
@@ -44,6 +47,22 @@ const MessageControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   useEffect(() => {
     loadChats();
   }, []);
+
+  useEffect(() => {
+    MessageUtils.handleChatNewEvent(chatNewEvent, setChats);
+  }, [chatNewEvent]);
+
+  useEffect(() => {
+    MessageUtils.handleChatUpdateEvent(chatUpdateEvent, setChats);
+  }, [chatUpdateEvent]);
+
+  useEffect(() => {
+    MessageUtils.handleChatDeleteEvent(chatDeleteEvent, setChats, chat, setChat);
+  }, [chatDeleteEvent]);
+
+  useEffect(() => {
+    MessageUtils.handleChatLastMessageEvent(chatLastMessageEvent, setChats);
+  }, [chatLastMessageEvent]);
 
   const rowRenderer = ({index, key, style}: any): ReactElement => (
     <MessageControlChat

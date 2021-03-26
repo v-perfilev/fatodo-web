@@ -17,15 +17,17 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Props) => {
   const classes = messageControlChatStyles();
-  const {users, addIds} = useUserListContext();
+  const {users, handleUserIds} = useUserListContext();
 
   const title = ChatUtils.getTitle(chat, users, account);
-  const date = DateFormatters.formatTimeAndDateWithYear(new Date(chat.lastMessage.createdAt));
+  const date = chat.lastMessage?.createdAt ? new Date(chat.lastMessage.createdAt) : null;
+  const formattedDate = date ? DateFormatters.formatTimeAndDateWithYear(date) : null;
+  const text = chat.lastMessage?.text;
 
   const classNames = csx(classes.root, {selected: isSelected});
 
   useEffect(() => {
-    addIds(chat.members);
+    handleUserIds(chat.members);
   }, []);
 
   return (
@@ -34,9 +36,9 @@ const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Pr
       <Box className={classes.chatContainer}>
         <Box className={classes.topContainer}>
           <Box className={classes.title}>{title}</Box>
-          <Box className={classes.date}>{date}</Box>
+          <Box className={classes.date}>{formattedDate}</Box>
         </Box>
-        <Box className={classes.text}>{chat.lastMessage.text}</Box>
+        <Box className={classes.text}>{text}</Box>
       </Box>
     </Box>
   );

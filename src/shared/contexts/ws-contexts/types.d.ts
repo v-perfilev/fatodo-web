@@ -5,7 +5,7 @@ export interface WsMessagesState {
   chatNewEvent: Chat;
   chatUpdateEvent: Chat;
   chatDeleteEvent: Chat;
-  chatLastMessageEvent: Message;
+  chatLastMessageEvent: Chat;
   messageNewEvent: Message;
   messageUpdateEvent: Message;
 }
