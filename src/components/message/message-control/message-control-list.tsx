@@ -20,7 +20,7 @@ type Props = {
 
 const MessageControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   const classes = messageControlListStyles();
-  const {chatNewEvent, chatUpdateEvent, chatDeleteEvent, chatLastMessageEvent} = useWsMessagesContext();
+  const {chatNewEvent, chatUpdateEvent, chatLastMessageEvent} = useWsMessagesContext();
   const {handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
   const [chats, setChats] = useState<Chat[]>([]);
@@ -53,12 +53,8 @@ const MessageControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   }, [chatNewEvent]);
 
   useEffect(() => {
-    MessageUtils.handleChatUpdateEvent(chatUpdateEvent, setChats);
+    MessageUtils.handleChatUpdateEvent(chatUpdateEvent, setChats, chat, setChat, account);
   }, [chatUpdateEvent]);
-
-  useEffect(() => {
-    MessageUtils.handleChatDeleteEvent(chatDeleteEvent, setChats, chat, setChat);
-  }, [chatDeleteEvent]);
 
   useEffect(() => {
     MessageUtils.handleChatLastMessageEvent(chatLastMessageEvent, setChats);

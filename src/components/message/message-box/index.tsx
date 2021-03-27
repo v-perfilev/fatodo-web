@@ -5,7 +5,7 @@ import MessageBoxIncoming from './message-box-incoming';
 import {compose} from 'recompose';
 import {User} from '../../../models/user.model';
 import {Container} from '@material-ui/core';
-import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import MessageBoxEvent from './message-box-event';
 
 type Props = HTMLAttributes<HTMLElement> & {
   message: Message;
@@ -13,17 +13,17 @@ type Props = HTMLAttributes<HTMLElement> & {
 };
 
 const MessageBox: FC<Props> = ({message, account, style}: Props) => {
-  const {users} = useUserListContext();
 
-  const user = users.find((user) => user.id === message.userId);
-
-  const isMessageOutcoming = message.userId === account.id;
+  const isMessageOutcoming = !message.isEvent && message.userId === account.id;
+  const isMessageIncoming = !message.isEvent && message.userId !== account.id;
+  const isMessageEvent = message.isEvent;
 
   return (
     <div style={style}>
       <Container maxWidth="md">
-        {isMessageOutcoming && <MessageBoxOutcoming message={message} user={user} />}
-        {!isMessageOutcoming && <MessageBoxIncoming message={message} user={user} />}
+        {isMessageOutcoming && <MessageBoxOutcoming message={message} />}
+        {isMessageIncoming && <MessageBoxIncoming message={message} />}
+        {isMessageEvent && <MessageBoxEvent message={message} />}
       </Container>
     </div>
   );

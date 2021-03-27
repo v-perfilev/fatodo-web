@@ -9,7 +9,6 @@ import {MESSAGE_WS_URL} from '../../../constants';
 enum WsMessageDestinations {
   CHAT_NEW = '/user/chat/new',
   CHAT_UPDATE = '/user/chat/update',
-  CHAT_DELETE = '/user/chat/delete',
   CHAT_LAST_MESSAGE = '/user/chat/last-message',
   MESSAGE_NEW = '/user/message/new',
   MESSAGE_UPDATE = '/user/message/update',
@@ -18,7 +17,6 @@ enum WsMessageDestinations {
 const wsMessageTopics = [
   WsMessageDestinations.CHAT_NEW,
   WsMessageDestinations.CHAT_UPDATE,
-  WsMessageDestinations.CHAT_DELETE,
   WsMessageDestinations.CHAT_LAST_MESSAGE,
   WsMessageDestinations.MESSAGE_NEW,
   WsMessageDestinations.MESSAGE_UPDATE
@@ -27,7 +25,6 @@ const wsMessageTopics = [
 const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElement => {
   const [chatNewEvent, setChatNewEvent] = useState<Chat>(null);
   const [chatUpdateEvent, setChatUpdateEvent] = useState<Chat>(null);
-  const [chatDeleteEvent, setChatDeleteEvent] = useState<Chat>(null);
   const [chatLastMessageEvent, setChatLastMessageEvent] = useState<Chat>(null);
   const [messageNewEvent, setMessageNewEvent] = useState<Message>(null);
   const [messageUpdateEvent, setMessageUpdateEvent] = useState<Message>(null);
@@ -37,8 +34,6 @@ const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElem
       setChatNewEvent(msg);
     } else if (topic === WsMessageDestinations.CHAT_UPDATE) {
       setChatUpdateEvent(msg);
-    } else if (topic === WsMessageDestinations.CHAT_DELETE) {
-      setChatDeleteEvent(msg);
     } else if (topic === WsMessageDestinations.CHAT_LAST_MESSAGE) {
       setChatLastMessageEvent(msg);
     } else if (topic === WsMessageDestinations.MESSAGE_NEW) {
@@ -51,7 +46,6 @@ const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElem
   const context = {
     chatNewEvent,
     chatUpdateEvent,
-    chatDeleteEvent,
     chatLastMessageEvent,
     messageNewEvent,
     messageUpdateEvent

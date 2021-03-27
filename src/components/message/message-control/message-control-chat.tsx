@@ -8,6 +8,7 @@ import csx from 'classnames';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {User} from '../../../models/user.model';
 import {ChatUtils} from '../../../shared/utils/chat.utils';
+import MessageControlLastMessage from './message-control-last-message';
 
 type Props = HTMLAttributes<HTMLElement> & {
   chat: Chat;
@@ -22,7 +23,6 @@ const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Pr
   const title = ChatUtils.getTitle(chat, users, account);
   const date = chat.lastMessage?.createdAt ? new Date(chat.lastMessage.createdAt) : null;
   const formattedDate = date ? DateFormatters.formatTimeAndDateWithYear(date) : null;
-  const text = chat.lastMessage?.text;
 
   const classNames = csx(classes.root, {selected: isSelected});
 
@@ -38,7 +38,9 @@ const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Pr
           <Box className={classes.title}>{title}</Box>
           <Box className={classes.date}>{formattedDate}</Box>
         </Box>
-        <Box className={classes.text}>{text}</Box>
+        <Box className={classes.text}>
+          <MessageControlLastMessage message={chat.lastMessage} />
+        </Box>
       </Box>
     </Box>
   );

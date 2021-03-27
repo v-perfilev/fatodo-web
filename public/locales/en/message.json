@@ -22,6 +22,14 @@
     "send": "Create",
     "cancel": "Cancel"
   },
+  "event": {
+    "CREATE_DIRECT_CHAT": "{{username}} created direct chat with {{usernames}}",
+    "CREATE_CHAT": "{{username}} created chat with {{usernames}}",
+    "RENAME_CHAT": "{{username}} renamed the chat to \"{{title}}\"",
+    "LEAVE_CHAT": "{{username}} left the chat",
+    "ADD_MEMBERS": "{{username}} added new members to the chat: {{usernames}}",
+    "DELETE_MEMBERS": "{{username}} deleted members from the chat: {{usernames}}"
+  },
   "tooltips": {
     "back": "Back"
   }

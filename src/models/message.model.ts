@@ -29,3 +29,19 @@ export interface MessageReaction {
   type: MessageReactionType;
   timestamp: Date;
 }
+
+export interface EventMessageParams {
+  type: EventMessageType;
+  userId?: string;
+  text?: string;
+  ids?: string[];
+}
+
+export enum EventMessageType {
+  CREATE_DIRECT_CHAT = 'CREATE_DIRECT_CHAT',
+  CREATE_CHAT = 'CREATE_CHAT',
+  RENAME_CHAT = 'RENAME_CHAT',
+  LEAVE_CHAT = 'LEAVE_CHAT',
+  ADD_MEMBERS = 'ADD_MEMBERS',
+  DELETE_MEMBERS = 'DELETE_MEMBERS',
+}
