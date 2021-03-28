@@ -2,16 +2,15 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 import {CHAT_CONTROL_HEADER_HEIGHT} from '../../_constants';
 
-
 export const messageControlListStyles = makeStyles(() => ({
   root: {
     height: 'calc(100vh - ' + CHAT_CONTROL_HEADER_HEIGHT + 'px)',
     overflowY: 'auto',
 
     '& .ReactVirtualized__List:focus': {
-      outline: 'none'
-    }
-  }
+      outline: 'none',
+    },
+  },
 }));
 
 export const messageControlChatStyles = makeStyles((theme: Theme) => ({
@@ -27,11 +26,11 @@ export const messageControlChatStyles = makeStyles((theme: Theme) => ({
     cursor: 'pointer',
 
     '&:hover, &.selected': {
-      backgroundColor: theme.palette.grey['100']
-    }
+      backgroundColor: theme.palette.grey['100'],
+    },
   },
   image: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   chatContainer: {
     height: '100%',
@@ -39,30 +38,30 @@ export const messageControlChatStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     flexGrow: 1,
     justifyContent: 'space-evenly',
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   topContainer: {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   title: {
     flexGrow: 1,
     overflow: 'hidden',
     marginLeft: theme.spacing(1),
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   date: {
     color: theme.palette.grey['500'],
     marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   text: {
     display: 'flex',
     alignItems: 'center',
     overflow: 'hidden',
     marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  }
+    marginRight: theme.spacing(1),
+  },
 }));

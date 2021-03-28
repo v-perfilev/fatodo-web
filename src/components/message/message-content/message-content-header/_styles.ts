@@ -13,30 +13,30 @@ export const messageContentHeaderStyles = makeStyles((theme: Theme) => ({
     paddingRight: theme.spacing(1),
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: theme.palette.grey['300']
+    borderBottomColor: theme.palette.grey['300'],
   },
   title: {
     flexGrow: 1,
-    fontWeight: 'bold'
-  }
+    fontWeight: 'bold',
+  },
 }));
 
 export const messageContentHeaderActionsStyles = makeStyles((theme: Theme) => ({
   popupMenu: {
     '& .MuiListItem-root': {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     '& .MuiSvgIcon-root': {
       color: theme.palette.primary.main,
       marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(0.5)
-    }
+      marginRight: theme.spacing(0.5),
+    },
   },
   red: {
     color: theme.palette.error.main,
     '& .MuiSvgIcon-root': {
-      color: theme.palette.error.main
-    }
-  }
+      color: theme.palette.error.main,
+    },
+  },
 }));

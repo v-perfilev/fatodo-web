@@ -30,6 +30,18 @@ export interface MessageReaction {
   timestamp: Date;
 }
 
+export interface MessageStatuses {
+  chatId: string;
+  messageId: string;
+  statuses: MessageStatus[];
+}
+
+export interface MessageReactions {
+  chatId: string;
+  messageId: string;
+  reactions: MessageReaction[];
+}
+
 export interface EventMessageParams {
   type: EventMessageType;
   text?: string;

@@ -1,8 +1,7 @@
-import React, {FC, HTMLAttributes, memo, useEffect} from 'react';
+import React, {FC, HTMLAttributes, useEffect} from 'react';
 import {Message} from '../../../../models/message.model';
 import MessageContentBoxOutcoming from './message-content-box-outcoming';
 import MessageContentBoxIncoming from './message-content-box-incoming';
-import {compose} from 'recompose';
 import {User} from '../../../../models/user.model';
 import {Container} from '@material-ui/core';
 import MessageContentBoxEvent from './message-content-box-event';
@@ -11,9 +10,10 @@ import {useUserListContext} from '../../../../shared/contexts/list-contexts/user
 type Props = HTMLAttributes<HTMLElement> & {
   message: Message;
   account: User;
+  isVisible: boolean;
 };
 
-const MessageContentBox: FC<Props> = ({message, account, style}: Props) => {
+const MessageContentBox: FC<Props> = ({message, account, isVisible, style}: Props) => {
   const {handleUserIds} = useUserListContext();
 
   const isMessageOutcoming = !message.isEvent && message.userId === account.id;
@@ -28,11 +28,11 @@ const MessageContentBox: FC<Props> = ({message, account, style}: Props) => {
     <div style={style}>
       <Container maxWidth="md">
         {isMessageOutcoming && <MessageContentBoxOutcoming message={message} />}
-        {isMessageIncoming && <MessageContentBoxIncoming message={message} />}
+        {isMessageIncoming && <MessageContentBoxIncoming message={message} account={account} isVisible={isVisible} />}
         {isMessageEvent && <MessageContentBoxEvent message={message} />}
       </Container>
     </div>
   );
 };
 
-export default compose(memo)(MessageContentBox);
+export default MessageContentBox;

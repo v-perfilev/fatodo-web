@@ -3,7 +3,7 @@ import {ComponentType, FC, ReactElement, useState} from 'react';
 import {WsMessagesContext} from '../../contexts/ws-contexts/ws-messages-context';
 import WsClient from '../../../components/common/ws/ws-client';
 import {Chat} from '../../../models/chat.model';
-import {Message} from '../../../models/message.model';
+import {Message, MessageReactions, MessageStatuses} from '../../../models/message.model';
 import {MESSAGE_WS_URL} from '../../../constants';
 
 enum WsMessageDestinations {
@@ -12,6 +12,8 @@ enum WsMessageDestinations {
   CHAT_LAST_MESSAGE = '/user/chat/last-message',
   MESSAGE_NEW = '/user/message/new',
   MESSAGE_UPDATE = '/user/message/update',
+  MESSAGE_STATUS = '/user/message/status',
+  MESSAGE_REACTION = '/user/message/reaction',
 }
 
 const wsMessageTopics = [
@@ -19,7 +21,9 @@ const wsMessageTopics = [
   WsMessageDestinations.CHAT_UPDATE,
   WsMessageDestinations.CHAT_LAST_MESSAGE,
   WsMessageDestinations.MESSAGE_NEW,
-  WsMessageDestinations.MESSAGE_UPDATE
+  WsMessageDestinations.MESSAGE_UPDATE,
+  WsMessageDestinations.MESSAGE_STATUS,
+  WsMessageDestinations.MESSAGE_REACTION,
 ];
 
 const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElement => {
@@ -28,6 +32,8 @@ const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElem
   const [chatLastMessageEvent, setChatLastMessageEvent] = useState<Chat>(null);
   const [messageNewEvent, setMessageNewEvent] = useState<Message>(null);
   const [messageUpdateEvent, setMessageUpdateEvent] = useState<Message>(null);
+  const [messageStatusesEvent, setMessageStatusesEvent] = useState<MessageStatuses>(null);
+  const [messageReactionsEvent, setMessageReactionsEvent] = useState<MessageReactions>(null);
 
   const onMessage = (msg: any, topic: string): void => {
     if (topic === WsMessageDestinations.CHAT_NEW) {
@@ -40,6 +46,10 @@ const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElem
       setMessageNewEvent(msg);
     } else if (topic === WsMessageDestinations.MESSAGE_UPDATE) {
       setMessageUpdateEvent(msg);
+    } else if (topic === WsMessageDestinations.MESSAGE_STATUS) {
+      setMessageStatusesEvent(msg);
+    } else if (topic === WsMessageDestinations.MESSAGE_REACTION) {
+      setMessageReactionsEvent(msg);
     }
   };
 
@@ -48,7 +58,9 @@ const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElem
     chatUpdateEvent,
     chatLastMessageEvent,
     messageNewEvent,
-    messageUpdateEvent
+    messageUpdateEvent,
+    messageStatusesEvent,
+    messageReactionsEvent,
   };
 
   return (

@@ -6,6 +6,6 @@ export const messageControlStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    height: '100%'
-  }
+    height: '100%',
+  },
 }));

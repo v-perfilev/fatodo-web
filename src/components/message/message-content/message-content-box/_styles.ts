@@ -8,17 +8,17 @@ export const messageContentBoxEventStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(1),
   },
   date: {
     fontSize: '0.7rem',
-    color: theme.palette.grey['500']
+    color: theme.palette.grey['500'],
   },
   text: {
     fontSize: '0.8rem',
     fontWeight: 'bold',
-    color: theme.palette.grey['500']
-  }
+    color: theme.palette.grey['500'],
+  },
 }));
 
 export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
@@ -28,7 +28,7 @@ export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'row',
     alignItems: 'start',
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(1),
   },
   message: {
     display: 'flex',
@@ -38,7 +38,11 @@ export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
     borderStyle: 'solid',
     borderColor: theme.palette.grey['300'],
     borderRadius: 5,
-    backgroundColor: theme.palette.grey['100']
+    backgroundColor: theme.palette.grey['100'],
+
+    '&.unread': {
+      borderColor: theme.palette.primary.main,
+    },
   },
   header: {
     display: 'flex',
@@ -46,20 +50,20 @@ export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     flexGrow: 1,
     margin: theme.spacing(1),
-    marginBottom: theme.spacing(0.5)
+    marginBottom: theme.spacing(0.5),
   },
   name: {
     fontWeight: 'bold',
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   date: {
-    color: theme.palette.grey['500']
+    color: theme.palette.grey['500'],
   },
   body: {
     margin: theme.spacing(1),
-    marginTop: theme.spacing(0.5)
-  }
+    marginTop: theme.spacing(0.5),
+  },
 }));
 
 export const messageContentBoxOutcomingStyles = makeStyles((theme: Theme) => ({
@@ -71,7 +75,7 @@ export const messageContentBoxOutcomingStyles = makeStyles((theme: Theme) => ({
     alignItems: 'start',
     justifyContent: 'flex-end',
     paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(1),
   },
   message: {
     display: 'flex',
@@ -81,7 +85,7 @@ export const messageContentBoxOutcomingStyles = makeStyles((theme: Theme) => ({
     borderStyle: 'solid',
     borderColor: theme.palette.grey['300'],
     borderRadius: 5,
-    backgroundColor: theme.palette.grey['100']
+    backgroundColor: theme.palette.grey['100'],
   },
   header: {
     display: 'flex',
@@ -89,18 +93,18 @@ export const messageContentBoxOutcomingStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     flexGrow: 1,
     margin: theme.spacing(1),
-    marginBottom: theme.spacing(0.5)
+    marginBottom: theme.spacing(0.5),
   },
   name: {
     fontWeight: 'bold',
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   date: {
-    color: theme.palette.grey['500']
+    color: theme.palette.grey['500'],
   },
   body: {
     margin: theme.spacing(1),
-    marginTop: theme.spacing(0.5)
-  }
+    marginTop: theme.spacing(0.5),
+  },
 }));

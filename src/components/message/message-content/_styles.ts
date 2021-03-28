@@ -6,8 +6,8 @@ export const messageContentStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    height: '100%'
-  }
+    height: '100%',
+  },
 }));
 
 export const messageContentPlaceholderStyles = makeStyles(() => ({
@@ -15,6 +15,6 @@ export const messageContentPlaceholderStyles = makeStyles(() => ({
     display: 'flex',
     flexGrow: 1,
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 }));

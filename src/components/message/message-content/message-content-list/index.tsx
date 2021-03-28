@@ -19,12 +19,12 @@ type Props = {
 
 const cellMeasurerCache = new CellMeasurerCache({
   defaultHeight: 100,
-  fixedWidth: true
+  fixedWidth: true,
 });
 
 const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   const classes = messageContentListStyles();
-  const {messageNewEvent, messageUpdateEvent} = useWsMessagesContext();
+  const {messageNewEvent, messageUpdateEvent, messageStatusesEvent, messageReactionsEvent} = useWsMessagesContext();
   const {handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
@@ -55,9 +55,17 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
     MessageUtils.handleMessageUpdateEvent(chat, messageUpdateEvent, setMessages);
   }, [messageUpdateEvent]);
 
-  const rowRenderer = ({index, key, parent, style}: any): ReactElement => (
+  useEffect(() => {
+    MessageUtils.handleMessageStatusesEvent(chat, messageStatusesEvent, setMessages);
+  }, [messageStatusesEvent]);
+
+  useEffect(() => {
+    MessageUtils.handleMessageReactionsEvent(chat, messageReactionsEvent, setMessages);
+  }, [messageReactionsEvent]);
+
+  const rowRenderer = ({index, isVisible, key, parent, style}: any): ReactElement => (
     <CellMeasurer cache={cellMeasurerCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
-      <MessageContentBox message={messages[index]} account={account} key={key} style={style} />
+      <MessageContentBox message={messages[index]} account={account} isVisible={isVisible} key={key} style={style} />
     </CellMeasurer>
   );
 

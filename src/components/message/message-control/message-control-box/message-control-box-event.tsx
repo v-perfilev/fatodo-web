@@ -24,11 +24,7 @@ const MessageControlBoxEvent: FC<Props> = ({message}: Props) => {
     }
   }, []);
 
-  return (
-    <Box className={classes.root}>
-      {text}
-    </Box>
-  );
+  return <Box className={classes.root}>{text}</Box>;
 };
 
 export default MessageControlBoxEvent;

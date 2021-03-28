@@ -13,13 +13,13 @@ export const messageControlHeaderStyles = makeStyles((theme: Theme) => ({
     paddingRight: theme.spacing(1),
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: theme.palette.grey['300']
-  }
+    borderBottomColor: theme.palette.grey['300'],
+  },
 }));
 
 export const messageControlChatButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     marginLeft: theme.spacing(1),
-    flexShrink: 0
-  }
+    flexShrink: 0,
+  },
 }));

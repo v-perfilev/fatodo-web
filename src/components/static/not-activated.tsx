@@ -50,6 +50,7 @@ const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
   if (!user) {
     history.push(Routes.INTERNAL_ERROR);
   }
+
   return (
     <Box className={classes.root}>
       <Typography variant="h5" color="primary">

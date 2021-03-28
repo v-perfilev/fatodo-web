@@ -1,5 +1,5 @@
 import {Chat} from '../../../models/chat.model';
-import {Message} from '../../../models/message.model';
+import {Message, MessageReactions, MessageStatuses} from '../../../models/message.model';
 
 export interface WsMessagesState {
   chatNewEvent: Chat;
@@ -7,4 +7,6 @@ export interface WsMessagesState {
   chatLastMessageEvent: Chat;
   messageNewEvent: Message;
   messageUpdateEvent: Message;
+  messageStatusesEvent: MessageStatuses;
+  messageReactionsEvent: MessageReactions;
 }

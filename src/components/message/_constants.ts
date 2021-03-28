@@ -2,3 +2,5 @@ export const CHAT_CONTROL_HEADER_HEIGHT = 60;
 export const CHAT_CONTENT_HEADER_HEIGHT = 60;
 export const CHAT_CONTENT_FOOTER_HEIGHT = 110;
 export const CHAT_HEIGHT = 60;
+
+export const TIMEOUT_BEFORE_MARK_AS_READ = 2000;
