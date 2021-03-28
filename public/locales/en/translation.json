@@ -16,5 +16,8 @@
     "forgotPassword": "Forgot password?",
     "agree": "Agree",
     "disagree": "Disagree"
+  },
+  "salutations": {
+    "you": "You"
   }
 }

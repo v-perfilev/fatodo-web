@@ -16,5 +16,8 @@
     "forgotPassword": "Забыли пароль?",
     "agree": "Подтвердить",
     "disagree": "Отменить"
+  },
+  "salutations": {
+    "you": "Вы"
   }
 }

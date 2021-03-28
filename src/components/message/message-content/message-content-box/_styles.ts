@@ -1,7 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const messageBoxEventStyles = makeStyles((theme: Theme) => ({
+export const messageContentBoxEventStyles = makeStyles((theme: Theme) => ({
   root: {
     maxWidth: '90%',
     display: 'flex',
@@ -21,7 +21,7 @@ export const messageBoxEventStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export const messageBoxIncomingStyles = makeStyles((theme: Theme) => ({
+export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
   root: {
     maxWidth: '90%',
     display: 'flex',
@@ -43,7 +43,7 @@ export const messageBoxIncomingStyles = makeStyles((theme: Theme) => ({
   header: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     flexGrow: 1,
     margin: theme.spacing(1),
     marginBottom: theme.spacing(0.5)
@@ -62,7 +62,7 @@ export const messageBoxIncomingStyles = makeStyles((theme: Theme) => ({
   }
 }));
 
-export const messageBoxOutcomingStyles = makeStyles((theme: Theme) => ({
+export const messageContentBoxOutcomingStyles = makeStyles((theme: Theme) => ({
   root: {
     maxWidth: '90%',
     float: 'right',
@@ -86,7 +86,7 @@ export const messageBoxOutcomingStyles = makeStyles((theme: Theme) => ({
   header: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
     flexGrow: 1,
     margin: theme.spacing(1),
     marginBottom: theme.spacing(0.5)

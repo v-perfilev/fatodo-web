@@ -16,8 +16,6 @@ export const messageControlListStyles = makeStyles(() => ({
 
 export const messageControlChatStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: '100%',
-    height: 65,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -40,7 +38,8 @@ export const messageControlChatStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    justifyContent: 'space-evenly'
+    justifyContent: 'space-evenly',
+    overflow: 'hidden'
   },
   topContainer: {
     width: '100%',

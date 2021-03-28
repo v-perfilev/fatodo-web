@@ -84,9 +84,7 @@ export class MessageUtils {
   };
 
   public static parseEventMessage = (message: Message): EventMessageParams => {
-    const params = JSON.parse(message.text) as EventMessageParams;
-    params.userId = message.userId;
-    return params;
+    return JSON.parse(message.text) as EventMessageParams;
   };
 
   public static buildEventMessageText = (
@@ -95,7 +93,7 @@ export class MessageUtils {
     users: User[],
     t: TFunction
   ): string => {
-    let text = null;
+    let text = '';
     const username = MessageUtils.extractUsernameFromMessage(users, message);
     const usernames = MessageUtils.extractUsernamesFromParams(users, params);
     const title = MessageUtils.extractTextFromParams(params);
@@ -103,30 +101,34 @@ export class MessageUtils {
       || params?.type === EventMessageType.CREATE_CHAT
       || params?.type === EventMessageType.ADD_MEMBERS
       || params?.type === EventMessageType.DELETE_MEMBERS) {
-      text = username && usernames ? t('message:event.' + params.type, {username, usernames}) : null;
+      text = t('message:event.' + params.type, {username, usernames});
     } else if (params?.type === EventMessageType.RENAME_CHAT) {
-      text = username && title ? t('message:event.' + params.type, {username, title}) : null;
+      text = t('message:event.' + params.type, {username, title});
     } else if (params?.type === EventMessageType.LEAVE_CHAT) {
-      text = username ? t('message:event.' + params.type, {username}) : null;
+      text = t('message:event.' + params.type, {username});
     }
     return text;
   };
 
-  private static extractUsernameFromMessage = (users: User[], message: Message): string => {
-    const user = users.find((user) => user.id === message.userId);
-    return user?.username;
+  public static extractUserFromMessage = (users: User[], message: Message): User => {
+    return users.find((user) => user.id === message.userId);
   };
 
-  private static extractUsernamesFromParams = (users: User[], params: EventMessageParams): string => {
+  public static extractUsernameFromMessage = (users: User[], message: Message): string => {
+    const user = users.find((user) => user.id === message.userId);
+    return user?.username || '';
+  };
+
+  public static extractUsernamesFromParams = (users: User[], params: EventMessageParams): string => {
     const eventUsers = users.filter((user) => params?.ids?.includes(user.id))
       .map((user) => user.username);
     return eventUsers && eventUsers.length > 0
       ? eventUsers.join(', ')
-      : null;
+      : '';
   };
 
-  private static extractTextFromParams = (params: EventMessageParams): string => {
-    return params?.text;
+  public static extractTextFromParams = (params: EventMessageParams): string => {
+    return params?.text || '';
   };
 
 }

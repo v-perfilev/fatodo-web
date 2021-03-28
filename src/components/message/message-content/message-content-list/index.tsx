@@ -9,7 +9,7 @@ import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {Message} from '../../../../models/message.model';
 import {useWsMessagesContext} from '../../../../shared/contexts/ws-contexts/ws-messages-context';
 import {MessageUtils} from '../../message.utils';
-import MessageControlBox from '../../message-control/message-control-box';
+import MessageContentBox from '..//message-content-box';
 import {CircularSpinner} from '../../../common/loaders';
 
 type Props = {
@@ -57,7 +57,7 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
 
   const rowRenderer = ({index, key, parent, style}: any): ReactElement => (
     <CellMeasurer cache={cellMeasurerCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
-      <MessageControlBox message={messages[index]} account={account} key={key} style={style} />
+      <MessageContentBox message={messages[index]} account={account} key={key} style={style} />
     </CellMeasurer>
   );
 

@@ -32,7 +32,6 @@ export interface MessageReaction {
 
 export interface EventMessageParams {
   type: EventMessageType;
-  userId?: string;
   text?: string;
   ids?: string[];
 }

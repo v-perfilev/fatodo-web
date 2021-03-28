@@ -1,24 +1,21 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {Message} from '../../../../models/message.model';
-import {messageBoxOutcomingStyles} from './_styles';
+import {messageContentBoxOutcomingStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
+import {MessageUtils} from '../../message.utils';
 
 type Props = {
   message: Message;
 };
 
 const MessageContentBoxOutcoming: FC<Props> = ({message}: Props) => {
-  const classes = messageBoxOutcomingStyles();
-  const {users, handleUserIds} = useUserListContext();
+  const classes = messageContentBoxOutcomingStyles();
+  const {users} = useUserListContext();
 
-  const user = users.find((user) => user.id === message.userId);
+  const user = MessageUtils.extractUserFromMessage(users, message);
   const date = DateFormatters.formatTimeAndDateWithYear(new Date(message.createdAt));
-
-  useEffect(() => {
-    handleUserIds([message.userId]);
-  }, []);
 
   return (
     <Box className={classes.root}>
