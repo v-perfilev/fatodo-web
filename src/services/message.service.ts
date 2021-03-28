@@ -33,6 +33,11 @@ export default class MessageService {
     return axios.post(url, title);
   };
 
+  public static getUnreadMessagesMap = (): AxiosPromise => {
+    const url = MessageService.baseUrl + '/chat/unread-messages-map';
+    return axios.get(url);
+  };
+
   /*
     MemberController
    */
