@@ -1,16 +1,16 @@
 import React, {FC, ReactElement, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {messageContentListStyles} from './_styles';
-import {Chat} from '../../../models/chat.model';
+import {Chat} from '../../../../models/chat.model';
 import {AutoSizer, CellMeasurer, CellMeasurerCache, List} from 'react-virtualized';
-import MessageBox from '../message-box';
-import {User} from '../../../models/user.model';
-import MessageContentLoader from './message-content-loader';
-import MessageService from '../../../services/message.service';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {Message} from '../../../models/message.model';
-import {useWsMessagesContext} from '../../../shared/contexts/ws-contexts/ws-messages-context';
-import {MessageUtils} from '../message.utils';
+import {User} from '../../../../models/user.model';
+import MessageService from '../../../../services/message.service';
+import {useSnackContext} from '../../../../shared/contexts/snack-context';
+import {Message} from '../../../../models/message.model';
+import {useWsMessagesContext} from '../../../../shared/contexts/ws-contexts/ws-messages-context';
+import {MessageUtils} from '../../message.utils';
+import MessageControlBox from '../../message-control/message-control-box';
+import {CircularSpinner} from '../../../common/loaders';
 
 type Props = {
   chat: Chat;
@@ -57,7 +57,7 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
 
   const rowRenderer = ({index, key, parent, style}: any): ReactElement => (
     <CellMeasurer cache={cellMeasurerCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
-      <MessageBox message={messages[index]} account={account} key={key} style={style} />
+      <MessageControlBox message={messages[index]} account={account} key={key} style={style} />
     </CellMeasurer>
   );
 
@@ -75,7 +75,7 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   );
 
   return loading ? (
-    <MessageContentLoader />
+    <CircularSpinner size="sm" />
   ) : (
     <Box className={classes.root}>
       <AutoSizer>{listRenderer}</AutoSizer>

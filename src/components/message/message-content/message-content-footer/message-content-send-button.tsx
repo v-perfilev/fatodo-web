@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Fab} from '@material-ui/core';
 import {messageContentSendButtonStyles} from './_styles';
-import {SendMessageIcon} from '../../common/icons/send-message-icon';
+import {SendMessageIcon} from '../../../common/icons/send-message-icon';
 
 type Props = {
   send: () => void;

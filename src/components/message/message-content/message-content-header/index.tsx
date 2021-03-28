@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {messageContentHeaderStyles} from './_styles';
-import {Chat} from '../../../models/chat.model';
+import {Chat} from '../../../../models/chat.model';
 import MessageContentHeaderActions from './message-content-header-actions';
-import {ChatUtils} from '../../../shared/utils/chat.utils';
-import {User} from '../../../models/user.model';
-import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import {ChatUtils} from '../../../../shared/utils/chat.utils';
+import {User} from '../../../../models/user.model';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 
 type Props = {
   chat: Chat;

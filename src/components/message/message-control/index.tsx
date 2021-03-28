@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {messageControlStyles} from './_styles';
 import MessageControlHeader from './message-control-header';
 import {Box} from '@material-ui/core';
-import MessageControlFilteredList from './message-control-filtered-list';
+import MessageControlFilteredList from './message-control-filtered-list/message-control-filtered-list';
 import MessageControlList from './message-control-list';
 import {Chat} from '../../../models/chat.model';
 import {User} from '../../../models/user.model';

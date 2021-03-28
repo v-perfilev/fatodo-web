@@ -1,8 +1,8 @@
 import React, {ChangeEvent, FC, KeyboardEvent, useRef} from 'react';
-import {ClearableTextInput} from '../../common/inputs';
+import {ClearableTextInput} from '../../../common/inputs';
 import {messageContentInputStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
-import {InputUtils} from '../../../shared/utils/input.utils';
+import {InputUtils} from '../../../../shared/utils/input.utils';
 
 type Props = {
   send: () => void;

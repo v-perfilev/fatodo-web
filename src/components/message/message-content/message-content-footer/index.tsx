@@ -3,9 +3,9 @@ import {Box} from '@material-ui/core';
 import {messageContentFooterStyles} from './_styles';
 import MessageContentInput from './message-content-input';
 import MessageContentSendButton from './message-content-send-button';
-import {MessageDTO} from '../../../models/dto/message.dto';
-import MessageService from '../../../services/message.service';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {MessageDTO} from '../../../../models/dto/message.dto';
+import MessageService from '../../../../services/message.service';
+import {useSnackContext} from '../../../../shared/contexts/snack-context';
 
 type Props = {
   chatId: string;

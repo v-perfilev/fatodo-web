@@ -1,17 +1,17 @@
 import React, {FC, useEffect, useState} from 'react';
-import {EventMessageParams, Message} from '../../../models/message.model';
+import {EventMessageParams, Message} from '../../../../models/message.model';
 import {messageBoxEventStyles} from './_styles';
 import {Box} from '@material-ui/core';
-import {DateFormatters} from '../../../shared/utils/date.utils';
-import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
-import {MessageUtils} from '../message.utils';
+import {DateFormatters} from '../../../../shared/utils/date.utils';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
+import {MessageUtils} from '../../message.utils';
 import {useTranslation} from 'react-i18next';
 
 type Props = {
   message: Message;
 };
 
-const MessageBoxEvent: FC<Props> = ({message}: Props) => {
+const MessageControlBoxEvent: FC<Props> = ({message}: Props) => {
   const classes = messageBoxEventStyles();
   const {users, handleUserIds} = useUserListContext();
   const {i18n, t} = useTranslation();
@@ -49,4 +49,4 @@ const MessageBoxEvent: FC<Props> = ({message}: Props) => {
   );
 };
 
-export default MessageBoxEvent;
+export default MessageControlBoxEvent;

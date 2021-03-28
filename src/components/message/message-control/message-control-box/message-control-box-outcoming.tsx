@@ -1,17 +1,16 @@
 import React, {FC, useEffect} from 'react';
-import {Message} from '../../../models/message.model';
-import {messageBoxIncomingStyles} from './_styles';
+import {Message} from '../../../../models/message.model';
+import {messageBoxOutcomingStyles} from './_styles';
 import {Box} from '@material-ui/core';
-import {UrlPic} from '../../common/images';
-import {DateFormatters} from '../../../shared/utils/date.utils';
-import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import {DateFormatters} from '../../../../shared/utils/date.utils';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 
 type Props = {
   message: Message;
 };
 
-const MessageBoxIncoming: FC<Props> = ({message}: Props) => {
-  const classes = messageBoxIncomingStyles();
+const MessageControlBoxOutcoming: FC<Props> = ({message}: Props) => {
+  const classes = messageBoxOutcomingStyles();
   const {users, handleUserIds} = useUserListContext();
 
   const user = users.find((user) => user.id === message.userId);
@@ -23,7 +22,6 @@ const MessageBoxIncoming: FC<Props> = ({message}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <UrlPic alt={user?.username} url={user?.imageFilename} size="lg" border={1} />
       <Box className={classes.message}>
         <Box className={classes.header}>
           <Box className={classes.name}>{user?.username}</Box>
@@ -35,4 +33,4 @@ const MessageBoxIncoming: FC<Props> = ({message}: Props) => {
   );
 };
 
-export default MessageBoxIncoming;
+export default MessageControlBoxOutcoming;

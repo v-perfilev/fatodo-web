@@ -2,15 +2,15 @@ import React, {FC, ReactElement, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {messageControlListStyles} from './_styles';
 import MessageControlChat from './message-control-chat';
-import {CHAT_HEIGHT} from '../_constants';
+import {CHAT_HEIGHT} from '../../_constants';
 import {AutoSizer, List} from 'react-virtualized';
-import {Chat} from '../../../models/chat.model';
-import MessageControlLoader from './message-control-loader';
-import MessageService from '../../../services/message.service';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {User} from '../../../models/user.model';
-import {MessageUtils} from '../message.utils';
-import {useWsMessagesContext} from '../../../shared/contexts/ws-contexts/ws-messages-context';
+import {Chat} from '../../../../models/chat.model';
+import MessageService from '../../../../services/message.service';
+import {useSnackContext} from '../../../../shared/contexts/snack-context';
+import {User} from '../../../../models/user.model';
+import {MessageUtils} from '../../message.utils';
+import {useWsMessagesContext} from '../../../../shared/contexts/ws-contexts/ws-messages-context';
+import {CircularSpinner} from '../../../common/loaders';
 
 type Props = {
   chat: Chat;
@@ -76,7 +76,7 @@ const MessageControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   );
 
   return loading ? (
-    <MessageControlLoader />
+    <CircularSpinner size="sm" />
   ) : (
     <Box className={classes.root}>
       <AutoSizer>{listRenderer}</AutoSizer>

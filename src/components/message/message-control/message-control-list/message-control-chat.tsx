@@ -1,14 +1,14 @@
 import React, {FC, HTMLAttributes, useEffect} from 'react';
 import {Box} from '@material-ui/core';
-import {Chat} from '../../../models/chat.model';
+import {Chat} from '../../../../models/chat.model';
 import {messageControlChatStyles} from './_styles';
-import {UrlPic} from '../../common/images';
-import {DateFormatters} from '../../../shared/utils/date.utils';
+import MessageControlBox from '../message-control-box';
+import {UrlPic} from '../../../common/images';
+import {DateFormatters} from '../../../../shared/utils/date.utils';
 import csx from 'classnames';
-import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
-import {User} from '../../../models/user.model';
-import {ChatUtils} from '../../../shared/utils/chat.utils';
-import MessageControlLastMessage from './message-control-last-message';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
+import {User} from '../../../../models/user.model';
+import {ChatUtils} from '../../../../shared/utils/chat.utils';
 
 type Props = HTMLAttributes<HTMLElement> & {
   chat: Chat;
@@ -39,7 +39,7 @@ const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Pr
           <Box className={classes.date}>{formattedDate}</Box>
         </Box>
         <Box className={classes.text}>
-          <MessageControlLastMessage message={chat.lastMessage} />
+          <MessageControlBox message={chat.lastMessage} account={account} />
         </Box>
       </Box>
     </Box>

@@ -1,13 +1,13 @@
 import React, {FC, MouseEvent, useRef, useState} from 'react';
 import {IconButton, MenuItem} from '@material-ui/core';
 import {messageContentHeaderActionsStyles} from './_styles';
-import {Chat} from '../../../models/chat.model';
-import {DotsVerticalIcon} from '../../common/icons/dots-vertical-icon';
-import {PopupMenu} from '../../common/surfaces';
+import {Chat} from '../../../../models/chat.model';
+import {DotsVerticalIcon} from '../../../common/icons/dots-vertical-icon';
+import {PopupMenu} from '../../../common/surfaces';
 import {useTranslation} from 'react-i18next';
-import {DeleteIcon} from '../../common/icons/delete-icon';
-import {BroomIcon} from '../../common/icons/broom-icon';
-import {LeaveIcon} from '../../common/icons/leave-icon';
+import {DeleteIcon} from '../../../common/icons/delete-icon';
+import {BroomIcon} from '../../../common/icons/broom-icon';
+import {LeaveIcon} from '../../../common/icons/leave-icon';
 
 type Props = {
   chat: Chat;

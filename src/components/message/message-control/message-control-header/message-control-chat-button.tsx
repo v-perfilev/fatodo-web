@@ -2,8 +2,8 @@ import {Fab} from '@material-ui/core';
 import * as React from 'react';
 import {FC, useState} from 'react';
 import {messageControlChatButtonStyles} from './_styles';
-import {PlusIcon} from '../../common/icons/plus-icon';
-import CreateChatDialog from '../create-chat-dialog';
+import {PlusIcon} from '../../../common/icons/plus-icon';
+import CreateChatDialog from '../../create-chat-dialog';
 
 const MessageControlChatButton: FC = () => {
   const classes = messageControlChatButtonStyles();

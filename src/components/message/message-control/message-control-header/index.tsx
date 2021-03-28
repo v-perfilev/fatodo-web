@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC} from 'react';
 import {Box} from '@material-ui/core';
-import {ClearableTextInput} from '../../common/inputs';
+import {ClearableTextInput} from '../../../common/inputs';
 import {messageControlHeaderStyles} from './_styles';
 import MessageControlChatButton from './message-control-chat-button';
 import {useTranslation} from 'react-i18next';
