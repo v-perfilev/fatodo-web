@@ -13,6 +13,7 @@ enum WsMessageDestinations {
   CHAT_NEW = '/user/chat/new',
   CHAT_UPDATE = '/user/chat/update',
   CHAT_LAST_MESSAGE = '/user/chat/last-message',
+  CHAT_LAST_MESSAGE_UPDATE = '/user/chat/last-message-update',
   MESSAGE_NEW = '/user/message/new',
   MESSAGE_UPDATE = '/user/message/update',
   MESSAGE_STATUS = '/user/message/status',
@@ -26,7 +27,7 @@ const wsMessageTopics = [
   WsMessageDestinations.MESSAGE_NEW,
   WsMessageDestinations.MESSAGE_UPDATE,
   WsMessageDestinations.MESSAGE_STATUS,
-  WsMessageDestinations.MESSAGE_REACTION,
+  WsMessageDestinations.MESSAGE_REACTION
 ];
 
 type Props = AuthState & PropsWithChildren<any>;
@@ -36,6 +37,7 @@ const withWsMessageClient = (Component: ComponentType): FC => (props: Props): Re
   const [chatNewEvent, setChatNewEvent] = useState<Chat>(null);
   const [chatUpdateEvent, setChatUpdateEvent] = useState<Chat>(null);
   const [chatLastMessageEvent, setChatLastMessageEvent] = useState<Chat>(null);
+  const [chatLastMessageUpdateEvent, setChatLastMessageUpdateEvent] = useState<Chat>(null);
   const [messageNewEvent, setMessageNewEvent] = useState<Message>(null);
   const [messageUpdateEvent, setMessageUpdateEvent] = useState<Message>(null);
   const [messageStatusesEvent, setMessageStatusesEvent] = useState<MessageStatuses>(null);
@@ -48,6 +50,8 @@ const withWsMessageClient = (Component: ComponentType): FC => (props: Props): Re
       setChatUpdateEvent(msg);
     } else if (topic === WsMessageDestinations.CHAT_LAST_MESSAGE) {
       setChatLastMessageEvent(msg);
+    } else if (topic === WsMessageDestinations.CHAT_LAST_MESSAGE_UPDATE) {
+      setChatLastMessageUpdateEvent(msg);
     } else if (topic === WsMessageDestinations.MESSAGE_NEW) {
       setMessageNewEvent(msg);
     } else if (topic === WsMessageDestinations.MESSAGE_UPDATE) {
@@ -63,10 +67,11 @@ const withWsMessageClient = (Component: ComponentType): FC => (props: Props): Re
     chatNewEvent,
     chatUpdateEvent,
     chatLastMessageEvent,
+    chatLastMessageUpdateEvent,
     messageNewEvent,
     messageUpdateEvent,
     messageStatusesEvent,
-    messageReactionsEvent,
+    messageReactionsEvent
   };
 
   return (
