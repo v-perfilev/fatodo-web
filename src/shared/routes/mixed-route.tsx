@@ -1,21 +1,16 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {RootState} from '../../store';
-import {connect, ConnectedProps} from 'react-redux';
 import {AuthState} from '../../store/rerducers/auth.reducer';
 import {Route, RouteProps, useHistory} from 'react-router-dom';
 import {compose} from 'recompose';
+import withAuthState from '../hocs/with-auth-state';
 
-const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
-const connector = connect(mapStateToProps);
-
-type Props = ConnectedProps<typeof connector> &
+type Props = AuthState &
   RouteProps & {
     redirect: string;
   };
 
-const MixedRoute: FC<Props> = ({authState, redirect, ...props}: Props) => {
-  const {isAuthenticated} = authState;
+const MixedRoute: FC<Props> = ({isAuthenticated, redirect, ...props}: Props) => {
   const history = useHistory();
 
   if (isAuthenticated) {
@@ -25,4 +20,4 @@ const MixedRoute: FC<Props> = ({authState, redirect, ...props}: Props) => {
   return !isAuthenticated && <Route {...props} />;
 };
 
-export default compose<RouteProps>(connector)(MixedRoute);
+export default compose<RouteProps>(withAuthState)(MixedRoute);

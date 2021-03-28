@@ -1,26 +1,21 @@
 import React, {FC, HTMLAttributes} from 'react';
 import {compose} from 'recompose';
-import {RootState} from '../../../../store';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
-import {connect, ConnectedProps} from 'react-redux';
 import csx from 'classnames';
 import {currentUserStyles} from './_styles';
 import {UserView} from '../../views';
 import {convertAccountToUser} from '../../../../models/user.model';
+import withAuthState from '../../../../shared/hocs/with-auth-state';
 
-const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
-const connector = connect(mapStateToProps);
+type Props = AuthState & HTMLAttributes<HTMLElement>;
 
-type Props = ConnectedProps<typeof connector> & HTMLAttributes<HTMLElement>;
-
-const CurrentUser: FC<Props> = ({authState, className}: Props) => {
+const CurrentUser: FC<Props> = ({account, className}: Props) => {
   const classes = currentUserStyles();
   const classNames = csx(classes.root, className);
 
-  const account = authState.account;
   const user = convertAccountToUser(account);
 
   return <UserView user={user} picSize="sm" withUsername className={classNames} />;
 };
 
-export default compose(connector)(CurrentUser);
+export default compose(withAuthState)(CurrentUser);

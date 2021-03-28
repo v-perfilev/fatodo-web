@@ -1,10 +1,13 @@
 import * as React from 'react';
-import {ComponentType, FC, ReactElement, useState} from 'react';
+import {ComponentType, FC, PropsWithChildren, ReactElement, useState} from 'react';
 import {WsMessagesContext} from '../../contexts/ws-contexts/ws-messages-context';
 import WsClient from '../../../components/common/ws/ws-client';
 import {Chat} from '../../../models/chat.model';
 import {Message, MessageReactions, MessageStatuses} from '../../../models/message.model';
 import {MESSAGE_WS_URL} from '../../../constants';
+import {compose} from 'recompose';
+import withAuthState from '../with-auth-state';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
 
 enum WsMessageDestinations {
   CHAT_NEW = '/user/chat/new',
@@ -26,7 +29,10 @@ const wsMessageTopics = [
   WsMessageDestinations.MESSAGE_REACTION,
 ];
 
-const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElement => {
+type Props = AuthState & PropsWithChildren<any>;
+
+const withWsMessageClient = (Component: ComponentType): FC => (props: Props): ReactElement => {
+  const {isAuthenticated} = props;
   const [chatNewEvent, setChatNewEvent] = useState<Chat>(null);
   const [chatUpdateEvent, setChatUpdateEvent] = useState<Chat>(null);
   const [chatLastMessageEvent, setChatLastMessageEvent] = useState<Chat>(null);
@@ -66,9 +72,9 @@ const withWsMessageClient = (Component: ComponentType): FC => (props): ReactElem
   return (
     <WsMessagesContext.Provider value={context}>
       <Component {...props} />
-      <WsClient url={MESSAGE_WS_URL} topics={wsMessageTopics} onMessage={onMessage} />
+      {isAuthenticated && <WsClient url={MESSAGE_WS_URL} topics={wsMessageTopics} onMessage={onMessage} />}
     </WsMessagesContext.Provider>
   );
 };
 
-export default withWsMessageClient;
+export default compose(withAuthState, withWsMessageClient);

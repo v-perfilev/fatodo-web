@@ -5,21 +5,17 @@ import {compose} from 'recompose';
 import {useTranslation} from 'react-i18next';
 import {useHistory} from 'react-router-dom';
 import ForgotPasswordForm from './forgot-password-form';
-import {connect, ConnectedProps} from 'react-redux';
-import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {authPageStyles} from '../_styles';
 import {Routes} from '../../router';
 import {LOADER_TIMEOUT} from '../../../constants';
 import withBackground from '../../../shared/hocs/with-background/with-background';
-import {Link} from '../../common/controls/link';
+import {Link} from '../../common/controls';
+import withAuthState from '../../../shared/hocs/with-auth-state';
 
-const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
-const connector = connect(mapStateToProps);
+type Props = AuthState;
 
-type Props = ConnectedProps<typeof connector>;
-
-const ForgotPassword: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
+const ForgotPassword: FC<Props> = ({isAuthenticated}: Props) => {
   const classes = authPageStyles();
   const history = useHistory();
   const {t} = useTranslation();
@@ -43,4 +39,4 @@ const ForgotPassword: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   );
 };
 
-export default compose(withBackground('/images/background-1.jpg'), connector)(ForgotPassword);
+export default compose(withBackground('/images/background-1.jpg'), withAuthState)(ForgotPassword);

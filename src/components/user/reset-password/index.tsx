@@ -7,19 +7,15 @@ import {Routes} from '../../router';
 import {useTranslation} from 'react-i18next';
 import {authPageStyles} from '../_styles';
 import {useHistory, useRouteMatch} from 'react-router-dom';
-import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {connect, ConnectedProps} from 'react-redux';
 import {LOADER_TIMEOUT} from '../../../constants';
 import {Link} from '../../common/controls';
 import ResetPasswordForm from './reset-password-form';
+import withAuthState from '../../../shared/hocs/with-auth-state';
 
-const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
-const connector = connect(mapStateToProps);
+type Props = AuthState;
 
-type Props = ConnectedProps<typeof connector>;
-
-const ResetPassword: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
+const ResetPassword: FC<Props> = ({isAuthenticated}: Props) => {
   const classes = authPageStyles();
   const history = useHistory();
   const {t} = useTranslation();
@@ -46,4 +42,4 @@ const ResetPassword: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   );
 };
 
-export default compose(withBackground('/images/background-1.jpg'), connector)(ResetPassword);
+export default compose(withBackground('/images/background-1.jpg'), withAuthState)(ResetPassword);

@@ -12,21 +12,16 @@ import {Box, Grid, Theme, useMediaQuery} from '@material-ui/core';
 import MessageControl from '../message-control';
 import MessageContent from '../message-content';
 import {Chat} from '../../../models/chat.model';
-import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {connect, ConnectedProps} from 'react-redux';
 import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import CreateChatDialog from '../create-chat-dialog';
 import withUserList from '../../../shared/hocs/with-list/with-user-list';
-import withWsMessageClient from '../../../shared/hocs/with-ws-client/with-ws-message-client';
+import withAuthState from '../../../shared/hocs/with-auth-state';
 
-const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
-const connector = connect(mapStateToProps);
+type Props = AuthState;
 
-type Props = ConnectedProps<typeof connector>;
-
-const MessageMain: FC<Props> = ({authState}: Props) => {
+const MessageMain: FC<Props> = ({account}: Props) => {
   const classes = messageMainStyles();
   const history = useHistory();
   const lastLocation = useLastLocation();
@@ -65,10 +60,10 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   const bigView = (
     <Grid container className={classes.bigViewRoot}>
       <Grid item xs={4} className={classes.control}>
-        <MessageControl chat={chat} setChat={setChat} account={authState.account} />
+        <MessageControl chat={chat} setChat={setChat} account={account} />
       </Grid>
       <Grid item xs={8} className={classes.content}>
-        <MessageContent chat={chat} account={authState.account} />
+        <MessageContent chat={chat} account={account} />
       </Grid>
     </Grid>
   );
@@ -76,9 +71,9 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   const smallView = (
     <Box className={classes.smallViewRoot}>
       {chat ? (
-        <MessageContent chat={chat} account={authState.account} />
+        <MessageContent chat={chat} account={account} />
       ) : (
-        <MessageControl chat={chat} setChat={setChat} account={authState.account} />
+        <MessageControl chat={chat} setChat={setChat} account={account} />
       )}
     </Box>
   );
@@ -91,4 +86,4 @@ const MessageMain: FC<Props> = ({authState}: Props) => {
   );
 };
 
-export default compose(connector, withUserList, withWsMessageClient)(MessageMain);
+export default compose(withUserList, withAuthState)(MessageMain);

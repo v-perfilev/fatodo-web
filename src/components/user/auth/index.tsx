@@ -8,18 +8,14 @@ import {useTranslation} from 'react-i18next';
 import {authPageStyles} from '../_styles';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {SOCIAL_LOGIN} from '../../../constants';
-import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {connect, ConnectedProps} from 'react-redux';
 import {Link} from '../../common/controls';
 import {SocialButtons} from './social-buttons';
 import LoginForm from './login-form';
 import RegistrationForm from './registration-form';
+import withAuthState from '../../../shared/hocs/with-auth-state';
 
-const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
-const connector = connect(mapStateToProps);
-
-type Props = ConnectedProps<typeof connector>;
+type Props = AuthState;
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -39,7 +35,7 @@ const calculateRouteFromTab = (tab: number): string => {
   }
 };
 
-const Auth: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
+const Auth: FC<Props> = ({isAuthenticated}: Props) => {
   const classes = authPageStyles();
   const history = useHistory();
   const match = useRouteMatch();
@@ -83,4 +79,4 @@ const Auth: FC<Props> = ({authState: {isAuthenticated}}: Props) => {
   );
 };
 
-export default compose(withBackground('/images/background-1.jpg'), connector)(Auth);
+export default compose(withBackground('/images/background-1.jpg'), withAuthState)(Auth);

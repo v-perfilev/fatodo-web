@@ -20,6 +20,7 @@ import withStore from './shared/hocs/with-store';
 import withDefaultTheme from './shared/hocs/with-default-theme';
 import withMui from './shared/hocs/with-mui';
 import withSnack from './shared/hocs/with-snack/with-snack';
+import withMessenger from './shared/hocs/with-messenger';
 
 const Root: FC = () => {
   // setup axios
@@ -36,7 +37,7 @@ const Root: FC = () => {
   );
 };
 
-const WrappedRoot = compose(withStore, withDefaultTheme, withMui, withSnack)(Root);
+const WrappedRoot = compose(withStore, withDefaultTheme, withMui, withSnack, withMessenger)(Root);
 
 const root = document.getElementById('root');
 initLanguages.then(() => {

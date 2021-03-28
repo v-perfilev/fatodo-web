@@ -8,16 +8,12 @@ import {FormDialogComponentProps} from '../../../common/dialogs';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import MessageService from '../../../../services/message.service';
-import {RootState} from '../../../../store';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
-import {connect, ConnectedProps} from 'react-redux';
 import UserService from '../../../../services/user.service';
 import {User} from '../../../../models/user.model';
+import withAuthState from '../../../../shared/hocs/with-auth-state';
 
-const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
-const connector = connect(mapStateToProps);
-
-type Props = ConnectedProps<typeof connector> & FormikProps<CreateChatValues> & FormDialogComponentProps & SnackState;
+type Props = AuthState & FormikProps<CreateChatValues> & FormDialogComponentProps & SnackState;
 
 const CreateChatForm: FC<Props> = (props: Props) => {
   const {setIsSubmitting, setIsValid, setSubmitForm, setResetForm} = props;
@@ -83,7 +79,7 @@ const CreateChatForm: FC<Props> = (props: Props) => {
 
 const formik = withFormik<Props, CreateChatValues>({
   mapPropsToValues: () => CreateChatFormUtils.mapPropsToValues(),
-  validationSchema: ({authState: {account}}: Props) => CreateChatFormUtils.validationSchema(account),
+  validationSchema: ({account}: Props) => CreateChatFormUtils.validationSchema(account),
   validateOnMount: true,
 
   handleSubmit: (values: CreateChatValues, {props, setSubmitting}: FormikBag<Props, CreateChatValues>) => {
@@ -106,4 +102,4 @@ const formik = withFormik<Props, CreateChatValues>({
   },
 });
 
-export default compose<FormDialogComponentProps>(withSnackContext, connector, formik)(CreateChatForm);
+export default compose<FormDialogComponentProps>(withSnackContext, withAuthState, formik)(CreateChatForm);

@@ -2,24 +2,17 @@ import {useTranslation} from 'react-i18next';
 import React, {FC, useEffect} from 'react';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
-import {connect, ConnectedProps} from 'react-redux';
 import {ContactRequestFormUtils, ContactRequestFormValues} from './_form';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
-import {RootState} from '../../../../store';
 import UserService from '../../../../services/user.service';
 import {MultilineInput, TextInput} from '../../../common/inputs';
 import {FormDialogComponentProps} from '../../../common/dialogs';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import ContactService from '../../../../services/contact.service';
+import withAuthState from '../../../../shared/hocs/with-auth-state';
 
-const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
-const connector = connect(mapStateToProps);
-
-type Props = ConnectedProps<typeof connector> &
-  FormikProps<ContactRequestFormValues> &
-  FormDialogComponentProps &
-  SnackState;
+type Props = AuthState & FormikProps<ContactRequestFormValues> & FormDialogComponentProps & SnackState;
 
 const ContactRequestForm: FC<Props> = (props: Props) => {
   const {setIsSubmitting, setIsValid, setSubmitForm, setResetForm} = props;
@@ -67,7 +60,7 @@ const ContactRequestForm: FC<Props> = (props: Props) => {
 
 const formik = withFormik<Props, ContactRequestFormValues>({
   mapPropsToValues: () => ContactRequestFormUtils.mapPropsToValues(),
-  validationSchema: ({authState: {account}}: Props) => ContactRequestFormUtils.validationSchema(account),
+  validationSchema: ({account}: Props) => ContactRequestFormUtils.validationSchema(account),
   validateOnMount: true,
 
   handleSubmit: (
@@ -90,4 +83,4 @@ const formik = withFormik<Props, ContactRequestFormValues>({
   },
 });
 
-export default compose<FormDialogComponentProps>(withSnackContext, connector, formik)(ContactRequestForm);
+export default compose<FormDialogComponentProps>(withSnackContext, withAuthState, formik)(ContactRequestForm);
