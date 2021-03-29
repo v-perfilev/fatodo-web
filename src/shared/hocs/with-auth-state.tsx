@@ -8,7 +8,7 @@ import {connect, ConnectedProps} from 'react-redux';
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
 
-type Props = ConnectedProps<typeof connector> & PropsWithChildren<any>;
+type Props = PropsWithChildren<ConnectedProps<typeof connector>>;
 
 const withAuthState = (Component: ComponentType<AuthState>): FC => (props: Props): ReactElement => {
   const {authState, ...propsWithoutAuthState} = props;

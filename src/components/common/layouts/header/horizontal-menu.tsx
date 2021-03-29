@@ -1,9 +1,9 @@
 import {RootState} from '../../../../store';
 import * as React from 'react';
-import {FC, useRef, useState} from 'react';
+import {FC, ReactElement, useRef, useState} from 'react';
 import {connect, ConnectedProps} from 'react-redux';
 import Button from '@material-ui/core/Button';
-import {Box, MenuItem} from '@material-ui/core';
+import {Badge, Box, MenuItem} from '@material-ui/core';
 import {logout} from '../../../../store/actions/auth.actions';
 import {useTranslation} from 'react-i18next';
 import {horizontalMenuStyles} from './_styles';
@@ -21,6 +21,7 @@ import {PopupMenu} from '../../surfaces';
 import {AccountIcon} from '../../icons/account-icon';
 import {UserListIcon} from '../../icons/user-list-icon';
 import {MessageIcon} from '../../icons/message-icon';
+import {useUnreadMessagesContext} from '../../../../shared/contexts/messenger-contexts/unread-messages-context';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {logout};
@@ -30,6 +31,7 @@ type Props = ConnectedProps<typeof connector>;
 
 const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props) => {
   const classes = horizontalMenuStyles();
+  const {totalUnreadMessages} = useUnreadMessagesContext();
   const {t} = useTranslation();
   const history = useHistory();
   const ref = useRef();
@@ -60,9 +62,18 @@ const HorizontalMenu: FC<Props> = ({authState: {isAuthenticated}, logout}: Props
     </>
   );
 
+  const messageIcon = (): ReactElement =>
+    totalUnreadMessages ? (
+      <Badge badgeContent={totalUnreadMessages} color="error">
+        <MessageIcon />
+      </Badge>
+    ) : (
+      <MessageIcon />
+    );
+
   const authenticatedMenu = (
     <>
-      <Button color="primary" startIcon={<MessageIcon />} onClick={redirectToMessages}>
+      <Button color="primary" startIcon={messageIcon()} onClick={redirectToMessages}>
         {t('header.messages')}
       </Button>
       <Button color="primary" startIcon={<UserListIcon />} onClick={redirectToContacts}>

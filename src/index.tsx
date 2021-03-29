@@ -20,7 +20,7 @@ import withStore from './shared/hocs/with-store';
 import withDefaultTheme from './shared/hocs/with-default-theme';
 import withMui from './shared/hocs/with-mui';
 import withSnack from './shared/hocs/with-snack/with-snack';
-import withMessenger from './shared/hocs/with-messenger';
+import withMessenger from './shared/hocs/with-messenger/with-messenger';
 
 const Root: FC = () => {
   // setup axios

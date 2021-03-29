@@ -7,6 +7,7 @@ import {DateConverters} from '../../../../shared/utils/date.utils';
 import {useTranslation} from 'react-i18next';
 import {TimeSelect} from '../time-select';
 import {CalendarSelect} from '../calendar-select';
+import {ArrayUtils} from '../../../../shared/utils/array.utils';
 
 type Props = {
   setReminder: (reminder: Reminder) => void;
@@ -32,7 +33,7 @@ export const RemindersInputPopoverMonthly: FC<Props> = ({setReminder}: Props) =>
   const handleClick = (date: number): void => {
     setDates((prevState) => {
       if (prevState.includes(date)) {
-        prevState.splice(prevState.indexOf(date), 1);
+        ArrayUtils.deleteItem(prevState, date);
       } else {
         prevState.push(date);
         prevState.sort();

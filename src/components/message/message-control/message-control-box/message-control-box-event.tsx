@@ -3,7 +3,7 @@ import {Message} from '../../../../models/message.model';
 import {messageControlBoxEventStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
-import {MessageUtils} from '../../message.utils';
+import {MessageUtils} from '../../../../shared/utils/message.utils';
 import {useTranslation} from 'react-i18next';
 
 type Props = {

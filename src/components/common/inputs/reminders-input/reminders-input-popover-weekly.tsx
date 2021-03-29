@@ -7,6 +7,7 @@ import {DateConverters} from '../../../../shared/utils/date.utils';
 import {useTranslation} from 'react-i18next';
 import {TimeSelect} from '../time-select';
 import {DaysSelect} from '../days-select';
+import {ArrayUtils} from '../../../../shared/utils/array.utils';
 
 type Props = {
   setReminder: (reminder: Reminder) => void;
@@ -32,7 +33,7 @@ export const RemindersInputPopoverWeekly: FC<Props> = ({setReminder}: Props) => 
   const handleClick = (day: number): void => {
     setDays((prevState) => {
       if (prevState.includes(day)) {
-        prevState.splice(prevState.indexOf(day), 1);
+        ArrayUtils.deleteItem(prevState, day);
       } else {
         prevState.push(day);
         prevState.sort();

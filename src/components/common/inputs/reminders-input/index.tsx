@@ -41,9 +41,8 @@ export const RemindersInput: FC<Props> = ({name, label}: Props) => {
   const removeReminder = (index, e): void => {
     e.stopPropagation();
     setReminders((prevState) => {
-      const newState = prevState;
-      newState.splice(index, 1);
-      return [...newState];
+      prevState.splice(index, 1);
+      return [...prevState];
     });
   };
 

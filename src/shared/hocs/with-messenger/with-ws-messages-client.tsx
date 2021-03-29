@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ComponentType, FC, PropsWithChildren, ReactElement, useState} from 'react';
-import {WsMessagesContext} from '../../contexts/ws-contexts/ws-messages-context';
+import {WsMessagesContext} from '../../contexts/messenger-contexts/ws-messages-context';
 import WsClient from '../../../components/common/ws/ws-client';
 import {Chat} from '../../../models/chat.model';
 import {Message, MessageReactions, MessageStatuses} from '../../../models/message.model';
@@ -27,12 +27,12 @@ const wsMessageTopics = [
   WsMessageDestinations.MESSAGE_NEW,
   WsMessageDestinations.MESSAGE_UPDATE,
   WsMessageDestinations.MESSAGE_STATUS,
-  WsMessageDestinations.MESSAGE_REACTION
+  WsMessageDestinations.MESSAGE_REACTION,
 ];
 
-type Props = AuthState & PropsWithChildren<any>;
+type Props = PropsWithChildren<AuthState>;
 
-const withWsMessageClient = (Component: ComponentType): FC => (props: Props): ReactElement => {
+const withWsMessagesClient = (Component: ComponentType): FC => (props: Props): ReactElement => {
   const {isAuthenticated} = props;
   const [chatNewEvent, setChatNewEvent] = useState<Chat>(null);
   const [chatUpdateEvent, setChatUpdateEvent] = useState<Chat>(null);
@@ -71,7 +71,7 @@ const withWsMessageClient = (Component: ComponentType): FC => (props: Props): Re
     messageNewEvent,
     messageUpdateEvent,
     messageStatusesEvent,
-    messageReactionsEvent
+    messageReactionsEvent,
   };
 
   return (
@@ -82,4 +82,4 @@ const withWsMessageClient = (Component: ComponentType): FC => (props: Props): Re
   );
 };
 
-export default compose(withAuthState, withWsMessageClient);
+export default compose(withAuthState, withWsMessagesClient);

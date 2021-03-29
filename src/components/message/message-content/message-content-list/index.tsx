@@ -7,10 +7,15 @@ import {User} from '../../../../models/user.model';
 import MessageService from '../../../../services/message.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {Message} from '../../../../models/message.model';
-import {useWsMessagesContext} from '../../../../shared/contexts/ws-contexts/ws-messages-context';
-import {MessageUtils} from '../../message.utils';
+import {useWsMessagesContext} from '../../../../shared/contexts/messenger-contexts/ws-messages-context';
 import MessageContentBox from '..//message-content-box';
 import {CircularSpinner} from '../../../common/loaders';
+import {
+  handleMessageNewEvent,
+  handleMessageReactionsEvent,
+  handleMessageStatusesEvent,
+  handleMessageUpdateEvent,
+} from './_ws';
 
 type Props = {
   chat: Chat;
@@ -48,19 +53,19 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   }, [chat]);
 
   useEffect(() => {
-    MessageUtils.handleMessageNewEvent(chat, messageNewEvent, setMessages);
+    handleMessageNewEvent(chat, messageNewEvent, setMessages);
   }, [messageNewEvent]);
 
   useEffect(() => {
-    MessageUtils.handleMessageUpdateEvent(chat, messageUpdateEvent, setMessages);
+    handleMessageUpdateEvent(chat, messageUpdateEvent, setMessages);
   }, [messageUpdateEvent]);
 
   useEffect(() => {
-    MessageUtils.handleMessageStatusesEvent(chat, messageStatusesEvent, setMessages);
+    handleMessageStatusesEvent(chat, messageStatusesEvent, setMessages);
   }, [messageStatusesEvent]);
 
   useEffect(() => {
-    MessageUtils.handleMessageReactionsEvent(chat, messageReactionsEvent, setMessages);
+    handleMessageReactionsEvent(chat, messageReactionsEvent, setMessages);
   }, [messageReactionsEvent]);
 
   const rowRenderer = ({index, isVisible, key, parent, style}: any): ReactElement => (

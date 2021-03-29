@@ -11,3 +11,8 @@ export interface WsMessagesState {
   messageStatusesEvent: MessageStatuses;
   messageReactionsEvent: MessageReactions;
 }
+
+export interface UnreadMessagesState {
+  totalUnreadMessages: number;
+  unreadMessageCountMap: Map<string, number>;
+}
