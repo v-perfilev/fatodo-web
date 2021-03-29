@@ -3,6 +3,8 @@ export const API_URL = process.env.API_URL;
 export const IMAGE_API_URL = API_URL + '/api/image/store/';
 export const MESSAGE_WS_URL = API_URL + '/ws/message/';
 
+export const FALLBACK_AVATAR = '/images/fallback.jpg';
+
 export const API_TIMEOUT = 60 * 1000;
 export const LOADER_TIMEOUT = 500;
 

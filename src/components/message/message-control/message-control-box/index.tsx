@@ -1,8 +1,7 @@
-import React, {FC, HTMLAttributes, memo, useEffect} from 'react';
+import React, {FC, HTMLAttributes, useEffect} from 'react';
 import {Message} from '../../../../models/message.model';
 import MessageControlBoxOutcoming from './message-control-box-outcoming';
 import MessageControlBoxIncoming from './message-control-box-incoming';
-import {compose} from 'recompose';
 import {User} from '../../../../models/user.model';
 import MessageControlBoxEvent from './message-control-box-event';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
@@ -34,4 +33,4 @@ const MessageControlBox: FC<Props> = ({message, account, style}: Props) => {
   );
 };
 
-export default compose(memo)(MessageControlBox);
+export default MessageControlBox;
