@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {FC} from 'react';
-import {SvgIcon} from '@material-ui/core';
-import {CommonProps} from '@material-ui/core/OverridableComponent';
+import {FC, PropsWithChildren} from 'react';
+import {SvgIcon, SvgIconProps} from '@material-ui/core';
 
-export const NormalPriorityIcon: FC<CommonProps<any>> = (props) => (
+type Props = PropsWithChildren<SvgIconProps>;
+
+export const NormalPriorityIcon: FC<Props> = (props: Props) => (
   <SvgIcon {...props}>
     <path d="M2.5 14.5H6.5V20.5H2.5V14.5Z" fill="currentColor" />
     <path d="M9.5 9.5H13.5V20.5H9.5V9.5Z" fill="currentColor" />

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {FC} from 'react';
-import {SvgIcon} from '@material-ui/core';
-import {CommonProps} from '@material-ui/core/OverridableComponent';
+import {FC, PropsWithChildren} from 'react';
+import {SvgIcon, SvgIconProps} from '@material-ui/core';
 
-export const ReorderIcon: FC<CommonProps<any>> = (props) => (
+type Props = PropsWithChildren<SvgIconProps>;
+
+export const ReorderIcon: FC<Props> = (props: Props) => (
   <SvgIcon {...props}>
     <rect x="9.80612" width="14.6939" height="6" rx="2" fill="currentColor" />
     <rect x="9.80612" y="9" width="14.6939" height="6" rx="2" fill="currentColor" />

@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {FC} from 'react';
-import {SvgIcon} from '@material-ui/core';
-import {CommonProps} from '@material-ui/core/OverridableComponent';
+import {FC, PropsWithChildren} from 'react';
+import {SvgIcon, SvgIconProps} from '@material-ui/core';
 
-export const ArrowUpIcon: FC<CommonProps<any>> = (props) => (
+type Props = PropsWithChildren<SvgIconProps>;
+
+export const ArrowUpIcon: FC<Props> = (props: Props) => (
   <SvgIcon {...props}>
     <path fill="currentColor" d="M7.41,15.41L12,10.83L16.59,15.41L18,14L12,8L6,14L7.41,15.41Z" />
   </SvgIcon>

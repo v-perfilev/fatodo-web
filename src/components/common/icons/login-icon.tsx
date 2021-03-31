@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {FC} from 'react';
-import {SvgIcon} from '@material-ui/core';
-import {CommonProps} from '@material-ui/core/OverridableComponent';
+import {FC, PropsWithChildren} from 'react';
+import {SvgIcon, SvgIconProps} from '@material-ui/core';
 
-export const LoginIcon: FC<CommonProps<any>> = (props) => (
+type Props = PropsWithChildren<SvgIconProps>;
+
+export const LoginIcon: FC<Props> = (props: Props) => (
   <SvgIcon {...props}>
     <path
       fill="currentColor"
