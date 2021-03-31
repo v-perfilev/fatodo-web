@@ -41,6 +41,7 @@ export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.grey['100'],
 
     '&.unread': {
+      borderWidth: 2,
       borderColor: theme.palette.primary.main,
     },
   },
