@@ -9,12 +9,10 @@ type Props = PropsWithChildren<SvgIconProps> & {
 
 const BadgeMessageIcon: FC<Props> = ({count, ...props}: Props) => {
 
-  return count ? (
+  return (
     <Badge badgeContent={count} color="error">
       <MessageIcon {...props} />
     </Badge>
-  ) : (
-    <MessageIcon {...props} />
   );
 
 };

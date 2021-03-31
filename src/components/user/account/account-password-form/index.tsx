@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {accountFormStyles} from '../_styles';
-import {PageSubheader} from '../../../common/surfaces/page-subheader';
-import {PageDivider, PageSpacer} from '../../../common/surfaces';
+import {PageDivider, PageSpacer, PageSubheader} from '../../../common/surfaces';
 import {Box} from '@material-ui/core';
 import {LoadingButton} from '../../../common/controls';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
@@ -63,7 +62,7 @@ const formik = withFormik<Props, AccountPasswordFormValues>({
       .finally(() => {
         setSubmitting(false);
       });
-  },
+  }
 });
 
 export default compose(withSnackContext, formik)(AccountPasswordForm);

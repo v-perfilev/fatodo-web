@@ -9,6 +9,8 @@ import {useUserListContext} from '../../../../shared/contexts/list-contexts/user
 import {User} from '../../../../models/user.model';
 import {ChatUtils} from '../../../../shared/utils/chat.utils';
 import {UrlPic} from '../../../common/images';
+import {useUnreadMessagesContext} from '../../../../shared/contexts/messenger-contexts/unread-messages-context';
+import {SoloBadge} from '../../../common/surfaces';
 
 type Props = HTMLAttributes<HTMLElement> & {
   chat: Chat;
@@ -19,7 +21,9 @@ type Props = HTMLAttributes<HTMLElement> & {
 const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Props) => {
   const classes = messageControlChatStyles();
   const {users, handleUserIds} = useUserListContext();
+  const {unreadMessageCountMap} = useUnreadMessagesContext();
 
+  const unreadCount = unreadMessageCountMap?.get(chat.id);
   const title = ChatUtils.getTitle(chat, users, account);
   const date = chat.lastMessage?.createdAt ? new Date(chat.lastMessage.createdAt) : null;
   const formattedDate = date ? DateFormatters.formatTimeAndDateWithYear(date) : null;
@@ -35,6 +39,11 @@ const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Pr
       <UrlPic className={classes.image} alt={null} url={null} size="lg" border={1} />
       <Box className={classes.chatContainer}>
         <Box className={classes.topContainer}>
+          {unreadCount > 0 && (
+            <Box className={classes.badge}>
+              <SoloBadge badgeContent={unreadCount} color="primary" />
+            </Box>
+          )}
           <Box className={classes.title}>{title}</Box>
           <Box className={classes.date}>{formattedDate}</Box>
         </Box>

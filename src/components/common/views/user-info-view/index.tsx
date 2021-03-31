@@ -2,7 +2,7 @@ import React, {FC, HTMLAttributes} from 'react';
 import {User} from '../../../../models/user.model';
 import {Button, Grid} from '@material-ui/core';
 import {UrlPic} from '../../images';
-import {PageSubheader} from '../../surfaces/page-subheader';
+import {PageSubheader} from '../../surfaces';
 import {userInfoViewStyles} from './_styles';
 import csx from 'classnames';
 import {UserInfoViewField} from './user-info-view-field';
