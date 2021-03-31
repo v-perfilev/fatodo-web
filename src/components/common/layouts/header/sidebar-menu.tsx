@@ -4,14 +4,16 @@ import {Box, Divider, Fab, SwipeableDrawer, Toolbar} from '@material-ui/core';
 import {ArrowRightIcon} from '../../icons/arrow-right-icon';
 import VerticalMenu from './vertical-menu';
 import {sidebarMenuStyles} from './_styles';
-import {LanguageSelect} from '../../controls/language-select';
+import {LanguageSelect} from '../../controls';
+import {RedirectMap} from './type';
 
 type Props = {
   show: boolean;
   onToggle: () => void;
+  redirectMap: RedirectMap;
 };
 
-export const SidebarMenu: FC<Props> = ({show, onToggle}: Props) => {
+export const SidebarMenu: FC<Props> = ({show, onToggle, redirectMap}: Props) => {
   const classes = sidebarMenuStyles();
 
   return (
@@ -23,7 +25,7 @@ export const SidebarMenu: FC<Props> = ({show, onToggle}: Props) => {
           </Fab>
         </Toolbar>
         <Divider />
-        <VerticalMenu />
+        <VerticalMenu redirectMap={redirectMap} />
         <Box className={classes.grow} />
         <LanguageSelect list />
       </Box>
