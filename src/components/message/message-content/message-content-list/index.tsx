@@ -14,7 +14,7 @@ import {
   handleMessageNewEvent,
   handleMessageReactionsEvent,
   handleMessageStatusesEvent,
-  handleMessageUpdateEvent,
+  handleMessageUpdateEvent
 } from './_ws';
 
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
 
 const cellMeasurerCache = new CellMeasurerCache({
   defaultHeight: 100,
-  fixedWidth: true,
+  fixedWidth: true
 });
 
 const MessageContentList: FC<Props> = ({chat, account}: Props) => {
@@ -38,7 +38,9 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
     setLoading(true);
     MessageService.getAllMessagesByChatIdPageable(chat.id)
       .then((response) => {
-        setMessages(response.data);
+        const messages = response.data;
+        const sortedMessages = messages.sort((a, b) => a.createdAt > b.createdAt ? 1 : -1);
+        setMessages(sortedMessages);
       })
       .catch((response) => {
         handleResponse(response);
