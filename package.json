@@ -60,6 +60,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/pickers": "^3.2.10",
+    "@types/react-virtualized": "^9.21.11",
     "axios": "^0.21.1",
     "browser-image-compression": "^1.0.12",
     "classnames": "^2.2.6",

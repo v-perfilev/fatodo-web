@@ -2,7 +2,7 @@ import React, {FC, ReactElement, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {messageContentListStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
-import {AutoSizer, CellMeasurer, CellMeasurerCache, InfiniteLoader, List} from 'react-virtualized';
+import {ListRowProps, ScrollParams} from 'react-virtualized';
 import {User} from '../../../../models/user.model';
 import MessageService from '../../../../services/message.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
@@ -16,29 +16,34 @@ import {
   handleMessageStatusesEvent,
   handleMessageUpdateEvent
 } from './_ws';
+import {VirtualizedList} from '../../../common/surfaces';
+import {useUnreadMessagesContext} from '../../../../shared/contexts/messenger-contexts/unread-messages-context';
+import MessageContentScrollButton from './message-content-scroll-button';
 
 type Props = {
   chat: Chat;
   account: User;
 };
 
-const cellMeasurerCache = new CellMeasurerCache({
-  defaultHeight: 100,
-  fixedWidth: true
-});
-
 const MessageContentList: FC<Props> = ({chat, account}: Props) => {
     const classes = messageContentListStyles();
     const {messageNewEvent, messageUpdateEvent, messageStatusesEvent, messageReactionsEvent} = useWsMessagesContext();
+    const {unreadMessageCountMap} = useUnreadMessagesContext();
     const {handleResponse} = useSnackContext();
-    const [loading, setLoading] = useState(true);
-    const [rendered, setRendered] = useState(false);
-    const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
     const [messages, setMessages] = useState<Message[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
+    const [scrolledToBottom, setScrolledToBottom] = useState(true);
+    const [shouldScrollDown, setShouldScrollDown] = useState(true);
 
-    const messageCount = allMessagesLoaded ? messages?.length : messages?.length + 1;
+    const unreadCount = unreadMessageCountMap?.get(chat.id);
 
-    const isMessageLoaded = ({index}: any): boolean => index > 0 ? true : allMessagesLoaded;
+    const onScroll = ({clientHeight, scrollHeight, scrollTop}: ScrollParams): void => {
+      const isNotRendered = clientHeight === 0;
+      const isScrolledToBottom = scrollHeight === scrollTop + clientHeight;
+      setScrolledToBottom(isScrolledToBottom);
+      setShouldScrollDown(isNotRendered || isScrolledToBottom);
+    };
 
     const addLoadedMessageToState = (loadedMessages: Message[]): void => {
       const comparator = (a: Message, b: Message): number => a.createdAt > b.createdAt ? 1 : -1;
@@ -48,7 +53,7 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
       });
     };
 
-    const loadMoreMessages = (): void => {
+    const loadMoreMessages = (): Promise<void> => new Promise((resolve) => {
       MessageService.getAllMessagesByChatIdPageable(chat.id, messages.length)
         .then((response) => {
           const newMessages = response.data;
@@ -63,18 +68,12 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
         })
         .finally(() => {
           setLoading(false);
+          resolve();
         });
-    };
-
-    const handleRowsRendered = (onRowsRendered: Function, params: any): void => {
-      onRowsRendered(params);
-      if (!rendered && messages.length - 1 === params.stopIndex) {
-        setTimeout(() => setRendered(true), 1000);
-      }
-    };
+    });
 
     useEffect(() => {
-      loadMoreMessages();
+      loadMoreMessages().finally();
     }, [chat]);
 
     useEffect(() => {
@@ -93,47 +92,28 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
       handleMessageReactionsEvent(chat, messageReactionsEvent, setMessages);
     }, [messageReactionsEvent]);
 
-    const listLoader = (): ReactElement => (
-      <InfiniteLoader
-        isRowLoaded={isMessageLoaded}
-        loadMoreRows={loadMoreMessages}
-        rowCount={messageCount}
-      >
-        {listAutoSizer}
-      </InfiniteLoader>
-    );
-
-    const listAutoSizer = ({onRowsRendered, registerChild}: any): ReactElement => (
-      <AutoSizer>{listRenderer(onRowsRendered, registerChild)}</AutoSizer>
-    );
-
-    const listRenderer = (onRowsRendered: any, registerChild: any) => ({height, width}: any): ReactElement => (
-      <List
-        height={height}
-        width={width}
-        onRowsRendered={(params) => handleRowsRendered(onRowsRendered, params)}
-        ref={registerChild}
-        deferredMeasurementCache={cellMeasurerCache}
-        rowCount={messages.length}
-        rowHeight={cellMeasurerCache.rowHeight}
-        overscanRowCount={10}
-        scrollToIndex={rendered ? undefined : messages.length - 1}
-        rowRenderer={rowRenderer}
-      />
-    );
-
-    const rowRenderer = ({index, isVisible, key, parent, style}: any): ReactElement => (
-      <CellMeasurer cache={cellMeasurerCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
-        <MessageContentBox message={messages[index]} account={account} isVisible={isVisible} key={key}
-                           style={style} />
-      </CellMeasurer>
+    const messageRenderer = ({index, isVisible, style}: ListRowProps): ReactElement => (
+      <MessageContentBox message={messages[index]} account={account} isVisible={isVisible} style={style} />
     );
 
     return loading ? (
       <CircularSpinner size="sm" />
     ) : (
       <Box className={classes.root}>
-        {listLoader()}
+        <VirtualizedList
+          renderer={messageRenderer}
+          isRowLoaded={({index}) => index > 0 ? true : allMessagesLoaded}
+          loadMoreRows={loadMoreMessages}
+          loadedLength={messages.length}
+          totalLength={allMessagesLoaded ? messages?.length : messages?.length + 1}
+          onScroll={onScroll}
+          scrollToIndex={shouldScrollDown ? messages.length - 1 : undefined}
+        />
+        <MessageContentScrollButton
+          show={!scrolledToBottom}
+          highlighted={unreadCount > 0}
+          setShouldScrollDown={setShouldScrollDown}
+        />
       </Box>
     );
   }

@@ -7,3 +7,4 @@ export * from './page-spacer';
 export * from './paper-box';
 export * from './popup-menu';
 export * from './solo-badge';
+export * from './virtualized-list';
