@@ -19,6 +19,7 @@ import {
 import {VirtualizedList} from '../../../common/surfaces';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/messenger-contexts/unread-messages-context';
 import MessageContentScrollButton from './message-content-scroll-button';
+import {ArrayUtils} from '../../../../shared/utils/array.utils';
 
 type Props = {
   chat: Chat;
@@ -40,16 +41,17 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
 
     const onScroll = ({clientHeight, scrollHeight, scrollTop}: ScrollParams): void => {
       const isNotRendered = clientHeight === 0;
-      const isScrolledToBottom = scrollHeight === scrollTop + clientHeight;
+      const isScrolledToBottom = scrollHeight === scrollTop + clientHeight || clientHeight === 0;
       setScrolledToBottom(isScrolledToBottom);
       setShouldScrollDown(isNotRendered || isScrolledToBottom);
     };
 
     const addLoadedMessageToState = (loadedMessages: Message[]): void => {
-      const comparator = (a: Message, b: Message): number => a.createdAt > b.createdAt ? 1 : -1;
       setMessages((prevState) => {
         const combinedMessages = [...loadedMessages, ...prevState];
-        return combinedMessages.sort(comparator);
+        return combinedMessages
+          .filter(ArrayUtils.uniqueByIdFilter)
+          .sort(ArrayUtils.createdAtComparator);
       });
     };
 

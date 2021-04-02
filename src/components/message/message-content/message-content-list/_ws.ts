@@ -1,11 +1,17 @@
 import {Chat} from '../../../../models/chat.model';
 import {Message, MessageReactions, MessageStatuses} from '../../../../models/message.model';
+import {ArrayUtils} from '../../../../shared/utils/array.utils';
 
 type SetMessagesType = (value: (prevState: Message[]) => Message[]) => void;
 
 export const handleMessageNewEvent = (chat: Chat, event: Message, setMessages: SetMessagesType): void => {
   if (chat?.id === event?.chatId) {
-    setMessages((prevState) => [...prevState, event]);
+    setMessages((prevState) => {
+      const combinedMessages = [...prevState, event];
+      return combinedMessages
+        .filter(ArrayUtils.uniqueByIdFilter)
+        .sort(ArrayUtils.createdAtComparator);
+    });
   }
 };
 
