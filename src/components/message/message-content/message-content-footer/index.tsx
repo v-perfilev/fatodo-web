@@ -17,10 +17,12 @@ const MessageContentFooter: FC<Props> = ({chatId}: Props) => {
   const [message, setMessage] = useState<string>('');
 
   const send = (): void => {
-    const dto = {text: message} as MessageDTO;
-    MessageService.sendIndirectMessage(chatId, dto).catch((response) => {
-      handleResponse(response);
-    });
+    if (message.trim().length > 0) {
+      const dto = {text: message} as MessageDTO;
+      MessageService.sendIndirectMessage(chatId, dto).catch((response) => {
+        handleResponse(response);
+      });
+    }
   };
 
   return (
