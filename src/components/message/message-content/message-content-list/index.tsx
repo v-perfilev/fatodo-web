@@ -14,7 +14,7 @@ import {
   handleMessageNewEvent,
   handleMessageReactionsEvent,
   handleMessageStatusesEvent,
-  handleMessageUpdateEvent,
+  handleMessageUpdateEvent
 } from './_ws';
 import {VirtualizedList} from '../../../common/surfaces';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/messenger-contexts/unread-messages-context';
@@ -35,15 +35,16 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   const [loading, setLoading] = useState(true);
   const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);
-  const [shouldScrollDown, setShouldScrollDown] = useState(true);
+  const [messagesRecentlyChanged, setMessagesRecentlyChanged] = useState(false);
+
+  let timerId;
 
   const unreadCount = unreadMessageCountMap?.get(chat.id);
 
   const onScroll = ({clientHeight, scrollHeight, scrollTop}: ScrollParams): void => {
-    const isNotRendered = clientHeight === 0;
-    const isScrolledToBottom = scrollHeight === scrollTop + clientHeight || clientHeight === 0;
-    setScrolledToBottom(isScrolledToBottom);
-    setShouldScrollDown(isNotRendered || isScrolledToBottom);
+    if (!messagesRecentlyChanged) {
+      setScrolledToBottom(scrollHeight === scrollTop + clientHeight);
+    }
   };
 
   const addLoadedMessagesToState = (loadedMessages: Message[]): void => {
@@ -73,11 +74,19 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
         });
     });
 
-  const isMessageLoaded = ({index}): boolean => (index > 0 ? true : allMessagesLoaded);
+  const isMessageLoaded = ({index}): boolean => {
+    return index > 0 ? true : allMessagesLoaded;
+  };
 
   useEffect(() => {
     loadMoreMessages().finally();
   }, [chat]);
+
+  useEffect(() => {
+    setMessagesRecentlyChanged(true);
+    window.clearTimeout(timerId);
+    timerId = window.setTimeout(() => setMessagesRecentlyChanged(false), 100);
+  }, [messages]);
 
   useEffect(() => {
     handleMessageNewEvent(chat, messageNewEvent, setMessages);
@@ -110,12 +119,12 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
         loadedLength={messages.length}
         totalLength={allMessagesLoaded ? messages.length : messages.length + 1}
         onScroll={onScroll}
-        scrollToIndex={shouldScrollDown ? messages.length - 1 : undefined}
+        scrollToIndex={scrolledToBottom ? messages.length - 1 : undefined}
       />
       <MessageContentScrollButton
         show={!scrolledToBottom}
         highlighted={unreadCount > 0}
-        setShouldScrollDown={setShouldScrollDown}
+        setShouldScrollDown={setScrolledToBottom}
       />
     </Box>
   );

@@ -59,7 +59,9 @@ const MessageControlList: FC<Props> = ({chat, setChat, account}: Props) => {
         });
     });
 
-  const isChatLoaded = ({index}): boolean => (index < chats.length ? true : allChatsLoaded);
+  const isChatLoaded = ({index}): boolean => {
+    return index < chats.length ? true : allChatsLoaded;
+  };
 
   useEffect(() => {
     loadMoreChats().finally();
