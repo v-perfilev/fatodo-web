@@ -62,7 +62,7 @@ const formik = withFormik<Props, AccountPasswordFormValues>({
       .finally(() => {
         setSubmitting(false);
       });
-  }
+  },
 });
 
 export default compose(withSnackContext, formik)(AccountPasswordForm);

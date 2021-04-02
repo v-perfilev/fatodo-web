@@ -13,16 +13,18 @@ import {useUnreadMessagesContext} from '../../../../shared/contexts/messenger-co
 import {SoloBadge} from '../../../common/surfaces';
 
 type Props = HTMLAttributes<HTMLElement> & {
-  chat: Chat;
+  index: number;
+  chats: Chat[];
   isSelected: boolean;
   account: User;
 };
 
-const MessageControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Props) => {
+const MessageControlChat: FC<Props> = ({index, chats, isSelected, account, ...props}: Props) => {
   const classes = messageControlChatStyles();
   const {users, handleUserIds} = useUserListContext();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
 
+  const chat = chats[index];
   const unreadCount = unreadMessageCountMap?.get(chat.id);
   const title = ChatUtils.getTitle(chat, users, account);
   const date = chat.lastMessage?.createdAt ? new Date(chat.lastMessage.createdAt) : null;

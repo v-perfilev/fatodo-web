@@ -8,9 +8,7 @@ export const handleMessageNewEvent = (chat: Chat, event: Message, setMessages: S
   if (chat?.id === event?.chatId) {
     setMessages((prevState) => {
       const combinedMessages = [...prevState, event];
-      return combinedMessages
-        .filter(ArrayUtils.uniqueByIdFilter)
-        .sort(ArrayUtils.createdAtComparator);
+      return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
     });
   }
 };

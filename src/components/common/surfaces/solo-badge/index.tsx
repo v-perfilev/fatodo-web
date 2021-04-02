@@ -7,7 +7,5 @@ type Props = BadgeProps;
 export const SoloBadge: FC<Props> = (props: Props) => {
   const classes = soloBadgeStyles();
 
-  return (
-    <Badge className={classes.root} {...props} />
-  );
+  return <Badge className={classes.root} {...props} />;
 };

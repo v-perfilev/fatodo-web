@@ -35,7 +35,7 @@ const Header: FC<Props> = ({flexible, logout}: Props) => {
     toRootAndLogout: (): void => {
       history.push(Routes.ROOT);
       logout();
-    }
+    },
   } as RedirectMap;
 
   const toggleMenu = (): void => setShowMenu((prevState) => !prevState);

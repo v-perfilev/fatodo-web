@@ -3,8 +3,8 @@ import {Theme} from '@material-ui/core';
 
 export const messageContentBoxStyles = makeStyles((theme: Theme) => ({
   spacer: {
-    height: theme.spacing(2)
-  }
+    height: theme.spacing(2),
+  },
 }));
 
 export const messageContentBoxEventStyles = makeStyles((theme: Theme) => ({
@@ -14,17 +14,17 @@ export const messageContentBoxEventStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
   },
   date: {
     fontSize: '0.7rem',
-    color: theme.palette.grey['500']
+    color: theme.palette.grey['500'],
   },
   text: {
     fontSize: '0.8rem',
     fontWeight: 'bold',
-    color: theme.palette.grey['500']
-  }
+    color: theme.palette.grey['500'],
+  },
 }));
 
 export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
@@ -33,7 +33,7 @@ export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'start',
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
   },
   message: {
     display: 'flex',
@@ -47,8 +47,8 @@ export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
 
     '&.unread': {
       borderWidth: 2,
-      borderColor: theme.palette.primary.main
-    }
+      borderColor: theme.palette.primary.main,
+    },
   },
   header: {
     display: 'flex',
@@ -56,20 +56,20 @@ export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     flexGrow: 1,
     margin: theme.spacing(1),
-    marginBottom: theme.spacing(0.5)
+    marginBottom: theme.spacing(0.5),
   },
   name: {
     fontWeight: 'bold',
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   date: {
-    color: theme.palette.grey['500']
+    color: theme.palette.grey['500'],
   },
   body: {
     margin: theme.spacing(1),
-    marginTop: theme.spacing(0.5)
-  }
+    marginTop: theme.spacing(0.5),
+  },
 }));
 
 export const messageContentBoxOutcomingStyles = makeStyles((theme: Theme) => ({
@@ -80,7 +80,7 @@ export const messageContentBoxOutcomingStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'row',
     alignItems: 'start',
     justifyContent: 'flex-end',
-    paddingBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2),
   },
   message: {
     display: 'flex',
@@ -90,7 +90,7 @@ export const messageContentBoxOutcomingStyles = makeStyles((theme: Theme) => ({
     borderStyle: 'solid',
     borderColor: theme.palette.grey['300'],
     borderRadius: 5,
-    backgroundColor: theme.palette.grey['100']
+    backgroundColor: theme.palette.grey['100'],
   },
   header: {
     display: 'flex',
@@ -98,18 +98,18 @@ export const messageContentBoxOutcomingStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     flexGrow: 1,
     margin: theme.spacing(1),
-    marginBottom: theme.spacing(0.5)
+    marginBottom: theme.spacing(0.5),
   },
   name: {
     fontWeight: 'bold',
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   date: {
-    color: theme.palette.grey['500']
+    color: theme.palette.grey['500'],
   },
   body: {
     margin: theme.spacing(1),
-    marginTop: theme.spacing(0.5)
-  }
+    marginTop: theme.spacing(0.5),
+  },
 }));

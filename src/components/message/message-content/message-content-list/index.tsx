@@ -14,7 +14,7 @@ import {
   handleMessageNewEvent,
   handleMessageReactionsEvent,
   handleMessageStatusesEvent,
-  handleMessageUpdateEvent
+  handleMessageUpdateEvent,
 } from './_ws';
 import {VirtualizedList} from '../../../common/surfaces';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/messenger-contexts/unread-messages-context';
@@ -27,42 +27,41 @@ type Props = {
 };
 
 const MessageContentList: FC<Props> = ({chat, account}: Props) => {
-    const classes = messageContentListStyles();
-    const {messageNewEvent, messageUpdateEvent, messageStatusesEvent, messageReactionsEvent} = useWsMessagesContext();
-    const {unreadMessageCountMap} = useUnreadMessagesContext();
-    const {handleResponse} = useSnackContext();
-    const [messages, setMessages] = useState<Message[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
-    const [scrolledToBottom, setScrolledToBottom] = useState(true);
-    const [shouldScrollDown, setShouldScrollDown] = useState(true);
+  const classes = messageContentListStyles();
+  const {messageNewEvent, messageUpdateEvent, messageStatusesEvent, messageReactionsEvent} = useWsMessagesContext();
+  const {unreadMessageCountMap} = useUnreadMessagesContext();
+  const {handleResponse} = useSnackContext();
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
+  const [scrolledToBottom, setScrolledToBottom] = useState(true);
+  const [shouldScrollDown, setShouldScrollDown] = useState(true);
 
-    const unreadCount = unreadMessageCountMap?.get(chat.id);
+  const unreadCount = unreadMessageCountMap?.get(chat.id);
 
-    const onScroll = ({clientHeight, scrollHeight, scrollTop}: ScrollParams): void => {
-      const isNotRendered = clientHeight === 0;
-      const isScrolledToBottom = scrollHeight === scrollTop + clientHeight || clientHeight === 0;
-      setScrolledToBottom(isScrolledToBottom);
-      setShouldScrollDown(isNotRendered || isScrolledToBottom);
-    };
+  const onScroll = ({clientHeight, scrollHeight, scrollTop}: ScrollParams): void => {
+    const isNotRendered = clientHeight === 0;
+    const isScrolledToBottom = scrollHeight === scrollTop + clientHeight || clientHeight === 0;
+    setScrolledToBottom(isScrolledToBottom);
+    setShouldScrollDown(isNotRendered || isScrolledToBottom);
+  };
 
-    const addLoadedMessageToState = (loadedMessages: Message[]): void => {
-      setMessages((prevState) => {
-        const combinedMessages = [...loadedMessages, ...prevState];
-        return combinedMessages
-          .filter(ArrayUtils.uniqueByIdFilter)
-          .sort(ArrayUtils.createdAtComparator);
-      });
-    };
+  const addLoadedMessagesToState = (loadedMessages: Message[]): void => {
+    setMessages((prevState) => {
+      const combinedMessages = [...loadedMessages, ...prevState];
+      return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
+    });
+  };
 
-    const loadMoreMessages = (): Promise<void> => new Promise((resolve) => {
+  const loadMoreMessages = (): Promise<void> =>
+    new Promise((resolve) => {
       MessageService.getAllMessagesByChatIdPageable(chat.id, messages.length)
         .then((response) => {
           const newMessages = response.data;
           if (newMessages.length === 0) {
             setAllMessagesLoaded(true);
           } else {
-            addLoadedMessageToState(newMessages);
+            addLoadedMessagesToState(newMessages);
           }
         })
         .catch((response) => {
@@ -74,51 +73,52 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
         });
     });
 
-    useEffect(() => {
-      loadMoreMessages().finally();
-    }, [chat]);
+  const isMessageLoaded = ({index}): boolean => (index > 0 ? true : allMessagesLoaded);
 
-    useEffect(() => {
-      handleMessageNewEvent(chat, messageNewEvent, setMessages);
-    }, [messageNewEvent]);
+  useEffect(() => {
+    loadMoreMessages().finally();
+  }, [chat]);
 
-    useEffect(() => {
-      handleMessageUpdateEvent(chat, messageUpdateEvent, setMessages);
-    }, [messageUpdateEvent]);
+  useEffect(() => {
+    handleMessageNewEvent(chat, messageNewEvent, setMessages);
+  }, [messageNewEvent]);
 
-    useEffect(() => {
-      handleMessageStatusesEvent(chat, messageStatusesEvent, setMessages);
-    }, [messageStatusesEvent]);
+  useEffect(() => {
+    handleMessageUpdateEvent(chat, messageUpdateEvent, setMessages);
+  }, [messageUpdateEvent]);
 
-    useEffect(() => {
-      handleMessageReactionsEvent(chat, messageReactionsEvent, setMessages);
-    }, [messageReactionsEvent]);
+  useEffect(() => {
+    handleMessageStatusesEvent(chat, messageStatusesEvent, setMessages);
+  }, [messageStatusesEvent]);
 
-    const messageRenderer = ({index, isVisible, style}: ListRowProps): ReactElement => (
-      <MessageContentBox index={index} messages={messages} account={account} isVisible={isVisible} style={style} />
-    );
+  useEffect(() => {
+    handleMessageReactionsEvent(chat, messageReactionsEvent, setMessages);
+  }, [messageReactionsEvent]);
 
-    return loading ? (
-      <CircularSpinner size="sm" />
-    ) : (
-      <Box className={classes.root}>
-        <VirtualizedList
-          renderer={messageRenderer}
-          isRowLoaded={({index}) => index > 0 ? true : allMessagesLoaded}
-          loadMoreRows={loadMoreMessages}
-          loadedLength={messages.length}
-          totalLength={allMessagesLoaded ? messages?.length : messages?.length + 1}
-          onScroll={onScroll}
-          scrollToIndex={shouldScrollDown ? messages.length - 1 : undefined}
-        />
-        <MessageContentScrollButton
-          show={!scrolledToBottom}
-          highlighted={unreadCount > 0}
-          setShouldScrollDown={setShouldScrollDown}
-        />
-      </Box>
-    );
-  }
-;
+  const messageRenderer = ({index, isVisible, style}: ListRowProps): ReactElement => (
+    <MessageContentBox index={index} messages={messages} account={account} isVisible={isVisible} style={style} />
+  );
+
+  return loading ? (
+    <CircularSpinner size="sm" />
+  ) : (
+    <Box className={classes.root}>
+      <VirtualizedList
+        renderer={messageRenderer}
+        isRowLoaded={isMessageLoaded}
+        loadMoreRows={loadMoreMessages}
+        loadedLength={messages.length}
+        totalLength={allMessagesLoaded ? messages.length : messages.length + 1}
+        onScroll={onScroll}
+        scrollToIndex={shouldScrollDown ? messages.length - 1 : undefined}
+      />
+      <MessageContentScrollButton
+        show={!scrolledToBottom}
+        highlighted={unreadCount > 0}
+        setShouldScrollDown={setShouldScrollDown}
+      />
+    </Box>
+  );
+};
 
 export default MessageContentList;

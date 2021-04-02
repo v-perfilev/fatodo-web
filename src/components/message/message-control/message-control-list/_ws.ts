@@ -7,7 +7,10 @@ type SetChatsType = (value: (prevState: Chat[]) => Chat[]) => void;
 
 export const handleChatNewEvent = (event: Chat, setChats: SetChatsType): void => {
   if (event) {
-    setChats((prevState) => [...prevState, event]);
+    setChats((prevState) => {
+      const combinedChats = [event, ...prevState];
+      return combinedChats.filter(ArrayUtils.uniqueByIdFilter);
+    });
   }
 };
 

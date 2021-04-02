@@ -48,9 +48,11 @@ const HorizontalMenu: FC<Props> = ({redirectMap, isAuthenticated}: Props) => {
 
   const authenticatedMenu = (
     <>
-      <Button color="primary"
-              startIcon={<BadgeMessageIcon count={totalUnreadMessages} />}
-              onClick={redirectMap.toMessages}>
+      <Button
+        color="primary"
+        startIcon={<BadgeMessageIcon count={totalUnreadMessages} />}
+        onClick={redirectMap.toMessages}
+      >
         {t('header.messages')}
       </Button>
       <Button color="primary" startIcon={<UserListIcon />} onClick={redirectMap.toContacts}>

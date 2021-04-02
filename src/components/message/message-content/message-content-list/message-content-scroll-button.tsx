@@ -19,7 +19,7 @@ const MessageContentScrollButton: FC<Props> = ({show, highlighted, setShouldScro
   };
 
   return show ? (
-    <Fab className={classes.root} color={color} onClick={scrollDown} size='medium'>
+    <Fab className={classes.root} color={color} onClick={scrollDown} size="medium">
       <ArrowDownIcon />
     </Fab>
   ) : null;

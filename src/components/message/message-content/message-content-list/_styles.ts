@@ -8,16 +8,15 @@ export const messageContentListStyles = makeStyles(() => ({
     height: 'calc(100vh - ' + CHAT_CONTENT_HEADER_HEIGHT + 'px - ' + CHAT_CONTENT_FOOTER_HEIGHT + 'px)',
 
     '& .ReactVirtualized__List:focus': {
-      outline: 'none'
-    }
-
-  }
+      outline: 'none',
+    },
+  },
 }));
 
 export const messageContentScrollButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'absolute',
     right: theme.spacing(2),
-    bottom: theme.spacing(2)
-  }
+    bottom: theme.spacing(2),
+  },
 }));

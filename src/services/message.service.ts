@@ -9,7 +9,7 @@ export default class MessageService {
   /*
     ChatController
    */
-  public static getAllChatsPageable = (offset?: string, size?: string): AxiosPromise<Chat[]> => {
+  public static getAllChatsPageable = (offset?: number, size?: number): AxiosPromise<Chat[]> => {
     const url = MessageService.baseUrl + '/chat';
     const params = {offset, size};
     return axios.get(url, {params});
