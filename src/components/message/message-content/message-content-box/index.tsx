@@ -1,4 +1,4 @@
-import React, {FC, HTMLAttributes, useEffect} from 'react';
+import React, {FC, HTMLAttributes, memo, useEffect} from 'react';
 import {Message} from '../../../../models/message.model';
 import MessageContentBoxOutcoming from './message-content-box-outcoming';
 import MessageContentBoxIncoming from './message-content-box-incoming';
@@ -42,4 +42,4 @@ const MessageContentBox: FC<Props> = ({index, messages, account, isVisible, styl
   );
 };
 
-export default MessageContentBox;
+export default memo(MessageContentBox);

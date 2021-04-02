@@ -36,7 +36,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   const {rowHeight, onScroll, onSectionRendered, scrollToIndex} = props;
 
   useEffect(() => {
-    // cellMeasurerCache.clearAll();
+    cellMeasurerCache.clearAll();
   }, [totalLength]);
 
   const rowRendererWithMeasurer = (props: ListRowProps): ReactElement => (

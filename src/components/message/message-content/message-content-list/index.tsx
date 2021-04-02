@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useEffect, useState} from 'react';
+import React, {FC, memo, ReactElement, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {messageContentListStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
@@ -54,25 +54,24 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
     });
   };
 
-  const loadMoreMessages = (): Promise<void> =>
-    new Promise((resolve) => {
-      MessageService.getAllMessagesByChatIdPageable(chat.id, messages.length)
-        .then((response) => {
-          const newMessages = response.data;
-          if (newMessages.length === 0) {
-            setAllMessagesLoaded(true);
-          } else {
-            addLoadedMessagesToState(newMessages);
-          }
-        })
-        .catch((response) => {
-          handleResponse(response);
-        })
-        .finally(() => {
-          setLoading(false);
-          resolve();
-        });
-    });
+  const loadMoreMessages = (): Promise<void> => new Promise((resolve) => {
+    MessageService.getAllMessagesByChatIdPageable(chat.id, messages.length)
+      .then((response) => {
+        const newMessages = response.data;
+        if (newMessages.length === 0) {
+          setAllMessagesLoaded(true);
+        } else {
+          addLoadedMessagesToState(newMessages);
+        }
+      })
+      .catch((response) => {
+        handleResponse(response);
+      })
+      .finally(() => {
+        setLoading(false);
+        resolve();
+      });
+  });
 
   const isMessageLoaded = ({index}): boolean => {
     return index > 0 ? true : allMessagesLoaded;
@@ -130,4 +129,4 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
   );
 };
 
-export default MessageContentList;
+export default memo(MessageContentList);
