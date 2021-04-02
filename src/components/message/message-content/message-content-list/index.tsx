@@ -93,7 +93,7 @@ const MessageContentList: FC<Props> = ({chat, account}: Props) => {
     }, [messageReactionsEvent]);
 
     const messageRenderer = ({index, isVisible, style}: ListRowProps): ReactElement => (
-      <MessageContentBox message={messages[index]} account={account} isVisible={isVisible} style={style} />
+      <MessageContentBox index={index} messages={messages} account={account} isVisible={isVisible} style={style} />
     );
 
     return loading ? (

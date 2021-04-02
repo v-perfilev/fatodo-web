@@ -1,6 +1,12 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
+export const messageContentBoxStyles = makeStyles((theme: Theme) => ({
+  spacer: {
+    height: theme.spacing(2)
+  }
+}));
+
 export const messageContentBoxEventStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '80%',
@@ -8,8 +14,7 @@ export const messageContentBoxEventStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(2)
   },
   date: {
     fontSize: '0.7rem',
@@ -28,8 +33,7 @@ export const messageContentBoxIncomingStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'start',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(2)
   },
   message: {
     display: 'flex',
@@ -76,8 +80,7 @@ export const messageContentBoxOutcomingStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'row',
     alignItems: 'start',
     justifyContent: 'flex-end',
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(1)
+    paddingBottom: theme.spacing(2)
   },
   message: {
     display: 'flex',

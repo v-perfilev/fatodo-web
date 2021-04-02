@@ -10,6 +10,7 @@ export const messageContentListStyles = makeStyles(() => ({
     '& .ReactVirtualized__List:focus': {
       outline: 'none'
     }
+
   }
 }));
 
