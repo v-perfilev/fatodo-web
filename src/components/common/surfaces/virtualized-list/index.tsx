@@ -1,4 +1,4 @@
-import React, {FC, ReactElement} from 'react';
+import React, {FC, ReactElement, useEffect} from 'react';
 import {
   AutoSizer,
   CellMeasurer,
@@ -22,17 +22,21 @@ type Props = {
   loadMoreRows: (params: IndexRange) => Promise<void>,
   onScroll?: (params: ScrollParams) => void,
   onSectionRendered?: (params: RenderedSection) => void,
-  scrollToIndex?: number
+  scrollToIndex?: number,
 };
 
 const cellMeasurerCache = new CellMeasurerCache({
-  defaultHeight: 100,
+  defaultHeight: 50,
   fixedWidth: true
 });
 
 export const VirtualizedList: FC<Props> = (props: Props) => {
   const {renderer, loadedLength, totalLength, isRowLoaded, loadMoreRows} = props;
   const {onScroll, onSectionRendered, scrollToIndex} = props;
+
+  useEffect(() => {
+    cellMeasurerCache.clearAll();
+  }, [totalLength]);
 
   const listLoader = (): ReactElement => (
     <InfiniteLoader
@@ -49,10 +53,10 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   );
 
   const listRenderer = ({onRowsRendered, registerChild}: InfiniteLoaderChildProps) =>
-    ({height, width}: Size): ReactElement => (
+    ({width, height}: Size): ReactElement => (
       <List
-        height={height}
         width={width}
+        height={height}
         onScroll={onScroll}
         onSectionRendered={onSectionRendered}
         onRowsRendered={onRowsRendered}
@@ -66,7 +70,12 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     );
 
   const rowRenderer = (props: ListRowProps): ReactElement => (
-    <CellMeasurer cache={cellMeasurerCache} columnIndex={0} rowIndex={props.index} {...props}>
+    <CellMeasurer
+      cache={cellMeasurerCache}
+      columnIndex={0}
+      rowIndex={props.index}
+      {...props}
+    >
       {renderer(props)}
     </CellMeasurer>
   );
