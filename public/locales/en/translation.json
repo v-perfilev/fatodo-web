@@ -5,7 +5,7 @@
     "login": "Log In",
     "account": "Account",
     "contacts": "Contacts",
-    "messages": "Messages"
+    "chats": "Messages"
   },
   "auth": {
     "socialLogin": "or log in with"

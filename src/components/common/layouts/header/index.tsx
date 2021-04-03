@@ -30,7 +30,7 @@ const Header: FC<Props> = ({flexible, logout}: Props) => {
     toLogin: (): void => history.push(Routes.LOGIN),
     toRegistration: (): void => history.push(Routes.REGISTRATION),
     toAccount: (): void => history.push(Routes.ACCOUNT),
-    toMessages: (): void => history.push(Routes.MESSAGES),
+    toChats: (): void => history.push(Routes.CHATS),
     toContacts: (): void => history.push(Routes.CONTACTS),
     toRootAndLogout: (): void => {
       history.push(Routes.ROOT);

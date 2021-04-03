@@ -14,7 +14,7 @@ import {ArrowDownIcon} from '../../icons/arrow-down-icon';
 import {PopupMenu} from '../../surfaces';
 import {AccountIcon} from '../../icons/account-icon';
 import {UserListIcon} from '../../icons/user-list-icon';
-import {useUnreadMessagesContext} from '../../../../shared/contexts/messenger-contexts/unread-messages-context';
+import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
 import {compose} from 'recompose';
 import {RedirectMap} from './type';
@@ -51,9 +51,9 @@ const HorizontalMenu: FC<Props> = ({redirectMap, isAuthenticated}: Props) => {
       <Button
         color="primary"
         startIcon={<BadgeMessageIcon count={totalUnreadMessages} />}
-        onClick={redirectMap.toMessages}
+        onClick={redirectMap.toChats}
       >
-        {t('header.messages')}
+        {t('header.chats')}
       </Button>
       <Button color="primary" startIcon={<UserListIcon />} onClick={redirectMap.toContacts}>
         {t('header.contacts')}

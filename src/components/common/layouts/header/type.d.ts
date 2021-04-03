@@ -2,7 +2,7 @@ export interface RedirectMap {
   toLogin: () => void;
   toRegistration: () => void;
   toAccount: () => void;
-  toMessages: () => void;
+  toChats: () => void;
   toContacts: () => void;
   toRootAndLogout: () => void;
 }

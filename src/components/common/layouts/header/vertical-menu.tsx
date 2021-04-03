@@ -11,7 +11,7 @@ import {SignUpIcon} from '../../icons/signup-icon';
 import {AccountIcon} from '../../icons/account-icon';
 import CurrentUser from '../current-user';
 import {UserListIcon} from '../../icons/user-list-icon';
-import {useUnreadMessagesContext} from '../../../../shared/contexts/messenger-contexts/unread-messages-context';
+import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
 import {RedirectMap} from './type';
 import withAuthState from '../../../../shared/hocs/with-auth-state';
@@ -44,11 +44,11 @@ const VerticalMenu: FC<Props> = ({isAuthenticated, redirectMap}: Props) => {
 
   const authenticatedMenu = (
     <>
-      <ListItem button onClick={redirectMap.toMessages}>
+      <ListItem button onClick={redirectMap.toChats}>
         <ListItemIcon>
           <BadgeMessageIcon count={totalUnreadMessages} className={classes.icon} />
         </ListItemIcon>
-        <ListItemText>{t('header.messages')}</ListItemText>
+        <ListItemText>{t('header.chats')}</ListItemText>
       </ListItem>
       <ListItem button onClick={redirectMap.toContacts}>
         <ListItemIcon>

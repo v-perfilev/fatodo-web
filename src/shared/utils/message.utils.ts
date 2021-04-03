@@ -23,11 +23,11 @@ export class MessageUtils {
       params?.type === EventMessageType.ADD_MEMBERS ||
       params?.type === EventMessageType.DELETE_MEMBERS
     ) {
-      text = t('message:event.' + params.type, {username, usernames});
+      text = t('chat:event.' + params.type, {username, usernames});
     } else if (params?.type === EventMessageType.RENAME_CHAT) {
-      text = t('message:event.' + params.type, {username, title});
+      text = t('chat:event.' + params.type, {username, title});
     } else if (params?.type === EventMessageType.LEAVE_CHAT) {
-      text = t('message:event.' + params.type, {username});
+      text = t('chat:event.' + params.type, {username});
     }
     return text;
   };
