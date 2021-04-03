@@ -33,7 +33,7 @@ const ChatControlChat: FC<Props> = ({index, chats, isSelected, account, ...props
   const classNames = csx(classes.root, {selected: isSelected});
 
   useEffect(() => {
-    handleUserIds(chat.members);
+    handleUserIds(chat?.members);
   }, []);
 
   return (

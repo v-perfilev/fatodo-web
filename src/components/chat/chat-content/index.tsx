@@ -18,7 +18,7 @@ const ChatContent: FC<Props> = ({chat, account}: Props) => {
   const {handleUserIds} = useUserListContext();
 
   useEffect(() => {
-    handleUserIds(chat.members);
+    handleUserIds(chat?.members);
   }, [chat]);
 
   return (

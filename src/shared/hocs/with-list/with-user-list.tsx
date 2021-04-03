@@ -34,11 +34,13 @@ const withUserList = (Component: ComponentType): FC => (props): ReactElement => 
   const context = {users, handleUserIds: setIds};
 
   useEffect(() => {
-    const cachedIds = users.map((user) => user.id);
-    cachedIds.push(...loadingIds);
-    const absentIds = ids.filter((id) => !cachedIds.includes(id));
-    if (absentIds.length > 0) {
-      addAbsentUsers(absentIds);
+    if (ids) {
+      const cachedIds = users.map((user) => user.id);
+      cachedIds.push(...loadingIds);
+      const absentIds = ids.filter((id) => !cachedIds.includes(id));
+      if (absentIds.length > 0) {
+        addAbsentUsers(absentIds);
+      }
     }
   }, [ids]);
 
