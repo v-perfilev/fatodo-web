@@ -18,6 +18,7 @@ import {PlusIcon} from '../../common/icons/plus-icon';
 import CreateChatDialog from '../create-chat-dialog';
 import withUserList from '../../../shared/hocs/with-list/with-user-list';
 import withAuthState from '../../../shared/hocs/with-auth-state';
+import {useWsChatContext} from '../../../shared/contexts/chat-contexts/ws-chat-context';
 
 type Props = AuthState;
 
@@ -29,6 +30,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   const {updateMenu} = useAdditionalMenuContext();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'), {noSsr: true});
   const [showCreateChatDialog, setShowCreateChatDialog] = useState<boolean>(false);
+  const {selectChat} = useWsChatContext();
   const [chat, setChat] = useState<Chat>();
 
   const openRequestDialog = (): void => setShowCreateChatDialog(true);
@@ -52,6 +54,10 @@ const ChatMain: FC<Props> = ({account}: Props) => {
       />
     </>
   );
+
+  useEffect(() => {
+    selectChat(chat);
+  }, [chat]);
 
   useEffect(() => {
     updateMenu(menu);

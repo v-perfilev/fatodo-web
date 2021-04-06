@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import * as ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 
@@ -22,23 +22,23 @@ import withDefaultTheme from './shared/hocs/with-default-theme';
 import withMui from './shared/hocs/with-mui';
 import withSnack from './shared/hocs/with-snack/with-snack';
 import withChat from './shared/hocs/with-chat/with-chat';
+import {enqueueReduxSnack} from './store/actions/snack.actions';
 
-const Root: FC = () => {
-  // setup axios
-  const actions = bindActionCreators({clearAuth}, store.dispatch);
-  setupAxiosInterceptors({
-    onUnauthenticated: actions.clearAuth
-  });
+// setup axios
+const axiosActions = bindActionCreators({clearAuth, enqueueReduxSnack}, store.dispatch);
+setupAxiosInterceptors({
+  onUnauthenticated: axiosActions.clearAuth,
+  enqueueReduxSnackbar: axiosActions.enqueueReduxSnack
+});
 
-  return (
-    <Router>
-      <CssBaseline />
-      <App />
-    </Router>
-  );
-};
+const Root: FC = () => (
+  <Router>
+    <CssBaseline />
+    <App />
+  </Router>
+);
 
-const WrappedRoot = compose(withStore, withDefaultTheme, withMui, withSnack, withChat)(Root);
+const WrappedRoot = compose(withStore, withDefaultTheme, withMui, withSnack, withChat, memo)(Root);
 
 const root = document.getElementById('root');
 initLanguages.then(() => {

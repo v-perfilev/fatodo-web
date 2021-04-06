@@ -16,7 +16,7 @@ type Props = AuthState & FormikProps<ContactRequestFormValues> & FormDialogCompo
 
 const ContactRequestForm: FC<Props> = (props: Props) => {
   const {setIsSubmitting, setIsValid, setSubmitForm, setResetForm} = props;
-  const {values, setFieldValue, isValid, isSubmitting, submitForm, validateForm, setErrors, resetForm} = props;
+  const {values, errors, setFieldValue, isValid, isSubmitting, submitForm, validateForm, setErrors, resetForm} = props;
   const {t} = useTranslation();
 
   useEffect(() => {
@@ -38,21 +38,21 @@ const ContactRequestForm: FC<Props> = (props: Props) => {
   }, [isSubmitting]);
 
   useEffect(() => {
-    if (values.user) {
-      setFieldValue('userId', '');
-      UserService.getByUsernameOrEmail(values.user)
+    if (values.usernameOrEmail && !errors.usernameOrEmail) {
+      setFieldValue('user', null);
+      UserService.getByUsernameOrEmail(values.usernameOrEmail)
         .then((response) => {
-          setFieldValue('userId', response.data.id);
+          setFieldValue('user', response.data);
         })
         .catch(() => {
           // skip
         });
     }
-  }, [values.user]);
+  }, [values.usernameOrEmail, errors.usernameOrEmail]);
 
   return (
     <Form>
-      <TextInput name="user" label={t('contact:addContact.fields.user.label')} required />
+      <TextInput name="usernameOrEmail" label={t('contact:addContact.fields.user.label')} required />
       <MultilineInput name="message" label={t('contact:addContact.fields.message.label')} rows={4} />
     </Form>
   );
@@ -80,7 +80,7 @@ const formik = withFormik<Props, ContactRequestFormValues>({
         handleResponse(response);
         setSubmitting(false);
       });
-  },
+  }
 });
 
 export default compose<FormDialogComponentProps>(withSnackContext, withAuthState, formik)(ContactRequestForm);

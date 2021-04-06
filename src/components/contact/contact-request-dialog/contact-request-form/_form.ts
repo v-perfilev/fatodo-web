@@ -1,19 +1,19 @@
 import * as Yup from 'yup';
 import {ObjectSchema} from 'yup';
-import {UserAccount} from '../../../../models/user.model';
+import {User, UserAccount} from '../../../../models/user.model';
 import {ContactRequestDTO} from '../../../../models/dto/contact-request.dto';
 import {userValidator} from './validators/user.validator';
 
 export interface ContactRequestFormValues {
-  user: string;
-  userId: string;
+  usernameOrEmail: string;
+  user: User;
   message: string;
 }
 
 export const defaultContactRequestFormValues: Readonly<ContactRequestFormValues> = {
-  user: '',
-  userId: '',
-  message: '',
+  usernameOrEmail: '',
+  user: null,
+  message: ''
 };
 
 export class ContactRequestFormUtils {
@@ -21,12 +21,12 @@ export class ContactRequestFormUtils {
 
   public static validationSchema = (account: UserAccount): ObjectSchema =>
     Yup.object().shape({
-      user: userValidator(account.username, account.email).check(),
-      userId: Yup.string().required(),
+      usernameOrEmail: userValidator(account.username, account.email).check(),
+      user: Yup.string().required()
     });
 
   public static mapValuesToDTO = (values: ContactRequestFormValues): ContactRequestDTO => ({
-    recipientId: values.userId,
-    message: values.message,
+    recipientId: values.user.id,
+    message: values.message
   });
 }

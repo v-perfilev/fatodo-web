@@ -4,24 +4,25 @@ import {SecurityUtils} from './utils/security.utils';
 import {TranslationUtils} from './utils/translation.utils';
 import {ResponseUtils} from './utils/response.utils';
 import {SnackBuilder} from './utils/builders/snack.builder';
-import {useSnackContext} from './contexts/snack-context';
+import Snack from '../models/snack.model';
 
 axios.defaults.timeout = API_TIMEOUT;
 axios.defaults.baseURL = API_URL;
 
 interface SetupAxiosActions {
   onUnauthenticated: () => void;
+  enqueueReduxSnackbar: (snack: Snack) => void;
 }
 
-const setupAxiosInterceptors = (actions: SetupAxiosActions): void => {
-  const {enqueueSnack} = useSnackContext();
+const setupAxiosInterceptors = ({onUnauthenticated, enqueueReduxSnackbar}: SetupAxiosActions): void => {
+
+  const enqueueErrorNotification = (message: string): void => {
+    const snack = new SnackBuilder(message).setVariant('error').build();
+    enqueueReduxSnackbar(snack);
+  };
 
   const handleErrorFeedback = (response: AxiosResponse): void => {
     const status = ResponseUtils.getStatus(response);
-    const enqueueErrorNotification = (message: string): void => {
-      const snack = new SnackBuilder(message).setVariant('error').build();
-      enqueueSnack(snack);
-    };
     if (status >= 500) {
       enqueueErrorNotification(TranslationUtils.getFeedbackTranslation('default'));
     } else if (!status) {
@@ -32,7 +33,7 @@ const setupAxiosInterceptors = (actions: SetupAxiosActions): void => {
   const handleErrorStatus = (response: AxiosResponse): void => {
     const status = ResponseUtils.getStatus(response);
     if (status === 403 || status === 401) {
-      actions.onUnauthenticated();
+      onUnauthenticated();
     }
   };
 

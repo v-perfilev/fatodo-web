@@ -14,26 +14,17 @@ enum WsChatDestinations {
   CHAT_UPDATE = '/user/chat/update',
   CHAT_LAST_MESSAGE = '/user/chat/last-message',
   CHAT_LAST_MESSAGE_UPDATE = '/user/chat/last-message-update',
-  MESSAGE_NEW = '/user/message/new',
-  MESSAGE_UPDATE = '/user/message/update',
-  MESSAGE_STATUS = '/user/message/status',
-  MESSAGE_REACTION = '/user/message/reaction',
+  MESSAGE_NEW = '/user/message/new/',
+  MESSAGE_UPDATE = '/user/message/update/',
+  MESSAGE_STATUS = '/user/message/status/',
+  MESSAGE_REACTION = '/user/message/reaction/',
 }
-
-const wsMessageTopics = [
-  WsChatDestinations.CHAT_NEW,
-  WsChatDestinations.CHAT_UPDATE,
-  WsChatDestinations.CHAT_LAST_MESSAGE,
-  WsChatDestinations.MESSAGE_NEW,
-  WsChatDestinations.MESSAGE_UPDATE,
-  WsChatDestinations.MESSAGE_STATUS,
-  WsChatDestinations.MESSAGE_REACTION,
-];
 
 type Props = PropsWithChildren<AuthState>;
 
 const withWsChatClient = (Component: ComponentType): FC => (props: Props): ReactElement => {
   const {isAuthenticated} = props;
+  const [chat, setChat] = useState<Chat>();
   const [chatNewEvent, setChatNewEvent] = useState<Chat>(null);
   const [chatUpdateEvent, setChatUpdateEvent] = useState<Chat>(null);
   const [chatLastMessageEvent, setChatLastMessageEvent] = useState<Chat>(null);
@@ -46,24 +37,42 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
   const onMessage = (msg: any, topic: string): void => {
     if (topic === WsChatDestinations.CHAT_NEW) {
       setChatNewEvent(msg);
-    } else if (topic === WsChatDestinations.CHAT_UPDATE) {
+    } else if (topic.startsWith(WsChatDestinations.CHAT_UPDATE)) {
       setChatUpdateEvent(msg);
-    } else if (topic === WsChatDestinations.CHAT_LAST_MESSAGE) {
+    } else if (topic.startsWith(WsChatDestinations.CHAT_LAST_MESSAGE)) {
       setChatLastMessageEvent(msg);
-    } else if (topic === WsChatDestinations.CHAT_LAST_MESSAGE_UPDATE) {
+    } else if (topic.startsWith(WsChatDestinations.CHAT_LAST_MESSAGE_UPDATE)) {
       setChatLastMessageUpdateEvent(msg);
-    } else if (topic === WsChatDestinations.MESSAGE_NEW) {
+    } else if (topic.startsWith(WsChatDestinations.MESSAGE_NEW)) {
       setMessageNewEvent(msg);
-    } else if (topic === WsChatDestinations.MESSAGE_UPDATE) {
+    } else if (topic.startsWith(WsChatDestinations.MESSAGE_UPDATE)) {
       setMessageUpdateEvent(msg);
-    } else if (topic === WsChatDestinations.MESSAGE_STATUS) {
+    } else if (topic.startsWith(WsChatDestinations.MESSAGE_STATUS)) {
       setMessageStatusesEvent(msg);
-    } else if (topic === WsChatDestinations.MESSAGE_REACTION) {
+    } else if (topic.startsWith(WsChatDestinations.MESSAGE_REACTION)) {
       setMessageReactionsEvent(msg);
     }
   };
 
+  const wsMessageTopics = [
+    WsChatDestinations.CHAT_NEW,
+    WsChatDestinations.CHAT_UPDATE,
+    WsChatDestinations.CHAT_LAST_MESSAGE,
+    WsChatDestinations.CHAT_LAST_MESSAGE_UPDATE
+  ] as string[];
+
+  if (chat) {
+    const id = chat.id;
+    wsMessageTopics.push(
+      WsChatDestinations.MESSAGE_NEW + id,
+      WsChatDestinations.MESSAGE_UPDATE + id,
+      WsChatDestinations.MESSAGE_STATUS + id,
+      WsChatDestinations.MESSAGE_REACTION + id
+    );
+  }
+
   const context = {
+    selectChat: setChat,
     chatNewEvent,
     chatUpdateEvent,
     chatLastMessageEvent,
@@ -71,13 +80,15 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
     messageNewEvent,
     messageUpdateEvent,
     messageStatusesEvent,
-    messageReactionsEvent,
+    messageReactionsEvent
   };
 
   return (
     <WsChatContext.Provider value={context}>
       <Component {...props} />
-      {isAuthenticated && <WsClient url={WS_URL} topics={wsMessageTopics} onMessage={onMessage} />}
+      {isAuthenticated && (
+        <WsClient url={WS_URL} topics={wsMessageTopics} onMessage={onMessage} />
+      )}
     </WsChatContext.Provider>
   );
 };
