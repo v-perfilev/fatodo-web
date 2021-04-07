@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ComponentType, FC, PropsWithChildren, ReactElement, useEffect, useState} from 'react';
+import {ComponentType, FC, memo, PropsWithChildren, ReactElement, useEffect, useState} from 'react';
 import {SnackbarKey, SnackbarProvider, useSnackbar, VariantType} from 'notistack';
 import {AxiosResponse} from 'axios';
 import {ResponseUtils} from '../../utils/response.utils';
@@ -109,4 +109,4 @@ export const withSnackContext = (Component: ComponentType<SnackState>): FC =>
     );
   };
 
-export default compose(withSnackProvider, connector, withSnack);
+export default compose(withSnackProvider, connector, withSnack, memo);

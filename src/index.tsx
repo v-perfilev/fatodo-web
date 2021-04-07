@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, memo} from 'react';
+import {FC} from 'react';
 import * as ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 
@@ -38,7 +38,7 @@ const Root: FC = () => (
   </Router>
 );
 
-const WrappedRoot = compose(withStore, withDefaultTheme, withMui, withSnack, withChat, memo)(Root);
+const WrappedRoot = compose(withStore, withDefaultTheme, withMui, withSnack, withChat)(Root);
 
 const root = document.getElementById('root');
 initLanguages.then(() => {
