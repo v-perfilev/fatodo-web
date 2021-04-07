@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useEffect} from 'react';
+import React, {FC, ReactElement, Ref, useImperativeHandle} from 'react';
 import {
   AutoSizer,
   CellMeasurer,
@@ -24,6 +24,7 @@ type Props = {
   onScroll?: (params: ScrollParams) => void;
   onSectionRendered?: (params: RenderedSection) => void;
   scrollToIndex?: number;
+  virtualizedCacheRef?: Ref<VirtualizedCache>
 };
 
 const cellMeasurerCache = new CellMeasurerCache({
@@ -31,13 +32,23 @@ const cellMeasurerCache = new CellMeasurerCache({
   fixedWidth: true
 });
 
+export type VirtualizedCache = {
+  clearCache: () => void
+}
+
 export const VirtualizedList: FC<Props> = (props: Props) => {
   const {renderer, loadedLength, totalLength, isRowLoaded, loadMoreRows} = props;
-  const {rowHeight, onScroll, onSectionRendered, scrollToIndex} = props;
+  const {rowHeight, onScroll, onSectionRendered, scrollToIndex, virtualizedCacheRef} = props;
 
-  useEffect(() => {
-    cellMeasurerCache.clearAll();
-  }, [totalLength]);
+  // useEffect(() => {
+  //   cellMeasurerCache.clearAll();
+  // }, [totalLength]);
+
+  useImperativeHandle(virtualizedCacheRef, () => ({
+    clearCache() {
+      cellMeasurerCache.clearAll();
+    }
+  }));
 
   const rowRendererWithMeasurer = (props: ListRowProps): ReactElement => (
     <CellMeasurer cache={cellMeasurerCache} columnIndex={0} rowIndex={props.index} {...props}>

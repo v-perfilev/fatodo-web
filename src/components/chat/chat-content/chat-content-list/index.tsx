@@ -1,4 +1,4 @@
-import React, {FC, memo, ReactElement, useEffect, useState} from 'react';
+import React, {FC, memo, ReactElement, useEffect, useRef, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {chatContentListStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
@@ -15,7 +15,7 @@ import {
   handleMessageStatusesEvent,
   handleMessageUpdateEvent
 } from './_ws';
-import {VirtualizedList} from '../../../common/surfaces';
+import {VirtualizedCache, VirtualizedList} from '../../../common/surfaces';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import ChatContentScrollButton from './chat-content-scroll-button';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
@@ -35,16 +35,18 @@ const ChatContentList: FC<Props> = ({chat, account}: Props) => {
   const [loading, setLoading] = useState(true);
   const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);
-  const [messagesRecentlyChanged, setMessagesRecentlyChanged] = useState(false);
-
-  let timerId;
+  const virtualizedCacheRef = useRef<VirtualizedCache>();
 
   const unreadCount = unreadMessageCountMap?.get(chat.id);
 
+  const isMessageLoaded = ({index}): boolean => {
+    return index > 0 ? true : allMessagesLoaded;
+  };
+
   const onScroll = ({clientHeight, scrollHeight, scrollTop}: ScrollParams): void => {
-    if (!messagesRecentlyChanged) {
-      setScrolledToBottom(scrollHeight === scrollTop + clientHeight);
-    }
+    const isScrolledToBottom = scrollHeight === scrollTop + clientHeight;
+    const isNotRendered = clientHeight === 0;
+    setScrolledToBottom(isScrolledToBottom || isNotRendered);
   };
 
   const addLoadedMessagesToState = (loadedMessages: Message[]): void => {
@@ -52,6 +54,9 @@ const ChatContentList: FC<Props> = ({chat, account}: Props) => {
       const combinedMessages = [...loadedMessages, ...prevState];
       return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
     });
+    if (virtualizedCacheRef) {
+      virtualizedCacheRef.current.clearCache();
+    }
   };
 
   const loadMoreMessages = (): Promise<void> => new Promise((resolve) => {
@@ -73,19 +78,9 @@ const ChatContentList: FC<Props> = ({chat, account}: Props) => {
       });
   });
 
-  const isMessageLoaded = ({index}): boolean => {
-    return index > 0 ? true : allMessagesLoaded;
-  };
-
   useEffect(() => {
     loadMoreMessages().finally();
   }, [chat]);
-
-  useEffect(() => {
-    setMessagesRecentlyChanged(true);
-    window.clearTimeout(timerId);
-    timerId = window.setTimeout(() => setMessagesRecentlyChanged(false), 100);
-  }, [messages]);
 
   useEffect(() => {
     handleMessageNewEvent(chat, messageNewEvent, setMessages);
@@ -119,6 +114,7 @@ const ChatContentList: FC<Props> = ({chat, account}: Props) => {
         totalLength={allMessagesLoaded ? messages.length : messages.length + 1}
         onScroll={onScroll}
         scrollToIndex={scrolledToBottom ? messages.length - 1 : undefined}
+        virtualizedCacheRef={virtualizedCacheRef}
       />
       <ChatContentScrollButton
         show={!scrolledToBottom}

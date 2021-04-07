@@ -54,7 +54,6 @@ const withSnack = (Component: ComponentType): FC => (props: Props): ReactElement
     const snack = isFeedBackCorrect && isStatusCorrect && message
       ? new SnackBuilder(message).setVariant(getVariantFromStatus(status)).build()
       : null;
-    console.log(snack);
     return snack ? enqueueSnack(snack) : null;
   };
 
