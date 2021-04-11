@@ -6,54 +6,60 @@ import {
   greenPalette,
   purplePalette,
   turquoisePalette,
-  yellowPalette,
+  yellowPalette
 } from './sets';
 import {ColorScheme} from './colors';
+import {defaultOverrides} from './overrides';
 
 export class ThemeFactory {
   private static yellowTheme = createMuiTheme({
     palette: {
       type: 'light',
       ...defaultPalette,
-      ...yellowPalette,
+      ...yellowPalette
     },
     typography: defaultTypography,
+    overrides: defaultOverrides
   });
 
   private static turquoiseTheme = createMuiTheme({
     palette: {
       type: 'light',
       ...defaultPalette,
-      ...turquoisePalette,
+      ...turquoisePalette
     },
     typography: defaultTypography,
+    overrides: defaultOverrides
   });
 
   private static purpleTheme = createMuiTheme({
     palette: {
       type: 'light',
       ...defaultPalette,
-      ...purplePalette,
+      ...purplePalette
     },
     typography: defaultTypography,
+    overrides: defaultOverrides
   });
 
   private static greenTheme = createMuiTheme({
     palette: {
       type: 'light',
       ...defaultPalette,
-      ...greenPalette,
+      ...greenPalette
     },
     typography: defaultTypography,
+    overrides: defaultOverrides
   });
 
   private static blueTheme = createMuiTheme({
     palette: {
       type: 'light',
       ...defaultPalette,
-      ...bluePalette,
+      ...bluePalette
     },
     typography: defaultTypography,
+    overrides: defaultOverrides
   });
 
   public static getDefaultTheme = (): Theme => ThemeFactory.yellowTheme;

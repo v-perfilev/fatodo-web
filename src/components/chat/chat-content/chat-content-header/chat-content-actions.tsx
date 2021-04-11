@@ -13,7 +13,7 @@ type Props = {
   chat: Chat;
 };
 
-const ChatContentHeaderActions: FC<Props> = ({}: Props) => {
+const ChatContentActions: FC<Props> = ({}: Props) => {
   const classes = chatContentHeaderActionsStyles();
   const {t} = useTranslation();
   const ref = useRef();
@@ -69,4 +69,4 @@ const ChatContentHeaderActions: FC<Props> = ({}: Props) => {
   );
 };
 
-export default ChatContentHeaderActions;
+export default ChatContentActions;

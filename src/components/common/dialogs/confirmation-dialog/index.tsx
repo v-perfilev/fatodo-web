@@ -1,17 +1,9 @@
 import React, {FC} from 'react';
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  ThemeProvider,
-} from '@material-ui/core';
+import {Button, ThemeProvider} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {LoadingButton} from '../../controls';
 import {ThemeFactory} from '../../../../shared/theme/theme';
-import {confirmationDialogStyles} from './_styles';
+import ModalDialog from '../modal-dialog';
 
 type Props = {
   open: boolean;
@@ -23,7 +15,6 @@ type Props = {
 };
 
 const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDisagree, loading}: Props) => {
-  const classes = confirmationDialogStyles();
   const {t} = useTranslation();
 
   const theme = ThemeFactory.getDefaultTheme();
@@ -42,18 +33,17 @@ const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDisagree, 
 
   return (
     <ThemeProvider theme={theme}>
-      <Dialog open={open}>
-        {title && <DialogTitle className={classes.title}>{title}</DialogTitle>}
-        {text && (
-          <DialogContent className={classes.content}>
-            <DialogContentText>{text}</DialogContentText>
-          </DialogContent>
-        )}
-        <DialogActions>
-          {disagreeButton}
-          {agreeButton}
-        </DialogActions>
-      </Dialog>
+      <ModalDialog
+        isOpen={open}
+        title={title}
+        content={text}
+        actions={
+          <>
+            {disagreeButton}
+            {agreeButton}
+          </>
+        }
+      />
     </ThemeProvider>
   );
 };
