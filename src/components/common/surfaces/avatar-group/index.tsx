@@ -12,7 +12,7 @@ type Props = {
   withPopup?: boolean;
 };
 
-const AvatarGroup: FC<Props> = ({users, onClick, withPopup}: Props) => {
+export const AvatarGroup: FC<Props> = ({users, onClick, withPopup}: Props) => {
   const classes = avatarGroupStyles();
   const classNames = csx(classes.avatars, {[classes.pointer]: onClick});
 
@@ -32,5 +32,3 @@ const AvatarGroup: FC<Props> = ({users, onClick, withPopup}: Props) => {
     </Box>
   );
 };
-
-export default AvatarGroup;

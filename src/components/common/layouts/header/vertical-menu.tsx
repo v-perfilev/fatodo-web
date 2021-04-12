@@ -29,13 +29,13 @@ const VerticalMenu: FC<Props> = ({isAuthenticated, redirectMap}: Props) => {
     <>
       <ListItem button onClick={redirectMap.toLogin}>
         <ListItemIcon>
-          <LoginIcon className={classes.icon} />
+          <LoginIcon color="primary" />
         </ListItemIcon>
         <ListItemText>{t('header.login')}</ListItemText>
       </ListItem>
       <ListItem color="primary" button onClick={redirectMap.toRegistration}>
         <ListItemIcon>
-          <SignUpIcon className={classes.icon} />
+          <SignUpIcon color="primary" />
         </ListItemIcon>
         <ListItemText>{t('header.register')}</ListItemText>
       </ListItem>
@@ -46,25 +46,25 @@ const VerticalMenu: FC<Props> = ({isAuthenticated, redirectMap}: Props) => {
     <>
       <ListItem button onClick={redirectMap.toChats}>
         <ListItemIcon>
-          <BadgeMessageIcon count={totalUnreadMessages} className={classes.icon} />
+          <BadgeMessageIcon count={totalUnreadMessages} color="primary" />
         </ListItemIcon>
         <ListItemText>{t('header.chats')}</ListItemText>
       </ListItem>
       <ListItem button onClick={redirectMap.toContacts}>
         <ListItemIcon>
-          <UserListIcon className={classes.icon} />
+          <UserListIcon color="primary" />
         </ListItemIcon>
         <ListItemText>{t('header.contacts')}</ListItemText>
       </ListItem>
       <ListItem button onClick={redirectMap.toAccount}>
         <ListItemIcon>
-          <AccountIcon className={classes.icon} />
+          <AccountIcon color="primary" />
         </ListItemIcon>
         <ListItemText>{t('header.account')}</ListItemText>
       </ListItem>
       <ListItem button onClick={redirectMap.toRootAndLogout}>
         <ListItemIcon>
-          <LogoutIcon className={classes.icon} />
+          <LogoutIcon color="primary" />
         </ListItemIcon>
         <ListItemText>{t('header.logout')}</ListItemText>
       </ListItem>

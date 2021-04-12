@@ -38,10 +38,6 @@ export const horizontalMenuStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  image: {
-    color: theme.palette.primary.main,
-    marginRight: theme.spacing(1),
-  },
 }));
 
 export const sidebarMenuStyles = makeStyles((theme: Theme) => ({
@@ -53,9 +49,6 @@ export const sidebarMenuStyles = makeStyles((theme: Theme) => ({
   },
   grow: {
     flexGrow: 1,
-  },
-  icon: {
-    color: theme.palette.primary.main,
   },
   toolbar: {
     display: 'flex',

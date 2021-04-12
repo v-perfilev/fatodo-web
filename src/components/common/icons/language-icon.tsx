@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {IconWithMargin, IconWithMarginProps} from '../surfaces/icon-with-margin';
+import {Icon, IconProps} from '../surfaces';
 
-type Props = IconWithMarginProps;
+type Props = IconProps;
 
 export const LanguageIcon: FC<Props> = (props: Props) => (
-  <IconWithMargin {...props}>
+  <Icon {...props}>
     <path
       fill="currentColor"
       d="M16.36,14C16.44,13.34 16.5,12.68 16.5,12C16.5,11.32 16.44,10.66 16.36,10H19.74C19.9,10.64 20,11.31 20,12C20,
@@ -18,5 +18,5 @@ export const LanguageIcon: FC<Props> = (props: Props) => (
       8H15.97C15.65,6.75 15.19,5.55 14.59,4.44C16.43,5.07 17.96,6.34 18.92,8M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,
       22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
     />
-  </IconWithMargin>
+  </Icon>
 );

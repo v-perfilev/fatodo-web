@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {IconWithMargin, IconWithMarginProps} from '../surfaces/icon-with-margin';
+import {Icon, IconProps} from '../surfaces';
 
-type Props = IconWithMarginProps;
+type Props = IconProps;
 
 export const ReorderIcon: FC<Props> = (props: Props) => (
-  <IconWithMargin {...props}>
+  <Icon {...props}>
     <rect x="9.80612" width="14.6939" height="6" rx="2" fill="currentColor" />
     <rect x="9.80612" y="9" width="14.6939" height="6" rx="2" fill="currentColor" />
     <path
@@ -27,5 +27,5 @@ export const ReorderIcon: FC<Props> = (props: Props) => (
       fill="currentColor"
     />
     <path d="M5.81348 3.19365L4.97581 7.91669L1.52754 4.78786L5.81348 3.19365Z" fill="currentColor" />
-  </IconWithMargin>
+  </Icon>
 );

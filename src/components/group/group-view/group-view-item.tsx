@@ -35,7 +35,7 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
   return (
     <Box className={classes.root}>
       <Box className={classes.iconBox}>
-        <CheckIcon className={classes.icon} />
+        <CheckIcon marginPosition="right" color="primary" className={classes.icon} />
       </Box>
       <Box className={classes.contentBox}>
         <Link to={viewItemUrl} color="textPrimary" withUnderline>

@@ -23,8 +23,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
   const addUsers = (): void => {};
 
   const actions = (
-    <Button onClick={addUsers} color="primary">
-      <UserPlusIcon className={classes.addIcon} />
+    <Button startIcon={<UserPlusIcon />} onClick={addUsers} color="primary">
       {t('chat:members.buttons.addUsers')}
     </Button>
   );

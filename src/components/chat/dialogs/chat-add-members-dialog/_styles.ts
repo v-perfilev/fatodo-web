@@ -8,7 +8,4 @@ export const chatAddMembersDialogStyles = makeStyles((theme: Theme) => ({
     marginLeft: theme.spacing(0.5),
     fontSize: '1rem',
   },
-  addIcon: {
-    marginRight: theme.spacing(1),
-  },
 }));

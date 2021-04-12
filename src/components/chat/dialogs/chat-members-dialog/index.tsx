@@ -56,8 +56,7 @@ const ChatMembersDialog: FC<Props> = ({chat, isOpen, close, switchToAddMembers}:
   );
 
   const actions = !chat.isDirect && (
-    <Button onClick={switchToAddMembers} color="primary">
-      <UserPlusIcon position="right" />
+    <Button startIcon={<UserPlusIcon />} onClick={switchToAddMembers} color="primary">
       {t('chat:members.buttons.addUsers')}
     </Button>
   );

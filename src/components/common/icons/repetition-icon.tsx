@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {FC} from 'react';
-import {IconWithMargin, IconWithMarginProps} from '../surfaces/icon-with-margin';
+import {Icon, IconProps} from '../surfaces';
 
-type Props = IconWithMarginProps;
+type Props = IconProps;
 
 export const RepetitionIcon: FC<Props> = (props: Props) => (
-  <IconWithMargin {...props}>
+  <Icon {...props}>
     <path
       fill="currentColor"
       d="M18,11V12.5C21.19,12.5 23.09,16.05 21.33,18.71L20.24,17.62C21.06,15.96
@@ -13,5 +13,5 @@ export const RepetitionIcon: FC<Props> = (props: Props) => (
     16.15,19 18,19V17.5L20.25,19.75L18,22M19,3H18V1H16V3H8V1H6V3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H14C13.36,20.45
     12.86,19.77 12.5,19H5V8H19V10.59C19.71,10.7 20.39,10.94 21,11.31V5A2,2 0 0,0 19,3Z"
     />
-  </IconWithMargin>
+  </Icon>
 );

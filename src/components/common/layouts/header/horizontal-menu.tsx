@@ -65,11 +65,11 @@ const HorizontalMenu: FC<Props> = ({redirectMap, isAuthenticated}: Props) => {
       </Button>
       <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
         <MenuItem onClick={redirectMap.toAccount}>
-          <AccountIcon className={classes.image} />
+          <AccountIcon marginPosition="right" color="primary" />
           {t('header.account')}
         </MenuItem>
         <MenuItem onClick={redirectMap.toRootAndLogout}>
-          <LogoutIcon className={classes.image} />
+          <LogoutIcon marginPosition="right" color="primary" />
           {t('header.logout')}
         </MenuItem>
       </PopupMenu>

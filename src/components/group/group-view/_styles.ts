@@ -33,8 +33,6 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   },
   icon: {
     fontSize: '1.8rem',
-    color: theme.palette.primary.main,
-    marginRight: theme.spacing(1),
   },
   iconBox: {
     display: 'flex',

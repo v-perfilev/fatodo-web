@@ -4,7 +4,7 @@ import ChatMembersDialog from '../../dialogs/chat-members-dialog';
 import ChatAddMembersDialog from '../../dialogs/chat-add-members-dialog';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {User} from '../../../../models/user.model';
-import AvatarGroup from '../../../common/surfaces/avatar-group';
+import {AvatarGroup} from '../../../common/surfaces';
 
 type Props = {
   chat: Chat;

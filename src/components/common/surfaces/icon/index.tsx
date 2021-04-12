@@ -4,17 +4,18 @@ import {SvgIcon, SvgIconProps} from '@material-ui/core';
 import {iconWithMarginStyles} from './_styles';
 import csx from 'classnames';
 
-export type IconWithMarginProps = PropsWithChildren<SvgIconProps> & {
-  position?: 'top' | 'right' | 'bottom' | 'left';
-  margin?: number;
+export type IconProps = PropsWithChildren<SvgIconProps> & {
+  marginPosition?: 'top' | 'right' | 'bottom' | 'left';
+  marginSize?: number;
 };
 
-type Props = IconWithMarginProps;
+type Props = IconProps;
 
-export const IconWithMargin: FC<Props> = ({position, margin = 1, className, children, ...props}: Props) => {
+export const Icon: FC<Props> = ({marginPosition, marginSize = 1, className, children, ...props}: Props) => {
+  const marginClasses = iconWithMarginStyles(marginSize);
+
   const marginClassName = useMemo<string>(() => {
-    const marginClasses = iconWithMarginStyles(margin);
-    switch (position) {
+    switch (marginPosition) {
       case 'top':
         return marginClasses.top;
       case 'right':
@@ -26,7 +27,7 @@ export const IconWithMargin: FC<Props> = ({position, margin = 1, className, chil
       default:
         return null;
     }
-  }, [position, margin]);
+  }, [marginPosition, marginSize]);
 
   const classNames = csx(marginClassName, className);
 

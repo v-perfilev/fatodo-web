@@ -120,25 +120,6 @@ export const groupCardNotificationsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardAvatarsStyles = makeStyles((theme: Theme) => ({
-  avatars: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    '& .MuiAvatar-root': {
-      marginLeft: theme.spacing(-1.5),
-      '&:first-child': {
-        marginLeft: 0,
-      },
-    },
-  },
-  count: {
-    fontSize: '1rem',
-    marginLeft: theme.spacing(0.5),
-    color: theme.palette.grey['400'],
-  },
-}));
-
 export const groupGridContainerStyles = makeStyles((theme: Theme) => ({
   container: {
     padding: theme.spacing(1),
