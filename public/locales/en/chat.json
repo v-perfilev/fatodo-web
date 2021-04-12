@@ -28,6 +28,12 @@
       "addUsers": "Add users"
     }
   },
+  "addMembers": {
+    "title": "Add chat members",
+    "buttons": {
+      "addUsers": "Add users"
+    }
+  },
   "removeMember": {
     "title": "Remove user from chat",
     "text": "Are you sure you want to delete user {{username}} from chat?"

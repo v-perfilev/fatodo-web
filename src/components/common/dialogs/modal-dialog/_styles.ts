@@ -22,5 +22,6 @@ export const modalDialogStyles = makeStyles((theme: Theme) => ({
   },
   content: {
     marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(0),
   },
 }));
