@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import FormDialog from '../../common/dialogs/form-dialog';
+import FormDialog from '../../../common/dialogs/form-dialog';
 import ContactRequestForm from './contact-request-form';
 import {useTranslation} from 'react-i18next';
 

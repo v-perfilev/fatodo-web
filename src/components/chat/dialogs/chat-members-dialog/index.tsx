@@ -1,14 +1,14 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
-import {Chat} from '../../../models/chat.model';
+import {Chat} from '../../../../models/chat.model';
 import {useTranslation} from 'react-i18next';
-import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
-import ModalDialog from '../../common/dialogs/modal-dialog';
-import {User} from '../../../models/user.model';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
+import ModalDialog from '../../../common/dialogs/modal-dialog';
+import {User} from '../../../../models/user.model';
 import {Box, Button} from '@material-ui/core';
-import {ClearableTextInput} from '../../common/inputs';
+import {ClearableTextInput} from '../../../common/inputs';
 import {chatMembersDialogStyles} from './_styles';
 import ChatMembersDialogMember from './chat-members-dialog-member';
-import {UserPlusIcon} from '../../common/icons/user-plus-icon';
+import {UserPlusIcon} from '../../../common/icons/user-plus-icon';
 
 type Props = {
   chat: Chat;
@@ -25,13 +25,12 @@ const ChatMembersDialog: FC<Props> = ({chat, isOpen, close, switchToAddMembers}:
 
   const filterUsersToShow = (event: ChangeEvent<HTMLInputElement>): void => {
     const filter = event.target.value;
-    const updatedUsersToShow = users.filter(user => chat.members.includes(user.id)
-      && user.username.includes(filter));
+    const updatedUsersToShow = users.filter((user) => chat.members.includes(user.id) && user.username.includes(filter));
     setUsersToShow(updatedUsersToShow);
   };
 
   useEffect(() => {
-    const updatedUsersToShow = users.filter(user => chat.members.includes(user.id));
+    const updatedUsersToShow = users.filter((user) => chat.members.includes(user.id));
     setUsersToShow(updatedUsersToShow);
   }, [chat.members]);
 

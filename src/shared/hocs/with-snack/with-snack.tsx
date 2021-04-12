@@ -51,9 +51,10 @@ const withSnack = (Component: ComponentType): FC => (props: Props): ReactElement
       (excludedCodes === '' || !excludedCodes.includes(feedbackCode));
     const isStatusCorrect = status && status < 500;
     const message = TranslationUtils.getFeedbackTranslation(feedbackCode);
-    const snack = isFeedBackCorrect && isStatusCorrect && message
-      ? new SnackBuilder(message).setVariant(getVariantFromStatus(status)).build()
-      : null;
+    const snack =
+      isFeedBackCorrect && isStatusCorrect && message
+        ? new SnackBuilder(message).setVariant(getVariantFromStatus(status)).build()
+        : null;
     return snack ? enqueueSnack(snack) : null;
   };
 
@@ -63,10 +64,8 @@ const withSnack = (Component: ComponentType): FC => (props: Props): ReactElement
     return snack ? enqueueSnack(snack) : null;
   };
 
-  const addDisplayed = (key: SnackbarKey): void =>
-    setDisplayed((prevState) => [...prevState, key]);
-  const removeDisplayed = (key: SnackbarKey): void =>
-    setDisplayed((prevState) => prevState.filter((k) => k !== key));
+  const addDisplayed = (key: SnackbarKey): void => setDisplayed((prevState) => [...prevState, key]);
+  const removeDisplayed = (key: SnackbarKey): void => setDisplayed((prevState) => prevState.filter((k) => k !== key));
 
   useEffect(() => {
     snackState.list.forEach(({message, options, key, dismissed = false}: ReduxSnack) => {
@@ -80,7 +79,6 @@ const withSnack = (Component: ComponentType): FC => (props: Props): ReactElement
     const keyList = snackState.list.map((l) => l.key);
     displayed.filter((key) => !keyList.includes(key)).forEach(removeDisplayed);
   });
-
 
   const context = {handleResponse, handleCode, enqueueSnack, closeSnack};
 
@@ -100,13 +98,8 @@ const withSnackProvider = (Component: ComponentType): FC => (props): ReactElemen
   );
 };
 
-export const withSnackContext = (Component: ComponentType<SnackState>): FC =>
-  (props): ReactElement => {
-    return (
-      <SnackContext.Consumer>
-        {(value): ReactElement => <Component {...props} {...value} />}
-      </SnackContext.Consumer>
-    );
-  };
+export const withSnackContext = (Component: ComponentType<SnackState>): FC => (props): ReactElement => {
+  return <SnackContext.Consumer>{(value): ReactElement => <Component {...props} {...value} />}</SnackContext.Consumer>;
+};
 
 export default compose(withSnackProvider, connector, withSnack, memo);

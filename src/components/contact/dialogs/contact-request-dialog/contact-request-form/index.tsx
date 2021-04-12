@@ -3,14 +3,14 @@ import React, {FC, useEffect} from 'react';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
 import {ContactRequestFormUtils, ContactRequestFormValues} from './_form';
-import {AuthState} from '../../../../store/rerducers/auth.reducer';
-import UserService from '../../../../services/user.service';
-import {MultilineInput, TextInput} from '../../../common/inputs';
-import {FormDialogComponentProps} from '../../../common/dialogs';
-import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
-import {SnackState} from '../../../../shared/contexts/snack-context';
-import ContactService from '../../../../services/contact.service';
-import withAuthState from '../../../../shared/hocs/with-auth-state';
+import {AuthState} from '../../../../../store/rerducers/auth.reducer';
+import UserService from '../../../../../services/user.service';
+import {MultilineInput, TextInput} from '../../../../common/inputs';
+import {FormDialogComponentProps} from '../../../../common/dialogs';
+import {withSnackContext} from '../../../../../shared/hocs/with-snack/with-snack';
+import {SnackState} from '../../../../../shared/contexts/snack-context';
+import ContactService from '../../../../../services/contact.service';
+import withAuthState from '../../../../../shared/hocs/with-auth-state';
 
 type Props = AuthState & FormikProps<ContactRequestFormValues> & FormDialogComponentProps & SnackState;
 
@@ -80,7 +80,7 @@ const formik = withFormik<Props, ContactRequestFormValues>({
         handleResponse(response);
         setSubmitting(false);
       });
-  }
+  },
 });
 
 export default compose<FormDialogComponentProps>(withSnackContext, withAuthState, formik)(ContactRequestForm);

@@ -28,7 +28,7 @@ import {enqueueReduxSnack} from './store/actions/snack.actions';
 const axiosActions = bindActionCreators({clearAuth, enqueueReduxSnack}, store.dispatch);
 setupAxiosInterceptors({
   onUnauthenticated: axiosActions.clearAuth,
-  enqueueReduxSnackbar: axiosActions.enqueueReduxSnack
+  enqueueReduxSnackbar: axiosActions.enqueueReduxSnack,
 });
 
 const Root: FC = () => (

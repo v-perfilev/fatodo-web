@@ -6,12 +6,11 @@ import {AVATARS_IN_CARD} from '../../../group/_constants';
 import {UserView, UserWithPopupView} from '../../views';
 import csx from 'classnames';
 
-
 type Props = {
   users: User[];
   onClick?: () => void;
   withPopup?: boolean;
-}
+};
 
 const AvatarGroup: FC<Props> = ({users, onClick, withPopup}: Props) => {
   const classes = avatarGroupStyles();
@@ -22,9 +21,12 @@ const AvatarGroup: FC<Props> = ({users, onClick, withPopup}: Props) => {
 
   return (
     <Box className={classNames} onClick={onClick}>
-      {usersToShow.map((user, index) => withPopup
-        ? <UserWithPopupView user={user} picSize="sm" key={index} />
-        : <UserView user={user} picSize="sm" key={index} />
+      {usersToShow.map((user, index) =>
+        withPopup ? (
+          <UserWithPopupView user={user} picSize="sm" key={index} />
+        ) : (
+          <UserView user={user} picSize="sm" key={index} />
+        )
       )}
       {moreThanLimit > 0 && <Typography className={classes.count}>+{moreThanLimit}</Typography>}
     </Box>

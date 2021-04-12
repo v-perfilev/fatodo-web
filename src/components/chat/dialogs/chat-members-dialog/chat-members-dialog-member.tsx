@@ -1,16 +1,16 @@
 import React, {FC, useState} from 'react';
-import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {User} from '../../../models/user.model';
+import {AuthState} from '../../../../store/rerducers/auth.reducer';
+import {User} from '../../../../models/user.model';
 import {Box, IconButton} from '@material-ui/core';
-import {UserWithPopupView} from '../../common/views';
+import {UserWithPopupView} from '../../../common/views';
 import {chatMembersDialogMemberStyles} from './_styles';
-import {Chat} from '../../../models/chat.model';
-import withAuthState from '../../../shared/hocs/with-auth-state';
-import ChatService from '../../../services/chat.service';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
-import ConfirmationDialog from '../../common/dialogs/confirmation-dialog';
+import {Chat} from '../../../../models/chat.model';
+import withAuthState from '../../../../shared/hocs/with-auth-state';
+import ChatService from '../../../../services/chat.service';
+import {useSnackContext} from '../../../../shared/contexts/snack-context';
+import ConfirmationDialog from '../../../common/dialogs/confirmation-dialog';
 import {useTranslation} from 'react-i18next';
-import {UserMinusIcon} from '../../common/icons/user-minus-icon';
+import {UserMinusIcon} from '../../../common/icons/user-minus-icon';
 
 type Props = AuthState & {
   chat: Chat;

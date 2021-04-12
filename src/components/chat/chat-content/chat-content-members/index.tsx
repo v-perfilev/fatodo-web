@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Chat} from '../../../../models/chat.model';
-import ChatMembersDialog from '../../chat-members-dialog';
-import ChatAddMembersDialog from '../../chat-add-members-dialog';
+import ChatMembersDialog from '../../dialogs/chat-members-dialog';
+import ChatAddMembersDialog from '../../dialogs/chat-add-members-dialog';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {User} from '../../../../models/user.model';
 import AvatarGroup from '../../../common/surfaces/avatar-group';
@@ -33,7 +33,7 @@ const ChatContentMembers: FC<Props> = ({chat}: Props) => {
   };
 
   useEffect(() => {
-    const updatedUsersToShow = users.filter(user => chat.members.includes(user.id));
+    const updatedUsersToShow = users.filter((user) => chat.members.includes(user.id));
     setUsersToShow(updatedUsersToShow);
   }, [chat.members]);
 

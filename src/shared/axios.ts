@@ -15,7 +15,6 @@ interface SetupAxiosActions {
 }
 
 const setupAxiosInterceptors = ({onUnauthenticated, enqueueReduxSnackbar}: SetupAxiosActions): void => {
-
   const enqueueErrorNotification = (message: string): void => {
     const snack = new SnackBuilder(message).setVariant('error').build();
     enqueueReduxSnackbar(snack);

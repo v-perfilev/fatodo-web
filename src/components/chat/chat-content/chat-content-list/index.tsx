@@ -13,7 +13,7 @@ import {
   handleMessageNewEvent,
   handleMessageReactionsEvent,
   handleMessageStatusesEvent,
-  handleMessageUpdateEvent
+  handleMessageUpdateEvent,
 } from './_ws';
 import {VirtualizedCache, VirtualizedList} from '../../../common/surfaces';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
@@ -59,24 +59,25 @@ const ChatContentList: FC<Props> = ({chat, account}: Props) => {
     }
   };
 
-  const loadMoreMessages = (): Promise<void> => new Promise((resolve) => {
-    ChatService.getAllMessagesByChatIdPageable(chat.id, messages.length)
-      .then((response) => {
-        const newMessages = response.data;
-        if (newMessages.length === 0) {
-          setAllMessagesLoaded(true);
-        } else {
-          addLoadedMessagesToState(newMessages);
-        }
-      })
-      .catch((response) => {
-        handleResponse(response);
-      })
-      .finally(() => {
-        setLoading(false);
-        resolve();
-      });
-  });
+  const loadMoreMessages = (): Promise<void> =>
+    new Promise((resolve) => {
+      ChatService.getAllMessagesByChatIdPageable(chat.id, messages.length)
+        .then((response) => {
+          const newMessages = response.data;
+          if (newMessages.length === 0) {
+            setAllMessagesLoaded(true);
+          } else {
+            addLoadedMessagesToState(newMessages);
+          }
+        })
+        .catch((response) => {
+          handleResponse(response);
+        })
+        .finally(() => {
+          setLoading(false);
+          resolve();
+        });
+    });
 
   useEffect(() => {
     loadMoreMessages().finally();

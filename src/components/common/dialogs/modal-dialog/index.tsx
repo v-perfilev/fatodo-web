@@ -3,7 +3,6 @@ import {Box, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitl
 import {CloseIcon} from '../../icons/close-icon';
 import {modalDialogStyles} from './_styles';
 
-
 type Props = {
   isOpen: boolean;
   close?: () => void;
@@ -16,42 +15,32 @@ type Props = {
 };
 
 const ModalDialog: FC<Props> = ({isOpen, close, title, content, actions, withText, showCloseIcon, size}: Props) => {
-    const classes = modalDialogStyles();
+  const classes = modalDialogStyles();
 
-    const maxWidth = size || 'xs';
+  const maxWidth = size || 'xs';
 
-    return (
-      <Dialog open={isOpen} onClose={close} fullWidth maxWidth={maxWidth}>
-        {title && (
-          <DialogTitle className={classes.title}>
-            {title}
-            {showCloseIcon && (
-              <Box className={classes.closeIcon}>
-                <IconButton size="small" onClick={close}>
-                  <CloseIcon />
-                </IconButton>
-              </Box>
-            )}
-          </DialogTitle>
-        )}
-        {content && (
-          <DialogContent>
-            {withText && (
-              <DialogContentText className={classes.content}>
-                {content}
-              </DialogContentText>
-            )}
-            {!withText && content}
-          </DialogContent>
-        )}
-        {actions && (
-          <DialogActions>
-            {actions}
-          </DialogActions>
-        )}
-      </Dialog>
-    );
-  }
-;
-
+  return (
+    <Dialog open={isOpen} onClose={close} fullWidth maxWidth={maxWidth}>
+      {title && (
+        <DialogTitle className={classes.title}>
+          {title}
+          {showCloseIcon && (
+            <Box className={classes.closeIcon}>
+              <IconButton size="small" onClick={close}>
+                <CloseIcon />
+              </IconButton>
+            </Box>
+          )}
+        </DialogTitle>
+      )}
+      {content && (
+        <DialogContent>
+          {withText && <DialogContentText className={classes.content}>{content}</DialogContentText>}
+          {!withText && content}
+        </DialogContent>
+      )}
+      {actions && <DialogActions>{actions}</DialogActions>}
+    </Dialog>
+  );
+};
 export default ModalDialog;

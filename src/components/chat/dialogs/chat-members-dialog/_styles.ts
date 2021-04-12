@@ -6,47 +6,47 @@ export const chatMembersDialogStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     marginTop: theme.spacing(0.3),
     marginLeft: theme.spacing(0.5),
-    fontSize: '1rem'
+    fontSize: '1rem',
   },
   filter: {
     marginTop: theme.spacing(0.5),
-    marginBottom: theme.spacing(1)
+    marginBottom: theme.spacing(1),
   },
   users: {
-    marginTop: theme.spacing(2)
+    marginTop: theme.spacing(2),
   },
   userBox: {
     display: 'flex',
     alignItems: 'center',
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   user: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   deleteUser: {
     color: theme.palette.error.main,
     '& .MuiSvgIcon-root': {
-      color: theme.palette.error.main
-    }
+      color: theme.palette.error.main,
+    },
   },
-  'addIcon': {
-    marginRight: theme.spacing(1)
-  }
+  addIcon: {
+    marginRight: theme.spacing(1),
+  },
 }));
 
 export const chatMembersDialogMemberStyles = makeStyles((theme: Theme) => ({
   userBox: {
     display: 'flex',
     alignItems: 'center',
-    marginTop: theme.spacing(1)
+    marginTop: theme.spacing(1),
   },
   user: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   deleteUser: {
     color: theme.palette.error.main,
     '& .MuiSvgIcon-root': {
-      color: theme.palette.error.main
-    }
-  }
+      color: theme.palette.error.main,
+    },
+  },
 }));

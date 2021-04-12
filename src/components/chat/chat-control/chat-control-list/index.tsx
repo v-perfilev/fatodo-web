@@ -39,24 +39,25 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
     });
   };
 
-  const loadMoreChats = (): Promise<void> => new Promise((resolve) => {
-    ChatService.getAllChatsPageable(chats.length)
-      .then((response) => {
-        const newChats = response.data;
-        if (newChats.length === 0) {
-          setAllChatsLoaded(true);
-        } else {
-          addLoadedChatsToState(newChats);
-        }
-      })
-      .catch((response) => {
-        handleResponse(response);
-      })
-      .finally(() => {
-        setLoading(false);
-        resolve();
-      });
-  });
+  const loadMoreChats = (): Promise<void> =>
+    new Promise((resolve) => {
+      ChatService.getAllChatsPageable(chats.length)
+        .then((response) => {
+          const newChats = response.data;
+          if (newChats.length === 0) {
+            setAllChatsLoaded(true);
+          } else {
+            addLoadedChatsToState(newChats);
+          }
+        })
+        .catch((response) => {
+          handleResponse(response);
+        })
+        .finally(() => {
+          setLoading(false);
+          resolve();
+        });
+    });
 
   const isChatLoaded = ({index}): boolean => {
     return index < chats.length ? true : allChatsLoaded;

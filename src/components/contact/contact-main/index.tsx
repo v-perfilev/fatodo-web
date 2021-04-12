@@ -16,7 +16,7 @@ import ContactIncoming from '../contact-incoming';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {ContactRouteUtils} from '../_router';
 import ContactOutcoming from '../contact-outcoming';
-import ContactRequestDialog from '../contact-request-dialog';
+import ContactRequestDialog from '../dialogs/contact-request-dialog';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {

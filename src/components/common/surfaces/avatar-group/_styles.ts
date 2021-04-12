@@ -9,16 +9,16 @@ export const avatarGroupStyles = makeStyles((theme: Theme) => ({
     '& > *': {
       marginLeft: theme.spacing(-1.5),
       '&:first-child': {
-        marginLeft: 0
-      }
-    }
+        marginLeft: 0,
+      },
+    },
   },
   count: {
     fontSize: '1rem',
     marginLeft: theme.spacing(0.5),
-    color: theme.palette.grey['400']
+    color: theme.palette.grey['400'],
   },
   pointer: {
-    cursor: 'pointer'
-  }
+    cursor: 'pointer',
+  },
 }));

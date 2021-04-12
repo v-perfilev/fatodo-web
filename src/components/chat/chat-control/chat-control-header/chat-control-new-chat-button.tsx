@@ -3,7 +3,7 @@ import * as React from 'react';
 import {FC, useState} from 'react';
 import {chatControlNewChatButtonStyles} from './_styles';
 import {PlusIcon} from '../../../common/icons/plus-icon';
-import ChatCreateDialog from '../../chat-create-dialog';
+import ChatCreateDialog from '../../dialogs/chat-create-dialog';
 
 const ChatControlNewChatButton: FC = () => {
   const classes = chatControlNewChatButtonStyles();

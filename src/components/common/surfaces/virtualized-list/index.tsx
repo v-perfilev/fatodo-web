@@ -10,7 +10,7 @@ import {
   List,
   ListRowProps,
   ScrollParams,
-  Size
+  Size,
 } from 'react-virtualized';
 import {RenderedSection} from 'react-virtualized/dist/es/Grid';
 
@@ -24,31 +24,30 @@ type Props = {
   onScroll?: (params: ScrollParams) => void;
   onSectionRendered?: (params: RenderedSection) => void;
   scrollToIndex?: number;
-  virtualizedCacheRef?: Ref<VirtualizedCache>
+  virtualizedCacheRef?: Ref<VirtualizedCache>;
 };
 
 const cellMeasurerCache = new CellMeasurerCache({
   defaultHeight: 50,
-  fixedWidth: true
+  fixedWidth: true,
 });
 
 export type VirtualizedCache = {
-  clearCache: () => void
-}
+  clearCache: () => void;
+};
 
 export const VirtualizedList: FC<Props> = (props: Props) => {
   const {renderer, loadedLength, totalLength, isRowLoaded, loadMoreRows} = props;
   const {rowHeight, onScroll, onSectionRendered, scrollToIndex, virtualizedCacheRef} = props;
 
-  // useEffect(() => {
-  //   cellMeasurerCache.clearAll();
-  // }, [totalLength]);
-
-  useImperativeHandle(virtualizedCacheRef, () => ({
-    clearCache() {
-      cellMeasurerCache.clearAll();
-    }
-  }));
+  useImperativeHandle(
+    virtualizedCacheRef,
+    (): VirtualizedCache => ({
+      clearCache(): void {
+        cellMeasurerCache.clearAll();
+      },
+    })
+  );
 
   const rowRendererWithMeasurer = (props: ListRowProps): ReactElement => (
     <CellMeasurer cache={cellMeasurerCache} columnIndex={0} rowIndex={props.index} {...props}>
@@ -59,9 +58,9 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   const rowRenderer = (props: ListRowProps): ReactElement => renderer(props);
 
   const listRenderer = ({onRowsRendered, registerChild}: InfiniteLoaderChildProps) => ({
-                                                                                         width,
-                                                                                         height
-                                                                                       }: Size): ReactElement => (
+    width,
+    height,
+  }: Size): ReactElement => (
     <List
       width={width}
       height={height}

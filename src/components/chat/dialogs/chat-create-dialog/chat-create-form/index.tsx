@@ -3,15 +3,15 @@ import React, {FC, useEffect, useState} from 'react';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
 import {CreateChatFormUtils, CreateChatValues} from './_form';
-import {TagsInput} from '../../../common/inputs';
-import {FormDialogComponentProps} from '../../../common/dialogs';
-import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
-import {SnackState} from '../../../../shared/contexts/snack-context';
-import ChatService from '../../../../services/chat.service';
-import {AuthState} from '../../../../store/rerducers/auth.reducer';
-import UserService from '../../../../services/user.service';
-import {User} from '../../../../models/user.model';
-import withAuthState from '../../../../shared/hocs/with-auth-state';
+import {TagsInput} from '../../../../common/inputs';
+import {FormDialogComponentProps} from '../../../../common/dialogs';
+import {withSnackContext} from '../../../../../shared/hocs/with-snack/with-snack';
+import {SnackState} from '../../../../../shared/contexts/snack-context';
+import ChatService from '../../../../../services/chat.service';
+import {AuthState} from '../../../../../store/rerducers/auth.reducer';
+import UserService from '../../../../../services/user.service';
+import {User} from '../../../../../models/user.model';
+import withAuthState from '../../../../../shared/hocs/with-auth-state';
 
 type Props = AuthState & FormikProps<CreateChatValues> & FormDialogComponentProps & SnackState;
 
@@ -99,7 +99,7 @@ const formik = withFormik<Props, CreateChatValues>({
         handleResponse(response);
         setSubmitting(false);
       });
-  }
+  },
 });
 
 export default compose<FormDialogComponentProps>(withSnackContext, withAuthState, formik)(ChatCreateForm);

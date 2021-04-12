@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 import {ObjectSchema} from 'yup';
-import {User, UserAccount} from '../../../../models/user.model';
+import {User, UserAccount} from '../../../../../models/user.model';
 import {userValidator} from './validators/user.validator';
 
 export interface CreateChatValues {

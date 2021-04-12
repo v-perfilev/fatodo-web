@@ -58,7 +58,7 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
     WsChatDestinations.CHAT_NEW,
     WsChatDestinations.CHAT_UPDATE,
     WsChatDestinations.CHAT_LAST_MESSAGE,
-    WsChatDestinations.CHAT_LAST_MESSAGE_UPDATE
+    WsChatDestinations.CHAT_LAST_MESSAGE_UPDATE,
   ] as string[];
 
   if (chat) {
@@ -80,15 +80,13 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
     messageNewEvent,
     messageUpdateEvent,
     messageStatusesEvent,
-    messageReactionsEvent
+    messageReactionsEvent,
   };
 
   return (
     <WsChatContext.Provider value={context}>
       <Component {...props} />
-      {isAuthenticated && (
-        <WsClient url={WS_URL} topics={wsMessageTopics} onMessage={onMessage} />
-      )}
+      {isAuthenticated && <WsClient url={WS_URL} topics={wsMessageTopics} onMessage={onMessage} />}
     </WsChatContext.Provider>
   );
 };

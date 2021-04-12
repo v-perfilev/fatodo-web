@@ -30,9 +30,7 @@ const ChatContent: FC<Props> = ({chat, account}: Props) => {
           <ChatContentFooter chatId={chat.id} />
         </>
       )}
-      {!chat && (
-        <Box className={classes.placeholder} />
-      )}
+      {!chat && <Box className={classes.placeholder} />}
     </Box>
   );
 };

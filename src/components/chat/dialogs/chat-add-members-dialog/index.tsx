@@ -1,8 +1,8 @@
 import React, {FC, useRef} from 'react';
-import {Chat} from '../../../models/chat.model';
+import {Chat} from '../../../../models/chat.model';
 import {useTranslation} from 'react-i18next';
-import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
-import ModalDialog from '../../common/dialogs/modal-dialog';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
+import ModalDialog from '../../../common/dialogs/modal-dialog';
 import {chatAddMembersDialogStyles} from './_styles';
 
 type Props = {
@@ -18,15 +18,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
   const {t} = useTranslation();
   const ref = useRef();
 
-  return (
-    <ModalDialog
-      isOpen={isOpen}
-      close={close}
-      title={<>Название</>}
-      content={<>Тело диалога</>}
-      showCloseIcon
-    />
-  );
+  return <ModalDialog isOpen={isOpen} close={close} title={<>Название</>} content={<>Тело диалога</>} showCloseIcon />;
 };
 
 export default ChatAddMembersDialog;

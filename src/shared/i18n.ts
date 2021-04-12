@@ -6,12 +6,12 @@ import {initReactI18next} from 'react-i18next';
 export const LANGUAGES = [
   {
     name: 'English',
-    code: 'en'
+    code: 'en',
   },
   {
     name: 'Русский',
-    code: 'ru'
-  }
+    code: 'ru',
+  },
 ];
 
 export const initLanguages = i18next
@@ -26,8 +26,8 @@ export const initLanguages = i18next
     defaultNS: 'translation',
     load: 'languageOnly',
     backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json'
-    }
+      loadPath: '/locales/{{lng}}/{{ns}}.json',
+    },
   });
 
 export default i18next;

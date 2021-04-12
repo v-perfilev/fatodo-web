@@ -6,6 +6,6 @@ export const chatAddMembersDialogStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     marginTop: theme.spacing(0.3),
     marginLeft: theme.spacing(0.5),
-    fontSize: '1rem'
-  }
+    fontSize: '1rem',
+  },
 }));

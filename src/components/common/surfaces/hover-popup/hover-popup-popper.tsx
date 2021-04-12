@@ -15,8 +15,14 @@ export const HoverPopupPopper: FC<Props> = (props: Props) => {
   const isOpen = Boolean(anchorEl);
 
   return (
-    <Popper className={classes.popper} open={isOpen} anchorEl={anchorEl} onMouseOver={onMouseOver}
-            onMouseLeave={onMouseLeave} transition>
+    <Popper
+      className={classes.popper}
+      open={isOpen}
+      anchorEl={anchorEl}
+      onMouseOver={onMouseOver}
+      onMouseLeave={onMouseLeave}
+      transition
+    >
       {({TransitionProps}): ReactNode => (
         <Fade {...TransitionProps} timeout={350}>
           <Paper className={classes.paper}>

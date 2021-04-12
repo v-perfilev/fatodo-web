@@ -7,7 +7,7 @@ export const modalDialogStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     paddingRight: theme.spacing(7),
     color: theme.palette.primary.contrastText,
-    background: theme.palette.gradient
+    background: theme.palette.gradient,
   },
   closeIcon: {
     height: '100%',
@@ -17,10 +17,10 @@ export const modalDialogStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     '& *': {
-      color: theme.palette.primary.contrastText
-    }
+      color: theme.palette.primary.contrastText,
+    },
   },
   content: {
-    marginTop: theme.spacing(1)
-  }
+    marginTop: theme.spacing(1),
+  },
 }));
