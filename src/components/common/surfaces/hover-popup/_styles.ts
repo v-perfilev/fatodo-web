@@ -7,6 +7,9 @@ export const hoverPopupStyles = makeStyles(() => ({
 }));
 
 export const hoverPopupPopperStyles = makeStyles((theme: Theme) => ({
+  popper: {
+    zIndex: 10000,
+  },
   paper: {
     padding: theme.spacing(1),
     margin: theme.spacing(1),

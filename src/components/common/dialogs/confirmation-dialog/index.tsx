@@ -9,7 +9,7 @@ type Props = {
   open: boolean;
   onAgree: () => void;
   onDisagree: () => void;
-  title?: string;
+  title: string;
   text?: string;
   loading?: boolean;
 };
@@ -43,6 +43,7 @@ const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDisagree, 
             {agreeButton}
           </>
         }
+        withText
       />
     </ThemeProvider>
   );

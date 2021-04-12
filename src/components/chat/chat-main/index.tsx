@@ -15,7 +15,7 @@ import {Chat} from '../../../models/chat.model';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
-import CreateChatDialog from '../create-chat-dialog';
+import ChatCreateDialog from '../chat-create-dialog';
 import withUserList from '../../../shared/hocs/with-list/with-user-list';
 import withAuthState from '../../../shared/hocs/with-auth-state';
 import {useWsChatContext} from '../../../shared/contexts/chat-contexts/ws-chat-context';
@@ -87,7 +87,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   return (
     <>
       {isBigDevice ? bigView : smallView}
-      <CreateChatDialog show={showCreateChatDialog} setShow={setShowCreateChatDialog} />
+      <ChatCreateDialog show={showCreateChatDialog} setShow={setShowCreateChatDialog} />
     </>
   );
 };

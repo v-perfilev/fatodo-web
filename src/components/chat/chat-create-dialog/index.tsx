@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import FormDialog from '../../common/dialogs/form-dialog';
-import CreateChatForm from './create-chat-form';
+import ChatCreateForm from './chat-create-form';
 import {useTranslation} from 'react-i18next';
 
 type Props = {
@@ -8,14 +8,14 @@ type Props = {
   setShow: (show: boolean) => void;
 };
 
-const CreateChatDialog: FC<Props> = ({show, setShow}: Props) => {
+const ChatCreateDialog: FC<Props> = ({show, setShow}: Props) => {
   const {t} = useTranslation();
 
   return (
     <FormDialog
       show={show}
       setShow={setShow}
-      FormComponent={CreateChatForm}
+      FormComponent={ChatCreateForm}
       title={t('chat:createChat.title')}
       sendText={t('chat:createChat.send')}
       cancelText={t('chat:createChat.cancel')}
@@ -23,4 +23,4 @@ const CreateChatDialog: FC<Props> = ({show, setShow}: Props) => {
   );
 };
 
-export default CreateChatDialog;
+export default ChatCreateDialog;

@@ -1,40 +1,57 @@
-import React, {FC, useRef, useState} from 'react';
-import {Box, IconButton} from '@material-ui/core';
+import React, {FC, useEffect, useState} from 'react';
 import {Chat} from '../../../../models/chat.model';
-import {useTranslation} from 'react-i18next';
-import {MembersIcon} from '../../../common/icons/members-icon';
-import ChatContentMembersDialog from './chat-content-members-dialog';
-import {chatContentMembers} from './_styles';
+import ChatMembersDialog from '../../chat-members-dialog';
+import ChatAddMembersDialog from '../../chat-add-members-dialog';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
+import {User} from '../../../../models/user.model';
+import AvatarGroup from '../../../common/surfaces/avatar-group';
 
 type Props = {
   chat: Chat;
 };
 
+export type ContentMemberDialogType = 'members' | 'add-members' | 'none';
+
 const ChatContentMembers: FC<Props> = ({chat}: Props) => {
-  const classes = chatContentMembers();
-  const {t} = useTranslation();
-  const ref = useRef();
-  const [isOpen, setIsOpen] = useState(false);
+  const [dialog, setDialog] = useState<ContentMemberDialogType>('none');
+  const {users} = useUserListContext();
+  const [usersToShow, setUsersToShow] = useState<User[]>([]);
 
-  const handleClickOnAction = (e: React.MouseEvent<HTMLElement>): void => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsOpen(true);
+  const isListDialogOpened = dialog === 'members';
+  const isAddDialogOpened = dialog === 'add-members';
+
+  const openMembersDialog = (): void => {
+    setDialog('members');
   };
 
-  const handleClose = (): void => {
-    setIsOpen(false);
+  const openAddMembersDialog = (): void => {
+    setDialog('add-members');
   };
+
+  const closeDialog = (): void => {
+    setDialog('none');
+  };
+
+  useEffect(() => {
+    const updatedUsersToShow = users.filter(user => chat.members.includes(user.id));
+    setUsersToShow(updatedUsersToShow);
+  }, [chat.members]);
 
   return (
     <>
-      <IconButton onClick={handleClickOnAction} ref={ref}>
-        <MembersIcon color="primary" />
-        <Box className={classes.memberCount}>
-          {chat.members.length}
-        </Box>
-      </IconButton>
-      <ChatContentMembersDialog chat={chat} isOpen={isOpen} close={handleClose} />
+      <AvatarGroup users={usersToShow} onClick={openMembersDialog} />
+      <ChatMembersDialog
+        chat={chat}
+        isOpen={isListDialogOpened}
+        close={closeDialog}
+        switchToAddMembers={openAddMembersDialog}
+      />
+      <ChatAddMembersDialog
+        chat={chat}
+        isOpen={isAddDialogOpened}
+        close={closeDialog}
+        switchToMembers={openAddMembersDialog}
+      />
     </>
   );
 };

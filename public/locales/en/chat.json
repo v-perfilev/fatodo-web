@@ -22,6 +22,16 @@
     "send": "Create",
     "cancel": "Cancel"
   },
+  "members": {
+    "title": "Chat members",
+    "buttons": {
+      "addUsers": "Add users"
+    }
+  },
+  "removeMember": {
+    "title": "Remove user from chat",
+    "text": "Are you sure you want to delete user {{username}} from chat?"
+  },
   "event": {
     "CREATE_DIRECT_CHAT": "{{username}} created direct chat with {{usernames}}",
     "CREATE_CHAT": "{{username}} created chat with {{usernames}}",

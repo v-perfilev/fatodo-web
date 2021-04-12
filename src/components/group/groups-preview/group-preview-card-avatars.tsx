@@ -2,12 +2,12 @@ import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {groupCardAvatarsStyles} from './_styles';
-import {AVATARS_IN_GROUP_CARD} from '../_constants';
+import {AVATARS_IN_CARD} from '../_constants';
 import {User} from '../../../models/user.model';
 import UserService from '../../../services/user.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {UserWithPopupView} from '../../common/views/user-with-popup-view';
+import {UserWithPopupView} from '../../common/views';
 
 const GroupPreviewCardAvatars: FC = () => {
   const classes = groupCardAvatarsStyles();
@@ -15,8 +15,8 @@ const GroupPreviewCardAvatars: FC = () => {
   const {obj: group} = useGroupViewContext();
   const [users, setUsers] = useState<User[]>([]);
 
-  const usersToShow = users.slice(0, AVATARS_IN_GROUP_CARD);
-  const moreThanLimit = users.length > AVATARS_IN_GROUP_CARD ? users.length - AVATARS_IN_GROUP_CARD : 0;
+  const usersToShow = users.slice(0, AVATARS_IN_CARD);
+  const moreThanLimit = users.length > AVATARS_IN_CARD ? users.length - AVATARS_IN_CARD : 0;
 
   const loadUsers = (ids: string[]): void => {
     UserService.getAllByIds(ids)

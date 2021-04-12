@@ -101,7 +101,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const groupCardNotificationsStyles = makeStyles((theme: Theme) => ({
-  actions: {
+  deleteUser: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -12,7 +12,7 @@ const GroupPreviewCardNotifications: FC = () => {
   const {obj: group} = useGroupViewContext();
 
   return (
-    <CardActions className={classes.actions}>
+    <CardActions className={classes.deleteUser}>
       <GroupPreviewCardAvatars />
       <Box className={classes.badges}>
         <Badge color="primary" max={5} badgeContent={group.notificationCount}>

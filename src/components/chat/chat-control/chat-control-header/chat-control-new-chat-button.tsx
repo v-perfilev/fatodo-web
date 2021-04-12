@@ -3,7 +3,7 @@ import * as React from 'react';
 import {FC, useState} from 'react';
 import {chatControlNewChatButtonStyles} from './_styles';
 import {PlusIcon} from '../../../common/icons/plus-icon';
-import CreateChatDialog from '../../create-chat-dialog';
+import ChatCreateDialog from '../../chat-create-dialog';
 
 const ChatControlNewChatButton: FC = () => {
   const classes = chatControlNewChatButtonStyles();
@@ -18,7 +18,7 @@ const ChatControlNewChatButton: FC = () => {
       <Fab className={classes.root} size="small" color="primary" onClick={showDialog}>
         <PlusIcon />
       </Fab>
-      <CreateChatDialog show={showCreateChatDialog} setShow={setShowCreateChatDialog} />
+      <ChatCreateDialog show={showCreateChatDialog} setShow={setShowCreateChatDialog} />
     </>
   );
 };

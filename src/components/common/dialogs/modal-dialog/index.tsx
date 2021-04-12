@@ -10,14 +10,18 @@ type Props = {
   title?: ReactElement | string;
   content?: ReactElement | string;
   actions?: ReactElement;
+  withText?: boolean;
   showCloseIcon?: boolean;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
 };
 
-const ModalDialog: FC<Props> = ({isOpen, close, title, content, actions, showCloseIcon}: Props) => {
+const ModalDialog: FC<Props> = ({isOpen, close, title, content, actions, withText, showCloseIcon, size}: Props) => {
     const classes = modalDialogStyles();
 
+    const maxWidth = size || 'xs';
+
     return (
-      <Dialog open={isOpen} onClose={close}>
+      <Dialog open={isOpen} onClose={close} fullWidth maxWidth={maxWidth}>
         {title && (
           <DialogTitle className={classes.title}>
             {title}
@@ -31,10 +35,13 @@ const ModalDialog: FC<Props> = ({isOpen, close, title, content, actions, showClo
           </DialogTitle>
         )}
         {content && (
-          <DialogContent className={classes.content}>
-            <DialogContentText>
-              {content}
-            </DialogContentText>
+          <DialogContent>
+            {withText && (
+              <DialogContentText className={classes.content}>
+                {content}
+              </DialogContentText>
+            )}
+            {!withText && content}
           </DialogContent>
         )}
         {actions && (
