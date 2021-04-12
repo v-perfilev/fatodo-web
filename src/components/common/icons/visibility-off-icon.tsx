@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {FC, PropsWithChildren} from 'react';
-import {SvgIcon, SvgIconProps} from '@material-ui/core';
+import {FC} from 'react';
+import {IconWithMargin, IconWithMarginProps} from '../surfaces/icon-with-margin';
 
-type Props = PropsWithChildren<SvgIconProps>;
+type Props = IconWithMarginProps;
 
 export const VisibilityOffIcon: FC<Props> = (props: Props) => (
-  <SvgIcon {...props}>
+  <IconWithMargin {...props}>
     <path fill="none" d="M0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0z" />
     <path
       fill="currentColor"
@@ -16,5 +16,5 @@ export const VisibilityOffIcon: FC<Props> = (props: Props) => (
         .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15
          3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"
     />
-  </SvgIcon>
+  </IconWithMargin>
 );

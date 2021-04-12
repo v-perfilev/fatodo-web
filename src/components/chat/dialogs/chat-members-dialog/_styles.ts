@@ -22,9 +22,6 @@ export const chatMembersDialogStyles = makeStyles((theme: Theme) => ({
   },
   user: {
     flexGrow: 1
-  },
-  addIcon: {
-    marginRight: theme.spacing(1)
   }
 }));
 

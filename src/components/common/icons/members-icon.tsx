@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {FC, PropsWithChildren} from 'react';
-import {SvgIcon, SvgIconProps} from '@material-ui/core';
+import {FC} from 'react';
+import {IconWithMargin, IconWithMarginProps} from '../surfaces/icon-with-margin';
 
-type Props = PropsWithChildren<SvgIconProps>;
+type Props = IconWithMarginProps;
 
 export const MembersIcon: FC<Props> = (props: Props) => (
-  <SvgIcon {...props}>
+  <IconWithMargin {...props}>
     <path
       fill="currentColor"
       d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1
@@ -16,5 +16,5 @@ export const MembersIcon: FC<Props> = (props: Props) => (
       4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28
       19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z"
     />
-  </SvgIcon>
+  </IconWithMargin>
 );

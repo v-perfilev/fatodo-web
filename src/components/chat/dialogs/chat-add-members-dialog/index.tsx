@@ -20,11 +20,9 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
   const {t} = useTranslation();
   const ref = useRef();
 
-  const addUsers = (): void => {
+  const addUsers = (): void => {};
 
-  }
-
-  const actions =  (
+  const actions = (
     <Button onClick={addUsers} color="primary">
       <UserPlusIcon className={classes.addIcon} />
       {t('chat:members.buttons.addUsers')}
