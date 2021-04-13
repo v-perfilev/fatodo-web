@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {Chat} from '../../../../models/chat.model';
 import {useTranslation} from 'react-i18next';
 import ModalDialog from '../../../common/dialogs/modal-dialog';
@@ -7,6 +7,7 @@ import {Button} from '@material-ui/core';
 import {UserPlusIcon} from '../../../common/icons/user-plus-icon';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
+import ContactService from '../../../../services/contact.service';
 
 type Props = {
   chat: Chat;
@@ -19,6 +20,19 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
   const classes = chatAddMembersDialogStyles();
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
+  const [contactIds, setContactIds] = useState<string[]>([]);
+
+  const loadContactIds = (): void => {
+    ContactService.getAllRelations()
+      .then((response) => {
+        const relations = response.data;
+        const relationUserIds = relations.map((relation) => relation.secondUserId);
+        setContactIds(relationUserIds);
+      })
+      .catch((response) => {
+        handleResponse(response);
+      });
+  };
 
   const addUsers = (): void => {
     ChatService.addUsersToChat(chat.id, [])

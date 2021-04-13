@@ -5,9 +5,14 @@ import {User} from '../models/user.model';
 export default class UserService {
   private static baseUrl = '/api/user';
 
-  public static getAllByIds = (ids: string[]): AxiosPromise => {
+  public static getAllByIds = (ids: string[]): AxiosPromise<User[]> => {
     const url = UserService.baseUrl + '/user/all-by-ids';
     return axios.post(url, ids);
+  };
+
+  public static getAllByUsernamePart = (usernamePart: string): AxiosPromise<User[]> => {
+    const url = UserService.baseUrl + '/user/all-by-username/' + usernamePart;
+    return axios.get(url);
   };
 
   public static getByUsername = (username: string): AxiosPromise<User> => {
@@ -20,33 +25,33 @@ export default class UserService {
     return axios.get(url);
   };
 
-  public static getCurrent = (): AxiosPromise => {
+  public static getCurrent = (): AxiosPromise<User> => {
     const url = UserService.baseUrl + '/account/current';
     return axios.get(url);
   };
 
-  public static updateAccount = (formData: FormData): AxiosPromise => {
+  public static updateAccount = (formData: FormData): AxiosPromise<void> => {
     const url = UserService.baseUrl + '/account/update';
     const config = {headers: {'content-type': 'multipart/form-data'}};
     return axios.post(url, formData, config);
   };
 
-  public static changePassword = (dto: ChangePasswordDTO): AxiosPromise => {
+  public static changePassword = (dto: ChangePasswordDTO): AxiosPromise<void> => {
     const url = UserService.baseUrl + '/account/change-password';
     return axios.post(url, dto);
   };
 
-  public static doesEmailExist = (value: string): AxiosPromise => {
+  public static doesEmailExist = (value: string): AxiosPromise<boolean> => {
     const url = UserService.baseUrl + '/check/email-exists/' + value;
     return axios.get(url);
   };
 
-  public static doesUsernameExist = (value: string): AxiosPromise => {
+  public static doesUsernameExist = (value: string): AxiosPromise<boolean> => {
     const url = UserService.baseUrl + '/check/username-exists/' + value;
     return axios.get(url);
   };
 
-  public static doesUsernameOrEmailExist = (value: string): AxiosPromise => {
+  public static doesUsernameOrEmailExist = (value: string): AxiosPromise<boolean> => {
     const url = UserService.baseUrl + '/check/username-or-email-exists/' + value;
     return axios.get(url);
   };
