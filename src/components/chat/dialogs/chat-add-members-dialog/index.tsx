@@ -37,7 +37,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
   };
 
   const addUsers = (): void => {
-    ChatService.addUsersToChat(chat.id, [])
+    ChatService.addUsersToChat(chat.id, userIds)
       .catch((response) => {
         handleResponse(response);
       })
@@ -46,14 +46,18 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
       });
   };
 
+  const userIdListNotEmpty = userIds.length > 0;
+
   useEffect(() => {
     loadContacts();
   }, []);
 
-  const content = <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />;
+  const content = (
+    <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />
+  );
 
   const actions = (
-    <Button startIcon={<UserPlusIcon />} onClick={addUsers} color="primary">
+    <Button startIcon={<UserPlusIcon />} onClick={addUsers} color="primary" disabled={userIdListNotEmpty}>
       {t('chat:addMembers.buttons.addUsers')}
     </Button>
   );

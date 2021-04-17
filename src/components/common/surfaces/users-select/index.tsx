@@ -39,20 +39,31 @@ const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props
   };
 
   const handleUsersToShow = (): void => {
-    const preliminaryUsersToShow = [];
+    const filterFunc = (user: User): boolean => user.username.toLowerCase().startsWith(filter.toLowerCase());
+    const filterInFunc = (ids: string[]) => (user: User): boolean => ids.includes(user.id);
+    const filterNotInFunc = (ids: string[]) => (user: User): boolean => !ids.includes(user.id);
+    const prioritySortFunc = (ids: string[]) => (u1: User, _): number => ids.includes(u1.id) ? 1 : -1;
+
+    let updatedUsersToShow = [];
 
     if (filter.length > 0) {
-      const filterFunc = (user: User): boolean => user.username.toLowerCase().startsWith(filter.toLowerCase());
-      const filteredUsers = users.filter(filterFunc);
-      preliminaryUsersToShow.push(filteredUsers);
+      const filteredUsers = users
+        .filter(filterFunc)
+        .sort(prioritySortFunc(priorityIds));
+      updatedUsersToShow.push(...filteredUsers);
+    } else {
+      const priorityFilteredUsers = users
+        .filter(filterInFunc(priorityIds));
+      updatedUsersToShow.push(...priorityFilteredUsers);
     }
 
-    const priorityFilterFunc = (user: User): boolean => priorityIds.includes(user.id);
-    const priorityFilteredUsers = users.filter(priorityFilterFunc);
-    preliminaryUsersToShow.push(priorityFilteredUsers);
+    updatedUsersToShow = updatedUsersToShow
+      .filter(filterNotInFunc(selectedIds))
+      .filter(filterNotInFunc(ignoredIds));
 
-    const ignoredFilterFunc = (user: User): boolean => !ignoredIds.includes(user.id);
-    const updatedUsersToShow = preliminaryUsersToShow.filter(ignoredFilterFunc);
+    const selectedUsers = users
+      .filter(filterInFunc(selectedIds));
+    updatedUsersToShow.push(...selectedUsers);
 
     setUsersToShow(updatedUsersToShow);
   };
@@ -63,18 +74,20 @@ const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props
   };
 
   const loadUserFromFilter = (): void => {
-    UserService.getAllByUsernamePart(filter)
-      .then((response) => {
-        const users = response.data;
-        const ids = users.map((u) => u.id);
-        handleUserIds(ids);
-      })
-      .catch((response) => {
-        handleResponse(response);
-      })
-      .finally(() => {
-        setFilterLoading(false);
-      });
+    if (filter.length > 0) {
+      UserService.getAllByUsernamePart(filter)
+        .then((response) => {
+          const users = response.data;
+          const ids = users.map((u) => u.id);
+          handleUserIds(ids);
+        })
+        .catch((response) => {
+          handleResponse(response);
+        })
+        .finally(() => {
+          setFilterLoading(false);
+        });
+    }
   };
 
   useEffect(() => {
