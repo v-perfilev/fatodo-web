@@ -1,25 +1,25 @@
 import React, {FC} from 'react';
 import {accountFormStyles} from '../_styles';
 import {Box} from '@material-ui/core';
-import {ImageUpload, TextInput} from '../../../common/inputs';
+import {ImageUpload, SelectInput, TextInput} from '../../../common/inputs';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {compose} from 'recompose';
 import {useTranslation} from 'react-i18next';
 import {UserAccount} from '../../../../models/user.model';
 import {LoadingButton} from '../../../common/controls';
 import {PageSpacer} from '../../../common/surfaces';
-import {SelectInput} from '../../../common/inputs/select-input';
 import {LANGUAGES} from '../../../../shared/i18n';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import UserService from '../../../../services/user.service';
 import {AccountFormUtils, AccountFormValues} from './_form';
 
-type Props = FormikProps<AccountFormValues> &
-  SnackState & {
-    account: UserAccount;
-    requestAccountData: () => void;
-  };
+type BaseProps = {
+  account: UserAccount;
+  requestAccountData: () => void;
+};
+
+type Props = FormikProps<AccountFormValues> & SnackState & BaseProps;
 
 const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = accountFormStyles();
@@ -74,4 +74,4 @@ const formik = withFormik<Props, AccountFormValues>({
   },
 });
 
-export default compose(withSnackContext, formik)(AccountForm);
+export default compose<Props, BaseProps>(withSnackContext, formik)(AccountForm);

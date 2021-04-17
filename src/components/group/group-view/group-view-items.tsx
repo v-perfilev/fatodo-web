@@ -41,4 +41,4 @@ const GroupViewItems: FC = () => {
     </Box>
   );
 };
-export default compose(withItemList)(GroupViewItems);
+export default compose<{}, {}>(withItemList)(GroupViewItems);

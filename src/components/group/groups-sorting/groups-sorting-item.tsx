@@ -9,7 +9,7 @@ import {Group} from '../../../models/group.model';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
-type Props = HTMLAttributes<any> & {
+type Props = HTMLAttributes<HTMLElement> & {
   group: Group;
   bind: (...any) => void;
   setItemRef: (element: HTMLDivElement) => void;
@@ -30,4 +30,4 @@ const GroupsSortingItem: FC<Props> = ({group, style, bind, setItemRef}: Props) =
   );
 };
 
-export default compose(animated, withGroupView)(GroupsSortingItem);
+export default compose<Props, Props>(animated, withGroupView)(GroupsSortingItem);

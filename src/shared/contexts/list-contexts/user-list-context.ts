@@ -5,6 +5,7 @@ import {User} from '../../../models/user.model';
 export interface UserListState {
   users: User[];
   handleUserIds: (ids: string[]) => void;
+  loading: boolean;
 }
 
 export const UserListContext = React.createContext<UserListState>(null);

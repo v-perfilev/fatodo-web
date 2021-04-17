@@ -2,14 +2,14 @@ import React, {FC, HTMLAttributes, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {itemViewChangesStyles, itemViewCommonStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
-import {LabeledBox} from '../../common/surfaces/labeled-box';
+import {LabeledBox} from '../../common/surfaces';
 import {DateFormatters} from '../../../shared/utils/date.utils';
 import csx from 'classnames';
 import UserService from '../../../services/user.service';
 import {User} from '../../../models/user.model';
 import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 
-type Props = HTMLAttributes<any>;
+type Props = HTMLAttributes<HTMLElement>;
 
 const ItemViewChanges: FC<Props> = ({className}: Props) => {
   const classes = itemViewChangesStyles();

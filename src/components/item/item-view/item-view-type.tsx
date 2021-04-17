@@ -1,10 +1,10 @@
 import React, {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
-import {TypeView} from '../../common/views/type-view';
-import {LabeledBox} from '../../common/surfaces/labeled-box';
+import {TypeView} from '../../common/views';
+import {LabeledBox} from '../../common/surfaces';
 import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 
-type Props = HTMLAttributes<any>;
+type Props = HTMLAttributes<HTMLElement>;
 
 const ItemViewType: FC<Props> = ({className}: Props) => {
   const {t} = useTranslation();

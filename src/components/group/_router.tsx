@@ -43,7 +43,7 @@ const GroupRouter: FC = () => {
   );
 };
 
-export default compose(
+export default compose<{}, {}>(
   withFlexibleHeader,
   withAdditionalMenu,
   withGroupDeleteDialog,

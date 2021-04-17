@@ -31,7 +31,9 @@ const withUserList = (Component: ComponentType): FC => (props): ReactElement => 
       });
   };
 
-  const context = {users, handleUserIds: setIds};
+  const loading = loadingIds.length > 0;
+
+  const context = {users, handleUserIds: setIds, loading};
 
   useEffect(() => {
     if (ids) {

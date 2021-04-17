@@ -37,4 +37,4 @@ const ItemRouter: FC = () => {
   );
 };
 
-export default compose(withFlexibleHeader, withAdditionalMenu, withItemDeleteDialog)(ItemRouter);
+export default compose<{}, {}>(withFlexibleHeader, withAdditionalMenu, withItemDeleteDialog)(ItemRouter);

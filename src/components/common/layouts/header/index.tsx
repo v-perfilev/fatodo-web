@@ -16,9 +16,11 @@ import {RedirectMap} from './type';
 const mapDispatchToProps = {logout};
 const connector = connect(null, mapDispatchToProps);
 
-type Props = ConnectedProps<typeof connector> & {
+type BaseProps = {
   flexible?: boolean;
 };
+
+type Props = ConnectedProps<typeof connector> & BaseProps;
 
 const Header: FC<Props> = ({flexible, logout}: Props) => {
   const classes = headerStyles();
@@ -61,4 +63,4 @@ const Header: FC<Props> = ({flexible, logout}: Props) => {
   );
 };
 
-export default compose(connector)(Header);
+export default compose<Props, BaseProps>(connector)(Header);

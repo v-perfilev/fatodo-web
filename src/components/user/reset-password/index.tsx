@@ -42,4 +42,4 @@ const ResetPassword: FC<Props> = ({isAuthenticated}: Props) => {
   );
 };
 
-export default compose(withBackground('/images/background-1.jpg'), withAuthState)(ResetPassword);
+export default compose<Props, {}>(withBackground('/images/background-1.jpg'), withAuthState)(ResetPassword);

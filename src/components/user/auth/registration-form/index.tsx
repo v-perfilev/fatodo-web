@@ -14,11 +14,11 @@ import {SnackState} from '../../../../shared/contexts/snack-context';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {RegistrationFormUtils, RegistrationFormValues} from './_form';
 
-type Props = FormikProps<RegistrationFormValues> &
-  CaptchaProps &
-  SnackState & {
-    onSuccess: () => void;
-  };
+type BaseProps = {
+  onSuccess: () => void;
+};
+
+type Props = FormikProps<RegistrationFormValues> & CaptchaProps & SnackState & BaseProps;
 
 const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -66,4 +66,4 @@ const formik = withFormik<Props, RegistrationFormValues>({
   },
 });
 
-export default compose(withCaptcha, withSnackContext, formik)(RegistrationForm);
+export default compose<Props, BaseProps>(withCaptcha, withSnackContext, formik)(RegistrationForm);

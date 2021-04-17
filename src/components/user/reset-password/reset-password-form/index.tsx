@@ -13,13 +13,13 @@ import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import {ResetPasswordFormUtils, ResetPasswordFormValues} from './_form';
 
-type Props = FormikProps<ResetPasswordFormValues> &
-  CaptchaProps &
-  SnackState & {
-    code: string;
-    onSuccess: () => void;
-    onFailure: () => void;
-  };
+type BaseProps = {
+  code: string;
+  onSuccess: () => void;
+  onFailure: () => void;
+};
+
+type Props = FormikProps<ResetPasswordFormValues> & CaptchaProps & SnackState & BaseProps;
 
 const ResetPasswordForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
   const classes = authFormStyles();
@@ -70,4 +70,4 @@ const formik = withFormik<Props, ResetPasswordFormValues>({
   },
 });
 
-export default compose(withCaptcha, withSnackContext, formik)(ResetPasswordForm);
+export default compose<Props, BaseProps>(withCaptcha, withSnackContext, formik)(ResetPasswordForm);

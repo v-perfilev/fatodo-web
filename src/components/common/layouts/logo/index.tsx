@@ -5,9 +5,9 @@ import {logoStyles, logoWithTextStyles} from './_styles';
 import csx from 'classnames';
 import {Typography} from '@material-ui/core';
 import {LogoPic} from '../../images';
-import {Link} from '../../controls/link';
+import {Link} from '../../controls';
 
-type Props = HTMLAttributes<any>;
+type Props = HTMLAttributes<HTMLElement>;
 
 export const Logo: FC<Props> = ({className}: Props) => {
   const classes = logoStyles();

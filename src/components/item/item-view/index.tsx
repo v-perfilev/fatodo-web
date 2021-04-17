@@ -28,7 +28,7 @@ import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import withItemView from '../../../shared/hocs/with-view/with-item-view';
 import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {CircularSpinner} from '../../common/loaders/circular-spinner';
+import {CircularSpinner} from '../../common/loaders';
 import {GroupsIcon} from '../../common/icons/groups-icon';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 
@@ -144,4 +144,4 @@ const ItemView: FC = () => {
   );
 };
 
-export default compose(withVerticalPadding, withGroupView, withItemView)(ItemView);
+export default compose<{}, {}>(withVerticalPadding, withGroupView, withItemView)(ItemView);

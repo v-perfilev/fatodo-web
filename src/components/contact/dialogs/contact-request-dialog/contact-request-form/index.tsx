@@ -12,7 +12,9 @@ import {SnackState} from '../../../../../shared/contexts/snack-context';
 import ContactService from '../../../../../services/contact.service';
 import withAuthState from '../../../../../shared/hocs/with-auth-state';
 
-type Props = AuthState & FormikProps<ContactRequestFormValues> & FormDialogComponentProps & SnackState;
+type BaseProps = FormDialogComponentProps;
+
+type Props = AuthState & FormikProps<ContactRequestFormValues> & SnackState & BaseProps;
 
 const ContactRequestForm: FC<Props> = (props: Props) => {
   const {setIsSubmitting, setIsValid, setSubmitForm, setResetForm} = props;
@@ -83,4 +85,4 @@ const formik = withFormik<Props, ContactRequestFormValues>({
   },
 });
 
-export default compose<FormDialogComponentProps>(withSnackContext, withAuthState, formik)(ContactRequestForm);
+export default compose<Props, BaseProps>(withSnackContext, withAuthState, formik)(ContactRequestForm);

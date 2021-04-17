@@ -27,4 +27,4 @@ const GroupPreviewGridItem: FC<Props> = ({group}: Props) => {
   );
 };
 
-export default compose(memo, withGroupView)(GroupPreviewGridItem);
+export default compose<Props, Props>(memo, withGroupView)(GroupPreviewGridItem);

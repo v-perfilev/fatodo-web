@@ -46,4 +46,4 @@ const Home: FC = () => {
   );
 };
 
-export default compose(withHeader, withVerticalPadding)(Home);
+export default compose<{}, {}>(withHeader, withVerticalPadding)(Home);

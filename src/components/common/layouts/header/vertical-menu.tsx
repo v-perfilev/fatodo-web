@@ -16,9 +16,11 @@ import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
 import {RedirectMap} from './type';
 import withAuthState from '../../../../shared/hocs/with-auth-state';
 
-type Props = AuthState & {
+type BaseProps = {
   redirectMap: RedirectMap;
 };
+
+type Props = AuthState & BaseProps;
 
 const VerticalMenu: FC<Props> = ({isAuthenticated, redirectMap}: Props) => {
   const classes = sidebarMenuStyles();
@@ -83,4 +85,4 @@ const VerticalMenu: FC<Props> = ({isAuthenticated, redirectMap}: Props) => {
   );
 };
 
-export default compose(withAuthState)(VerticalMenu);
+export default compose<Props, BaseProps>(withAuthState)(VerticalMenu);

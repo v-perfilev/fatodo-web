@@ -32,4 +32,11 @@ const App: FC<Props> = ({login, requestAccountData}: Props) => {
   return ready && <Router />;
 };
 
-export default compose(hot(module), withDevelopmentRibbon, withLastLocation, withLoader, withWrapper, connector)(App);
+export default compose<Props, {}>(
+  hot(module),
+  withDevelopmentRibbon,
+  withLastLocation,
+  withLoader,
+  withWrapper,
+  connector
+)(App);

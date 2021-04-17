@@ -18,7 +18,9 @@ const mapStateToProps = (state: RootState): any => ({snackState: state.snackStat
 const mapDispatchToProps = {enqueueReduxSnack, closeReduxSnack, removeReduxSnack};
 const connector = connect(mapStateToProps, mapDispatchToProps);
 
-type Props = ConnectedProps<typeof connector> & PropsWithChildren<any>;
+type BaseProps = PropsWithChildren<HTMLElement>;
+
+type Props = ConnectedProps<typeof connector> & BaseProps;
 
 const withSnack = (Component: ComponentType): FC => (props: Props): ReactElement => {
   const {snackState, enqueueReduxSnack, closeReduxSnack, removeReduxSnack, ...restProps} = props;
@@ -102,4 +104,4 @@ export const withSnackContext = (Component: ComponentType<SnackState>): FC => (p
   return <SnackContext.Consumer>{(value): ReactElement => <Component {...props} {...value} />}</SnackContext.Consumer>;
 };
 
-export default compose(withSnackProvider, connector, withSnack, memo);
+export default compose<Props, BaseProps>(withSnackProvider, connector, withSnack, memo);

@@ -79,4 +79,4 @@ const Auth: FC<Props> = ({isAuthenticated}: Props) => {
   );
 };
 
-export default compose(withBackground('/images/background-1.jpg'), withAuthState)(Auth);
+export default compose<Props, {}>(withBackground('/images/background-1.jpg'), withAuthState)(Auth);

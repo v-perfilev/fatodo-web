@@ -12,7 +12,7 @@ type Props = {
   setTime: (time: Date) => void;
 };
 
-export const TimeSelect: FC<Props> = ({label, required, time, setTime}: Props) => {
+export const TimeSelectInput: FC<Props> = ({label, required, time, setTime}: Props) => {
   const classes = timeInputStyles();
   const [showClock, setShowClock] = useState(false);
   const [showMinutes, setShowMinutes] = useState(false);

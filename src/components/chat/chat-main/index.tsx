@@ -92,4 +92,4 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   );
 };
 
-export default compose(withUserList, withAuthState)(ChatMain);
+export default compose<Props, {}>(withUserList, withAuthState)(ChatMain);

@@ -27,5 +27,5 @@ export type SortProps = {
   sortContainerHeight: string | number;
   sortOrder: MutableRefObject<number[]>;
   sortSprings: CSSProperties[];
-  sortBind: (...any) => void;
+  sortBind: any;
 };

@@ -65,4 +65,4 @@ const GroupPreview: FC = () => {
   return groupsLoading ? <CircularSpinner /> : <GroupPreviewGridContainer />;
 };
 
-export default compose(withGroupList)(GroupPreview);
+export default compose<{}, {}>(withGroupList)(GroupPreview);

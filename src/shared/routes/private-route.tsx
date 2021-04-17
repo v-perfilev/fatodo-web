@@ -6,7 +6,9 @@ import {compose} from 'recompose';
 import {Routes} from '../../components/router';
 import withAuthState from '../hocs/with-auth-state';
 
-type Props = AuthState & RouteProps;
+type BaseProps = RouteProps;
+
+type Props = AuthState & BaseProps;
 
 const PrivateRoute: FC<Props> = ({isAuthenticated, ...props}: Props) => {
   const history = useHistory();
@@ -18,4 +20,4 @@ const PrivateRoute: FC<Props> = ({isAuthenticated, ...props}: Props) => {
   return isAuthenticated && <Route {...props} />;
 };
 
-export default compose<RouteProps>(withAuthState)(PrivateRoute);
+export default compose<Props, BaseProps>(withAuthState)(PrivateRoute);

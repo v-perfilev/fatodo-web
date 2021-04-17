@@ -7,7 +7,9 @@ import {UserView} from '../../views';
 import {convertAccountToUser} from '../../../../models/user.model';
 import withAuthState from '../../../../shared/hocs/with-auth-state';
 
-type Props = AuthState & HTMLAttributes<HTMLElement>;
+type BaseProps = HTMLAttributes<HTMLElement>;
+
+type Props = AuthState & BaseProps;
 
 const CurrentUser: FC<Props> = ({account, className}: Props) => {
   const classes = currentUserStyles();
@@ -18,4 +20,4 @@ const CurrentUser: FC<Props> = ({account, className}: Props) => {
   return <UserView user={user} picSize="sm" withUsername className={classNames} />;
 };
 
-export default compose(withAuthState)(CurrentUser);
+export default compose<Props, BaseProps>(withAuthState)(CurrentUser);

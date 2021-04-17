@@ -4,7 +4,7 @@ import {calendarSelectStyles} from './_styles';
 import csx from 'classnames';
 import {DateUtils} from '../../../../shared/utils/date.utils';
 
-type Props = HTMLAttributes<any> & {
+type Props = HTMLAttributes<HTMLElement> & {
   label?: string;
   required?: boolean;
   selectedDates?: number[];

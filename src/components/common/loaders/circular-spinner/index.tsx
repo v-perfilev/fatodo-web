@@ -5,7 +5,7 @@ import {Box, CircularProgress} from '@material-ui/core';
 import csx from 'classnames';
 import {SizeType} from '../types';
 
-type Props = HTMLAttributes<any> & {
+type Props = HTMLAttributes<HTMLElement> & {
   size?: SizeType;
 };
 

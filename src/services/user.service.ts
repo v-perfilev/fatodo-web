@@ -1,6 +1,6 @@
 import axios, {AxiosPromise} from 'axios';
 import {ChangePasswordDTO} from '../models/dto/change-password.dto';
-import {User} from '../models/user.model';
+import {User, UserAccount} from '../models/user.model';
 
 export default class UserService {
   private static baseUrl = '/api/user';
@@ -25,7 +25,7 @@ export default class UserService {
     return axios.get(url);
   };
 
-  public static getCurrent = (): AxiosPromise<User> => {
+  public static getCurrent = (): AxiosPromise<UserAccount> => {
     const url = UserService.baseUrl + '/account/current';
     return axios.get(url);
   };

@@ -33,4 +33,4 @@ const Unauthorized: FC<Props> = ({timer, resetTimer}: Props) => {
   );
 };
 
-export default compose(withBackground('/images/background-1.jpg'), withRedirectTimer())(Unauthorized);
+export default compose<Props, {}>(withBackground('/images/background-1.jpg'), withRedirectTimer())(Unauthorized);

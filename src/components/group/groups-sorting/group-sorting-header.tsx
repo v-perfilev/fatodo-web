@@ -4,7 +4,7 @@ import {Box, CardHeader, Typography} from '@material-ui/core';
 import {groupSortingCardHeaderStyles} from './_styles';
 import GroupSortingActions from './group-sorting-actions';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {UrlPic} from '../../common/images/url-pic';
+import {UrlPic} from '../../common/images';
 
 type Props = {
   bind: (...any) => void;

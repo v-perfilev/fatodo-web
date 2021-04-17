@@ -30,4 +30,4 @@ const SocialLogin: FC<Props> = ({login, requestAccountData}: Props) => {
   return null;
 };
 
-export default compose(connector)(SocialLogin);
+export default compose<Props, {}>(connector)(SocialLogin);

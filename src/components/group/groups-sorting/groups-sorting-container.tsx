@@ -9,9 +9,11 @@ import {SortProps} from '../../../shared/hocs/with-sortable-grid/types';
 import GroupsSortingItem from './groups-sorting-item';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 
-type Props = SortProps & {
+type BaseProps = {
   setOrder: (order: MutableRefObject<number[]>) => void;
 };
+
+type Props = SortProps & BaseProps;
 
 const GroupsSortingContainer: FC<Props> = (props: Props) => {
   const classes = groupSortingGridContainerStyles();
@@ -47,4 +49,4 @@ const GroupsSortingContainer: FC<Props> = (props: Props) => {
   );
 };
 
-export default compose(animated, withSortableGrid)(GroupsSortingContainer);
+export default compose<Props, BaseProps>(animated, withSortableGrid)(GroupsSortingContainer);

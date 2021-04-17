@@ -1,10 +1,10 @@
 import React, {FC, HTMLAttributes} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
-import {LabeledBox} from '../../common/surfaces/labeled-box';
+import {LabeledBox} from '../../common/surfaces';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
-type Props = HTMLAttributes<any>;
+type Props = HTMLAttributes<HTMLElement>;
 
 const ItemViewGroup: FC<Props> = ({className}: Props) => {
   const {t} = useTranslation();

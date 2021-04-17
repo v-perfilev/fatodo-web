@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Chat} from '../../../../models/chat.model';
 import {useTranslation} from 'react-i18next';
 import ModalDialog from '../../../common/dialogs/modal-dialog';
@@ -8,6 +8,7 @@ import {UserPlusIcon} from '../../../common/icons/user-plus-icon';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import ContactService from '../../../../services/contact.service';
+import {UserSelect} from '../../../common/surfaces';
 
 type Props = {
   chat: Chat;
@@ -21,8 +22,9 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [contactIds, setContactIds] = useState<string[]>([]);
+  const [userIds, setUserIds] = useState<string[]>([]);
 
-  const loadContactIds = (): void => {
+  const loadContacts = (): void => {
     ContactService.getAllRelations()
       .then((response) => {
         const relations = response.data;
@@ -44,7 +46,11 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
       });
   };
 
-  const content = <>Test</>;
+  useEffect(() => {
+    loadContacts();
+  }, []);
+
+  const content = <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />;
 
   const actions = (
     <Button startIcon={<UserPlusIcon />} onClick={addUsers} color="primary">

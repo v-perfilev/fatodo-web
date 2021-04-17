@@ -11,12 +11,14 @@ import {useTranslation} from 'react-i18next';
 import {PageDivider, PageHeader} from '../../common/surfaces';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 
-type Props = FormikProps<GroupFormValues> & {
+type BaseProps = {
   group?: Group;
   header: string;
   setSaveCallback: (callback: () => () => void) => void;
   request: (formData: FormData, stopSubmitting: () => void) => void;
 };
+
+type Props = FormikProps<GroupFormValues> & BaseProps;
 
 const GroupForm: FC<Props> = ({header, setSaveCallback, values, isValid, submitForm, isSubmitting}: Props) => {
   const classes = groupFormStyles();
@@ -73,4 +75,4 @@ const formik = withFormik<Props, GroupFormValues>({
   },
 });
 
-export default compose(formik, withVerticalPadding)(GroupForm);
+export default compose<Props, BaseProps>(formik, withVerticalPadding)(GroupForm);

@@ -4,7 +4,7 @@ import {spinnerStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import csx from 'classnames';
 
-type Props = HTMLAttributes<any>;
+type Props = HTMLAttributes<HTMLElement>;
 
 export const Spinner: FC<Props> = ({className}: Props) => {
   const classes = spinnerStyles();

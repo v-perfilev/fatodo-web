@@ -32,4 +32,4 @@ const ContactRouter: FC = () => {
   );
 };
 
-export default compose(withFlexibleHeader, withAdditionalMenu)(ContactRouter);
+export default compose<{}, {}>(withFlexibleHeader, withAdditionalMenu)(ContactRouter);

@@ -24,4 +24,4 @@ const ChatRouter: FC = () => {
   );
 };
 
-export default compose(withFlexibleHeader, withAdditionalMenu)(ChatRouter);
+export default compose<{}, {}>(withFlexibleHeader, withAdditionalMenu)(ChatRouter);

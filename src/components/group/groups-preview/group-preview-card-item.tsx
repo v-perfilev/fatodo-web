@@ -13,7 +13,7 @@ import {Link} from '../../common/controls';
 import withItemView from '../../../shared/hocs/with-view/with-item-view';
 import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 
-type Props = HTMLAttributes<any> & {
+type Props = HTMLAttributes<HTMLElement> & {
   item: Item;
 };
 
@@ -39,4 +39,4 @@ const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
   );
 };
 
-export default compose(animated, withItemView)(GroupPreviewCardItem);
+export default compose<Props, Props>(animated, withItemView)(GroupPreviewCardItem);

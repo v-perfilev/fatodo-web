@@ -98,4 +98,4 @@ const ContactMain: FC = () => {
   );
 };
 
-export default compose(withVerticalPadding)(ContactMain);
+export default compose<{}, {}>(withVerticalPadding)(ContactMain);

@@ -20,7 +20,9 @@ enum WsChatDestinations {
   MESSAGE_REACTION = '/user/message/reaction/',
 }
 
-type Props = PropsWithChildren<AuthState>;
+type BaseProps = PropsWithChildren<HTMLElement>;
+
+type Props = AuthState & BaseProps;
 
 const withWsChatClient = (Component: ComponentType): FC => (props: Props): ReactElement => {
   const {isAuthenticated} = props;
@@ -91,4 +93,4 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
   );
 };
 
-export default compose(withAuthState, withWsChatClient);
+export default compose<Props, BaseProps>(withAuthState, withWsChatClient);

@@ -64,4 +64,4 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
   );
 };
 
-export default compose(withHeader, withAdditionalMenu, withVerticalPadding, connector)(Account);
+export default compose<Props, {}>(withHeader, withAdditionalMenu, withVerticalPadding, connector)(Account);

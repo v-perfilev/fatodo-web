@@ -9,4 +9,5 @@ export * from './page-subheader';
 export * from './paper-box';
 export * from './popup-menu';
 export * from './solo-badge';
+export * from './users-select';
 export * from './virtualized-list';

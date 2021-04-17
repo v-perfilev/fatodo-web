@@ -28,4 +28,4 @@ const GroupSortingCard: FC<Props> = ({bind}: Props) => {
   );
 };
 
-export default compose(memo)(GroupSortingCard);
+export default compose<Props, Props>(memo)(GroupSortingCard);

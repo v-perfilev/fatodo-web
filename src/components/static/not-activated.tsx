@@ -76,4 +76,4 @@ const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
   );
 };
 
-export default compose(withBackground('/images/background-1.jpg'), withRedirectTimer('/', 60))(NotActivated);
+export default compose<Props, {}>(withBackground('/images/background-1.jpg'), withRedirectTimer('/', 60))(NotActivated);

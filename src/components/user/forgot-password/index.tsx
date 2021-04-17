@@ -39,4 +39,4 @@ const ForgotPassword: FC<Props> = ({isAuthenticated}: Props) => {
   );
 };
 
-export default compose(withBackground('/images/background-1.jpg'), withAuthState)(ForgotPassword);
+export default compose<Props, {}>(withBackground('/images/background-1.jpg'), withAuthState)(ForgotPassword);

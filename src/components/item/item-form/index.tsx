@@ -22,13 +22,15 @@ import {useTranslation} from 'react-i18next';
 import TypeInput from '../../common/inputs/type-input';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 
-type Props = FormikProps<ItemFormValues> & {
+type BaseProps = {
   group: Group;
   item?: Item;
   header: string;
   setSaveCallback: (callback: () => () => void) => void;
   request: (data: ItemDTO, stopSubmitting: () => void) => void;
 };
+
+type Props = FormikProps<ItemFormValues> & BaseProps;
 
 const ItemForm: FC<Props> = (props: Props) => {
   const classes = itemFormStyles();
@@ -95,4 +97,4 @@ const formik = withFormik<Props, ItemFormValues>({
   },
 });
 
-export default compose(formik, withVerticalPadding)(ItemForm);
+export default compose<Props, BaseProps>(formik, withVerticalPadding)(ItemForm);

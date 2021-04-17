@@ -5,7 +5,7 @@ import {Box} from '@material-ui/core';
 import {DateParams} from '../../../../models/date-params.model';
 import {DateConverters} from '../../../../shared/utils/date.utils';
 import {useTranslation} from 'react-i18next';
-import {TimeSelect} from '../time-select';
+import {TimeSelectInput} from '../time-select-input';
 import {DateSelect} from '../date-select';
 
 type Props = {
@@ -31,7 +31,7 @@ export const RemindersInputPopoverYearly: FC<Props> = ({setReminder}: Props) => 
 
   return (
     <Box className={classes.root}>
-      <TimeSelect label={t('common:reminders.fields.time')} required time={time} setTime={setTime} />
+      <TimeSelectInput label={t('common:reminders.fields.time')} required time={time} setTime={setTime} />
       <DateSelect
         label={t('common:reminders.fields.date')}
         required

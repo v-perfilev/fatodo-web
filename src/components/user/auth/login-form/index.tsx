@@ -23,13 +23,16 @@ import {LoginFormUtils, LoginFormValues} from './_form';
 const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);
 
+type BaseProps = {
+  onSuccess: () => void;
+};
+
 type Props = RouteComponentProps &
   FormikProps<LoginFormValues> &
   ConnectedProps<typeof connector> &
   CaptchaProps &
-  SnackState & {
-    onSuccess: () => void;
-  };
+  SnackState &
+  BaseProps;
 
 const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -94,4 +97,4 @@ const formik = withFormik<Props, LoginFormValues>({
   },
 });
 
-export default compose(withRouter, withCaptcha, withSnackContext, connector, formik)(LoginForm);
+export default compose<Props, BaseProps>(withRouter, withCaptcha, withSnackContext, connector, formik)(LoginForm);

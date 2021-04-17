@@ -9,7 +9,9 @@ import {useWsChatContext} from '../../contexts/chat-contexts/ws-chat-context';
 import {useSnackContext} from '../../contexts/snack-context';
 import {handleChatLastMessageEvent, handleMessageStatusesEvent} from './_ws';
 
-type Props = PropsWithChildren<AuthState>;
+type BaseProps = PropsWithChildren<HTMLElement>;
+
+type Props = AuthState & BaseProps;
 
 const withUnreadMessages = (Component: ComponentType): FC => (props: Props): ReactElement => {
   const {account, isAuthenticated} = props;
@@ -80,4 +82,4 @@ const withUnreadMessages = (Component: ComponentType): FC => (props: Props): Rea
   );
 };
 
-export default compose(withAuthState, withUnreadMessages);
+export default compose<Props, BaseProps>(withAuthState, withUnreadMessages);

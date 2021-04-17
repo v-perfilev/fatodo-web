@@ -11,11 +11,14 @@ import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import ConfirmationDialog from '../../../common/dialogs/confirmation-dialog';
 import {useTranslation} from 'react-i18next';
 import {UserMinusIcon} from '../../../common/icons/user-minus-icon';
+import {compose} from 'recompose';
 
-type Props = AuthState & {
+type BaseProps = {
   chat: Chat;
   user: User;
 };
+
+type Props = AuthState & BaseProps;
 
 const ChatMembersDialogMember: FC<Props> = ({chat, user, account}: Props) => {
   const classes = chatMembersDialogMemberStyles();
@@ -68,4 +71,4 @@ const ChatMembersDialogMember: FC<Props> = ({chat, user, account}: Props) => {
   );
 };
 
-export default withAuthState(ChatMembersDialogMember);
+export default compose<Props, BaseProps>(withAuthState)(ChatMembersDialogMember);

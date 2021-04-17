@@ -20,9 +20,11 @@ import {compose} from 'recompose';
 import {RedirectMap} from './type';
 import withAuthState from '../../../../shared/hocs/with-auth-state';
 
-type Props = AuthState & {
+type BaseProps = {
   redirectMap: RedirectMap;
 };
+
+type Props = AuthState & BaseProps;
 
 const HorizontalMenu: FC<Props> = ({redirectMap, isAuthenticated}: Props) => {
   const classes = horizontalMenuStyles();
@@ -79,4 +81,4 @@ const HorizontalMenu: FC<Props> = ({redirectMap, isAuthenticated}: Props) => {
   return <Box className={classes.root}>{isAuthenticated ? authenticatedMenu : unauthenticatedMenu}</Box>;
 };
 
-export default compose(withAuthState)(HorizontalMenu);
+export default compose<Props, BaseProps>(withAuthState)(HorizontalMenu);

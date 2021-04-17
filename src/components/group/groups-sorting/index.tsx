@@ -80,4 +80,4 @@ const GroupsSorting: FC = () => {
   return groupsLoading ? <CircularSpinner /> : <GroupsSortingContainer setOrder={setOrder} />;
 };
 
-export default compose(withGroupList)(GroupsSorting);
+export default compose<{}, {}>(withGroupList)(GroupsSorting);

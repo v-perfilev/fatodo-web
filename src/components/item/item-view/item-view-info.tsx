@@ -7,7 +7,7 @@ import {itemViewCommonStyles, itemViewInfoStyles} from './_styles';
 import csx from 'classnames';
 import ItemViewDate from './item-view-date';
 
-type Props = HTMLAttributes<any>;
+type Props = HTMLAttributes<HTMLElement>;
 
 const ItemViewInfo: FC<Props> = ({className}: Props) => {
   const classes = itemViewInfoStyles();

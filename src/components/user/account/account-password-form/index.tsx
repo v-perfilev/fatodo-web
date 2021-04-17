@@ -13,7 +13,7 @@ import {SnackState} from '../../../../shared/contexts/snack-context';
 import UserService from '../../../../services/user.service';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 
-type Props = FormikProps<any> & SnackState;
+type Props = FormikProps<AccountPasswordFormValues> & SnackState;
 
 const AccountPasswordForm: FC<Props> = ({values, isValid, isSubmitting}: Props) => {
   const classes = accountFormStyles();
@@ -65,4 +65,4 @@ const formik = withFormik<Props, AccountPasswordFormValues>({
   },
 });
 
-export default compose(withSnackContext, formik)(AccountPasswordForm);
+export default compose<Props, {}>(withSnackContext, formik)(AccountPasswordForm);

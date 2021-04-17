@@ -12,11 +12,11 @@ import {SnackState} from '../../../../shared/contexts/snack-context';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {ForgotPasswordFormUtils, ForgotPasswordFormValues} from './_form';
 
-type Props = FormikProps<ForgotPasswordFormValues> &
-  CaptchaProps &
-  SnackState & {
-    onSuccess?: () => void;
-  };
+type BaseProps = {
+  onSuccess?: () => void;
+};
+
+type Props = FormikProps<ForgotPasswordFormValues> & CaptchaProps & SnackState & BaseProps;
 
 const ForgotPasswordForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = authFormStyles();
@@ -64,4 +64,4 @@ const formik = withFormik<Props, ForgotPasswordFormValues>({
   },
 });
 
-export default compose(withCaptcha, withSnackContext, formik)(ForgotPasswordForm);
+export default compose<Props, BaseProps>(withCaptcha, withSnackContext, formik)(ForgotPasswordForm);

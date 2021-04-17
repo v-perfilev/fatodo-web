@@ -117,4 +117,4 @@ const GroupView: FC = () => {
   );
 };
 
-export default compose(withVerticalPadding, withGroupView)(GroupView);
+export default compose<{}, {}>(withVerticalPadding, withGroupView)(GroupView);

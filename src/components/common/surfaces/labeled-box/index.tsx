@@ -3,7 +3,7 @@ import {labeledBoxStyles} from './_styles';
 import {Box, Typography} from '@material-ui/core';
 import csx from 'classnames';
 
-type Props = HTMLAttributes<any> & {
+type Props = HTMLAttributes<HTMLElement> & {
   label: string;
 };
 

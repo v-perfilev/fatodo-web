@@ -13,7 +13,9 @@ import UserService from '../../../../../services/user.service';
 import {User} from '../../../../../models/user.model';
 import withAuthState from '../../../../../shared/hocs/with-auth-state';
 
-type Props = AuthState & FormikProps<CreateChatValues> & FormDialogComponentProps & SnackState;
+type BaseProps = FormDialogComponentProps;
+
+type Props = AuthState & FormikProps<CreateChatValues> & SnackState & BaseProps;
 
 const ChatCreateForm: FC<Props> = (props: Props) => {
   const {setIsSubmitting, setIsValid, setSubmitForm, setResetForm} = props;
@@ -102,4 +104,4 @@ const formik = withFormik<Props, CreateChatValues>({
   },
 });
 
-export default compose<FormDialogComponentProps>(withSnackContext, withAuthState, formik)(ChatCreateForm);
+export default compose<Props, BaseProps>(withSnackContext, withAuthState, formik)(ChatCreateForm);

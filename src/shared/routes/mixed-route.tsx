@@ -5,10 +5,11 @@ import {Route, RouteProps, useHistory} from 'react-router-dom';
 import {compose} from 'recompose';
 import withAuthState from '../hocs/with-auth-state';
 
-type Props = AuthState &
-  RouteProps & {
-    redirect: string;
-  };
+type BaseProps = RouteProps & {
+  redirect: string;
+};
+
+type Props = AuthState & BaseProps;
 
 const MixedRoute: FC<Props> = ({isAuthenticated, redirect, ...props}: Props) => {
   const history = useHistory();
@@ -20,4 +21,4 @@ const MixedRoute: FC<Props> = ({isAuthenticated, redirect, ...props}: Props) => 
   return !isAuthenticated && <Route {...props} />;
 };
 
-export default compose<RouteProps>(withAuthState)(MixedRoute);
+export default compose<Props, BaseProps>(withAuthState)(MixedRoute);

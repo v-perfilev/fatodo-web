@@ -10,7 +10,7 @@ import {EventIcon} from '../../icons/event-icon';
 import {RepetitionIcon} from '../../icons/repetition-icon';
 import {NoteIcon} from '../../icons/note-icon';
 
-type Props = HTMLAttributes<any> & {
+type Props = HTMLAttributes<HTMLElement> & {
   type: ItemType;
 };
 
