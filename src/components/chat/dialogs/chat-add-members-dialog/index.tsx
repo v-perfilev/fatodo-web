@@ -3,11 +3,11 @@ import {Chat} from '../../../../models/chat.model';
 import {useTranslation} from 'react-i18next';
 import ModalDialog from '../../../common/dialogs/modal-dialog';
 import {Button} from '@material-ui/core';
-import {UserPlusIcon} from '../../../common/icons/user-plus-icon';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import ContactService from '../../../../services/contact.service';
 import {UserSelect} from '../../../common/surfaces';
+import {LoadingButton} from '../../../common/controls';
 
 type Props = {
   chat: Chat;
@@ -20,6 +20,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close}: Props) => {
   const {t} = useTranslation();
   const [contactIds, setContactIds] = useState<string[]>([]);
   const [userIds, setUserIds] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const loadContacts = (): void => {
     ContactService.getAllRelations()
@@ -34,12 +35,16 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close}: Props) => {
   };
 
   const addUsers = (): void => {
+    setIsSubmitting(true);
     ChatService.addUsersToChat(chat.id, userIds)
+      .then(() => {
+        close();
+      })
       .catch((response) => {
         handleResponse(response);
       })
       .finally(() => {
-        close();
+        setIsSubmitting(false);
       });
   };
 
@@ -51,10 +56,28 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close}: Props) => {
 
   const content = <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />;
 
-  const actions = (
-    <Button startIcon={<UserPlusIcon />} onClick={addUsers} color="primary" disabled={isUserIdListEmpty}>
-      {t('chat:addMembers.buttons.addUsers')}
+  const cancelButton = (
+    <Button onClick={close} color="primary" disabled={isSubmitting}>
+      {t('chat:addMembers.buttons.cancel')}
     </Button>
+  );
+
+  const sendButton = (
+    <LoadingButton
+      color="secondary"
+      disabled={isSubmitting || isUserIdListEmpty}
+      loading={isSubmitting}
+      onClick={addUsers}
+    >
+      {t('chat:addMembers.buttons.send')}
+    </LoadingButton>
+  );
+
+  const actions = (
+    <>
+      {cancelButton}
+      {sendButton}
+    </>
   );
 
   return (

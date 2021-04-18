@@ -40,13 +40,14 @@
     "title": "Chat members",
     "usersNotFound": "Users not found",
     "buttons": {
-      "addUsers": "Add users"
+      "addUsers": "Add members"
     }
   },
   "addMembers": {
     "title": "Add chat members",
     "buttons": {
-      "addUsers": "Add users"
+      "send": "Add members",
+      "cancel": "Cancel"
     }
   },
   "removeMember": {
