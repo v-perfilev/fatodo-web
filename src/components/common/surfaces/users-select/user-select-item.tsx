@@ -18,14 +18,10 @@ const UserSelectItem: FC<Props> = ({user, isSelected, toggleSelected, ...props}:
   return (
     <Box className={classes.root} {...props}>
       <UrlPic className={classes.image} alt={user.username} url={user.imageFilename} size="md" border={1} />
-      <Box className={classes.user}>
-        {user.username}
-      </Box>
+      <Box className={classes.user}>{user.username}</Box>
       <CheckboxInput onClick={toggleSelected} isSelected={isSelected} />
     </Box>
   );
 };
 
-export default compose<Props, Props>(
-  memo
-)(UserSelectItem);
+export default compose<Props, Props>(memo)(UserSelectItem);

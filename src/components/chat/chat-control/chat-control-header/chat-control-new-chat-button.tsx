@@ -13,12 +13,16 @@ const ChatControlNewChatButton: FC = () => {
     setShowCreateChatDialog(true);
   };
 
+  const closeDialog = (): void => {
+    setShowCreateChatDialog(false);
+  };
+
   return (
     <>
       <Fab className={classes.root} size="small" color="primary" onClick={showDialog}>
         <PlusIcon />
       </Fab>
-      <ChatCreateDialog show={showCreateChatDialog} setShow={setShowCreateChatDialog} />
+      <ChatCreateDialog isOpen={showCreateChatDialog} close={closeDialog} />
     </>
   );
 };

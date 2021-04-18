@@ -1,28 +1,95 @@
-import React, {FC} from 'react';
-import FormDialog from '../../../common/dialogs/form-dialog';
-import ChatCreateForm from './chat-create-form';
+import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
+import ModalDialog from '../../../common/dialogs/modal-dialog';
+import ContactService from '../../../../services/contact.service';
+import ChatService from '../../../../services/chat.service';
+import {UserSelect} from '../../../common/surfaces';
+import {Button} from '@material-ui/core';
+import {useSnackContext} from '../../../../shared/contexts/snack-context';
+import {LoadingButton} from '../../../common/controls';
 
 type Props = {
-  show: boolean;
-  setShow: (show: boolean) => void;
+  isOpen: boolean;
+  close: () => void;
 };
 
-const ChatCreateDialog: FC<Props> = ({show, setShow}: Props) => {
+const ChatCreateDialog: FC<Props> = ({isOpen, close}: Props) => {
+  const {handleCode, handleResponse} = useSnackContext();
   const {t} = useTranslation();
+  const [contactIds, setContactIds] = useState<string[]>([]);
+  const [userIds, setUserIds] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const close = (): void => {
-    setShow(false);
+  const loadContacts = (): void => {
+    ContactService.getAllRelations()
+      .then((response) => {
+        const relations = response.data;
+        const relationUserIds = relations.map((relation) => relation.secondUserId);
+        setContactIds(relationUserIds);
+      })
+      .catch((response) => {
+        handleResponse(response);
+      });
   };
 
+  const createChat = (): void => {
+    const createChat =
+      userIds.length === 1 ? ChatService.createDirectChat(userIds[0]) : ChatService.createIndirectChat(userIds);
+
+    setIsSubmitting(true);
+    createChat
+      .then(() => {
+        handleCode('message.chatCreated', 'info');
+        close();
+      })
+      .catch((response) => {
+        handleResponse(response);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+  };
+
+  const isUserIdListEmpty = userIds.length == 0;
+
+  useEffect(() => {
+    loadContacts();
+  }, []);
+
+  const content = <UserSelect priorityIds={contactIds} ignoredIds={[]} setUserIds={setUserIds} />;
+
+  const cancelButton = (
+    <Button onClick={close} color="primary" disabled={isSubmitting}>
+      {t('chat:createChat.cancel')}
+    </Button>
+  );
+
+  const sendButton = (
+    <LoadingButton
+      color="secondary"
+      disabled={isSubmitting || isUserIdListEmpty}
+      loading={isSubmitting}
+      onClick={createChat}
+    >
+      {t('chat:createChat.send')}
+    </LoadingButton>
+  );
+
+  const actions = (
+    <>
+      {cancelButton}
+      {sendButton}
+    </>
+  );
+
   return (
-    <FormDialog
-      show={show}
+    <ModalDialog
+      isOpen={isOpen}
       close={close}
-      FormComponent={ChatCreateForm}
       title={t('chat:createChat.title')}
-      sendText={t('chat:createChat.send')}
-      cancelText={t('chat:createChat.cancel')}
+      content={content}
+      actions={actions}
+      showCloseIcon
     />
   );
 };

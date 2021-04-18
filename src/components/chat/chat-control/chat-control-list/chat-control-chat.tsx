@@ -50,9 +50,7 @@ const ChatControlChat: FC<Props> = ({index, chats, isSelected, account, ...props
           )}
           <Box className={classes.title}>
             {title}
-            {chat.isDirect && (
-              <Box className={classes.direct}>{t('chat:common.direct')}</Box>
-            )}
+            {chat.isDirect && <Box className={classes.direct}>{t('chat:common.direct')}</Box>}
           </Box>
           <Box className={classes.date}>{formattedDate}</Box>
         </Box>

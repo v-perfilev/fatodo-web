@@ -18,9 +18,7 @@ const ChatContentMembers: FC<Props> = ({chat, openMembersDialog}: Props) => {
     setUsersToShow(updatedUsersToShow);
   }, [chat.members]);
 
-  return (
-    <AvatarGroup users={usersToShow} onClick={openMembersDialog} />
-  );
+  return <AvatarGroup users={usersToShow} onClick={openMembersDialog} />;
 };
 
 export default ChatContentMembers;

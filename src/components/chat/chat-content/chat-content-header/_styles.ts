@@ -13,29 +13,29 @@ export const chatContentHeaderStyles = makeStyles((theme: Theme) => ({
     paddingRight: theme.spacing(1),
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: theme.palette.grey['300']
+    borderBottomColor: theme.palette.grey['300'],
   },
   title: {
     display: 'flex',
     flexDirection: 'row',
     flexGrow: 1,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   direct: {
     marginLeft: theme.spacing(1),
-    color: theme.palette.grey['400']
-  }
+    color: theme.palette.grey['400'],
+  },
 }));
 
 export const chatContentHeaderActionsStyles = makeStyles((theme: Theme) => ({
   popupMenu: {
     '& .MuiListItem-root': {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     '& .MuiSvgIcon-root': {
       marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(0.5)
-    }
-  }
+      marginRight: theme.spacing(0.5),
+    },
+  },
 }));

@@ -20,7 +20,7 @@ const ChatRenameForm: FC<Props> = (props: Props) => {
   const {isValid, isSubmitting, submitForm, validateForm, resetForm} = props;
   const {t} = useTranslation();
 
-  const title = props.params.title!;
+  const title = props?.params?.title;
 
   useEffect(() => {
     setSubmitForm(() => (): void => {
@@ -67,7 +67,7 @@ const formik = withFormik<Props, RenameChatValues>({
         handleResponse(response);
         setSubmitting(false);
       });
-  }
+  },
 });
 
 export default compose<Props, BaseProps>(withSnackContext, formik)(ChatRenameForm);

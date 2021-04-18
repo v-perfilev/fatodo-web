@@ -41,6 +41,10 @@ const ChatMain: FC<Props> = ({account}: Props) => {
     setChat(null);
   };
 
+  const closeCreateChatDialog = (): void => {
+    setShowCreateChatDialog(false);
+  };
+
   const menu = (
     <>
       <AdditionalMenuButton
@@ -91,7 +95,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   return (
     <>
       {isBigDevice ? bigView : smallView}
-      <ChatCreateDialog show={showCreateChatDialog} setShow={setShowCreateChatDialog} />
+      <ChatCreateDialog isOpen={showCreateChatDialog} close={closeCreateChatDialog} />
     </>
   );
 };

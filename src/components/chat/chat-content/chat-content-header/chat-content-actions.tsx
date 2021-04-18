@@ -59,28 +59,25 @@ const ChatContentActions: FC<Props> = (props: Props) => {
   };
 
   const cleanChat = (e: MouseEvent<HTMLElement>): void => {
-    ChatService.cleanChat(chat.id)
-      .catch((response) => {
-        handleResponse(response);
-      });
+    ChatService.cleanChat(chat.id).catch((response) => {
+      handleResponse(response);
+    });
     handleClose(e);
     clearMessages();
   };
 
   const leaveChat = (e: MouseEvent<HTMLElement>): void => {
-    ChatService.leaveChat(chat.id)
-      .catch((response) => {
-        handleResponse(response);
-      });
+    ChatService.leaveChat(chat.id).catch((response) => {
+      handleResponse(response);
+    });
     handleClose(e);
     closeChat();
   };
 
   const deleteChat = (e: MouseEvent<HTMLElement>): void => {
-    ChatService.deleteChat(chat.id)
-      .catch((response) => {
-        handleResponse(response);
-      });
+    ChatService.deleteChat(chat.id).catch((response) => {
+      handleResponse(response);
+    });
     handleClose(e);
     closeChat();
   };

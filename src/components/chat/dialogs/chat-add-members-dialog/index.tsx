@@ -49,9 +49,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close}: Props) => {
     loadContacts();
   }, []);
 
-  const content = (
-    <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />
-  );
+  const content = <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />;
 
   const actions = (
     <Button startIcon={<UserPlusIcon />} onClick={addUsers} color="primary" disabled={isUserIdListEmpty}>

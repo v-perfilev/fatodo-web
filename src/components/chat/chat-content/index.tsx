@@ -27,9 +27,7 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
   const [dialog, setDialog] = useState<ChatContentDialogType>('none');
   const [messages, setMessages] = useState<Message[]>([]);
 
-  const title = useMemo<string>(() => (
-    chat ? ChatUtils.getTitle(chat, users, account) : null
-  ), [chat, users, account]);
+  const title = useMemo<string>(() => (chat ? ChatUtils.getTitle(chat, users, account) : null), [chat, users, account]);
 
   const isRenameDialogOpened = dialog === 'rename';
   const isMembersDialogOpened = dialog === 'members';
@@ -72,12 +70,7 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
             closeChat={closeChat}
             clearMessages={clearMessages}
           />
-          <MessageContentList
-            chat={chat}
-            account={account}
-            messages={messages}
-            setMessages={setMessages}
-          />
+          <MessageContentList chat={chat} account={account} messages={messages} setMessages={setMessages} />
           <ChatContentFooter chatId={chat.id} />
 
           <ChatMembersDialog
@@ -86,17 +79,8 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
             close={closeDialog}
             switchToAddMembers={openAddMembersDialog}
           />
-          <ChatAddMembersDialog
-            chat={chat}
-            isOpen={isAddMembersDialogOpened}
-            close={closeDialog}
-          />
-          <ChatRenameDialog
-            chat={chat}
-            isOpen={isRenameDialogOpened}
-            close={closeDialog}
-            title={title}
-          />
+          <ChatAddMembersDialog chat={chat} isOpen={isAddMembersDialogOpened} close={closeDialog} />
+          <ChatRenameDialog chat={chat} isOpen={isRenameDialogOpened} close={closeDialog} title={title} />
         </>
       )}
       {!chat && <Box className={classes.placeholder} />}

@@ -11,6 +11,6 @@ export const checkboxInputStyles = makeStyles((theme: Theme) => ({
     borderWidth: 1,
     borderStyle: 'solid',
     borderColor: theme.palette.grey['500'],
-    borderRadius: 5
-  }
+    borderRadius: 5,
+  },
 }));

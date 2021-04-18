@@ -44,27 +44,21 @@ const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props
     const filterFunc = (user: User): boolean => user.username.toLowerCase().startsWith(filter.toLowerCase());
     const filterInFunc = (ids: string[]) => (user: User): boolean => ids.includes(user.id);
     const filterNotInFunc = (ids: string[]) => (user: User): boolean => !ids.includes(user.id);
-    const prioritySortFunc = (ids: string[]) => (u1: User, _): number => ids.includes(u1.id) ? 1 : -1;
+    const prioritySortFunc = (ids: string[]) => (user: User): number => (ids.includes(user.id) ? 1 : -1);
 
     let updatedUsersToShow = [];
 
     if (filter.length > 0) {
-      const filteredUsers = users
-        .filter(filterFunc)
-        .sort(prioritySortFunc(priorityIds));
+      const filteredUsers = users.filter(filterFunc).sort(prioritySortFunc(priorityIds));
       updatedUsersToShow.push(...filteredUsers);
     } else {
-      const priorityFilteredUsers = users
-        .filter(filterInFunc(priorityIds));
+      const priorityFilteredUsers = users.filter(filterInFunc(priorityIds));
       updatedUsersToShow.push(...priorityFilteredUsers);
     }
 
-    updatedUsersToShow = updatedUsersToShow
-      .filter(filterNotInFunc(selectedIds))
-      .filter(filterNotInFunc(ignoredIds));
+    updatedUsersToShow = updatedUsersToShow.filter(filterNotInFunc(selectedIds)).filter(filterNotInFunc(ignoredIds));
 
-    const selectedUsers = users
-      .filter(filterInFunc(selectedIds));
+    const selectedUsers = users.filter(filterInFunc(selectedIds));
     updatedUsersToShow.push(...selectedUsers);
 
     setUsersToShow(updatedUsersToShow);
@@ -113,11 +107,7 @@ const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props
         {usersToShow.map((user, index) => (
           <UserSelectItem user={user} isSelected={isSelected(user)} toggleSelected={toggleSelected(user)} key={index} />
         ))}
-        {usersToShow.length === 0 && (
-          <Box className={classes.notFound}>
-            {t('common:usersSelect.usersNotFound')}
-          </Box>
-        )}
+        {usersToShow.length === 0 && <Box className={classes.notFound}>{t('common:usersSelect.usersNotFound')}</Box>}
       </Box>
     </Box>
   );
