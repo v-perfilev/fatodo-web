@@ -12,6 +12,7 @@ import {MembersIcon} from '../../../common/icons/members-icon';
 import {UserPlusIcon} from '../../../common/icons/user-plus-icon';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
+import {EditIcon} from '../../../common/icons/edit-icon';
 
 type Props = {
   chat: Chat;
@@ -102,7 +103,7 @@ const ChatContentActions: FC<Props> = (props: Props) => {
         )}
         {!chat.isDirect && (
           <MenuItem onClick={renameChat}>
-            <UserPlusIcon color="primary" />
+            <EditIcon color="primary" />
             {t('chat:menu.renameChat')}
           </MenuItem>
         )}

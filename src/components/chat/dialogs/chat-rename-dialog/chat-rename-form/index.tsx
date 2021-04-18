@@ -8,6 +8,7 @@ import {FormDialogComponentProps} from '../../../../common/dialogs';
 import {withSnackContext} from '../../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../../shared/contexts/snack-context';
 import ChatService from '../../../../../services/chat.service';
+import {Chat} from '../../../../../models/chat.model';
 
 type BaseProps = FormDialogComponentProps;
 
@@ -18,6 +19,8 @@ const ChatRenameForm: FC<Props> = (props: Props) => {
   const {setErrors} = props;
   const {isValid, isSubmitting, submitForm, validateForm, resetForm} = props;
   const {t} = useTranslation();
+
+  const title = props.params.title!;
 
   useEffect(() => {
     setSubmitForm(() => (): void => {
@@ -39,24 +42,25 @@ const ChatRenameForm: FC<Props> = (props: Props) => {
 
   return (
     <Form>
-      <TextInput name="title" label={t('chat:createChat.fields.users.label')} placeholder={'test'} />
+      <TextInput name="title" label={t('chat:renameChat.fields.title.label')} placeholder={title} />
     </Form>
   );
 };
 
 const formik = withFormik<Props, RenameChatValues>({
-  mapPropsToValues: () => RenameChatFormUtils.mapPropsToValues(),
+  mapPropsToValues: ({params}: Props) => RenameChatFormUtils.mapPropsToValues(params.chat),
   validationSchema: () => RenameChatFormUtils.validationSchema,
   validateOnMount: true,
 
   handleSubmit: (values: RenameChatValues, {props, setSubmitting}: FormikBag<Props, RenameChatValues>) => {
-    const {handleCode, handleResponse} = props;
+    const {params, handleCode, handleResponse} = props;
 
+    const chat = params.chat as Chat;
     const title = RenameChatFormUtils.mapValuesToDTO(values);
 
-    ChatService.renameChat(null, title)
+    ChatService.renameChat(chat.id, title)
       .then(() => {
-        handleCode('message.chatCreated', 'info');
+        handleCode('message.chatRenamed', 'info');
         props.close();
       })
       .catch((response) => {

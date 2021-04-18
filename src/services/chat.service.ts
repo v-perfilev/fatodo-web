@@ -31,7 +31,7 @@ export default class ChatService {
   };
 
   public static renameChat = (id: string, title: string): AxiosPromise<Chat> => {
-    const url = ChatService.baseUrl + '/chat/' + id;
+    const url = ChatService.baseUrl + '/chat/rename/' + id;
     return axios.post(url, title);
   };
 

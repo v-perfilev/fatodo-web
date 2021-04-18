@@ -28,6 +28,7 @@
     "requestDeclined": "Запрос отклонён"
   },
   "message": {
-    "chatCreated": "Чат создан"
+    "chatCreated": "Чат создан",
+    "chatRenamed": "Чат переименован"
   }
 }

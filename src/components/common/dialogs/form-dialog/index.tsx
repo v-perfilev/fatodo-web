@@ -9,6 +9,7 @@ export type FormDialogComponentProps = {
   setIsValid: (isValid: boolean) => void;
   setSubmitForm: (callback: () => () => void) => void;
   setResetForm: (callback: () => () => void) => void;
+  params?: any;
 };
 
 type Props = {
@@ -18,9 +19,11 @@ type Props = {
   title: string;
   sendText: string;
   cancelText: string;
+  params?: any;
 };
 
-const FormDialog: FC<Props> = ({show, close: closeDialog, title, sendText, cancelText, FormComponent}: Props) => {
+const FormDialog: FC<Props> = (props: Props) => {
+  const {show, close: closeDialog, title, sendText, cancelText, FormComponent, params} = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [submitForm, setSubmitForm] = useState(() => (): void => {
@@ -52,7 +55,7 @@ const FormDialog: FC<Props> = ({show, close: closeDialog, title, sendText, cance
       isOpen={show}
       close={close}
       title={title}
-      content={<FormComponent {...{close, setIsSubmitting, setIsValid, setSubmitForm, setResetForm}} />}
+      content={<FormComponent {...{close, setIsSubmitting, setIsValid, setSubmitForm, setResetForm, params}} />}
       actions={
         <>
           {cancelButton}

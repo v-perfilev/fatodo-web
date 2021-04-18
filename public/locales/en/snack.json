@@ -28,6 +28,7 @@
     "requestDeclined": "Contact request declined"
   },
   "message": {
-    "chatCreated": "Chat created"
+    "chatCreated": "Chat created",
+    "chatRenamed": "Chat renamed"
   }
 }

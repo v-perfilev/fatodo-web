@@ -8,20 +8,23 @@ type Props = {
   chat: Chat;
   isOpen: boolean;
   close: () => void;
+  title: string;
 };
 
-const ChatRenameDialog: FC<Props> = ({chat, isOpen, close}: Props) => {
+const ChatRenameDialog: FC<Props> = ({chat, isOpen, close, title}: Props) => {
   const {t} = useTranslation();
 
+  const params = {chat, title};
 
   return (
     <FormDialog
       show={isOpen}
       close={close}
       FormComponent={ChatRenameForm}
-      title={t('chat:createChat.title')}
-      sendText={t('chat:createChat.send')}
-      cancelText={t('chat:createChat.cancel')}
+      title={t('chat:renameChat.title')}
+      sendText={t('chat:renameChat.send')}
+      cancelText={t('chat:renameChat.cancel')}
+      params={params}
     />
   );
 };

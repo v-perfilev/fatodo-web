@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useMemo, useState} from 'react';
 import {chatContentStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import {Chat} from '../../../models/chat.model';
@@ -11,6 +11,7 @@ import ChatMembersDialog from '../dialogs/chat-members-dialog';
 import ChatAddMembersDialog from '../dialogs/chat-add-members-dialog';
 import {Message} from '../../../models/message.model';
 import ChatRenameDialog from '../dialogs/chat-rename-dialog';
+import {ChatUtils} from '../../../shared/utils/chat.utils';
 
 type Props = {
   chat: Chat;
@@ -22,9 +23,13 @@ export type ChatContentDialogType = 'rename' | 'members' | 'add-members' | 'none
 
 const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
   const classes = chatContentStyles();
-  const {handleUserIds} = useUserListContext();
+  const {users, handleUserIds} = useUserListContext();
   const [dialog, setDialog] = useState<ChatContentDialogType>('none');
   const [messages, setMessages] = useState<Message[]>([]);
+
+  const title = useMemo<string>(() => (
+    chat ? ChatUtils.getTitle(chat, users, account) : null
+  ), [chat, users, account]);
 
   const isRenameDialogOpened = dialog === 'rename';
   const isMembersDialogOpened = dialog === 'members';
@@ -60,7 +65,7 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
         <>
           <ChatContentHeader
             chat={chat}
-            account={account}
+            title={title}
             openMembersDialog={openMembersDialog}
             openAddMembersDialog={openAddMembersDialog}
             openRenameDialog={openRenameDialog}
@@ -90,6 +95,7 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
             chat={chat}
             isOpen={isRenameDialogOpened}
             close={closeDialog}
+            title={title}
           />
         </>
       )}

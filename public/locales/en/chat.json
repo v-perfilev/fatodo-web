@@ -25,6 +25,17 @@
     "send": "Create",
     "cancel": "Cancel"
   },
+  "renameChat": {
+    "title": "Rename chat",
+    "fields": {
+      "title": {
+        "label": "Title",
+        "required": "Required"
+      }
+    },
+    "send": "Rename",
+    "cancel": "Cancel"
+  },
   "members": {
     "title": "Chat members",
     "usersNotFound": "Users not found",
