@@ -6,6 +6,9 @@
       "clear": "Удалить"
     }
   },
+  "usersSelect": {
+    "usersNotFound": "Пользователи не найдены"
+  },
   "reminders": {
     "fields": {
       "time": "Время",

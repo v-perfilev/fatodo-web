@@ -36,7 +36,7 @@ const ChatMembersDialog: FC<Props> = ({chat, isOpen, close, switchToAddMembers}:
 
   const filter = (
     <Box className={classes.filter}>
-      <ClearableTextInput placeholder={t('chat:control.filter')} onChange={filterUsersToShow} fullWidth />
+      <ClearableTextInput placeholder={t('inputs.filter')} onChange={filterUsersToShow} fullWidth />
     </Box>
   );
 
@@ -45,6 +45,11 @@ const ChatMembersDialog: FC<Props> = ({chat, isOpen, close, switchToAddMembers}:
       {usersToShow.map((user, index) => (
         <ChatMembersDialogMember chat={chat} user={user} key={index} />
       ))}
+      {usersToShow.length === 0 && (
+        <Box className={classes.notFound}>
+          {t('common:members.usersNotFound')}
+        </Box>
+      )}
     </Box>
   );
 

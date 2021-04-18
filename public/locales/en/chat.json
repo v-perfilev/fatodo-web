@@ -1,7 +1,4 @@
 {
-  "control": {
-    "filter": "Filter"
-  },
   "content": {
     "inputPlaceholder": "Type your message..."
   },
@@ -24,14 +21,13 @@
   },
   "members": {
     "title": "Chat members",
+    "usersNotFound": "Users not found",
     "buttons": {
       "addUsers": "Add users"
     }
   },
   "addMembers": {
     "title": "Add chat members",
-    "search": "Search",
-    "usersNotFound": "Users not found",
     "buttons": {
       "addUsers": "Add users"
     }

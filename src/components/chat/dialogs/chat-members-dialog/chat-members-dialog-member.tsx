@@ -43,8 +43,6 @@ const ChatMembersDialogMember: FC<Props> = ({chat, user, account}: Props) => {
       });
   };
 
-  chat.isDirect = false;
-
   const removingConfirmation = (
     <ConfirmationDialog
       open={showRemovingConfirmation}

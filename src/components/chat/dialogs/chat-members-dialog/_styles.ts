@@ -15,6 +15,14 @@ export const chatMembersDialogStyles = makeStyles((theme: Theme) => ({
   users: {
     marginTop: theme.spacing(2),
   },
+  notFound: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexGrow: 1,
+    marginTop: theme.spacing(2),
+    fontSize: '1rem',
+    color: theme.palette.grey['400']
+  },
   userBox: {
     display: 'flex',
     alignItems: 'center',

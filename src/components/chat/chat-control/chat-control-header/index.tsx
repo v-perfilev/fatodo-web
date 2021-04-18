@@ -20,7 +20,7 @@ const ChatControlHeader: FC<Props> = ({setFilter}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <ClearableTextInput placeholder={t('chat:control.filter')} onChange={handleOnChange} fullWidth />
+      <ClearableTextInput placeholder={t('inputs.filter')} onChange={handleOnChange} fullWidth />
       <ChatControlNewChatButton />
     </Box>
   );

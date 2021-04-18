@@ -2,7 +2,6 @@ import React, {FC, useEffect, useState} from 'react';
 import {Chat} from '../../../../models/chat.model';
 import {useTranslation} from 'react-i18next';
 import ModalDialog from '../../../common/dialogs/modal-dialog';
-import {chatAddMembersDialogStyles} from './_styles';
 import {Button} from '@material-ui/core';
 import {UserPlusIcon} from '../../../common/icons/user-plus-icon';
 import ChatService from '../../../../services/chat.service';
@@ -18,7 +17,6 @@ type Props = {
 };
 
 const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}: Props) => {
-  const classes = chatAddMembersDialogStyles();
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [contactIds, setContactIds] = useState<string[]>([]);

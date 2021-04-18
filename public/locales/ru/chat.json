@@ -1,7 +1,4 @@
 {
-  "control": {
-    "filter": "Фильтр"
-  },
   "content": {
     "inputPlaceholder": "Введите сообщение..."
   },
@@ -24,14 +21,13 @@
   },
   "members": {
     "title": "Пользователи в чате",
+    "usersNotFound": "Пользователи не найдены",
     "buttons": {
       "addUsers": "Добавить пользователей"
     }
   },
   "addMembers": {
     "title": "Добавление пользователей в чат",
-    "search": "Поиск",
-    "usersNotFound": "Пользователи не найдены",
     "buttons": {
       "addUsers": "Добавить пользователей"
     }

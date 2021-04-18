@@ -107,7 +107,7 @@ const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props
   return (
     <Box className={classes.root}>
       <Box className={classes.filter}>
-        <ClearableTextInput placeholder={t('chat:addMembers.search')} onChange={handleFilterChange} fullWidth />
+        <ClearableTextInput placeholder={t('inputs.search')} onChange={handleFilterChange} fullWidth />
       </Box>
       <Box className={classes.users}>
         {usersToShow.map((user, index) => (
@@ -115,7 +115,7 @@ const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props
         ))}
         {usersToShow.length === 0 && (
           <Box className={classes.notFound}>
-            {t('chat:addMembers.usersNotFound')}
+            {t('common:usersSelect.usersNotFound')}
           </Box>
         )}
       </Box>

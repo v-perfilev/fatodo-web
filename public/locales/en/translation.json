@@ -10,6 +10,10 @@
   "auth": {
     "socialLogin": "or log in with"
   },
+  "inputs": {
+    "search": "Search",
+    "filter": "Filter"
+  },
   "buttons": {
     "toHomePage": "To home page",
     "sendActivationCode": "Send code again",

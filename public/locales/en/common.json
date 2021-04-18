@@ -6,6 +6,9 @@
       "clear": "Clear"
     }
   },
+  "usersSelect": {
+    "usersNotFound": "Users not found"
+  },
   "reminders": {
     "fields": {
       "time": "Time",
