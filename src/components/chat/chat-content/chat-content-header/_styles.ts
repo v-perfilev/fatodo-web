@@ -34,15 +34,8 @@ export const chatContentHeaderActionsStyles = makeStyles((theme: Theme) => ({
       alignItems: 'center'
     },
     '& .MuiSvgIcon-root': {
-      color: theme.palette.primary.main,
       marginLeft: theme.spacing(-0.5),
       marginRight: theme.spacing(0.5)
-    }
-  },
-  red: {
-    color: theme.palette.error.main,
-    '& .MuiSvgIcon-root': {
-      color: theme.palette.error.main
     }
   }
 }));

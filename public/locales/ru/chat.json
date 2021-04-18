@@ -6,6 +6,8 @@
     "inputPlaceholder": "Введите сообщение..."
   },
   "menu": {
+    "showMembers": "Пользователи",
+    "addMembers": "Пригласить",
     "cleanChat": "Очистить чат",
     "leaveChat": "Покинуть чат",
     "deleteChat": "Удалить чат"

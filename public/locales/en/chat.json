@@ -6,9 +6,11 @@
     "inputPlaceholder": "Type your message..."
   },
   "menu": {
-    "cleanChat": "Clean",
-    "leaveChat": "Leave",
-    "deleteChat": "Delete"
+    "showMembers": "Members",
+    "addMembers": "Add members",
+    "cleanChat": "Clean chat",
+    "leaveChat": "Leave chat",
+    "deleteChat": "Delete chat"
   },
   "createChat": {
     "title": "Create chat",

@@ -8,6 +8,8 @@ import {useTranslation} from 'react-i18next';
 import {DeleteIcon} from '../../../common/icons/delete-icon';
 import {BroomIcon} from '../../../common/icons/broom-icon';
 import {LeaveIcon} from '../../../common/icons/leave-icon';
+import {MembersIcon} from '../../../common/icons/members-icon';
+import {UserPlusIcon} from '../../../common/icons/user-plus-icon';
 
 type Props = {
   chat: Chat;
@@ -31,6 +33,16 @@ const ChatContentActions: FC<Props> = ({}: Props) => {
     setIsOpen(false);
   };
 
+  const showMembers = (e: MouseEvent<HTMLElement>): void => {
+    console.log('show members');
+    handleClose(e);
+  };
+
+  const addMembers = (e: MouseEvent<HTMLElement>): void => {
+    console.log('clean chat');
+    handleClose(e);
+  };
+
   const cleanChat = (e: MouseEvent<HTMLElement>): void => {
     console.log('clean chat');
     handleClose(e);
@@ -52,16 +64,24 @@ const ChatContentActions: FC<Props> = ({}: Props) => {
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
+        <MenuItem onClick={showMembers}>
+          <MembersIcon color="primary" />
+          {t('chat:menu.showMembers')}
+        </MenuItem>
+        <MenuItem onClick={addMembers}>
+          <UserPlusIcon color="primary" />
+          {t('chat:menu.addMembers')}
+        </MenuItem>
         <MenuItem onClick={cleanChat}>
-          <BroomIcon />
+          <BroomIcon color="primary" />
           {t('chat:menu.cleanChat')}
         </MenuItem>
         <MenuItem onClick={leaveChat}>
-          <LeaveIcon />
+          <LeaveIcon color="primary" />
           {t('chat:menu.leaveChat')}
         </MenuItem>
-        <MenuItem className={classes.red} onClick={deleteChat}>
-          <DeleteIcon />
+        <MenuItem onClick={deleteChat}>
+          <DeleteIcon color="error" />
           {t('chat:menu.deleteChat')}
         </MenuItem>
       </PopupMenu>
