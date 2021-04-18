@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {chatContentStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import {Chat} from '../../../models/chat.model';
@@ -7,15 +7,42 @@ import {useUserListContext} from '../../../shared/contexts/list-contexts/user-li
 import ChatContentHeader from './chat-content-header';
 import MessageContentList from './chat-content-list';
 import ChatContentFooter from './chat-content-footer';
+import ChatMembersDialog from '../dialogs/chat-members-dialog';
+import ChatAddMembersDialog from '../dialogs/chat-add-members-dialog';
+import {Message} from '../../../models/message.model';
 
 type Props = {
   chat: Chat;
+  closeChat: () => void;
   account: User;
 };
 
-const ChatContent: FC<Props> = ({chat, account}: Props) => {
+export type ChatContentDialogType = 'members' | 'add-members' | 'none';
+
+const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
   const classes = chatContentStyles();
   const {handleUserIds} = useUserListContext();
+  const [dialog, setDialog] = useState<ChatContentDialogType>('none');
+  const [messages, setMessages] = useState<Message[]>([]);
+
+  const isMembersDialogOpened = dialog === 'members';
+  const isAddMembersDialogOpened = dialog === 'add-members';
+
+  const openMembersDialog = (): void => {
+    setDialog('members');
+  };
+
+  const openAddMembersDialog = (): void => {
+    setDialog('add-members');
+  };
+
+  const closeDialog = (): void => {
+    setDialog('none');
+  };
+
+  const clearMessages = (): void => {
+    setMessages([]);
+  };
 
   useEffect(() => {
     handleUserIds(chat?.members);
@@ -25,9 +52,32 @@ const ChatContent: FC<Props> = ({chat, account}: Props) => {
     <Box className={classes.root}>
       {chat && (
         <>
-          <ChatContentHeader chat={chat} account={account} />
-          <MessageContentList chat={chat} account={account} />
+          <ChatContentHeader
+            chat={chat}
+            account={account}
+            openMembersDialog={openMembersDialog}
+            openAddMembersDialog={openAddMembersDialog}
+            closeChat={closeChat}
+            clearMessages={clearMessages}
+          />
+          <MessageContentList
+            chat={chat}
+            account={account}
+            messages={messages}
+            setMessages={setMessages}
+          />
           <ChatContentFooter chatId={chat.id} />
+          <ChatMembersDialog
+            chat={chat}
+            isOpen={isMembersDialogOpened}
+            close={closeDialog}
+            switchToAddMembers={openAddMembersDialog}
+          />
+          <ChatAddMembersDialog
+            chat={chat}
+            isOpen={isAddMembersDialogOpened}
+            close={closeDialog}
+          />
         </>
       )}
       {!chat && <Box className={classes.placeholder} />}

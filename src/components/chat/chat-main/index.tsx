@@ -37,6 +37,10 @@ const ChatMain: FC<Props> = ({account}: Props) => {
 
   const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
+  const closeChat = (): void => {
+    setChat(null);
+  };
+
   const menu = (
     <>
       <AdditionalMenuButton
@@ -69,7 +73,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
         <ChatControl chat={chat} setChat={setChat} account={account} />
       </Grid>
       <Grid item xs={8} className={classes.content}>
-        <ChatContent chat={chat} account={account} />
+        <ChatContent chat={chat} closeChat={closeChat} account={account} />
       </Grid>
     </Grid>
   );
@@ -77,7 +81,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   const smallView = (
     <Box className={classes.smallViewRoot}>
       {chat ? (
-        <ChatContent chat={chat} account={account} />
+        <ChatContent chat={chat} closeChat={closeChat} account={account} />
       ) : (
         <ChatControl chat={chat} setChat={setChat} account={account} />
       )}

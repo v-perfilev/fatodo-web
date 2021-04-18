@@ -13,10 +13,9 @@ type Props = {
   chat: Chat;
   isOpen: boolean;
   close: () => void;
-  switchToMembers: () => void;
 };
 
-const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}: Props) => {
+const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close}: Props) => {
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [contactIds, setContactIds] = useState<string[]>([]);
@@ -40,7 +39,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
         handleResponse(response);
       })
       .finally(() => {
-        switchToMembers();
+        close();
       });
   };
 

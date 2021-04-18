@@ -1,4 +1,4 @@
-import React, {FC, memo, ReactElement, useEffect, useRef, useState} from 'react';
+import React, {Dispatch, FC, memo, ReactElement, SetStateAction, useEffect, useRef, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {chatContentListStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
@@ -13,7 +13,7 @@ import {
   handleMessageNewEvent,
   handleMessageReactionsEvent,
   handleMessageStatusesEvent,
-  handleMessageUpdateEvent,
+  handleMessageUpdateEvent
 } from './_ws';
 import {VirtualizedCache, VirtualizedList} from '../../../common/surfaces';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
@@ -24,14 +24,15 @@ import ChatContentMessage from '../chat-content-message';
 type Props = {
   chat: Chat;
   account: User;
+  messages: Message[];
+  setMessages: Dispatch<SetStateAction<Message[]>>;
 };
 
-const ChatContentList: FC<Props> = ({chat, account}: Props) => {
+const ChatContentList: FC<Props> = ({chat, account, messages, setMessages}: Props) => {
   const classes = chatContentListStyles();
   const {messageNewEvent, messageUpdateEvent, messageStatusesEvent, messageReactionsEvent} = useWsChatContext();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
   const {handleResponse} = useSnackContext();
-  const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
   const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);

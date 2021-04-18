@@ -10,13 +10,21 @@ import {BroomIcon} from '../../../common/icons/broom-icon';
 import {LeaveIcon} from '../../../common/icons/leave-icon';
 import {MembersIcon} from '../../../common/icons/members-icon';
 import {UserPlusIcon} from '../../../common/icons/user-plus-icon';
+import ChatService from '../../../../services/chat.service';
+import {useSnackContext} from '../../../../shared/contexts/snack-context';
 
 type Props = {
   chat: Chat;
+  openMembersDialog: () => void;
+  openAddMembersDialog: () => void;
+  closeChat: () => void;
+  clearMessages: () => void;
 };
 
-const ChatContentActions: FC<Props> = ({}: Props) => {
+const ChatContentActions: FC<Props> = (props: Props) => {
+  const {chat, openMembersDialog, openAddMembersDialog, closeChat, clearMessages} = props;
   const classes = chatContentHeaderActionsStyles();
+  const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const ref = useRef();
   const [isOpen, setIsOpen] = useState(false);
@@ -34,28 +42,40 @@ const ChatContentActions: FC<Props> = ({}: Props) => {
   };
 
   const showMembers = (e: MouseEvent<HTMLElement>): void => {
-    console.log('show members');
+    openMembersDialog();
     handleClose(e);
   };
 
   const addMembers = (e: MouseEvent<HTMLElement>): void => {
-    console.log('clean chat');
+    openAddMembersDialog();
     handleClose(e);
   };
 
   const cleanChat = (e: MouseEvent<HTMLElement>): void => {
-    console.log('clean chat');
+    ChatService.cleanChat(chat.id)
+      .catch((response) => {
+        handleResponse(response);
+      });
     handleClose(e);
+    clearMessages();
   };
 
   const leaveChat = (e: MouseEvent<HTMLElement>): void => {
-    console.log('leave chat');
+    ChatService.leaveChat(chat.id)
+      .catch((response) => {
+        handleResponse(response);
+      });
     handleClose(e);
+    closeChat();
   };
 
   const deleteChat = (e: MouseEvent<HTMLElement>): void => {
-    console.log('delete chat');
+    ChatService.deleteChat(chat.id)
+      .catch((response) => {
+        handleResponse(response);
+      });
     handleClose(e);
+    closeChat();
   };
 
   return (
@@ -68,22 +88,28 @@ const ChatContentActions: FC<Props> = ({}: Props) => {
           <MembersIcon color="primary" />
           {t('chat:menu.showMembers')}
         </MenuItem>
-        <MenuItem onClick={addMembers}>
-          <UserPlusIcon color="primary" />
-          {t('chat:menu.addMembers')}
-        </MenuItem>
+        {!chat.isDirect && (
+          <MenuItem onClick={addMembers}>
+            <UserPlusIcon color="primary" />
+            {t('chat:menu.addMembers')}
+          </MenuItem>
+        )}
         <MenuItem onClick={cleanChat}>
           <BroomIcon color="primary" />
           {t('chat:menu.cleanChat')}
         </MenuItem>
-        <MenuItem onClick={leaveChat}>
-          <LeaveIcon color="primary" />
-          {t('chat:menu.leaveChat')}
-        </MenuItem>
-        <MenuItem onClick={deleteChat}>
-          <DeleteIcon color="error" />
-          {t('chat:menu.deleteChat')}
-        </MenuItem>
+        {!chat.isDirect && (
+          <MenuItem onClick={leaveChat}>
+            <LeaveIcon color="primary" />
+            {t('chat:menu.leaveChat')}
+          </MenuItem>
+        )}
+        {!chat.isDirect && (
+          <MenuItem onClick={deleteChat}>
+            <DeleteIcon color="error" />
+            {t('chat:menu.deleteChat')}
+          </MenuItem>
+        )}
       </PopupMenu>
     </>
   );
