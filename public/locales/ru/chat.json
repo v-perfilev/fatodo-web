@@ -1,4 +1,7 @@
 {
+  "common": {
+    "direct": "Директ"
+  },
   "content": {
     "inputPlaceholder": "Введите сообщение..."
   },

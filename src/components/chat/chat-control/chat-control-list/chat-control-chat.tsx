@@ -11,6 +11,7 @@ import {ChatUtils} from '../../../../shared/utils/chat.utils';
 import {UrlPic} from '../../../common/images';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import {SoloBadge} from '../../../common/surfaces';
+import {useTranslation} from 'react-i18next';
 
 type Props = HTMLAttributes<HTMLElement> & {
   index: number;
@@ -23,6 +24,7 @@ const ChatControlChat: FC<Props> = ({index, chats, isSelected, account, ...props
   const classes = chatControlChatStyles();
   const {users, handleUserIds} = useUserListContext();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
+  const {t} = useTranslation();
 
   const chat = chats[index];
   const unreadCount = unreadMessageCountMap?.get(chat.id);
@@ -46,7 +48,12 @@ const ChatControlChat: FC<Props> = ({index, chats, isSelected, account, ...props
               <SoloBadge badgeContent={unreadCount} color="primary" />
             </Box>
           )}
-          <Box className={classes.title}>{title}</Box>
+          <Box className={classes.title}>
+            {title}
+            {chat.isDirect && (
+              <Box className={classes.direct}>{t('chat:common.direct')}</Box>
+            )}
+          </Box>
           <Box className={classes.date}>{formattedDate}</Box>
         </Box>
         <Box className={classes.text}>
