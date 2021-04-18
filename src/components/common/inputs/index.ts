@@ -1,4 +1,5 @@
 export * from './calendar-select';
+export * from './checkbox-input';
 export * from './clearable-text-input';
 export * from './date-input';
 export * from './date-select';

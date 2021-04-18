@@ -30,6 +30,8 @@
   },
   "addMembers": {
     "title": "Add chat members",
+    "search": "Search",
+    "usersNotFound": "Users not found",
     "buttons": {
       "addUsers": "Add users"
     }

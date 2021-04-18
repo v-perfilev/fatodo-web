@@ -46,7 +46,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
       });
   };
 
-  const userIdListNotEmpty = userIds.length > 0;
+  const isUserIdListEmpty = userIds.length == 0;
 
   useEffect(() => {
     loadContacts();
@@ -57,7 +57,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
   );
 
   const actions = (
-    <Button startIcon={<UserPlusIcon />} onClick={addUsers} color="primary" disabled={userIdListNotEmpty}>
+    <Button startIcon={<UserPlusIcon />} onClick={addUsers} color="primary" disabled={isUserIdListEmpty}>
       {t('chat:addMembers.buttons.addUsers')}
     </Button>
   );
@@ -69,7 +69,6 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close, switchToMembers}:
       title={t('chat:addMembers.title')}
       content={content}
       actions={actions}
-      withText
       showCloseIcon
     />
   );

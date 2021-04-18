@@ -7,8 +7,10 @@ import {useUserListContext} from '../../../../shared/contexts/list-contexts/user
 import {User} from '../../../../models/user.model';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {ClearableTextInput} from '../../inputs';
-import {compose} from 'recompose';
+import {userSelectStyles} from './_styles';
+import UserSelectItem from './user-select-item';
 import withUserList from '../../../../shared/hocs/with-list/with-user-list';
+import {compose} from 'recompose';
 
 type Props = {
   priorityIds: string[];
@@ -17,23 +19,23 @@ type Props = {
 };
 
 const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props) => {
-  const {users, handleUserIds, loading: userLoading} = useUserListContext();
+  const classes = userSelectStyles();
+  const {users, handleUserIds, handleUsers} = useUserListContext();
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [filter, setFilter] = useState<string>('');
-  const [filterLoading, setFilterLoading] = useState(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
 
-  const loading = userLoading && filterLoading;
+  const isSelected = (user: User): boolean => selectedIds.includes(user.id);
 
-  const toggleSelected = (id: string): void => {
+  const toggleSelected = (user: User) => (): void => {
     setSelectedIds((prevState) => {
-      if (prevState.includes(id)) {
-        return [...prevState, id];
+      if (!prevState.includes(user.id)) {
+        return [...prevState, user.id];
       } else {
-        ArrayUtils.deleteItem(prevState, id);
-        return prevState;
+        ArrayUtils.deleteItem(prevState, user.id);
+        return [...prevState];
       }
     });
   };
@@ -78,14 +80,10 @@ const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props
       UserService.getAllByUsernamePart(filter)
         .then((response) => {
           const users = response.data;
-          const ids = users.map((u) => u.id);
-          handleUserIds(ids);
+          handleUsers(users);
         })
         .catch((response) => {
           handleResponse(response);
-        })
-        .finally(() => {
-          setFilterLoading(false);
         });
     }
   };
@@ -107,13 +105,20 @@ const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props
   }, [users, selectedIds, ignoredIds, filter]);
 
   return (
-    <Box>
-      <ClearableTextInput onChange={handleFilterChange} fullWidth />
-      {usersToShow.map((user, index) => (
-        <Box key={index}>
-          {user.username} - {selectedIds.includes(user.id) ? '!' : '-'}
-        </Box>
-      ))}
+    <Box className={classes.root}>
+      <Box className={classes.filter}>
+        <ClearableTextInput placeholder={t('chat:addMembers.search')} onChange={handleFilterChange} fullWidth />
+      </Box>
+      <Box className={classes.users}>
+        {usersToShow.map((user, index) => (
+          <UserSelectItem user={user} isSelected={isSelected(user)} toggleSelected={toggleSelected(user)} key={index} />
+        ))}
+        {usersToShow.length === 0 && (
+          <Box className={classes.notFound}>
+            {t('chat:addMembers.usersNotFound')}
+          </Box>
+        )}
+      </Box>
     </Box>
   );
 };
