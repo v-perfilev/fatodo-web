@@ -8,6 +8,7 @@
   "menu": {
     "showMembers": "Пользователи",
     "addMembers": "Пригласить",
+    "renameChat": "Переименовать чат",
     "cleanChat": "Очистить чат",
     "leaveChat": "Покинуть чат",
     "deleteChat": "Удалить чат"

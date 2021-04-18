@@ -11,10 +11,14 @@ type Props = {
 const ChatCreateDialog: FC<Props> = ({show, setShow}: Props) => {
   const {t} = useTranslation();
 
+  const close = (): void => {
+    setShow(false);
+  };
+
   return (
     <FormDialog
       show={show}
-      setShow={setShow}
+      close={close}
       FormComponent={ChatCreateForm}
       title={t('chat:createChat.title')}
       sendText={t('chat:createChat.send')}

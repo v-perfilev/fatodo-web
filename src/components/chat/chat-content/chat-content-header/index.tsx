@@ -14,13 +14,14 @@ type Props = {
   account: User;
   openMembersDialog: () => void;
   openAddMembersDialog: () => void;
+  openRenameDialog: () => void;
   closeChat: () => void;
   clearMessages: () => void;
 };
 
 const ChatContentHeader: FC<Props> = (props: Props) => {
   const {chat, account} = props;
-  const {openMembersDialog, openAddMembersDialog, closeChat, clearMessages} = props;
+  const {openMembersDialog, openAddMembersDialog, openRenameDialog, closeChat, clearMessages} = props;
   const classes = chatContentHeaderStyles();
   const {users} = useUserListContext();
   const {t} = useTranslation();
@@ -43,6 +44,7 @@ const ChatContentHeader: FC<Props> = (props: Props) => {
         chat={chat}
         openMembersDialog={openMembersDialog}
         openAddMembersDialog={openAddMembersDialog}
+        openRenameDialog={openRenameDialog}
         closeChat={closeChat}
         clearMessages={clearMessages}
       />

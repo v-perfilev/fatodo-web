@@ -13,14 +13,14 @@ export type FormDialogComponentProps = {
 
 type Props = {
   show: boolean;
-  setShow: (show: boolean) => void;
+  close: () => void;
   FormComponent: ComponentType<FormDialogComponentProps>;
   title: string;
   sendText: string;
   cancelText: string;
 };
 
-const FormDialog: FC<Props> = ({show, setShow, title, sendText, cancelText, FormComponent}: Props) => {
+const FormDialog: FC<Props> = ({show, close: closeDialog, title, sendText, cancelText, FormComponent}: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [submitForm, setSubmitForm] = useState(() => (): void => {
@@ -31,7 +31,7 @@ const FormDialog: FC<Props> = ({show, setShow, title, sendText, cancelText, Form
   });
 
   const close = (): void => {
-    setShow(false);
+    closeDialog();
     resetForm();
   };
 

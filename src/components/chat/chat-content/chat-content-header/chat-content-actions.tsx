@@ -17,12 +17,13 @@ type Props = {
   chat: Chat;
   openMembersDialog: () => void;
   openAddMembersDialog: () => void;
+  openRenameDialog: () => void;
   closeChat: () => void;
   clearMessages: () => void;
 };
 
 const ChatContentActions: FC<Props> = (props: Props) => {
-  const {chat, openMembersDialog, openAddMembersDialog, closeChat, clearMessages} = props;
+  const {chat, openMembersDialog, openAddMembersDialog, openRenameDialog, closeChat, clearMessages} = props;
   const classes = chatContentHeaderActionsStyles();
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
@@ -48,6 +49,11 @@ const ChatContentActions: FC<Props> = (props: Props) => {
 
   const addMembers = (e: MouseEvent<HTMLElement>): void => {
     openAddMembersDialog();
+    handleClose(e);
+  };
+
+  const renameChat = (e: MouseEvent<HTMLElement>): void => {
+    openRenameDialog();
     handleClose(e);
   };
 
@@ -92,6 +98,12 @@ const ChatContentActions: FC<Props> = (props: Props) => {
           <MenuItem onClick={addMembers}>
             <UserPlusIcon color="primary" />
             {t('chat:menu.addMembers')}
+          </MenuItem>
+        )}
+        {!chat.isDirect && (
+          <MenuItem onClick={renameChat}>
+            <UserPlusIcon color="primary" />
+            {t('chat:menu.renameChat')}
           </MenuItem>
         )}
         <MenuItem onClick={cleanChat}>

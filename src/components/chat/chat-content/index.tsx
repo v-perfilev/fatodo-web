@@ -10,6 +10,7 @@ import ChatContentFooter from './chat-content-footer';
 import ChatMembersDialog from '../dialogs/chat-members-dialog';
 import ChatAddMembersDialog from '../dialogs/chat-add-members-dialog';
 import {Message} from '../../../models/message.model';
+import ChatRenameDialog from '../dialogs/chat-rename-dialog';
 
 type Props = {
   chat: Chat;
@@ -17,7 +18,7 @@ type Props = {
   account: User;
 };
 
-export type ChatContentDialogType = 'members' | 'add-members' | 'none';
+export type ChatContentDialogType = 'rename' | 'members' | 'add-members' | 'none';
 
 const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
   const classes = chatContentStyles();
@@ -25,8 +26,13 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
   const [dialog, setDialog] = useState<ChatContentDialogType>('none');
   const [messages, setMessages] = useState<Message[]>([]);
 
+  const isRenameDialogOpened = dialog === 'rename';
   const isMembersDialogOpened = dialog === 'members';
   const isAddMembersDialogOpened = dialog === 'add-members';
+
+  const openRenameDialog = (): void => {
+    setDialog('rename');
+  };
 
   const openMembersDialog = (): void => {
     setDialog('members');
@@ -57,6 +63,7 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
             account={account}
             openMembersDialog={openMembersDialog}
             openAddMembersDialog={openAddMembersDialog}
+            openRenameDialog={openRenameDialog}
             closeChat={closeChat}
             clearMessages={clearMessages}
           />
@@ -67,6 +74,7 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
             setMessages={setMessages}
           />
           <ChatContentFooter chatId={chat.id} />
+
           <ChatMembersDialog
             chat={chat}
             isOpen={isMembersDialogOpened}
@@ -76,6 +84,11 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
           <ChatAddMembersDialog
             chat={chat}
             isOpen={isAddMembersDialogOpened}
+            close={closeDialog}
+          />
+          <ChatRenameDialog
+            chat={chat}
+            isOpen={isRenameDialogOpened}
             close={closeDialog}
           />
         </>
