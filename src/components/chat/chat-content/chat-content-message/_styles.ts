@@ -7,6 +7,20 @@ export const chatContentMessageStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+export const chatContentMessageActionsStyles = makeStyles((theme: Theme) => ({
+  popupMenu: {
+    '& .MuiListItem-root': {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    '& .MuiSvgIcon-root': {
+      marginLeft: theme.spacing(-0.5),
+      marginRight: theme.spacing(0.5),
+    },
+  },
+}));
+
+
 export const chatContentMessageEventStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '80%',
