@@ -4,21 +4,29 @@ import {useTranslation} from 'react-i18next';
 import FormDialog from '../../../common/dialogs/form-dialog';
 import ChatRenameForm from './chat-rename-form';
 
-type Props = {
+export type ChatRenameDialogProps = {
   chat: Chat;
-  isOpen: boolean;
-  close: () => void;
   title: string;
+  close: () => void;
 };
 
-const ChatRenameDialog: FC<Props> = ({chat, isOpen, close, title}: Props) => {
+export const defaultChatRenameDialogProps: Readonly<ChatRenameDialogProps> = {
+  chat: null,
+  title: '',
+  close: (): void => {
+  }
+};
+
+type Props = ChatRenameDialogProps;
+
+const ChatRenameDialog: FC<Props> = ({chat, title, close}: Props) => {
   const {t} = useTranslation();
 
   const params = {chat, title};
 
   return (
     <FormDialog
-      show={isOpen}
+      show={!!chat}
       close={close}
       FormComponent={ChatRenameForm}
       title={t('chat:renameChat.title')}

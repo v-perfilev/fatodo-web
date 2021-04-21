@@ -1,16 +1,16 @@
-import React, {MouseEvent} from 'react';
-import {FC, useRef, useState} from 'react';
+import React, {FC, MouseEvent, useRef, useState} from 'react';
 import {IconButton, MenuItem} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../common/icons/dots-vertical-icon';
 import {groupCardActionsStyles} from './_styles';
 import {PopupMenu} from '../../common/surfaces';
 import {useHistory} from 'react-router-dom';
-import {GroupRouteUtils} from '../_router';
+import {GroupDialogs, GroupRouteUtils} from '../_router';
 import {ItemRouteUtils} from '../../item/_router';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
-import {useGroupDeleteContext} from '../../../shared/contexts/delete-contexts/group-delete-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {useTranslation} from 'react-i18next';
+import {GroupDeleteDialogProps} from '../dialogs/group-delete-dialog';
+import {useDialogsContext} from '../../../shared/contexts/dialogs-context';
 
 const GroupPreviewCardActions: FC = () => {
   const classes = groupCardActionsStyles();
@@ -19,7 +19,7 @@ const GroupPreviewCardActions: FC = () => {
   const ref = useRef();
   const {load: loadGroups} = useGroupListContext();
   const {obj: group} = useGroupViewContext();
-  const {setObj: setGroupToDelete, setOnSuccess: setOnDeleteGroupSuccess} = useGroupDeleteContext();
+  const {setDialogProps, clearDialogProps} = useDialogsContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOnAction = (e: MouseEvent<HTMLElement>): void => {
@@ -49,10 +49,11 @@ const GroupPreviewCardActions: FC = () => {
     handleClose(e);
   };
 
-  const openDeleteDialog = (e: MouseEvent<HTMLElement>): void => {
-    setOnDeleteGroupSuccess(() => (): void => loadGroups());
-    setGroupToDelete(group);
-    handleClose(e);
+  const showGroupDeleteDialog = (): void => {
+    const close = (): void => clearDialogProps(GroupDialogs.DELETE);
+    const onSuccess = (): void => loadGroups();
+    const props = {group, close, onSuccess} as GroupDeleteDialogProps;
+    setDialogProps(GroupDialogs.DELETE, props);
   };
 
   return (
@@ -64,7 +65,7 @@ const GroupPreviewCardActions: FC = () => {
         <MenuItem onClick={redirectToItemCreate}>{t('group:menu.createItem')}</MenuItem>
         <MenuItem onClick={redirectToGroupView}>{t('group:menu.viewGroup')}</MenuItem>
         <MenuItem onClick={redirectToGroupEdit}>{t('group:menu.editGroup')}</MenuItem>
-        <MenuItem onClick={openDeleteDialog}>{t('group:menu.deleteGroup')}</MenuItem>
+        <MenuItem onClick={showGroupDeleteDialog}>{t('group:menu.deleteGroup')}</MenuItem>
       </PopupMenu>
     </>
   );

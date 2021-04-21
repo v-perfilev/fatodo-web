@@ -15,6 +15,7 @@ import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import {CircularSpinner} from '../../common/loaders';
 import GroupPreviewGridContainer from './group-preview-grid-container';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 const GroupPreview: FC = () => {
   const history = useHistory();
@@ -65,4 +66,4 @@ const GroupPreview: FC = () => {
   return groupsLoading ? <CircularSpinner /> : <GroupPreviewGridContainer />;
 };
 
-export default compose<{}, {}>(withGroupList)(GroupPreview);
+export default compose(withGroupList)(GroupPreview);

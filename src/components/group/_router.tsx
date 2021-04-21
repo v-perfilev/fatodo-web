@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
 import GroupsPreview from './groups-preview';
@@ -11,8 +11,15 @@ import {Routes} from '../router';
 import GroupView from './group-view';
 import GroupCreate from './group-create';
 import GroupEdit from './group-edit';
-import withGroupDeleteDialog from '../../shared/hocs/with-delete-dialog/with-group-delete-dialog';
-import withItemDeleteDialog from '../../shared/hocs/with-delete-dialog/with-item-delete-dialog';
+import withUserList from '../../shared/hocs/with-list/with-user-list';
+import {useDialogsContext} from '../../shared/contexts/dialogs-context';
+import {defaultGroupDeleteDialogProps, GroupDeleteDialog} from './dialogs/group-delete-dialog';
+import {ItemDialogs} from '../item/_router';
+import {defaultItemDeleteDialogProps, ItemDeleteDialog} from '../item/dialogs/item-delete-dialog';
+
+export enum GroupDialogs {
+  DELETE = 'GROUP_DELETE_DIALOG',
+}
 
 export enum GroupRoutes {
   SORTING = '/sorting',
@@ -29,7 +36,17 @@ export class GroupRouteUtils {
 }
 
 const GroupRouter: FC = () => {
+  const {handleDialog} = useDialogsContext();
   const match = useRouteMatch();
+
+  const initDialogs = (): void => {
+    handleDialog(GroupDialogs.DELETE, GroupDeleteDialog, defaultGroupDeleteDialogProps);
+    handleDialog(ItemDialogs.DELETE, ItemDeleteDialog, defaultItemDeleteDialogProps);
+  };
+
+  useEffect(() => {
+    initDialogs();
+  }, []);
 
   return (
     <Switch>
@@ -43,9 +60,8 @@ const GroupRouter: FC = () => {
   );
 };
 
-export default compose<{}, {}>(
+export default compose(
   withFlexibleHeader,
   withAdditionalMenu,
-  withGroupDeleteDialog,
-  withItemDeleteDialog
+  withUserList
 )(GroupRouter);

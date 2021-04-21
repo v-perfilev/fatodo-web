@@ -10,8 +10,10 @@ import {Link} from '../../common/controls';
 import {ItemRouteUtils} from '../../item/_router';
 import {EyeIcon} from '../../common/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
-import {useItemDeleteContext} from '../../../shared/contexts/delete-contexts/item-delete-context';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
+import {useDialogsContext} from '../../../shared/contexts/dialogs-context';
+import {ItemDeleteDialogProps} from '../../item/dialogs/item-delete-dialog';
+import {GroupDialogs} from '../_router';
 
 type Props = {
   item: Item;
@@ -21,15 +23,17 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
   const classes = groupViewItemStyles();
   const history = useHistory();
   const {load: loadItems} = useItemListContext();
-  const {setObj: setItemToDelete, setOnSuccess: setOnDeleteItemSuccess} = useItemDeleteContext();
+  const {setDialogProps, clearDialogProps} = useDialogsContext();
 
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
   const redirectToViewItem = (): void => history.push(viewItemUrl);
   const redirectToEditItem = (): void => history.push(ItemRouteUtils.getEditUrl(item.id));
 
-  const openDeleteDialog = (): void => {
-    setOnDeleteItemSuccess(() => (): void => loadItems());
-    setItemToDelete(item);
+  const showItemDeleteDialog = (): void => {
+    const close = (): void => clearDialogProps(GroupDialogs.DELETE);
+    const onSuccess = (): void => loadItems();
+    const props = {item, close, onSuccess} as ItemDeleteDialogProps;
+    setDialogProps(GroupDialogs.DELETE, props);
   };
 
   return (
@@ -52,7 +56,7 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
         <IconButton size="small" className={classes.toggleIcon}>
           <PackageDownIcon />
         </IconButton>
-        <IconButton size="small" className={classes.deleteIcon} onClick={openDeleteDialog}>
+        <IconButton size="small" className={classes.deleteIcon} onClick={showItemDeleteDialog}>
           <DeleteIcon />
         </IconButton>
       </Box>

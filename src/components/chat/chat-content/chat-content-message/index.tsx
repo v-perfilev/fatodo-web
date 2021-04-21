@@ -26,8 +26,14 @@ const ChatContentMessage: FC<Props> = ({index, messages, account, isVisible, sty
 
   const isFirst = index === 0;
 
+  const handleMessageUserIds = (): void => {
+    const reactionUserIds = message.reactions.map((r) => r.userId);
+    const statusUserIds = message.statuses.map((s) => s.userId);
+    handleUserIds([message.userId, ...reactionUserIds, ...statusUserIds]);
+  };
+
   useEffect(() => {
-    handleUserIds([message.userId]);
+    handleMessageUserIds();
   }, []);
 
   return (

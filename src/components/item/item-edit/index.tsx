@@ -127,4 +127,4 @@ const ItemEdit: FC = () => {
   );
 };
 
-export default compose<{}, {}>(withGroupView, withItemView)(ItemEdit);
+export default compose(withGroupView, withItemView)(ItemEdit);

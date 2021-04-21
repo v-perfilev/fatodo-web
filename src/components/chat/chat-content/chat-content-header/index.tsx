@@ -9,16 +9,13 @@ import {useTranslation} from 'react-i18next';
 type Props = {
   chat: Chat;
   title: string;
-  openMembersDialog: () => void;
-  openAddMembersDialog: () => void;
-  openRenameDialog: () => void;
   closeChat: () => void;
   clearMessages: () => void;
 };
 
 const ChatContentHeader: FC<Props> = (props: Props) => {
   const {chat, title} = props;
-  const {openMembersDialog, openAddMembersDialog, openRenameDialog, closeChat, clearMessages} = props;
+  const {closeChat, clearMessages} = props;
   const classes = chatContentHeaderStyles();
   const {t} = useTranslation();
 
@@ -31,12 +28,10 @@ const ChatContentHeader: FC<Props> = (props: Props) => {
         {title}
         {chat.isDirect && <Box className={classes.direct}>{t('chat:common.direct')}</Box>}
       </Box>
-      <ChatContentMembers chat={chat} openMembersDialog={openMembersDialog} />
+      <ChatContentMembers chat={chat} />
       <ChatContentActions
         chat={chat}
-        openMembersDialog={openMembersDialog}
-        openAddMembersDialog={openAddMembersDialog}
-        openRenameDialog={openRenameDialog}
+        title={title}
         closeChat={closeChat}
         clearMessages={clearMessages}
       />

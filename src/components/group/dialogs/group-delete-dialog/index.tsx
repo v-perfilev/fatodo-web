@@ -3,12 +3,23 @@ import {useTranslation} from 'react-i18next';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {Group} from '../../../../models/group.model';
 import GroupService from '../../../../services/group.service';
-import {DeleteDialogProps} from '../../../../shared/contexts/delete-contexts/types';
 import ConfirmationDialog from '../../../common/dialogs/confirmation-dialog';
 
-type Props = DeleteDialogProps<Group>;
+export type GroupDeleteDialogProps = {
+  group: Group;
+  close: () => void;
+  onSuccess?: () => void;
+}
 
-export const GroupDeleteDialog: FC<Props> = ({obj: group, setObj: setGroup, onSuccess}: Props) => {
+export const defaultGroupDeleteDialogProps: Readonly<GroupDeleteDialogProps> = {
+  group: null,
+  close: (): void => {
+  }
+};
+
+type Props = GroupDeleteDialogProps;
+
+export const GroupDeleteDialog: FC<Props> = ({group, close, onSuccess}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
@@ -18,7 +29,7 @@ export const GroupDeleteDialog: FC<Props> = ({obj: group, setObj: setGroup, onSu
     GroupService.delete(group?.id)
       .then(() => {
         handleCode('group.deleted', 'info');
-        setGroup(null);
+        close();
         if (onSuccess) {
           onSuccess();
         }
@@ -32,12 +43,12 @@ export const GroupDeleteDialog: FC<Props> = ({obj: group, setObj: setGroup, onSu
   };
 
   const onDisagree = (): void => {
-    setGroup(null);
+    close();
   };
 
   return (
     <ConfirmationDialog
-      open={group !== null}
+      open={!!group}
       onAgree={onAgree}
       onDisagree={onDisagree}
       title={t('group:modals.deleteTitle')}

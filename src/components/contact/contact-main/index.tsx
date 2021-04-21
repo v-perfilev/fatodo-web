@@ -14,9 +14,10 @@ import {PlusIcon} from '../../common/icons/plus-icon';
 import ContactRelations from '../contact-relations';
 import ContactIncoming from '../contact-incoming';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
-import {ContactRouteUtils} from '../_router';
+import {ContactDialogs, ContactRouteUtils} from '../_router';
 import ContactOutcoming from '../contact-outcoming';
-import ContactRequestDialog from '../dialogs/contact-request-dialog';
+import {ContactRequestDialogProps} from '../dialogs/contact-request-dialog';
+import {useDialogsContext} from '../../../shared/contexts/dialogs-context';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -47,12 +48,17 @@ const ContactMain: FC = () => {
   const match = useRouteMatch();
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
+  const {setDialogProps, clearDialogProps} = useDialogsContext();
   const [activeTab, setActiveTab] = useState<number>(calculateTabFromRoute(match.path));
-  const [showRequestDialog, setShowRequestDialog] = useState<boolean>(false);
 
   const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
-  const openRequestDialog = (): void => setShowRequestDialog(true);
+  const showContactRequestDialog = (): void => {
+    const show = true;
+    const close = (): void => clearDialogProps(ContactDialogs.REQUEST);
+    const props = {show, close} as ContactRequestDialogProps;
+    setDialogProps(ContactDialogs.REQUEST, props);
+  };
 
   const handleChange = (event: React.ChangeEvent<{}>, newTab: number): void => {
     history.replace(calculateRouteFromTab(newTab));
@@ -63,7 +69,7 @@ const ContactMain: FC = () => {
     <>
       <AdditionalMenuButton
         icon={<PlusIcon />}
-        action={openRequestDialog}
+        action={showContactRequestDialog}
         color="primary"
         tooltip={t('contact:tooltips.addContact')}
       />
@@ -93,9 +99,8 @@ const ContactMain: FC = () => {
         {activeTab === 1 && <ContactOutcoming />}
         {activeTab === 2 && <ContactIncoming />}
       </Container>
-      <ContactRequestDialog show={showRequestDialog} setShow={setShowRequestDialog} />
     </>
   );
 };
 
-export default compose<{}, {}>(withVerticalPadding)(ContactMain);
+export default compose(withVerticalPadding)(ContactMain);

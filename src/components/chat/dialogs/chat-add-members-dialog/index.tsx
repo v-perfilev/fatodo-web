@@ -9,13 +9,20 @@ import ContactService from '../../../../services/contact.service';
 import {UserSelect} from '../../../common/surfaces';
 import {LoadingButton} from '../../../common/controls';
 
-type Props = {
+export type ChatAddMembersDialogProps = {
   chat: Chat;
-  isOpen: boolean;
   close: () => void;
 };
 
-const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close}: Props) => {
+export const defaultChatAddMembersDialogProps: Readonly<ChatAddMembersDialogProps> = {
+  chat: null,
+  close: (): void => {
+  }
+};
+
+type Props = ChatAddMembersDialogProps;
+
+const ChatAddMembersDialog: FC<Props> = ({chat, close}: Props) => {
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [contactIds, setContactIds] = useState<string[]>([]);
@@ -51,10 +58,14 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close}: Props) => {
   const isUserIdListEmpty = userIds.length == 0;
 
   useEffect(() => {
-    loadContacts();
-  }, []);
+    if (chat) {
+      loadContacts();
+    }
+  }, [chat]);
 
-  const content = <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />;
+  const content = chat && (
+    <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />
+  );
 
   const cancelButton = (
     <Button onClick={close} color="primary" disabled={isSubmitting}>
@@ -82,7 +93,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, isOpen, close}: Props) => {
 
   return (
     <ModalDialog
-      isOpen={isOpen}
+      isOpen={!!chat}
       close={close}
       title={t('chat:addMembers.title')}
       content={content}

@@ -9,27 +9,12 @@ import {User} from '../../../models/user.model';
 import UserService from '../../../services/user.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {AvatarGroup} from '../../common/surfaces';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 const GroupPreviewCardNotifications: FC = () => {
   const classes = groupCardNotificationsStyles();
-  const {handleResponse} = useSnackContext();
   const {obj: group} = useGroupViewContext();
-  const [users, setUsers] = useState<User[]>([]);
-
-  const loadUsers = (ids: string[]): void => {
-    UserService.getAllByIds(ids)
-      .then((response) => {
-        setUsers(response.data);
-      })
-      .catch((response) => {
-        handleResponse(response);
-      });
-  };
-
-  useEffect(() => {
-    const ids = group.users.map((u) => u.id);
-    loadUsers(ids);
-  }, []);
+  const {users} = useUserListContext();
 
   return (
     <CardActions className={classes.deleteUser}>

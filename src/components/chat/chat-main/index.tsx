@@ -15,25 +15,24 @@ import {Chat} from '../../../models/chat.model';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
-import ChatCreateDialog from '../dialogs/chat-create-dialog';
-import withUserList from '../../../shared/hocs/with-list/with-user-list';
 import withAuthState from '../../../shared/hocs/with-auth-state';
 import {useWsChatContext} from '../../../shared/contexts/chat-contexts/ws-chat-context';
+import {useDialogsContext} from '../../../shared/contexts/dialogs-context';
+import {ChatCreateDialogProps} from '../dialogs/chat-create-dialog';
+import {ChatDialogs} from '../_router';
 
 type Props = AuthState;
 
 const ChatMain: FC<Props> = ({account}: Props) => {
   const classes = messageMainStyles();
   const history = useHistory();
+  const {setDialogProps, clearDialogProps} = useDialogsContext();
   const lastLocation = useLastLocation();
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'), {noSsr: true});
-  const [showCreateChatDialog, setShowCreateChatDialog] = useState<boolean>(false);
   const {selectChat} = useWsChatContext();
   const [chat, setChat] = useState<Chat>();
-
-  const openRequestDialog = (): void => setShowCreateChatDialog(true);
 
   const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
@@ -41,17 +40,20 @@ const ChatMain: FC<Props> = ({account}: Props) => {
     setChat(null);
   };
 
-  const closeCreateChatDialog = (): void => {
-    setShowCreateChatDialog(false);
+  const showChatCreateDialog = (): void => {
+    const show = true;
+    const close = (): void => clearDialogProps(ChatDialogs.CREATE);
+    const props = {show, close} as ChatCreateDialogProps;
+    setDialogProps(ChatDialogs.CREATE, props);
   };
 
   const menu = (
     <>
       <AdditionalMenuButton
         icon={<PlusIcon />}
-        action={openRequestDialog}
+        action={showChatCreateDialog}
         color="primary"
-        tooltip={t('contact:tooltips.addContact')}
+        tooltip={t('chat:tooltips.createChat')}
       />
       <AdditionalMenuSpacer showOnSmallDevices />
       <AdditionalMenuButton
@@ -95,9 +97,8 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   return (
     <>
       {isBigDevice ? bigView : smallView}
-      <ChatCreateDialog isOpen={showCreateChatDialog} close={closeCreateChatDialog} />
     </>
   );
 };
 
-export default compose<Props, {}>(withUserList, withAuthState)(ChatMain);
+export default compose<Props, {}>(withAuthState)(ChatMain);

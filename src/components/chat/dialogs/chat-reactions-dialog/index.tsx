@@ -1,42 +1,44 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import ModalDialog from '../../../common/dialogs/modal-dialog';
 import {User} from '../../../../models/user.model';
 import {Box} from '@material-ui/core';
 import {ClearableTextInput} from '../../../common/inputs';
 import {chatReactionsDialogStyles} from './_styles';
-import {Message, MessageReaction} from '../../../../models/message.model';
 import ChatReactionsDialogReaction from './chat-reactions-dialog-reaction';
+import {Message, MessageReaction} from '../../../../models/message.model';
 
-type Props = {
+export type ChatReactionDialogProps = {
   message: Message;
-  isOpen: boolean;
+  users: User[];
   close: () => void;
 };
 
-type UserReaction = {
+export const defaultChatReactionDialogProps: Readonly<ChatReactionDialogProps> = {
+  message: null,
+  users: [],
+  close: (): void => {
+  }
+};
+
+type MessageReactionWithUser = {
   reaction: MessageReaction;
   user?: User;
 }
 
-const ChatReactionsDialog: FC<Props> = ({message, isOpen, close}: Props) => {
+type Props = ChatReactionDialogProps;
+
+const ChatReactionsDialog: FC<Props> = ({message, users, close}: Props) => {
   const classes = chatReactionsDialogStyles();
-  const {users, handleUserIds} = useUserListContext();
   const {t} = useTranslation();
-  const [reactions, setReactions] = useState<UserReaction[]>([]);
-  const [reactionsToShow, setReactionsToShow] = useState<UserReaction[]>([]);
+  const [reactions, setReactions] = useState<MessageReactionWithUser[]>([]);
+  const [reactionsToShow, setReactionsToShow] = useState<MessageReactionWithUser[]>([]);
 
   const filterReactionsToShow = (event: ChangeEvent<HTMLInputElement>): void => {
     const filter = event.target.value;
     const updatedList = reactions
       .filter((reaction) => reaction.user?.username?.includes(filter));
     setReactionsToShow(updatedList);
-  };
-
-  const loadUsersFromReactions = (): void => {
-    const userIds = message.reactions.map((reaction) => reaction.userId);
-    handleUserIds(userIds);
   };
 
   const combineUsersWithReactions = (): void => {
@@ -50,12 +52,10 @@ const ChatReactionsDialog: FC<Props> = ({message, isOpen, close}: Props) => {
   };
 
   useEffect(() => {
-    loadUsersFromReactions();
-  }, []);
-
-  useEffect(() => {
-    combineUsersWithReactions();
-  }, [users]);
+    if (message) {
+      combineUsersWithReactions();
+    }
+  }, [message, users]);
 
   const filter = (
     <Box className={classes.filter}>
@@ -81,7 +81,7 @@ const ChatReactionsDialog: FC<Props> = ({message, isOpen, close}: Props) => {
 
   return (
     <ModalDialog
-      isOpen={isOpen}
+      isOpen={!!message}
       close={close}
       title={t('chat:members.title')}
       content={content}

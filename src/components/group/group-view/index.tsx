@@ -9,7 +9,7 @@ import GroupViewMessages from './group-view-messages';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
 import {Routes} from '../../router';
-import {GroupRouteUtils} from '../_router';
+import {GroupDialogs, GroupRouteUtils} from '../_router';
 import {useHistory, useParams} from 'react-router-dom';
 import {GroupsIcon} from '../../common/icons/groups-icon';
 import GroupService from '../../../services/group.service';
@@ -21,11 +21,13 @@ import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {DeleteIcon} from '../../common/icons/delete-icon';
-import {useGroupDeleteContext} from '../../../shared/contexts/delete-contexts/group-delete-context';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {CircularSpinner} from '../../common/loaders';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
+import {GroupDeleteDialogProps} from '../dialogs/group-delete-dialog';
+import {useDialogsContext} from '../../../shared/contexts/dialogs-context';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 const GroupView: FC = () => {
   const history = useHistory();
@@ -33,8 +35,9 @@ const GroupView: FC = () => {
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
+  const {handleUserIds} = useUserListContext();
+  const {setDialogProps, clearDialogProps} = useDialogsContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
-  const {setObj: setGroupToDelete, setOnSuccess: setOnDeleteGroupSuccess} = useGroupDeleteContext();
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
@@ -43,9 +46,11 @@ const GroupView: FC = () => {
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
-  const openDeleteDialog = (): void => {
-    setOnDeleteGroupSuccess(() => (): void => redirectToGroups());
-    setGroupToDelete(group);
+  const showGroupDeleteDialog = (): void => {
+    const close = (): void => clearDialogProps(GroupDialogs.DELETE);
+    const onSuccess = (): void => redirectToGroups();
+    const props = {group, close, onSuccess} as GroupDeleteDialogProps;
+    setDialogProps(GroupDialogs.DELETE, props);
   };
 
   const loadGroup = (): void => {
@@ -61,6 +66,11 @@ const GroupView: FC = () => {
         handleResponse(response);
         redirectToGroups();
       });
+  };
+
+  const loadUsers = (): void => {
+    const userIds = group.users.map((user) => user.id);
+    handleUserIds(userIds);
   };
 
   const menu = (
@@ -79,7 +89,7 @@ const GroupView: FC = () => {
       />
       <AdditionalMenuButton
         icon={<DeleteIcon />}
-        action={openDeleteDialog}
+        action={showGroupDeleteDialog}
         color="primary"
         tooltip={t('group:tooltips.delete')}
       />
@@ -96,6 +106,10 @@ const GroupView: FC = () => {
   useEffect(() => {
     setLoadGroup(() => (): void => loadGroup());
   }, []);
+
+  useEffect(() => {
+    loadUsers();
+  }, [group]);
 
   useEffect(() => {
     updateMenu(menu);
@@ -117,4 +131,4 @@ const GroupView: FC = () => {
   );
 };
 
-export default compose<{}, {}>(withVerticalPadding, withGroupView)(GroupView);
+export default compose(withVerticalPadding, withGroupView)(GroupView);

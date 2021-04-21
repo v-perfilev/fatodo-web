@@ -8,12 +8,20 @@ import {Button} from '@material-ui/core';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {LoadingButton} from '../../../common/controls';
 
-type Props = {
-  isOpen: boolean;
+export type ChatCreateDialogProps = {
+  show: boolean;
   close: () => void;
+}
+
+export const defaultChatCreateDialogProps: Readonly<ChatCreateDialogProps> = {
+  show: false,
+  close: (): void => {
+  }
 };
 
-const ChatCreateDialog: FC<Props> = ({isOpen, close}: Props) => {
+type Props = ChatCreateDialogProps;
+
+const ChatCreateDialog: FC<Props> = ({show, close}: Props) => {
   const {handleCode, handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [contactIds, setContactIds] = useState<string[]>([]);
@@ -53,8 +61,10 @@ const ChatCreateDialog: FC<Props> = ({isOpen, close}: Props) => {
   const isUserIdListEmpty = userIds.length == 0;
 
   useEffect(() => {
-    loadContacts();
-  }, []);
+    if (show) {
+      loadContacts();
+    }
+  }, [show]);
 
   const content = <UserSelect priorityIds={contactIds} ignoredIds={[]} setUserIds={setUserIds} />;
 
@@ -84,7 +94,7 @@ const ChatCreateDialog: FC<Props> = ({isOpen, close}: Props) => {
 
   return (
     <ModalDialog
-      isOpen={isOpen}
+      isOpen={show}
       close={close}
       title={t('chat:createChat.title')}
       content={content}

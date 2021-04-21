@@ -13,23 +13,50 @@ import {UserPlusIcon} from '../../../common/icons/user-plus-icon';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {EditIcon} from '../../../common/icons/edit-icon';
+import {ChatDialogs} from '../../_router';
+import {ChatMembersDialogProps} from '../../dialogs/chat-members-dialog';
+import {ChatAddMembersDialogProps} from '../../dialogs/chat-add-members-dialog';
+import {useDialogsContext} from '../../../../shared/contexts/dialogs-context';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
+import {ChatRenameDialogProps} from '../../dialogs/chat-rename-dialog';
 
 type Props = {
   chat: Chat;
-  openMembersDialog: () => void;
-  openAddMembersDialog: () => void;
-  openRenameDialog: () => void;
+  title: string;
   closeChat: () => void;
   clearMessages: () => void;
 };
 
-const ChatContentActions: FC<Props> = (props: Props) => {
-  const {chat, openMembersDialog, openAddMembersDialog, openRenameDialog, closeChat, clearMessages} = props;
+const ChatContentActions: FC<Props> = ({chat, title, closeChat, clearMessages}: Props) => {
   const classes = chatContentHeaderActionsStyles();
+  const {users} = useUserListContext();
+  const {setDialogProps, clearDialogProps} = useDialogsContext();
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const ref = useRef();
   const [isOpen, setIsOpen] = useState(false);
+
+  const showChatAddMembersDialog = (): void => {
+    const close = (): void => clearDialogProps(ChatDialogs.ADD_MEMBERS);
+    const props = {chat, close} as ChatAddMembersDialogProps;
+    setDialogProps(ChatDialogs.ADD_MEMBERS, props);
+  };
+
+  const showChatMembersDialog = (): void => {
+    const close = (): void => clearDialogProps(ChatDialogs.MEMBERS);
+    const switchToAddMembers = (): void => {
+      clearDialogProps(ChatDialogs.MEMBERS);
+      showChatAddMembersDialog();
+    };
+    const props = {chat, users, close, switchToAddMembers} as ChatMembersDialogProps;
+    setDialogProps(ChatDialogs.MEMBERS, props);
+  };
+
+  const showChatRenameDialog = (): void => {
+    const close = (): void => clearDialogProps(ChatDialogs.RENAME);
+    const props = {chat, title, close} as ChatRenameDialogProps;
+    setDialogProps(ChatDialogs.RENAME, props);
+  };
 
   const handleClickOnAction = (e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
@@ -44,17 +71,17 @@ const ChatContentActions: FC<Props> = (props: Props) => {
   };
 
   const showMembers = (e: MouseEvent<HTMLElement>): void => {
-    openMembersDialog();
+    showChatMembersDialog();
     handleClose(e);
   };
 
   const addMembers = (e: MouseEvent<HTMLElement>): void => {
-    openAddMembersDialog();
+    showChatAddMembersDialog();
     handleClose(e);
   };
 
   const renameChat = (e: MouseEvent<HTMLElement>): void => {
-    openRenameDialog();
+    showChatRenameDialog();
     handleClose(e);
   };
 

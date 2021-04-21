@@ -95,4 +95,4 @@ const GroupEdit: FC = () => {
   );
 };
 
-export default compose<{}, {}>(withGroupView)(GroupEdit);
+export default compose(withGroupView)(GroupEdit);

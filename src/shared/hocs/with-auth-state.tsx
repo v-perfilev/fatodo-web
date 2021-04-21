@@ -18,4 +18,4 @@ const withAuthState = (Component: ComponentType<AuthState>): FC => (props: Props
   );
 };
 
-export default compose<{}, {}>(connector, withAuthState);
+export default compose(connector, withAuthState);

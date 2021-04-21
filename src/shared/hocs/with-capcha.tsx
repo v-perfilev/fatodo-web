@@ -60,4 +60,4 @@ const withCaptchaProvider = (Component: ComponentType): FC => (props): ReactElem
   );
 };
 
-export default compose<{}, {}>(withCaptchaProvider, withCaptcha);
+export default compose(withCaptchaProvider, withCaptcha);

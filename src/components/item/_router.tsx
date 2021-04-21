@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
 
@@ -10,7 +10,13 @@ import {Routes} from '../router';
 import ItemView from './item-view';
 import ItemEdit from './item-edit';
 import ItemCreate from './item-create';
-import withItemDeleteDialog from '../../shared/hocs/with-delete-dialog/with-item-delete-dialog';
+import withUserList from '../../shared/hocs/with-list/with-user-list';
+import {defaultItemDeleteDialogProps, ItemDeleteDialog} from './dialogs/item-delete-dialog';
+import {useDialogsContext} from '../../shared/contexts/dialogs-context';
+
+export enum ItemDialogs {
+  DELETE = 'ITEM_DELETE_DIALOG',
+}
 
 export enum ItemRoutes {
   CREATE = '/create/:groupId',
@@ -25,7 +31,16 @@ export class ItemRouteUtils {
 }
 
 const ItemRouter: FC = () => {
+  const {handleDialog} = useDialogsContext();
   const match = useRouteMatch();
+
+  const initDialogs = (): void => {
+    handleDialog(ItemDialogs.DELETE, ItemDeleteDialog, defaultItemDeleteDialogProps);
+  };
+
+  useEffect(() => {
+    initDialogs();
+  }, []);
 
   return (
     <Switch>
@@ -37,4 +52,4 @@ const ItemRouter: FC = () => {
   );
 };
 
-export default compose<{}, {}>(withFlexibleHeader, withAdditionalMenu, withItemDeleteDialog)(ItemRouter);
+export default compose(withFlexibleHeader, withAdditionalMenu, withUserList)(ItemRouter);

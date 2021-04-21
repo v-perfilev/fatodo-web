@@ -3,12 +3,23 @@ import {useTranslation} from 'react-i18next';
 import {Item} from '../../../../models/item.model';
 import ItemService from '../../../../services/item.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
-import {DeleteDialogProps} from '../../../../shared/contexts/delete-contexts/types';
 import ConfirmationDialog from '../../../common/dialogs/confirmation-dialog';
 
-type Props = DeleteDialogProps<Item>;
+export type ItemDeleteDialogProps = {
+  item: Item;
+  close: () => void;
+  onSuccess?: () => void;
+}
 
-export const ItemDeleteDialog: FC<Props> = ({obj: item, setObj: setItem, onSuccess}: Props) => {
+export const defaultItemDeleteDialogProps: Readonly<ItemDeleteDialogProps> = {
+  item: null,
+  close: (): void => {
+  }
+};
+
+type Props = ItemDeleteDialogProps;
+
+export const ItemDeleteDialog: FC<Props> = ({item, close, onSuccess}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
@@ -18,7 +29,7 @@ export const ItemDeleteDialog: FC<Props> = ({obj: item, setObj: setItem, onSucce
     ItemService.delete(item?.id)
       .then(() => {
         handleCode('item.deleted', 'info');
-        setItem(null);
+        close();
         if (onSuccess) {
           onSuccess();
         }
@@ -32,12 +43,12 @@ export const ItemDeleteDialog: FC<Props> = ({obj: item, setObj: setItem, onSucce
   };
 
   const onDisagree = (): void => {
-    setItem(null);
+    close();
   };
 
   return (
     <ConfirmationDialog
-      open={item !== null}
+      open={!!item}
       onAgree={onAgree}
       onDisagree={onDisagree}
       title={t('item:modals.deleteTitle')}

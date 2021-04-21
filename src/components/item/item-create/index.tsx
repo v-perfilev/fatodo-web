@@ -102,4 +102,4 @@ const ItemCreate: FC = () => {
   );
 };
 
-export default compose<{}, {}>(withGroupView)(ItemCreate);
+export default compose(withGroupView)(ItemCreate);

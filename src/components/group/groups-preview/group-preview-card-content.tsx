@@ -78,4 +78,4 @@ const GroupPreviewCardContent: FC = () => {
   );
 };
 
-export default compose<{}, {}>(withItemList)(GroupPreviewCardContent);
+export default compose(withItemList)(GroupPreviewCardContent);

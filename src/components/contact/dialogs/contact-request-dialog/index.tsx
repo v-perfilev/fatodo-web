@@ -3,17 +3,21 @@ import FormDialog from '../../../common/dialogs/form-dialog';
 import ContactRequestForm from './contact-request-form';
 import {useTranslation} from 'react-i18next';
 
-type Props = {
+export type ContactRequestDialogProps = {
   show: boolean;
-  setShow: (show: boolean) => void;
+  close: () => void;
 };
 
-const ContactRequestDialog: FC<Props> = ({show, setShow}: Props) => {
-  const {t} = useTranslation();
+export const defaultContactRequestDialogProps: Readonly<ContactRequestDialogProps> = {
+  show: false,
+  close: (): void => {
+  }
+};
 
-  const close = (): void => {
-    setShow(false);
-  };
+type Props = ContactRequestDialogProps;
+
+const ContactRequestDialog: FC<Props> = ({show, close}: Props) => {
+  const {t} = useTranslation();
 
   return (
     <FormDialog
