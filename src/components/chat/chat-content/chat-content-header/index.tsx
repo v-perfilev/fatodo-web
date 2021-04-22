@@ -20,7 +20,7 @@ const ChatContentHeader: FC<Props> = (props: Props) => {
   const {t} = useTranslation();
 
   // UNCOMMENT FOR DEVELOPMENT
-  chat.isDirect = false;
+  // chat.isDirect = false;
 
   return (
     <Box className={classes.root}>
