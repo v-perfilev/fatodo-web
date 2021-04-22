@@ -36,10 +36,10 @@ const ModalDialog: FC<Props> = ({isOpen, close, title, content, actions, withTex
       {content && (
         <DialogContent>
           {withText && <DialogContentText className={classes.content}>{content}</DialogContentText>}
-          {!withText && content}
+          {!withText && <Box className={classes.content}>{content}</Box>}
         </DialogContent>
       )}
-      {actions && <DialogActions>{actions}</DialogActions>}
+      {actions && <DialogActions className={classes.actions}>{actions}</DialogActions>}
     </Dialog>
   );
 };

@@ -35,6 +35,7 @@ const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDisagree, 
     <ThemeProvider theme={theme}>
       <ModalDialog
         isOpen={open}
+        close={onDisagree}
         title={title}
         content={text}
         actions={
@@ -44,6 +45,7 @@ const ConfirmationDialog: FC<Props> = ({open, title, text, onAgree, onDisagree, 
           </>
         }
         withText
+        showCloseIcon
       />
     </ThemeProvider>
   );
