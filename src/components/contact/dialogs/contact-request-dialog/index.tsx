@@ -10,8 +10,7 @@ export type ContactRequestDialogProps = {
 
 export const defaultContactRequestDialogProps: Readonly<ContactRequestDialogProps> = {
   show: false,
-  close: (): void => {
-  }
+  close: (): void => undefined,
 };
 
 type Props = ContactRequestDialogProps;

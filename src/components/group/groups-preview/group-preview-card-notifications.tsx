@@ -1,13 +1,10 @@
 import * as React from 'react';
-import {FC, useEffect, useState} from 'react';
+import {FC} from 'react';
 import {Badge, Box, CardActions} from '@material-ui/core';
 import {BellIcon} from '../../common/icons/bell-icon';
 import {MessageIcon} from '../../common/icons/message-icon';
 import {groupCardNotificationsStyles} from './_styles';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {User} from '../../../models/user.model';
-import UserService from '../../../services/user.service';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {AvatarGroup} from '../../common/surfaces';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 

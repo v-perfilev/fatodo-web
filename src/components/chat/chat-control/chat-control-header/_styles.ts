@@ -13,10 +13,10 @@ export const chatControlHeaderStyles = makeStyles((theme: Theme) => ({
     paddingRight: theme.spacing(1),
     borderBottomWidth: 1,
     borderBottomStyle: 'solid',
-    borderBottomColor: theme.palette.grey['300']
+    borderBottomColor: theme.palette.grey['300'],
   },
   button: {
     marginLeft: theme.spacing(1),
-    flexShrink: 0
-  }
+    flexShrink: 0,
+  },
 }));

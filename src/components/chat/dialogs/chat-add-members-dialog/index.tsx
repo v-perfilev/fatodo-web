@@ -11,18 +11,19 @@ import {LoadingButton} from '../../../common/controls';
 
 export type ChatAddMembersDialogProps = {
   chat: Chat;
+  show: boolean;
   close: () => void;
 };
 
 export const defaultChatAddMembersDialogProps: Readonly<ChatAddMembersDialogProps> = {
   chat: null,
-  close: (): void => {
-  }
+  show: false,
+  close: (): void => undefined,
 };
 
 type Props = ChatAddMembersDialogProps;
 
-const ChatAddMembersDialog: FC<Props> = ({chat, close}: Props) => {
+const ChatAddMembersDialog: FC<Props> = ({chat, show, close}: Props) => {
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [contactIds, setContactIds] = useState<string[]>([]);
@@ -63,9 +64,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, close}: Props) => {
     }
   }, [chat]);
 
-  const content = chat && (
-    <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />
-  );
+  const content = chat && <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />;
 
   const cancelButton = (
     <Button onClick={close} color="primary" disabled={isSubmitting}>
@@ -93,7 +92,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, close}: Props) => {
 
   return (
     <ModalDialog
-      isOpen={!!chat}
+      isOpen={show}
       close={close}
       title={t('chat:addMembers.title')}
       content={content}

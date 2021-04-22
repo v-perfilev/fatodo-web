@@ -7,26 +7,27 @@ import ChatRenameForm from './chat-rename-form';
 export type ChatRenameDialogProps = {
   chat: Chat;
   title: string;
+  show: boolean;
   close: () => void;
 };
 
 export const defaultChatRenameDialogProps: Readonly<ChatRenameDialogProps> = {
   chat: null,
-  title: '',
-  close: (): void => {
-  }
+  title: null,
+  show: false,
+  close: (): void => undefined,
 };
 
 type Props = ChatRenameDialogProps;
 
-const ChatRenameDialog: FC<Props> = ({chat, title, close}: Props) => {
+const ChatRenameDialog: FC<Props> = ({chat, title, show, close}: Props) => {
   const {t} = useTranslation();
 
   const params = {chat, title};
 
   return (
     <FormDialog
-      show={!!chat}
+      show={show}
       close={close}
       FormComponent={ChatRenameForm}
       title={t('chat:renameChat.title')}

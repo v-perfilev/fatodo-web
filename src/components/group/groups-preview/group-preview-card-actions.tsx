@@ -4,13 +4,12 @@ import {DotsVerticalIcon} from '../../common/icons/dots-vertical-icon';
 import {groupCardActionsStyles} from './_styles';
 import {PopupMenu} from '../../common/surfaces';
 import {useHistory} from 'react-router-dom';
-import {GroupDialogs, GroupRouteUtils} from '../_router';
+import {GroupRouteUtils} from '../_router';
 import {ItemRouteUtils} from '../../item/_router';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {useTranslation} from 'react-i18next';
-import {GroupDeleteDialogProps} from '../dialogs/group-delete-dialog';
-import {useDialogsContext} from '../../../shared/contexts/dialogs-context';
+import {useGroupDialogContext} from '../../../shared/contexts/dialog-contexts/group-dialog-context';
 
 const GroupPreviewCardActions: FC = () => {
   const classes = groupCardActionsStyles();
@@ -19,7 +18,7 @@ const GroupPreviewCardActions: FC = () => {
   const ref = useRef();
   const {load: loadGroups} = useGroupListContext();
   const {obj: group} = useGroupViewContext();
-  const {setDialogProps, clearDialogProps} = useDialogsContext();
+  const {showGroupDeleteDialog} = useGroupDialogContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOnAction = (e: MouseEvent<HTMLElement>): void => {
@@ -49,11 +48,10 @@ const GroupPreviewCardActions: FC = () => {
     handleClose(e);
   };
 
-  const showGroupDeleteDialog = (): void => {
-    const close = (): void => clearDialogProps(GroupDialogs.DELETE);
+  const openGroupDeleteDialog = (e: MouseEvent<HTMLElement>): void => {
     const onSuccess = (): void => loadGroups();
-    const props = {group, close, onSuccess} as GroupDeleteDialogProps;
-    setDialogProps(GroupDialogs.DELETE, props);
+    showGroupDeleteDialog(group, onSuccess);
+    handleClose(e);
   };
 
   return (
@@ -65,7 +63,7 @@ const GroupPreviewCardActions: FC = () => {
         <MenuItem onClick={redirectToItemCreate}>{t('group:menu.createItem')}</MenuItem>
         <MenuItem onClick={redirectToGroupView}>{t('group:menu.viewGroup')}</MenuItem>
         <MenuItem onClick={redirectToGroupEdit}>{t('group:menu.editGroup')}</MenuItem>
-        <MenuItem onClick={showGroupDeleteDialog}>{t('group:menu.deleteGroup')}</MenuItem>
+        <MenuItem onClick={openGroupDeleteDialog}>{t('group:menu.deleteGroup')}</MenuItem>
       </PopupMenu>
     </>
   );

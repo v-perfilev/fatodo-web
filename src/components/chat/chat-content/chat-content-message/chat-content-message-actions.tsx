@@ -9,6 +9,8 @@ import {Message} from '../../../../models/message.model';
 import {chatContentMessageActionsStyles} from './_styles';
 import {ReactionsIcon} from '../../../common/icons/reactions-icon';
 import ChatService from '../../../../services/chat.service';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
+import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
 
 type Props = {
   message: Message;
@@ -18,8 +20,10 @@ type Props = {
 const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => {
   const classes = chatContentMessageActionsStyles();
   const {handleResponse} = useSnackContext();
+  const {users} = useUserListContext();
   const {t} = useTranslation();
   const ref = useRef();
+  const {showChatReactionsDialog} = useChatDialogContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOnAction = (e: React.MouseEvent<HTMLElement>): void => {
@@ -34,16 +38,15 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
     setIsOpen(false);
   };
 
-  const showReactions = (e: MouseEvent<HTMLElement>): void => {
-    // openMembersDialog();
+  const openReactionsDialog = (e: MouseEvent<HTMLElement>): void => {
+    showChatReactionsDialog(message, users);
     handleClose(e);
   };
 
   const deleteMessage = (e: MouseEvent<HTMLElement>): void => {
-    ChatService.deleteMessage(message.id)
-      .catch((response) => {
-        handleResponse(response);
-      });
+    ChatService.deleteMessage(message.id).catch((response) => {
+      handleResponse(response);
+    });
     handleClose(e);
   };
 
@@ -53,7 +56,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        <MenuItem onClick={showReactions}>
+        <MenuItem onClick={openReactionsDialog}>
           <ReactionsIcon color="primary" />
           {t('chat:menu.addMembers')}
         </MenuItem>

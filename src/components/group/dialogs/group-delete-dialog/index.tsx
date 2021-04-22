@@ -7,19 +7,20 @@ import ConfirmationDialog from '../../../common/dialogs/confirmation-dialog';
 
 export type GroupDeleteDialogProps = {
   group: Group;
+  show: boolean;
   close: () => void;
   onSuccess?: () => void;
-}
+};
 
 export const defaultGroupDeleteDialogProps: Readonly<GroupDeleteDialogProps> = {
   group: null,
-  close: (): void => {
-  }
+  show: false,
+  close: (): void => undefined,
 };
 
 type Props = GroupDeleteDialogProps;
 
-export const GroupDeleteDialog: FC<Props> = ({group, close, onSuccess}: Props) => {
+export const GroupDeleteDialog: FC<Props> = ({group, show, close, onSuccess}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
@@ -48,7 +49,7 @@ export const GroupDeleteDialog: FC<Props> = ({group, close, onSuccess}: Props) =
 
   return (
     <ConfirmationDialog
-      open={!!group}
+      open={show}
       onAgree={onAgree}
       onDisagree={onDisagree}
       title={t('group:modals.deleteTitle')}

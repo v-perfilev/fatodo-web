@@ -12,6 +12,7 @@ import {UserPlusIcon} from '../../../common/icons/user-plus-icon';
 export type ChatMembersDialogProps = {
   chat: Chat;
   users: User[];
+  show: boolean;
   close: () => void;
   switchToAddMembers: () => void;
 };
@@ -19,15 +20,14 @@ export type ChatMembersDialogProps = {
 export const defaultChatMembersDialogProps: Readonly<ChatMembersDialogProps> = {
   chat: null,
   users: [],
-  close: (): void => {
-  },
-  switchToAddMembers: (): void => {
-  }
+  show: false,
+  close: (): void => undefined,
+  switchToAddMembers: (): void => undefined,
 };
 
 type Props = ChatMembersDialogProps;
 
-const ChatMembersDialog: FC<Props> = ({chat, users, close, switchToAddMembers}: Props) => {
+const ChatMembersDialog: FC<Props> = ({chat, users, show, close, switchToAddMembers}: Props) => {
   const classes = chatMembersDialogStyles();
   const {t} = useTranslation();
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
@@ -75,7 +75,7 @@ const ChatMembersDialog: FC<Props> = ({chat, users, close, switchToAddMembers}: 
 
   return (
     <ModalDialog
-      isOpen={!!chat}
+      isOpen={show}
       close={close}
       title={t('chat:members.title')}
       content={content}

@@ -63,6 +63,7 @@
     "DELETE_MEMBERS": "{{username}} удалил из чата пользователей: {{usernames}}"
   },
   "tooltips": {
+    "createChat": "Создать чат",
     "back": "К предыдущей страницы"
   }
 }

@@ -17,21 +17,19 @@ import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import withAuthState from '../../../shared/hocs/with-auth-state';
 import {useWsChatContext} from '../../../shared/contexts/chat-contexts/ws-chat-context';
-import {useDialogsContext} from '../../../shared/contexts/dialogs-context';
-import {ChatCreateDialogProps} from '../dialogs/chat-create-dialog';
-import {ChatDialogs} from '../_router';
+import {useChatDialogContext} from '../../../shared/contexts/dialog-contexts/chat-dialog-context';
 
 type Props = AuthState;
 
 const ChatMain: FC<Props> = ({account}: Props) => {
   const classes = messageMainStyles();
   const history = useHistory();
-  const {setDialogProps, clearDialogProps} = useDialogsContext();
   const lastLocation = useLastLocation();
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'), {noSsr: true});
   const {selectChat} = useWsChatContext();
+  const {showChatCreateDialog} = useChatDialogContext();
   const [chat, setChat] = useState<Chat>();
 
   const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
@@ -40,18 +38,15 @@ const ChatMain: FC<Props> = ({account}: Props) => {
     setChat(null);
   };
 
-  const showChatCreateDialog = (): void => {
-    const show = true;
-    const close = (): void => clearDialogProps(ChatDialogs.CREATE);
-    const props = {show, close} as ChatCreateDialogProps;
-    setDialogProps(ChatDialogs.CREATE, props);
+  const openChatCreateDialog = (): void => {
+    showChatCreateDialog();
   };
 
   const menu = (
     <>
       <AdditionalMenuButton
         icon={<PlusIcon />}
-        action={showChatCreateDialog}
+        action={openChatCreateDialog}
         color="primary"
         tooltip={t('chat:tooltips.createChat')}
       />
@@ -71,7 +66,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
 
   useEffect(() => {
     updateMenu(menu);
-  }, [i18n.language]);
+  }, [i18n.language, showChatCreateDialog]);
 
   const bigView = (
     <Grid container className={classes.bigViewRoot}>
@@ -94,11 +89,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
     </Box>
   );
 
-  return (
-    <>
-      {isBigDevice ? bigView : smallView}
-    </>
-  );
+  return <>{isBigDevice ? bigView : smallView}</>;
 };
 
 export default compose<Props, {}>(withAuthState)(ChatMain);

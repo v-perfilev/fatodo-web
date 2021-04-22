@@ -11,9 +11,7 @@ import {ItemRouteUtils} from '../../item/_router';
 import {EyeIcon} from '../../common/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
-import {useDialogsContext} from '../../../shared/contexts/dialogs-context';
-import {ItemDeleteDialogProps} from '../../item/dialogs/item-delete-dialog';
-import {GroupDialogs} from '../_router';
+import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
 
 type Props = {
   item: Item;
@@ -23,17 +21,15 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
   const classes = groupViewItemStyles();
   const history = useHistory();
   const {load: loadItems} = useItemListContext();
-  const {setDialogProps, clearDialogProps} = useDialogsContext();
+  const {showItemDeleteDialog} = useItemDialogContext();
 
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
   const redirectToViewItem = (): void => history.push(viewItemUrl);
   const redirectToEditItem = (): void => history.push(ItemRouteUtils.getEditUrl(item.id));
 
-  const showItemDeleteDialog = (): void => {
-    const close = (): void => clearDialogProps(GroupDialogs.DELETE);
+  const openItemDeleteDialog = (): void => {
     const onSuccess = (): void => loadItems();
-    const props = {item, close, onSuccess} as ItemDeleteDialogProps;
-    setDialogProps(GroupDialogs.DELETE, props);
+    showItemDeleteDialog(item, onSuccess);
   };
 
   return (
@@ -56,7 +52,7 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
         <IconButton size="small" className={classes.toggleIcon}>
           <PackageDownIcon />
         </IconButton>
-        <IconButton size="small" className={classes.deleteIcon} onClick={showItemDeleteDialog}>
+        <IconButton size="small" className={classes.deleteIcon} onClick={openItemDeleteDialog}>
           <DeleteIcon />
         </IconButton>
       </Box>

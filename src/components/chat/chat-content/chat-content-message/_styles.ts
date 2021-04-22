@@ -20,7 +20,6 @@ export const chatContentMessageActionsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-
 export const chatContentMessageEventStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '80%',

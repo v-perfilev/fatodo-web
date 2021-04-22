@@ -7,14 +7,15 @@ import ConfirmationDialog from '../../../common/dialogs/confirmation-dialog';
 
 export type ItemDeleteDialogProps = {
   item: Item;
+  show: boolean;
   close: () => void;
   onSuccess?: () => void;
-}
+};
 
 export const defaultItemDeleteDialogProps: Readonly<ItemDeleteDialogProps> = {
   item: null,
-  close: (): void => {
-  }
+  show: false,
+  close: (): void => undefined,
 };
 
 type Props = ItemDeleteDialogProps;

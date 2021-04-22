@@ -59,7 +59,7 @@ const ChatMembersDialogMember: FC<Props> = ({chat, user, account}: Props) => {
       <Box className={classes.user}>
         <UserWithPopupView user={user} withUsername withUserPic picSize="sm" />
       </Box>
-      {!chat.isDirect && user.id !== account.id && (
+      {chat && !chat.isDirect && user.id !== account.id && (
         <IconButton size="small" onClick={switchRemovingConfirmation}>
           <UserMinusIcon color="error" />
         </IconButton>

@@ -63,6 +63,7 @@
     "DELETE_MEMBERS": "{{username}} deleted members from the chat: {{usernames}}"
   },
   "tooltips": {
+    "createChat": "Create chat",
     "back": "Back"
   }
 }

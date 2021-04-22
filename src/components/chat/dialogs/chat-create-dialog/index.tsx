@@ -11,12 +11,11 @@ import {LoadingButton} from '../../../common/controls';
 export type ChatCreateDialogProps = {
   show: boolean;
   close: () => void;
-}
+};
 
 export const defaultChatCreateDialogProps: Readonly<ChatCreateDialogProps> = {
   show: false,
-  close: (): void => {
-  }
+  close: (): void => undefined,
 };
 
 type Props = ChatCreateDialogProps;

@@ -14,10 +14,9 @@ import {PlusIcon} from '../../common/icons/plus-icon';
 import ContactRelations from '../contact-relations';
 import ContactIncoming from '../contact-incoming';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
-import {ContactDialogs, ContactRouteUtils} from '../_router';
+import {ContactRouteUtils} from '../_router';
 import ContactOutcoming from '../contact-outcoming';
-import {ContactRequestDialogProps} from '../dialogs/contact-request-dialog';
-import {useDialogsContext} from '../../../shared/contexts/dialogs-context';
+import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/contact-dialog-context';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -48,16 +47,13 @@ const ContactMain: FC = () => {
   const match = useRouteMatch();
   const {i18n, t} = useTranslation();
   const {updateMenu} = useAdditionalMenuContext();
-  const {setDialogProps, clearDialogProps} = useDialogsContext();
+  const {showContactRequestDialog} = useContactDialogContext();
   const [activeTab, setActiveTab] = useState<number>(calculateTabFromRoute(match.path));
 
   const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
-  const showContactRequestDialog = (): void => {
-    const show = true;
-    const close = (): void => clearDialogProps(ContactDialogs.REQUEST);
-    const props = {show, close} as ContactRequestDialogProps;
-    setDialogProps(ContactDialogs.REQUEST, props);
+  const openContactRequestDialog = (): void => {
+    showContactRequestDialog();
   };
 
   const handleChange = (event: React.ChangeEvent<{}>, newTab: number): void => {
@@ -69,7 +65,7 @@ const ContactMain: FC = () => {
     <>
       <AdditionalMenuButton
         icon={<PlusIcon />}
-        action={showContactRequestDialog}
+        action={openContactRequestDialog}
         color="primary"
         tooltip={t('contact:tooltips.addContact')}
       />
@@ -85,7 +81,7 @@ const ContactMain: FC = () => {
 
   useEffect(() => {
     updateMenu(menu);
-  }, [i18n.language]);
+  }, [i18n.language, showContactRequestDialog]);
 
   return (
     <>

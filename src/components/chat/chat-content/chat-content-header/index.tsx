@@ -29,12 +29,7 @@ const ChatContentHeader: FC<Props> = (props: Props) => {
         {chat.isDirect && <Box className={classes.direct}>{t('chat:common.direct')}</Box>}
       </Box>
       <ChatContentMembers chat={chat} />
-      <ChatContentActions
-        chat={chat}
-        title={title}
-        closeChat={closeChat}
-        clearMessages={clearMessages}
-      />
+      <ChatContentActions chat={chat} title={title} closeChat={closeChat} clearMessages={clearMessages} />
     </Box>
   );
 };

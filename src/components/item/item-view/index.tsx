@@ -18,7 +18,7 @@ import ItemViewChanges from './item-view-changes';
 import {compose} from 'recompose';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
-import {ItemDialogs, ItemRouteUtils} from '../_router';
+import {ItemRouteUtils} from '../_router';
 import {ItemsIcon} from '../../common/icons/items-icon';
 import {GroupRouteUtils} from '../../group/_router';
 import ItemViewInfo from './item-view-info';
@@ -30,8 +30,7 @@ import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-
 import {CircularSpinner} from '../../common/loaders';
 import {GroupsIcon} from '../../common/icons/groups-icon';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
-import {useDialogsContext} from '../../../shared/contexts/dialogs-context';
-import {ItemDeleteDialogProps} from '../dialogs/item-delete-dialog';
+import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
 
 const ItemView: FC = () => {
   const history = useHistory();
@@ -39,7 +38,7 @@ const ItemView: FC = () => {
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {updateMenu} = useAdditionalMenuContext();
-  const {setDialogProps, clearDialogProps} = useDialogsContext();
+  const {showItemDeleteDialog} = useItemDialogContext();
   const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
 
@@ -50,11 +49,9 @@ const ItemView: FC = () => {
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
-  const showItemDeleteDialog = (): void => {
-    const close = (): void => clearDialogProps(ItemDialogs.DELETE);
+  const openItemDeleteDialog = (): void => {
     const onSuccess = (): void => redirectToGroupView();
-    const props = {item, close, onSuccess} as ItemDeleteDialogProps;
-    setDialogProps(ItemDialogs.DELETE, props);
+    showItemDeleteDialog(item, onSuccess);
   };
 
   const loadItem = (): void => {
@@ -95,7 +92,7 @@ const ItemView: FC = () => {
       />
       <AdditionalMenuButton
         icon={<DeleteIcon />}
-        action={showItemDeleteDialog}
+        action={openItemDeleteDialog}
         color="primary"
         tooltip={t('item:tooltips.delete')}
       />
@@ -127,7 +124,7 @@ const ItemView: FC = () => {
 
   useEffect(() => {
     updateMenu(menu);
-  }, [item, group, i18n.language]);
+  }, [item, group, i18n.language, showItemDeleteDialog]);
 
   return itemLoading || groupLoading ? (
     <CircularSpinner />

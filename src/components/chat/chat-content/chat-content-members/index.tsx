@@ -3,10 +3,7 @@ import {Chat} from '../../../../models/chat.model';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {User} from '../../../../models/user.model';
 import {AvatarGroup} from '../../../common/surfaces';
-import {ChatDialogs} from '../../_router';
-import {useDialogsContext} from '../../../../shared/contexts/dialogs-context';
-import {ChatMembersDialogProps} from '../../dialogs/chat-members-dialog';
-import {ChatAddMembersDialogProps} from '../../dialogs/chat-add-members-dialog';
+import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
 
 type Props = {
   chat: Chat;
@@ -14,23 +11,11 @@ type Props = {
 
 const ChatContentMembers: FC<Props> = ({chat}: Props) => {
   const {users} = useUserListContext();
-  const {setDialogProps, clearDialogProps} = useDialogsContext();
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
+  const {showChatMembersDialog} = useChatDialogContext();
 
-  const showChatAddMembersDialog = (): void => {
-    const close = (): void => clearDialogProps(ChatDialogs.ADD_MEMBERS);
-    const props = {chat, close} as ChatAddMembersDialogProps;
-    setDialogProps(ChatDialogs.ADD_MEMBERS, props);
-  };
-
-  const showChatMembersDialog = (): void => {
-    const close = (): void => clearDialogProps(ChatDialogs.MEMBERS);
-    const switchToAddMembers = (): void => {
-      clearDialogProps(ChatDialogs.MEMBERS);
-      showChatAddMembersDialog();
-    };
-    const props = {chat, users, close, switchToAddMembers} as ChatMembersDialogProps;
-    setDialogProps(ChatDialogs.MEMBERS, props);
+  const openChatMembersDialog = (): void => {
+    showChatMembersDialog(chat, users);
   };
 
   useEffect(() => {
@@ -38,7 +23,7 @@ const ChatContentMembers: FC<Props> = ({chat}: Props) => {
     setUsersToShow(updatedUsersToShow);
   }, [chat.members]);
 
-  return <AvatarGroup users={usersToShow} onClick={showChatMembersDialog} />;
+  return <AvatarGroup users={usersToShow} onClick={openChatMembersDialog} />;
 };
 
 export default ChatContentMembers;

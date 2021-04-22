@@ -11,7 +11,6 @@ type Props = IconProps & {
 };
 
 export const ReactionView: FC<Props> = ({reaction, className, ...props}: Props) => {
-
   const icon = useMemo<ReactElement>(() => {
     switch (reaction.type) {
       case 'LIKE':

@@ -21,8 +21,9 @@ const GroupPreview: FC = () => {
   const history = useHistory();
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
+  const {handleUserIds} = useUserListContext();
   const {updateMenu} = useAdditionalMenuContext();
-  const {setObjs: setGroups, setLoad: setLoadGroups, loading: groupsLoading} = useGroupListContext();
+  const {objs: groups, setObjs: setGroups, setLoad: setLoadGroups, loading: groupsLoading} = useGroupListContext();
 
   const redirectToGroupCreate = (): void => history.push(GroupRouteUtils.getCreateUrl());
   const redirectToGroupsSorting = (): void => history.push(GroupRouteUtils.getSortingUrl());
@@ -35,6 +36,13 @@ const GroupPreview: FC = () => {
       .catch((response) => {
         handleResponse(response);
       });
+  };
+
+  const loadUsers = (): void => {
+    const userIds = groups
+      .map((group) => group.users.map((user) => user.id))
+      .reduce((acc, userIds) => [...acc, ...userIds], []);
+    handleUserIds(userIds);
   };
 
   const menu = (
@@ -58,6 +66,12 @@ const GroupPreview: FC = () => {
   useEffect(() => {
     setLoadGroups(() => (): void => loadGroups());
   }, []);
+
+  useEffect(() => {
+    if (groups) {
+      loadUsers();
+    }
+  }, [groups]);
 
   useEffect(() => {
     updateMenu(menu);
