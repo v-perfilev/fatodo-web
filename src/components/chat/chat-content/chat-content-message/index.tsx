@@ -1,30 +1,34 @@
-import React, {FC, HTMLAttributes, memo, useEffect} from 'react';
-import {Message} from '../../../../models/message.model';
+import React, {FC, memo, useEffect, useMemo} from 'react';
 import ChatContentMessageOutcoming from './chat-content-message-outcoming';
 import ChatContentMessageIncoming from './chat-content-message-incoming';
-import {User} from '../../../../models/user.model';
-import {Box, Container} from '@material-ui/core';
 import MessageContentBoxEvent from './chat-content-message-event';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
-import {chatContentMessageStyles} from './_styles';
+import {Message, MessageType} from '../../../../models/message.model';
+import {compose} from 'recompose';
+import withAuthState from '../../../../shared/hocs/with-auth-state';
+import {AuthState} from '../../../../store/rerducers/auth.reducer';
 
-type Props = HTMLAttributes<HTMLElement> & {
-  index: number;
-  messages: Message[];
-  account: User;
+type BaseProps = {
+  message: Message;
   isVisible: boolean;
 };
 
-const ChatContentMessage: FC<Props> = ({index, messages, account, isVisible, style}: Props) => {
-  const classes = chatContentMessageStyles();
+type Props = AuthState & BaseProps;
+
+const ChatContentMessage: FC<Props> = ({message, account, isVisible}: Props) => {
   const {handleUserIds} = useUserListContext();
 
-  const message = messages[index];
-  const isMessageOutcoming = !message.isEvent && message.userId === account.id;
-  const isMessageIncoming = !message.isEvent && message.userId !== account.id;
-  const isMessageEvent = message.isEvent;
-
-  const isFirst = index === 0;
+  const type = useMemo<MessageType>(() => {
+    if (!message.isEvent && message.userId === account.id) {
+      return 'outcoming';
+    } else if (!message.isEvent && message.userId !== account.id) {
+      return 'incoming';
+    } else if (message.isEvent) {
+      return 'event';
+    } else {
+      return null;
+    }
+  }, [message]);
 
   const handleMessageUserIds = (): void => {
     const reactionUserIds = message.reactions.map((r) => r.userId);
@@ -37,15 +41,12 @@ const ChatContentMessage: FC<Props> = ({index, messages, account, isVisible, sty
   }, []);
 
   return (
-    <div style={style}>
-      {isFirst && <Box className={classes.spacer} />}
-      <Container maxWidth="md">
-        {isMessageOutcoming && <ChatContentMessageOutcoming message={message} />}
-        {isMessageIncoming && <ChatContentMessageIncoming message={message} account={account} isVisible={isVisible} />}
-        {isMessageEvent && <MessageContentBoxEvent message={message} />}
-      </Container>
-    </div>
+    <>
+      {type === 'outcoming' && <ChatContentMessageOutcoming message={message} />}
+      {type === 'incoming' && <ChatContentMessageIncoming message={message} account={account} isVisible={isVisible} />}
+      {type === 'event' && <MessageContentBoxEvent message={message} />}
+    </>
   );
 };
 
-export default memo(ChatContentMessage);
+export default compose<Props, BaseProps>(memo, withAuthState)(ChatContentMessage);

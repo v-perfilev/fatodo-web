@@ -23,7 +23,7 @@ const ChatContentMessageIncoming: FC<Props> = ({message, account, isVisible}: Pr
   let timerId;
 
   const user = MessageUtils.extractUserFromMessage(users, message);
-  const date = DateFormatters.formatTimeAndDateWithYear(new Date(message.createdAt));
+  const date = DateFormatters.formatTime(new Date(message.createdAt));
   const isRead = MessageUtils.isReadMessage(message, account);
 
   const messageClassName = csx(classes.message, {unread: !isRead});

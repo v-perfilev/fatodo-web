@@ -36,7 +36,7 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
       {chat && (
         <>
           <ChatContentHeader chat={chat} title={title} closeChat={closeChat} clearMessages={clearMessages} />
-          <MessageContentList chat={chat} account={account} messages={messages} setMessages={setMessages} />
+          <MessageContentList chat={chat} messages={messages} setMessages={setMessages} />
           <ChatContentFooter chatId={chat.id} />
         </>
       )}

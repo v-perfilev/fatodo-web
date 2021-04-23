@@ -15,7 +15,7 @@ const ChatContentMessageOutcoming: FC<Props> = ({message}: Props) => {
   const {users} = useUserListContext();
 
   const user = MessageUtils.extractUserFromMessage(users, message);
-  const date = DateFormatters.formatTimeAndDateWithYear(new Date(message.createdAt));
+  const date = DateFormatters.formatTime(new Date(message.createdAt));
 
   return (
     <Box className={classes.root}>

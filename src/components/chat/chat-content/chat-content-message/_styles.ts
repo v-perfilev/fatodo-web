@@ -1,12 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const chatContentMessageStyles = makeStyles((theme: Theme) => ({
-  spacer: {
-    height: theme.spacing(2),
-  },
-}));
-
 export const chatContentMessageActionsStyles = makeStyles((theme: Theme) => ({
   popupMenu: {
     '& .MuiListItem-root': {
@@ -24,14 +18,11 @@ export const chatContentMessageEventStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '80%',
     marginLeft: '10%',
+    marginRight: '10%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     paddingBottom: theme.spacing(2),
-  },
-  date: {
-    fontSize: '0.7rem',
-    color: theme.palette.grey['500'],
   },
   text: {
     fontSize: '0.8rem',
@@ -42,13 +33,14 @@ export const chatContentMessageEventStyles = makeStyles((theme: Theme) => ({
 
 export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
   root: {
-    maxWidth: '90%',
+    width: '90%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'start',
     paddingBottom: theme.spacing(2),
   },
   message: {
+    minWidth: '30%',
     display: 'flex',
     flexDirection: 'column',
     marginLeft: theme.spacing(1),
@@ -87,7 +79,7 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
 
 export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
   root: {
-    maxWidth: '90%',
+    width: '90%',
     float: 'right',
     display: 'flex',
     flexDirection: 'row',
@@ -96,6 +88,7 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(2),
   },
   message: {
+    minWidth: '30%',
     display: 'flex',
     flexDirection: 'column',
     marginLeft: theme.spacing(1),

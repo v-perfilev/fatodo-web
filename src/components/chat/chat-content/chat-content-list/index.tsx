@@ -3,10 +3,9 @@ import {Box} from '@material-ui/core';
 import {chatContentListStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
 import {ListRowProps, ScrollParams} from 'react-virtualized';
-import {User} from '../../../../models/user.model';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
-import {Message} from '../../../../models/message.model';
+import {Message, MessageListItem} from '../../../../models/message.model';
 import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-chat-context';
 import {CircularSpinner} from '../../../common/loaders';
 import {
@@ -19,20 +18,21 @@ import {VirtualizedCache, VirtualizedList} from '../../../common/surfaces';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import ChatContentScrollButton from './chat-content-scroll-button';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
-import ChatContentMessage from '../chat-content-message';
+import ChatContentItem from '../chat-content-item';
+import {DateFormatters} from '../../../../shared/utils/date.utils';
 
 type Props = {
   chat: Chat;
-  account: User;
   messages: Message[];
   setMessages: Dispatch<SetStateAction<Message[]>>;
 };
 
-const ChatContentList: FC<Props> = ({chat, account, messages, setMessages}: Props) => {
+const ChatContentList: FC<Props> = ({chat, messages, setMessages}: Props) => {
   const classes = chatContentListStyles();
   const {messageNewEvent, messageUpdateEvent, messageStatusesEvent, messageReactionsEvent} = useWsChatContext();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
   const {handleResponse} = useSnackContext();
+  const [items, setItems] = useState<MessageListItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);
@@ -50,14 +50,25 @@ const ChatContentList: FC<Props> = ({chat, account, messages, setMessages}: Prop
     setScrolledToBottom(isScrolledToBottom || isNotRendered);
   };
 
+  const handleMessages = (): void => {
+    const handledDates = [];
+    const handledItems = [];
+    messages.forEach((message) => {
+      const date = DateFormatters.formatDateWithYear(new Date(message.createdAt));
+      if (!handledDates.includes(date)) {
+        handledDates.push(date);
+        handledItems.push({date});
+      }
+      handledItems.push({message});
+    });
+    setItems(handledItems);
+  };
+
   const addLoadedMessagesToState = (loadedMessages: Message[]): void => {
     setMessages((prevState) => {
       const combinedMessages = [...loadedMessages, ...prevState];
       return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
     });
-    if (virtualizedCacheRef) {
-      virtualizedCacheRef.current.clearCache();
-    }
   };
 
   const loadMoreMessages = (): Promise<void> =>
@@ -85,6 +96,16 @@ const ChatContentList: FC<Props> = ({chat, account, messages, setMessages}: Prop
   }, [chat]);
 
   useEffect(() => {
+    handleMessages();
+  }, [messages]);
+
+  useEffect(() => {
+    if (virtualizedCacheRef && items.length > 0) {
+      virtualizedCacheRef.current.clearCache();
+    }
+  }, [items]);
+
+  useEffect(() => {
     handleMessageNewEvent(chat, messageNewEvent, setMessages);
   }, [messageNewEvent]);
 
@@ -101,7 +122,7 @@ const ChatContentList: FC<Props> = ({chat, account, messages, setMessages}: Prop
   }, [messageReactionsEvent]);
 
   const messageRenderer = ({index, isVisible, style}: ListRowProps): ReactElement => (
-    <ChatContentMessage index={index} messages={messages} account={account} isVisible={isVisible} style={style} />
+    <ChatContentItem item={items[index]} isVisible={isVisible} isFirst={index === 0} style={style} />
   );
 
   return loading ? (
@@ -112,10 +133,10 @@ const ChatContentList: FC<Props> = ({chat, account, messages, setMessages}: Prop
         renderer={messageRenderer}
         isRowLoaded={isMessageLoaded}
         loadMoreRows={loadMoreMessages}
-        loadedLength={messages.length}
-        totalLength={allMessagesLoaded ? messages.length : messages.length + 1}
+        loadedLength={items.length}
+        totalLength={allMessagesLoaded ? items.length : items.length + 1}
         onScroll={onScroll}
-        scrollToIndex={scrolledToBottom ? messages.length - 1 : undefined}
+        scrollToIndex={scrolledToBottom ? items.length - 1 : undefined}
         virtualizedCacheRef={virtualizedCacheRef}
       />
       <ChatContentScrollButton

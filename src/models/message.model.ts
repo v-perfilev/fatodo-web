@@ -3,6 +3,13 @@ import {AbstractAuditing} from './abstract-auditing.model';
 export type MessageStatusType = 'READ';
 export type MessageReactionType = 'LIKE' | 'DISLIKE';
 
+export type MessageType = 'event' | 'outcoming' | 'incoming' | null;
+
+export interface MessageListItem {
+  message?: Message;
+  date?: string;
+}
+
 export interface Message extends AbstractAuditing {
   id: string;
   chatId: string;
