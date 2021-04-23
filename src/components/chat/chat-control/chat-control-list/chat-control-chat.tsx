@@ -30,7 +30,7 @@ const ChatControlChat: FC<Props> = ({index, chats, isSelected, account, ...props
   const unreadCount = unreadMessageCountMap?.get(chat.id);
   const title = ChatUtils.getTitle(chat, users, account);
   const date = chat.lastMessage?.createdAt ? new Date(chat.lastMessage.createdAt) : null;
-  const formattedDate = date ? DateFormatters.formatTimeAndDateWithYear(date) : null;
+  const formattedDate = date ? DateFormatters.formatDependsOfDay(date) : null;
 
   const classNames = csx(classes.root, {selected: isSelected});
 
