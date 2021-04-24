@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useEffect, useState} from 'react';
+import React, {FC, memo, ReactElement, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {chatControlListStyles} from './_styles';
 import MessageControlChat from './chat-control-chat';
@@ -12,6 +12,7 @@ import {handleChatLastMessageEvent, handleChatNewEvent, handleChatUpdateEvent} f
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {VirtualizedList} from '../../../common/surfaces';
 import {CHAT_HEIGHT} from '../../_constants';
+import {ListRowProps} from 'react-virtualized';
 
 type Props = {
   chat: Chat;
@@ -83,7 +84,7 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
     handleChatLastMessageEvent(chatLastMessageUpdateEvent, setChats);
   }, [chatLastMessageUpdateEvent]);
 
-  const chatRenderer = ({index, key, style}: any): ReactElement => (
+  const chatRenderer = ({index, key, style}: ListRowProps): ReactElement => (
     <MessageControlChat
       index={index}
       chats={chats}
@@ -111,4 +112,4 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   );
 };
 
-export default ChatControlList;
+export default memo(ChatControlList);

@@ -10,7 +10,7 @@ import {
   List,
   ListRowProps,
   ScrollParams,
-  Size,
+  Size
 } from 'react-virtualized';
 import {RenderedSection} from 'react-virtualized/dist/es/Grid';
 
@@ -24,28 +24,28 @@ type Props = {
   onScroll?: (params: ScrollParams) => void;
   onSectionRendered?: (params: RenderedSection) => void;
   scrollToIndex?: number;
-  virtualizedCacheRef?: Ref<VirtualizedCache>;
+  virtualizedListRef?: Ref<VirtualizedListMethods>;
 };
 
 const cellMeasurerCache = new CellMeasurerCache({
   defaultHeight: 50,
-  fixedWidth: true,
+  fixedWidth: true
 });
 
-export type VirtualizedCache = {
+export type VirtualizedListMethods = {
   clearCache: () => void;
 };
 
 export const VirtualizedList: FC<Props> = (props: Props) => {
   const {renderer, loadedLength, totalLength, isRowLoaded, loadMoreRows} = props;
-  const {rowHeight, onScroll, onSectionRendered, scrollToIndex, virtualizedCacheRef} = props;
+  const {rowHeight, onScroll, scrollToIndex, virtualizedListRef} = props;
 
   useImperativeHandle(
-    virtualizedCacheRef,
-    (): VirtualizedCache => ({
+    virtualizedListRef,
+    (): VirtualizedListMethods => ({
       clearCache(): void {
         cellMeasurerCache.clearAll();
-      },
+      }
     })
   );
 
@@ -58,20 +58,19 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   const rowRenderer = (props: ListRowProps): ReactElement => renderer(props);
 
   const listRenderer = ({onRowsRendered, registerChild}: InfiniteLoaderChildProps) => ({
-    width,
-    height,
-  }: Size): ReactElement => (
+                                                                                         width,
+                                                                                         height
+                                                                                       }: Size): ReactElement => (
     <List
       width={width}
       height={height}
       onScroll={onScroll}
-      onSectionRendered={onSectionRendered}
+      scrollToIndex={scrollToIndex}
       onRowsRendered={onRowsRendered}
       ref={registerChild}
       deferredMeasurementCache={rowHeight ? undefined : cellMeasurerCache}
       rowCount={loadedLength}
       rowHeight={rowHeight || cellMeasurerCache.rowHeight}
-      scrollToIndex={scrollToIndex}
       rowRenderer={rowHeight ? rowRenderer : rowRendererWithMeasurer}
     />
   );

@@ -3,28 +3,27 @@ import ChatContentMessageOutcoming from './chat-content-message-outcoming';
 import ChatContentMessageIncoming from './chat-content-message-incoming';
 import MessageContentBoxEvent from './chat-content-message-event';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
-import {Message, MessageType} from '../../../../models/message.model';
+import {Message, MessageReaction, MessageStatus, MessageType} from '../../../../models/message.model';
 import {User} from '../../../../models/user.model';
 import {MessageUtils} from '../../../../shared/utils/message.utils';
 
 type Props = {
   message: Message;
+  reactions: MessageReaction[];
+  statuses: MessageStatus[];
   account: User;
-  isVisible: boolean;
 };
 
-const ChatContentMessage: FC<Props> = ({message, account, isVisible}: Props) => {
+const ChatContentMessage: FC<Props> = ({message, account}: Props) => {
   const {handleUserIds} = useUserListContext();
 
   const type = useMemo<MessageType>(() => {
-    if (message) {
-      if (message.isEvent) {
-        return 'event';
-      } else if (MessageUtils.isIncomingMessage(message, account)) {
-        return 'incoming';
-      } else {
-        return 'outcoming';
-      }
+    if (message && message.isEvent) {
+      return 'event';
+    } else if (message && MessageUtils.isIncomingMessage(message, account)) {
+      return 'incoming';
+    } else if (message) {
+      return 'outcoming';
     } else {
       return null;
     }
@@ -38,14 +37,15 @@ const ChatContentMessage: FC<Props> = ({message, account, isVisible}: Props) => 
 
   useEffect(() => {
     handleMessageUserIds();
-  }, []);
+  }, [message]);
 
   return (
     <>
       {type === 'outcoming' && <ChatContentMessageOutcoming message={message} />}
-      {type === 'incoming' && <ChatContentMessageIncoming message={message} account={account} isVisible={isVisible} />}
+      {type === 'incoming' && <ChatContentMessageIncoming message={message} account={account} />}
       {type === 'event' && <MessageContentBoxEvent message={message} />}
     </>
   );
 };
+
 export default memo(ChatContentMessage);

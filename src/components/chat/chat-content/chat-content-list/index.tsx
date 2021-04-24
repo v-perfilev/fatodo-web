@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, memo, ReactElement, SetStateAction, useCallback, useEffect, useRef, useState} from 'react';
+import React, {Dispatch, FC, memo, ReactElement, SetStateAction, useEffect, useRef, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {chatContentListStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
@@ -12,9 +12,9 @@ import {
   handleMessageNewEvent,
   handleMessageReactionsEvent,
   handleMessageStatusesEvent,
-  handleMessageUpdateEvent,
+  handleMessageUpdateEvent
 } from './_ws';
-import {VirtualizedCache, VirtualizedList} from '../../../common/surfaces';
+import {VirtualizedList, VirtualizedListMethods} from '../../../common/surfaces';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import ChatContentScrollButton from './chat-content-scroll-button';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
@@ -36,7 +36,7 @@ const ChatContentList: FC<Props> = ({chat, messages, setMessages}: Props) => {
   const [loading, setLoading] = useState(true);
   const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
   const [scrolledToBottom, setScrolledToBottom] = useState(true);
-  const virtualizedCacheRef = useRef<VirtualizedCache>();
+  const virtualizedListRef = useRef<VirtualizedListMethods>();
 
   const unreadCount = unreadMessageCountMap?.get(chat.id);
 
@@ -69,30 +69,29 @@ const ChatContentList: FC<Props> = ({chat, messages, setMessages}: Props) => {
       const combinedMessages = [...loadedMessages, ...prevState];
       return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
     });
-    if (virtualizedCacheRef) {
-      virtualizedCacheRef.current.clearCache();
+    if (virtualizedListRef.current) {
+      virtualizedListRef.current.clearCache();
     }
   };
 
-  const loadMoreMessages = (): Promise<void> =>
-    new Promise((resolve) => {
-      ChatService.getAllMessagesByChatIdPageable(chat.id, messages.length)
-        .then((response) => {
-          const newMessages = response.data;
-          if (newMessages.length === 0) {
-            setAllMessagesLoaded(true);
-          } else {
-            addLoadedMessagesToState(newMessages);
-          }
-        })
-        .catch((response) => {
-          handleResponse(response);
-        })
-        .finally(() => {
-          setLoading(false);
-          resolve();
-        });
-    });
+  const loadMoreMessages = (): Promise<void> => new Promise((resolve) => {
+    ChatService.getAllMessagesByChatIdPageable(chat.id, messages.length)
+      .then((response) => {
+        const newMessages = response.data;
+        if (newMessages.length === 0) {
+          setAllMessagesLoaded(true);
+        } else {
+          addLoadedMessagesToState(newMessages);
+        }
+      })
+      .catch((response) => {
+        handleResponse(response);
+      })
+      .finally(() => {
+        setLoading(false);
+        resolve();
+      });
+  });
 
   useEffect(() => {
     loadMoreMessages().finally();
@@ -118,11 +117,8 @@ const ChatContentList: FC<Props> = ({chat, messages, setMessages}: Props) => {
     handleMessageReactionsEvent(chat, messageReactionsEvent, setMessages);
   }, [messageReactionsEvent]);
 
-  const messageRenderer = useCallback(
-    ({index, isVisible, style}: ListRowProps): ReactElement => (
-      <ChatContentItem item={items[index]} isFirst={index === 0} isVisible={isVisible} style={style} />
-    ),
-    [items]
+  const messageRenderer = ({index, isVisible, style}: ListRowProps): ReactElement => (
+    <ChatContentItem index={index} items={items} isVisible={isVisible} style={style} />
   );
 
   return loading ? (
@@ -137,7 +133,7 @@ const ChatContentList: FC<Props> = ({chat, messages, setMessages}: Props) => {
         totalLength={allMessagesLoaded ? items.length : items.length + 1}
         onScroll={onScroll}
         scrollToIndex={scrolledToBottom ? items.length - 1 : undefined}
-        virtualizedCacheRef={virtualizedCacheRef}
+        virtualizedListRef={virtualizedListRef}
       />
       <ChatContentScrollButton
         show={!scrolledToBottom}
