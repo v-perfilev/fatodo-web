@@ -4,27 +4,27 @@ import ChatContentMessageIncoming from './chat-content-message-incoming';
 import MessageContentBoxEvent from './chat-content-message-event';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {Message, MessageType} from '../../../../models/message.model';
-import {compose} from 'recompose';
-import withAuthState from '../../../../shared/hocs/with-auth-state';
-import {AuthState} from '../../../../store/rerducers/auth.reducer';
+import {User} from '../../../../models/user.model';
+import {MessageUtils} from '../../../../shared/utils/message.utils';
 
-type BaseProps = {
+type Props = {
   message: Message;
+  account: User;
   isVisible: boolean;
 };
-
-type Props = AuthState & BaseProps;
 
 const ChatContentMessage: FC<Props> = ({message, account, isVisible}: Props) => {
   const {handleUserIds} = useUserListContext();
 
   const type = useMemo<MessageType>(() => {
-    if (!message.isEvent && message.userId === account.id) {
-      return 'outcoming';
-    } else if (!message.isEvent && message.userId !== account.id) {
-      return 'incoming';
-    } else if (message.isEvent) {
-      return 'event';
+    if (message) {
+      if (message.isEvent) {
+        return 'event';
+      } else if (MessageUtils.isIncomingMessage(message, account)) {
+        return 'incoming';
+      } else {
+        return 'outcoming';
+      }
     } else {
       return null;
     }
@@ -48,5 +48,4 @@ const ChatContentMessage: FC<Props> = ({message, account, isVisible}: Props) => 
     </>
   );
 };
-
-export default compose<Props, BaseProps>(memo, withAuthState)(ChatContentMessage);
+export default memo(ChatContentMessage);

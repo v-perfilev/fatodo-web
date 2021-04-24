@@ -32,6 +32,10 @@ export class MessageUtils {
     return text;
   };
 
+  public static isIncomingMessage = (message: Message, account: User): boolean => {
+    return message && account && message.userId !== account.id;
+  };
+
   public static isReadMessage = (message: Message, account: User): boolean => {
     const readUserIds = message?.statuses.filter((status) => status.type === 'READ').map((status) => status.userId);
     return readUserIds && readUserIds.includes(account?.id);

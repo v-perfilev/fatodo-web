@@ -1,10 +1,11 @@
-import React, {FC} from 'react';
+import React, {FC, useMemo} from 'react';
 import {Message} from '../../../../models/message.model';
 import {chatContentMessageOutcomingStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {MessageUtils} from '../../../../shared/utils/message.utils';
+import {User} from '../../../../models/user.model';
 
 type Props = {
   message: Message;
@@ -14,8 +15,12 @@ const ChatContentMessageOutcoming: FC<Props> = ({message}: Props) => {
   const classes = chatContentMessageOutcomingStyles();
   const {users} = useUserListContext();
 
-  const user = MessageUtils.extractUserFromMessage(users, message);
-  const date = DateFormatters.formatTime(new Date(message.createdAt));
+  const user = useMemo((): User => {
+    return MessageUtils.extractUserFromMessage(users, message);
+  }, [users, message]);
+  const date = useMemo((): string => {
+    return DateFormatters.formatTime(new Date(message.createdAt));
+  }, [message]);
 
   return (
     <Box className={classes.root}>

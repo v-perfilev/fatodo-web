@@ -40,7 +40,7 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(2),
   },
   message: {
-    minWidth: '30%',
+    minWidth: 250,
     display: 'flex',
     flexDirection: 'column',
     marginLeft: theme.spacing(1),
@@ -88,7 +88,7 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(2),
   },
   message: {
-    minWidth: '30%',
+    minWidth: 250,
     display: 'flex',
     flexDirection: 'column',
     marginLeft: theme.spacing(1),

@@ -5,10 +5,10 @@ export type MessageReactionType = 'LIKE' | 'DISLIKE';
 
 export type MessageType = 'event' | 'outcoming' | 'incoming' | null;
 
-export interface MessageListItem {
+export type MessageListItem = {
   message?: Message;
   date?: string;
-}
+};
 
 export interface Message extends AbstractAuditing {
   id: string;

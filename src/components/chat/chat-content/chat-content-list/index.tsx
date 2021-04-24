@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, memo, ReactElement, SetStateAction, useEffect, useRef, useState} from 'react';
+import React, {Dispatch, FC, memo, ReactElement, SetStateAction, useCallback, useEffect, useRef, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {chatContentListStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
@@ -18,8 +18,8 @@ import {VirtualizedCache, VirtualizedList} from '../../../common/surfaces';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import ChatContentScrollButton from './chat-content-scroll-button';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
-import ChatContentItem from '../chat-content-item';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
+import ChatContentItem from '../chat-content-item';
 
 type Props = {
   chat: Chat;
@@ -50,9 +50,9 @@ const ChatContentList: FC<Props> = ({chat, messages, setMessages}: Props) => {
     setScrolledToBottom(isScrolledToBottom || isNotRendered);
   };
 
-  const handleMessages = (): void => {
-    const handledDates = [];
-    const handledItems = [];
+  const prepareItemsFromMessages = (): void => {
+    const handledDates = [] as string[];
+    const handledItems = [] as MessageListItem[];
     messages.forEach((message) => {
       const date = DateFormatters.formatDateWithYear(new Date(message.createdAt));
       if (!handledDates.includes(date)) {
@@ -69,6 +69,9 @@ const ChatContentList: FC<Props> = ({chat, messages, setMessages}: Props) => {
       const combinedMessages = [...loadedMessages, ...prevState];
       return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
     });
+    if (virtualizedCacheRef) {
+      virtualizedCacheRef.current.clearCache();
+    }
   };
 
   const loadMoreMessages = (): Promise<void> =>
@@ -96,14 +99,8 @@ const ChatContentList: FC<Props> = ({chat, messages, setMessages}: Props) => {
   }, [chat]);
 
   useEffect(() => {
-    handleMessages();
+    prepareItemsFromMessages();
   }, [messages]);
-
-  useEffect(() => {
-    if (virtualizedCacheRef && items.length > 0) {
-      virtualizedCacheRef.current.clearCache();
-    }
-  }, [items]);
 
   useEffect(() => {
     handleMessageNewEvent(chat, messageNewEvent, setMessages);
@@ -121,8 +118,11 @@ const ChatContentList: FC<Props> = ({chat, messages, setMessages}: Props) => {
     handleMessageReactionsEvent(chat, messageReactionsEvent, setMessages);
   }, [messageReactionsEvent]);
 
-  const messageRenderer = ({index, isVisible, style}: ListRowProps): ReactElement => (
-    <ChatContentItem item={items[index]} isVisible={isVisible} isFirst={index === 0} style={style} />
+  const messageRenderer = useCallback(
+    ({index, isVisible, style}: ListRowProps): ReactElement => (
+      <ChatContentItem item={items[index]} isFirst={index === 0} isVisible={isVisible} style={style} />
+    ),
+    [items]
   );
 
   return loading ? (

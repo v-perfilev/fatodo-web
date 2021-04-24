@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useMemo} from 'react';
 import {Message} from '../../../../models/message.model';
 import {chatContentMessageIncomingStyles} from './_styles';
 import {Box} from '@material-ui/core';
@@ -22,23 +22,33 @@ const ChatContentMessageIncoming: FC<Props> = ({message, account, isVisible}: Pr
   const {users} = useUserListContext();
   let timerId;
 
-  const user = MessageUtils.extractUserFromMessage(users, message);
-  const date = DateFormatters.formatTime(new Date(message.createdAt));
-  const isRead = MessageUtils.isReadMessage(message, account);
-
-  const messageClassName = csx(classes.message, {unread: !isRead});
+  const user = useMemo((): User => {
+    return MessageUtils.extractUserFromMessage(users, message);
+  }, [users, message]);
+  const date = useMemo((): string => {
+    return DateFormatters.formatTime(new Date(message.createdAt));
+  }, [message]);
+  const isRead = useMemo((): boolean => {
+    return MessageUtils.isReadMessage(message, account);
+  }, [message, account]);
 
   const markAsRead = (): void => {
     ChatService.markMessageAsRead(message.id);
   };
 
-  useEffect(() => {
-    if (isVisible && !isRead) {
+  const markAsReadIfNeeded = (): void => {
+    if (!isRead && isVisible) {
       timerId = window.setTimeout(() => markAsRead(), TIMEOUT_BEFORE_MARK_AS_READ);
-    } else if (!isVisible && !isRead) {
+    } else if (!isRead && !isVisible) {
       window.clearTimeout(timerId);
     }
+  };
+
+  useEffect(() => {
+    markAsReadIfNeeded();
   }, [isVisible]);
+
+  const messageClassName = csx(classes.message, {unread: !isRead});
 
   return (
     <Box className={classes.root}>

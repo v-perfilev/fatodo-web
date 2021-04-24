@@ -1,4 +1,4 @@
-import React, {FC, memo, useEffect} from 'react';
+import React, {FC, useEffect, useMemo} from 'react';
 import {Message} from '../../../../models/message.model';
 import {chatContentMessageEventStyles} from './_styles';
 import {Box} from '@material-ui/core';
@@ -15,8 +15,12 @@ const ChatContentMessageEvent: FC<Props> = ({message}: Props) => {
   const {users, handleUserIds} = useUserListContext();
   const {t} = useTranslation();
 
-  const params = MessageUtils.parseEventMessage(message);
-  const text = MessageUtils.buildEventMessageText(message, params, users, t);
+  const params = useMemo((): any => {
+    return MessageUtils.parseEventMessage(message);
+  }, [message]);
+  const text = useMemo((): string => {
+    return MessageUtils.buildEventMessageText(message, params, users, t);
+  }, [message, params, users]);
 
   useEffect(() => {
     if (params.ids) {
@@ -31,4 +35,4 @@ const ChatContentMessageEvent: FC<Props> = ({message}: Props) => {
   );
 };
 
-export default memo(ChatContentMessageEvent);
+export default ChatContentMessageEvent;
