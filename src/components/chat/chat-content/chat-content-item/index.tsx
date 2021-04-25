@@ -1,4 +1,4 @@
-import React, {FC, HTMLAttributes, useEffect, useMemo} from 'react';
+import React, {FC, useEffect, useMemo} from 'react';
 import {Box, Container} from '@material-ui/core';
 import {chatContentItemStyles} from './_styles';
 import {MessageListItem} from '../../../../models/message.model';
@@ -11,7 +11,7 @@ import {MessageUtils} from '../../../../shared/utils/message.utils';
 import ChatService from '../../../../services/chat.service';
 import {TIMEOUT_BEFORE_MARK_AS_READ} from '../../_constants';
 
-type BaseProps = HTMLAttributes<HTMLElement> & {
+type BaseProps = {
   index: number;
   items: MessageListItem[];
   isVisible: boolean;
@@ -19,7 +19,7 @@ type BaseProps = HTMLAttributes<HTMLElement> & {
 
 type Props = AuthState & BaseProps;
 
-const ChatContentItem: FC<Props> = ({index, items, isVisible, account, style}: Props) => {
+const ChatContentItem: FC<Props> = ({index, items, isVisible, account}: Props) => {
   const classes = chatContentItemStyles();
   let timerId;
 
@@ -53,20 +53,18 @@ const ChatContentItem: FC<Props> = ({index, items, isVisible, account, style}: P
   }, [isVisible]);
 
   return (
-    <div style={style}>
-      <Container maxWidth="md">
-        {isFirst && <Box className={classes.spacer} />}
-        {date && <ChatContentDate date={date} />}
-        {message && (
-          <ChatContentMessage
-            message={message}
-            reactions={message.reactions}
-            statuses={message.statuses}
-            account={account}
-          />
-        )}
-      </Container>
-    </div>
+    <Container maxWidth="md">
+      {isFirst && <Box className={classes.spacer} />}
+      {date && <ChatContentDate date={date} />}
+      {message && (
+        <ChatContentMessage
+          message={message}
+          reactions={message.reactions}
+          statuses={message.statuses}
+          account={account}
+        />
+      )}
+    </Container>
   );
 };
 

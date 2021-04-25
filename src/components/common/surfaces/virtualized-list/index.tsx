@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, Ref, useImperativeHandle} from 'react';
+import React, {FC, ReactElement, Ref, useImperativeHandle, useRef} from 'react';
 import {
   AutoSizer,
   CellMeasurer,
@@ -10,9 +10,9 @@ import {
   List,
   ListRowProps,
   ScrollParams,
-  Size
+  Size,
 } from 'react-virtualized';
-import {RenderedSection} from 'react-virtualized/dist/es/Grid';
+import {RefUtils} from '../../../../shared/utils/ref.utils';
 
 type Props = {
   renderer: (params: ListRowProps) => ReactElement;
@@ -22,31 +22,49 @@ type Props = {
   loadMoreRows: (params: IndexRange) => Promise<void>;
   rowHeight?: number;
   onScroll?: (params: ScrollParams) => void;
-  onSectionRendered?: (params: RenderedSection) => void;
   scrollToIndex?: number;
   virtualizedListRef?: Ref<VirtualizedListMethods>;
 };
 
 const cellMeasurerCache = new CellMeasurerCache({
-  defaultHeight: 50,
-  fixedWidth: true
+  fixedWidth: true,
 });
 
 export type VirtualizedListMethods = {
   clearCache: () => void;
+  recomputeRowHeights: () => void;
+  scrollToPosition: (position: number) => void;
+  scrollToIndex: (index: number) => void;
 };
 
 export const VirtualizedList: FC<Props> = (props: Props) => {
   const {renderer, loadedLength, totalLength, isRowLoaded, loadMoreRows} = props;
   const {rowHeight, onScroll, scrollToIndex, virtualizedListRef} = props;
+  const listRef = useRef<List>();
 
   useImperativeHandle(
     virtualizedListRef,
     (): VirtualizedListMethods => ({
       clearCache(): void {
         cellMeasurerCache.clearAll();
-      }
-    })
+      },
+      recomputeRowHeights(): void {
+        if (listRef.current) {
+          listRef.current.recomputeRowHeights();
+        }
+      },
+      scrollToPosition(position: number): void {
+        if (listRef.current) {
+          listRef.current.scrollToPosition(position);
+        }
+      },
+      scrollToIndex(index: number): void {
+        if (listRef.current) {
+          listRef.current.scrollToRow(index);
+        }
+      },
+    }),
+    [listRef.current]
   );
 
   const rowRendererWithMeasurer = (props: ListRowProps): ReactElement => (
@@ -58,16 +76,16 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   const rowRenderer = (props: ListRowProps): ReactElement => renderer(props);
 
   const listRenderer = ({onRowsRendered, registerChild}: InfiniteLoaderChildProps) => ({
-                                                                                         width,
-                                                                                         height
-                                                                                       }: Size): ReactElement => (
+    width,
+    height,
+  }: Size): ReactElement => (
     <List
       width={width}
       height={height}
       onScroll={onScroll}
       scrollToIndex={scrollToIndex}
       onRowsRendered={onRowsRendered}
-      ref={registerChild}
+      ref={RefUtils.mergeRefs(registerChild, listRef)}
       deferredMeasurementCache={rowHeight ? undefined : cellMeasurerCache}
       rowCount={loadedLength}
       rowHeight={rowHeight || cellMeasurerCache.rowHeight}
