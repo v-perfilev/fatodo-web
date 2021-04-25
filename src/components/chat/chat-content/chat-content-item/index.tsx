@@ -53,7 +53,7 @@ const ChatContentItem: FC<Props> = ({index, items, isVisible, account}: Props) =
   }, [isVisible]);
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" className={classes.item}>
       {isFirst && <Box className={classes.spacer} />}
       {date && <ChatContentDate date={date} />}
       {message && (

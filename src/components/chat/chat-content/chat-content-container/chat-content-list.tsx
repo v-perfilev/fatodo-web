@@ -8,6 +8,7 @@ import ChatContentScrollButton from './chat-content-scroll-button';
 import ChatContentItem from '../chat-content-item';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import {Chat} from '../../../../models/chat.model';
+import {RefUtils} from '../../../../shared/utils/ref.utils';
 
 type Props = {
   chat: Chat;
@@ -22,6 +23,7 @@ const ChatContentList: FC<Props> = ({chat, items, loadMore, updating, allLoaded}
   const {unreadMessageCountMap} = useUnreadMessagesContext();
   const [scrolledToBottom, setScrolledToBottom] = useState(true);
   const [scrollParams, setScrollParams] = useState<ScrollParams>();
+  const prevValues = RefUtils.usePrevious({items, scrollParams});
   const virtualizedListRef = useRef<VirtualizedListMethods>();
 
   const unreadCount = unreadMessageCountMap?.get(chat.id);
@@ -35,31 +37,31 @@ const ChatContentList: FC<Props> = ({chat, items, loadMore, updating, allLoaded}
     return index > 0 ? true : updating || allLoaded;
   };
 
-  const recalculateRows = (): void => {
-    virtualizedListRef.current.clearCache();
-    virtualizedListRef.current.recomputeRowHeights();
+  const updateScrolledToBottom = (): void => {
+    const isNotInitialized = scrollParams?.clientHeight === 0;
+    const isScrolledToBottom = scrollParams?.scrollHeight === scrollParams?.scrollTop + scrollParams?.clientHeight;
+    setScrolledToBottom(isNotInitialized || isScrolledToBottom);
   };
 
   const initList = (): void => {
     setTimeout(() => {
-      recalculateRows();
+      virtualizedListRef.current.clearCache();
+      virtualizedListRef.current.recomputeRowHeights();
       virtualizedListRef.current.scrollToIndex(items.length - 1);
-    }, 0);
-  };
-
-  const onScroll = (params: ScrollParams): void => {
-    const {clientHeight, scrollHeight, scrollTop} = params;
-    setScrolledToBottom(clientHeight === 0 || scrollHeight === scrollTop + clientHeight);
-    setScrollParams(scrollParams);
+    }, 50);
   };
 
   useEffect(() => {
-    initList();
   }, []);
 
   useEffect(() => {
-    recalculateRows();
+    initList();
   }, [items]);
+
+  useEffect(() => {
+    updateScrolledToBottom();
+  }, [scrollParams]);
+
 
   const messageRenderer = ({index, isVisible, style}: ListRowProps): ReactElement => (
     <div style={style}>
@@ -75,7 +77,7 @@ const ChatContentList: FC<Props> = ({chat, items, loadMore, updating, allLoaded}
         loadMoreRows={loadMoreMessages}
         loadedLength={items.length}
         totalLength={allLoaded ? items.length : items.length + 1}
-        onScroll={onScroll}
+        onScroll={setScrollParams}
         scrollToIndex={scrolledToBottom ? items.length - 1 : undefined}
         virtualizedListRef={virtualizedListRef}
       />
