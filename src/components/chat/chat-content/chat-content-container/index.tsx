@@ -27,14 +27,14 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
   const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
 
+  const clearMessages = useCallback((): void => {
+    setMessages([]);
+    setItems([]);
+  }, []);
+
   useImperativeHandle(
     chatContentListRef,
-    (): ChatContentMethods => ({
-      clearMessages(): void {
-        setMessages([]);
-        setItems([]);
-      },
-    })
+    (): ChatContentMethods => ({clearMessages})
   );
 
   const updateItemsFromMessages = (updatedMessages: Message[]): void => {
@@ -52,57 +52,44 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
   };
 
   const updateMessages = (updateFunc: (prevState: Message[]) => Message[]): void => {
-    let combinedMessages;
     setMessages((prevState) => {
-      combinedMessages = updateFunc(prevState);
+      const combinedMessages = updateFunc(prevState);
+      updateItemsFromMessages(combinedMessages);
       return combinedMessages;
     });
-    updateItemsFromMessages(combinedMessages);
   };
 
-  const messageInserter = useCallback(
-    (...messages: Message[]) => (prevState: Message[]): Message[] => {
-      const combinedMessages = [...messages, ...prevState];
-      return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
-    },
-    []
-  );
+  const messageInserter = (...messages: Message[]) => (prevState: Message[]): Message[] => {
+    const combinedMessages = [...messages, ...prevState];
+    return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
+  };
 
-  const messageUpdater = useCallback(
-    (message: Message) => (prevState: Message[]): Message[] => {
-      const messageInList = prevState.find((m) => m.id === message.id);
-      if (messageInList) {
-        const index = prevState.indexOf(messageInList);
-        prevState[index] = message;
-      }
-      return [...prevState];
-    },
-    []
-  );
+  const messageUpdater = (message: Message) => (prevState: Message[]): Message[] => {
+    const messageInList = prevState.find((m) => m.id === message.id);
+    if (messageInList) {
+      const index = prevState.indexOf(messageInList);
+      prevState[index] = message;
+    }
+    return [...prevState];
+  };
 
-  const statusesUpdater = useCallback(
-    (messageStatuses: MessageStatuses) => (prevState: Message[]): Message[] => {
-      const messageInList = prevState.find((m) => m.id === messageStatuses.messageId);
-      if (messageInList) {
-        const index = prevState.indexOf(messageInList);
-        prevState[index].statuses = messageStatuses.statuses;
-      }
-      return [...prevState];
-    },
-    []
-  );
+  const statusesUpdater = (messageStatuses: MessageStatuses) => (prevState: Message[]): Message[] => {
+    const messageInList = prevState.find((m) => m.id === messageStatuses.messageId);
+    if (messageInList) {
+      const index = prevState.indexOf(messageInList);
+      prevState[index].statuses = messageStatuses.statuses;
+    }
+    return [...prevState];
+  };
 
-  const reactionsUpdater = useCallback(
-    (messageReactions: MessageReactions) => (prevState: Message[]): Message[] => {
-      const messageInList = prevState.find((m) => m.id === messageReactions.messageId);
-      if (messageInList) {
-        const index = prevState.indexOf(messageInList);
-        prevState[index].reactions = messageReactions.reactions;
-      }
-      return [...prevState];
-    },
-    []
-  );
+  const reactionsUpdater = (messageReactions: MessageReactions) => (prevState: Message[]): Message[] => {
+    const messageInList = prevState.find((m) => m.id === messageReactions.messageId);
+    if (messageInList) {
+      const index = prevState.indexOf(messageInList);
+      prevState[index].reactions = messageReactions.reactions;
+    }
+    return [...prevState];
+  };
 
   const loadMoreMessages = (): Promise<void> =>
     new Promise((resolve) => {
@@ -165,7 +152,7 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
     <ChatContentList
       chat={chat}
       items={items}
-      loadMore={loadMoreMessages}
+      loadMoreItems={loadMoreMessages}
       updating={updating}
       allLoaded={allMessagesLoaded}
     />

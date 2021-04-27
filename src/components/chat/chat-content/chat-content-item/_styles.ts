@@ -3,7 +3,7 @@ import {Theme} from '@material-ui/core';
 
 export const chatContentItemStyles = makeStyles((theme: Theme) => ({
   item: {
-    marginBottom: theme.spacing(2)
+    paddingBottom: theme.spacing(2)
   },
   spacer: {
     height: theme.spacing(2)

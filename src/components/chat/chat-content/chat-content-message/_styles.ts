@@ -33,6 +33,7 @@ export const chatContentMessageEventStyles = makeStyles((theme: Theme) => ({
 export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '90%',
+    marginRight: '10%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'start'
@@ -78,7 +79,7 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
 export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '90%',
-    float: 'right',
+    marginLeft: '10%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'start',

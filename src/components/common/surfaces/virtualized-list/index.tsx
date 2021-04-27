@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, Ref, useImperativeHandle, useRef} from 'react';
+import React, {FC, ReactElement, Ref, useCallback, useImperativeHandle, useMemo, useRef, useState} from 'react';
 import {
   AutoSizer,
   CellMeasurer,
@@ -13,16 +13,16 @@ import {
   Size
 } from 'react-virtualized';
 import {RefUtils} from '../../../../shared/utils/ref.utils';
+import {ListRowRenderer} from 'react-virtualized/dist/es/List';
 
 type Props = {
   renderer: (params: ListRowProps) => ReactElement;
   loadedLength: number;
   totalLength: number;
-  isRowLoaded: (params: Index) => boolean;
   loadMoreRows: (params: IndexRange) => Promise<void>;
+  isRowLoaded: (params: Index) => boolean;
   rowHeight?: number;
-  onScroll?: (params: ScrollParams) => void;
-  scrollToIndex?: number;
+  reverseOrder?: boolean;
   virtualizedListRef?: Ref<VirtualizedListMethods>;
 };
 
@@ -31,62 +31,79 @@ const cellMeasurerCache = new CellMeasurerCache({
 });
 
 export type VirtualizedListMethods = {
-  clearCache: () => void;
-  recomputeRowHeights: () => void;
+  clearCache: (index?: number) => void;
   scrollToPosition: (position: number) => void;
-  scrollToIndex: (index: number) => void;
+  scrollToBottom: () => void;
+  isScrolledToBottom: boolean;
 };
 
 export const VirtualizedList: FC<Props> = (props: Props) => {
-  const {renderer, loadedLength, totalLength, isRowLoaded, loadMoreRows} = props;
-  const {rowHeight, onScroll, scrollToIndex, virtualizedListRef} = props;
+  const {renderer, loadedLength, totalLength, loadMoreRows, isRowLoaded} = props;
+  const {rowHeight, reverseOrder, virtualizedListRef} = props;
+  const [scrollParams, setScrollParams] = useState<ScrollParams>();
   const listRef = useRef<List>();
+
+  const clearCache = useCallback((index?: number): void => {
+    if (index !== undefined) {
+      cellMeasurerCache.clear(index, 0);
+    } else {
+      cellMeasurerCache.clearAll();
+    }
+  }, []);
+
+  const scrollToPosition = useCallback((position: number) => {
+    listRef.current.scrollToPosition(position);
+  }, [listRef.current]);
+
+  const scrollToBottom = useCallback(() => {
+    listRef.current.scrollToRow(loadedLength - 1);
+  }, [listRef.current, loadedLength]);
+
+  const isScrolledToBottom = useMemo<boolean>(() => {
+    const clientHeight = scrollParams?.clientHeight;
+    const scrollTop = scrollParams?.scrollTop;
+    const scrollHeight = Array.from(Array(loadedLength).keys())
+      .reduce((acc, index) => acc + cellMeasurerCache.getHeight(index, 0), 0);
+    return !clientHeight || scrollHeight <= scrollTop + clientHeight;
+  }, [scrollParams]);
 
   useImperativeHandle(
     virtualizedListRef,
     (): VirtualizedListMethods => ({
-      clearCache(): void {
-        cellMeasurerCache.clearAll();
-      },
-      recomputeRowHeights(): void {
-        if (listRef.current) {
-          listRef.current.recomputeRowHeights();
-        }
-      },
-      scrollToPosition(position: number): void {
-        if (listRef.current) {
-          listRef.current.scrollToPosition(position);
-        }
-      },
-      scrollToIndex(index: number): void {
-        if (listRef.current) {
-          listRef.current.scrollToRow(index);
-        }
-      }
+      clearCache,
+      scrollToPosition,
+      scrollToBottom,
+      isScrolledToBottom
     }),
-    [listRef.current]
+    [scrollToPosition, scrollToBottom, isScrolledToBottom]
   );
 
-  const rowRendererWithMeasurer = (props: ListRowProps): ReactElement => (
+  const getHeightFromCache = ({index}: Index): number => {
+    return cellMeasurerCache.getHeight(index, 0);
+  };
+
+  const rendererWithMeasurer = (props: ListRowProps): ReactElement => (
     <CellMeasurer cache={cellMeasurerCache} columnIndex={0} rowIndex={props.index} {...props}>
       {renderer(props)}
     </CellMeasurer>
   );
 
-  const rowRenderer = (props: ListRowProps): ReactElement => renderer(props);
+  const getRenderer = (): ListRowRenderer => {
+    return rowHeight ? renderer : rendererWithMeasurer;
+  };
 
   const listRenderer = (loaderProps: InfiniteLoaderChildProps) => (size: Size): ReactElement => (
     <List
+      ref={RefUtils.mergeRefs(loaderProps.registerChild, listRef)}
       width={size.width}
       height={size.height}
-      onScroll={onScroll}
-      scrollToIndex={scrollToIndex}
+      onScroll={setScrollParams}
+      scrollToIndex={reverseOrder && isScrolledToBottom ? loadedLength - 1 : undefined}
       onRowsRendered={loaderProps.onRowsRendered}
-      ref={RefUtils.mergeRefs(loaderProps.registerChild, listRef)}
-      deferredMeasurementCache={rowHeight ? undefined : cellMeasurerCache}
       rowCount={loadedLength}
-      rowHeight={rowHeight || cellMeasurerCache.rowHeight}
-      rowRenderer={rowHeight ? rowRenderer : rowRendererWithMeasurer}
+      deferredMeasurementCache={rowHeight ? undefined : cellMeasurerCache}
+      rowHeight={rowHeight || getHeightFromCache}
+      rowRenderer={getRenderer()}
     />
   );
 
@@ -94,11 +111,16 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     <AutoSizer>{listRenderer(infiniteLoaderChildProps)}</AutoSizer>
   );
 
-  const listLoader = (): ReactElement => (
-    <InfiniteLoader isRowLoaded={isRowLoaded} loadMoreRows={loadMoreRows} rowCount={totalLength}>
-      {listAutoSizer}
-    </InfiniteLoader>
+  return (
+    <>
+      <InfiniteLoader
+        isRowLoaded={isRowLoaded}
+        loadMoreRows={loadMoreRows}
+        rowCount={totalLength}
+      >
+        {listAutoSizer}
+      </InfiniteLoader>
+    </>
   );
 
-  return listLoader();
 };

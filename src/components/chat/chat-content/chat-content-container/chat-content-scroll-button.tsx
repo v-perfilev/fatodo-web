@@ -6,20 +6,16 @@ import {ArrowDownIcon} from '../../../common/icons/arrow-down-icon';
 type Props = {
   show: boolean;
   highlighted: boolean;
-  setShouldScrollDown: (value: boolean) => void;
+  scrollToBottom: () => void;
 };
 
-const ChatContentScrollButton: FC<Props> = ({show, highlighted, setShouldScrollDown}: Props) => {
+const ChatContentScrollButton: FC<Props> = ({show, highlighted, scrollToBottom}: Props) => {
   const classes = chatContentScrollButtonStyles();
 
   const color = highlighted ? 'primary' : 'default';
 
-  const scrollDown = (): void => {
-    setShouldScrollDown(true);
-  };
-
   return show ? (
-    <Fab className={classes.root} color={color} onClick={scrollDown} size="medium">
+    <Fab className={classes.root} color={color} onClick={scrollToBottom} size="medium">
       <ArrowDownIcon />
     </Fab>
   ) : null;
