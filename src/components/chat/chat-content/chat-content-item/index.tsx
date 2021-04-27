@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useMemo} from 'react';
+import React, {FC, memo, useEffect, useMemo} from 'react';
 import {Box, Container} from '@material-ui/core';
 import {chatContentItemStyles} from './_styles';
 import {MessageListItem} from '../../../../models/message.model';
@@ -68,4 +68,4 @@ const ChatContentItem: FC<Props> = ({index, items, isVisible, account}: Props) =
   );
 };
 
-export default compose<Props, BaseProps>(withAuthState)(ChatContentItem);
+export default compose<Props, BaseProps>(memo, withAuthState)(ChatContentItem);

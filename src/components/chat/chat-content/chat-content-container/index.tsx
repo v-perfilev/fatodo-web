@@ -34,13 +34,14 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
 
   useImperativeHandle(
     chatContentListRef,
-    (): ChatContentMethods => ({clearMessages})
+    (): ChatContentMethods => ({clearMessages}),
+    []
   );
 
-  const updateItemsFromMessages = (updatedMessages: Message[]): void => {
+  const convertMessagesToItems = (messagesToConvert: Message[]): MessageListItem[] => {
     const handledDates = [] as string[];
     const handledItems = [] as MessageListItem[];
-    updatedMessages.forEach((message) => {
+    messagesToConvert.forEach((message) => {
       const date = DateFormatters.formatDateWithYear(new Date(message.createdAt));
       if (!handledDates.includes(date)) {
         handledDates.push(date);
@@ -48,15 +49,18 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
       }
       handledItems.push({message});
     });
-    setItems(handledItems);
+    return handledItems;
   };
 
-  const updateMessages = (updateFunc: (prevState: Message[]) => Message[]): void => {
-    setMessages((prevState) => {
-      const combinedMessages = updateFunc(prevState);
-      updateItemsFromMessages(combinedMessages);
-      return combinedMessages;
-    });
+  const updateItemsFromMessages = (updatedMessages: Message[]): void => {
+    const newItems = convertMessagesToItems(updatedMessages);
+    setItems(newItems);
+  };
+
+  const updateMessagesAndItems = (updateFunc: (prevState: Message[]) => Message[]): void => {
+    const combinedMessages = updateFunc(messages);
+    setMessages(combinedMessages);
+    updateItemsFromMessages(combinedMessages);
   };
 
   const messageInserter = (...messages: Message[]) => (prevState: Message[]): Message[] => {
@@ -101,7 +105,7 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
             setAllMessagesLoaded(true);
           } else {
             const updateFunc = messageInserter(...newMessages);
-            updateMessages(updateFunc);
+            updateMessagesAndItems(updateFunc);
           }
         })
         .catch((response) => {
@@ -121,28 +125,28 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
   useEffect(() => {
     if (chat?.id === messageNewEvent?.chatId) {
       const updateFunc = messageInserter(messageNewEvent);
-      updateMessages(updateFunc);
+      updateMessagesAndItems(updateFunc);
     }
   }, [messageNewEvent]);
 
   useEffect(() => {
     if (chat?.id === messageNewEvent?.chatId) {
       const updateFunc = messageUpdater(messageUpdateEvent);
-      updateMessages(updateFunc);
+      updateMessagesAndItems(updateFunc);
     }
   }, [messageUpdateEvent]);
 
   useEffect(() => {
     if (chat?.id === messageStatusesEvent?.chatId) {
       const updateFunc = statusesUpdater(messageStatusesEvent);
-      updateMessages(updateFunc);
+      updateMessagesAndItems(updateFunc);
     }
   }, [messageStatusesEvent]);
 
   useEffect(() => {
     if (chat?.id === messageReactionsEvent?.chatId) {
       const updateFunc = reactionsUpdater(messageReactionsEvent);
-      updateMessages(updateFunc);
+      updateMessagesAndItems(updateFunc);
     }
   }, [messageReactionsEvent]);
 

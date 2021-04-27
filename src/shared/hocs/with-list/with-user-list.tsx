@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
+import {ComponentType, FC, ReactElement, useState} from 'react';
 import {UserListContext} from '../../contexts/list-contexts/user-list-context';
 import {User} from '../../../models/user.model';
 import UserService from '../../../services/user.service';
@@ -10,9 +10,8 @@ const withUserList = (Component: ComponentType): FC => (props): ReactElement => 
   const {handleResponse} = useSnackContext();
   const [users, setUsers] = useState<User[]>([]);
   const [loadingIds, setLoadingIds] = useState<string[]>([]);
-  const [ids, setIds] = useState<string[]>([]);
 
-  const addAbsentUsersByIds = (ids: string[]): void => {
+  const loadUsersByIds = (ids: string[]): void => {
     setLoadingIds((prevState) => [...prevState, ...ids]);
     UserService.getAllByIds(ids)
       .then((response) => {
@@ -32,6 +31,15 @@ const withUserList = (Component: ComponentType): FC => (props): ReactElement => 
       });
   };
 
+  const addAbsentUserIds = (ids: string[]): void => {
+    const existingIds = users.map((user) => user.id);
+    const notAllowedIds = [...existingIds, loadingIds];
+    const idsToLoad = ids.filter(ArrayUtils.uniqueFilter).filter((id) => !notAllowedIds.includes(id));
+    if (idsToLoad.length > 0) {
+      loadUsersByIds(idsToLoad);
+    }
+  };
+
   const addAbsentUsers = (users: User[]): void => {
     setUsers((previousState) => {
       const newUsers = [...users, ...previousState];
@@ -42,18 +50,7 @@ const withUserList = (Component: ComponentType): FC => (props): ReactElement => 
 
   const loading = loadingIds.length > 0;
 
-  const context = {users, handleUserIds: setIds, handleUsers: addAbsentUsers, loading};
-
-  useEffect(() => {
-    if (ids) {
-      const cachedIds = users.map((user) => user.id);
-      cachedIds.push(...loadingIds);
-      const absentIds = ids.filter((id) => !cachedIds.includes(id));
-      if (absentIds.length > 0) {
-        addAbsentUsersByIds(absentIds);
-      }
-    }
-  }, [ids]);
+  const context = {users, handleUserIds: addAbsentUserIds, handleUsers: addAbsentUsers, loading};
 
   return (
     <UserListContext.Provider value={context}>

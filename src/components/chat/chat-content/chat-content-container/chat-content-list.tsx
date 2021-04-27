@@ -1,13 +1,14 @@
-import React, {FC, memo, ReactElement, useState} from 'react';
+import React, {FC, memo, ReactElement, useCallback, useEffect, useMemo, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {chatContentListStyles} from './_styles';
-import {ListRowProps} from 'react-virtualized';
+import {Index, ListRowProps} from 'react-virtualized';
 import {MessageListItem} from '../../../../models/message.model';
 import {VirtualizedList, VirtualizedListMethods} from '../../../common/surfaces';
 import ChatContentScrollButton from './chat-content-scroll-button';
 import ChatContentItem from '../chat-content-item';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import {Chat} from '../../../../models/chat.model';
+import {RefUtils} from '../../../../shared/utils/ref.utils';
 
 type Props = {
   chat: Chat;
@@ -20,13 +21,40 @@ type Props = {
 const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, updating, allLoaded}: Props) => {
   const classes = chatContentListStyles();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
+  const prevValues = RefUtils.usePrevious({items});
   const [virtualizedListRef, setVirtualizedListRef] = useState<VirtualizedListMethods>();
 
-  const unreadCount = unreadMessageCountMap?.get(chat.id);
+  const totalLoaded = useMemo<number>(() => {
+    return allLoaded ? items.length : items.length + 1;
+  }, [allLoaded, items]);
 
-  const isMessageLoaded = ({index}): boolean => {
+  const isMessageLoaded = useCallback(({index}: Index): boolean => {
     return index > 0 ? true : updating || allLoaded;
-  };
+  }, [updating, allLoaded]);
+
+  const showScrollButton = useMemo<boolean>(() => {
+    return virtualizedListRef && !virtualizedListRef.isScrolledToBottom;
+  }, [virtualizedListRef]);
+
+  const scrollToBottom = useCallback((): void => {
+    virtualizedListRef.scrollToBottom();
+  }, [virtualizedListRef]);
+
+  const isButtonHighlighted = useMemo<boolean>(() => {
+    return unreadMessageCountMap?.get(chat.id) > 0;
+  }, [unreadMessageCountMap, chat]);
+
+  const wereNewItemsLoaded = useCallback((oldList: MessageListItem[], newList: MessageListItem[]): boolean => {
+    const checkEquality = (i: number): boolean => JSON.stringify(oldList[i]) === JSON.stringify(newList[i]);
+    return oldList && oldList.length > 2 && newList && newList.length > 2 && !checkEquality(0) && !checkEquality(1);
+  }, []);
+
+  useEffect(() => {
+    const newItemsLoaded = wereNewItemsLoaded(prevValues?.items, items);
+    if (newItemsLoaded) {
+      virtualizedListRef?.clearAndRecomputeCache();
+    }
+  }, [items]);
 
   const messageRenderer = ({index, isVisible, style}: ListRowProps): ReactElement => (
     <div style={style}>
@@ -38,7 +66,7 @@ const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, updating, allLo
     <Box className={classes.root}>
       <VirtualizedList
         renderer={messageRenderer}
-        totalLength={allLoaded ? items.length : items.length + 1}
+        totalLength={totalLoaded}
         loadedLength={items.length}
         loadMoreRows={loadMoreItems}
         isRowLoaded={isMessageLoaded}
@@ -46,9 +74,9 @@ const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, updating, allLo
         virtualizedListRef={setVirtualizedListRef}
       />
       <ChatContentScrollButton
-        show={virtualizedListRef && !virtualizedListRef.isScrolledToBottom}
-        highlighted={unreadCount > 0}
-        scrollToBottom={virtualizedListRef?.scrollToBottom}
+        show={showScrollButton}
+        scrollToBottom={scrollToBottom}
+        highlighted={isButtonHighlighted}
       />
     </Box>
   );

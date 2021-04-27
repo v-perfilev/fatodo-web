@@ -1,4 +1,4 @@
-import React, {FC, memo, useEffect, useMemo} from 'react';
+import React, {FC, memo, useCallback, useEffect, useMemo} from 'react';
 import ChatContentMessageOutcoming from './chat-content-message-outcoming';
 import ChatContentMessageIncoming from './chat-content-message-incoming';
 import MessageContentBoxEvent from './chat-content-message-event';
@@ -14,7 +14,7 @@ type Props = {
   account: User;
 };
 
-const ChatContentMessage: FC<Props> = ({message, account}: Props) => {
+const ChatContentMessage: FC<Props> = ({message, reactions, statuses, account}: Props) => {
   const {handleUserIds} = useUserListContext();
 
   const type = useMemo<MessageType>(() => {
@@ -29,15 +29,15 @@ const ChatContentMessage: FC<Props> = ({message, account}: Props) => {
     }
   }, [message]);
 
-  const handleMessageUserIds = (): void => {
+  const handleMessageUserIds = useCallback((): void => {
     const reactionUserIds = message.reactions.map((r) => r.userId);
     const statusUserIds = message.statuses.map((s) => s.userId);
     handleUserIds([message.userId, ...reactionUserIds, ...statusUserIds]);
-  };
+  }, [message, handleUserIds]);
 
   useEffect(() => {
     handleMessageUserIds();
-  }, [message]);
+  }, [message, reactions, statuses]);
 
   return (
     <>

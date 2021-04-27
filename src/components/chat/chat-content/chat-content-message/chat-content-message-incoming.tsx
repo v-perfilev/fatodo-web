@@ -21,9 +21,11 @@ const ChatContentMessageIncoming: FC<Props> = ({message, account}: Props) => {
   const user = useMemo((): User => {
     return MessageUtils.extractUserFromMessage(users, message);
   }, [users, message]);
+
   const date = useMemo((): string => {
     return DateFormatters.formatTime(new Date(message.createdAt));
   }, [message.createdAt]);
+
   const isRead = useMemo((): boolean => {
     return MessageUtils.isReadMessage(message, account);
   }, [message.statuses, account]);

@@ -18,6 +18,7 @@ const ChatContentMessageOutcoming: FC<Props> = ({message}: Props) => {
   const user = useMemo((): User => {
     return MessageUtils.extractUserFromMessage(users, message);
   }, [users, message]);
+
   const date = useMemo((): string => {
     return DateFormatters.formatTime(new Date(message.createdAt));
   }, [message]);

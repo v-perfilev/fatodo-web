@@ -29,7 +29,9 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
   };
 
   useEffect(() => {
-    handleUserIds(chat?.members);
+    if (chat) {
+      handleUserIds(chat.members);
+    }
   }, [chat]);
 
   return (

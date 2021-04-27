@@ -5,11 +5,11 @@ import {ArrowDownIcon} from '../../../common/icons/arrow-down-icon';
 
 type Props = {
   show: boolean;
-  highlighted: boolean;
   scrollToBottom: () => void;
+  highlighted: boolean;
 };
 
-const ChatContentScrollButton: FC<Props> = ({show, highlighted, scrollToBottom}: Props) => {
+const ChatContentScrollButton: FC<Props> = ({show, scrollToBottom, highlighted}: Props) => {
   const classes = chatContentScrollButtonStyles();
 
   const color = highlighted ? 'primary' : 'default';

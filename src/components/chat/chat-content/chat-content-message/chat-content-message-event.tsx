@@ -18,6 +18,7 @@ const ChatContentMessageEvent: FC<Props> = ({message}: Props) => {
   const params = useMemo((): any => {
     return MessageUtils.parseEventMessage(message);
   }, [message]);
+
   const text = useMemo((): string => {
     return MessageUtils.buildEventMessageText(message, params, users, t);
   }, [message, params, users]);
