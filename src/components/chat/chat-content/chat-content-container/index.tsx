@@ -22,10 +22,9 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
   const {messageNewEvent, messageUpdateEvent, messageStatusesEvent, messageReactionsEvent} = useWsChatContext();
   const {handleResponse} = useSnackContext();
   const [messages, setMessages] = useState<Message[]>([]);
-  const [items, setItems] = useState<MessageListItem[]>([]);
+  const [items, setItems] = useState<MessageListItem[]>(undefined);
   const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [updating, setUpdating] = useState(false);
 
   const clearMessages = useCallback((): void => {
     setMessages([]);
@@ -96,8 +95,8 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
   };
 
   const loadMoreMessages = (): Promise<void> =>
-    new Promise((resolve) => {
-      setUpdating(true);
+    new Promise((resolve, reject) => {
+      setLoading(true);
       ChatService.getAllMessagesByChatIdPageable(chat.id, messages.length)
         .then((response) => {
           const newMessages = response.data;
@@ -107,14 +106,14 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
             const updateFunc = messageInserter(...newMessages);
             updateMessagesAndItems(updateFunc);
           }
+          resolve();
         })
         .catch((response) => {
           handleResponse(response);
+          reject();
         })
         .finally(() => {
           setLoading(false);
-          setUpdating(false);
-          resolve();
         });
     });
 
@@ -150,14 +149,14 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
     }
   }, [messageReactionsEvent]);
 
-  return loading ? (
+  return !items ? (
     <CircularSpinner size="sm" />
   ) : (
     <ChatContentList
       chat={chat}
       items={items}
       loadMoreItems={loadMoreMessages}
-      updating={updating}
+      loading={loading}
       allLoaded={allMessagesLoaded}
     />
   );
