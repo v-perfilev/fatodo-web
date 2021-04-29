@@ -5,13 +5,13 @@ export const chatContentMessageActionsStyles = makeStyles((theme: Theme) => ({
   popupMenu: {
     '& .MuiListItem-root': {
       display: 'flex',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     '& .MuiSvgIcon-root': {
       marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(0.5)
-    }
-  }
+      marginRight: theme.spacing(0.5),
+    },
+  },
 }));
 
 export const chatContentMessageEventStyles = makeStyles((theme: Theme) => ({
@@ -21,13 +21,13 @@ export const chatContentMessageEventStyles = makeStyles((theme: Theme) => ({
     marginRight: '10%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   text: {
     fontSize: '0.8rem',
     fontWeight: 'bold',
-    color: theme.palette.grey['500']
-  }
+    color: theme.palette.grey['500'],
+  },
 }));
 
 export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
@@ -36,7 +36,7 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
     marginRight: '10%',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'start'
+    alignItems: 'start',
   },
   message: {
     minWidth: 250,
@@ -51,8 +51,8 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
 
     '&.unread': {
       borderWidth: 2,
-      borderColor: theme.palette.primary.main
-    }
+      borderColor: theme.palette.primary.main,
+    },
   },
   header: {
     display: 'flex',
@@ -60,20 +60,20 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     flexGrow: 1,
     margin: theme.spacing(1),
-    marginBottom: theme.spacing(0.5)
+    marginBottom: theme.spacing(0.5),
   },
   name: {
     fontWeight: 'bold',
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   date: {
-    color: theme.palette.grey['500']
+    color: theme.palette.grey['500'],
   },
   body: {
     margin: theme.spacing(1),
-    marginTop: theme.spacing(0.5)
-  }
+    marginTop: theme.spacing(0.5),
+  },
 }));
 
 export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
@@ -83,7 +83,7 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'start',
-    justifyContent: 'flex-end'
+    justifyContent: 'flex-end',
   },
   message: {
     minWidth: 250,
@@ -94,7 +94,7 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     borderStyle: 'solid',
     borderColor: theme.palette.grey['300'],
     borderRadius: 5,
-    backgroundColor: theme.palette.grey['100']
+    backgroundColor: theme.palette.grey['100'],
   },
   header: {
     display: 'flex',
@@ -102,18 +102,18 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'space-between',
     flexGrow: 1,
     margin: theme.spacing(1),
-    marginBottom: theme.spacing(0.5)
+    marginBottom: theme.spacing(0.5),
   },
   name: {
     fontWeight: 'bold',
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
   },
   date: {
-    color: theme.palette.grey['500']
+    color: theme.palette.grey['500'],
   },
   body: {
     margin: theme.spacing(1),
-    marginTop: theme.spacing(0.5)
-  }
+    marginTop: theme.spacing(0.5),
+  },
 }));

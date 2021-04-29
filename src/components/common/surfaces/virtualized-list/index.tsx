@@ -9,192 +9,178 @@ import React, {
   useRef,
   useState
 } from 'react';
-import {
-  AutoSizer,
-  CellMeasurer,
-  CellMeasurerCache,
-  Index,
-  InfiniteLoader,
-  InfiniteLoaderChildProps,
-  List,
-  ListRowProps,
-  ScrollParams,
-  Size
-} from 'react-virtualized';
+import {ListKeysCache, ListMeasurerCache, ListParamsCache} from './_caches';
+import {ListChildComponentProps, ListOnScrollProps, VariableSizeList} from 'react-window';
+import AutoSizer from 'react-virtualized-auto-sizer';
+import InfiniteLoader from 'react-window-infinite-loader';
+import VirtualizedListMeasurer from './virtualized-list-measurer';
 import {RefUtils} from '../../../../shared/utils/ref.utils';
-import {ListRowRenderer} from 'react-virtualized/dist/es/List';
-import {ListParamsCache} from './_caches';
 
 type Props = {
-  renderer: (params: ListRowProps) => ReactElement;
+  itemRenderer: (params: ListChildComponentProps) => ReactElement;
+  loadMoreItems: () => Promise<void>;
+  isItemLoaded: (index: number) => boolean;
   loadedLength: number;
   totalLength: number;
-  loadMoreRows: () => Promise<void>;
-  isRowLoaded: (params: Index) => boolean;
-  rowHeight?: number;
+  itemHeight?: number;
+  itemKey?: (index: number) => string;
   reverseOrder?: boolean;
   virtualizedListRef?: Ref<VirtualizedListMethods>;
 };
 
 export type VirtualizedListMethods = {
   clearCache: () => void;
-  shiftCache: (length: number, shift: number) => void;
-  recomputeCache: () => void;
+  updateList: () => void;
   scrollToPosition: (position: number) => void;
   scrollToBottom: () => void;
   isScrolledToBottom: boolean;
 };
 
 export const VirtualizedList: FC<Props> = (props: Props) => {
-  const {renderer, loadedLength, totalLength, loadMoreRows, isRowLoaded} = props;
-  const {rowHeight, reverseOrder, virtualizedListRef} = props;
-  const [scrollParams, setScrollParams] = useState<ScrollParams>();
-  const [updating, setUpdating] = useState<boolean>(false);
+  const {itemRenderer, loadMoreItems, isItemLoaded, loadedLength, totalLength} = props;
+  const {itemHeight, itemKey, reverseOrder, virtualizedListRef} = props;
+  const [scroll, setScroll] = useState<ListOnScrollProps>();
+  const [loading, setLoading] = useState<boolean>(false);
 
-  const paramsCache = useRef<ListParamsCache>(new ListParamsCache());
-  const measurerCache = useRef<CellMeasurerCache>(new CellMeasurerCache({fixedWidth: true}));
-  const listRef = useRef<List>();
+  const [paramsCache] = useState<ListParamsCache>(new ListParamsCache());
+  const [keyCache] = useState<ListKeysCache>(new ListKeysCache());
+  const [measurerCache] = useState<ListMeasurerCache>(new ListMeasurerCache());
+
+  const listRef = useRef<VariableSizeList>();
 
   // OUTER METHODS
 
   const calculateTotalHeight = useCallback((): number => {
     return Array.from(Array(loadedLength).keys())
-      .map((index) => measurerCache.current.getHeight(index, 0))
+      .map((index) => keyCache.get(index))
+      .map((key) => measurerCache.getHeight(key))
       .reduce((acc, height) => acc + height, 0);
-  }, [measurerCache.current, loadedLength]);
+  }, [keyCache, measurerCache, loadedLength]);
 
   const clearCache = useCallback((): void => {
-    measurerCache.current.clearAll();
-  }, [measurerCache.current]);
+    measurerCache.clear();
+  }, [measurerCache]);
 
-  const shiftCache = useCallback((length: number, shift: number): void => {
-    for (let i = length - 1; i >= 0; i--) {
-      const height = measurerCache.current.getHeight(i, 0);
-      measurerCache.current.set(i + shift, 0, 0, height);
-    }
-    for (let i = 0; i < shift + 1; i++) {
-      measurerCache.current.clear(i, 0);
-    }
-  }, [measurerCache.current]);
-
-  const recomputeCache = useCallback((): void => {
-    listRef.current?.recomputeRowHeights();
+  const updateList = useCallback((): void => {
+    listRef.current?.resetAfterIndex(0, true);
   }, [listRef.current]);
 
-  const scrollToPosition = useCallback((position: number): void => {
-    listRef.current?.scrollToPosition(position);
-  }, [listRef.current]);
+  const scrollToPosition = useCallback(
+    (position: number): void => {
+      listRef.current?.scrollTo(position);
+    },
+    [listRef.current]
+  );
 
   const scrollToBottom = useCallback((): void => {
-    listRef.current?.scrollToRow(totalLength - 1);
+    listRef.current?.scrollToItem(totalLength - 1);
   }, [listRef.current]);
 
   const isScrolledToBottom = useMemo<boolean>(() => {
-    const clientHeight = scrollParams?.clientHeight;
-    const scrollTop = scrollParams?.scrollTop;
+    const clientHeight = listRef.current?.props.height as number;
+    const scrollTop = scroll?.scrollOffset;
     const scrollHeight = calculateTotalHeight();
     return !clientHeight || scrollHeight <= scrollTop + clientHeight;
-  }, [scrollParams, totalLength]);
+  }, [listRef.current, scroll, totalLength]);
 
   useImperativeHandle(
     virtualizedListRef,
     (): VirtualizedListMethods => ({
       clearCache,
-      shiftCache,
-      recomputeCache,
+      updateList,
       scrollToPosition,
       scrollToBottom,
       isScrolledToBottom
     }),
-    [clearCache, shiftCache, recomputeCache, scrollToPosition, scrollToBottom, isScrolledToBottom]
+    [clearCache, updateList, scrollToPosition, scrollToBottom, isScrolledToBottom]
   );
 
   // MAIN COMPONENT CONTENT
 
   const height = calculateTotalHeight();
 
-  const logCache = () => {
+  const logCache = (): void => {
     const heights = Array.from(Array(loadedLength).keys())
-      .map((i) => measurerCache.current.getHeight(i, 0))
+      .map((index) => keyCache.get(index))
+      .map((key) => measurerCache.getHeight(key))
       .reduce((acc, height) => [...acc, height], []);
     console.log(heights);
   };
 
   useEffect(() => {
-    if (updating && loadedLength > paramsCache.current.previousLength) {
-      shiftCache(paramsCache.current.previousLength, loadedLength - paramsCache.current.previousLength);
-      recomputeCache();
-    }
-    paramsCache.current.updateLength(loadedLength);
-  }, [loadedLength]);
-
-  useEffect(() => {
-    if (updating && height > paramsCache.current.previousHeight) {
-      const position = height - paramsCache.current.previousHeight + scrollParams?.scrollTop;
+    if (reverseOrder && height > 0 && paramsCache.getPreviousHeight() === 0) {
+      scrollToPosition(height);
+    } else if (reverseOrder && loading && height > paramsCache.getPreviousHeight()) {
+      const position = height - paramsCache.getPreviousHeight() + scroll?.scrollOffset;
       scrollToPosition(position);
-      setUpdating(false);
+      setLoading(false);
     }
-    paramsCache.current.updateHeight(height);
+    listRef.current?.resetAfterIndex(0, true);
+    paramsCache.updatePreviousHeight(height);
   }, [height]);
 
   // RENDER PARAMS
 
-  const isLoaded = useCallback((params: Index): boolean => {
-    return updating || isRowLoaded(params);
-  }, [updating, isRowLoaded]);
+  const updateKeys = (): void => {
+    if (!itemHeight && itemKey) {
+      for (let i = 0; i < loadedLength; i++) {
+        const key = itemKey(i);
+        keyCache.set(i, key);
+      }
+    }
+  };
 
-  const wrappedLoadMoreRows = (): Promise<void> => new Promise((resolve) => {
-    setUpdating(true);
-    loadMoreRows()
-      .catch(() => setUpdating(false))
-      .finally(() => resolve());
-  });
+  const wrappedIsItemLoaded = (index: number): boolean => {
+    return loading || isItemLoaded(index);
+  };
+
+  const wrappedLoadMoreRows = (): Promise<void> =>
+    new Promise((resolve) => {
+      setLoading(true);
+      loadMoreItems()
+        .catch(() => setLoading(false))
+        .finally(() => resolve());
+    });
+
+  const getItemSize = (index: number): number => {
+    return itemHeight || measurerCache.getHeight(keyCache.get(index));
+  };
 
   // RENDER METHODS
 
-  const getHeightFromCache = useCallback(({index}: Index): number => {
-    return measurerCache.current.getHeight(index, 0);
-  }, []);
-
-  const rendererWithMeasurer = useCallback((props: ListRowProps): ReactElement => (
-    <CellMeasurer cache={measurerCache.current} columnIndex={0} rowIndex={props.index} {...props}>
-      {renderer(props)}
-    </CellMeasurer>
-  ), [renderer]);
-
-  const getRenderer = useCallback((): ListRowRenderer => {
-    return rowHeight ? renderer : rendererWithMeasurer;
-  }, [rowHeight, renderer, rendererWithMeasurer]);
-
-  const listRenderer = (loaderProps: InfiniteLoaderChildProps) => (size: Size): ReactElement => (
-    <List
-      ref={RefUtils.mergeRefs(loaderProps.registerChild, listRef)}
-      width={size.width}
-      height={size.height}
-      onScroll={setScrollParams}
-      scrollToIndex={reverseOrder && isScrolledToBottom ? loadedLength - 1 : undefined}
-      onRowsRendered={loaderProps.onRowsRendered}
-      rowCount={loadedLength}
-      deferredMeasurementCache={rowHeight ? undefined : measurerCache.current}
-      rowHeight={rowHeight || getHeightFromCache}
-      rowRenderer={getRenderer()}
-    />
-  );
-
-  const listAutoSizer = (infiniteLoaderChildProps: InfiniteLoaderChildProps): ReactElement => (
-    <AutoSizer>{listRenderer(infiniteLoaderChildProps)}</AutoSizer>
-  );
+  updateKeys();
 
   return (
-    <>
-      <InfiniteLoader
-        isRowLoaded={isLoaded}
-        loadMoreRows={wrappedLoadMoreRows}
-        rowCount={totalLength}
-      >
-        {listAutoSizer}
-      </InfiniteLoader>
-    </>
+    <AutoSizer>
+      {({height, width}): ReactElement => (
+        <>
+          <VirtualizedListMeasurer
+            measurerCache={measurerCache}
+            keyCache={keyCache}
+            renderer={itemRenderer}
+            loadedLength={loadedLength}
+          />
+          <InfiniteLoader
+            isItemLoaded={wrappedIsItemLoaded}
+            loadMoreItems={wrappedLoadMoreRows}
+            itemCount={totalLength}
+          >
+            {({onItemsRendered, ref}): ReactElement => (
+              <VariableSizeList
+                ref={RefUtils.mergeRefs(listRef, ref)}
+                height={height}
+                width={width}
+                itemCount={loadedLength}
+                itemSize={getItemSize}
+                onItemsRendered={onItemsRendered}
+                onScroll={setScroll}
+              >
+                {itemRenderer}
+              </VariableSizeList>
+            )}
+          </InfiniteLoader>
+        </>
+      )}
+    </AutoSizer>
   );
-
 };

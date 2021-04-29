@@ -12,7 +12,7 @@ import {handleChatLastMessageEvent, handleChatNewEvent, handleChatUpdateEvent} f
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {VirtualizedList} from '../../../common/surfaces';
 import {CHAT_HEIGHT} from '../../_constants';
-import {ListRowProps} from 'react-virtualized';
+import {ListChildComponentProps} from 'react-window';
 
 type Props = {
   chat: Chat;
@@ -60,7 +60,7 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
         });
     });
 
-  const isChatLoaded = ({index}): boolean => {
+  const isChatLoaded = (index: number): boolean => {
     return index < chats.length ? true : allChatsLoaded;
   };
 
@@ -84,13 +84,12 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
     handleChatLastMessageEvent(chatLastMessageUpdateEvent, setChats);
   }, [chatLastMessageUpdateEvent]);
 
-  const chatRenderer = ({index, key, style}: ListRowProps): ReactElement => (
+  const chatRenderer = ({index, style}: ListChildComponentProps): ReactElement => (
     <MessageControlChat
       index={index}
       chats={chats}
       account={account}
       isSelected={chat?.id === chats[index].id}
-      key={key}
       style={style}
       onClick={handleOnChatClick(index)}
     />
@@ -101,12 +100,12 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   ) : (
     <Box className={classes.root}>
       <VirtualizedList
-        renderer={chatRenderer}
-        isRowLoaded={isChatLoaded}
-        loadMoreRows={loadMoreChats}
+        itemRenderer={chatRenderer}
+        isItemLoaded={isChatLoaded}
+        loadMoreItems={loadMoreChats}
         loadedLength={chats.length}
         totalLength={allChatsLoaded ? chats.length : chats.length + 1}
-        rowHeight={CHAT_HEIGHT}
+        itemHeight={CHAT_HEIGHT}
       />
     </Box>
   );

@@ -31,11 +31,7 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
     setItems([]);
   }, []);
 
-  useImperativeHandle(
-    chatContentListRef,
-    (): ChatContentMethods => ({clearMessages}),
-    []
-  );
+  useImperativeHandle(chatContentListRef, (): ChatContentMethods => ({clearMessages}), []);
 
   const convertMessagesToItems = (messagesToConvert: Message[]): MessageListItem[] => {
     const handledDates = [] as string[];

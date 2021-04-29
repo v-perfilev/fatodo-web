@@ -17,5 +17,4 @@ export class ArrayUtils {
   public static uniqueByIdFilter = (item: any, i: number, arr: any[]): any => {
     return arr.findIndex((t) => t.id === item.id) === i;
   };
-
 }

@@ -1,7 +1,6 @@
 import {Ref, useEffect, useRef} from 'react';
 
 export class RefUtils {
-
   public static mergeRefs = (...refs): Ref<any> => {
     const filteredRefs = refs.filter(Boolean);
     if (!filteredRefs.length) {
@@ -28,5 +27,4 @@ export class RefUtils {
     });
     return ref.current;
   };
-
 }
