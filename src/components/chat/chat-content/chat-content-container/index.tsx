@@ -92,7 +92,6 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
 
   const loadMoreMessages = (): Promise<void> =>
     new Promise((resolve, reject) => {
-      setLoading(true);
       ChatService.getAllMessagesByChatIdPageable(chat.id, messages.length)
         .then((response) => {
           const newMessages = response.data;
@@ -145,14 +144,13 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
     }
   }, [messageReactionsEvent]);
 
-  return !items ? (
+  return loading ? (
     <CircularSpinner size="sm" />
   ) : (
     <ChatContentList
       chat={chat}
       items={items}
       loadMoreItems={loadMoreMessages}
-      loading={loading}
       allLoaded={allMessagesLoaded}
     />
   );

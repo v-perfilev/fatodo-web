@@ -1,28 +1,3 @@
-export class ListParamsCache {
-  private previousHeight = 0;
-  private previousLength = 0;
-
-  public getPreviousHeight(): number {
-    return this.previousHeight;
-  }
-
-  public updatePreviousHeight(height: number): void {
-    if (this.previousHeight < height) {
-      this.previousHeight = height;
-    }
-  }
-
-  public getPreviousLength(): number {
-    return this.previousLength;
-  }
-
-  public updateLength(length: number): void {
-    if (this.previousLength < length) {
-      this.previousLength = length;
-    }
-  }
-}
-
 export class ListKeysCache {
   private keyMap = new Map<number, string>();
 
@@ -32,6 +7,10 @@ export class ListKeysCache {
 
   public get(index: number): string {
     return this.keyMap.get(index);
+  }
+
+  public size(): number {
+    return this.keyMap.size;
   }
 
   public clear(): void {
@@ -53,6 +32,11 @@ export class ListMeasurerCache {
 
   public has(key: string): boolean {
     return this.measurementMap.has(key);
+  }
+
+  public totalHeight(): number {
+    return Array.from(this.measurementMap.values())
+      .reduce((acc, height) => acc + height, 0);
   }
 
   public clear(): void {

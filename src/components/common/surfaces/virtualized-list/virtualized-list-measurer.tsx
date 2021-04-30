@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useRef} from 'react';
+import React, {FC, memo, ReactElement, useCallback, useEffect, useRef, useState} from 'react';
 import {virtualizedListMeasurerStyles} from './_styles';
 import {ListChildComponentProps} from 'react-window';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
@@ -7,31 +7,34 @@ type Props = {
   measurerCache: ListMeasurerCache;
   keyCache: ListKeysCache;
   renderer: (params: ListChildComponentProps) => ReactElement;
-  loadedLength: number;
+  afterMeasure: () => void;
 };
 
-const measurerIdPrefix = 'virtualized-list-measurer–';
-
-const VirtualizedListMeasurer: FC<Props> = ({measurerCache, keyCache, renderer, loadedLength}: Props) => {
+const VirtualizedListMeasurer: FC<Props> = ({measurerCache, keyCache, renderer, afterMeasure}: Props) => {
   const classes = virtualizedListMeasurerStyles();
-  const measurerId = useRef<string>(measurerIdPrefix + Math.random());
+  const measurerRef = useRef<HTMLDivElement>();
   const indexesToMeasureMap = useRef<Map<number, number>>();
+  const [, updateState] = useState<{}>();
 
-  const measure = (): void => {
-    const measurer = document.getElementById(measurerId.current);
-    if (measurer && indexesToMeasureMap.current) {
-      Array.from(indexesToMeasureMap.current.keys()).forEach((index) => {
-        const i = indexesToMeasureMap.current.get(index);
+  const forceUpdate = useCallback(() => {
+    updateState({});
+  }, []);
+
+  useEffect(() => {
+    if (measurerRef.current && indexesToMeasureMap.current?.size > 0) {
+      Array.from(indexesToMeasureMap.current.entries()).forEach(([index, i]) => {
         const key = keyCache.get(index);
-        const height = measurer.children[i].clientHeight;
+        const height = measurerRef.current.children[i].clientHeight;
         measurerCache.setHeight(key, height);
       });
       indexesToMeasureMap.current = undefined;
+      afterMeasure();
+      forceUpdate();
     }
-  };
+  });
 
-  const fillMapToMeasure = (): void => {
-    const indexes = Array.from(Array(loadedLength).keys()).filter((index) => {
+  useEffect(() => {
+    const indexes = Array.from(Array(keyCache.size()).keys()).filter((index) => {
       const key = keyCache.get(index);
       return !measurerCache.has(key);
     });
@@ -40,19 +43,21 @@ const VirtualizedListMeasurer: FC<Props> = ({measurerCache, keyCache, renderer, 
       indexes.forEach((index, i) => {
         indexesToMeasureMap.current.set(index, i);
       });
+      forceUpdate();
     }
-  };
-
-  measure();
-  fillMapToMeasure();
+  }, [keyCache.size()]);
 
   return indexesToMeasureMap.current ? (
-    <div id={measurerId.current} className={classes.measurer}>
-      {Array.from(indexesToMeasureMap.current.values()).map((index, key) => (
+    <div className={classes.measurer} ref={measurerRef}>
+      {Array.from(indexesToMeasureMap.current.keys()).map((index, key) => (
         <div key={key}>{renderer({index, style: undefined, data: undefined})}</div>
       ))}
     </div>
   ) : null;
 };
 
-export default VirtualizedListMeasurer;
+const shouldNotUpdate = (props: Props, prevProps: Props) => {
+  return props.keyCache.size() === 0 || props.keyCache.size() === prevProps.keyCache.size();
+};
+
+export default memo(VirtualizedListMeasurer, shouldNotUpdate);

@@ -13,11 +13,10 @@ type Props = {
   chat: Chat;
   items: MessageListItem[];
   loadMoreItems: () => Promise<void>;
-  loading: boolean;
   allLoaded: boolean;
 };
 
-const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, loading, allLoaded}: Props) => {
+const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded}: Props) => {
   const classes = chatContentListStyles();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
   const [virtualizedListRef, setVirtualizedListRef] = useState<VirtualizedListMethods>();
@@ -26,19 +25,13 @@ const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, loading, allLoa
     return allLoaded ? items.length : items.length + 1;
   }, [allLoaded, items]);
 
-  const isMessageLoaded = useCallback(
-    (index: number): boolean => {
-      return index > 0 ? true : loading || allLoaded;
-    },
-    [loading, allLoaded]
-  );
+  const isMessageLoaded = useCallback((index: number): boolean => {
+    return index > 0 ? true : allLoaded;
+  }, [allLoaded]);
 
-  const getItemKey = useCallback(
-    (index: number): string => {
-      return items[index].message?.id || items[index].date;
-    },
-    [items]
-  );
+  const getItemKey = useCallback((index: number): string => {
+    return items[index].message?.id || items[index].date;
+  }, [items]);
 
   const showScrollButton = useMemo<boolean>(() => {
     return virtualizedListRef && !virtualizedListRef.isScrolledToBottom;

@@ -12,14 +12,12 @@ export const messageMainStyles = makeStyles((theme: Theme) => ({
   },
   control: {
     height: '100%',
-    overflowY: 'scroll',
     borderRightWidth: 1,
     borderRightStyle: 'solid',
     borderRightColor: theme.palette.grey['300'],
   },
   content: {
     height: '100%',
-    overflowY: 'scroll',
   },
   smallViewRoot: {
     height: 'calc(100vh - ' + HEADER_HEIGHT + 'px - ' + BOTTOM_DRAWER_HEIGHT + 'px)',
