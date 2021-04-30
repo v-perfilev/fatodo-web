@@ -39,18 +39,16 @@ export type VirtualizedListMethods = {
 export const VirtualizedList: FC<Props> = (props: Props) => {
   const {itemRenderer, loadMoreItems, isItemLoaded, loadedLength, totalLength} = props;
   const {itemHeight, itemKey, reverseOrder, virtualizedListRef} = props;
+  const listRef = useRef<VariableSizeList>();
   const [scroll, setScroll] = useState<ListOnScrollProps>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [keyCache] = useState<ListKeysCache>(new ListKeysCache());
+  const [measurerCache] = useState<ListMeasurerCache>(new ListMeasurerCache());
   const [, updateState] = useState<{}>();
 
   const forceUpdate = useCallback(() => {
     updateState({});
   }, []);
-
-  const [keyCache] = useState<ListKeysCache>(new ListKeysCache());
-  const [measurerCache] = useState<ListMeasurerCache>(new ListMeasurerCache());
-
-  const listRef = useRef<VariableSizeList>();
 
   // OUTER METHODS
 
@@ -94,30 +92,18 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
 
   const height = measurerCache.totalHeight();
   const prevHeight = RefUtils.usePrevious(height);
-  console.log(height);
 
-  useEffect(() => {
-    console.log(height, measurerCache.totalHeight());
-  }, [measurerCache.totalHeight()]);
-
-  const logCache = (): void => {
-    const heights = Array.from(Array(loadedLength).keys())
-      .map((index) => keyCache.get(index))
-      .map((key) => measurerCache.getHeight(key))
-      .reduce((acc, height) => [...acc, height], []);
-    console.log(heights);
-  };
-
-  useEffect(() => {
+  const updateKeys = useCallback((): void => {
     if (!itemHeight && itemKey) {
       for (let i = 0; i < loadedLength; i++) {
         const key = itemKey(i);
         keyCache.set(i, key);
       }
+      forceUpdate();
     }
-  }, [loadedLength]);
+  }, [forceUpdate, itemHeight, itemKey]);
 
-  useEffect(() => {
+  const scrollAndRefresh = useCallback((): void => {
     if (height > prevHeight && reverseOrder && loading) {
       const position = height - prevHeight + scroll?.scrollOffset;
       scrollToPosition(position);
@@ -126,25 +112,39 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       scrollToPosition(height);
     }
     listRef.current?.resetAfterIndex(0, true);
+  }, [height, prevHeight, reverseOrder, loading, scrollToPosition]);
+
+  useEffect(() => {
+    updateKeys();
+  }, [loadedLength]);
+
+  useEffect(() => {
+    scrollAndRefresh();
   }, [height]);
 
   // RENDER PARAMS
 
-  const wrappedIsItemLoaded = (index: number): boolean => {
-    return loading || isItemLoaded(index);
-  };
+  const wrappedItemRenderer = useCallback((params: ListChildComponentProps): ReactElement => {
+    const style = {...params.style, overflow: 'hidden'};
+    return itemRenderer({...params, style});
+  }, [itemRenderer]);
 
-  const wrappedLoadMoreRows = (): Promise<void> =>
-    new Promise((resolve) => {
+  const wrappedIsItemLoaded = useCallback((index: number): boolean => {
+    return loading || isItemLoaded(index);
+  }, [loading, isItemLoaded]);
+
+  const wrappedLoadMoreRows = useCallback((): Promise<void> => {
+    return new Promise((resolve) => {
       setLoading(true);
       loadMoreItems()
         .catch(() => setLoading(false))
         .finally(() => resolve());
     });
+  }, [loadMoreItems]);
 
-  const getItemSize = (index: number): number => {
+  const getItemSize = useCallback((index: number): number => {
     return itemHeight || measurerCache.getHeight(keyCache.get(index));
-  };
+  }, [itemHeight]);
 
   // RENDER METHODS
 
@@ -153,9 +153,10 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       {({height, width}): ReactElement => (
         <>
           <VirtualizedListMeasurer
+            itemRenderer={itemRenderer}
+            loadedItems={keyCache.size()}
             measurerCache={measurerCache}
             keyCache={keyCache}
-            renderer={itemRenderer}
             afterMeasure={forceUpdate}
           />
           <InfiniteLoader
@@ -173,7 +174,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
                 onItemsRendered={onItemsRendered}
                 onScroll={setScroll}
               >
-                {itemRenderer}
+                {wrappedItemRenderer}
               </VariableSizeList>
             )}
           </InfiniteLoader>
