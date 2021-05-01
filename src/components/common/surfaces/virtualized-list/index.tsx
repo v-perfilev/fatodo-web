@@ -8,7 +8,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
 import {ListChildComponentProps, ListOnItemsRenderedProps, ListOnScrollProps, VariableSizeList} from 'react-window';
@@ -62,6 +62,12 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     measurerCache.clear(key);
   }, []);
 
+  const getScrollHeight = useCallback((): number => {
+    return itemHeight !== undefined
+      ? itemHeight * loadedLength
+      : measurerCache.getTotalHeight();
+  }, [itemHeight, loadedLength]);
+
   const scrollToPosition = useCallback((position: number): void => {
     listRef.current?.scrollTo(position);
   }, []);
@@ -82,9 +88,8 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   const isScrolledToBottom = useMemo<boolean>(() => {
     const clientHeight = listRef.current?.props.height as number;
     const scrollTop = scroll?.scrollOffset;
-    const scrollHeight = measurerCache.totalHeight();
-    return !clientHeight || scrollHeight <= scrollTop + clientHeight;
-  }, [scroll, loadedLength]);
+    return !clientHeight || getScrollHeight() <= scrollTop + clientHeight;
+  }, [scroll, getScrollHeight]);
 
   useImperativeHandle(
     virtualizedListRef,
@@ -94,14 +99,14 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       scrollToTop,
       scrollToBottom,
       isScrolledToTop,
-      isScrolledToBottom,
+      isScrolledToBottom
     }),
     [clearCache, scrollToPosition, scrollToBottom, isScrolledToBottom]
   );
 
   // MAIN COMPONENT CONTENT
 
-  const height = measurerCache.totalHeight();
+  const height = getScrollHeight();
   const prevHeight = RefUtils.usePrevious(height);
 
   const updateKeys = useCallback((): void => {
@@ -128,6 +133,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   useEffect(() => {
     updateKeys();
   }, [loadedLength]);
+
 
   useEffect(() => {
     scrollAndRefresh();
@@ -190,6 +196,10 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     [itemHeight]
   );
 
+  const wrappedInitialScrollOffset = useMemo<number>(() => {
+    return reverseOrder ? Number.MAX_VALUE : 0;
+  }, []);
+
   // RENDER METHODS
 
   return (
@@ -211,6 +221,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
                 width={width}
                 itemCount={loadedLength}
                 itemSize={getItemSize}
+                initialScrollOffset={wrappedInitialScrollOffset}
                 onItemsRendered={wrappedOnItemsRendered(onItemsRendered)}
                 onScroll={setScroll}
               >
