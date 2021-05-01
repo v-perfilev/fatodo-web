@@ -33,7 +33,7 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
 
   useImperativeHandle(chatContentListRef, (): ChatContentMethods => ({clearMessages}), []);
 
-  const convertMessagesToItems = (messagesToConvert: Message[]): MessageListItem[] => {
+  const convertMessagesToItems = useCallback((messagesToConvert: Message[]): MessageListItem[] => {
     const handledDates = [] as string[];
     const handledItems = [] as MessageListItem[];
     handledItems.push({});
@@ -46,24 +46,18 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
       handledItems.push({message});
     });
     return handledItems;
-  };
+  }, []);
 
-  const updateItems = useCallback(
-    (updatedMessages: Message[]): void => {
-      const newItems = convertMessagesToItems(updatedMessages);
-      setItems(newItems);
-    },
-    [convertMessagesToItems]
-  );
+  const updateItems = useCallback((updatedMessages: Message[]): void => {
+    const newItems = convertMessagesToItems(updatedMessages);
+    setItems(newItems);
+  }, [items]);
 
-  const updateMessagesAndItems = useCallback(
-    (updateFunc: (prevState: Message[]) => Message[]): void => {
-      const combinedMessages = updateFunc(messages);
-      setMessages(combinedMessages);
-      updateItems(combinedMessages);
-    },
-    [updateItems]
-  );
+  const updateMessagesAndItems = useCallback((updateFunc: (prevState: Message[]) => Message[]): void => {
+    const combinedMessages = updateFunc(messages);
+    setMessages(combinedMessages);
+    updateItems(combinedMessages);
+  }, [messages, updateItems]);
 
   const messageInserter = useCallback(
     (...messages: Message[]) => (prevState: Message[]): Message[] => {
@@ -130,7 +124,7 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
           setLoading(false);
         });
     });
-  }, [chat, messages, updateMessagesAndItems]);
+  }, [messages, items]);
 
   useEffect(() => {
     loadMoreMessages().finally();

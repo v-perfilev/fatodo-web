@@ -8,7 +8,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
 import {ListChildComponentProps, ListOnItemsRenderedProps, ListOnScrollProps, VariableSizeList} from 'react-window';
@@ -85,7 +85,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       updateList,
       scrollToPosition,
       scrollToBottom,
-      isScrolledToBottom,
+      isScrolledToBottom
     }),
     [clearCache, updateList, scrollToPosition, scrollToBottom, isScrolledToBottom]
   );
@@ -106,15 +106,15 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   }, [forceUpdate, itemHeight, itemKey]);
 
   const scrollAndRefresh = useCallback((): void => {
-    if (height > prevHeight && reverseOrder && loading) {
+    if (reverseOrder && loading) {
       const position = height - prevHeight + scroll?.scrollOffset;
       scrollToPosition(position);
       setLoading(false);
-    } else if (height > 0 && prevHeight === 0 && reverseOrder) {
+    } else if (reverseOrder && isScrolledToBottom) {
       scrollToPosition(height);
     }
     listRef.current?.resetAfterIndex(0, true);
-  }, [height, prevHeight, reverseOrder, loading, scrollToPosition]);
+  }, [height, prevHeight, loading, scrollToPosition, isScrolledToBottom]);
 
   useEffect(() => {
     updateKeys();
