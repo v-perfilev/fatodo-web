@@ -8,7 +8,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState
+  useState,
 } from 'react';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
 import {ListChildComponentProps, ListOnItemsRenderedProps, ListOnScrollProps, VariableSizeList} from 'react-window';
@@ -31,10 +31,11 @@ type Props = {
 };
 
 export type VirtualizedListMethods = {
-  clearCache: () => void;
-  updateList: () => void;
+  clearCache: (index?: number) => void;
   scrollToPosition: (position: number) => void;
+  scrollToTop: () => void;
   scrollToBottom: () => void;
+  isScrolledToTop: boolean;
   isScrolledToBottom: boolean;
 };
 
@@ -55,21 +56,28 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
 
   // OUTER METHODS
 
-  const clearCache = useCallback((): void => {
-    measurerCache.clear();
-  }, []);
-
-  const updateList = useCallback((): void => {
-    listRef.current?.resetAfterIndex(0, true);
+  const clearCache = useCallback((index?: number): void => {
+    const key = keyCache.get(index);
+    keyCache.clear(index);
+    measurerCache.clear(key);
   }, []);
 
   const scrollToPosition = useCallback((position: number): void => {
     listRef.current?.scrollTo(position);
   }, []);
 
+  const scrollToTop = useCallback((): void => {
+    listRef.current?.scrollTo(0);
+  }, []);
+
   const scrollToBottom = useCallback((): void => {
     listRef.current?.scrollToItem(loadedLength - 1);
   }, [loadedLength]);
+
+  const isScrolledToTop = useMemo<boolean>(() => {
+    const scrollTop = scroll?.scrollOffset;
+    return scrollTop === 0;
+  }, [scroll]);
 
   const isScrolledToBottom = useMemo<boolean>(() => {
     const clientHeight = listRef.current?.props.height as number;
@@ -82,12 +90,13 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     virtualizedListRef,
     (): VirtualizedListMethods => ({
       clearCache,
-      updateList,
       scrollToPosition,
+      scrollToTop,
       scrollToBottom,
-      isScrolledToBottom
+      isScrolledToTop,
+      isScrolledToBottom,
     }),
-    [clearCache, updateList, scrollToPosition, scrollToBottom, isScrolledToBottom]
+    [clearCache, scrollToPosition, scrollToBottom, isScrolledToBottom]
   );
 
   // MAIN COMPONENT CONTENT

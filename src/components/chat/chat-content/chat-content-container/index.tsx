@@ -8,6 +8,7 @@ import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-chat-context';
 import ChatContentList from './chat-content-list';
+import {VirtualizedListMethods} from '../../../common/surfaces';
 
 type Props = {
   chat: Chat;
@@ -25,6 +26,7 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
   const [items, setItems] = useState<MessageListItem[]>(undefined);
   const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [listRef, setListRef] = useState<VirtualizedListMethods>();
 
   const clearMessages = useCallback((): void => {
     setMessages([]);
@@ -48,16 +50,22 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
     return handledItems;
   }, []);
 
-  const updateItems = useCallback((updatedMessages: Message[]): void => {
-    const newItems = convertMessagesToItems(updatedMessages);
-    setItems(newItems);
-  }, [items]);
+  const updateItems = useCallback(
+    (updatedMessages: Message[]): void => {
+      const newItems = convertMessagesToItems(updatedMessages);
+      setItems(newItems);
+    },
+    [items]
+  );
 
-  const updateMessagesAndItems = useCallback((updateFunc: (prevState: Message[]) => Message[]): void => {
-    const combinedMessages = updateFunc(messages);
-    setMessages(combinedMessages);
-    updateItems(combinedMessages);
-  }, [messages, updateItems]);
+  const updateMessagesAndItems = useCallback(
+    (updateFunc: (prevState: Message[]) => Message[]): void => {
+      const combinedMessages = updateFunc(messages);
+      setMessages(combinedMessages);
+      updateItems(combinedMessages);
+    },
+    [messages, updateItems]
+  );
 
   const messageInserter = useCallback(
     (...messages: Message[]) => (prevState: Message[]): Message[] => {
@@ -141,6 +149,11 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
     if (chat?.id === messageNewEvent?.chatId) {
       const updateFunc = messageUpdater(messageUpdateEvent);
       updateMessagesAndItems(updateFunc);
+      // clear cache for resize
+      const index = items.findIndex((item) => item.message?.id === messageNewEvent.id);
+      if (index !== undefined) {
+        listRef?.clearCache(index);
+      }
     }
   }, [messageUpdateEvent]);
 
@@ -161,7 +174,14 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
   return loading ? (
     <CircularSpinner size="sm" />
   ) : (
-    <ChatContentList chat={chat} items={items} loadMoreItems={loadMoreMessages} allLoaded={allMessagesLoaded} />
+    <ChatContentList
+      chat={chat}
+      items={items}
+      loadMoreItems={loadMoreMessages}
+      allLoaded={allMessagesLoaded}
+      listRef={listRef}
+      setListRef={setListRef}
+    />
   );
 };
 

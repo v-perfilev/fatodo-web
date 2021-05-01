@@ -13,8 +13,12 @@ export class ListKeysCache {
     return this.keyMap.size;
   }
 
-  public clear(): void {
-    this.keyMap.clear();
+  public clear(index?: number): void {
+    if (index !== undefined) {
+      this.keyMap.delete(index);
+    } else {
+      this.keyMap.clear();
+    }
   }
 }
 
@@ -38,7 +42,11 @@ export class ListMeasurerCache {
     return Array.from(this.measurementMap.values()).reduce((acc, height) => acc + height, 0);
   }
 
-  public clear(): void {
-    this.measurementMap.clear();
+  public clear(key?: string): void {
+    if (key) {
+      this.measurementMap.delete(key);
+    } else {
+      this.measurementMap.clear();
+    }
   }
 }

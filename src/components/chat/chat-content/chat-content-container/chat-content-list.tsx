@@ -1,4 +1,4 @@
-import React, {FC, memo, ReactElement, useCallback, useMemo, useState} from 'react';
+import React, {Dispatch, FC, memo, ReactElement, SetStateAction, useCallback, useMemo} from 'react';
 import {Box} from '@material-ui/core';
 import {chatContentListStyles} from './_styles';
 import {MessageListItem} from '../../../../models/message.model';
@@ -14,12 +14,13 @@ type Props = {
   items: MessageListItem[];
   loadMoreItems: () => Promise<void>;
   allLoaded: boolean;
+  listRef: VirtualizedListMethods;
+  setListRef: Dispatch<SetStateAction<VirtualizedListMethods>>;
 };
 
-const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded}: Props) => {
+const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded, listRef, setListRef}: Props) => {
   const classes = chatContentListStyles();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
-  const [virtualizedListRef, setVirtualizedListRef] = useState<VirtualizedListMethods>();
 
   const getItemKey = useCallback(
     (index: number): string => {
@@ -29,12 +30,12 @@ const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded}: Pro
   );
 
   const showScrollButton = useMemo<boolean>(() => {
-    return virtualizedListRef && !virtualizedListRef.isScrolledToBottom;
-  }, [virtualizedListRef]);
+    return listRef && !listRef.isScrolledToBottom;
+  }, [listRef]);
 
   const scrollToBottom = useCallback((): void => {
-    virtualizedListRef?.scrollToBottom();
-  }, [virtualizedListRef]);
+    listRef?.scrollToBottom();
+  }, [listRef]);
 
   const isButtonHighlighted = useMemo<boolean>(() => {
     return unreadMessageCountMap?.get(chat.id) > 0;
@@ -58,7 +59,7 @@ const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded}: Pro
         allLoaded={allLoaded}
         itemKey={getItemKey}
         reverseOrder
-        virtualizedListRef={setVirtualizedListRef}
+        virtualizedListRef={setListRef}
       />
       <ChatContentScrollButton
         show={showScrollButton}
