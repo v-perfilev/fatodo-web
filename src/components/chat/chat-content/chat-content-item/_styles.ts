@@ -2,11 +2,8 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
 export const chatContentItemStyles = makeStyles((theme: Theme) => ({
-  item: {
+  root: {
     paddingBottom: theme.spacing(2),
-  },
-  spacer: {
-    height: theme.spacing(2),
   },
 }));
 

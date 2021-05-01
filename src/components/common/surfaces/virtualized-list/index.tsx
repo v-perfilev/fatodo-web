@@ -1,4 +1,5 @@
 import React, {
+  CSSProperties,
   FC,
   ReactElement,
   Ref,
@@ -7,24 +8,25 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState
+  useState,
 } from 'react';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
-import {ListChildComponentProps, ListOnScrollProps, VariableSizeList} from 'react-window';
+import {ListChildComponentProps, ListOnItemsRenderedProps, ListOnScrollProps, VariableSizeList} from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import InfiniteLoader from 'react-window-infinite-loader';
 import VirtualizedListMeasurer from './virtualized-list-measurer';
 import {RefUtils} from '../../../../shared/utils/ref.utils';
+import {ListItemProps, OnItemsRendered} from './types';
 
 type Props = {
-  itemRenderer: (params: ListChildComponentProps) => ReactElement;
+  itemRenderer: (params: ListItemProps) => ReactElement;
   loadMoreItems: () => Promise<void>;
-  isItemLoaded: (index: number) => boolean;
   loadedLength: number;
-  totalLength: number;
+  allLoaded: boolean;
   itemHeight?: number;
   itemKey?: (index: number) => string;
   reverseOrder?: boolean;
+  firstItemStyle?: CSSProperties;
   virtualizedListRef?: Ref<VirtualizedListMethods>;
 };
 
@@ -37,11 +39,12 @@ export type VirtualizedListMethods = {
 };
 
 export const VirtualizedList: FC<Props> = (props: Props) => {
-  const {itemRenderer, loadMoreItems, isItemLoaded, loadedLength, totalLength} = props;
-  const {itemHeight, itemKey, reverseOrder, virtualizedListRef} = props;
+  const {itemRenderer, loadMoreItems, loadedLength, allLoaded} = props;
+  const {itemHeight, itemKey, reverseOrder, firstItemStyle, virtualizedListRef} = props;
   const listRef = useRef<VariableSizeList>();
   const [scroll, setScroll] = useState<ListOnScrollProps>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [visible, setVisible] = useState<number[]>([]);
   const [keyCache] = useState<ListKeysCache>(new ListKeysCache());
   const [measurerCache] = useState<ListMeasurerCache>(new ListMeasurerCache());
   const [, updateState] = useState<{}>();
@@ -60,21 +63,20 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     listRef.current?.resetAfterIndex(0, true);
   }, []);
 
-  const scrollToPosition = useCallback(
-    (position: number): void => {
-      listRef.current?.scrollTo(position);
-    }, []);
+  const scrollToPosition = useCallback((position: number): void => {
+    listRef.current?.scrollTo(position);
+  }, []);
 
   const scrollToBottom = useCallback((): void => {
-    listRef.current?.scrollToItem(totalLength - 1);
-  }, []);
+    listRef.current?.scrollToItem(loadedLength - 1);
+  }, [loadedLength]);
 
   const isScrolledToBottom = useMemo<boolean>(() => {
     const clientHeight = listRef.current?.props.height as number;
     const scrollTop = scroll?.scrollOffset;
     const scrollHeight = measurerCache.totalHeight();
     return !clientHeight || scrollHeight <= scrollTop + clientHeight;
-  }, [scroll, totalLength]);
+  }, [scroll, loadedLength]);
 
   useImperativeHandle(
     virtualizedListRef,
@@ -83,7 +85,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       updateList,
       scrollToPosition,
       scrollToBottom,
-      isScrolledToBottom
+      isScrolledToBottom,
     }),
     [clearCache, updateList, scrollToPosition, scrollToBottom, isScrolledToBottom]
   );
@@ -124,14 +126,44 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
 
   // RENDER PARAMS
 
-  const wrappedItemRenderer = useCallback((params: ListChildComponentProps): ReactElement => {
-    const style = {...params.style, overflow: 'hidden'};
-    return itemRenderer({...params, style});
-  }, [itemRenderer]);
+  const itemCount = useMemo<number>(() => {
+    return allLoaded ? loadedLength : loadedLength + 1;
+  }, [allLoaded, loadedLength]);
 
-  const wrappedIsItemLoaded = useCallback((index: number): boolean => {
-    return loading || isItemLoaded(index);
-  }, [loading, isItemLoaded]);
+  const isItemLoaded = useCallback(
+    (index: number): boolean => {
+      return reverseOrder ? (index > 0 ? true : allLoaded) : index < loadedLength;
+    },
+    [allLoaded, loadedLength, reverseOrder]
+  );
+
+  const wrappedItemRenderer = useCallback(
+    (params: ListChildComponentProps): ReactElement => {
+      const index = params.index;
+      const style = {...params.style, overflow: 'hidden', ...(index === 0 ? firstItemStyle : null)};
+      const isVisible = visible.includes(index);
+      return itemRenderer({...params, style, isVisible});
+    },
+    [itemRenderer]
+  );
+
+  const wrappedOnItemsRendered = useCallback(
+    (onItemsRendered: OnItemsRendered) => (props: ListOnItemsRenderedProps): void => {
+      const firstVisible = props.visibleStartIndex;
+      const visibleItemsCount = props.visibleStopIndex - props.visibleStartIndex + 1;
+      const visibleItems = Array.from({length: visibleItemsCount}, (_, i) => i + firstVisible);
+      setVisible(visibleItems);
+      onItemsRendered(props);
+    },
+    []
+  );
+
+  const wrappedIsItemLoaded = useCallback(
+    (index: number): boolean => {
+      return loading || isItemLoaded(index);
+    },
+    [loading, isItemLoaded]
+  );
 
   const wrappedLoadMoreRows = useCallback((): Promise<void> => {
     return new Promise((resolve) => {
@@ -142,9 +174,12 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     });
   }, [loadMoreItems]);
 
-  const getItemSize = useCallback((index: number): number => {
-    return itemHeight || measurerCache.getHeight(keyCache.get(index));
-  }, [itemHeight]);
+  const getItemSize = useCallback(
+    (index: number): number => {
+      return itemHeight || measurerCache.getHeight(keyCache.get(index));
+    },
+    [itemHeight]
+  );
 
   // RENDER METHODS
 
@@ -157,13 +192,9 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
             loadedItems={keyCache.size()}
             measurerCache={measurerCache}
             keyCache={keyCache}
-            afterMeasure={forceUpdate}
+            afterMeasured={forceUpdate}
           />
-          <InfiniteLoader
-            isItemLoaded={wrappedIsItemLoaded}
-            loadMoreItems={wrappedLoadMoreRows}
-            itemCount={totalLength}
-          >
+          <InfiniteLoader isItemLoaded={wrappedIsItemLoaded} loadMoreItems={wrappedLoadMoreRows} itemCount={itemCount}>
             {({onItemsRendered, ref}): ReactElement => (
               <VariableSizeList
                 ref={RefUtils.mergeRefs(listRef, ref)}
@@ -171,7 +202,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
                 width={width}
                 itemCount={loadedLength}
                 itemSize={getItemSize}
-                onItemsRendered={onItemsRendered}
+                onItemsRendered={wrappedOnItemsRendered(onItemsRendered)}
                 onScroll={setScroll}
               >
                 {wrappedItemRenderer}

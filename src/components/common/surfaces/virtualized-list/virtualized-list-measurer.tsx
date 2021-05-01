@@ -8,11 +8,11 @@ type Props = {
   keyCache: ListKeysCache;
   itemRenderer: (params: ListChildComponentProps) => ReactElement;
   loadedItems: number;
-  afterMeasure: () => void;
+  afterMeasured: () => void;
 };
 
 const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
-  const {measurerCache, keyCache, itemRenderer, loadedItems, afterMeasure} = props;
+  const {measurerCache, keyCache, itemRenderer, loadedItems, afterMeasured} = props;
   const classes = virtualizedListMeasurerStyles();
   const measurerRef = useRef<HTMLDivElement>();
   const indexesToMeasureMap = useRef<Map<number, number>>();
@@ -31,7 +31,7 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
       });
       indexesToMeasureMap.current = undefined;
       forceUpdate();
-      afterMeasure();
+      afterMeasured();
     }
   }, [forceUpdate, forceUpdate]);
 
@@ -60,15 +60,13 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
   return indexesToMeasureMap.current ? (
     <div className={classes.measurer} ref={measurerRef}>
       {Array.from(indexesToMeasureMap.current.keys()).map((index, key) => (
-        <div key={key}>
-          {itemRenderer({index, style: undefined, data: undefined})}
-        </div>
+        <div key={key}>{itemRenderer({index, style: undefined, data: undefined})}</div>
       ))}
     </div>
   ) : null;
 };
 
-const shouldNotUpdate = (props: Props, prevProps: Props) => {
+const shouldNotUpdate = (props: Props, prevProps: Props): boolean => {
   return props.loadedItems === 0 || props.loadedItems === prevProps.loadedItems;
 };
 

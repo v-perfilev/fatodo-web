@@ -6,10 +6,6 @@ export const chatContentListStyles = makeStyles(() => ({
   root: {
     position: 'relative',
     height: 'calc(100vh - ' + CHAT_CONTENT_HEADER_HEIGHT + 'px - ' + CHAT_CONTENT_FOOTER_HEIGHT + 'px)',
-
-    '& .ReactVirtualized__List:focus': {
-      outline: 'none',
-    },
   },
 }));
 

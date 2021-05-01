@@ -1,5 +1,5 @@
 import React, {FC, memo, useEffect, useMemo} from 'react';
-import {Box, Container} from '@material-ui/core';
+import {Container} from '@material-ui/core';
 import {chatContentItemStyles} from './_styles';
 import {MessageListItem} from '../../../../models/message.model';
 import ChatContentMessage from '../chat-content-message';
@@ -10,6 +10,7 @@ import ChatContentDate from './chat-content-date';
 import {MessageUtils} from '../../../../shared/utils/message.utils';
 import ChatService from '../../../../services/chat.service';
 import {TIMEOUT_BEFORE_MARK_AS_READ} from '../../_constants';
+import ChatContentSpacer from './chat-content-spacer';
 
 type BaseProps = {
   index: number;
@@ -25,7 +26,6 @@ const ChatContentItem: FC<Props> = ({index, items, isVisible, account}: Props) =
 
   const message = items[index].message;
   const date = items[index].date;
-  const isFirst = index === 0;
 
   const isIncomingMessage = useMemo((): boolean => {
     return MessageUtils.isIncomingMessage(message, account);
@@ -53,8 +53,8 @@ const ChatContentItem: FC<Props> = ({index, items, isVisible, account}: Props) =
   }, [isVisible]);
 
   return (
-    <Container maxWidth="md" className={classes.item}>
-      {isFirst && <Box className={classes.spacer} />}
+    <Container maxWidth="md" className={classes.root}>
+      {!date && !message && <ChatContentSpacer />}
       {date && <ChatContentDate date={date} />}
       {message && (
         <ChatContentMessage

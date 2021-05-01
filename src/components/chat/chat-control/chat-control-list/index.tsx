@@ -1,4 +1,4 @@
-import React, {FC, memo, ReactElement, useEffect, useState} from 'react';
+import React, {FC, memo, ReactElement, useCallback, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {chatControlListStyles} from './_styles';
 import MessageControlChat from './chat-control-chat';
@@ -26,27 +26,33 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   const {handleResponse} = useSnackContext();
   const [chats, setChats] = useState<Chat[]>([]);
   const [loading, setLoading] = useState(true);
-  const [allChatsLoaded, setAllChatsLoaded] = useState(false);
+  const [allLoaded, setAllLoaded] = useState(false);
 
-  const handleOnChatClick = (index: number) => (): void => {
-    const chat = chats[index];
-    setChat(chat);
-  };
+  const handleOnChatClick = useCallback(
+    (index: number) => (): void => {
+      const chat = chats[index];
+      setChat(chat);
+    },
+    [chats]
+  );
 
-  const addLoadedChatsToState = (loadedChats: Chat[]): void => {
-    setChats((prevState) => {
-      const combinedMessages = [...prevState, ...loadedChats];
-      return combinedMessages.filter(ArrayUtils.uniqueByIdFilter);
-    });
-  };
+  const addLoadedChatsToState = useCallback(
+    (loadedChats: Chat[]): void => {
+      setChats((prevState) => {
+        const combinedMessages = [...prevState, ...loadedChats];
+        return combinedMessages.filter(ArrayUtils.uniqueByIdFilter);
+      });
+    },
+    [setChats]
+  );
 
-  const loadMoreChats = (): Promise<void> =>
-    new Promise((resolve) => {
+  const loadMoreChats = useCallback((): Promise<void> => {
+    return new Promise((resolve) => {
       ChatService.getAllChatsPageable(chats.length)
         .then((response) => {
           const newChats = response.data;
           if (newChats.length === 0) {
-            setAllChatsLoaded(true);
+            setAllLoaded(true);
           } else {
             addLoadedChatsToState(newChats);
           }
@@ -59,10 +65,7 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
           resolve();
         });
     });
-
-  const isChatLoaded = (index: number): boolean => {
-    return index < chats.length ? true : allChatsLoaded;
-  };
+  }, [chats, addLoadedChatsToState]);
 
   useEffect(() => {
     loadMoreChats().finally();
@@ -101,10 +104,9 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
     <Box className={classes.root}>
       <VirtualizedList
         itemRenderer={chatRenderer}
-        isItemLoaded={isChatLoaded}
         loadMoreItems={loadMoreChats}
         loadedLength={chats.length}
-        totalLength={allChatsLoaded ? chats.length : chats.length + 1}
+        allLoaded={allLoaded}
         itemHeight={CHAT_HEIGHT}
       />
     </Box>

@@ -36,6 +36,7 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
   const convertMessagesToItems = (messagesToConvert: Message[]): MessageListItem[] => {
     const handledDates = [] as string[];
     const handledItems = [] as MessageListItem[];
+    handledItems.push({});
     messagesToConvert.forEach((message) => {
       const date = DateFormatters.formatDateWithYear(new Date(message.createdAt));
       if (!handledDates.includes(date)) {
@@ -47,51 +48,69 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
     return handledItems;
   };
 
-  const updateItemsFromMessages = (updatedMessages: Message[]): void => {
-    const newItems = convertMessagesToItems(updatedMessages);
-    setItems(newItems);
-  };
+  const updateItems = useCallback(
+    (updatedMessages: Message[]): void => {
+      const newItems = convertMessagesToItems(updatedMessages);
+      setItems(newItems);
+    },
+    [convertMessagesToItems]
+  );
 
-  const updateMessagesAndItems = (updateFunc: (prevState: Message[]) => Message[]): void => {
-    const combinedMessages = updateFunc(messages);
-    setMessages(combinedMessages);
-    updateItemsFromMessages(combinedMessages);
-  };
+  const updateMessagesAndItems = useCallback(
+    (updateFunc: (prevState: Message[]) => Message[]): void => {
+      const combinedMessages = updateFunc(messages);
+      setMessages(combinedMessages);
+      updateItems(combinedMessages);
+    },
+    [updateItems]
+  );
 
-  const messageInserter = (...messages: Message[]) => (prevState: Message[]): Message[] => {
-    const combinedMessages = [...messages, ...prevState];
-    return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
-  };
+  const messageInserter = useCallback(
+    (...messages: Message[]) => (prevState: Message[]): Message[] => {
+      const combinedMessages = [...messages, ...prevState];
+      return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
+    },
+    []
+  );
 
-  const messageUpdater = (message: Message) => (prevState: Message[]): Message[] => {
-    const messageInList = prevState.find((m) => m.id === message.id);
-    if (messageInList) {
-      const index = prevState.indexOf(messageInList);
-      prevState[index] = message;
-    }
-    return [...prevState];
-  };
+  const messageUpdater = useCallback(
+    (message: Message) => (prevState: Message[]): Message[] => {
+      const messageInList = prevState.find((m) => m.id === message.id);
+      if (messageInList) {
+        const index = prevState.indexOf(messageInList);
+        prevState[index] = message;
+      }
+      return [...prevState];
+    },
+    []
+  );
 
-  const statusesUpdater = (messageStatuses: MessageStatuses) => (prevState: Message[]): Message[] => {
-    const messageInList = prevState.find((m) => m.id === messageStatuses.messageId);
-    if (messageInList) {
-      const index = prevState.indexOf(messageInList);
-      prevState[index].statuses = messageStatuses.statuses;
-    }
-    return [...prevState];
-  };
+  const statusesUpdater = useCallback(
+    (statuses: MessageStatuses) => (prevState: Message[]): Message[] => {
+      const messageInList = prevState.find((m) => m.id === statuses.messageId);
+      if (messageInList) {
+        const index = prevState.indexOf(messageInList);
+        prevState[index].statuses = statuses.statuses;
+      }
+      return [...prevState];
+    },
+    []
+  );
 
-  const reactionsUpdater = (messageReactions: MessageReactions) => (prevState: Message[]): Message[] => {
-    const messageInList = prevState.find((m) => m.id === messageReactions.messageId);
-    if (messageInList) {
-      const index = prevState.indexOf(messageInList);
-      prevState[index].reactions = messageReactions.reactions;
-    }
-    return [...prevState];
-  };
+  const reactionsUpdater = useCallback(
+    (reactions: MessageReactions) => (prevState: Message[]): Message[] => {
+      const messageInList = prevState.find((m) => m.id === reactions.messageId);
+      if (messageInList) {
+        const index = prevState.indexOf(messageInList);
+        prevState[index].reactions = reactions.reactions;
+      }
+      return [...prevState];
+    },
+    []
+  );
 
-  const loadMoreMessages = (): Promise<void> =>
-    new Promise((resolve, reject) => {
+  const loadMoreMessages = useCallback((): Promise<void> => {
+    return new Promise((resolve, reject) => {
       ChatService.getAllMessagesByChatIdPageable(chat.id, messages.length)
         .then((response) => {
           const newMessages = response.data;
@@ -111,6 +130,7 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
           setLoading(false);
         });
     });
+  }, [chat, messages, updateMessagesAndItems]);
 
   useEffect(() => {
     loadMoreMessages().finally();
@@ -147,12 +167,7 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
   return loading ? (
     <CircularSpinner size="sm" />
   ) : (
-    <ChatContentList
-      chat={chat}
-      items={items}
-      loadMoreItems={loadMoreMessages}
-      allLoaded={allMessagesLoaded}
-    />
+    <ChatContentList chat={chat} items={items} loadMoreItems={loadMoreMessages} allLoaded={allMessagesLoaded} />
   );
 };
 

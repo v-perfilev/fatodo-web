@@ -7,7 +7,7 @@ import ChatContentScrollButton from './chat-content-scroll-button';
 import ChatContentItem from '../chat-content-item';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import {Chat} from '../../../../models/chat.model';
-import {ListChildComponentProps} from 'react-window';
+import {ListItemProps} from '../../../common/surfaces/virtualized-list/types';
 
 type Props = {
   chat: Chat;
@@ -21,24 +21,19 @@ const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded}: Pro
   const {unreadMessageCountMap} = useUnreadMessagesContext();
   const [virtualizedListRef, setVirtualizedListRef] = useState<VirtualizedListMethods>();
 
-  const totalLoaded = useMemo<number>(() => {
-    return allLoaded ? items.length : items.length + 1;
-  }, [allLoaded, items]);
-
-  const isMessageLoaded = useCallback((index: number): boolean => {
-    return index > 0 ? true : allLoaded;
-  }, [allLoaded]);
-
-  const getItemKey = useCallback((index: number): string => {
-    return items[index].message?.id || items[index].date;
-  }, [items]);
+  const getItemKey = useCallback(
+    (index: number): string => {
+      return items[index].message?.id || items[index].date || 'spacer';
+    },
+    [items]
+  );
 
   const showScrollButton = useMemo<boolean>(() => {
     return virtualizedListRef && !virtualizedListRef.isScrolledToBottom;
   }, [virtualizedListRef]);
 
   const scrollToBottom = useCallback((): void => {
-    virtualizedListRef.scrollToBottom();
+    virtualizedListRef?.scrollToBottom();
   }, [virtualizedListRef]);
 
   const isButtonHighlighted = useMemo<boolean>(() => {
@@ -46,9 +41,9 @@ const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded}: Pro
   }, [unreadMessageCountMap, chat]);
 
   const messageRenderer = useCallback(
-    ({index, style}: ListChildComponentProps): ReactElement => (
+    ({index, isVisible, style}: ListItemProps): ReactElement => (
       <div style={style}>
-        <ChatContentItem index={index} items={items} isVisible={true} />
+        <ChatContentItem index={index} items={items} isVisible={isVisible} />
       </div>
     ),
     [items]
@@ -59,9 +54,8 @@ const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded}: Pro
       <VirtualizedList
         itemRenderer={messageRenderer}
         loadMoreItems={loadMoreItems}
-        isItemLoaded={isMessageLoaded}
-        totalLength={totalLoaded}
         loadedLength={items.length}
+        allLoaded={allLoaded}
         itemKey={getItemKey}
         reverseOrder
         virtualizedListRef={setVirtualizedListRef}
