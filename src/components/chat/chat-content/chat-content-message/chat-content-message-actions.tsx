@@ -52,7 +52,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
 
   return (
     <>
-      <IconButton onClick={handleClickOnAction} ref={ref}>
+      <IconButton onClick={handleClickOnAction} size="small" ref={ref}>
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>

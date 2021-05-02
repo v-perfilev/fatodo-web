@@ -57,22 +57,27 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
   header: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
     flexGrow: 1,
-    margin: theme.spacing(1),
-    marginBottom: theme.spacing(0.5),
+    marginTop: theme.spacing(0.5),
+    marginRight: theme.spacing(0.5),
+    marginLeft: theme.spacing(1),
   },
   name: {
+    flexGrow: 1,
     fontWeight: 'bold',
     color: theme.palette.primary.main,
     marginRight: theme.spacing(1),
   },
   date: {
     color: theme.palette.grey['500'],
+    marginRight: theme.spacing(0.5),
   },
   body: {
-    margin: theme.spacing(1),
     marginTop: theme.spacing(0.5),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    marginLeft: theme.spacing(1),
   },
 }));
 
@@ -99,21 +104,26 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
   header: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    alignItems: 'center',
     flexGrow: 1,
-    margin: theme.spacing(1),
-    marginBottom: theme.spacing(0.5),
+    marginTop: theme.spacing(0.5),
+    marginRight: theme.spacing(0.5),
+    marginLeft: theme.spacing(1),
   },
   name: {
+    flexGrow: 1,
     fontWeight: 'bold',
     color: theme.palette.primary.main,
     marginRight: theme.spacing(1),
   },
   date: {
     color: theme.palette.grey['500'],
+    marginRight: theme.spacing(0.5),
   },
   body: {
-    margin: theme.spacing(1),
     marginTop: theme.spacing(0.5),
+    marginRight: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+    marginLeft: theme.spacing(1),
   },
 }));

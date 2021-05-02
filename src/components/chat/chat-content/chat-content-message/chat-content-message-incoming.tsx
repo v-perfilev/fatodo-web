@@ -8,6 +8,7 @@ import {useUserListContext} from '../../../../shared/contexts/list-contexts/user
 import {MessageUtils} from '../../../../shared/utils/message.utils';
 import csx from 'classnames';
 import {User} from '../../../../models/user.model';
+import ChatContentMessageActions from './chat-content-message-actions';
 
 type Props = {
   message: Message;
@@ -39,6 +40,7 @@ const ChatContentMessageIncoming: FC<Props> = ({message, account}: Props) => {
         <Box className={classes.header}>
           <Box className={classes.name}>{user?.username}</Box>
           <Box className={classes.date}>{date}</Box>
+          <ChatContentMessageActions message={message} />
         </Box>
         <Box className={classes.body}>{message.text}</Box>
       </Box>
