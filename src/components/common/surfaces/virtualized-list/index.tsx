@@ -119,9 +119,11 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     if (reverseOrder && loading) {
       const position = height - prevHeight + scroll?.scrollOffset;
       scrollToPosition(position);
-      setLoading(false);
     } else if (reverseOrder && isScrolledToBottom) {
       scrollToPosition(height);
+    }
+    if (loading) {
+      setLoading(false);
     }
     listRef.current?.resetAfterIndex(0, true);
   }, [height, prevHeight, loading, scrollToPosition, isScrolledToBottom]);
@@ -168,7 +170,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
         .catch(() => setLoading(false))
         .finally(() => resolve());
     });
-  }, []);
+  }, [loadMoreItems]);
 
   const getItemSize = useCallback(
     (index: number): number => {

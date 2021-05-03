@@ -1,4 +1,4 @@
-import React, {FC, memo, useCallback, useEffect, useMemo} from 'react';
+import React, {FC, useCallback, useEffect, useMemo} from 'react';
 import ChatContentMessageOutcoming from './chat-content-message-outcoming';
 import ChatContentMessageIncoming from './chat-content-message-incoming';
 import MessageContentBoxEvent from './chat-content-message-event';
@@ -46,4 +46,4 @@ const ChatContentMessage: FC<Props> = ({message, account}: Props) => {
   );
 };
 
-export default memo(ChatContentMessage);
+export default ChatContentMessage;

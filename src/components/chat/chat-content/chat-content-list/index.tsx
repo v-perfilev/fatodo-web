@@ -134,7 +134,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
           setLoading(false);
         });
     });
-  }, [messages, items]);
+  }, [messages.length, items]);
 
   useEffect(() => {
     loadMoreMessages().finally();

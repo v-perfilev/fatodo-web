@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, memo, ReactElement, SetStateAction, useCallback, useMemo} from 'react';
+import React, {Dispatch, FC, ReactElement, SetStateAction, useCallback, useMemo} from 'react';
 import {Box} from '@material-ui/core';
 import {chatContentListStyles} from './_styles';
 import {MessageListItem} from '../../../../models/message.model';
@@ -82,4 +82,4 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
   );
 };
 
-export default memo(ChatContentContainer);
+export default ChatContentContainer;
