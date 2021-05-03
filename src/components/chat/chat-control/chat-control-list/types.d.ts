@@ -1,6 +1,7 @@
-import {ListItemDataProps, ListItemProps} from '../../../common/surfaces/virtualized-list/types';
+import {ListItemDataProps} from '../../../common/surfaces/virtualized-list/types';
 import {Chat} from '../../../../models/chat.model';
 import {User} from '../../../../models/user.model';
+import {ListChildComponentProps} from 'react-window';
 
 export interface ChatControlItemDataProps extends ListItemDataProps<Chat> {
   chat: Chat;
@@ -8,4 +9,4 @@ export interface ChatControlItemDataProps extends ListItemDataProps<Chat> {
   handleOnChatClick: (index: number) => () => void;
 }
 
-export type ChatControlItemProps = ListItemProps<ChatControlItemDataProps>;
+export type ChatControlItemProps = ListChildComponentProps<ChatControlItemDataProps>;

@@ -1,4 +1,4 @@
-import React, {FC, memo, ReactElement, useCallback, useEffect, useMemo, useState} from 'react';
+import React, {FC, ReactElement, useCallback, useEffect, useMemo, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {Message, MessageReactionType, messageReactionTypes} from '../../../../models/message.model';
@@ -74,4 +74,4 @@ const ChatContentMessageReactions: FC<Props> = ({message, account}: Props) => {
   return <Box className={classes.root}>{Array.from(reactionMap.keys()).map(reaction)}</Box>;
 };
 
-export default memo(ChatContentMessageReactions);
+export default ChatContentMessageReactions;

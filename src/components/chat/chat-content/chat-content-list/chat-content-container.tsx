@@ -32,6 +32,10 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
     [items]
   );
 
+  const visibleItems = useMemo<number[]>(() => {
+    return listRef?.visibleItems;
+  }, [listRef?.visibleItems]);
+
   const showScrollButton = useMemo<boolean>(() => {
     return listRef && !listRef.isScrolledToBottom;
   }, [listRef?.isScrolledToBottom]);
@@ -51,10 +55,11 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
 
   const itemData = useMemo<ChatContentItemDataProps>(
     () => ({
+      visibleItems,
       items,
       account,
     }),
-    [items, account]
+    [visibleItems, items, account]
   );
 
   return (

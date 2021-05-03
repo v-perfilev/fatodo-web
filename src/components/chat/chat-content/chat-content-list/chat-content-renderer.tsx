@@ -5,9 +5,10 @@ import {areEqual} from 'react-window';
 
 type Props = ChatContentItemProps;
 
-const ChatContentRenderer: FC<Props> = ({data, index, style, isVisible}: Props) => {
+const ChatContentRenderer: FC<Props> = ({data, index, style}: Props) => {
   const item = data.items[index];
   const account = data.account;
+  const isVisible = data.visibleItems.includes(index);
 
   return (
     <div style={style}>

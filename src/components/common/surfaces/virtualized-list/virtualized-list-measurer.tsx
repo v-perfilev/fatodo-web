@@ -1,10 +1,11 @@
 import React, {FC, memo, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {virtualizedListMeasurerStyles} from './_styles';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
-import {ListItemDataProps, ListItemProps} from './types';
+import {ListItemDataProps} from './types';
+import {ListChildComponentProps} from 'react-window';
 
 type Props = {
-  itemRenderer: (params: ListItemProps) => ReactElement;
+  itemRenderer: (params: ListChildComponentProps) => ReactElement;
   itemData: ListItemDataProps;
   itemKey: (index: number) => string;
   measurerCache: ListMeasurerCache;
@@ -74,7 +75,7 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
   return indexesToMeasureMap.current ? (
     <div className={classes.measurer} ref={measurerRef}>
       {Array.from(indexesToMeasureMap.current.keys()).map((index, key) => (
-        <div key={key}>{itemRenderer({index, style: undefined, data: itemData, isVisible: false})}</div>
+        <div key={key}>{itemRenderer({index, style: undefined, data: itemData})}</div>
       ))}
     </div>
   ) : null;
