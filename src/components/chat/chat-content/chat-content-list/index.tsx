@@ -1,4 +1,4 @@
-import React, {FC, memo, Ref, useCallback, useEffect, useImperativeHandle, useState} from 'react';
+import React, {FC, Ref, useCallback, useEffect, useImperativeHandle, useState} from 'react';
 import {Chat} from '../../../../models/chat.model';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
@@ -26,7 +26,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
   const {handleResponse} = useSnackContext();
   const [messages, setMessages] = useState<Message[]>([]);
   const [items, setItems] = useState<MessageListItem[]>(undefined);
-  const [allMessagesLoaded, setAllMessagesLoaded] = useState(false);
+  const [allLoaded, setAllLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [listRef, setListRef] = useState<VirtualizedListMethods>();
 
@@ -119,7 +119,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
         .then((response) => {
           const newMessages = response.data;
           if (newMessages.length === 0) {
-            setAllMessagesLoaded(true);
+            setAllLoaded(true);
           } else {
             const updateFunc = messageInserter(...newMessages);
             updateMessagesAndItems(updateFunc);
@@ -180,7 +180,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
       chat={chat}
       items={items}
       loadMoreItems={loadMoreMessages}
-      allLoaded={allMessagesLoaded}
+      allLoaded={allLoaded}
       account={account}
       listRef={listRef}
       setListRef={setListRef}
@@ -188,4 +188,4 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
   );
 };
 
-export default memo(ChatContentList);
+export default ChatContentList;

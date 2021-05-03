@@ -1,7 +1,7 @@
 import React, {FC, HTMLAttributes, useEffect, useMemo} from 'react';
 import {Box} from '@material-ui/core';
 import {Chat} from '../../../../models/chat.model';
-import {chatControlChatStyles} from './_styles';
+import {chatControlItemStyles} from './_styles';
 import ChatControlMessage from '../chat-control-message';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import csx from 'classnames';
@@ -19,8 +19,8 @@ type Props = HTMLAttributes<HTMLElement> & {
   account: User;
 };
 
-const ChatControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Props) => {
-  const classes = chatControlChatStyles();
+const ChatControlItem: FC<Props> = ({chat, isSelected, account, ...props}: Props) => {
+  const classes = chatControlItemStyles();
   const {users, handleUserIds} = useUserListContext();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
   const {t} = useTranslation();
@@ -73,4 +73,4 @@ const ChatControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Props
   );
 };
 
-export default ChatControlChat;
+export default ChatControlItem;

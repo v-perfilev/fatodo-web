@@ -2,12 +2,11 @@ import React, {Dispatch, FC, memo, ReactElement, SetStateAction, useCallback, us
 import {Box} from '@material-ui/core';
 import {chatContentListStyles} from './_styles';
 import {MessageListItem} from '../../../../models/message.model';
-import {VirtualizedListMethods} from '../../../common/surfaces';
+import {VirtualizedList, VirtualizedListMethods} from '../../../common/surfaces';
 import ChatContentScrollButton from './chat-content-scroll-button';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import {Chat} from '../../../../models/chat.model';
 import {User} from '../../../../models/user.model';
-import VirtualizedList from '../../../common/surfaces/virtualized-list';
 import {ChatContentItemDataProps, ChatContentItemProps} from './types';
 import ChatContentRenderer from './chat-content-renderer';
 
@@ -35,7 +34,7 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
 
   const showScrollButton = useMemo<boolean>(() => {
     return listRef && !listRef.isScrolledToBottom;
-  }, [listRef]);
+  }, [listRef?.isScrolledToBottom]);
 
   const scrollToBottom = useCallback((): void => {
     listRef?.scrollToBottom();
@@ -64,7 +63,6 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
         itemRenderer={itemRenderer}
         itemData={itemData}
         loadMoreItems={loadMoreItems}
-        loadedLength={items.length}
         allLoaded={allLoaded}
         itemKey={getItemKey}
         reverseOrder

@@ -1,7 +1,7 @@
 import React, {FC, memo} from 'react';
-import ChatControlChat from './chat-control-chat';
 import {ChatControlItemProps} from './types';
 import {areEqual} from 'react-window';
+import ChatControlItem from '../chat-control-item';
 
 type Props = ChatControlItemProps;
 
@@ -12,7 +12,7 @@ const ChatControlRenderer: FC<Props> = ({data, index, style}: Props) => {
   const handleOnChatClick = data.handleOnChatClick(index);
 
   return (
-    <ChatControlChat chat={chat} isSelected={isSelected} account={account} onClick={handleOnChatClick} style={style} />
+    <ChatControlItem chat={chat} isSelected={isSelected} account={account} onClick={handleOnChatClick} style={style} />
   );
 };
 

@@ -1,6 +1,5 @@
 import React, {
   FC,
-  memo,
   ReactElement,
   Ref,
   useCallback,
@@ -22,7 +21,6 @@ type Props = {
   itemRenderer: (params: ListItemProps) => ReactElement;
   itemData: ListItemDataProps;
   loadMoreItems: () => Promise<void>;
-  loadedLength: number;
   allLoaded: boolean;
   itemHeight?: number;
   itemKey?: (index: number) => string;
@@ -39,8 +37,8 @@ export type VirtualizedListMethods = {
   isScrolledToBottom: boolean;
 };
 
-const VirtualizedList: FC<Props> = (props: Props) => {
-  const {itemRenderer, itemData, loadMoreItems, loadedLength, allLoaded} = props;
+export const VirtualizedList: FC<Props> = (props: Props) => {
+  const {itemRenderer, itemData, loadMoreItems, allLoaded} = props;
   const {itemHeight, itemKey, reverseOrder, virtualizedListRef} = props;
   const listRef = useRef<VariableSizeList>();
   const [scroll, setScroll] = useState<ListOnScrollProps>();
@@ -53,6 +51,10 @@ const VirtualizedList: FC<Props> = (props: Props) => {
   const forceUpdate = useCallback(() => {
     updateState({});
   }, []);
+
+  const loadedLength = useMemo<number>(() => {
+    return itemData.items.length;
+  }, [itemData]);
 
   // OUTER METHODS
 
@@ -99,7 +101,7 @@ const VirtualizedList: FC<Props> = (props: Props) => {
       isScrolledToTop,
       isScrolledToBottom,
     }),
-    [clearCache, scrollToPosition, scrollToBottom, isScrolledToBottom]
+    [clearCache, scrollToPosition, scrollToTop, scrollToBottom, isScrolledToTop, isScrolledToBottom]
   );
 
   // MAIN COMPONENT CONTENT
@@ -232,5 +234,3 @@ const VirtualizedList: FC<Props> = (props: Props) => {
     </AutoSizer>
   );
 };
-
-export default memo(VirtualizedList);

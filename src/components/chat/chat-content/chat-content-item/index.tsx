@@ -20,10 +20,6 @@ const ChatContentItem: FC<Props> = ({item, isVisible, account}: Props) => {
   const classes = chatContentItemStyles();
   let timerId;
 
-  if (item?.message?.text === 'test') {
-    console.log('rerender');
-  }
-
   const message = useMemo<Message>(() => {
     return item.message;
   }, [item]);

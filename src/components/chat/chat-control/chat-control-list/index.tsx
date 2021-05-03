@@ -1,18 +1,12 @@
-import React, {FC, memo, ReactElement, useCallback, useEffect, useMemo, useState} from 'react';
-import {Box} from '@material-ui/core';
-import {chatControlListStyles} from './_styles';
+import React, {FC, useCallback, useEffect, useState} from 'react';
 import {Chat} from '../../../../models/chat.model';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {User} from '../../../../models/user.model';
 import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-chat-context';
 import {CircularSpinner} from '../../../common/loaders';
-import {handleChatLastMessageEvent, handleChatNewEvent, handleChatUpdateEvent} from './_ws';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
-import {CHAT_HEIGHT} from '../../_constants';
-import VirtualizedList from '../../../common/surfaces/virtualized-list';
-import {ChatControlItemDataProps, ChatControlItemProps} from './types';
-import ChatControlRenderer from './chat-control-renderer';
+import ChatControlContainer from './chat-control-container';
 
 type Props = {
   chat: Chat;
@@ -21,29 +15,66 @@ type Props = {
 };
 
 const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
-  const classes = chatControlListStyles();
   const {chatNewEvent, chatUpdateEvent, chatLastMessageEvent, chatLastMessageUpdateEvent} = useWsChatContext();
   const {handleResponse} = useSnackContext();
   const [chats, setChats] = useState<Chat[]>([]);
   const [loading, setLoading] = useState(true);
   const [allLoaded, setAllLoaded] = useState(false);
 
-  const handleOnChatClick = useCallback(
-    (index: number) => (): void => {
-      const chat = chats[index];
-      setChat(chat);
+  const updateChats = useCallback(
+    (updateFunc: (prevState: Chat[]) => Chat[]): void => {
+      const combinedChats = updateFunc(chats);
+      setChats(combinedChats);
     },
     [chats]
   );
 
-  const addLoadedChatsToState = useCallback(
-    (loadedChats: Chat[]): void => {
-      setChats((prevState) => {
-        const combinedMessages = [...prevState, ...loadedChats];
-        return combinedMessages.filter(ArrayUtils.uniqueByIdFilter);
-      });
+  const chatInserter = useCallback(
+    (...chats: Chat[]) => (prevState: Chat[]): Chat[] => {
+      const combinedChats = [...chats, ...prevState];
+      return combinedChats.filter(ArrayUtils.uniqueByIdFilter);
     },
-    [setChats]
+    []
+  );
+
+  const chatUpdater = useCallback(
+    (chatToUpdate: Chat) => (prevState: Chat[]): Chat[] => {
+      if (chat?.id === chatToUpdate.id) {
+        setChat(chatToUpdate);
+      }
+      const chatInList = prevState.find((c) => c.id === chatToUpdate.id);
+      if (chatInList) {
+        const index = prevState.indexOf(chatInList);
+        prevState[index] = chatToUpdate;
+      }
+      return [...prevState];
+    },
+    []
+  );
+
+  const chatRemover = useCallback(
+    (chatToDelete: Chat) => (prevState: Chat[]): Chat[] => {
+      if (chat?.id === chatToDelete.id) {
+        setChat(null);
+      }
+      const chatInList = prevState.find((c) => c.id === chatToDelete.id);
+      if (chatInList) {
+        ArrayUtils.deleteItem(prevState, chatInList);
+      }
+      return [...prevState];
+    },
+    []
+  );
+
+  const lastMessageUpdater = useCallback(
+    (lastMessageChat: Chat) => (prevState: Chat[]): Chat[] => {
+      const chatInList = prevState.find((c) => c.id === lastMessageChat.id);
+      if (chatInList) {
+        ArrayUtils.deleteItem(prevState, chatInList);
+      }
+      return [...prevState, lastMessageChat];
+    },
+    []
   );
 
   const loadMoreChats = useCallback((): Promise<void> => {
@@ -54,7 +85,8 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
           if (newChats.length === 0) {
             setAllLoaded(true);
           } else {
-            addLoadedChatsToState(newChats);
+            const updateFunc = chatInserter(...newChats);
+            updateChats(updateFunc);
           }
         })
         .catch((response) => {
@@ -65,57 +97,54 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
           resolve();
         });
     });
-  }, [chats, addLoadedChatsToState]);
+  }, [chats]);
 
   useEffect(() => {
     loadMoreChats().finally();
   }, []);
 
   useEffect(() => {
-    handleChatNewEvent(chatNewEvent, setChats);
+    if (chatNewEvent) {
+      const updateFunc = chatInserter(chatNewEvent);
+      updateChats(updateFunc);
+    }
   }, [chatNewEvent]);
 
   useEffect(() => {
-    handleChatUpdateEvent(chatUpdateEvent, setChats, chat, setChat, account);
+    if (chatUpdateEvent) {
+      const updateFunc = chatUpdateEvent.members.includes(account.id)
+        ? chatUpdater(chatUpdateEvent)
+        : chatRemover(chatUpdateEvent);
+      updateChats(updateFunc);
+    }
   }, [chatUpdateEvent]);
 
   useEffect(() => {
-    handleChatLastMessageEvent(chatLastMessageEvent, setChats);
+    if (chatLastMessageEvent) {
+      const updateFunc = lastMessageUpdater(chatLastMessageEvent);
+      updateChats(updateFunc);
+    }
   }, [chatLastMessageEvent]);
 
   useEffect(() => {
-    handleChatLastMessageEvent(chatLastMessageUpdateEvent, setChats);
+    if (chatLastMessageUpdateEvent) {
+      const updateFunc = lastMessageUpdater(chatLastMessageUpdateEvent);
+      updateChats(updateFunc);
+    }
   }, [chatLastMessageUpdateEvent]);
-
-  const chatRenderer = useCallback(
-    (props: ChatControlItemProps): ReactElement => <ChatControlRenderer {...props} />,
-    []
-  );
-
-  const itemData = useMemo<ChatControlItemDataProps>(
-    () => ({
-      items: chats,
-      chat,
-      account,
-      handleOnChatClick,
-    }),
-    [chats, chat, account, handleOnChatClick]
-  );
 
   return loading ? (
     <CircularSpinner size="sm" />
   ) : (
-    <Box className={classes.root}>
-      <VirtualizedList
-        itemRenderer={chatRenderer}
-        itemData={itemData}
-        loadMoreItems={loadMoreChats}
-        loadedLength={chats.length}
-        allLoaded={allLoaded}
-        itemHeight={CHAT_HEIGHT}
-      />
-    </Box>
+    <ChatControlContainer
+      chat={chat}
+      setChat={setChat}
+      chats={chats}
+      loadMoreItems={loadMoreChats}
+      allLoaded={allLoaded}
+      account={account}
+    />
   );
 };
 
-export default memo(ChatControlList);
+export default ChatControlList;
