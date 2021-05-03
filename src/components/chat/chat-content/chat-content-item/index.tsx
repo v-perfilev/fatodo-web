@@ -1,42 +1,48 @@
-import React, {FC, memo, useEffect, useMemo} from 'react';
+import React, {FC, useCallback, useEffect, useMemo} from 'react';
 import {Container} from '@material-ui/core';
 import {chatContentItemStyles} from './_styles';
-import {MessageListItem} from '../../../../models/message.model';
+import {Message, MessageListItem} from '../../../../models/message.model';
 import ChatContentMessage from '../chat-content-message';
-import {AuthState} from '../../../../store/rerducers/auth.reducer';
-import withAuthState from '../../../../shared/hocs/with-auth-state';
-import {compose} from 'recompose';
 import ChatContentDate from './chat-content-date';
 import {MessageUtils} from '../../../../shared/utils/message.utils';
 import ChatService from '../../../../services/chat.service';
 import {TIMEOUT_BEFORE_MARK_AS_READ} from '../../_constants';
 import ChatContentSpacer from './chat-content-spacer';
+import {User} from '../../../../models/user.model';
 
-type BaseProps = {
-  index: number;
-  items: MessageListItem[];
+type Props = {
+  item: MessageListItem;
   isVisible: boolean;
+  account: User;
 };
 
-type Props = AuthState & BaseProps;
-
-const ChatContentItem: FC<Props> = ({index, items, isVisible, account}: Props) => {
+const ChatContentItem: FC<Props> = ({item, isVisible, account}: Props) => {
   const classes = chatContentItemStyles();
   let timerId;
 
-  const message = items[index].message;
-  const date = items[index].date;
+  if (item?.message?.text === 'test') {
+    console.log('rerender');
+  }
 
-  const isIncomingMessage = useMemo((): boolean => {
+  const message = useMemo<Message>(() => {
+    return item.message;
+  }, [item]);
+
+  const date = useMemo<string>(() => {
+    return item.date;
+  }, [item]);
+
+  const isIncomingMessage = useMemo<boolean>((): boolean => {
     return MessageUtils.isIncomingMessage(message, account);
   }, [message, account]);
-  const isRead = useMemo((): boolean => {
+
+  const isRead = useMemo<boolean>((): boolean => {
     return MessageUtils.isReadMessage(message, account);
   }, [message?.statuses, account]);
 
-  const markAsRead = (): void => {
+  const markAsRead = useCallback((): void => {
     ChatService.markMessageAsRead(message.id);
-  };
+  }, [message?.id]);
 
   const markAsReadIfNeeded = (): void => {
     if (isVisible) {
@@ -56,16 +62,9 @@ const ChatContentItem: FC<Props> = ({index, items, isVisible, account}: Props) =
     <Container maxWidth="md" className={classes.root}>
       {!date && !message && <ChatContentSpacer />}
       {date && <ChatContentDate date={date} />}
-      {message && (
-        <ChatContentMessage
-          message={message}
-          reactions={message.reactions}
-          statuses={message.statuses}
-          account={account}
-        />
-      )}
+      {message && <ChatContentMessage message={message} account={account} />}
     </Container>
   );
 };
 
-export default compose<Props, BaseProps>(memo, withAuthState)(ChatContentItem);
+export default ChatContentItem;

@@ -3,18 +3,16 @@ import ChatContentMessageOutcoming from './chat-content-message-outcoming';
 import ChatContentMessageIncoming from './chat-content-message-incoming';
 import MessageContentBoxEvent from './chat-content-message-event';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
-import {Message, MessageReaction, MessageStatus, MessageType} from '../../../../models/message.model';
+import {Message, MessageType} from '../../../../models/message.model';
 import {User} from '../../../../models/user.model';
 import {MessageUtils} from '../../../../shared/utils/message.utils';
 
 type Props = {
   message: Message;
-  reactions: MessageReaction[];
-  statuses: MessageStatus[];
   account: User;
 };
 
-const ChatContentMessage: FC<Props> = ({message, reactions, statuses, account}: Props) => {
+const ChatContentMessage: FC<Props> = ({message, account}: Props) => {
   const {handleUserIds} = useUserListContext();
 
   const type = useMemo<MessageType>(() => {
@@ -37,11 +35,11 @@ const ChatContentMessage: FC<Props> = ({message, reactions, statuses, account}: 
 
   useEffect(() => {
     handleMessageUserIds();
-  }, [message, reactions, statuses]);
+  }, [message, message.statuses, message.reactions]);
 
   return (
     <>
-      {type === 'outcoming' && <ChatContentMessageOutcoming message={message} />}
+      {type === 'outcoming' && <ChatContentMessageOutcoming message={message} account={account} />}
       {type === 'incoming' && <ChatContentMessageIncoming message={message} account={account} />}
       {type === 'event' && <MessageContentBoxEvent message={message} />}
     </>

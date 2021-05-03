@@ -127,3 +127,24 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     marginLeft: theme.spacing(1),
   },
 }));
+
+export const chatContentMessageReactionsStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    alignSelf: 'stretch',
+    alignItems: 'center',
+    margin: theme.spacing(0.5),
+    color: theme.palette.grey['500'],
+  },
+  pointer: {
+    cursor: 'pointer',
+  },
+  count: {
+    marginRight: theme.spacing(0.5),
+  },
+  reaction: {
+    display: 'flex',
+    alignItems: 'center',
+    margin: theme.spacing(0.5),
+  },
+}));

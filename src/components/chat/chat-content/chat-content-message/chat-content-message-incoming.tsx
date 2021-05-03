@@ -9,6 +9,7 @@ import {MessageUtils} from '../../../../shared/utils/message.utils';
 import csx from 'classnames';
 import {User} from '../../../../models/user.model';
 import ChatContentMessageActions from './chat-content-message-actions';
+import ChatContentMessageReactions from './chat-content-message-reactions';
 
 type Props = {
   message: Message;
@@ -44,6 +45,7 @@ const ChatContentMessageIncoming: FC<Props> = ({message, account}: Props) => {
         </Box>
         <Box className={classes.body}>{message.text}</Box>
       </Box>
+      <ChatContentMessageReactions message={message} account={account} />
     </Box>
   );
 };

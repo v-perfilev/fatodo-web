@@ -39,8 +39,7 @@ export class ListMeasurerCache {
   }
 
   public getTotalHeight(): number {
-    return Array.from(this.measurementMap.values())
-      .reduce((acc, height) => acc + height, 0);
+    return Array.from(this.measurementMap.values()).reduce((acc, height) => acc + height, 0);
   }
 
   public clear(key?: string): void {
@@ -50,5 +49,4 @@ export class ListMeasurerCache {
       this.measurementMap.clear();
     }
   }
-
 }

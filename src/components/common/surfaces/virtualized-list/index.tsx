@@ -1,6 +1,6 @@
 import React, {
-  CSSProperties,
   FC,
+  memo,
   ReactElement,
   Ref,
   useCallback,
@@ -8,25 +8,25 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState
+  useState,
 } from 'react';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
-import {ListChildComponentProps, ListOnItemsRenderedProps, ListOnScrollProps, VariableSizeList} from 'react-window';
+import {ListOnItemsRenderedProps, ListOnScrollProps, VariableSizeList} from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import InfiniteLoader from 'react-window-infinite-loader';
 import VirtualizedListMeasurer from './virtualized-list-measurer';
 import {RefUtils} from '../../../../shared/utils/ref.utils';
-import {ListItemProps, OnItemsRendered} from './types';
+import {ListItemDataProps, ListItemProps, OnItemsRendered} from './types';
 
 type Props = {
   itemRenderer: (params: ListItemProps) => ReactElement;
+  itemData: ListItemDataProps;
   loadMoreItems: () => Promise<void>;
   loadedLength: number;
   allLoaded: boolean;
   itemHeight?: number;
   itemKey?: (index: number) => string;
   reverseOrder?: boolean;
-  firstItemStyle?: CSSProperties;
   virtualizedListRef?: Ref<VirtualizedListMethods>;
 };
 
@@ -39,13 +39,13 @@ export type VirtualizedListMethods = {
   isScrolledToBottom: boolean;
 };
 
-export const VirtualizedList: FC<Props> = (props: Props) => {
-  const {itemRenderer, loadMoreItems, loadedLength, allLoaded} = props;
-  const {itemHeight, itemKey, reverseOrder, firstItemStyle, virtualizedListRef} = props;
+const VirtualizedList: FC<Props> = (props: Props) => {
+  const {itemRenderer, itemData, loadMoreItems, loadedLength, allLoaded} = props;
+  const {itemHeight, itemKey, reverseOrder, virtualizedListRef} = props;
   const listRef = useRef<VariableSizeList>();
   const [scroll, setScroll] = useState<ListOnScrollProps>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [visible, setVisible] = useState<number[]>([]);
+  const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [keyCache] = useState<ListKeysCache>(new ListKeysCache());
   const [measurerCache] = useState<ListMeasurerCache>(new ListMeasurerCache());
   const [, updateState] = useState<{}>();
@@ -63,9 +63,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   }, []);
 
   const getScrollHeight = useCallback((): number => {
-    return itemHeight !== undefined
-      ? itemHeight * loadedLength
-      : measurerCache.getTotalHeight();
+    return itemHeight !== undefined ? itemHeight * loadedLength : measurerCache.getTotalHeight();
   }, [itemHeight, loadedLength]);
 
   const scrollToPosition = useCallback((position: number): void => {
@@ -99,7 +97,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       scrollToTop,
       scrollToBottom,
       isScrolledToTop,
-      isScrolledToBottom
+      isScrolledToBottom,
     }),
     [clearCache, scrollToPosition, scrollToBottom, isScrolledToBottom]
   );
@@ -134,7 +132,6 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     updateKeys();
   }, [loadedLength]);
 
-
   useEffect(() => {
     scrollAndRefresh();
   }, [height]);
@@ -153,10 +150,10 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   );
 
   const wrappedItemRenderer = useCallback(
-    (params: ListChildComponentProps): ReactElement => {
+    (params: ListItemProps): ReactElement => {
       const index = params.index;
-      const style = {...params.style, overflow: 'hidden', ...(index === 0 ? firstItemStyle : null)};
-      const isVisible = visible.includes(index);
+      const style = {...params.style, overflow: 'hidden'};
+      const isVisible = visibleItems.includes(index);
       return itemRenderer({...params, style, isVisible});
     },
     [itemRenderer]
@@ -167,7 +164,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       const firstVisible = props.visibleStartIndex;
       const visibleItemsCount = props.visibleStopIndex - props.visibleStartIndex + 1;
       const visibleItems = Array.from({length: visibleItemsCount}, (_, i) => i + firstVisible);
-      setVisible(visibleItems);
+      setVisibleItems(visibleItems);
       onItemsRendered(props);
     },
     []
@@ -208,7 +205,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
         <>
           <VirtualizedListMeasurer
             itemRenderer={itemRenderer}
-            loadedItems={keyCache.size()}
+            itemData={itemData}
             measurerCache={measurerCache}
             keyCache={keyCache}
             afterMeasured={forceUpdate}
@@ -219,6 +216,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
                 ref={RefUtils.mergeRefs(listRef, ref)}
                 height={height}
                 width={width}
+                itemData={itemData}
                 itemCount={loadedLength}
                 itemSize={getItemSize}
                 initialScrollOffset={wrappedInitialScrollOffset}
@@ -234,3 +232,5 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     </AutoSizer>
   );
 };
+
+export default memo(VirtualizedList);

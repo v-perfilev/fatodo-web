@@ -1,7 +1,6 @@
-import React, {FC, memo, ReactElement, useCallback, useEffect, useState} from 'react';
+import React, {FC, memo, ReactElement, useCallback, useEffect, useMemo, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {chatControlListStyles} from './_styles';
-import MessageControlChat from './chat-control-chat';
 import {Chat} from '../../../../models/chat.model';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
@@ -10,9 +9,10 @@ import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-cha
 import {CircularSpinner} from '../../../common/loaders';
 import {handleChatLastMessageEvent, handleChatNewEvent, handleChatUpdateEvent} from './_ws';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
-import {VirtualizedList} from '../../../common/surfaces';
 import {CHAT_HEIGHT} from '../../_constants';
-import {ListChildComponentProps} from 'react-window';
+import VirtualizedList from '../../../common/surfaces/virtualized-list';
+import {ChatControlItemDataProps, ChatControlItemProps} from './types';
+import ChatControlRenderer from './chat-control-renderer';
 
 type Props = {
   chat: Chat;
@@ -87,15 +87,19 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
     handleChatLastMessageEvent(chatLastMessageUpdateEvent, setChats);
   }, [chatLastMessageUpdateEvent]);
 
-  const chatRenderer = ({index, style}: ListChildComponentProps): ReactElement => (
-    <MessageControlChat
-      index={index}
-      chats={chats}
-      account={account}
-      isSelected={chat?.id === chats[index].id}
-      style={style}
-      onClick={handleOnChatClick(index)}
-    />
+  const chatRenderer = useCallback(
+    (props: ChatControlItemProps): ReactElement => <ChatControlRenderer {...props} />,
+    []
+  );
+
+  const itemData = useMemo<ChatControlItemDataProps>(
+    () => ({
+      items: chats,
+      chat,
+      account,
+      handleOnChatClick,
+    }),
+    [chats, chat, account, handleOnChatClick]
   );
 
   return loading ? (
@@ -104,6 +108,7 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
     <Box className={classes.root}>
       <VirtualizedList
         itemRenderer={chatRenderer}
+        itemData={itemData}
         loadMoreItems={loadMoreChats}
         loadedLength={chats.length}
         allLoaded={allLoaded}

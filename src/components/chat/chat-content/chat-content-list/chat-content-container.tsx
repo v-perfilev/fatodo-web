@@ -2,23 +2,27 @@ import React, {Dispatch, FC, memo, ReactElement, SetStateAction, useCallback, us
 import {Box} from '@material-ui/core';
 import {chatContentListStyles} from './_styles';
 import {MessageListItem} from '../../../../models/message.model';
-import {VirtualizedList, VirtualizedListMethods} from '../../../common/surfaces';
+import {VirtualizedListMethods} from '../../../common/surfaces';
 import ChatContentScrollButton from './chat-content-scroll-button';
-import ChatContentItem from '../chat-content-item';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import {Chat} from '../../../../models/chat.model';
-import {ListItemProps} from '../../../common/surfaces/virtualized-list/types';
+import {User} from '../../../../models/user.model';
+import VirtualizedList from '../../../common/surfaces/virtualized-list';
+import {ChatContentItemDataProps, ChatContentItemProps} from './types';
+import ChatContentRenderer from './chat-content-renderer';
 
 type Props = {
   chat: Chat;
   items: MessageListItem[];
   loadMoreItems: () => Promise<void>;
   allLoaded: boolean;
+  account: User;
   listRef: VirtualizedListMethods;
   setListRef: Dispatch<SetStateAction<VirtualizedListMethods>>;
 };
 
-const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded, listRef, setListRef}: Props) => {
+const ChatContentContainer: FC<Props> = (props: Props) => {
+  const {chat, items, loadMoreItems, allLoaded, account, listRef, setListRef} = props;
   const classes = chatContentListStyles();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
 
@@ -41,19 +45,24 @@ const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded, list
     return unreadMessageCountMap?.get(chat.id) > 0;
   }, [unreadMessageCountMap, chat]);
 
-  const messageRenderer = useCallback(
-    ({index, isVisible, style}: ListItemProps): ReactElement => (
-      <div style={style}>
-        <ChatContentItem index={index} items={items} isVisible={isVisible} />
-      </div>
-    ),
-    [items]
+  const itemRenderer = useCallback(
+    (props: ChatContentItemProps): ReactElement => <ChatContentRenderer {...props} />,
+    []
+  );
+
+  const itemData = useMemo<ChatContentItemDataProps>(
+    () => ({
+      items,
+      account,
+    }),
+    [items, account]
   );
 
   return (
     <Box className={classes.root}>
       <VirtualizedList
-        itemRenderer={messageRenderer}
+        itemRenderer={itemRenderer}
+        itemData={itemData}
         loadMoreItems={loadMoreItems}
         loadedLength={items.length}
         allLoaded={allLoaded}
@@ -70,4 +79,4 @@ const ChatContentList: FC<Props> = ({chat, items, loadMoreItems, allLoaded, list
   );
 };
 
-export default memo(ChatContentList);
+export default memo(ChatContentContainer);

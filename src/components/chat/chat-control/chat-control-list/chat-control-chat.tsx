@@ -1,4 +1,4 @@
-import React, {FC, HTMLAttributes, memo, useEffect} from 'react';
+import React, {FC, HTMLAttributes, useEffect, useMemo} from 'react';
 import {Box} from '@material-ui/core';
 import {Chat} from '../../../../models/chat.model';
 import {chatControlChatStyles} from './_styles';
@@ -14,29 +14,40 @@ import {SoloBadge} from '../../../common/surfaces';
 import {useTranslation} from 'react-i18next';
 
 type Props = HTMLAttributes<HTMLElement> & {
-  index: number;
-  chats: Chat[];
+  chat: Chat;
   isSelected: boolean;
   account: User;
 };
 
-const ChatControlChat: FC<Props> = ({index, chats, isSelected, account, ...props}: Props) => {
+const ChatControlChat: FC<Props> = ({chat, isSelected, account, ...props}: Props) => {
   const classes = chatControlChatStyles();
   const {users, handleUserIds} = useUserListContext();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
   const {t} = useTranslation();
 
-  const chat = chats[index];
-  const unreadCount = unreadMessageCountMap?.get(chat.id);
-  const title = ChatUtils.getTitle(chat, users, account);
-  const date = chat.lastMessage?.createdAt ? new Date(chat.lastMessage.createdAt) : null;
-  const formattedDate = date ? DateFormatters.formatDependsOfDay(date) : null;
+  const unreadCount = useMemo<number>(() => {
+    return unreadMessageCountMap?.get(chat.id);
+  }, [unreadMessageCountMap, chat.id]);
+
+  const title = useMemo<string>(() => {
+    return ChatUtils.getTitle(chat, users, account);
+  }, [chat, users, account]);
+
+  const date = useMemo(() => {
+    return chat.lastMessage?.createdAt ? new Date(chat.lastMessage.createdAt) : null;
+  }, [chat.lastMessage]);
+
+  const formattedDate = useMemo<string>(() => {
+    return date ? DateFormatters.formatDependsOfDay(date) : null;
+  }, [date]);
 
   const classNames = csx(classes.root, {selected: isSelected});
 
   useEffect(() => {
-    handleUserIds(chat?.members);
-  }, []);
+    if (chat) {
+      handleUserIds(chat.members);
+    }
+  }, [chat]);
 
   return (
     <Box className={classNames} {...props}>
@@ -62,4 +73,4 @@ const ChatControlChat: FC<Props> = ({index, chats, isSelected, account, ...props
   );
 };
 
-export default memo(ChatControlChat);
+export default ChatControlChat;

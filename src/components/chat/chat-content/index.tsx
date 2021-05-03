@@ -5,7 +5,7 @@ import {Chat} from '../../../models/chat.model';
 import {User} from '../../../models/user.model';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import ChatContentHeader from './chat-content-header';
-import MessageContentList, {ChatContentMethods} from './chat-content-container';
+import ChatContentList, {ChatContentMethods} from './chat-content-list';
 import ChatContentFooter from './chat-content-footer';
 import {ChatUtils} from '../../../shared/utils/chat.utils';
 
@@ -39,7 +39,7 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
       {chat && (
         <>
           <ChatContentHeader chat={chat} title={title} closeChat={closeChat} clearMessages={clearMessages} />
-          <MessageContentList chat={chat} chatContentListRef={chatContentListRef} />
+          <ChatContentList chat={chat} account={account} chatContentListRef={chatContentListRef} />
           <ChatContentFooter chatId={chat.id} />
         </>
       )}

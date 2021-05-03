@@ -1,18 +1,18 @@
-import React, {FC, memo, ReactElement, useCallback, useEffect, useRef, useState} from 'react';
+import React, {FC, memo, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {virtualizedListMeasurerStyles} from './_styles';
-import {ListChildComponentProps} from 'react-window';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
+import {ListItemDataProps, ListItemProps} from './types';
 
 type Props = {
+  itemRenderer: (params: ListItemProps) => ReactElement;
+  itemData: ListItemDataProps;
   measurerCache: ListMeasurerCache;
   keyCache: ListKeysCache;
-  itemRenderer: (params: ListChildComponentProps) => ReactElement;
-  loadedItems: number;
   afterMeasured: () => void;
 };
 
 const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
-  const {measurerCache, keyCache, itemRenderer, loadedItems, afterMeasured} = props;
+  const {itemRenderer, itemData, measurerCache, keyCache, afterMeasured} = props;
   const classes = virtualizedListMeasurerStyles();
   const measurerRef = useRef<HTMLDivElement>();
   const indexesToMeasureMap = useRef<Map<number, number>>();
@@ -21,6 +21,10 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
   const forceUpdate = useCallback(() => {
     updateState({});
   }, []);
+
+  const loadedLength = useMemo<number>(() => {
+    return itemData.items.length;
+  }, [itemData.items]);
 
   const measure = useCallback(() => {
     if (measurerRef.current && indexesToMeasureMap.current?.size > 0) {
@@ -36,7 +40,7 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
   }, [forceUpdate, forceUpdate]);
 
   const fillMapToMeasure = useCallback(() => {
-    const indexes = Array.from(Array(loadedItems).keys()).filter((index) => {
+    const indexes = Array.from(Array(loadedLength).keys()).filter((index) => {
       const key = keyCache.get(index);
       return !measurerCache.has(key);
     });
@@ -47,7 +51,7 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
       });
       forceUpdate();
     }
-  }, [forceUpdate, loadedItems]);
+  }, [forceUpdate, loadedLength]);
 
   useEffect(() => {
     measure();
@@ -55,19 +59,19 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
 
   useEffect(() => {
     fillMapToMeasure();
-  }, [loadedItems]);
+  }, [loadedLength]);
 
   return indexesToMeasureMap.current ? (
     <div className={classes.measurer} ref={measurerRef}>
       {Array.from(indexesToMeasureMap.current.keys()).map((index, key) => (
-        <div key={key}>{itemRenderer({index, style: undefined, data: undefined})}</div>
+        <div key={key}>{itemRenderer({index, style: undefined, data: itemData, isVisible: false})}</div>
       ))}
     </div>
   ) : null;
 };
 
-const shouldNotUpdate = (props: Props, prevProps: Props): boolean => {
-  return props.loadedItems === 0 || props.loadedItems === prevProps.loadedItems;
+const areEqual = (props: Props, prevProps: Props): boolean => {
+  return props.itemData.items.length === 0 || props.itemData.items.length === prevProps.itemData.items.length;
 };
 
-export default memo(VirtualizedListMeasurer, shouldNotUpdate);
+export default memo(VirtualizedListMeasurer, areEqual);

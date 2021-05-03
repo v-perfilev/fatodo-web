@@ -1,5 +1,7 @@
 import {AbstractAuditing} from './abstract-auditing.model';
 
+export const messageReactionTypes = ['LIKE', 'DISLIKE'];
+
 export type MessageStatusType = 'READ';
 export type MessageReactionType = 'LIKE' | 'DISLIKE';
 

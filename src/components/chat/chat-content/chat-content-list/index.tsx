@@ -1,4 +1,4 @@
-import React, {FC, Ref, useCallback, useEffect, useImperativeHandle, useState} from 'react';
+import React, {FC, memo, Ref, useCallback, useEffect, useImperativeHandle, useState} from 'react';
 import {Chat} from '../../../../models/chat.model';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
@@ -7,11 +7,13 @@ import {CircularSpinner} from '../../../common/loaders';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-chat-context';
-import ChatContentList from './chat-content-list';
+import ChatContentContainer from './chat-content-container';
 import {VirtualizedListMethods} from '../../../common/surfaces';
+import {User} from '../../../../models/user.model';
 
 type Props = {
   chat: Chat;
+  account: User;
   chatContentListRef?: Ref<ChatContentMethods>;
 };
 
@@ -19,7 +21,7 @@ export type ChatContentMethods = {
   clearMessages: () => void;
 };
 
-const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
+const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) => {
   const {messageNewEvent, messageUpdateEvent, messageStatusesEvent, messageReactionsEvent} = useWsChatContext();
   const {handleResponse} = useSnackContext();
   const [messages, setMessages] = useState<Message[]>([]);
@@ -174,15 +176,16 @@ const ChatContentContainer: FC<Props> = ({chat, chatContentListRef}: Props) => {
   return loading ? (
     <CircularSpinner size="sm" />
   ) : (
-    <ChatContentList
+    <ChatContentContainer
       chat={chat}
       items={items}
       loadMoreItems={loadMoreMessages}
       allLoaded={allMessagesLoaded}
+      account={account}
       listRef={listRef}
       setListRef={setListRef}
     />
   );
 };
 
-export default ChatContentContainer;
+export default memo(ChatContentList);

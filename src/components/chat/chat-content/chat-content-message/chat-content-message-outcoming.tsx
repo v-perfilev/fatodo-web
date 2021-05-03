@@ -7,12 +7,14 @@ import {useUserListContext} from '../../../../shared/contexts/list-contexts/user
 import {MessageUtils} from '../../../../shared/utils/message.utils';
 import {User} from '../../../../models/user.model';
 import ChatContentMessageActions from './chat-content-message-actions';
+import ChatContentMessageReactions from './chat-content-message-reactions';
 
 type Props = {
   message: Message;
+  account: User;
 };
 
-const ChatContentMessageOutcoming: FC<Props> = ({message}: Props) => {
+const ChatContentMessageOutcoming: FC<Props> = ({message, account}: Props) => {
   const classes = chatContentMessageOutcomingStyles();
   const {users} = useUserListContext();
 
@@ -26,6 +28,7 @@ const ChatContentMessageOutcoming: FC<Props> = ({message}: Props) => {
 
   return (
     <Box className={classes.root}>
+      <ChatContentMessageReactions message={message} account={account} />
       <Box className={classes.message}>
         <Box className={classes.header}>
           <Box className={classes.name}>{user?.username}</Box>
