@@ -7,7 +7,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
 import {ListOnItemsRenderedProps, ListOnScrollProps, VariableSizeList} from 'react-window';
@@ -56,6 +56,10 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     return itemData.items.length;
   }, [itemData]);
 
+  const isDynamic = useMemo<boolean>(() => {
+    return itemHeight === undefined && itemKey !== undefined;
+  }, []);
+
   // OUTER METHODS
 
   const clearCache = useCallback((index?: number): void => {
@@ -65,8 +69,8 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   }, []);
 
   const getScrollHeight = useCallback((): number => {
-    return itemHeight !== undefined ? itemHeight * loadedLength : measurerCache.getTotalHeight();
-  }, [itemHeight, loadedLength]);
+    return isDynamic ? measurerCache.getTotalHeight() : itemHeight * loadedLength;
+  }, [isDynamic, loadedLength]);
 
   const scrollToPosition = useCallback((position: number): void => {
     listRef.current?.scrollTo(position);
@@ -99,7 +103,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       scrollToTop,
       scrollToBottom,
       isScrolledToTop,
-      isScrolledToBottom,
+      isScrolledToBottom
     }),
     [clearCache, scrollToPosition, scrollToTop, scrollToBottom, isScrolledToTop, isScrolledToBottom]
   );
@@ -108,16 +112,6 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
 
   const height = getScrollHeight();
   const prevHeight = RefUtils.usePrevious(height);
-
-  const updateKeys = useCallback((): void => {
-    if (!itemHeight && itemKey) {
-      for (let i = 0; i < loadedLength; i++) {
-        const key = itemKey(i);
-        keyCache.set(i, key);
-      }
-      forceUpdate();
-    }
-  }, [forceUpdate, itemHeight, itemKey]);
 
   const scrollAndRefresh = useCallback((): void => {
     if (reverseOrder && loading) {
@@ -129,10 +123,6 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     }
     listRef.current?.resetAfterIndex(0, true);
   }, [height, prevHeight, loading, scrollToPosition, isScrolledToBottom]);
-
-  useEffect(() => {
-    updateKeys();
-  }, [loadedLength]);
 
   useEffect(() => {
     scrollAndRefresh();
@@ -201,17 +191,22 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
 
   // RENDER METHODS
 
+  const measurer = (
+    <VirtualizedListMeasurer
+      itemRenderer={itemRenderer}
+      itemData={itemData}
+      itemKey={itemKey}
+      measurerCache={measurerCache}
+      keyCache={keyCache}
+      afterMeasured={forceUpdate}
+    />
+  );
+
   return (
     <AutoSizer>
       {({height, width}): ReactElement => (
         <>
-          <VirtualizedListMeasurer
-            itemRenderer={itemRenderer}
-            itemData={itemData}
-            measurerCache={measurerCache}
-            keyCache={keyCache}
-            afterMeasured={forceUpdate}
-          />
+          {isDynamic && measurer}
           <InfiniteLoader isItemLoaded={wrappedIsItemLoaded} loadMoreItems={wrappedLoadMoreRows} itemCount={itemCount}>
             {({onItemsRendered, ref}): ReactElement => (
               <VariableSizeList

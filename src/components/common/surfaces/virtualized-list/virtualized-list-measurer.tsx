@@ -6,13 +6,14 @@ import {ListItemDataProps, ListItemProps} from './types';
 type Props = {
   itemRenderer: (params: ListItemProps) => ReactElement;
   itemData: ListItemDataProps;
+  itemKey: (index: number) => string;
   measurerCache: ListMeasurerCache;
   keyCache: ListKeysCache;
   afterMeasured: () => void;
 };
 
 const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
-  const {itemRenderer, itemData, measurerCache, keyCache, afterMeasured} = props;
+  const {itemRenderer, itemData, itemKey, measurerCache, keyCache, afterMeasured} = props;
   const classes = virtualizedListMeasurerStyles();
   const measurerRef = useRef<HTMLDivElement>();
   const indexesToMeasureMap = useRef<Map<number, number>>();
@@ -26,6 +27,14 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
     return itemData.items.length;
   }, [itemData.items]);
 
+  const updateKeys = useCallback((): void => {
+    for (let i = 0; i < loadedLength; i++) {
+      const key = itemKey(i);
+      keyCache.set(i, key);
+    }
+    forceUpdate();
+  }, [loadedLength]);
+
   const measure = useCallback(() => {
     if (measurerRef.current && indexesToMeasureMap.current?.size > 0) {
       Array.from(indexesToMeasureMap.current.entries()).forEach(([index, i]) => {
@@ -37,7 +46,7 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
       forceUpdate();
       afterMeasured();
     }
-  }, [forceUpdate, forceUpdate]);
+  }, []);
 
   const fillMapToMeasure = useCallback(() => {
     const indexes = Array.from(Array(loadedLength).keys()).filter((index) => {
@@ -51,13 +60,14 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
       });
       forceUpdate();
     }
-  }, [forceUpdate, loadedLength]);
+  }, [loadedLength]);
 
   useEffect(() => {
     measure();
   });
 
   useEffect(() => {
+    updateKeys();
     fillMapToMeasure();
   }, [loadedLength]);
 
