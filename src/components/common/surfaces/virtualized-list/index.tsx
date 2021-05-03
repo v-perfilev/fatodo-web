@@ -7,7 +7,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState
+  useState,
 } from 'react';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
 import {ListOnItemsRenderedProps, ListOnScrollProps, VariableSizeList} from 'react-window';
@@ -103,7 +103,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       scrollToTop,
       scrollToBottom,
       isScrolledToTop,
-      isScrolledToBottom
+      isScrolledToBottom,
     }),
     [clearCache, scrollToPosition, scrollToTop, scrollToBottom, isScrolledToTop, isScrolledToBottom]
   );
@@ -148,7 +148,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       const isVisible = visibleItems.includes(index);
       return itemRenderer({...params, style, isVisible});
     },
-    [itemRenderer]
+    [visibleItems]
   );
 
   const wrappedOnItemsRendered = useCallback(
@@ -176,13 +176,13 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
         .catch(() => setLoading(false))
         .finally(() => resolve());
     });
-  }, [loadMoreItems]);
+  }, []);
 
   const getItemSize = useCallback(
     (index: number): number => {
-      return itemHeight || measurerCache.getHeight(keyCache.get(index));
+      return isDynamic ? measurerCache.getHeight(keyCache.get(index)) : itemHeight;
     },
-    [itemHeight]
+    [isDynamic]
   );
 
   const wrappedInitialScrollOffset = useMemo<number>(() => {

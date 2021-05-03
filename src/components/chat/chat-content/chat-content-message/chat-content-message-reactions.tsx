@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useCallback, useEffect, useMemo, useState} from 'react';
+import React, {FC, memo, ReactElement, useCallback, useEffect, useMemo, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {Message, MessageReactionType, messageReactionTypes} from '../../../../models/message.model';
@@ -22,25 +22,19 @@ const ChatContentMessageReactions: FC<Props> = ({message, account}: Props) => {
   const handleClick = useCallback(
     (r: MessageReactionType) => (): void => {
       if (r === activeReaction) {
-        ChatService.noneMessageReaction(message?.id).catch((response) => {
-          handleResponse(response);
-        });
+        ChatService.noneMessageReaction(message.id).catch(handleResponse);
       } else if (r === 'LIKE') {
-        ChatService.likeMessageReaction(message?.id).catch((response) => {
-          handleResponse(response);
-        });
+        ChatService.likeMessageReaction(message.id).catch(handleResponse);
       } else if (r === 'DISLIKE') {
-        ChatService.dislikeMessageReaction(message?.id).catch((response) => {
-          handleResponse(response);
-        });
+        ChatService.dislikeMessageReaction(message.id).catch(handleResponse);
       }
     },
-    [message, account, activeReaction]
+    [message, activeReaction]
   );
 
   const isOutcoming = useMemo<boolean>(() => {
-    return message?.userId === account?.id;
-  }, [message, account]);
+    return message.userId === account?.id;
+  }, [message]);
 
   const updateReactionsMap = useCallback(() => {
     const map = new Map();
@@ -54,14 +48,14 @@ const ChatContentMessageReactions: FC<Props> = ({message, account}: Props) => {
   }, [message.reactions]);
 
   const updateActiveReaction = useCallback(() => {
-    const reaction = message?.reactions?.find((r) => r.userId === account?.id);
+    const reaction = message.reactions.find((r) => r.userId === account?.id);
     setActiveReaction(reaction?.type);
-  }, [message.reactions, account]);
+  }, [message.reactions]);
 
   useEffect(() => {
     updateReactionsMap();
     updateActiveReaction();
-  }, [message.reactions, account]);
+  }, [message.reactions]);
 
   const reactionClassNames = csx(classes.reaction, {[classes.pointer]: !isOutcoming});
 
@@ -80,4 +74,4 @@ const ChatContentMessageReactions: FC<Props> = ({message, account}: Props) => {
   return <Box className={classes.root}>{Array.from(reactionMap.keys()).map(reaction)}</Box>;
 };
 
-export default ChatContentMessageReactions;
+export default memo(ChatContentMessageReactions);

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, ReactElement, useMemo} from 'react';
+import {FC, ReactElement} from 'react';
 import {Box} from '@material-ui/core';
 import {MessageReactionType} from '../../../../models/message.model';
 import {LikeIcon} from '../../icons/like-icon';
@@ -11,7 +11,7 @@ type Props = IconProps & {
 };
 
 export const ReactionView: FC<Props> = ({reactionType, className, ...props}: Props) => {
-  const icon = useMemo<ReactElement>(() => {
+  const icon = (): ReactElement => {
     switch (reactionType) {
       case 'LIKE':
         return <LikeIcon {...props} />;
@@ -20,7 +20,7 @@ export const ReactionView: FC<Props> = ({reactionType, className, ...props}: Pro
       default:
         return <LikeIcon {...props} />;
     }
-  }, [reactionType]);
+  };
 
   return <Box className={className}>{icon}</Box>;
 };
