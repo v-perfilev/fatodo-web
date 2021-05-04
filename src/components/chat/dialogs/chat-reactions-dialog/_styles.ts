@@ -41,7 +41,7 @@ export const chatReactionsDialogReactionStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(1),
   },
   reaction: {
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(2),
   },
   user: {
     flexGrow: 1,

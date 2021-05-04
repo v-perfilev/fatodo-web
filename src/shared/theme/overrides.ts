@@ -6,4 +6,15 @@ export const defaultOverrides = {
       fontSize: '1rem',
     },
   },
+  MuiDialog: {
+    paperWidthXs: {
+      maxWidth: 200,
+    },
+    paperWidthSm: {
+      maxWidth: 350,
+    },
+    paperWidthMd: {
+      maxWidth: 500,
+    }
+  }
 } as Overrides;

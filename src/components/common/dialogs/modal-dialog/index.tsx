@@ -17,7 +17,7 @@ type Props = {
 const ModalDialog: FC<Props> = ({isOpen, close, title, content, actions, withText, showCloseIcon, size}: Props) => {
   const classes = modalDialogStyles();
 
-  const maxWidth = size || 'xs';
+  const maxWidth = size || 'sm';
 
   return (
     <Dialog open={isOpen} onClose={close} fullWidth maxWidth={maxWidth}>

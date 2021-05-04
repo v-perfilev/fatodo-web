@@ -16,7 +16,7 @@ const ChatReactionsDialogReaction: FC<Props> = ({reaction, user}: Props) => {
   return (
     <Box className={classes.reactionBox}>
       <Box className={classes.reaction}>
-        <ReactionView reactionType={reaction.type} />
+        <ReactionView reactionType={reaction.type} color="primary" />
       </Box>
       <Box className={classes.user}>
         <UserWithPopupView user={user} withUsername withUserPic picSize="sm" />
