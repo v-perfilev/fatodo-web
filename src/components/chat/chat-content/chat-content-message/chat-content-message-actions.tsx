@@ -1,4 +1,4 @@
-import React, {FC, MouseEvent, useRef, useState} from 'react';
+import React, {FC, MouseEvent, useCallback, useRef, useState} from 'react';
 import {IconButton, MenuItem} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../../common/icons/dots-vertical-icon';
 import {PopupMenu} from '../../../common/surfaces';
@@ -26,29 +26,29 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
   const {showChatReactionsDialog} = useChatDialogContext();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClickOnAction = (e: React.MouseEvent<HTMLElement>): void => {
+  const handleClickOnAction = useCallback((e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     e.stopPropagation();
     setIsOpen(true);
-  };
+  }, []);
 
-  const handleClose = (e: React.MouseEvent<HTMLElement>): void => {
+  const handleClose = useCallback((e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     e.stopPropagation();
     setIsOpen(false);
-  };
+  }, []);
 
-  const openReactionsDialog = (e: MouseEvent<HTMLElement>): void => {
+  const openReactionsDialog = useCallback((e: MouseEvent<HTMLElement>): void => {
     showChatReactionsDialog(message, users);
     handleClose(e);
-  };
+  }, [message, users]);
 
-  const deleteMessage = (e: MouseEvent<HTMLElement>): void => {
+  const deleteMessage = useCallback((e: MouseEvent<HTMLElement>): void => {
     ChatService.deleteMessage(message.id).catch((response) => {
       handleResponse(response);
     });
     handleClose(e);
-  };
+  }, [message]);
 
   return (
     <>

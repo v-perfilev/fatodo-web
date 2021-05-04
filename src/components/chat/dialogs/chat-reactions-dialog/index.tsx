@@ -55,7 +55,7 @@ const ChatReactionsDialog: FC<Props> = ({message, users, show, close}: Props) =>
     if (message && users) {
       combineUsersWithReactions();
     }
-  }, [message, users]);
+  }, [message?.reactions, users]);
 
   const filter = (
     <Box className={classes.filter}>
