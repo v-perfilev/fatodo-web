@@ -19,7 +19,7 @@ export const defaultChatReactionDialogProps: Readonly<ChatReactionDialogProps> =
   message: null,
   users: [],
   show: false,
-  close: (): void => undefined,
+  close: (): void => undefined
 };
 
 type MessageReactionWithUser = {
@@ -45,7 +45,7 @@ const ChatReactionsDialog: FC<Props> = ({message, users, show, close}: Props) =>
     const userFilter = (userId: string) => (user: User): boolean => user.id === userId;
     const updatedList = message.reactions.map((reaction) => ({
       reaction,
-      user: users.find(userFilter(reaction.userId)),
+      user: users.find(userFilter(reaction.userId))
     }));
     setReactions(updatedList);
     setReactionsToShow(updatedList);
@@ -68,7 +68,9 @@ const ChatReactionsDialog: FC<Props> = ({message, users, show, close}: Props) =>
       {reactionsToShow.map((reaction, index) => (
         <ChatReactionsDialogReaction reaction={reaction.reaction} user={reaction.user} key={index} />
       ))}
-      {reactionsToShow.length === 0 && <Box className={classes.notFound}>{t('common:members.usersNotFound')}</Box>}
+      {reactionsToShow.length === 0 && (
+        <Box className={classes.notFound}>{t('chat:readStatuses.readStatusesNotFound')}</Box>
+      )}
     </Box>
   );
 
@@ -79,7 +81,8 @@ const ChatReactionsDialog: FC<Props> = ({message, users, show, close}: Props) =>
     </>
   );
 
-  return <ModalDialog isOpen={show} close={close} title={t('chat:members.title')} content={content} showCloseIcon />;
+  return <ModalDialog isOpen={show} close={close} title={t('chat:readStatuses.title')} content={content}
+                      showCloseIcon />;
 };
 
 export default ChatReactionsDialog;

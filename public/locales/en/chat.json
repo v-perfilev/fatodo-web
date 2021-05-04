@@ -13,6 +13,14 @@
     "leaveChat": "Leave chat",
     "deleteChat": "Delete chat"
   },
+  "message": {
+    "deleted": "Message deleted",
+    "actions": {
+      "reactions": "Reactions",
+      "readStatuses": "Read",
+      "delete": "Delete"
+    }
+  },
   "createChat": {
     "title": "Create chat",
     "fields": {
@@ -53,6 +61,14 @@
   "removeMember": {
     "title": "Remove user from chat",
     "text": "Are you sure you want to delete user {{username}} from chat?"
+  },
+  "reactions": {
+    "title": "Reactions to message",
+    "reactionsNotFound": "No reactions yet"
+  },
+  "readStatuses": {
+    "title": "Read",
+    "readStatusesNotFound": "Nobody has read this message"
   },
   "event": {
     "CREATE_DIRECT_CHAT": "{{username}} created direct chat with {{usernames}}",

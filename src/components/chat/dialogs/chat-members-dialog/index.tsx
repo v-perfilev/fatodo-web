@@ -56,7 +56,7 @@ const ChatMembersDialog: FC<Props> = ({chat, users, show, close, switchToAddMemb
       {usersToShow.map((user, index) => (
         <ChatMembersDialogMember chat={chat} user={user} key={index} />
       ))}
-      {usersToShow.length === 0 && <Box className={classes.notFound}>{t('common:members.usersNotFound')}</Box>}
+      {usersToShow.length === 0 && <Box className={classes.notFound}>{t('chat:members.usersNotFound')}</Box>}
     </Box>
   );
 

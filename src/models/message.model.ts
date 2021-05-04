@@ -19,6 +19,7 @@ export interface Message extends AbstractAuditing {
   text: string;
   forwardedMessage: Message;
 
+  isDeleted: boolean;
   isEvent: boolean;
 
   statuses: MessageStatus[];

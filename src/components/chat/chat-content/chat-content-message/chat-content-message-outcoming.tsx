@@ -8,6 +8,7 @@ import {MessageUtils} from '../../../../shared/utils/message.utils';
 import {User} from '../../../../models/user.model';
 import ChatContentMessageActions from './chat-content-message-actions';
 import ChatContentMessageReactions from './chat-content-message-reactions';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   message: Message;
@@ -17,6 +18,7 @@ type Props = {
 const ChatContentMessageOutcoming: FC<Props> = ({message, account}: Props) => {
   const classes = chatContentMessageOutcomingStyles();
   const {users} = useUserListContext();
+  const {t} = useTranslation();
 
   const user = useMemo((): User => {
     return MessageUtils.extractUserFromMessage(users, message);
@@ -35,7 +37,12 @@ const ChatContentMessageOutcoming: FC<Props> = ({message, account}: Props) => {
           <Box className={classes.date}>{date}</Box>
           <ChatContentMessageActions message={message} isOutcoming />
         </Box>
-        <Box className={classes.body}>{message.text}</Box>
+        {!message.isDeleted && (
+          <Box className={classes.body}>{message.text}</Box>
+        )}
+        {message.isDeleted && (
+          <Box className={classes.deleted}>{t('chat:message.deleted')}</Box>
+        )}
       </Box>
     </Box>
   );

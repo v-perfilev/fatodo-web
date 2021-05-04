@@ -43,6 +43,11 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
     handleClose(e);
   }, [message, users]);
 
+  const openReadStatusesDialog = useCallback((e: MouseEvent<HTMLElement>): void => {
+    showChatReactionsDialog(message, users);
+    handleClose(e);
+  }, [message, users]);
+
   const deleteMessage = useCallback((e: MouseEvent<HTMLElement>): void => {
     ChatService.deleteMessage(message.id).catch((response) => {
       handleResponse(response);
@@ -58,12 +63,16 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
       <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
         <MenuItem onClick={openReactionsDialog}>
           <ReactionsIcon color="primary" />
-          {t('chat:menu.addMembers')}
+          {t('chat:message.actions.reactions')}
         </MenuItem>
-        {isOutcoming && (
+        <MenuItem onClick={openReadStatusesDialog}>
+          <ReactionsIcon color="primary" />
+          {t('chat:message.actions.readStatuses')}
+        </MenuItem>
+        {isOutcoming && !message.isDeleted && (
           <MenuItem onClick={deleteMessage}>
             <DeleteIcon color="error" />
-            {t('chat:menu.renameChat')}
+            {t('chat:message.actions.delete')}
           </MenuItem>
         )}
       </PopupMenu>

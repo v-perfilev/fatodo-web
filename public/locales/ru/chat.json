@@ -13,6 +13,14 @@
     "leaveChat": "Покинуть чат",
     "deleteChat": "Удалить чат"
   },
+  "message": {
+    "deleted": "Сообщение удалено",
+    "actions": {
+      "reactions": "Реакции",
+      "readStatuses": "Прочитали",
+      "delete": "Удалить"
+    }
+  },
   "createChat": {
     "title": "Создать чат",
     "fields": {
@@ -53,6 +61,14 @@
   "removeMember": {
     "title": "Удаление пользователя",
     "text": "Вы уверены, что хотите удалить пользователя {{username}} из чата?"
+  },
+  "reactions": {
+    "title": "Реакции на сообщение",
+    "reactionsNotFound": "Пока реакций нет"
+  },
+  "readStatuses": {
+    "title": "Прочитали",
+    "readStatusesNotFound": "Пока никто не прочитал"
   },
   "event": {
     "CREATE_DIRECT_CHAT": "{{username}} создал директ чат с {{usernames}}",

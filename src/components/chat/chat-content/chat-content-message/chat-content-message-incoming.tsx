@@ -10,6 +10,7 @@ import csx from 'classnames';
 import {User} from '../../../../models/user.model';
 import ChatContentMessageActions from './chat-content-message-actions';
 import ChatContentMessageReactions from './chat-content-message-reactions';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   message: Message;
@@ -19,6 +20,7 @@ type Props = {
 const ChatContentMessageIncoming: FC<Props> = ({message, account}: Props) => {
   const classes = chatContentMessageIncomingStyles();
   const {users} = useUserListContext();
+  const {t} = useTranslation();
 
   const user = useMemo((): User => {
     return MessageUtils.extractUserFromMessage(users, message);
@@ -43,7 +45,12 @@ const ChatContentMessageIncoming: FC<Props> = ({message, account}: Props) => {
           <Box className={classes.date}>{date}</Box>
           <ChatContentMessageActions message={message} />
         </Box>
-        <Box className={classes.body}>{message.text}</Box>
+        {!message.isDeleted && (
+          <Box className={classes.body}>{message.text}</Box>
+        )}
+        {message.isDeleted && (
+          <Box className={classes.deleted}>{t('chat:message.deleted')}</Box>
+        )}
       </Box>
       <ChatContentMessageReactions message={message} account={account} />
     </Box>
