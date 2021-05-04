@@ -70,10 +70,10 @@ const ChatMain: FC<Props> = ({account}: Props) => {
 
   const bigView = (
     <Grid container className={classes.bigViewRoot}>
-      <Grid item xs={4} className={classes.control}>
+      <Grid item xs={5} lg={4} xl={3} className={classes.control}>
         <ChatControl chat={chat} setChat={setChat} account={account} />
       </Grid>
-      <Grid item xs={8} className={classes.content}>
+      <Grid item xs={7} lg={8} xl={9} className={classes.content}>
         <ChatContent chat={chat} closeChat={closeChat} account={account} />
       </Grid>
     </Grid>

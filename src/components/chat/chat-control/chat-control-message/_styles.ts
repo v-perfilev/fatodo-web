@@ -6,26 +6,32 @@ export const chatControlMessageEventStyles = makeStyles((theme: Theme) => ({
     whiteSpace: 'nowrap',
     fontSize: '0.8rem',
     fontWeight: 'bold',
-    color: theme.palette.grey['500'],
-  },
+    color: theme.palette.grey['500']
+  }
 }));
 
 export const chatControlMessageIncomingStyles = makeStyles((theme: Theme) => ({
   root: {
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap'
   },
   salutation: {
     fontWeight: 'bold',
-    color: theme.palette.grey['500'],
+    color: theme.palette.grey['500']
   },
+  deleted: {
+    color: theme.palette.grey['500']
+  }
 }));
 
 export const chatControlMessageOutcomingStyles = makeStyles((theme: Theme) => ({
   root: {
-    whiteSpace: 'nowrap',
+    whiteSpace: 'nowrap'
   },
   salutation: {
     fontWeight: 'bold',
-    color: theme.palette.grey['500'],
+    color: theme.palette.grey['500']
   },
+  deleted: {
+    color: theme.palette.grey['500']
+  }
 }));

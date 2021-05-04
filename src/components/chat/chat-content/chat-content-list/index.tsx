@@ -148,11 +148,11 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
   }, [messageNewEvent]);
 
   useEffect(() => {
-    if (chat?.id === messageNewEvent?.chatId) {
+    if (chat?.id === messageUpdateEvent?.chatId) {
       const updateFunc = messageUpdater(messageUpdateEvent);
       updateMessagesAndItems(updateFunc);
       // clear cache for resize
-      const index = items.findIndex((item) => item.message?.id === messageNewEvent.id);
+      const index = items.findIndex((item) => item.message?.id === messageUpdateEvent.id);
       if (index !== undefined) {
         listRef?.clearCache(index);
       }

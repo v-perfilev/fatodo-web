@@ -7,7 +7,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
+  useState
 } from 'react';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
 import {ListChildComponentProps, ListOnItemsRenderedProps, ListOnScrollProps, VariableSizeList} from 'react-window';
@@ -105,7 +105,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       scrollToTop,
       scrollToBottom,
       isScrolledToTop,
-      isScrolledToBottom,
+      isScrolledToBottom
     }),
     [visibleItems, clearCache, scrollToPosition, scrollToTop, scrollToBottom, isScrolledToTop, isScrolledToBottom]
   );
@@ -213,6 +213,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
                 initialScrollOffset={wrappedInitialScrollOffset}
                 onItemsRendered={wrappedOnItemsRendered(onItemsRendered)}
                 onScroll={setScroll}
+                overscanCount={5}
               >
                 {itemRenderer}
               </VariableSizeList>

@@ -38,22 +38,31 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
     setIsOpen(false);
   }, []);
 
-  const openReactionsDialog = useCallback((e: MouseEvent<HTMLElement>): void => {
-    showChatReactionsDialog(message, users);
-    handleClose(e);
-  }, [message, users]);
+  const openReactionsDialog = useCallback(
+    (e: MouseEvent<HTMLElement>): void => {
+      showChatReactionsDialog(message, users);
+      handleClose(e);
+    },
+    [message, users]
+  );
 
-  const openReadStatusesDialog = useCallback((e: MouseEvent<HTMLElement>): void => {
-    showChatReactionsDialog(message, users);
-    handleClose(e);
-  }, [message, users]);
+  const openReadStatusesDialog = useCallback(
+    (e: MouseEvent<HTMLElement>): void => {
+      showChatReactionsDialog(message, users);
+      handleClose(e);
+    },
+    [message, users]
+  );
 
-  const deleteMessage = useCallback((e: MouseEvent<HTMLElement>): void => {
-    ChatService.deleteMessage(message.id).catch((response) => {
-      handleResponse(response);
-    });
-    handleClose(e);
-  }, [message]);
+  const deleteMessage = useCallback(
+    (e: MouseEvent<HTMLElement>): void => {
+      ChatService.deleteMessage(message.id).catch((response) => {
+        handleResponse(response);
+      });
+      handleClose(e);
+    },
+    [message]
+  );
 
   return (
     <>

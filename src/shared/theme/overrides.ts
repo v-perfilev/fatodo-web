@@ -15,6 +15,6 @@ export const defaultOverrides = {
     },
     paperWidthMd: {
       maxWidth: 500,
-    }
-  }
+    },
+  },
 } as Overrides;

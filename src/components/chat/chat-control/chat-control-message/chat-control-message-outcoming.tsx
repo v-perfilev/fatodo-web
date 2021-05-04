@@ -15,7 +15,8 @@ const ChatControlMessageOutcoming: FC<Props> = ({message}: Props) => {
   return (
     <Box className={classes.root}>
       <span className={classes.salutation}>{t('salutations.you')}: </span>
-      {message.text}
+      {!message.isDeleted && <span>{message.text}</span>}
+      {message.isDeleted && <span className={classes.deleted}>{t('chat:message.deleted')}</span>}
     </Box>
   );
 };

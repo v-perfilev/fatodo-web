@@ -24,6 +24,8 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
     updateState({});
   }, []);
 
+  const keyLength = keyCache.size();
+
   const loadedLength = useMemo<number>(() => {
     return itemData.items.length;
   }, [itemData.items]);
@@ -70,7 +72,7 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
   useEffect(() => {
     updateKeys();
     fillMapToMeasure();
-  }, [loadedLength]);
+  }, [keyLength, loadedLength]);
 
   return indexesToMeasureMap.current ? (
     <div className={classes.measurer} ref={measurerRef}>
@@ -81,8 +83,4 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
   ) : null;
 };
 
-const areEqual = (props: Props, prevProps: Props): boolean => {
-  return props.itemData.items.length === 0 || props.itemData.items.length === prevProps.itemData.items.length;
-};
-
-export default memo(VirtualizedListMeasurer, areEqual);
+export default memo(VirtualizedListMeasurer);
