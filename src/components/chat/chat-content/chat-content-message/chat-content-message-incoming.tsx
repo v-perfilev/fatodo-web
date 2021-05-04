@@ -1,7 +1,7 @@
 import React, {FC, useMemo} from 'react';
 import {Message} from '../../../../models/message.model';
 import {chatContentMessageIncomingStyles} from './_styles';
-import {Box} from '@material-ui/core';
+import {Box, Hidden} from '@material-ui/core';
 import {UrlPic} from '../../../common/images';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
@@ -38,15 +38,19 @@ const ChatContentMessageIncoming: FC<Props> = ({message, account}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <UrlPic alt={user?.username} url={user?.imageFilename} size="lg" border={1} />
+      <Hidden xsDown>
+        <UrlPic alt={user?.username} url={user?.imageFilename} size="lg" border={1} />
+      </Hidden>
       <Box className={messageClassName}>
         <Box className={classes.header}>
           <Box className={classes.name}>{user?.username}</Box>
           <Box className={classes.date}>{date}</Box>
           <ChatContentMessageActions message={message} />
         </Box>
-        {!message.isDeleted && <Box className={classes.body}>{message.text}</Box>}
-        {message.isDeleted && <Box className={classes.deleted}>{t('chat:message.deleted')}</Box>}
+        <Box className={classes.body}>
+          {!message.isDeleted && <span>{message.text}</span>}
+          {message.isDeleted && <span className={classes.deleted}>{t('chat:message.deleted')}</span>}
+        </Box>
       </Box>
       <ChatContentMessageReactions message={message} account={account} />
     </Box>

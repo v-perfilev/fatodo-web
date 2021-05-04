@@ -33,13 +33,13 @@ export const chatContentMessageEventStyles = makeStyles((theme: Theme) => ({
 export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '90%',
+    minWidth: 200,
     marginRight: '10%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'start',
   },
   message: {
-    minWidth: 250,
     display: 'flex',
     flexDirection: 'column',
     marginLeft: theme.spacing(1),
@@ -80,10 +80,6 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
     marginLeft: theme.spacing(1),
   },
   deleted: {
-    marginTop: theme.spacing(0.5),
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-    marginLeft: theme.spacing(1),
     color: theme.palette.grey['500'],
   },
 }));
@@ -91,6 +87,7 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
 export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '90%',
+    minWidth: 200,
     marginLeft: '10%',
     display: 'flex',
     flexDirection: 'row',
@@ -98,7 +95,6 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'flex-end',
   },
   message: {
-    minWidth: 250,
     display: 'flex',
     flexDirection: 'column',
     marginLeft: theme.spacing(1),
@@ -134,10 +130,6 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     marginLeft: theme.spacing(1),
   },
   deleted: {
-    marginTop: theme.spacing(0.5),
-    marginRight: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-    marginLeft: theme.spacing(1),
     color: theme.palette.grey['500'],
   },
 }));

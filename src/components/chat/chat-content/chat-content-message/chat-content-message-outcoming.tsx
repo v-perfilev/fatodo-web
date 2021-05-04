@@ -37,8 +37,10 @@ const ChatContentMessageOutcoming: FC<Props> = ({message, account}: Props) => {
           <Box className={classes.date}>{date}</Box>
           <ChatContentMessageActions message={message} isOutcoming />
         </Box>
-        {!message.isDeleted && <Box className={classes.body}>{message.text}</Box>}
-        {message.isDeleted && <Box className={classes.deleted}>{t('chat:message.deleted')}</Box>}
+        <Box className={classes.body}>
+          {!message.isDeleted && <span>{message.text}</span>}
+          {message.isDeleted && <span className={classes.deleted}>{t('chat:message.deleted')}</span>}
+        </Box>
       </Box>
     </Box>
   );
