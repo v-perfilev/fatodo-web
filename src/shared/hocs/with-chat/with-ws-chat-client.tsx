@@ -74,7 +74,7 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
   }
 
   const context = {
-    selectChat: setChat,
+    selectChatForWs: setChat,
     chatNewEvent,
     chatUpdateEvent,
     chatLastMessageEvent,

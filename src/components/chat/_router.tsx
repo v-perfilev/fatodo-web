@@ -14,6 +14,11 @@ export enum ChatRoutes {
   CHAT = '/:chatId',
 }
 
+export class ChatRouteUtils {
+  public static getRootUrl = (): string => Routes.CHATS;
+  public static getChatUrl = (id: string): string => (Routes.CHATS + ChatRoutes.CHAT).replace(':chatId', id);
+}
+
 const ChatRouter: FC = () => {
   const match = useRouteMatch();
 
