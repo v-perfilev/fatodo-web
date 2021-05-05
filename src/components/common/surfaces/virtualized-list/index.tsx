@@ -213,7 +213,6 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
                 initialScrollOffset={wrappedInitialScrollOffset}
                 onItemsRendered={wrappedOnItemsRendered(onItemsRendered)}
                 onScroll={setScroll}
-                overscanCount={5}
               >
                 {itemRenderer}
               </VariableSizeList>

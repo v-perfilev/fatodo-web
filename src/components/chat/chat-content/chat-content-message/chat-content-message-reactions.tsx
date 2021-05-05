@@ -57,7 +57,12 @@ const ChatContentMessageReactions: FC<Props> = ({message, account}: Props) => {
     updateActiveReaction();
   }, [message.reactions]);
 
-  const reactionClassNames = csx(classes.reaction, {[classes.pointer]: !isOutcoming});
+  const reactionClassNames = csx(
+    classes.reaction,
+    {[classes.pointer]: !isOutcoming},
+    {[classes.countOnRight]: !isOutcoming},
+    {[classes.countOnLeft]: isOutcoming},
+    );
 
   const reaction = (r: MessageReactionType, key: number): ReactElement => {
     const count = reactionMap.get(r);

@@ -38,9 +38,11 @@ const ChatContentMessageIncoming: FC<Props> = ({message, account}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <Hidden xsDown>
-        <UrlPic alt={user?.username} url={user?.imageFilename} size="lg" border={1} />
-      </Hidden>
+      {/*<Hidden xsDown>*/}
+        <Box className={classes.image}>
+        <UrlPic alt={user?.username} url={user?.imageFilename} size="md" border={1} />
+        </Box>
+      {/*</Hidden>*/}
       <Box className={messageClassName}>
         <Box className={classes.header}>
           <Box className={classes.name}>{user?.username}</Box>
