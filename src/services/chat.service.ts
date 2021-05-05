@@ -15,6 +15,11 @@ export default class ChatService {
     return axios.get(url, {params});
   };
 
+  public static getFilteredChats = (filter: string): AxiosPromise<Chat[]> => {
+    const url = ChatService.baseUrl + '/chat/filtered/' + filter;
+    return axios.get(url);
+  };
+
   public static getChatById = (id: string): AxiosPromise<Chat> => {
     const url = ChatService.baseUrl + '/chat/' + id;
     return axios.get(url);

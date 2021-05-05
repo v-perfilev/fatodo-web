@@ -29,9 +29,10 @@ const ChatControl: FC<Props> = ({chat, setChat, account}: Props) => {
     <Box className={classes.root}>
       <ChatControlHeader setFilter={setFilter} />
       {type === 'list' && <ChatControlList chat={chat} setChat={setChat} account={account} />}
-      {type === 'filtered' && <ChatControlFilteredList chat={chat} setChat={setChat} />}
+      {type === 'filtered' && (
+        <ChatControlFilteredList filter={filter} chat={chat} setChat={setChat} account={account} />
+      )}
     </Box>
   );
 };
-
 export default ChatControl;

@@ -20,8 +20,8 @@ import {ListItemDataProps, OnItemsRendered} from './types';
 type Props = {
   itemRenderer: (params: ListChildComponentProps) => ReactElement;
   itemData: ListItemDataProps;
-  loadMoreItems: () => Promise<void>;
-  allLoaded: boolean;
+  loadMoreItems?: () => Promise<void>;
+  allLoaded?: boolean;
   itemHeight?: number;
   itemKey?: (index: number) => string;
   reverseOrder?: boolean;
@@ -39,7 +39,7 @@ export type VirtualizedListMethods = {
 };
 
 export const VirtualizedList: FC<Props> = (props: Props) => {
-  const {itemRenderer, itemData, loadMoreItems, allLoaded} = props;
+  const {itemRenderer, itemData, loadMoreItems, allLoaded = true} = props;
   const {itemHeight, itemKey, reverseOrder, virtualizedListRef} = props;
   const listRef = useRef<VariableSizeList>();
   const [scroll, setScroll] = useState<ListOnScrollProps>();
@@ -165,10 +165,14 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
 
   const wrappedLoadMoreRows = useCallback((): Promise<void> => {
     return new Promise((resolve) => {
-      setLoading(true);
-      loadMoreItems()
-        .catch(() => setLoading(false))
-        .finally(() => resolve());
+      if (loadMoreItems) {
+        setLoading(true);
+        loadMoreItems()
+          .catch(() => setLoading(false))
+          .finally(() => resolve());
+      } else {
+        resolve();
+      }
     });
   }, [loadMoreItems]);
 

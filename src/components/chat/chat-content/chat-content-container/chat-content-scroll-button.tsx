@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Fab} from '@material-ui/core';
-import {chatContentScrollButtonStyles} from './_styles';
 import {ArrowDownIcon} from '../../../common/icons/arrow-down-icon';
+import {chatContentScrollButtonStyles} from './_styles';
 
 type Props = {
   show: boolean;

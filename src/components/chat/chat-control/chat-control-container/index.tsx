@@ -1,19 +1,19 @@
 import React, {FC, memo, ReactElement, useCallback, useMemo} from 'react';
 import {Box} from '@material-ui/core';
-import {chatControlContainerStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
 import {User} from '../../../../models/user.model';
 import {CHAT_HEIGHT} from '../../_constants';
 import {ChatControlItemDataProps, ChatControlItemProps} from './types';
 import ChatControlRenderer from './chat-control-renderer';
 import {VirtualizedList} from '../../../common/surfaces';
+import {chatControlContainerStyles} from './_styles';
 
 type Props = {
   chat: Chat;
   setChat: (chat: Chat) => void;
   chats: Chat[];
-  loadMoreItems: () => Promise<void>;
-  allLoaded: boolean;
+  loadMoreItems?: () => Promise<void>;
+  allLoaded?: boolean;
   account: User;
 };
 

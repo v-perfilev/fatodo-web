@@ -7,7 +7,7 @@ import {CircularSpinner} from '../../../common/loaders';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-chat-context';
-import ChatContentContainer from './chat-content-container';
+import ChatContentContainer from '../chat-content-container';
 import {VirtualizedListMethods} from '../../../common/surfaces';
 import {User} from '../../../../models/user.model';
 

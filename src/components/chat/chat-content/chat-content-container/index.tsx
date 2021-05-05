@@ -1,6 +1,5 @@
 import React, {Dispatch, FC, ReactElement, SetStateAction, useCallback, useMemo} from 'react';
 import {Box} from '@material-ui/core';
-import {chatContentListStyles} from './_styles';
 import {MessageListItem} from '../../../../models/message.model';
 import {VirtualizedList, VirtualizedListMethods} from '../../../common/surfaces';
 import ChatContentScrollButton from './chat-content-scroll-button';
@@ -9,6 +8,7 @@ import {Chat} from '../../../../models/chat.model';
 import {User} from '../../../../models/user.model';
 import {ChatContentItemDataProps, ChatContentItemProps} from './types';
 import ChatContentRenderer from './chat-content-renderer';
+import {chatContentContainerStyles} from './_styles';
 
 type Props = {
   chat: Chat;
@@ -22,7 +22,7 @@ type Props = {
 
 const ChatContentContainer: FC<Props> = (props: Props) => {
   const {chat, items, loadMoreItems, allLoaded, account, listRef, setListRef} = props;
-  const classes = chatContentListStyles();
+  const classes = chatContentContainerStyles();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
 
   const getItemKey = useCallback(

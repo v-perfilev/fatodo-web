@@ -1,28 +1,123 @@
-import React, {FC, ReactNode} from 'react';
-import {Box} from '@material-ui/core';
-import {chatControlFilteredListStyles} from './_styles';
+import React, {FC, useCallback, useEffect, useState} from 'react';
 import {Chat} from '../../../../models/chat.model';
+import {User} from '../../../../models/user.model';
+import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-chat-context';
+import {useSnackContext} from '../../../../shared/contexts/snack-context';
+import {ArrayUtils} from '../../../../shared/utils/array.utils';
+import {CircularSpinner} from '../../../common/loaders';
+import ChatControlContainer from '../chat-control-container';
+import ChatService from '../../../../services/chat.service';
 
 type Props = {
+  filter: string;
   chat: Chat;
   setChat: (chat: Chat) => void;
+  account: User;
 };
 
-const ChatControlFilteredList: FC<Props> = () => {
-  const classes = chatControlFilteredListStyles();
+const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Props) => {
+  const {chatUpdateEvent, chatLastMessageEvent, chatLastMessageUpdateEvent} = useWsChatContext();
+  const {handleResponse} = useSnackContext();
+  const [chats, setChats] = useState<Chat[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const renderNumbers = (): ReactNode => {
-    const a = Array.from({length: 1000}, (_, i) => 1000 - i);
-    return (
-      <>
-        {a.map((value, index) => (
-          <div key={index}>{value}</div>
-        ))}
-      </>
-    );
-  };
+  const updateChats = useCallback(
+    (updateFunc: (prevState: Chat[]) => Chat[]): void => {
+      const combinedChats = updateFunc(chats);
+      setChats(combinedChats);
+    },
+    [chats]
+  );
 
-  return <Box className={classes.root}>{renderNumbers()}</Box>;
+  const chatUpdater = useCallback(
+    (chatToUpdate: Chat) => (prevState: Chat[]): Chat[] => {
+      if (chat?.id === chatToUpdate.id) {
+        setChat(chatToUpdate);
+      }
+      const chatInList = prevState.find((c) => c.id === chatToUpdate.id);
+      if (chatInList) {
+        const index = prevState.indexOf(chatInList);
+        prevState[index] = chatToUpdate;
+      }
+      return [...prevState];
+    },
+    []
+  );
+
+  const chatRemover = useCallback(
+    (chatToDelete: Chat) => (prevState: Chat[]): Chat[] => {
+      if (chat?.id === chatToDelete.id) {
+        setChat(null);
+      }
+      const chatInList = prevState.find((c) => c.id === chatToDelete.id);
+      if (chatInList) {
+        ArrayUtils.deleteItem(prevState, chatInList);
+      }
+      return [...prevState];
+    },
+    []
+  );
+
+  const lastMessageUpdater = useCallback(
+    (lastMessageChat: Chat) => (prevState: Chat[]): Chat[] => {
+      const chatInList = prevState.find((c) => c.id === lastMessageChat.id);
+      if (chatInList) {
+        ArrayUtils.deleteItem(prevState, chatInList);
+      }
+      return [...prevState, lastMessageChat];
+    },
+    []
+  );
+
+  const loadFilteredChats = useCallback((filter: string): void => {
+    setLoading(true);
+    ChatService.getFilteredChats(filter)
+      .then((response) => {
+        const chats = response.data;
+        setChats(chats);
+      })
+      .catch(handleResponse)
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (filter.length > 0) {
+      loadFilteredChats(filter);
+    } else {
+      setChats([]);
+    }
+  }, [filter]);
+
+  useEffect(() => {
+    if (chatUpdateEvent) {
+      const updateFunc = chatUpdateEvent.members.includes(account.id)
+        ? chatUpdater(chatUpdateEvent)
+        : chatRemover(chatUpdateEvent);
+      updateChats(updateFunc);
+    }
+  }, [chatUpdateEvent]);
+
+  useEffect(() => {
+    if (chatLastMessageEvent) {
+      const updateFunc = lastMessageUpdater(chatLastMessageEvent);
+      updateChats(updateFunc);
+    }
+  }, [chatLastMessageEvent]);
+
+  useEffect(() => {
+    if (chatLastMessageUpdateEvent) {
+      const updateFunc = lastMessageUpdater(chatLastMessageUpdateEvent);
+      updateChats(updateFunc);
+    }
+  }, [chatLastMessageUpdateEvent]);
+
+  return loading ? (
+    <CircularSpinner size="sm" />
+  ) : (
+    <ChatControlContainer chat={chat} setChat={setChat} chats={chats} account={account} />
+  );
 };
 
 export default ChatControlFilteredList;
