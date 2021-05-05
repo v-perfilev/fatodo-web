@@ -13,10 +13,6 @@ import ItemCreate from './item-create';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
 import withItemDialogs from '../../shared/hocs/with-dialogs/with-item-dialogs';
 
-export enum ItemDialogs {
-  DELETE = 'ITEM_DELETE_DIALOG',
-}
-
 export enum ItemRoutes {
   CREATE = '/create/:groupId',
   EDIT = '/edit/:itemId',

@@ -1,7 +1,7 @@
 import React, {FC, useMemo} from 'react';
 import {Message} from '../../../../models/message.model';
 import {chatContentMessageIncomingStyles} from './_styles';
-import {Box, Hidden} from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import {UrlPic} from '../../../common/images';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
@@ -38,11 +38,9 @@ const ChatContentMessageIncoming: FC<Props> = ({message, account}: Props) => {
 
   return (
     <Box className={classes.root}>
-      {/*<Hidden xsDown>*/}
-        <Box className={classes.image}>
+      <Box className={classes.image}>
         <UrlPic alt={user?.username} url={user?.imageFilename} size="md" border={1} />
-        </Box>
-      {/*</Hidden>*/}
+      </Box>
       <Box className={messageClassName}>
         <Box className={classes.header}>
           <Box className={classes.name}>{user?.username}</Box>

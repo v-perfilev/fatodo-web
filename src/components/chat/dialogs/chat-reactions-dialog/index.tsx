@@ -5,7 +5,7 @@ import {User} from '../../../../models/user.model';
 import {Box} from '@material-ui/core';
 import {ClearableTextInput} from '../../../common/inputs';
 import {chatReactionsDialogStyles} from './_styles';
-import ChatReactionsDialogReaction from './chat-reactions-dialog-reaction';
+import ChatReactionsDialogItem from './chat-reactions-dialog-item';
 import {Message, MessageReaction} from '../../../../models/message.model';
 
 export type ChatReactionDialogProps = {
@@ -66,11 +66,9 @@ const ChatReactionsDialog: FC<Props> = ({message, users, show, close}: Props) =>
   const userList = (
     <Box className={classes.users}>
       {reactionsToShow.map((reaction, index) => (
-        <ChatReactionsDialogReaction reaction={reaction.reaction} user={reaction.user} key={index} />
+        <ChatReactionsDialogItem reaction={reaction.reaction} user={reaction.user} key={index} />
       ))}
-      {reactionsToShow.length === 0 && (
-        <Box className={classes.notFound}>{t('chat:readStatuses.readStatusesNotFound')}</Box>
-      )}
+      {reactionsToShow.length === 0 && <Box className={classes.notFound}>{t('chat:reactions.reactionsNotFound')}</Box>}
     </Box>
   );
 
@@ -81,9 +79,7 @@ const ChatReactionsDialog: FC<Props> = ({message, users, show, close}: Props) =>
     </>
   );
 
-  return (
-    <ModalDialog isOpen={show} close={close} title={t('chat:readStatuses.title')} content={content} showCloseIcon />
-  );
+  return <ModalDialog isOpen={show} close={close} title={t('chat:reactions.title')} content={content} showCloseIcon />;
 };
 
 export default ChatReactionsDialog;

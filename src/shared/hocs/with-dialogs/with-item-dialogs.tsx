@@ -3,12 +3,15 @@ import {ComponentType, FC, ReactElement, useCallback, useEffect} from 'react';
 import {useDialogContext} from '../../contexts/dialog-contexts/dialog-context';
 import {ItemDialogContext} from '../../contexts/dialog-contexts/item-dialog-context';
 import {Item} from '../../../models/item.model';
-import {ItemDialogs} from '../../../components/item/_router';
 import {
   defaultItemDeleteDialogProps,
   ItemDeleteDialog,
   ItemDeleteDialogProps,
 } from '../../../components/item/dialogs/item-delete-dialog';
+
+enum ItemDialogs {
+  DELETE = 'ITEM_DELETE_DIALOG',
+}
 
 const withItemDialogs = (Component: ComponentType): FC => (props): ReactElement => {
   const {handleDialog, setDialogProps, clearDialogProps} = useDialogContext();

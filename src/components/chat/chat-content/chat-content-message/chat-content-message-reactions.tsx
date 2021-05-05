@@ -61,8 +61,8 @@ const ChatContentMessageReactions: FC<Props> = ({message, account}: Props) => {
     classes.reaction,
     {[classes.pointer]: !isOutcoming},
     {[classes.countOnRight]: !isOutcoming},
-    {[classes.countOnLeft]: isOutcoming},
-    );
+    {[classes.countOnLeft]: isOutcoming}
+  );
 
   const reaction = (r: MessageReactionType, key: number): ReactElement => {
     const count = reactionMap.get(r);

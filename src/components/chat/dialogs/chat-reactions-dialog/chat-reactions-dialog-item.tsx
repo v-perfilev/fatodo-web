@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {User} from '../../../../models/user.model';
 import {Box} from '@material-ui/core';
 import {ReactionView, UserWithPopupView} from '../../../common/views';
-import {chatReactionsDialogReactionStyles} from './_styles';
+import {chatReactionsDialogItemStyles} from './_styles';
 import {MessageReaction} from '../../../../models/message.model';
 
 type Props = {
@@ -10,11 +10,11 @@ type Props = {
   user: User;
 };
 
-const ChatReactionsDialogReaction: FC<Props> = ({reaction, user}: Props) => {
-  const classes = chatReactionsDialogReactionStyles();
+const ChatReactionsDialogItem: FC<Props> = ({reaction, user}: Props) => {
+  const classes = chatReactionsDialogItemStyles();
 
   return (
-    <Box className={classes.reactionBox}>
+    <Box className={classes.statusBox}>
       <Box className={classes.reaction}>
         <ReactionView reactionType={reaction.type} color="primary" />
       </Box>
@@ -25,4 +25,4 @@ const ChatReactionsDialogReaction: FC<Props> = ({reaction, user}: Props) => {
   );
 };
 
-export default ChatReactionsDialogReaction;
+export default ChatReactionsDialogItem;

@@ -1,7 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const chatReactionsDialogStyles = makeStyles((theme: Theme) => ({
+export const chatReadStatusesDialogStyles = makeStyles((theme: Theme) => ({
   root: {
     height: '100%',
     marginTop: theme.spacing(0.3),
@@ -33,7 +33,7 @@ export const chatReactionsDialogStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const chatReactionsDialogItemStyles = makeStyles((theme: Theme) => ({
+export const chatReadStatusesDialogItemStyles = makeStyles((theme: Theme) => ({
   statusBox: {
     display: 'flex',
     flexDirection: 'row',

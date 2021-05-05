@@ -15,10 +15,6 @@ import withUserList from '../../shared/hocs/with-list/with-user-list';
 import withGroupDialogs from '../../shared/hocs/with-dialogs/with-group-dialogs';
 import withItemDialogs from '../../shared/hocs/with-dialogs/with-item-dialogs';
 
-export enum GroupDialogs {
-  DELETE = 'GROUP_DELETE_DIALOG',
-}
-
 export enum GroupRoutes {
   SORTING = '/sorting',
   CREATE = '/create',

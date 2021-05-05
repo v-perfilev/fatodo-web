@@ -2,7 +2,6 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement, useCallback, useEffect} from 'react';
 import {ChatDialogContext} from '../../contexts/dialog-contexts/chat-dialog-context';
 import {Chat} from '../../../models/chat.model';
-import {ChatDialogs} from '../../../components/chat/_router';
 import ChatAddMembersDialog, {
   ChatAddMembersDialogProps,
   defaultChatAddMembersDialogProps,
@@ -26,6 +25,19 @@ import ChatRenameDialog, {
   defaultChatRenameDialogProps,
 } from '../../../components/chat/dialogs/chat-rename-dialog';
 import {useDialogContext} from '../../contexts/dialog-contexts/dialog-context';
+import ChatReadStatusesDialog, {
+  ChatReadStatusesDialogProps,
+  defaultChatReadStatusesDialogProps,
+} from '../../../components/chat/dialogs/chat-read-statuses-dialog';
+
+enum ChatDialogs {
+  ADD_MEMBERS = 'CHAT_ADD_MEMBERS_DIALOG',
+  CREATE = 'CHAT_CREATE_DIALOG',
+  MEMBERS = 'CHAT_MEMBERS_DIALOG',
+  REACTIONS = 'CHAT_REACTIONS_DIALOG',
+  READ_STATUSES = 'CHAT_READ_STATUSES_DIALOG',
+  RENAME = 'CHAT_RENAME_DIALOG',
+}
 
 const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement => {
   const {handleDialog, setDialogProps, updateDialogProps, clearDialogProps} = useDialogContext();
@@ -71,6 +83,16 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
     [setDialogProps, updateDialogProps]
   );
 
+  const showChatReadStatusesDialog = useCallback(
+    (message: Message, users: User[]): void => {
+      const show = true;
+      const close = (): void => updateDialogProps(ChatDialogs.READ_STATUSES, {show: false});
+      const props = {message, users, show, close} as ChatReadStatusesDialogProps;
+      setDialogProps(ChatDialogs.READ_STATUSES, props);
+    },
+    [setDialogProps, updateDialogProps]
+  );
+
   const showChatRenameDialog = useCallback(
     (chat: Chat, title: string): void => {
       const show = true;
@@ -86,6 +108,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
     handleDialog(ChatDialogs.CREATE, ChatCreateDialog, defaultChatCreateDialogProps);
     handleDialog(ChatDialogs.MEMBERS, ChatMembersDialog, defaultChatMembersDialogProps);
     handleDialog(ChatDialogs.REACTIONS, ChatReactionsDialog, defaultChatReactionDialogProps);
+    handleDialog(ChatDialogs.READ_STATUSES, ChatReadStatusesDialog, defaultChatReadStatusesDialogProps);
     handleDialog(ChatDialogs.RENAME, ChatRenameDialog, defaultChatRenameDialogProps);
   };
 
@@ -98,6 +121,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
     showChatCreateDialog,
     showChatMembersDialog,
     showChatReactionsDialog,
+    showChatReadStatusesDialog,
     showChatRenameDialog,
   };
 

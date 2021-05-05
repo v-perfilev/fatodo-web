@@ -11,6 +11,7 @@ import {ReactionsIcon} from '../../../common/icons/reactions-icon';
 import ChatService from '../../../../services/chat.service';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
+import {EyeIcon} from '../../../common/icons/eye-icon';
 
 type Props = {
   message: Message;
@@ -23,7 +24,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
   const {users} = useUserListContext();
   const {t} = useTranslation();
   const ref = useRef();
-  const {showChatReactionsDialog} = useChatDialogContext();
+  const {showChatReactionsDialog, showChatReadStatusesDialog} = useChatDialogContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOnAction = useCallback((e: React.MouseEvent<HTMLElement>): void => {
@@ -48,7 +49,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
 
   const openReadStatusesDialog = useCallback(
     (e: MouseEvent<HTMLElement>): void => {
-      showChatReactionsDialog(message, users);
+      showChatReadStatusesDialog(message, users);
       handleClose(e);
     },
     [message, users]
@@ -75,7 +76,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
           {t('chat:message.actions.reactions')}
         </MenuItem>
         <MenuItem onClick={openReadStatusesDialog}>
-          <ReactionsIcon color="primary" />
+          <EyeIcon color="primary" />
           {t('chat:message.actions.readStatuses')}
         </MenuItem>
         {isOutcoming && !message.isDeleted && (

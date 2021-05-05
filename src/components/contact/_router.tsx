@@ -10,10 +10,6 @@ import ContactMain from './contact-main';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
 import withContactDialogs from '../../shared/hocs/with-dialogs/with-contact-dialogs';
 
-export enum ContactDialogs {
-  REQUEST = 'CONTACT_REQUEST_DIALOG',
-}
-
 export enum ContactRoutes {
   INCOMING = '/incoming',
   OUTCOMING = '/outcoming',

@@ -5,8 +5,11 @@ import ContactRequestDialog, {
   ContactRequestDialogProps,
   defaultContactRequestDialogProps,
 } from '../../../components/contact/dialogs/contact-request-dialog';
-import {ContactDialogs} from '../../../components/contact/_router';
 import {ContactDialogContext} from '../../contexts/dialog-contexts/contact-dialog-context';
+
+enum ContactDialogs {
+  REQUEST = 'CONTACT_REQUEST_DIALOG',
+}
 
 const withContactDialogs = (Component: ComponentType): FC => (props): ReactElement => {
   const {handleDialog, setDialogProps, clearDialogProps} = useDialogContext();

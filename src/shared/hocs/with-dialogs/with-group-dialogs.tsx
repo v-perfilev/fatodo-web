@@ -2,13 +2,16 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement, useCallback, useEffect} from 'react';
 import {useDialogContext} from '../../contexts/dialog-contexts/dialog-context';
 import {Group} from '../../../models/group.model';
-import {GroupDialogs} from '../../../components/group/_router';
 import {
   defaultGroupDeleteDialogProps,
   GroupDeleteDialog,
   GroupDeleteDialogProps,
 } from '../../../components/group/dialogs/group-delete-dialog';
 import {GroupDialogContext} from '../../contexts/dialog-contexts/group-dialog-context';
+
+enum GroupDialogs {
+  DELETE = 'GROUP_DELETE_DIALOG',
+}
 
 const withGroupDialogs = (Component: ComponentType): FC => (props): ReactElement => {
   const {handleDialog, setDialogProps, clearDialogProps} = useDialogContext();

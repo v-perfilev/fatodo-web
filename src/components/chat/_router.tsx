@@ -10,14 +10,6 @@ import MessageMain from './chat-main';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
 import withChatDialogs from '../../shared/hocs/with-dialogs/with-chat-dialogs';
 
-export enum ChatDialogs {
-  ADD_MEMBERS = 'CHAT_ADD_MEMBERS_DIALOG',
-  CREATE = 'CHAT_CREATE_DIALOG',
-  MEMBERS = 'CHAT_MEMBERS_DIALOG',
-  REACTIONS = 'CHAT_REACTIONS_DIALOG',
-  RENAME = 'CHAT_RENAME_DIALOG',
-}
-
 export enum ChatRoutes {
   CHAT = '/:chatId',
 }

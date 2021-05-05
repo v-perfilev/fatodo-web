@@ -9,6 +9,7 @@ interface ChatDialogState {
   showChatCreateDialog: () => void;
   showChatMembersDialog: (chat: Chat, users: User[]) => void;
   showChatReactionsDialog: (message: Message, users: User[]) => void;
+  showChatReadStatusesDialog: (message: Message, users: User[]) => void;
   showChatRenameDialog: (chat: Chat, title: string) => void;
 }
 
