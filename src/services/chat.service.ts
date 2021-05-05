@@ -10,18 +10,18 @@ export default class ChatService {
     ChatController
    */
   public static getAllChatsPageable = (offset?: number, size?: number): AxiosPromise<Chat[]> => {
-    const url = ChatService.baseUrl + '/chats';
+    const url = ChatService.baseUrl + '/chats/get-all';
     const params = {offset, size};
     return axios.get(url, {params});
   };
 
   public static getFilteredChats = (filter: string): AxiosPromise<Chat[]> => {
-    const url = ChatService.baseUrl + '/chats/filtered/' + filter;
+    const url = ChatService.baseUrl + '/chats/get-filtered/' + filter;
     return axios.get(url);
   };
 
   public static getChatById = (id: string): AxiosPromise<Chat> => {
-    const url = ChatService.baseUrl + '/chats/' + id;
+    const url = ChatService.baseUrl + '/chats/get-by-id/' + id;
     return axios.get(url);
   };
 
