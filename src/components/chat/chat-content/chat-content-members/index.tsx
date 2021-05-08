@@ -21,7 +21,7 @@ const ChatContentMembers: FC<Props> = ({chat}: Props) => {
   useEffect(() => {
     const updatedUsersToShow = users.filter((user) => chat.members.includes(user.id));
     setUsersToShow(updatedUsersToShow);
-  }, [chat.members]);
+  }, [chat.members, users]);
 
   return <AvatarGroup users={usersToShow} onClick={openChatMembersDialog} />;
 };

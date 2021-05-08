@@ -4,3 +4,4 @@ export const CHAT_CONTENT_FOOTER_HEIGHT = 110;
 export const CHAT_HEIGHT = 60;
 
 export const TIMEOUT_BEFORE_MARK_AS_READ = 1000;
+export const TIMEOUT_BEFORE_APPLY_FILTER = 500;

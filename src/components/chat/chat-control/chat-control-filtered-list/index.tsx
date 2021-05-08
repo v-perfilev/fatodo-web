@@ -7,6 +7,7 @@ import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {CircularSpinner} from '../../../common/loaders';
 import ChatControlContainer from '../chat-control-container';
 import ChatService from '../../../../services/chat.service';
+import {TIMEOUT_BEFORE_APPLY_FILTER} from '../../_constants';
 
 type Props = {
   filter: string;
@@ -20,6 +21,7 @@ const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Pr
   const {handleResponse} = useSnackContext();
   const [chats, setChats] = useState<Chat[]>([]);
   const [loading, setLoading] = useState(true);
+  let timerId;
 
   const updateChats = useCallback(
     (updateFunc: (prevState: Chat[]) => Chat[]): void => {
@@ -83,8 +85,9 @@ const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Pr
   }, []);
 
   useEffect(() => {
+    window.clearTimeout(timerId);
     if (filter.length > 0) {
-      loadFilteredChats(filter);
+      timerId = window.setTimeout(() => loadFilteredChats(filter), TIMEOUT_BEFORE_APPLY_FILTER);
     } else {
       setChats([]);
     }
