@@ -19,8 +19,22 @@ const ChatContentMessageReactions: FC<Props> = ({message, account}: Props) => {
   const [reactionMap, setReactionMap] = useState<Map<MessageReactionType, number>>(new Map());
   const [activeReaction, setActiveReaction] = useState<MessageReactionType>();
 
+  const setUsersReaction = useCallback((r: MessageReactionType) => {
+    setActiveReaction(r !== activeReaction ? r : undefined);
+    setReactionMap((prevState) => {
+      if (activeReaction) {
+        prevState.set(activeReaction, prevState.get(activeReaction) - 1);
+      }
+      if (r) {
+        prevState.set(r, prevState.get(r) + 1);
+      }
+      return new Map(prevState);
+    });
+  }, [reactionMap]);
+
   const handleClick = useCallback(
     (r: MessageReactionType) => (): void => {
+      setUsersReaction(r);
       if (r === activeReaction) {
         ChatService.noneMessageReaction(message.id).catch(handleResponse);
       } else if (r === 'LIKE') {
