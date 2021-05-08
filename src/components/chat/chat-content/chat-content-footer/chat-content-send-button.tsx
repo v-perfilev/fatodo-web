@@ -12,7 +12,7 @@ const ChatContentSendButton: FC<Props> = ({send}: Props) => {
   const classes = chatContentSendButtonStyles();
 
   return (
-    <Fab className={classes.root} size="medium" color="primary" onClick={send}>
+    <Fab className={classes.root} size="small" color="primary" onClick={send}>
       <SendMessageIcon />
     </Fab>
   );

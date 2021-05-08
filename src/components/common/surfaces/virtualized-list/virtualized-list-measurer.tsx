@@ -24,17 +24,29 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
     updateState({});
   }, []);
 
-  const keyLength = keyCache.size();
-
   const loadedLength = useMemo<number>(() => {
     return itemData.items.length;
   }, [itemData.items]);
 
-  const updateKeys = useCallback((): void => {
+  const shouldUpdateCaches = useCallback((): boolean => {
+    const keysInCache = Array.from(Array(loadedLength).keys())
+      .map((index) => itemKey(index))
+      .filter((key) => keyCache.keys().includes(key));
+    return loadedLength !== keysInCache.length;
+  }, [loadedLength]);
+
+  const updateCaches = useCallback((): void => {
+    // update key cache
     for (let i = 0; i < loadedLength; i++) {
       const key = itemKey(i);
       keyCache.set(i, key);
     }
+    // remove unused keys from measurer cache
+    Array.from(measurerCache.keys()).forEach((key) => {
+      if (!keyCache.keys().includes(key)) {
+        measurerCache.clear(key);
+      }
+    });
     forceUpdate();
   }, [loadedLength]);
 
@@ -67,12 +79,11 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
 
   useEffect(() => {
     measure();
+    if (shouldUpdateCaches()) {
+      updateCaches();
+      fillMapToMeasure();
+    }
   });
-
-  useEffect(() => {
-    updateKeys();
-    fillMapToMeasure();
-  }, [keyLength, loadedLength]);
 
   return indexesToMeasureMap.current ? (
     <div className={classes.measurer} ref={measurerRef}>

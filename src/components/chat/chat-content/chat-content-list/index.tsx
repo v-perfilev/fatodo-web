@@ -10,6 +10,7 @@ import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-cha
 import ChatContentContainer from '../chat-content-container';
 import {VirtualizedListMethods} from '../../../common/surfaces';
 import {User} from '../../../../models/user.model';
+import {NEW_MESSAGES_PREFIX} from '../../_constants';
 
 type Props = {
   chat: Chat;
@@ -19,6 +20,7 @@ type Props = {
 
 export type ChatContentMethods = {
   clearMessages: () => void;
+  addMessage: (message: Message) => void;
 };
 
 const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) => {
@@ -29,13 +31,6 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
   const [allLoaded, setAllLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [listRef, setListRef] = useState<VirtualizedListMethods>();
-
-  const clearMessages = useCallback((): void => {
-    setMessages([]);
-    setItems([]);
-  }, []);
-
-  useImperativeHandle(chatContentListRef, (): ChatContentMethods => ({clearMessages}), []);
 
   const convertMessagesToItems = useCallback((messagesToConvert: Message[]): MessageListItem[] => {
     const handledDates = [] as string[];
@@ -66,13 +61,31 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
       setMessages(combinedMessages);
       updateItems(combinedMessages);
     },
-    [messages, updateItems]
+    [messages, items]
   );
 
   const messageInserter = useCallback(
     (...messages: Message[]) => (prevState: Message[]): Message[] => {
       const combinedMessages = [...messages, ...prevState];
-      return combinedMessages.filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtComparator);
+      return combinedMessages
+        .filter(ArrayUtils.withIdFilter)
+        .filter(ArrayUtils.uniqueByIdFilter)
+        .sort(ArrayUtils.createdAtComparator);
+    },
+    []
+  );
+
+  const ownMessageInserter = useCallback(
+    (message: Message) => (prevState: Message[]): Message[] => {
+      const messageInChat = prevState.find((c) => c.id.startsWith(NEW_MESSAGES_PREFIX) && c.text === message.text);
+      if (messageInChat) {
+        ArrayUtils.deleteItem(prevState, messageInChat);
+      }
+      const combinedMessages = [message, ...prevState];
+      return combinedMessages
+        .filter(ArrayUtils.withIdFilter)
+        .filter(ArrayUtils.uniqueByIdFilter)
+        .sort(ArrayUtils.createdAtComparator);
     },
     []
   );
@@ -136,13 +149,40 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
     });
   }, [messages.length, items]);
 
+  // Imperative handlers
+
+  const clearMessages = useCallback((): void => {
+    setMessages([]);
+    setItems([]);
+  }, []);
+
+  const addMessage = useCallback(
+    (message: Message) => {
+      const updateFunc = messageInserter(message);
+      updateMessagesAndItems(updateFunc);
+    },
+    [messages, items]
+  );
+
+  useImperativeHandle(
+    chatContentListRef,
+    (): ChatContentMethods => ({
+      clearMessages,
+      addMessage,
+    }),
+    [messages, items]
+  );
+
+  // Effects
+
   useEffect(() => {
     loadMoreMessages().finally();
   }, [chat]);
 
   useEffect(() => {
     if (chat?.id === messageNewEvent?.chatId) {
-      const updateFunc = messageInserter(messageNewEvent);
+      const updateFunc =
+        messageNewEvent.userId === account.id ? ownMessageInserter(messageNewEvent) : messageInserter(messageNewEvent);
       updateMessagesAndItems(updateFunc);
     }
   }, [messageNewEvent]);

@@ -8,6 +8,7 @@ import ChatContentHeader from './chat-content-header';
 import ChatContentList, {ChatContentMethods} from './chat-content-list';
 import ChatContentFooter from './chat-content-footer';
 import {ChatUtils} from '../../../shared/utils/chat.utils';
+import {Message} from '../../../models/message.model';
 
 type Props = {
   chat: Chat;
@@ -23,9 +24,11 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
   const title = useMemo<string>(() => (chat ? ChatUtils.getTitle(chat, users, account) : null), [chat, users, account]);
 
   const clearMessages = (): void => {
-    if (chatContentListRef.current) {
-      chatContentListRef.current.clearMessages();
-    }
+    chatContentListRef.current?.clearMessages();
+  };
+
+  const addMessage = (message: Message): void => {
+    chatContentListRef.current?.addMessage(message);
   };
 
   useEffect(() => {
@@ -40,7 +43,7 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
         <>
           <ChatContentHeader chat={chat} title={title} closeChat={closeChat} clearMessages={clearMessages} />
           <ChatContentList chat={chat} account={account} chatContentListRef={chatContentListRef} />
-          <ChatContentFooter chatId={chat.id} />
+          <ChatContentFooter chatId={chat.id} account={account} addMessage={addMessage} />
         </>
       )}
       {!chat && <Box className={classes.placeholder} />}

@@ -9,6 +9,10 @@ export class ListKeysCache {
     return this.keyMap.get(index);
   }
 
+  public keys(): string[] {
+    return Array.from(this.keyMap.values());
+  }
+
   public size(): number {
     return this.keyMap.size;
   }
@@ -40,6 +44,10 @@ export class ListMeasurerCache {
 
   public getTotalHeight(): number {
     return Array.from(this.measurementMap.values()).reduce((acc, height) => acc + height, 0);
+  }
+
+  public keys(): string[] {
+    return Array.from(this.measurementMap.keys());
   }
 
   public clear(key?: string): void {

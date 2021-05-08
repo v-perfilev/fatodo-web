@@ -17,9 +17,13 @@ export const chatContentFooterStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const chatContentInputStyles = makeStyles(() => ({
+export const chatContentInputStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
+    '& > div': {
+      // padding: theme.spacing(2)
+      height: CHAT_CONTENT_FOOTER_HEIGHT - theme.spacing(2),
+    },
   },
 }));
 

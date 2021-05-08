@@ -37,7 +37,7 @@ const ChatContentInput: FC<Props> = ({send, setMessage}: Props) => {
       fullWidth
       variant="outlined"
       multiline
-      rows={3}
+      rows={1}
       inputRef={ref}
       onKeyPress={handleKeyPress}
       onChange={handleOnChange}

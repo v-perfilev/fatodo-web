@@ -1,6 +1,6 @@
 export interface AbstractAuditing {
   createdBy?: string;
-  createdAt?: string;
+  createdAt?: number;
   lastModifiedBy?: string;
-  lastModifiedAt?: string;
+  lastModifiedAt?: number;
 }

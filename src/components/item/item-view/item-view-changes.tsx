@@ -21,8 +21,8 @@ const ItemViewChanges: FC<Props> = ({className}: Props) => {
 
   const classNames = csx(classes.root, className);
 
-  const getDate = (timestamp: string): string => {
-    const timestampNumber = Number(timestamp) * 1000;
+  const getDate = (timestamp: number): string => {
+    const timestampNumber = timestamp * 1000;
     return (
       DateFormatters.formatTime(new Date(timestampNumber)) +
       ' ' +
