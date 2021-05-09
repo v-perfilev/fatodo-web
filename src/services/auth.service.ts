@@ -8,12 +8,12 @@ export default class AuthService {
   private static baseUrl = '/api/auth/';
 
   public static authenticate = (dto: LoginDTO): AxiosPromise => {
-    const url = AuthService.baseUrl + 'authenticate';
+    const url = AuthService.baseUrl + 'account/authenticate';
     return axios.post(url, dto);
   };
 
   public static register = (dto: RegistrationDTO): AxiosPromise => {
-    const url = AuthService.baseUrl + 'register';
+    const url = AuthService.baseUrl + 'account/register';
     return axios.post(url, dto);
   };
 
