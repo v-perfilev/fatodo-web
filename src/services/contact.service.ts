@@ -7,12 +7,12 @@ export default class ContactService {
   private static baseUrl = '/api/contact';
 
   public static getAllRelations = (): AxiosPromise<ContactRelation[]> => {
-    const url = ContactService.baseUrl + '/relation';
+    const url = ContactService.baseUrl + '/relations';
     return axios.get(url);
   };
 
   public static removeRelation = (userId: string): AxiosPromise<void> => {
-    const url = ContactService.baseUrl + '/relation/' + userId;
+    const url = ContactService.baseUrl + '/relations/' + userId;
     return axios.delete(url);
   };
 
