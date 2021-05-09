@@ -5,7 +5,7 @@ export default class ItemService {
   private static baseUrl = '/api/item';
 
   public static getAllByGroupId = (groupId: string): AxiosPromise => {
-    const url = ItemService.baseUrl + '/item/all-by-group-id/' + groupId;
+    const url = ItemService.baseUrl + '/items/' + groupId + '/group-id';
     return axios.get(url);
   };
 
