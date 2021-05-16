@@ -4,7 +4,6 @@ import {useTranslation} from 'react-i18next';
 import ItemForm from '../item-form';
 import {useHistory, useParams} from 'react-router-dom';
 import {Routes} from '../../router';
-import GroupService from '../../../services/group.service';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
@@ -59,7 +58,7 @@ const ItemEdit: FC = () => {
   );
 
   const loadItem = (): void => {
-    ItemService.get(itemId)
+    ItemService.getItem(itemId)
       .then((response) => {
         setItem(response.data);
       })
@@ -73,7 +72,7 @@ const ItemEdit: FC = () => {
   };
 
   const loadGroup = (): void => {
-    GroupService.get(item?.groupId)
+    ItemService.getGroup(item?.groupId)
       .then((response) => {
         setGroup(response.data);
       })
@@ -88,7 +87,7 @@ const ItemEdit: FC = () => {
 
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     setIsSaving(true);
-    ItemService.update(data)
+    ItemService.updateItem(data)
       .then(() => {
         handleCode('item.edited', 'info');
         redirectToGroupView();

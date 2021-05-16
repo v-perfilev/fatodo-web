@@ -32,7 +32,7 @@ const GroupPreviewCardContent: FC = () => {
   const onDownClick = (): void => setFirstShowedItem((prevState) => prevState + ITEMS_IN_GROUP_CARD);
 
   const loadItems = (): void => {
-    ItemService.getAllByGroupId(group.id)
+    ItemService.getAllItemsByGroupId(group.id)
       .then((response) => {
         setItems(response.data);
       })
@@ -45,7 +45,7 @@ const GroupPreviewCardContent: FC = () => {
     reset: true,
     delay: 50,
     opacity: 1,
-    from: {opacity: 0},
+    from: {opacity: 0}
   });
 
   useEffect(() => {

@@ -12,7 +12,6 @@ import {Routes} from '../../router';
 import {GroupRouteUtils} from '../_router';
 import {useHistory, useParams} from 'react-router-dom';
 import {GroupsIcon} from '../../common/icons/groups-icon';
-import GroupService from '../../../services/group.service';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import {ItemRouteUtils} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
@@ -27,6 +26,7 @@ import {CircularSpinner} from '../../common/loaders';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {useGroupDialogContext} from '../../../shared/contexts/dialog-contexts/group-dialog-context';
+import ItemService from '../../../services/item.service';
 
 const GroupView: FC = () => {
   const history = useHistory();
@@ -51,7 +51,7 @@ const GroupView: FC = () => {
   };
 
   const loadGroup = (): void => {
-    GroupService.get(groupId)
+    ItemService.getGroup(groupId)
       .then((response) => {
         setGroup(response.data);
       })

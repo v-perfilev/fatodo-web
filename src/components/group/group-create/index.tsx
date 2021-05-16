@@ -7,10 +7,10 @@ import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
-import GroupService from '../../../services/group.service';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {GroupRouteUtils} from '../_router';
+import ItemService from '../../../services/item.service';
 
 const GroupCreate: FC = () => {
   const history = useHistory();
@@ -27,7 +27,7 @@ const GroupCreate: FC = () => {
 
   const request = (formData: FormData, stopSubmitting: () => void): void => {
     setIsSaving(true);
-    GroupService.create(formData)
+    ItemService.createGroup(formData)
       .then((response) => {
         handleCode('group.created', 'info');
         const id = response.data.id;

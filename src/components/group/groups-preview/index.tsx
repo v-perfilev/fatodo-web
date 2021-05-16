@@ -7,7 +7,6 @@ import AdditionalMenuButton from '../../common/layouts/additional-menu/additiona
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {PlusIcon} from '../../common/icons/plus-icon';
-import GroupService from '../../../services/group.service';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {compose} from 'recompose';
@@ -16,6 +15,7 @@ import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-
 import {CircularSpinner} from '../../common/loaders';
 import GroupPreviewGridContainer from './group-preview-grid-container';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import ItemService from '../../../services/item.service';
 
 const GroupPreview: FC = () => {
   const history = useHistory();
@@ -29,7 +29,7 @@ const GroupPreview: FC = () => {
   const redirectToGroupsSorting = (): void => history.push(GroupRouteUtils.getSortingUrl());
 
   const loadGroups = (): void => {
-    GroupService.getAll()
+    ItemService.getAllGroups()
       .then((response) => {
         setGroups(response.data);
       })

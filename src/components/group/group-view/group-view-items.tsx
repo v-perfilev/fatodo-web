@@ -17,7 +17,7 @@ const GroupViewItems: FC = () => {
   const {objs: items, setObjs: setItems, setLoad: setLoadItems} = useItemListContext();
 
   const loadItems = (): void => {
-    ItemService.getAllByGroupId(group.id)
+    ItemService.getAllItemsByGroupId(group.id)
       .then((response) => {
         setItems(response.data);
       })

@@ -2,8 +2,8 @@ import React, {FC, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {Group} from '../../../../models/group.model';
-import GroupService from '../../../../services/group.service';
 import ConfirmationDialog from '../../../common/dialogs/confirmation-dialog';
+import ItemService from '../../../../services/item.service';
 
 export type GroupDeleteDialogProps = {
   group: Group;
@@ -15,7 +15,7 @@ export type GroupDeleteDialogProps = {
 export const defaultGroupDeleteDialogProps: Readonly<GroupDeleteDialogProps> = {
   group: null,
   show: false,
-  close: (): void => undefined,
+  close: (): void => undefined
 };
 
 type Props = GroupDeleteDialogProps;
@@ -27,7 +27,7 @@ export const GroupDeleteDialog: FC<Props> = ({group, show, close, onSuccess}: Pr
 
   const onAgree = (): void => {
     setLoading(true);
-    GroupService.delete(group?.id)
+    ItemService.deleteGroup(group?.id)
       .then(() => {
         handleCode('group.deleted', 'info');
         close();

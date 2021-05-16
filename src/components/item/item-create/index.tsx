@@ -6,7 +6,6 @@ import AdditionalMenuButton from '../../common/layouts/additional-menu/additiona
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import {useHistory, useParams} from 'react-router-dom';
-import GroupService from '../../../services/group.service';
 import ItemService from '../../../services/item.service';
 import ItemForm from '../item-form';
 import {ItemDTO} from '../../../models/dto/item.dto';
@@ -54,7 +53,7 @@ const ItemCreate: FC = () => {
   );
 
   const loadGroup = (): void => {
-    GroupService.get(groupId)
+    ItemService.getGroup(groupId)
       .then((response) => {
         setGroup(response.data);
       })
@@ -70,7 +69,7 @@ const ItemCreate: FC = () => {
 
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     setIsSaving(true);
-    ItemService.create(data)
+    ItemService.createItem(data)
       .then(() => {
         handleCode('item.created', 'info');
         redirectToGroupView();

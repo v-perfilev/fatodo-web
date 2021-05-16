@@ -7,7 +7,6 @@ import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
 import {PageDivider, PageHeader} from '../../common/surfaces';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
-import GroupService from '../../../services/group.service';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
@@ -55,7 +54,7 @@ const ItemView: FC = () => {
   };
 
   const loadItem = (): void => {
-    ItemService.get(itemId)
+    ItemService.getItem(itemId)
       .then((response) => {
         setItem(response.data);
       })
@@ -69,7 +68,7 @@ const ItemView: FC = () => {
   };
 
   const loadGroup = (): void => {
-    GroupService.get(item?.groupId)
+    ItemService.getGroup(item?.groupId)
       .then((response) => {
         setGroup(response.data);
       })

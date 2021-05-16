@@ -27,7 +27,7 @@ export const ItemDeleteDialog: FC<Props> = ({item, close, onSuccess}: Props) => 
 
   const onAgree = (): void => {
     setLoading(true);
-    ItemService.delete(item?.id)
+    ItemService.deleteItem(item?.id)
       .then(() => {
         handleCode('item.deleted', 'info');
         close();

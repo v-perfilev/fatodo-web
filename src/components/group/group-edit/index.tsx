@@ -7,7 +7,6 @@ import {Routes} from '../../router';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
-import GroupService from '../../../services/group.service';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
@@ -16,6 +15,7 @@ import {CircularSpinner} from '../../common/loaders';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {compose} from 'recompose';
+import ItemService from '../../../services/item.service';
 
 const GroupEdit: FC = () => {
   const history = useHistory();
@@ -33,7 +33,7 @@ const GroupEdit: FC = () => {
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const loadGroup = (): void => {
-    GroupService.get(groupId)
+    ItemService.getGroup(groupId)
       .then((response) => {
         setGroup(response.data);
       })
@@ -49,7 +49,7 @@ const GroupEdit: FC = () => {
 
   const request = (formData: FormData, stopSubmitting: () => void): void => {
     setIsSaving(true);
-    GroupService.update(formData)
+    ItemService.updateGroup(formData)
       .then(() => {
         handleCode('group.edited', 'info');
         redirectToGroupView();
