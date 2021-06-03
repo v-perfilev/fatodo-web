@@ -13,7 +13,7 @@ compile:
   stage: compile
   script:
     - npm install
-    - npm build
+    - npm run-script build
   artifacts:
     expire_in: 1 hour
     paths:
