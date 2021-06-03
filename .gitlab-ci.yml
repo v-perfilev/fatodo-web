@@ -1,0 +1,53 @@
+image: node:alpine
+
+variables:
+  TAG_LATEST: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:latest
+  TAG_COMMIT: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:$CI_COMMIT_SHORT_SHA
+
+stages:
+  - compile
+  - publish
+  - deploy
+
+compile:
+  stage: compile
+  script:
+    - npm install
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - dist/
+      - node_modules/
+
+publish-to-docker:
+  image: docker:20
+  stage: publish
+  services:
+    - docker:20-dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker build -t $TAG_COMMIT -t $TAG_LATEST .
+    - docker push $TAG_COMMIT
+    - docker push $TAG_LATEST
+  only:
+    - develop
+    - master
+
+deploy-to-stage:
+  stage: deploy
+  script:
+    - chmod og= $SERVER_ID_RSA
+    - apk update && apk add openssh-client
+    - ssh -i $SERVER_ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
+    - ssh -i $SERVER_ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker pull $TAG_COMMIT"
+    - ssh -i $SERVER_ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker container rm -f $APP_NAME || true"
+    - ssh -i $SERVER_ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker run -d $DOCKER_APP_PARAMS $DOCKER_COMMON_PARAMS --name $APP_NAME $TAG_COMMIT"
+  environment:
+    name: staging
+    url: $SERVER_URL
+  only:
+    - develop
