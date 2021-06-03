@@ -45,7 +45,7 @@ const GroupPreviewCardContent: FC = () => {
     reset: true,
     delay: 50,
     opacity: 1,
-    from: {opacity: 0}
+    from: {opacity: 0},
   });
 
   useEffect(() => {

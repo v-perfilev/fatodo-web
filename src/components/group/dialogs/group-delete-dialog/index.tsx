@@ -15,7 +15,7 @@ export type GroupDeleteDialogProps = {
 export const defaultGroupDeleteDialogProps: Readonly<GroupDeleteDialogProps> = {
   group: null,
   show: false,
-  close: (): void => undefined
+  close: (): void => undefined,
 };
 
 type Props = GroupDeleteDialogProps;
