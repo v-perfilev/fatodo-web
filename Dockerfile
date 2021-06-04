@@ -5,6 +5,11 @@ WORKDIR /app
 COPY . ./
 RUN rm -rf dist
 RUN npm install
+
+ARG BASE_URL
+ARG API_URL
+ARG RECAPTCHA_KEY
+
 RUN npm run-script build
 
 FROM nginx:alpine
