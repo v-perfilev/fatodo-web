@@ -9,6 +9,8 @@ import Snack from '../models/snack.model';
 axios.defaults.timeout = API_TIMEOUT;
 axios.defaults.baseURL = API_URL;
 
+console.log(API_URL);
+
 interface SetupAxiosActions {
   onUnauthenticated: () => void;
   enqueueReduxSnackbar: (snack: Snack) => void;
