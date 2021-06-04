@@ -53,7 +53,8 @@ module.exports = () => ({
     }),
     new webpack.EnvironmentPlugin({
       BASE_URL: 'http://localhost:9000',
-      API_URL: 'http://localhost:4000',
+      // API_URL: 'http://localhost:4000',
+      API_URL: 'http://75.119.154.167:4000',
       RECAPTCHA_KEY: 'take_it_from_google'
     })
   ]
