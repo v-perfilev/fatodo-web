@@ -1,5 +1,5 @@
 import axios, {AxiosPromise, AxiosResponse} from 'axios';
-import {API_TIMEOUT, API_URL, BASE_URL} from '../constants';
+import {API_TIMEOUT, API_URL} from '../constants';
 import {SecurityUtils} from './utils/security.utils';
 import {TranslationUtils} from './utils/translation.utils';
 import {ResponseUtils} from './utils/response.utils';
@@ -8,9 +8,6 @@ import Snack from '../models/snack.model';
 
 axios.defaults.timeout = API_TIMEOUT;
 axios.defaults.baseURL = API_URL;
-
-console.log('Base url: ' + BASE_URL);
-console.log('Api url: ' + API_URL);
 
 interface SetupAxiosActions {
   onUnauthenticated: () => void;
