@@ -10,6 +10,12 @@ const ENV = 'production';
 
 module.exports = () => merge(commonConfig({env: ENV}), {
   mode: ENV,
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
+  },
+  devtool: false,
   module: {
     rules: [
       {
@@ -30,14 +36,20 @@ module.exports = () => merge(commonConfig({env: ENV}), {
     ]
   },
   optimization: {
-    runtimeChunk: false,
+    runtimeChunk: 'single',
     usedExports: true,
     splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          chunks: 'all'
+          name(module) {
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+            return `npm.${packageName.replace('@', '')}`;
+          }
+          // name: 'vendors',
         }
       }
     },

@@ -10,7 +10,6 @@ import {CssBaseline} from '@material-ui/core';
 import {clearAuth} from './store/actions/auth.actions';
 import {initLanguages} from './shared/i18n';
 import './shared/i18n';
-import {BrowserRouter as Router} from 'react-router-dom';
 import {compose} from 'recompose';
 
 // import styles
@@ -33,10 +32,10 @@ setupAxiosInterceptors({
 });
 
 const Root: FC = () => (
-  <Router>
+  <>
     <CssBaseline />
     <App />
-  </Router>
+  </>
 );
 
 const WrappedRoot = compose(withStore, withDefaultTheme, withMui, withSnack, withDialogs, withChat)(Root);
