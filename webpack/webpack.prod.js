@@ -11,11 +11,12 @@ const ENV = 'production';
 module.exports = () => merge(commonConfig({env: ENV}), {
   mode: ENV,
   performance: {
-    hints: false,
+    maxAssetSize: 512000,
     maxEntrypointSize: 512000,
-    maxAssetSize: 512000
+    assetFilter: function(assetFilename) {
+      return !assetFilename.endsWith('.jpg');
+    }
   },
-  devtool: false,
   module: {
     rules: [
       {
@@ -49,7 +50,6 @@ module.exports = () => merge(commonConfig({env: ENV}), {
             const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
             return `npm.${packageName.replace('@', '')}`;
           }
-          // name: 'vendors',
         }
       }
     },

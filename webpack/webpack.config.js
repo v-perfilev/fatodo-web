@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const {ContextReplacementPlugin} = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
@@ -6,7 +7,13 @@ const Dotenv = require('dotenv-webpack');
 const PATH = require('path');
 
 module.exports = () => ({
-  entry: './src/index.tsx',
+  entry: {
+    main: './src/index.tsx',
+    chat: './src/components/chat/_router.tsx',
+    contact: './src/components/contact/_router.tsx',
+    group: './src/components/group/_router.tsx',
+    item: './src/components/item/_router.tsx'
+  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
@@ -45,6 +52,10 @@ module.exports = () => ({
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
+    new ContextReplacementPlugin(
+      /moment[/\\]locale$/,
+      /en|ru/
+    ),
     new CopyWebpackPlugin([
       {from: './public/', to: ''}
     ]),

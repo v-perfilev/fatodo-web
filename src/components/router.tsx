@@ -16,6 +16,12 @@ import ForgotPassword from './user/forgot-password';
 import ResetPassword from './user/reset-password';
 import Home from './home';
 import AccountSettings from './user/account';
+import {Spinner} from './common/loaders';
+
+// import GroupRouter from './group/_router';
+// import ItemRouter from './item/_router';
+// import ContactRouter from './contact/_router';
+// import ChatRouter from './chat/_router';
 
 const GroupRouter = lazy(() => import('./group/_router'));
 const ItemRouter = lazy(() => import('./item/_router'));
@@ -45,7 +51,7 @@ export enum Routes {
 
 const Router: FC = () => (
   <BrowserRouter>
-    <Suspense fallback={'...'}>
+    <Suspense fallback={<Spinner />}>
       <Switch>
         <MixedRoute exact path={Routes.ROOT} component={Home} redirect={Routes.GROUPS} />
         {/*Private Routes*/}
