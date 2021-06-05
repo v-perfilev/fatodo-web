@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, lazy, Suspense} from 'react';
-import {BrowserRouter, Redirect, Switch} from 'react-router-dom';
+import {Redirect, Switch} from 'react-router-dom';
 import PublicRoute from '../shared/routes/public-route';
 import Unauthorized from './static/unauthorized';
 import InternalError from './static/internal-error';
@@ -50,33 +50,31 @@ export enum Routes {
 }
 
 const Router: FC = () => (
-  <BrowserRouter>
-    <Suspense fallback={<Spinner />}>
-      <Switch>
-        <MixedRoute exact path={Routes.ROOT} component={Home} redirect={Routes.GROUPS} />
-        {/*Private Routes*/}
-        <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
-        <PrivateRoute path={Routes.ITEMS} component={ItemRouter} />
-        <PrivateRoute path={Routes.CONTACTS} component={ContactRouter} />
-        <PrivateRoute path={Routes.CHATS} component={ChatRouter} />
-        <PrivateRoute path={Routes.ACCOUNT} component={AccountSettings} />
-        {/*Auth Routes*/}
-        <PublicRoute path={Routes.LOGIN} component={Auth} />
-        <PublicRoute path={Routes.REGISTRATION} component={Auth} />
-        <PublicRoute path={Routes.SOCIAL_LOGIN_WITH_PARAM} component={SocialLogin} />
-        <PublicRoute path={Routes.ACTIVATION_WITH_PARAM} component={Activation} />
-        <PublicRoute path={Routes.NOT_ACTIVATED} component={NotActivated} />
-        <PublicRoute path={Routes.FORGOT_PASSWORD} component={ForgotPassword} />
-        <PublicRoute path={Routes.RESET_PASSWORD_WITH_PARAM} component={ResetPassword} />
-        {/*Errors*/}
-        <PublicRoute path={Routes.UNAUTHORIZED} component={Unauthorized} />
-        <PublicRoute path={Routes.FORBIDDEN} component={Forbidden} />
-        <PublicRoute path={Routes.INTERNAL_ERROR} component={InternalError} />
-        <PublicRoute path={Routes.PAGE_NOT_FOUND} component={PageNotFound} />
-        <Redirect to={Routes.PAGE_NOT_FOUND} />
-      </Switch>
-    </Suspense>
-  </BrowserRouter>
+  <Suspense fallback={<Spinner />}>
+    <Switch>
+      <MixedRoute exact path={Routes.ROOT} component={Home} redirect={Routes.GROUPS} />
+      {/*Private Routes*/}
+      <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
+      <PrivateRoute path={Routes.ITEMS} component={ItemRouter} />
+      <PrivateRoute path={Routes.CONTACTS} component={ContactRouter} />
+      <PrivateRoute path={Routes.CHATS} component={ChatRouter} />
+      <PrivateRoute path={Routes.ACCOUNT} component={AccountSettings} />
+      {/*Auth Routes*/}
+      <PublicRoute path={Routes.LOGIN} component={Auth} />
+      <PublicRoute path={Routes.REGISTRATION} component={Auth} />
+      <PublicRoute path={Routes.SOCIAL_LOGIN_WITH_PARAM} component={SocialLogin} />
+      <PublicRoute path={Routes.ACTIVATION_WITH_PARAM} component={Activation} />
+      <PublicRoute path={Routes.NOT_ACTIVATED} component={NotActivated} />
+      <PublicRoute path={Routes.FORGOT_PASSWORD} component={ForgotPassword} />
+      <PublicRoute path={Routes.RESET_PASSWORD_WITH_PARAM} component={ResetPassword} />
+      {/*Errors*/}
+      <PublicRoute path={Routes.UNAUTHORIZED} component={Unauthorized} />
+      <PublicRoute path={Routes.FORBIDDEN} component={Forbidden} />
+      <PublicRoute path={Routes.INTERNAL_ERROR} component={InternalError} />
+      <PublicRoute path={Routes.PAGE_NOT_FOUND} component={PageNotFound} />
+      <Redirect to={Routes.PAGE_NOT_FOUND} />
+    </Switch>
+  </Suspense>
 );
 
 export default Router;
