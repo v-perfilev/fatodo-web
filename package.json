@@ -104,6 +104,7 @@
     "cleanup": "rimraf dist/",
     "start": "webpack-dev-server --config webpack/webpack.dev.js --open --hot",
     "build": "npm run cleanup && webpack --config webpack/webpack.prod.js -p",
+    "build:analyze": "npm run cleanup && webpack --config webpack/webpack.prod.js --env.analyze=true -p",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:fix": "npm run-script lint -- --fix",
     "jest": "jest --coverage --logHeapUsage --maxWorkers=2 --config test/jest.conf.js",

@@ -8,7 +8,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const ENV = 'production';
 
-module.exports = () => merge(commonConfig({env: ENV}), {
+module.exports = (env) => merge(commonConfig({env: ENV}), {
   mode: ENV,
   performance: {
     maxAssetSize: 512000,
@@ -65,10 +65,10 @@ module.exports = () => merge(commonConfig({env: ENV}), {
       minRatio: 0.8
     }),
     new CleanWebpackPlugin(),
-    // new BundleAnalyzerPlugin(),
     new webpack.EnvironmentPlugin({
       SOCIAL_LOGIN: true,
       DEVELOPMENT_MODE: false
-    })
+    }),
+    ...(env && env.analyze ? [new BundleAnalyzerPlugin()] : [])
   ]
 });

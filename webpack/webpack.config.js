@@ -7,19 +7,13 @@ const Dotenv = require('dotenv-webpack');
 const PATH = require('path');
 
 module.exports = () => ({
-  entry: {
-    main: './src/index.tsx',
-    chat: './src/components/chat/_router.tsx',
-    contact: './src/components/contact/_router.tsx',
-    group: './src/components/group/_router.tsx',
-    item: './src/components/item/_router.tsx'
-  },
+  entry: './src/index.tsx',
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
   output: {
     path: PATH.join(__dirname, '../dist'),
-    filename: '[name].[hash].js',
+    filename: '[name].[contenthash].js',
     publicPath: '/'
   },
   module: {
