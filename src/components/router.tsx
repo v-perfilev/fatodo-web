@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, lazy, Suspense} from 'react';
+import {FC} from 'react';
 import {Redirect, Switch} from 'react-router-dom';
 import PublicRoute from '../shared/routes/public-route';
 import Unauthorized from './static/unauthorized';
@@ -16,17 +16,10 @@ import ForgotPassword from './user/forgot-password';
 import ResetPassword from './user/reset-password';
 import Home from './home';
 import AccountSettings from './user/account';
-import {Spinner} from './common/loaders';
-
-// import GroupRouter from './group/_router';
-// import ItemRouter from './item/_router';
-// import ContactRouter from './contact/_router';
-// import ChatRouter from './chat/_router';
-
-const GroupRouter = lazy(() => import('./group/_router'));
-const ItemRouter = lazy(() => import('./item/_router'));
-const ContactRouter = lazy(() => import('./contact/_router'));
-const ChatRouter = lazy(() => import('./chat/_router'));
+import GroupRouter from './group/_router';
+import ItemRouter from './item/_router';
+import ContactRouter from './contact/_router';
+import ChatRouter from './chat/_router';
 
 export enum Routes {
   ROOT = '/',
@@ -50,31 +43,29 @@ export enum Routes {
 }
 
 const Router: FC = () => (
-  <Suspense fallback={<Spinner />}>
-    <Switch>
-      <MixedRoute exact path={Routes.ROOT} component={Home} redirect={Routes.GROUPS} />
-      {/*Private Routes*/}
-      <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
-      <PrivateRoute path={Routes.ITEMS} component={ItemRouter} />
-      <PrivateRoute path={Routes.CONTACTS} component={ContactRouter} />
-      <PrivateRoute path={Routes.CHATS} component={ChatRouter} />
-      <PrivateRoute path={Routes.ACCOUNT} component={AccountSettings} />
-      {/*Auth Routes*/}
-      <PublicRoute path={Routes.LOGIN} component={Auth} />
-      <PublicRoute path={Routes.REGISTRATION} component={Auth} />
-      <PublicRoute path={Routes.SOCIAL_LOGIN_WITH_PARAM} component={SocialLogin} />
-      <PublicRoute path={Routes.ACTIVATION_WITH_PARAM} component={Activation} />
-      <PublicRoute path={Routes.NOT_ACTIVATED} component={NotActivated} />
-      <PublicRoute path={Routes.FORGOT_PASSWORD} component={ForgotPassword} />
-      <PublicRoute path={Routes.RESET_PASSWORD_WITH_PARAM} component={ResetPassword} />
-      {/*Errors*/}
-      <PublicRoute path={Routes.UNAUTHORIZED} component={Unauthorized} />
-      <PublicRoute path={Routes.FORBIDDEN} component={Forbidden} />
-      <PublicRoute path={Routes.INTERNAL_ERROR} component={InternalError} />
-      <PublicRoute path={Routes.PAGE_NOT_FOUND} component={PageNotFound} />
-      <Redirect to={Routes.PAGE_NOT_FOUND} />
-    </Switch>
-  </Suspense>
+  <Switch>
+    <MixedRoute exact path={Routes.ROOT} component={Home} redirect={Routes.GROUPS} />
+    {/*Private Routes*/}
+    <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
+    <PrivateRoute path={Routes.ITEMS} component={ItemRouter} />
+    <PrivateRoute path={Routes.CONTACTS} component={ContactRouter} />
+    <PrivateRoute path={Routes.CHATS} component={ChatRouter} />
+    <PrivateRoute path={Routes.ACCOUNT} component={AccountSettings} />
+    {/*Auth Routes*/}
+    <PublicRoute path={Routes.LOGIN} component={Auth} />
+    <PublicRoute path={Routes.REGISTRATION} component={Auth} />
+    <PublicRoute path={Routes.SOCIAL_LOGIN_WITH_PARAM} component={SocialLogin} />
+    <PublicRoute path={Routes.ACTIVATION_WITH_PARAM} component={Activation} />
+    <PublicRoute path={Routes.NOT_ACTIVATED} component={NotActivated} />
+    <PublicRoute path={Routes.FORGOT_PASSWORD} component={ForgotPassword} />
+    <PublicRoute path={Routes.RESET_PASSWORD_WITH_PARAM} component={ResetPassword} />
+    {/*Errors*/}
+    <PublicRoute path={Routes.UNAUTHORIZED} component={Unauthorized} />
+    <PublicRoute path={Routes.FORBIDDEN} component={Forbidden} />
+    <PublicRoute path={Routes.INTERNAL_ERROR} component={InternalError} />
+    <PublicRoute path={Routes.PAGE_NOT_FOUND} component={PageNotFound} />
+    <Redirect to={Routes.PAGE_NOT_FOUND} />
+  </Switch>
 );
 
 export default Router;

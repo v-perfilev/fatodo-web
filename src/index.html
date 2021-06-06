@@ -5,9 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Fatodo</title>
+  <style>
+      body {
+          margin: 0;
+          padding: 0;
+      }
+
+      #root {
+          overflow: hidden;
+      }
+
+      #preloader {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100vw;
+          height: 100vh;
+      }
+
+      #preloader img {
+          width: 270px;
+          height: 270px;
+          max-width: 70%;
+      }
+  </style>
 </head>
 <body>
-<div id="root" style="overflow: hidden">
+<div id="root">
+
+  <div id="preloader">
+    <img src="/spinner.svg" alt="Fatodo" />
+  </div>
+
 </div>
 </body>
 </html>
