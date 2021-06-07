@@ -7,6 +7,12 @@ const ENV = 'development';
 
 module.exports = () => merge(commonConfig({env: ENV}), {
   mode: ENV,
+  entry: './src/index.tsx',
+  output: {
+    path: PATH.join(__dirname, '../dist'),
+    filename: '[name].[hash].js',
+    publicPath: '/'
+  },
   resolve: {
     alias: {
       'react-dom': '@hot-loader/react-dom'

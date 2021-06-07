@@ -6,10 +6,17 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
+const PATH = require('path');
 const ENV = 'production';
 
 module.exports = (env) => merge(commonConfig({env: ENV}), {
   mode: ENV,
+  entry: './src/index.tsx',
+  output: {
+    path: PATH.join(__dirname, '../dist'),
+    filename: '[name].[contenthash].js',
+    publicPath: '/'
+  },
   performance: {
     maxAssetSize: 512000,
     maxEntrypointSize: 512000,

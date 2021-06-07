@@ -4,17 +4,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
-const PATH = require('path');
-
 module.exports = () => ({
-  entry: './src/index.tsx',
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
-  },
-  output: {
-    path: PATH.join(__dirname, '../dist'),
-    filename: '[name].[contenthash].js',
-    publicPath: '/'
   },
   module: {
     rules: [
