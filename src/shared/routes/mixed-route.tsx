@@ -2,7 +2,6 @@ import * as React from 'react';
 import {FC} from 'react';
 import {AuthState} from '../../store/rerducers/auth.reducer';
 import {Route, RouteProps, useHistory} from 'react-router-dom';
-import {compose} from 'recompose';
 import withAuthState from '../hocs/with-auth-state';
 
 type BaseProps = RouteProps & {
@@ -21,4 +20,4 @@ const MixedRoute: FC<Props> = ({isAuthenticated, redirect, ...props}: Props) => 
   return !isAuthenticated && <Route {...props} />;
 };
 
-export default compose<Props, BaseProps>(withAuthState)(MixedRoute);
+export default withAuthState(MixedRoute);

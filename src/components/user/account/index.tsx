@@ -1,6 +1,5 @@
 import React, {FC, useEffect} from 'react';
 import withHeader from '../../../shared/hocs/with-header/with-header';
-import {compose} from 'recompose';
 import {Container} from '@material-ui/core';
 import {PageDivider, PageHeader} from '../../common/surfaces';
 import {useTranslation} from 'react-i18next';
@@ -20,6 +19,7 @@ import {requestAccountData} from '../../../store/actions/auth.actions';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
+import {flowRight} from 'lodash';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {requestAccountData};
@@ -64,4 +64,4 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
   );
 };
 
-export default compose<Props, {}>(withHeader, withAdditionalMenu, withVerticalPadding, connector)(Account);
+export default flowRight([withHeader, withAdditionalMenu, withVerticalPadding, connector])(Account);

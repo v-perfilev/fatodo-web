@@ -10,7 +10,7 @@ import {ClearableTextInput} from '../../inputs';
 import {userSelectStyles} from './_styles';
 import UserSelectItem from './user-select-item';
 import withUserList from '../../../../shared/hocs/with-list/with-user-list';
-import {compose} from 'recompose';
+import {flowRight} from 'lodash';
 
 type Props = {
   priorityIds: string[];
@@ -18,7 +18,7 @@ type Props = {
   setUserIds: (ids: string[]) => void;
 };
 
-const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props) => {
+const UsersSelect: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props) => {
   const classes = userSelectStyles();
   const {users, handleUserIds, handleUsers} = useUserListContext();
   const {handleResponse} = useSnackContext();
@@ -112,4 +112,4 @@ const UsersSelectBase: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props
     </Box>
   );
 };
-export const UserSelect = compose<Props, Props>(withUserList)(UsersSelectBase);
+export default flowRight(withUserList)(UsersSelect);

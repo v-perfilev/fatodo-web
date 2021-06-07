@@ -3,7 +3,6 @@ import {itemFormStyles} from './_styles';
 import {Item} from '../../../models/item.model';
 import {Button, Container, Grid, ThemeProvider} from '@material-ui/core';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
-import {compose} from 'recompose';
 import {ItemFormUtils, ItemFormValues} from './_form';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Group} from '../../../models/group.model';
@@ -21,6 +20,7 @@ import {
 import {useTranslation} from 'react-i18next';
 import TypeInput from '../../common/inputs/type-input';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
+import {flowRight} from 'lodash';
 
 type BaseProps = {
   group: Group;
@@ -97,4 +97,4 @@ const formik = withFormik<Props, ItemFormValues>({
   },
 });
 
-export default compose<Props, BaseProps>(formik, withVerticalPadding)(ItemForm);
+export default flowRight([formik, withVerticalPadding])(ItemForm);

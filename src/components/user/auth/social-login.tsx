@@ -1,7 +1,6 @@
 import {FC, useEffect} from 'react';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {Routes} from '../../router';
-import {compose} from 'recompose';
 import {connect, ConnectedProps} from 'react-redux';
 import {login, requestAccountData} from '../../../store/actions/auth.actions';
 
@@ -30,4 +29,4 @@ const SocialLogin: FC<Props> = ({login, requestAccountData}: Props) => {
   return null;
 };
 
-export default compose<Props, {}>(connector)(SocialLogin);
+export default connector(SocialLogin);

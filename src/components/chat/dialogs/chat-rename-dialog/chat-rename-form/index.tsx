@@ -1,7 +1,6 @@
 import {useTranslation} from 'react-i18next';
 import React, {FC, useEffect} from 'react';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
-import {compose} from 'recompose';
 import {RenameChatFormUtils, RenameChatValues} from './_form';
 import {TextInput} from '../../../../common/inputs';
 import {FormDialogComponentProps} from '../../../../common/dialogs';
@@ -9,6 +8,7 @@ import {withSnackContext} from '../../../../../shared/hocs/with-snack/with-snack
 import {SnackState} from '../../../../../shared/contexts/snack-context';
 import ChatService from '../../../../../services/chat.service';
 import {Chat} from '../../../../../models/chat.model';
+import {flowRight} from 'lodash';
 
 type BaseProps = FormDialogComponentProps;
 
@@ -70,4 +70,4 @@ const formik = withFormik<Props, RenameChatValues>({
   },
 });
 
-export default compose<Props, BaseProps>(withSnackContext, formik)(ChatRenameForm);
+export default flowRight([withSnackContext, formik])(ChatRenameForm);

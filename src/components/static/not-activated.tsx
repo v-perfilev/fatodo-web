@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 import {Box, Typography} from '@material-ui/core';
-import {compose} from 'recompose';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/with-redirect-timer';
 import {useTranslation} from 'react-i18next';
 import {staticPageStyles} from './_styles';
@@ -11,7 +10,8 @@ import {Routes} from '../router';
 import AuthService from '../../services/auth.service';
 import {HomeIcon} from '../common/icons/home-icon';
 import {EmailIcon} from '../common/icons/email-icon';
-import {LoadingButton} from '../common/controls/loading-button';
+import {LoadingButton} from '../common/controls';
+import {flowRight} from 'lodash';
 
 type Props = RedirectTimerProps;
 
@@ -76,4 +76,4 @@ const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
   );
 };
 
-export default compose<Props, {}>(withBackground('/images/background-1.jpg'), withRedirectTimer('/', 60))(NotActivated);
+export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer('/', 60)])(NotActivated);

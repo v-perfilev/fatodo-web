@@ -2,13 +2,13 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
-import {compose} from 'recompose';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
 import withAdditionalMenu from '../../shared/hocs/with-additional-menu/with-additional-menu';
 import {Routes} from '../router';
 import ContactMain from './contact-main';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
 import withContactDialogs from '../../shared/hocs/with-dialogs/with-contact-dialogs';
+import {flowRight} from 'lodash';
 
 export enum ContactRoutes {
   INCOMING = '/incoming',
@@ -34,4 +34,4 @@ const ContactRouter: FC = () => {
   );
 };
 
-export default compose(withFlexibleHeader, withAdditionalMenu, withUserList, withContactDialogs)(ContactRouter);
+export default flowRight([withFlexibleHeader, withAdditionalMenu, withUserList, withContactDialogs])(ContactRouter);

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
-import {compose} from 'recompose';
 import withBackground from '../../../shared/hocs/with-background/with-background';
 import {Routes} from '../../router';
 import {useTranslation} from 'react-i18next';
@@ -12,6 +11,7 @@ import {LOADER_TIMEOUT} from '../../../constants';
 import {Link} from '../../common/controls';
 import ResetPasswordForm from './reset-password-form';
 import withAuthState from '../../../shared/hocs/with-auth-state';
+import {flowRight} from 'lodash';
 
 type Props = AuthState;
 
@@ -42,4 +42,4 @@ const ResetPassword: FC<Props> = ({isAuthenticated}: Props) => {
   );
 };
 
-export default compose<Props, {}>(withBackground('/images/background-1.jpg'), withAuthState)(ResetPassword);
+export default flowRight([withBackground('/images/background-1.jpg'), withAuthState])(ResetPassword);

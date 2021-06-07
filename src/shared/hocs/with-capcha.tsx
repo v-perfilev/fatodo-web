@@ -2,9 +2,9 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
 import {RECAPTCHA_KEY} from '../../constants';
 import {LanguageUtils} from '../utils/language.utils';
-import {compose} from 'recompose';
 import {GoogleReCaptchaProvider, useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 import {PromiseUtils} from '../utils/promise.utils';
+import {flowRight} from 'lodash';
 
 export type CaptchaProps = {
   token: string;
@@ -60,4 +60,4 @@ const withCaptchaProvider = (Component: ComponentType): FC => (props): ReactElem
   );
 };
 
-export default compose(withCaptchaProvider, withCaptcha);
+export default flowRight([withCaptchaProvider, withCaptcha]);

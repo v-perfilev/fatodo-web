@@ -14,7 +14,6 @@ import {GroupRouteUtils} from '../_router';
 import {CircularSpinner} from '../../common/loaders';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
-import {compose} from 'recompose';
 import ItemService from '../../../services/item.service';
 
 const GroupEdit: FC = () => {
@@ -95,4 +94,4 @@ const GroupEdit: FC = () => {
   );
 };
 
-export default compose(withGroupView)(GroupEdit);
+export default withGroupView(GroupEdit);

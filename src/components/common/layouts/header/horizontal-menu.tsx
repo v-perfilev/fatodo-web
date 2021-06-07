@@ -16,7 +16,6 @@ import {AccountIcon} from '../../icons/account-icon';
 import {UserListIcon} from '../../icons/user-list-icon';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
-import {compose} from 'recompose';
 import {RedirectMap} from './type';
 import withAuthState from '../../../../shared/hocs/with-auth-state';
 
@@ -81,4 +80,4 @@ const HorizontalMenu: FC<Props> = ({redirectMap, isAuthenticated}: Props) => {
   return <Box className={classes.root}>{isAuthenticated ? authenticatedMenu : unauthenticatedMenu}</Box>;
 };
 
-export default compose<Props, BaseProps>(withAuthState)(HorizontalMenu);
+export default withAuthState(HorizontalMenu);

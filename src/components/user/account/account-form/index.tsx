@@ -3,7 +3,6 @@ import {accountFormStyles} from '../_styles';
 import {Box} from '@material-ui/core';
 import {ImageUpload, SelectInput, TextInput} from '../../../common/inputs';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
-import {compose} from 'recompose';
 import {useTranslation} from 'react-i18next';
 import {UserAccount} from '../../../../models/user.model';
 import {LoadingButton} from '../../../common/controls';
@@ -13,6 +12,7 @@ import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import UserService from '../../../../services/user.service';
 import {AccountFormUtils, AccountFormValues} from './_form';
+import {flowRight} from 'lodash';
 
 type BaseProps = {
   account: UserAccount;
@@ -74,4 +74,4 @@ const formik = withFormik<Props, AccountFormValues>({
   },
 });
 
-export default compose<Props, BaseProps>(withSnackContext, formik)(AccountForm);
+export default flowRight([withSnackContext, formik])(AccountForm);

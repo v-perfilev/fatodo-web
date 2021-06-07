@@ -18,8 +18,8 @@ import {CircularSpinner} from '../../common/loaders';
 import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withItemView from '../../../shared/hocs/with-view/with-item-view';
-import {compose} from 'recompose';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
+import {flowRight} from 'lodash';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -126,4 +126,4 @@ const ItemEdit: FC = () => {
   );
 };
 
-export default compose(withGroupView, withItemView)(ItemEdit);
+export default flowRight([withGroupView, withItemView])(ItemEdit);

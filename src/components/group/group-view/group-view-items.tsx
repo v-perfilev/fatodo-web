@@ -6,7 +6,6 @@ import {PageDivider} from '../../common/surfaces';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {compose} from 'recompose';
 import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 
@@ -41,4 +40,4 @@ const GroupViewItems: FC = () => {
     </Box>
   );
 };
-export default compose(withItemList)(GroupViewItems);
+export default withItemList(GroupViewItems);

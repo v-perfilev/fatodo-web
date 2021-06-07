@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {ComponentType, FC, PropsWithChildren, ReactElement} from 'react';
-import {compose} from 'recompose';
 import {RootState} from '../../store';
 import {AuthState} from '../../store/rerducers/auth.reducer';
 import {connect, ConnectedProps} from 'react-redux';
+import {flowRight} from 'lodash';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const connector = connect(mapStateToProps);
@@ -18,4 +18,4 @@ const withAuthState = (Component: ComponentType<AuthState>): FC => (props: Props
   );
 };
 
-export default compose(connector, withAuthState);
+export default flowRight([connector, withAuthState]);

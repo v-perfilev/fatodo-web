@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ComponentType, FC, memo, ReactElement, useMemo, useState} from 'react';
 import {DialogContext} from '../../contexts/dialog-contexts/dialog-context';
-import {compose} from 'recompose';
+import {flowRight} from 'lodash';
 
 type ComponentWithProps = {
   component: ComponentType;
@@ -75,4 +75,4 @@ const withDialogs = (Component: ComponentType): FC => (props): ReactElement => {
   );
 };
 
-export default compose(withDialogs, memo);
+export default flowRight([withDialogs, memo]);

@@ -14,7 +14,6 @@ import {Routes} from '../../router';
 import ItemViewReminders from './item-view-reminders';
 import ItemViewTags from './item-view-tags';
 import ItemViewChanges from './item-view-changes';
-import {compose} from 'recompose';
 import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
 import {ItemRouteUtils} from '../_router';
@@ -30,6 +29,7 @@ import {CircularSpinner} from '../../common/loaders';
 import {GroupsIcon} from '../../common/icons/groups-icon';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
+import {flowRight} from 'lodash';
 
 const ItemView: FC = () => {
   const history = useHistory();
@@ -143,4 +143,4 @@ const ItemView: FC = () => {
   );
 };
 
-export default compose(withVerticalPadding, withGroupView, withItemView)(ItemView);
+export default flowRight(withVerticalPadding, withGroupView, withItemView)(ItemView);

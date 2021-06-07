@@ -1,7 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
-import {compose} from 'recompose';
 import {Container, ThemeProvider} from '@material-ui/core';
 import GroupViewItems from './group-view-items';
 import GroupViewUsers from './group-view-users';
@@ -27,6 +26,7 @@ import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {useGroupDialogContext} from '../../../shared/contexts/dialog-contexts/group-dialog-context';
 import ItemService from '../../../services/item.service';
+import {flowRight} from 'lodash';
 
 const GroupView: FC = () => {
   const history = useHistory();
@@ -130,4 +130,4 @@ const GroupView: FC = () => {
   );
 };
 
-export default compose(withVerticalPadding, withGroupView)(GroupView);
+export default flowRight([withVerticalPadding, withGroupView])(GroupView);

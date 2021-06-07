@@ -7,7 +7,6 @@ import * as React from 'react';
 import {FC} from 'react';
 import {authFormStyles} from '../../_styles';
 import {useTranslation} from 'react-i18next';
-import {compose} from 'recompose';
 import AuthService from '../../../../services/auth.service';
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../../../router';
@@ -19,6 +18,7 @@ import {Link, LoadingButton} from '../../../common/controls';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import {LoginFormUtils, LoginFormValues} from './_form';
+import {flowRight} from 'lodash';
 
 const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);
@@ -97,4 +97,4 @@ const formik = withFormik<Props, LoginFormValues>({
   },
 });
 
-export default compose<Props, BaseProps>(withRouter, withCaptcha, withSnackContext, connector, formik)(LoginForm);
+export default flowRight([withRouter, withCaptcha, withSnackContext, connector, formik])(LoginForm);

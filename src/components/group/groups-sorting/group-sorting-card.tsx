@@ -3,7 +3,6 @@ import {FC, memo} from 'react';
 import {Card, ThemeProvider} from '@material-ui/core';
 import GroupSortingHeader from './group-sorting-header';
 import {groupSortingCardStyles} from './_styles';
-import {compose} from 'recompose';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
@@ -28,4 +27,4 @@ const GroupSortingCard: FC<Props> = ({bind}: Props) => {
   );
 };
 
-export default compose<Props, Props>(memo)(GroupSortingCard);
+export default memo(GroupSortingCard);

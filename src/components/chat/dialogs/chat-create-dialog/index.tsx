@@ -3,10 +3,10 @@ import {useTranslation} from 'react-i18next';
 import ModalDialog from '../../../common/dialogs/modal-dialog';
 import ContactService from '../../../../services/contact.service';
 import ChatService from '../../../../services/chat.service';
-import {UserSelect} from '../../../common/surfaces';
 import {Button} from '@material-ui/core';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {LoadingButton} from '../../../common/controls';
+import UsersSelect from '../../../common/surfaces/users-select';
 
 export type ChatCreateDialogProps = {
   show: boolean;
@@ -65,7 +65,7 @@ const ChatCreateDialog: FC<Props> = ({show, close}: Props) => {
     }
   }, [show]);
 
-  const content = <UserSelect priorityIds={contactIds} ignoredIds={[]} setUserIds={setUserIds} />;
+  const content = <UsersSelect priorityIds={contactIds} ignoredIds={[]} setUserIds={setUserIds} />;
 
   const cancelButton = (
     <Button onClick={close} color="primary" disabled={isSubmitting}>

@@ -5,9 +5,9 @@ import WsClient from '../../../components/common/ws/ws-client';
 import {Chat} from '../../../models/chat.model';
 import {Message, MessageReactions, MessageStatuses} from '../../../models/message.model';
 import {WS_URL} from '../../../constants';
-import {compose} from 'recompose';
 import withAuthState from '../with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
+import {flowRight} from 'lodash';
 
 enum WsChatDestinations {
   CHAT_NEW = '/user/chat/new',
@@ -93,4 +93,4 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
   );
 };
 
-export default compose<Props, BaseProps>(withAuthState, withWsChatClient);
+export default flowRight([withAuthState, withWsChatClient]);

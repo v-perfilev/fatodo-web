@@ -4,10 +4,10 @@ import {Grid} from '@material-ui/core';
 import {groupSortingGridContainerStyles} from './_styles';
 import withSortableGrid from '../../../shared/hocs/with-sortable-grid/with-sortable-grid';
 import {animated} from 'react-spring';
-import {compose} from 'recompose';
 import {SortProps} from '../../../shared/hocs/with-sortable-grid/types';
 import GroupsSortingItem from './groups-sorting-item';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
+import {flowRight} from 'lodash';
 
 type BaseProps = {
   setOrder: (order: MutableRefObject<number[]>) => void;
@@ -49,4 +49,4 @@ const GroupsSortingContainer: FC<Props> = (props: Props) => {
   );
 };
 
-export default compose<Props, BaseProps>(animated, withSortableGrid)(GroupsSortingContainer);
+export default flowRight([animated, withSortableGrid])(GroupsSortingContainer);

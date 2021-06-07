@@ -3,7 +3,6 @@ import * as React from 'react';
 import {FC} from 'react';
 import {authFormStyles} from '../../_styles';
 import {useTranslation} from 'react-i18next';
-import {compose} from 'recompose';
 import AuthService from '../../../../services/auth.service';
 import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha';
 import {PasswordInput} from '../../../common/inputs';
@@ -12,6 +11,7 @@ import {PasswordStrengthBar} from '../../password-strength-bar';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import {ResetPasswordFormUtils, ResetPasswordFormValues} from './_form';
+import {flowRight} from 'lodash';
 
 type BaseProps = {
   code: string;
@@ -70,4 +70,4 @@ const formik = withFormik<Props, ResetPasswordFormValues>({
   },
 });
 
-export default compose<Props, BaseProps>(withCaptcha, withSnackContext, formik)(ResetPasswordForm);
+export default flowRight([withCaptcha, withSnackContext, formik])(ResetPasswordForm);

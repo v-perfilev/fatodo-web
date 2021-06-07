@@ -1,7 +1,6 @@
 import {useTranslation} from 'react-i18next';
 import React, {FC, useEffect} from 'react';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
-import {compose} from 'recompose';
 import {ContactRequestFormUtils, ContactRequestFormValues} from './_form';
 import {AuthState} from '../../../../../store/rerducers/auth.reducer';
 import UserService from '../../../../../services/user.service';
@@ -11,6 +10,7 @@ import {withSnackContext} from '../../../../../shared/hocs/with-snack/with-snack
 import {SnackState} from '../../../../../shared/contexts/snack-context';
 import ContactService from '../../../../../services/contact.service';
 import withAuthState from '../../../../../shared/hocs/with-auth-state';
+import {flowRight} from 'lodash';
 
 type BaseProps = FormDialogComponentProps;
 
@@ -85,4 +85,4 @@ const formik = withFormik<Props, ContactRequestFormValues>({
   },
 });
 
-export default compose<Props, BaseProps>(withSnackContext, withAuthState, formik)(ContactRequestForm);
+export default flowRight([withSnackContext, withAuthState, formik])(ContactRequestForm);

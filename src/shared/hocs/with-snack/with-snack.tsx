@@ -8,11 +8,11 @@ import {SnackBuilder} from '../../utils/builders/snack.builder';
 import {SnackContext, SnackState} from '../../contexts/snack-context';
 import Snack from '../../../models/snack.model';
 import {snackStyles} from './_styles';
-import {compose} from 'recompose';
 import {connect, ConnectedProps} from 'react-redux';
 import {RootState} from '../../../store';
 import {closeReduxSnack, enqueueReduxSnack, removeReduxSnack} from '../../../store/actions/snack.actions';
 import {ReduxSnack} from '../../../store/rerducers/snack.reducer';
+import {flowRight} from 'lodash';
 
 const mapStateToProps = (state: RootState): any => ({snackState: state.snackState});
 const mapDispatchToProps = {enqueueReduxSnack, closeReduxSnack, removeReduxSnack};
@@ -104,4 +104,4 @@ export const withSnackContext = (Component: ComponentType<SnackState>): FC => (p
   return <SnackContext.Consumer>{(value): ReactElement => <Component {...props} {...value} />}</SnackContext.Consumer>;
 };
 
-export default compose<Props, BaseProps>(withSnackProvider, connector, withSnack, memo);
+export default flowRight([withSnackProvider, connector, withSnack, memo]);

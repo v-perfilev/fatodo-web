@@ -9,7 +9,6 @@ import {useTranslation} from 'react-i18next';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {compose} from 'recompose';
 import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import {CircularSpinner} from '../../common/loaders';
@@ -80,4 +79,4 @@ const GroupPreview: FC = () => {
   return groupsLoading ? <CircularSpinner /> : <GroupPreviewGridContainer />;
 };
 
-export default compose(withGroupList)(GroupPreview);
+export default withGroupList(GroupPreview);

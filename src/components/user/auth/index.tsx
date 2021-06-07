@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 import {Box, Tab, Tabs} from '@material-ui/core';
-import {compose} from 'recompose';
 import withBackground from '../../../shared/hocs/with-background/with-background';
 import {Routes} from '../../router';
 import {useTranslation} from 'react-i18next';
@@ -14,6 +13,7 @@ import {SocialButtons} from './social-buttons';
 import LoginForm from './login-form';
 import RegistrationForm from './registration-form';
 import withAuthState from '../../../shared/hocs/with-auth-state';
+import {flowRight} from 'lodash';
 
 type Props = AuthState;
 
@@ -79,4 +79,4 @@ const Auth: FC<Props> = ({isAuthenticated}: Props) => {
   );
 };
 
-export default compose<Props, {}>(withBackground('/images/background-1.jpg'), withAuthState)(Auth);
+export default flowRight([withBackground('/images/background-1.jpg'), withAuthState])(Auth);

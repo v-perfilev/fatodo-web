@@ -2,7 +2,6 @@ import React, {FC, useEffect, useRef} from 'react';
 import {groupFormStyles} from './_styles';
 import {Button, Container, Grid, ThemeProvider} from '@material-ui/core';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
-import {compose} from 'recompose';
 import {Group} from '../../../models/group.model';
 import {GroupFormUtils, GroupFormValues} from './_form';
 import {ThemeFactory} from '../../../shared/theme/theme';
@@ -10,6 +9,7 @@ import {ImageUpload, TextInput, ThemeSelect} from '../../common/inputs';
 import {useTranslation} from 'react-i18next';
 import {PageDivider, PageHeader} from '../../common/surfaces';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
+import {flowRight} from 'lodash';
 
 type BaseProps = {
   group?: Group;
@@ -75,4 +75,4 @@ const formik = withFormik<Props, GroupFormValues>({
   },
 });
 
-export default compose<Props, BaseProps>(formik, withVerticalPadding)(GroupForm);
+export default flowRight([formik, withVerticalPadding])(GroupForm);

@@ -2,7 +2,6 @@ import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as React from 'react';
 import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import {compose} from 'recompose';
 import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha';
 import {authFormStyles} from '../../_styles';
 import {TextInput} from '../../../common/inputs';
@@ -11,6 +10,7 @@ import AuthService from '../../../../services/auth.service';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {ForgotPasswordFormUtils, ForgotPasswordFormValues} from './_form';
+import {flowRight} from 'lodash';
 
 type BaseProps = {
   onSuccess?: () => void;
@@ -64,4 +64,4 @@ const formik = withFormik<Props, ForgotPasswordFormValues>({
   },
 });
 
-export default compose<Props, BaseProps>(withCaptcha, withSnackContext, formik)(ForgotPasswordForm);
+export default flowRight([withCaptcha, withSnackContext, formik])(ForgotPasswordForm);

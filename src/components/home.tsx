@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Container, Typography} from '@material-ui/core';
-import {compose} from 'recompose';
 import withHeader from '../shared/hocs/with-header/with-header';
 import withVerticalPadding from '../shared/hocs/with-vertical-padding/with-vertical-padding';
+import {flowRight} from 'lodash';
 
 const Home: FC = () => {
   return (
@@ -46,4 +46,4 @@ const Home: FC = () => {
   );
 };
 
-export default compose(withHeader, withVerticalPadding)(Home);
+export default flowRight([withHeader, withVerticalPadding])(Home);

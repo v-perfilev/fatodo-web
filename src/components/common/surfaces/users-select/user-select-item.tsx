@@ -1,7 +1,6 @@
 import React, {FC, HTMLAttributes, memo} from 'react';
 import {Box} from '@material-ui/core';
 import {User} from '../../../../models/user.model';
-import {compose} from 'recompose';
 import {userSelectItemStyles} from './_styles';
 import {UrlPic} from '../../images';
 import {CheckboxInput} from '../../inputs';
@@ -24,4 +23,4 @@ const UserSelectItem: FC<Props> = ({user, isSelected, toggleSelected, ...props}:
   );
 };
 
-export default compose<Props, Props>(memo)(UserSelectItem);
+export default memo(UserSelectItem);

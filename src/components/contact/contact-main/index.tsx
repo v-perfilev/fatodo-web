@@ -9,7 +9,6 @@ import {ArrowBackIcon} from '../../common/icons/arrow-back-icon';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
 import {contactMainStyles} from './_styles';
-import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import ContactRelations from '../contact-relations';
 import ContactIncoming from '../contact-incoming';
@@ -99,4 +98,4 @@ const ContactMain: FC = () => {
   );
 };
 
-export default compose(withVerticalPadding)(ContactMain);
+export default withVerticalPadding(ContactMain);

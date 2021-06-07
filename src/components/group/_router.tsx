@@ -4,7 +4,6 @@ import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
 import GroupsPreview from './groups-preview';
 import GroupsSorting from './groups-sorting';
-import {compose} from 'recompose';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
 import withAdditionalMenu from '../../shared/hocs/with-additional-menu/with-additional-menu';
 import {Routes} from '../router';
@@ -14,6 +13,7 @@ import GroupEdit from './group-edit';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
 import withGroupDialogs from '../../shared/hocs/with-dialogs/with-group-dialogs';
 import withItemDialogs from '../../shared/hocs/with-dialogs/with-item-dialogs';
+import {flowRight} from 'lodash';
 
 export enum GroupRoutes {
   SORTING = '/sorting',
@@ -44,10 +44,6 @@ const GroupRouter: FC = () => {
   );
 };
 
-export default compose(
-  withFlexibleHeader,
-  withAdditionalMenu,
-  withUserList,
-  withGroupDialogs,
-  withItemDialogs
-)(GroupRouter);
+export default flowRight([withFlexibleHeader, withAdditionalMenu, withUserList, withGroupDialogs, withItemDialogs])(
+  GroupRouter
+);

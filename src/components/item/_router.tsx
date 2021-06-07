@@ -2,8 +2,6 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
-
-import {compose} from 'recompose';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
 import withAdditionalMenu from '../../shared/hocs/with-additional-menu/with-additional-menu';
 import {Routes} from '../router';
@@ -12,6 +10,7 @@ import ItemEdit from './item-edit';
 import ItemCreate from './item-create';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
 import withItemDialogs from '../../shared/hocs/with-dialogs/with-item-dialogs';
+import {flowRight} from 'lodash';
 
 export enum ItemRoutes {
   CREATE = '/create/:groupId',
@@ -38,4 +37,4 @@ const ItemRouter: FC = () => {
   );
 };
 
-export default compose(withFlexibleHeader, withAdditionalMenu, withUserList, withItemDialogs)(ItemRouter);
+export default flowRight([withFlexibleHeader, withAdditionalMenu, withUserList, withItemDialogs])(ItemRouter);

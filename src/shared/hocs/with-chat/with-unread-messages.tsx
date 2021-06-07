@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {ComponentType, FC, PropsWithChildren, ReactElement, useEffect, useState} from 'react';
-import {compose} from 'recompose';
 import withAuthState from '../with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {UnreadMessagesContext} from '../../contexts/chat-contexts/unread-messages-context';
@@ -8,6 +7,7 @@ import ChatService from '../../../services/chat.service';
 import {useWsChatContext} from '../../contexts/chat-contexts/ws-chat-context';
 import {useSnackContext} from '../../contexts/snack-context';
 import {handleChatLastMessageEvent, handleMessageStatusesEvent} from './_ws';
+import {flowRight} from 'lodash';
 
 type BaseProps = PropsWithChildren<HTMLElement>;
 
@@ -82,4 +82,4 @@ const withUnreadMessages = (Component: ComponentType): FC => (props: Props): Rea
   );
 };
 
-export default compose<Props, BaseProps>(withAuthState, withUnreadMessages);
+export default flowRight([withAuthState, withUnreadMessages]);

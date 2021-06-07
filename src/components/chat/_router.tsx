@@ -2,13 +2,13 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
-import {compose} from 'recompose';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
 import withAdditionalMenu from '../../shared/hocs/with-additional-menu/with-additional-menu';
 import {Routes} from '../router';
 import MessageMain from './chat-main';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
 import withChatDialogs from '../../shared/hocs/with-dialogs/with-chat-dialogs';
+import {flowRight} from 'lodash';
 
 export enum ChatRoutes {
   CHAT = '/:chatId',
@@ -31,4 +31,4 @@ const ChatRouter: FC = () => {
   );
 };
 
-export default compose(withFlexibleHeader, withAdditionalMenu, withUserList, withChatDialogs)(ChatRouter);
+export default flowRight([withFlexibleHeader, withAdditionalMenu, withUserList, withChatDialogs])(ChatRouter);

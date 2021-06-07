@@ -8,10 +8,10 @@ import {useTranslation} from 'react-i18next';
 import {AccountPasswordFormUtils, AccountPasswordFormValues} from './_form';
 import {PasswordInput} from '../../../common/inputs';
 import {PasswordStrengthBar} from '../../password-strength-bar';
-import {compose} from 'recompose';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import UserService from '../../../../services/user.service';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
+import {flowRight} from 'lodash';
 
 type Props = FormikProps<AccountPasswordFormValues> & SnackState;
 
@@ -65,4 +65,4 @@ const formik = withFormik<Props, AccountPasswordFormValues>({
   },
 });
 
-export default compose<Props, {}>(withSnackContext, formik)(AccountPasswordForm);
+export default flowRight([withSnackContext, formik])(AccountPasswordForm);

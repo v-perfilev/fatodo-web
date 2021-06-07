@@ -8,7 +8,6 @@ import {LogoWithText} from '../logo';
 import {SidebarMenu} from './sidebar-menu';
 import {logout} from '../../../../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
-import {compose} from 'recompose';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../../router';
 import {RedirectMap} from './type';
@@ -63,4 +62,4 @@ const Header: FC<Props> = ({flexible, logout}: Props) => {
   );
 };
 
-export default compose<Props, BaseProps>(connector)(Header);
+export default connector(Header);

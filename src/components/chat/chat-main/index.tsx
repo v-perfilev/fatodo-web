@@ -13,7 +13,6 @@ import ChatControl from '../chat-control';
 import ChatContent from '../chat-content';
 import {Chat} from '../../../models/chat.model';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {compose} from 'recompose';
 import {PlusIcon} from '../../common/icons/plus-icon';
 import withAuthState from '../../../shared/hocs/with-auth-state';
 import {useWsChatContext} from '../../../shared/contexts/chat-contexts/ws-chat-context';
@@ -119,4 +118,4 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   return <>{isBigDevice ? bigView : smallView}</>;
 };
 
-export default compose<Props, {}>(withAuthState)(ChatMain);
+export default withAuthState(ChatMain);

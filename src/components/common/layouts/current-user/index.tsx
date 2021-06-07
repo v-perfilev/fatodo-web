@@ -1,5 +1,4 @@
 import React, {FC, HTMLAttributes} from 'react';
-import {compose} from 'recompose';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
 import csx from 'classnames';
 import {currentUserStyles} from './_styles';
@@ -20,4 +19,4 @@ const CurrentUser: FC<Props> = ({account, className}: Props) => {
   return <UserView user={user} picSize="sm" withUsername className={classNames} />;
 };
 
-export default compose<Props, BaseProps>(withAuthState)(CurrentUser);
+export default withAuthState(CurrentUser);

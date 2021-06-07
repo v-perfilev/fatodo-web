@@ -5,7 +5,6 @@ import {useTranslation} from 'react-i18next';
 import {sidebarMenuStyles} from './_styles';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
 import {LogoutIcon} from '../../icons/logout-icon';
-import {compose} from 'recompose';
 import {LoginIcon} from '../../icons/login-icon';
 import {SignUpIcon} from '../../icons/signup-icon';
 import {AccountIcon} from '../../icons/account-icon';
@@ -85,4 +84,4 @@ const VerticalMenu: FC<Props> = ({isAuthenticated, redirectMap}: Props) => {
   );
 };
 
-export default compose<Props, BaseProps>(withAuthState)(VerticalMenu);
+export default withAuthState(VerticalMenu);

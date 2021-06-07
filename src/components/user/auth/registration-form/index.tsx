@@ -5,7 +5,6 @@ import {useTranslation} from 'react-i18next';
 import AuthService from '../../../../services/auth.service';
 import {authFormStyles} from '../../_styles';
 import i18n from '../../../../shared/i18n';
-import {compose} from 'recompose';
 import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha';
 import {PasswordInput, TextInput} from '../../../common/inputs';
 import {LoadingButton} from '../../../common/controls';
@@ -13,6 +12,7 @@ import {PasswordStrengthBar} from '../../password-strength-bar';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {RegistrationFormUtils, RegistrationFormValues} from './_form';
+import {flowRight} from 'lodash';
 
 type BaseProps = {
   onSuccess: () => void;
@@ -66,4 +66,4 @@ const formik = withFormik<Props, RegistrationFormValues>({
   },
 });
 
-export default compose<Props, BaseProps>(withCaptcha, withSnackContext, formik)(RegistrationForm);
+export default flowRight([withCaptcha, withSnackContext, formik])(RegistrationForm);

@@ -2,7 +2,6 @@ import * as React from 'react';
 import {FC} from 'react';
 import {AuthState} from '../../store/rerducers/auth.reducer';
 import {Route, RouteProps, useHistory} from 'react-router-dom';
-import {compose} from 'recompose';
 import {Routes} from '../../components/router';
 import withAuthState from '../hocs/with-auth-state';
 
@@ -20,4 +19,4 @@ const PrivateRoute: FC<Props> = ({isAuthenticated, ...props}: Props) => {
   return isAuthenticated && <Route {...props} />;
 };
 
-export default compose<Props, BaseProps>(withAuthState)(PrivateRoute);
+export default withAuthState(PrivateRoute);

@@ -11,7 +11,6 @@ import {clearAuth} from './store/actions/auth.actions';
 import {initLanguages} from './shared/i18n';
 import './shared/i18n';
 import {BrowserRouter as Router} from 'react-router-dom';
-import {compose} from 'recompose';
 
 // import styles
 import 'react-image-crop/dist/ReactCrop.css';
@@ -24,6 +23,7 @@ import withSnack from './shared/hocs/with-snack/with-snack';
 import withChat from './shared/hocs/with-chat/with-chat';
 import {enqueueReduxSnack} from './store/actions/snack.actions';
 import withDialogs from './shared/hocs/with-dialogs/with-dialogs';
+import {flowRight} from 'lodash';
 
 // setup axios
 const axiosActions = bindActionCreators({clearAuth, enqueueReduxSnack}, store.dispatch);
@@ -39,7 +39,7 @@ const Root: FC = () => (
   </Router>
 );
 
-const WrappedRoot = compose(withStore, withDefaultTheme, withMui, withSnack, withDialogs, withChat)(Root);
+const WrappedRoot = flowRight([withStore, withDefaultTheme, withMui, withSnack, withDialogs, withChat])(Root);
 
 const root = document.getElementById('root');
 initLanguages.then(() => {

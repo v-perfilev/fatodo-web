@@ -2,12 +2,12 @@ import * as React from 'react';
 import {FC, HTMLAttributes, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import {animated} from 'react-spring';
-import {compose} from 'recompose';
 import GroupSortingCard from './group-sorting-card';
 import {groupSortingGridItemStyles} from './_styles';
 import {Group} from '../../../models/group.model';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
+import {flowRight} from 'lodash';
 
 type Props = HTMLAttributes<HTMLElement> & {
   group: Group;
@@ -30,4 +30,4 @@ const GroupsSortingItem: FC<Props> = ({group, style, bind, setItemRef}: Props) =
   );
 };
 
-export default compose<Props, Props>(animated, withGroupView)(GroupsSortingItem);
+export default flowRight([animated, withGroupView])(GroupsSortingItem);

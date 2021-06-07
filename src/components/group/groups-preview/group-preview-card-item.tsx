@@ -3,7 +3,6 @@ import {FC, HTMLAttributes, useEffect} from 'react';
 import {Box, Card, Typography} from '@material-ui/core';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {groupCardItemStyles} from './_styles';
-import {compose} from 'recompose';
 import {animated} from 'react-spring';
 import Truncate from 'react-truncate';
 import {Item} from '../../../models/item.model';
@@ -12,6 +11,7 @@ import {ItemRoutes} from '../../item/_router';
 import {Link} from '../../common/controls';
 import withItemView from '../../../shared/hocs/with-view/with-item-view';
 import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
+import {flowRight} from 'lodash';
 
 type Props = HTMLAttributes<HTMLElement> & {
   item: Item;
@@ -39,4 +39,4 @@ const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
   );
 };
 
-export default compose<Props, Props>(animated, withItemView)(GroupPreviewCardItem);
+export default flowRight([animated, withItemView])(GroupPreviewCardItem);

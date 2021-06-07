@@ -2,11 +2,11 @@ import * as React from 'react';
 import {FC, memo, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import {groupGridItemStyles} from './_styles';
-import {compose} from 'recompose';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {Group} from '../../../models/group.model';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import GroupPreviewCard from './group-preview-card';
+import {flowRight} from 'lodash';
 
 type Props = {
   group: Group;
@@ -27,4 +27,4 @@ const GroupPreviewGridItem: FC<Props> = ({group}: Props) => {
   );
 };
 
-export default compose<Props, Props>(memo, withGroupView)(GroupPreviewGridItem);
+export default flowRight([memo, withGroupView])(GroupPreviewGridItem);

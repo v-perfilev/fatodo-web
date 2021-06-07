@@ -6,8 +6,8 @@ import {Button} from '@material-ui/core';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import ContactService from '../../../../services/contact.service';
-import {UserSelect} from '../../../common/surfaces';
 import {LoadingButton} from '../../../common/controls';
+import UsersSelect from '../../../common/surfaces/users-select';
 
 export type ChatAddMembersDialogProps = {
   chat: Chat;
@@ -64,7 +64,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, show, close}: Props) => {
     }
   }, [chat]);
 
-  const content = chat && <UserSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />;
+  const content = chat && <UsersSelect priorityIds={contactIds} ignoredIds={chat.members} setUserIds={setUserIds} />;
 
   const cancelButton = (
     <Button onClick={close} color="primary" disabled={isSubmitting}>
