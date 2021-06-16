@@ -1,7 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {HEADER_HEIGHT} from '../../common/layouts/header/_constants';
 import {Theme} from '@material-ui/core';
-import {BOTTOM_DRAWER_HEIGHT} from '../../common/layouts/additional-menu/_constants';
 
 export const messageMainStyles = makeStyles((theme: Theme) => ({
   bigViewRoot: {
@@ -20,7 +19,7 @@ export const messageMainStyles = makeStyles((theme: Theme) => ({
     height: '100%',
   },
   smallViewRoot: {
-    height: 'calc(100vh - ' + HEADER_HEIGHT + 'px - ' + BOTTOM_DRAWER_HEIGHT + 'px)',
+    height: 'calc(100vh - ' + HEADER_HEIGHT + 'px)',
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,

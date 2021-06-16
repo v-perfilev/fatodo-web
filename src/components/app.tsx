@@ -11,6 +11,7 @@ import {login, requestAccountData} from '../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
 import withLastLocation from '../shared/hocs/with-last-location';
 import {flowRight} from 'lodash';
+import withAdditionalMenu from '../shared/hocs/with-additional-menu';
 
 const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);
@@ -32,6 +33,12 @@ const App: FC<Props> = ({login, requestAccountData}: Props) => {
   return ready && <Router />;
 };
 
-export default flowRight([hot(module), withDevelopmentRibbon, withLastLocation, withLoader, withWrapper, connector])(
-  App
-);
+export default flowRight([
+  hot(module),
+  withDevelopmentRibbon,
+  withLastLocation,
+  withLoader,
+  withWrapper,
+  withAdditionalMenu,
+  connector,
+])(App);

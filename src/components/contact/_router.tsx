@@ -3,7 +3,6 @@ import {FC} from 'react';
 import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
-import withAdditionalMenu from '../../shared/hocs/with-additional-menu/with-additional-menu';
 import {Routes} from '../router';
 import ContactMain from './contact-main';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
@@ -34,4 +33,4 @@ const ContactRouter: FC = () => {
   );
 };
 
-export default flowRight([withFlexibleHeader, withAdditionalMenu, withUserList, withContactDialogs])(ContactRouter);
+export default flowRight([withFlexibleHeader, withUserList, withContactDialogs])(ContactRouter);

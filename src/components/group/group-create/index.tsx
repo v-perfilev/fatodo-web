@@ -1,13 +1,11 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import GroupForm from '../group-form';
-import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {GroupRouteUtils} from '../_router';
 import ItemService from '../../../services/item.service';
@@ -15,7 +13,7 @@ import ItemService from '../../../services/item.service';
 const GroupCreate: FC = () => {
   const history = useHistory();
   const {i18n, t} = useTranslation();
-  const {updateMenu} = useAdditionalMenuContext();
+  const {setMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
@@ -40,27 +38,13 @@ const GroupCreate: FC = () => {
       });
   };
 
-  const menu = (
-    <>
-      <AdditionalMenuSpacer showOnSmallDevices />
-      <AdditionalMenuButton
-        icon={<CheckIcon />}
-        action={saveCallback}
-        color="primary"
-        tooltip={t('group:tooltips.ok')}
-        loading={isSaving}
-      />
-      <AdditionalMenuButton
-        icon={<CloseIcon />}
-        action={redirectToGroups}
-        color="secondary"
-        tooltip={t('group:tooltips.cancel')}
-      />
-    </>
-  );
+  const additionalMenuItems = [
+    {icon: <CheckIcon />, action: saveCallback, tooltip: t('group:tooltips.ok')},
+    {icon: <CloseIcon />, action: redirectToGroups, tooltip: t('group:tooltips.cancel')},
+  ];
 
   useEffect(() => {
-    updateMenu(menu);
+    setMenu(additionalMenuItems);
   }, [i18n.language, isSaving, saveCallback]);
 
   return <GroupForm header={t('group:headers.create')} setSaveCallback={setSaveCallback} request={request} />;

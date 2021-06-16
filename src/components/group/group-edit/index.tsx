@@ -1,13 +1,9 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import GroupForm from '../group-form';
 import {useHistory, useParams} from 'react-router-dom';
 import {Routes} from '../../router';
-import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
-import {CheckIcon} from '../../common/icons/check-icon';
-import {CloseIcon} from '../../common/icons/close-icon';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../_router';
@@ -15,12 +11,14 @@ import {CircularSpinner} from '../../common/loaders';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import ItemService from '../../../services/item.service';
+import {PlusIcon} from '../../common/icons/plus-icon';
+import {ArrowBackIcon} from '../../common/icons/arrow-back-icon';
 
 const GroupEdit: FC = () => {
   const history = useHistory();
   const {groupId} = useParams();
   const {i18n, t} = useTranslation();
-  const {updateMenu} = useAdditionalMenuContext();
+  const {setMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
   const [isSaving, setIsSaving] = useState(false);
@@ -60,31 +58,17 @@ const GroupEdit: FC = () => {
       });
   };
 
-  const menu = (
-    <>
-      <AdditionalMenuSpacer showOnSmallDevices />
-      <AdditionalMenuButton
-        icon={<CheckIcon />}
-        action={saveCallback}
-        color="primary"
-        tooltip={t('group:tooltips.ok')}
-        loading={isSaving}
-      />
-      <AdditionalMenuButton
-        icon={<CloseIcon />}
-        action={redirectToGroupView}
-        color="secondary"
-        tooltip={t('group:tooltips.cancel')}
-      />
-    </>
-  );
+  const additionalMenuItems = [
+    {icon: <PlusIcon />, action: saveCallback, tooltip: t('group:tooltips.ok')},
+    {icon: <ArrowBackIcon />, action: redirectToGroupView, tooltip: t('group:tooltips.cancel')},
+  ];
 
   useEffect(() => {
     setLoadGroup(() => (): void => loadGroup());
   }, []);
 
   useEffect(() => {
-    updateMenu(menu);
+    setMenu(additionalMenuItems);
   }, [i18n.language, isSaving, saveCallback]);
 
   return groupLoading ? (

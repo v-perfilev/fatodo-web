@@ -2,9 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {Container, Tab, Tabs} from '@material-ui/core';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
-import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
-import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
 import {ArrowBackIcon} from '../../common/icons/arrow-back-icon';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
@@ -45,7 +43,7 @@ const ContactMain: FC = () => {
   const lastLocation = useLastLocation();
   const match = useRouteMatch();
   const {i18n, t} = useTranslation();
-  const {updateMenu} = useAdditionalMenuContext();
+  const {setMenu} = useAdditionalMenuContext();
   const {showContactRequestDialog} = useContactDialogContext();
   const [activeTab, setActiveTab] = useState<number>(calculateTabFromRoute(match.path));
 
@@ -60,26 +58,13 @@ const ContactMain: FC = () => {
     setActiveTab(newTab);
   };
 
-  const menu = (
-    <>
-      <AdditionalMenuButton
-        icon={<PlusIcon />}
-        action={openContactRequestDialog}
-        color="primary"
-        tooltip={t('contact:tooltips.addContact')}
-      />
-      <AdditionalMenuSpacer showOnSmallDevices />
-      <AdditionalMenuButton
-        icon={<ArrowBackIcon />}
-        action={redirectToPreviousLocation}
-        color="secondary"
-        tooltip={t('contact:tooltips.back')}
-      />
-    </>
-  );
+  const additionalMenuItems = [
+    {icon: <PlusIcon />, action: openContactRequestDialog, tooltip: t('contact:tooltips.addContact')},
+    {icon: <ArrowBackIcon />, action: redirectToPreviousLocation, tooltip: t('contact:tooltips.back')},
+  ];
 
   useEffect(() => {
-    updateMenu(menu);
+    setMenu(additionalMenuItems);
   }, [i18n.language, showContactRequestDialog]);
 
   return (

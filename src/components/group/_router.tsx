@@ -5,7 +5,6 @@ import PublicRoute from '../../shared/routes/public-route';
 import GroupsPreview from './groups-preview';
 import GroupsSorting from './groups-sorting';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
-import withAdditionalMenu from '../../shared/hocs/with-additional-menu/with-additional-menu';
 import {Routes} from '../router';
 import GroupView from './group-view';
 import GroupCreate from './group-create';
@@ -44,6 +43,4 @@ const GroupRouter: FC = () => {
   );
 };
 
-export default flowRight([withFlexibleHeader, withAdditionalMenu, withUserList, withGroupDialogs, withItemDialogs])(
-  GroupRouter
-);
+export default flowRight([withFlexibleHeader, withUserList, withGroupDialogs, withItemDialogs])(GroupRouter);

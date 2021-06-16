@@ -1,38 +1,55 @@
 import * as React from 'react';
-import {FC} from 'react';
-import {Box, Drawer, Theme, useMediaQuery} from '@material-ui/core';
+import {FC, ReactNode, useEffect, useMemo} from 'react';
 import {additionalMenuStyles} from './_styles';
-import csx from 'classnames';
-import {Logo} from '../logo';
-import {useAdditionalMenuContext} from '../../../../shared/contexts/additional-menu-context';
-import AdditionalMenuSpacer from './additional-menu-spacer';
+import {useAdditionalMenuContext} from '../../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab';
+import {CircularProgress} from '@material-ui/core';
+import {useLocation} from 'react-router-dom';
+import {MenuIcon} from '../../icons/menu-icon';
+import {CloseIcon} from '../../icons/close-icon';
 
 const AdditionalMenu: FC = () => {
   const classes = additionalMenuStyles();
-  const {menu} = useAdditionalMenuContext();
-  const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'));
+  const {pathname} = useLocation();
+  const {menu, setMenu, loading, setLoading} = useAdditionalMenuContext();
+  const [open, setOpen] = React.useState(false);
 
-  const drawerClassNames = csx(classes.drawer, isBigDevice ? classes.drawerLeft : classes.drawerBottom);
-  const containerClassNames = csx(classes.container, isBigDevice ? classes.containerLeft : classes.containerBottom);
+  const handleOpen = (): void => {
+    setOpen(true);
+  };
 
-  return (
-    <Drawer
-      variant="permanent"
-      anchor={isBigDevice ? 'left' : 'bottom'}
-      className={drawerClassNames}
-      classes={{paper: drawerClassNames}}
+  const handleClose = (): void => {
+    setOpen(false);
+  };
+
+  const icon = useMemo<ReactNode>(() => {
+    return loading ? (
+      <CircularProgress color="inherit" />
+    ) : (
+      <SpeedDialIcon icon={<MenuIcon />} openIcon={<CloseIcon />} />
+    );
+  }, [loading]);
+
+  useEffect(() => {
+    setMenu(null);
+    setLoading(false);
+  }, [pathname]);
+
+  return menu ? (
+    <SpeedDial
+      ariaLabel="Menu"
+      className={classes.root}
+      icon={icon}
+      onClose={handleClose}
+      onOpen={handleOpen}
+      open={open}
+      direction="up"
     >
-      {isBigDevice && (
-        <Box className={classes.logo}>
-          <Logo />
-        </Box>
-      )}
-      <Box className={containerClassNames}>
-        <AdditionalMenuSpacer showOnBigDevices />
-        {menu}
-      </Box>
-    </Drawer>
-  );
+      {menu.map((action, index) => (
+        <SpeedDialAction key={index} icon={action.icon} tooltipTitle={action.tooltip} onClick={action.action} />
+      ))}
+    </SpeedDial>
+  ) : null;
 };
 
 export default AdditionalMenu;

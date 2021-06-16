@@ -3,10 +3,7 @@ import withHeader from '../../../shared/hocs/with-header/with-header';
 import {Container} from '@material-ui/core';
 import {PageDivider, PageHeader} from '../../common/surfaces';
 import {useTranslation} from 'react-i18next';
-import withAdditionalMenu from '../../../shared/hocs/with-additional-menu/with-additional-menu';
-import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
-import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
 import {ArrowBackIcon} from '../../common/icons/arrow-back-icon';
 import {useHistory} from 'react-router-dom';
 import {RootState} from '../../../store';
@@ -32,24 +29,16 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
   const history = useHistory();
   const lastLocation = useLastLocation();
   const {i18n, t} = useTranslation();
-  const {updateMenu} = useAdditionalMenuContext();
+  const {setMenu} = useAdditionalMenuContext();
 
   const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
-  const menu = (
-    <>
-      <AdditionalMenuSpacer showOnSmallDevices />
-      <AdditionalMenuButton
-        icon={<ArrowBackIcon />}
-        action={redirectToPreviousLocation}
-        color="secondary"
-        tooltip={t('account:tooltips.back')}
-      />
-    </>
-  );
+  const additionalMenuItems = [
+    {icon: <ArrowBackIcon />, action: redirectToPreviousLocation, tooltip: t('account:tooltips.back')},
+  ];
 
   useEffect(() => {
-    updateMenu(menu);
+    setMenu(additionalMenuItems);
   }, [i18n.language]);
 
   return account.id ? (
@@ -64,4 +53,4 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
   );
 };
 
-export default flowRight([withHeader, withAdditionalMenu, withVerticalPadding, connector])(Account);
+export default flowRight([withHeader, withVerticalPadding, connector])(Account);

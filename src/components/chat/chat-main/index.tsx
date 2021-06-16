@@ -1,10 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
-import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
-import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
-import {ArrowBackIcon} from '../../common/icons/arrow-back-icon';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
 import {messageMainStyles} from './_styles';
@@ -13,13 +10,14 @@ import ChatControl from '../chat-control';
 import ChatContent from '../chat-content';
 import {Chat} from '../../../models/chat.model';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {PlusIcon} from '../../common/icons/plus-icon';
 import withAuthState from '../../../shared/hocs/with-auth-state';
 import {useWsChatContext} from '../../../shared/contexts/chat-contexts/ws-chat-context';
 import {useChatDialogContext} from '../../../shared/contexts/dialog-contexts/chat-dialog-context';
 import ChatService from '../../../services/chat.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ChatRouteUtils} from '../_router';
+import {PlusIcon} from '../../common/icons/plus-icon';
+import {ArrowBackIcon} from '../../common/icons/arrow-back-icon';
 
 type Props = AuthState;
 
@@ -30,7 +28,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   const lastLocation = useLastLocation();
   const {i18n, t} = useTranslation();
   const {handleResponse} = useSnackContext();
-  const {updateMenu} = useAdditionalMenuContext();
+  const {setMenu} = useAdditionalMenuContext();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'), {noSsr: true});
   const {selectChatForWs} = useWsChatContext();
   const {showChatCreateDialog} = useChatDialogContext();
@@ -66,23 +64,10 @@ const ChatMain: FC<Props> = ({account}: Props) => {
       .catch(handleResponse);
   };
 
-  const menu = (
-    <>
-      <AdditionalMenuButton
-        icon={<PlusIcon />}
-        action={openChatCreateDialog}
-        color="primary"
-        tooltip={t('chat:tooltips.createChat')}
-      />
-      <AdditionalMenuSpacer showOnSmallDevices />
-      <AdditionalMenuButton
-        icon={<ArrowBackIcon />}
-        action={redirectToPreviousLocation}
-        color="secondary"
-        tooltip={t('chat:tooltips.back')}
-      />
-    </>
-  );
+  const additionalMenuItems = [
+    {icon: <PlusIcon />, action: openChatCreateDialog, tooltip: t('chat:tooltips.createChat')},
+    {icon: <ArrowBackIcon />, action: redirectToPreviousLocation, tooltip: t('chat:tooltips.back')},
+  ];
 
   useEffect(() => {
     if (chatId) {
@@ -91,7 +76,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   }, []);
 
   useEffect(() => {
-    updateMenu(menu);
+    setMenu(additionalMenuItems);
   }, [i18n.language, showChatCreateDialog]);
 
   const bigView = (

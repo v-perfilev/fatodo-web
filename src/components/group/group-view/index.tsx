@@ -1,11 +1,9 @@
 import React, {FC, useEffect} from 'react';
-import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {Container, ThemeProvider} from '@material-ui/core';
 import GroupViewItems from './group-view-items';
 import GroupViewUsers from './group-view-users';
 import GroupViewMessages from './group-view-messages';
-import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
 import {Routes} from '../../router';
 import {GroupRouteUtils} from '../_router';
@@ -15,7 +13,7 @@ import {PlusIcon} from '../../common/icons/plus-icon';
 import {ItemRouteUtils} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {PageDivider, PageHeader, PageSpacer} from '../../common/surfaces';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {DeleteIcon} from '../../common/icons/delete-icon';
@@ -33,7 +31,7 @@ const GroupView: FC = () => {
   const {groupId} = useParams();
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
-  const {updateMenu} = useAdditionalMenuContext();
+  const {setMenu} = useAdditionalMenuContext();
   const {handleUserIds} = useUserListContext();
   const {showGroupDeleteDialog} = useGroupDialogContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
@@ -70,35 +68,12 @@ const GroupView: FC = () => {
     handleUserIds(userIds);
   };
 
-  const menu = (
-    <>
-      <AdditionalMenuButton
-        icon={<PlusIcon />}
-        action={redirectToItemCreate}
-        color="primary"
-        tooltip={t('item:tooltips.create')}
-      />
-      <AdditionalMenuButton
-        icon={<EditIcon />}
-        action={redirectToGroupEdit}
-        color="primary"
-        tooltip={t('group:tooltips.edit')}
-      />
-      <AdditionalMenuButton
-        icon={<DeleteIcon />}
-        action={openGroupDeleteDialog}
-        color="primary"
-        tooltip={t('group:tooltips.delete')}
-      />
-      <AdditionalMenuSpacer showOnSmallDevices />
-      <AdditionalMenuButton
-        icon={<GroupsIcon />}
-        action={redirectToGroups}
-        color="secondary"
-        tooltip={t('group:tooltips.list')}
-      />
-    </>
-  );
+  const additionalMenuItems = [
+    {icon: <PlusIcon />, action: redirectToItemCreate, tooltip: t('item:tooltips.create')},
+    {icon: <EditIcon />, action: redirectToGroupEdit, tooltip: t('group:tooltips.edit')},
+    {icon: <DeleteIcon />, action: openGroupDeleteDialog, tooltip: t('group:tooltips.delete')},
+    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')},
+  ];
 
   useEffect(() => {
     setLoadGroup(() => (): void => loadGroup());
@@ -111,7 +86,7 @@ const GroupView: FC = () => {
   }, [group]);
 
   useEffect(() => {
-    updateMenu(menu);
+    setMenu(additionalMenuItems);
   }, [group, i18n.language, showGroupDeleteDialog]);
 
   return groupLoading ? (

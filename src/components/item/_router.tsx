@@ -3,7 +3,6 @@ import {FC} from 'react';
 import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
-import withAdditionalMenu from '../../shared/hocs/with-additional-menu/with-additional-menu';
 import {Routes} from '../router';
 import ItemView from './item-view';
 import ItemEdit from './item-edit';
@@ -37,4 +36,4 @@ const ItemRouter: FC = () => {
   );
 };
 
-export default flowRight([withFlexibleHeader, withAdditionalMenu, withUserList, withItemDialogs])(ItemRouter);
+export default flowRight([withFlexibleHeader, withUserList, withItemDialogs])(ItemRouter);

@@ -1,16 +1,14 @@
 import React, {FC, useEffect, useState} from 'react';
-import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import ItemForm from '../item-form';
 import {useHistory, useParams} from 'react-router-dom';
 import {Routes} from '../../router';
-import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {CheckIcon} from '../../common/icons/check-icon';
 import {CloseIcon} from '../../common/icons/close-icon';
 import ItemService from '../../../services/item.service';
 import {ItemDTO} from '../../../models/dto/item.dto';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {ItemRouteUtils} from '../_router';
 import {GroupRouteUtils} from '../../group/_router';
@@ -26,7 +24,7 @@ const ItemEdit: FC = () => {
   const {handleCode, handleResponse} = useSnackContext();
   const history = useHistory();
   const {itemId} = useParams();
-  const {updateMenu} = useAdditionalMenuContext();
+  const {setMenu} = useAdditionalMenuContext();
   const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
   const [isSaving, setIsSaving] = useState(false);
@@ -38,24 +36,10 @@ const ItemEdit: FC = () => {
   const redirectToItemView = (): void => history.push(ItemRouteUtils.getViewUrl(itemId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
-  const menu = (
-    <>
-      <AdditionalMenuButton
-        icon={<CheckIcon />}
-        action={saveCallback}
-        color="primary"
-        tooltip={t('item:tooltips.ok')}
-        loading={isSaving}
-      />
-      <AdditionalMenuSpacer showOnSmallDevices />
-      <AdditionalMenuButton
-        icon={<CloseIcon />}
-        action={redirectToItemView}
-        color="secondary"
-        tooltip={t('item:tooltips.cancel')}
-      />
-    </>
-  );
+  const additionalMenuItems = [
+    {icon: <CheckIcon />, action: saveCallback, tooltip: t('item:tooltips.ok')},
+    {icon: <CloseIcon />, action: redirectToItemView, tooltip: t('item:tooltips.cancel')},
+  ];
 
   const loadItem = (): void => {
     ItemService.getItem(itemId)
@@ -110,7 +94,7 @@ const ItemEdit: FC = () => {
   }, [item]);
 
   useEffect(() => {
-    updateMenu(menu);
+    setMenu(additionalMenuItems);
   }, [i18n.language, isSaving, saveCallback]);
 
   return groupLoading || itemLoading ? (

@@ -1,12 +1,11 @@
 import React, {FC, useEffect} from 'react';
-import AdditionalMenuSpacer from '../../common/layouts/additional-menu/additional-menu-spacer';
 import {useTranslation} from 'react-i18next';
 import {Container, ThemeProvider} from '@material-ui/core';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
 import {PageDivider, PageHeader} from '../../common/surfaces';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
@@ -14,7 +13,6 @@ import {Routes} from '../../router';
 import ItemViewReminders from './item-view-reminders';
 import ItemViewTags from './item-view-tags';
 import ItemViewChanges from './item-view-changes';
-import AdditionalMenuButton from '../../common/layouts/additional-menu/additional-menu-button';
 import {EditIcon} from '../../common/icons/edit-icon';
 import {ItemRouteUtils} from '../_router';
 import {ItemsIcon} from '../../common/icons/items-icon';
@@ -36,7 +34,7 @@ const ItemView: FC = () => {
   const {itemId} = useParams();
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
-  const {updateMenu} = useAdditionalMenuContext();
+  const {setMenu} = useAdditionalMenuContext();
   const {showItemDeleteDialog} = useItemDialogContext();
   const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
@@ -81,35 +79,12 @@ const ItemView: FC = () => {
       });
   };
 
-  const menu = (
-    <>
-      <AdditionalMenuButton
-        icon={<EditIcon />}
-        action={redirectToItemEdit}
-        color="primary"
-        tooltip={t('item:tooltips.edit')}
-      />
-      <AdditionalMenuButton
-        icon={<DeleteIcon />}
-        action={openItemDeleteDialog}
-        color="primary"
-        tooltip={t('item:tooltips.delete')}
-      />
-      <AdditionalMenuSpacer showOnSmallDevices />
-      <AdditionalMenuButton
-        icon={<ItemsIcon />}
-        action={redirectToGroupView}
-        color="secondary"
-        tooltip={t('item:tooltips.list')}
-      />
-      <AdditionalMenuButton
-        icon={<GroupsIcon />}
-        action={redirectToGroups}
-        color="secondary"
-        tooltip={t('item:tooltips.groupList')}
-      />
-    </>
-  );
+  const additionalMenuItems = [
+    {icon: <EditIcon />, action: redirectToItemEdit, tooltip: t('item:tooltips.edit')},
+    {icon: <DeleteIcon />, action: openItemDeleteDialog, tooltip: t('item:tooltips.delete')},
+    {icon: <ItemsIcon />, action: redirectToGroupView, tooltip: t('item:tooltips.list')},
+    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('item:tooltips.groupList')},
+  ];
 
   useEffect(() => {
     setLoadItem(() => (): void => loadItem());
@@ -122,7 +97,7 @@ const ItemView: FC = () => {
   }, [item]);
 
   useEffect(() => {
-    updateMenu(menu);
+    setMenu(additionalMenuItems);
   }, [item, group, i18n.language, showItemDeleteDialog]);
 
   return itemLoading || groupLoading ? (
