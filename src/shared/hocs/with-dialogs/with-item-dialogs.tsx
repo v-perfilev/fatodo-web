@@ -7,7 +7,7 @@ import {
   defaultItemDeleteDialogProps,
   ItemDeleteDialog,
   ItemDeleteDialogProps,
-} from '../../../components/item/dialogs/item-delete-dialog';
+} from '../../../pages/item/dialogs/item-delete-dialog';
 
 enum ItemDialogs {
   DELETE = 'ITEM_DELETE_DIALOG',

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useEffect, useState} from 'react';
 
-import Router from './router';
+import Router from '../pages/router';
 import withLoader from '../shared/hocs/with-loader/with-loader';
 import {hot} from 'react-hot-loader';
 import withWrapper from '../shared/hocs/with-wrapper/with-wrapper';

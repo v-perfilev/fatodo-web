@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ComponentType, FC, PropsWithChildren, ReactElement, useState} from 'react';
 import {WsChatContext} from '../../contexts/chat-contexts/ws-chat-context';
-import WsClient from '../../../components/common/ws/ws-client';
+import WsClient from '../../../components/ws/ws-client';
 import {Chat} from '../../../models/chat.model';
 import {Message, MessageReactions, MessageStatuses} from '../../../models/message.model';
 import {WS_URL} from '../../../constants';

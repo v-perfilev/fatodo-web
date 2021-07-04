@@ -6,7 +6,7 @@ import {
   defaultGroupDeleteDialogProps,
   GroupDeleteDialog,
   GroupDeleteDialogProps,
-} from '../../../components/group/dialogs/group-delete-dialog';
+} from '../../../pages/group/dialogs/group-delete-dialog';
 import {GroupDialogContext} from '../../contexts/dialog-contexts/group-dialog-context';
 
 enum GroupDialogs {

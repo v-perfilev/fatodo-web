@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useState} from 'react';
-import AdditionalMenu from '../../components/common/layouts/additional-menu';
+import AdditionalMenu from '../../components/layouts/additional-menu';
 import {AdditionalMenuContext} from '../contexts/additional-menu-context/additional-menu-context';
 import {AdditionalMenuItem} from '../contexts/additional-menu-context/types';
 

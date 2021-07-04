@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC} from 'react';
 import {AuthState} from '../../store/rerducers/auth.reducer';
 import {Route, RouteProps, useHistory} from 'react-router-dom';
-import {Routes} from '../../components/router';
+import {Routes} from '../../pages/router';
 import withAuthState from '../hocs/with-auth-state';
 
 type BaseProps = RouteProps;

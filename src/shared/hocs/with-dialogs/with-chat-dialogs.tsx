@@ -5,30 +5,30 @@ import {Chat} from '../../../models/chat.model';
 import ChatAddMembersDialog, {
   ChatAddMembersDialogProps,
   defaultChatAddMembersDialogProps,
-} from '../../../components/chat/dialogs/chat-add-members-dialog';
+} from '../../../pages/chat/dialogs/chat-add-members-dialog';
 import ChatCreateDialog, {
   ChatCreateDialogProps,
   defaultChatCreateDialogProps,
-} from '../../../components/chat/dialogs/chat-create-dialog';
+} from '../../../pages/chat/dialogs/chat-create-dialog';
 import {User} from '../../../models/user.model';
 import ChatMembersDialog, {
   ChatMembersDialogProps,
   defaultChatMembersDialogProps,
-} from '../../../components/chat/dialogs/chat-members-dialog';
+} from '../../../pages/chat/dialogs/chat-members-dialog';
 import {Message} from '../../../models/message.model';
 import ChatReactionsDialog, {
   ChatReactionDialogProps,
   defaultChatReactionDialogProps,
-} from '../../../components/chat/dialogs/chat-reactions-dialog';
+} from '../../../pages/chat/dialogs/chat-reactions-dialog';
 import ChatRenameDialog, {
   ChatRenameDialogProps,
   defaultChatRenameDialogProps,
-} from '../../../components/chat/dialogs/chat-rename-dialog';
+} from '../../../pages/chat/dialogs/chat-rename-dialog';
 import {useDialogContext} from '../../contexts/dialog-contexts/dialog-context';
 import ChatReadStatusesDialog, {
   ChatReadStatusesDialogProps,
   defaultChatReadStatusesDialogProps,
-} from '../../../components/chat/dialogs/chat-read-statuses-dialog';
+} from '../../../pages/chat/dialogs/chat-read-statuses-dialog';
 
 enum ChatDialogs {
   ADD_MEMBERS = 'CHAT_ADD_MEMBERS_DIALOG',

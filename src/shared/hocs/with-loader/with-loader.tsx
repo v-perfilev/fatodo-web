@@ -3,7 +3,7 @@ import {ComponentType, FC, ReactElement, useEffect, useState} from 'react';
 import {Box, Fade} from '@material-ui/core';
 import {LOADER_TIMEOUT} from '../../../constants';
 import {loaderStyles} from './_styles';
-import {Spinner} from '../../../components/common/loaders';
+import {Spinner} from '../../../components/loaders';
 
 const withLoader = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = loaderStyles();

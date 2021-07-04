@@ -4,7 +4,7 @@ import {useDialogContext} from '../../contexts/dialog-contexts/dialog-context';
 import ContactRequestDialog, {
   ContactRequestDialogProps,
   defaultContactRequestDialogProps,
-} from '../../../components/contact/dialogs/contact-request-dialog';
+} from '../../../pages/contact/dialogs/contact-request-dialog';
 import {ContactDialogContext} from '../../contexts/dialog-contexts/contact-dialog-context';
 
 enum ContactDialogs {
