@@ -8,9 +8,9 @@ export const groupViewUsersStyles = makeStyles((theme: Theme) => ({
     '& > *': {
       marginTop: theme.spacing(0.5),
       marginRight: theme.spacing(2),
-      marginBottom: theme.spacing(0.5),
-    },
-  },
+      marginBottom: theme.spacing(0.5)
+    }
+  }
 }));
 
 export const groupViewItemsStyles = makeStyles((theme: Theme) => ({
@@ -19,8 +19,8 @@ export const groupViewItemsStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     flexGrow: 1,
     marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
+    marginBottom: theme.spacing(1)
+  }
 }));
 
 export const groupViewItemStyles = makeStyles((theme: Theme) => ({
@@ -29,56 +29,48 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     paddingTop: theme.spacing(1.2),
-    paddingBottom: theme.spacing(1.2),
+    paddingBottom: theme.spacing(1.2)
   },
   icon: {
-    fontSize: '1.8rem',
+    fontSize: '1.8rem'
   },
   iconBox: {
     display: 'flex',
     minWidth: 50,
     '& > *': {
-      marginRight: theme.spacing(1),
-    },
+      marginRight: theme.spacing(1)
+    }
   },
   contentBox: {
     display: 'flex',
     flexGrow: 1,
-    fontSize: '1rem',
+    fontSize: '1rem'
   },
   managementBox: {
     display: 'flex',
     '& > *': {
       color: theme.palette.grey['400'],
-      marginLeft: theme.spacing(3),
-    },
+      marginLeft: theme.spacing(3)
+    }
   },
   showIcon: {
     '&:hover': {
-      color: theme.palette.primary.main,
-    },
+      color: theme.palette.primary.main
+    }
   },
   editIcon: {
     '&:hover': {
-      color: theme.palette.secondary.main,
-    },
+      color: theme.palette.secondary.main
+    }
   },
   toggleIcon: {
     '&:hover': {
-      color: theme.palette.secondary.main,
-    },
+      color: theme.palette.secondary.main
+    }
   },
   deleteIcon: {
     '&:hover': {
-      color: theme.palette.error.main,
-    },
-  },
-}));
-
-export const groupViewMessagesStyles = makeStyles((theme: Theme) => ({
-  root: {
-    minHeight: 200,
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
+      color: theme.palette.error.main
+    }
+  }
 }));

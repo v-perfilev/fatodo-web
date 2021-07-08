@@ -3,7 +3,6 @@ import {useTranslation} from 'react-i18next';
 import {Container, ThemeProvider} from '@material-ui/core';
 import GroupViewItems from './group-view-items';
 import GroupViewUsers from './group-view-users';
-import GroupViewMessages from './group-view-messages';
 import {EditIcon} from '../../../components/icons/edit-icon';
 import {Routes} from '../../router';
 import {GroupRouteUtils} from '../_router';
@@ -25,6 +24,7 @@ import {useUserListContext} from '../../../shared/contexts/list-contexts/user-li
 import {useGroupDialogContext} from '../../../shared/contexts/dialog-contexts/group-dialog-context';
 import ItemService from '../../../services/item.service';
 import {flowRight} from 'lodash';
+import Comments from '../../../components/layouts/comments';
 
 const GroupView: FC = () => {
   const history = useHistory();
@@ -72,7 +72,7 @@ const GroupView: FC = () => {
     {icon: <PlusIcon />, action: redirectToItemCreate, tooltip: t('item:tooltips.create')},
     {icon: <EditIcon />, action: redirectToGroupEdit, tooltip: t('group:tooltips.edit')},
     {icon: <DeleteIcon />, action: openGroupDeleteDialog, tooltip: t('group:tooltips.delete')},
-    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')},
+    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')}
   ];
 
   useEffect(() => {
@@ -99,7 +99,7 @@ const GroupView: FC = () => {
         <GroupViewUsers />
         <GroupViewItems />
         <PageSpacer />
-        <GroupViewMessages />
+        <Comments />
       </Container>
     </ThemeProvider>
   );

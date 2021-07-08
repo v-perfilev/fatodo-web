@@ -1,8 +1,8 @@
-import React, {ChangeEvent, FC, KeyboardEvent, useRef} from 'react';
-import {ClearableTextInput} from '../../../../components/inputs';
+import React, {FC} from 'react';
 import {chatContentInputStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
-import {InputUtils} from '../../../../shared/utils/input.utils';
+import ReflectableClearableTextInput
+  from '../../../../components/inputs/clearable-text-input/reflectable-clearable-text-input';
 
 type Props = {
   send: () => void;
@@ -11,36 +11,14 @@ type Props = {
 
 const ChatContentInput: FC<Props> = ({send, setMessage}: Props) => {
   const classes = chatContentInputStyles();
-  const ref = useRef<HTMLInputElement>();
   const {t} = useTranslation();
 
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const text = event.target.value;
-    setMessage(text);
-  };
-
-  const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>): void => {
-    const isHelpKeyPressed = event.ctrlKey || event.altKey || event.shiftKey;
-    const isEnterKeyPressed = event.key === 'Enter';
-
-    if (isEnterKeyPressed && !isHelpKeyPressed) {
-      event.preventDefault();
-      send();
-      InputUtils.clear(ref);
-    }
-  };
-
   return (
-    <ClearableTextInput
+    <ReflectableClearableTextInput
       className={classes.root}
+      action={send}
+      updateText={setMessage}
       placeholder={t('chat:content.inputPlaceholder')}
-      fullWidth
-      variant="outlined"
-      multiline
-      rows={1}
-      inputRef={ref}
-      onKeyPress={handleKeyPress}
-      onChange={handleOnChange}
     />
   );
 };
