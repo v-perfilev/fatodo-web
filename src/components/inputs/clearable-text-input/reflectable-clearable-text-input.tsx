@@ -1,6 +1,5 @@
 import {ClearableTextInput} from './index';
 import React, {ChangeEvent, FC, HTMLAttributes, KeyboardEvent, useRef} from 'react';
-import {useTranslation} from 'react-i18next';
 import {InputUtils} from '../../../shared/utils/input.utils';
 
 type Props = HTMLAttributes<HTMLElement> & {
@@ -11,7 +10,6 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 const ReflectableClearableTextInput: FC<Props> = ({placeholder, action, updateText, className}: Props) => {
   const ref = useRef<HTMLInputElement>();
-  const {t} = useTranslation();
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const text = event.target.value;

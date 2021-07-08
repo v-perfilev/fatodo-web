@@ -1,17 +1,20 @@
 import React, {FC} from 'react';
-import CommentsInput from './comments-input';
-import CommentsList from './comments-list';
 import {commentsStyles} from './_styles';
 import {Box} from '@material-ui/core';
+import CommentsFooter from './comments-footer';
+import CommentsList from './comments-list';
 
+type Props = {
+  id: string;
+}
 
-const Comments: FC = () => {
+const Comments: FC<Props> = ({id}: Props) => {
   const classes = commentsStyles();
 
   return (
     <Box className={classes.root}>
-      <CommentsInput send={console.log} setMessage={console.log} />
       <CommentsList />
+      <CommentsFooter />
     </Box>
   );
 };
