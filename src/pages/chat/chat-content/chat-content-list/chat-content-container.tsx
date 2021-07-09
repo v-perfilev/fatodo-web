@@ -57,7 +57,7 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
     () => ({
       visibleItems,
       items,
-      account,
+      account
     }),
     [visibleItems, items, account]
   );

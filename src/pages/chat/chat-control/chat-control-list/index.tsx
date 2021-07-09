@@ -21,6 +21,8 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
   const [loading, setLoading] = useState(true);
   const [allLoaded, setAllLoaded] = useState(false);
 
+  // UPDATERS
+
   const updateChats = useCallback(
     (updateFunc: (prevState: Chat[]) => Chat[]): void => {
       const combinedChats = updateFunc(chats);
@@ -77,6 +79,8 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
     []
   );
 
+  // LOADERS
+
   const loadMoreChats = useCallback((): Promise<void> => {
     return new Promise((resolve) => {
       ChatService.getAllChatsPageable(chats.length)
@@ -98,6 +102,8 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
         });
     });
   }, [chats]);
+
+  // EFFECTS
 
   useEffect(() => {
     loadMoreChats().finally();
@@ -132,6 +138,8 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
       updateChats(updateFunc);
     }
   }, [chatLastMessageUpdateEvent]);
+
+  // RENDERERS
 
   return loading ? (
     <CircularSpinner size="sm" />

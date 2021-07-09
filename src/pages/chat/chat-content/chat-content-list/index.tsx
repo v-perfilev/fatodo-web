@@ -47,6 +47,8 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
     return handledItems;
   }, []);
 
+  // UPDATERS
+
   const updateItems = useCallback(
     (updatedMessages: Message[]): void => {
       const newItems = convertMessagesToItems(updatedMessages);
@@ -126,6 +128,8 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
     []
   );
 
+  // LOADERS
+
   const loadMoreMessages = useCallback((): Promise<void> => {
     return new Promise((resolve, reject) => {
       ChatService.getAllMessagesByChatIdPageable(chat.id, messages.length)
@@ -149,7 +153,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
     });
   }, [messages.length, items]);
 
-  // Imperative handlers
+  // IMPERATIVE HANDLERS
 
   const clearMessages = useCallback((): void => {
     setMessages([]);
@@ -173,7 +177,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
     [messages, items]
   );
 
-  // Effects
+  // EFFECTS
 
   useEffect(() => {
     loadMoreMessages().finally();
@@ -212,6 +216,8 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
       updateMessagesAndItems(updateFunc);
     }
   }, [messageReactionsEvent]);
+
+  // RENDERERS
 
   return loading ? (
     <CircularSpinner size="sm" />
