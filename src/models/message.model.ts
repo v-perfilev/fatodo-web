@@ -5,8 +5,6 @@ export const messageReactionTypes = ['LIKE', 'DISLIKE'];
 export type MessageStatusType = 'READ';
 export type MessageReactionType = 'LIKE' | 'DISLIKE';
 
-export type MessageType = 'event' | 'outcoming' | 'incoming' | null;
-
 export type MessageListItem = {
   message?: Message;
   date?: string;

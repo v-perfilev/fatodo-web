@@ -5,7 +5,7 @@ import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-cha
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {CircularSpinner} from '../../../../components/loaders';
-import ChatControlContainer from '../chat-control-container';
+import ChatControlContainer from '../chat-control-list/chat-control-container';
 import ChatService from '../../../../services/chat.service';
 import {TIMEOUT_BEFORE_APPLY_FILTER} from '../../_constants';
 

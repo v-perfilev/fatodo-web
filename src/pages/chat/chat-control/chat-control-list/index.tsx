@@ -6,7 +6,7 @@ import {User} from '../../../../models/user.model';
 import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-chat-context';
 import {CircularSpinner} from '../../../../components/loaders';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
-import ChatControlContainer from '../chat-control-container';
+import ChatControlContainer from './chat-control-container';
 
 type Props = {
   chat: Chat;
