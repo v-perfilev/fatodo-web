@@ -12,7 +12,7 @@ import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../../../router';
 import {ResponseUtils} from '../../../../shared/utils/response.utils';
 import {SecurityUtils} from '../../../../shared/utils/security.utils';
-import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha';
+import {CaptchaProps, withCaptcha, withCaptchaProvider} from '../../../../shared/hocs/with-capcha';
 import {PasswordInput, TextInput} from '../../../../components/inputs';
 import {Link, LoadingButton} from '../../../../components/controls';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
@@ -72,9 +72,9 @@ const formik = withFormik<Props, LoginFormValues>({
   validationSchema: LoginFormUtils.validationSchema,
   validateOnMount: true,
 
-  handleSubmit: (values: LoginFormValues, {setSubmitting, props}: FormikBag<Props, LoginFormValues>) => {
-    const {login, requestAccountData, history, onSuccess, token, updateToken, handleResponse} = props;
-
+  handleSubmit: async (values: LoginFormValues, {setSubmitting, props}: FormikBag<Props, LoginFormValues>) => {
+    const {login, requestAccountData, history, onSuccess, getToken, handleResponse} = props;
+    const token = await getToken();
     const dto = LoginFormUtils.mapValuesToDTO(values, token);
 
     const onFailure = (): void => setSubmitting(false);
@@ -91,10 +91,16 @@ const formik = withFormik<Props, LoginFormValues>({
         } else {
           handleResponse(response, '*', ['auth.notActivated']);
           setSubmitting(false);
-          updateToken();
         }
       });
-  },
+  }
 });
 
-export default flowRight([withRouter, withCaptcha, withSnackContext, connector, formik])(LoginForm);
+export default flowRight([
+  withRouter,
+  withCaptchaProvider,
+  withCaptcha,
+  withSnackContext,
+  connector,
+  formik
+])(LoginForm);

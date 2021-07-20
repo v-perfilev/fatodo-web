@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 import AuthService from '../../../../services/auth.service';
 import {authFormStyles} from '../../_styles';
 import i18n from '../../../../shared/i18n';
-import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha';
+import {CaptchaProps, withCaptcha, withCaptchaProvider} from '../../../../shared/hocs/with-capcha';
 import {PasswordInput, TextInput} from '../../../../components/inputs';
 import {LoadingButton} from '../../../../components/controls';
 import {PasswordStrengthBar} from '../../password-strength-bar';
@@ -48,9 +48,12 @@ const formik = withFormik<Props, RegistrationFormValues>({
   validationSchema: RegistrationFormUtils.validationSchema,
   validateOnMount: true,
 
-  handleSubmit: (values: RegistrationFormValues, {setSubmitting, props}: FormikBag<Props, RegistrationFormValues>) => {
-    const {token, updateToken, onSuccess, handleCode, handleResponse} = props;
-
+  handleSubmit: async (values: RegistrationFormValues, {
+    setSubmitting,
+    props
+  }: FormikBag<Props, RegistrationFormValues>) => {
+    const {getToken, onSuccess, handleCode, handleResponse} = props;
+    const token = await getToken();
     const dto = RegistrationFormUtils.mapValuesToDTO(values, i18n.language, token);
 
     AuthService.register(dto)
@@ -61,9 +64,8 @@ const formik = withFormik<Props, RegistrationFormValues>({
       .catch((response) => {
         handleResponse(response);
         setSubmitting(false);
-        updateToken();
       });
-  },
+  }
 });
 
-export default flowRight([withCaptcha, withSnackContext, formik])(RegistrationForm);
+export default flowRight([withCaptchaProvider, withCaptcha, withSnackContext, formik])(RegistrationForm);

@@ -4,7 +4,7 @@ import {FC} from 'react';
 import {authFormStyles} from '../../_styles';
 import {useTranslation} from 'react-i18next';
 import AuthService from '../../../../services/auth.service';
-import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha';
+import {CaptchaProps, withCaptcha, withCaptchaProvider} from '../../../../shared/hocs/with-capcha';
 import {PasswordInput} from '../../../../components/inputs';
 import {LoadingButton} from '../../../../components/controls';
 import {PasswordStrengthBar} from '../../password-strength-bar';
@@ -48,12 +48,12 @@ const formik = withFormik<Props, ResetPasswordFormValues>({
   validationSchema: ResetPasswordFormUtils.validationSchema,
   validateOnMount: true,
 
-  handleSubmit: (
+  handleSubmit: async (
     values: ResetPasswordFormValues,
     {setSubmitting, props}: FormikBag<Props, ResetPasswordFormValues>
   ) => {
-    const {code, token, updateToken, onSuccess, onFailure, handleCode, handleResponse} = props;
-
+    const {code, getToken, onSuccess, onFailure, handleCode, handleResponse} = props;
+    const token = await getToken();
     const dto = ResetPasswordFormUtils.mapValuesToDTO(values, code, token);
 
     AuthService.resetPassword(dto)
@@ -64,10 +64,9 @@ const formik = withFormik<Props, ResetPasswordFormValues>({
       .catch((response) => {
         handleResponse(response);
         setSubmitting(false);
-        updateToken();
         onFailure();
       });
-  },
+  }
 });
 
-export default flowRight([withCaptcha, withSnackContext, formik])(ResetPasswordForm);
+export default flowRight([withCaptchaProvider, withCaptcha, withSnackContext, formik])(ResetPasswordForm);
