@@ -60,7 +60,7 @@ const formik = withFormik<Props, ForgotPasswordFormValues>({
         handleResponse(response);
         setSubmitting(false);
       });
-  }
+  },
 });
 
 export default flowRight([withCaptchaProvider, withCaptcha, withSnackContext, formik])(ForgotPasswordForm);

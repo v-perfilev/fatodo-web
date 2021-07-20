@@ -66,7 +66,7 @@ const formik = withFormik<Props, ResetPasswordFormValues>({
         setSubmitting(false);
         onFailure();
       });
-  }
+  },
 });
 
 export default flowRight([withCaptchaProvider, withCaptcha, withSnackContext, formik])(ResetPasswordForm);

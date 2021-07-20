@@ -93,14 +93,9 @@ const formik = withFormik<Props, LoginFormValues>({
           setSubmitting(false);
         }
       });
-  }
+  },
 });
 
-export default flowRight([
-  withRouter,
-  withCaptchaProvider,
-  withCaptcha,
-  withSnackContext,
-  connector,
-  formik
-])(LoginForm);
+export default flowRight([withRouter, withCaptchaProvider, withCaptcha, withSnackContext, connector, formik])(
+  LoginForm
+);

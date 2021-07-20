@@ -48,10 +48,10 @@ const formik = withFormik<Props, RegistrationFormValues>({
   validationSchema: RegistrationFormUtils.validationSchema,
   validateOnMount: true,
 
-  handleSubmit: async (values: RegistrationFormValues, {
-    setSubmitting,
-    props
-  }: FormikBag<Props, RegistrationFormValues>) => {
+  handleSubmit: async (
+    values: RegistrationFormValues,
+    {setSubmitting, props}: FormikBag<Props, RegistrationFormValues>
+  ) => {
     const {getToken, onSuccess, handleCode, handleResponse} = props;
     const token = await getToken();
     const dto = RegistrationFormUtils.mapValuesToDTO(values, i18n.language, token);
@@ -65,7 +65,7 @@ const formik = withFormik<Props, RegistrationFormValues>({
         handleResponse(response);
         setSubmitting(false);
       });
-  }
+  },
 });
 
 export default flowRight([withCaptchaProvider, withCaptcha, withSnackContext, formik])(RegistrationForm);
