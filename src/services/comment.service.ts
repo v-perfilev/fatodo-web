@@ -1,5 +1,6 @@
 import axios, {AxiosPromise} from 'axios';
 import {Comment} from '../models/comment.model';
+import {PageableList} from '../models/pageable-list.model';
 
 export default class CommentService {
   private static baseUrl = '/api/comment';
@@ -11,7 +12,7 @@ export default class CommentService {
     targetId: string,
     offset?: number,
     size?: number
-  ): AxiosPromise<Comment[]> => {
+  ): AxiosPromise<PageableList<Comment>> => {
     const url = CommentService.baseUrl + '/comments/' + targetId;
     const params = {offset, size};
     return axios.get(url, {params});
@@ -21,7 +22,7 @@ export default class CommentService {
     parentId: string,
     offset?: number,
     size?: number
-  ): AxiosPromise<Comment[]> => {
+  ): AxiosPromise<PageableList<Comment>> => {
     const url = CommentService.baseUrl + '/comments/' + parentId + '/children';
     const params = {offset, size};
     return axios.get(url, {params});

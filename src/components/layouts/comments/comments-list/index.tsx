@@ -15,6 +15,10 @@ const CommentsList: FC<Props> = ({targetId}: Props) => {
   const [allLoaded, setAllLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  // UPDATERS
+
+  // LOADERS
+
   const loadMoreParentComments = useCallback((): Promise<void> => {
     return new Promise((resolve, reject) => {
       CommentService.getAllParentsPageable(targetId, comments.length)
