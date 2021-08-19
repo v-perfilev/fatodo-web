@@ -2,7 +2,7 @@ import React, {FC, Ref, useCallback, useEffect, useImperativeHandle, useState} f
 import {Chat} from '../../../../models/chat.model';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
-import {Message, MessageListItem, MessageReactions, MessageStatuses} from '../../../../models/message.model';
+import {Message, MessageReactions, MessageStatuses} from '../../../../models/message.model';
 import {CircularSpinner} from '../../../../components/loaders';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
@@ -11,6 +11,7 @@ import ChatContentContainer from './chat-content-container';
 import {VirtualizedListMethods} from '../../../../components/surfaces';
 import {User} from '../../../../models/user.model';
 import {NEW_MESSAGES_PREFIX} from '../../_constants';
+import {ChatItem} from '../types';
 
 type Props = {
   chat: Chat;
@@ -27,14 +28,14 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
   const {messageNewEvent, messageUpdateEvent, messageStatusesEvent, messageReactionsEvent} = useWsChatContext();
   const {handleResponse} = useSnackContext();
   const [messages, setMessages] = useState<Message[]>([]);
-  const [items, setItems] = useState<MessageListItem[]>(undefined);
+  const [items, setItems] = useState<ChatItem[]>(undefined);
   const [allLoaded, setAllLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [listRef, setListRef] = useState<VirtualizedListMethods>();
 
-  const convertMessagesToItems = useCallback((messagesToConvert: Message[]): MessageListItem[] => {
+  const convertMessagesToItems = useCallback((messagesToConvert: Message[]): ChatItem[] => {
     const handledDates = [] as string[];
-    const handledItems = [] as MessageListItem[];
+    const handledItems = [] as ChatItem[];
     handledItems.push({});
     messagesToConvert.forEach((message) => {
       const date = DateFormatters.formatDateWithYear(new Date(message.createdAt));
@@ -49,19 +50,12 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
 
   // UPDATERS
 
-  const updateItems = useCallback(
-    (updatedMessages: Message[]): void => {
-      const newItems = convertMessagesToItems(updatedMessages);
-      setItems(newItems);
-    },
-    [items]
-  );
-
   const updateMessagesAndItems = useCallback(
     (updateFunc: (prevState: Message[]) => Message[]): void => {
       const combinedMessages = updateFunc(messages);
+      const combinedItems = convertMessagesToItems(combinedMessages);
       setMessages(combinedMessages);
-      updateItems(combinedMessages);
+      setItems(combinedItems);
     },
     [messages, items]
   );
@@ -172,7 +166,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
     chatContentListRef,
     (): ChatContentMethods => ({
       clearMessages,
-      addMessage
+      addMessage,
     }),
     [messages, items]
   );

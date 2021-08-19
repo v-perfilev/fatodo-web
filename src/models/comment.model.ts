@@ -1,5 +1,4 @@
 import {AbstractAuditing} from './abstract-auditing.model';
-import {MessageReactionType} from './message.model';
 import {PageableList} from './pageable-list.model';
 
 export const messageReactionTypes = ['LIKE', 'DISLIKE'];
@@ -7,14 +6,8 @@ export const messageReactionTypes = ['LIKE', 'DISLIKE'];
 export type CommentStatusType = 'READ';
 export type CommentReactionType = 'LIKE' | 'DISLIKE';
 
-export type MessageType = 'event' | 'outcoming' | 'incoming' | null;
-
-// export type MessageListItem = {
-//   message?: Message;
-//   date?: string;
-// };
-
 export interface Comment extends AbstractAuditing {
+  id: string;
   threadId: string;
   parentId: string;
   userId: string;

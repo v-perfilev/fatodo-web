@@ -1,7 +1,7 @@
 import React, {FC, useCallback, useEffect, useMemo} from 'react';
 import {Container} from '@material-ui/core';
 import {chatContentItemStyles} from './_styles';
-import {Message, MessageListItem} from '../../../../models/message.model';
+import {Message} from '../../../../models/message.model';
 import ChatContentMessage from '../chat-content-message';
 import ChatContentDate from './chat-content-date';
 import {MessageUtils} from '../../../../shared/utils/message.utils';
@@ -9,9 +9,10 @@ import ChatService from '../../../../services/chat.service';
 import {TIMEOUT_BEFORE_MARK_AS_READ} from '../../_constants';
 import ChatContentSpacer from './chat-content-spacer';
 import {User} from '../../../../models/user.model';
+import {ChatItem} from '../types';
 
 type Props = {
-  item: MessageListItem;
+  item: ChatItem;
   isVisible: boolean;
   account: User;
 };

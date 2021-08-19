@@ -10,6 +10,10 @@ export class ArrayUtils {
     return a.createdAt > b.createdAt ? 1 : -1;
   };
 
+  public static createdAtDescComparator = (a: any, b: any): number => {
+    return a.createdAt < b.createdAt ? 1 : -1;
+  };
+
   public static uniqueFilter = (item: any, i: number, arr: any[]): boolean => {
     return arr.findIndex((t) => t === item) === i;
   };

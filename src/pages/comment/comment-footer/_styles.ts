@@ -8,26 +8,26 @@ export const commentsFooterStyles = makeStyles(() => ({
     left: 0,
     right: 0,
     bottom: 0,
-    height: COMMENTS_FOOTER_HEIGHT
+    height: COMMENTS_FOOTER_HEIGHT,
   },
   container: {
     display: 'flex',
-    flexDirection: 'row'
-  }
+    flexDirection: 'row',
+  },
 }));
 
 export const commentsInputStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
     '& > div': {
-      height: COMMENTS_FOOTER_HEIGHT - theme.spacing(2)
-    }
-  }
+      height: COMMENTS_FOOTER_HEIGHT - theme.spacing(2),
+    },
+  },
 }));
 
 export const commentsSendButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     marginLeft: theme.spacing(2),
-    flexShrink: 0
-  }
+    flexShrink: 0,
+  },
 }));

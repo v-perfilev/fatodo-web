@@ -1,12 +1,12 @@
 import React, {FC, memo, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {virtualizedListMeasurerStyles} from './_styles';
 import {ListKeysCache, ListMeasurerCache} from './_caches';
-import {ListItemDataProps} from './types';
+import {ListDataProps} from './types';
 import {ListChildComponentProps} from 'react-window';
 
 type Props = {
   itemRenderer: (params: ListChildComponentProps) => ReactElement;
-  itemData: ListItemDataProps;
+  itemData: ListDataProps;
   itemKey: (index: number) => string;
   measurerCache: ListMeasurerCache;
   keyCache: ListKeysCache;

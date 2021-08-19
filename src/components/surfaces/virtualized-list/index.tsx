@@ -15,11 +15,11 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import InfiniteLoader from 'react-window-infinite-loader';
 import VirtualizedListMeasurer from './virtualized-list-measurer';
 import {RefUtils} from '../../../shared/utils/ref.utils';
-import {ListItemDataProps, OnItemsRendered} from './types';
+import {ListDataProps, OnItemsRendered} from './types';
 
 type Props = {
   itemRenderer: (params: ListChildComponentProps) => ReactElement;
-  itemData: ListItemDataProps;
+  itemData: ListDataProps;
   loadMoreItems?: () => Promise<void>;
   allLoaded?: boolean;
   itemHeight?: number;

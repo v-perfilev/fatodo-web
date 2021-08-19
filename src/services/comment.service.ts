@@ -65,5 +65,4 @@ export default class CommentService {
     const url = CommentService.baseUrl + '/reactions/none/' + commentId;
     return axios.get(url);
   };
-
 }

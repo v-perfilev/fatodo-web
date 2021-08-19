@@ -1,9 +1,9 @@
-import {ListItemDataProps} from '../../../../components/surfaces/virtualized-list/types';
+import {ListDataProps} from '../../../../components/surfaces/virtualized-list/types';
 import {Chat} from '../../../../models/chat.model';
 import {User} from '../../../../models/user.model';
 import {ListChildComponentProps} from 'react-window';
 
-export interface ChatControlItemDataProps extends ListItemDataProps<Chat> {
+export interface ChatControlItemDataProps extends ListDataProps<Chat> {
   chat: Chat;
   account: User;
   handleOnChatClick: (index: number) => () => void;

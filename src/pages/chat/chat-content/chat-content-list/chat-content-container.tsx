@@ -1,18 +1,17 @@
 import React, {Dispatch, FC, ReactElement, SetStateAction, useCallback, useMemo} from 'react';
 import {Box} from '@material-ui/core';
-import {MessageListItem} from '../../../../models/message.model';
 import {VirtualizedList, VirtualizedListMethods} from '../../../../components/surfaces';
 import ChatContentScrollButton from './chat-content-scroll-button';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import {Chat} from '../../../../models/chat.model';
 import {User} from '../../../../models/user.model';
-import {ChatContentItemDataProps, ChatContentItemProps} from './types';
+import {ChatItem, ChatItemProps, ChatListDataProps} from '../types';
 import ChatContentRenderer from './chat-content-renderer';
 import {chatContentContainerStyles} from './_styles';
 
 type Props = {
   chat: Chat;
-  items: MessageListItem[];
+  items: ChatItem[];
   loadMoreItems: () => Promise<void>;
   allLoaded: boolean;
   account: User;
@@ -48,16 +47,13 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
     return unreadMessageCountMap?.get(chat.id) > 0;
   }, [unreadMessageCountMap, chat]);
 
-  const itemRenderer = useCallback(
-    (props: ChatContentItemProps): ReactElement => <ChatContentRenderer {...props} />,
-    []
-  );
+  const itemRenderer = useCallback((props: ChatItemProps): ReactElement => <ChatContentRenderer {...props} />, []);
 
-  const itemData = useMemo<ChatContentItemDataProps>(
+  const itemData = useMemo<ChatListDataProps>(
     () => ({
       visibleItems,
       items,
-      account
+      account,
     }),
     [visibleItems, items, account]
   );

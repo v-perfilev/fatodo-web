@@ -24,7 +24,7 @@ import {useUserListContext} from '../../../shared/contexts/list-contexts/user-li
 import {useGroupDialogContext} from '../../../shared/contexts/dialog-contexts/group-dialog-context';
 import ItemService from '../../../services/item.service';
 import {flowRight} from 'lodash';
-import Comments from '../../../components/layouts/comments';
+import Comments from '../../comment';
 
 const GroupView: FC = () => {
   const history = useHistory();
@@ -72,7 +72,7 @@ const GroupView: FC = () => {
     {icon: <PlusIcon />, action: redirectToItemCreate, tooltip: t('item:tooltips.create')},
     {icon: <EditIcon />, action: redirectToGroupEdit, tooltip: t('group:tooltips.edit')},
     {icon: <DeleteIcon />, action: openGroupDeleteDialog, tooltip: t('group:tooltips.delete')},
-    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')}
+    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')},
   ];
 
   useEffect(() => {

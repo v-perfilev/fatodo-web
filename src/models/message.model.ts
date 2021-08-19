@@ -5,11 +5,6 @@ export const messageReactionTypes = ['LIKE', 'DISLIKE'];
 export type MessageStatusType = 'READ';
 export type MessageReactionType = 'LIKE' | 'DISLIKE';
 
-export type MessageListItem = {
-  message?: Message;
-  date?: string;
-};
-
 export interface Message extends AbstractAuditing {
   id: string;
   chatId: string;

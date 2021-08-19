@@ -1,14 +1,14 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Fab} from '@material-ui/core';
-import {SendMessageIcon} from '../../../icons/send-message-icon';
+import {SendMessageIcon} from '../../../components/icons/send-message-icon';
 import {commentsSendButtonStyles} from './_styles';
 
 type Props = {
   send: () => void;
 };
 
-const CommentsSendButton: FC<Props> = ({send}: Props) => {
+const CommentSendButton: FC<Props> = ({send}: Props) => {
   const classes = commentsSendButtonStyles();
 
   return (
@@ -18,4 +18,4 @@ const CommentsSendButton: FC<Props> = ({send}: Props) => {
   );
 };
 
-export default CommentsSendButton;
+export default CommentSendButton;

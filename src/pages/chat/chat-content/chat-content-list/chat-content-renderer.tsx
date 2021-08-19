@@ -1,10 +1,10 @@
 import React, {FC, memo} from 'react';
 import ChatContentItem from '../chat-content-item';
-import {ChatContentItemProps} from './types';
+import {ChatItemProps} from '../types';
 import {areEqual} from 'react-window';
 import {chatContentRendererStyles} from './_styles';
 
-type Props = ChatContentItemProps;
+type Props = ChatItemProps;
 
 const ChatContentRenderer: FC<Props> = ({data, index, style}: Props) => {
   const classes = chatContentRendererStyles();
