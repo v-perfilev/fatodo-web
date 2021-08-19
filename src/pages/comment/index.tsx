@@ -4,6 +4,7 @@ import {Box} from '@material-ui/core';
 import CommentFooter from './comment-footer';
 import CommentList from './comment-list';
 import {User} from '../../models/user.model';
+import withAuthState from '../../shared/hocs/with-auth-state';
 
 type Props = {
   targetId: string;
@@ -21,4 +22,4 @@ const Comments: FC<Props> = ({targetId, account}: Props) => {
   );
 };
 
-export default Comments;
+export default withAuthState(Comments);

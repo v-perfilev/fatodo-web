@@ -99,7 +99,7 @@ const GroupView: FC = () => {
         <GroupViewUsers />
         <GroupViewItems />
         <PageSpacer />
-        <Comments id={group.id} />
+        <Comments targetId={group.id} />
       </Container>
     </ThemeProvider>
   );

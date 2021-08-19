@@ -1,8 +1,7 @@
 import React, {FC} from 'react';
 import {chatContentInputStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
-import ReflectableClearableTextInput
-  from '../../../../components/inputs/clearable-text-input/reflectable-clearable-text-input';
+import ReflectableTextInput from '../../../../components/inputs/clearable-text-input/reflectable-text-input';
 
 type Props = {
   send: () => void;
@@ -14,7 +13,7 @@ const ChatContentInput: FC<Props> = ({send, setMessage}: Props) => {
   const {t} = useTranslation();
 
   return (
-    <ReflectableClearableTextInput
+    <ReflectableTextInput
       className={classes.root}
       action={send}
       updateText={setMessage}

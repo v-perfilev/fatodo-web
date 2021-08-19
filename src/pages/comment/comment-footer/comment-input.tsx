@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import ReflectableClearableTextInput
-  from '../../../components/inputs/clearable-text-input/reflectable-clearable-text-input';
+import ReflectableTextInput from '../../../components/inputs/clearable-text-input/reflectable-text-input';
 import {commentsInputStyles} from './_styles';
 
 type Props = {
@@ -14,7 +13,7 @@ const CommentInput: FC<Props> = ({send, setMessage}: Props) => {
   const {t} = useTranslation();
 
   return (
-    <ReflectableClearableTextInput
+    <ReflectableTextInput
       className={classes.root}
       action={send}
       updateText={setMessage}

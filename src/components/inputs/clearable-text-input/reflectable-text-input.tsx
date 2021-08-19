@@ -8,7 +8,7 @@ type Props = HTMLAttributes<HTMLElement> & {
   updateText: (text: string) => void;
 };
 
-const ReflectableClearableTextInput: FC<Props> = ({placeholder, action, updateText, className}: Props) => {
+const ReflectableTextInput: FC<Props> = ({placeholder, action, updateText, className}: Props) => {
   const ref = useRef<HTMLInputElement>();
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -42,4 +42,4 @@ const ReflectableClearableTextInput: FC<Props> = ({placeholder, action, updateTe
   );
 };
 
-export default ReflectableClearableTextInput;
+export default ReflectableTextInput;

@@ -4,7 +4,6 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {Comment} from '../../../models/comment.model';
 import {PageableList} from '../../../models/pageable-list.model';
 import {ArrayUtils} from '../../../shared/utils/array.utils';
-import {CircularSpinner} from '../../../components/loaders';
 import CommentContainer from './comment-container';
 import {CommentItem} from '../types';
 import {User} from '../../../models/user.model';
@@ -17,8 +16,8 @@ type Props = {
 const CommentList: FC<Props> = ({targetId, account}: Props) => {
   const {handleResponse} = useSnackContext();
   const [comments, setComments] = useState<PageableList<Comment>>();
-  const [items, setItems] = useState<CommentItem[]>();
-  const [loading, setLoading] = useState<string[]>([targetId]);
+  const [items, setItems] = useState<CommentItem[]>([]);
+  const [itemsLoading, setItemsLoading] = useState<string[]>([targetId]);
 
   const convertCommentsToItems = useCallback((commentsToConvert: PageableList<Comment>): CommentItem[] => {
     const handledItems = [] as CommentItem[];
@@ -33,7 +32,7 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
           children.data.forEach((child) => {
             handledItems.push({id: child.id, type: 'child', comment: child});
           });
-          if (loading.includes(parent.id)) {
+          if (itemsLoading.includes(parent.id)) {
             handledItems.push({id: 'loader', type: 'loader'});
           } else if (children.data.length < children.count) {
             handledItems.push({id: 'loadChildrenButton', type: 'loadChildrenButton', parentId: parent.id});
@@ -42,7 +41,7 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
           handledItems.push({id: 'childStub', type: 'childStub'});
         }
       });
-      if (loading.includes(targetId)) {
+      if (itemsLoading.includes(targetId)) {
         handledItems.push({id: 'loader', type: 'loader'});
       } else if (parents.length < commentsToConvert.count) {
         handledItems.push({id: 'loadParentsButton', type: 'loadParentsButton'});
@@ -72,7 +71,7 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
         .sort(ArrayUtils.createdAtComparator);
       return {
         data: filteredComments,
-        count: newComments.count,
+        count: newComments.count
       };
     },
     []
@@ -93,12 +92,12 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
           .sort(ArrayUtils.createdAtDescComparator);
         prevState[index] = {
           data: filteredComments,
-          count: newComments.count,
+          count: newComments.count
         };
       }
       return {
         data: commentList,
-        count: prevState.count,
+        count: prevState.count
       };
     },
     []
@@ -107,7 +106,7 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
   // LOADERS
 
   const addLoading = (id: string): void => {
-    setLoading((prevState) => {
+    setItemsLoading((prevState) => {
       if (!prevState.includes(id)) {
         prevState.push(id);
       }
@@ -116,7 +115,7 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
   };
 
   const removeLoading = (id: string): void => {
-    setLoading((prevState) => {
+    setItemsLoading((prevState) => {
       const index = prevState.indexOf(id, 0);
       if (index > -1) {
         prevState.splice(index, 1);
@@ -128,7 +127,7 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
   const loadMoreParentComments = useCallback((): Promise<void> => {
     return new Promise((resolve, reject) => {
       addLoading(targetId);
-      CommentService.getAllParentsPageable(targetId, comments.data.length)
+      CommentService.getAllParentsPageable(targetId, comments?.data.length || 0)
         .then((response) => {
           const newComments = response.data;
           const updateFunc = parentCommentInserter(newComments);
@@ -136,8 +135,12 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
           resolve();
         })
         .catch((response) => {
-          handleResponse(response);
-          reject();
+          if (response.status === 404) {
+            resolve();
+          } else {
+            handleResponse(response);
+            reject();
+          }
         })
         .finally(() => {
           removeLoading(targetId);
@@ -150,8 +153,7 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
       return new Promise((resolve, reject) => {
         addLoading(parentId);
         const parent = comments.data.find((c) => c.id === parentId);
-        const childrenLength = parent?.children.data.length || 0;
-        CommentService.getAllChildrenPageable(parentId, childrenLength)
+        CommentService.getAllChildrenPageable(parentId, parent?.children.data.length || 0)
           .then((response) => {
             const newComments = response.data;
             const updateFunc = childCommentInserter(parentId, newComments);
@@ -177,15 +179,15 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
   }, [targetId]);
 
   useEffect(() => {
-    const itemsWithUpdatedLoadings = convertCommentsToItems(comments);
-    setItems(itemsWithUpdatedLoadings);
-  }, [loading]);
+    if (comments) {
+      const itemsWithUpdatedLoadings = convertCommentsToItems(comments);
+      setItems(itemsWithUpdatedLoadings);
+    }
+  }, [itemsLoading]);
 
   // RENDERERS
 
-  return loading ? (
-    <CircularSpinner size="sm" />
-  ) : (
+  return (
     <CommentContainer
       items={items}
       loadMoreItems={loadMoreParentComments}
