@@ -13,40 +13,60 @@ type Props = {
   account: User;
 };
 
+class CommentItemFactory {
+  public static createComment = (id: string, comment: Comment): CommentItem => {
+    return {id, type: 'comment', comment};
+  };
+
+  public static createButton = (parentId?: string): CommentItem => {
+    return {id: 'button', type: 'button', parentId};
+  };
+
+  public static createLoader = (parentId?: string): CommentItem => {
+    return {id: 'loader', type: 'loader', parentId};
+  };
+
+
+  public static createStub = (): CommentItem => {
+    return {id: 'stub', type: 'stub'};
+  };
+}
+
 const CommentList: FC<Props> = ({targetId, account}: Props) => {
   const {handleResponse} = useSnackContext();
   const [comments, setComments] = useState<PageableList<Comment>>();
   const [items, setItems] = useState<CommentItem[]>([]);
   const [itemsLoading, setItemsLoading] = useState<string[]>([targetId]);
 
+  // CONVERTER
+
   const convertCommentsToItems = useCallback((commentsToConvert: PageableList<Comment>): CommentItem[] => {
     const handledItems = [] as CommentItem[];
     const parents = commentsToConvert.data;
     if (parents.length === 0) {
-      handledItems.push({id: 'parentStub', type: 'parentStub'});
+      handledItems.push(CommentItemFactory.createStub());
     } else {
       parents.forEach((parent) => {
-        handledItems.push({id: parent.id, type: 'parent', comment: parent});
+        handledItems.push(CommentItemFactory.createComment(parent.id, parent));
         const children = parent.children;
         if (children.data.length > 0) {
           children.data.forEach((child) => {
-            handledItems.push({id: child.id, type: 'child', comment: child});
+            handledItems.push(CommentItemFactory.createComment(child.id, child));
           });
           if (itemsLoading.includes(parent.id)) {
-            handledItems.push({id: 'loader', type: 'loader'});
+            handledItems.push(CommentItemFactory.createLoader(parent.id));
           } else if (children.data.length < children.count) {
-            handledItems.push({id: 'loadChildrenButton', type: 'loadChildrenButton', parentId: parent.id});
+            handledItems.push(CommentItemFactory.createButton(parent.id));
           }
-        } else {
-          handledItems.push({id: 'childStub', type: 'childStub'});
         }
       });
       if (itemsLoading.includes(targetId)) {
-        handledItems.push({id: 'loader', type: 'loader'});
+        handledItems.push(CommentItemFactory.createLoader());
       } else if (parents.length < commentsToConvert.count) {
-        handledItems.push({id: 'loadParentsButton', type: 'loadParentsButton'});
+        handledItems.push(CommentItemFactory.createButton());
       }
     }
+
     return handledItems;
   }, []);
 

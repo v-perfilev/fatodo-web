@@ -4,13 +4,10 @@ import {ListChildComponentProps} from 'react-window';
 import {Comment} from '../../models/comment.model';
 
 export type CommentItemType =
-  | 'parent'
-  | 'child'
-  | 'parentStub'
-  | 'childStub'
-  | 'loadParentsButton'
-  | 'loadChildrenButton'
-  | 'loader';
+  | 'comment'
+  | 'button'
+  | 'loader'
+  | 'stub';
 
 export interface CommentItem {
   id: string;
