@@ -7,6 +7,9 @@ export const commentCommentStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     flexGrow: 1,
   },
+  child: {
+    marginLeft: 50,
+  },
   header: {
     display: 'flex',
     flexDirection: 'row',

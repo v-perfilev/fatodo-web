@@ -10,6 +10,7 @@ import {UrlPic} from '../../../components/images';
 import {useTranslation} from 'react-i18next';
 import CommentCommentReactions from './comment-comment-reactions';
 import CommentCommentActions from './comment-comment-actions';
+import csx from 'classnames';
 
 type Props = {
   comment: Comment;
@@ -33,8 +34,14 @@ const CommentComment: FC<Props> = ({comment, account}: Props) => {
     return CommentUtils.isOwnComment(comment, account);
   }, [comment, account]);
 
+  const isChild = useMemo((): boolean => {
+    return !!comment.parentId;
+  }, [comment]);
+
+  const classNames = csx(classes.root, {[classes.child]: isChild});
+
   return (
-    <Box className={classes.root}>
+    <Box className={classNames}>
       <Box className={classes.header}>
         <UrlPic className={classes.image} alt={user?.username} url={user?.imageFilename} size="sm" border={1} />
         <Box className={classes.name}>{user?.username}</Box>

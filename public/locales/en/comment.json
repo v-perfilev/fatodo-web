@@ -1,4 +1,7 @@
 {
+  "list": {
+    "commentsNotFound": "No comments yet"
+  },
   "comment": {
     "deleted": "Comment deleted",
     "actions": {

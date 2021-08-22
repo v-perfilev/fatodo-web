@@ -49,16 +49,19 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
         handledItems.push(CommentItemFactory.createComment(parent.id, parent));
         const children = parent.children;
         if (children.data.length > 0) {
-          children.data.forEach((child) => {
-            handledItems.push(CommentItemFactory.createComment(child.id, child));
-          });
+          // child loader or button
           if (itemsLoading.includes(parent.id)) {
             handledItems.push(CommentItemFactory.createLoader(parent.id));
           } else if (children.data.length < children.count) {
             handledItems.push(CommentItemFactory.createButton(parent.id));
           }
+          // child comments
+          children.data.forEach((child) => {
+            handledItems.push(CommentItemFactory.createComment(child.id, child));
+          });
         }
       });
+      // parent loader or button
       if (itemsLoading.includes(targetId)) {
         handledItems.push(CommentItemFactory.createLoader());
       } else if (parents.length < commentsToConvert.count) {
