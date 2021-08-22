@@ -6,4 +6,9 @@ export const commentStyles = makeStyles(() => ({
     flexDirection: 'column',
     flexGrow: 1,
   },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+  },
 }));

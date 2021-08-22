@@ -5,10 +5,10 @@ import {commentControlInputStyles} from './_styles';
 
 type Props = {
   send: () => void;
-  setMessage: (message: string) => void;
+  setComment: (comment: string) => void;
 };
 
-const CommentControlInput: FC<Props> = ({send, setMessage}: Props) => {
+const CommentControlInput: FC<Props> = ({send, setComment}: Props) => {
   const classes = commentControlInputStyles();
   const {t} = useTranslation();
 
@@ -16,7 +16,7 @@ const CommentControlInput: FC<Props> = ({send, setMessage}: Props) => {
     <ReflectableTextInput
       className={classes.root}
       action={send}
-      updateText={setMessage}
+      updateText={setComment}
       placeholder={t('comment:control.inputPlaceholder')}
     />
   );

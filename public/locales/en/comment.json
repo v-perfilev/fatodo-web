@@ -1,6 +1,7 @@
 {
   "list": {
-    "commentsNotFound": "No comments yet"
+    "commentsNotFound": "No comments yet",
+    "loadMore": "Load more comments"
   },
   "comment": {
     "deleted": "Comment deleted",

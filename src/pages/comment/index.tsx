@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {commentStyles} from './_styles';
-import {Box} from '@material-ui/core';
+import {Box, Container} from '@material-ui/core';
 import CommentControl from './comment-control';
 import CommentList from './comment-list';
 import {User} from '../../models/user.model';
@@ -18,8 +18,10 @@ const Comment: FC<Props> = ({targetId, account}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <CommentControl />
-      <CommentList targetId={targetId} account={account} />
+      <Container className={classes.container}>
+        <CommentControl targetId={targetId} parentId={null} addComment={null} account={account} />
+        <CommentList targetId={targetId} account={account} />
+      </Container>
     </Box>
   );
 };

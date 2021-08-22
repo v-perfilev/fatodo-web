@@ -1,6 +1,7 @@
 {
   "list": {
-    "commentsNotFound": "Пока комментариев нет"
+    "commentsNotFound": "Пока комментариев нет",
+    "loadMore": "Загрузить больше комментариев"
   },
   "comment": {
     "deleted": "Комментарий удалён",

@@ -22,10 +22,6 @@ class CommentItemFactory {
     return {id: 'button', type: 'button', parentId};
   };
 
-  public static createLoader = (parentId?: string): CommentItem => {
-    return {id: 'loader', type: 'loader', parentId};
-  };
-
   public static createStub = (): CommentItem => {
     return {id: 'stub', type: 'stub'};
   };
@@ -46,13 +42,12 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
       handledItems.push(CommentItemFactory.createStub());
     } else {
       parents.forEach((parent) => {
+        // parent comment
         handledItems.push(CommentItemFactory.createComment(parent.id, parent));
         const children = parent.children;
         if (children.data.length > 0) {
-          // child loader or button
-          if (itemsLoading.includes(parent.id)) {
-            handledItems.push(CommentItemFactory.createLoader(parent.id));
-          } else if (children.data.length < children.count) {
+          // children load button
+          if (children.data.length < children.count) {
             handledItems.push(CommentItemFactory.createButton(parent.id));
           }
           // child comments
@@ -61,10 +56,8 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
           });
         }
       });
-      // parent loader or button
-      if (itemsLoading.includes(targetId)) {
-        handledItems.push(CommentItemFactory.createLoader());
-      } else if (parents.length < commentsToConvert.count) {
+      // parents load button
+      if (parents.length < commentsToConvert.count) {
         handledItems.push(CommentItemFactory.createButton());
       }
     }

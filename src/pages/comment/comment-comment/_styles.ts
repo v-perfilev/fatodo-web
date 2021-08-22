@@ -1,5 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
+import {COMMENTS_CHILD_MARGIN} from '../_constants';
 
 export const commentCommentStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -8,7 +9,7 @@ export const commentCommentStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
   },
   child: {
-    marginLeft: 50,
+    marginLeft: COMMENTS_CHILD_MARGIN,
   },
   header: {
     display: 'flex',

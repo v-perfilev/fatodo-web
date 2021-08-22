@@ -6,21 +6,23 @@ import {commentItemStyles} from './_styles';
 import CommentItemComment from './comment-item-comment';
 import CommentItemButton from './comment-item-button';
 import CommentItemStub from './comment-item-stub';
-import CommentItemLoader from './comment-item-loader';
 
 type Props = {
   item: CommentItem;
   account: User;
+  loadMoreItems: () => Promise<void>;
+  loadMoreChildren: (parentId: string) => Promise<void>;
 };
 
-const CommentItem: FC<Props> = ({item, account}: Props) => {
+const CommentItem: FC<Props> = ({item, account, loadMoreItems, loadMoreChildren}: Props) => {
   const classes = commentItemStyles();
 
   return (
     <Container maxWidth="md" className={classes.root}>
       {item.type === 'comment' && <CommentItemComment comment={item.comment} account={account} />}
-      {item.type === 'button' && <CommentItemButton parentId={item.parentId} />}
-      {item.type === 'loader' && <CommentItemLoader parentId={item.parentId} />}
+      {item.type === 'button' && (
+        <CommentItemButton loadMoreItems={loadMoreItems} loadMoreChildren={loadMoreChildren} parentId={item.parentId} />
+      )}
       {item.type === 'stub' && <CommentItemStub />}
     </Container>
   );

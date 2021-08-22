@@ -8,9 +8,9 @@ import CommentRenderer from './comment-renderer';
 
 type Props = {
   items: CommentItem[];
+  account: User;
   loadMoreItems: () => Promise<void>;
   loadMoreChildren: (parentId: string) => Promise<void>;
-  account: User;
 };
 
 const CommentContainer: FC<Props> = (props: Props) => {
