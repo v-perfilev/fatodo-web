@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 import {COMMENTS_FOOTER_HEIGHT} from '../_constants';
 
-export const commentsFooterStyles = makeStyles(() => ({
+export const commentControlStyles = makeStyles(() => ({
   root: {
     position: 'fixed',
     left: 0,
@@ -16,7 +16,7 @@ export const commentsFooterStyles = makeStyles(() => ({
   },
 }));
 
-export const commentsInputStyles = makeStyles((theme: Theme) => ({
+export const commentControlInputStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
     '& > div': {
@@ -25,7 +25,7 @@ export const commentsInputStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const commentsSendButtonStyles = makeStyles((theme: Theme) => ({
+export const commentControlSendButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     marginLeft: theme.spacing(2),
     flexShrink: 0,

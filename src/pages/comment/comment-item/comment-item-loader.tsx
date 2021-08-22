@@ -6,12 +6,7 @@ type Props = {
 };
 
 const CommentItemLoader: FC<Props> = () => {
-
-  return (
-    <Box>
-      Test
-    </Box>
-  );
+  return <Box>Test</Box>;
 };
 
 export default CommentItemLoader;

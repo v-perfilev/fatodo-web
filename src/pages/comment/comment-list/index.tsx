@@ -26,7 +26,6 @@ class CommentItemFactory {
     return {id: 'loader', type: 'loader', parentId};
   };
 
-
   public static createStub = (): CommentItem => {
     return {id: 'stub', type: 'stub'};
   };
@@ -91,7 +90,7 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
         .sort(ArrayUtils.createdAtComparator);
       return {
         data: filteredComments,
-        count: newComments.count
+        count: newComments.count,
       };
     },
     []
@@ -112,12 +111,12 @@ const CommentList: FC<Props> = ({targetId, account}: Props) => {
           .sort(ArrayUtils.createdAtDescComparator);
         prevState[index] = {
           data: filteredComments,
-          count: newComments.count
+          count: newComments.count,
         };
       }
       return {
         data: commentList,
-        count: prevState.count
+        count: prevState.count,
       };
     },
     []

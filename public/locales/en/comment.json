@@ -1,5 +1,16 @@
 {
-  "footer": {
+  "comment": {
+    "deleted": "Comment deleted",
+    "actions": {
+      "reactions": "Reactions",
+      "delete": "Delete"
+    }
+  },
+  "control": {
     "inputPlaceholder": "Type your comment..."
+  },
+  "reactions": {
+    "title": "Reactions to the comment",
+    "reactionsNotFound": "No reactions yet"
   }
 }

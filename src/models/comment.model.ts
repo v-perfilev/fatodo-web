@@ -1,9 +1,8 @@
 import {AbstractAuditing} from './abstract-auditing.model';
 import {PageableList} from './pageable-list.model';
 
-export const messageReactionTypes = ['LIKE', 'DISLIKE'];
+export const commentReactionTypes = ['LIKE', 'DISLIKE'];
 
-export type CommentStatusType = 'READ';
 export type CommentReactionType = 'LIKE' | 'DISLIKE';
 
 export interface Comment extends AbstractAuditing {

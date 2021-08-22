@@ -1,5 +1,16 @@
 {
-  "footer": {
+  "comment": {
+    "deleted": "Комментарий удалён",
+    "actions": {
+      "reactions": "Реакции",
+      "delete": "Удалить"
+    }
+  },
+  "control": {
     "inputPlaceholder": "Оставьте свой комментарий..."
+  },
+  "reactions": {
+    "title": "Реакции на комментарий",
+    "reactionsNotFound": "Пока реакций нет"
   }
 }

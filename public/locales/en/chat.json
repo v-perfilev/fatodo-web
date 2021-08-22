@@ -63,7 +63,7 @@
     "text": "Are you sure you want to delete user {{username}} from chat?"
   },
   "reactions": {
-    "title": "Reactions to message",
+    "title": "Reactions to the message",
     "reactionsNotFound": "No reactions yet"
   },
   "readStatuses": {

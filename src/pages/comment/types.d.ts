@@ -3,11 +3,7 @@ import {User} from '../../models/user.model';
 import {ListChildComponentProps} from 'react-window';
 import {Comment} from '../../models/comment.model';
 
-export type CommentItemType =
-  | 'comment'
-  | 'button'
-  | 'loader'
-  | 'stub';
+export type CommentItemType = 'comment' | 'button' | 'loader' | 'stub';
 
 export interface CommentItem {
   id: string;

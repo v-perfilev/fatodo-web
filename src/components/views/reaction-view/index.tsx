@@ -5,9 +5,10 @@ import {MessageReactionType} from '../../../models/message.model';
 import {LikeIcon} from '../../icons/like-icon';
 import {DislikeIcon} from '../../icons/dislike-icon';
 import {IconProps} from '../../surfaces';
+import {CommentReactionType} from '../../../models/comment.model';
 
 type Props = IconProps & {
-  reactionType: MessageReactionType;
+  reactionType: MessageReactionType & CommentReactionType;
 };
 
 export const ReactionView: FC<Props> = ({reactionType, className, ...props}: Props) => {

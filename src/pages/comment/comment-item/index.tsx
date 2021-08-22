@@ -22,7 +22,7 @@ const CommentItem: FC<Props> = ({item, account}: Props) => {
       {item.type === 'button' && <CommentItemButton parentId={item.parentId} />}
       {item.type === 'loader' && <CommentItemLoader parentId={item.parentId} />}
       {item.type === 'stub' && <CommentItemStub />}
-    </Container> 
+    </Container>
   );
 };
 

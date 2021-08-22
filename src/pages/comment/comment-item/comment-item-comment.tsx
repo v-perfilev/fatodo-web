@@ -9,12 +9,7 @@ type Props = {
 };
 
 const CommentItemComment: FC<Props> = () => {
-
-  return (
-    <Box>
-      Test
-    </Box>
-  );
+  return <Box>Test</Box>;
 };
 
 export default CommentItemComment;
