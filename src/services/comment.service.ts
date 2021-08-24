@@ -8,7 +8,7 @@ export default class CommentService {
   /*
     CommentController
    */
-  public static getAllParentsPageable = (
+  public static getAllPageable = (
     targetId: string,
     offset?: number,
     size?: number
@@ -18,23 +18,13 @@ export default class CommentService {
     return axios.get(url, {params});
   };
 
-  public static getAllChildrenPageable = (
-    parentId: string,
-    offset?: number,
-    size?: number
-  ): AxiosPromise<PageableList<Comment>> => {
-    const url = CommentService.baseUrl + '/comments/' + parentId + '/children';
-    const params = {offset, size};
-    return axios.get(url, {params});
-  };
-
-  public static addParent = (targetId: string, text: string): AxiosPromise<Comment> => {
+  public static addComment = (targetId: string, text: string): AxiosPromise<Comment> => {
     const url = CommentService.baseUrl + '/comments/' + targetId;
     return axios.post(url, text);
   };
 
-  public static addChild = (parentId: string, text: string): AxiosPromise<Comment> => {
-    const url = CommentService.baseUrl + '/comments/' + parentId + '/child';
+  public static addCommentWithReference = (referenceId: string, text: string): AxiosPromise<Comment> => {
+    const url = CommentService.baseUrl + '/comments/' + referenceId + '/reference';
     return axios.post(url, text);
   };
 

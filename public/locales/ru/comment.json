@@ -5,13 +5,18 @@
   },
   "comment": {
     "deleted": "Комментарий удалён",
+    "reference": "Ответ",
+    "buttons": {
+      "reference": "Ответить"
+    },
     "actions": {
       "reactions": "Реакции",
       "delete": "Удалить"
     }
   },
   "control": {
-    "inputPlaceholder": "Оставьте свой комментарий..."
+    "inputPlaceholder": "Оставьте свой комментарий...",
+    "reference": "Ответ"
   },
   "reactions": {
     "title": "Реакции на комментарий",

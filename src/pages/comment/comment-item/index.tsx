@@ -1,30 +1,59 @@
-import {User} from '../../../models/user.model';
-import React, {FC} from 'react';
-import {CommentItem} from '../types';
-import {Container} from '@material-ui/core';
+import React, {FC, useMemo} from 'react';
+import {Box} from '@material-ui/core';
+import {Comment} from '../../../models/comment.model';
 import {commentItemStyles} from './_styles';
-import CommentItemComment from './comment-item-comment';
-import CommentItemButton from './comment-item-button';
-import CommentItemStub from './comment-item-stub';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import {User} from '../../../models/user.model';
+import {DateFormatters} from '../../../shared/utils/date.utils';
+import {CommentUtils} from '../../../shared/utils/comment.utils';
+import {UrlPic} from '../../../components/images';
+import {useTranslation} from 'react-i18next';
+import CommentItemReactions from './comment-item-reactions';
+import CommentItemActions from './comment-item-actions';
+import CommentItemReferenceButton from './comment-item-reference-button';
+import CommentItemReference from './comment-item-reference';
 
 type Props = {
-  item: CommentItem;
+  comment: Comment;
   account: User;
-  loadMoreItems: () => Promise<void>;
-  loadMoreChildren: (parentId: string) => Promise<void>;
+  setReference: (comment: Comment) => void;
 };
 
-const CommentItem: FC<Props> = ({item, account, loadMoreItems, loadMoreChildren}: Props) => {
+const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
   const classes = commentItemStyles();
+  const {t} = useTranslation();
+  const {users} = useUserListContext();
+
+  const user = useMemo((): User => {
+    return CommentUtils.extractUserFromComment(users, comment);
+  }, [users, comment]);
+
+  const date = useMemo((): string => {
+    return DateFormatters.formatTime(new Date(comment.createdAt));
+  }, [comment]);
+
+  const isOwnMessage = useMemo((): boolean => {
+    return CommentUtils.isOwnComment(comment, account);
+  }, [comment, account]);
 
   return (
-    <Container maxWidth="md" className={classes.root}>
-      {item.type === 'comment' && <CommentItemComment comment={item.comment} account={account} />}
-      {item.type === 'button' && (
-        <CommentItemButton loadMoreItems={loadMoreItems} loadMoreChildren={loadMoreChildren} parentId={item.parentId} />
-      )}
-      {item.type === 'stub' && <CommentItemStub />}
-    </Container>
+    <Box className={classes.root}>
+      <Box className={classes.header}>
+        <UrlPic className={classes.image} alt={user?.username} url={user?.imageFilename} size="sm" border={1} />
+        <Box className={classes.name}>{user?.username}</Box>
+        <Box className={classes.date}>{date}</Box>
+        <CommentItemReferenceButton comment={comment} setReference={setReference} />
+        <CommentItemActions comment={comment} isOwnComment={isOwnMessage} />
+      </Box>
+      {comment.reference && <CommentItemReference reference={comment.reference} />}
+      <Box className={classes.body}>
+        {!comment.isDeleted && <span>{comment.text}</span>}
+        {comment.isDeleted && <span className={classes.deleted}>{t('comment:comment.deleted')}</span>}
+      </Box>
+      <Box className={classes.footer}>
+        <CommentItemReactions comment={comment} account={account} />
+      </Box>
+    </Box>
   );
 };
 

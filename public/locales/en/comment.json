@@ -5,13 +5,18 @@
   },
   "comment": {
     "deleted": "Comment deleted",
+    "reference": "Response",
+    "buttons": {
+      "response": "Answer"
+    },
     "actions": {
       "reactions": "Reactions",
       "delete": "Delete"
     }
   },
   "control": {
-    "inputPlaceholder": "Type your comment..."
+    "inputPlaceholder": "Type your comment...",
+    "reference": "Response"
   },
   "reactions": {
     "title": "Reactions to the comment",

@@ -2,7 +2,7 @@ import React, {FC, MouseEvent, useCallback, useRef, useState} from 'react';
 import {IconButton, MenuItem} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {Comment} from '../../../models/comment.model';
-import {commentCommentActionsStyles} from './_styles';
+import {commentItemActionsStyles} from './_styles';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import CommentService from '../../../services/comment.service';
@@ -17,8 +17,8 @@ type Props = {
   isOwnComment?: boolean;
 };
 
-const CommentCommentActions: FC<Props> = ({comment, isOwnComment}: Props) => {
-  const classes = commentCommentActionsStyles();
+const CommentItemActions: FC<Props> = ({comment, isOwnComment}: Props) => {
+  const classes = commentItemActionsStyles();
   const {handleResponse} = useSnackContext();
   const {users} = useUserListContext();
   const {t} = useTranslation();
@@ -77,4 +77,4 @@ const CommentCommentActions: FC<Props> = ({comment, isOwnComment}: Props) => {
   );
 };
 
-export default CommentCommentActions;
+export default CommentItemActions;

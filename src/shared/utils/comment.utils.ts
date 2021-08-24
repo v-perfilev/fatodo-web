@@ -1,12 +1,12 @@
 import {User} from '../../models/user.model';
-import {Comment} from '../../models/comment.model';
+import {Comment, ReferenceComment} from '../../models/comment.model';
 
 export class CommentUtils {
   public static isOwnComment = (comment: Comment, account: User): boolean => {
     return comment && account && comment.userId !== account.id;
   };
 
-  public static extractUserFromComment = (users: User[], comment: Comment): User => {
+  public static extractUserFromComment = (users: User[], comment: Comment | ReferenceComment): User => {
     return users.find((user) => user.id === comment.userId);
   };
 

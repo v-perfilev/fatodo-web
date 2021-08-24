@@ -3,19 +3,9 @@ import {User} from '../../models/user.model';
 import {ListChildComponentProps} from 'react-window';
 import {Comment} from '../../models/comment.model';
 
-export type CommentItemType = 'comment' | 'button' | 'stub';
-
-export interface CommentItem {
-  id: string;
-  type: CommentItemType;
-  comment?: Comment;
-  parentId?: string;
-}
-
-export interface CommentListDataProps extends ListDataProps<CommentItem> {
+export interface CommentListDataProps extends ListDataProps<Comment> {
   account: User;
-  loadMoreItems: () => Promise<void>;
-  loadMoreChildren: (parentId: string) => Promise<void>;
+  setReference: (comment: Comment) => void;
 }
 
 export type CommentItemProps = ListChildComponentProps<CommentListDataProps>;

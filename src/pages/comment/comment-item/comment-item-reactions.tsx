@@ -4,7 +4,7 @@ import csx from 'classnames';
 import {Comment, CommentReactionType, commentReactionTypes} from '../../../models/comment.model';
 import CommentService from '../../../services/comment.service';
 import {User} from '../../../models/user.model';
-import {commentCommentReactionsStyles} from './_styles';
+import {commentItemReactionsStyles} from './_styles';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {CommentUtils} from '../../../shared/utils/comment.utils';
 import {ReactionView} from '../../../components/views';
@@ -14,8 +14,8 @@ type Props = {
   account: User;
 };
 
-const CommentCommentReactions: FC<Props> = ({comment, account}: Props) => {
-  const classes = commentCommentReactionsStyles();
+const CommentItemReactions: FC<Props> = ({comment, account}: Props) => {
+  const classes = commentItemReactionsStyles();
   const {handleResponse} = useSnackContext();
   const [reactionMap, setReactionMap] = useState<Map<CommentReactionType, number>>(new Map());
   const [activeReaction, setActiveReaction] = useState<CommentReactionType>();
@@ -97,4 +97,4 @@ const CommentCommentReactions: FC<Props> = ({comment, account}: Props) => {
   return <Box className={classes.root}>{Array.from(reactionMap.keys()).map(reaction)}</Box>;
 };
 
-export default CommentCommentReactions;
+export default CommentItemReactions;

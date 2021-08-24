@@ -8,14 +8,13 @@ type Props = CommentItemProps;
 
 const CommentRenderer: FC<Props> = ({data, index, style}: Props) => {
   const classes = commentsRendererStyles();
-  const item = data.items[index];
+  const comment = data.items[index];
   const account = data.account;
-  const loadMoreItems = data.loadMoreItems;
-  const loadMoreChildren = data.loadMoreChildren;
+  const setReference = data.setReference;
 
   return (
     <div className={classes.root} style={style}>
-      <CommentItem item={item} account={account} loadMoreItems={loadMoreItems} loadMoreChildren={loadMoreChildren} />
+      <CommentItem comment={comment} account={account} setReference={setReference} />
     </div>
   );
 };

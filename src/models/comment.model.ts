@@ -1,5 +1,4 @@
 import {AbstractAuditing} from './abstract-auditing.model';
-import {PageableList} from './pageable-list.model';
 
 export const commentReactionTypes = ['LIKE', 'DISLIKE'];
 
@@ -8,14 +7,18 @@ export type CommentReactionType = 'LIKE' | 'DISLIKE';
 export interface Comment extends AbstractAuditing {
   id: string;
   threadId: string;
-  parentId: string;
   userId: string;
   text: string;
   isDeleted: boolean;
 
-  reactions: CommentReaction[];
+  reference?: ReferenceComment;
 
-  children: PageableList<Comment>;
+  reactions: CommentReaction[];
+}
+
+export interface ReferenceComment extends AbstractAuditing {
+  id: string;
+  userId: string;
 }
 
 export interface CommentReaction {
