@@ -31,7 +31,7 @@ const CommentContainer: FC<Props> = ({comments, loadMoreItems, allLoaded, accoun
     () => ({
       items: comments,
       account,
-      setReference,
+      setReference
     }),
     [comments]
   );

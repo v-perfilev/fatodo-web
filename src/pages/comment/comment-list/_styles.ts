@@ -3,7 +3,8 @@ import {Theme} from '@material-ui/core';
 
 export const commentContainerStyles = makeStyles(() => ({
   root: {
-    position: 'relative'
+    position: 'relative',
+    height: 200,
   }
 }));
 
