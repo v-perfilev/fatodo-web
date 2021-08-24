@@ -6,6 +6,7 @@ import {PageableList} from '../../../models/pageable-list.model';
 import {ArrayUtils} from '../../../shared/utils/array.utils';
 import CommentContainer from './comment-container';
 import {User} from '../../../models/user.model';
+import CommentStub from './comment-stub';
 
 type Props = {
   targetId: string;
@@ -15,7 +16,7 @@ type Props = {
 
 const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
   const {handleResponse} = useSnackContext();
-  const [comments, setComments] = useState<PageableList<Comment>>();
+  const [comments, setComments] = useState<PageableList<Comment>>({data: [], count: 0});
   const [loading, setLoading] = useState(true);
   const [allLoaded, setAllLoaded] = useState(false);
 
@@ -38,7 +39,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
         .sort(ArrayUtils.createdAtComparator);
       return {
         data: filteredComments,
-        count: newComments.count,
+        count: newComments.count
       };
     },
     []
@@ -80,15 +81,20 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
   // RENDERERS
 
   return (
-    !loading && (
-      <CommentContainer
-        comments={comments.data}
-        loadMoreItems={loadMoreParentComments}
-        allLoaded={allLoaded}
-        account={account}
-        setReference={setReference}
-      />
-    )
+    <>
+      {!loading && comments?.data.length > 0 && (
+        <CommentContainer
+          comments={comments.data}
+          loadMoreItems={loadMoreParentComments}
+          allLoaded={allLoaded}
+          account={account}
+          setReference={setReference}
+        />
+      )}
+      {!loading && comments?.data.length == 0 && (
+        <CommentStub />
+      )}
+    </>
   );
 };
 

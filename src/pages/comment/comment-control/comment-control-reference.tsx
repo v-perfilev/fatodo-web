@@ -20,22 +20,20 @@ const CommentControlReference: FC<Props> = ({reference, clearReference}: Props) 
   const {users} = useUserListContext();
 
   const user = useMemo((): User => {
-    return CommentUtils.extractUserFromComment(users, reference);
+    return reference ? CommentUtils.extractUserFromComment(users, reference) : null;
   }, [users, reference]);
 
   const date = useMemo((): string => {
-    return DateFormatters.formatTime(new Date(reference.createdAt));
-  }, [reference.createdAt]);
+    return reference ? DateFormatters.formatTime(new Date(reference.createdAt)) : null;
+  }, [reference]);
 
-  return (
-    !!reference && (
-      <Box className={classes.root}>
-        {t('comment:control.reference')}:{user.username},{date}
-        <IconButton onClick={clearReference} size="small">
-          <CloseIcon />
-        </IconButton>
-      </Box>
-    )
+  return user && date && (
+    <Box className={classes.root}>
+      {t('comment:control.reference')}:{user.username},{date}
+      <IconButton onClick={clearReference} size="small">
+        <CloseIcon />
+      </IconButton>
+    </Box>
   );
 };
 

@@ -1,14 +1,26 @@
 import {makeStyles} from '@material-ui/core/styles';
+import {Theme} from '@material-ui/core';
 
-export const commentsContainerStyles = makeStyles(() => ({
+export const commentContainerStyles = makeStyles(() => ({
   root: {
-    position: 'relative',
-    // height: 'calc(100vh - ' + CHAT_CONTENT_HEADER_HEIGHT + 'px - ' + CHAT_CONTENT_FOOTER_HEIGHT + 'px)',
-  },
+    position: 'relative'
+  }
 }));
 
-export const commentsRendererStyles = makeStyles(() => ({
+export const commentRendererStyles = makeStyles(() => ({
   root: {
-    overflow: 'hidden',
-  },
+    overflow: 'hidden'
+  }
+}));
+
+export const commentStubStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    fontSize: '1rem',
+    color: theme.palette.grey['400']
+  }
 }));

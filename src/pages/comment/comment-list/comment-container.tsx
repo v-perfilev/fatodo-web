@@ -2,7 +2,7 @@ import React, {FC, ReactElement, useCallback, useMemo} from 'react';
 import {Box} from '@material-ui/core';
 import {VirtualizedList} from '../../../components/surfaces';
 import {CommentItemProps, CommentListDataProps} from '../types';
-import {commentsContainerStyles} from './_styles';
+import {commentContainerStyles} from './_styles';
 import {User} from '../../../models/user.model';
 import CommentRenderer from './comment-renderer';
 import {Comment} from '../../../models/comment.model';
@@ -16,7 +16,7 @@ type Props = {
 };
 
 const CommentContainer: FC<Props> = ({comments, loadMoreItems, allLoaded, account, setReference}: Props) => {
-  const classes = commentsContainerStyles();
+  const classes = commentContainerStyles();
 
   const getItemKey = useCallback(
     (index: number): string => {
