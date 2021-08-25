@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, memo, useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Container, ThemeProvider} from '@material-ui/core';
 import GroupViewItems from './group-view-items';
@@ -72,7 +72,7 @@ const GroupView: FC = () => {
     {icon: <PlusIcon />, action: redirectToItemCreate, tooltip: t('item:tooltips.create')},
     {icon: <EditIcon />, action: redirectToGroupEdit, tooltip: t('group:tooltips.edit')},
     {icon: <DeleteIcon />, action: openGroupDeleteDialog, tooltip: t('group:tooltips.delete')},
-    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')},
+    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')}
   ];
 
   useEffect(() => {
@@ -105,4 +105,4 @@ const GroupView: FC = () => {
   );
 };
 
-export default flowRight([withVerticalPadding, withGroupView])(GroupView);
+export default flowRight([withVerticalPadding, withGroupView, memo])(GroupView);

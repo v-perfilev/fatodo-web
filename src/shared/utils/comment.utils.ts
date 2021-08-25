@@ -3,7 +3,7 @@ import {Comment, ReferenceComment} from '../../models/comment.model';
 
 export class CommentUtils {
   public static isOwnComment = (comment: Comment, account: User): boolean => {
-    return comment && account && comment.userId !== account.id;
+    return comment && account && comment.userId === account.id;
   };
 
   public static extractUserFromComment = (users: User[], comment: Comment | ReferenceComment): User => {

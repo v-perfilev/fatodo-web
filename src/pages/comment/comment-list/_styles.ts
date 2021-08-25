@@ -3,14 +3,17 @@ import {Theme} from '@material-ui/core';
 
 export const commentContainerStyles = makeStyles(() => ({
   root: {
-    position: 'relative',
-    height: '100vh',
+    position: 'relative'
   }
 }));
 
-export const commentRendererStyles = makeStyles(() => ({
+export const commentLoadButtonStyles = makeStyles((theme: Theme) => ({
   root: {
-    overflow: 'hidden'
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
   }
 }));
 

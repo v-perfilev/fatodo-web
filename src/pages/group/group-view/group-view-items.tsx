@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, memo, useEffect} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewItemsStyles} from './_styles';
 import GroupViewItem from './group-view-item';
@@ -8,6 +8,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
+import {flowRight} from 'lodash';
 
 const GroupViewItems: FC = () => {
   const classes = groupViewItemsStyles();
@@ -40,4 +41,4 @@ const GroupViewItems: FC = () => {
     </Box>
   );
 };
-export default withItemList(GroupViewItems);
+export default flowRight([withItemList, memo])(GroupViewItems);

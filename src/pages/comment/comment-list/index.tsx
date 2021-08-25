@@ -7,6 +7,7 @@ import {ArrayUtils} from '../../../shared/utils/array.utils';
 import CommentContainer from './comment-container';
 import {User} from '../../../models/user.model';
 import CommentStub from './comment-stub';
+import CommentLoadButton from './comment-load-button';
 
 type Props = {
   targetId: string;
@@ -36,7 +37,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
       const filteredComments = combinedComments
         .filter(ArrayUtils.withIdFilter)
         .filter(ArrayUtils.uniqueByIdFilter)
-        .sort(ArrayUtils.createdAtComparator);
+        .sort(ArrayUtils.createdAtDescComparator);
       return {
         data: filteredComments,
         count: newComments.count
@@ -47,7 +48,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
 
   // LOADERS
 
-  const loadMoreParentComments = useCallback((): Promise<void> => {
+  const loadMoreItems = useCallback((): Promise<void> => {
     return new Promise((resolve) => {
       CommentService.getAllPageable(targetId, comments?.data.length || 0)
         .then((response) => {
@@ -69,7 +70,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
   // EFFECTS
 
   useEffect(() => {
-    loadMoreParentComments().finally();
+    loadMoreItems().finally();
   }, [targetId]);
 
   useEffect(() => {
@@ -85,7 +86,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
       {!loading && comments?.data.length > 0 && (
         <CommentContainer
           comments={comments.data}
-          loadMoreItems={loadMoreParentComments}
+          loadMoreItems={loadMoreItems}
           allLoaded={allLoaded}
           account={account}
           setReference={setReference}
@@ -93,6 +94,10 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
       )}
       {!loading && comments?.data.length == 0 && (
         <CommentStub />
+      )}
+      {/*{comments && !allLoaded && (*/}
+      {comments && (
+        <CommentLoadButton loadMoreItems={loadMoreItems} loading={loading} />
       )}
     </>
   );

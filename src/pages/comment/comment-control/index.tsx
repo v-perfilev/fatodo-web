@@ -43,7 +43,7 @@ const CommentControl: FC<Props> = ({targetId, account, reference, clearReference
   const dto = useMemo<CommentDTO>(
     () => ({
       text: commentBody,
-      referenceId: reference.id
+      referenceId: reference?.id
     }),
     [commentBody, reference]
   );

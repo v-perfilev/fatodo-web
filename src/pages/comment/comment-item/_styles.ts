@@ -46,7 +46,7 @@ export const commentItemReactionsStyles = makeStyles((theme: Theme) => ({
     width: 50,
     display: 'flex',
     flexShrink: 0,
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignSelf: 'stretch',
     justifyContent: 'center',
     margin: theme.spacing(0.5),
