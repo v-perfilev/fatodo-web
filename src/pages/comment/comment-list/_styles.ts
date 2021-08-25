@@ -3,8 +3,8 @@ import {Theme} from '@material-ui/core';
 
 export const commentContainerStyles = makeStyles(() => ({
   root: {
-    position: 'relative'
-  }
+    position: 'relative',
+  },
 }));
 
 export const commentLoadButtonStyles = makeStyles((theme: Theme) => ({
@@ -13,8 +13,8 @@ export const commentLoadButtonStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2)
-  }
+    marginBottom: theme.spacing(2),
+  },
 }));
 
 export const commentStubStyles = makeStyles((theme: Theme) => ({
@@ -25,6 +25,6 @@ export const commentStubStyles = makeStyles((theme: Theme) => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
     fontSize: '1rem',
-    color: theme.palette.grey['400']
-  }
+    color: theme.palette.grey['400'],
+  },
 }));

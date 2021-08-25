@@ -27,13 +27,16 @@ const CommentControlReference: FC<Props> = ({reference, clearReference}: Props) 
     return reference ? DateFormatters.formatTime(new Date(reference.createdAt)) : null;
   }, [reference]);
 
-  return user && date && (
-    <Box className={classes.root}>
-      {t('comment:control.reference')}:{user.username},{date}
-      <IconButton onClick={clearReference} size="small">
-        <CloseIcon />
-      </IconButton>
-    </Box>
+  return (
+    user &&
+    date && (
+      <Box className={classes.root}>
+        {t('comment:control.reference')}:{user.username},{date}
+        <IconButton onClick={clearReference} size="small">
+          <CloseIcon />
+        </IconButton>
+      </Box>
+    )
   );
 };
 

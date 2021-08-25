@@ -40,7 +40,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
         .sort(ArrayUtils.createdAtDescComparator);
       return {
         data: filteredComments,
-        count: newComments.count
+        count: newComments.count,
       };
     },
     []
@@ -84,21 +84,10 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
   return (
     <>
       {!loading && comments?.data.length > 0 && (
-        <CommentContainer
-          comments={comments.data}
-          loadMoreItems={loadMoreItems}
-          allLoaded={allLoaded}
-          account={account}
-          setReference={setReference}
-        />
+        <CommentContainer comments={comments.data} account={account} setReference={setReference} />
       )}
-      {!loading && comments?.data.length == 0 && (
-        <CommentStub />
-      )}
-      {/*{comments && !allLoaded && (*/}
-      {comments && (
-        <CommentLoadButton loadMoreItems={loadMoreItems} loading={loading} />
-      )}
+      {!loading && comments?.data.length == 0 && <CommentStub />}
+      {comments && !allLoaded && <CommentLoadButton loadMoreItems={loadMoreItems} loading={loading} />}
     </>
   );
 };

@@ -10,11 +10,7 @@ const CommentStub: FC = () => {
   const classes = commentStubStyles();
   const {t} = useTranslation();
 
-  return (
-    <Box className={classes.root}>
-      {t('comment:list.commentsNotFound')}
-    </Box>
-  );
+  return <Box className={classes.root}>{t('comment:list.commentsNotFound')}</Box>;
 };
 
 export default CommentStub;

@@ -25,10 +25,13 @@ const CommentItemReference: FC<Props> = ({reference}: Props) => {
     return reference ? DateFormatters.formatTime(new Date(reference.createdAt)) : null;
   }, [reference]);
 
-  return user && date && (
-    <Box className={classes.root}>
-      {t('comment:control.reference')}:{user.username},{date}
-    </Box>
+  return (
+    user &&
+    date && (
+      <Box className={classes.root}>
+        {t('comment:control.reference')}:{user.username},{date}
+      </Box>
+    )
   );
 };
 

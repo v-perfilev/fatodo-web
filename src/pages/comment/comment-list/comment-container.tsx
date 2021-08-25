@@ -7,13 +7,11 @@ import CommentItem from '../comment-item';
 
 type Props = {
   comments: Comment[];
-  loadMoreItems: () => Promise<void>;
-  allLoaded: boolean;
   account: User;
   setReference: (comment: Comment) => void;
 };
 
-const CommentContainer: FC<Props> = ({comments, loadMoreItems, allLoaded, account, setReference}: Props) => {
+const CommentContainer: FC<Props> = ({comments, account, setReference}: Props) => {
   const classes = commentContainerStyles();
 
   return (
@@ -23,7 +21,6 @@ const CommentContainer: FC<Props> = ({comments, loadMoreItems, allLoaded, accoun
           <CommentItem comment={comment} account={account} setReference={setReference} />
         </Box>
       ))}
-
     </Box>
   );
 };

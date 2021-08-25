@@ -72,7 +72,7 @@ const GroupView: FC = () => {
     {icon: <PlusIcon />, action: redirectToItemCreate, tooltip: t('item:tooltips.create')},
     {icon: <EditIcon />, action: redirectToGroupEdit, tooltip: t('group:tooltips.edit')},
     {icon: <DeleteIcon />, action: openGroupDeleteDialog, tooltip: t('group:tooltips.delete')},
-    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')}
+    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')},
   ];
 
   useEffect(() => {
