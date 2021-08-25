@@ -1,6 +1,7 @@
 import axios, {AxiosPromise} from 'axios';
 import {Comment} from '../models/comment.model';
 import {PageableList} from '../models/pageable-list.model';
+import {CommentDTO} from '../models/dto/comment.dto';
 
 export default class CommentService {
   private static baseUrl = '/api/comment';
@@ -18,14 +19,9 @@ export default class CommentService {
     return axios.get(url, {params});
   };
 
-  public static addComment = (targetId: string, text: string): AxiosPromise<Comment> => {
+  public static addComment = (targetId: string, dto: CommentDTO): AxiosPromise<Comment> => {
     const url = CommentService.baseUrl + '/comments/' + targetId;
-    return axios.post(url, text);
-  };
-
-  public static addCommentWithReference = (referenceId: string, text: string): AxiosPromise<Comment> => {
-    const url = CommentService.baseUrl + '/comments/' + referenceId + '/reference';
-    return axios.post(url, text);
+    return axios.post(url, dto);
   };
 
   public static editComment = (commentId: string, text: string): AxiosPromise<Comment> => {

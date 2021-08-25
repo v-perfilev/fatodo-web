@@ -10,6 +10,7 @@ import {RandomUtils} from '../../../shared/utils/random.utils';
 import {NEW_COMMENT_PREFIX} from '../_constants';
 import CommentService from '../../../services/comment.service';
 import CommentControlReference from './comment-control-reference';
+import {CommentDTO} from '../../../models/dto/comment.dto';
 
 type Props = {
   targetId: string;
@@ -24,7 +25,7 @@ const CommentControl: FC<Props> = ({targetId, account, reference, clearReference
   const {handleResponse} = useSnackContext();
   const [commentBody, setCommentBody] = useState<string>('');
 
-  const message = useMemo<Comment>(
+  const comment = useMemo<Comment>(
     () => ({
       id: NEW_COMMENT_PREFIX + RandomUtils.generate().toString(),
       threadId: null,
@@ -34,19 +35,23 @@ const CommentControl: FC<Props> = ({targetId, account, reference, clearReference
       reference: reference,
       reactions: [],
       createdAt: new Date().getTime(),
-      createdBy: account.id,
+      createdBy: account.id
     }),
     [commentBody]
   );
 
+  const dto = useMemo<CommentDTO>(
+    () => ({
+      text: commentBody,
+      referenceId: reference.id
+    }),
+    [commentBody, reference]
+  );
+
   const send = (): void => {
     if (commentBody.trim().length > 0) {
-      addComment(message);
-      if (reference) {
-        CommentService.addCommentWithReference(reference.id, commentBody).catch(handleResponse);
-      } else {
-        CommentService.addComment(targetId, commentBody).catch(handleResponse);
-      }
+      addComment(comment);
+      CommentService.addComment(targetId, dto).catch(handleResponse);
     }
   };
 
