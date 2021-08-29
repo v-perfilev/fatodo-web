@@ -5,10 +5,11 @@ import ReflectableTextInput from '../../../../components/inputs/clearable-text-i
 
 type Props = {
   send: () => void;
+  message: string;
   setMessage: (message: string) => void;
 };
 
-const ChatContentInput: FC<Props> = ({send, setMessage}: Props) => {
+const ChatContentInput: FC<Props> = ({send, message, setMessage}: Props) => {
   const classes = chatContentInputStyles();
   const {t} = useTranslation();
 
@@ -16,6 +17,7 @@ const ChatContentInput: FC<Props> = ({send, setMessage}: Props) => {
     <ReflectableTextInput
       className={classes.root}
       action={send}
+      text={message}
       updateText={setMessage}
       placeholder={t('chat:content.inputPlaceholder')}
     />

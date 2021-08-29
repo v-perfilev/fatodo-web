@@ -50,13 +50,14 @@ const ChatContentFooter: FC<Props> = ({chatId, account, addMessage}: Props) => {
   const send = (): void => {
     if (messageBody.trim().length > 0) {
       addMessage(message);
+      setMessageBody('');
       ChatService.sendIndirectMessage(chatId, dto).catch(handleResponse);
     }
   };
 
   return (
     <Box className={classes.root}>
-      <ChatContentInput send={send} setMessage={setMessageBody} />
+      <ChatContentInput send={send} message={messageBody} setMessage={setMessageBody} />
       <ChatContentSendButton send={send} />
     </Box>
   );

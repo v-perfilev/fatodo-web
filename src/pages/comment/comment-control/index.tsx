@@ -51,6 +51,8 @@ const CommentControl: FC<Props> = ({targetId, account, reference, clearReference
   const send = (): void => {
     if (commentBody.trim().length > 0) {
       addComment(comment);
+      setCommentBody('');
+      clearReference();
       CommentService.addComment(targetId, dto).catch(handleResponse);
     }
   };
@@ -58,7 +60,7 @@ const CommentControl: FC<Props> = ({targetId, account, reference, clearReference
   return (
     <Box className={classes.root}>
       <Box className={classes.inputWithButton}>
-        <CommentControlInput send={send} setComment={setCommentBody} />
+        <CommentControlInput send={send} comment={commentBody} setComment={setCommentBody} />
         <CommentControlSendButton send={send} />
       </Box>
       <Box className={classes.reference}>
