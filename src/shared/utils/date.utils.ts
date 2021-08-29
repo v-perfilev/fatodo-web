@@ -5,6 +5,8 @@ import i18n from '../i18n';
 export class DateFormats {
   static timeFormat = 'HH:mm';
 
+  static timeWithDateFormat = 'HH:mm DD.MM.YYYY';
+
   static dateFormat = 'DD.MM';
 
   static dateWithYearFormat = 'DD.MM.YYYY';
@@ -15,6 +17,10 @@ export class DateFormats {
 export class DateFormatters {
   static formatTime = (date: Date): string => {
     return moment(date).format(DateFormats.timeFormat);
+  };
+
+  static formatTimeWithDate = (date: Date): string => {
+    return moment(date).format(DateFormats.timeWithDateFormat);
   };
 
   static formatDate = (date: Date): string => {

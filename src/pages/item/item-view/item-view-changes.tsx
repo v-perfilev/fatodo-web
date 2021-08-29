@@ -23,11 +23,7 @@ const ItemViewChanges: FC<Props> = ({className}: Props) => {
 
   const getDate = (timestamp: number): string => {
     const timestampNumber = timestamp * 1000;
-    return (
-      DateFormatters.formatTime(new Date(timestampNumber)) +
-      ' ' +
-      DateFormatters.formatDateWithYear(new Date(timestampNumber))
-    );
+    return DateFormatters.formatTimeWithDate(new Date(timestampNumber));
   };
 
   const loadUsernames = (): void => {
