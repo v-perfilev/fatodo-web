@@ -76,11 +76,11 @@ export const commentItemReactionsStyles = makeStyles((theme: Theme) => ({
 
 export const commentItemActionsStyles = makeStyles((theme: Theme) => ({
   popupMenu: {
-    '& .MuiListItem-root': {
+    '& li': {
       display: 'flex',
       alignItems: 'center',
     },
-    '& .MuiSvgIcon-root': {
+    '& svg': {
       marginLeft: theme.spacing(-0.5),
       marginRight: theme.spacing(0.5),
     },

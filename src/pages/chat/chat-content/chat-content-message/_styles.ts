@@ -3,11 +3,11 @@ import {Theme} from '@material-ui/core';
 
 export const chatContentMessageActionsStyles = makeStyles((theme: Theme) => ({
   popupMenu: {
-    '& .MuiListItem-root': {
+    '& li': {
       display: 'flex',
       alignItems: 'center',
     },
-    '& .MuiSvgIcon-root': {
+    '& svg': {
       marginLeft: theme.spacing(-0.5),
       marginRight: theme.spacing(0.5),
     },
