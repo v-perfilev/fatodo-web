@@ -46,7 +46,7 @@ const ChatCreateDialog: FC<Props> = ({show, close}: Props) => {
     setIsSubmitting(true);
     createChat
       .then(() => {
-        handleCode('message.chatCreated', 'info');
+        handleCode('chat.chatCreated', 'info');
         close();
       })
       .catch((response) => {

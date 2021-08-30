@@ -28,7 +28,7 @@ const ChatContentFooter: FC<Props> = ({chatId, account, addMessage}: Props) => {
       chatId,
       userId: account.id,
       text: messageBody,
-      forwardedMessage: null,
+      reference: null,
       isDeleted: false,
       isEvent: false,
       statuses: [],

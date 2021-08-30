@@ -24,7 +24,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
   const {users} = useUserListContext();
   const {t} = useTranslation();
   const ref = useRef();
-  const {showChatReactionsDialog, showChatReadStatusesDialog} = useChatDialogContext();
+  const {showMessageReactionsDialog, showMessageReadStatusesDialog, showMessageEditDialog} = useChatDialogContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOnAction = useCallback((e: React.MouseEvent<HTMLElement>): void => {
@@ -41,7 +41,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
 
   const openReactionsDialog = useCallback(
     (e: MouseEvent<HTMLElement>): void => {
-      showChatReactionsDialog(message, users);
+      showMessageReactionsDialog(message, users);
       handleClose(e);
     },
     [message, users]
@@ -49,10 +49,18 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
 
   const openReadStatusesDialog = useCallback(
     (e: MouseEvent<HTMLElement>): void => {
-      showChatReadStatusesDialog(message, users);
+      showMessageReadStatusesDialog(message, users);
       handleClose(e);
     },
     [message, users]
+  );
+
+  const editMessage = useCallback(
+    (e: MouseEvent<HTMLElement>): void => {
+      showMessageEditDialog(message);
+      handleClose(e);
+    },
+    [message]
   );
 
   const deleteMessage = useCallback(
@@ -80,10 +88,16 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
           {t('chat:message.actions.readStatuses')}
         </MenuItem>
         {isOutcoming && !message.isDeleted && (
-          <MenuItem onClick={deleteMessage}>
-            <DeleteIcon color="error" />
-            {t('chat:message.actions.delete')}
-          </MenuItem>
+          <>
+            <MenuItem onClick={editMessage}>
+              <DeleteIcon color="primary" />
+              {t('chat:message.actions.edit')}
+            </MenuItem>
+            <MenuItem onClick={deleteMessage}>
+              <DeleteIcon color="error" />
+              {t('chat:message.actions.delete')}
+            </MenuItem>
+          </>
         )}
       </PopupMenu>
     </>

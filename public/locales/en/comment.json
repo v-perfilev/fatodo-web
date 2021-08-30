@@ -11,6 +11,7 @@
     },
     "actions": {
       "reactions": "Reactions",
+      "edit": "Edit",
       "delete": "Delete"
     }
   },
@@ -21,5 +22,16 @@
   "reactions": {
     "title": "Reactions to the comment",
     "reactionsNotFound": "No reactions yet"
+  },
+  "editComment": {
+    "title": "Edit comment",
+    "fields": {
+      "text": {
+        "label": "Text",
+        "required": "Required"
+      }
+    },
+    "send": "Edit",
+    "cancel": "Cancel"
   }
 }

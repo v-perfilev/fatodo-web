@@ -1,26 +1,24 @@
 import {useTranslation} from 'react-i18next';
 import React, {FC, useEffect} from 'react';
 import {Form, FormikBag, FormikProps, withFormik} from 'formik';
-import {ChatRenameFormUtils, ChatRenameValues} from './_form';
-import {TextInput} from '../../../../../components/inputs';
+import {CommentEditFormUtils, CommentEditValues} from './_form';
+import {MultilineInput} from '../../../../../components/inputs';
 import {FormDialogComponentProps} from '../../../../../components/dialogs';
 import {withSnackContext} from '../../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../../shared/contexts/snack-context';
-import ChatService from '../../../../../services/chat.service';
-import {Chat} from '../../../../../models/chat.model';
 import {flowRight} from 'lodash';
+import CommentService from '../../../../../services/comment.service';
+import {Comment} from '../../../../../models/comment.model';
 
 type BaseProps = FormDialogComponentProps;
 
-type Props = FormikProps<ChatRenameValues> & SnackState & BaseProps;
+type Props = FormikProps<CommentEditValues> & SnackState & BaseProps;
 
-const ChatRenameForm: FC<Props> = (props: Props) => {
+const CommentEditForm: FC<Props> = (props: Props) => {
   const {setIsSubmitting, setIsValid, setSubmitForm, setResetForm} = props;
   const {setErrors} = props;
   const {isValid, isSubmitting, submitForm, validateForm, resetForm} = props;
   const {t} = useTranslation();
-
-  const title = props?.params?.title;
 
   useEffect(() => {
     setSubmitForm(() => (): void => {
@@ -42,25 +40,25 @@ const ChatRenameForm: FC<Props> = (props: Props) => {
 
   return (
     <Form>
-      <TextInput name="title" label={t('chat:renameChat.fields.title.label')} placeholder={title} />
+      <MultilineInput name="text" label={t('comment:editComment.fields.text.label')} rows={5} />
     </Form>
   );
 };
 
-const formik = withFormik<Props, ChatRenameValues>({
-  mapPropsToValues: ({params}: Props) => ChatRenameFormUtils.mapPropsToValues(params.chat),
-  validationSchema: () => ChatRenameFormUtils.validationSchema,
+const formik = withFormik<Props, CommentEditValues>({
+  mapPropsToValues: ({params}: Props) => CommentEditFormUtils.mapPropsToValues(params.comment),
+  validationSchema: () => CommentEditFormUtils.validationSchema,
   validateOnMount: true,
 
-  handleSubmit: (values: ChatRenameValues, {props, setSubmitting}: FormikBag<Props, ChatRenameValues>) => {
+  handleSubmit: (values: CommentEditValues, {props, setSubmitting}: FormikBag<Props, CommentEditValues>) => {
     const {params, handleCode, handleResponse} = props;
 
-    const chat = params.chat as Chat;
-    const title = ChatRenameFormUtils.mapValuesToDTO(values);
+    const comment = params.comment as Comment;
+    const dto = CommentEditFormUtils.mapValuesToDTO(values);
 
-    ChatService.renameChat(chat.id, title)
+    CommentService.editComment(comment.id, dto)
       .then(() => {
-        handleCode('chat.chatRenamed', 'info');
+        handleCode('comment.commentEdited', 'info');
         props.close();
       })
       .catch((response) => {
@@ -70,4 +68,4 @@ const formik = withFormik<Props, ChatRenameValues>({
   },
 });
 
-export default flowRight([withSnackContext, formik])(ChatRenameForm);
+export default flowRight([withSnackContext, formik])(CommentEditForm);

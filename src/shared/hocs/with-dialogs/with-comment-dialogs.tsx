@@ -8,9 +8,14 @@ import CommentReactionsDialog, {
 } from '../../../pages/comment/dialogs/comment-reactions-dialog';
 import {Comment} from '../../../models/comment.model';
 import {CommentDialogContext} from '../../contexts/dialog-contexts/comment-dialog-context';
+import CommentEditDialog, {
+  CommentEditDialogProps,
+  defaultCommentEditDialogProps,
+} from '../../../pages/comment/dialogs/comment-edit-dialog';
 
 enum CommentDialogs {
   REACTIONS = 'COMMENT_REACTIONS_DIALOG',
+  EDIT = 'COMMENT_EDIT',
 }
 
 const withCommentDialogs = (Component: ComponentType): FC => (props): ReactElement => {
@@ -26,8 +31,19 @@ const withCommentDialogs = (Component: ComponentType): FC => (props): ReactEleme
     [setDialogProps, updateDialogProps]
   );
 
+  const showCommentEditDialog = useCallback(
+    (comment: Comment): void => {
+      const show = true;
+      const close = (): void => updateDialogProps(CommentDialogs.EDIT, {show: false});
+      const props = {comment, show, close} as CommentEditDialogProps;
+      setDialogProps(CommentDialogs.EDIT, props);
+    },
+    [setDialogProps, updateDialogProps]
+  );
+
   const initDialogs = (): void => {
     handleDialog(CommentDialogs.REACTIONS, CommentReactionsDialog, defaultCommentReactionDialogProps);
+    handleDialog(CommentDialogs.EDIT, CommentEditDialog, defaultCommentEditDialogProps);
   };
 
   useEffect(() => {
@@ -36,6 +52,7 @@ const withCommentDialogs = (Component: ComponentType): FC => (props): ReactEleme
 
   const context = {
     showCommentReactionsDialog,
+    showCommentEditDialog,
   };
 
   return (

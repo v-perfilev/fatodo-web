@@ -10,7 +10,7 @@ export interface Message extends AbstractAuditing {
   chatId: string;
   userId: string;
   text: string;
-  forwardedMessage: Message;
+  reference: Message;
 
   isDeleted: boolean;
   isEvent: boolean;

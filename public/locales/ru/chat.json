@@ -18,6 +18,7 @@
     "actions": {
       "reactions": "Реакции",
       "readStatuses": "Прочитали",
+      "edit": "Редактировать",
       "delete": "Удалить"
     }
   },
@@ -69,6 +70,17 @@
   "readStatuses": {
     "title": "Прочитали",
     "readStatusesNotFound": "Пока никто не прочитал"
+  },
+  "editMessage": {
+    "title": "Редактировать сообщение",
+    "fields": {
+      "title": {
+        "label": "Текст",
+        "required": "Обязательное поле"
+      }
+    },
+    "send": "Редактировать",
+    "cancel": "Отменить"
   },
   "event": {
     "CREATE_DIRECT_CHAT": "{{username}} создал директ чат с {{usernames}}",

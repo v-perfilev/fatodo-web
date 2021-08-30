@@ -27,8 +27,12 @@
     "requestAccepted": "Contact request accepted",
     "requestDeclined": "Contact request declined"
   },
-  "message": {
+  "chat": {
     "chatCreated": "Chat created",
-    "chatRenamed": "Chat renamed"
+    "chatRenamed": "Chat renamed",
+    "messageEdited": "Message edited"
+  },
+  "comment": {
+    "commentEdited": "Comment edited"
   }
 }

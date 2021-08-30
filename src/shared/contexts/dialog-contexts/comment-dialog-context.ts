@@ -5,6 +5,7 @@ import {Comment} from '../../../models/comment.model';
 
 interface CommentDialogState {
   showCommentReactionsDialog: (comment: Comment, users: User[]) => void;
+  showCommentEditDialog: (comment: Comment) => void;
 }
 
 export const CommentDialogContext = React.createContext<CommentDialogState>(null);

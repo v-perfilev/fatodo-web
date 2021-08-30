@@ -27,8 +27,12 @@
     "requestAccepted": "Запрос принят",
     "requestDeclined": "Запрос отклонён"
   },
-  "message": {
+  "chat": {
     "chatCreated": "Чат создан",
-    "chatRenamed": "Чат переименован"
+    "chatRenamed": "Чат переименован",
+    "messageEdited": "Сообщение отредактировано"
+  },
+  "comment": {
+    "commentEdited": "Комментарий отредактирован"
   }
 }

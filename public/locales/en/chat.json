@@ -18,6 +18,7 @@
     "actions": {
       "reactions": "Reactions",
       "readStatuses": "Read",
+      "edit": "Edit",
       "delete": "Delete"
     }
   },
@@ -69,6 +70,17 @@
   "readStatuses": {
     "title": "Read",
     "readStatusesNotFound": "Nobody has read this message"
+  },
+  "editMessage": {
+    "title": "Edit message",
+    "fields": {
+      "text": {
+        "label": "Text",
+        "required": "Required"
+      }
+    },
+    "send": "Edit",
+    "cancel": "Cancel"
   },
   "event": {
     "CREATE_DIRECT_CHAT": "{{username}} created direct chat with {{usernames}}",

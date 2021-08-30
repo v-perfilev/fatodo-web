@@ -11,6 +11,7 @@ import {PopupMenu} from '../../../components/surfaces';
 import {ReactionsIcon} from '../../../components/icons/reactions-icon';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
 import {useCommentDialogContext} from '../../../shared/contexts/dialog-contexts/comment-dialog-context';
+import {EditIcon} from '../../../components/icons/edit-icon';
 
 type Props = {
   comment: Comment;
@@ -23,7 +24,7 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment}: Props) => {
   const {users} = useUserListContext();
   const {t} = useTranslation();
   const ref = useRef();
-  const {showCommentReactionsDialog} = useCommentDialogContext();
+  const {showCommentReactionsDialog, showCommentEditDialog} = useCommentDialogContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickOnAction = useCallback((e: React.MouseEvent<HTMLElement>): void => {
@@ -44,6 +45,14 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment}: Props) => {
       handleClose(e);
     },
     [comment, users]
+  );
+
+  const openEditDialog = useCallback(
+    (e: MouseEvent<HTMLElement>): void => {
+      showCommentEditDialog(comment);
+      handleClose(e);
+    },
+    [comment]
   );
 
   const deleteMessage = useCallback(
@@ -67,10 +76,16 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment}: Props) => {
           {t('comment:comment.actions.reactions')}
         </MenuItem>
         {isOwnComment && !comment.isDeleted && (
-          <MenuItem onClick={deleteMessage}>
-            <DeleteIcon color="error" />
-            {t('comment:comment.actions.delete')}
-          </MenuItem>
+          <>
+            <MenuItem onClick={openEditDialog}>
+              <EditIcon color="primary" />
+              {t('comment:comment.actions.edit')}
+            </MenuItem>
+            <MenuItem onClick={deleteMessage}>
+              <DeleteIcon color="error" />
+              {t('comment:comment.actions.delete')}
+            </MenuItem>
+          </>
         )}
       </PopupMenu>
     </>

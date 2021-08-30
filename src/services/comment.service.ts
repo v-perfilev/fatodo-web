@@ -24,9 +24,9 @@ export default class CommentService {
     return axios.post(url, dto);
   };
 
-  public static editComment = (commentId: string, text: string): AxiosPromise<Comment> => {
+  public static editComment = (commentId: string, dto: CommentDTO): AxiosPromise<Comment> => {
     const url = CommentService.baseUrl + '/comments/' + commentId;
-    return axios.put(url, text);
+    return axios.put(url, dto);
   };
 
   public static deleteComment = (commentId: string): AxiosPromise<void> => {
