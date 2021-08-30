@@ -76,16 +76,16 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment}: Props) => {
           {t('comment:comment.actions.reactions')}
         </MenuItem>
         {isOwnComment && !comment.isDeleted && (
-          <>
-            <MenuItem onClick={openEditDialog}>
-              <EditIcon color="primary" />
-              {t('comment:comment.actions.edit')}
-            </MenuItem>
-            <MenuItem onClick={deleteMessage}>
-              <DeleteIcon color="error" />
-              {t('comment:comment.actions.delete')}
-            </MenuItem>
-          </>
+          <MenuItem onClick={openEditDialog}>
+            <EditIcon color="primary" />
+            {t('comment:comment.actions.edit')}
+          </MenuItem>
+        )}
+        {isOwnComment && !comment.isDeleted && (
+          <MenuItem onClick={deleteMessage}>
+            <DeleteIcon color="error" />
+            {t('comment:comment.actions.delete')}
+          </MenuItem>
         )}
       </PopupMenu>
     </>

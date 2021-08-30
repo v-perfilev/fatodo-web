@@ -31,6 +31,7 @@ const ChatEditDialog: FC<Props> = ({message, show, close}: Props) => {
       title={t('chat:editMessage.title')}
       sendText={t('chat:editMessage.send')}
       cancelText={t('chat:editMessage.cancel')}
+      size="md"
       params={params}
     />
   );

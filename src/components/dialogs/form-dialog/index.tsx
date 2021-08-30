@@ -19,11 +19,12 @@ type Props = {
   title: string;
   sendText: string;
   cancelText: string;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl' | false;
   params?: any;
 };
 
 const FormDialog: FC<Props> = (props: Props) => {
-  const {show, close: closeDialog, title, sendText, cancelText, FormComponent, params} = props;
+  const {show, close: closeDialog, title, sendText, cancelText, FormComponent, size, params} = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [submitForm, setSubmitForm] = useState(() => (): void => {
@@ -62,6 +63,7 @@ const FormDialog: FC<Props> = (props: Props) => {
           {sendButton}
         </>
       }
+      size={size}
       showCloseIcon
     />
   );

@@ -88,16 +88,16 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
           {t('chat:message.actions.readStatuses')}
         </MenuItem>
         {isOutcoming && !message.isDeleted && (
-          <>
-            <MenuItem onClick={editMessage}>
-              <DeleteIcon color="primary" />
-              {t('chat:message.actions.edit')}
-            </MenuItem>
-            <MenuItem onClick={deleteMessage}>
-              <DeleteIcon color="error" />
-              {t('chat:message.actions.delete')}
-            </MenuItem>
-          </>
+          <MenuItem onClick={editMessage}>
+            <DeleteIcon color="primary" />
+            {t('chat:message.actions.edit')}
+          </MenuItem>
+        )}
+        {isOutcoming && !message.isDeleted && (
+          <MenuItem onClick={deleteMessage}>
+            <DeleteIcon color="error" />
+            {t('chat:message.actions.delete')}
+          </MenuItem>
         )}
       </PopupMenu>
     </>

@@ -31,6 +31,7 @@ const CommentEditDialog: FC<Props> = ({comment, show, close}: Props) => {
       title={t('comment:editComment.title')}
       sendText={t('comment:editComment.send')}
       cancelText={t('comment:editComment.cancel')}
+      size="md"
       params={params}
     />
   );
