@@ -26,7 +26,7 @@ type Props = AuthState & BaseProps;
 
 const withWsChatClient = (Component: ComponentType): FC => (props: Props): ReactElement => {
   const {isAuthenticated} = props;
-  const [chat, setChat] = useState<Chat>();
+  const [chatId, setChatId] = useState<string>();
   const [chatNewEvent, setChatNewEvent] = useState<Chat>(null);
   const [chatUpdateEvent, setChatUpdateEvent] = useState<Chat>(null);
   const [chatLastMessageEvent, setChatLastMessageEvent] = useState<Chat>(null);
@@ -63,18 +63,17 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
     WsChatDestinations.CHAT_LAST_MESSAGE_UPDATE,
   ] as string[];
 
-  if (chat) {
-    const id = chat.id;
+  if (chatId) {
     wsMessageTopics.push(
-      WsChatDestinations.MESSAGE_NEW + id,
-      WsChatDestinations.MESSAGE_UPDATE + id,
-      WsChatDestinations.MESSAGE_STATUS + id,
-      WsChatDestinations.MESSAGE_REACTION + id
+      WsChatDestinations.MESSAGE_NEW + chatId,
+      WsChatDestinations.MESSAGE_UPDATE + chatId,
+      WsChatDestinations.MESSAGE_STATUS + chatId,
+      WsChatDestinations.MESSAGE_REACTION + chatId
     );
   }
 
   const context = {
-    selectChatForWs: setChat,
+    selectChatIdForWs: setChatId,
     chatNewEvent,
     chatUpdateEvent,
     chatLastMessageEvent,

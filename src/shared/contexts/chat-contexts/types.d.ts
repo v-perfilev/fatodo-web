@@ -2,7 +2,7 @@ import {Chat} from '../../../models/chat.model';
 import {Message, MessageReactions, MessageStatuses} from '../../../models/message.model';
 
 export interface WsChatState {
-  selectChatForWs: (chat: Chat) => void;
+  selectChatIdForWs: (chatId: string) => void;
   chatNewEvent: Chat;
   chatUpdateEvent: Chat;
   chatLastMessageEvent: Chat;

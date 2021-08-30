@@ -7,6 +7,7 @@ export type CommentReactionType = 'LIKE' | 'DISLIKE';
 export interface Comment extends AbstractAuditing {
   id: string;
   threadId: string;
+  targetId: string;
   userId: string;
   text: string;
   isDeleted: boolean;
@@ -30,21 +31,7 @@ export interface CommentReaction {
 
 export interface CommentReactions {
   threadId: string;
+  targetId: string;
   commentId: string;
   reactions: CommentReaction[];
-}
-
-export interface EventMessageParams {
-  type: EventMessageType;
-  text?: string;
-  ids?: string[];
-}
-
-export enum EventMessageType {
-  CREATE_DIRECT_CHAT = 'CREATE_DIRECT_CHAT',
-  CREATE_CHAT = 'CREATE_CHAT',
-  RENAME_CHAT = 'RENAME_CHAT',
-  LEAVE_CHAT = 'LEAVE_CHAT',
-  ADD_MEMBERS = 'ADD_MEMBERS',
-  DELETE_MEMBERS = 'DELETE_MEMBERS',
 }

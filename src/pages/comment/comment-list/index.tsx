@@ -1,21 +1,29 @@
-import React, {FC, useCallback, useEffect, useState} from 'react';
+import React, {FC, Ref, useCallback, useEffect, useImperativeHandle, useState} from 'react';
 import CommentService from '../../../services/comment.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {Comment} from '../../../models/comment.model';
+import {Comment, CommentReactions} from '../../../models/comment.model';
 import {PageableList} from '../../../models/pageable-list.model';
 import {ArrayUtils} from '../../../shared/utils/array.utils';
 import CommentContainer from './comment-container';
 import {User} from '../../../models/user.model';
 import CommentStub from './comment-stub';
 import CommentLoadButton from './comment-load-button';
+import {useWsCommentContext} from '../../../shared/contexts/comment-contexts/ws-comment-context';
+import {NEW_COMMENT_PREFIX} from '../_constants';
 
 type Props = {
   targetId: string;
   account: User;
   setReference: (comment: Comment) => void;
+  commentListRef?: Ref<CommentListMethods>;
 };
 
-const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
+export type CommentListMethods = {
+  addComment: (comment: Comment) => void;
+};
+
+const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef}: Props) => {
+  const {commentNewEvent, commentUpdateEvent, commentReactionsEvent} = useWsCommentContext();
   const {handleResponse} = useSnackContext();
   const [comments, setComments] = useState<PageableList<Comment>>({data: [], count: 0});
   const [loading, setLoading] = useState(true);
@@ -31,16 +39,81 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
     [comments]
   );
 
-  const commentInserter = useCallback(
+  const filterComments = (comments: Comment[]): Comment[] =>
+    comments
+      .filter(ArrayUtils.withIdFilter)
+      .filter(ArrayUtils.uniqueByIdFilter)
+      .sort(ArrayUtils.createdAtDescComparator);
+
+  const commentsInserter = useCallback(
     (newComments: PageableList<Comment>) => (prevState: PageableList<Comment>): PageableList<Comment> => {
-      const combinedComments = [...newComments.data, ...prevState.data];
-      const filteredComments = combinedComments
-        .filter(ArrayUtils.withIdFilter)
-        .filter(ArrayUtils.uniqueByIdFilter)
-        .sort(ArrayUtils.createdAtDescComparator);
+      const combinedComments = [...prevState.data, ...newComments.data];
+      const filteredComments = filterComments(combinedComments);
       return {
         data: filteredComments,
         count: newComments.count,
+      };
+    },
+    []
+  );
+
+  const commentInserter = useCallback(
+    (comment: Comment) => (prevState: PageableList<Comment>): PageableList<Comment> => {
+      const prevList = prevState.data;
+      const combinedComments = [...prevList, comment];
+      const filteredComments = filterComments(combinedComments);
+      return {
+        data: filteredComments,
+        count: prevState.count + 1,
+      };
+    },
+    []
+  );
+
+  const ownCommentInserter = useCallback(
+    (comment: Comment) => (prevState: PageableList<Comment>): PageableList<Comment> => {
+      const prevList = prevState.data;
+      const commentInList = prevList.find((c) => c.id.startsWith(NEW_COMMENT_PREFIX) && c.text === comment.text);
+      if (commentInList) {
+        ArrayUtils.deleteItem(prevList, commentInList);
+      }
+      const combinedComments = [...prevList, comment];
+      const filteredComments = filterComments(combinedComments);
+      return {
+        data: filteredComments,
+        count: commentInList ? prevState.count : prevState.count + 1,
+      };
+    },
+    []
+  );
+
+  const commentUpdater = useCallback(
+    (comment: Comment) => (prevState: PageableList<Comment>): PageableList<Comment> => {
+      const prevList = prevState.data;
+      const commentInList = prevList.find((c) => c.id === comment.id);
+      if (commentInList) {
+        const index = prevList.indexOf(commentInList);
+        prevList[index] = comment;
+      }
+      return {
+        data: prevList,
+        count: prevState.count,
+      };
+    },
+    []
+  );
+
+  const reactionsUpdater = useCallback(
+    (reactions: CommentReactions) => (prevState: PageableList<Comment>): PageableList<Comment> => {
+      const prevList = prevState.data;
+      const commentInList = prevList.find((m) => m.id === reactions.commentId);
+      if (commentInList) {
+        const index = prevList.indexOf(commentInList);
+        prevList[index].reactions = reactions.reactions;
+      }
+      return {
+        data: prevList,
+        count: prevState.count,
       };
     },
     []
@@ -52,7 +125,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
     return new Promise((resolve) => {
       CommentService.getAllPageable(targetId, comments?.data.length || 0)
         .then((response) => {
-          const updateFunc = commentInserter(response.data);
+          const updateFunc = commentsInserter(response.data);
           updateComments(updateFunc);
         })
         .catch((response) => {
@@ -67,6 +140,24 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
     });
   }, [comments]);
 
+  // IMPERATIVE HANDLERS
+
+  const addComment = useCallback(
+    (comment: Comment) => {
+      const updateFunc = commentInserter(comment);
+      updateComments(updateFunc);
+    },
+    [comments]
+  );
+
+  useImperativeHandle(
+    commentListRef,
+    (): CommentListMethods => ({
+      addComment,
+    }),
+    [comments]
+  );
+
   // EFFECTS
 
   useEffect(() => {
@@ -78,6 +169,28 @@ const CommentList: FC<Props> = ({targetId, account, setReference}: Props) => {
       setAllLoaded(true);
     }
   }, [comments]);
+
+  useEffect(() => {
+    if (targetId === commentNewEvent?.targetId) {
+      const updateFunc =
+        commentNewEvent.userId === account.id ? ownCommentInserter(commentNewEvent) : commentInserter(commentNewEvent);
+      updateComments(updateFunc);
+    }
+  }, [commentNewEvent]);
+
+  useEffect(() => {
+    if (targetId === commentUpdateEvent?.targetId) {
+      const updateFunc = commentUpdater(commentUpdateEvent);
+      updateComments(updateFunc);
+    }
+  }, [commentUpdateEvent]);
+
+  useEffect(() => {
+    if (targetId === commentReactionsEvent?.targetId) {
+      const updateFunc = reactionsUpdater(commentReactionsEvent);
+      updateComments(updateFunc);
+    }
+  }, [commentReactionsEvent]);
 
   // RENDERERS
 

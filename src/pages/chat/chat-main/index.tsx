@@ -30,7 +30,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   const {handleResponse} = useSnackContext();
   const {setMenu} = useAdditionalMenuContext();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'), {noSsr: true});
-  const {selectChatForWs} = useWsChatContext();
+  const {selectChatIdForWs} = useWsChatContext();
   const {showChatCreateDialog} = useChatDialogContext();
   const [chat, setChat] = useState<Chat>();
 
@@ -43,7 +43,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
 
   const selectChat = (chat: Chat): void => {
     setChat(chat);
-    selectChatForWs(chat);
+    selectChatIdForWs(chat?.id);
     updateUrlChatParameter(chat);
   };
 

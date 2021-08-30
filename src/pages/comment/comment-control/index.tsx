@@ -29,6 +29,7 @@ const CommentControl: FC<Props> = ({targetId, account, reference, clearReference
     () => ({
       id: NEW_COMMENT_PREFIX + RandomUtils.generate().toString(),
       threadId: null,
+      targetId: targetId,
       userId: account.id,
       text: commentBody,
       isDeleted: false,

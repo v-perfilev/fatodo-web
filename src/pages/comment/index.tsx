@@ -1,13 +1,15 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import {commentStyles} from './_styles';
 import {Box, Container} from '@material-ui/core';
 import CommentControl from './comment-control';
-import CommentList from './comment-list';
+import CommentList, {CommentListMethods} from './comment-list';
 import {User} from '../../models/user.model';
 import withAuthState from '../../shared/hocs/with-auth-state';
 import {flowRight} from 'lodash';
 import withCommentDialogs from '../../shared/hocs/with-dialogs/with-comment-dialogs';
 import {Comment} from '../../models/comment.model';
+import withComment from '../../shared/hocs/with-comment/with-comment';
+import {useWsCommentContext} from '../../shared/contexts/comment-contexts/ws-comment-context';
 
 type Props = {
   targetId: string;
@@ -16,11 +18,21 @@ type Props = {
 
 const Comment: FC<Props> = ({targetId, account}: Props) => {
   const classes = commentStyles();
+  const {selectCommentTargetIdForWs} = useWsCommentContext();
   const [reference, setReference] = useState<Comment>();
+  const commentListRef = useRef<CommentListMethods>();
 
   const clearReference = (): void => {
     setReference(null);
   };
+
+  const addComment = (comment: Comment): void => {
+    commentListRef.current?.addComment(comment);
+  };
+
+  useEffect(() => {
+    selectCommentTargetIdForWs(targetId);
+  }, [targetId]);
 
   return (
     <Box className={classes.root}>
@@ -30,12 +42,17 @@ const Comment: FC<Props> = ({targetId, account}: Props) => {
           account={account}
           reference={reference}
           clearReference={clearReference}
-          addComment={console.log}
+          addComment={addComment}
         />
-        <CommentList targetId={targetId} account={account} setReference={setReference} />
+        <CommentList
+          targetId={targetId}
+          account={account}
+          setReference={setReference}
+          commentListRef={commentListRef}
+        />
       </Container>
     </Box>
   );
 };
 
-export default flowRight([withCommentDialogs, withAuthState])(Comment);
+export default flowRight([withCommentDialogs, withComment, withAuthState])(Comment);
