@@ -10,7 +10,7 @@ import {Routes} from '../../router';
 import {LOADER_TIMEOUT} from '../../../constants';
 import withBackground from '../../../shared/hocs/with-background/with-background';
 import {Link} from '../../../components/controls';
-import withAuthState from '../../../shared/hocs/with-auth-state';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {flowRight} from 'lodash';
 
 type Props = AuthState;

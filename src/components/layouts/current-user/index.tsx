@@ -4,7 +4,7 @@ import csx from 'classnames';
 import {currentUserStyles} from './_styles';
 import {UserView} from '../../views';
 import {convertAccountToUser} from '../../../models/user.model';
-import withAuthState from '../../../shared/hocs/with-auth-state';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 
 type BaseProps = HTMLAttributes<HTMLElement>;
 

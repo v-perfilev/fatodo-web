@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
-import store from '../../store/store';
+import store from '../../../store/store';
 import {Provider} from 'react-redux';
 
 const withStore = (Component: ComponentType): FC => (props): ReactElement => {

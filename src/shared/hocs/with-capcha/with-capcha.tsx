@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useState} from 'react';
-import {RECAPTCHA_KEY, RECAPTCHA_LIFETIME} from '../../constants';
+import {RECAPTCHA_KEY, RECAPTCHA_LIFETIME} from '../../../constants';
 import {GoogleReCaptchaProvider, useGoogleReCaptcha} from 'react-google-recaptcha-v3';
 
 export type CaptchaProps = {

@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
 import {useTranslation} from 'react-i18next';
 import GroupsSortingContainer from './groups-sorting-container';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import withGroupList from '../../../shared/hocs/with-list/with-group-list';

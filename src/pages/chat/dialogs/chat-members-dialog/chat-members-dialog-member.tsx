@@ -5,7 +5,7 @@ import {Box, IconButton} from '@material-ui/core';
 import {UserWithPopupView} from '../../../../components/views';
 import {chatMembersDialogMemberStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
-import withAuthState from '../../../../shared/hocs/with-auth-state';
+import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import ConfirmationDialog from '../../../../components/dialogs/confirmation-dialog';

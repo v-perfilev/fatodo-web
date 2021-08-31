@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {Container, Tab, Tabs} from '@material-ui/core';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';

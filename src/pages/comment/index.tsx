@@ -4,7 +4,7 @@ import {Box, Container} from '@material-ui/core';
 import CommentControl from './comment-control';
 import CommentList, {CommentListMethods} from './comment-list';
 import {User} from '../../models/user.model';
-import withAuthState from '../../shared/hocs/with-auth-state';
+import withAuthState from '../../shared/hocs/with-auth-state/with-auth-state';
 import {flowRight} from 'lodash';
 import withCommentDialogs from '../../shared/hocs/with-dialogs/with-comment-dialogs';
 import {Comment} from '../../models/comment.model';

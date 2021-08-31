@@ -4,7 +4,7 @@ import {FC} from 'react';
 import {authFormStyles} from '../../_styles';
 import {useTranslation} from 'react-i18next';
 import AuthService from '../../../../services/auth.service';
-import {CaptchaProps, withCaptcha, withCaptchaProvider} from '../../../../shared/hocs/with-capcha';
+import {CaptchaProps, withCaptcha, withCaptchaProvider} from '../../../../shared/hocs/with-capcha/with-capcha';
 import {PasswordInput} from '../../../../components/inputs';
 import {LoadingButton} from '../../../../components/controls';
 import {PasswordStrengthBar} from '../../password-strength-bar';

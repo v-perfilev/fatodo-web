@@ -12,7 +12,7 @@ import {Link} from '../../../components/controls';
 import {SocialButtons} from './social-buttons';
 import LoginForm from './login-form';
 import RegistrationForm from './registration-form';
-import withAuthState from '../../../shared/hocs/with-auth-state';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {flowRight} from 'lodash';
 
 type Props = AuthState;

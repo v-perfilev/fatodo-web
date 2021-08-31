@@ -12,7 +12,7 @@ import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../../../router';
 import {ResponseUtils} from '../../../../shared/utils/response.utils';
 import {SecurityUtils} from '../../../../shared/utils/security.utils';
-import {CaptchaProps, withCaptcha, withCaptchaProvider} from '../../../../shared/hocs/with-capcha';
+import {CaptchaProps, withCaptcha, withCaptchaProvider} from '../../../../shared/hocs/with-capcha/with-capcha';
 import {PasswordInput, TextInput} from '../../../../components/inputs';
 import {Link, LoadingButton} from '../../../../components/controls';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';

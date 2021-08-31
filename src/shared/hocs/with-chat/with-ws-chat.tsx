@@ -1,13 +1,9 @@
 import * as React from 'react';
-import {ComponentType, FC, PropsWithChildren, ReactElement, useState} from 'react';
+import {ComponentType, FC, PropsWithChildren, ReactElement, useCallback, useEffect, useMemo, useState} from 'react';
 import {WsChatContext} from '../../contexts/chat-contexts/ws-chat-context';
-import WsClient from '../../../components/ws/ws-client';
 import {Chat} from '../../../models/chat.model';
 import {Message, MessageReactions, MessageStatuses} from '../../../models/message.model';
-import {WS_URL} from '../../../constants';
-import withAuthState from '../with-auth-state';
-import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {flowRight} from 'lodash';
+import {useWsContext} from '../../contexts/ws-contexts/ws-context';
 
 enum WsChatDestinations {
   CHAT_NEW = '/user/chat/new',
@@ -20,12 +16,10 @@ enum WsChatDestinations {
   MESSAGE_REACTION = '/user/message/reaction/',
 }
 
-type BaseProps = PropsWithChildren<HTMLElement>;
+type Props = PropsWithChildren<HTMLElement>;
 
-type Props = AuthState & BaseProps;
-
-const withWsChatClient = (Component: ComponentType): FC => (props: Props): ReactElement => {
-  const {isAuthenticated} = props;
+const withWsChat = (Component: ComponentType): FC => (props: Props): ReactElement => {
+  const {setTopicsAndHandler, removeTopicsAndHandler} = useWsContext();
   const [chatId, setChatId] = useState<string>();
   const [chatNewEvent, setChatNewEvent] = useState<Chat>(null);
   const [chatUpdateEvent, setChatUpdateEvent] = useState<Chat>(null);
@@ -36,7 +30,7 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
   const [messageStatusesEvent, setMessageStatusesEvent] = useState<MessageStatuses>(null);
   const [messageReactionsEvent, setMessageReactionsEvent] = useState<MessageReactions>(null);
 
-  const onMessage = (msg: any, topic: string): void => {
+  const handler = useCallback((msg: any, topic: string): void => {
     if (topic === WsChatDestinations.CHAT_NEW) {
       setChatNewEvent(msg);
     } else if (topic.startsWith(WsChatDestinations.CHAT_UPDATE)) {
@@ -54,23 +48,30 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
     } else if (topic.startsWith(WsChatDestinations.MESSAGE_REACTION)) {
       setMessageReactionsEvent(msg);
     }
-  };
+  }, []);
 
-  const wsMessageTopics = [
-    WsChatDestinations.CHAT_NEW,
-    WsChatDestinations.CHAT_UPDATE,
-    WsChatDestinations.CHAT_LAST_MESSAGE,
-    WsChatDestinations.CHAT_LAST_MESSAGE_UPDATE,
-  ] as string[];
+  const topics = useMemo<string[]>(() => {
+    const wsTopics = [
+      WsChatDestinations.CHAT_NEW,
+      WsChatDestinations.CHAT_UPDATE,
+      WsChatDestinations.CHAT_LAST_MESSAGE,
+      WsChatDestinations.CHAT_LAST_MESSAGE_UPDATE,
+    ] as string[];
+    if (chatId) {
+      wsTopics.push(
+        WsChatDestinations.MESSAGE_NEW + chatId,
+        WsChatDestinations.MESSAGE_UPDATE + chatId,
+        WsChatDestinations.MESSAGE_STATUS + chatId,
+        WsChatDestinations.MESSAGE_REACTION + chatId
+      );
+    }
+    return wsTopics;
+  }, [chatId]);
 
-  if (chatId) {
-    wsMessageTopics.push(
-      WsChatDestinations.MESSAGE_NEW + chatId,
-      WsChatDestinations.MESSAGE_UPDATE + chatId,
-      WsChatDestinations.MESSAGE_STATUS + chatId,
-      WsChatDestinations.MESSAGE_REACTION + chatId
-    );
-  }
+  useEffect(() => {
+    setTopicsAndHandler('WS_CHAT', {topics, handler});
+    return (): void => removeTopicsAndHandler('WS_CHAT');
+  }, [chatId]);
 
   const context = {
     selectChatIdForWs: setChatId,
@@ -87,9 +88,8 @@ const withWsChatClient = (Component: ComponentType): FC => (props: Props): React
   return (
     <WsChatContext.Provider value={context}>
       <Component {...props} />
-      {isAuthenticated && <WsClient url={WS_URL} topics={wsMessageTopics} onMessage={onMessage} />}
     </WsChatContext.Provider>
   );
 };
 
-export default flowRight([withAuthState, withWsChatClient]);
+export default withWsChat;

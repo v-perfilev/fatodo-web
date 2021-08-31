@@ -9,9 +9,9 @@ import withDevelopmentRibbon from '../shared/hocs/with-development-ribbon/with-d
 import {SecurityUtils} from '../shared/utils/security.utils';
 import {login, requestAccountData} from '../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';
-import withLastLocation from '../shared/hocs/with-last-location';
+import withLastLocation from '../shared/hocs/with-last-location/with-last-location';
 import {flowRight} from 'lodash';
-import withAdditionalMenu from '../shared/hocs/with-additional-menu';
+import withAdditionalMenu from '../shared/hocs/with-additional-menu/with-additional-menu';
 
 const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);

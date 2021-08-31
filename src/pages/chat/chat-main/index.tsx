@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
 import {messageMainStyles} from './_styles';
@@ -10,7 +10,7 @@ import ChatControl from '../chat-control';
 import ChatContent from '../chat-content';
 import {Chat} from '../../../models/chat.model';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import withAuthState from '../../../shared/hocs/with-auth-state';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {useWsChatContext} from '../../../shared/contexts/chat-contexts/ws-chat-context';
 import {useChatDialogContext} from '../../../shared/contexts/dialog-contexts/chat-dialog-context';
 import ChatService from '../../../services/chat.service';

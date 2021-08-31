@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ComponentType, FC, PropsWithChildren, ReactElement, useEffect, useState} from 'react';
-import withAuthState from '../with-auth-state';
+import withAuthState from '../with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {UnreadMessagesContext} from '../../contexts/chat-contexts/unread-messages-context';
 import ChatService from '../../../services/chat.service';

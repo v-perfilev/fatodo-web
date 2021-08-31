@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useState} from 'react';
-import AdditionalMenu from '../../components/layouts/additional-menu';
-import {AdditionalMenuContext} from '../contexts/additional-menu-context/additional-menu-context';
-import {AdditionalMenuItem} from '../contexts/additional-menu-context/types';
+import AdditionalMenu from '../../../components/layouts/additional-menu';
+import {AdditionalMenuContext} from '../../contexts/additional-menu-contexts/additional-menu-context';
+import {AdditionalMenuItem} from '../../contexts/additional-menu-contexts/types';
 
 const withAdditionalMenu = (Component: ComponentType): FC => (props): ReactElement => {
   const [menu, setMenu] = useState<AdditionalMenuItem[]>();

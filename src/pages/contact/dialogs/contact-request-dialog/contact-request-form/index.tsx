@@ -9,7 +9,7 @@ import {FormDialogComponentProps} from '../../../../../components/dialogs';
 import {withSnackContext} from '../../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../../shared/contexts/snack-context';
 import ContactService from '../../../../../services/contact.service';
-import withAuthState from '../../../../../shared/hocs/with-auth-state';
+import withAuthState from '../../../../../shared/hocs/with-auth-state/with-auth-state';
 import {flowRight} from 'lodash';
 
 type BaseProps = FormDialogComponentProps;

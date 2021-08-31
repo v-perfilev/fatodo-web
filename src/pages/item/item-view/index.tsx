@@ -5,7 +5,7 @@ import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
 import {PageDivider, PageHeader} from '../../../components/surfaces';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';

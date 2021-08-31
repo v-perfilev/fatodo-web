@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import GroupForm from '../group-form';
 import {useHistory, useParams} from 'react-router-dom';
 import {Routes} from '../../router';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../_router';

@@ -5,7 +5,7 @@ import {CheckIcon} from '../../../components/icons/check-icon';
 import {CloseIcon} from '../../../components/icons/close-icon';
 import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {GroupRouteUtils} from '../_router';
 import ItemService from '../../../services/item.service';

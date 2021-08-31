@@ -17,7 +17,7 @@ import {UserListIcon} from '../../icons/user-list-icon';
 import {useUnreadMessagesContext} from '../../../shared/contexts/chat-contexts/unread-messages-context';
 import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
 import {RedirectMap} from './type';
-import withAuthState from '../../../shared/hocs/with-auth-state';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 
 type BaseProps = {
   redirectMap: RedirectMap;

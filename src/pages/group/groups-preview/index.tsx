@@ -5,7 +5,7 @@ import {GroupRouteUtils} from '../_router';
 import {ReorderIcon} from '../../../components/icons/reorder-icon';
 import {useTranslation} from 'react-i18next';
 import {PlusIcon} from '../../../components/icons/plus-icon';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';

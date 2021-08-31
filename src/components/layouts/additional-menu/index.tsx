@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, ReactNode, useEffect, useMemo} from 'react';
 import {additionalMenuStyles} from './_styles';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import {SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab';
 import {CircularProgress} from '@material-ui/core';
 import {useLocation} from 'react-router-dom';

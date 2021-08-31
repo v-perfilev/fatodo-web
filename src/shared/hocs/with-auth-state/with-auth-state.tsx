@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ComponentType, FC, PropsWithChildren, ReactElement} from 'react';
-import {RootState} from '../../store';
-import {AuthState} from '../../store/rerducers/auth.reducer';
+import {RootState} from '../../../store';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {connect, ConnectedProps} from 'react-redux';
 import {flowRight} from 'lodash';
 

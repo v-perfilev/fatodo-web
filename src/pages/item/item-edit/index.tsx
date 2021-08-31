@@ -8,7 +8,7 @@ import {CloseIcon} from '../../../components/icons/close-icon';
 import ItemService from '../../../services/item.service';
 import {ItemDTO} from '../../../models/dto/item.dto';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {ItemRouteUtils} from '../_router';
 import {GroupRouteUtils} from '../../group/_router';

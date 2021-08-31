@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Box, Button, Typography} from '@material-ui/core';
-import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/with-redirect-timer';
+import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/with-redirect-timer/with-redirect-timer';
 import {useTranslation} from 'react-i18next';
 import {staticPageStyles} from './_styles';
 import withBackground from '../../shared/hocs/with-background/with-background';

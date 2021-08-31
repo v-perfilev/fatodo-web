@@ -3,7 +3,7 @@ import {FC} from 'react';
 import {AuthState} from '../../store/rerducers/auth.reducer';
 import {Route, RouteProps, useHistory} from 'react-router-dom';
 import {Routes} from '../../pages/router';
-import withAuthState from '../hocs/with-auth-state';
+import withAuthState from '../hocs/with-auth-state/with-auth-state';
 
 type BaseProps = RouteProps;
 

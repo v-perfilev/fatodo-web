@@ -3,7 +3,7 @@ import withHeader from '../../../shared/hocs/with-header/with-header';
 import {Container} from '@material-ui/core';
 import {PageDivider, PageHeader} from '../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-context/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
 import {useHistory} from 'react-router-dom';
 import {RootState} from '../../../store';
