@@ -41,6 +41,7 @@ const Auth: FC<Props> = ({isAuthenticated}: Props) => {
   const match = useRouteMatch();
   const {t} = useTranslation();
   const [activeTab, setActiveTab] = useState<number>(calculateTabFromRoute(match.path));
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleChange = (event: React.ChangeEvent<{}>, newTab: number): void => {
     history.replace(calculateRouteFromTab(newTab));
@@ -66,7 +67,11 @@ const Auth: FC<Props> = ({isAuthenticated}: Props) => {
         <Tab label={t('account:register.header')} />
       </Tabs>
       <Box m={1} />
-      {activeTab === 0 ? <LoginForm onSuccess={redirectToHome} /> : <RegistrationForm onSuccess={redirectToHome} />}
+      {activeTab === 0 ? (
+        <LoginForm onSuccess={redirectToHome} loading={loading} setLoading={setLoading} />
+      ) : (
+        <RegistrationForm onSuccess={redirectToHome} loading={loading} setLoading={setLoading} />
+      )}
       {SOCIAL_LOGIN && (
         <>
           <Box m={2} />

@@ -25,6 +25,8 @@ const connector = connect(null, mapDispatchToProps);
 
 type BaseProps = {
   onSuccess: () => void;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 };
 
 type Props = RouteComponentProps &
@@ -34,7 +36,7 @@ type Props = RouteComponentProps &
   SnackState &
   BaseProps;
 
-const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
+const LoginForm: FC<Props> = ({isValid, isSubmitting, loading}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
 
@@ -55,8 +57,8 @@ const LoginForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
           type="submit"
           color="secondary"
           fullWidth
-          disabled={!isValid || isSubmitting}
-          loading={isSubmitting}
+          disabled={!isValid || isSubmitting || loading}
+          loading={isSubmitting || loading}
         >
           {t('account:login.submit')}
         </LoadingButton>
@@ -73,12 +75,13 @@ const formik = withFormik<Props, LoginFormValues>({
   validateOnMount: true,
 
   handleSubmit: async (values: LoginFormValues, {setSubmitting, props}: FormikBag<Props, LoginFormValues>) => {
-    const {login, requestAccountData, history, onSuccess, getToken, handleResponse} = props;
+    const {login, requestAccountData, history, onSuccess, getToken, handleResponse, setLoading} = props;
     const token = await getToken();
     const dto = LoginFormUtils.mapValuesToDTO(values, token);
 
     const onFailure = (): void => setSubmitting(false);
 
+    setLoading(true);
     AuthService.authenticate(dto)
       .then((response) => {
         const token = SecurityUtils.parseTokenFromResponse(response);
@@ -90,8 +93,11 @@ const formik = withFormik<Props, LoginFormValues>({
           history.push(Routes.NOT_ACTIVATED, {user: values.user});
         } else {
           handleResponse(response, '*', ['auth.notActivated']);
-          setSubmitting(false);
         }
+      })
+      .finally(() => {
+        setSubmitting(false);
+        setLoading(false);
       });
   },
 });

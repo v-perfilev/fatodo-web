@@ -16,11 +16,13 @@ import {flowRight} from 'lodash';
 
 type BaseProps = {
   onSuccess: () => void;
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
 };
 
 type Props = FormikProps<RegistrationFormValues> & CaptchaProps & SnackState & BaseProps;
 
-const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => {
+const RegistrationForm: FC<Props> = ({isValid, isSubmitting, loading, values}: Props) => {
   const classes = authFormStyles();
   const {t} = useTranslation();
 
@@ -34,8 +36,8 @@ const RegistrationForm: FC<Props> = ({isValid, isSubmitting, values}: Props) => 
         type="submit"
         color="secondary"
         fullWidth={true}
-        disabled={!isValid || isSubmitting}
-        loading={isSubmitting}
+        disabled={!isValid || isSubmitting || loading}
+        loading={isSubmitting || loading}
       >
         {t('account:register.submit')}
       </LoadingButton>
@@ -52,10 +54,11 @@ const formik = withFormik<Props, RegistrationFormValues>({
     values: RegistrationFormValues,
     {setSubmitting, props}: FormikBag<Props, RegistrationFormValues>
   ) => {
-    const {getToken, onSuccess, handleCode, handleResponse} = props;
+    const {getToken, onSuccess, handleCode, handleResponse, setLoading} = props;
     const token = await getToken();
     const dto = RegistrationFormUtils.mapValuesToDTO(values, i18n.language, token);
 
+    setLoading(true);
     AuthService.register(dto)
       .then(() => {
         handleCode('auth.registered', 'info');
@@ -63,7 +66,10 @@ const formik = withFormik<Props, RegistrationFormValues>({
       })
       .catch((response) => {
         handleResponse(response);
+      })
+      .finally(() => {
         setSubmitting(false);
+        setLoading(false);
       });
   },
 });
