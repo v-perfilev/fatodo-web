@@ -116,11 +116,14 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   const prevHeight = RefUtils.usePrevious(height);
 
   const scrollAndRefresh = useCallback((): void => {
-    if (reverseOrder && loading) {
-      const position = height - prevHeight + scroll?.scrollOffset;
-      scrollToPosition(position);
-    } else if (reverseOrder && isScrolledToBottom) {
-      scrollToPosition(height);
+    const clientHeight = listRef.current?.props.height as number;
+    if (reverseOrder && height > clientHeight) {
+      if (loading) {
+        const position = height - prevHeight + scroll?.scrollOffset;
+        scrollToPosition(position);
+      } else if (isScrolledToBottom) {
+        scrollToPosition(height);
+      }
     }
     if (loading) {
       setLoading(false);
@@ -183,10 +186,6 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     [isDynamic]
   );
 
-  const wrappedInitialScrollOffset = useMemo<number>(() => {
-    return reverseOrder ? Number.MAX_VALUE : 0;
-  }, []);
-
   // RENDER METHODS
 
   const measurer = (
@@ -214,7 +213,6 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
                 itemData={itemData}
                 itemCount={loadedLength}
                 itemSize={getItemSize}
-                initialScrollOffset={wrappedInitialScrollOffset}
                 onItemsRendered={wrappedOnItemsRendered(onItemsRendered)}
                 onScroll={setScroll}
               >
