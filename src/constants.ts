@@ -12,7 +12,6 @@ export const AUTHORIZATION_HEADER = 'authorization';
 export const AUTHORIZATION_PREFIX = 'Bearer ';
 
 export const RECAPTCHA_KEY = process.env.RECAPTCHA_KEY;
-export const RECAPTCHA_LIFETIME = 90;
 
 export const SOCIAL_LOGIN = process.env.SOCIAL_LOGIN;
 export const DEVELOPMENT_MODE = process.env.DEVELOPMENT_MODE;

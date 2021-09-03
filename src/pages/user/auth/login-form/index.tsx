@@ -12,7 +12,7 @@ import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {Routes} from '../../../router';
 import {ResponseUtils} from '../../../../shared/utils/response.utils';
 import {SecurityUtils} from '../../../../shared/utils/security.utils';
-import {CaptchaProps, withCaptcha, withCaptchaProvider} from '../../../../shared/hocs/with-capcha/with-capcha';
+import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha/with-capcha';
 import {PasswordInput, TextInput} from '../../../../components/inputs';
 import {Link, LoadingButton} from '../../../../components/controls';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
@@ -79,14 +79,12 @@ const formik = withFormik<Props, LoginFormValues>({
     const token = await getToken();
     const dto = LoginFormUtils.mapValuesToDTO(values, token);
 
-    const onFailure = (): void => setSubmitting(false);
-
     setLoading(true);
     AuthService.authenticate(dto)
       .then((response) => {
         const token = SecurityUtils.parseTokenFromResponse(response);
         login(token, values.rememberMe);
-        requestAccountData(onSuccess, onFailure);
+        requestAccountData(onSuccess);
       })
       .catch((response) => {
         if (ResponseUtils.getFeedbackCode(response) === 'auth.notActivated') {
@@ -102,6 +100,4 @@ const formik = withFormik<Props, LoginFormValues>({
   },
 });
 
-export default flowRight([withRouter, withCaptchaProvider, withCaptcha, withSnackContext, connector, formik])(
-  LoginForm
-);
+export default flowRight([withRouter, withCaptcha, withSnackContext, connector, formik])(LoginForm);

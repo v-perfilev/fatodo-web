@@ -2,7 +2,7 @@ import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import * as React from 'react';
 import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import {CaptchaProps, withCaptcha, withCaptchaProvider} from '../../../../shared/hocs/with-capcha/with-capcha';
+import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha/with-capcha';
 import {authFormStyles} from '../../_styles';
 import {TextInput} from '../../../../components/inputs';
 import {LoadingButton} from '../../../../components/controls';
@@ -63,4 +63,4 @@ const formik = withFormik<Props, ForgotPasswordFormValues>({
   },
 });
 
-export default flowRight([withCaptchaProvider, withCaptcha, withSnackContext, formik])(ForgotPasswordForm);
+export default flowRight([withCaptcha, withSnackContext, formik])(ForgotPasswordForm);
