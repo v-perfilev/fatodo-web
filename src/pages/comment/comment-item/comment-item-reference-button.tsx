@@ -16,7 +16,7 @@ const CommentItemReferenceButton: FC<Props> = ({comment, setReference}: Props) =
   };
 
   return (
-    <Button variant="outlined" size="small" color="primary" onClick={updateReference}>
+    <Button variant="text" size="small" color="primary" onClick={updateReference}>
       {t('comment:comment.buttons.response')}
     </Button>
   );

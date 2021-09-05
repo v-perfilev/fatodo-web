@@ -8,9 +8,9 @@ type Props = LinkProps &
     withUnderline?: boolean;
   };
 
-export const Link: FC<Props> = ({withUnderline, to, children, ...props}: Props) => {
+export const Link: FC<Props> = ({withUnderline, children, ...props}: Props) => {
   return (
-    <MaterialLink {...props} component={RouterLink} to={to} underline={withUnderline ? 'hover' : 'none'}>
+    <MaterialLink {...props} component={RouterLink} underline={withUnderline ? 'hover' : 'none'}>
       {children}
     </MaterialLink>
   );

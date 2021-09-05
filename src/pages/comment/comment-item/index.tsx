@@ -38,20 +38,25 @@ const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <Box className={classes.header}>
-        <UrlPic className={classes.image} alt={user?.username} url={user?.imageFilename} size="sm" border={1} />
-        <Box className={classes.name}>{user?.username}</Box>
-        <Box className={classes.date}>{date}</Box>
-        <CommentItemReferenceButton comment={comment} setReference={setReference} />
-        <CommentItemActions comment={comment} isOwnComment={isOwnMessage} />
+      <Box className={classes.image}>
+        <UrlPic alt={user?.username} url={user?.imageFilename} size="sm" border={1} />
       </Box>
-      {comment.reference && <CommentItemReference reference={comment.reference} />}
-      <Box className={classes.body}>
-        {!comment.isDeleted && <span>{comment.text}</span>}
-        {comment.isDeleted && <span className={classes.deleted}>{t('comment:comment.deleted')}</span>}
-      </Box>
-      <Box className={classes.footer}>
-        <CommentItemReactions comment={comment} account={account} />
+      <Box className={classes.content}>
+        <Box className={classes.header}>
+          <Box className={classes.name}>{user?.username}</Box>
+          <Box className={classes.date}>{date}</Box>
+          {comment.reference && <CommentItemReference reference={comment.reference} />}
+          <Box className={classes.placeholder} />
+          <CommentItemReferenceButton comment={comment} setReference={setReference} />
+          <CommentItemActions comment={comment} isOwnComment={isOwnMessage} />
+        </Box>
+        <Box className={classes.body}>
+          {!comment.isDeleted && <span>{comment.text}</span>}
+          {comment.isDeleted && <span className={classes.deleted}>{t('comment:comment.deleted')}</span>}
+        </Box>
+        <Box className={classes.footer}>
+          <CommentItemReactions comment={comment} account={account} />
+        </Box>
       </Box>
     </Box>
   );

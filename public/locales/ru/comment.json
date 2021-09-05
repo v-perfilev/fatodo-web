@@ -5,7 +5,7 @@
   },
   "comment": {
     "deleted": "Комментарий удалён",
-    "reference": "Ответ",
+    "reference": "Ответ на",
     "buttons": {
       "reference": "Ответить"
     },
@@ -17,7 +17,7 @@
   },
   "control": {
     "inputPlaceholder": "Оставьте свой комментарий...",
-    "reference": "Ответ"
+    "reference": "Ответ на"
   },
   "reactions": {
     "title": "Реакции на комментарий",

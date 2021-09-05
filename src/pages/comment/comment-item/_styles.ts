@@ -4,6 +4,15 @@ import {Theme} from '@material-ui/core';
 export const commentItemStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
+    flexDirection: 'row',
+    flexGrow: 1,
+    padding: theme.spacing(1.5),
+  },
+  image: {
+    marginRight: theme.spacing(1.5),
+  },
+  content: {
+    display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
   },
@@ -13,23 +22,24 @@ export const commentItemStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     alignItems: 'center',
   },
-  image: {
-    marginRight: theme.spacing(1),
-  },
   name: {
-    flexGrow: 1,
     fontWeight: 'bold',
     color: theme.palette.primary.main,
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(2),
   },
   date: {
     color: theme.palette.grey['500'],
-    marginRight: theme.spacing(0.5),
+    marginRight: theme.spacing(2),
+  },
+  placeholder: {
+    flexGrow: 1,
   },
   body: {
     display: 'flex',
     flexDirection: 'row',
     flexGrow: 1,
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
   },
   deleted: {
     color: theme.palette.grey['500'],
@@ -43,7 +53,6 @@ export const commentItemStyles = makeStyles((theme: Theme) => ({
 
 export const commentItemReactionsStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: 50,
     display: 'flex',
     flexShrink: 0,
     flexDirection: 'row',
@@ -58,7 +67,7 @@ export const commentItemReactionsStyles = makeStyles((theme: Theme) => ({
   reaction: {
     display: 'flex',
     alignItems: 'center',
-    margin: theme.spacing(0.5),
+    marginRight: theme.spacing(1),
   },
   countOnLeft: {
     flexDirection: 'row',
@@ -87,10 +96,17 @@ export const commentItemActionsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const commentItemReferenceStyles = makeStyles(() => ({
+export const commentItemReferenceStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+    marginRight: theme.spacing(2),
+  },
+  label: {
+    fontWeight: 'bold',
+    color: theme.palette.grey['500'],
+    marginRight: theme.spacing(0.5),
+  },
+  name: {
+    fontWeight: 'bold',
+    color: theme.palette.primary.main,
   },
 }));

@@ -31,8 +31,10 @@ const CommentControlReference: FC<Props> = ({reference, clearReference}: Props) 
     user &&
     date && (
       <Box className={classes.root}>
-        {t('comment:control.reference')}:{user.username},{date}
-        <IconButton onClick={clearReference} size="small">
+        <span className={classes.text}>
+          {t('comment:control.reference')}: {user.username}, {date}
+        </span>
+        <IconButton className={classes.icon} onClick={clearReference} size="small">
           <CloseIcon />
         </IconButton>
       </Box>

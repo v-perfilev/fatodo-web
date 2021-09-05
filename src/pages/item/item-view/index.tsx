@@ -4,7 +4,7 @@ import {Container, ThemeProvider} from '@material-ui/core';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
-import {PageDivider, PageHeader} from '../../../components/surfaces';
+import {PageDivider, PageHeader, PageSpacer} from '../../../components/surfaces';
 import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
@@ -28,6 +28,7 @@ import {GroupsIcon} from '../../../components/icons/groups-icon';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
 import {flowRight} from 'lodash';
+import Comments from '../../comment';
 
 const ItemView: FC = () => {
   const history = useHistory();
@@ -113,6 +114,8 @@ const ItemView: FC = () => {
         <ItemViewReminders />
         <ItemViewTags />
         <ItemViewChanges />
+        <PageSpacer />
+        <Comments targetId={item.id} />
       </Container>
     </ThemeProvider>
   );

@@ -29,7 +29,10 @@ const CommentItemReference: FC<Props> = ({reference}: Props) => {
     user &&
     date && (
       <Box className={classes.root}>
-        {t('comment:control.reference')}:{user.username},{date}
+        <span className={classes.label}>{t('comment:comment.reference')}:</span>
+        <span className={classes.name}>
+          {user.username}, {date}
+        </span>
       </Box>
     )
   );

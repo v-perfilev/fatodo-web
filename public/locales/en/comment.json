@@ -5,7 +5,7 @@
   },
   "comment": {
     "deleted": "Comment deleted",
-    "reference": "Response",
+    "reference": "Response to",
     "buttons": {
       "response": "Answer"
     },
@@ -17,7 +17,7 @@
   },
   "control": {
     "inputPlaceholder": "Type your comment...",
-    "reference": "Response"
+    "reference": "Response to"
   },
   "reactions": {
     "title": "Reactions to the comment",

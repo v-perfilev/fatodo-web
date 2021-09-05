@@ -10,6 +10,7 @@ import CommentStub from './comment-stub';
 import CommentLoadButton from './comment-load-button';
 import {useWsCommentContext} from '../../../shared/contexts/comment-contexts/ws-comment-context';
 import {NEW_COMMENT_PREFIX} from '../_constants';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 type Props = {
   targetId: string;
@@ -25,6 +26,7 @@ export type CommentListMethods = {
 const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef}: Props) => {
   const {commentNewEvent, commentUpdateEvent, commentReactionsEvent} = useWsCommentContext();
   const {handleResponse} = useSnackContext();
+  const {handleUserIds} = useUserListContext();
   const [comments, setComments] = useState<PageableList<Comment>>({data: [], count: 0});
   const [loading, setLoading] = useState(true);
   const [allLoaded, setAllLoaded] = useState(false);
@@ -125,6 +127,8 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
     return new Promise((resolve) => {
       CommentService.getAllPageable(targetId, comments?.data.length || 0)
         .then((response) => {
+          const userIds = response.data.data.map((comment) => comment.userId);
+          handleUserIds(userIds);
           const updateFunc = commentsInserter(response.data);
           updateComments(updateFunc);
         })
@@ -144,6 +148,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
 
   const addComment = useCallback(
     (comment: Comment) => {
+      handleUserIds([comment.userId]);
       const updateFunc = commentInserter(comment);
       updateComments(updateFunc);
     },
@@ -172,6 +177,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
 
   useEffect(() => {
     if (targetId === commentNewEvent?.targetId) {
+      handleUserIds([commentNewEvent.userId]);
       const updateFunc =
         commentNewEvent.userId === account.id ? ownCommentInserter(commentNewEvent) : commentInserter(commentNewEvent);
       updateComments(updateFunc);

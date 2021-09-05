@@ -14,7 +14,7 @@ export const chatControlItemStyles = makeStyles((theme: Theme) => ({
     cursor: 'pointer',
 
     '&:hover, &.selected': {
-      backgroundColor: theme.palette.grey['100'],
+      backgroundColor: theme.palette.grey['50'],
     },
   },
   image: {

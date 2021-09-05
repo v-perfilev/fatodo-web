@@ -94,7 +94,7 @@ const CommentItemReactions: FC<Props> = ({comment, account}: Props) => {
     );
   };
 
-  return <Box className={classes.root}>{Array.from(reactionMap.keys()).map(reaction)}</Box>;
+  return reactionMap.size > 0 && <Box className={classes.root}>{Array.from(reactionMap.keys()).map(reaction)}</Box>;
 };
 
 export default CommentItemReactions;

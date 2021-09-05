@@ -49,7 +49,7 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
     borderStyle: 'solid',
     borderColor: theme.palette.grey['300'],
     borderRadius: 5,
-    backgroundColor: theme.palette.grey['100'],
+    backgroundColor: theme.palette.grey['50'],
 
     '&.unread': {
       borderWidth: 2,
@@ -103,7 +103,7 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     borderStyle: 'solid',
     borderColor: theme.palette.grey['300'],
     borderRadius: 5,
-    backgroundColor: theme.palette.grey['100'],
+    backgroundColor: theme.palette.grey['50'],
   },
   header: {
     display: 'flex',
