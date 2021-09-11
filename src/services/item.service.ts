@@ -33,11 +33,6 @@ export default class ItemService {
     return axios.delete(url);
   };
 
-  public static setGroupOrder = (order: string[]): AxiosPromise => {
-    const url = ItemService.baseUrl + '/configuration/order';
-    return axios.post(url, order);
-  };
-
   // ITEMS
 
   public static getAllItemsByGroupId = (groupId: string): AxiosPromise => {
@@ -64,4 +59,14 @@ export default class ItemService {
     const url = ItemService.baseUrl + '/items/' + id;
     return axios.delete(url);
   };
+
+  // CONFIGURATION
+
+  public static setGroupOrder = (order: string[]): AxiosPromise => {
+    const url = ItemService.baseUrl + '/configuration/order';
+    return axios.post(url, order);
+  };
+
+  // MEMBERS
+
 }
