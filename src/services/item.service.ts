@@ -1,10 +1,11 @@
 import axios, {AxiosPromise} from 'axios';
 import {ItemDTO} from '../models/dto/item.dto';
+import {GroupMember} from '../models/group.model';
 
 export default class ItemService {
   private static baseUrl = '/api/item';
 
-  // GROUPS
+  // GroupResource
 
   public static getAllGroups = (): AxiosPromise => {
     const url = ItemService.baseUrl + '/groups';
@@ -33,7 +34,7 @@ export default class ItemService {
     return axios.delete(url);
   };
 
-  // ITEMS
+  // ItemResource
 
   public static getAllItemsByGroupId = (groupId: string): AxiosPromise => {
     const url = ItemService.baseUrl + '/items/' + groupId + '/group-id';
@@ -60,13 +61,32 @@ export default class ItemService {
     return axios.delete(url);
   };
 
-  // CONFIGURATION
+  // ConfigurationController
 
   public static setGroupOrder = (order: string[]): AxiosPromise => {
     const url = ItemService.baseUrl + '/configuration/order';
     return axios.post(url, order);
   };
 
-  // MEMBERS
+  // MemberController
 
+  public static addMembersToGroup = (groupId: string, userIds: string[]): AxiosPromise<void> => {
+    const url = ItemService.baseUrl + '/members/group/' + groupId + '/add';
+    return axios.post(url, userIds);
+  };
+
+  public static removeMembersFromGroup = (groupId: string, userIds: string[]): AxiosPromise<void> => {
+    const url = ItemService.baseUrl + '/members/group/' + groupId + '/remove';
+    return axios.post(url, userIds);
+  };
+
+  public static editGroupMember = (groupId: string, member: GroupMember): AxiosPromise<void> => {
+    const url = ItemService.baseUrl + '/members/group/' + groupId + '/edit';
+    return axios.post(url, member);
+  };
+
+  public static leaveGroup = (groupId: string): AxiosPromise<void> => {
+    const url = ItemService.baseUrl + '/members/group/' + groupId + '/leave';
+    return axios.get(url);
+  };
 }

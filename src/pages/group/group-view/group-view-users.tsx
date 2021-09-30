@@ -13,7 +13,7 @@ const GroupViewUsers: FC = () => {
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
 
   const updateUsersToShow = (): void => {
-    const groupUserIds = group.users.map((user) => user.id);
+    const groupUserIds = group.members.map((user) => user.id);
     const updatedList = users.filter((user) => groupUserIds.includes(user.id));
     setUsersToShow(updatedList);
   };

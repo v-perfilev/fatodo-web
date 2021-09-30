@@ -64,7 +64,7 @@ const GroupView: FC = () => {
   };
 
   const loadUsers = (): void => {
-    const userIds = group.users.map((user) => user.id);
+    const userIds = group.members.map((user) => user.id);
     handleUserIds(userIds);
   };
 

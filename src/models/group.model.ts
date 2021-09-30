@@ -5,12 +5,14 @@ export interface Group {
   title: string;
   color: ColorScheme;
   imageFilename: string;
-  users?: GroupUser[];
+  members: GroupMember[];
   notificationCount: number;
   messageCount: number;
 }
 
-export interface GroupUser {
+export type GroupPermission = 'ADMIN' | 'EDIT' | 'READ';
+
+export interface GroupMember {
   id: string;
-  permission: string;
+  permission: GroupPermission;
 }
