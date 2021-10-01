@@ -70,6 +70,16 @@ export default class ItemService {
 
   // MemberController
 
+  public static getUserIdsByGroupId = (groupId: string): AxiosPromise<string[]> => {
+    const url = ItemService.baseUrl + '/members/group/' + groupId + '/ids';
+    return axios.get(url);
+  };
+
+  public static getUserIdsByItemId = (itemId: string): AxiosPromise<string[]> => {
+    const url = ItemService.baseUrl + '/members/item/' + itemId + '/ids';
+    return axios.get(url);
+  };
+
   public static addMembersToGroup = (groupId: string, userIds: string[]): AxiosPromise<void> => {
     const url = ItemService.baseUrl + '/members/group/' + groupId + '/add';
     return axios.post(url, userIds);
