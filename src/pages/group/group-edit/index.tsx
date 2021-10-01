@@ -13,12 +13,14 @@ import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import ItemService from '../../../services/item.service';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 const GroupEdit: FC = () => {
   const history = useHistory();
   const {groupId} = useParams();
   const {i18n, t} = useTranslation();
   const {setMenu} = useAdditionalMenuContext();
+  const {handleUserIds} = useUserListContext();
   const {handleCode, handleResponse} = useSnackContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
   const [isSaving, setIsSaving] = useState(false);
@@ -58,6 +60,11 @@ const GroupEdit: FC = () => {
       });
   };
 
+  const loadUsers = (): void => {
+    const userIds = group.members.map((user) => user.id);
+    handleUserIds(userIds);
+  };
+
   const additionalMenuItems = [
     {icon: <PlusIcon />, action: saveCallback, tooltip: t('group:tooltips.ok')},
     {icon: <ArrowBackIcon />, action: redirectToGroupView, tooltip: t('group:tooltips.cancel')},
@@ -66,6 +73,12 @@ const GroupEdit: FC = () => {
   useEffect(() => {
     setLoadGroup(() => (): void => loadGroup());
   }, []);
+
+  useEffect(() => {
+    if (group) {
+      loadUsers();
+    }
+  }, [group]);
 
   useEffect(() => {
     setMenu(additionalMenuItems);

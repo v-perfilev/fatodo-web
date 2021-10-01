@@ -18,6 +18,7 @@ import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-
 import withItemView from '../../../shared/hocs/with-view/with-item-view';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {flowRight} from 'lodash';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -25,6 +26,7 @@ const ItemEdit: FC = () => {
   const history = useHistory();
   const {itemId} = useParams();
   const {setMenu} = useAdditionalMenuContext();
+  const {handleUserIds} = useUserListContext();
   const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
   const [isSaving, setIsSaving] = useState(false);
@@ -35,6 +37,11 @@ const ItemEdit: FC = () => {
   const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(item.groupId));
   const redirectToItemView = (): void => history.push(ItemRouteUtils.getViewUrl(itemId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
+
+  const loadUsers = (): void => {
+    const userIds = group.members.map((user) => user.id);
+    handleUserIds(userIds);
+  };
 
   const additionalMenuItems = [
     {icon: <CheckIcon />, action: saveCallback, tooltip: t('item:tooltips.ok')},
@@ -92,6 +99,12 @@ const ItemEdit: FC = () => {
       setLoadGroup(() => (): void => loadGroup());
     }
   }, [item]);
+
+  useEffect(() => {
+    if (group) {
+      loadUsers();
+    }
+  }, [group]);
 
   useEffect(() => {
     setMenu(additionalMenuItems);

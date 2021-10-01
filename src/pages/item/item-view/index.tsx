@@ -29,6 +29,7 @@ import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with
 import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
 import {flowRight} from 'lodash';
 import Comments from '../../comment';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 const ItemView: FC = () => {
   const history = useHistory();
@@ -36,6 +37,7 @@ const ItemView: FC = () => {
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {setMenu} = useAdditionalMenuContext();
+  const {handleUserIds} = useUserListContext();
   const {showItemDeleteDialog} = useItemDialogContext();
   const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
@@ -80,6 +82,11 @@ const ItemView: FC = () => {
       });
   };
 
+  const loadUsers = (): void => {
+    const userIds = group.members.map((user) => user.id);
+    handleUserIds(userIds);
+  };
+
   const additionalMenuItems = [
     {icon: <EditIcon />, action: redirectToItemEdit, tooltip: t('item:tooltips.edit')},
     {icon: <DeleteIcon />, action: openItemDeleteDialog, tooltip: t('item:tooltips.delete')},
@@ -96,6 +103,12 @@ const ItemView: FC = () => {
       setLoadGroup(() => (): void => loadGroup());
     }
   }, [item]);
+
+  useEffect(() => {
+    if (group) {
+      loadUsers();
+    }
+  }, [group]);
 
   useEffect(() => {
     setMenu(additionalMenuItems);
