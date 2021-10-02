@@ -82,6 +82,20 @@
     "send": "Edit",
     "cancel": "Cancel"
   },
+  "directMessage": {
+    "title": "Direct message",
+    "fields": {
+      "username": {
+        "label": "User"
+      },
+      "text": {
+        "label": "Text",
+        "required": "Required"
+      }
+    },
+    "send": "Send",
+    "cancel": "Cancel"
+  },
   "event": {
     "CREATE_DIRECT_CHAT": "{{username}} created direct chat with {{usernames}}",
     "CREATE_CHAT": "{{username}} created chat with {{usernames}}",

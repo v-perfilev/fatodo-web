@@ -7,12 +7,12 @@ export interface ChatEditValues {
   text: string;
 }
 
-export const defaultCommentEditFormValues = (message: Message): Readonly<ChatEditValues> => ({
+export const defaultChatEditFormValues = (message: Message): Readonly<ChatEditValues> => ({
   text: message?.text ? message.text : '',
 });
 
 export class ChatEditFormUtils {
-  public static mapPropsToValues = (message: Message): ChatEditValues => defaultCommentEditFormValues(message);
+  public static mapPropsToValues = (message: Message): ChatEditValues => defaultChatEditFormValues(message);
 
   public static validationSchema = Yup.object().shape({
     text: Yup.string().required(() => i18n.t('chat:editMessage.fields.text.required')),

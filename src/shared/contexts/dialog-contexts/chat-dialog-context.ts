@@ -12,6 +12,7 @@ interface ChatDialogState {
   showMessageReactionsDialog: (message: Message, users: User[]) => void;
   showMessageReadStatusesDialog: (message: Message, users: User[]) => void;
   showMessageEditDialog: (message: Message) => void;
+  showDirectMessageDialog: (user: User) => void;
 }
 
 export const ChatDialogContext = React.createContext<ChatDialogState>(null);

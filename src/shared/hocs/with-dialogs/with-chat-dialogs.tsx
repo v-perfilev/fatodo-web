@@ -33,6 +33,10 @@ import ChatEditDialog, {
   ChatEditDialogProps,
   defaultChatEditDialogProps,
 } from '../../../pages/chat/dialogs/chat-edit-dialog';
+import ChatDirectMessageDialog, {
+  ChatDirectMessageDialogProps,
+  defaultChatDirectMessageDialogProps,
+} from '../../../pages/chat/dialogs/chat-direct-message-dialog';
 
 enum ChatDialogs {
   ADD_MEMBERS = 'CHAT_ADD_MEMBERS_DIALOG',
@@ -42,6 +46,7 @@ enum ChatDialogs {
   MESSAGE_REACTIONS = 'CHAT_MESSAGE_REACTIONS_DIALOG',
   MESSAGE_READ_STATUSES = 'CHAT_MESSAGE_READ_STATUSES_DIALOG',
   MESSAGE_EDIT = 'CHAT_MESSAGE_EDIT_DIALOG',
+  DIRECT_MESSAGE = 'CHAT_DIRECT_MESSAGE_DIALOG',
 }
 
 const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement => {
@@ -118,6 +123,16 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
     [setDialogProps, updateDialogProps]
   );
 
+  const showDirectMessageDialog = useCallback(
+    (user: User): void => {
+      const show = true;
+      const close = (): void => updateDialogProps(ChatDialogs.DIRECT_MESSAGE, {show: false});
+      const props = {user, show, close} as ChatDirectMessageDialogProps;
+      setDialogProps(ChatDialogs.DIRECT_MESSAGE, props);
+    },
+    [setDialogProps, updateDialogProps]
+  );
+
   const initDialogs = (): void => {
     handleDialog(ChatDialogs.ADD_MEMBERS, ChatAddMembersDialog, defaultChatAddMembersDialogProps);
     handleDialog(ChatDialogs.CREATE, ChatCreateDialog, defaultChatCreateDialogProps);
@@ -126,6 +141,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
     handleDialog(ChatDialogs.MESSAGE_REACTIONS, ChatReactionsDialog, defaultChatReactionDialogProps);
     handleDialog(ChatDialogs.MESSAGE_READ_STATUSES, ChatReadStatusesDialog, defaultChatReadStatusesDialogProps);
     handleDialog(ChatDialogs.MESSAGE_EDIT, ChatEditDialog, defaultChatEditDialogProps);
+    handleDialog(ChatDialogs.DIRECT_MESSAGE, ChatDirectMessageDialog, defaultChatDirectMessageDialogProps);
   };
 
   useEffect(() => {
@@ -140,6 +156,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
     showMessageReactionsDialog,
     showMessageReadStatusesDialog,
     showMessageEditDialog,
+    showDirectMessageDialog,
   };
 
   return (
