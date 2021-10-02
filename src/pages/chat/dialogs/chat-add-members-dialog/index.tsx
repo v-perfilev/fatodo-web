@@ -61,7 +61,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, show, close}: Props) => {
   }, []);
 
   const isUserIdListEmpty = userIds.length == 0;
-  const ignoredIds = chat.members;
+  const ignoredIds = chat?.members;
   const content = chat && <UsersSelect priorityIds={contactIds} ignoredIds={ignoredIds} setUserIds={setUserIds} />;
 
   const cancelButton = (
