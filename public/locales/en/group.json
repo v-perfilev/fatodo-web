@@ -32,6 +32,36 @@
     "editGroup": "Edit",
     "deleteGroup": "Delete"
   },
+  "members": {
+    "title": "Group members",
+    "usersNotFound": "Users not found",
+    "buttons": {
+      "addUsers": "Add members"
+    }
+  },
+  "addMembers": {
+    "title": "Add group members",
+    "buttons": {
+      "send": "Add members",
+      "cancel": "Cancel"
+    }
+  },
+  "editMember": {
+    "title": "Edit group member",
+    "buttons": {
+      "send": "Edit member",
+      "cancel": "Cancel"
+    }
+  },
+  "removeMember": {
+    "title": "Remove user from group",
+    "text": "Are you sure you want to delete user {{username}} from group?"
+  },
+  "roles": {
+    "admin": "Administrator",
+    "edit": "Editor",
+    "read": "Reader"
+  },
   "modals": {
     "deleteTitle": "Delete group",
     "deleteText": "Are you sure you want to delete group \"{{title}}\"?"

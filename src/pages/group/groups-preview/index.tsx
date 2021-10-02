@@ -36,10 +36,11 @@ const GroupPreview: FC = () => {
   };
 
   const loadUsers = (): void => {
-    const userIds = groups
-      .map((group) => group.members.map((user) => user.id))
-      .reduce((acc, userIds) => [...acc, ...userIds], []);
-    handleUserIds(userIds);
+    console.log(groups);
+    // const userIds = groups
+    //   .map((group) => group.members.map((user) => user.id))
+    //   .reduce((acc, userIds) => [...acc, ...userIds], []);
+    // handleUserIds(userIds);
   };
 
   const additionalMenuItems = [

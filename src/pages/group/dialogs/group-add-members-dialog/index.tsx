@@ -1,29 +1,29 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Chat} from '../../../../models/chat.model';
 import {useTranslation} from 'react-i18next';
 import ModalDialog from '../../../../components/dialogs/modal-dialog';
 import {Button} from '@material-ui/core';
-import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import ContactService from '../../../../services/contact.service';
 import {LoadingButton} from '../../../../components/controls';
 import UsersSelect from '../../../../components/surfaces/users-select';
+import {Group} from '../../../../models/group.model';
+import ItemService from '../../../../services/item.service';
 
-export type ChatAddMembersDialogProps = {
-  chat: Chat;
+export type GroupAddMembersDialogProps = {
+  group: Group;
   show: boolean;
   close: () => void;
 };
 
-export const defaultChatAddMembersDialogProps: Readonly<ChatAddMembersDialogProps> = {
-  chat: null,
+export const defaultGroupAddMembersDialogProps: Readonly<GroupAddMembersDialogProps> = {
+  group: null,
   show: false,
   close: (): void => undefined,
 };
 
-type Props = ChatAddMembersDialogProps;
+type Props = GroupAddMembersDialogProps;
 
-const ChatAddMembersDialog: FC<Props> = ({chat, show, close}: Props) => {
+const GroupAddMembersDialog: FC<Props> = ({group, show, close}: Props) => {
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [contactIds, setContactIds] = useState<string[]>([]);
@@ -44,7 +44,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, show, close}: Props) => {
 
   const addUsers = (): void => {
     setIsSubmitting(true);
-    ChatService.addUsersToChat(chat.id, userIds)
+    ItemService.addMembersToGroup(group.id, userIds)
       .then(() => {
         close();
       })
@@ -61,12 +61,12 @@ const ChatAddMembersDialog: FC<Props> = ({chat, show, close}: Props) => {
   }, []);
 
   const isUserIdListEmpty = userIds.length == 0;
-  const ignoredIds = chat.members;
-  const content = chat && <UsersSelect priorityIds={contactIds} ignoredIds={ignoredIds} setUserIds={setUserIds} />;
+  const ignoredIds = group.members.map((m) => m.id);
+  const content = group && <UsersSelect priorityIds={contactIds} ignoredIds={ignoredIds} setUserIds={setUserIds} />;
 
   const cancelButton = (
     <Button onClick={close} color="primary" disabled={isSubmitting}>
-      {t('chat:addMembers.buttons.cancel')}
+      {t('group:addMembers.buttons.cancel')}
     </Button>
   );
 
@@ -77,7 +77,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, show, close}: Props) => {
       loading={isSubmitting}
       onClick={addUsers}
     >
-      {t('chat:addMembers.buttons.send')}
+      {t('group:addMembers.buttons.send')}
     </LoadingButton>
   );
 
@@ -92,7 +92,7 @@ const ChatAddMembersDialog: FC<Props> = ({chat, show, close}: Props) => {
     <ModalDialog
       isOpen={show}
       close={close}
-      title={t('chat:addMembers.title')}
+      title={t('group:addMembers.title')}
       content={content}
       actions={actions}
       showCloseIcon
@@ -100,4 +100,4 @@ const ChatAddMembersDialog: FC<Props> = ({chat, show, close}: Props) => {
   );
 };
 
-export default ChatAddMembersDialog;
+export default GroupAddMembersDialog;
