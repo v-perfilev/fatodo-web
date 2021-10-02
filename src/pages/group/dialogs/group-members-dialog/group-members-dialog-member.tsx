@@ -37,7 +37,7 @@ const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, a
     setShowRemovingConfirmation((prevState) => !prevState);
   };
 
-  const canAdmin = GroupUtils.canAdmin(account, group);
+  const canAdmin = group && GroupUtils.canAdmin(account, group);
 
   const removeUserFromChat = (): void => {
     setRemovingLoading(true);

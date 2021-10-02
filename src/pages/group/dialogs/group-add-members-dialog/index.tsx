@@ -61,7 +61,7 @@ const GroupAddMembersDialog: FC<Props> = ({group, show, close}: Props) => {
   }, []);
 
   const isUserIdListEmpty = userIds.length == 0;
-  const ignoredIds = group.members.map((m) => m.id);
+  const ignoredIds = group?.members.map((m) => m.id);
   const content = group && <UsersSelect priorityIds={contactIds} ignoredIds={ignoredIds} setUserIds={setUserIds} />;
 
   const cancelButton = (

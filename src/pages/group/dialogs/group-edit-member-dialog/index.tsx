@@ -1,10 +1,10 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import ModalDialog from '../../../../components/dialogs/modal-dialog';
 import {Button} from '@material-ui/core';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {LoadingButton} from '../../../../components/controls';
-import {Group, GroupMember, GroupUser} from '../../../../models/group.model';
+import {Group, GroupMember, GroupPermission, GroupUser} from '../../../../models/group.model';
 import ItemService from '../../../../services/item.service';
 import {UserView} from '../../../../components/views';
 import {PermissionSelect} from '../../../../components/inputs/permission-select';
@@ -29,7 +29,7 @@ const GroupEditMemberDialog: FC<Props> = ({group, user, show, close}: Props) => 
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [permission, setPermission] = useState(user.permission);
+  const [permission, setPermission] = useState<GroupPermission>();
 
   const editMember = (): void => {
     setIsSubmitting(true);
@@ -45,6 +45,12 @@ const GroupEditMemberDialog: FC<Props> = ({group, user, show, close}: Props) => 
         setIsSubmitting(false);
       });
   };
+
+  useEffect(() => {
+    if (group && user) {
+      setPermission(user.permission);
+    }
+  }, [group, user]);
 
   const content = group && user && (
     <>

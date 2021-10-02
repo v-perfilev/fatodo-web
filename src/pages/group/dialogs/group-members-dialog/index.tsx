@@ -58,7 +58,7 @@ const GroupMembersDialog: FC<Props> = (props: Props) => {
     }
   }, [group]);
 
-  const canAddUsers = GroupUtils.canAdmin(account, group);
+  const canAdmin = group && GroupUtils.canAdmin(account, group);
 
   const filter = (
     <Box className={classes.filter}>
@@ -82,7 +82,7 @@ const GroupMembersDialog: FC<Props> = (props: Props) => {
     </>
   );
 
-  const actions = group && canAddUsers && (
+  const actions = group && canAdmin && (
     <Button startIcon={<UserPlusIcon />} onClick={switchToAddMembers} color="primary">
       {t('group:members.buttons.addUsers')}
     </Button>

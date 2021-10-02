@@ -25,6 +25,7 @@ import {useGroupDialogContext} from '../../../shared/contexts/dialog-contexts/gr
 import ItemService from '../../../services/item.service';
 import {flowRight} from 'lodash';
 import Comments from '../../comment';
+import {MembersIcon} from '../../../components/icons/members-icon';
 
 const GroupView: FC = () => {
   const history = useHistory();
@@ -32,8 +33,8 @@ const GroupView: FC = () => {
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {setMenu} = useAdditionalMenuContext();
-  const {handleUserIds} = useUserListContext();
-  const {showGroupDeleteDialog} = useGroupDialogContext();
+  const {users, handleUserIds} = useUserListContext();
+  const {showGroupDeleteDialog, showGroupMembersDialog} = useGroupDialogContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
@@ -42,6 +43,10 @@ const GroupView: FC = () => {
   const redirectToGroupEdit = (): void => history.push(GroupRouteUtils.getEditUrl(groupId));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
+
+  const openGroupMembersDialog = (): void => {
+    showGroupMembersDialog(group, users);
+  };
 
   const openGroupDeleteDialog = (): void => {
     const onSuccess = (): void => redirectToGroups();
@@ -71,6 +76,7 @@ const GroupView: FC = () => {
   const additionalMenuItems = [
     {icon: <PlusIcon />, action: redirectToItemCreate, tooltip: t('item:tooltips.create')},
     {icon: <EditIcon />, action: redirectToGroupEdit, tooltip: t('group:tooltips.edit')},
+    {icon: <MembersIcon />, action: openGroupMembersDialog, tooltip: t('group:tooltips.members')},
     {icon: <DeleteIcon />, action: openGroupDeleteDialog, tooltip: t('group:tooltips.delete')},
     {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')},
   ];
