@@ -24,6 +24,7 @@ const ControlMenu: FC<Props> = ({menu, disabled}: Props) => {
           loading={action.loading}
           color={action.color || 'primary'}
           variant="outlined"
+          size="small"
         >
           {action.text}
         </LoadingButton>

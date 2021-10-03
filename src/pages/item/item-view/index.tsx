@@ -24,7 +24,6 @@ import withItemView from '../../../shared/hocs/with-view/with-item-view';
 import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {CircularSpinner} from '../../../components/loaders';
-import {GroupsIcon} from '../../../components/icons/groups-icon';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
 import {flowRight} from 'lodash';
@@ -48,7 +47,6 @@ const ItemView: FC = () => {
 
   const redirectToItemEdit = (): void => history.push(ItemRouteUtils.getEditUrl(itemId));
   const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(group?.id));
-  const redirectToGroups = (): void => history.push(Routes.GROUPS);
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const openItemDeleteDialog = (): void => {
@@ -90,10 +88,9 @@ const ItemView: FC = () => {
   };
 
   const menuElements = [
-    {icon: <EditIcon />, action: redirectToItemEdit, text: t('item:tooltips.edit')},
-    {icon: <DeleteIcon />, action: openItemDeleteDialog, text: t('item:tooltips.delete')},
     {icon: <ItemsIcon />, action: redirectToGroupView, text: t('item:tooltips.list')},
-    {icon: <GroupsIcon />, action: redirectToGroups, text: t('item:tooltips.groupList')},
+    {icon: <EditIcon />, action: redirectToItemEdit, text: t('item:tooltips.edit')},
+    {icon: <DeleteIcon />, action: openItemDeleteDialog, text: t('item:tooltips.delete'), color: 'secondary'},
   ] as MenuElement[];
 
   useEffect(() => {

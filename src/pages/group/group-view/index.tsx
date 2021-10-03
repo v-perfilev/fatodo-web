@@ -76,11 +76,11 @@ const GroupView: FC = () => {
   };
 
   const menuElements = [
+    {icon: <GroupsIcon />, action: redirectToGroups, text: t('group:tooltips.list')},
     {icon: <PlusIcon />, action: redirectToItemCreate, text: t('item:tooltips.create')},
     {icon: <EditIcon />, action: redirectToGroupEdit, text: t('group:tooltips.edit')},
     {icon: <MembersIcon />, action: openGroupMembersDialog, text: t('group:tooltips.members')},
-    {icon: <DeleteIcon />, action: openGroupDeleteDialog, text: t('group:tooltips.delete')},
-    {icon: <GroupsIcon />, action: redirectToGroups, text: t('group:tooltips.list')},
+    {icon: <DeleteIcon />, action: openGroupDeleteDialog, text: t('group:tooltips.delete'), color: 'secondary'},
   ] as MenuElement[];
 
   useEffect(() => {
