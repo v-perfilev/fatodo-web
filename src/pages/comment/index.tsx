@@ -6,7 +6,6 @@ import CommentList, {CommentListMethods} from './comment-list';
 import {User} from '../../models/user.model';
 import withAuthState from '../../shared/hocs/with-auth-state/with-auth-state';
 import {flowRight} from 'lodash';
-import withCommentDialogs from '../../shared/hocs/with-dialogs/with-comment-dialogs';
 import {Comment} from '../../models/comment.model';
 import withComment from '../../shared/hocs/with-comment/with-comment';
 import {useWsCommentContext} from '../../shared/contexts/comment-contexts/ws-comment-context';
@@ -55,4 +54,4 @@ const Comment: FC<Props> = ({targetId, account}: Props) => {
   );
 };
 
-export default flowRight([withCommentDialogs, withComment, withAuthState])(Comment);
+export default flowRight([withComment, withAuthState])(Comment);

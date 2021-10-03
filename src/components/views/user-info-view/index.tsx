@@ -1,19 +1,22 @@
 import React, {FC, HTMLAttributes} from 'react';
 import {User} from '../../../models/user.model';
-import {Button, Grid} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
 import {UrlPic} from '../../images';
 import {PageSubheader} from '../../surfaces';
 import {userInfoViewStyles} from './_styles';
 import csx from 'classnames';
 import {UserInfoViewField} from './user-info-view-field';
 import {useTranslation} from 'react-i18next';
-import {MailIcon} from '../../icons/mail-icon';
+import {UserInfoViewButtons} from './user-info-view-buttons';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
 
-type Props = HTMLAttributes<HTMLElement> & {
-  user: User;
-};
+type Props = HTMLAttributes<HTMLElement> &
+  AuthState & {
+    user: User;
+  };
 
-export const UserInfoView: FC<Props> = ({user, className}: Props) => {
+const UserInfoView: FC<Props> = ({user, account, className}: Props) => {
   const classes = userInfoViewStyles();
   const classNames = csx(classes.root, className);
   const {t} = useTranslation();
@@ -34,11 +37,13 @@ export const UserInfoView: FC<Props> = ({user, className}: Props) => {
           text={user.lastname ?? t('account:info.fieldNotSet')}
         />
       </Grid>
-      <Grid item xs={12} className={classes.buttonsItem}>
-        <Button variant="contained" color="secondary">
-          <MailIcon />
-        </Button>
-      </Grid>
+      {user.id !== account.id && (
+        <Grid item xs={12} className={classes.buttonsItem}>
+          <UserInfoViewButtons user={user} />
+        </Grid>
+      )}
     </Grid>
   );
 };
+
+export default withAuthState(UserInfoView);

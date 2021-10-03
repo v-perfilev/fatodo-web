@@ -2,9 +2,8 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement, useCallback, useEffect} from 'react';
 import {useDialogContext} from '../../contexts/dialog-contexts/dialog-context';
 import {Group, GroupUser} from '../../../models/group.model';
-import {
+import GroupDeleteDialog, {
   defaultGroupDeleteDialogProps,
-  GroupDeleteDialog,
   GroupDeleteDialogProps,
 } from '../../../pages/group/dialogs/group-delete-dialog';
 import {GroupDialogContext} from '../../contexts/dialog-contexts/group-dialog-context';

@@ -2,6 +2,11 @@ import * as React from 'react';
 import {ComponentType, FC, memo, ReactElement, useMemo, useState} from 'react';
 import {DialogContext} from '../../contexts/dialog-contexts/dialog-context';
 import {flowRight} from 'lodash';
+import withChatDialogs from './with-chat-dialogs';
+import withCommentDialogs from './with-comment-dialogs';
+import withContactDialogs from './with-contact-dialogs';
+import withGroupDialogs from './with-group-dialogs';
+import withItemDialogs from './with-item-dialogs';
 
 type ComponentWithProps = {
   component: ComponentType;
@@ -75,4 +80,12 @@ const withDialogs = (Component: ComponentType): FC => (props): ReactElement => {
   );
 };
 
-export default flowRight([withDialogs, memo]);
+export default flowRight([
+  withDialogs,
+  withChatDialogs,
+  withCommentDialogs,
+  withContactDialogs,
+  withGroupDialogs,
+  withItemDialogs,
+  memo,
+]);

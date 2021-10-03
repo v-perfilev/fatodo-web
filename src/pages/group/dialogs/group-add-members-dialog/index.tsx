@@ -3,11 +3,11 @@ import {useTranslation} from 'react-i18next';
 import ModalDialog from '../../../../components/dialogs/modal-dialog';
 import {Button} from '@material-ui/core';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
-import ContactService from '../../../../services/contact.service';
 import {LoadingButton} from '../../../../components/controls';
 import UsersSelect from '../../../../components/surfaces/users-select';
 import {Group} from '../../../../models/group.model';
 import ItemService from '../../../../services/item.service';
+import {useContactContext} from '../../../../shared/contexts/contact-contexts/contact-context';
 
 export type GroupAddMembersDialogProps = {
   group: Group;
@@ -26,21 +26,10 @@ type Props = GroupAddMembersDialogProps;
 const GroupAddMembersDialog: FC<Props> = ({group, show, close}: Props) => {
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
+  const {relations, update} = useContactContext();
   const [contactIds, setContactIds] = useState<string[]>([]);
   const [userIds, setUserIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const loadContacts = (): void => {
-    ContactService.getAllRelations()
-      .then((response) => {
-        const relations = response.data;
-        const relationUserIds = relations.map((relation) => relation.secondUserId);
-        setContactIds(relationUserIds);
-      })
-      .catch((response) => {
-        handleResponse(response);
-      });
-  };
 
   const addUsers = (): void => {
     setIsSubmitting(true);
@@ -57,8 +46,15 @@ const GroupAddMembersDialog: FC<Props> = ({group, show, close}: Props) => {
   };
 
   useEffect(() => {
-    loadContacts();
-  }, []);
+    if (show) {
+      update();
+    }
+  }, [show]);
+
+  useEffect(() => {
+    const relationUserIds = relations.map((relation) => relation.secondUserId);
+    setContactIds(relationUserIds);
+  }, [show]);
 
   const isUserIdListEmpty = userIds.length == 0;
   const ignoredIds = group?.members.map((m) => m.id);

@@ -8,7 +8,6 @@ import ItemView from './item-view';
 import ItemEdit from './item-edit';
 import ItemCreate from './item-create';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
-import withItemDialogs from '../../shared/hocs/with-dialogs/with-item-dialogs';
 import {flowRight} from 'lodash';
 
 export enum ItemRoutes {
@@ -36,4 +35,4 @@ const ItemRouter: FC = () => {
   );
 };
 
-export default flowRight([withFlexibleHeader, withUserList, withItemDialogs])(ItemRouter);
+export default flowRight([withFlexibleHeader, withUserList])(ItemRouter);

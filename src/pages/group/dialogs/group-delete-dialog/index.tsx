@@ -20,7 +20,7 @@ export const defaultGroupDeleteDialogProps: Readonly<GroupDeleteDialogProps> = {
 
 type Props = GroupDeleteDialogProps;
 
-export const GroupDeleteDialog: FC<Props> = ({group, show, close, onSuccess}: Props) => {
+const GroupDeleteDialog: FC<Props> = ({group, show, close, onSuccess}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
@@ -58,3 +58,5 @@ export const GroupDeleteDialog: FC<Props> = ({group, show, close, onSuccess}: Pr
     />
   );
 };
+
+export default GroupDeleteDialog;

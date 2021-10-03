@@ -21,6 +21,8 @@ type Props = ChatDirectMessageDialogProps;
 const ChatDirectMessageDialog: FC<Props> = ({user, show, close}: Props) => {
   const {t} = useTranslation();
 
+  const params = {user};
+
   return (
     <FormDialog
       show={show}
@@ -30,7 +32,7 @@ const ChatDirectMessageDialog: FC<Props> = ({user, show, close}: Props) => {
       sendText={t('chat:directMessage.send')}
       cancelText={t('chat:directMessage.cancel')}
       size="md"
-      params={user}
+      params={params}
     />
   );
 };

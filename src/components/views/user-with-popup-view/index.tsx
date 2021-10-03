@@ -2,7 +2,7 @@ import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {User} from '../../../models/user.model';
 import {SizeType} from '../../images/types';
-import {UserInfoView} from '../user-info-view';
+import UserInfoView from '../user-info-view';
 import {HoverPopup} from '../../surfaces';
 import {UserView} from '../user-view';
 

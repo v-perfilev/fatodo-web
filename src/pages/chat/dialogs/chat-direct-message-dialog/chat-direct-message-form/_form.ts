@@ -1,6 +1,5 @@
 import * as Yup from 'yup';
 import i18n from '../../../../../shared/i18n';
-import {Message} from '../../../../../models/message.model';
 import {MessageDTO} from '../../../../../models/dto/message.dto';
 import {User} from '../../../../../models/user.model';
 

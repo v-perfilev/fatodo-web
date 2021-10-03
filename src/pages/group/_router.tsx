@@ -10,8 +10,6 @@ import GroupView from './group-view';
 import GroupCreate from './group-create';
 import GroupEdit from './group-edit';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
-import withGroupDialogs from '../../shared/hocs/with-dialogs/with-group-dialogs';
-import withItemDialogs from '../../shared/hocs/with-dialogs/with-item-dialogs';
 import {flowRight} from 'lodash';
 
 export enum GroupRoutes {
@@ -43,4 +41,4 @@ const GroupRouter: FC = () => {
   );
 };
 
-export default flowRight([withFlexibleHeader, withUserList, withGroupDialogs, withItemDialogs])(GroupRouter);
+export default flowRight([withFlexibleHeader, withUserList])(GroupRouter);

@@ -1,12 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import ModalDialog from '../../../../components/dialogs/modal-dialog';
-import ContactService from '../../../../services/contact.service';
 import ChatService from '../../../../services/chat.service';
 import {Button} from '@material-ui/core';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {LoadingButton} from '../../../../components/controls';
 import UsersSelect from '../../../../components/surfaces/users-select';
+import {useContactContext} from '../../../../shared/contexts/contact-contexts/contact-context';
 
 export type ChatCreateDialogProps = {
   show: boolean;
@@ -23,21 +23,10 @@ type Props = ChatCreateDialogProps;
 const ChatCreateDialog: FC<Props> = ({show, close}: Props) => {
   const {handleCode, handleResponse} = useSnackContext();
   const {t} = useTranslation();
+  const {relations, update} = useContactContext();
   const [contactIds, setContactIds] = useState<string[]>([]);
   const [userIds, setUserIds] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const loadContacts = (): void => {
-    ContactService.getAllRelations()
-      .then((response) => {
-        const relations = response.data;
-        const relationUserIds = relations.map((relation) => relation.secondUserId);
-        setContactIds(relationUserIds);
-      })
-      .catch((response) => {
-        handleResponse(response);
-      });
-  };
 
   const createChat = (): void => {
     const createChat =
@@ -61,9 +50,14 @@ const ChatCreateDialog: FC<Props> = ({show, close}: Props) => {
 
   useEffect(() => {
     if (show) {
-      loadContacts();
+      update();
     }
   }, [show]);
+
+  useEffect(() => {
+    const relationUserIds = relations.map((relation) => relation.secondUserId);
+    setContactIds(relationUserIds);
+  }, [relations]);
 
   const content = <UsersSelect priorityIds={contactIds} ignoredIds={[]} setUserIds={setUserIds} />;
 

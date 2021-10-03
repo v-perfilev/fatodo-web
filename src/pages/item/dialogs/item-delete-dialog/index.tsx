@@ -20,7 +20,7 @@ export const defaultItemDeleteDialogProps: Readonly<ItemDeleteDialogProps> = {
 
 type Props = ItemDeleteDialogProps;
 
-export const ItemDeleteDialog: FC<Props> = ({item, close, onSuccess}: Props) => {
+const ItemDeleteDialog: FC<Props> = ({item, close, onSuccess}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
@@ -58,3 +58,5 @@ export const ItemDeleteDialog: FC<Props> = ({item, close, onSuccess}: Props) => 
     />
   );
 };
+
+export default ItemDeleteDialog;

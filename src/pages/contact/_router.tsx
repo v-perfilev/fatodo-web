@@ -6,7 +6,6 @@ import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-head
 import {Routes} from '../router';
 import ContactMain from './contact-main';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
-import withContactDialogs from '../../shared/hocs/with-dialogs/with-contact-dialogs';
 import {flowRight} from 'lodash';
 
 export enum ContactRoutes {
@@ -33,4 +32,4 @@ const ContactRouter: FC = () => {
   );
 };
 
-export default flowRight([withFlexibleHeader, withUserList, withContactDialogs])(ContactRouter);
+export default flowRight([withFlexibleHeader, withUserList])(ContactRouter);

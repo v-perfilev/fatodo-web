@@ -1,30 +1,18 @@
 import React, {FC, useEffect, useState} from 'react';
-import {ContactRequest, ContactRequestWithUser} from '../../../models/contact-request.model';
-import ContactService from '../../../services/contact.service';
+import {ContactRequestWithUser} from '../../../models/contact-request.model';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import ContactIncomingList from './contact-incoming-list';
 import {User} from '../../../models/user.model';
 import UserService from '../../../services/user.service';
 import {CircularSpinner} from '../../../components/loaders';
+import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
 
 const ContactIncoming: FC = () => {
   const {handleResponse} = useSnackContext();
-  const [requests, setRequests] = useState<ContactRequest[]>([]);
+  const {incomingRequests: requests, update, loading: requestsLoading} = useContactContext();
   const [users, setUsers] = useState<User[]>([]);
   const [userRequests, setUserRequests] = useState<ContactRequestWithUser[]>([]);
   const [loading, setLoading] = useState(false);
-
-  const loadRequests = (): void => {
-    setLoading(true);
-    ContactService.getIncomingRequests()
-      .then((response) => {
-        setRequests(response.data);
-      })
-      .catch((response) => {
-        handleResponse(response);
-        setLoading(false);
-      });
-  };
 
   const loadUsers = (): void => {
     const ids = requests.map((r) => r.requesterId);
@@ -46,7 +34,7 @@ const ContactIncoming: FC = () => {
   };
 
   useEffect(() => {
-    loadRequests();
+    update();
   }, []);
 
   useEffect(() => {
@@ -57,7 +45,11 @@ const ContactIncoming: FC = () => {
     combineRequestsWithUsers();
   }, [users]);
 
-  return loading ? <CircularSpinner /> : <ContactIncomingList requests={userRequests} loadRequests={loadRequests} />;
+  return loading || requestsLoading ? (
+    <CircularSpinner />
+  ) : (
+    <ContactIncomingList requests={userRequests} loadRequests={update} />
+  );
 };
 
 export default ContactIncoming;

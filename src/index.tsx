@@ -25,6 +25,7 @@ import {enqueueReduxSnack} from './store/actions/snack.actions';
 import withDialogs from './shared/hocs/with-dialogs/with-dialogs';
 import {flowRight} from 'lodash';
 import withWsClient from './shared/hocs/with-ws/with-ws-client';
+import withContacts from './shared/hocs/with-contacts/with-contacts';
 
 // setup axios
 const axiosActions = bindActionCreators({clearAuth, enqueueReduxSnack}, store.dispatch);
@@ -40,9 +41,16 @@ const Root: FC = () => (
   </Router>
 );
 
-const WrappedRoot = flowRight([withStore, withDefaultTheme, withMui, withSnack, withDialogs, withWsClient, withChat])(
-  Root
-);
+const WrappedRoot = flowRight([
+  withStore,
+  withDefaultTheme,
+  withMui,
+  withSnack,
+  withDialogs,
+  withWsClient,
+  withChat,
+  withContacts,
+])(Root);
 
 const root = document.getElementById('root');
 initLanguages.then(() => {

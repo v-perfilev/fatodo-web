@@ -40,14 +40,14 @@ const ChatDirectMessageForm: FC<Props> = (props: Props) => {
 
   return (
     <Form>
-      <TextInput name="username" label={t('chat:directMessage.fields.text.label')} disabled />
+      <TextInput name="username" label={t('chat:directMessage.fields.username.label')} disabled />
       <MultilineInput name="text" label={t('chat:directMessage.fields.text.label')} rows={5} />
     </Form>
   );
 };
 
 const formik = withFormik<Props, ChatDirectMessageValues>({
-  mapPropsToValues: ({params}: Props) => ChatDirectMessageFormUtils.mapPropsToValues(params.message),
+  mapPropsToValues: ({params}: Props) => ChatDirectMessageFormUtils.mapPropsToValues(params.user),
   validationSchema: () => ChatDirectMessageFormUtils.validationSchema,
   validateOnMount: true,
 

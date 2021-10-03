@@ -3,9 +3,8 @@ import {ComponentType, FC, ReactElement, useCallback, useEffect} from 'react';
 import {useDialogContext} from '../../contexts/dialog-contexts/dialog-context';
 import {ItemDialogContext} from '../../contexts/dialog-contexts/item-dialog-context';
 import {Item} from '../../../models/item.model';
-import {
+import ItemDeleteDialog, {
   defaultItemDeleteDialogProps,
-  ItemDeleteDialog,
   ItemDeleteDialogProps,
 } from '../../../pages/item/dialogs/item-delete-dialog';
 

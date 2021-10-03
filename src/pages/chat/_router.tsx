@@ -6,7 +6,6 @@ import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-head
 import {Routes} from '../router';
 import MessageMain from './chat-main';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
-import withChatDialogs from '../../shared/hocs/with-dialogs/with-chat-dialogs';
 import {flowRight} from 'lodash';
 
 export enum ChatRoutes {
@@ -30,4 +29,4 @@ const ChatRouter: FC = () => {
   );
 };
 
-export default flowRight([withFlexibleHeader, withUserList, withChatDialogs])(ChatRouter);
+export default flowRight([withFlexibleHeader, withUserList])(ChatRouter);
