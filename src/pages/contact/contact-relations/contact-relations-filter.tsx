@@ -24,7 +24,7 @@ const ContactRelationsFilter: FC<Props> = ({relations, setRelationsToShow}: Prop
 
   return (
     <Box className={classes.root}>
-      <TextField className={classes.input} size="small" label={t('inputs.filter')} onChange={handleChange} />
+      <TextField size="small" label={t('inputs.filter')} onChange={handleChange} fullWidth />
     </Box>
   );
 };

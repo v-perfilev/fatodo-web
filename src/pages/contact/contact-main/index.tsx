@@ -3,9 +3,6 @@ import {Container, Tab, Tabs} from '@material-ui/core';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
-import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
-import {useLastLocation} from 'react-router-last-location';
-import {Routes} from '../../router';
 import {contactMainStyles} from './_styles';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import ContactRelations from '../contact-relations';
@@ -15,6 +12,8 @@ import {ContactRouteUtils} from '../_router';
 import ContactOutcoming from '../contact-outcoming';
 import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/contact-dialog-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
+import ControlMenu from '../../../components/layouts/control-menu';
+import {PageSpacer} from '../../../components/surfaces';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -41,14 +40,11 @@ const calculateRouteFromTab = (tab: number): string => {
 const ContactMain: FC = () => {
   const classes = contactMainStyles();
   const history = useHistory();
-  const lastLocation = useLastLocation();
   const match = useRouteMatch();
   const {i18n, t} = useTranslation();
   const {setMenu} = useAdditionalMenuContext();
   const {showContactRequestDialog} = useContactDialogContext();
   const [activeTab, setActiveTab] = useState<number>(calculateTabFromRoute(match.path));
-
-  const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
   const openContactRequestDialog = (): void => {
     showContactRequestDialog();
@@ -61,12 +57,11 @@ const ContactMain: FC = () => {
 
   const menuElements = [
     {icon: <PlusIcon />, action: openContactRequestDialog, text: t('contact:tooltips.addContact')},
-    {icon: <ArrowBackIcon />, action: redirectToPreviousLocation, text: t('contact:tooltips.back')},
   ] as MenuElement[];
 
   useEffect(() => {
     setMenu(menuElements);
-  }, [i18n.language, showContactRequestDialog]);
+  }, [i18n.language, activeTab, showContactRequestDialog]);
 
   return (
     <>
@@ -76,6 +71,8 @@ const ContactMain: FC = () => {
           <Tab label={t('contact:outcoming.title')} />
           <Tab label={t('contact:incoming.title')} />
         </Tabs>
+        <PageSpacer />
+        <ControlMenu menu={menuElements} />
         {activeTab === 0 && <ContactRelations />}
         {activeTab === 1 && <ContactOutcoming />}
         {activeTab === 2 && <ContactIncoming />}

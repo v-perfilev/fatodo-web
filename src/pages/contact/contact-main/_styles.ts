@@ -4,6 +4,6 @@ export const contactMainStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: 1,
+    // flexGrow: 1,
   },
 }));

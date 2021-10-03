@@ -21,12 +21,7 @@ export const contactRelationsListStyles = makeStyles((theme: Theme) => ({
 export const contactRelationsFilterStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
-    justifyContent: 'flex-end',
-    marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5),
-  },
-  input: {
-    width: 400,
   },
 }));
 
@@ -47,5 +42,17 @@ export const contactRelationsItemStyles = makeStyles((theme: Theme) => ({
     '& > *': {
       marginLeft: theme.spacing(3),
     },
+  },
+}));
+
+export const contactRelationsStubStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    fontSize: '1rem',
+    color: theme.palette.grey['400'],
   },
 }));

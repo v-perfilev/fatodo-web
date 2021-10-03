@@ -1,4 +1,4 @@
-import React, {FC, memo, useEffect} from 'react';
+import React, {FC, memo, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewItemsStyles} from './_styles';
 import GroupViewItem from './group-view-item';
@@ -9,20 +9,27 @@ import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-
 import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {flowRight} from 'lodash';
+import {CircularSpinner} from '../../../components/loaders';
+import GroupViewStub from './group-view-stub';
 
 const GroupViewItems: FC = () => {
   const classes = groupViewItemsStyles();
   const {handleResponse} = useSnackContext();
   const {obj: group} = useGroupViewContext();
   const {objs: items, setObjs: setItems, setLoad: setLoadItems} = useItemListContext();
+  const [loading, setLoading] = useState(true);
 
   const loadItems = (): void => {
+    setLoading(true);
     ItemService.getAllItemsByGroupId(group.id)
       .then((response) => {
         setItems(response.data);
       })
       .catch((response) => {
         handleResponse(response);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -32,12 +39,15 @@ const GroupViewItems: FC = () => {
 
   return (
     <Box className={classes.root}>
-      {items.map((item, index) => (
-        <Box key={index}>
-          {index !== 0 && <PageDivider />}
-          <GroupViewItem item={item} />
-        </Box>
-      ))}
+      {loading && <CircularSpinner />}
+      {!loading && items.length === 0 && <GroupViewStub />}
+      {!loading &&
+        items.map((item, index) => (
+          <Box key={index}>
+            {index !== 0 && <PageDivider />}
+            <GroupViewItem item={item} />
+          </Box>
+        ))}
     </Box>
   );
 };

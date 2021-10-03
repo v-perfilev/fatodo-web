@@ -1,16 +1,19 @@
 {
   "relations": {
     "title": "Contacts",
-    "remove": "Remove"
+    "remove": "Remove",
+    "relationsNotFound": "No contacts yet"
   },
   "outcoming": {
     "title": "Outcoming",
-    "remove": "Remove"
+    "remove": "Remove",
+    "requestsNotFound": "No outcoming requests"
   },
   "incoming": {
     "title": "Incoming",
     "accept": "Accept",
-    "decline": "Decline"
+    "decline": "Decline",
+    "requestsNotFound": "No incoming requests"
   },
   "addContact": {
     "title": "Add user to list of contacts",
@@ -29,7 +32,6 @@
     "cancel": "Cancel"
   },
   "tooltips": {
-    "addContact": "Add contact",
-    "back": "Back"
+    "addContact": "Add contact"
   }
 }

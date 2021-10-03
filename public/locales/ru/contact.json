@@ -1,16 +1,19 @@
 {
   "relations": {
     "title": "Контакты",
-    "remove": "Удалить"
+    "remove": "Удалить",
+    "relationsNotFound": "Пока контактов нет"
   },
   "outcoming": {
     "title": "Исходящие",
-    "remove": "Удалить"
+    "remove": "Удалить",
+    "requestsNotFound": "Исходящих заявок нет"
   },
   "incoming": {
     "title": "Входящие",
     "accept": "Принять",
-    "decline": "Отклонить"
+    "decline": "Отклонить",
+    "requestsNotFound": "Входящих заявок нет"
   },
   "addContact": {
     "title": "Добавить пользователя в список контактов",
@@ -29,7 +32,6 @@
     "cancel": "Отменить"
   },
   "tooltips": {
-    "addContact": "Добавить контакт",
-    "back": "К предыдущей странице"
+    "addContact": "Добавить контакт"
   }
 }
