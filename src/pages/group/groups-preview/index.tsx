@@ -5,7 +5,7 @@ import {GroupRouteUtils} from '../_router';
 import {ReorderIcon} from '../../../components/icons/reorder-icon';
 import {useTranslation} from 'react-i18next';
 import {PlusIcon} from '../../../components/icons/plus-icon';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
@@ -13,6 +13,7 @@ import {CircularSpinner} from '../../../components/loaders';
 import GroupPreviewGridContainer from './group-preview-grid-container';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import ItemService from '../../../services/item.service';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const GroupPreview: FC = () => {
   const history = useHistory();
@@ -42,10 +43,10 @@ const GroupPreview: FC = () => {
     handleUserIds(userIds);
   };
 
-  const additionalMenuItems = [
-    {icon: <PlusIcon />, action: redirectToGroupCreate, tooltip: t('group:tooltips.create')},
-    {icon: <ReorderIcon />, action: redirectToGroupsSorting, tooltip: t('group:tooltips.reorder')},
-  ];
+  const menuElements = [
+    {icon: <PlusIcon />, action: redirectToGroupCreate, text: t('group:tooltips.create')},
+    {icon: <ReorderIcon />, action: redirectToGroupsSorting, text: t('group:tooltips.reorder')},
+  ] as MenuElement[];
 
   useEffect(() => {
     setLoadGroups(() => (): void => loadGroups());
@@ -58,7 +59,7 @@ const GroupPreview: FC = () => {
   }, [groups]);
 
   useEffect(() => {
-    setMenu(additionalMenuItems);
+    setMenu(menuElements);
   }, [i18n.language]);
 
   return groupsLoading ? <CircularSpinner /> : <GroupPreviewGridContainer />;

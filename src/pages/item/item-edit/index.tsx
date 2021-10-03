@@ -8,7 +8,7 @@ import {CloseIcon} from '../../../components/icons/close-icon';
 import ItemService from '../../../services/item.service';
 import {ItemDTO} from '../../../models/dto/item.dto';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {ItemRouteUtils} from '../_router';
 import {GroupRouteUtils} from '../../group/_router';
@@ -19,6 +19,7 @@ import withItemView from '../../../shared/hocs/with-view/with-item-view';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {flowRight} from 'lodash';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -43,10 +44,10 @@ const ItemEdit: FC = () => {
     handleUserIds(userIds);
   };
 
-  const additionalMenuItems = [
-    {icon: <CheckIcon />, action: saveCallback, tooltip: t('item:tooltips.ok')},
-    {icon: <CloseIcon />, action: redirectToItemView, tooltip: t('item:tooltips.cancel')},
-  ];
+  const MenuElements = [
+    {icon: <CheckIcon />, action: saveCallback, text: t('item:tooltips.ok')},
+    {icon: <CloseIcon />, action: redirectToItemView, text: t('item:tooltips.cancel')},
+  ] as MenuElement[];
 
   const loadItem = (): void => {
     ItemService.getItem(itemId)
@@ -107,7 +108,7 @@ const ItemEdit: FC = () => {
   }, [group]);
 
   useEffect(() => {
-    setMenu(additionalMenuItems);
+    setMenu(MenuElements);
   }, [i18n.language, isSaving, saveCallback]);
 
   return groupLoading || itemLoading ? (

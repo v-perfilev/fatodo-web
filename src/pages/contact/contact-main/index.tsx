@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import {Container, Tab, Tabs} from '@material-ui/core';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
@@ -14,6 +14,7 @@ import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with
 import {ContactRouteUtils} from '../_router';
 import ContactOutcoming from '../contact-outcoming';
 import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/contact-dialog-context';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -58,13 +59,13 @@ const ContactMain: FC = () => {
     setActiveTab(newTab);
   };
 
-  const additionalMenuItems = [
-    {icon: <PlusIcon />, action: openContactRequestDialog, tooltip: t('contact:tooltips.addContact')},
-    {icon: <ArrowBackIcon />, action: redirectToPreviousLocation, tooltip: t('contact:tooltips.back')},
-  ];
+  const menuElements = [
+    {icon: <PlusIcon />, action: openContactRequestDialog, text: t('contact:tooltips.addContact')},
+    {icon: <ArrowBackIcon />, action: redirectToPreviousLocation, text: t('contact:tooltips.back')},
+  ] as MenuElement[];
 
   useEffect(() => {
-    setMenu(additionalMenuItems);
+    setMenu(menuElements);
   }, [i18n.language, showContactRequestDialog]);
 
   return (

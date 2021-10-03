@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, ReactNode, useEffect, useMemo} from 'react';
 import {additionalMenuStyles} from './_styles';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab';
 import {CircularProgress} from '@material-ui/core';
 import {useLocation} from 'react-router-dom';
@@ -46,7 +46,7 @@ const AdditionalMenu: FC = () => {
       direction="up"
     >
       {menu.map((action, index) => (
-        <SpeedDialAction key={index} icon={action.icon} tooltipTitle={action.tooltip} onClick={action.action} />
+        <SpeedDialAction key={index} icon={action.icon} tooltipTitle={action.text} onClick={action.action} />
       ))}
     </SpeedDial>
   ) : null;

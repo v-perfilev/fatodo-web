@@ -5,12 +5,13 @@ import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
 import {useTranslation} from 'react-i18next';
 import GroupsSortingContainer from './groups-sorting-container';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {CircularSpinner} from '../../../components/loaders';
 import ItemService from '../../../services/item.service';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const GroupsSorting: FC = () => {
   const history = useHistory();
@@ -47,17 +48,17 @@ const GroupsSorting: FC = () => {
       });
   };
 
-  const additionalMenuItems = [
-    {icon: <CheckIcon />, action: saveOrder, tooltip: t('group:tooltips.ok')},
-    {icon: <CloseIcon />, action: redirectToGroups, tooltip: t('group:tooltips.cancel')},
-  ];
+  const menuElements = [
+    {icon: <CheckIcon />, action: saveOrder, text: t('group:tooltips.ok')},
+    {icon: <CloseIcon />, action: redirectToGroups, text: t('group:tooltips.cancel')},
+  ] as MenuElement[];
 
   useEffect(() => {
     setLoadGroups(() => (): void => loadGroups());
   }, []);
 
   useEffect(() => {
-    setMenu(additionalMenuItems);
+    setMenu(menuElements);
   }, [i18n.language, isSaving, order, groups]);
 
   return groupsLoading ? <CircularSpinner /> : <GroupsSortingContainer setOrder={setOrder} />;

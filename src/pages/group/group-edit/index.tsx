@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import GroupForm from '../group-form';
 import {useHistory, useParams} from 'react-router-dom';
 import {Routes} from '../../router';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../_router';
@@ -14,6 +14,7 @@ import ItemService from '../../../services/item.service';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const GroupEdit: FC = () => {
   const history = useHistory();
@@ -65,10 +66,10 @@ const GroupEdit: FC = () => {
     handleUserIds(userIds);
   };
 
-  const additionalMenuItems = [
-    {icon: <PlusIcon />, action: saveCallback, tooltip: t('group:tooltips.ok')},
-    {icon: <ArrowBackIcon />, action: redirectToGroupView, tooltip: t('group:tooltips.cancel')},
-  ];
+  const menuElements = [
+    {icon: <PlusIcon />, action: saveCallback, text: t('group:tooltips.ok')},
+    {icon: <ArrowBackIcon />, action: redirectToGroupView, text: t('group:tooltips.cancel')},
+  ] as MenuElement[];
 
   useEffect(() => {
     setLoadGroup(() => (): void => loadGroup());
@@ -81,7 +82,7 @@ const GroupEdit: FC = () => {
   }, [group]);
 
   useEffect(() => {
-    setMenu(additionalMenuItems);
+    setMenu(menuElements);
   }, [i18n.language, isSaving, saveCallback]);
 
   return groupLoading ? (

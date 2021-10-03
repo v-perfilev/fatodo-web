@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
 import {messageMainStyles} from './_styles';
@@ -18,6 +18,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ChatRouteUtils} from '../_router';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 type Props = AuthState;
 
@@ -64,10 +65,10 @@ const ChatMain: FC<Props> = ({account}: Props) => {
       .catch(handleResponse);
   };
 
-  const additionalMenuItems = [
-    {icon: <PlusIcon />, action: openChatCreateDialog, tooltip: t('chat:tooltips.createChat')},
-    {icon: <ArrowBackIcon />, action: redirectToPreviousLocation, tooltip: t('chat:tooltips.back')},
-  ];
+  const menuElements = [
+    {icon: <PlusIcon />, action: openChatCreateDialog, text: t('chat:tooltips.createChat')},
+    {icon: <ArrowBackIcon />, action: redirectToPreviousLocation, text: t('chat:tooltips.back')},
+  ] as MenuElement[];
 
   useEffect(() => {
     if (chatId) {
@@ -76,7 +77,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   }, []);
 
   useEffect(() => {
-    setMenu(additionalMenuItems);
+    setMenu(menuElements);
   }, [i18n.language, showChatCreateDialog]);
 
   const bigView = (

@@ -1,7 +1,7 @@
 import {ReactElement} from 'react';
 
-export interface AdditionalMenuItem {
+export interface MenuElement {
   icon: ReactElement;
   action: () => void;
-  tooltip: string;
+  text: string;
 }

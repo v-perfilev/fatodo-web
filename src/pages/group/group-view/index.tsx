@@ -12,7 +12,7 @@ import {PlusIcon} from '../../../components/icons/plus-icon';
 import {ItemRouteUtils} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {PageDivider, PageHeader, PageSpacer} from '../../../components/surfaces';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
@@ -26,6 +26,7 @@ import ItemService from '../../../services/item.service';
 import {flowRight} from 'lodash';
 import Comments from '../../comment';
 import {MembersIcon} from '../../../components/icons/members-icon';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const GroupView: FC = () => {
   const history = useHistory();
@@ -73,13 +74,13 @@ const GroupView: FC = () => {
     handleUserIds(userIds);
   };
 
-  const additionalMenuItems = [
-    {icon: <PlusIcon />, action: redirectToItemCreate, tooltip: t('item:tooltips.create')},
-    {icon: <EditIcon />, action: redirectToGroupEdit, tooltip: t('group:tooltips.edit')},
-    {icon: <MembersIcon />, action: openGroupMembersDialog, tooltip: t('group:tooltips.members')},
-    {icon: <DeleteIcon />, action: openGroupDeleteDialog, tooltip: t('group:tooltips.delete')},
-    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('group:tooltips.list')},
-  ];
+  const menuElements = [
+    {icon: <PlusIcon />, action: redirectToItemCreate, text: t('item:tooltips.create')},
+    {icon: <EditIcon />, action: redirectToGroupEdit, text: t('group:tooltips.edit')},
+    {icon: <MembersIcon />, action: openGroupMembersDialog, text: t('group:tooltips.members')},
+    {icon: <DeleteIcon />, action: openGroupDeleteDialog, text: t('group:tooltips.delete')},
+    {icon: <GroupsIcon />, action: redirectToGroups, text: t('group:tooltips.list')},
+  ] as MenuElement[];
 
   useEffect(() => {
     setLoadGroup(() => (): void => loadGroup());
@@ -92,7 +93,7 @@ const GroupView: FC = () => {
   }, [group]);
 
   useEffect(() => {
-    setMenu(additionalMenuItems);
+    setMenu(menuElements);
   }, [group, i18n.language, showGroupDeleteDialog]);
 
   return groupLoading ? (

@@ -3,7 +3,7 @@ import withHeader from '../../../shared/hocs/with-header/with-header';
 import {Container} from '@material-ui/core';
 import {PageDivider, PageHeader} from '../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
 import {useHistory} from 'react-router-dom';
 import {RootState} from '../../../store';
@@ -17,6 +17,7 @@ import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {flowRight} from 'lodash';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {requestAccountData};
@@ -33,12 +34,12 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
 
   const redirectToPreviousLocation = (): void => history.push(lastLocation?.pathname ?? Routes.ROOT);
 
-  const additionalMenuItems = [
-    {icon: <ArrowBackIcon />, action: redirectToPreviousLocation, tooltip: t('account:tooltips.back')},
-  ];
+  const menuElements = [
+    {icon: <ArrowBackIcon />, action: redirectToPreviousLocation, text: t('account:tooltips.back')},
+  ] as MenuElement[];
 
   useEffect(() => {
-    setMenu(additionalMenuItems);
+    setMenu(menuElements);
   }, [i18n.language]);
 
   return account.id ? (

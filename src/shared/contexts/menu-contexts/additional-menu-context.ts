@@ -1,9 +1,9 @@
 import {createContext, useContext} from 'react';
-import {AdditionalMenuItem} from './types';
+import {MenuElement} from './types';
 
 interface AdditionalMenuState {
-  menu: AdditionalMenuItem[];
-  setMenu: (menu: AdditionalMenuItem[]) => void;
+  menu: MenuElement[];
+  setMenu: (menu: MenuElement[]) => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
 }

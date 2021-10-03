@@ -7,13 +7,14 @@ import {useHistory, useParams} from 'react-router-dom';
 import ItemService from '../../../services/item.service';
 import ItemForm from '../item-form';
 import {ItemDTO} from '../../../models/dto/item.dto';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../../group/_router';
 import {CircularSpinner} from '../../../components/loaders';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const ItemCreate: FC = () => {
   const {i18n, t} = useTranslation();
@@ -30,10 +31,10 @@ const ItemCreate: FC = () => {
   const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
-  const additionalMenuItems = [
-    {icon: <CheckIcon />, action: saveCallback, tooltip: t('item:tooltips.ok')},
-    {icon: <CloseIcon />, action: redirectToGroupView, tooltip: t('item:tooltips.cancel')},
-  ];
+  const menuElements = [
+    {icon: <CheckIcon />, action: saveCallback, text: t('item:tooltips.ok')},
+    {icon: <CloseIcon />, action: redirectToGroupView, text: t('item:tooltips.cancel')},
+  ] as MenuElement[];
 
   const loadGroup = (): void => {
     ItemService.getGroup(groupId)
@@ -69,7 +70,7 @@ const ItemCreate: FC = () => {
   }, []);
 
   useEffect(() => {
-    setMenu(additionalMenuItems);
+    setMenu(menuElements);
   }, [i18n.language, isSaving, saveCallback]);
 
   return groupLoad ? (

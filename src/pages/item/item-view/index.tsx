@@ -5,7 +5,7 @@ import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
 import {PageDivider, PageHeader, PageSpacer} from '../../../components/surfaces';
-import {useAdditionalMenuContext} from '../../../shared/contexts/additional-menu-contexts/additional-menu-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
@@ -30,6 +30,7 @@ import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/ite
 import {flowRight} from 'lodash';
 import Comments from '../../comment';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const ItemView: FC = () => {
   const history = useHistory();
@@ -87,12 +88,12 @@ const ItemView: FC = () => {
     handleUserIds(userIds);
   };
 
-  const additionalMenuItems = [
-    {icon: <EditIcon />, action: redirectToItemEdit, tooltip: t('item:tooltips.edit')},
-    {icon: <DeleteIcon />, action: openItemDeleteDialog, tooltip: t('item:tooltips.delete')},
-    {icon: <ItemsIcon />, action: redirectToGroupView, tooltip: t('item:tooltips.list')},
-    {icon: <GroupsIcon />, action: redirectToGroups, tooltip: t('item:tooltips.groupList')},
-  ];
+  const menuElements = [
+    {icon: <EditIcon />, action: redirectToItemEdit, text: t('item:tooltips.edit')},
+    {icon: <DeleteIcon />, action: openItemDeleteDialog, text: t('item:tooltips.delete')},
+    {icon: <ItemsIcon />, action: redirectToGroupView, text: t('item:tooltips.list')},
+    {icon: <GroupsIcon />, action: redirectToGroups, text: t('item:tooltips.groupList')},
+  ] as MenuElement[];
 
   useEffect(() => {
     setLoadItem(() => (): void => loadItem());
@@ -111,7 +112,7 @@ const ItemView: FC = () => {
   }, [group]);
 
   useEffect(() => {
-    setMenu(additionalMenuItems);
+    setMenu(menuElements);
   }, [item, group, i18n.language, showItemDeleteDialog]);
 
   return itemLoading || groupLoading ? (
