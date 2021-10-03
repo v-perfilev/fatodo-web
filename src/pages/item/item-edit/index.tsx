@@ -20,6 +20,10 @@ import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {flowRight} from 'lodash';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
+import {PageSpacer} from '../../../components/surfaces';
+import ControlMenu from '../../../components/layouts/control-menu';
+import {Container, ThemeProvider} from '@material-ui/core';
+import {ThemeFactory} from '../../../shared/theme/theme';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -44,10 +48,12 @@ const ItemEdit: FC = () => {
     handleUserIds(userIds);
   };
 
-  const MenuElements = [
-    {icon: <CheckIcon />, action: saveCallback, text: t('item:tooltips.ok')},
-    {icon: <CloseIcon />, action: redirectToItemView, text: t('item:tooltips.cancel')},
+  const menuElements = [
+    {icon: <CheckIcon />, action: saveCallback, text: t('item:tooltips.save'), loading: isSaving},
+    {icon: <CloseIcon />, action: redirectToItemView, text: t('item:tooltips.cancel'), color: 'secondary'},
   ] as MenuElement[];
+
+  const theme = ThemeFactory.getTheme(group?.color);
 
   const loadItem = (): void => {
     ItemService.getItem(itemId)
@@ -108,19 +114,25 @@ const ItemEdit: FC = () => {
   }, [group]);
 
   useEffect(() => {
-    setMenu(MenuElements);
+    setMenu(menuElements);
   }, [i18n.language, isSaving, saveCallback]);
 
   return groupLoading || itemLoading ? (
     <CircularSpinner />
   ) : (
-    <ItemForm
-      group={group}
-      item={item}
-      header={t('item:headers.edit', {group: group.title})}
-      setSaveCallback={setSaveCallback}
-      request={request}
-    />
+    <ThemeProvider theme={theme}>
+      <Container>
+        <ItemForm
+          group={group}
+          item={item}
+          header={t('item:headers.edit', {group: group.title})}
+          setSaveCallback={setSaveCallback}
+          request={request}
+        />
+        <PageSpacer />
+        <ControlMenu menu={menuElements} disabled={isSaving} />
+      </Container>
+    </ThemeProvider>
   );
 };
 

@@ -12,9 +12,13 @@ import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import ItemService from '../../../services/item.service';
 import {PlusIcon} from '../../../components/icons/plus-icon';
-import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
+import {PageSpacer} from '../../../components/surfaces';
+import ControlMenu from '../../../components/layouts/control-menu';
+import {ThemeFactory} from '../../../shared/theme/theme';
+import {Container, ThemeProvider} from '@material-ui/core';
+import {CloseIcon} from '../../../components/icons/close-icon';
 
 const GroupEdit: FC = () => {
   const history = useHistory();
@@ -67,9 +71,11 @@ const GroupEdit: FC = () => {
   };
 
   const menuElements = [
-    {icon: <PlusIcon />, action: saveCallback, text: t('group:tooltips.ok')},
-    {icon: <ArrowBackIcon />, action: redirectToGroupView, text: t('group:tooltips.cancel')},
+    {icon: <PlusIcon />, action: saveCallback, text: t('group:tooltips.save'), loading: isSaving},
+    {icon: <CloseIcon />, action: redirectToGroupView, text: t('group:tooltips.cancel'), color: 'secondary'},
   ] as MenuElement[];
+
+  const theme = ThemeFactory.getTheme(group?.color);
 
   useEffect(() => {
     setLoadGroup(() => (): void => loadGroup());
@@ -88,7 +94,13 @@ const GroupEdit: FC = () => {
   return groupLoading ? (
     <CircularSpinner />
   ) : (
-    <GroupForm group={group} header={t('group:headers.edit')} setSaveCallback={setSaveCallback} request={request} />
+    <ThemeProvider theme={theme}>
+      <Container>
+        <GroupForm group={group} header={t('group:headers.edit')} setSaveCallback={setSaveCallback} request={request} />
+        <PageSpacer />
+        <ControlMenu menu={menuElements} disabled={isSaving} />
+      </Container>
+    </ThemeProvider>
   );
 };
 

@@ -31,6 +31,7 @@ import {flowRight} from 'lodash';
 import Comments from '../../comment';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
+import ControlMenu from '../../../components/layouts/control-menu';
 
 const ItemView: FC = () => {
   const history = useHistory();
@@ -128,6 +129,8 @@ const ItemView: FC = () => {
         <ItemViewReminders />
         <ItemViewTags />
         <ItemViewChanges />
+        <PageSpacer />
+        <ControlMenu menu={menuElements} />
         <PageSpacer />
         <Comments targetId={item.id} />
       </Container>

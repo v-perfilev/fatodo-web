@@ -17,7 +17,7 @@
     }
   },
   "tooltips": {
-    "ok": "Ok",
+    "save": "Save",
     "cancel": "Cancel",
     "reorder": "Reorder groups",
     "create": "Create group",

@@ -5,10 +5,10 @@ export const controlMenuStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     flexGrow: 1,
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
     '& > *': {
       marginRight: theme.spacing(2),
+      marginTop: theme.spacing(1),
+      marginBottom: theme.spacing(1),
     },
   },
 }));

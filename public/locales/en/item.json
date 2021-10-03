@@ -46,7 +46,7 @@
     }
   },
   "tooltips": {
-    "ok": "Ok",
+    "save": "Save",
     "cancel": "Cancel",
     "create": "Create item",
     "edit": "Edit item",

@@ -10,6 +10,10 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {GroupRouteUtils} from '../_router';
 import ItemService from '../../../services/item.service';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
+import {PageSpacer} from '../../../components/surfaces';
+import ControlMenu from '../../../components/layouts/control-menu';
+import {ThemeFactory} from '../../../shared/theme/theme';
+import {Container, ThemeProvider} from '@material-ui/core';
 
 const GroupCreate: FC = () => {
   const history = useHistory();
@@ -40,15 +44,25 @@ const GroupCreate: FC = () => {
   };
 
   const menuElements = [
-    {icon: <CheckIcon />, action: saveCallback, text: t('group:tooltips.ok')},
-    {icon: <CloseIcon />, action: redirectToGroups, text: t('group:tooltips.cancel')},
+    {icon: <CheckIcon />, action: saveCallback, text: t('group:tooltips.save'), loading: isSaving},
+    {icon: <CloseIcon />, action: redirectToGroups, text: t('group:tooltips.cancel'), color: 'secondary'},
   ] as MenuElement[];
+
+  const theme = ThemeFactory.getDefaultTheme();
 
   useEffect(() => {
     setMenu(menuElements);
   }, [i18n.language, isSaving, saveCallback]);
 
-  return <GroupForm header={t('group:headers.create')} setSaveCallback={setSaveCallback} request={request} />;
+  return (
+    <ThemeProvider theme={theme}>
+      <Container>
+        <GroupForm header={t('group:headers.create')} setSaveCallback={setSaveCallback} request={request} />
+        <PageSpacer />
+        <ControlMenu menu={menuElements} disabled={isSaving} />
+      </Container>
+    </ThemeProvider>
+  );
 };
 
 export default GroupCreate;

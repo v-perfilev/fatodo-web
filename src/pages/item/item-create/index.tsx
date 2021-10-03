@@ -15,6 +15,10 @@ import {CircularSpinner} from '../../../components/loaders';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
+import {PageSpacer} from '../../../components/surfaces';
+import ControlMenu from '../../../components/layouts/control-menu';
+import {Container, ThemeProvider} from '@material-ui/core';
+import {ThemeFactory} from '../../../shared/theme/theme';
 
 const ItemCreate: FC = () => {
   const {i18n, t} = useTranslation();
@@ -32,9 +36,11 @@ const ItemCreate: FC = () => {
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
 
   const menuElements = [
-    {icon: <CheckIcon />, action: saveCallback, text: t('item:tooltips.ok')},
-    {icon: <CloseIcon />, action: redirectToGroupView, text: t('item:tooltips.cancel')},
+    {icon: <CheckIcon />, action: saveCallback, text: t('item:tooltips.save'), loading: isSaving},
+    {icon: <CloseIcon />, action: redirectToGroupView, text: t('item:tooltips.cancel'), color: 'secondary'},
   ] as MenuElement[];
+
+  const theme = ThemeFactory.getTheme(group?.color);
 
   const loadGroup = (): void => {
     ItemService.getGroup(groupId)
@@ -76,12 +82,18 @@ const ItemCreate: FC = () => {
   return groupLoad ? (
     <CircularSpinner />
   ) : (
-    <ItemForm
-      group={group}
-      header={t('item:headers.create', {group: group.title})}
-      setSaveCallback={setSaveCallback}
-      request={request}
-    />
+    <ThemeProvider theme={theme}>
+      <Container>
+        <ItemForm
+          group={group}
+          header={t('item:headers.create', {group: group.title})}
+          setSaveCallback={setSaveCallback}
+          request={request}
+        />
+        <PageSpacer />
+        <ControlMenu menu={menuElements} disabled={isSaving} />
+      </Container>
+    </ThemeProvider>
   );
 };
 

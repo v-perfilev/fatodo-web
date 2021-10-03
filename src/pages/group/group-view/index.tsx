@@ -27,6 +27,7 @@ import {flowRight} from 'lodash';
 import Comments from '../../comment';
 import {MembersIcon} from '../../../components/icons/members-icon';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
+import ControlMenu from '../../../components/layouts/control-menu';
 
 const GroupView: FC = () => {
   const history = useHistory();
@@ -105,6 +106,8 @@ const GroupView: FC = () => {
         <PageDivider height={5} />
         <GroupViewUsers />
         <GroupViewItems />
+        <PageSpacer />
+        <ControlMenu menu={menuElements} />
         <PageSpacer />
         <Comments targetId={group.id} />
       </Container>

@@ -49,7 +49,7 @@ const GroupsSorting: FC = () => {
   };
 
   const menuElements = [
-    {icon: <CheckIcon />, action: saveOrder, text: t('group:tooltips.ok')},
+    {icon: <CheckIcon />, action: saveOrder, text: t('group:tooltips.save')},
     {icon: <CloseIcon />, action: redirectToGroups, text: t('group:tooltips.cancel')},
   ] as MenuElement[];
 
