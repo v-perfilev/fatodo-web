@@ -2,7 +2,11 @@
   "common": {
     "direct": "Директ"
   },
+  "control": {
+    "chatsNotFound": "Пока чатов нет"
+  },
   "content": {
+    "placeholder": "Чат не выбран",
     "inputPlaceholder": "Введите сообщение..."
   },
   "menu": {

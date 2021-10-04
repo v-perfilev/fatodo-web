@@ -2,7 +2,11 @@
   "common": {
     "direct": "Direct"
   },
+  "control": {
+    "chatsNotFound": "No chats yet"
+  },
   "content": {
+    "placeholder": "Chat not selected",
     "inputPlaceholder": "Type your message..."
   },
   "menu": {

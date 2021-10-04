@@ -4,6 +4,17 @@ export const contactMainStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    // flexGrow: 1,
+    flexGrow: 1,
+  },
+  control: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+}));
+
+export const contactFilterStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+    width: 400,
   },
 }));

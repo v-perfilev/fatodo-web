@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Container, Tab, Tabs} from '@material-ui/core';
+import {Box, Container, Tab, Tabs} from '@material-ui/core';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
@@ -14,6 +14,7 @@ import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import ControlMenu from '../../../components/layouts/control-menu';
 import {PageSpacer} from '../../../components/surfaces';
+import ContactFilter from './contact-filter';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -45,6 +46,7 @@ const ContactMain: FC = () => {
   const {setMenu} = useAdditionalMenuContext();
   const {showContactRequestDialog} = useContactDialogContext();
   const [activeTab, setActiveTab] = useState<number>(calculateTabFromRoute(match.path));
+  const [filter, setFilter] = useState<string>('');
 
   const openContactRequestDialog = (): void => {
     showContactRequestDialog();
@@ -72,10 +74,13 @@ const ContactMain: FC = () => {
           <Tab label={t('contact:incoming.title')} />
         </Tabs>
         <PageSpacer />
-        <ControlMenu menu={menuElements} />
-        {activeTab === 0 && <ContactRelations />}
-        {activeTab === 1 && <ContactOutcoming />}
-        {activeTab === 2 && <ContactIncoming />}
+        <Box className={classes.control}>
+          <ControlMenu menu={menuElements} />
+          <ContactFilter setFilter={setFilter} />
+        </Box>
+        {activeTab === 0 && <ContactRelations filter={filter} />}
+        {activeTab === 1 && <ContactOutcoming filter={filter} />}
+        {activeTab === 2 && <ContactIncoming filter={filter} />}
       </Container>
     </>
   );

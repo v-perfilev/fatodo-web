@@ -7,7 +7,11 @@ import {User} from '../../../models/user.model';
 import ContactRelationsContainer from './contact-relations-container';
 import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
 
-const ContactRelations: FC = () => {
+type Props = {
+  filter: string;
+};
+
+const ContactRelations: FC<Props> = ({filter}: Props) => {
   const {handleResponse} = useSnackContext();
   const {relations, update, loading: relationsLoading} = useContactContext();
   const [users, setUsers] = useState<User[]>([]);
@@ -46,9 +50,9 @@ const ContactRelations: FC = () => {
   }, [users]);
 
   return loading || relationsLoading ? (
-    <CircularSpinner />
+    <CircularSpinner size="sm" />
   ) : (
-    <ContactRelationsContainer relations={userRelations} loadRelations={update} />
+    <ContactRelationsContainer relations={userRelations} loadRelations={update} filter={filter} />
   );
 };
 

@@ -7,6 +7,7 @@ import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-cha
 import {CircularSpinner} from '../../../../components/loaders';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import ChatControlContainer from './chat-control-container';
+import ChatControlStub from '../chat-control-stub';
 
 type Props = {
   chat: Chat;
@@ -141,17 +142,21 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
 
   // RENDERERS
 
-  return loading ? (
-    <CircularSpinner size="sm" />
-  ) : (
-    <ChatControlContainer
-      chat={chat}
-      setChat={setChat}
-      chats={chats}
-      loadMoreItems={loadMoreChats}
-      allLoaded={allLoaded}
-      account={account}
-    />
+  return (
+    <>
+      {loading && <CircularSpinner size="sm" />}
+      {!loading && chats.length === 0 && <ChatControlStub />}
+      {!loading && chats.length > 0 && (
+        <ChatControlContainer
+          chat={chat}
+          setChat={setChat}
+          chats={chats}
+          loadMoreItems={loadMoreChats}
+          allLoaded={allLoaded}
+          account={account}
+        />
+      )}
+    </>
   );
 };
 

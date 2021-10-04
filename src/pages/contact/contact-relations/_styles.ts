@@ -1,13 +1,5 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-export const contactRelationsContainerStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-  },
-}));
-
 export const contactRelationsListStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
@@ -15,13 +7,6 @@ export const contactRelationsListStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     paddingTop: theme.spacing(2),
     paddingBottom: theme.spacing(1),
-  },
-}));
-
-export const contactRelationsFilterStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    marginBottom: theme.spacing(0.5),
   },
 }));
 
@@ -50,8 +35,7 @@ export const contactRelationsStubStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    flexGrow: 1,
     fontSize: '1rem',
     color: theme.palette.grey['400'],
   },

@@ -1,4 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
+import {Theme} from '@material-ui/core';
 
 export const chatContentStyles = makeStyles(() => ({
   root: {
@@ -8,10 +9,17 @@ export const chatContentStyles = makeStyles(() => ({
     flexGrow: 1,
     height: '100%',
   },
-  placeholder: {
+}));
+
+export const chatContentPlaceholderStyles = makeStyles((theme: Theme) => ({
+  root: {
     display: 'flex',
-    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    flexGrow: 1,
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+    fontSize: '1rem',
+    color: theme.palette.grey['400'],
   },
 }));

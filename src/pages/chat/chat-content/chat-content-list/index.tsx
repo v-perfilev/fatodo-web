@@ -12,6 +12,7 @@ import {VirtualizedListMethods} from '../../../../components/surfaces';
 import {User} from '../../../../models/user.model';
 import {NEW_MESSAGES_PREFIX} from '../../_constants';
 import {ChatItem} from '../types';
+import ChatControlStub from '../../chat-control/chat-control-stub';
 
 type Props = {
   chat: Chat;
@@ -213,18 +214,22 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
 
   // RENDERERS
 
-  return loading ? (
-    <CircularSpinner size="sm" />
-  ) : (
-    <ChatContentContainer
-      chat={chat}
-      items={items}
-      loadMoreItems={loadMoreMessages}
-      allLoaded={allLoaded}
-      account={account}
-      listRef={listRef}
-      setListRef={setListRef}
-    />
+  return (
+    <>
+      {loading && <CircularSpinner size="sm" />}
+      {!loading && items.length === 0 && <ChatControlStub />}
+      {!loading && items.length > 0 && (
+        <ChatContentContainer
+          chat={chat}
+          items={items}
+          loadMoreItems={loadMoreMessages}
+          allLoaded={allLoaded}
+          account={account}
+          listRef={listRef}
+          setListRef={setListRef}
+        />
+      )}
+    </>
   );
 };
 

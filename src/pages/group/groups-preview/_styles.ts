@@ -131,3 +131,14 @@ export const groupGridItemStyles = makeStyles((theme: Theme) => ({
     padding: theme.spacing(1),
   },
 }));
+
+export const groupPreviewStubStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '1rem',
+    color: theme.palette.grey['400'],
+  },
+}));

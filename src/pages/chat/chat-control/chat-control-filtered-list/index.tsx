@@ -8,6 +8,7 @@ import {CircularSpinner} from '../../../../components/loaders';
 import ChatControlContainer from '../chat-control-list/chat-control-container';
 import ChatService from '../../../../services/chat.service';
 import {TIMEOUT_BEFORE_APPLY_FILTER} from '../../_constants';
+import ChatControlStub from '../chat-control-stub';
 
 type Props = {
   filter: string;
@@ -116,10 +117,14 @@ const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Pr
     }
   }, [chatLastMessageUpdateEvent]);
 
-  return loading ? (
-    <CircularSpinner size="sm" />
-  ) : (
-    <ChatControlContainer chat={chat} setChat={setChat} chats={chats} account={account} />
+  return (
+    <>
+      {loading && <CircularSpinner size="sm" />}
+      {!loading && chats.length === 0 && <ChatControlStub />}
+      {!loading && chats.length > 0 && (
+        <ChatControlContainer chat={chat} setChat={setChat} chats={chats} account={account} />
+      )}
+    </>
   );
 };
 

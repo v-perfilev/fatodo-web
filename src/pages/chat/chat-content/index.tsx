@@ -9,6 +9,7 @@ import ChatContentList, {ChatContentMethods} from './chat-content-list';
 import ChatContentFooter from './chat-content-footer';
 import {ChatUtils} from '../../../shared/utils/chat.utils';
 import {Message} from '../../../models/message.model';
+import ChatContentPlaceholder from './chat-content-placeholder';
 
 type Props = {
   chat: Chat;
@@ -46,7 +47,7 @@ const ChatContent: FC<Props> = ({chat, closeChat, account}: Props) => {
           <ChatContentFooter chatId={chat.id} account={account} addMessage={addMessage} />
         </>
       )}
-      {!chat && <Box className={classes.placeholder} />}
+      {!chat && <ChatContentPlaceholder />}
     </Box>
   );
 };

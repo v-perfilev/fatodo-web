@@ -1,13 +1,17 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ContactRequestWithUser} from '../../../models/contact-request.model';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import ContactIncomingList from './contact-incoming-list';
 import {User} from '../../../models/user.model';
 import UserService from '../../../services/user.service';
 import {CircularSpinner} from '../../../components/loaders';
 import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
+import ContactIncomingContainer from './contact-incoming-container';
 
-const ContactIncoming: FC = () => {
+type Props = {
+  filter: string;
+};
+
+const ContactIncoming: FC<Props> = ({filter}: Props) => {
   const {handleResponse} = useSnackContext();
   const {incomingRequests: requests, update, loading: requestsLoading} = useContactContext();
   const [users, setUsers] = useState<User[]>([]);
@@ -46,9 +50,9 @@ const ContactIncoming: FC = () => {
   }, [users]);
 
   return loading || requestsLoading ? (
-    <CircularSpinner />
+    <CircularSpinner size="sm" />
   ) : (
-    <ContactIncomingList requests={userRequests} loadRequests={update} />
+    <ContactIncomingContainer requests={userRequests} loadRequests={update} filter={filter} />
   );
 };
 

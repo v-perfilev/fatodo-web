@@ -39,7 +39,7 @@ const GroupViewItems: FC = () => {
 
   return (
     <Box className={classes.root}>
-      {loading && <CircularSpinner />}
+      {loading && <CircularSpinner size="sm" />}
       {!loading && items.length === 0 && <GroupViewStub />}
       {!loading &&
         items.map((item, index) => (

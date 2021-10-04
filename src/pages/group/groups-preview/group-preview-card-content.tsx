@@ -12,6 +12,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
+import GroupPreviewStub from './group-perview-stub';
 
 const GroupPreviewCardContent: FC = () => {
   const classes = groupCardContentStyles();
@@ -51,7 +52,7 @@ const GroupPreviewCardContent: FC = () => {
     loadItems();
   }, []);
 
-  return (
+  return items.length > 0 ? (
     <CardContent className={classes.content}>
       <div className={classes.box} ref={ref}>
         {trail.map((style, index) => (
@@ -74,6 +75,8 @@ const GroupPreviewCardContent: FC = () => {
         </Box>
       )}
     </CardContent>
+  ) : (
+    <GroupPreviewStub />
   );
 };
 
