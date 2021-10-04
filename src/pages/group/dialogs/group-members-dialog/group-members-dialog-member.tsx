@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
 import {Box, IconButton} from '@material-ui/core';
-import {UserWithPopupView} from '../../../../components/views';
+import {UserView} from '../../../../components/views';
 import {groupMembersDialogMemberStyles} from './_styles';
 import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
@@ -65,7 +65,7 @@ const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, a
   return (
     <Box className={classes.root}>
       <Box className={classes.user}>
-        <UserWithPopupView user={user} withUsername withUserPic picSize="sm" />
+        <UserView user={user} withUsername withUserPic picSize="sm" />
         <PermissionView permission={user.permission} />
       </Box>
       <Box className={classes.buttons}>
