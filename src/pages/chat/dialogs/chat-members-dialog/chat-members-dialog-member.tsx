@@ -54,7 +54,7 @@ const ChatMembersDialogMember: FC<Props> = ({chat, user, account}: Props) => {
   );
 
   return (
-    <Box className={classes.userBox}>
+    <Box className={classes.root}>
       <Box className={classes.user}>
         <UserWithPopupView user={user} withUsername withUserPic picSize="sm" />
       </Box>

@@ -22,13 +22,14 @@
   "tooltips": {
     "save": "Save",
     "cancel": "Cancel",
-    "reorder": "Reorder groups",
-    "create": "Create group",
-    "edit": "Edit group",
-    "members": "Group members",
-    "delete": "Delete group",
+    "reorder": "Reorder",
+    "create": "Create",
+    "edit": "Edit",
+    "members": "Members",
+    "addMembers": "Invite",
+    "delete": "Delete",
     "list": "List of groups",
-    "createItem": "Create item"
+    "leave": "Leave"
   },
   "menu": {
     "createItem": "Create item",
@@ -61,13 +62,17 @@
     "title": "Remove user from group",
     "text": "Are you sure you want to delete user {{username}} from group?"
   },
+  "deleteGroup": {
+    "title": "Delete group",
+    "text": "Are you sure you want to delete the group \"{{title}}\"?"
+  },
+  "leaveGroup": {
+    "title": "Leave group",
+    "text": "Are you sure you want to leave the group \"{{title}}\"?"
+  },
   "roles": {
     "admin": "Administrator",
     "edit": "Editor",
     "read": "Reader"
-  },
-  "modals": {
-    "deleteTitle": "Delete group",
-    "deleteText": "Are you sure you want to delete group \"{{title}}\"?"
   }
 }

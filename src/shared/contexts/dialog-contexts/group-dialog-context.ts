@@ -4,10 +4,11 @@ import {Group, GroupUser} from '../../../models/group.model';
 import {User} from '../../../models/user.model';
 
 interface GroupDialogState {
-  showGroupDeleteDialog: (group: Group, onSuccess?: () => void) => void;
-  showGroupAddMembersDialog: (group: Group) => void;
-  showGroupEditMemberDialog: (group: Group, user: GroupUser) => void;
-  showGroupMembersDialog: (group: Group, users: User[]) => void;
+  showGroupDeleteDialog: (group: Group, onSuccess: () => void) => void;
+  showGroupAddMembersDialog: (group: Group, onSuccess: () => void) => void;
+  showGroupEditMemberDialog: (group: Group, user: GroupUser, onSuccess: () => void) => void;
+  showGroupMembersDialog: (group: Group, users: User[], onSuccess: () => void) => void;
+  showGroupLeaveDialog: (group: Group, onSuccess: () => void) => void;
 }
 
 export const GroupDialogContext = React.createContext<GroupDialogState>(null);

@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
 import {commentStyles} from './_styles';
-import {Box, Container} from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import CommentControl from './comment-control';
 import CommentList, {CommentListMethods} from './comment-list';
 import {User} from '../../models/user.model';
@@ -35,21 +35,14 @@ const Comment: FC<Props> = ({targetId, account}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <Container className={classes.container}>
-        <CommentControl
-          targetId={targetId}
-          account={account}
-          reference={reference}
-          clearReference={clearReference}
-          addComment={addComment}
-        />
-        <CommentList
-          targetId={targetId}
-          account={account}
-          setReference={setReference}
-          commentListRef={commentListRef}
-        />
-      </Container>
+      <CommentControl
+        targetId={targetId}
+        account={account}
+        reference={reference}
+        clearReference={clearReference}
+        addComment={addComment}
+      />
+      <CommentList targetId={targetId} account={account} setReference={setReference} commentListRef={commentListRef} />
     </Box>
   );
 };

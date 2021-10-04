@@ -34,18 +34,22 @@ export const groupMembersDialogStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const groupMembersDialogMemberStyles = makeStyles((theme: Theme) => ({
-  userBox: {
+  root: {
     display: 'flex',
     alignItems: 'center',
     marginTop: theme.spacing(1),
   },
   user: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
     flexGrow: 1,
   },
-  deleteUser: {
-    color: theme.palette.error.main,
-    '& .MuiSvgIcon-root': {
-      color: theme.palette.error.main,
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+    '& > *': {
+      marginLeft: theme.spacing(1),
     },
   },
 }));

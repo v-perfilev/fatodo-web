@@ -96,6 +96,7 @@ const GroupMembersDialog: FC<Props> = (props: Props) => {
       content={content}
       actions={actions}
       showCloseIcon
+      size="md"
     />
   );
 };

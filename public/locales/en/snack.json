@@ -14,7 +14,8 @@
     "created": "Group created",
     "edited": "Group edited",
     "deleted": "Group deleted",
-    "sorted": "Groups resorted"
+    "sorted": "Groups resorted",
+    "left": "You left the group"
   },
   "item": {
     "created": "Item created",

@@ -34,18 +34,12 @@ export const chatMembersDialogStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const chatMembersDialogMemberStyles = makeStyles((theme: Theme) => ({
-  userBox: {
+  root: {
     display: 'flex',
     alignItems: 'center',
     marginTop: theme.spacing(1),
   },
   user: {
     flexGrow: 1,
-  },
-  deleteUser: {
-    color: theme.palette.error.main,
-    '& .MuiSvgIcon-root': {
-      color: theme.palette.error.main,
-    },
   },
 }));

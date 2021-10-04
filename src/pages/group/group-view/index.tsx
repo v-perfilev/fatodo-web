@@ -28,6 +28,8 @@ import Comments from '../../comment';
 import {MembersIcon} from '../../../components/icons/members-icon';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import ControlMenu from '../../../components/layouts/control-menu';
+import {UserPlusIcon} from '../../../components/icons/user-plus-icon';
+import {LeaveIcon} from '../../../components/icons/leave-icon';
 
 const GroupView: FC = () => {
   const history = useHistory();
@@ -36,7 +38,12 @@ const GroupView: FC = () => {
   const {handleResponse} = useSnackContext();
   const {setMenu} = useAdditionalMenuContext();
   const {users, handleUserIds} = useUserListContext();
-  const {showGroupDeleteDialog, showGroupMembersDialog} = useGroupDialogContext();
+  const {
+    showGroupDeleteDialog,
+    showGroupMembersDialog,
+    showGroupAddMembersDialog,
+    showGroupLeaveDialog,
+  } = useGroupDialogContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
@@ -45,15 +52,6 @@ const GroupView: FC = () => {
   const redirectToGroupEdit = (): void => history.push(GroupRouteUtils.getEditUrl(groupId));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
-
-  const openGroupMembersDialog = (): void => {
-    showGroupMembersDialog(group, users);
-  };
-
-  const openGroupDeleteDialog = (): void => {
-    const onSuccess = (): void => redirectToGroups();
-    showGroupDeleteDialog(group, onSuccess);
-  };
 
   const loadGroup = (): void => {
     ItemService.getGroup(groupId)
@@ -75,11 +73,33 @@ const GroupView: FC = () => {
     handleUserIds(userIds);
   };
 
+  const openGroupMembersDialog = (): void => {
+    const onSuccess = (): void => loadGroup();
+    showGroupMembersDialog(group, users, onSuccess);
+  };
+
+  const openGroupAddMembersDialog = (): void => {
+    const onSuccess = (): void => loadGroup();
+    showGroupAddMembersDialog(group, onSuccess);
+  };
+
+  const openGroupDeleteDialog = (): void => {
+    const onSuccess = (): void => redirectToGroups();
+    showGroupDeleteDialog(group, onSuccess);
+  };
+
+  const openGroupLeaveDialog = (): void => {
+    const onSuccess = (): void => redirectToGroups();
+    showGroupLeaveDialog(group, onSuccess);
+  };
+
   const menuElements = [
     {icon: <GroupsIcon />, action: redirectToGroups, text: t('group:tooltips.list')},
     {icon: <PlusIcon />, action: redirectToItemCreate, text: t('item:tooltips.create')},
     {icon: <EditIcon />, action: redirectToGroupEdit, text: t('group:tooltips.edit')},
     {icon: <MembersIcon />, action: openGroupMembersDialog, text: t('group:tooltips.members')},
+    {icon: <UserPlusIcon />, action: openGroupAddMembersDialog, text: t('group:tooltips.addMembers')},
+    {icon: <LeaveIcon />, action: openGroupLeaveDialog, text: t('group:tooltips.leave'), color: 'secondary'},
     {icon: <DeleteIcon />, action: openGroupDeleteDialog, text: t('group:tooltips.delete'), color: 'secondary'},
   ] as MenuElement[];
 

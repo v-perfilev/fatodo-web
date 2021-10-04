@@ -13,17 +13,19 @@ export type GroupAddMembersDialogProps = {
   group: Group;
   show: boolean;
   close: () => void;
+  onSuccess: () => void;
 };
 
 export const defaultGroupAddMembersDialogProps: Readonly<GroupAddMembersDialogProps> = {
   group: null,
   show: false,
   close: (): void => undefined,
+  onSuccess: (): void => undefined,
 };
 
 type Props = GroupAddMembersDialogProps;
 
-const GroupAddMembersDialog: FC<Props> = ({group, show, close}: Props) => {
+const GroupAddMembersDialog: FC<Props> = ({group, show, close, onSuccess}: Props) => {
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const {relations, update} = useContactContext();
@@ -36,6 +38,7 @@ const GroupAddMembersDialog: FC<Props> = ({group, show, close}: Props) => {
     ItemService.addMembersToGroup(group.id, userIds)
       .then(() => {
         close();
+        onSuccess();
       })
       .catch((response) => {
         handleResponse(response);

@@ -14,6 +14,7 @@ export type GroupEditMemberDialogProps = {
   user: GroupUser;
   show: boolean;
   close: () => void;
+  onSuccess: () => void;
 };
 
 export const defaultGroupEditMemberDialogProps: Readonly<GroupEditMemberDialogProps> = {
@@ -21,11 +22,12 @@ export const defaultGroupEditMemberDialogProps: Readonly<GroupEditMemberDialogPr
   user: null,
   show: false,
   close: (): void => undefined,
+  onSuccess: (): void => undefined,
 };
 
 type Props = GroupEditMemberDialogProps;
 
-const GroupEditMemberDialog: FC<Props> = ({group, user, show, close}: Props) => {
+const GroupEditMemberDialog: FC<Props> = ({group, user, show, close, onSuccess}: Props) => {
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,6 +39,7 @@ const GroupEditMemberDialog: FC<Props> = ({group, user, show, close}: Props) => 
     ItemService.editGroupMember(group.id, editedMember)
       .then(() => {
         close();
+        onSuccess();
       })
       .catch((response) => {
         handleResponse(response);
@@ -54,7 +57,7 @@ const GroupEditMemberDialog: FC<Props> = ({group, user, show, close}: Props) => 
 
   const content = group && user && (
     <>
-      <UserView user={user} />
+      <UserView user={user} withUsername />
       <PermissionSelect permission={permission} setPermission={setPermission} />
     </>
   );

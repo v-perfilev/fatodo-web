@@ -5,23 +5,23 @@ import {Group} from '../../../../models/group.model';
 import ConfirmationDialog from '../../../../components/dialogs/confirmation-dialog';
 import ItemService from '../../../../services/item.service';
 
-export type GroupDeleteDialogProps = {
+export type GroupLeaveDialogProps = {
   group: Group;
   show: boolean;
   close: () => void;
   onSuccess: () => void;
 };
 
-export const defaultGroupDeleteDialogProps: Readonly<GroupDeleteDialogProps> = {
+export const defaultGroupLeaveDialogProps: Readonly<GroupLeaveDialogProps> = {
   group: null,
   show: false,
   close: (): void => undefined,
   onSuccess: (): void => undefined,
 };
 
-type Props = GroupDeleteDialogProps;
+type Props = GroupLeaveDialogProps;
 
-const GroupDeleteDialog: FC<Props> = ({group, show, close, onSuccess}: Props) => {
+const GroupLeaveDialog: FC<Props> = ({group, show, close, onSuccess}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ const GroupDeleteDialog: FC<Props> = ({group, show, close, onSuccess}: Props) =>
     setLoading(true);
     ItemService.deleteGroup(group?.id)
       .then(() => {
-        handleCode('group.deleted', 'info');
+        handleCode('group.left', 'info');
         close();
         onSuccess();
       })
@@ -51,11 +51,11 @@ const GroupDeleteDialog: FC<Props> = ({group, show, close, onSuccess}: Props) =>
       open={show}
       onAgree={onAgree}
       onDisagree={onDisagree}
-      title={t('group:deleteGroup.title')}
-      text={t('group:deleteGroup.text', {title: group?.title})}
+      title={t('group:leaveGroup.title')}
+      text={t('group:leaveGroup.text', {title: group?.title})}
       loading={loading}
     />
   );
 };
 
-export default GroupDeleteDialog;
+export default GroupLeaveDialog;

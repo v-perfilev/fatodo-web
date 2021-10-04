@@ -63,21 +63,23 @@ const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, a
   );
 
   return (
-    <Box className={classes.userBox}>
+    <Box className={classes.root}>
       <Box className={classes.user}>
         <UserWithPopupView user={user} withUsername withUserPic picSize="sm" />
         <PermissionView permission={user.permission} />
       </Box>
-      {canAdmin && (
-        <IconButton size="small" onClick={switchToEdit}>
-          <EditIcon color="action" />
-        </IconButton>
-      )}
-      {canAdmin && (
-        <IconButton size="small" onClick={switchRemovingConfirmation}>
-          <UserMinusIcon color="error" />
-        </IconButton>
-      )}
+      <Box className={classes.buttons}>
+        {canAdmin && (
+          <IconButton size="small" onClick={switchToEdit}>
+            <EditIcon color="primary" />
+          </IconButton>
+        )}
+        {canAdmin && (
+          <IconButton size="small" onClick={switchRemovingConfirmation}>
+            <UserMinusIcon color="error" />
+          </IconButton>
+        )}
+      </Box>
       {removingConfirmation}
     </Box>
   );
