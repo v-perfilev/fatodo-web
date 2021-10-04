@@ -52,8 +52,8 @@ const ItemDeleteDialog: FC<Props> = ({item, close, onSuccess}: Props) => {
       open={!!item}
       onAgree={onAgree}
       onDisagree={onDisagree}
-      title={t('item:modals.deleteTitle')}
-      text={t('item:modals.deleteText', {title: item?.title})}
+      title={t('item:deleteItem.title')}
+      text={t('item:deleteItem.text', {title: item?.title})}
       loading={loading}
     />
   );

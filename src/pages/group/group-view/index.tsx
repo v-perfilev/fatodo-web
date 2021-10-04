@@ -30,8 +30,13 @@ import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import ControlMenu from '../../../components/layouts/control-menu';
 import {UserPlusIcon} from '../../../components/icons/user-plus-icon';
 import {LeaveIcon} from '../../../components/icons/leave-icon';
+import {GroupUtils} from '../../../shared/utils/group.utils';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
 
-const GroupView: FC = () => {
+type Props = AuthState;
+
+const GroupView: FC<Props> = ({account}: Props) => {
   const history = useHistory();
   const {groupId} = useParams();
   const {t, i18n} = useTranslation();
@@ -93,14 +98,35 @@ const GroupView: FC = () => {
     showGroupLeaveDialog(group, onSuccess);
   };
 
+  const canAdmin = group && GroupUtils.canAdmin(account, group);
+  const canEdit = group && GroupUtils.canAdmin(account, group);
+  const canLeave = group && GroupUtils.canLeave(account, group);
+
   const menuElements = [
     {icon: <GroupsIcon />, action: redirectToGroups, text: t('group:tooltips.list')},
-    {icon: <PlusIcon />, action: redirectToItemCreate, text: t('item:tooltips.create')},
-    {icon: <EditIcon />, action: redirectToGroupEdit, text: t('group:tooltips.edit')},
+    {icon: <PlusIcon />, action: redirectToItemCreate, text: t('item:tooltips.create'), hidden: !canEdit},
+    {icon: <EditIcon />, action: redirectToGroupEdit, text: t('group:tooltips.edit'), hidden: !canAdmin},
     {icon: <MembersIcon />, action: openGroupMembersDialog, text: t('group:tooltips.members')},
-    {icon: <UserPlusIcon />, action: openGroupAddMembersDialog, text: t('group:tooltips.addMembers')},
-    {icon: <LeaveIcon />, action: openGroupLeaveDialog, text: t('group:tooltips.leave'), color: 'secondary'},
-    {icon: <DeleteIcon />, action: openGroupDeleteDialog, text: t('group:tooltips.delete'), color: 'secondary'},
+    {
+      icon: <UserPlusIcon />,
+      action: openGroupAddMembersDialog,
+      text: t('group:tooltips.addMembers'),
+      hidden: !canAdmin,
+    },
+    {
+      icon: <LeaveIcon />,
+      action: openGroupLeaveDialog,
+      text: t('group:tooltips.leave'),
+      color: 'secondary',
+      disabled: !canLeave,
+    },
+    {
+      icon: <DeleteIcon />,
+      action: openGroupDeleteDialog,
+      text: t('group:tooltips.delete'),
+      color: 'secondary',
+      hidden: !canAdmin,
+    },
   ] as MenuElement[];
 
   useEffect(() => {
@@ -125,6 +151,7 @@ const GroupView: FC = () => {
         <PageHeader title={group.title} filename={group.imageFilename} />
         <PageDivider height={5} />
         <GroupViewUsers />
+        <PageSpacer />
         <GroupViewItems />
         <PageSpacer />
         <ControlMenu menu={menuElements} />
@@ -135,4 +162,4 @@ const GroupView: FC = () => {
   );
 };
 
-export default flowRight([withVerticalPadding, withGroupView, memo])(GroupView);
+export default flowRight([withVerticalPadding, withGroupView, withAuthState, memo])(GroupView);

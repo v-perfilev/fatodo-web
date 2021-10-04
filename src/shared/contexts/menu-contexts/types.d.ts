@@ -6,5 +6,7 @@ export interface MenuElement {
   action: () => void;
   text: string;
   color?: PropTypes.Color;
-  loading?: any;
+  disabled?: boolean;
+  hidden?: boolean;
+  loading?: boolean;
 }

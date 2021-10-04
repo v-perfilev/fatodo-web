@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ComponentType, FC, HTMLAttributes, useEffect, useState} from 'react';
+import {ComponentType, FC, HTMLAttributes, useCallback, useEffect, useMemo, useState} from 'react';
 import {HoverPopupPopper} from './hover-popup-popper';
 import {hoverPopupStyles} from './_styles';
 
@@ -11,41 +11,44 @@ type Props = HTMLAttributes<HTMLElement> & {
 export const HoverPopup: FC<Props> = ({AnchorComponent, PopupComponent}: Props) => {
   const classes = hoverPopupStyles();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const [tmpAnchorEl, setTmpAnchorEl] = useState<HTMLElement | null>(null);
   const [isOverBox, setIsOverBox] = useState(false);
   const [isOverPopover, setIsOverPopover] = useState(false);
 
-  const onBoxOver = (event: React.MouseEvent<HTMLElement, MouseEvent>): void => {
+  const onBoxOver = useCallback((event: React.MouseEvent<HTMLElement, MouseEvent>): void => {
     setIsOverBox(true);
-    setTmpAnchorEl(event.currentTarget);
-    window.setTimeout(() => setAnchorEl(tmpAnchorEl), 500);
-  };
+    setAnchorEl(event.currentTarget);
+  }, []);
 
-  const onBoxLeave = (): void => {
+  const onBoxLeave = useCallback((): void => {
     window.setTimeout(() => setIsOverBox(false), 50);
-  };
+  }, []);
 
-  const onPopoverOver = (): void => {
+  const onPopoverOver = useCallback((): void => {
     setIsOverPopover(true);
-  };
+  }, []);
 
-  const onPopoverLeave = (): void => {
-    window.setTimeout(() => setIsOverPopover(false), 50);
-  };
+  const onPopoverLeave = useCallback((): void => {
+    window.setTimeout(() => setIsOverPopover(false), 500);
+  }, []);
 
-  const clearAnchor = (): void => {
+  const clearAnchor = useCallback((): void => {
     setAnchorEl(null);
-  };
+  }, []);
 
   useEffect(() => {
     if (!isOverBox && !isOverPopover) {
       clearAnchor();
     }
-  }, [isOverBox, isOverPopover, anchorEl]);
+  }, [isOverBox, isOverPopover]);
+
+  const anchor = useMemo(
+    () => <AnchorComponent onMouseOver={onBoxOver} onMouseLeave={onBoxLeave} className={classes.root} />,
+    []
+  );
 
   return (
     <>
-      <AnchorComponent onMouseOver={onBoxOver} onMouseLeave={onBoxLeave} className={classes.root} />
+      {anchor}
       <HoverPopupPopper
         anchorEl={anchorEl}
         ContentComponent={PopupComponent}

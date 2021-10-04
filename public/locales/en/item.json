@@ -3,6 +3,9 @@
     "create": "Create item in {{group}}",
     "edit": "Edit item in {{group}}"
   },
+  "view": {
+    "noDescription": "No description"
+  },
   "labels": {
     "type": "Type",
     "date": "Date",
@@ -53,8 +56,8 @@
     "delete": "Delete",
     "list": "List of items"
   },
-  "modals": {
-    "deleteTitle": "Delete item",
-    "deleteText": "Are you sure you want to delete item \"{{title}}\"?"
+  "deleteItem": {
+    "title": "Delete item",
+    "text": "Are you sure you want to delete item \"{{title}}\"?"
   }
 }

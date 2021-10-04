@@ -58,7 +58,7 @@ export const UserInfoViewButtons: FC<Props> = ({user}: Props) => {
     setRemoveLoading(true);
     ContactService.removeRequest(user.id)
       .then(() => {
-        handleCode('contact.requestSent', 'info');
+        handleCode('contact.requestRemoved', 'info');
         update();
       })
       .catch((response) => {

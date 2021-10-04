@@ -45,9 +45,11 @@ const AdditionalMenu: FC = () => {
       open={open}
       direction="up"
     >
-      {menu.map((action, index) => (
-        <SpeedDialAction key={index} icon={action.icon} tooltipTitle={action.text} onClick={action.action} />
-      ))}
+      {menu
+        .filter((action) => !action.hidden && !action.disabled)
+        .map((action, index) => (
+          <SpeedDialAction key={index} icon={action.icon} tooltipTitle={action.text} onClick={action.action} />
+        ))}
     </SpeedDial>
   ) : null;
 };

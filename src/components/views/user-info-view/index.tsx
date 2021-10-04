@@ -7,9 +7,9 @@ import {userInfoViewStyles} from './_styles';
 import csx from 'classnames';
 import {UserInfoViewField} from './user-info-view-field';
 import {useTranslation} from 'react-i18next';
-import {UserInfoViewButtons} from './user-info-view-buttons';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
+import {UserInfoViewButtons} from './user-info-view-buttons';
 
 type Props = HTMLAttributes<HTMLElement> &
   AuthState & {

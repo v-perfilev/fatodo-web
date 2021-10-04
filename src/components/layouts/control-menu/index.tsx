@@ -15,20 +15,22 @@ const ControlMenu: FC<Props> = ({menu, disabled}: Props) => {
 
   return (
     <Box className={classes.root}>
-      {menu.map((action, index) => (
-        <LoadingButton
-          key={index}
-          startIcon={action.icon}
-          onClick={action.action}
-          disabled={disabled}
-          loading={action.loading}
-          color={action.color || 'primary'}
-          variant="outlined"
-          size="small"
-        >
-          {action.text}
-        </LoadingButton>
-      ))}
+      {menu
+        .filter((action) => !action.hidden)
+        .map((action, index) => (
+          <LoadingButton
+            key={index}
+            startIcon={action.icon}
+            onClick={action.action}
+            disabled={disabled || action.disabled}
+            loading={action.loading}
+            color={action.color || 'primary'}
+            variant="outlined"
+            size="small"
+          >
+            {action.text}
+          </LoadingButton>
+        ))}
     </Box>
   );
 };

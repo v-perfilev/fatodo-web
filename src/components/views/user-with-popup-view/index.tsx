@@ -3,8 +3,8 @@ import {FC, HTMLAttributes} from 'react';
 import {User} from '../../../models/user.model';
 import {SizeType} from '../../images/types';
 import UserInfoView from '../user-info-view';
-import {HoverPopup} from '../../surfaces';
 import {UserView} from '../user-view';
+import {HoverPopup} from '../../surfaces';
 
 type Props = HTMLAttributes<HTMLElement> & {
   user: User;

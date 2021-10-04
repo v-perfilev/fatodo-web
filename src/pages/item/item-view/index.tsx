@@ -31,8 +31,13 @@ import Comments from '../../comment';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import ControlMenu from '../../../components/layouts/control-menu';
+import {GroupUtils} from '../../../shared/utils/group.utils';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
 
-const ItemView: FC = () => {
+type Props = AuthState;
+
+const ItemView: FC<Props> = ({account}: Props) => {
   const history = useHistory();
   const {itemId} = useParams();
   const {t, i18n} = useTranslation();
@@ -87,10 +92,18 @@ const ItemView: FC = () => {
     handleUserIds(userIds);
   };
 
+  const canEdit = group && GroupUtils.canAdmin(account, group);
+
   const menuElements = [
     {icon: <ItemsIcon />, action: redirectToGroupView, text: t('item:tooltips.list')},
-    {icon: <EditIcon />, action: redirectToItemEdit, text: t('item:tooltips.edit')},
-    {icon: <DeleteIcon />, action: openItemDeleteDialog, text: t('item:tooltips.delete'), color: 'secondary'},
+    {icon: <EditIcon />, action: redirectToItemEdit, text: t('item:tooltips.edit'), hidden: !canEdit},
+    {
+      icon: <DeleteIcon />,
+      action: openItemDeleteDialog,
+      text: t('item:tooltips.delete'),
+      color: 'secondary',
+      hidden: !canEdit,
+    },
   ] as MenuElement[];
 
   useEffect(() => {
@@ -123,6 +136,7 @@ const ItemView: FC = () => {
         <ItemViewInfo />
         <PageDivider />
         <ItemViewDescription />
+        <PageDivider />
         <ItemViewReminders />
         <ItemViewTags />
         <ItemViewChanges />
@@ -135,4 +149,4 @@ const ItemView: FC = () => {
   );
 };
 
-export default flowRight(withVerticalPadding, withGroupView, withItemView)(ItemView);
+export default flowRight(withVerticalPadding, withGroupView, withItemView, withAuthState)(ItemView);
