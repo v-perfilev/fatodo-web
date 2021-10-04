@@ -2,8 +2,8 @@ import {makeStyles, Theme} from '@material-ui/core/styles';
 
 export const userInfoViewStyles = makeStyles((theme: Theme) => ({
   root: {
-    minWidth: 300,
-    minHeight: 180,
+    width: 300,
+    height: 180,
   },
   imageItem: {
     display: 'flex',

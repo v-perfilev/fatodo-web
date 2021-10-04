@@ -151,9 +151,9 @@ const GroupView: FC<Props> = ({account}: Props) => {
         <PageHeader title={group.title} filename={group.imageFilename} />
         <PageDivider height={5} />
         <GroupViewUsers />
-        <PageSpacer />
+        <PageDivider />
         <GroupViewItems />
-        <PageSpacer />
+        <PageDivider />
         <ControlMenu menu={menuElements} />
         <PageSpacer />
         <Comments targetId={group.id} />
