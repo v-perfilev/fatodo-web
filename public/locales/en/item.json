@@ -49,10 +49,9 @@
     "save": "Save",
     "cancel": "Cancel",
     "create": "Create item",
-    "edit": "Edit item",
-    "delete": "Delete item",
-    "list": "List of items",
-    "groupList": "List of groups"
+    "edit": "Edit",
+    "delete": "Delete",
+    "list": "List of items"
   },
   "modals": {
     "deleteTitle": "Delete item",
