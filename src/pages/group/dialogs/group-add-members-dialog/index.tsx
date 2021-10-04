@@ -46,7 +46,7 @@ const GroupAddMembersDialog: FC<Props> = ({group, show, close}: Props) => {
   };
 
   useEffect(() => {
-    if (show) {
+    if (show && update) {
       update();
     }
   }, [show]);
@@ -54,7 +54,7 @@ const GroupAddMembersDialog: FC<Props> = ({group, show, close}: Props) => {
   useEffect(() => {
     const relationUserIds = relations.map((relation) => relation.secondUserId);
     setContactIds(relationUserIds);
-  }, [show]);
+  }, [show, relations]);
 
   const isUserIdListEmpty = userIds.length == 0;
   const ignoredIds = group?.members.map((m) => m.id);

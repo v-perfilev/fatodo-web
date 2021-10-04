@@ -46,10 +46,10 @@ const WrappedRoot = flowRight([
   withDefaultTheme,
   withMui,
   withSnack,
-  withDialogs,
   withWsClient,
   withChat,
   withContacts,
+  withDialogs,
 ])(Root);
 
 const root = document.getElementById('root');
