@@ -29,7 +29,7 @@ const defaultItemFormValues: Readonly<ItemFormValues> = {
 };
 
 export class ItemFormUtils {
-  public static mapPropsToValues = (item: Item): ItemFormValues =>
+  public static mapPropsToValues = (item: Item, reminders: Reminder[]): ItemFormValues =>
     item
       ? {
           title: item.title,
@@ -38,7 +38,7 @@ export class ItemFormUtils {
           time: DateConverters.getTimeFromParamDate(item.date),
           date: DateConverters.getDateFromParamDate(item.date),
           description: item.description,
-          reminders: item.reminders,
+          reminders: reminders,
           tags: item.tags,
         }
       : defaultItemFormValues;
@@ -49,7 +49,9 @@ export class ItemFormUtils {
     priority: Yup.string().required(() => i18n.t('item:fields.priority.required')),
   });
 
-  public static mapValuesToDTO = (values: ItemFormValues, item: Item, group: Group): ItemDTO => {
+  public static mapValuesToDTO = (values: ItemFormValues, item: Item, group: Group, reminders: Reminder[]): ItemDTO => {
+    const remindersChanged = JSON.stringify(reminders) !== JSON.stringify(values.reminders);
+    const deleteReminders = remindersChanged && values.reminders.length === 0;
     return {
       id: item ? item.id : null,
       title: values.title,
@@ -57,9 +59,10 @@ export class ItemFormUtils {
       priority: values.priority,
       date: DateConverters.getParamDateFromTimeAndDate(values.time, values.date),
       description: values.description,
-      reminders: values.reminders,
+      reminders: !deleteReminders && remindersChanged ? values.reminders : undefined,
       tags: values.tags,
       groupId: group.id,
+      deleteReminders: deleteReminders ? true : undefined,
     };
   };
 }

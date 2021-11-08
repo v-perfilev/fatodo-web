@@ -11,4 +11,5 @@ export interface ItemDTO {
   reminders: Reminder[];
   tags: string[];
   groupId: string;
+  deleteReminders?: boolean;
 }

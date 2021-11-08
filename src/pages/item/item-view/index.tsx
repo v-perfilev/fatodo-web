@@ -34,6 +34,8 @@ import ControlMenu from '../../../components/layouts/control-menu';
 import {GroupUtils} from '../../../shared/utils/group.utils';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
+import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';
+import NotificationService from '../../../services/notification.service';
 
 type Props = AuthState;
 
@@ -47,6 +49,7 @@ const ItemView: FC<Props> = ({account}: Props) => {
   const {showItemDeleteDialog} = useItemDialogContext();
   const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
+  const {setObjs: setReminders, setLoad: setLoadReminders} = useReminderListContext();
 
   const theme = ThemeFactory.getTheme(group?.color);
 
@@ -69,6 +72,16 @@ const ItemView: FC<Props> = ({account}: Props) => {
         if (status === 404) {
           redirectToNotFound();
         }
+        handleResponse(response);
+      });
+  };
+
+  const loadReminders = (): void => {
+    NotificationService.getAllByTargetId(itemId)
+      .then((response) => {
+        setReminders(response.data);
+      })
+      .catch((response) => {
         handleResponse(response);
       });
   };
@@ -108,6 +121,7 @@ const ItemView: FC<Props> = ({account}: Props) => {
 
   useEffect(() => {
     setLoadItem(() => (): void => loadItem());
+    setLoadReminders(() => (): void => loadReminders());
   }, []);
 
   useEffect(() => {

@@ -20,10 +20,12 @@ import {useTranslation} from 'react-i18next';
 import TypeInput from '../../../components/inputs/type-input';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {flowRight} from 'lodash';
+import {Reminder} from '../../../models/reminder.model';
 
 type BaseProps = {
   group: Group;
   item?: Item;
+  reminders?: Reminder[];
   header: string;
   setSaveCallback: (callback: () => () => void) => void;
   request: (data: ItemDTO, stopSubmitting: () => void) => void;
@@ -81,13 +83,13 @@ const ItemForm: FC<Props> = (props: Props) => {
 };
 
 const formik = withFormik<Props, ItemFormValues>({
-  mapPropsToValues: ({item}: Props) => ItemFormUtils.mapPropsToValues(item),
+  mapPropsToValues: ({item, reminders}: Props) => ItemFormUtils.mapPropsToValues(item, reminders),
   validationSchema: ItemFormUtils.validationSchema,
   validateOnMount: true,
 
   handleSubmit: (values: ItemFormValues, {setSubmitting, props}: FormikBag<Props, ItemFormValues>) => {
-    const {request, item, group} = props;
-    const dto = ItemFormUtils.mapValuesToDTO(values, item, group);
+    const {request, item, group, reminders} = props;
+    const dto = ItemFormUtils.mapValuesToDTO(values, item, group, reminders);
     request(dto, () => setSubmitting(false));
   },
 });

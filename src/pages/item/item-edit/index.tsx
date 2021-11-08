@@ -24,6 +24,8 @@ import {PageSpacer} from '../../../components/surfaces';
 import ControlMenu from '../../../components/layouts/control-menu';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {ThemeFactory} from '../../../shared/theme/theme';
+import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';
+import NotificationService from '../../../services/notification.service';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -34,6 +36,7 @@ const ItemEdit: FC = () => {
   const {handleUserIds} = useUserListContext();
   const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
+  const {objs: reminders, setObjs: setReminders, setLoad: setLoadReminders} = useReminderListContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
@@ -69,6 +72,16 @@ const ItemEdit: FC = () => {
       });
   };
 
+  const loadReminders = (): void => {
+    NotificationService.getAllByTargetId(itemId)
+      .then((response) => {
+        setReminders(response.data);
+      })
+      .catch((response) => {
+        handleResponse(response);
+      });
+  };
+
   const loadGroup = (): void => {
     ItemService.getGroup(item?.groupId)
       .then((response) => {
@@ -99,6 +112,7 @@ const ItemEdit: FC = () => {
 
   useEffect(() => {
     setLoadItem(() => (): void => loadItem());
+    setLoadReminders(() => (): void => loadReminders());
   }, []);
 
   useEffect(() => {
@@ -125,6 +139,7 @@ const ItemEdit: FC = () => {
         <ItemForm
           group={group}
           item={item}
+          reminders={reminders}
           header={t('item:headers.edit', {group: group.title})}
           setSaveCallback={setSaveCallback}
           request={request}
