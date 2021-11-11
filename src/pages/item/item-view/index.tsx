@@ -36,6 +36,7 @@ import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state'
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';
 import NotificationService from '../../../services/notification.service';
+import withReminderList from '../../../shared/hocs/with-list/with-reminder-list';
 
 type Props = AuthState;
 
@@ -163,4 +164,4 @@ const ItemView: FC<Props> = ({account}: Props) => {
   );
 };
 
-export default flowRight(withVerticalPadding, withGroupView, withItemView, withAuthState)(ItemView);
+export default flowRight(withVerticalPadding, withGroupView, withItemView, withReminderList, withAuthState)(ItemView);

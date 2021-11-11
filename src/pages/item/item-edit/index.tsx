@@ -26,6 +26,7 @@ import {Container, ThemeProvider} from '@material-ui/core';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';
 import NotificationService from '../../../services/notification.service';
+import withReminderList from '../../../shared/hocs/with-list/with-reminder-list';
 
 const ItemEdit: FC = () => {
   const {i18n, t} = useTranslation();
@@ -151,4 +152,4 @@ const ItemEdit: FC = () => {
   );
 };
 
-export default flowRight([withGroupView, withItemView])(ItemEdit);
+export default flowRight([withGroupView, withItemView, withReminderList])(ItemEdit);
