@@ -1,8 +1,12 @@
-image: node:alpine
+image: node:16-alpine
 
 variables:
   TAG_LATEST: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:latest
   TAG_COMMIT: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:$CI_COMMIT_SHORT_SHA
+
+cache:
+  paths:
+    - node_modules/
 
 stages:
   - compile
@@ -18,7 +22,6 @@ compile:
     expire_in: 1 hour
     paths:
       - dist/
-      - node_modules/
 
 publish-to-docker:
   image: docker:20
