@@ -8,6 +8,7 @@ export interface AccountFormValues {
   firstname: string;
   lastname: string;
   language: string;
+  timezone: string;
   imageFilename?: string;
   imageContent?: Blob;
 }
@@ -17,6 +18,7 @@ const defaultAccountFormValues: Readonly<AccountFormValues> = {
   firstname: '',
   lastname: '',
   language: 'en',
+  timezone: '',
   imageFilename: null,
   imageContent: null,
 };
@@ -27,6 +29,7 @@ export class AccountFormUtils {
     firstname: account?.info?.firstname ?? defaultAccountFormValues.firstname,
     lastname: account?.info?.lastname ?? defaultAccountFormValues.lastname,
     language: account?.info?.language ?? defaultAccountFormValues.language,
+    timezone: account?.info?.timezone ?? defaultAccountFormValues.timezone,
     imageFilename: account?.info?.imageFilename ?? defaultAccountFormValues.imageFilename,
     imageContent: null,
   });
@@ -43,6 +46,7 @@ export class AccountFormUtils {
     AccountFormUtils.addValueToForm(formData, 'firstname', values.firstname);
     AccountFormUtils.addValueToForm(formData, 'lastname', values.lastname);
     AccountFormUtils.addValueToForm(formData, 'language', values.language);
+    AccountFormUtils.addValueToForm(formData, 'timezone', values.timezone);
     AccountFormUtils.addValueToForm(formData, 'imageFilename', values.imageFilename);
     AccountFormUtils.addValueToForm(formData, 'imageContent', values.imageContent);
     return formData;

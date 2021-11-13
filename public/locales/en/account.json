@@ -77,6 +77,10 @@
       "label": "Language",
       "required": "Required"
     },
+    "timezone": {
+      "label": "Timezone",
+      "required": "Required"
+    },
     "image": {
       "label": "Image"
     }

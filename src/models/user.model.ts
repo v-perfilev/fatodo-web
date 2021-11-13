@@ -18,8 +18,9 @@ export interface User {
 export interface UserInfo {
   firstname?: string;
   lastname?: string;
-  language: string;
   imageFilename?: string;
+  language: string;
+  timezone: string;
 }
 
 export const convertAccountToUser = (account: UserAccount): User => {

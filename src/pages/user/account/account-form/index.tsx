@@ -28,12 +28,16 @@ const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const languageMap = new Map();
   LANGUAGES.forEach((value) => languageMap.set(value.code, value.name));
 
+  const timezoneMap = new Map();
+  LANGUAGES.forEach((value) => timezoneMap.set(value.code, value.name));
+
   return (
     <Form className={classes.form}>
       <TextInput name="username" label={t('account:fields.username.label')} required />
       <TextInput name="firstname" label={t('account:fields.firstname.label')} />
       <TextInput name="lastname" label={t('account:fields.lastname.label')} />
       <SelectInput name="language" label={t('account:fields.language.label')} options={languageMap} required />
+      <SelectInput name="timezone" label={t('account:fields.timezone.label')} options={timezoneMap} required />
       <ImageUpload
         filenameName="imageFilename"
         contentName="imageContent"
