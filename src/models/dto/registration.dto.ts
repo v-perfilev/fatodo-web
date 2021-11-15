@@ -3,5 +3,6 @@ export interface RegistrationDTO {
   username: string;
   password: string;
   language: string;
+  timezone: string;
   token: string;
 }

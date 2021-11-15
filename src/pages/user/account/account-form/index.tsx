@@ -13,6 +13,7 @@ import {SnackState} from '../../../../shared/contexts/snack-context';
 import UserService from '../../../../services/user.service';
 import {AccountFormUtils, AccountFormValues} from './_form';
 import {flowRight} from 'lodash';
+import {DateUtils} from '../../../../shared/utils/date.utils';
 
 type BaseProps = {
   account: UserAccount;
@@ -21,15 +22,12 @@ type BaseProps = {
 
 type Props = FormikProps<AccountFormValues> & SnackState & BaseProps;
 
+const languageMap = LANGUAGES.reduce((map, lang) => map.set(lang.code, lang.name), new Map());
+const timezoneMap = DateUtils.getTimezones().reduce((map, tz) => map.set(tz, DateUtils.formatTimezone(tz)), new Map());
+
 const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = accountFormStyles();
   const {t} = useTranslation();
-
-  const languageMap = new Map();
-  LANGUAGES.forEach((value) => languageMap.set(value.code, value.name));
-
-  const timezoneMap = new Map();
-  LANGUAGES.forEach((value) => timezoneMap.set(value.code, value.name));
 
   return (
     <Form className={classes.form}>

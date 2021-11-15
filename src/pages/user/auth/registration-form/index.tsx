@@ -13,6 +13,7 @@ import {SnackState} from '../../../../shared/contexts/snack-context';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {RegistrationFormUtils, RegistrationFormValues} from './_form';
 import {flowRight} from 'lodash';
+import {DateUtils} from '../../../../shared/utils/date.utils';
 
 type BaseProps = {
   onSuccess: () => void;
@@ -55,8 +56,9 @@ const formik = withFormik<Props, RegistrationFormValues>({
     {setSubmitting, props}: FormikBag<Props, RegistrationFormValues>
   ) => {
     const {getToken, onSuccess, handleCode, handleResponse, setLoading} = props;
+    const timezone = DateUtils.getTimezone();
     const token = await getToken();
-    const dto = RegistrationFormUtils.mapValuesToDTO(values, i18n.language, token);
+    const dto = RegistrationFormUtils.mapValuesToDTO(values, i18n.language, timezone, token);
 
     setLoading(true);
     AuthService.register(dto)

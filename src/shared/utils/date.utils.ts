@@ -1,4 +1,5 @@
 import moment, {Moment} from 'moment';
+import timezone from 'moment-timezone';
 import {DateParams} from '../../models/date-params.model';
 import i18n from '../i18n';
 
@@ -144,6 +145,12 @@ export class DateUtils {
   static resetLocale = (): void => {
     moment.locale(i18n.language);
   };
+
+  static getTimezone = (): string => timezone.tz.guess();
+
+  static getTimezones = (): string[] => timezone.tz.names();
+
+  static formatTimezone = (tz: string): string => '(GMT' + timezone().tz(tz).format('Z') + ') ' + tz;
 
   static getDayOfWeek = (date: Date): number => moment(date).weekday();
 

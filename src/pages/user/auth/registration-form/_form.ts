@@ -28,12 +28,14 @@ export class RegistrationFormUtils {
   public static mapValuesToDTO = (
     values: RegistrationFormValues,
     language: string,
+    timezone: string,
     token: string
   ): RegistrationDTO => ({
     email: values.email,
     username: values.username,
     password: values.password,
     language: language,
+    timezone: timezone,
     token: token,
   });
 }
