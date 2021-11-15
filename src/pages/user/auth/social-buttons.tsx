@@ -19,8 +19,9 @@ export const SocialButtons: FC = () => {
   const oAuth2Login = (provider: string): void => {
     const apiUrl = API_URL + '/oauth2/authorize/' + provider;
     const languageParam = 'language=' + LanguageUtils.getLanguage();
+    const timezoneParam = 'timezone=' + DateUtils.getTimezone();
     const redirectParam = 'redirect=' + BASE_URL + Routes.SOCIAL_LOGIN;
-    window.location.href = apiUrl + '?' + languageParam + '&' + redirectParam;
+    window.location.href = apiUrl + '?' + languageParam + '&' + timezoneParam + '&' + redirectParam;
   };
 
   const facebookLogin = (): void => {
