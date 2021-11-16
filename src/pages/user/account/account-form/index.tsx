@@ -12,8 +12,8 @@ import {SnackState} from '../../../../shared/contexts/snack-context';
 import UserService from '../../../../services/user.service';
 import {AccountFormUtils, AccountFormValues} from './_form';
 import {flowRight} from 'lodash';
-import {TIMEZONE_MAP} from '../../../../shared/utils/date.utils';
-import {LANGUAGE_MAP} from '../../../../shared/utils/language.utils';
+import {LANGUAGE_MAP} from '../../../../shared/i18n';
+import {TIMEZONE_MAP} from '../../../../shared/timezone';
 
 type BaseProps = {
   account: UserAccount;

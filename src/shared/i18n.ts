@@ -14,6 +14,8 @@ export const LANGUAGES = [
   },
 ];
 
+export const LANGUAGE_MAP = LANGUAGES.reduce((map, lang) => map.set(lang.code, lang.name), new Map());
+
 export const initLanguages = i18next
   .use(detector)
   .use(backend)
