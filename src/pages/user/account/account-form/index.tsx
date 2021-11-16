@@ -7,13 +7,13 @@ import {useTranslation} from 'react-i18next';
 import {UserAccount} from '../../../../models/user.model';
 import {LoadingButton} from '../../../../components/controls';
 import {PageSpacer} from '../../../../components/surfaces';
-import {LANGUAGES} from '../../../../shared/i18n';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import UserService from '../../../../services/user.service';
 import {AccountFormUtils, AccountFormValues} from './_form';
 import {flowRight} from 'lodash';
-import {DateUtils} from '../../../../shared/utils/date.utils';
+import {TIMEZONE_MAP} from '../../../../shared/utils/date.utils';
+import {LANGUAGE_MAP} from '../../../../shared/utils/language.utils';
 
 type BaseProps = {
   account: UserAccount;
@@ -21,9 +21,6 @@ type BaseProps = {
 };
 
 type Props = FormikProps<AccountFormValues> & SnackState & BaseProps;
-
-const languageMap = LANGUAGES.reduce((map, lang) => map.set(lang.code, lang.name), new Map());
-const timezoneMap = DateUtils.getTimezones().reduce((map, tz) => map.set(tz, DateUtils.formatTimezone(tz)), new Map());
 
 const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
   const classes = accountFormStyles();
@@ -34,8 +31,8 @@ const AccountForm: FC<Props> = ({isValid, isSubmitting}: Props) => {
       <TextInput name="username" label={t('account:fields.username.label')} required />
       <TextInput name="firstname" label={t('account:fields.firstname.label')} />
       <TextInput name="lastname" label={t('account:fields.lastname.label')} />
-      <SelectInput name="language" label={t('account:fields.language.label')} options={languageMap} required />
-      <SelectInput name="timezone" label={t('account:fields.timezone.label')} options={timezoneMap} required />
+      <SelectInput name="language" label={t('account:fields.language.label')} options={LANGUAGE_MAP} required />
+      <SelectInput name="timezone" label={t('account:fields.timezone.label')} options={TIMEZONE_MAP} required />
       <ImageUpload
         filenameName="imageFilename"
         contentName="imageContent"

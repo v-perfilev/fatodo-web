@@ -1,4 +1,4 @@
-import i18n from '../i18n';
+import i18n, {LANGUAGES} from '../i18n';
 import {InitOptions} from 'i18next';
 import {UserAccount} from '../../models/user.model';
 
@@ -20,3 +20,5 @@ export class LanguageUtils {
     }
   };
 }
+
+export const LANGUAGE_MAP = LANGUAGES.reduce((map, lang) => map.set(lang.code, lang.name), new Map());

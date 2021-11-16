@@ -3,4 +3,5 @@ export interface DateParams {
   date?: number;
   month?: number;
   year?: number;
+  dateOffset?: number;
 }
