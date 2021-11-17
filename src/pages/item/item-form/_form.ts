@@ -29,14 +29,14 @@ const defaultItemFormValues: Readonly<ItemFormValues> = {
 };
 
 export class ItemFormUtils {
-  public static mapPropsToValues = (item: Item, reminders: Reminder[]): ItemFormValues =>
+  public static mapPropsToValues = (item: Item, reminders: Reminder[], timezone: string): ItemFormValues =>
     item
       ? {
           title: item.title,
           type: item.type,
           priority: item.priority,
-          time: DateConverters.getTimeFromParamDate(item.date),
-          date: DateConverters.getDateFromParamDate(item.date),
+          time: DateConverters.getTimeFromParamDate(item.date, timezone),
+          date: DateConverters.getDateFromParamDate(item.date, timezone),
           description: item.description,
           reminders: reminders,
           tags: item.tags,
@@ -49,7 +49,13 @@ export class ItemFormUtils {
     priority: Yup.string().required(() => i18n.t('item:fields.priority.required')),
   });
 
-  public static mapValuesToDTO = (values: ItemFormValues, item: Item, group: Group, reminders: Reminder[]): ItemDTO => {
+  public static mapValuesToDTO = (
+    values: ItemFormValues,
+    item: Item,
+    group: Group,
+    reminders: Reminder[],
+    timezone: string
+  ): ItemDTO => {
     const remindersChanged = JSON.stringify(reminders) !== JSON.stringify(values.reminders);
     const deleteReminders = remindersChanged && values.reminders.length === 0;
     return {
@@ -57,7 +63,7 @@ export class ItemFormUtils {
       title: values.title,
       type: values.type,
       priority: values.priority,
-      date: DateConverters.getParamDateFromTimeAndDate(values.time, values.date),
+      date: DateConverters.getParamDateFromTimeAndDate(values.time, values.date, timezone),
       description: values.description,
       reminders: !deleteReminders && remindersChanged ? values.reminders : undefined,
       tags: values.tags,

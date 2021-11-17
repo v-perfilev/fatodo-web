@@ -4,20 +4,23 @@ import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {DateConverters, DateFormatters} from '../../../shared/utils/date.utils';
 import {DateParams} from '../../../models/date-params.model';
+import {flowRight} from 'lodash';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
 
-type Props = {
+type Props = AuthState & {
   date: DateParams;
 };
 
-export const DateView: FC<Props> = ({date: paramDate}: Props) => {
+const DateView: FC<Props> = ({date: paramDate, account}: Props) => {
   const {t} = useTranslation();
+  const timezone = account.info.timezone;
 
   let description = '';
   if (paramDate.time) {
-    const timeDate = DateConverters.getTimeFromParamDate(paramDate);
+    const timeDate = DateConverters.getTimeFromParamDate(paramDate, timezone);
     const time = DateFormatters.formatTime(timeDate);
-    const translatedTime = t('common:paramDate.time', {time});
-    description = description.concat(translatedTime);
+    description = description.concat(t('common:paramDate.time', {time}));
   }
 
   if (paramDate.date && paramDate.month) {
@@ -25,17 +28,13 @@ export const DateView: FC<Props> = ({date: paramDate}: Props) => {
       description = description.concat(' ');
     }
 
-    const dateDate = DateConverters.getDateFromParamDate(paramDate);
-    let date;
-    if (paramDate.year) {
-      date = DateFormatters.formatDateWithYear(dateDate);
-    } else {
-      date = DateFormatters.formatDate(dateDate);
-    }
+    const dateDate = DateConverters.getDateFromParamDate(paramDate, timezone);
+    const date = paramDate.year ? DateFormatters.formatDateWithYear(dateDate) : DateFormatters.formatDate(dateDate);
 
-    const translatedDate = t('common:paramDate.date', {date});
-    description = description.concat(translatedDate);
+    description = description.concat(t('common:paramDate.date', {date}));
   }
 
   return <Box>{description}</Box>;
 };
+
+export default flowRight([withAuthState])(DateView);

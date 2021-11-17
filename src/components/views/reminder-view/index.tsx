@@ -4,42 +4,70 @@ import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
 import {Reminder} from '../../../models/reminder.model';
 import {DateConverters, DateFormatters, DateUtils} from '../../../shared/utils/date.utils';
+import {flowRight} from 'lodash';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
 
-type Props = HTMLAttributes<HTMLElement> & {
+type Props = HTMLAttributes<HTMLElement> & AuthState & {
   reminder: Reminder;
 };
 
-export const ReminderView: FC<Props> = ({reminder, className}: Props) => {
+const ReminderView: FC<Props> = ({reminder, className, account}: Props) => {
   const {t} = useTranslation();
+  const timezone = account.info.timezone;
 
   //need to set locale in moment here cause of bug in material-ui
   DateUtils.resetLocale();
 
   const label = t('common:reminders.periodicity.' + reminder.periodicity) + ': ';
 
-  const timeDate = DateConverters.getTimeFromParamDate(reminder.date);
-  const dateDate = DateConverters.getDateFromParamDate(reminder.date);
+  const timeDate = DateConverters.getTimeFromParamDate(reminder.date, timezone);
+  const dateDate = DateConverters.getDateFromParamDate(reminder.date, timezone);
   const time = DateFormatters.formatTime(timeDate);
+
+  const buildOnceDescription = (): string => {
+    const date = DateFormatters.formatDateWithYear(dateDate);
+    return t('common:reminders.' + reminder.periodicity, {time, date});
+  };
+
+  const buildDailyDescription = (): string => {
+    return t('common:reminders.' + reminder.periodicity, {time});
+  };
+
+  const buildWeeklyDescription = (): string => {
+    const reminderWeekDays = DateConverters.getWeekDaysFromParamDate(reminder.date, reminder.weekDays, timezone);
+    const weekDays = DateUtils.getDayNamesByNumbers(reminderWeekDays)
+      .map((str) => str.toUpperCase())
+      .join(', ');
+    return t('common:reminders.' + reminder.periodicity, {time, weekDays});
+  };
+
+  const buildMonthlyDescription = (): string => {
+    const reminderMonthDays = DateConverters.getMonthDaysFromParamDate(reminder.date, reminder.monthDays, timezone);
+    const monthDates = reminderMonthDays.join(', ');
+    return t('common:reminders.' + reminder.periodicity, {time, monthDates});
+  };
+
+  const buildYearlyDescription = (): string => {
+    const date = DateFormatters.formatDate(dateDate);
+    return t('common:reminders.' + reminder.periodicity, {time, date});
+  };
 
   let description = '';
   if (reminder.periodicity === 'ONCE') {
-    const date = DateFormatters.formatDateWithYear(dateDate);
-    description = t('common:reminders.' + reminder.periodicity, {time, date});
+    description = buildOnceDescription();
   } else if (reminder.periodicity === 'DAILY') {
-    description = t('common:reminders.' + reminder.periodicity, {time});
+    description = buildDailyDescription();
   } else if (reminder.periodicity === 'WEEKLY') {
-    const weekDays = DateUtils.getDayNamesByNumbers(reminder.weekDays)
-      .map((str) => str.toUpperCase())
-      .join(', ');
-    description = t('common:reminders.' + reminder.periodicity, {time, weekDays});
+    description = buildWeeklyDescription();
   } else if (reminder.periodicity === 'MONTHLY') {
-    const monthDates = reminder.monthDays.sort((a, b) => a - b).join(', ');
-    description = t('common:reminders.' + reminder.periodicity, {time, monthDates});
+    description = buildMonthlyDescription();
   } else if (reminder.periodicity === 'YEARLY') {
-    const date = DateFormatters.formatDate(dateDate);
-    description = t('common:reminders.' + reminder.periodicity, {time, date});
+    description = buildYearlyDescription();
   }
 
   const reminderStr = label + description;
   return <Box className={className}>{reminderStr}</Box>;
 };
+
+export default flowRight([withAuthState])(ReminderView);

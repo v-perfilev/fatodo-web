@@ -1,5 +1,5 @@
 import moment, {Moment} from 'moment';
-import timezone from 'moment-timezone';
+import {tz} from 'moment-timezone';
 import {DateParams} from '../../models/date-params.model';
 import i18n from '../i18n';
 
@@ -43,18 +43,16 @@ export class DateFormatters {
 }
 
 export class DateConverters {
-  static getParamDateFromTime = (time: Date): DateParams => {
-    if (!time) {
-      return null;
-    }
-    return {time: time.getHours() * 60 + time.getMinutes()};
-  };
-
-  static getParamDateFromTimeAndDate = (time: Date, date: Date): DateParams => {
+  static getParamDateFromTimeAndDate = (
+    time: Date,
+    date: Date,
+    timezone: string,
+    withoutYear?: boolean
+  ): DateParams => {
     if (!time && !date) {
       return null;
     }
-    let result = {};
+    let result = {timezone} as DateParams;
     if (time) {
       result = {
         ...result,
@@ -66,48 +64,28 @@ export class DateConverters {
         ...result,
         date: date.getDate(),
         month: date.getMonth(),
-        year: date.getFullYear(),
+        year: withoutYear ? undefined : date.getFullYear(),
       };
     }
     return result;
   };
 
-  static getParamDateFromTimeAndDateWithoutYear = (time: Date, date: Date): DateParams => {
-    if (!time && !date) {
-      return null;
-    }
-    let result = {};
-    if (time) {
-      result = {
-        ...result,
-        time: time.getHours() * 60 + time.getMinutes(),
-      };
-    }
-    if (date) {
-      result = {
-        ...result,
-        date: date.getDate(),
-        month: date.getMonth(),
-      };
-    }
-    return result;
-  };
-
-  static getTimeFromParamDate = (paramDate: DateParams): Date => {
+  static getTimeFromParamDate = (paramDate: DateParams, timezone: string): Date => {
     if (!paramDate || !paramDate.time) {
       return null;
     }
-    const time = paramDate.time;
+    const time = DateConverters.getTimeWithTimezone(paramDate, timezone);
     const date = new Date(0);
     date.setHours(Math.floor(time / 60));
     date.setMinutes(time % 60);
     return date;
   };
 
-  static getDateFromParamDate = (paramDate: DateParams): Date => {
-    if (paramDate == null || (!paramDate.date && !paramDate.month && !paramDate.year)) {
+  static getDateFromParamDate = (paramDate: DateParams, timezone: string): Date => {
+    if (!paramDate || (!paramDate.date && !paramDate.month && !paramDate.year)) {
       return null;
     }
+    const dateDifference = DateConverters.getDateDifferenceWithTimezone(paramDate, timezone);
     const date = new Date(0);
     if (paramDate.date) {
       date.setDate(paramDate.date);
@@ -118,7 +96,70 @@ export class DateConverters {
     if (paramDate.year) {
       date.setFullYear(paramDate.year);
     }
+    if (dateDifference !== 0) {
+      date.setDate(date.getDate() + dateDifference);
+    }
     return date;
+  };
+
+  static getWeekDaysFromParamDate = (paramDate: DateParams, weekDays: number[], timezone: string): number[] => {
+    if (!weekDays) {
+      return null;
+    }
+    const dateDifference = DateConverters.getDateDifferenceWithTimezone(paramDate, timezone);
+    if (dateDifference !== 0) {
+      weekDays = weekDays.map((day) => {
+        let newDay = day + dateDifference;
+        if (newDay < 0) newDay = 6;
+        if (newDay > 6) newDay = 0;
+        return newDay;
+      });
+    }
+    return weekDays.sort((a, b) => a - b);
+  };
+
+  static getMonthDaysFromParamDate = (paramDate: DateParams, monthDays: number[], timezone: string): number[] => {
+    if (!monthDays) {
+      return null;
+    }
+    const dateDifference = DateConverters.getDateDifferenceWithTimezone(paramDate, timezone);
+    if (dateDifference !== 0) {
+      monthDays = monthDays.map((day) => {
+        let newDay = day + dateDifference;
+        if (newDay < 1) newDay = 31;
+        if (newDay > 31) newDay = 1;
+        return newDay;
+      });
+    }
+    return monthDays.sort((a, b) => a - b);
+  };
+
+  static getTimeWithTimezone = (paramDate: DateParams, timezone: string): number => {
+    let time = paramDate.time;
+    if (paramDate.timezone !== timezone) {
+      const offsetDifference = tz(timezone).utcOffset() - tz(paramDate.timezone).utcOffset();
+      time += offsetDifference;
+      if (time > 24 * 60) {
+        time -= 24 * 60;
+      } else if (time < 0) {
+        time += 24 * 60;
+      }
+    }
+    return time;
+  };
+
+  static getDateDifferenceWithTimezone = (paramDate: DateParams, timezone: string): number => {
+    let time = paramDate.time;
+    if (time && paramDate.timezone !== timezone) {
+      const offsetDifference = tz(timezone).utcOffset() - tz(paramDate.timezone).utcOffset();
+      time += offsetDifference;
+      if (time > 24 * 60) {
+        return 1;
+      } else if (time < 0) {
+        return -1;
+      }
+    }
+    return 0;
   };
 
   static getMomentFromTime = (time: Date): Moment => (time ? moment(time) : moment(new Date()));
@@ -146,9 +187,9 @@ export class DateUtils {
     moment.locale(i18n.language);
   };
 
-  static getTimezone = (): string => timezone.tz.guess();
+  static getTimezone = (): string => tz.guess();
 
-  static formatTimezone = (tz: string): string => '(GMT' + timezone().tz(tz).format('Z') + ') ' + tz;
+  static formatTimezone = (timezone: string): string => '(GMT' + tz(timezone).format('Z') + ') ' + timezone;
 
   static getDayOfWeek = (date: Date): number => moment(date).weekday();
 

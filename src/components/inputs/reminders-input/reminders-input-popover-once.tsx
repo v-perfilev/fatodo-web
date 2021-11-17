@@ -10,9 +10,10 @@ import {DateSelect} from '../date-select';
 
 type Props = {
   setReminder: (reminder: Reminder) => void;
+  timezone: string;
 };
 
-export const RemindersInputPopoverOnce: FC<Props> = ({setReminder}: Props) => {
+export const RemindersInputPopoverOnce: FC<Props> = ({setReminder, timezone}: Props) => {
   const classes = remindersInputPopoverItemStyles();
   const {t} = useTranslation();
   const [time, setTime] = useState<Date>(null);
@@ -24,7 +25,7 @@ export const RemindersInputPopoverOnce: FC<Props> = ({setReminder}: Props) => {
 
   useEffect(() => {
     if (time && date) {
-      const paramDate: DateParams = DateConverters.getParamDateFromTimeAndDate(time, date);
+      const paramDate: DateParams = DateConverters.getParamDateFromTimeAndDate(time, date, timezone);
       setReminder({date: paramDate, periodicity: 'ONCE'});
     }
   }, [time, date]);

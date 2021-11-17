@@ -9,9 +9,10 @@ import {TimeSelectInput} from '../time-select-input';
 
 type Props = {
   setReminder: (reminder: Reminder) => void;
+  timezone: string;
 };
 
-export const RemindersInputPopoverDaily: FC<Props> = ({setReminder}: Props) => {
+export const RemindersInputPopoverDaily: FC<Props> = ({setReminder, timezone}: Props) => {
   const classes = remindersInputPopoverItemStyles();
   const {t} = useTranslation();
   const [time, setTime] = useState<Date>(null);
@@ -22,7 +23,7 @@ export const RemindersInputPopoverDaily: FC<Props> = ({setReminder}: Props) => {
 
   useEffect(() => {
     if (time) {
-      const paramDate: DateParams = DateConverters.getParamDateFromTime(time);
+      const paramDate: DateParams = DateConverters.getParamDateFromTimeAndDate(time, null, timezone);
       setReminder({date: paramDate, periodicity: 'DAILY'});
     }
   }, [time]);

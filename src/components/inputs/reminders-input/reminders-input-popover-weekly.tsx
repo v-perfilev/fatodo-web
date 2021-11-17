@@ -11,9 +11,10 @@ import {ArrayUtils} from '../../../shared/utils/array.utils';
 
 type Props = {
   setReminder: (reminder: Reminder) => void;
+  timezone: string;
 };
 
-export const RemindersInputPopoverWeekly: FC<Props> = ({setReminder}: Props) => {
+export const RemindersInputPopoverWeekly: FC<Props> = ({setReminder, timezone}: Props) => {
   const classes = remindersInputPopoverItemStyles();
   const {t} = useTranslation();
   const [time, setTime] = useState<Date>(null);
@@ -25,7 +26,7 @@ export const RemindersInputPopoverWeekly: FC<Props> = ({setReminder}: Props) => 
 
   useEffect(() => {
     if (time && days && days.length > 0) {
-      const paramDate: DateParams = DateConverters.getParamDateFromTime(time);
+      const paramDate: DateParams = DateConverters.getParamDateFromTimeAndDate(time, null, timezone);
       setReminder({date: paramDate, weekDays: days, periodicity: 'WEEKLY'});
     }
   }, [time, days]);

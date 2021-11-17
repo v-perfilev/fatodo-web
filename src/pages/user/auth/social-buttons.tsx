@@ -8,7 +8,8 @@ import {FacebookIcon} from '../../../components/icons/facebook-icon';
 import {GoogleIcon} from '../../../components/icons/google-icon';
 import {Box, Divider, Typography} from '@material-ui/core';
 import {socialLoginStyles} from '../_styles';
-import {LoadingButton} from '../../../components/controls/loading-button';
+import {LoadingButton} from '../../../components/controls';
+import {DateUtils} from '../../../shared/utils/date.utils';
 
 export const SocialButtons: FC = () => {
   const classes = socialLoginStyles();

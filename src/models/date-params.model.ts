@@ -1,7 +1,7 @@
 export interface DateParams {
-  time?: number;
+  time: number;
   date?: number;
   month?: number;
   year?: number;
-  dateOffset?: number;
+  timezone: string;
 }

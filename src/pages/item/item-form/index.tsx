@@ -21,8 +21,10 @@ import TypeInput from '../../../components/inputs/type-input';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {flowRight} from 'lodash';
 import {Reminder} from '../../../models/reminder.model';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
 
-type BaseProps = {
+type BaseProps = AuthState & {
   group: Group;
   item?: Item;
   reminders?: Reminder[];
@@ -83,15 +85,16 @@ const ItemForm: FC<Props> = (props: Props) => {
 };
 
 const formik = withFormik<Props, ItemFormValues>({
-  mapPropsToValues: ({item, reminders}: Props) => ItemFormUtils.mapPropsToValues(item, reminders),
+  mapPropsToValues: ({item, reminders, account}: Props) =>
+    ItemFormUtils.mapPropsToValues(item, reminders, account.info.timezone),
   validationSchema: ItemFormUtils.validationSchema,
   validateOnMount: true,
 
   handleSubmit: (values: ItemFormValues, {setSubmitting, props}: FormikBag<Props, ItemFormValues>) => {
-    const {request, item, group, reminders} = props;
-    const dto = ItemFormUtils.mapValuesToDTO(values, item, group, reminders);
+    const {request, item, group, reminders, account} = props;
+    const dto = ItemFormUtils.mapValuesToDTO(values, item, group, reminders, account.info.timezone);
     request(dto, () => setSubmitting(false));
   },
 });
 
-export default flowRight([formik, withVerticalPadding])(ItemForm);
+export default flowRight([withAuthState, formik, withVerticalPadding])(ItemForm);

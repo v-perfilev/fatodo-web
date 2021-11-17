@@ -6,7 +6,7 @@ import {TextField} from 'formik-material-ui';
 import {remindersInputStyles} from './_styles';
 import {RemindersInputChips} from './reminders-input-chips';
 import {RemindersInputButtons} from './reminders-input-buttons';
-import {RemindersInputPopover} from './reminders-input-popover';
+import RemindersInputPopover from './reminders-input-popover';
 
 type Props = {
   name: string;
