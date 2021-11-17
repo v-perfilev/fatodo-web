@@ -8,9 +8,10 @@ import {flowRight} from 'lodash';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 
-type Props = HTMLAttributes<HTMLElement> & AuthState & {
-  reminder: Reminder;
-};
+type Props = HTMLAttributes<HTMLElement> &
+  AuthState & {
+    reminder: Reminder;
+  };
 
 const ReminderView: FC<Props> = ({reminder, className, account}: Props) => {
   const {t} = useTranslation();
