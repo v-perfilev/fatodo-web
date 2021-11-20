@@ -1,4 +1,4 @@
-FROM node:alpine as build
+FROM node:16-alpine as build
 
 ARG BASE_URL
 ARG API_URL
@@ -11,7 +11,7 @@ RUN rm -rf dist
 RUN npm install
 RUN npm run-script build
 
-FROM nginx:alpine
+FROM nginx:16-alpine
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
