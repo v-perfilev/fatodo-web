@@ -83,7 +83,9 @@ const ItemView: FC<Props> = ({account}: Props) => {
         setReminders(response.data);
       })
       .catch((response) => {
-        handleResponse(response);
+        if (response.status !== 404) {
+          handleResponse(response);
+        }
       });
   };
 

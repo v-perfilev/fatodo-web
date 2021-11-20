@@ -79,7 +79,9 @@ const ItemEdit: FC = () => {
         setReminders(response.data);
       })
       .catch((response) => {
-        handleResponse(response);
+        if (response.status !== 404) {
+          handleResponse(response);
+        }
       });
   };
 
