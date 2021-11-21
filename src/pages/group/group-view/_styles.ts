@@ -75,14 +75,10 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupViewStubStyles = makeStyles((theme: Theme) => ({
+export const groupViewCreateButtonStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
-    fontSize: '1rem',
-    color: theme.palette.grey['400'],
+    height: 90,
+    paddingTop: theme.spacing(1.2),
+    paddingBottom: theme.spacing(1.2),
   },
 }));

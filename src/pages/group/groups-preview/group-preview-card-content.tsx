@@ -13,12 +13,13 @@ import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import GroupPreviewCardItem from './group-preview-card-item';
 import GroupPreviewCardCreateButton from './group-preview-card-create-button';
+import {CircularSpinner} from '../../../components/loaders';
 
 const GroupPreviewCardContent: FC = () => {
   const classes = groupCardContentStyles();
   const {handleResponse} = useSnackContext();
   const {obj: group} = useGroupViewContext();
-  const {objs: items, setObjs: setItems} = useItemListContext();
+  const {objs: items, setObjs: setItems, setLoad: setLoadItems, loading: itemsLoading} = useItemListContext();
   const [firstShowedItem, setFirstShowedItem] = useState(0);
   const ref = useRef();
 
@@ -50,7 +51,7 @@ const GroupPreviewCardContent: FC = () => {
   });
 
   useEffect(() => {
-    loadItems();
+    setLoadItems(() => (): void => loadItems());
   }, []);
 
   const listElement = (
@@ -83,8 +84,9 @@ const GroupPreviewCardContent: FC = () => {
 
   return (
     <CardContent className={classes.content}>
-      {listElement}
-      {isMultiPage && paginationElement}
+      {itemsLoading && <CircularSpinner size="sm" />}
+      {!itemsLoading && listElement}
+      {!itemsLoading && isMultiPage && paginationElement}
     </CardContent>
   );
 };

@@ -10,7 +10,7 @@ import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {flowRight} from 'lodash';
 import {CircularSpinner} from '../../../components/loaders';
-import GroupViewStub from './group-view-stub';
+import GroupViewCreateButton from './group-view-create-button';
 
 const GroupViewItems: FC = () => {
   const classes = groupViewItemsStyles();
@@ -40,7 +40,6 @@ const GroupViewItems: FC = () => {
   return (
     <Box className={classes.root}>
       {loading && <CircularSpinner size="sm" />}
-      {!loading && items.length === 0 && <GroupViewStub />}
       {!loading &&
         items.map((item, index) => (
           <Box key={index}>
@@ -48,6 +47,8 @@ const GroupViewItems: FC = () => {
             <GroupViewItem item={item} />
           </Box>
         ))}
+      {!loading && items.length !== 0 && <PageDivider />}
+      {!loading && <GroupViewCreateButton group={group} />}
     </Box>
   );
 };
