@@ -7,8 +7,6 @@ export interface Group {
   color: ColorScheme;
   imageFilename: string;
   members: GroupMember[];
-  notificationCount: number;
-  messageCount: number;
 }
 
 export type GroupPermission = 'ADMIN' | 'EDIT' | 'READ';

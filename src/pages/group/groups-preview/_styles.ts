@@ -74,6 +74,15 @@ export const groupCardContentStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+export const groupCardCreateButtonStyles = makeStyles((theme: Theme) => ({
+  root: {
+    height: 'calc(100% / ' + ITEMS_IN_GROUP_CARD + ')',
+    boxSizing: 'border-box',
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+  },
+}));
+
 export const groupCardItemStyles = makeStyles((theme: Theme) => ({
   item: {
     height: 'calc(100% / ' + ITEMS_IN_GROUP_CARD + ')',
@@ -101,22 +110,13 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const groupCardNotificationsStyles = makeStyles((theme: Theme) => ({
-  deleteUser: {
+  users: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
     paddingBottom: theme.spacing(1.5),
-  },
-  badges: {
-    marginRight: theme.spacing(1),
-    '& > *': {
-      marginLeft: theme.spacing(2),
-    },
-  },
-  icon: {
-    color: theme.palette.grey['400'],
   },
 }));
 
@@ -129,16 +129,5 @@ export const groupGridContainerStyles = makeStyles((theme: Theme) => ({
 export const groupGridItemStyles = makeStyles((theme: Theme) => ({
   item: {
     padding: theme.spacing(1),
-  },
-}));
-
-export const groupPreviewStubStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: '1rem',
-    color: theme.palette.grey['400'],
   },
 }));

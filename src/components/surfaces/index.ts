@@ -1,3 +1,4 @@
+export * from './active-placeholder';
 export * from './avatar-group';
 export * from './hover-popup';
 export * from './icon';

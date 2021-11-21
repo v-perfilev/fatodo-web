@@ -13,16 +13,15 @@ type Props = {
 
 const GroupPreviewCard: FC<Props> = ({height}: Props) => {
   const classes = groupCardStyles();
+  const style = {height: height};
   const {obj: group} = useGroupViewContext();
 
   const theme = ThemeFactory.getTheme(group?.color);
 
-  const cardStyle = {height: height};
-
   return (
     group && (
       <ThemeProvider theme={theme}>
-        <Card square elevation={3} className={classes.card} style={cardStyle}>
+        <Card square elevation={3} className={classes.card} style={style}>
           <GroupPreviewCardHeader />
           <GroupPreviewCardBody />
         </Card>

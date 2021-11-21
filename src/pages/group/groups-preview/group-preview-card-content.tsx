@@ -5,14 +5,14 @@ import {groupCardContentStyles} from './_styles';
 import {ArrowDownIcon} from '../../../components/icons/arrow-down-icon';
 import {ArrowUpIcon} from '../../../components/icons/arrow-up-icon';
 import {useTrail} from 'react-spring';
-import GroupCardItem from './group-preview-card-item';
-import {ITEMS_IN_GROUP_CARD} from '../_constants';
+import {BUTTONS_IN_GROUP_CARD, ITEMS_IN_GROUP_CARD} from '../_constants';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
-import GroupPreviewStub from './group-perview-stub';
+import GroupPreviewCardItem from './group-preview-card-item';
+import GroupPreviewCardCreateButton from './group-preview-card-create-button';
 
 const GroupPreviewCardContent: FC = () => {
   const classes = groupCardContentStyles();
@@ -22,9 +22,9 @@ const GroupPreviewCardContent: FC = () => {
   const [firstShowedItem, setFirstShowedItem] = useState(0);
   const ref = useRef();
 
-  const isMultiPage = items.length > ITEMS_IN_GROUP_CARD;
+  const isMultiPage = items.length + BUTTONS_IN_GROUP_CARD > ITEMS_IN_GROUP_CARD;
   const isNotFirstPage = firstShowedItem > 0;
-  const isNotLastPage = firstShowedItem + ITEMS_IN_GROUP_CARD < items.length;
+  const isNotLastPage = firstShowedItem + ITEMS_IN_GROUP_CARD < items.length + BUTTONS_IN_GROUP_CARD;
 
   const itemsToShow = items.slice(firstShowedItem, firstShowedItem + ITEMS_IN_GROUP_CARD);
 
@@ -41,7 +41,8 @@ const GroupPreviewCardContent: FC = () => {
       });
   };
 
-  const trail = useTrail(itemsToShow.length, {
+  const trailItems = isNotLastPage ? itemsToShow.length : itemsToShow.length + BUTTONS_IN_GROUP_CARD;
+  const trail = useTrail(trailItems, {
     reset: true,
     delay: 50,
     opacity: 1,
@@ -52,31 +53,39 @@ const GroupPreviewCardContent: FC = () => {
     loadItems();
   }, []);
 
-  return items.length > 0 ? (
-    <CardContent className={classes.content}>
-      <div className={classes.box} ref={ref}>
-        {trail.map((style, index) => (
-          <GroupCardItem item={itemsToShow[index]} key={index} style={style} />
-        ))}
-      </div>
-      {isMultiPage && (
-        <Box className={classes.control}>
-          <Button variant="outlined" size="small" onClick={onUpClick} disabled={!isNotFirstPage}>
-            <ArrowUpIcon />
-          </Button>
-          <Box className={classes.pageCount}>
-            <Typography color="primary">
-              {Math.floor(firstShowedItem / ITEMS_IN_GROUP_CARD) + 1}/{Math.ceil(items.length / ITEMS_IN_GROUP_CARD)}
-            </Typography>
-          </Box>
-          <Button variant="outlined" size="small" onClick={onDownClick} disabled={!isNotLastPage}>
-            <ArrowDownIcon />
-          </Button>
-        </Box>
+  const listElement = (
+    <div className={classes.box} ref={ref}>
+      {trail.map((style, index) =>
+        index < items.length ? (
+          <GroupPreviewCardItem item={itemsToShow[index]} key={index} style={style} />
+        ) : (
+          <GroupPreviewCardCreateButton group={group} style={style} key={index} />
+        )
       )}
+    </div>
+  );
+
+  const paginationElement = (
+    <Box className={classes.control}>
+      <Button variant="outlined" size="small" onClick={onUpClick} disabled={!isNotFirstPage}>
+        <ArrowUpIcon />
+      </Button>
+      <Box className={classes.pageCount}>
+        <Typography color="primary">
+          {Math.floor(firstShowedItem / ITEMS_IN_GROUP_CARD) + 1}/{Math.ceil(items.length / ITEMS_IN_GROUP_CARD)}
+        </Typography>
+      </Box>
+      <Button variant="outlined" size="small" onClick={onDownClick} disabled={!isNotLastPage}>
+        <ArrowDownIcon />
+      </Button>
+    </Box>
+  );
+
+  return (
+    <CardContent className={classes.content}>
+      {listElement}
+      {isMultiPage && paginationElement}
     </CardContent>
-  ) : (
-    <GroupPreviewStub />
   );
 };
 

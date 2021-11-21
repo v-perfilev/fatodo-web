@@ -3,9 +3,6 @@
     "create": "Create group",
     "edit": "Edit group"
   },
-  "list": {
-    "itemsNotFound": "No items yet"
-  },
   "fields": {
     "title": {
       "label": "Title",
@@ -32,6 +29,7 @@
     "leave": "Leave"
   },
   "menu": {
+    "createGroup": "Create group",
     "createItem": "Create item",
     "viewGroup": "View",
     "editGroup": "Edit",
