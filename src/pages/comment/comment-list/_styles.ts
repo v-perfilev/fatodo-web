@@ -24,7 +24,7 @@ export const commentStubStyles = makeStyles((theme: Theme) => ({
     justifyContent: 'center',
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
-    fontSize: '1rem',
+    fontSize: '1.3rem',
     color: theme.palette.grey['400'],
   },
 }));

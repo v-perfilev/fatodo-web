@@ -16,6 +16,10 @@ export class DateFormats {
 }
 
 export class DateFormatters {
+  static formatZ = (timezone: string): string => tz(timezone).format('Z');
+
+  static formatTimezone = (timezone: string): string => '(GMT' + tz(timezone).format('Z') + ') ' + timezone;
+
   static formatTime = (date: Date): string => {
     return moment(date).format(DateFormats.timeFormat);
   };
@@ -188,8 +192,6 @@ export class DateUtils {
   };
 
   static getTimezone = (): string => tz.guess();
-
-  static formatTimezone = (timezone: string): string => '(GMT' + tz(timezone).format('Z') + ') ' + timezone;
 
   static getDayOfWeek = (date: Date): number => moment(date).weekday();
 
