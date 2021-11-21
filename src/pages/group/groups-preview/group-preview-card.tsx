@@ -1,35 +1,28 @@
 import * as React from 'react';
-import {FC, useEffect, useRef, useState} from 'react';
+import {FC} from 'react';
 import {Card, ThemeProvider} from '@material-ui/core';
 import GroupPreviewCardHeader from './group-preview-card-header';
 import {groupCardStyles} from './_styles';
 import GroupPreviewCardBody from './group-preview-card-body';
-import {useResize} from '../../../shared/hooks/use-resize';
-import {CARD_RATIO} from '../_constants';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
-const GroupPreviewCard: FC = () => {
+type Props = {
+  height: number;
+};
+
+const GroupPreviewCard: FC<Props> = ({height}: Props) => {
   const classes = groupCardStyles();
-  const sizes = useResize();
   const {obj: group} = useGroupViewContext();
-  const ref = useRef(null);
-  const [height, setHeight] = useState(0);
 
   const theme = ThemeFactory.getTheme(group?.color);
 
   const cardStyle = {height: height};
 
-  useEffect(() => {
-    if (ref.current?.clientWidth) {
-      setHeight(ref.current.clientWidth * CARD_RATIO);
-    }
-  }, [sizes, ref]);
-
   return (
     group && (
       <ThemeProvider theme={theme}>
-        <Card square elevation={3} className={classes.card} style={cardStyle} ref={ref}>
+        <Card square elevation={3} className={classes.card} style={cardStyle}>
           <GroupPreviewCardHeader />
           <GroupPreviewCardBody />
         </Card>
