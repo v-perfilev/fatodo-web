@@ -19,7 +19,7 @@ export const chatControlStubStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
-    fontSize: '1rem',
+    fontSize: '1.5rem',
     color: theme.palette.grey['400'],
   },
 }));

@@ -36,7 +36,7 @@ export const contactRelationsStubStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     flexGrow: 1,
-    fontSize: '1rem',
+    fontSize: '1.5rem',
     color: theme.palette.grey['400'],
   },
 }));
