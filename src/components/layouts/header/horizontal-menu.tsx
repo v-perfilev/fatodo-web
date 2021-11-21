@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useRef, useState} from 'react';
 import Button from '@material-ui/core/Button';
-import {Box, ListItemIcon, MenuItem} from '@material-ui/core';
+import {Box, MenuItem} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {horizontalMenuStyles} from './_styles';
 import {AuthState} from '../../../store/rerducers/auth.reducer';

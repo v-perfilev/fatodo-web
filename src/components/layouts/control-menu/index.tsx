@@ -25,7 +25,7 @@ const ControlMenu: FC<Props> = ({menu, disabled}: Props) => {
             disabled={disabled || action.disabled}
             loading={action.loading}
             color={action.color || 'primary'}
-            variant="outlined"
+            variant="contained"
             size="small"
           >
             {action.text}
