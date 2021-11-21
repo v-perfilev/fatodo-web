@@ -14,6 +14,7 @@ import {useUnreadMessagesContext} from '../../../shared/contexts/chat-contexts/u
 import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
 import {RedirectMap} from './type';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
+import {GroupsIcon} from '../../icons/groups-icon';
 
 type BaseProps = {
   redirectMap: RedirectMap;
@@ -45,6 +46,12 @@ const VerticalMenu: FC<Props> = ({isAuthenticated, redirectMap}: Props) => {
 
   const authenticatedMenu = (
     <>
+      <ListItem button onClick={redirectMap.toGroups}>
+        <ListItemIcon>
+          <GroupsIcon color="primary" />
+        </ListItemIcon>
+        <ListItemText>{t('header.groups')}</ListItemText>
+      </ListItem>
       <ListItem button onClick={redirectMap.toChats}>
         <ListItemIcon>
           <BadgeMessageIcon count={totalUnreadMessages} color="primary" />

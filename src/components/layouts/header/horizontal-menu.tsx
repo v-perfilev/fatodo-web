@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useRef, useState} from 'react';
 import Button from '@material-ui/core/Button';
-import {Box, MenuItem} from '@material-ui/core';
+import {Box, ListItemIcon, MenuItem} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {horizontalMenuStyles} from './_styles';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
@@ -18,6 +18,7 @@ import {useUnreadMessagesContext} from '../../../shared/contexts/chat-contexts/u
 import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
 import {RedirectMap} from './type';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
+import {GroupsIcon} from '../../icons/groups-icon';
 
 type BaseProps = {
   redirectMap: RedirectMap;
@@ -49,6 +50,9 @@ const HorizontalMenu: FC<Props> = ({redirectMap, isAuthenticated}: Props) => {
 
   const authenticatedMenu = (
     <>
+      <Button color="primary" startIcon={<GroupsIcon />} onClick={redirectMap.toGroups}>
+        {t('header.groups')}
+      </Button>
       <Button
         color="primary"
         startIcon={<BadgeMessageIcon count={totalUnreadMessages} />}
