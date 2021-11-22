@@ -19,7 +19,7 @@ const ContactFilter: FC<Props> = ({setFilter}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <ClearableTextInput size="small" label={t('inputs.filter')} onChange={handleChange} fullWidth />
+      <ClearableTextInput placeholder={t('inputs.filter')} onChange={handleChange} fullWidth />
     </Box>
   );
 };

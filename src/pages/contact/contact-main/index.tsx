@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Box, Container, Tab, Tabs} from '@material-ui/core';
+import {Box, Container, Fab, Tab, Tabs} from '@material-ui/core';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
@@ -12,7 +12,6 @@ import {ContactRouteUtils} from '../_router';
 import ContactOutcoming from '../contact-outcoming';
 import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/contact-dialog-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
-import ControlMenu from '../../../components/layouts/control-menu';
 import {PageSpacer} from '../../../components/surfaces';
 import ContactFilter from './contact-filter';
 
@@ -75,7 +74,9 @@ const ContactMain: FC = () => {
         </Tabs>
         <PageSpacer />
         <Box className={classes.control}>
-          <ControlMenu menu={menuElements} />
+          <Fab className={classes.button} size="small" color="primary" onClick={openContactRequestDialog}>
+            <PlusIcon />
+          </Fab>
           <ContactFilter setFilter={setFilter} />
         </Box>
         {activeTab === 0 && <ContactRelations filter={filter} />}

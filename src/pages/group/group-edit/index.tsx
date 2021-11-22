@@ -98,7 +98,7 @@ const GroupEdit: FC = () => {
       <Container>
         <GroupForm group={group} header={t('group:headers.edit')} setSaveCallback={setSaveCallback} request={request} />
         <PageSpacer />
-        <ControlMenu menu={menuElements} disabled={isSaving} />
+        <ControlMenu menu={menuElements} disabled={isSaving} floatRight />
       </Container>
     </ThemeProvider>
   );

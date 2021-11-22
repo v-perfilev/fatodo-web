@@ -148,7 +148,7 @@ const ItemEdit: FC = () => {
           request={request}
         />
         <PageSpacer />
-        <ControlMenu menu={menuElements} disabled={isSaving} />
+        <ControlMenu menu={menuElements} disabled={isSaving} floatRight />
       </Container>
     </ThemeProvider>
   );

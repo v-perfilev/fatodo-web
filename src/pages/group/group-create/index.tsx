@@ -59,7 +59,7 @@ const GroupCreate: FC = () => {
       <Container>
         <GroupForm header={t('group:headers.create')} setSaveCallback={setSaveCallback} request={request} />
         <PageSpacer />
-        <ControlMenu menu={menuElements} disabled={isSaving} />
+        <ControlMenu menu={menuElements} disabled={isSaving} floatRight />
       </Container>
     </ThemeProvider>
   );
