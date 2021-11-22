@@ -1,5 +1,6 @@
 export const BASE_URL = process.env.BASE_URL;
 export const API_URL = process.env.API_URL;
+export const LANDING_URL = process.env.LANDING_URL;
 export const WS_URL = API_URL + '/ws/';
 export const IMAGE_API_URL = API_URL + '/api/image/store/';
 

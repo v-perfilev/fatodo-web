@@ -6,7 +6,7 @@ import {Routes} from '../../router';
 import {useTranslation} from 'react-i18next';
 import {authPageStyles} from '../_styles';
 import {useHistory, useRouteMatch} from 'react-router-dom';
-import {SOCIAL_LOGIN} from '../../../constants';
+import {LANDING_URL, SOCIAL_LOGIN} from '../../../constants';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {Link} from '../../../components/controls';
 import {SocialButtons} from './social-buttons';
@@ -79,7 +79,7 @@ const Auth: FC<Props> = ({isAuthenticated}: Props) => {
         </>
       )}
       <Box m={2} />
-      <Link to={Routes.ROOT}>{t('buttons.toHomePage')}</Link>
+      <Link to={LANDING_URL}>{t('buttons.toHomePage')}</Link>
     </Box>
   );
 };

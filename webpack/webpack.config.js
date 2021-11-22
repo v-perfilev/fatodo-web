@@ -51,6 +51,7 @@ module.exports = () => ({
     new webpack.EnvironmentPlugin({
       BASE_URL: 'http://localhost:9000',
       API_URL: 'http://localhost:4000',
+      LANDING_URL: 'https://fatodo.app',
       RECAPTCHA_KEY: 'take_it_from_google'
     })
   ]

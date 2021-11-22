@@ -46,7 +46,7 @@ const Header: FC<Props> = ({flexible, logout}: Props) => {
     <Slide appear={false} in={!flexible || !trigger}>
       <AppBar elevation={3} className={classes.appbar}>
         <Toolbar className={classes.toolbar}>
-          <LogoWithText />
+          <LogoWithText href={Routes.ROOT} />
           <Box className={classes.grow} />
           <Hidden smDown>
             <HorizontalMenu redirectMap={redirectMap} />

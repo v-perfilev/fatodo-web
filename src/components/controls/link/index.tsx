@@ -9,7 +9,14 @@ type Props = LinkProps &
   };
 
 export const Link: FC<Props> = ({withUnderline, children, ...props}: Props) => {
-  return (
+  const href = props.to?.toString();
+  const isExternalLink = href?.startsWith('http');
+
+  return isExternalLink ? (
+    <MaterialLink {...props} href={href} component="a" underline={withUnderline ? 'hover' : 'none'}>
+      {children}
+    </MaterialLink>
+  ) : (
     <MaterialLink {...props} component={RouterLink} underline={withUnderline ? 'hover' : 'none'}>
       {children}
     </MaterialLink>

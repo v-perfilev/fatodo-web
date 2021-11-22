@@ -2,8 +2,9 @@ import * as React from 'react';
 import {ComponentType, FC, ReactElement} from 'react';
 import {Box, Grid, Hidden} from '@material-ui/core';
 import {backgroundStyles} from './_styles';
-import {LogoWithText} from '../../../components/layouts/logo';
-import {LanguageSelect} from '../../../components/controls/language-select';
+import {LogoWithText} from '../../../components/layouts';
+import {LanguageSelect} from '../../../components/controls';
+import {LANDING_URL} from '../../../constants';
 
 const withBackground = (imgSrc: string) => (Component: ComponentType): FC => (props): ReactElement => {
   const classes = backgroundStyles();
@@ -13,7 +14,7 @@ const withBackground = (imgSrc: string) => (Component: ComponentType): FC => (pr
       <Grid item xs={12} md={6}>
         <Box className={classes.container}>
           <Box className={classes.header}>
-            <LogoWithText />
+            <LogoWithText href={LANDING_URL} />
           </Box>
           <Box className={classes.body}>
             <Component {...props} />
