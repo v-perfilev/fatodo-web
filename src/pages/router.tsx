@@ -14,7 +14,6 @@ import SocialLogin from './user/auth/social-login';
 import Activation from './user/activation';
 import ForgotPassword from './user/forgot-password';
 import ResetPassword from './user/reset-password';
-import Home from './home';
 import AccountSettings from './user/account';
 import GroupRouter from './group/_router';
 import ItemRouter from './item/_router';
@@ -44,7 +43,7 @@ export enum Routes {
 
 const Router: FC = () => (
   <Switch>
-    <MixedRoute exact path={Routes.ROOT} component={Home} redirect={Routes.GROUPS} />
+    <MixedRoute exact path={Routes.ROOT} component={Auth} redirect={Routes.GROUPS} />
     {/*Private Routes*/}
     <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
     <PrivateRoute path={Routes.ITEMS} component={ItemRouter} />
