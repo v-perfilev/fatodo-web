@@ -93,19 +93,54 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
   card: {
     height: '100%',
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
     borderColor: theme.palette.grey['300'],
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
   },
+  headerBox: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'start',
+    paddingTop: theme.spacing(2),
+  },
+  titleBox: {
+    display: 'flex',
+    flexGrow: 1,
+  },
+  iconBox: {
+    display: 'flex',
+    minWidth: 50,
+    '& > *': {
+      marginRight: theme.spacing(1),
+    },
+  },
+  changesBox: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'end',
+    margin: theme.spacing(1),
+  },
   icon: {
     fontSize: '1.5rem',
-    color: theme.palette.primary.main,
-    marginRight: theme.spacing(1),
   },
   typography: {
     width: '100%',
+  },
+}));
+
+export const groupCardItemChangesStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    '& *': {
+      color: theme.palette.grey['500'],
+      fontSize: '0.7rem',
+    },
   },
 }));
 
