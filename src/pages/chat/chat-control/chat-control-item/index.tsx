@@ -38,7 +38,7 @@ const ChatControlItem: FC<Props> = ({chat, isSelected, account, ...props}: Props
   }, [chat.lastMessage]);
 
   const formattedDate = useMemo<string>(() => {
-    return date ? DateFormatters.formatDependsOfDay(date) : null;
+    return date ? DateFormatters.formatDependsOnDay(date) : null;
   }, [date]);
 
   const classNames = csx(classes.root, {selected: isSelected});

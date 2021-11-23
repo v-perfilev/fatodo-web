@@ -72,13 +72,8 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
 
 export const groupViewItemChangesStyles = makeStyles((theme: Theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    '& *': {
-      color: theme.palette.grey['500'],
-      fontSize: '0.7rem',
-    },
+    color: theme.palette.grey['500'],
+    fontSize: '0.7rem',
   },
 }));
 

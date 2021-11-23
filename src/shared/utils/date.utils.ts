@@ -8,6 +8,8 @@ export class DateFormats {
 
   static timeWithDateFormat = 'HH:mm DD.MM.YYYY';
 
+  static timeWithShortenDateFormat = 'HH:mm DD.MM';
+
   static dateFormat = 'DD.MM';
 
   static dateWithYearFormat = 'DD.MM.YYYY';
@@ -40,9 +42,15 @@ export class DateFormatters {
     return moment(date).format(DateFormats.monthFormat);
   };
 
-  static formatDependsOfDay = (date: Date): string => {
-    const isToday = moment(date).isSame(moment(new Date()), 'day');
-    return isToday ? moment(date).format(DateFormats.timeFormat) : moment(date).format(DateFormats.dateWithYearFormat);
+  static formatDependsOnDay = (date: Date): string => {
+    const isSameDay = moment(date).isSame(moment(new Date()), 'day');
+    const isSameYear = moment(date).isSame(moment(new Date()), 'year');
+    if (isSameDay) {
+      return moment(date).format(DateFormats.timeFormat);
+    } else if (isSameYear) {
+      return moment(date).format(DateFormats.timeWithShortenDateFormat);
+    }
+    return moment(date).format(DateFormats.dateWithYearFormat);
   };
 }
 

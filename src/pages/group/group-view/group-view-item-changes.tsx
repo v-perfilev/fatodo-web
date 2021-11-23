@@ -1,6 +1,5 @@
-import React, {FC, HTMLAttributes} from 'react';
+import React, {FC, HTMLAttributes, useMemo} from 'react';
 import {Box} from '@material-ui/core';
-import {useTranslation} from 'react-i18next';
 import {DateFormatters} from '../../../shared/utils/date.utils';
 import {Item} from '../../../models/item.model';
 import {groupViewItemChangesStyles} from './_styles';
@@ -11,19 +10,15 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 const GroupViewItemChanges: FC<Props> = ({item}: Props) => {
   const classes = groupViewItemChangesStyles();
-  const {t} = useTranslation();
 
-  const getDate = (timestamp: number): string => {
-    const timestampNumber = timestamp * 1000;
-    return DateFormatters.formatTimeWithDate(new Date(timestampNumber));
-  };
+  const formattedDate = useMemo<string>(() => {
+    const timestampToDate = (timestamp: number): Date => new Date(timestamp * 1000);
+    return !item.lastModifiedAt || item.createdAt === item.lastModifiedAt
+      ? DateFormatters.formatDependsOnDay(timestampToDate(item.createdAt))
+      : DateFormatters.formatDependsOnDay(timestampToDate(item.lastModifiedAt));
+  }, [item]);
 
-  return (
-    <Box className={classes.root}>
-      {!item.lastModifiedAt || (item.createdAt === item.lastModifiedAt && <Box>{getDate(item.createdAt)}</Box>)}
-      {item.createdAt !== item.lastModifiedAt && <Box>{getDate(item.lastModifiedAt)}</Box>}
-    </Box>
-  );
+  return <Box className={classes.root}>{formattedDate}</Box>;
 };
 
 export default GroupViewItemChanges;

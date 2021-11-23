@@ -22,7 +22,7 @@ const CommentItemReference: FC<Props> = ({reference}: Props) => {
   }, [users, reference]);
 
   const date = useMemo((): string => {
-    return reference ? DateFormatters.formatTimeWithDate(new Date(reference.createdAt)) : null;
+    return reference ? DateFormatters.formatDependsOnDay(new Date(reference.createdAt)) : null;
   }, [reference]);
 
   return (

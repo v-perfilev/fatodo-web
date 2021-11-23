@@ -29,7 +29,7 @@ const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
   }, [users, comment]);
 
   const date = useMemo((): string => {
-    return DateFormatters.formatTimeWithDate(new Date(comment.createdAt));
+    return DateFormatters.formatDependsOnDay(new Date(comment.createdAt));
   }, [comment]);
 
   const isOwnMessage = useMemo((): boolean => {
