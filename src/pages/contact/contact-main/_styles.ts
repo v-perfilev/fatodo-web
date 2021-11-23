@@ -7,7 +7,6 @@ export const contactMainStyles = makeStyles(() => ({
     flexDirection: 'column',
     flexGrow: 1,
   },
-
 }));
 
 export const contactHeaderStyles = makeStyles((theme: Theme) => ({
