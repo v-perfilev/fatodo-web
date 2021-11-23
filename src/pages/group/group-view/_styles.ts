@@ -50,7 +50,7 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     '& > *': {
       color: theme.palette.grey['400'],
-      marginLeft: theme.spacing(3),
+      marginLeft: theme.spacing(1),
     },
   },
   showIcon: {
@@ -59,11 +59,6 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
     },
   },
   editIcon: {
-    '&:hover': {
-      color: theme.palette.secondary.main,
-    },
-  },
-  toggleIcon: {
     '&:hover': {
       color: theme.palette.secondary.main,
     },

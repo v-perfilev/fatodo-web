@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
-import {Box, IconButton} from '@material-ui/core';
+import {Box, Hidden, IconButton} from '@material-ui/core';
 import {groupViewItemStyles} from './_styles';
-import {PackageDownIcon} from '../../../components/icons/package-down-icon';
 import {EditIcon} from '../../../components/icons/edit-icon';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
 import {Item} from '../../../models/item.model';
@@ -48,14 +47,13 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
         <GroupViewItemChanges item={item} />
       </Box>
       <Box className={classes.managementBox}>
-        <IconButton size="small" className={classes.showIcon} onClick={redirectToViewItem}>
-          <EyeIcon />
-        </IconButton>
+        <Hidden xsDown>
+          <IconButton size="small" className={classes.showIcon} onClick={redirectToViewItem}>
+            <EyeIcon />
+          </IconButton>
+        </Hidden>
         <IconButton size="small" className={classes.editIcon} onClick={redirectToEditItem}>
           <EditIcon />
-        </IconButton>
-        <IconButton size="small" className={classes.toggleIcon}>
-          <PackageDownIcon />
         </IconButton>
         <IconButton size="small" className={classes.deleteIcon} onClick={openItemDeleteDialog}>
           <DeleteIcon />
