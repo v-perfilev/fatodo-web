@@ -35,7 +35,7 @@ export const PriorityView: FC<Props> = ({priority, withoutText, className}: Prop
 
   return withoutText ? (
     <Box className={classNames}>
-      <Tooltip title={text}>
+      <Tooltip className={classes.tooltip} title={text}>
         <Box>{icon}</Box>
       </Tooltip>
     </Box>

@@ -38,7 +38,7 @@ export const TypeView: FC<Props> = ({type, withoutText, className}: Props) => {
 
   return withoutText ? (
     <Box className={classNames}>
-      <Tooltip title={text}>
+      <Tooltip className={classes.tooltip} title={text}>
         <Box>{icon}</Box>
       </Tooltip>
     </Box>

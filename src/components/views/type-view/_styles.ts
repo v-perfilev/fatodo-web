@@ -5,10 +5,13 @@ export const typeStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
+    marginRight: theme.spacing(1),
     '& svg': {
       color: theme.palette.primary.main,
-      marginRight: theme.spacing(1),
       fontSize: '1.2rem',
     },
+  },
+  tooltip: {
+    display: 'flex',
   },
 }));

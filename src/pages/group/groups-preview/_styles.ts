@@ -91,6 +91,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(0.5),
   },
   card: {
+    position: 'relative',
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -100,21 +101,20 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
   },
   headerBox: {
     display: 'flex',
+    flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'start',
-    flexGrow: 1,
+    paddingTop: CARD_CHANGES_HEIGHT / 4,
   },
   titleBox: {
     display: 'flex',
+    alignItems: 'center',
     flexGrow: 1,
   },
   iconBox: {
     display: 'flex',
-    minWidth: 50,
-    '& > *': {
-      marginRight: theme.spacing(1),
-    },
+    alignItems: 'center',
   },
   changesBox: {
     height: CARD_CHANGES_HEIGHT,

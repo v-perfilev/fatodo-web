@@ -5,8 +5,8 @@ export const priorityStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
+    marginRight: theme.spacing(1),
     '& svg': {
-      marginRight: theme.spacing(1),
       fontSize: '1.2rem',
       '&.low': {
         color: theme.palette.grey['400'],
@@ -18,5 +18,8 @@ export const priorityStyles = makeStyles((theme: Theme) => ({
         color: theme.palette.error.main,
       },
     },
+  },
+  tooltip: {
+    display: 'flex',
   },
 }));
