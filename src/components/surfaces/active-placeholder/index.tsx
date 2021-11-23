@@ -1,6 +1,6 @@
-import React, {FC, HTMLAttributes, ReactElement} from 'react';
+import React, {FC, HTMLAttributes, ReactElement, useMemo} from 'react';
 import {activePlaceholderStyles} from './_styles';
-import {Box, Paper} from '@material-ui/core';
+import {Box, Fade, Paper} from '@material-ui/core';
 import csx from 'classnames';
 
 type Props = HTMLAttributes<HTMLElement> & {
@@ -23,12 +23,21 @@ export const ActivePlaceholder: FC<Props> = (props: Props) => {
     {[classes.horizontal]: orientation === 'horizontal'},
     {[classes.small]: size === 'sm'}
   );
-  const style = {height: height || '100%'};
+
+  const style = useMemo(() => {
+    return {height: height || '100%'};
+  }, [height]);
+
+  const show = useMemo<boolean>(() => {
+    return !height || height > 0;
+  }, [height]);
 
   return (
-    <Paper square variant={variant} elevation={3} className={classnames} style={style} ref={setRef} onClick={action}>
-      <Box className="icon">{icon}</Box>
-      <Box className="text">{text}</Box>
-    </Paper>
+    <Fade in={show}>
+      <Paper square variant={variant} elevation={3} className={classnames} style={style} ref={setRef} onClick={action}>
+        <Box className="icon">{icon}</Box>
+        <Box className="text">{text}</Box>
+      </Paper>
+    </Fade>
   );
 };
