@@ -15,7 +15,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 };
 
 export const ActivePlaceholder: FC<Props> = (props: Props) => {
-  const {action, icon, text, height, setRef, variant, orientation, size, style} = props;
+  const {action, icon, text, height, setRef, variant, orientation, size} = props;
   const classes = activePlaceholderStyles();
 
   const classnames = csx(
@@ -23,7 +23,7 @@ export const ActivePlaceholder: FC<Props> = (props: Props) => {
     {[classes.horizontal]: orientation === 'horizontal'},
     {[classes.small]: size === 'sm'}
   );
-  const paperStyle = {height: height || '100%', ...style};
+  const style = {height: height || '100%'};
 
   return (
     <Paper
@@ -31,7 +31,7 @@ export const ActivePlaceholder: FC<Props> = (props: Props) => {
       variant={variant}
       elevation={3}
       className={classnames}
-      style={paperStyle}
+      style={style}
       ref={setRef}
       onClick={action}
     >
