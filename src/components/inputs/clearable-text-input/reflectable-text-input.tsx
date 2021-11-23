@@ -1,15 +1,18 @@
 import {ClearableTextInput} from './index';
 import React, {ChangeEvent, FC, HTMLAttributes, KeyboardEvent, useEffect, useRef} from 'react';
 import {InputUtils} from '../../../shared/utils/input.utils';
+import {TextFieldProps} from '@material-ui/core';
+import {RefUtils} from '../../../shared/utils/ref.utils';
 
-type Props = HTMLAttributes<HTMLElement> & {
-  placeholder: string;
-  action: () => void;
-  text: string;
-  updateText: (text: string) => void;
-};
+type Props = HTMLAttributes<HTMLElement> &
+  TextFieldProps & {
+    placeholder: string;
+    action: () => void;
+    text: string;
+    updateText: (text: string) => void;
+  };
 
-const ReflectableTextInput: FC<Props> = ({placeholder, action, text, updateText, className}: Props) => {
+const ReflectableTextInput: FC<Props> = ({placeholder, action, text, updateText, inputRef, className}: Props) => {
   const ref = useRef<HTMLInputElement>();
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -42,7 +45,7 @@ const ReflectableTextInput: FC<Props> = ({placeholder, action, text, updateText,
       variant="outlined"
       multiline
       rows={1}
-      inputRef={ref}
+      inputRef={RefUtils.mergeRefs(ref, inputRef)}
       onKeyPress={handleKeyPress}
       onChange={handleOnChange}
     />

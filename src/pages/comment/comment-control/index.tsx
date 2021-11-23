@@ -61,7 +61,7 @@ const CommentControl: FC<Props> = ({targetId, account, reference, clearReference
   return (
     <Box className={classes.root}>
       <Box className={classes.inputWithButton}>
-        <CommentControlInput send={send} comment={commentBody} setComment={setCommentBody} />
+        <CommentControlInput send={send} comment={commentBody} setComment={setCommentBody} reference={reference} />
         <CommentControlSendButton send={send} />
       </Box>
       <Box className={classes.reference}>

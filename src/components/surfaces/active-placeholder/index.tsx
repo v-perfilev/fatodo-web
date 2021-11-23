@@ -26,15 +26,7 @@ export const ActivePlaceholder: FC<Props> = (props: Props) => {
   const style = {height: height || '100%'};
 
   return (
-    <Paper
-      square
-      variant={variant}
-      elevation={3}
-      className={classnames}
-      style={style}
-      ref={setRef}
-      onClick={action}
-    >
+    <Paper square variant={variant} elevation={3} className={classnames} style={style} ref={setRef} onClick={action}>
       <Box className="icon">{icon}</Box>
       <Box className="text">{text}</Box>
     </Paper>
