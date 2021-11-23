@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, ReactNode} from 'react';
+import {FC, ReactNode, useMemo} from 'react';
 import {priorityStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
 import {Box} from '@material-ui/core';
@@ -10,13 +10,14 @@ import {HighPriorityIcon} from '../../icons/high-priority-icon';
 
 type Props = {
   priority: ItemPriority;
+  withoutText?: boolean;
 };
 
-export const PriorityView: FC<Props> = ({priority}: Props) => {
+export const PriorityView: FC<Props> = ({priority, withoutText}: Props) => {
   const classes = priorityStyles();
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
 
-  const icon = (): ReactNode => {
+  const icon = useMemo<ReactNode>(() => {
     if (priority === 'LOW') {
       return <LowPriorityIcon className="low" />;
     } else if (priority === 'NORMAL') {
@@ -24,11 +25,15 @@ export const PriorityView: FC<Props> = ({priority}: Props) => {
     } else {
       return <HighPriorityIcon className="high" />;
     }
-  };
+  }, [priority]);
+
+  const label = useMemo<string>(() => {
+    return !withoutText && t('common:priorities.' + priority);
+  }, [priority, withoutText, i18n.language]);
 
   return (
     <Box className={classes.root}>
-      {icon()} {t('common:priorities.' + priority)}
+      {icon} {label}
     </Box>
   );
 };

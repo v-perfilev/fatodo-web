@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, HTMLAttributes, ReactNode} from 'react';
+import {FC, HTMLAttributes, ReactNode, useMemo} from 'react';
 import csx from 'classnames';
 import {typeStyles} from './_styles';
 import {ItemType} from '../../../models/item.model';
@@ -12,14 +12,15 @@ import {NoteIcon} from '../../icons/note-icon';
 
 type Props = HTMLAttributes<HTMLElement> & {
   type: ItemType;
+  withoutText?: boolean;
 };
 
-export const TypeView: FC<Props> = ({type, className}: Props) => {
+export const TypeView: FC<Props> = ({type, withoutText, className}: Props) => {
   const classes = typeStyles();
   const classNames = csx(classes.root, className);
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
 
-  const icon = (): ReactNode => {
+  const icon = useMemo<ReactNode>(() => {
     if (type === 'TASK') {
       return <TaskIcon />;
     } else if (type === 'EVENT') {
@@ -29,11 +30,15 @@ export const TypeView: FC<Props> = ({type, className}: Props) => {
     } else {
       return <NoteIcon />;
     }
-  };
+  }, [type]);
+
+  const label = useMemo<string>(() => {
+    return !withoutText && t('common:types.' + type);
+  }, [type, withoutText, i18n.language]);
 
   return (
     <Box className={classNames}>
-      {icon()} {t('common:types.' + type)}
+      {icon} {label}
     </Box>
   );
 };
