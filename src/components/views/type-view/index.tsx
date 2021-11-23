@@ -4,7 +4,7 @@ import csx from 'classnames';
 import {typeStyles} from './_styles';
 import {ItemType} from '../../../models/item.model';
 import {useTranslation} from 'react-i18next';
-import {Box} from '@material-ui/core';
+import {Box, Tooltip} from '@material-ui/core';
 import {TaskIcon} from '../../icons/task-icon';
 import {EventIcon} from '../../icons/event-icon';
 import {RepetitionIcon} from '../../icons/repetition-icon';
@@ -32,13 +32,19 @@ export const TypeView: FC<Props> = ({type, withoutText, className}: Props) => {
     }
   }, [type]);
 
-  const label = useMemo<string>(() => {
-    return !withoutText && t('common:types.' + type);
-  }, [type, withoutText, i18n.language]);
+  const text = useMemo<string>(() => {
+    return t('common:types.' + type);
+  }, [type, i18n.language]);
 
-  return (
+  return withoutText ? (
     <Box className={classNames}>
-      {icon} {label}
+      <Tooltip title={text}>
+        <Box>{icon}</Box>
+      </Tooltip>
+    </Box>
+  ) : (
+    <Box className={classNames}>
+      {icon} {text}
     </Box>
   );
 };

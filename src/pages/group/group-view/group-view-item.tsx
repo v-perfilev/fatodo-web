@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {Box, IconButton} from '@material-ui/core';
 import {groupViewItemStyles} from './_styles';
-import {CheckIcon} from '../../../components/icons/check-icon';
 import {PackageDownIcon} from '../../../components/icons/package-down-icon';
 import {EditIcon} from '../../../components/icons/edit-icon';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
@@ -12,6 +11,7 @@ import {EyeIcon} from '../../../components/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
+import {PriorityView, TypeView} from '../../../components/views';
 
 type Props = {
   item: Item;
@@ -35,7 +35,8 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
   return (
     <Box className={classes.root}>
       <Box className={classes.iconBox}>
-        <CheckIcon marginPosition="right" color="primary" className={classes.icon} />
+        <TypeView className={classes.icon} type={item.type} withoutText />
+        <PriorityView className={classes.icon} priority={item.priority} withoutText />
       </Box>
       <Box className={classes.contentBox}>
         <Link to={viewItemUrl} color="textPrimary" withUnderline>
