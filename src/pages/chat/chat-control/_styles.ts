@@ -1,5 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
+import {CHAT_CONTROL_HEADER_HEIGHT} from '../_constants';
 
 export const chatControlStyles = makeStyles(() => ({
   root: {
@@ -8,6 +9,9 @@ export const chatControlStyles = makeStyles(() => ({
     flexDirection: 'column',
     flexGrow: 1,
     height: '100%',
+    '& > *': {
+      marginBottom: -CHAT_CONTROL_HEADER_HEIGHT,
+    },
   },
 }));
 

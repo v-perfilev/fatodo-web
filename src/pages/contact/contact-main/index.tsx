@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Box, Container, Fab, Tab, Tabs} from '@material-ui/core';
+import {Container, Tab, Tabs} from '@material-ui/core';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
@@ -13,7 +13,7 @@ import ContactOutcoming from '../contact-outcoming';
 import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/contact-dialog-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import {PageSpacer} from '../../../components/surfaces';
-import ContactFilter from './contact-filter';
+import ContactHeader from './contact-header';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -73,12 +73,7 @@ const ContactMain: FC = () => {
           <Tab label={t('contact:incoming.title')} />
         </Tabs>
         <PageSpacer />
-        <Box className={classes.control}>
-          <Fab className={classes.button} size="small" color="primary" onClick={openContactRequestDialog}>
-            <PlusIcon />
-          </Fab>
-          <ContactFilter setFilter={setFilter} />
-        </Box>
+        <ContactHeader setFilter={setFilter} />
         {activeTab === 0 && <ContactRelations filter={filter} />}
         {activeTab === 1 && <ContactOutcoming filter={filter} />}
         {activeTab === 2 && <ContactIncoming filter={filter} />}
