@@ -38,6 +38,7 @@ const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, a
   };
 
   const canAdmin = group && GroupUtils.canAdmin(account, group);
+  const canLeave = group && GroupUtils.canLeave(account, group);
 
   const removeUserFromChat = (): void => {
     setRemovingLoading(true);
@@ -69,12 +70,12 @@ const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, a
         <PermissionView permission={user.permission} />
       </Box>
       <Box className={classes.buttons}>
-        {canAdmin && (
+        {canAdmin && (user.id !== account.id || canLeave) && (
           <IconButton size="small" onClick={switchToEdit}>
             <EditIcon color="primary" />
           </IconButton>
         )}
-        {canAdmin && (
+        {canAdmin && (user.id !== account.id || canLeave) && (
           <IconButton size="small" onClick={switchRemovingConfirmation}>
             <UserMinusIcon color="error" />
           </IconButton>
