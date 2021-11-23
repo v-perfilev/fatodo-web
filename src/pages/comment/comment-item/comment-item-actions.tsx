@@ -12,13 +12,15 @@ import {ReactionsIcon} from '../../../components/icons/reactions-icon';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
 import {useCommentDialogContext} from '../../../shared/contexts/dialog-contexts/comment-dialog-context';
 import {EditIcon} from '../../../components/icons/edit-icon';
+import {ReplyIcon} from '../../../components/icons/reply-icon';
 
 type Props = {
   comment: Comment;
   isOwnComment?: boolean;
+  setReference: (comment: Comment) => void;
 };
 
-const CommentItemActions: FC<Props> = ({comment, isOwnComment}: Props) => {
+const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Props) => {
   const classes = commentItemActionsStyles();
   const {handleResponse} = useSnackContext();
   const {users} = useUserListContext();
@@ -38,6 +40,14 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment}: Props) => {
     e.stopPropagation();
     setIsOpen(false);
   }, []);
+
+  const replyToComment = useCallback(
+    (e: MouseEvent<HTMLElement>): void => {
+      setReference(comment);
+      handleClose(e);
+    },
+    [comment]
+  );
 
   const openReactionsDialog = useCallback(
     (e: MouseEvent<HTMLElement>): void => {
@@ -71,6 +81,10 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment}: Props) => {
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
+        <MenuItem onClick={replyToComment}>
+          <ReplyIcon color="primary" />
+          {t('comment:comment.buttons.response')}
+        </MenuItem>
         <MenuItem onClick={openReactionsDialog}>
           <ReactionsIcon color="primary" />
           {t('comment:comment.actions.reactions')}

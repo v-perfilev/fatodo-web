@@ -1,5 +1,5 @@
 import React, {FC, memo, useMemo} from 'react';
-import {Box} from '@material-ui/core';
+import {Box, Hidden} from '@material-ui/core';
 import {Comment} from '../../../models/comment.model';
 import {commentItemStyles} from './_styles';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
@@ -47,8 +47,10 @@ const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
           <Box className={classes.date}>{date}</Box>
           {comment.reference && <CommentItemReference reference={comment.reference} />}
           <Box className={classes.placeholder} />
-          <CommentItemReferenceButton comment={comment} setReference={setReference} />
-          <CommentItemActions comment={comment} isOwnComment={isOwnMessage} />
+          <Hidden xsDown>
+            <CommentItemReferenceButton comment={comment} setReference={setReference} />
+          </Hidden>
+          <CommentItemActions comment={comment} isOwnComment={isOwnMessage} setReference={setReference} />
         </Box>
         <Box className={classes.body}>
           {!comment.isDeleted && <span>{comment.text}</span>}
