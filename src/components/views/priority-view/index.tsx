@@ -41,7 +41,8 @@ export const PriorityView: FC<Props> = ({priority, withoutText, className}: Prop
     </Box>
   ) : (
     <Box className={classNames}>
-      {icon} {text}
+      {icon}
+      <Box className={classes.text}>{text}</Box>
     </Box>
   );
 };

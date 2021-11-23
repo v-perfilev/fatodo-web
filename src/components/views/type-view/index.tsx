@@ -44,7 +44,8 @@ export const TypeView: FC<Props> = ({type, withoutText, className}: Props) => {
     </Box>
   ) : (
     <Box className={classNames}>
-      {icon} {text}
+      {icon}
+      <Box className={classes.text}>{text}</Box>
     </Box>
   );
 };

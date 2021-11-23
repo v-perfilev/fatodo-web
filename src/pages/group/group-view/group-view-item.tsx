@@ -12,8 +12,6 @@ import {useHistory} from 'react-router-dom';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
 import {PriorityView, TypeView} from '../../../components/views';
-import {DateFormatters} from '../../../shared/utils/date.utils';
-import {useTranslation} from 'react-i18next';
 import GroupViewItemChanges from './group-view-item-changes';
 
 type Props = {
@@ -22,7 +20,6 @@ type Props = {
 
 const GroupViewItem: FC<Props> = ({item}: Props) => {
   const classes = groupViewItemStyles();
-  const {t} = useTranslation();
   const history = useHistory();
   const {load: loadItems} = useItemListContext();
   const {showItemDeleteDialog} = useItemDialogContext();
@@ -34,11 +31,6 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
   const openItemDeleteDialog = (): void => {
     const onSuccess = (): void => loadItems();
     showItemDeleteDialog(item, onSuccess);
-  };
-
-  const getDate = (timestamp: number): string => {
-    const timestampNumber = timestamp * 1000;
-    return DateFormatters.formatTimeWithDate(new Date(timestampNumber));
   };
 
   return (

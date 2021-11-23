@@ -5,8 +5,8 @@ import {groupGridItemStyles} from './_styles';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {Group} from '../../../models/group.model';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import GroupPreviewCard from './group-preview-card';
 import {flowRight} from 'lodash';
+import GroupPreviewCard from './group-preview-card';
 
 type Props = {
   group: Group;

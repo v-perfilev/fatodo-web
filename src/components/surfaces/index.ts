@@ -1,5 +1,6 @@
 export * from './active-placeholder';
 export * from './avatar-group';
+export * from './box-with-icon';
 export * from './hover-popup';
 export * from './icon';
 export * from './labeled-box';

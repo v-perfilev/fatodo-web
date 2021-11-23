@@ -9,7 +9,6 @@ import {BUTTONS_IN_GROUP_CARD, ITEMS_IN_GROUP_CARD} from '../_constants';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import GroupPreviewCardItem from './group-preview-card-item';
 import GroupPreviewCardCreateButton from './group-preview-card-create-button';
@@ -91,4 +90,4 @@ const GroupPreviewCardContent: FC = () => {
   );
 };
 
-export default withItemList(GroupPreviewCardContent);
+export default GroupPreviewCardContent;

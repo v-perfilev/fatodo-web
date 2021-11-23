@@ -115,6 +115,9 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
   iconBox: {
     display: 'flex',
     alignItems: 'center',
+    '& > *': {
+      marginRight: theme.spacing(1),
+    },
   },
   changesBox: {
     height: CARD_CHANGES_HEIGHT,
@@ -151,6 +154,12 @@ export const groupCardNotificationsStyles = makeStyles((theme: Theme) => ({
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
     paddingBottom: theme.spacing(1.5),
+  },
+  badges: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'end',
   },
 }));
 

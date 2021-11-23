@@ -1,17 +1,11 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const typeStyles = makeStyles((theme: Theme) => ({
+export const labeledBoxStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
-    '& svg': {
-      color: theme.palette.primary.main,
-      fontSize: '1.2rem',
-    },
-  },
-  tooltip: {
-    display: 'flex',
   },
   text: {
     marginLeft: theme.spacing(1),

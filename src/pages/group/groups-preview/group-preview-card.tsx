@@ -6,6 +6,8 @@ import {groupCardStyles} from './_styles';
 import GroupPreviewCardBody from './group-preview-card-body';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
+import withItemList from '../../../shared/hocs/with-list/with-item-list';
+import {flowRight} from 'lodash';
 
 type Props = {
   height: number;
@@ -30,4 +32,4 @@ const GroupPreviewCard: FC<Props> = ({height}: Props) => {
   );
 };
 
-export default GroupPreviewCard;
+export default flowRight([withItemList])(GroupPreviewCard);
