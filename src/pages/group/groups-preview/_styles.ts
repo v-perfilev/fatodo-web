@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {CARD_HEADER_HEIGHT, ITEMS_IN_GROUP_CARD} from '../_constants';
+import {CARD_CHANGES_HEIGHT, CARD_HEADER_HEIGHT, ITEMS_IN_GROUP_CARD} from '../_constants';
 
 export const groupCardStyles = makeStyles(() => ({
   card: {
@@ -101,10 +101,9 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
   headerBox: {
     display: 'flex',
     flexDirection: 'row',
-    flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'start',
-    paddingTop: theme.spacing(2),
+    flexGrow: 1,
   },
   titleBox: {
     display: 'flex',
@@ -118,11 +117,11 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
     },
   },
   changesBox: {
+    height: CARD_CHANGES_HEIGHT,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'end',
-    margin: theme.spacing(1),
   },
   icon: {
     fontSize: '1.5rem',
