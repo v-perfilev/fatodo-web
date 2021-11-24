@@ -18,8 +18,6 @@ export const groupViewItemsStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
   },
 }));
 
@@ -79,7 +77,7 @@ export const groupViewItemChangesStyles = makeStyles((theme: Theme) => ({
 
 export const groupViewCreateButtonStyles = makeStyles((theme: Theme) => ({
   root: {
-    paddingTop: theme.spacing(0.7),
-    paddingBottom: theme.spacing(0.2),
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
   },
 }));

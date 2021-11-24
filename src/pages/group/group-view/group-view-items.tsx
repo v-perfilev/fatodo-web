@@ -40,6 +40,8 @@ const GroupViewItems: FC = () => {
   return (
     <Box className={classes.root}>
       {loading && <CircularSpinner size="sm" />}
+      {!loading && <GroupViewCreateButton group={group} />}
+      {!loading && items.length !== 0 && <PageDivider />}
       {!loading &&
         items.map((item, index) => (
           <Box key={index}>
@@ -47,8 +49,6 @@ const GroupViewItems: FC = () => {
             <GroupViewItem item={item} />
           </Box>
         ))}
-      {!loading && items.length !== 0 && <PageDivider />}
-      {!loading && <GroupViewCreateButton group={group} />}
     </Box>
   );
 };
