@@ -34,6 +34,7 @@ import {GroupUtils} from '../../../shared/utils/group.utils';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import GroupViewHeader from './group-view-header';
+import withUserList from '../../../shared/hocs/with-list/with-user-list';
 
 type Props = AuthState;
 
@@ -163,4 +164,4 @@ const GroupView: FC<Props> = ({account}: Props) => {
   );
 };
 
-export default flowRight([withVerticalPadding, withGroupView, withAuthState, memo])(GroupView);
+export default flowRight([withVerticalPadding, withGroupView, withUserList, withAuthState, memo])(GroupView);

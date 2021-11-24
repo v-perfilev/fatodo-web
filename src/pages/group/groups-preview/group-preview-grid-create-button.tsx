@@ -1,9 +1,7 @@
 import * as React from 'react';
-import {FC, memo, useCallback, useMemo} from 'react';
+import {FC, useCallback, useMemo} from 'react';
 import {Grid} from '@material-ui/core';
 import {groupGridItemStyles} from './_styles';
-import withGroupView from '../../../shared/hocs/with-view/with-group-view';
-import {flowRight} from 'lodash';
 import {ActivePlaceholder} from '../../../components/surfaces';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {useHistory} from 'react-router-dom';
@@ -33,4 +31,4 @@ const GroupPreviewGridCreateButton: FC<Props> = ({height, setRef}: Props) => {
   );
 };
 
-export default flowRight([memo, withGroupView])(GroupPreviewGridCreateButton);
+export default GroupPreviewGridCreateButton;

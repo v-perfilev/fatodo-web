@@ -11,7 +11,6 @@ import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import {CircularSpinner} from '../../../components/loaders';
 import GroupPreviewGridContainer from './group-preview-grid-container';
-import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import ItemService from '../../../services/item.service';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
@@ -19,9 +18,8 @@ const GroupPreview: FC = () => {
   const history = useHistory();
   const {t, i18n} = useTranslation();
   const {handleResponse} = useSnackContext();
-  const {handleUserIds} = useUserListContext();
   const {setMenu} = useAdditionalMenuContext();
-  const {objs: groups, setObjs: setGroups, setLoad: setLoadGroups, loading: groupsLoading} = useGroupListContext();
+  const {setObjs: setGroups, setLoad: setLoadGroups, loading: groupsLoading} = useGroupListContext();
 
   const redirectToGroupCreate = (): void => history.push(GroupRouteUtils.getCreateUrl());
   const redirectToGroupsSorting = (): void => history.push(GroupRouteUtils.getSortingUrl());
@@ -36,13 +34,6 @@ const GroupPreview: FC = () => {
       });
   };
 
-  const loadUsers = (): void => {
-    const userIds = groups
-      .map((group) => group.members.map((user) => user.id))
-      .reduce((acc, userIds) => [...acc, ...userIds], []);
-    handleUserIds(userIds);
-  };
-
   const menuElements = [
     {icon: <PlusIcon />, action: redirectToGroupCreate, text: t('group:tooltips.create')},
     {icon: <ReorderIcon />, action: redirectToGroupsSorting, text: t('group:tooltips.reorder')},
@@ -51,12 +42,6 @@ const GroupPreview: FC = () => {
   useEffect(() => {
     setLoadGroups(() => (): void => loadGroups());
   }, []);
-
-  useEffect(() => {
-    if (groups) {
-      loadUsers();
-    }
-  }, [groups]);
 
   useEffect(() => {
     setMenu(menuElements);

@@ -7,6 +7,8 @@ import {Group} from '../../../models/group.model';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {flowRight} from 'lodash';
 import GroupPreviewCard from './group-preview-card';
+import withUserList from '../../../shared/hocs/with-list/with-user-list';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 type Props = {
   group: Group;
@@ -15,9 +17,16 @@ type Props = {
 
 const GroupPreviewGridItem: FC<Props> = ({group, height}: Props) => {
   const classes = groupGridItemStyles();
+  const {handleUserIds} = useUserListContext();
   const {setObj: setGroup} = useGroupViewContext();
 
+  const loadUsers = (): void => {
+    const userIds = group.members.map((user) => user.id);
+    handleUserIds(userIds);
+  };
+
   useEffect(() => {
+    loadUsers();
     setGroup(group);
   }, [group]);
 
@@ -28,4 +37,4 @@ const GroupPreviewGridItem: FC<Props> = ({group, height}: Props) => {
   );
 };
 
-export default flowRight([memo, withGroupView])(GroupPreviewGridItem);
+export default flowRight([memo, withGroupView, withUserList])(GroupPreviewGridItem);

@@ -9,7 +9,6 @@ import {Routes} from '../router';
 import GroupView from './group-view';
 import GroupCreate from './group-create';
 import GroupEdit from './group-edit';
-import withUserList from '../../shared/hocs/with-list/with-user-list';
 import {flowRight} from 'lodash';
 
 export enum GroupRoutes {
@@ -41,4 +40,4 @@ const GroupRouter: FC = () => {
   );
 };
 
-export default flowRight([withFlexibleHeader, withUserList])(GroupRouter);
+export default flowRight([withFlexibleHeader])(GroupRouter);

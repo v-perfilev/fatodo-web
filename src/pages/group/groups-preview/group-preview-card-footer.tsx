@@ -58,7 +58,7 @@ const GroupPreviewCardFooter: FC<Props> = (props: Props) => {
 
   return (
     <CardActions className={classes.footer}>
-      <AvatarGroup users={users} />
+      <AvatarGroup users={users} withPopup shorten={isMultiPage} />
       {isMultiPage && paginationElement}
       <Box className={classes.badges}>
         <BoxWithIcon icon={<ItemsIcon color="primary" />}>{items?.length || 0}</BoxWithIcon>
