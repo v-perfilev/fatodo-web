@@ -13,17 +13,15 @@ import GroupPreviewCardItem from './group-preview-card-item';
 
 type Props = {
   itemsToShow: Item[];
-  firstShownItem: number;
-  isNotLastPage: boolean;
+  isNotFirstPage: boolean;
 };
 
-const GroupPreviewCardContent: FC<Props> = ({itemsToShow, firstShownItem, isNotLastPage}: Props) => {
+const GroupPreviewCardContent: FC<Props> = ({itemsToShow, isNotFirstPage}: Props) => {
   const classes = groupCardContentStyles();
   const {obj: group} = useGroupViewContext();
-  const {objs: items} = useItemListContext();
   const {loading: itemsLoading} = useItemListContext();
 
-  const trailItems = isNotLastPage ? itemsToShow?.length : itemsToShow?.length + BUTTONS_IN_GROUP_CARD;
+  const trailItems = isNotFirstPage ? itemsToShow?.length : itemsToShow?.length + BUTTONS_IN_GROUP_CARD;
   const trail = useTrail(trailItems, {
     reset: true,
     delay: 50,
@@ -33,11 +31,11 @@ const GroupPreviewCardContent: FC<Props> = ({itemsToShow, firstShownItem, isNotL
 
   const itemElement = (style: CSSProperties, index: number): ReactNode => (
     <div className={classes.box} key={index}>
-      {index + firstShownItem < items.length ? (
-        <GroupPreviewCardItem item={itemsToShow[index]} style={style} />
-      ) : (
-        <GroupPreviewCardCreateButton group={group} style={style} />
+      {isNotFirstPage && <GroupPreviewCardItem item={itemsToShow[index]} style={style} />}
+      {!isNotFirstPage && index >= BUTTONS_IN_GROUP_CARD && (
+        <GroupPreviewCardItem item={itemsToShow[index - BUTTONS_IN_GROUP_CARD]} style={style} />
       )}
+      {!isNotFirstPage && index < BUTTONS_IN_GROUP_CARD && <GroupPreviewCardCreateButton group={group} style={style} />}
     </div>
   );
 

@@ -19,10 +19,21 @@ const GroupPreviewCardBody: FC = () => {
   const isMultiPage = items.length + BUTTONS_IN_GROUP_CARD > ITEMS_IN_GROUP_CARD;
   const isNotFirstPage = firstShownItem > 0;
   const isNotLastPage = firstShownItem + ITEMS_IN_GROUP_CARD < items.length + BUTTONS_IN_GROUP_CARD;
-  const itemsToShow = items.slice(firstShownItem, firstShownItem + ITEMS_IN_GROUP_CARD);
+  const itemsInPage = isNotFirstPage ? ITEMS_IN_GROUP_CARD : ITEMS_IN_GROUP_CARD - BUTTONS_IN_GROUP_CARD;
+  const itemsToShow = items.slice(firstShownItem, firstShownItem + itemsInPage);
 
-  const onUpClick = (): void => setFirstShownItem((prevState) => prevState - ITEMS_IN_GROUP_CARD);
-  const onDownClick = (): void => setFirstShownItem((prevState) => prevState + ITEMS_IN_GROUP_CARD);
+  const onUpClick = (): void => {
+    setFirstShownItem((prevState) => {
+      return prevState > ITEMS_IN_GROUP_CARD - BUTTONS_IN_GROUP_CARD ? prevState - ITEMS_IN_GROUP_CARD : 0;
+    });
+  };
+  const onDownClick = (): void => {
+    setFirstShownItem((prevState) => {
+      return prevState === 0
+        ? prevState + ITEMS_IN_GROUP_CARD - BUTTONS_IN_GROUP_CARD
+        : prevState + ITEMS_IN_GROUP_CARD;
+    });
+  };
 
   const loadItems = (): void => {
     ItemService.getAllItemsByGroupId(group.id)
@@ -40,11 +51,7 @@ const GroupPreviewCardBody: FC = () => {
 
   return (
     <>
-      <GroupPreviewCardContent
-        itemsToShow={itemsToShow}
-        firstShownItem={firstShownItem}
-        isNotLastPage={isNotLastPage}
-      />
+      <GroupPreviewCardContent itemsToShow={itemsToShow} isNotFirstPage={isNotFirstPage} />
       <GroupPreviewCardFooter
         onUpClick={onUpClick}
         onDownClick={onDownClick}

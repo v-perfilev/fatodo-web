@@ -6,7 +6,6 @@ import {groupCardStyles} from './_styles';
 import GroupPreviewCardBody from './group-preview-card-body';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import withUserList from '../../../shared/hocs/with-list/with-user-list';
 import {flowRight} from 'lodash';
 
 type Props = {

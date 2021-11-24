@@ -13,7 +13,7 @@ export const groupViewUsersStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupViewItemsStyles = makeStyles((theme: Theme) => ({
+export const groupViewItemsStyles = makeStyles(() => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
