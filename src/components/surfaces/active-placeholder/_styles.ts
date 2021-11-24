@@ -7,7 +7,6 @@ export const activePlaceholderStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: theme.spacing(1),
 
     '& .icon': {
       width: 56,

@@ -79,8 +79,7 @@ export const groupViewItemChangesStyles = makeStyles((theme: Theme) => ({
 
 export const groupViewCreateButtonStyles = makeStyles((theme: Theme) => ({
   root: {
-    height: 90,
-    paddingTop: theme.spacing(1.2),
-    paddingBottom: theme.spacing(1.2),
+    paddingTop: theme.spacing(0.7),
+    paddingBottom: theme.spacing(0.2),
   },
 }));

@@ -1,47 +1,29 @@
 import * as React from 'react';
-import {FC, useEffect, useRef, useState} from 'react';
-import {Box, Button, CardContent, Typography} from '@material-ui/core';
+import {CSSProperties, FC, memo, ReactNode} from 'react';
+import {CardContent} from '@material-ui/core';
 import {groupCardContentStyles} from './_styles';
-import {ArrowDownIcon} from '../../../components/icons/arrow-down-icon';
-import {ArrowUpIcon} from '../../../components/icons/arrow-up-icon';
 import {useTrail} from 'react-spring';
-import {BUTTONS_IN_GROUP_CARD, ITEMS_IN_GROUP_CARD} from '../_constants';
-import ItemService from '../../../services/item.service';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {BUTTONS_IN_GROUP_CARD} from '../_constants';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
-import GroupPreviewCardItem from './group-preview-card-item';
 import GroupPreviewCardCreateButton from './group-preview-card-create-button';
 import {CircularSpinner} from '../../../components/loaders';
+import {Item} from '../../../models/item.model';
+import GroupPreviewCardItem from './group-preview-card-item';
 
-const GroupPreviewCardContent: FC = () => {
+type Props = {
+  itemsToShow: Item[];
+  firstShownItem: number;
+  isNotLastPage: boolean;
+};
+
+const GroupPreviewCardContent: FC<Props> = ({itemsToShow, firstShownItem, isNotLastPage}: Props) => {
   const classes = groupCardContentStyles();
-  const {handleResponse} = useSnackContext();
   const {obj: group} = useGroupViewContext();
-  const {objs: items, setObjs: setItems, setLoad: setLoadItems, loading: itemsLoading} = useItemListContext();
-  const [firstShowedItem, setFirstShowedItem] = useState(0);
-  const ref = useRef();
+  const {objs: items} = useItemListContext();
+  const {loading: itemsLoading} = useItemListContext();
 
-  const isMultiPage = items.length + BUTTONS_IN_GROUP_CARD > ITEMS_IN_GROUP_CARD;
-  const isNotFirstPage = firstShowedItem > 0;
-  const isNotLastPage = firstShowedItem + ITEMS_IN_GROUP_CARD < items.length + BUTTONS_IN_GROUP_CARD;
-
-  const itemsToShow = items.slice(firstShowedItem, firstShowedItem + ITEMS_IN_GROUP_CARD);
-
-  const onUpClick = (): void => setFirstShowedItem((prevState) => prevState - ITEMS_IN_GROUP_CARD);
-  const onDownClick = (): void => setFirstShowedItem((prevState) => prevState + ITEMS_IN_GROUP_CARD);
-
-  const loadItems = (): void => {
-    ItemService.getAllItemsByGroupId(group.id)
-      .then((response) => {
-        setItems(response.data);
-      })
-      .catch((response) => {
-        handleResponse(response);
-      });
-  };
-
-  const trailItems = isNotLastPage ? itemsToShow.length : itemsToShow.length + BUTTONS_IN_GROUP_CARD;
+  const trailItems = isNotLastPage ? itemsToShow?.length : itemsToShow?.length + BUTTONS_IN_GROUP_CARD;
   const trail = useTrail(trailItems, {
     reset: true,
     delay: 50,
@@ -49,45 +31,24 @@ const GroupPreviewCardContent: FC = () => {
     from: {opacity: 0},
   });
 
-  useEffect(() => {
-    setLoadItems(() => (): void => loadItems());
-  }, []);
-
-  const listElement = (
-    <div className={classes.box} ref={ref}>
-      {trail.map((style, index) =>
-        index < items.length ? (
-          <GroupPreviewCardItem item={itemsToShow[index]} key={index} style={style} />
-        ) : (
-          <GroupPreviewCardCreateButton group={group} style={style} key={index} />
-        )
+  const itemElement = (style: CSSProperties, index: number): ReactNode => (
+    <div className={classes.box} key={index}>
+      {index + firstShownItem < items.length ? (
+        <GroupPreviewCardItem item={itemsToShow[index]} style={style} />
+      ) : (
+        <GroupPreviewCardCreateButton group={group} style={style} />
       )}
     </div>
   );
 
-  const paginationElement = (
-    <Box className={classes.control}>
-      <Button variant="outlined" size="small" onClick={onUpClick} disabled={!isNotFirstPage}>
-        <ArrowUpIcon />
-      </Button>
-      <Box className={classes.pageCount}>
-        <Typography color="primary">
-          {Math.floor(firstShowedItem / ITEMS_IN_GROUP_CARD) + 1}/{Math.ceil(items.length / ITEMS_IN_GROUP_CARD)}
-        </Typography>
-      </Box>
-      <Button variant="outlined" size="small" onClick={onDownClick} disabled={!isNotLastPage}>
-        <ArrowDownIcon />
-      </Button>
-    </Box>
-  );
+  const listElement = trail.map((style: CSSProperties, index) => itemElement(style, index));
 
   return (
     <CardContent className={classes.content}>
       {itemsLoading && <CircularSpinner size="sm" />}
       {!itemsLoading && listElement}
-      {!itemsLoading && isMultiPage && paginationElement}
     </CardContent>
   );
 };
 
-export default GroupPreviewCardContent;
+export default memo(GroupPreviewCardContent);

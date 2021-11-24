@@ -27,7 +27,7 @@ const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
   }, [item]);
 
   return (
-    <Box className={classes.item} style={style}>
+    <Box className={classes.root} style={style}>
       <Link to={(Routes.ITEMS + ItemRoutes.VIEW).replace(':itemId', item.id)}>
         <Card square variant="outlined" className={classes.card}>
           <Box className={classes.headerBox}>

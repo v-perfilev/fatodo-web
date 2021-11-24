@@ -2,7 +2,7 @@ import {User} from '../../../models/user.model';
 import {avatarGroupStyles} from './_styles';
 import React, {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
-import {AVATARS_IN_CARD} from '../../../pages/group/_constants';
+import {AVATARS_IN_CARD, SHORTEN_AVATARS_IN_CARD} from '../../../pages/group/_constants';
 import {UserView, UserWithPopupView} from '../../views';
 import csx from 'classnames';
 
@@ -10,14 +10,16 @@ type Props = {
   users: User[];
   onClick?: () => void;
   withPopup?: boolean;
+  shorten?: boolean;
 };
 
-export const AvatarGroup: FC<Props> = ({users, onClick, withPopup}: Props) => {
+export const AvatarGroup: FC<Props> = ({users, onClick, withPopup, shorten}: Props) => {
   const classes = avatarGroupStyles();
   const classNames = csx(classes.avatars, {[classes.pointer]: onClick});
 
-  const usersToShow = users.slice(0, AVATARS_IN_CARD);
-  const moreThanLimit = users.length > AVATARS_IN_CARD ? users.length - AVATARS_IN_CARD : 0;
+  const avatarsCount = shorten ? SHORTEN_AVATARS_IN_CARD : AVATARS_IN_CARD;
+  const usersToShow = users.slice(0, avatarsCount);
+  const moreThanLimit = users.length > avatarsCount ? users.length - avatarsCount : 0;
 
   return (
     <Box className={classNames} onClick={onClick}>

@@ -1,6 +1,12 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {CARD_CHANGES_HEIGHT, CARD_HEADER_HEIGHT, ITEMS_HEIGHT_IN_GROUP_CARD} from '../_constants';
+import {
+  CARD_CHANGES_HEIGHT,
+  CARD_FOOTER_HEIGHT,
+  CARD_HEADER_HEIGHT,
+  ITEMS_IN_GROUP_CARD,
+  PAGINATION_BUTTON_WIDTH,
+} from '../_constants';
 
 export const groupCardStyles = makeStyles(() => ({
   card: {
@@ -40,58 +46,30 @@ export const groupCardActionsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardBodyStyles = makeStyles(() => ({
-  body: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-  },
-}));
-
 export const groupCardContentStyles = makeStyles((theme: Theme) => ({
   content: {
-    position: 'relative',
+    height: `calc(100% - ${CARD_HEADER_HEIGHT}px - ${CARD_FOOTER_HEIGHT}px)`,
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: 1,
+    paddingBottom: theme.spacing(1),
   },
   box: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-  },
-  control: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginTop: theme.spacing(2),
-  },
-  pageCount: {
-    display: 'flex',
-    flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    '& *': {
-      fontWeight: 'bold',
-    },
+    height: `calc(100% / ${ITEMS_IN_GROUP_CARD})`,
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+    flexShrink: 0,
   },
 }));
 
-export const groupCardCreateButtonStyles = makeStyles((theme: Theme) => ({
+export const groupCardCreateButtonStyles = makeStyles(() => ({
   root: {
-    height: ITEMS_HEIGHT_IN_GROUP_CARD,
-    boxSizing: 'border-box',
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
+    height: '100%',
   },
 }));
 
 export const groupCardItemStyles = makeStyles((theme: Theme) => ({
-  item: {
-    height: ITEMS_HEIGHT_IN_GROUP_CARD,
-    boxSizing: 'border-box',
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
-    flexShrink: 0,
+  root: {
+    height: '100%',
   },
   card: {
     position: 'relative',
@@ -144,14 +122,35 @@ export const groupCardItemChangesStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardNotificationsStyles = makeStyles((theme: Theme) => ({
-  users: {
+export const groupCardFooterStyles = makeStyles((theme: Theme) => ({
+  footer: {
+    height: CARD_FOOTER_HEIGHT,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
     paddingBottom: theme.spacing(1.5),
+  },
+  control: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  paginationButton: {
+    minWidth: PAGINATION_BUTTON_WIDTH,
+    width: PAGINATION_BUTTON_WIDTH,
+  },
+  pageCount: {
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: theme.spacing(0.5),
+    marginRight: theme.spacing(0.5),
+    '& *': {
+      fontWeight: 'bold',
+    },
   },
   badges: {
     display: 'flex',
