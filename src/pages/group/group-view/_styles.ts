@@ -70,7 +70,7 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
 
 export const groupViewItemChangesStyles = makeStyles((theme: Theme) => ({
   root: {
-    color: theme.palette.grey['500'],
+    color: theme.palette.grey['400'],
     fontSize: '0.7rem',
   },
 }));

@@ -13,9 +13,7 @@ const GroupPreviewCardItemChanges: FC<Props> = ({item}: Props) => {
 
   const formattedDate = useMemo<string>(() => {
     const timestampToDate = (timestamp: number): Date => new Date(timestamp * 1000);
-    return !item.lastModifiedAt || item.createdAt === item.lastModifiedAt
-      ? DateFormatters.formatDependsOnDay(timestampToDate(item.createdAt))
-      : DateFormatters.formatDependsOnDay(timestampToDate(item.lastModifiedAt));
+    return DateFormatters.formatDependsOnDay(timestampToDate(item.createdAt));
   }, [item]);
 
   return <Box className={classes.root}>{formattedDate}</Box>;
