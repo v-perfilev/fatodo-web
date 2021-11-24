@@ -39,7 +39,7 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
         <PriorityView className={classes.icon} priority={item.priority} withoutText />
       </Box>
       <Box className={classes.contentBox}>
-        <Link to={viewItemUrl} color="textPrimary" withUnderline>
+        <Link to={viewItemUrl} color="textPrimary" withHoverUnderline>
           {item.title}
         </Link>
       </Box>

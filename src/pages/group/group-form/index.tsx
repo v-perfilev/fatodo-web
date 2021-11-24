@@ -6,9 +6,10 @@ import {Group} from '../../../models/group.model';
 import {GroupFormUtils, GroupFormValues} from './_form';
 import {ImageUpload, TextInput, ThemeSelect} from '../../../components/inputs';
 import {useTranslation} from 'react-i18next';
-import {PageDivider, PageHeader} from '../../../components/surfaces';
+import {PageDivider} from '../../../components/surfaces';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {flowRight} from 'lodash';
+import GroupFormHeader from './group-form-header';
 
 type BaseProps = {
   group?: Group;
@@ -30,7 +31,7 @@ const GroupForm: FC<Props> = ({header, setSaveCallback, isValid, submitForm, isS
 
   return (
     <>
-      <PageHeader title={header} />
+      <GroupFormHeader title={header} />
       <PageDivider height={5} />
       <Form className={classes.form}>
         <Grid container spacing={3}>

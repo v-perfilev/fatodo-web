@@ -4,7 +4,7 @@ import {Container, ThemeProvider} from '@material-ui/core';
 import ItemViewDescription from './item-view-description';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
-import {PageDivider, PageHeader, PageSpacer} from '../../../components/surfaces';
+import {PageDivider, PageSpacer} from '../../../components/surfaces';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
@@ -37,6 +37,7 @@ import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';
 import NotificationService from '../../../services/notification.service';
 import withReminderList from '../../../shared/hocs/with-list/with-reminder-list';
+import ItemViewHeader from './item-view-header';
 
 type Props = AuthState;
 
@@ -111,7 +112,7 @@ const ItemView: FC<Props> = ({account}: Props) => {
   const canEdit = group && GroupUtils.canAdmin(account, group);
 
   const menuElements = [
-    {icon: <ItemsIcon />, action: redirectToGroupView, text: t('item:tooltips.list')},
+    {icon: <ItemsIcon />, action: redirectToGroupView, text: t('item:tooltips.list'), hiddenInControlMenu: true},
     {icon: <EditIcon />, action: redirectToItemEdit, text: t('item:tooltips.edit'), hidden: !canEdit},
     {
       icon: <DeleteIcon />,
@@ -148,7 +149,7 @@ const ItemView: FC<Props> = ({account}: Props) => {
   ) : (
     <ThemeProvider theme={theme}>
       <Container>
-        <PageHeader title={item.title} />
+        <ItemViewHeader title={item.title} group={group} />
         <PageDivider height={5} />
         <ItemViewInfo />
         <PageDivider />

@@ -19,7 +19,7 @@ const GroupSortingHeader: FC<Props> = ({bind}: Props) => {
       title={
         <Box className={classes.title}>
           {group.imageFilename && <UrlPic url={group.imageFilename} size="md" />}
-          <Typography variant={'h6'} className={classes.caption}>
+          <Typography variant="h6" className={classes.caption}>
             {group.title}
           </Typography>
         </Box>

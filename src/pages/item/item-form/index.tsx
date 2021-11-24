@@ -6,7 +6,7 @@ import {Form, FormikBag, FormikProps, withFormik} from 'formik';
 import {ItemFormUtils, ItemFormValues} from './_form';
 import {Group} from '../../../models/group.model';
 import {ItemDTO} from '../../../models/dto/item.dto';
-import {PageDivider, PageHeader} from '../../../components/surfaces';
+import {PageDivider} from '../../../components/surfaces';
 import {
   DateInput,
   MultilineInput,
@@ -23,6 +23,7 @@ import {flowRight} from 'lodash';
 import {Reminder} from '../../../models/reminder.model';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
+import ItemFormHeader from './item-form-header';
 
 type BaseProps = AuthState & {
   group: Group;
@@ -47,7 +48,7 @@ const ItemForm: FC<Props> = (props: Props) => {
 
   return (
     <>
-      <PageHeader title={header} />
+      <ItemFormHeader title={header} />
       <PageDivider height={5} />
       <Form className={classes.form}>
         <Grid container spacing={3}>

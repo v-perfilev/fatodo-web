@@ -8,5 +8,6 @@ export interface MenuElement {
   color?: PropTypes.Color;
   disabled?: boolean;
   hidden?: boolean;
+  hiddenInControlMenu?: boolean;
   loading?: boolean;
 }

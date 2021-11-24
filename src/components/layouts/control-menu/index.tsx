@@ -19,7 +19,7 @@ const ControlMenu: FC<Props> = ({menu, disabled, floatRight}: Props) => {
   return (
     <Box className={classNames}>
       {menu
-        .filter((action) => !action.hidden)
+        .filter((action) => !action.hidden && !action.hiddenInControlMenu)
         .map((action, index) => (
           <LoadingButton
             key={index}

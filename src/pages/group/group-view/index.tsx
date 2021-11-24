@@ -11,7 +11,7 @@ import {GroupsIcon} from '../../../components/icons/groups-icon';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {ItemRouteUtils} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
-import {PageDivider, PageHeader, PageSpacer} from '../../../components/surfaces';
+import {PageDivider, PageSpacer} from '../../../components/surfaces';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ResponseUtils} from '../../../shared/utils/response.utils';
@@ -33,6 +33,7 @@ import {LeaveIcon} from '../../../components/icons/leave-icon';
 import {GroupUtils} from '../../../shared/utils/group.utils';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
+import GroupViewHeader from './group-view-header';
 
 type Props = AuthState;
 
@@ -103,7 +104,7 @@ const GroupView: FC<Props> = ({account}: Props) => {
   const canLeave = group && GroupUtils.canLeave(account, group);
 
   const menuElements = [
-    {icon: <GroupsIcon />, action: redirectToGroups, text: t('group:tooltips.list')},
+    {icon: <GroupsIcon />, action: redirectToGroups, text: t('group:tooltips.list'), hiddenInControlMenu: true},
     {icon: <PlusIcon />, action: redirectToItemCreate, text: t('item:tooltips.create'), hidden: !canEdit},
     {icon: <EditIcon />, action: redirectToGroupEdit, text: t('group:tooltips.edit'), hidden: !canAdmin},
     {icon: <MembersIcon />, action: openGroupMembersDialog, text: t('group:tooltips.members')},
@@ -148,7 +149,7 @@ const GroupView: FC<Props> = ({account}: Props) => {
   ) : (
     <ThemeProvider theme={theme}>
       <Container>
-        <PageHeader title={group.title} filename={group.imageFilename} />
+        <GroupViewHeader title={group.title} filename={group.imageFilename} />
         <PageDivider height={5} />
         <GroupViewUsers />
         <PageDivider />

@@ -1,7 +1,7 @@
 import React, {FC, useEffect} from 'react';
 import withHeader from '../../../shared/hocs/with-header/with-header';
 import {Container} from '@material-ui/core';
-import {PageDivider, PageHeader} from '../../../components/surfaces';
+import {PageDivider} from '../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
@@ -18,6 +18,7 @@ import {Routes} from '../../router';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {flowRight} from 'lodash';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
+import AccountHeader from './account-header';
 
 const mapStateToProps = (state: RootState): {authState: AuthState} => ({authState: state.authState});
 const mapDispatchToProps = {requestAccountData};
@@ -44,7 +45,7 @@ const Account: FC<Props> = ({authState, requestAccountData}: Props) => {
 
   return account.id ? (
     <Container maxWidth="sm">
-      <PageHeader title={t('account:account.title')} />
+      <AccountHeader title={t('account:account.title')} />
       <PageDivider height={5} />
       <AccountForm account={account} requestAccountData={requestAccountData} />
       {account.provider === 'LOCAL' && <AccountPasswordForm />}
