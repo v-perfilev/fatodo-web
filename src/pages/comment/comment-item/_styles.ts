@@ -6,6 +6,8 @@ export const commentItemStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     flexGrow: 1,
+    marginTop: theme.spacing(1.5),
+    marginBottom: theme.spacing(1.5),
     padding: theme.spacing(1.5),
   },
   image: {
@@ -43,11 +45,6 @@ export const commentItemStyles = makeStyles((theme: Theme) => ({
   },
   deleted: {
     color: theme.palette.grey['500'],
-  },
-  footer: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexGrow: 1,
   },
 }));
 

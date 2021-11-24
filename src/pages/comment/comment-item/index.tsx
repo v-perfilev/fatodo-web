@@ -1,5 +1,5 @@
 import React, {FC, memo, useMemo} from 'react';
-import {Box, Hidden} from '@material-ui/core';
+import {Box, Hidden, Paper} from '@material-ui/core';
 import {Comment} from '../../../models/comment.model';
 import {commentItemStyles} from './_styles';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
@@ -37,7 +37,7 @@ const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
   }, [comment, account]);
 
   return (
-    <Box className={classes.root}>
+    <Paper variant="outlined" className={classes.root}>
       <Box className={classes.image}>
         <UrlPic alt={user?.username} url={user?.imageFilename} size="sm" border={1} />
       </Box>
@@ -46,6 +46,7 @@ const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
           <Box className={classes.name}>{user?.username}</Box>
           <Box className={classes.date}>{date}</Box>
           {comment.reference && <CommentItemReference reference={comment.reference} />}
+          <CommentItemReactions comment={comment} account={account} />
           <Box className={classes.placeholder} />
           <Hidden xsDown>
             <CommentItemReferenceButton comment={comment} setReference={setReference} />
@@ -56,11 +57,8 @@ const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
           {!comment.isDeleted && <span>{comment.text}</span>}
           {comment.isDeleted && <span className={classes.deleted}>{t('comment:comment.deleted')}</span>}
         </Box>
-        <Box className={classes.footer}>
-          <CommentItemReactions comment={comment} account={account} />
-        </Box>
       </Box>
-    </Box>
+    </Paper>
   );
 };
 
