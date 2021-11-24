@@ -23,3 +23,14 @@ export const chatContentPlaceholderStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.grey['400'],
   },
 }));
+
+export const chatContentStubStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexGrow: 1,
+    fontSize: '1.5rem',
+    color: theme.palette.grey['400'],
+  },
+}));

@@ -12,7 +12,7 @@ import {VirtualizedListMethods} from '../../../../components/surfaces';
 import {User} from '../../../../models/user.model';
 import {NEW_MESSAGES_PREFIX} from '../../_constants';
 import {ChatItem} from '../types';
-import ChatControlStub from '../../chat-control/chat-control-stub';
+import ChatContentStub from '../chat-content-stub';
 
 type Props = {
   chat: Chat;
@@ -29,7 +29,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
   const {messageNewEvent, messageUpdateEvent, messageStatusesEvent, messageReactionsEvent} = useWsChatContext();
   const {handleResponse} = useSnackContext();
   const [messages, setMessages] = useState<Message[]>([]);
-  const [items, setItems] = useState<ChatItem[]>(undefined);
+  const [items, setItems] = useState<ChatItem[]>([]);
   const [allLoaded, setAllLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [listRef, setListRef] = useState<VirtualizedListMethods>();
@@ -217,7 +217,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
   return (
     <>
       {loading && <CircularSpinner size="sm" />}
-      {!loading && items.length === 0 && <ChatControlStub />}
+      {!loading && items.length === 0 && <ChatContentStub />}
       {!loading && items.length > 0 && (
         <ChatContentContainer
           chat={chat}
