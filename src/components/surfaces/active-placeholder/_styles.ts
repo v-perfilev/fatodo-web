@@ -44,7 +44,7 @@ export const activePlaceholderStyles = makeStyles((theme: Theme) => ({
   },
   horizontal: {
     flexDirection: 'row',
-    justifyContent: 'start',
+    justifyContent: 'flex-start',
   },
   small: {
     '& .icon': {

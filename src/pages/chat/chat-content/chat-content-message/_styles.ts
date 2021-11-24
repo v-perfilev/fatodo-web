@@ -36,7 +36,7 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
     marginRight: '5%',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'start',
+    alignItems: 'flex-start',
   },
   image: {
     marginRight: theme.spacing(1),
@@ -92,7 +92,7 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     marginLeft: '5%',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'start',
+    alignItems: 'flex-start',
     justifyContent: 'flex-end',
   },
   message: {

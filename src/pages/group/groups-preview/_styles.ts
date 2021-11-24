@@ -56,6 +56,8 @@ export const groupCardContentStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
   },
   box: {
+    display: 'flex',
+    flexDirection: 'column',
     flexGrow: 1,
   },
   control: {
@@ -89,6 +91,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
     boxSizing: 'border-box',
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
+    flexShrink: 0,
   },
   card: {
     position: 'relative',
@@ -104,7 +107,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'start',
+    justifyContent: 'flex-start',
     paddingTop: CARD_CHANGES_HEIGHT / 4,
   },
   titleBox: {
@@ -155,6 +158,7 @@ export const groupCardNotificationsStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
+    paddingRight: theme.spacing(1),
   },
 }));
 
