@@ -124,7 +124,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'end',
+    justifyContent: 'flex-end',
   },
   icon: {
     fontSize: '1.5rem',
@@ -154,7 +154,7 @@ export const groupCardNotificationsStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'end',
+    justifyContent: 'flex-end',
   },
 }));
 

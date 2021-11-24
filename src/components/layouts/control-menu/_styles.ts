@@ -13,6 +13,6 @@ export const controlMenuStyles = makeStyles((theme: Theme) => ({
     },
   },
   floatRight: {
-    justifyContent: 'right',
+    justifyContent: 'flex-end',
   },
 }));
