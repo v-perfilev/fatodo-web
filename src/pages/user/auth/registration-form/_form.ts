@@ -31,9 +31,9 @@ export class RegistrationFormUtils {
     timezone: string,
     token: string
   ): RegistrationDTO => ({
-    email: values.email,
-    username: values.username,
-    password: values.password,
+    email: values.email.trim(),
+    username: values.username.trim(),
+    password: values.password.trim(),
     language: language,
     timezone: timezone,
     token: token,

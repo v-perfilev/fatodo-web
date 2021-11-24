@@ -23,8 +23,8 @@ export class LoginFormUtils {
   });
 
   public static mapValuesToDTO = (values: LoginFormValues, token: string): LoginDTO => ({
-    user: values.user,
-    password: values.password,
+    user: values.user.trim(),
+    password: values.password.trim(),
     token: token,
   });
 }
