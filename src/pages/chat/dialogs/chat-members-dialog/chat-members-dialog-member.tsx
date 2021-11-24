@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
 import {User} from '../../../../models/user.model';
 import {Box, IconButton} from '@material-ui/core';
-import {UserWithPopupView} from '../../../../components/views';
+import {UserView} from '../../../../components/views';
 import {chatMembersDialogMemberStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
 import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
@@ -56,7 +56,7 @@ const ChatMembersDialogMember: FC<Props> = ({chat, user, account}: Props) => {
   return (
     <Box className={classes.root}>
       <Box className={classes.user}>
-        <UserWithPopupView user={user} withUsername withUserPic picSize="sm" />
+        <UserView user={user} withUsername withUserPic picSize="sm" />
       </Box>
       {chat && !chat.isDirect && user.id !== account.id && (
         <IconButton size="small" onClick={switchRemovingConfirmation}>

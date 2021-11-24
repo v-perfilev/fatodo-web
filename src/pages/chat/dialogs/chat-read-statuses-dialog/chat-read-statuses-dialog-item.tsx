@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {User} from '../../../../models/user.model';
 import {Box} from '@material-ui/core';
-import {UserWithPopupView} from '../../../../components/views';
+import {UserView} from '../../../../components/views';
 import {chatReadStatusesDialogItemStyles} from './_styles';
 import {MessageStatus} from '../../../../models/message.model';
 
@@ -16,7 +16,7 @@ const ChatReadStatusesDialogItem: FC<Props> = ({user}: Props) => {
   return (
     <Box className={classes.statusBox}>
       <Box className={classes.user}>
-        <UserWithPopupView user={user} withUsername withUserPic picSize="sm" />
+        <UserView user={user} withUsername withUserPic picSize="sm" />
       </Box>
     </Box>
   );
