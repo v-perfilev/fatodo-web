@@ -54,7 +54,9 @@
     "create": "Create item",
     "edit": "Edit",
     "delete": "Delete",
-    "list": "List of items"
+    "list": "List of items",
+    "add": "Add",
+    "close": "Close"
   },
   "deleteItem": {
     "title": "Delete item",

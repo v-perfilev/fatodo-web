@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {Box, Popover} from '@material-ui/core';
+import {Box, Button, Popover} from '@material-ui/core';
 import {remindersInputPopoverStyles} from './_styles';
 import {Reminder, ReminderPeriodicity} from '../../../models/reminder.model';
 import {RemindersInputPopoverToolbar} from './reminders-input-popover-toolbar';
@@ -11,6 +11,7 @@ import {RemindersInputPopoverOnce} from './reminders-input-popover-once';
 import {flowRight} from 'lodash';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
+import {useTranslation} from 'react-i18next';
 
 type Props = AuthState & {
   anchorEl: HTMLElement;
@@ -19,13 +20,18 @@ type Props = AuthState & {
 
 const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose, account}: Props) => {
   const classes = remindersInputPopoverStyles();
+  const {t} = useTranslation();
   const [reminder, setReminder] = useState<Reminder>(null);
   const [periodicity, setPeriodicity] = useState<ReminderPeriodicity>('ONCE');
   const timezone = account.info.timezone;
 
   const isOpen = Boolean(anchorEl);
 
-  const onClose = (): void => {
+  const close = (): void => {
+    handleClose(null);
+  };
+
+  const add = (): void => {
     handleClose(reminder);
   };
 
@@ -33,7 +39,7 @@ const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose, account}: Prop
     <Popover
       open={isOpen}
       anchorEl={anchorEl}
-      onClose={onClose}
+      onClose={close}
       anchorOrigin={{vertical: 'top', horizontal: 'center'}}
       transformOrigin={{vertical: 'top', horizontal: 'center'}}
     >
@@ -44,6 +50,14 @@ const RemindersInputPopover: FC<Props> = ({anchorEl, handleClose, account}: Prop
         {periodicity === 'WEEKLY' && <RemindersInputPopoverWeekly setReminder={setReminder} timezone={timezone} />}
         {periodicity === 'MONTHLY' && <RemindersInputPopoverMonthly setReminder={setReminder} timezone={timezone} />}
         {periodicity === 'YEARLY' && <RemindersInputPopoverYearly setReminder={setReminder} timezone={timezone} />}
+        <Box className={classes.buttons}>
+          <Button variant="text" color="primary" onClick={add} disabled={!reminder}>
+            {t('item:tooltips.add')}
+          </Button>
+          <Button variant="text" color="secondary" onClick={close}>
+            {t('item:tooltips.close')}
+          </Button>
+        </Box>
       </Box>
     </Popover>
   );

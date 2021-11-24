@@ -19,7 +19,7 @@ export const remindersInputChipsStyles = makeStyles(() => ({
   },
 }));
 
-export const remindersInputPopoverStyles = makeStyles(() => ({
+export const remindersInputPopoverStyles = makeStyles((theme: Theme) => ({
   popoverBody: {
     position: 'relative',
     display: 'flex',
@@ -29,6 +29,13 @@ export const remindersInputPopoverStyles = makeStyles(() => ({
     minWidth: 310,
     minHeight: 305,
     overflowX: 'hidden',
+  },
+  buttons: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginRight: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
   },
 }));
 
