@@ -22,7 +22,10 @@ module.exports = () => merge(commonConfig({env: ENV}), {
   devServer: {
     contentBase: PATH.join(__dirname, '../dist'),
     compress: true,
+    host: '0.0.0.0',
     port: 9000,
+    openPage: 'http://localhost:9000',
+    disableHostCheck: true,
     hot: true,
     historyApiFallback: {
       disableDotRule: true
