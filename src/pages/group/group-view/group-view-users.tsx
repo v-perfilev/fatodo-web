@@ -24,10 +24,12 @@ const GroupViewUsers: FC = () => {
     }
   }, [group, users]);
 
+  console.log(usersToShow);
+
   return (
     <Box className={classes.root}>
-      {usersToShow.map((user, index) => (
-        <UserWithPopupView user={user} withUsername withPaperBox key={index} />
+      {usersToShow.map((user) => (
+        <UserWithPopupView user={user} withUsername withPaperBox key={user.id} />
       ))}
     </Box>
   );

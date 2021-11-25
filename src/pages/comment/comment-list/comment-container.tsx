@@ -16,8 +16,8 @@ const CommentContainer: FC<Props> = ({comments, account, setReference}: Props) =
 
   return (
     <Box className={classes.root}>
-      {comments.map((comment, index) => (
-        <Box key={index}>
+      {comments.map((comment) => (
+        <Box key={comment.id}>
           <CommentItem comment={comment} account={account} setReference={setReference} />
         </Box>
       ))}

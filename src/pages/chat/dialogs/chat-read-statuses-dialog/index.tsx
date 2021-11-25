@@ -67,8 +67,8 @@ const ChatReadStatusesDialog: FC<Props> = ({message, users, show, close}: Props)
 
   const userList = (
     <Box className={classes.users}>
-      {statusesToShow.map((reaction, index) => (
-        <ChatReadStatusesDialogItem status={reaction.status} user={reaction.user} key={index} />
+      {statusesToShow.map((status) => (
+        <ChatReadStatusesDialogItem status={status.status} user={status.user} key={status.user.id} />
       ))}
       {statusesToShow.length === 0 && (
         <Box className={classes.notFound}>{t('chat:readStatuses.readStatusesNotFound')}</Box>

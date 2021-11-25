@@ -65,8 +65,8 @@ const ChatReactionsDialog: FC<Props> = ({message, users, show, close}: Props) =>
 
   const userList = (
     <Box className={classes.users}>
-      {reactionsToShow.map((reaction, index) => (
-        <ChatReactionsDialogItem reaction={reaction.reaction} user={reaction.user} key={index} />
+      {reactionsToShow.map((reaction) => (
+        <ChatReactionsDialogItem reaction={reaction.reaction} user={reaction.user} key={reaction.user.id} />
       ))}
       {reactionsToShow.length === 0 && <Box className={classes.notFound}>{t('chat:reactions.reactionsNotFound')}</Box>}
     </Box>

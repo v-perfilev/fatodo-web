@@ -15,8 +15,8 @@ const ItemViewTags: FC = () => {
   return (
     showTags && (
       <LabeledBox label={t('item:labels.tags')}>
-        {item.tags.map((tag, index) => (
-          <Chip key={index} size="medium" label={tag} className={commonClasses.box} />
+        {item.tags.map((tag) => (
+          <Chip key={tag} size="medium" label={tag} className={commonClasses.box} />
         ))}
       </LabeledBox>
     )

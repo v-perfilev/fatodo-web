@@ -45,6 +45,7 @@ const GroupMembersDialog: FC<Props> = (props: Props) => {
 
   const conditionalClose = (): void => {
     if (deletedMemberIds.length >= 0) {
+      setDeletedMemberIds([]);
       onSuccess();
     }
     close();
@@ -83,11 +84,11 @@ const GroupMembersDialog: FC<Props> = (props: Props) => {
 
   const userList = (
     <Box className={classes.users}>
-      {usersToShow.map((user, index) => (
+      {usersToShow.map((user) => (
         <GroupMembersDialogMember
           group={group}
           user={user}
-          key={index}
+          key={user.id}
           switchToEditMember={switchToEditMember}
           onDelete={onMemberDelete}
         />

@@ -15,7 +15,7 @@ const ContactRelationsList: FC<Props> = ({relations}: Props) => {
   return (
     <Box className={classes.root}>
       {relations.map((relation, index) => (
-        <Box key={index}>
+        <Box key={relation.id}>
           {index !== 0 && <PageDivider />}
           <ContactRelationsItem relation={relation} />
         </Box>

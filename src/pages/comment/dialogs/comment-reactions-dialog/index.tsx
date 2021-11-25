@@ -65,8 +65,8 @@ const CommentReactionsDialog: FC<Props> = ({comment, users, show, close}: Props)
 
   const userList = (
     <Box className={classes.users}>
-      {reactionsToShow.map((reaction, index) => (
-        <CommentReactionsDialogItem reaction={reaction.reaction} user={reaction.user} key={index} />
+      {reactionsToShow.map((reaction) => (
+        <CommentReactionsDialogItem reaction={reaction.reaction} user={reaction.user} key={reaction.user.id} />
       ))}
       {reactionsToShow.length === 0 && (
         <Box className={classes.notFound}>{t('comment:reactions.reactionsNotFound')}</Box>

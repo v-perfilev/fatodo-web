@@ -16,8 +16,13 @@ const ItemViewReminders: FC = () => {
   return (
     showReminders && (
       <LabeledBox label={t('item:labels.reminders')}>
-        {reminders.map((reminder, index) => (
-          <Chip key={index} size="medium" label={<ReminderView reminder={reminder} />} className={commonClasses.box} />
+        {reminders.map((reminder) => (
+          <Chip
+            key={reminder.id}
+            size="medium"
+            label={<ReminderView reminder={reminder} />}
+            className={commonClasses.box}
+          />
         ))}
       </LabeledBox>
     )

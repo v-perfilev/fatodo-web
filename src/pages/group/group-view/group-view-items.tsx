@@ -52,7 +52,7 @@ const GroupViewItems: FC<Props> = ({account}: Props) => {
       {!loading && items.length !== 0 && <PageDivider />}
       {!loading &&
         items.map((item, index) => (
-          <Box key={index}>
+          <Box key={item.id}>
             {index !== 0 && <PageDivider />}
             <GroupViewItem item={item} canEdit={canEdit} />
           </Box>

@@ -15,7 +15,7 @@ const ContactIncomingList: FC<Props> = ({requests}: Props) => {
   return (
     <Box className={classes.root}>
       {requests.map((request, index) => (
-        <Box key={index}>
+        <Box key={request.id}>
           {index !== 0 && <PageDivider />}
           <ContactOutcomingRequest request={request} />
         </Box>
