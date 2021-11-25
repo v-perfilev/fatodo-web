@@ -12,6 +12,7 @@ import ChatService from '../../../../services/chat.service';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
 import {EyeIcon} from '../../../../components/icons/eye-icon';
+import {EditIcon} from '../../../../components/icons/edit-icon';
 
 type Props = {
   message: Message;
@@ -89,7 +90,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
         </MenuItem>
         {isOutcoming && !message.isDeleted && (
           <MenuItem onClick={editMessage}>
-            <DeleteIcon color="primary" />
+            <EditIcon color="primary" />
             {t('chat:message.actions.edit')}
           </MenuItem>
         )}
