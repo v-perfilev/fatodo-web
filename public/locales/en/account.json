@@ -24,7 +24,14 @@
     "submit": "Save"
   },
   "info": {
-    "fieldNotSet": "Not set"
+    "fieldNotSet": "Not set",
+    "sendContactRequest": "Send contact request",
+    "acceptContactRequest": "Accept contact request",
+    "declineContactRequest": "Decline contact request",
+    "cancelContactRequest": "Cancel contact request",
+    "waitContactAccepting": "Waiting for contact accepting",
+    "userInContactList": "User in contact list",
+    "sendMessage": "Send direct message"
   },
   "fields": {
     "user": {

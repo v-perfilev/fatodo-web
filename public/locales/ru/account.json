@@ -24,7 +24,14 @@
     "submit": "Сохранить"
   },
   "info": {
-    "fieldNotSet": "Не установлено"
+    "fieldNotSet": "Не установлено",
+    "sendContactRequest": "Добавить в список контактов",
+    "acceptContactRequest": "Принять запрос",
+    "declineContactRequest": "Отклонить запрос",
+    "cancelContactRequest": "Отменить запрос",
+    "waitContactAccepting": "Ожидание подтверждения",
+    "userInContactList": "Пользователь в списке контактов",
+    "sendMessage": "Отправить direct-сообщение"
   },
   "fields": {
     "user": {

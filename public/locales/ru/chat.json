@@ -88,7 +88,7 @@
     "cancel": "Отменить"
   },
   "directMessage": {
-    "title": "Прямое сообщение",
+    "title": "Direct-сообщение",
     "fields": {
       "username": {
         "label": "Пользователь"
