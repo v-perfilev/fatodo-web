@@ -7,10 +7,9 @@ import {PageDivider} from '../../../components/surfaces';
 
 type Props = {
   relations: ContactRelationWithUser[];
-  loadRelations: () => void;
 };
 
-const ContactRelationsList: FC<Props> = ({relations, loadRelations}: Props) => {
+const ContactRelationsList: FC<Props> = ({relations}: Props) => {
   const classes = contactRelationsListStyles();
 
   return (
@@ -18,7 +17,7 @@ const ContactRelationsList: FC<Props> = ({relations, loadRelations}: Props) => {
       {relations.map((relation, index) => (
         <Box key={index}>
           {index !== 0 && <PageDivider />}
-          <ContactRelationsItem relation={relation} loadRelations={loadRelations} />
+          <ContactRelationsItem relation={relation} />
         </Box>
       ))}
     </Box>

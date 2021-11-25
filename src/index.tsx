@@ -26,6 +26,7 @@ import withDialogs from './shared/hocs/with-dialogs/with-dialogs';
 import {flowRight} from 'lodash';
 import withWsClient from './shared/hocs/with-ws/with-ws-client';
 import withContacts from './shared/hocs/with-contacts/with-contacts';
+import withContactInfo from './shared/hocs/with-contacts/with-contact-info';
 
 // setup axios
 const axiosActions = bindActionCreators({clearAuth, enqueueReduxSnack}, store.dispatch);
@@ -48,6 +49,7 @@ const WrappedRoot = flowRight([
   withSnack,
   withWsClient,
   withChat,
+  withContactInfo,
   withContacts,
   withDialogs,
 ])(Root);

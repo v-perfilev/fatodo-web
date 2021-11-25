@@ -6,6 +6,15 @@ export const contactMainStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
+
+    '& .MuiTab-root': {
+      minHeight: 0,
+      paddingTop: 6,
+    },
+
+    '& .MuiTab-wrapper': {
+      flexDirection: 'row-reverse',
+    },
   },
 }));
 

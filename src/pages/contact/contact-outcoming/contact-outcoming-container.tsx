@@ -5,11 +5,10 @@ import ContactOutcomingList from './contact-outcoming-list';
 
 type Props = {
   requests: ContactRequestWithUser[];
-  loadRequests: () => void;
   filter: string;
 };
 
-const ContactOutcomingContainer: FC<Props> = ({requests, loadRequests, filter}: Props) => {
+const ContactOutcomingContainer: FC<Props> = ({requests, filter}: Props) => {
   const [requestsWithUser, setRequestsWithUser] = useState<ContactRequestWithUser[]>([]);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ const ContactOutcomingContainer: FC<Props> = ({requests, loadRequests, filter}: 
   return (
     <>
       {requests.length === 0 && <ContactOutcomingStub />}
-      {requests.length > 0 && <ContactOutcomingList requests={requestsWithUser} loadRequests={loadRequests} />}
+      {requests.length > 0 && <ContactOutcomingList requests={requestsWithUser} />}
     </>
   );
 };

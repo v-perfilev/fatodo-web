@@ -5,11 +5,10 @@ import ContactRelationsStub from './contact-relations-stub';
 
 type Props = {
   relations: ContactRelationWithUser[];
-  loadRelations: () => void;
   filter: string;
 };
 
-const ContactRelationsContainer: FC<Props> = ({relations, loadRelations, filter}: Props) => {
+const ContactRelationsContainer: FC<Props> = ({relations, filter}: Props) => {
   const [relationsToShow, setRelationsToShow] = useState<ContactRelationWithUser[]>([]);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ const ContactRelationsContainer: FC<Props> = ({relations, loadRelations, filter}
   return (
     <>
       {relations.length === 0 && <ContactRelationsStub />}
-      {relations.length > 0 && <ContactRelationsList relations={relationsToShow} loadRelations={loadRelations} />}
+      {relations.length > 0 && <ContactRelationsList relations={relationsToShow} />}
     </>
   );
 };

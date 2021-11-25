@@ -5,11 +5,10 @@ import ContactIncomingList from './contact-incoming-list';
 
 type Props = {
   requests: ContactRequestWithUser[];
-  loadRequests: () => void;
   filter: string;
 };
 
-const ContactIncomingContainer: FC<Props> = ({requests, loadRequests, filter}: Props) => {
+const ContactIncomingContainer: FC<Props> = ({requests, filter}: Props) => {
   const [requestsWithUser, setRequestsWithUser] = useState<ContactRequestWithUser[]>([]);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ const ContactIncomingContainer: FC<Props> = ({requests, loadRequests, filter}: P
   return (
     <>
       {requests.length === 0 && <ContactIncomingStub />}
-      {requests.length > 0 && <ContactIncomingList requests={requestsWithUser} loadRequests={loadRequests} />}
+      {requests.length > 0 && <ContactIncomingList requests={requestsWithUser} />}
     </>
   );
 };

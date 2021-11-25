@@ -7,15 +7,18 @@ import {contactRelationsItemStyles} from './_styles';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useTranslation} from 'react-i18next';
 import ContactService from '../../../services/contact.service';
+import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
+import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
 
 type Props = {
   relation: ContactRelationWithUser;
-  loadRelations: () => void;
 };
 
-const ContactRelationsItem: FC<Props> = ({relation, loadRelations}: Props) => {
+const ContactRelationsItem: FC<Props> = ({relation}: Props) => {
   const classes = contactRelationsItemStyles();
   const {handleCode, handleResponse} = useSnackContext();
+  const {update: updateContacts} = useContactContext();
+  const {update: updateInfo} = useContactInfoContext();
   const {t} = useTranslation();
   const [disabled, setDisabled] = useState(false);
 
@@ -24,7 +27,8 @@ const ContactRelationsItem: FC<Props> = ({relation, loadRelations}: Props) => {
     ContactService.removeRelation(relation.user.id)
       .then(() => {
         handleCode('contact.relationRemoved', 'info');
-        loadRelations();
+        updateInfo();
+        updateContacts();
       })
       .catch((response) => {
         handleResponse(response);

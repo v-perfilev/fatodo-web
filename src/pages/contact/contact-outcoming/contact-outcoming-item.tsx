@@ -7,15 +7,18 @@ import {UserWithPopupView} from '../../../components/views';
 import {useTranslation} from 'react-i18next';
 import ContactService from '../../../services/contact.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
+import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
 
 type Props = {
   request: ContactRequestWithUser;
-  loadRequests: () => void;
 };
 
-const ContactOutcomingItem: FC<Props> = ({request, loadRequests}: Props) => {
+const ContactOutcomingItem: FC<Props> = ({request}: Props) => {
   const classes = contactOutcomingRequestStyles();
   const {handleCode, handleResponse} = useSnackContext();
+  const {update: updateContacts} = useContactContext();
+  const {update: updateInfo} = useContactInfoContext();
   const {t} = useTranslation();
   const [disabled, setDisabled] = useState(false);
 
@@ -24,7 +27,8 @@ const ContactOutcomingItem: FC<Props> = ({request, loadRequests}: Props) => {
     ContactService.removeRequest(request.user.id)
       .then(() => {
         handleCode('contact.requestRemoved', 'info');
-        loadRequests();
+        updateInfo();
+        updateContacts();
       })
       .catch((response) => {
         handleResponse(response);

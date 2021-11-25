@@ -2,9 +2,15 @@ import axios, {AxiosPromise} from 'axios';
 import {ContactRequestDTO} from '../models/dto/contact-request.dto';
 import {ContactRelation} from '../models/contact-relation.model';
 import {ContactRequest} from '../models/contact-request.model';
+import {ContactInfo} from '../models/contact-info.model';
 
 export default class ContactService {
   private static baseUrl = '/api/contact';
+
+  public static getInfo = (): AxiosPromise<ContactInfo> => {
+    const url = ContactService.baseUrl + '/info';
+    return axios.get(url);
+  };
 
   public static getAllRelations = (): AxiosPromise<ContactRelation[]> => {
     const url = ContactService.baseUrl + '/relations';

@@ -14,6 +14,9 @@ import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import {PageSpacer} from '../../../components/surfaces';
 import ContactHeader from './contact-header';
+import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
+import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
+import BadgeWithoutIcon from '../../../components/icons/badge-icons/badge-without-icon';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -43,6 +46,8 @@ const ContactMain: FC = () => {
   const match = useRouteMatch();
   const {i18n, t} = useTranslation();
   const {setMenu} = useAdditionalMenuContext();
+  const {update: updateContacts} = useContactContext();
+  const {relationCount, outcomingRequestCount, incomingRequestCount, update: updateInfo} = useContactInfoContext();
   const {showContactRequestDialog} = useContactDialogContext();
   const [activeTab, setActiveTab] = useState<number>(calculateTabFromRoute(match.path));
   const [filter, setFilter] = useState<string>('');
@@ -61,6 +66,11 @@ const ContactMain: FC = () => {
   ] as MenuElement[];
 
   useEffect(() => {
+    updateInfo();
+    updateContacts();
+  }, []);
+
+  useEffect(() => {
     setMenu(menuElements);
   }, [i18n.language, activeTab, showContactRequestDialog]);
 
@@ -68,9 +78,18 @@ const ContactMain: FC = () => {
     <>
       <Container className={classes.root} maxWidth="md">
         <Tabs variant="fullWidth" textColor="primary" value={activeTab} onChange={handleChange}>
-          <Tab label={t('contact:relations.title')} />
-          <Tab label={t('contact:outcoming.title')} />
-          <Tab label={t('contact:incoming.title')} />
+          <Tab
+            label={t('contact:relations.title')}
+            icon={relationCount > 0 && <BadgeWithoutIcon color="secondary" count={relationCount} />}
+          />
+          <Tab
+            label={t('contact:outcoming.title')}
+            icon={outcomingRequestCount > 0 && <BadgeWithoutIcon color="secondary" count={outcomingRequestCount} />}
+          />
+          <Tab
+            label={t('contact:incoming.title')}
+            icon={incomingRequestCount > 0 && <BadgeWithoutIcon color="error" count={incomingRequestCount} />}
+          />
         </Tabs>
         <PageSpacer />
         <ContactHeader setFilter={setFilter} />

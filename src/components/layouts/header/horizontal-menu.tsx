@@ -13,12 +13,13 @@ import CurrentUser from '../current-user';
 import {ArrowDownIcon} from '../../icons/arrow-down-icon';
 import {PopupMenu} from '../../surfaces';
 import {AccountIcon} from '../../icons/account-icon';
-import {UserListIcon} from '../../icons/user-list-icon';
 import {useUnreadMessagesContext} from '../../../shared/contexts/chat-contexts/unread-messages-context';
 import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
 import {RedirectMap} from './type';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {GroupsIcon} from '../../icons/groups-icon';
+import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
+import BadgeContactInfo from '../../icons/badge-icons/badge-contact-icon';
 
 type BaseProps = {
   redirectMap: RedirectMap;
@@ -29,6 +30,7 @@ type Props = AuthState & BaseProps;
 const HorizontalMenu: FC<Props> = ({redirectMap, isAuthenticated}: Props) => {
   const classes = horizontalMenuStyles();
   const {totalUnreadMessages} = useUnreadMessagesContext();
+  const {incomingRequestCount} = useContactInfoContext();
   const {t} = useTranslation();
   const ref = useRef();
   const [isOpen, setIsOpen] = useState(false);
@@ -60,7 +62,11 @@ const HorizontalMenu: FC<Props> = ({redirectMap, isAuthenticated}: Props) => {
       >
         {t('header.chats')}
       </Button>
-      <Button color="primary" startIcon={<UserListIcon />} onClick={redirectMap.toContacts}>
+      <Button
+        color="primary"
+        startIcon={<BadgeContactInfo count={incomingRequestCount} />}
+        onClick={redirectMap.toContacts}
+      >
         {t('header.contacts')}
       </Button>
       <LanguageSelect />

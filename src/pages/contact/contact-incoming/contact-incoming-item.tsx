@@ -7,15 +7,18 @@ import {UserWithPopupView} from '../../../components/views';
 import {useTranslation} from 'react-i18next';
 import ContactService from '../../../services/contact.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
+import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
 
 type Props = {
   request: ContactRequestWithUser;
-  loadRequests: () => void;
 };
 
-const ContactIncomingItem: FC<Props> = ({request, loadRequests}: Props) => {
+const ContactIncomingItem: FC<Props> = ({request}: Props) => {
   const classes = contactIncomingRequestStyles();
   const {handleCode, handleResponse} = useSnackContext();
+  const {update: updateContacts} = useContactContext();
+  const {update: updateInfo} = useContactInfoContext();
   const {t} = useTranslation();
   const [disabled, setDisabled] = useState(false);
 
@@ -24,7 +27,8 @@ const ContactIncomingItem: FC<Props> = ({request, loadRequests}: Props) => {
     ContactService.acceptRequest(request.user.id)
       .then(() => {
         handleCode('contact.requestAccepted', 'info');
-        loadRequests();
+        updateInfo();
+        updateContacts();
       })
       .catch((response) => {
         handleResponse(response);
@@ -37,7 +41,8 @@ const ContactIncomingItem: FC<Props> = ({request, loadRequests}: Props) => {
     ContactService.declineRequest(request.user.id)
       .then(() => {
         handleCode('contact.requestDeclined', 'info');
-        loadRequests();
+        updateInfo();
+        updateContacts();
       })
       .catch((response) => {
         handleResponse(response);

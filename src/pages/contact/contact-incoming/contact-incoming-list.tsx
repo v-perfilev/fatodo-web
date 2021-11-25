@@ -7,10 +7,9 @@ import ContactOutcomingRequest from './contact-incoming-item';
 
 type Props = {
   requests: ContactRequestWithUser[];
-  loadRequests: () => void;
 };
 
-const ContactIncomingList: FC<Props> = ({requests, loadRequests}: Props) => {
+const ContactIncomingList: FC<Props> = ({requests}: Props) => {
   const classes = contactIncomingListStyles();
 
   return (
@@ -18,7 +17,7 @@ const ContactIncomingList: FC<Props> = ({requests, loadRequests}: Props) => {
       {requests.map((request, index) => (
         <Box key={index}>
           {index !== 0 && <PageDivider />}
-          <ContactOutcomingRequest request={request} loadRequests={loadRequests} />
+          <ContactOutcomingRequest request={request} />
         </Box>
       ))}
     </Box>
