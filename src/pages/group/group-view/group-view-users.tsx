@@ -24,8 +24,6 @@ const GroupViewUsers: FC = () => {
     }
   }, [group, users]);
 
-  console.log(usersToShow);
-
   return (
     <Box className={classes.root}>
       {usersToShow.map((user) => (
