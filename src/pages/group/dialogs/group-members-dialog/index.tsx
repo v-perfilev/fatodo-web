@@ -8,15 +8,16 @@ import {groupMembersDialogStyles} from './_styles';
 import GroupMembersDialogMember from './group-members-dialog-member';
 import {UserPlusIcon} from '../../../../components/icons/user-plus-icon';
 import {Group, GroupUser} from '../../../../models/group.model';
-import {GroupUtils} from '../../../../shared/utils/group.utils';
 import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
+import {GroupUtils} from '../../../../shared/utils/group.utils';
 
 export type GroupMembersDialogProps = {
   group: Group;
   users: User[];
   show: boolean;
   close: () => void;
+  onSuccess: () => void;
   switchToAddMembers: () => void;
   switchToEditMember: (user: GroupUser) => void;
 };
@@ -25,6 +26,7 @@ export const defaultGroupMembersDialogProps: Readonly<GroupMembersDialogProps> =
   group: null,
   users: [],
   show: false,
+  onSuccess: (): void => undefined,
   close: (): void => undefined,
   switchToAddMembers: (): void => undefined,
   switchToEditMember: (): void => undefined,
@@ -33,32 +35,45 @@ export const defaultGroupMembersDialogProps: Readonly<GroupMembersDialogProps> =
 type Props = AuthState & GroupMembersDialogProps;
 
 const GroupMembersDialog: FC<Props> = (props: Props) => {
-  const {group, users, show, close, switchToAddMembers, switchToEditMember, account} = props;
+  const {group, users, show, close, onSuccess, switchToAddMembers, switchToEditMember, account} = props;
   const classes = groupMembersDialogStyles();
   const {t} = useTranslation();
   const [usersToShow, setUsersToShow] = useState<GroupUser[]>([]);
+  const [deletedMemberIds, setDeletedMemberIds] = useState<string[]>([]);
+
+  const canAdmin = group && GroupUtils.canAdmin(account, group);
+
+  const conditionalClose = (): void => {
+    if (deletedMemberIds.length >= 0) {
+      onSuccess();
+    }
+    close();
+  };
+
+  const updateUsersToShow = (filter?: string): void => {
+    const memberMap = new Map(group.members.map((member) => [member.id, member]));
+    const updatedUsersToShow = users
+      .filter((user) => !deletedMemberIds.includes(user.id))
+      .filter((user) => memberMap.has(user.id))
+      .map((user) => ({...user, ...memberMap.get(user.id)}))
+      .filter((user) => filter === undefined || user.username.includes(filter));
+    setUsersToShow(updatedUsersToShow);
+  };
 
   const filterUsersToShow = (event: ChangeEvent<HTMLInputElement>): void => {
     const filter = event.target.value;
-    const memberMap = new Map(group.members.map((member) => [member.id, member]));
-    const updatedUsersToShow = users
-      .filter((user) => memberMap.has(user.id))
-      .map((user) => ({...user, ...memberMap.get(user.id)} as GroupUser))
-      .filter((user) => user.username.includes(filter));
-    setUsersToShow(updatedUsersToShow);
+    updateUsersToShow(filter);
+  };
+
+  const onMemberDelete = (userId: string): void => {
+    setDeletedMemberIds((prevState) => [...prevState, userId]);
   };
 
   useEffect(() => {
     if (group) {
-      const memberMap = new Map(group.members.map((member) => [member.id, member]));
-      const updatedUsersToShow = users
-        .filter((user) => memberMap.has(user.id))
-        .map((user) => ({...user, ...memberMap.get(user.id)}));
-      setUsersToShow(updatedUsersToShow);
+      updateUsersToShow();
     }
-  }, [group]);
-
-  const canAdmin = group && GroupUtils.canAdmin(account, group);
+  }, [group, deletedMemberIds]);
 
   const filter = (
     <Box className={classes.filter}>
@@ -69,7 +84,13 @@ const GroupMembersDialog: FC<Props> = (props: Props) => {
   const userList = (
     <Box className={classes.users}>
       {usersToShow.map((user, index) => (
-        <GroupMembersDialogMember group={group} user={user} key={index} switchToEditMember={switchToEditMember} />
+        <GroupMembersDialogMember
+          group={group}
+          user={user}
+          key={index}
+          switchToEditMember={switchToEditMember}
+          onDelete={onMemberDelete}
+        />
       ))}
       {usersToShow.length === 0 && <Box className={classes.notFound}>{t('group:members.usersNotFound')}</Box>}
     </Box>
@@ -91,7 +112,7 @@ const GroupMembersDialog: FC<Props> = (props: Props) => {
   return (
     <ModalDialog
       isOpen={show}
-      close={close}
+      close={conditionalClose}
       title={t('group:members.title')}
       content={content}
       actions={actions}

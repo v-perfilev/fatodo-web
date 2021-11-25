@@ -6,7 +6,7 @@ import {User} from '../../../models/user.model';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
 import {MailIcon} from '../../icons/mail-icon';
-import {Button, Tooltip} from '@material-ui/core';
+import {Box, Button, Tooltip} from '@material-ui/core';
 import {useChatDialogContext} from '../../../shared/contexts/dialog-contexts/chat-dialog-context';
 import {LoadingButton} from '../../controls';
 import {UserCancelIcon} from '../../icons/user-cancel-icon';
@@ -115,74 +115,88 @@ export const UserInfoViewButtons: FC<Props> = ({user}: Props) => {
     <>
       {!isContact && !isOutcomingRequest && !isIncomingRequest && (
         <Tooltip title={t('account:info.sendContactRequest')}>
-          <LoadingButton
-            variant="contained"
-            color="primary"
-            disabled={loading}
-            loading={sendLoading}
-            onClick={sendRequest}
-          >
-            <UserPlusIcon />
-          </LoadingButton>
+          <Box>
+            <LoadingButton
+              variant="contained"
+              color="primary"
+              disabled={loading}
+              loading={sendLoading}
+              onClick={sendRequest}
+            >
+              <UserPlusIcon />
+            </LoadingButton>
+          </Box>
         </Tooltip>
       )}
       {isOutcomingRequest && (
         <Tooltip title={t('account:info.waitContactAccepting')}>
-          <Button variant="outlined" color="primary" disableElevation disableRipple>
-            <UserWaitIcon />
-          </Button>
+          <Box>
+            <Button variant="outlined" color="primary" disableElevation disableRipple>
+              <UserWaitIcon />
+            </Button>
+          </Box>
         </Tooltip>
       )}
       {isOutcomingRequest && (
         <Tooltip title={t('account:info.cancelContactRequest')}>
-          <LoadingButton
-            variant="contained"
-            color="secondary"
-            disabled={loading}
-            loading={removeLoading}
-            onClick={removeRequest}
-          >
-            <UserCancelIcon />
-          </LoadingButton>
+          <Box>
+            <LoadingButton
+              variant="contained"
+              color="secondary"
+              disabled={loading}
+              loading={removeLoading}
+              onClick={removeRequest}
+            >
+              <UserCancelIcon />
+            </LoadingButton>
+          </Box>
         </Tooltip>
       )}
       {isIncomingRequest && (
         <Tooltip title={t('account:info.acceptContactRequest')}>
-          <LoadingButton
-            variant="contained"
-            color="primary"
-            disabled={loading}
-            loading={acceptLoading}
-            onClick={acceptRequest}
-          >
-            <UserPlusIcon />
-          </LoadingButton>
+          <Box>
+            <LoadingButton
+              variant="contained"
+              color="primary"
+              disabled={loading}
+              loading={acceptLoading}
+              onClick={acceptRequest}
+            >
+              <UserPlusIcon />
+            </LoadingButton>
+          </Box>
         </Tooltip>
       )}
       {isIncomingRequest && (
         <Tooltip title={t('account:info.declineContactRequest')}>
-          <LoadingButton
-            variant="contained"
-            color="secondary"
-            disabled={loading}
-            loading={declineLoading}
-            onClick={declineRequest}
-          >
-            <UserCancelIcon />
-          </LoadingButton>
+          <Box>
+            <LoadingButton
+              variant="contained"
+              color="secondary"
+              disabled={loading}
+              loading={declineLoading}
+              onClick={declineRequest}
+            >
+              <UserCancelIcon />
+            </LoadingButton>
+          </Box>
         </Tooltip>
       )}
       {isContact && (
         <Tooltip title={t('account:info.userInContactList')}>
-          <Button variant="outlined" color="primary" disableElevation disableRipple>
-            <UserOkIcon />
-          </Button>
+          <Box>
+            <Button variant="outlined" color="primary" disableElevation disableRipple>
+              <UserOkIcon />
+            </Button>
+          </Box>
         </Tooltip>
       )}
       <Tooltip title={t('account:info.sendMessage')}>
-        <Button variant="contained" color="secondary" onClick={openDirectMessageDialog}>
-          <MailIcon />
-        </Button>
+        <Box>
+          <Button variant="contained" color="secondary" onClick={openDirectMessageDialog}>
+            <MailIcon />
+          </Button>
+        </Box>
       </Tooltip>
     </>
   );

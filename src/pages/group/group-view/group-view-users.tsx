@@ -19,8 +19,10 @@ const GroupViewUsers: FC = () => {
   };
 
   useEffect(() => {
-    updateUsersToShow();
-  }, [users, group]);
+    if (users) {
+      updateUsersToShow();
+    }
+  }, [group, users]);
 
   return (
     <Box className={classes.root}>

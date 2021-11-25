@@ -33,7 +33,7 @@ const withUserList = (Component: ComponentType): FC => (props): ReactElement => 
 
   const addAbsentUserIds = (ids: string[]): void => {
     const existingIds = users.map((user) => user.id);
-    const notAllowedIds = [...existingIds, loadingIds];
+    const notAllowedIds = [...existingIds, ...loadingIds];
     const idsToLoad = ids.filter(ArrayUtils.uniqueFilter).filter((id) => !notAllowedIds.includes(id));
     if (idsToLoad.length > 0) {
       loadUsersByIds(idsToLoad);

@@ -18,11 +18,12 @@ type BaseProps = {
   group: Group;
   user: GroupUser;
   switchToEditMember: (user: GroupUser) => void;
+  onDelete: (userId: string) => void;
 };
 
 type Props = AuthState & BaseProps;
 
-const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, account}: Props) => {
+const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, onDelete, account}: Props) => {
   const classes = groupMembersDialogMemberStyles();
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
@@ -43,6 +44,9 @@ const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, a
   const removeUserFromChat = (): void => {
     setRemovingLoading(true);
     ItemService.removeMembersFromGroup(group.id, [user.id])
+      .then(() => {
+        onDelete(user.id);
+      })
       .catch((response) => {
         handleResponse(response);
       })
@@ -75,7 +79,7 @@ const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, a
             <EditIcon color="primary" />
           </IconButton>
         )}
-        {canAdmin && (user.id !== account.id || canLeave) && (
+        {canAdmin && user.id !== account.id && (
           <IconButton size="small" onClick={switchRemovingConfirmation}>
             <UserMinusIcon color="error" />
           </IconButton>

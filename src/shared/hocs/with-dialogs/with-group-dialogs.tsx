@@ -78,7 +78,15 @@ const withGroupDialogs = (Component: ComponentType): FC => (props): ReactElement
         updateDialogProps(GroupDialogs.MEMBERS, {show: false});
         showGroupEditMemberDialog(group, user, onSuccess);
       };
-      const props = {group, users, show, close, switchToAddMembers, switchToEditMember} as GroupMembersDialogProps;
+      const props = {
+        group,
+        users,
+        show,
+        close,
+        onSuccess,
+        switchToAddMembers,
+        switchToEditMember,
+      } as GroupMembersDialogProps;
       setDialogProps(GroupDialogs.MEMBERS, props);
     },
     [setDialogProps, updateDialogProps, showGroupAddMembersDialog]

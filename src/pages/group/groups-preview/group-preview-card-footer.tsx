@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Box, Button, CardActions, Typography} from '@material-ui/core';
 import {groupCardFooterStyles} from './_styles';
 import {AvatarGroup, BoxWithIcon} from '../../../components/surfaces';
@@ -9,6 +9,8 @@ import {ItemsIcon} from '../../../components/icons/items-icon';
 import {ArrowUpIcon} from '../../../components/icons/arrow-up-icon';
 import {BUTTONS_IN_GROUP_CARD, ITEMS_IN_GROUP_CARD} from '../_constants';
 import {ArrowDownIcon} from '../../../components/icons/arrow-down-icon';
+import {User} from '../../../models/user.model';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
 type Props = {
   onUpClick: () => void;
@@ -24,6 +26,18 @@ const GroupPreviewCardFooter: FC<Props> = (props: Props) => {
   const {onUpClick, onDownClick, isMultiPage, isNotFirstPage, isNotLastPage, firstShownItem} = props;
   const {users} = useUserListContext();
   const {objs: items} = useItemListContext();
+  const {obj: group} = useGroupViewContext();
+  const [usersToShow, setUsersToShow] = useState<User[]>([]);
+
+  const updateUsersToShow = (): void => {
+    const groupUserIds = group.members.map((user) => user.id);
+    const updatedList = users.filter((user) => groupUserIds.includes(user.id));
+    setUsersToShow(updatedList);
+  };
+
+  useEffect(() => {
+    updateUsersToShow();
+  }, [users, group]);
 
   const pageNumber = Math.floor(firstShownItem / ITEMS_IN_GROUP_CARD) + 1;
   const totalPages = Math.ceil((items.length + BUTTONS_IN_GROUP_CARD) / ITEMS_IN_GROUP_CARD);
@@ -58,7 +72,7 @@ const GroupPreviewCardFooter: FC<Props> = (props: Props) => {
 
   return (
     <CardActions className={classes.footer}>
-      <AvatarGroup users={users} withPopup shorten={isMultiPage} />
+      <AvatarGroup users={usersToShow} withPopup shorten={isMultiPage} />
       {isMultiPage && paginationElement}
       <Box className={classes.badges}>
         <BoxWithIcon icon={<ItemsIcon color="primary" />}>{items?.length || 0}</BoxWithIcon>
