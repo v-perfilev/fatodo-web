@@ -11,13 +11,21 @@ import {useItemListContext} from '../../../shared/contexts/list-contexts/item-li
 import {flowRight} from 'lodash';
 import {CircularSpinner} from '../../../components/loaders';
 import GroupViewCreateButton from './group-view-create-button';
+import {GroupUtils} from '../../../shared/utils/group.utils';
+import {UserAccount} from '../../../models/user.model';
 
-const GroupViewItems: FC = () => {
+type Props = {
+  account: UserAccount;
+};
+
+const GroupViewItems: FC<Props> = ({account}: Props) => {
   const classes = groupViewItemsStyles();
   const {handleResponse} = useSnackContext();
   const {obj: group} = useGroupViewContext();
   const {objs: items, setObjs: setItems, setLoad: setLoadItems} = useItemListContext();
   const [loading, setLoading] = useState(true);
+
+  const canAdmin = group && GroupUtils.canAdmin(account, group);
 
   const loadItems = (): void => {
     setLoading(true);
@@ -46,7 +54,7 @@ const GroupViewItems: FC = () => {
         items.map((item, index) => (
           <Box key={index}>
             {index !== 0 && <PageDivider />}
-            <GroupViewItem item={item} />
+            <GroupViewItem item={item} canAdmin={canAdmin} />
           </Box>
         ))}
     </Box>

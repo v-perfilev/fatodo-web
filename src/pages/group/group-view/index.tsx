@@ -154,7 +154,7 @@ const GroupView: FC<Props> = ({account}: Props) => {
         <PageDivider height={5} />
         <GroupViewUsers />
         <PageDivider />
-        <GroupViewItems />
+        <GroupViewItems account={account} />
         <PageDivider />
         <ControlMenu menu={menuElements} />
         <PageSpacer />

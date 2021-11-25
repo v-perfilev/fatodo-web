@@ -15,9 +15,10 @@ import GroupViewItemChanges from './group-view-item-changes';
 
 type Props = {
   item: Item;
+  canAdmin: boolean;
 };
 
-const GroupViewItem: FC<Props> = ({item}: Props) => {
+const GroupViewItem: FC<Props> = ({item, canAdmin}: Props) => {
   const classes = groupViewItemStyles();
   const history = useHistory();
   const {load: loadItems} = useItemListContext();
@@ -52,12 +53,16 @@ const GroupViewItem: FC<Props> = ({item}: Props) => {
             <EyeIcon />
           </IconButton>
         </Hidden>
-        <IconButton size="small" className={classes.editIcon} onClick={redirectToEditItem}>
-          <EditIcon />
-        </IconButton>
-        <IconButton size="small" className={classes.deleteIcon} onClick={openItemDeleteDialog}>
-          <DeleteIcon />
-        </IconButton>
+        {canAdmin && (
+          <IconButton size="small" className={classes.editIcon} onClick={redirectToEditItem}>
+            <EditIcon />
+          </IconButton>
+        )}
+        {canAdmin && (
+          <IconButton size="small" className={classes.deleteIcon} onClick={openItemDeleteDialog}>
+            <DeleteIcon />
+          </IconButton>
+        )}
       </Box>
     </Box>
   );
