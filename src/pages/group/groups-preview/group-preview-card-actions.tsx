@@ -10,8 +10,18 @@ import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {useTranslation} from 'react-i18next';
 import {useGroupDialogContext} from '../../../shared/contexts/dialog-contexts/group-dialog-context';
+import {GroupUtils} from '../../../shared/utils/group.utils';
+import {EyeIcon} from '../../../components/icons/eye-icon';
+import {EditIcon} from '../../../components/icons/edit-icon';
+import {DeleteIcon} from '../../../components/icons/delete-icon';
+import {PlusIcon} from '../../../components/icons/plus-icon';
+import {UserAccount} from '../../../models/user.model';
 
-const GroupPreviewCardActions: FC = () => {
+type Props = {
+  account: UserAccount;
+};
+
+const GroupPreviewCardActions: FC<Props> = ({account}: Props) => {
   const classes = groupCardActionsStyles();
   const history = useHistory();
   const {t} = useTranslation();
@@ -20,6 +30,9 @@ const GroupPreviewCardActions: FC = () => {
   const {obj: group} = useGroupViewContext();
   const {showGroupDeleteDialog} = useGroupDialogContext();
   const [isOpen, setIsOpen] = useState(false);
+
+  const canEdit = group && GroupUtils.canEdit(account, group);
+  const canAdmin = group && GroupUtils.canAdmin(account, group);
 
   const handleClickOnAction = (e: MouseEvent<HTMLElement>): void => {
     e.preventDefault();
@@ -59,11 +72,29 @@ const GroupPreviewCardActions: FC = () => {
       <IconButton onClick={handleClickOnAction} className={classes.root} ref={ref}>
         <DotsVerticalIcon />
       </IconButton>
-      <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        <MenuItem onClick={redirectToItemCreate}>{t('group:menu.createItem')}</MenuItem>
-        <MenuItem onClick={redirectToGroupView}>{t('group:menu.viewGroup')}</MenuItem>
-        <MenuItem onClick={redirectToGroupEdit}>{t('group:menu.editGroup')}</MenuItem>
-        <MenuItem onClick={openGroupDeleteDialog}>{t('group:menu.deleteGroup')}</MenuItem>
+      <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
+        {canEdit && (
+          <MenuItem onClick={redirectToItemCreate}>
+            <PlusIcon color="primary" />
+            {t('group:menu.createItem')}
+          </MenuItem>
+        )}
+        <MenuItem onClick={redirectToGroupView}>
+          <EyeIcon color="primary" />
+          {t('group:menu.viewGroup')}
+        </MenuItem>
+        {canAdmin && (
+          <MenuItem onClick={redirectToGroupEdit}>
+            <EditIcon color="primary" />
+            {t('group:menu.editGroup')}
+          </MenuItem>
+        )}
+        {canAdmin && (
+          <MenuItem onClick={openGroupDeleteDialog}>
+            <DeleteIcon color="error" />
+            {t('group:menu.deleteGroup')}
+          </MenuItem>
+        )}
       </PopupMenu>
     </>
   );

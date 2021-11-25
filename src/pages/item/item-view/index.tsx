@@ -109,17 +109,17 @@ const ItemView: FC<Props> = ({account}: Props) => {
     handleUserIds(userIds);
   };
 
-  const canAdmin = group && GroupUtils.canAdmin(account, group);
+  const canEdit = group && GroupUtils.canEdit(account, group);
 
   const menuElements = [
     {icon: <ItemsIcon />, action: redirectToGroupView, text: t('item:tooltips.list'), hiddenInControlMenu: true},
-    {icon: <EditIcon />, action: redirectToItemEdit, text: t('item:tooltips.edit'), hidden: !canAdmin},
+    {icon: <EditIcon />, action: redirectToItemEdit, text: t('item:tooltips.edit'), hidden: !canEdit},
     {
       icon: <DeleteIcon />,
       action: openItemDeleteDialog,
       text: t('item:tooltips.delete'),
       color: 'secondary',
-      hidden: !canAdmin,
+      hidden: !canEdit,
     },
   ] as MenuElement[];
 

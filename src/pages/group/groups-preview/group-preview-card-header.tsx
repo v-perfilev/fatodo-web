@@ -7,8 +7,13 @@ import GroupPreviewCardActions from './group-preview-card-actions';
 import {Link} from '../../../components/controls';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {UrlPic} from '../../../components/images';
+import {UserAccount} from '../../../models/user.model';
 
-const GroupPreviewCardHeader: FC = () => {
+type Props = {
+  account: UserAccount;
+};
+
+const GroupPreviewCardHeader: FC<Props> = ({account}: Props) => {
   const classes = groupCardHeaderStyles();
   const {obj: group} = useGroupViewContext();
 
@@ -23,7 +28,7 @@ const GroupPreviewCardHeader: FC = () => {
             </Typography>
           </Box>
         }
-        action={<GroupPreviewCardActions />}
+        action={<GroupPreviewCardActions account={account} />}
         className={classes.root}
       />
     </Link>

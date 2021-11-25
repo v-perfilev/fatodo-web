@@ -25,7 +25,7 @@ const GroupViewItems: FC<Props> = ({account}: Props) => {
   const {objs: items, setObjs: setItems, setLoad: setLoadItems} = useItemListContext();
   const [loading, setLoading] = useState(true);
 
-  const canAdmin = group && GroupUtils.canAdmin(account, group);
+  const canEdit = group && GroupUtils.canEdit(account, group);
 
   const loadItems = (): void => {
     setLoading(true);
@@ -54,7 +54,7 @@ const GroupViewItems: FC<Props> = ({account}: Props) => {
         items.map((item, index) => (
           <Box key={index}>
             {index !== 0 && <PageDivider />}
-            <GroupViewItem item={item} canAdmin={canAdmin} />
+            <GroupViewItem item={item} canEdit={canEdit} />
           </Box>
         ))}
     </Box>

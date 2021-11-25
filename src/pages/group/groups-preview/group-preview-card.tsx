@@ -7,12 +7,14 @@ import GroupPreviewCardBody from './group-preview-card-body';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {flowRight} from 'lodash';
+import {AuthState} from '../../../store/rerducers/auth.reducer';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 
-type Props = {
+type Props = AuthState & {
   height: number;
 };
 
-const GroupPreviewCard: FC<Props> = ({height}: Props) => {
+const GroupPreviewCard: FC<Props> = ({account, height}: Props) => {
   const classes = groupCardStyles();
   const {obj: group} = useGroupViewContext();
 
@@ -23,11 +25,11 @@ const GroupPreviewCard: FC<Props> = ({height}: Props) => {
     group && (
       <ThemeProvider theme={theme}>
         <Card elevation={3} className={classes.card} style={style}>
-          <GroupPreviewCardHeader />
+          <GroupPreviewCardHeader account={account} />
           <GroupPreviewCardBody />
         </Card>
       </ThemeProvider>
     )
   );
 };
-export default flowRight([memo])(GroupPreviewCard);
+export default flowRight([withAuthState, memo])(GroupPreviewCard);

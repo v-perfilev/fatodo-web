@@ -88,7 +88,7 @@ export const commentItemActionsStyles = makeStyles((theme: Theme) => ({
     },
     '& svg': {
       marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(0.5),
+      marginRight: theme.spacing(1),
     },
   },
 }));

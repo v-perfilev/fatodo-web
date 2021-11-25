@@ -7,9 +7,5 @@ type Props = HTMLAttributes<HTMLElement>;
 export const PaperBox: FC<Props> = ({children}: Props) => {
   const classes = paperBoxStyles();
 
-  return (
-    <Paper className={classes.root}>
-      {children}
-    </Paper>
-  );
+  return <Paper className={classes.root}>{children}</Paper>;
 };

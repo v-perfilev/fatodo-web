@@ -35,7 +35,7 @@ export const chatContentHeaderActionsStyles = makeStyles((theme: Theme) => ({
     },
     '& .MuiSvgIcon-root': {
       marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(0.5),
+      marginRight: theme.spacing(1),
     },
   },
 }));
