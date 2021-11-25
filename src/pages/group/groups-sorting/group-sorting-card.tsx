@@ -19,7 +19,7 @@ const GroupSortingCard: FC<Props> = ({bind}: Props) => {
   return (
     group && (
       <ThemeProvider theme={theme}>
-        <Card square elevation={3} className={classes.card}>
+        <Card elevation={3} className={classes.card}>
           <GroupSortingHeader bind={bind} />
         </Card>
       </ThemeProvider>

@@ -22,7 +22,7 @@ const GroupPreviewCard: FC<Props> = ({height}: Props) => {
   return (
     group && (
       <ThemeProvider theme={theme}>
-        <Card square elevation={3} className={classes.card} style={style}>
+        <Card elevation={3} className={classes.card} style={style}>
           <GroupPreviewCardHeader />
           <GroupPreviewCardBody />
         </Card>

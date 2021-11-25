@@ -8,7 +8,7 @@ export const PaperBox: FC<Props> = ({children}: Props) => {
   const classes = paperBoxStyles();
 
   return (
-    <Paper square className={classes.root}>
+    <Paper className={classes.root}>
       {children}
     </Paper>
   );

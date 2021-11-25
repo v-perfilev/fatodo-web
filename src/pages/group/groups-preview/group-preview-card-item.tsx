@@ -29,7 +29,7 @@ const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
   return (
     <Box className={classes.root} style={style}>
       <Link to={(Routes.ITEMS + ItemRoutes.VIEW).replace(':itemId', item.id)}>
-        <Card square variant="outlined" className={classes.card}>
+        <Card variant="outlined" className={classes.card}>
           <Box className={classes.headerBox}>
             <Box className={classes.iconBox}>
               <TypeView className={classes.icon} type={item.type} withoutText />
