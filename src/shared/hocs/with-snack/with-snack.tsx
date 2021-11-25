@@ -94,7 +94,12 @@ const withSnack = (Component: ComponentType): FC => (props: Props): ReactElement
 const withSnackProvider = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = snackStyles();
   return (
-    <SnackbarProvider classes={classes} anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}>
+    <SnackbarProvider
+      classes={classes}
+      anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+      autoHideDuration={7000}
+      preventDuplicate
+    >
       <Component {...props} />
     </SnackbarProvider>
   );
