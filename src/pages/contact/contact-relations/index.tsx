@@ -34,7 +34,7 @@ const ContactRelations: FC<Props> = ({filter}: Props) => {
     if (users && relations) {
       combineRelationsWithUsers();
     }
-  }, [users]);
+  }, [users, relations]);
 
   return loading ? (
     <CircularSpinner size="sm" />

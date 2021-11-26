@@ -14,12 +14,18 @@ enum ContactDialogs {
 const withContactDialogs = (Component: ComponentType): FC => (props): ReactElement => {
   const {handleDialog, setDialogProps, clearDialogProps} = useDialogContext();
 
-  const showContactRequestDialog = useCallback((): void => {
-    const show = true;
-    const close = (): void => clearDialogProps(ContactDialogs.REQUEST);
-    const props = {show, close} as ContactRequestDialogProps;
-    setDialogProps(ContactDialogs.REQUEST, props);
-  }, [setDialogProps, clearDialogProps]);
+  const showContactRequestDialog = useCallback(
+    (onSuccess?: () => void): void => {
+      const show = true;
+      const close = (): void => {
+        if (onSuccess) onSuccess();
+        clearDialogProps(ContactDialogs.REQUEST);
+      };
+      const props = {show, close} as ContactRequestDialogProps;
+      setDialogProps(ContactDialogs.REQUEST, props);
+    },
+    [setDialogProps, clearDialogProps]
+  );
 
   const initDialogs = (): void => {
     handleDialog(ContactDialogs.REQUEST, ContactRequestDialog, defaultContactRequestDialogProps);

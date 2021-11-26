@@ -34,7 +34,7 @@ const ContactOutcoming: FC<Props> = ({filter}: Props) => {
     if (users && outcomingRequests) {
       combineRequestsWithUsers();
     }
-  }, [users]);
+  }, [users, outcomingRequests]);
 
   return loading ? (
     <CircularSpinner size="sm" />

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useContext} from 'react';
 
 interface ContactDialogState {
-  showContactRequestDialog: () => void;
+  showContactRequestDialog: (onSuccess?: () => void) => void;
 }
 
 export const ContactDialogContext = React.createContext<ContactDialogState>(null);

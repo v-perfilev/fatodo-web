@@ -5,6 +5,8 @@ import {contactHeaderStyles} from './_styles';
 import {ClearableTextInput} from '../../../components/inputs';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/contact-dialog-context';
+import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
+import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
 
 type Props = {
   setFilter: (filter: string) => void;
@@ -12,8 +14,18 @@ type Props = {
 
 const ContactHeader: FC<Props> = ({setFilter}: Props) => {
   const classes = contactHeaderStyles();
+  const {update: updateContacts} = useContactContext();
+  const {update: updateInfo} = useContactInfoContext();
   const {showContactRequestDialog} = useContactDialogContext();
   const {t} = useTranslation();
+
+  const openContactRequestDialog = (): void => {
+    const onSuccess = (): void => {
+      updateContacts();
+      updateInfo();
+    };
+    showContactRequestDialog(onSuccess);
+  };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const filter = event.target.value;
@@ -22,7 +34,7 @@ const ContactHeader: FC<Props> = ({setFilter}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <Fab className={classes.button} size="small" color="primary" onClick={showContactRequestDialog}>
+      <Fab className={classes.button} size="small" color="primary" onClick={openContactRequestDialog}>
         <PlusIcon />
       </Fab>
       <ClearableTextInput placeholder={t('inputs.filter')} onChange={handleChange} fullWidth />

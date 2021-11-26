@@ -53,7 +53,11 @@ const ContactMain: FC = () => {
   const [filter, setFilter] = useState<string>('');
 
   const openContactRequestDialog = (): void => {
-    showContactRequestDialog();
+    const onSuccess = (): void => {
+      updateContacts();
+      updateInfo();
+    };
+    showContactRequestDialog(onSuccess);
   };
 
   const handleChange = (event: React.ChangeEvent<{}>, newTab: number): void => {
