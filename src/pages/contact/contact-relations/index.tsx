@@ -15,6 +15,11 @@ const ContactRelations: FC<Props> = ({filter}: Props) => {
   const [userRelations, setUserRelations] = useState<ContactRelationWithUser[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const resetUserRelations = (): void => {
+    setUserRelations([]);
+    setLoading(false);
+  };
+
   const combineRelationsWithUsers = (): void => {
     const userMap = new Map(users.map((user) => [user.id, user]));
     const userRelations = relations
@@ -31,8 +36,10 @@ const ContactRelations: FC<Props> = ({filter}: Props) => {
   }, [relations]);
 
   useEffect(() => {
-    if (users && relations) {
+    if (users?.length > 0 && relations?.length > 0) {
       combineRelationsWithUsers();
+    } else if (users && relations) {
+      resetUserRelations();
     }
   }, [users, relations]);
 

@@ -15,6 +15,11 @@ const ContactIncoming: FC<Props> = ({filter}: Props) => {
   const [userRequests, setUserRequests] = useState<ContactRequestWithUser[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const resetUserRequests = (): void => {
+    setUserRequests([]);
+    setLoading(false);
+  };
+
   const combineRequestsWithUsers = (): void => {
     const userMap = new Map(users.map((user) => [user.id, user]));
     const userRequests = incomingRequests
@@ -26,13 +31,15 @@ const ContactIncoming: FC<Props> = ({filter}: Props) => {
   };
 
   useEffect(() => {
-    const userIds = incomingRequests.map((r) => r.recipientId);
+    const userIds = incomingRequests.map((r) => r.requesterId);
     handleUserIds(userIds);
   }, [incomingRequests]);
 
   useEffect(() => {
-    if (users && incomingRequests) {
+    if (users?.length > 0 && incomingRequests?.length > 0) {
       combineRequestsWithUsers();
+    } else if (users && incomingRequests) {
+      resetUserRequests();
     }
   }, [users, incomingRequests]);
 
