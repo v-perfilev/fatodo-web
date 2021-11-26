@@ -33,7 +33,8 @@
     "invalid": "Object contains invalid parameter"
   },
   "permission": {
-    "restricted": "Not enough rights to perform this operation"
+    "restricted": "Not enough rights to perform this operation",
+    "usersNotAllowed": "Users not from contact list"
   },
   "service": {
     "group": {
