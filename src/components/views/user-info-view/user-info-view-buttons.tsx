@@ -205,7 +205,7 @@ export const UserInfoViewButtons: FC<Props> = ({user}: Props) => {
       )}
       <Tooltip title={t('account:info.sendMessage')}>
         <Box>
-          <Button variant="contained" color="secondary" onClick={openDirectMessageDialog}>
+          <Button variant="contained" color="secondary" disabled={!isContact} onClick={openDirectMessageDialog}>
             <MailIcon />
           </Button>
         </Box>
