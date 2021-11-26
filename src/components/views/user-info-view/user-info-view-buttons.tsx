@@ -14,6 +14,7 @@ import {UserPlusIcon} from '../../icons/user-plus-icon';
 import {UserWaitIcon} from '../../icons/user-wait-icon';
 import {UserOkIcon} from '../../icons/user-ok-icon';
 import {useTranslation} from 'react-i18next';
+import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
 
 type Props = {
   user: User;
@@ -22,7 +23,14 @@ type Props = {
 export const UserInfoViewButtons: FC<Props> = ({user}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
-  const {relations, outcomingRequests, incomingRequests, update, loading: contactLoading} = useContactContext();
+  const {update: updateInfo} = useContactInfoContext();
+  const {
+    relations,
+    outcomingRequests,
+    incomingRequests,
+    update: updateContacts,
+    loading: contactLoading,
+  } = useContactContext();
   const {showDirectMessageDialog} = useChatDialogContext();
   const [loading, setLoading] = useState<boolean>(false);
   const [sendLoading, setSendLoading] = useState<boolean>(false);
@@ -48,7 +56,8 @@ export const UserInfoViewButtons: FC<Props> = ({user}: Props) => {
     ContactService.sendRequest(dto)
       .then(() => {
         handleCode('contact.requestSent', 'info');
-        update();
+        updateInfo();
+        updateContacts();
       })
       .catch((response) => {
         handleResponse(response);
@@ -61,7 +70,8 @@ export const UserInfoViewButtons: FC<Props> = ({user}: Props) => {
     ContactService.removeRequest(user.id)
       .then(() => {
         handleCode('contact.requestRemoved', 'info');
-        update();
+        updateInfo();
+        updateContacts();
       })
       .catch((response) => {
         handleResponse(response);
@@ -74,7 +84,8 @@ export const UserInfoViewButtons: FC<Props> = ({user}: Props) => {
     ContactService.acceptRequest(user.id)
       .then(() => {
         handleCode('contact.requestAccepted', 'info');
-        update();
+        updateInfo();
+        updateContacts();
       })
       .catch((response) => {
         handleResponse(response);
@@ -87,7 +98,8 @@ export const UserInfoViewButtons: FC<Props> = ({user}: Props) => {
     ContactService.declineRequest(user.id)
       .then(() => {
         handleCode('contact.requestDeclined', 'info');
-        update();
+        updateInfo();
+        updateContacts();
       })
       .catch((response) => {
         handleResponse(response);
