@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useMemo, useState} from 'react';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
@@ -9,6 +9,7 @@ import GroupPreviewCardFooter from './group-preview-card-footer';
 import GroupPreviewCardContent from './group-preview-card-content';
 import {flowRight} from 'lodash';
 import withItemList from '../../../shared/hocs/with-list/with-item-list';
+import {Item} from '../../../models/item.model';
 
 const GroupPreviewCardBody: FC = () => {
   const {handleResponse} = useSnackContext();
@@ -20,7 +21,12 @@ const GroupPreviewCardBody: FC = () => {
   const isNotFirstPage = firstShownItem > 0;
   const isNotLastPage = firstShownItem + ITEMS_IN_GROUP_CARD < items.length + BUTTONS_IN_GROUP_CARD;
   const itemsInPage = isNotFirstPage ? ITEMS_IN_GROUP_CARD : ITEMS_IN_GROUP_CARD - BUTTONS_IN_GROUP_CARD;
-  const itemsToShow = items.slice(firstShownItem, firstShownItem + itemsInPage);
+
+  const itemsToShow = useMemo<Item[]>(() => items.slice(firstShownItem, firstShownItem + itemsInPage), [
+    items,
+    firstShownItem,
+    itemsInPage,
+  ]);
 
   const onUpClick = (): void => {
     setFirstShownItem((prevState) => {
