@@ -14,8 +14,10 @@ import {PageSpacer} from '../../../components/surfaces';
 import ControlMenu from '../../../components/layouts/control-menu';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Container, ThemeProvider} from '@material-ui/core';
+import {groupCreateStyles} from './_styles';
 
 const GroupCreate: FC = () => {
+  const classes = groupCreateStyles();
   const history = useHistory();
   const {i18n, t} = useTranslation();
   const {setMenu} = useAdditionalMenuContext();
@@ -56,7 +58,7 @@ const GroupCreate: FC = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container>
+      <Container className={classes.container}>
         <GroupForm header={t('group:headers.create')} setSaveCallback={setSaveCallback} request={request} />
         <PageSpacer />
         <ControlMenu menu={menuElements} disabled={isSaving} floatRight />

@@ -19,8 +19,10 @@ import {PageSpacer} from '../../../components/surfaces';
 import ControlMenu from '../../../components/layouts/control-menu';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {ThemeFactory} from '../../../shared/theme/theme';
+import {itemCreateStyles} from './_styles';
 
 const ItemCreate: FC = () => {
+  const classes = itemCreateStyles();
   const {i18n, t} = useTranslation();
   const history = useHistory();
   const {groupId} = useParams();
@@ -83,7 +85,7 @@ const ItemCreate: FC = () => {
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>
-      <Container>
+      <Container className={classes.container}>
         <ItemForm
           group={group}
           header={t('item:headers.create', {group: group.title})}

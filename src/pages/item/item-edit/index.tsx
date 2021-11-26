@@ -27,8 +27,10 @@ import {ThemeFactory} from '../../../shared/theme/theme';
 import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';
 import NotificationService from '../../../services/notification.service';
 import withReminderList from '../../../shared/hocs/with-list/with-reminder-list';
+import {itemEditStyles} from './_styles';
 
 const ItemEdit: FC = () => {
+  const classes = itemEditStyles();
   const {i18n, t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const history = useHistory();
@@ -138,7 +140,7 @@ const ItemEdit: FC = () => {
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>
-      <Container>
+      <Container className={classes.container}>
         <ItemForm
           group={group}
           item={item}

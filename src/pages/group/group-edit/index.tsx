@@ -18,8 +18,10 @@ import ControlMenu from '../../../components/layouts/control-menu';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {CloseIcon} from '../../../components/icons/close-icon';
+import {groupEditStyles} from './_styles';
 
 const GroupEdit: FC = () => {
+  const classes = groupEditStyles();
   const history = useHistory();
   const {groupId} = useParams();
   const {i18n, t} = useTranslation();
@@ -82,7 +84,7 @@ const GroupEdit: FC = () => {
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>
-      <Container>
+      <Container className={classes.container}>
         <GroupForm group={group} header={t('group:headers.edit')} setSaveCallback={setSaveCallback} request={request} />
         <PageSpacer />
         <ControlMenu menu={menuElements} disabled={isSaving} floatRight />
