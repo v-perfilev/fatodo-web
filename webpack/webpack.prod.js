@@ -74,7 +74,8 @@ module.exports = (env) => merge(commonConfig({env: ENV}), {
     new CleanWebpackPlugin(),
     new webpack.EnvironmentPlugin({
       SOCIAL_LOGIN: true,
-      DEVELOPMENT_MODE: false
+      DEVELOPMENT_MODE: false,
+      DEBUG_WS: false,
     }),
     ...(env && env.analyze ? [new BundleAnalyzerPlugin()] : [])
   ]

@@ -47,7 +47,8 @@ module.exports = () => merge(commonConfig({env: ENV}), {
   plugins: [
     new webpack.EnvironmentPlugin({
       SOCIAL_LOGIN: true,
-      DEVELOPMENT_MODE: true
+      DEVELOPMENT_MODE: true,
+      DEBUG_WS: false,
     })
   ]
 });
