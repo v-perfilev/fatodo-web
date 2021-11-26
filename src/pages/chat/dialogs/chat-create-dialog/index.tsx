@@ -59,7 +59,7 @@ const ChatCreateDialog: FC<Props> = ({show, close}: Props) => {
     setContactIds(relationUserIds);
   }, [relations]);
 
-  const content = <UsersSelect priorityIds={contactIds} ignoredIds={[]} setUserIds={setUserIds} />;
+  const content = <UsersSelect allowedIds={contactIds} ignoredIds={[]} setUserIds={setUserIds} />;
 
   const cancelButton = (
     <Button onClick={close} color="primary" disabled={isSubmitting}>

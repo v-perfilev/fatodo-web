@@ -13,12 +13,12 @@ import withUserList from '../../../shared/hocs/with-list/with-user-list';
 import {flowRight} from 'lodash';
 
 type Props = {
-  priorityIds: string[];
+  allowedIds: string[];
   ignoredIds: string[];
   setUserIds: (ids: string[]) => void;
 };
 
-const UsersSelect: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props) => {
+const UsersSelect: FC<Props> = ({allowedIds, ignoredIds, setUserIds}: Props) => {
   const classes = userSelectStyles();
   const {users, handleUserIds, handleUsers} = useUserListContext();
   const {handleResponse} = useSnackContext();
@@ -44,19 +44,11 @@ const UsersSelect: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props) =>
     const filterFunc = (user: User): boolean => user.username.toLowerCase().startsWith(filter.toLowerCase());
     const filterInFunc = (ids: string[]) => (user: User): boolean => ids.includes(user.id);
     const filterNotInFunc = (ids: string[]) => (user: User): boolean => !ids.includes(user.id);
-    const prioritySortFunc = (ids: string[]) => (user: User): number => (ids.includes(user.id) ? 1 : -1);
 
-    let updatedUsersToShow = [];
-
-    if (filter.length > 0) {
-      const filteredUsers = users.filter(filterFunc).sort(prioritySortFunc(priorityIds));
-      updatedUsersToShow.push(...filteredUsers);
-    } else {
-      const priorityFilteredUsers = users.filter(filterInFunc(priorityIds));
-      updatedUsersToShow.push(...priorityFilteredUsers);
-    }
-
-    updatedUsersToShow = updatedUsersToShow.filter(filterNotInFunc(selectedIds)).filter(filterNotInFunc(ignoredIds));
+    let updatedUsersToShow = filter.length > 0 ? users.filter(filterFunc) : users;
+    updatedUsersToShow = updatedUsersToShow.filter(
+      filterInFunc(allowedIds) && filterNotInFunc(selectedIds) && filterNotInFunc(ignoredIds)
+    );
 
     const selectedUsers = users.filter(filterInFunc(selectedIds));
     updatedUsersToShow.push(...selectedUsers);
@@ -83,8 +75,8 @@ const UsersSelect: FC<Props> = ({priorityIds, ignoredIds, setUserIds}: Props) =>
   };
 
   useEffect(() => {
-    handleUserIds(priorityIds);
-  }, [priorityIds]);
+    handleUserIds(allowedIds);
+  }, [allowedIds]);
 
   useEffect(() => {
     loadUserFromFilter();
