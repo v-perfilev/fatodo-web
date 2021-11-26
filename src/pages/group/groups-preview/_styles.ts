@@ -27,12 +27,16 @@ export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
   title: {
     display: 'flex',
     flexDirection: 'row',
+    flexGrow: 1,
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
     alignItems: 'center',
     '& >  *': {
       marginRight: theme.spacing(1),
     },
   },
   caption: {
+    width: '100%',
     fontSize: '1rem',
     color: theme.palette.primary.contrastText,
   },
@@ -61,6 +65,7 @@ export const groupCardContentStyles = makeStyles((theme: Theme) => ({
     height: `calc(100% - ${CARD_HEADER_HEIGHT}px - ${CARD_FOOTER_HEIGHT}px)`,
     display: 'flex',
     flexDirection: 'column',
+    paddingTop: theme.spacing(1.5),
     paddingBottom: theme.spacing(1),
   },
   box: {

@@ -8,6 +8,7 @@ import {Link} from '../../../components/controls';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {UrlPic} from '../../../components/images';
 import {UserAccount} from '../../../models/user.model';
+import Truncate from 'react-truncate';
 
 type Props = {
   account: UserAccount;
@@ -24,7 +25,7 @@ const GroupPreviewCardHeader: FC<Props> = ({account}: Props) => {
           <Box className={classes.title}>
             {group.imageFilename && <UrlPic url={group.imageFilename} size="md" />}
             <Typography variant="h6" className={classes.caption}>
-              {group.title}
+              <Truncate>{group.title}</Truncate>
             </Typography>
           </Box>
         }
