@@ -5,12 +5,14 @@ import {chatControlHeaderStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
 import {PlusIcon} from '../../../../components/icons/plus-icon';
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
+import {UserAccount} from '../../../../models/user.model';
 
 type Props = {
   setFilter: (filter: string) => void;
+  account: UserAccount;
 };
 
-const ChatControlHeader: FC<Props> = ({setFilter}: Props) => {
+const ChatControlHeader: FC<Props> = ({setFilter, account}: Props) => {
   const classes = chatControlHeaderStyles();
   const {t} = useTranslation();
   const {showChatCreateDialog} = useChatDialogContext();
@@ -21,7 +23,7 @@ const ChatControlHeader: FC<Props> = ({setFilter}: Props) => {
   };
 
   const openChatCreateDialog = (): void => {
-    showChatCreateDialog();
+    showChatCreateDialog(account);
   };
 
   return (

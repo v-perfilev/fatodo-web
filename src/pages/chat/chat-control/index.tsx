@@ -5,12 +5,12 @@ import {Box} from '@material-ui/core';
 import ChatControlFilteredList from './chat-control-filtered-list';
 import ChatControlList from './chat-control-list';
 import {Chat} from '../../../models/chat.model';
-import {User} from '../../../models/user.model';
+import {UserAccount} from '../../../models/user.model';
 
 type Props = {
   chat: Chat;
   setChat: (chat: Chat) => void;
-  account: User;
+  account: UserAccount;
 };
 
 type ControlType = 'list' | 'filtered';
@@ -27,7 +27,7 @@ const ChatControl: FC<Props> = ({chat, setChat, account}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <ChatControlHeader setFilter={setFilter} />
+      <ChatControlHeader setFilter={setFilter} account={account} />
       {type === 'list' && <ChatControlList chat={chat} setChat={setChat} account={account} />}
       {type === 'filtered' && (
         <ChatControlFilteredList filter={filter} chat={chat} setChat={setChat} account={account} />

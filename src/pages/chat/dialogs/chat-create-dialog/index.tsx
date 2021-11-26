@@ -7,20 +7,23 @@ import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {LoadingButton} from '../../../../components/controls';
 import UsersSelect from '../../../../components/surfaces/users-select';
 import {useContactContext} from '../../../../shared/contexts/contact-contexts/contact-context';
+import {UserAccount} from '../../../../models/user.model';
 
 export type ChatCreateDialogProps = {
   show: boolean;
   close: () => void;
+  account: UserAccount;
 };
 
 export const defaultChatCreateDialogProps: Readonly<ChatCreateDialogProps> = {
   show: false,
   close: (): void => undefined,
+  account: undefined,
 };
 
 type Props = ChatCreateDialogProps;
 
-const ChatCreateDialog: FC<Props> = ({show, close}: Props) => {
+const ChatCreateDialog: FC<Props> = ({show, close, account}: Props) => {
   const {handleCode, handleResponse} = useSnackContext();
   const {t} = useTranslation();
   const {relations, update} = useContactContext();
@@ -59,7 +62,7 @@ const ChatCreateDialog: FC<Props> = ({show, close}: Props) => {
     setContactIds(relationUserIds);
   }, [relations]);
 
-  const content = <UsersSelect allowedIds={contactIds} ignoredIds={[]} setUserIds={setUserIds} />;
+  const content = <UsersSelect allowedIds={contactIds} ignoredIds={[account?.id]} setUserIds={setUserIds} />;
 
   const cancelButton = (
     <Button onClick={close} color="primary" disabled={isSubmitting}>

@@ -10,7 +10,7 @@ import ChatCreateDialog, {
   ChatCreateDialogProps,
   defaultChatCreateDialogProps,
 } from '../../../pages/chat/dialogs/chat-create-dialog';
-import {User} from '../../../models/user.model';
+import {User, UserAccount} from '../../../models/user.model';
 import ChatMembersDialog, {
   ChatMembersDialogProps,
   defaultChatMembersDialogProps,
@@ -62,12 +62,15 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
     [setDialogProps, updateDialogProps]
   );
 
-  const showChatCreateDialog = useCallback((): void => {
-    const show = true;
-    const close = (): void => clearDialogProps(ChatDialogs.CREATE);
-    const props = {show, close} as ChatCreateDialogProps;
-    setDialogProps(ChatDialogs.CREATE, props);
-  }, [setDialogProps, clearDialogProps]);
+  const showChatCreateDialog = useCallback(
+    (account: UserAccount): void => {
+      const show = true;
+      const close = (): void => clearDialogProps(ChatDialogs.CREATE);
+      const props = {show, close, account} as ChatCreateDialogProps;
+      setDialogProps(ChatDialogs.CREATE, props);
+    },
+    [setDialogProps, clearDialogProps]
+  );
 
   const showChatMembersDialog = useCallback(
     (chat: Chat, users: User[]): void => {

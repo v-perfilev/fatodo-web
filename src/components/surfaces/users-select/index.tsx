@@ -46,9 +46,10 @@ const UsersSelect: FC<Props> = ({allowedIds, ignoredIds, setUserIds}: Props) => 
     const filterNotInFunc = (ids: string[]) => (user: User): boolean => !ids.includes(user.id);
 
     let updatedUsersToShow = filter.length > 0 ? users.filter(filterFunc) : users;
-    updatedUsersToShow = updatedUsersToShow.filter(
-      filterInFunc(allowedIds) && filterNotInFunc(selectedIds) && filterNotInFunc(ignoredIds)
-    );
+    updatedUsersToShow = updatedUsersToShow
+      .filter(filterInFunc(allowedIds))
+      .filter(filterNotInFunc(selectedIds))
+      .filter(filterNotInFunc(ignoredIds));
 
     const selectedUsers = users.filter(filterInFunc(selectedIds));
     updatedUsersToShow.push(...selectedUsers);

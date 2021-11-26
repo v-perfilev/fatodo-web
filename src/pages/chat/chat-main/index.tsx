@@ -53,7 +53,7 @@ const ChatMain: FC<Props> = ({account}: Props) => {
   };
 
   const openChatCreateDialog = (): void => {
-    showChatCreateDialog();
+    showChatCreateDialog(account);
   };
 
   const loadChatFromRoute = (): void => {
