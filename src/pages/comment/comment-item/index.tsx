@@ -6,12 +6,12 @@ import {useUserListContext} from '../../../shared/contexts/list-contexts/user-li
 import {User} from '../../../models/user.model';
 import {DateFormatters} from '../../../shared/utils/date.utils';
 import {CommentUtils} from '../../../shared/utils/comment.utils';
-import {UrlPic} from '../../../components/images';
 import {useTranslation} from 'react-i18next';
 import CommentItemReactions from './comment-item-reactions';
 import CommentItemActions from './comment-item-actions';
 import CommentItemReferenceButton from './comment-item-reference-button';
 import CommentItemReference from './comment-item-reference';
+import {UserWithPopupView} from '../../../components/views';
 
 type Props = {
   comment: Comment;
@@ -38,9 +38,7 @@ const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
 
   return (
     <Paper variant="outlined" className={classes.root}>
-      <Box className={classes.image}>
-        <UrlPic alt={user?.username} url={user?.imageFilename} size="sm" border={1} />
-      </Box>
+      <Box className={classes.image}>{user && <UserWithPopupView user={user} withUserPic picSize="md" />}</Box>
       <Box className={classes.content}>
         <Box className={classes.header}>
           <Box className={classes.name}>{user?.username}</Box>

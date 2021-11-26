@@ -12,6 +12,7 @@ import {UrlPic} from '../../../../components/images';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import {SoloBadge} from '../../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
+import {UserWithPopupView} from '../../../../components/views';
 
 type Props = HTMLAttributes<HTMLElement> & {
   chat: Chat;
@@ -28,6 +29,10 @@ const ChatControlItem: FC<Props> = ({chat, isSelected, account, ...props}: Props
   const unreadCount = useMemo<number>(() => {
     return unreadMessageCountMap?.get(chat.id);
   }, [unreadMessageCountMap, chat.id]);
+
+  const directUser = useMemo<User>(() => {
+    return ChatUtils.getDirectChatUser(chat, users, account);
+  }, [chat, users, account]);
 
   const title = useMemo<string>(() => {
     return ChatUtils.getTitle(chat, users, account);
@@ -49,9 +54,15 @@ const ChatControlItem: FC<Props> = ({chat, isSelected, account, ...props}: Props
     }
   }, [chat]);
 
+  const pic = directUser ? (
+    <UserWithPopupView className={classes.image} user={directUser} withUserPic picSize="lg" />
+  ) : (
+    <UrlPic className={classes.image} alt={null} url={null} size="lg" border={1} />
+  );
+
   return (
     <Box className={classNames} {...props}>
-      <UrlPic className={classes.image} alt={null} url={null} size="lg" border={1} />
+      {pic}
       <Box className={classes.chatContainer}>
         <Box className={classes.topContainer}>
           {unreadCount > 0 && (

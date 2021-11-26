@@ -2,7 +2,6 @@ import React, {FC, useMemo} from 'react';
 import {Message} from '../../../../models/message.model';
 import {chatContentMessageIncomingStyles} from './_styles';
 import {Box} from '@material-ui/core';
-import {UrlPic} from '../../../../components/images';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {MessageUtils} from '../../../../shared/utils/message.utils';
@@ -11,6 +10,7 @@ import {User} from '../../../../models/user.model';
 import ChatContentMessageActions from './chat-content-message-actions';
 import ChatContentMessageReactions from './chat-content-message-reactions';
 import {useTranslation} from 'react-i18next';
+import {UserWithPopupView} from '../../../../components/views';
 
 type Props = {
   message: Message;
@@ -38,9 +38,7 @@ const ChatContentMessageIncoming: FC<Props> = ({message, account}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <Box className={classes.image}>
-        <UrlPic alt={user?.username} url={user?.imageFilename} size="md" border={1} />
-      </Box>
+      <Box className={classes.image}>{user && <UserWithPopupView user={user} withUserPic picSize="md" />}</Box>
       <Box className={messageClassName}>
         <Box className={classes.header}>
           <Box className={classes.name}>{user?.username}</Box>

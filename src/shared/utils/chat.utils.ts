@@ -2,6 +2,10 @@ import {Chat} from '../../models/chat.model';
 import {User} from '../../models/user.model';
 
 export class ChatUtils {
+  public static getDirectChatUser = (chat: Chat, users: User[], account: User): User => {
+    return chat.isDirect ? users.find((user) => chat.members.includes(user.id) && user.id !== account.id) : null;
+  };
+
   public static getTitle = (chat: Chat, users: User[], account: User): string => {
     return chat.title
       ? chat.title
