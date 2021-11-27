@@ -14,7 +14,7 @@ const MixedRoute: FC<Props> = ({isAuthenticated, redirect, ...props}: Props) => 
   const history = useHistory();
 
   if (isAuthenticated) {
-    history.push(redirect);
+    setTimeout(() => history.push(redirect), 100);
   }
 
   return !isAuthenticated && <Route {...props} />;

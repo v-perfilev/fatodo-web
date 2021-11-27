@@ -24,7 +24,6 @@ const mapDispatchToProps = {login, requestAccountData};
 const connector = connect(null, mapDispatchToProps);
 
 type BaseProps = {
-  onSuccess: () => void;
   loading: boolean;
   setLoading: (loading: boolean) => void;
 };
@@ -75,7 +74,7 @@ const formik = withFormik<Props, LoginFormValues>({
   validateOnMount: true,
 
   handleSubmit: async (values: LoginFormValues, {setSubmitting, props}: FormikBag<Props, LoginFormValues>) => {
-    const {login, requestAccountData, history, onSuccess, getToken, handleResponse, setLoading} = props;
+    const {login, requestAccountData, history, getToken, handleResponse, setLoading} = props;
     const token = await getToken();
     const dto = LoginFormUtils.mapValuesToDTO(values, token);
 
@@ -84,18 +83,16 @@ const formik = withFormik<Props, LoginFormValues>({
       .then((response) => {
         const token = SecurityUtils.parseTokenFromResponse(response);
         login(token, values.rememberMe);
-        requestAccountData(onSuccess);
+        requestAccountData();
       })
       .catch((response) => {
         if (ResponseUtils.getFeedbackCode(response) === 'auth.notActivated') {
           history.push(Routes.NOT_ACTIVATED, {user: values.user});
         } else {
           handleResponse(response, '*', ['auth.notActivated']);
+          setSubmitting(false);
+          setLoading(false);
         }
-      })
-      .finally(() => {
-        setSubmitting(false);
-        setLoading(false);
       });
   },
 });

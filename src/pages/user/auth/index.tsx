@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useEffect, useState} from 'react';
+import {FC, useCallback, useState} from 'react';
 import {Box, Tab, Tabs} from '@material-ui/core';
 import withBackground from '../../../shared/hocs/with-background/with-background';
 import {Routes} from '../../router';
@@ -7,15 +7,11 @@ import {useTranslation} from 'react-i18next';
 import {authPageStyles} from '../_styles';
 import {useHistory, useRouteMatch} from 'react-router-dom';
 import {LANDING_URL, SOCIAL_LOGIN} from '../../../constants';
-import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {Link} from '../../../components/controls';
 import {SocialButtons} from './social-buttons';
 import LoginForm from './login-form';
 import RegistrationForm from './registration-form';
-import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {flowRight} from 'lodash';
-
-type Props = AuthState;
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -35,7 +31,7 @@ const calculateRouteFromTab = (tab: number): string => {
   }
 };
 
-const Auth: FC<Props> = ({isAuthenticated}: Props) => {
+const Auth: FC = () => {
   const classes = authPageStyles();
   const history = useHistory();
   const match = useRouteMatch();
@@ -48,14 +44,8 @@ const Auth: FC<Props> = ({isAuthenticated}: Props) => {
     setActiveTab(newTab);
   };
 
-  const redirectToHome = (): void => {
+  const redirectToHome = useCallback((): void => {
     history.push(Routes.ROOT);
-  };
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      redirectToHome();
-    }
   }, []);
 
   const tabsStyle = {width: '100%'};
@@ -68,7 +58,7 @@ const Auth: FC<Props> = ({isAuthenticated}: Props) => {
       </Tabs>
       <Box m={1} />
       {activeTab === 0 ? (
-        <LoginForm onSuccess={redirectToHome} loading={loading} setLoading={setLoading} />
+        <LoginForm loading={loading} setLoading={setLoading} />
       ) : (
         <RegistrationForm onSuccess={redirectToHome} loading={loading} setLoading={setLoading} />
       )}
@@ -84,4 +74,4 @@ const Auth: FC<Props> = ({isAuthenticated}: Props) => {
   );
 };
 
-export default flowRight([withBackground('/images/background-1.jpg'), withAuthState])(Auth);
+export default flowRight([withBackground('/images/background-1.jpg')])(Auth);

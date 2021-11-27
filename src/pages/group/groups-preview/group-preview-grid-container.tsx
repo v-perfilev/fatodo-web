@@ -23,8 +23,8 @@ const GroupPreviewGridContainer: FC = () => {
 
   return (
     <Grid container className={classes.container}>
-      {groups.map((group, i) => (
-        <GroupGridItem key={i} group={group} height={itemHeight} />
+      {groups.map((group) => (
+        <GroupGridItem key={group.id} group={group} height={itemHeight} />
       ))}
       <GroupPreviewGridCreateButton height={itemHeight} setRef={setItemRef} />
     </Grid>

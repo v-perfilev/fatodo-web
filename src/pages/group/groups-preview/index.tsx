@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useEffect} from 'react';
+import {FC, useEffect, useMemo} from 'react';
 import {useHistory} from 'react-router-dom';
 import {GroupRouteUtils} from '../_router';
 import {ReorderIcon} from '../../../components/icons/reorder-icon';
@@ -21,8 +21,8 @@ const GroupPreview: FC = () => {
   const {setMenu} = useAdditionalMenuContext();
   const {setObjs: setGroups, setLoad: setLoadGroups, loading: groupsLoading} = useGroupListContext();
 
-  const redirectToGroupCreate = (): void => history.push(GroupRouteUtils.getCreateUrl());
-  const redirectToGroupsSorting = (): void => history.push(GroupRouteUtils.getSortingUrl());
+  const redirectToGroupCreate = (): void => useMemo(() => history.push(GroupRouteUtils.getCreateUrl()), []);
+  const redirectToGroupsSorting = (): void => useMemo(() => history.push(GroupRouteUtils.getSortingUrl()), []);
 
   const loadGroups = (): void => {
     ItemService.getAllGroups()
