@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {CSSProperties, FC, memo, ReactNode} from 'react';
+import {CSSProperties, FC, memo, ReactNode, useCallback, useMemo} from 'react';
 import {CardContent} from '@material-ui/core';
 import {groupCardContentStyles} from './_styles';
 import {useTrail} from 'react-spring';
@@ -21,7 +21,25 @@ const GroupPreviewCardContent: FC<Props> = ({itemsToShow, isNotFirstPage}: Props
   const {obj: group} = useGroupViewContext();
   const {loading: itemsLoading} = useItemListContext();
 
-  const trailItems = isNotFirstPage ? itemsToShow?.length : itemsToShow?.length + BUTTONS_IN_GROUP_CARD;
+  const trailItems = useMemo(() => {
+    return isNotFirstPage ? itemsToShow?.length : itemsToShow?.length + BUTTONS_IN_GROUP_CARD;
+  }, [itemsToShow, isNotFirstPage]);
+
+  const itemElement = useCallback(
+    (style: CSSProperties, index: number): ReactNode => (
+      <div className={classes.box} key={index}>
+        {isNotFirstPage && <GroupPreviewCardItem item={itemsToShow[index]} style={style} />}
+        {!isNotFirstPage && index >= BUTTONS_IN_GROUP_CARD && (
+          <GroupPreviewCardItem item={itemsToShow[index - BUTTONS_IN_GROUP_CARD]} style={style} />
+        )}
+        {!isNotFirstPage && index < BUTTONS_IN_GROUP_CARD && (
+          <GroupPreviewCardCreateButton group={group} style={style} />
+        )}
+      </div>
+    ),
+    [itemsToShow, isNotFirstPage, group]
+  );
+
   const trail = useTrail(trailItems, {
     reset: true,
     delay: 50,
@@ -29,22 +47,10 @@ const GroupPreviewCardContent: FC<Props> = ({itemsToShow, isNotFirstPage}: Props
     from: {opacity: 0},
   });
 
-  const itemElement = (style: CSSProperties, index: number): ReactNode => (
-    <div className={classes.box} key={index}>
-      {isNotFirstPage && <GroupPreviewCardItem item={itemsToShow[index]} style={style} />}
-      {!isNotFirstPage && index >= BUTTONS_IN_GROUP_CARD && (
-        <GroupPreviewCardItem item={itemsToShow[index - BUTTONS_IN_GROUP_CARD]} style={style} />
-      )}
-      {!isNotFirstPage && index < BUTTONS_IN_GROUP_CARD && <GroupPreviewCardCreateButton group={group} style={style} />}
-    </div>
-  );
-
-  const listElement = trail.map((style: CSSProperties, index) => itemElement(style, index));
-
   return (
     <CardContent className={classes.content}>
       {itemsLoading && <CircularSpinner size="sm" />}
-      {!itemsLoading && listElement}
+      {!itemsLoading && trail.map((style: CSSProperties, index) => itemElement(style, index))}
     </CardContent>
   );
 };

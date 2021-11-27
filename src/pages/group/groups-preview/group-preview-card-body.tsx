@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, useMemo, useState} from 'react';
+import {FC, memo, useMemo, useState} from 'react';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {BUTTONS_IN_GROUP_CARD, ITEMS_IN_GROUP_CARD} from '../_constants';
 import GroupPreviewCardFooter from './group-preview-card-footer';
@@ -49,4 +49,4 @@ const GroupPreviewCardBody: FC = () => {
   );
 };
 
-export default GroupPreviewCardBody;
+export default memo(GroupPreviewCardBody);

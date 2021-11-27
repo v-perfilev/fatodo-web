@@ -35,6 +35,8 @@ import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state'
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import GroupViewHeader from './group-view-header';
 import withUserList from '../../../shared/hocs/with-list/with-user-list';
+import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
+import withItemList from '../../../shared/hocs/with-list/with-item-list';
 
 type Props = AuthState;
 
@@ -52,6 +54,7 @@ const GroupView: FC<Props> = ({account}: Props) => {
     showGroupLeaveDialog,
   } = useGroupDialogContext();
   const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
+  const {objs: items, setObjs: setItems, setLoad: setLoadItems} = useItemListContext();
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
@@ -75,8 +78,23 @@ const GroupView: FC<Props> = ({account}: Props) => {
       });
   };
 
-  const loadUsers = (): void => {
+  const loadItems = (): void => {
+    ItemService.getAllItemsByGroupId(group.id)
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch((response) => {
+        handleResponse(response);
+      });
+  };
+
+  const loadGroupUsers = (): void => {
     const userIds = group.members.map((user) => user.id);
+    handleUserIds(userIds);
+  };
+
+  const loadItemsUsers = (): void => {
+    const userIds = items.reduce((acc, item) => [...acc, item.createdBy, item.lastModifiedBy], []);
     handleUserIds(userIds);
   };
 
@@ -137,9 +155,16 @@ const GroupView: FC<Props> = ({account}: Props) => {
 
   useEffect(() => {
     if (group) {
-      loadUsers();
+      loadGroupUsers();
+      setLoadItems(() => (): void => loadItems());
     }
   }, [group]);
+
+  useEffect(() => {
+    if (items) {
+      loadItemsUsers();
+    }
+  }, [items]);
 
   useEffect(() => {
     setMenu(menuElements);
@@ -164,4 +189,6 @@ const GroupView: FC<Props> = ({account}: Props) => {
   );
 };
 
-export default flowRight([withVerticalPadding, withGroupView, withUserList, withAuthState, memo])(GroupView);
+export default flowRight([withVerticalPadding, withGroupView, withItemList, withUserList, withAuthState, memo])(
+  GroupView
+);

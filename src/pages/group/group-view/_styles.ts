@@ -51,6 +51,9 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
       marginLeft: theme.spacing(1),
     },
   },
+}));
+
+export const groupViewItemButtonsStyles = makeStyles((theme: Theme) => ({
   showIcon: {
     '&:hover': {
       color: theme.palette.primary.main,
@@ -69,7 +72,17 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const groupViewItemChangesStyles = makeStyles((theme: Theme) => ({
-  root: {
+  name: {
+    color: theme.palette.grey['400'],
+    fontSize: '0.7rem',
+  },
+  slash: {
+    color: theme.palette.grey['400'],
+    fontSize: '0.7rem',
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  date: {
     color: theme.palette.grey['400'],
     fontWeight: 'bold',
     fontSize: '0.7rem',

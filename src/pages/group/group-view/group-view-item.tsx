@@ -1,17 +1,12 @@
 import React, {FC} from 'react';
-import {Box, Hidden, IconButton} from '@material-ui/core';
+import {Box, Hidden} from '@material-ui/core';
 import {groupViewItemStyles} from './_styles';
-import {EditIcon} from '../../../components/icons/edit-icon';
-import {DeleteIcon} from '../../../components/icons/delete-icon';
 import {Item} from '../../../models/item.model';
 import {Link} from '../../../components/controls';
 import {ItemRouteUtils} from '../../item/_router';
-import {EyeIcon} from '../../../components/icons/eye-icon';
-import {useHistory} from 'react-router-dom';
-import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
-import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
 import {PriorityView, TypeView} from '../../../components/views';
 import GroupViewItemChanges from './group-view-item-changes';
+import GroupViewItemButtons from './group-view-item-buttons';
 
 type Props = {
   item: Item;
@@ -20,18 +15,8 @@ type Props = {
 
 const GroupViewItem: FC<Props> = ({item, canEdit}: Props) => {
   const classes = groupViewItemStyles();
-  const history = useHistory();
-  const {load: loadItems} = useItemListContext();
-  const {showItemDeleteDialog} = useItemDialogContext();
 
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
-  const redirectToViewItem = (): void => history.push(viewItemUrl);
-  const redirectToEditItem = (): void => history.push(ItemRouteUtils.getEditUrl(item.id));
-
-  const openItemDeleteDialog = (): void => {
-    const onSuccess = (): void => loadItems();
-    showItemDeleteDialog(item, onSuccess);
-  };
 
   return (
     <Box className={classes.root}>
@@ -48,21 +33,7 @@ const GroupViewItem: FC<Props> = ({item, canEdit}: Props) => {
         <GroupViewItemChanges item={item} />
       </Hidden>
       <Box className={classes.managementBox}>
-        <Hidden xsDown>
-          <IconButton size="small" className={classes.showIcon} onClick={redirectToViewItem}>
-            <EyeIcon />
-          </IconButton>
-        </Hidden>
-        {canEdit && (
-          <IconButton size="small" className={classes.editIcon} onClick={redirectToEditItem}>
-            <EditIcon />
-          </IconButton>
-        )}
-        {canEdit && (
-          <IconButton size="small" className={classes.deleteIcon} onClick={openItemDeleteDialog}>
-            <DeleteIcon />
-          </IconButton>
-        )}
+        <GroupViewItemButtons item={item} canEdit={canEdit} />
       </Box>
     </Box>
   );
