@@ -127,11 +127,22 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
   },
   typography: {
     width: '100%',
+    fontSize: '0.9rem',
   },
 }));
 
 export const groupCardItemChangesStyles = makeStyles((theme: Theme) => ({
-  root: {
+  name: {
+    color: theme.palette.grey['400'],
+    fontSize: '0.7rem',
+  },
+  slash: {
+    color: theme.palette.grey['400'],
+    fontSize: '0.7rem',
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  date: {
     color: theme.palette.grey['400'],
     fontWeight: 'bold',
     fontSize: '0.7rem',
