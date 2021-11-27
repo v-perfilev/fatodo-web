@@ -44,9 +44,9 @@ const GroupViewItem: FC<Props> = ({item, canEdit}: Props) => {
           {item.title}
         </Link>
       </Box>
-      <Box>
+      <Hidden xsDown>
         <GroupViewItemChanges item={item} />
-      </Box>
+      </Hidden>
       <Box className={classes.managementBox}>
         <Hidden xsDown>
           <IconButton size="small" className={classes.showIcon} onClick={redirectToViewItem}>
