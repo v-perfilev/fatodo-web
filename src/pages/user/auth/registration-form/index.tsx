@@ -68,8 +68,6 @@ const formik = withFormik<Props, RegistrationFormValues>({
       })
       .catch((response) => {
         handleResponse(response);
-      })
-      .finally(() => {
         setSubmitting(false);
         setLoading(false);
       });
