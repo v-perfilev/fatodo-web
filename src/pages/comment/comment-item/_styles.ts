@@ -10,6 +10,10 @@ export const commentItemStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(1.5),
     padding: theme.spacing(1.5),
   },
+  imageAndReactions: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   image: {
     marginRight: theme.spacing(1.5),
   },
@@ -30,15 +34,16 @@ export const commentItemStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(2),
   },
   date: {
-    color: theme.palette.grey['500'],
-    marginRight: theme.spacing(2),
+    color: theme.palette.grey['400'],
+    fontWeight: 'bold',
+    fontSize: '0.7rem',
   },
   placeholder: {
     flexGrow: 1,
   },
   body: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     flexGrow: 1,
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
@@ -50,9 +55,10 @@ export const commentItemStyles = makeStyles((theme: Theme) => ({
 
 export const commentItemReactionsStyles = makeStyles((theme: Theme) => ({
   root: {
+    // width: 50,
     display: 'flex',
     flexShrink: 0,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignSelf: 'stretch',
     justifyContent: 'center',
     margin: theme.spacing(0.5),
@@ -64,6 +70,8 @@ export const commentItemReactionsStyles = makeStyles((theme: Theme) => ({
   reaction: {
     display: 'flex',
     alignItems: 'center',
+    marginTop: theme.spacing(0.25),
+    marginBottom: theme.spacing(0.25),
     marginRight: theme.spacing(1),
   },
   countOnLeft: {
@@ -95,7 +103,7 @@ export const commentItemActionsStyles = makeStyles((theme: Theme) => ({
 
 export const commentItemReferenceStyles = makeStyles((theme: Theme) => ({
   root: {
-    marginRight: theme.spacing(2),
+    marginBottom: theme.spacing(1),
   },
   label: {
     fontWeight: 'bold',

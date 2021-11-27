@@ -38,13 +38,14 @@ const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
 
   return (
     <Paper variant="outlined" className={classes.root}>
-      <Box className={classes.image}>{user && <UserWithPopupView user={user} withUserPic picSize="md" />}</Box>
+      <Box className={classes.imageAndReactions}>
+        <Box className={classes.image}>{user && <UserWithPopupView user={user} withUserPic picSize="md" />}</Box>
+        <CommentItemReactions comment={comment} account={account} />
+      </Box>
       <Box className={classes.content}>
         <Box className={classes.header}>
           <Box className={classes.name}>{user?.username}</Box>
           <Box className={classes.date}>{date}</Box>
-          {comment.reference && <CommentItemReference reference={comment.reference} />}
-          <CommentItemReactions comment={comment} account={account} />
           <Box className={classes.placeholder} />
           <Hidden xsDown>
             <CommentItemReferenceButton comment={comment} setReference={setReference} />
@@ -52,6 +53,7 @@ const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
           <CommentItemActions comment={comment} isOwnComment={isOwnMessage} setReference={setReference} />
         </Box>
         <Box className={classes.body}>
+          {comment.reference && <CommentItemReference reference={comment.reference} />}
           {!comment.isDeleted && <span>{comment.text}</span>}
           {comment.isDeleted && <span className={classes.deleted}>{t('comment:comment.deleted')}</span>}
         </Box>

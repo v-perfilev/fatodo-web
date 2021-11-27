@@ -152,7 +152,10 @@ export const chatContentMessageReactionsStyles = makeStyles((theme: Theme) => ({
   reaction: {
     display: 'flex',
     alignItems: 'center',
-    margin: theme.spacing(0.5),
+    marginTop: theme.spacing(0.25),
+    marginBottom: theme.spacing(0.25),
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(0.5),
   },
   countOnLeft: {
     flexDirection: 'row',
