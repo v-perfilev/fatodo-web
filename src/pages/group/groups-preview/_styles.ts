@@ -1,12 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {
-  CARD_CHANGES_HEIGHT,
-  CARD_FOOTER_HEIGHT,
-  CARD_HEADER_HEIGHT,
-  ITEMS_IN_GROUP_CARD,
-  PAGINATION_BUTTON_WIDTH,
-} from '../_constants';
+import {CARD_FOOTER_HEIGHT, CARD_HEADER_HEIGHT, ITEMS_IN_GROUP_CARD, PAGINATION_BUTTON_WIDTH} from '../_constants';
 
 export const groupCardStyles = makeStyles(() => ({
   card: {
@@ -87,26 +81,34 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
     height: '100%',
   },
   card: {
-    position: 'relative',
     height: '100%',
     display: 'flex',
-    flexDirection: 'column',
-    borderColor: theme.palette.grey['300'],
+    alignItems: 'center',
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
   },
-  topBox: {
+  leftBox: {
+    minHeight: '60%',
     display: 'flex',
     flexGrow: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingTop: CARD_CHANGES_HEIGHT / 4,
   },
-  titleBox: {
+  leftLeftBox: {
+    display: 'flex',
+    alignItems: 'flex-start',
+  },
+  leftRightBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+    justifyContent: 'space-between',
+  },
+  rightBox: {
     display: 'flex',
     alignItems: 'center',
-    flexGrow: 1,
+    '& > *': {
+      color: theme.palette.grey['400'],
+      marginLeft: theme.spacing(1),
+    },
   },
   iconBox: {
     display: 'flex',
@@ -115,19 +117,12 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
       marginRight: theme.spacing(1),
     },
   },
-  bottomBox: {
-    height: CARD_CHANGES_HEIGHT,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-  },
   icon: {
     fontSize: '1.5rem',
   },
   typography: {
     width: '100%',
-    fontSize: '0.9rem',
+    fontSize: '0.95rem',
   },
 }));
 
@@ -146,6 +141,14 @@ export const groupCardItemChangesStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.grey['400'],
     fontWeight: 'bold',
     fontSize: '0.7rem',
+  },
+}));
+
+export const groupPreviewCardItemButtonsStyles = makeStyles((theme: Theme) => ({
+  showIcon: {
+    '&:hover': {
+      color: theme.palette.primary.main,
+    },
   },
 }));
 
