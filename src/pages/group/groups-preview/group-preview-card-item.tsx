@@ -30,7 +30,7 @@ const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
     <Box className={classes.root} style={style}>
       <Link to={(Routes.ITEMS + ItemRoutes.VIEW).replace(':itemId', item.id)}>
         <Card variant="outlined" className={classes.card}>
-          <Box className={classes.headerBox}>
+          <Box className={classes.topBox}>
             <Box className={classes.iconBox}>
               <TypeView className={classes.icon} type={item.type} withoutText />
               <PriorityView className={classes.icon} priority={item.priority} withoutText />
@@ -41,7 +41,7 @@ const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
               </Typography>
             </Box>
           </Box>
-          <Box className={classes.changesBox}>
+          <Box className={classes.bottomBox}>
             <GroupPreviewCardItemChanges item={item} />
           </Box>
         </Card>

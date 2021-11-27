@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Box, Hidden} from '@material-ui/core';
+import {Box, Card, Typography} from '@material-ui/core';
 import {groupViewItemStyles} from './_styles';
 import {Item} from '../../../models/item.model';
 import {Link} from '../../../components/controls';
@@ -20,21 +20,23 @@ const GroupViewItem: FC<Props> = ({item, canEdit}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <Box className={classes.iconBox}>
-        <TypeView className={classes.icon} type={item.type} withoutText />
-        <PriorityView className={classes.icon} priority={item.priority} withoutText />
-      </Box>
-      <Box className={classes.contentBox}>
-        <Link to={viewItemUrl} color="textPrimary" withHoverUnderline>
-          {item.title}
-        </Link>
-      </Box>
-      <Hidden xsDown>
-        <GroupViewItemChanges item={item} />
-      </Hidden>
-      <Box className={classes.managementBox}>
-        <GroupViewItemButtons item={item} canEdit={canEdit} />
-      </Box>
+      <Card variant="outlined" className={classes.card}>
+        <Box className={classes.leftBox}>
+          <Box className={classes.iconBox}>
+            <TypeView className={classes.icon} type={item.type} withoutText />
+            <PriorityView className={classes.icon} priority={item.priority} withoutText />
+          </Box>
+        </Box>
+        <Box className={classes.centerBox}>
+          <Link to={viewItemUrl} color="textPrimary" withHoverUnderline>
+            <Typography>{item.title}</Typography>
+          </Link>
+          <GroupViewItemChanges item={item} />
+        </Box>
+        <Box className={classes.rightBox}>
+          <GroupViewItemButtons item={item} canEdit={canEdit} />
+        </Box>
+      </Card>
     </Box>
   );
 };

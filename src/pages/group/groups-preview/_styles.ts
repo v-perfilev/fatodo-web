@@ -95,7 +95,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
   },
-  headerBox: {
+  topBox: {
     display: 'flex',
     flexGrow: 1,
     flexDirection: 'row',
@@ -115,7 +115,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
       marginRight: theme.spacing(1),
     },
   },
-  changesBox: {
+  bottomBox: {
     height: CARD_CHANGES_HEIGHT,
     display: 'flex',
     flexDirection: 'row',

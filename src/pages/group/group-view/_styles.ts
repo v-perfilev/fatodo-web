@@ -13,21 +13,42 @@ export const groupViewUsersStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupViewItemsStyles = makeStyles(() => ({
+export const groupViewItemsStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
   },
 }));
 
 export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   root: {
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+  },
+  card: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
-    paddingTop: theme.spacing(1.2),
-    paddingBottom: theme.spacing(1.2),
+    padding: theme.spacing(1),
+  },
+  leftBox: {
+    display: 'flex',
+    alignItems: 'flex-start',
+  },
+  centerBox: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1,
+  },
+  rightBox: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    '& > *': {
+      color: theme.palette.grey['400'],
+      marginLeft: theme.spacing(1),
+    },
   },
   icon: {
     fontSize: '1.8rem',
@@ -43,13 +64,6 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexGrow: 1,
     fontSize: '1rem',
-  },
-  managementBox: {
-    display: 'flex',
-    '& > *': {
-      color: theme.palette.grey['400'],
-      marginLeft: theme.spacing(1),
-    },
   },
 }));
 

@@ -2,7 +2,6 @@ import React, {FC, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewItemsStyles} from './_styles';
 import GroupViewItem from './group-view-item';
-import {PageDivider} from '../../../components/surfaces';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {CircularSpinner} from '../../../components/loaders';
@@ -32,14 +31,7 @@ const GroupViewItems: FC<Props> = ({account}: Props) => {
     <Box className={classes.root}>
       {loading && <CircularSpinner size="sm" />}
       {!loading && <GroupViewCreateButton group={group} />}
-      {!loading && items.length !== 0 && <PageDivider />}
-      {!loading &&
-        items.map((item, index) => (
-          <Box key={item.id}>
-            {index !== 0 && <PageDivider />}
-            <GroupViewItem item={item} canEdit={canEdit} />
-          </Box>
-        ))}
+      {!loading && items.map((item) => <GroupViewItem item={item} canEdit={canEdit} key={item.id} />)}
     </Box>
   );
 };
