@@ -15,12 +15,13 @@ import {UserWaitIcon} from '../../icons/user-wait-icon';
 import {UserOkIcon} from '../../icons/user-ok-icon';
 import {useTranslation} from 'react-i18next';
 import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
+import {PopupContentComponentProps} from '../../surfaces/hover-popup/hover-popup-popper';
 
-type Props = {
+type Props = PopupContentComponentProps & {
   user: User;
 };
 
-export const UserInfoViewButtons: FC<Props> = ({user}: Props) => {
+export const UserInfoViewButtons: FC<Props> = ({user, closePopup}: Props) => {
   const {t} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const {update: updateInfo} = useContactInfoContext();
@@ -109,6 +110,7 @@ export const UserInfoViewButtons: FC<Props> = ({user}: Props) => {
 
   const openDirectMessageDialog = (): void => {
     showDirectMessageDialog(user);
+    closePopup();
   };
 
   useEffect(() => {

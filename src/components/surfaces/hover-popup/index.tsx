@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {ComponentType, FC, HTMLAttributes, useCallback, useEffect, useMemo, useState} from 'react';
-import {HoverPopupPopper} from './hover-popup-popper';
+import {HoverPopupPopper, PopupContentComponentProps} from './hover-popup-popper';
 import {hoverPopupStyles} from './_styles';
 
 type Props = HTMLAttributes<HTMLElement> & {
   AnchorComponent: FC<HTMLAttributes<HTMLElement>>;
-  PopupComponent: ComponentType;
+  PopupComponent: ComponentType<PopupContentComponentProps>;
 };
 
 export const HoverPopup: FC<Props> = ({AnchorComponent, PopupComponent}: Props) => {
@@ -35,6 +35,11 @@ export const HoverPopup: FC<Props> = ({AnchorComponent, PopupComponent}: Props) 
     setAnchorEl(null);
   }, []);
 
+  const close = useCallback((): void => {
+    setIsOverBox(false);
+    setIsOverPopover(false);
+  }, []);
+
   useEffect(() => {
     if (!isOverBox && !isOverPopover) {
       clearAnchor();
@@ -54,6 +59,7 @@ export const HoverPopup: FC<Props> = ({AnchorComponent, PopupComponent}: Props) 
         ContentComponent={PopupComponent}
         onMouseOver={onPopoverOver}
         onMouseLeave={onPopoverLeave}
+        closePopup={close}
       />
     </>
   );

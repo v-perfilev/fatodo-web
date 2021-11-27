@@ -5,6 +5,7 @@ import {SizeType} from '../../images/types';
 import UserInfoView from '../user-info-view';
 import {UserView} from '../user-view';
 import {HoverPopup} from '../../surfaces';
+import {PopupContentComponentProps} from '../../surfaces/hover-popup/hover-popup-popper';
 
 type Props = HTMLAttributes<HTMLElement> & {
   user: User;
@@ -21,7 +22,7 @@ export const UserWithPopupView: FC<Props> = (props: Props) => {
     <UserView {...{user, picSize, withUserPic, withUsername, withPaperBox, className}} {...props} />
   );
 
-  const PopupComponent: FC<any> = (props: any) => <UserInfoView user={user} {...props} />;
+  const PopupComponent: FC<PopupContentComponentProps> = (props: any) => <UserInfoView user={user} {...props} />;
 
   return <HoverPopup AnchorComponent={AnchorComponent} PopupComponent={PopupComponent} />;
 };

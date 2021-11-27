@@ -10,13 +10,15 @@ import {useTranslation} from 'react-i18next';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {UserInfoViewButtons} from './user-info-view-buttons';
+import {PopupContentComponentProps} from '../../surfaces/hover-popup/hover-popup-popper';
 
 type Props = HTMLAttributes<HTMLElement> &
+  PopupContentComponentProps &
   AuthState & {
     user: User;
   };
 
-const UserInfoView: FC<Props> = ({user, account, className}: Props) => {
+const UserInfoView: FC<Props> = ({user, account, className, closePopup}: Props) => {
   const classes = userInfoViewStyles();
   const classNames = csx(classes.root, className);
   const {t} = useTranslation();
@@ -39,7 +41,7 @@ const UserInfoView: FC<Props> = ({user, account, className}: Props) => {
       </Grid>
       {user.id !== account.id && (
         <Grid item xs={12} className={classes.buttonsItem}>
-          <UserInfoViewButtons user={user} />
+          <UserInfoViewButtons user={user} closePopup={closePopup} />
         </Grid>
       )}
     </Grid>
