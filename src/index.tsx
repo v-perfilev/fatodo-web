@@ -27,7 +27,6 @@ import {flowRight} from 'lodash';
 import withWsClient from './shared/hocs/with-ws/with-ws-client';
 import withContacts from './shared/hocs/with-contacts/with-contacts';
 import withContactInfo from './shared/hocs/with-contacts/with-contact-info';
-import withStyles from './shared/hocs/with-styles/with-styles';
 
 // setup axios
 const axiosActions = bindActionCreators({clearAuth, enqueueReduxSnack}, store.dispatch);
@@ -46,7 +45,6 @@ const Root: FC = () => (
 const WrappedRoot = flowRight([
   withStore,
   withDefaultTheme,
-  withStyles,
   withMui,
   withSnack,
   withWsClient,

@@ -65,8 +65,8 @@ export const groupCardContentStyles = makeStyles((theme: Theme) => ({
     height: `calc(100% - ${CARD_HEADER_HEIGHT}px - ${CARD_FOOTER_HEIGHT}px)`,
     display: 'flex',
     flexDirection: 'column',
-    paddingTop: theme.spacing(1.5),
-    paddingBottom: theme.spacing(1),
+    paddingTop: theme.spacing(1.5) + 'px !important',
+    paddingBottom: theme.spacing(1) + 'px !important',
   },
   box: {
     height: `calc(100% / ${ITEMS_IN_GROUP_CARD})`,
