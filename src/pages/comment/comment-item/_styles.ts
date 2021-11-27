@@ -55,7 +55,6 @@ export const commentItemStyles = makeStyles((theme: Theme) => ({
 
 export const commentItemReactionsStyles = makeStyles((theme: Theme) => ({
   root: {
-    // width: 50,
     display: 'flex',
     flexShrink: 0,
     flexDirection: 'column',

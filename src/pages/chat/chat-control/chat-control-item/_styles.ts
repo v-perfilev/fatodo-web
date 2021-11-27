@@ -50,7 +50,9 @@ export const chatControlItemStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.grey['400'],
   },
   date: {
-    color: theme.palette.grey['500'],
+    color: theme.palette.grey['400'],
+    fontWeight: 'bold',
+    fontSize: '0.7rem',
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },

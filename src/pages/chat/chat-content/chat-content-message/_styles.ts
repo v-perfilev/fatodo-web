@@ -72,7 +72,9 @@ export const chatContentMessageIncomingStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(1),
   },
   date: {
-    color: theme.palette.grey['500'],
+    color: theme.palette.grey['400'],
+    fontWeight: 'bold',
+    fontSize: '0.7rem',
     marginRight: theme.spacing(0.5),
   },
   body: {
@@ -121,7 +123,9 @@ export const chatContentMessageOutcomingStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(1),
   },
   date: {
-    color: theme.palette.grey['500'],
+    color: theme.palette.grey['400'],
+    fontWeight: 'bold',
+    fontSize: '0.7rem',
     marginRight: theme.spacing(0.5),
   },
   body: {
