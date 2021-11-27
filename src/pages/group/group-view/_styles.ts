@@ -36,6 +36,7 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   leftBox: {
     display: 'flex',
     alignItems: 'flex-start',
+    paddingTop: 2,
   },
   centerBox: {
     display: 'flex',
@@ -55,6 +56,7 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   },
   iconBox: {
     display: 'flex',
+    alignItems: 'center',
     minWidth: 50,
     '& > *': {
       marginRight: theme.spacing(1),
