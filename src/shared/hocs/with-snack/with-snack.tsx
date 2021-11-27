@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ComponentType, FC, memo, PropsWithChildren, ReactElement, useEffect, useState} from 'react';
+import {ComponentType, FC, PropsWithChildren, ReactElement, useCallback, useEffect, useState} from 'react';
 import {SnackbarKey, SnackbarProvider, useSnackbar, VariantType} from 'notistack';
 import {AxiosResponse} from 'axios';
 import {ResponseUtils} from '../../utils/response.utils';
@@ -27,9 +27,8 @@ const withSnack = (Component: ComponentType): FC => (props: Props): ReactElement
   const {enqueueSnackbar, closeSnackbar} = useSnackbar();
   const [displayed, setDisplayed] = useState<SnackbarKey[]>([]);
 
-  const enqueueSnack = (snack: Snack): SnackbarKey => enqueueReduxSnack(snack);
-  const closeSnack = (key: SnackbarKey): void => closeReduxSnack(key);
-
+  const addDisplayed = (key: SnackbarKey): void => setDisplayed((prevState) => [...prevState, key]);
+  const removeDisplayed = (key: SnackbarKey): void => setDisplayed((prevState) => prevState.filter((k) => k !== key));
   const getVariantFromStatus = (status: number): VariantType => {
     if (status >= 400 && status < 500) {
       return 'warning';
@@ -40,34 +39,37 @@ const withSnack = (Component: ComponentType): FC => (props: Props): ReactElement
     }
   };
 
-  const handleResponse = (
-    response: AxiosResponse,
-    allowedCodes: string[] | '*' = '*',
-    excludedCodes: string[] | '' = ''
-  ): SnackbarKey => {
-    const feedbackCode = ResponseUtils.getFeedbackCode(response);
-    const status = ResponseUtils.getStatus(response);
-    const isFeedBackCorrect =
-      feedbackCode &&
-      (allowedCodes === '*' || allowedCodes.includes(feedbackCode)) &&
-      (excludedCodes === '' || !excludedCodes.includes(feedbackCode));
-    const isStatusCorrect = status && status < 500;
-    const message = TranslationUtils.getFeedbackTranslation(feedbackCode);
-    const snack =
-      isFeedBackCorrect && isStatusCorrect && message
-        ? new SnackBuilder(message).setVariant(getVariantFromStatus(status)).build()
-        : null;
-    return snack ? enqueueSnack(snack) : null;
-  };
+  const enqueueSnack = useCallback((snack: Snack): SnackbarKey => enqueueReduxSnack(snack), [enqueueSnackbar]);
 
-  const handleCode = (code: string, variant: VariantType): SnackbarKey => {
-    const message = TranslationUtils.getSnackTranslation(code);
-    const snack = message ? new SnackBuilder(message).setVariant(variant).build() : null;
-    return snack ? enqueueSnack(snack) : null;
-  };
+  const closeSnack = useCallback((key: SnackbarKey): void => closeReduxSnack(key), [closeReduxSnack]);
 
-  const addDisplayed = (key: SnackbarKey): void => setDisplayed((prevState) => [...prevState, key]);
-  const removeDisplayed = (key: SnackbarKey): void => setDisplayed((prevState) => prevState.filter((k) => k !== key));
+  const handleResponse = useCallback(
+    (response: AxiosResponse, allowedCodes: string[] | '*' = '*', excludedCodes: string[] | '' = ''): SnackbarKey => {
+      const feedbackCode = ResponseUtils.getFeedbackCode(response);
+      const status = ResponseUtils.getStatus(response);
+      const isFeedBackCorrect =
+        feedbackCode &&
+        (allowedCodes === '*' || allowedCodes.includes(feedbackCode)) &&
+        (excludedCodes === '' || !excludedCodes.includes(feedbackCode));
+      const isStatusCorrect = status && status < 500;
+      const message = TranslationUtils.getFeedbackTranslation(feedbackCode);
+      const snack =
+        isFeedBackCorrect && isStatusCorrect && message
+          ? new SnackBuilder(message).setVariant(getVariantFromStatus(status)).build()
+          : null;
+      return snack ? enqueueSnack(snack) : null;
+    },
+    [enqueueSnack]
+  );
+
+  const handleCode = useCallback(
+    (code: string, variant: VariantType): SnackbarKey => {
+      const message = TranslationUtils.getSnackTranslation(code);
+      const snack = message ? new SnackBuilder(message).setVariant(variant).build() : null;
+      return snack ? enqueueSnack(snack) : null;
+    },
+    [enqueueSnack]
+  );
 
   useEffect(() => {
     snackState.list.forEach(({message, options, key, dismissed = false}: ReduxSnack) => {
@@ -109,4 +111,4 @@ export const withSnackContext = (Component: ComponentType<SnackState>): FC => (p
   return <SnackContext.Consumer>{(value): ReactElement => <Component {...props} {...value} />}</SnackContext.Consumer>;
 };
 
-export default flowRight([withSnackProvider, connector, withSnack, memo]);
+export default flowRight([withSnackProvider, connector, withSnack]);

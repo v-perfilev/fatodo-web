@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ComponentType, FC, memo, ReactElement, useMemo, useState} from 'react';
+import {ComponentType, FC, ReactElement, useMemo, useState} from 'react';
 import {DialogContext} from '../../contexts/dialog-contexts/dialog-context';
 import {flowRight} from 'lodash';
 import withChatDialogs from './with-chat-dialogs';
@@ -87,5 +87,4 @@ export default flowRight([
   withContactDialogs,
   withGroupDialogs,
   withItemDialogs,
-  memo,
 ]);

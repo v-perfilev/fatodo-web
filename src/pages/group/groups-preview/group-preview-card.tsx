@@ -1,20 +1,20 @@
 import * as React from 'react';
 import {FC, memo, useEffect} from 'react';
 import {Card, ThemeProvider} from '@material-ui/core';
-import GroupPreviewCardHeader from './group-preview-card-header';
 import {groupCardStyles} from './_styles';
 import GroupPreviewCardBody from './group-preview-card-body';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {flowRight} from 'lodash';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import withUserList from '../../../shared/hocs/with-list/with-user-list';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import withItemList from '../../../shared/hocs/with-list/with-item-list';
+import GroupPreviewCardHeader from './group-preview-card-header';
+import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 
 type Props = AuthState & {
   height: number;
@@ -74,4 +74,5 @@ const GroupPreviewCard: FC<Props> = ({account, height}: Props) => {
     )
   );
 };
+
 export default flowRight([withAuthState, withItemList, withUserList, memo])(GroupPreviewCard);

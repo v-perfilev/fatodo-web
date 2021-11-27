@@ -1,6 +1,5 @@
 import React, {FC, memo} from 'react';
 import {ChatControlItemProps} from './types';
-import {areEqual} from 'react-window';
 import ChatControlItem from '../chat-control-item';
 
 type Props = ChatControlItemProps;
@@ -16,4 +15,4 @@ const ChatControlRenderer: FC<Props> = ({data, index, style}: Props) => {
   );
 };
 
-export default memo(ChatControlRenderer, areEqual);
+export default memo(ChatControlRenderer);

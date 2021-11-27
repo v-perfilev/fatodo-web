@@ -41,7 +41,6 @@ const GroupPreviewCardContent: FC<Props> = ({itemsToShow, isNotFirstPage}: Props
   );
 
   const trail = useTrail(trailItems, {
-    reset: true,
     delay: 50,
     opacity: 1,
     from: {opacity: 0},

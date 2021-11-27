@@ -189,6 +189,6 @@ const GroupView: FC<Props> = ({account}: Props) => {
   );
 };
 
-export default flowRight([withVerticalPadding, withGroupView, withItemList, withUserList, withAuthState, memo])(
-  GroupView
+export default flowRight([withVerticalPadding, withGroupView, withItemList, withUserList, withAuthState])(
+  memo(GroupView)
 );

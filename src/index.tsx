@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import * as ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 
@@ -52,6 +52,7 @@ const WrappedRoot = flowRight([
   withContactInfo,
   withContacts,
   withDialogs,
+  memo,
 ])(Root);
 
 const root = document.getElementById('root');

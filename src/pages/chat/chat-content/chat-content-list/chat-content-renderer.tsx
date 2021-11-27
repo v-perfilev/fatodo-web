@@ -1,7 +1,6 @@
 import React, {FC, memo} from 'react';
 import ChatContentItem from '../chat-content-item';
 import {ChatItemProps} from '../types';
-import {areEqual} from 'react-window';
 import {chatContentRendererStyles} from './_styles';
 
 type Props = ChatItemProps;
@@ -19,4 +18,4 @@ const ChatContentRenderer: FC<Props> = ({data, index, style}: Props) => {
   );
 };
 
-export default memo(ChatContentRenderer, areEqual);
+export default memo(ChatContentRenderer);

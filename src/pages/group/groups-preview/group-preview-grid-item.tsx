@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, memo, useEffect} from 'react';
+import {FC, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import {groupGridItemStyles} from './_styles';
 import {Group} from '../../../models/group.model';
@@ -30,4 +30,4 @@ const GroupPreviewGridItem: FC<Props> = ({group, height}: Props) => {
   );
 };
 
-export default flowRight([withGroupView, memo])(GroupPreviewGridItem);
+export default flowRight([withGroupView])(GroupPreviewGridItem);

@@ -1,4 +1,4 @@
-import React, {FC, HTMLAttributes, memo} from 'react';
+import React, {FC, HTMLAttributes} from 'react';
 import {Box} from '@material-ui/core';
 import {User} from '../../../models/user.model';
 import {userSelectItemStyles} from './_styles';
@@ -23,4 +23,4 @@ const UserSelectItem: FC<Props> = ({user, isSelected, toggleSelected, ...props}:
   );
 };
 
-export default memo(UserSelectItem);
+export default UserSelectItem;

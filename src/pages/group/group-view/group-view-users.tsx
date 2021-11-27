@@ -1,4 +1,4 @@
-import React, {FC, memo, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewUsersStyles} from './_styles';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
@@ -33,4 +33,4 @@ const GroupViewUsers: FC = () => {
   );
 };
 
-export default memo(GroupViewUsers);
+export default GroupViewUsers;
