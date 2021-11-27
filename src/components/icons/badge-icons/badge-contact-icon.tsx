@@ -5,13 +5,11 @@ import {UserListIcon} from '../user-list-icon';
 
 type Props = PropsWithChildren<SvgIconProps> & {
   count: number;
-  color?: 'primary' | 'secondary' | 'default' | 'error';
 };
 
-const BadgeContactInfo: FC<Props> = ({count, color, ...props}: Props) => {
-  const badgeColor = color || 'error';
+const BadgeContactInfo: FC<Props> = ({count, ...props}: Props) => {
   return (
-    <Badge badgeContent={count} color={badgeColor}>
+    <Badge badgeContent={count} color="error">
       <UserListIcon {...props} />
     </Badge>
   );
