@@ -9,12 +9,13 @@ import {LoginIcon} from '../../icons/login-icon';
 import {SignUpIcon} from '../../icons/signup-icon';
 import {AccountIcon} from '../../icons/account-icon';
 import CurrentUser from '../current-user';
-import {UserListIcon} from '../../icons/user-list-icon';
 import {useUnreadMessagesContext} from '../../../shared/contexts/chat-contexts/unread-messages-context';
 import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
 import {RedirectMap} from './type';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {GroupsIcon} from '../../icons/groups-icon';
+import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
+import BadgeContactInfo from '../../icons/badge-icons/badge-contact-icon';
 
 type BaseProps = {
   redirectMap: RedirectMap;
@@ -25,6 +26,7 @@ type Props = AuthState & BaseProps;
 const VerticalMenu: FC<Props> = ({isAuthenticated, redirectMap}: Props) => {
   const classes = sidebarMenuStyles();
   const {totalUnreadMessages} = useUnreadMessagesContext();
+  const {incomingRequestCount} = useContactInfoContext();
   const {t} = useTranslation();
 
   const unauthenticatedMenu = (
@@ -60,7 +62,7 @@ const VerticalMenu: FC<Props> = ({isAuthenticated, redirectMap}: Props) => {
       </ListItem>
       <ListItem button onClick={redirectMap.toContacts}>
         <ListItemIcon>
-          <UserListIcon color="primary" />
+          <BadgeContactInfo count={incomingRequestCount} color="primary" />
         </ListItemIcon>
         <ListItemText>{t('header.contacts')}</ListItemText>
       </ListItem>
