@@ -20,8 +20,6 @@ const VirtualizedListMeasurer: FC<Props> = (props: Props) => {
   const indexesToMeasureMap = useRef<Map<number, number>>();
   const [, updateState] = useState<{}>();
 
-  console.log(itemRenderer);
-
   const forceUpdate = useCallback(() => {
     updateState({});
   }, []);
