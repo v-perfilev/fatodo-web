@@ -56,7 +56,7 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
     [visibleItems, items, account]
   );
 
-  const itemRenderer = (props: ChatItemProps): ReactElement => <ChatContentRenderer {...props} />;
+  const itemRenderer = useCallback((props: ChatItemProps): ReactElement => <ChatContentRenderer {...props} />, []);
 
   return (
     <Box className={classes.root}>
