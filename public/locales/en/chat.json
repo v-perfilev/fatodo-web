@@ -11,6 +11,7 @@
     "inputPlaceholder": "Type your message..."
   },
   "menu": {
+    "toChatList": "To chat list",
     "showMembers": "Members",
     "addMembers": "Add members",
     "renameChat": "Rename chat",

@@ -1,5 +1,5 @@
 import React, {FC, MouseEvent, useRef, useState} from 'react';
-import {IconButton, MenuItem} from '@material-ui/core';
+import {IconButton, MenuItem, Theme, useMediaQuery} from '@material-ui/core';
 import {chatContentHeaderActionsStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
 import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
@@ -15,6 +15,7 @@ import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {EditIcon} from '../../../../components/icons/edit-icon';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
+import {MessageIcon} from '../../../../components/icons/message-icon';
 
 type Props = {
   chat: Chat;
@@ -31,6 +32,7 @@ const ChatContentActions: FC<Props> = ({chat, title, closeChat, clearMessages}: 
   const ref = useRef();
   const [isOpen, setIsOpen] = useState(false);
   const {showChatAddMembersDialog, showChatMembersDialog, showChatRenameDialog} = useChatDialogContext();
+  const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'), {noSsr: true});
 
   const openChatAddMembersDialog = (): void => {
     showChatAddMembersDialog(chat);
@@ -101,6 +103,12 @@ const ChatContentActions: FC<Props> = ({chat, title, closeChat, clearMessages}: 
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
+        {!isBigDevice && (
+          <MenuItem onClick={closeChat}>
+            <MessageIcon color="primary" />
+            {t('chat:menu.toChatList')}
+          </MenuItem>
+        )}
         <MenuItem onClick={showMembers}>
           <MembersIcon color="primary" />
           {t('chat:menu.showMembers')}

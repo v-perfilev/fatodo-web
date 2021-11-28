@@ -93,11 +93,8 @@ const ChatMain: FC<Props> = ({account}: Props) => {
 
   const smallView = (
     <Box className={classes.smallViewRoot}>
-      {chat ? (
-        <ChatContent chat={chat} closeChat={closeChat} account={account} />
-      ) : (
-        <ChatControl chat={chat} setChat={selectChat} account={account} />
-      )}
+      {chat && <ChatContent chat={chat} closeChat={closeChat} account={account} />}
+      {!chatId && <ChatControl chat={chat} setChat={selectChat} account={account} />}
     </Box>
   );
 
