@@ -45,7 +45,7 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   },
   rightBox: {
     display: 'flex',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     '& > *': {
       color: theme.palette.grey['400'],
       marginLeft: theme.spacing(1),
