@@ -28,11 +28,6 @@ const ChatControlContainer: FC<Props> = ({chat, setChat, chats, loadMoreItems, a
     [chats]
   );
 
-  const itemRenderer = useCallback(
-    (props: ChatControlItemProps): ReactElement => <ChatControlRenderer {...props} />,
-    []
-  );
-
   const itemData = useMemo<ChatControlItemDataProps>(
     () => ({
       items: chats,
@@ -42,6 +37,8 @@ const ChatControlContainer: FC<Props> = ({chat, setChat, chats, loadMoreItems, a
     }),
     [chats, chat, account, handleOnChatClick]
   );
+
+  const itemRenderer = (props: ChatControlItemProps): ReactElement => <ChatControlRenderer {...props} />;
 
   return (
     <Box className={classes.root}>

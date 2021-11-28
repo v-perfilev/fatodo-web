@@ -47,8 +47,6 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
     return unreadMessageCountMap?.get(chat.id) > 0;
   }, [unreadMessageCountMap, chat]);
 
-  const itemRenderer = useCallback((props: ChatItemProps): ReactElement => <ChatContentRenderer {...props} />, []);
-
   const itemData = useMemo<ChatListDataProps>(
     () => ({
       visibleItems,
@@ -57,6 +55,8 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
     }),
     [visibleItems, items, account]
   );
+
+  const itemRenderer = (props: ChatItemProps): ReactElement => <ChatContentRenderer {...props} />;
 
   return (
     <Box className={classes.root}>
