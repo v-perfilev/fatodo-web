@@ -37,7 +37,7 @@ export const ImageUploadButtons: FC<Props> = ({image, setImage, setSource, setAn
         <input
           id="upload-image"
           type="file"
-          accept="image/*"
+          accept="image/png, image/jpeg"
           className={classes.input}
           onChange={onImageLoaded}
           ref={inputRef}
