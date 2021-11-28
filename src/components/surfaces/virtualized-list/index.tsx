@@ -82,7 +82,10 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   }, []);
 
   const scrollToBottom = useCallback((): void => {
-    listRef.current?.scrollToItem(loadedLength - 1);
+    const doScroll = ():void => listRef.current?.scrollToItem(loadedLength - 1);
+    doScroll();
+    // workaround for mobile devices
+    window.setTimeout(() => doScroll(), 50);
   }, [loadedLength]);
 
   const isScrolledToTop = useMemo<boolean>(() => {

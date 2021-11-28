@@ -15,7 +15,7 @@ const ChatContentScrollButton: FC<Props> = ({show, scrollToBottom, highlighted}:
   const color = highlighted ? 'primary' : 'default';
 
   return show ? (
-    <Fab className={classes.root} color={color} onClick={scrollToBottom} size="medium">
+    <Fab className={classes.root} color={color} onClick={scrollToBottom} size="small">
       <ArrowDownIcon />
     </Fab>
   ) : null;

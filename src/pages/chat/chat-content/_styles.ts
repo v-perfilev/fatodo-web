@@ -4,10 +4,10 @@ import {Theme} from '@material-ui/core';
 export const chatContentStyles = makeStyles(() => ({
   root: {
     position: 'relative',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    height: '100%',
   },
 }));
 
