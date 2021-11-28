@@ -34,6 +34,13 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
   const [loading, setLoading] = useState(true);
   const [listRef, setListRef] = useState<VirtualizedListMethods>();
 
+  const resetChat = (): void => {
+    setMessages([]);
+    setItems([]);
+    setLoading(true);
+    setAllLoaded(true);
+  };
+
   const convertMessagesToItems = useCallback((messagesToConvert: Message[]): ChatItem[] => {
     const handledDates = [] as string[];
     const handledItems = [] as ChatItem[];
@@ -175,8 +182,14 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
   // EFFECTS
 
   useEffect(() => {
-    loadMoreMessages().finally();
+    resetChat();
   }, [chat]);
+
+  useEffect(() => {
+    if (loading) {
+      loadMoreMessages().finally();
+    }
+  }, [loading]);
 
   useEffect(() => {
     if (chat?.id === messageNewEvent?.chatId) {
