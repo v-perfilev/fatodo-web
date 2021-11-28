@@ -1,4 +1,4 @@
-import React, {FC, memo, useMemo} from 'react';
+import React, {FC, useMemo} from 'react';
 import {Box, Hidden, Paper} from '@material-ui/core';
 import {Comment} from '../../../models/comment.model';
 import {commentItemStyles} from './_styles';
@@ -62,4 +62,4 @@ const CommentItem: FC<Props> = ({comment, account, setReference}: Props) => {
   );
 };
 
-export default memo(CommentItem);
+export default CommentItem;
