@@ -68,7 +68,7 @@ const ItemForm: FC<Props> = (props: Props) => {
             <DateInput name="date" label={t('item:fields.date.label')} />
           </Grid>
           <Grid item xs={12}>
-            <MultilineInput name="description" label={t('item:fields.description.label')} />
+            <MultilineInput name="description" label={t('item:fields.description.label')} rows={4} />
           </Grid>
           <Grid item xs={12}>
             <RemindersInput name="reminders" label={t('item:fields.reminders.label')} />
