@@ -1,4 +1,4 @@
-import React, {FC, HTMLAttributes, useEffect, useMemo} from 'react';
+import React, {FC, HTMLAttributes, ReactElement, useEffect, useMemo} from 'react';
 import {Box} from '@material-ui/core';
 import {Chat} from '../../../../models/chat.model';
 import {chatControlItemStyles} from './_styles';
@@ -22,6 +22,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 const ChatControlItem: FC<Props> = ({chat, isSelected, account, ...props}: Props) => {
   const classes = chatControlItemStyles();
+  const classNames = csx(classes.root, {selected: isSelected});
   const {users, handleUserIds} = useUserListContext();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
   const {t} = useTranslation();
@@ -46,19 +47,19 @@ const ChatControlItem: FC<Props> = ({chat, isSelected, account, ...props}: Props
     return date ? DateFormatters.formatDependsOnDay(date) : null;
   }, [date]);
 
-  const classNames = csx(classes.root, {selected: isSelected});
+  const pic = useMemo<ReactElement>(() => {
+    return directUser ? (
+      <UserWithPopupView className={classes.image} user={directUser} withUserPic picSize="lg" />
+    ) : (
+      <UrlPic className={classes.image} alt={null} url={null} size="lg" border={1} />
+    );
+  }, [directUser]);
 
   useEffect(() => {
     if (chat) {
       handleUserIds(chat.members);
     }
   }, [chat]);
-
-  const pic = directUser ? (
-    <UserWithPopupView className={classes.image} user={directUser} withUserPic picSize="lg" />
-  ) : (
-    <UrlPic className={classes.image} alt={null} url={null} size="lg" border={1} />
-  );
 
   return (
     <Box className={classNames} {...props}>

@@ -17,10 +17,9 @@ type Props = HTMLAttributes<HTMLElement> & {
 };
 
 export const UserView: FC<Props> = (props: Props) => {
-  const classes = userViewStyles();
   const {user, picSize = 'xs', withUserPic = true, withUsername = false, withPaperBox = false} = props;
   const {onMouseOver, onMouseLeave, className} = props;
-
+  const classes = userViewStyles();
   const classNames = csx(className, classes.root);
 
   const imageWithUsername = (

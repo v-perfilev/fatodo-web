@@ -75,7 +75,10 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
       if (chatInList) {
         ArrayUtils.deleteItem(prevState, chatInList);
       }
-      return [...prevState, lastMessageChat];
+      const sortedChats = [lastMessageChat, ...prevState].sort((chatA, chatB) => {
+        return chatA.lastMessage?.createdAt < chatB.lastMessage?.createdAt ? 1 : 0;
+      });
+      return [...sortedChats];
     },
     []
   );
