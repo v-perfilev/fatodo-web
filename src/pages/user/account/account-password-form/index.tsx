@@ -45,7 +45,7 @@ const formik = withFormik<Props, AccountPasswordFormValues>({
 
   handleSubmit: (
     values: AccountPasswordFormValues,
-    {setSubmitting, props}: FormikBag<Props, AccountPasswordFormValues>
+    {setSubmitting, resetForm, props}: FormikBag<Props, AccountPasswordFormValues>
   ) => {
     const {handleCode, handleResponse} = props;
 
@@ -55,6 +55,7 @@ const formik = withFormik<Props, AccountPasswordFormValues>({
     UserService.changePassword(data)
       .then(() => {
         handleCode('auth.afterChangePassword', 'info');
+        resetForm({});
       })
       .catch((response) => {
         handleResponse(response);

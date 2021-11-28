@@ -17,7 +17,7 @@ export class AccountPasswordFormUtils {
   public static mapPropsToValues = (): AccountPasswordFormValues => defaultAccountPasswordFormValues;
 
   public static validationSchema = Yup.object().shape({
-    oldPassword: Yup.string().required(i18n.t('account:fields.password.required')),
+    oldPassword: Yup.string().required(() => i18n.t('account:fields.password.required')),
     newPassword: passwordValidator,
   });
 
