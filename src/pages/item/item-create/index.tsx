@@ -9,7 +9,6 @@ import ItemForm from '../item-form';
 import {ItemDTO} from '../../../models/dto/item.dto';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../../group/_router';
 import {CircularSpinner} from '../../../components/loaders';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
@@ -28,7 +27,7 @@ const ItemCreate: FC = () => {
   const {groupId} = useParams();
   const {setMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
-  const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoad} = useGroupViewContext();
+  const {group, load: loadGroup, loading: groupLoad} = useGroupViewContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
@@ -43,21 +42,6 @@ const ItemCreate: FC = () => {
   ] as MenuElement[];
 
   const theme = ThemeFactory.getTheme(group?.color);
-
-  const loadGroup = (): void => {
-    ItemService.getGroup(groupId)
-      .then((response) => {
-        setGroup(response.data);
-      })
-      .catch((response) => {
-        const status = ResponseUtils.getStatus(response);
-        if (status === 404) {
-          redirectToNotFound();
-        }
-        handleResponse(response);
-        redirectToGroupView();
-      });
-  };
 
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     setIsSaving(true);
@@ -74,7 +58,7 @@ const ItemCreate: FC = () => {
   };
 
   useEffect(() => {
-    setLoadGroup(() => (): void => loadGroup());
+    loadGroup(groupId, redirectToNotFound, redirectToGroupView);
   }, []);
 
   useEffect(() => {

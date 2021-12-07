@@ -8,7 +8,7 @@ import {User} from '../../../models/user.model';
 
 const GroupViewUsers: FC = () => {
   const classes = groupViewUsersStyles();
-  const {obj: group} = useGroupViewContext();
+  const {group} = useGroupViewContext();
   const {users} = useUserListContext();
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
 

@@ -27,7 +27,7 @@ const GroupPreviewCardActions: FC<Props> = ({account}: Props) => {
   const {t} = useTranslation();
   const ref = useRef();
   const {load: loadGroups} = useGroupListContext();
-  const {obj: group} = useGroupViewContext();
+  const {group} = useGroupViewContext();
   const {showGroupDeleteDialog} = useGroupDialogContext();
   const [isOpen, setIsOpen] = useState(false);
 

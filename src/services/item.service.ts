@@ -1,18 +1,20 @@
 import axios, {AxiosPromise} from 'axios';
 import {ItemDTO} from '../models/dto/item.dto';
-import {GroupMember} from '../models/group.model';
+import {Group, GroupMember} from '../models/group.model';
+import {PageableList} from '../models/pageable-list.model';
+import {Item} from '../models/item.model';
 
 export default class ItemService {
   private static baseUrl = '/api/item';
 
   // GroupResource
 
-  public static getAllGroups = (): AxiosPromise => {
+  public static getAllGroups = (): AxiosPromise<Group[]> => {
     const url = ItemService.baseUrl + '/groups';
     return axios.get(url);
   };
 
-  public static getGroup = (id: string): AxiosPromise => {
+  public static getGroup = (id: string): AxiosPromise<Group> => {
     const url = ItemService.baseUrl + '/groups/' + id;
     return axios.get(url);
   };
@@ -36,12 +38,32 @@ export default class ItemService {
 
   // ItemResource
 
-  public static getAllItemsByGroupId = (groupId: string): AxiosPromise => {
-    const url = ItemService.baseUrl + '/items/' + groupId + '/group-id';
-    return axios.get(url);
+  public static getPreviewItemsByGroupIds = (groupIds: string[]): AxiosPromise<Map<string, PageableList<Item>>> => {
+    const url = ItemService.baseUrl + '/items/preview/group-ids';
+    return axios.post(url, groupIds);
   };
 
-  public static getItem = (id: string): AxiosPromise => {
+  public static getItemsByGroupId = (
+    groupId: string,
+    offset?: number,
+    size?: number
+  ): AxiosPromise<PageableList<Item>> => {
+    const url = ItemService.baseUrl + '/items/' + groupId + '/group-id';
+    const params = {offset, size};
+    return axios.get(url, {params});
+  };
+
+  public static getArchivedItemsByGroupId = (
+    groupId: string,
+    offset?: number,
+    size?: number
+  ): AxiosPromise<PageableList<Item>> => {
+    const url = ItemService.baseUrl + '/items/archived/' + groupId + '/group-id';
+    const params = {offset, size};
+    return axios.get(url, {params});
+  };
+
+  public static getItem = (id: string): AxiosPromise<Item> => {
     const url = ItemService.baseUrl + '/items/' + id;
     return axios.get(url);
   };

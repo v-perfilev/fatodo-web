@@ -18,21 +18,11 @@ const GroupsSorting: FC = () => {
   const {t, i18n} = useTranslation();
   const {handleCode, handleResponse} = useSnackContext();
   const {setMenu} = useAdditionalMenuContext();
-  const {objs: groups, setObjs: setGroups, setLoad: setLoadGroups, loading: groupsLoading} = useGroupListContext();
+  const {groups, load: loadGroups, loading: groupsLoading} = useGroupListContext();
   const [isSaving, setIsSaving] = useState(false);
   const [order, setOrder] = useState<MutableRefObject<number[]>>();
 
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
-
-  const loadGroups = (): void => {
-    ItemService.getAllGroups()
-      .then((response) => {
-        setGroups(response.data);
-      })
-      .catch((response) => {
-        handleResponse(response);
-      });
-  };
 
   const saveOrder = (): void => {
     setIsSaving(true);
@@ -54,7 +44,7 @@ const GroupsSorting: FC = () => {
   ] as MenuElement[];
 
   useEffect(() => {
-    setLoadGroups(() => (): void => loadGroups());
+    loadGroups();
   }, []);
 
   useEffect(() => {

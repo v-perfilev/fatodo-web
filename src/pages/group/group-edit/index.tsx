@@ -5,7 +5,6 @@ import {useHistory, useParams} from 'react-router-dom';
 import {Routes} from '../../router';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {GroupRouteUtils} from '../_router';
 import {CircularSpinner} from '../../../components/loaders';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
@@ -27,7 +26,7 @@ const GroupEdit: FC = () => {
   const {i18n, t} = useTranslation();
   const {setMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
-  const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
+  const {group, load: loadGroup, loading: groupLoading} = useGroupViewContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
     // important stub function
@@ -35,21 +34,6 @@ const GroupEdit: FC = () => {
 
   const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
-
-  const loadGroup = (): void => {
-    ItemService.getGroup(groupId)
-      .then((response) => {
-        setGroup(response.data);
-      })
-      .catch((response) => {
-        const status = ResponseUtils.getStatus(response);
-        if (status === 404) {
-          redirectToNotFound();
-        }
-        handleResponse(response);
-        redirectToGroupView();
-      });
-  };
 
   const request = (formData: FormData, stopSubmitting: () => void): void => {
     setIsSaving(true);
@@ -73,7 +57,7 @@ const GroupEdit: FC = () => {
   const theme = ThemeFactory.getTheme(group?.color);
 
   useEffect(() => {
-    setLoadGroup(() => (): void => loadGroup());
+    loadGroup(groupId, redirectToNotFound, redirectToGroupView);
   }, []);
 
   useEffect(() => {

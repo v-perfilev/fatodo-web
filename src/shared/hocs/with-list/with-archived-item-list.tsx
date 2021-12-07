@@ -17,7 +17,7 @@ const withItemList = (Component: ComponentType): FC => (props): ReactElement => 
 
   const load = (groupId: string, offset?: number, size?: number): void => {
     setLoading(true);
-    ItemService.getItemsByGroupId(groupId, offset, size)
+    ItemService.getArchivedItemsByGroupId(groupId, offset, size)
       .then((response) => {
         setItems((prevState) => {
           const combinedItems = [...prevState, ...response.data.data];

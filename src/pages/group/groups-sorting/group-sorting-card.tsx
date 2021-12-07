@@ -12,7 +12,7 @@ type Props = {
 
 const GroupSortingCard: FC<Props> = ({bind}: Props) => {
   const classes = groupSortingCardStyles();
-  const {obj: group} = useGroupViewContext();
+  const {group} = useGroupViewContext();
 
   const theme = ThemeFactory.getTheme(group?.color);
 

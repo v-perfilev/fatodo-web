@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, memo, useEffect} from 'react';
+import {FC, memo, useEffect, useMemo} from 'react';
 import {Card, ThemeProvider} from '@material-ui/core';
 import {groupCardStyles} from './_styles';
 import GroupPreviewCardBody from './group-preview-card-body';
@@ -7,14 +7,13 @@ import {ThemeFactory} from '../../../shared/theme/theme';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {flowRight} from 'lodash';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import withUserList from '../../../shared/hocs/with-list/with-user-list';
-import ItemService from '../../../services/item.service';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
 import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import GroupPreviewCardHeader from './group-preview-card-header';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
+import {Item} from '../../../models/item.model';
+import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
 
 type Props = AuthState & {
   height: number;
@@ -22,20 +21,13 @@ type Props = AuthState & {
 
 const GroupPreviewCard: FC<Props> = ({account, height}: Props) => {
   const classes = groupCardStyles();
-  const {handleResponse} = useSnackContext();
   const {handleUserIds} = useUserListContext();
-  const {objs: items, setObjs: setItems, setLoad: setLoadItems} = useItemListContext();
-  const {obj: group} = useGroupViewContext();
+  const {group} = useGroupViewContext();
+  const {items: previewItems} = usePreviewItemListContext();
 
-  const loadItems = (): void => {
-    ItemService.getAllItemsByGroupId(group.id)
-      .then((response) => {
-        setItems(response.data);
-      })
-      .catch((response) => {
-        handleResponse(response);
-      });
-  };
+  const items = useMemo<Item[]>(() => {
+    return group && previewItems.has(group.id) ? previewItems.get(group.id) : [];
+  }, [group, previewItems]);
 
   const loadGroupUsers = (): void => {
     const userIds = group.members.map((user) => user.id);
@@ -49,7 +41,6 @@ const GroupPreviewCard: FC<Props> = ({account, height}: Props) => {
 
   useEffect(() => {
     if (group) {
-      setLoadItems(() => (): void => loadItems());
       loadGroupUsers();
     }
   }, [group]);

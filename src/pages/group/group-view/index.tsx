@@ -13,8 +13,6 @@ import {ItemRouteUtils} from '../../item/_router';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {PageDivider, PageSpacer} from '../../../components/surfaces';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
@@ -22,7 +20,6 @@ import {CircularSpinner} from '../../../components/loaders';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {useGroupDialogContext} from '../../../shared/contexts/dialog-contexts/group-dialog-context';
-import ItemService from '../../../services/item.service';
 import {flowRight} from 'lodash';
 import Comments from '../../comment';
 import {MembersIcon} from '../../../components/icons/members-icon';
@@ -44,7 +41,6 @@ const GroupView: FC<Props> = ({account}: Props) => {
   const history = useHistory();
   const {groupId} = useParams();
   const {t, i18n} = useTranslation();
-  const {handleResponse} = useSnackContext();
   const {setMenu} = useAdditionalMenuContext();
   const {users, handleUserIds} = useUserListContext();
   const {
@@ -53,8 +49,8 @@ const GroupView: FC<Props> = ({account}: Props) => {
     showGroupAddMembersDialog,
     showGroupLeaveDialog,
   } = useGroupDialogContext();
-  const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
-  const {objs: items, setObjs: setItems, setLoad: setLoadItems} = useItemListContext();
+  const {group, load: loadGroup, loading: groupLoading} = useGroupViewContext();
+  const {items, load: loadItems} = useItemListContext();
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
@@ -62,31 +58,6 @@ const GroupView: FC<Props> = ({account}: Props) => {
   const redirectToGroupEdit = (): void => history.push(GroupRouteUtils.getEditUrl(groupId));
   const redirectToGroups = (): void => history.push(Routes.GROUPS);
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
-
-  const loadGroup = (): void => {
-    ItemService.getGroup(groupId)
-      .then((response) => {
-        setGroup(response.data);
-      })
-      .catch((response) => {
-        const status = ResponseUtils.getStatus(response);
-        if (status === 404) {
-          redirectToNotFound();
-        }
-        handleResponse(response);
-        redirectToGroups();
-      });
-  };
-
-  const loadItems = (): void => {
-    ItemService.getAllItemsByGroupId(group.id)
-      .then((response) => {
-        setItems(response.data);
-      })
-      .catch((response) => {
-        handleResponse(response);
-      });
-  };
 
   const loadGroupUsers = (): void => {
     const userIds = group.members.map((user) => user.id);
@@ -99,12 +70,12 @@ const GroupView: FC<Props> = ({account}: Props) => {
   };
 
   const openGroupMembersDialog = (): void => {
-    const onSuccess = (): void => loadGroup();
+    const onSuccess = (): void => loadGroup(groupId, redirectToNotFound, redirectToGroups);
     showGroupMembersDialog(group, users, onSuccess);
   };
 
   const openGroupAddMembersDialog = (): void => {
-    const onSuccess = (): void => loadGroup();
+    const onSuccess = (): void => loadGroup(groupId, redirectToNotFound, redirectToGroups);
     showGroupAddMembersDialog(group, onSuccess);
   };
 
@@ -150,13 +121,13 @@ const GroupView: FC<Props> = ({account}: Props) => {
   ] as MenuElement[];
 
   useEffect(() => {
-    setLoadGroup(() => (): void => loadGroup());
+    loadGroup(groupId, redirectToNotFound, redirectToGroups);
   }, []);
 
   useEffect(() => {
     if (group) {
       loadGroupUsers();
-      setLoadItems(() => (): void => loadItems());
+      loadItems(group.id);
     }
   }, [group]);
 

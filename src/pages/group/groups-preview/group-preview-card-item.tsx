@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, HTMLAttributes, useEffect} from 'react';
+import {FC, HTMLAttributes} from 'react';
 import {Box, Card, Typography} from '@material-ui/core';
 import {groupCardItemStyles} from './_styles';
 import {animated} from 'react-spring';
@@ -7,8 +7,6 @@ import Truncate from 'react-truncate';
 import {Item} from '../../../models/item.model';
 import {ItemRouteUtils} from '../../item/_router';
 import {Link} from '../../../components/controls';
-import withItemView from '../../../shared/hocs/with-view/with-item-view';
-import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 import {flowRight} from 'lodash';
 import {PriorityView, TypeView} from '../../../components/views';
 import GroupPreviewCardItemChanges from './group-preview-card-item-changes';
@@ -20,13 +18,8 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
   const classes = groupCardItemStyles();
-  const {setObj: setItem} = useItemViewContext();
 
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
-
-  useEffect(() => {
-    setItem(item);
-  }, [item]);
 
   return (
     <Box className={classes.root} style={style}>
@@ -55,4 +48,4 @@ const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
   );
 };
 
-export default flowRight([animated, withItemView])(GroupPreviewCardItem);
+export default flowRight([animated])(GroupPreviewCardItem);

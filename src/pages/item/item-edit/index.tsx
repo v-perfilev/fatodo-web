@@ -9,7 +9,6 @@ import ItemService from '../../../services/item.service';
 import {ItemDTO} from '../../../models/dto/item.dto';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
-import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {ItemRouteUtils} from '../_router';
 import {GroupRouteUtils} from '../../group/_router';
 import {CircularSpinner} from '../../../components/loaders';
@@ -25,7 +24,6 @@ import ControlMenu from '../../../components/layouts/control-menu';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';
-import NotificationService from '../../../services/notification.service';
 import withReminderList from '../../../shared/hocs/with-list/with-reminder-list';
 import {itemEditStyles} from './_styles';
 
@@ -37,9 +35,9 @@ const ItemEdit: FC = () => {
   const {itemId} = useParams();
   const {setMenu} = useAdditionalMenuContext();
   const {handleUserIds} = useUserListContext();
-  const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
-  const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
-  const {objs: reminders, setObjs: setReminders, setLoad: setLoadReminders} = useReminderListContext();
+  const {item, load: loadItem, loading: itemLoading} = useItemViewContext();
+  const {group, load: loadGroup, loading: groupLoading} = useGroupViewContext();
+  const {reminders, load: loadReminders} = useReminderListContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
@@ -61,46 +59,6 @@ const ItemEdit: FC = () => {
 
   const theme = ThemeFactory.getTheme(group?.color);
 
-  const loadItem = (): void => {
-    ItemService.getItem(itemId)
-      .then((response) => {
-        setItem(response.data);
-      })
-      .catch((response) => {
-        const status = ResponseUtils.getStatus(response);
-        if (status === 404) {
-          redirectToNotFound();
-        }
-        handleResponse(response);
-      });
-  };
-
-  const loadReminders = (): void => {
-    NotificationService.getAllByTargetId(itemId)
-      .then((response) => {
-        setReminders(response.data);
-      })
-      .catch((response) => {
-        if (response.status !== 404) {
-          handleResponse(response);
-        }
-      });
-  };
-
-  const loadGroup = (): void => {
-    ItemService.getGroup(item?.groupId)
-      .then((response) => {
-        setGroup(response.data);
-      })
-      .catch((response) => {
-        const status = ResponseUtils.getStatus(response);
-        if (status === 404) {
-          redirectToNotFound();
-        }
-        handleResponse(response);
-      });
-  };
-
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     setIsSaving(true);
     ItemService.updateItem(data)
@@ -116,13 +74,13 @@ const ItemEdit: FC = () => {
   };
 
   useEffect(() => {
-    setLoadItem(() => (): void => loadItem());
-    setLoadReminders(() => (): void => loadReminders());
+    loadItem(itemId, redirectToNotFound);
+    loadReminders(itemId);
   }, []);
 
   useEffect(() => {
     if (item) {
-      setLoadGroup(() => (): void => loadGroup());
+      loadGroup(item.groupId, redirectToNotFound);
     }
   }, [item]);
 

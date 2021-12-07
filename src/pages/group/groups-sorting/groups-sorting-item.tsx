@@ -17,7 +17,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 const GroupsSortingItem: FC<Props> = ({group, style, bind, setItemRef}: Props) => {
   const classes = groupSortingGridItemStyles();
-  const {setObj: setGroup} = useGroupViewContext();
+  const {setGroup} = useGroupViewContext();
 
   useEffect(() => {
     setGroup(group);

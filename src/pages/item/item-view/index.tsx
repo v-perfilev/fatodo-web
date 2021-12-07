@@ -6,9 +6,6 @@ import {ThemeFactory} from '../../../shared/theme/theme';
 import {useHistory, useParams} from 'react-router-dom';
 import {PageDivider, PageSpacer} from '../../../components/surfaces';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
-import ItemService from '../../../services/item.service';
-import {useSnackContext} from '../../../shared/contexts/snack-context';
-import {ResponseUtils} from '../../../shared/utils/response.utils';
 import {Routes} from '../../router';
 import ItemViewReminders from './item-view-reminders';
 import ItemViewTags from './item-view-tags';
@@ -35,7 +32,6 @@ import {GroupUtils} from '../../../shared/utils/group.utils';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';
-import NotificationService from '../../../services/notification.service';
 import withReminderList from '../../../shared/hocs/with-list/with-reminder-list';
 import ItemViewHeader from './item-view-header';
 
@@ -45,13 +41,12 @@ const ItemView: FC<Props> = ({account}: Props) => {
   const history = useHistory();
   const {itemId} = useParams();
   const {t, i18n} = useTranslation();
-  const {handleResponse} = useSnackContext();
   const {setMenu} = useAdditionalMenuContext();
   const {handleUserIds} = useUserListContext();
   const {showItemDeleteDialog} = useItemDialogContext();
-  const {obj: item, setObj: setItem, setLoad: setLoadItem, loading: itemLoading} = useItemViewContext();
-  const {obj: group, setObj: setGroup, setLoad: setLoadGroup, loading: groupLoading} = useGroupViewContext();
-  const {setObjs: setReminders, setLoad: setLoadReminders} = useReminderListContext();
+  const {item, load: loadItem, loading: itemLoading} = useItemViewContext();
+  const {group, load: loadGroup, loading: groupLoading} = useGroupViewContext();
+  const {load: loadReminders} = useReminderListContext();
 
   const theme = ThemeFactory.getTheme(group?.color);
 
@@ -62,46 +57,6 @@ const ItemView: FC<Props> = ({account}: Props) => {
   const openItemDeleteDialog = (): void => {
     const onSuccess = (): void => redirectToGroupView();
     showItemDeleteDialog(item, onSuccess);
-  };
-
-  const loadItem = (): void => {
-    ItemService.getItem(itemId)
-      .then((response) => {
-        setItem(response.data);
-      })
-      .catch((response) => {
-        const status = ResponseUtils.getStatus(response);
-        if (status === 404) {
-          redirectToNotFound();
-        }
-        handleResponse(response);
-      });
-  };
-
-  const loadReminders = (): void => {
-    NotificationService.getAllByTargetId(itemId)
-      .then((response) => {
-        setReminders(response.data);
-      })
-      .catch((response) => {
-        if (response.status !== 404) {
-          handleResponse(response);
-        }
-      });
-  };
-
-  const loadGroup = (): void => {
-    ItemService.getGroup(item?.groupId)
-      .then((response) => {
-        setGroup(response.data);
-      })
-      .catch((response) => {
-        const status = ResponseUtils.getStatus(response);
-        if (status === 404) {
-          redirectToNotFound();
-        }
-        handleResponse(response);
-      });
   };
 
   const loadUsers = (): void => {
@@ -124,13 +79,13 @@ const ItemView: FC<Props> = ({account}: Props) => {
   ] as MenuElement[];
 
   useEffect(() => {
-    setLoadItem(() => (): void => loadItem());
-    setLoadReminders(() => (): void => loadReminders());
+    loadItem(itemId, redirectToNotFound);
+    loadReminders(itemId);
   }, []);
 
   useEffect(() => {
     if (item) {
-      setLoadGroup(() => (): void => loadGroup());
+      loadGroup(item.groupId, redirectToNotFound);
     }
   }, [item]);
 

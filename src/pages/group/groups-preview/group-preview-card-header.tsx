@@ -16,7 +16,7 @@ type Props = {
 
 const GroupPreviewCardHeader: FC<Props> = ({account}: Props) => {
   const classes = groupCardHeaderStyles();
-  const {obj: group} = useGroupViewContext();
+  const {group} = useGroupViewContext();
 
   return (
     <Link to={Routes.GROUPS + '/' + group.id}>

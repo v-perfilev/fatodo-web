@@ -5,11 +5,11 @@ import {groupCardContentStyles} from './_styles';
 import {useTrail} from 'react-spring';
 import {BUTTONS_IN_GROUP_CARD} from '../_constants';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import GroupPreviewCardCreateButton from './group-preview-card-create-button';
 import {CircularSpinner} from '../../../components/loaders';
 import {Item} from '../../../models/item.model';
 import GroupPreviewCardItem from './group-preview-card-item';
+import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
 
 type Props = {
   itemsToShow: Item[];
@@ -18,8 +18,12 @@ type Props = {
 
 const GroupPreviewCardContent: FC<Props> = ({itemsToShow, isNotFirstPage}: Props) => {
   const classes = groupCardContentStyles();
-  const {obj: group} = useGroupViewContext();
-  const {loading: itemsLoading} = useItemListContext();
+  const {group} = useGroupViewContext();
+  const {loading: previewLoading} = usePreviewItemListContext();
+
+  const loading = useMemo<boolean>(() => {
+    return group && previewLoading.has(group.id) ? previewLoading.get(group.id) : false;
+  }, [group, previewLoading]);
 
   const trailItems = useMemo(() => {
     return isNotFirstPage ? itemsToShow?.length : itemsToShow?.length + BUTTONS_IN_GROUP_CARD;
@@ -48,8 +52,8 @@ const GroupPreviewCardContent: FC<Props> = ({itemsToShow, isNotFirstPage}: Props
 
   return (
     <CardContent className={classes.content}>
-      {itemsLoading && <CircularSpinner size="sm" />}
-      {!itemsLoading && trail.map((style: CSSProperties, index) => itemElement(style, index))}
+      {loading && <CircularSpinner size="sm" />}
+      {!loading && trail.map((style: CSSProperties, index) => itemElement(style, index))}
     </CardContent>
   );
 };

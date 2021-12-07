@@ -15,8 +15,8 @@ type Props = {
 
 const GroupViewItems: FC<Props> = ({account}: Props) => {
   const classes = groupViewItemsStyles();
-  const {obj: group} = useGroupViewContext();
-  const {objs: items, loading: itemsLoading} = useItemListContext();
+  const {group} = useGroupViewContext();
+  const {items, loading: itemsLoading} = useItemListContext();
   const [loading, setLoading] = useState<boolean>(true);
 
   const canEdit = group && GroupUtils.canEdit(account, group);

@@ -9,6 +9,7 @@ import {EyeIcon} from '../../../components/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
+import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
 type Props = {
   item: Item;
@@ -18,6 +19,7 @@ type Props = {
 const GroupViewItemButtons: FC<Props> = ({item, canEdit}: Props) => {
   const classes = groupViewItemButtonsStyles();
   const history = useHistory();
+  const {group} = useGroupViewContext();
   const {load: loadItems} = useItemListContext();
   const {showItemDeleteDialog} = useItemDialogContext();
 
@@ -26,7 +28,7 @@ const GroupViewItemButtons: FC<Props> = ({item, canEdit}: Props) => {
   const redirectToEditItem = (): void => history.push(ItemRouteUtils.getEditUrl(item.id));
 
   const openItemDeleteDialog = (): void => {
-    const onSuccess = (): void => loadItems();
+    const onSuccess = (): void => loadItems(group.id);
     showItemDeleteDialog(item, onSuccess);
   };
 
