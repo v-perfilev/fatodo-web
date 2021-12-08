@@ -34,6 +34,7 @@ import GroupViewHeader from './group-view-header';
 import withUserList from '../../../shared/hocs/with-list/with-user-list';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import withItemList from '../../../shared/hocs/with-list/with-item-list';
+import withArchivedItemList from '../../../shared/hocs/with-list/with-archived-item-list';
 
 type Props = AuthState;
 
@@ -160,6 +161,11 @@ const GroupView: FC<Props> = ({account}: Props) => {
   );
 };
 
-export default flowRight([withVerticalPadding, withGroupView, withItemList, withUserList, withAuthState])(
-  memo(GroupView)
-);
+export default flowRight([
+  withVerticalPadding,
+  withGroupView,
+  withItemList,
+  withArchivedItemList,
+  withUserList,
+  withAuthState,
+])(memo(GroupView));

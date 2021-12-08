@@ -1,4 +1,5 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
+import {PAGINATION_BUTTON_WIDTH} from '../_constants';
 
 export const groupViewUsersStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -20,6 +21,36 @@ export const groupViewItemsStyles = makeStyles((theme: Theme) => ({
     flexGrow: 1,
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
+  },
+}));
+
+export const groupViewItemsHeaderStyles = makeStyles(() => ({
+  box: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
+}));
+
+export const groupViewItemsFooterStyles = makeStyles((theme: Theme) => ({
+  control: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  paginationButton: {
+    minWidth: PAGINATION_BUTTON_WIDTH,
+    width: PAGINATION_BUTTON_WIDTH,
+  },
+  pageCount: {
+    display: 'flex',
+    flexGrow: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: theme.spacing(0.5),
+    marginRight: theme.spacing(0.5),
+    '& *': {
+      fontWeight: 'bold',
+    },
   },
 }));
 

@@ -2,12 +2,12 @@ import * as React from 'react';
 import {useContext} from 'react';
 import {Item} from '../../../models/item.model';
 
-type ItemListState = {
+type ArchivedItemListState = {
   items: Item[];
   count: number;
   load: (groupId: string, offset?: number, size?: number) => void;
   loading: boolean;
 };
 
-export const ItemListContext = React.createContext<ItemListState>(null);
-export const useItemListContext = (): ItemListState => useContext(ItemListContext);
+export const ArchivedItemListContext = React.createContext<ArchivedItemListState>(null);
+export const useArchivedItemListContext = (): ArchivedItemListState => useContext(ArchivedItemListContext);

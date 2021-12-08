@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {CARD_FOOTER_HEIGHT, CARD_HEADER_HEIGHT, ITEMS_IN_GROUP_CARD, PAGINATION_BUTTON_WIDTH} from '../_constants';
+import {CARD_FOOTER_HEIGHT, CARD_HEADER_HEIGHT, ITEMS_IN_PREVIEW_CARD, PAGINATION_BUTTON_WIDTH} from '../_constants';
 
 export const groupCardStyles = makeStyles(() => ({
   card: {
@@ -63,7 +63,7 @@ export const groupCardContentStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(1) + 'px !important',
   },
   box: {
-    height: `calc(100% / ${ITEMS_IN_GROUP_CARD})`,
+    height: `calc(100% / ${ITEMS_IN_PREVIEW_CARD})`,
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
     flexShrink: 0,

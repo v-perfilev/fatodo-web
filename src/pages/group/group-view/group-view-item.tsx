@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, HTMLAttributes} from 'react';
 import {Box, Card, Typography} from '@material-ui/core';
 import {groupViewItemStyles} from './_styles';
 import {Item} from '../../../models/item.model';
@@ -7,19 +7,21 @@ import {ItemRouteUtils} from '../../item/_router';
 import {PriorityView, TypeView} from '../../../components/views';
 import GroupViewItemChanges from './group-view-item-changes';
 import GroupViewItemButtons from './group-view-item-buttons';
+import {flowRight} from 'lodash';
+import {animated} from 'react-spring';
 
-type Props = {
+type Props = HTMLAttributes<HTMLElement> & {
   item: Item;
   canEdit: boolean;
 };
 
-const GroupViewItem: FC<Props> = ({item, canEdit}: Props) => {
+const GroupViewItem: FC<Props> = ({item, canEdit, style}: Props) => {
   const classes = groupViewItemStyles();
 
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
 
   return (
-    <Box className={classes.root}>
+    <Box className={classes.root} style={style}>
       <Card variant="outlined" className={classes.card}>
         <Box className={classes.leftBox}>
           <Box className={classes.iconBox}>
@@ -41,4 +43,4 @@ const GroupViewItem: FC<Props> = ({item, canEdit}: Props) => {
   );
 };
 
-export default GroupViewItem;
+export default flowRight([animated])(GroupViewItem);

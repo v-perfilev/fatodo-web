@@ -1,29 +1,24 @@
 import * as React from 'react';
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useMemo, useState} from 'react';
 import {Box, Button, CardActions, Typography} from '@material-ui/core';
 import {groupCardFooterStyles} from './_styles';
 import {AvatarGroup, BoxWithIcon} from '../../../components/surfaces';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {ItemsIcon} from '../../../components/icons/items-icon';
 import {ArrowUpIcon} from '../../../components/icons/arrow-up-icon';
-import {BUTTONS_IN_GROUP_CARD, ITEMS_IN_GROUP_CARD} from '../_constants';
 import {ArrowDownIcon} from '../../../components/icons/arrow-down-icon';
 import {User} from '../../../models/user.model';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
 type Props = {
-  onUpClick: () => void;
-  onDownClick: () => void;
-  isMultiPage: boolean;
-  isNotFirstPage: boolean;
-  isNotLastPage: boolean;
-  firstShownItem: number;
-  count: number;
+  page: number;
+  setPage: (page: number) => void;
+  totalPages: number;
+  itemsCount: number;
 };
 
-const GroupPreviewCardFooter: FC<Props> = (props: Props) => {
+const GroupPreviewCardFooter: FC<Props> = ({page, setPage, totalPages, itemsCount}: Props) => {
   const classes = groupCardFooterStyles();
-  const {onUpClick, onDownClick, isMultiPage, isNotFirstPage, isNotLastPage, firstShownItem, count} = props;
   const {users} = useUserListContext();
   const {group} = useGroupViewContext();
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
@@ -34,12 +29,19 @@ const GroupPreviewCardFooter: FC<Props> = (props: Props) => {
     setUsersToShow(updatedList);
   };
 
+  const isMultiPage = useMemo<boolean>(() => totalPages > 1, [totalPages]);
+
   useEffect(() => {
     updateUsersToShow();
   }, [users, group]);
 
-  const pageNumber = Math.floor(firstShownItem / ITEMS_IN_GROUP_CARD) + 1;
-  const totalPages = Math.ceil((count + BUTTONS_IN_GROUP_CARD) / ITEMS_IN_GROUP_CARD);
+  const onUpClick = (): void => {
+    setPage(page - 1);
+  };
+
+  const onDownClick = (): void => {
+    setPage(page + 1);
+  };
 
   const paginationElement = (
     <Box className={classes.control}>
@@ -48,13 +50,13 @@ const GroupPreviewCardFooter: FC<Props> = (props: Props) => {
         variant="outlined"
         size="small"
         onClick={onUpClick}
-        disabled={!isNotFirstPage}
+        disabled={page === 0}
       >
         <ArrowUpIcon />
       </Button>
       <Box className={classes.pageCount}>
         <Typography color="primary">
-          {pageNumber} / {totalPages}
+          {page} / {totalPages}
         </Typography>
       </Box>
       <Button
@@ -62,7 +64,7 @@ const GroupPreviewCardFooter: FC<Props> = (props: Props) => {
         variant="outlined"
         size="small"
         onClick={onDownClick}
-        disabled={!isNotLastPage}
+        disabled={page === totalPages - 1}
       >
         <ArrowDownIcon />
       </Button>
@@ -74,7 +76,7 @@ const GroupPreviewCardFooter: FC<Props> = (props: Props) => {
       <AvatarGroup users={usersToShow} withPopup shorten={isMultiPage} />
       {isMultiPage && paginationElement}
       <Box className={classes.badges}>
-        <BoxWithIcon icon={<ItemsIcon color="primary" />}>{count || 0}</BoxWithIcon>
+        <BoxWithIcon icon={<ItemsIcon color="primary" />}>{itemsCount || 0}</BoxWithIcon>
       </Box>
     </CardActions>
   );

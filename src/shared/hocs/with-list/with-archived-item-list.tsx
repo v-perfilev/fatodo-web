@@ -4,7 +4,7 @@ import {useSnackContext} from '../../contexts/snack-context';
 import ItemService from '../../../services/item.service';
 import {Item} from '../../../models/item.model';
 import {ArrayUtils} from '../../utils/array.utils';
-import {ItemListContext} from '../../contexts/list-contexts/item-list-context';
+import {ArchivedItemListContext} from '../../contexts/list-contexts/archived-item-list-context';
 
 const withItemList = (Component: ComponentType): FC => (props): ReactElement => {
   const {handleResponse} = useSnackContext();
@@ -36,9 +36,9 @@ const withItemList = (Component: ComponentType): FC => (props): ReactElement => 
   const context = {items, count, load, loading};
 
   return (
-    <ItemListContext.Provider value={context}>
+    <ArchivedItemListContext.Provider value={context}>
       <Component {...props} />
-    </ItemListContext.Provider>
+    </ArchivedItemListContext.Provider>
   );
 };
 
