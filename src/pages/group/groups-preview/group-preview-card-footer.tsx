@@ -60,7 +60,7 @@ const GroupPreviewCardFooter: FC<Props> = ({page, setPage, totalPages, itemsCoun
       </Button>
       <Box className={classes.pageCount}>
         <Typography color="primary">
-          {page} / {totalPages}
+          {page + 1} / {totalPages}
         </Typography>
       </Box>
       <Button

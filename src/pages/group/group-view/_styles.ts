@@ -1,5 +1,5 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
-import {PAGINATION_BUTTON_WIDTH} from '../_constants';
+import {GROUP_ITEM_HEIGHT, PAGINATION_BUTTON_WIDTH} from '../_constants';
 
 export const groupViewUsersStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -66,25 +66,31 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(0.5),
   },
   card: {
+    height: GROUP_ITEM_HEIGHT,
     display: 'flex',
-    flexDirection: 'row',
-    padding: theme.spacing(1),
+    alignItems: 'center',
+    paddingLeft: theme.spacing(1),
+    paddingRight: theme.spacing(2),
   },
   statusCol: {
     display: 'flex',
     alignItems: 'center',
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(2),
   },
-  iconCol: {
+  iconsCol: {
+    height: '72%',
     display: 'flex',
-    alignItems: 'flex-start',
-    paddingTop: 2,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginRight: theme.spacing(1),
   },
-  titleCol: {
+  contentCol: {
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
   },
-  buttonCol: {
+  buttonsCol: {
     display: 'flex',
     alignItems: 'center',
     '& > *': {
@@ -94,14 +100,6 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   },
   icon: {
     fontSize: '1.8rem',
-  },
-  iconBox: {
-    display: 'flex',
-    alignItems: 'center',
-    minWidth: 50,
-    '& > *': {
-      marginRight: theme.spacing(1),
-    },
   },
   contentBox: {
     display: 'flex',
@@ -155,5 +153,8 @@ export const groupViewCreateButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
+  },
+  placeholder: {
+    height: GROUP_ITEM_HEIGHT,
   },
 }));

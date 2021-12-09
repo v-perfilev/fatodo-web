@@ -5,7 +5,7 @@ import GroupPreviewCardContent from './group-preview-card-content';
 import {Item} from '../../../models/item.model';
 import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {ITEMS_IN_FIRST_PAGE_PREVIEW_CARD, ITEMS_IN_PREVIEW_CARD} from '../_constants';
+import {CARD_ITEMS_COUNT, CARD_ITEMS_FIRST_PAGE_COUNT} from '../_constants';
 
 const GroupPreviewCardBody: FC = () => {
   const {group} = useGroupViewContext();
@@ -21,27 +21,27 @@ const GroupPreviewCardBody: FC = () => {
   }, [group, previewCounts]);
 
   const totalPages = useMemo<number>(() => {
-    const firstPageRest = count - ITEMS_IN_FIRST_PAGE_PREVIEW_CARD;
+    const firstPageRest = count - CARD_ITEMS_FIRST_PAGE_COUNT;
     const firstPageCounter = firstPageRest > 0 ? 1 : 0;
-    const otherPagesCounter = firstPageRest > 0 ? Math.floor(firstPageRest / ITEMS_IN_PREVIEW_CARD) : 0;
-    const lastNotFullPageCounter = firstPageRest > 0 ? firstPageRest % ITEMS_IN_PREVIEW_CARD : 0;
-    return 1 + firstPageCounter + otherPagesCounter + lastNotFullPageCounter;
+    const otherPagesCounter = firstPageRest > 0 ? Math.floor(firstPageRest / CARD_ITEMS_COUNT) : 0;
+    const lastNotFullPageCounter = firstPageRest > 0 && firstPageRest % CARD_ITEMS_COUNT > 0 ? 1 : 0;
+    return firstPageCounter + otherPagesCounter + lastNotFullPageCounter;
   }, [group, count]);
 
   const itemsToShow = useMemo<Item[]>(() => {
-    const firstPageItems = page > 0 ? ITEMS_IN_FIRST_PAGE_PREVIEW_CARD : 0;
-    const otherPagesItems = page > 1 ? ITEMS_IN_PREVIEW_CARD * (page - 1) : 0;
+    const firstPageItems = page > 0 ? CARD_ITEMS_FIRST_PAGE_COUNT : 0;
+    const otherPagesItems = page > 1 ? CARD_ITEMS_COUNT * (page - 1) : 0;
     const firstShownItem = firstPageItems + otherPagesItems;
-    const itemsInPage = page == 0 ? ITEMS_IN_FIRST_PAGE_PREVIEW_CARD : ITEMS_IN_PREVIEW_CARD;
+    const itemsInPage = page == 0 ? CARD_ITEMS_FIRST_PAGE_COUNT : CARD_ITEMS_COUNT;
     return items?.length > firstShownItem ? items.slice(firstShownItem, firstShownItem + itemsInPage) : [];
   }, [items, count, page]);
 
   const loadMoreIfNeeded = (): void => {
-    const firstPageItems = page > 0 ? ITEMS_IN_FIRST_PAGE_PREVIEW_CARD : 0;
-    const otherPagesItems = page > 1 ? ITEMS_IN_PREVIEW_CARD * (page - 1) : 0;
+    const firstPageItems = page > 0 ? CARD_ITEMS_FIRST_PAGE_COUNT : 0;
+    const otherPagesItems = page > 1 ? CARD_ITEMS_COUNT * (page - 1) : 0;
     const firstShownItem = firstPageItems + otherPagesItems;
-    if (items.length < count && items.length < firstShownItem + ITEMS_IN_PREVIEW_CARD) {
-      loadMoreItems(group.id, items.length, ITEMS_IN_PREVIEW_CARD * 2);
+    if (items.length < count && items.length < firstShownItem + CARD_ITEMS_COUNT) {
+      loadMoreItems(group.id, items.length, CARD_ITEMS_COUNT * 2);
     }
   };
 

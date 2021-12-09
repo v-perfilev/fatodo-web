@@ -16,7 +16,7 @@ export const CircularSpinner: FC<Props> = ({size, className}: Props) => {
   let pxSize;
   switch (size) {
     case 'xs':
-      pxSize = 25;
+      pxSize = 20;
       break;
     case 'sm':
       pxSize = 50;

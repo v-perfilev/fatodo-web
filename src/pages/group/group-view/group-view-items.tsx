@@ -11,7 +11,7 @@ import {UserAccount} from '../../../models/user.model';
 import {useArchivedItemListContext} from '../../../shared/contexts/list-contexts/archived-item-list-context';
 import GroupViewItemsPagination from './group-view-items-pagination';
 import {Item} from '../../../models/item.model';
-import {ITEMS_IN_GROUP, ITEMS_IN_PREVIEW_CARD} from '../_constants';
+import {GROUP_ITEMS_COUNT, CARD_ITEMS_COUNT} from '../_constants';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 type Props = {
@@ -41,12 +41,12 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
   }, [activeCount, archivedCount, showArchived]);
 
   const totalPages = useMemo<number>(() => {
-    return Math.floor(count / ITEMS_IN_GROUP) + (count % ITEMS_IN_GROUP > 0 ? 1 : 0);
+    return Math.floor(count / GROUP_ITEMS_COUNT) + (count % GROUP_ITEMS_COUNT > 0 ? 1 : 0);
   }, [count]);
 
   const itemsToShow = useMemo<Item[]>(() => {
-    const firstShownItem = ITEMS_IN_GROUP * page;
-    return items.length > firstShownItem ? items.slice(firstShownItem, firstShownItem + ITEMS_IN_GROUP) : [];
+    const firstShownItem = GROUP_ITEMS_COUNT * page;
+    return items.length > firstShownItem ? items.slice(firstShownItem, firstShownItem + GROUP_ITEMS_COUNT) : [];
   }, [items, page]);
 
   const loadItemsUsers = (): void => {
@@ -59,9 +59,9 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
   };
 
   const loadMoreIfNeeded = (load: (groupId: string, offset: number, size: number) => void): void => {
-    const firstShownItem = ITEMS_IN_GROUP * page;
-    if (items.length < count && items.length < firstShownItem + ITEMS_IN_GROUP) {
-      load(group.id, items.length, ITEMS_IN_PREVIEW_CARD * 2);
+    const firstShownItem = GROUP_ITEMS_COUNT * page;
+    if (items.length < count && items.length < firstShownItem + GROUP_ITEMS_COUNT) {
+      load(group.id, items.length, CARD_ITEMS_COUNT * 2);
     }
   };
 

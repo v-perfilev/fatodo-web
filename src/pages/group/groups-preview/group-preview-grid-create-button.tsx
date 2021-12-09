@@ -8,12 +8,7 @@ import {useHistory} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {GroupRouteUtils} from '../_router';
 
-type Props = {
-  height: number;
-  setRef: (element: HTMLDivElement) => void;
-};
-
-const GroupPreviewGridCreateButton: FC<Props> = ({height, setRef}: Props) => {
+const GroupPreviewGridCreateButton: FC = () => {
   const classes = groupGridItemStyles();
   const history = useHistory();
   const {t, i18n} = useTranslation();
@@ -25,8 +20,8 @@ const GroupPreviewGridCreateButton: FC<Props> = ({height, setRef}: Props) => {
   const text = useMemo<string>(() => t('group:menu.createGroup'), [i18n.language]);
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.item}>
-      <ActivePlaceholder action={action} icon={<PlusIcon />} text={text} height={height} setRef={setRef} />
+    <Grid item xs={12} sm={6} md={6} lg={4} xl={3} className={classes.item}>
+      <ActivePlaceholder className={classes.card} action={action} icon={<PlusIcon />} text={text} />
     </Grid>
   );
 };

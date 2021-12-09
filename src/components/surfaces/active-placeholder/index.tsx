@@ -1,6 +1,6 @@
-import React, {FC, HTMLAttributes, ReactElement, useMemo} from 'react';
+import React, {FC, HTMLAttributes, ReactElement} from 'react';
 import {activePlaceholderStyles} from './_styles';
-import {Box, Fade, Paper} from '@material-ui/core';
+import {Box, Paper} from '@material-ui/core';
 import csx from 'classnames';
 
 type Props = HTMLAttributes<HTMLElement> & {
@@ -15,29 +15,20 @@ type Props = HTMLAttributes<HTMLElement> & {
 };
 
 export const ActivePlaceholder: FC<Props> = (props: Props) => {
-  const {action, icon, text, height, setRef, variant, orientation, size} = props;
+  const {action, icon, text, variant, orientation, size, className} = props;
   const classes = activePlaceholderStyles();
 
   const classnames = csx(
     classes.root,
     {[classes.horizontal]: orientation === 'horizontal'},
-    {[classes.small]: size === 'sm'}
+    {[classes.small]: size === 'sm'},
+    className
   );
 
-  const style = useMemo(() => {
-    return {height: height || '100%'};
-  }, [height]);
-
-  const show = useMemo<boolean>(() => {
-    return !height || height > 0;
-  }, [height]);
-
   return (
-    <Fade in={show}>
-      <Paper variant={variant} elevation={3} className={classnames} style={style} ref={setRef} onClick={action}>
-        <Box className="icon">{icon}</Box>
-        <Box className="text">{text}</Box>
-      </Paper>
-    </Fade>
+    <Paper variant={variant} elevation={3} className={classnames} onClick={action}>
+      <Box className="icon">{icon}</Box>
+      <Box className="text">{text}</Box>
+    </Paper>
   );
 };

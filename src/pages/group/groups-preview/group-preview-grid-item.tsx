@@ -10,10 +10,9 @@ import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-
 
 type Props = {
   group: Group;
-  height: number;
 };
 
-const GroupPreviewGridItem: FC<Props> = ({group, height}: Props) => {
+const GroupPreviewGridItem: FC<Props> = ({group}: Props) => {
   const classes = groupGridItemStyles();
   const {setGroup} = useGroupViewContext();
 
@@ -24,8 +23,8 @@ const GroupPreviewGridItem: FC<Props> = ({group, height}: Props) => {
   }, [group]);
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.item}>
-      <GroupPreviewCard group={group} height={height} />
+    <Grid item xs={12} sm={6} md={6} lg={4} xl={3} className={classes.item}>
+      <GroupPreviewCard />
     </Grid>
   );
 };

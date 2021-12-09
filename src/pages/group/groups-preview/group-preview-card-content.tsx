@@ -9,7 +9,7 @@ import {CircularSpinner} from '../../../components/loaders';
 import {Item} from '../../../models/item.model';
 import GroupPreviewCardItem from './group-preview-card-item';
 import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
-import {BUTTONS_IN_FIRST_PAGE_PREVIEW_CARD} from '../_constants';
+import {CARD_BUTTONS_FIRST_PAGE_COUNT} from '../_constants';
 
 type Props = {
   itemsToShow: Item[];
@@ -26,17 +26,17 @@ const GroupPreviewCardContent: FC<Props> = ({itemsToShow, isFirstPage}: Props) =
   }, [group, previewLoading]);
 
   const trailItems = useMemo(() => {
-    return isFirstPage ? itemsToShow?.length + BUTTONS_IN_FIRST_PAGE_PREVIEW_CARD : itemsToShow?.length;
+    return isFirstPage ? itemsToShow?.length + CARD_BUTTONS_FIRST_PAGE_COUNT : itemsToShow?.length;
   }, [itemsToShow, isFirstPage]);
 
   const itemElement = useCallback(
     (style: CSSProperties, index: number): ReactNode => (
       <div className={classes.box} key={index}>
         {!isFirstPage && <GroupPreviewCardItem item={itemsToShow[index]} style={style} />}
-        {isFirstPage && index >= BUTTONS_IN_FIRST_PAGE_PREVIEW_CARD && (
-          <GroupPreviewCardItem item={itemsToShow[index - BUTTONS_IN_FIRST_PAGE_PREVIEW_CARD]} style={style} />
+        {isFirstPage && index >= CARD_BUTTONS_FIRST_PAGE_COUNT && (
+          <GroupPreviewCardItem item={itemsToShow[index - CARD_BUTTONS_FIRST_PAGE_COUNT]} style={style} />
         )}
-        {isFirstPage && index < BUTTONS_IN_FIRST_PAGE_PREVIEW_CARD && (
+        {isFirstPage && index < CARD_BUTTONS_FIRST_PAGE_COUNT && (
           <GroupPreviewCardCreateButton group={group} style={style} />
         )}
       </div>

@@ -27,6 +27,7 @@ const GroupViewCreateButton: FC<Props> = ({group}: Props) => {
   return (
     <Box className={classes.root}>
       <ActivePlaceholder
+        className={classes.placeholder}
         action={action}
         icon={<PlusIcon />}
         text={text}

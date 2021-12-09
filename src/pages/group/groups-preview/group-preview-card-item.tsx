@@ -11,6 +11,7 @@ import {flowRight} from 'lodash';
 import {PriorityView, TypeView} from '../../../components/views';
 import GroupPreviewCardItemChanges from './group-preview-card-item-changes';
 import GroupPreviewCardItemButtons from './group-preview-card-item-buttons';
+import {StatusView} from '../../../components/views/status-view';
 
 type Props = HTMLAttributes<HTMLElement> & {
   item: Item;
@@ -22,25 +23,24 @@ const GroupPreviewCardItem: FC<Props> = ({item, style}: Props) => {
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
 
   return (
-    <Box className={classes.root} style={style}>
+    <Box style={style}>
       <Card variant="outlined" className={classes.card}>
-        <Box className={classes.leftBox}>
-          <Box className={classes.leftLeftBox}>
-            <Box className={classes.iconBox}>
-              <TypeView className={classes.icon} type={item.type} withoutText />
-              <PriorityView className={classes.icon} priority={item.priority} withoutText />
-            </Box>
-          </Box>
-          <Box className={classes.leftRightBox}>
-            <Link to={viewItemUrl} color="textPrimary" withHoverUnderline>
-              <Typography className={classes.typography}>
-                <Truncate>{item.title}</Truncate>
-              </Typography>
-            </Link>
-            <GroupPreviewCardItemChanges item={item} />
-          </Box>
+        <Box className={classes.statusCol}>
+          <StatusView statusType={item.status} />
         </Box>
-        <Box className={classes.rightBox}>
+        <Box className={classes.iconsCol}>
+          <TypeView className={classes.icon} type={item.type} withoutText />
+          <PriorityView className={classes.icon} priority={item.priority} withoutText />
+        </Box>
+        <Box className={classes.contentCol}>
+          <Link to={viewItemUrl} color="textPrimary" withHoverUnderline>
+            <Typography className={classes.typography}>
+              <Truncate>{item.title}</Truncate>
+            </Typography>
+          </Link>
+          <GroupPreviewCardItemChanges item={item} />
+        </Box>
+        <Box className={classes.buttonsCol}>
           <GroupPreviewCardItemButtons item={item} />
         </Box>
       </Card>

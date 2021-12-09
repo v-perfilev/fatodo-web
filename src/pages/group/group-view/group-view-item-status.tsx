@@ -1,9 +1,11 @@
 import React, {FC, useState} from 'react';
-import {Item} from '../../../models/item.model';
-import {useHistory} from 'react-router-dom';
+import {Item, ItemStatusType} from '../../../models/item.model';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {useArchivedItemListContext} from '../../../shared/contexts/list-contexts/archived-item-list-context';
+import {StatusView} from '../../../components/views/status-view';
+import {StatusInput} from '../../../components/inputs/status-input';
+import ItemService from '../../../services/item.service';
 
 type Props = {
   item: Item;
@@ -11,13 +13,32 @@ type Props = {
 };
 
 const GroupViewItemStatus: FC<Props> = ({item, canEdit}: Props) => {
-  const history = useHistory();
   const {handleResponse} = useSnackContext();
   const {updateItem: updateActive} = useItemListContext();
   const {updateItem: updateArchived} = useArchivedItemListContext();
-  const [statusLoading, setStatusLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  return <></>;
+  const updateItem = item.archived ? updateArchived : updateActive;
+
+  const updateStatus = (status: ItemStatusType): void => {
+    setLoading(true);
+    ItemService.updateItemStatus(item.id, status)
+      .then(() => {
+        const updatedItem = {...item, status};
+        updateItem(updatedItem);
+      })
+      .catch((response) => {
+        handleResponse(response);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  const statusInput = <StatusInput statusType={item.status} setStatusType={updateStatus} loading={loading} />;
+  const statusView = <StatusView statusType={item.status} />;
+
+  return canEdit ? statusInput : statusView;
 };
 
 export default GroupViewItemStatus;

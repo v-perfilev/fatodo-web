@@ -15,11 +15,9 @@ import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state'
 import {Item} from '../../../models/item.model';
 import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
 
-type Props = AuthState & {
-  height: number;
-};
+type Props = AuthState;
 
-const GroupPreviewCard: FC<Props> = ({account, height}: Props) => {
+const GroupPreviewCard: FC<Props> = ({account}: Props) => {
   const classes = groupCardStyles();
   const {handleUserIds} = useUserListContext();
   const {group} = useGroupViewContext();
@@ -52,12 +50,11 @@ const GroupPreviewCard: FC<Props> = ({account, height}: Props) => {
   }, [items]);
 
   const theme = ThemeFactory.getTheme(group?.color);
-  const style = {height: height};
 
   return (
     group && (
       <ThemeProvider theme={theme}>
-        <Card elevation={3} className={classes.card} style={style}>
+        <Card elevation={3} className={classes.card}>
           <GroupPreviewCardHeader account={account} />
           <GroupPreviewCardBody />
         </Card>

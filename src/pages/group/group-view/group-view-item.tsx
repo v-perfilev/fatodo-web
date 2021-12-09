@@ -27,19 +27,17 @@ const GroupViewItem: FC<Props> = ({item, canEdit}: Props) => {
         <Box className={classes.statusCol}>
           <GroupViewItemStatus item={item} canEdit={canEdit} />
         </Box>
-        <Box className={classes.iconCol}>
-          <Box className={classes.iconBox}>
-            <TypeView className={classes.icon} type={item.type} withoutText />
-            <PriorityView className={classes.icon} priority={item.priority} withoutText />
-          </Box>
+        <Box className={classes.iconsCol}>
+          <TypeView className={classes.icon} type={item.type} withoutText />
+          <PriorityView className={classes.icon} priority={item.priority} withoutText />
         </Box>
-        <Box className={classes.titleCol}>
+        <Box className={classes.contentCol}>
           <Link to={viewItemUrl} color="textPrimary" withHoverUnderline>
             <Typography>{item.title}</Typography>
           </Link>
           <GroupViewItemChanges item={item} />
         </Box>
-        <Box className={classes.buttonCol}>
+        <Box className={classes.buttonsCol}>
           <GroupViewItemButtons item={item} canEdit={canEdit} />
         </Box>
       </Card>

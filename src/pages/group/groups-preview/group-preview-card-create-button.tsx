@@ -28,8 +28,9 @@ const GroupPreviewCardCreateButton: FC<Props> = ({group, style}: Props) => {
   const text = useMemo<string>(() => t('group:menu.createItem'), [i18n.language]);
 
   return (
-    <Box className={classes.root} style={style}>
+    <Box style={style}>
       <ActivePlaceholder
+        className={classes.placeholder}
         action={action}
         icon={<PlusIcon />}
         text={text}

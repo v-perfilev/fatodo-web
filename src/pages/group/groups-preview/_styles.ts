@@ -1,12 +1,19 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
-import {CARD_FOOTER_HEIGHT, CARD_HEADER_HEIGHT, ITEMS_IN_PREVIEW_CARD, PAGINATION_BUTTON_WIDTH} from '../_constants';
+import {
+  CARD_FOOTER_HEIGHT,
+  CARD_HEADER_HEIGHT,
+  CARD_HEIGHT,
+  CARD_ITEM_HEIGHT,
+  PAGINATION_BUTTON_WIDTH,
+} from '../_constants';
 
 export const groupCardStyles = makeStyles(() => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    height: CARD_HEIGHT,
   },
 }));
 
@@ -63,7 +70,6 @@ export const groupCardContentStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(1) + 'px !important',
   },
   box: {
-    height: `calc(100% / ${ITEMS_IN_PREVIEW_CARD})`,
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
     flexShrink: 0,
@@ -71,50 +77,42 @@ export const groupCardContentStyles = makeStyles((theme: Theme) => ({
 }));
 
 export const groupCardCreateButtonStyles = makeStyles(() => ({
-  root: {
-    height: '100%',
+  placeholder: {
+    height: CARD_ITEM_HEIGHT,
   },
 }));
 
 export const groupCardItemStyles = makeStyles((theme: Theme) => ({
-  root: {
-    height: '100%',
-  },
   card: {
-    height: '100%',
+    height: CARD_ITEM_HEIGHT,
     display: 'flex',
     alignItems: 'center',
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
   },
-  leftBox: {
-    minHeight: '60%',
+  statusCol: {
     display: 'flex',
-    flexGrow: 1,
+    alignItems: 'center',
+    marginRight: theme.spacing(1),
   },
-  leftLeftBox: {
+  iconsCol: {
+    height: '72%',
     display: 'flex',
-    alignItems: 'flex-start',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginRight: theme.spacing(1),
   },
-  leftRightBox: {
+  contentCol: {
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    justifyContent: 'space-between',
   },
-  rightBox: {
+  buttonsCol: {
     display: 'flex',
     alignItems: 'center',
     '& > *': {
       color: theme.palette.grey['400'],
       marginLeft: theme.spacing(1),
-    },
-  },
-  iconBox: {
-    display: 'flex',
-    alignItems: 'center',
-    '& > *': {
-      marginRight: theme.spacing(1),
     },
   },
   icon: {
@@ -200,5 +198,8 @@ export const groupGridContainerStyles = makeStyles((theme: Theme) => ({
 export const groupGridItemStyles = makeStyles((theme: Theme) => ({
   item: {
     padding: theme.spacing(1),
+  },
+  card: {
+    height: CARD_HEIGHT,
   },
 }));

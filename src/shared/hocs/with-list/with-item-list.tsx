@@ -25,8 +25,12 @@ const withItemList = (Component: ComponentType): FC => (props): ReactElement => 
 
   const updateItem = (item: Item): void => {
     setItems((prevState) => {
-      const combinedItems = [...prevState, item];
-      return filterItems(combinedItems);
+      const itemInList = prevState.find((m) => m.id === item.id);
+      if (itemInList) {
+        const index = prevState.indexOf(itemInList);
+        prevState[index] = item;
+      }
+      return [...prevState];
     });
   };
 

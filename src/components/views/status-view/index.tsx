@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {FC, ReactElement} from 'react';
-import {Box} from '@material-ui/core';
 import {IconProps} from '../../surfaces';
 import {ItemStatusType} from '../../../models/item.model';
 import {StatusCreatedIcon} from '../../icons/status-created-icon';
@@ -12,21 +11,21 @@ type Props = IconProps & {
   statusType: ItemStatusType;
 };
 
-export const StatusView: FC<Props> = ({statusType, className, ...props}: Props) => {
+export const StatusView: FC<Props> = ({statusType}: Props) => {
   const iconByStatusType = (statusType: ItemStatusType): ReactElement => {
     switch (statusType) {
       case 'CREATED':
-        return <StatusCreatedIcon {...props} />;
+        return <StatusCreatedIcon color="primary" />;
       case 'WORK_IN_PROGRESS':
-        return <StatusWipIcon {...props} />;
+        return <StatusWipIcon color="primary" />;
       case 'COMPLETED':
-        return <StatusCompletedIcon {...props} />;
+        return <StatusCompletedIcon color="primary" />;
       case 'CLOSED':
-        return <StatusClosedIcon {...props} />;
+        return <StatusClosedIcon color="primary" />;
       default:
-        return <StatusCreatedIcon {...props} />;
+        return <StatusCreatedIcon color="primary" />;
     }
   };
 
-  return <Box className={className}>{iconByStatusType(statusType)}</Box>;
+  return iconByStatusType(statusType);
 };
