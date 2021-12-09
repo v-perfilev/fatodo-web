@@ -8,12 +8,12 @@ import {IconProps} from '../../surfaces';
 import {CommentReactionType} from '../../../models/comment.model';
 
 type Props = IconProps & {
-  reactionType: MessageReactionType & CommentReactionType;
+  statusType: MessageReactionType & CommentReactionType;
 };
 
-export const ReactionView: FC<Props> = ({reactionType, className, ...props}: Props) => {
+export const ReactionView: FC<Props> = ({statusType, className, ...props}: Props) => {
   const icon = (): ReactElement => {
-    switch (reactionType) {
+    switch (statusType) {
       case 'LIKE':
         return <LikeIcon {...props} />;
       case 'DISLIKE':

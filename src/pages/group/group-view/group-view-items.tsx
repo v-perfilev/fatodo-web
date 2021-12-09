@@ -1,4 +1,4 @@
-import React, {CSSProperties, FC, useEffect, useMemo, useState} from 'react';
+import React, {FC, useEffect, useMemo, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewItemsStyles} from './_styles';
 import GroupViewItem from './group-view-item';
@@ -9,19 +9,19 @@ import GroupViewCreateButton from './group-view-create-button';
 import {GroupUtils} from '../../../shared/utils/group.utils';
 import {UserAccount} from '../../../models/user.model';
 import {useArchivedItemListContext} from '../../../shared/contexts/list-contexts/archived-item-list-context';
-import GroupViewItemsHeader from './group-view-items-header';
-import GroupViewItemsFooter from './group-view-items-footer';
+import GroupViewItemsPagination from './group-view-items-pagination';
 import {Item} from '../../../models/item.model';
 import {ITEMS_IN_GROUP, ITEMS_IN_PREVIEW_CARD} from '../_constants';
-import {useTrail} from 'react-spring';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 type Props = {
+  showArchived: boolean;
   account: UserAccount;
 };
 
-const GroupViewItems: FC<Props> = ({account}: Props) => {
+const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
   const classes = groupViewItemsStyles();
-  const [showArchived, setShowArchived] = useState<boolean>(false);
+  const {handleUserIds} = useUserListContext();
   const {group} = useGroupViewContext();
   const {items: active, count: activeCount, load: loadActive, loading: activeLoading} = useItemListContext();
   const {
@@ -32,9 +32,6 @@ const GroupViewItems: FC<Props> = ({account}: Props) => {
   } = useArchivedItemListContext();
   const [page, setPage] = useState<number>(0);
 
-  const loading = useMemo<boolean>(() => activeLoading || archivedLoading, [activeLoading, archivedLoading]);
-  const canEdit = useMemo<boolean>(() => group && GroupUtils.canEdit(account, group), [group, account]);
-
   const items = useMemo<Item[]>(() => {
     return showArchived ? archived : active;
   }, [active, archived, showArchived]);
@@ -44,13 +41,18 @@ const GroupViewItems: FC<Props> = ({account}: Props) => {
   }, [activeCount, archivedCount, showArchived]);
 
   const totalPages = useMemo<number>(() => {
-    return 1 + Math.floor(count / ITEMS_IN_GROUP) + (count % ITEMS_IN_GROUP) > 0 ? 1 : 0;
+    return Math.floor(count / ITEMS_IN_GROUP) + (count % ITEMS_IN_GROUP > 0 ? 1 : 0);
   }, [count]);
 
   const itemsToShow = useMemo<Item[]>(() => {
     const firstShownItem = ITEMS_IN_GROUP * page;
-    return items?.length > firstShownItem ? items.slice(firstShownItem, firstShownItem + ITEMS_IN_GROUP) : [];
+    return items.length > firstShownItem ? items.slice(firstShownItem, firstShownItem + ITEMS_IN_GROUP) : [];
   }, [items, page]);
+
+  const loadItemsUsers = (): void => {
+    const userIds = items.reduce((acc, item) => [...acc, item.createdBy, item.lastModifiedBy], []);
+    handleUserIds(userIds);
+  };
 
   const loadInitial = (load: (groupId: string, offset?: number, size?: number) => void): void => {
     load(group.id);
@@ -64,12 +66,18 @@ const GroupViewItems: FC<Props> = ({account}: Props) => {
   };
 
   useEffect(() => {
-    if (!items && showArchived) {
+    if (items.length > 0) {
+      loadItemsUsers();
+    }
+  }, [items]);
+
+  useEffect(() => {
+    if (showArchived) {
       loadInitial(loadArchived);
-    } else if (!items && !showArchived) {
+    } else {
       loadInitial(loadActive);
     }
-  }, [showArchived]);
+  }, [group.id, showArchived]);
 
   useEffect(() => {
     if (page > 0 && showArchived) {
@@ -79,22 +87,15 @@ const GroupViewItems: FC<Props> = ({account}: Props) => {
     }
   }, [page, showArchived]);
 
-  const trail = useTrail(itemsToShow.length, {
-    delay: 35,
-    opacity: 1,
-    from: {opacity: 0},
-  });
+  const loading = useMemo<boolean>(() => activeLoading || archivedLoading, [activeLoading, archivedLoading]);
+  const canEdit = useMemo<boolean>(() => group && GroupUtils.canEdit(account, group), [group, account]);
 
   return (
     <Box className={classes.root}>
-      <GroupViewItemsHeader showArchived={showArchived} setShowArchived={setShowArchived} />
+      <GroupViewCreateButton group={group} />
       {loading && <CircularSpinner size="sm" />}
-      {!loading && <GroupViewCreateButton group={group} />}
-      {!loading &&
-        trail.map((style: CSSProperties, index) => (
-          <GroupViewItem item={itemsToShow[index]} canEdit={canEdit} style={style} key={index} />
-        ))}
-      <GroupViewItemsFooter page={page} totalPages={totalPages} setPage={setPage} />
+      {!loading && itemsToShow.map((item) => <GroupViewItem item={item} canEdit={canEdit} key={item.id} />)}
+      <GroupViewItemsPagination page={page} totalPages={totalPages} setPage={setPage} />
     </Box>
   );
 };

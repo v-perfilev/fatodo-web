@@ -9,7 +9,7 @@ import ItemViewDescriptionStub from './item-view-description-stub';
 const ItemViewDescription: FC = () => {
   const commonClasses = itemViewCommonStyles();
   const {t} = useTranslation();
-  const {obj: item} = useItemViewContext();
+  const {item} = useItemViewContext();
 
   return item.description ? (
     <LabeledBox className={commonClasses.box} label={t('item:labels.description')}>

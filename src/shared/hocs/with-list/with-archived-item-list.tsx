@@ -15,6 +15,29 @@ const withItemList = (Component: ComponentType): FC => (props): ReactElement => 
   const filterItems = (items: Item[]): Item[] =>
     items.filter(ArrayUtils.withIdFilter).filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtDescComparator);
 
+  const addItem = (item: Item): void => {
+    setItems((prevState) => {
+      const combinedItems = [...prevState, item];
+      return filterItems(combinedItems);
+    });
+    setCount((prevState) => prevState + 1);
+  };
+
+  const updateItem = (item: Item): void => {
+    setItems((prevState) => {
+      const combinedItems = [...prevState, item];
+      return filterItems(combinedItems);
+    });
+  };
+
+  const removeItem = (itemId: string): void => {
+    setItems((prevState) => {
+      const filteredItems = prevState.filter((item) => item.id !== itemId);
+      return [...filteredItems];
+    });
+    setCount((prevState) => prevState - 1);
+  };
+
   const load = (groupId: string, offset?: number, size?: number): void => {
     setLoading(true);
     ItemService.getArchivedItemsByGroupId(groupId, offset, size)
@@ -33,7 +56,7 @@ const withItemList = (Component: ComponentType): FC => (props): ReactElement => 
       });
   };
 
-  const context = {items, count, load, loading};
+  const context = {items, count, addItem, updateItem, removeItem, load, loading};
 
   return (
     <ArchivedItemListContext.Provider value={context}>

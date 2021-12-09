@@ -51,12 +51,6 @@ const GroupPreviewCardBody: FC = () => {
     }
   }, [page]);
 
-  useEffect(() => {
-    if (page > 0) {
-      loadMoreIfNeeded();
-    }
-  }, [page]);
-
   return (
     <>
       <GroupPreviewCardContent itemsToShow={itemsToShow} isFirstPage={page == 0} />

@@ -1,4 +1,4 @@
-import {Item, itemPriorities, ItemPriority, ItemType, itemTypes} from '../../../models/item.model';
+import {Item, itemPriorityTypes, ItemPriorityType, ItemType, itemTypes} from '../../../models/item.model';
 import {Reminder} from '../../../models/reminder.model';
 import {DateConverters} from '../../../shared/utils/date.utils';
 import {Group} from '../../../models/group.model';
@@ -9,7 +9,7 @@ import i18n from '../../../shared/i18n';
 export interface ItemFormValues {
   title: string;
   type: ItemType;
-  priority: ItemPriority;
+  priority: ItemPriorityType;
   time?: Date;
   date?: Date;
   description?: string;
@@ -20,7 +20,7 @@ export interface ItemFormValues {
 const defaultItemFormValues: Readonly<ItemFormValues> = {
   title: '',
   type: itemTypes[0],
-  priority: itemPriorities[1],
+  priority: itemPriorityTypes[1],
   time: null,
   date: null,
   description: '',

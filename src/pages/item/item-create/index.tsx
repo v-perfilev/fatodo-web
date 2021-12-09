@@ -27,7 +27,7 @@ const ItemCreate: FC = () => {
   const {groupId} = useParams();
   const {setMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
-  const {group, load: loadGroup, loading: groupLoad} = useGroupViewContext();
+  const {group, load: loadGroup} = useGroupViewContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
@@ -65,7 +65,7 @@ const ItemCreate: FC = () => {
     setMenu(menuElements);
   }, [i18n.language, isSaving, saveCallback]);
 
-  return groupLoad ? (
+  return !group ? (
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>

@@ -12,7 +12,7 @@ type Props = {
 
 const GroupSortingHeader: FC<Props> = ({bind}: Props) => {
   const classes = groupSortingCardHeaderStyles();
-  const {obj: group} = useGroupViewContext();
+  const {group} = useGroupViewContext();
 
   return (
     <CardHeader

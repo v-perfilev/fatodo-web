@@ -8,7 +8,7 @@ type Props = HTMLAttributes<HTMLElement>;
 
 const ItemViewDate: FC<Props> = ({className}: Props) => {
   const {t} = useTranslation();
-  const {obj: item} = useItemViewContext();
+  const {item} = useItemViewContext();
 
   return (
     item?.date && (

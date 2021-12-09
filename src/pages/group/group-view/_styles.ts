@@ -24,7 +24,7 @@ export const groupViewItemsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupViewItemsHeaderStyles = makeStyles(() => ({
+export const groupViewArchivedSwitchStyles = makeStyles(() => ({
   box: {
     display: 'flex',
     flexDirection: 'row',
@@ -32,7 +32,13 @@ export const groupViewItemsHeaderStyles = makeStyles(() => ({
   },
 }));
 
-export const groupViewItemsFooterStyles = makeStyles((theme: Theme) => ({
+export const groupViewItemsPaginationStyles = makeStyles((theme: Theme) => ({
+  pagination: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: theme.spacing(0.5),
+    marginBottom: theme.spacing(0.5),
+  },
   control: {
     display: 'flex',
     flexDirection: 'row',
@@ -64,17 +70,21 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'row',
     padding: theme.spacing(1),
   },
-  leftBox: {
+  statusCol: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  iconCol: {
     display: 'flex',
     alignItems: 'flex-start',
     paddingTop: 2,
   },
-  centerBox: {
+  titleCol: {
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
   },
-  rightBox: {
+  buttonCol: {
     display: 'flex',
     alignItems: 'center',
     '& > *': {
@@ -104,6 +114,11 @@ export const groupViewItemButtonsStyles = makeStyles((theme: Theme) => ({
   showIcon: {
     '&:hover': {
       color: theme.palette.primary.main,
+    },
+  },
+  archivedIcon: {
+    '&:hover': {
+      color: theme.palette.secondary.main,
     },
   },
   editIcon: {

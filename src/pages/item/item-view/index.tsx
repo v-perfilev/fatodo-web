@@ -44,8 +44,8 @@ const ItemView: FC<Props> = ({account}: Props) => {
   const {setMenu} = useAdditionalMenuContext();
   const {handleUserIds} = useUserListContext();
   const {showItemDeleteDialog} = useItemDialogContext();
-  const {item, load: loadItem, loading: itemLoading} = useItemViewContext();
-  const {group, load: loadGroup, loading: groupLoading} = useGroupViewContext();
+  const {item, load: loadItem} = useItemViewContext();
+  const {group, load: loadGroup} = useGroupViewContext();
   const {load: loadReminders} = useReminderListContext();
 
   const theme = ThemeFactory.getTheme(group?.color);
@@ -99,7 +99,7 @@ const ItemView: FC<Props> = ({account}: Props) => {
     setMenu(menuElements);
   }, [item, group, i18n.language, showItemDeleteDialog]);
 
-  return itemLoading || groupLoading ? (
+  return !item || !group ? (
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>

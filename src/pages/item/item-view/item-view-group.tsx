@@ -8,7 +8,7 @@ type Props = HTMLAttributes<HTMLElement>;
 
 const ItemViewGroup: FC<Props> = ({className}: Props) => {
   const {t} = useTranslation();
-  const {obj: group} = useGroupViewContext();
+  const {group} = useGroupViewContext();
 
   return (
     <LabeledBox label={t('item:labels.group')} className={className}>

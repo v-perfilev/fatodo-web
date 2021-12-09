@@ -18,9 +18,6 @@ export const headerStyles = makeStyles((theme: Theme) => ({
       },
     },
   },
-  grow: {
-    flexGrow: 1,
-  },
   menuButton: {
     marginRight: theme.spacing(-1) + 'px !important',
   },
@@ -46,9 +43,6 @@ export const sidebarMenuStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-  },
-  grow: {
-    flexGrow: 1,
   },
   toolbar: {
     display: 'flex',

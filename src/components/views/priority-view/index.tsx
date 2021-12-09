@@ -3,14 +3,14 @@ import {FC, HTMLAttributes, ReactNode, useMemo} from 'react';
 import {priorityStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
 import {Box, Tooltip} from '@material-ui/core';
-import {ItemPriority} from '../../../models/item.model';
+import {ItemPriorityType} from '../../../models/item.model';
 import {LowPriorityIcon} from '../../icons/low-priority-icon';
 import {NormalPriorityIcon} from '../../icons/normal-priority-icon';
 import {HighPriorityIcon} from '../../icons/high-priority-icon';
 import csx from 'classnames';
 
 type Props = HTMLAttributes<HTMLElement> & {
-  priority: ItemPriority;
+  priority: ItemPriorityType;
   withoutText?: boolean;
 };
 

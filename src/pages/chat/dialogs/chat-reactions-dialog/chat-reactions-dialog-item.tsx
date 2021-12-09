@@ -16,7 +16,7 @@ const ChatReactionsDialogItem: FC<Props> = ({reaction, user}: Props) => {
   return (
     <Box className={classes.statusBox}>
       <Box className={classes.reaction}>
-        <ReactionView reactionType={reaction.type} color="primary" />
+        <ReactionView statusType={reaction.type} color="primary" />
       </Box>
       <Box className={classes.user}>
         <UserView user={user} withUsername withUserPic picSize="sm" />

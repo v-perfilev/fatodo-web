@@ -10,7 +10,7 @@ import GroupPreviewGridCreateButton from './group-preview-grid-create-button';
 
 const GroupPreviewGridContainer: FC = () => {
   const classes = groupGridContainerStyles();
-  const {objs: groups} = useGroupListContext();
+  const {groups} = useGroupListContext();
   const sizes = useResize();
   const [itemRef, setItemRef] = useState<HTMLDivElement>();
   const [itemHeight, setItemHeight] = useState<number>(0);
@@ -23,7 +23,7 @@ const GroupPreviewGridContainer: FC = () => {
 
   return (
     <Grid container className={classes.container}>
-      {groups.map((group) => (
+      {groups?.map((group) => (
         <GroupGridItem key={group.id} group={group} height={itemHeight} />
       ))}
       <GroupPreviewGridCreateButton height={itemHeight} setRef={setItemRef} />

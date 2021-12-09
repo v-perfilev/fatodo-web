@@ -6,6 +6,7 @@ import VerticalMenu from './vertical-menu';
 import {sidebarMenuStyles} from './_styles';
 import {LanguageSelect} from '../../controls';
 import {RedirectMap} from './type';
+import {Grower} from '../../surfaces';
 
 type Props = {
   show: boolean;
@@ -26,7 +27,7 @@ export const SidebarMenu: FC<Props> = ({show, onToggle, redirectMap}: Props) => 
         </Toolbar>
         <Divider />
         <VerticalMenu redirectMap={redirectMap} />
-        <Box className={classes.grow} />
+        <Grower />
         <LanguageSelect list />
       </Box>
     </SwipeableDrawer>

@@ -9,7 +9,7 @@ import ReminderView from '../../../components/views/reminder-view';
 const ItemViewReminders: FC = () => {
   const commonClasses = itemViewCommonStyles();
   const {t} = useTranslation();
-  const {objs: reminders} = useReminderListContext();
+  const {reminders} = useReminderListContext();
 
   const showReminders = reminders?.length > 0;
 

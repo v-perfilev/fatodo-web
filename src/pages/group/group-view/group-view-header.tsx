@@ -1,17 +1,20 @@
 import React, {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {UrlPic} from '../../../components/images';
-import {PageHeader} from '../../../components/surfaces';
+import {Grower, PageHeader} from '../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
 import {Link} from '../../../components/controls';
 import {Routes} from '../../router';
+import {Group} from '../../../models/group.model';
+import GroupViewArchivedSwitch from './group-view-archived-switch';
 
 type Props = {
-  title: string;
-  filename?: string;
+  group: Group;
+  showArchived: boolean;
+  setShowArchived: (showArchived: boolean) => void;
 };
 
-const GroupViewHeader: FC<Props> = ({title, filename}: Props) => {
+const GroupViewHeader: FC<Props> = ({group, showArchived, setShowArchived}: Props) => {
   const {t} = useTranslation();
 
   return (
@@ -20,8 +23,10 @@ const GroupViewHeader: FC<Props> = ({title, filename}: Props) => {
         <Typography variant="body1">{t('header.groups')}</Typography>
       </Link>
       <Box>/</Box>
-      {filename && <UrlPic url={filename} size="md" border={2} />}
-      <Typography variant="h6">{title}</Typography>
+      {group.imageFilename && <UrlPic url={group.imageFilename} size="md" border={2} />}
+      <Typography variant="h6">{group.title}</Typography>
+      <Grower />
+      <GroupViewArchivedSwitch showArchived={showArchived} setShowArchived={setShowArchived} />
     </PageHeader>
   );
 };

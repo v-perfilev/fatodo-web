@@ -15,7 +15,7 @@ const ItemViewChanges: FC<Props> = ({className}: Props) => {
   const classes = itemViewChangesStyles();
   const commonClasses = itemViewCommonStyles();
   const {t} = useTranslation();
-  const {obj: item} = useItemViewContext();
+  const {item} = useItemViewContext();
   const [creator, setCreator] = useState<string>();
   const [updater, setUpdater] = useState<string>();
 

@@ -26,7 +26,7 @@ const GroupEdit: FC = () => {
   const {i18n, t} = useTranslation();
   const {setMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
-  const {group, load: loadGroup, loading: groupLoading} = useGroupViewContext();
+  const {group, load: loadGroup} = useGroupViewContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState<() => void>(() => (): void => {
     // important stub function
@@ -64,7 +64,7 @@ const GroupEdit: FC = () => {
     setMenu(menuElements);
   }, [i18n.language, isSaving, saveCallback]);
 
-  return groupLoading ? (
+  return !group ? (
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>

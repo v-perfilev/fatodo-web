@@ -78,6 +78,18 @@ export default class ItemService {
     return axios.put(url, dto);
   };
 
+  public static updateItemStatus = (id: string, status: string): AxiosPromise => {
+    const dto = {id, status};
+    const url = ItemService.baseUrl + '/items/status';
+    return axios.put(url, dto);
+  };
+
+  public static updateItemArchived = (id: string, archived: boolean): AxiosPromise => {
+    const dto = {id, archived};
+    const url = ItemService.baseUrl + '/items/archived';
+    return axios.put(url, dto);
+  };
+
   public static deleteItem = (id: string): AxiosPromise => {
     const url = ItemService.baseUrl + '/items/' + id;
     return axios.delete(url);

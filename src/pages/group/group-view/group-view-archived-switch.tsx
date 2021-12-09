@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Box, Switch} from '@material-ui/core';
-import {groupViewItemsHeaderStyles} from './_styles';
+import {groupViewArchivedSwitchStyles} from './_styles';
 
 type Props = {
   showArchived: boolean;
   setShowArchived: (archived: boolean) => void;
 };
 
-const GroupViewItemsHeader: FC<Props> = ({showArchived, setShowArchived}: Props) => {
-  const classes = groupViewItemsHeaderStyles();
+const GroupViewArchivedSwitch: FC<Props> = ({showArchived, setShowArchived}: Props) => {
+  const classes = groupViewArchivedSwitchStyles();
 
   const toggleArchived = (): void => {
     setShowArchived(!showArchived);
@@ -22,4 +22,4 @@ const GroupViewItemsHeader: FC<Props> = ({showArchived, setShowArchived}: Props)
   );
 };
 
-export default GroupViewItemsHeader;
+export default GroupViewArchivedSwitch;

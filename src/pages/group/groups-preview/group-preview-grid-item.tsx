@@ -15,7 +15,7 @@ type Props = {
 
 const GroupPreviewGridItem: FC<Props> = ({group, height}: Props) => {
   const classes = groupGridItemStyles();
-  const {setObj: setGroup} = useGroupViewContext();
+  const {setGroup} = useGroupViewContext();
 
   useEffect(() => {
     if (group) {

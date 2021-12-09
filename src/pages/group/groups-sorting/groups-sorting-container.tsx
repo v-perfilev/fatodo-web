@@ -17,7 +17,7 @@ type Props = SortProps & BaseProps;
 
 const GroupsSortingContainer: FC<Props> = (props: Props) => {
   const classes = groupSortingGridContainerStyles();
-  const {objs: groups} = useGroupListContext();
+  const {groups} = useGroupListContext();
   const {setSortItems, setSortContainerRef, setSortItemRef} = props;
   const {sortContainerHeight, sortSprings, sortBind, sortOrder} = props;
   const {setOrder} = props;

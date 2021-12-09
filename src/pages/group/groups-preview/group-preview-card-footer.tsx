@@ -36,11 +36,15 @@ const GroupPreviewCardFooter: FC<Props> = ({page, setPage, totalPages, itemsCoun
   }, [users, group]);
 
   const onUpClick = (): void => {
-    setPage(page - 1);
+    if (page > 0) {
+      setPage(page - 1);
+    }
   };
 
   const onDownClick = (): void => {
-    setPage(page + 1);
+    if (page < totalPages - 1) {
+      setPage(page + 1);
+    }
   };
 
   const paginationElement = (

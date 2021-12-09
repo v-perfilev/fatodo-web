@@ -45,7 +45,8 @@ const withPreviewItemList = (Component: ComponentType): FC => (props): ReactElem
     setIdsLoading(groupIds, true);
     ItemService.getPreviewItemsByGroupIds(groupIds)
       .then((response) => {
-        updateItems(response.data);
+        const itemMap = new Map(Object.entries(response.data));
+        updateItems(itemMap);
       })
       .catch((response) => {
         handleResponse(response);

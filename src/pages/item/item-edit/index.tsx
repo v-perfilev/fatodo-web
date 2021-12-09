@@ -35,8 +35,8 @@ const ItemEdit: FC = () => {
   const {itemId} = useParams();
   const {setMenu} = useAdditionalMenuContext();
   const {handleUserIds} = useUserListContext();
-  const {item, load: loadItem, loading: itemLoading} = useItemViewContext();
-  const {group, load: loadGroup, loading: groupLoading} = useGroupViewContext();
+  const {item, load: loadItem} = useItemViewContext();
+  const {group, load: loadGroup} = useGroupViewContext();
   const {reminders, load: loadReminders} = useReminderListContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
@@ -94,7 +94,7 @@ const ItemEdit: FC = () => {
     setMenu(menuElements);
   }, [i18n.language, isSaving, saveCallback]);
 
-  return groupLoading || itemLoading ? (
+  return !group || !item ? (
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>

@@ -1,4 +1,4 @@
-import React, {FC, memo, useEffect} from 'react';
+import React, {FC, memo, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Container, ThemeProvider} from '@material-ui/core';
 import GroupViewItems from './group-view-items';
@@ -32,7 +32,6 @@ import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state'
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import GroupViewHeader from './group-view-header';
 import withUserList from '../../../shared/hocs/with-list/with-user-list';
-import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import withArchivedItemList from '../../../shared/hocs/with-list/with-archived-item-list';
 
@@ -50,8 +49,8 @@ const GroupView: FC<Props> = ({account}: Props) => {
     showGroupAddMembersDialog,
     showGroupLeaveDialog,
   } = useGroupDialogContext();
-  const {group, load: loadGroup, loading: groupLoading} = useGroupViewContext();
-  const {items, load: loadItems} = useItemListContext();
+  const {group, load: loadGroup} = useGroupViewContext();
+  const [showArchived, setShowArchived] = useState<boolean>(false);
 
   const theme = group ? ThemeFactory.getTheme(group.color) : ThemeFactory.getDefaultTheme();
 
@@ -62,11 +61,6 @@ const GroupView: FC<Props> = ({account}: Props) => {
 
   const loadGroupUsers = (): void => {
     const userIds = group.members.map((user) => user.id);
-    handleUserIds(userIds);
-  };
-
-  const loadItemsUsers = (): void => {
-    const userIds = items.reduce((acc, item) => [...acc, item.createdBy, item.lastModifiedBy], []);
     handleUserIds(userIds);
   };
 
@@ -128,30 +122,23 @@ const GroupView: FC<Props> = ({account}: Props) => {
   useEffect(() => {
     if (group) {
       loadGroupUsers();
-      loadItems(group.id);
     }
   }, [group]);
-
-  useEffect(() => {
-    if (items) {
-      loadItemsUsers();
-    }
-  }, [items]);
 
   useEffect(() => {
     setMenu(menuElements);
   }, [group, i18n.language, showGroupDeleteDialog]);
 
-  return groupLoading ? (
+  return !group ? (
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>
       <Container>
-        <GroupViewHeader title={group.title} filename={group.imageFilename} />
+        <GroupViewHeader group={group} showArchived={showArchived} setShowArchived={setShowArchived} />
         <PageDivider height={5} />
         <GroupViewUsers />
         <PageDivider />
-        <GroupViewItems account={account} />
+        <GroupViewItems showArchived={showArchived} account={account} />
         <PageDivider />
         <ControlMenu menu={menuElements} />
         <PageSpacer />

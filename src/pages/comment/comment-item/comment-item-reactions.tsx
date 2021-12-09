@@ -89,7 +89,7 @@ const CommentItemReactions: FC<Props> = ({comment, account}: Props) => {
     return (
       <Box className={reactionClassNames} onClick={onClick} key={key}>
         {count > 0 && <Box className={classes.count}>{count}</Box>}
-        <ReactionView reactionType={r} fontSize="small" color={color} />
+        <ReactionView statusType={r} fontSize="small" color={color} />
       </Box>
     );
   };

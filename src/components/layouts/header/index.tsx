@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, useState} from 'react';
-import {AppBar, Box, Hidden, IconButton, Slide, Toolbar, useScrollTrigger} from '@material-ui/core';
+import {AppBar, Hidden, IconButton, Slide, Toolbar, useScrollTrigger} from '@material-ui/core';
 import HorizontalMenu from './horizontal-menu';
 import {headerStyles} from './_styles';
 import {MenuIcon} from '../../icons/menu-icon';
@@ -11,6 +11,7 @@ import {connect, ConnectedProps} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../../pages/router';
 import {RedirectMap} from './type';
+import {Grower} from '../../surfaces';
 
 const mapDispatchToProps = {logout};
 const connector = connect(null, mapDispatchToProps);
@@ -47,7 +48,7 @@ const Header: FC<Props> = ({flexible, logout}: Props) => {
       <AppBar elevation={3} className={classes.appbar}>
         <Toolbar className={classes.toolbar}>
           <LogoWithText href={Routes.ROOT} />
-          <Box className={classes.grow} />
+          <Grower />
           <Hidden smDown>
             <HorizontalMenu redirectMap={redirectMap} />
           </Hidden>

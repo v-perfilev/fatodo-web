@@ -8,7 +8,7 @@ type Props = HTMLAttributes<HTMLElement>;
 
 const ItemViewPriority: FC<Props> = ({className}: Props) => {
   const {t} = useTranslation();
-  const {obj: item} = useItemViewContext();
+  const {item} = useItemViewContext();
 
   return (
     <LabeledBox label={t('item:labels.priority')} className={className}>
