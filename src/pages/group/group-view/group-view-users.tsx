@@ -5,12 +5,14 @@ import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-
 import {UserWithPopupView} from '../../../components/views';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {User} from '../../../models/user.model';
+import GroupViewUsersSkeleton from './group-view-users-skeleton';
 
 const GroupViewUsers: FC = () => {
   const classes = groupViewUsersStyles();
   const {group} = useGroupViewContext();
   const {users} = useUserListContext();
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const updateUsersToShow = (): void => {
     const groupUserIds = group.members.map((user) => user.id);
@@ -19,16 +21,21 @@ const GroupViewUsers: FC = () => {
   };
 
   useEffect(() => {
-    if (users) {
+    if (group && users) {
       updateUsersToShow();
     }
-  }, [group, users]);
+  }, [users]);
+
+  useEffect(() => {
+    if (usersToShow.length > 0) {
+      setLoading(false);
+    }
+  }, [usersToShow]);
 
   return (
     <Box className={classes.root}>
-      {usersToShow.map((user) => (
-        <UserWithPopupView user={user} withUsername withPaperBox key={user.id} />
-      ))}
+      {loading && <GroupViewUsersSkeleton />}
+      {!loading && usersToShow.map((user) => <UserWithPopupView user={user} withUsername withPaperBox key={user.id} />)}
     </Box>
   );
 };

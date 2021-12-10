@@ -1,18 +1,18 @@
 import React, {FC, useEffect, useMemo, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewItemsStyles} from './_styles';
-import GroupViewItem from './group-view-item';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
-import {CircularSpinner} from '../../../components/loaders';
 import GroupViewCreateButton from './group-view-create-button';
 import {GroupUtils} from '../../../shared/utils/group.utils';
 import {UserAccount} from '../../../models/user.model';
 import {useArchivedItemListContext} from '../../../shared/contexts/list-contexts/archived-item-list-context';
 import GroupViewItemsPagination from './group-view-items-pagination';
 import {Item} from '../../../models/item.model';
-import {GROUP_ITEMS_COUNT, CARD_ITEMS_COUNT} from '../_constants';
+import {CARD_ITEMS_COUNT, GROUP_ITEMS_COUNT} from '../_constants';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import GroupViewItemSkeleton from './group-view-item-skeleton';
+import GroupViewItem from './group-view-item';
 
 type Props = {
   showArchived: boolean;
@@ -90,10 +90,12 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
   const loading = useMemo<boolean>(() => activeLoading || archivedLoading, [activeLoading, archivedLoading]);
   const canEdit = useMemo<boolean>(() => group && GroupUtils.canEdit(account, group), [group, account]);
 
+  const indexArray = useMemo(() => Array.from(Array(GROUP_ITEMS_COUNT).keys()), []);
+
   return (
     <Box className={classes.root}>
       <GroupViewCreateButton group={group} />
-      {loading && <CircularSpinner size="sm" />}
+      {loading && indexArray.map((index) => <GroupViewItemSkeleton key={index} />)}
       {!loading && itemsToShow.map((item) => <GroupViewItem item={item} canEdit={canEdit} key={item.id} />)}
       <GroupViewItemsPagination page={page} totalPages={totalPages} setPage={setPage} />
     </Box>
