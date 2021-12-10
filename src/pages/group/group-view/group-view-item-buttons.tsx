@@ -1,11 +1,10 @@
 import React, {FC, useState} from 'react';
-import {Hidden, IconButton} from '@material-ui/core';
+import {IconButton} from '@material-ui/core';
 import {groupViewItemButtonsStyles} from './_styles';
 import {EditIcon} from '../../../components/icons/edit-icon';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
 import {Item} from '../../../models/item.model';
 import {ItemRouteUtils} from '../../item/_router';
-import {EyeIcon} from '../../../components/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
 import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
 import {PackageUpIcon} from '../../../components/icons/package-up-icon';
@@ -30,9 +29,9 @@ const GroupViewItemButtons: FC<Props> = ({item, canEdit}: Props) => {
   const {addItem: addArchived, removeItem: removeArchived} = useArchivedItemListContext();
   const [archivedLoading, setArchivedLoading] = useState<boolean>(false);
 
-  const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
-  const redirectToViewItem = (): void => history.push(viewItemUrl);
-  const redirectToEditItem = (): void => history.push(ItemRouteUtils.getEditUrl(item.id));
+  const redirectToEditItem = (): void => {
+    history.push(ItemRouteUtils.getEditUrl(item.id));
+  };
 
   const toggleArchived = (): void => {
     setArchivedLoading(true);
@@ -55,26 +54,39 @@ const GroupViewItemButtons: FC<Props> = ({item, canEdit}: Props) => {
     showItemDeleteDialog(item, onSuccess);
   };
 
+  const clickOnEditButton = (e: React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    redirectToEditItem();
+  };
+
+  const clickOnArchivedButton = (e: React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleArchived();
+  };
+
+  const clickOnDeleteButton = (e: React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    openItemDeleteDialog();
+  };
+
   return (
     <>
-      <Hidden xsDown>
-        <IconButton size="small" className={classes.showIcon} onClick={redirectToViewItem}>
-          <EyeIcon />
-        </IconButton>
-      </Hidden>
       {canEdit && archivedLoading && <CircularSpinner size="xs" />}
       {canEdit && !archivedLoading && (
-        <IconButton size="small" className={classes.archivedIcon} onClick={toggleArchived}>
+        <IconButton size="small" className={classes.archivedIcon} onClick={clickOnArchivedButton}>
           {item.archived ? <PackageUpIcon /> : <PackageDownIcon />}
         </IconButton>
       )}
       {canEdit && (
-        <IconButton size="small" className={classes.editIcon} onClick={redirectToEditItem}>
+        <IconButton size="small" className={classes.editIcon} onClick={clickOnEditButton}>
           <EditIcon />
         </IconButton>
       )}
       {canEdit && (
-        <IconButton size="small" className={classes.deleteIcon} onClick={openItemDeleteDialog}>
+        <IconButton size="small" className={classes.deleteIcon} onClick={clickOnDeleteButton}>
           <DeleteIcon />
         </IconButton>
       )}

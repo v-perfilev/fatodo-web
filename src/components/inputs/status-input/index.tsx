@@ -35,40 +35,44 @@ export const StatusInput: FC<Props> = ({statusType, setStatusType, loading}: Pro
     }
   };
 
-  const openDialog = (): void => {
+  const openDialog = (e: React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
     setIsOpen(true);
   };
 
-  const closeDialog = (): void => {
+  const closeDialog = (e: React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
     setIsOpen(false);
   };
 
-  const setStatusToCreated = (): void => {
+  const setStatusToCreated = (e: React.MouseEvent<HTMLElement>): void => {
     if (statusType !== 'CREATED') {
       setStatusType('CREATED');
     }
-    closeDialog();
+    closeDialog(e);
   };
 
-  const setStatusToWip = (): void => {
+  const setStatusToWip = (e: React.MouseEvent<HTMLElement>): void => {
     if (statusType !== 'WORK_IN_PROGRESS') {
       setStatusType('WORK_IN_PROGRESS');
     }
-    closeDialog();
+    closeDialog(e);
   };
 
-  const setStatusToCompleted = (): void => {
+  const setStatusToCompleted = (e: React.MouseEvent<HTMLElement>): void => {
     if (statusType !== 'COMPLETED') {
       setStatusType('COMPLETED');
     }
-    closeDialog();
+    closeDialog(e);
   };
 
-  const setStatusToClosed = (): void => {
+  const setStatusToClosed = (e: React.MouseEvent<HTMLElement>): void => {
     if (statusType !== 'CLOSED') {
       setStatusType('CLOSED');
     }
-    closeDialog();
+    closeDialog(e);
   };
 
   return (

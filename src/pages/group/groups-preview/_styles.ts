@@ -69,26 +69,34 @@ export const groupCardContentStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(1.5) + 'px !important',
     paddingBottom: theme.spacing(1) + 'px !important',
   },
-  box: {
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
-    flexShrink: 0,
-  },
 }));
 
-export const groupCardCreateButtonStyles = makeStyles(() => ({
+export const groupCardCreateButtonStyles = makeStyles((theme: Theme) => ({
+  root: {
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+  },
   placeholder: {
     height: CARD_ITEM_HEIGHT,
   },
 }));
 
 export const groupCardItemStyles = makeStyles((theme: Theme) => ({
+  root: {
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+  },
   card: {
     height: CARD_ITEM_HEIGHT,
     display: 'flex',
     alignItems: 'center',
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
+    transition: '0.3s',
+
+    '&:hover': {
+      backgroundColor: theme.palette.grey[50],
+    },
   },
   statusCol: {
     display: 'flex',

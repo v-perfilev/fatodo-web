@@ -17,8 +17,14 @@ const GroupPreviewCardItemButtons: FC<Props> = ({item}: Props) => {
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
   const redirectToViewItem = (): void => history.push(viewItemUrl);
 
+  const clickOnViewButton = (e: React.MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
+    redirectToViewItem();
+  };
+
   return (
-    <IconButton size="small" className={classes.showIcon} onClick={redirectToViewItem}>
+    <IconButton size="small" className={classes.showIcon} onClick={clickOnViewButton}>
       <EyeIcon />
     </IconButton>
   );

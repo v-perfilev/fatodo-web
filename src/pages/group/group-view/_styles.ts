@@ -71,6 +71,11 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(2),
+    transition: '0.3s',
+
+    '&:hover': {
+      backgroundColor: theme.palette.grey[50],
+    },
   },
   statusCol: {
     display: 'flex',
