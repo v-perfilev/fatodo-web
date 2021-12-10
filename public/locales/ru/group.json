@@ -17,6 +17,8 @@
     }
   },
   "tooltips": {
+    "showArchived": "Показать архив",
+    "view": "Открыть",
     "save": "Сохранить",
     "cancel": "Отменить",
     "reorder": "Редактировать",
@@ -26,7 +28,9 @@
     "addMembers": "Пригласить",
     "delete": "Удалить",
     "list": "Список групп",
-    "leave": "Покинуть"
+    "leave": "Покинуть",
+    "moveToArchive": "Перенести в архив",
+    "removeFromArchive": "Удалить из архива"
   },
   "menu": {
     "createGroup": "Добавить группу",

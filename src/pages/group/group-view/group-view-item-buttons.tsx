@@ -1,5 +1,5 @@
 import React, {FC, useState} from 'react';
-import {IconButton} from '@material-ui/core';
+import {IconButton, Tooltip} from '@material-ui/core';
 import {groupViewItemButtonsStyles} from './_styles';
 import {EditIcon} from '../../../components/icons/edit-icon';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
@@ -14,6 +14,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {CircularSpinner} from '../../../components/loaders';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {useArchivedItemListContext} from '../../../shared/contexts/list-contexts/archived-item-list-context';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   item: Item;
@@ -23,6 +24,7 @@ type Props = {
 const GroupViewItemButtons: FC<Props> = ({item, canEdit}: Props) => {
   const classes = groupViewItemButtonsStyles();
   const history = useHistory();
+  const {t} = useTranslation();
   const {handleResponse} = useSnackContext();
   const {showItemDeleteDialog} = useItemDialogContext();
   const {addItem: addActive, removeItem: removedActive} = useItemListContext();
@@ -76,19 +78,25 @@ const GroupViewItemButtons: FC<Props> = ({item, canEdit}: Props) => {
     <>
       {canEdit && archivedLoading && <CircularSpinner size="xs" />}
       {canEdit && !archivedLoading && (
-        <IconButton size="small" className={classes.archivedIcon} onClick={clickOnArchivedButton}>
-          {item.archived ? <PackageUpIcon /> : <PackageDownIcon />}
-        </IconButton>
+        <Tooltip title={item.archived ? t('group:tooltips.removeFromArchived') : t('group:tooltips.moveToArchive')}>
+          <IconButton size="small" className={classes.archivedIcon} onClick={clickOnArchivedButton}>
+            {item.archived ? <PackageUpIcon /> : <PackageDownIcon />}
+          </IconButton>
+        </Tooltip>
       )}
       {canEdit && (
-        <IconButton size="small" className={classes.editIcon} onClick={clickOnEditButton}>
-          <EditIcon />
-        </IconButton>
+        <Tooltip title={t('group:tooltips.edit')}>
+          <IconButton size="small" className={classes.editIcon} onClick={clickOnEditButton}>
+            <EditIcon />
+          </IconButton>
+        </Tooltip>
       )}
       {canEdit && (
-        <IconButton size="small" className={classes.deleteIcon} onClick={clickOnDeleteButton}>
-          <DeleteIcon />
-        </IconButton>
+        <Tooltip title={t('group:tooltips.delete')}>
+          <IconButton size="small" className={classes.deleteIcon} onClick={clickOnDeleteButton}>
+            <DeleteIcon />
+          </IconButton>
+        </Tooltip>
       )}
     </>
   );

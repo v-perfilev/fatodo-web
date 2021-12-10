@@ -48,6 +48,12 @@
       "label": "Reminders"
     }
   },
+  "statuses": {
+    "created": "Created",
+    "workInProgress": "Work in progress",
+    "completed": "Completed",
+    "closed": "Closed"
+  },
   "tooltips": {
     "save": "Save",
     "cancel": "Cancel",

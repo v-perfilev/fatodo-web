@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
-import {Box, IconButton} from '@material-ui/core';
+import {Box, IconButton, Tooltip} from '@material-ui/core';
 import {UserView} from '../../../../components/views';
 import {groupMembersDialogMemberStyles} from './_styles';
 import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
@@ -75,14 +75,18 @@ const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, o
       </Box>
       <Box className={classes.buttons}>
         {canAdmin && (user.id !== account.id || canLeave) && (
-          <IconButton size="small" onClick={switchToEdit}>
-            <EditIcon color="primary" />
-          </IconButton>
+          <Tooltip title={t('group:tooltips.edit')}>
+            <IconButton size="small" onClick={switchToEdit}>
+              <EditIcon color="primary" />
+            </IconButton>
+          </Tooltip>
         )}
         {canAdmin && user.id !== account.id && (
-          <IconButton size="small" onClick={switchRemovingConfirmation}>
-            <UserMinusIcon color="error" />
-          </IconButton>
+          <Tooltip title={t('group:tooltips.delete')}>
+            <IconButton size="small" onClick={switchRemovingConfirmation}>
+              <UserMinusIcon color="error" />
+            </IconButton>
+          </Tooltip>
         )}
       </Box>
       {removingConfirmation}

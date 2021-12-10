@@ -4,7 +4,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {useArchivedItemListContext} from '../../../shared/contexts/list-contexts/archived-item-list-context';
 import {StatusView} from '../../../components/views/status-view';
-import {StatusInput} from '../../../components/inputs/status-input';
+import {StatusSelect} from '../../../components/inputs/status-select';
 import ItemService from '../../../services/item.service';
 
 type Props = {
@@ -35,7 +35,7 @@ const GroupViewItemStatus: FC<Props> = ({item, canEdit}: Props) => {
       });
   };
 
-  const statusInput = <StatusInput statusType={item.status} setStatusType={updateStatus} loading={loading} />;
+  const statusInput = <StatusSelect statusType={item.status} setStatusType={updateStatus} loading={loading} />;
   const statusView = <StatusView statusType={item.status} />;
 
   return canEdit ? statusInput : statusView;

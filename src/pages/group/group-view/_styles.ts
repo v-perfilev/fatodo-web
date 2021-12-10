@@ -24,11 +24,17 @@ export const groupViewItemsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupViewArchivedSwitchStyles = makeStyles(() => ({
+export const groupViewArchivedSwitchStyles = makeStyles((theme: Theme) => ({
   box: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  label: {
+    fontWeight: 500,
+    color: theme.palette.grey[500],
+    marginRight: theme.spacing(0.5),
   },
 }));
 

@@ -48,6 +48,12 @@
       "label": "Напоминания"
     }
   },
+  "statuses": {
+    "created": "Создано",
+    "workInProgress": "В процессе",
+    "completed": "Завершено",
+    "closed": "Закрыто"
+  },
   "tooltips": {
     "save": "Сохранить",
     "cancel": "Отменить",

@@ -28,7 +28,7 @@ const GroupLeaveDialog: FC<Props> = ({group, show, close, onSuccess}: Props) => 
 
   const onAgree = (): void => {
     setLoading(true);
-    ItemService.deleteGroup(group?.id)
+    ItemService.leaveGroup(group?.id)
       .then(() => {
         handleCode('group.left', 'info');
         close();

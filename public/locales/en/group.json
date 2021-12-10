@@ -17,6 +17,8 @@
     }
   },
   "tooltips": {
+    "showArchived": "Show archived",
+    "view": "View",
     "save": "Save",
     "cancel": "Cancel",
     "reorder": "Reorder",
@@ -26,7 +28,9 @@
     "addMembers": "Invite",
     "delete": "Delete",
     "list": "List of groups",
-    "leave": "Leave"
+    "leave": "Leave",
+    "moveToArchive": "Move to archive",
+    "removeFromArchive": "Remove from archive"
   },
   "menu": {
     "createGroup": "Create group",
