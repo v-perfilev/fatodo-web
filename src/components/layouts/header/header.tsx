@@ -4,7 +4,7 @@ import {AppBar, Hidden, IconButton, Slide, Toolbar, useScrollTrigger} from '@mat
 import HorizontalMenu from './horizontal-menu';
 import {headerStyles} from './_styles';
 import {MenuIcon} from '../../icons/menu-icon';
-import {LogoWithText} from '../logo';
+import {LogoWithText} from '../logo/logo';
 import {SidebarMenu} from './sidebar-menu';
 import {logout} from '../../../store/actions/auth.actions';
 import {connect, ConnectedProps} from 'react-redux';

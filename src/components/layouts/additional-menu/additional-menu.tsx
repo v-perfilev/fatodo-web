@@ -7,6 +7,7 @@ import {CircularProgress} from '@material-ui/core';
 import {useLocation} from 'react-router-dom';
 import {MenuIcon} from '../../icons/menu-icon';
 import {CloseIcon} from '../../icons/close-icon';
+import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const AdditionalMenu: FC = () => {
   const classes = additionalMenuStyles();
@@ -30,12 +31,16 @@ const AdditionalMenu: FC = () => {
     );
   }, [loading]);
 
+  const filteredMenu = useMemo<MenuElement[]>(() => {
+    return menu.filter((action) => !action.hidden && !action.disabled);
+  }, [menu]);
+
   useEffect(() => {
     setMenu(null);
     setLoading(false);
   }, [pathname]);
 
-  return menu ? (
+  return filteredMenu ? (
     <SpeedDial
       ariaLabel="Menu"
       className={classes.root}
@@ -45,11 +50,9 @@ const AdditionalMenu: FC = () => {
       open={open}
       direction="up"
     >
-      {menu
-        .filter((action) => !action.hidden && !action.disabled)
-        .map((action, index) => (
-          <SpeedDialAction key={index} icon={action.icon} tooltipTitle={action.text} onClick={action.action} />
-        ))}
+      {filteredMenu.map((action, index) => (
+        <SpeedDialAction icon={action.icon} tooltipTitle={action.text} onClick={action.action} key={index} />
+      ))}
     </SpeedDial>
   ) : null;
 };

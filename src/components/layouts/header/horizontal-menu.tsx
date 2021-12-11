@@ -9,7 +9,7 @@ import {LoginIcon} from '../../icons/login-icon';
 import {LogoutIcon} from '../../icons/logout-icon';
 import {SignUpIcon} from '../../icons/signup-icon';
 import {LanguageSelect} from '../../controls';
-import CurrentUser from '../current-user';
+import CurrentUser from '../current-user/current-user';
 import {ArrowDownIcon} from '../../icons/arrow-down-icon';
 import {PopupMenu} from '../../surfaces';
 import {AccountIcon} from '../../icons/account-icon';

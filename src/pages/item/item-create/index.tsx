@@ -15,7 +15,7 @@ import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import {PageSpacer} from '../../../components/surfaces';
-import ControlMenu from '../../../components/layouts/control-menu';
+import ControlMenu from '../../../components/layouts/control-menu/control-menu';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {itemCreateStyles} from './_styles';

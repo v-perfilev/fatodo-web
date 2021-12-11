@@ -8,7 +8,7 @@ import {LogoutIcon} from '../../icons/logout-icon';
 import {LoginIcon} from '../../icons/login-icon';
 import {SignUpIcon} from '../../icons/signup-icon';
 import {AccountIcon} from '../../icons/account-icon';
-import CurrentUser from '../current-user';
+import CurrentUser from '../current-user/current-user';
 import {useUnreadMessagesContext} from '../../../shared/contexts/chat-contexts/unread-messages-context';
 import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
 import {RedirectMap} from './type';

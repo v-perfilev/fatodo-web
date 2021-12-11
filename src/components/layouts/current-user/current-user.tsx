@@ -12,10 +12,10 @@ type Props = AuthState & BaseProps;
 
 const CurrentUser: FC<Props> = ({account, className}: Props) => {
   const classes = currentUserStyles();
-  const classNames = csx(classes.root, className);
 
   const user = convertAccountToUser(account);
 
+  const classNames = csx(classes.root, className);
   return <UserView user={user} picSize="sm" withUsername className={classNames} />;
 };
 
