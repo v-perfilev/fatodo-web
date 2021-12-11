@@ -4,6 +4,7 @@ import {useContactContext} from '../../../shared/contexts/contact-contexts/conta
 import ContactOutcomingContainer from './contact-outcoming-container';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import ContactSkeletons from '../contact-skeletons/contact-skeletons';
+import {useLoadingState} from '../../../shared/hooks/use-loading-state';
 
 type Props = {
   filter: string;
@@ -13,7 +14,7 @@ const ContactOutcoming: FC<Props> = ({filter}: Props) => {
   const {outcomingRequests} = useContactContext();
   const {users, handleUserIds} = useUserListContext();
   const [userRequests, setUserRequests] = useState<ContactRequestWithUser[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useLoadingState();
 
   const resetUserRequests = (): void => {
     setUserRequests([]);

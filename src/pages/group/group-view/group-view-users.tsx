@@ -6,13 +6,14 @@ import {UserWithPopupView} from '../../../components/views';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {User} from '../../../models/user.model';
 import GroupViewUsersSkeleton from './group-view-users-skeleton';
+import {useLoadingState} from '../../../shared/hooks/use-loading-state';
 
 const GroupViewUsers: FC = () => {
   const classes = groupViewUsersStyles();
   const {group} = useGroupViewContext();
   const {users} = useUserListContext();
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useLoadingState();
 
   const updateUsersToShow = (): void => {
     const groupUserIds = group.members.map((user) => user.id);

@@ -13,6 +13,7 @@ import {NEW_COMMENT_PREFIX} from '../_constants';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {CircularSpinner} from '../../../components/loaders';
 import CommentSkeletons from '../comment-skeletons/comment-skeletons';
+import {useLoadingState} from '../../../shared/hooks/use-loading-state';
 
 type Props = {
   targetId: string;
@@ -30,6 +31,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
   const {handleResponse} = useSnackContext();
   const {handleUserIds} = useUserListContext();
   const [comments, setComments] = useState<PageableList<Comment>>({data: [], count: 0});
+  const [initialLoading, setInitialLoading] = useLoadingState();
   const [loading, setLoading] = useState(true);
   const [allLoaded, setAllLoaded] = useState(false);
 
@@ -168,7 +170,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
   // EFFECTS
 
   useEffect(() => {
-    loadMoreItems().finally();
+    loadMoreItems().finally(() => setInitialLoading(false));
   }, [targetId]);
 
   useEffect(() => {
@@ -204,13 +206,13 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
 
   return (
     <>
-      {comments?.data.length > 0 && (
+      {initialLoading && <CommentSkeletons />}
+      {!initialLoading && comments?.data.length > 0 && (
         <CommentContainer comments={comments.data} account={account} setReference={setReference} />
       )}
-      {loading && comments?.data.length == 0 && <CommentSkeletons />}
-      {loading && comments?.data.length > 0 && <CircularSpinner size="sm" />}
-      {!loading && comments?.data.length == 0 && <CommentStub />}
-      {!loading && !allLoaded && comments.data.length > 0 && (
+      {!initialLoading && loading && <CircularSpinner size="sm" />}
+      {!initialLoading && !loading && comments?.data.length == 0 && <CommentStub />}
+      {!initialLoading && !loading && !allLoaded && comments.data.length > 0 && (
         <CommentLoadButton loadMoreItems={loadMoreItems} loading={loading} />
       )}
     </>

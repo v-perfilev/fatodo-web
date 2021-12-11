@@ -13,6 +13,7 @@ import {CARD_ITEMS_COUNT, GROUP_ITEMS_COUNT} from '../_constants';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import GroupViewItem from './group-view-item';
 import GroupViewItemSkeletons from './group-view-item-skeletons';
+import {useLoadingState} from '../../../shared/hooks/use-loading-state';
 
 type Props = {
   showArchived: boolean;
@@ -30,6 +31,7 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
     load: loadArchived,
     loading: archivedLoading,
   } = useArchivedItemListContext();
+  const [loading, setLoading] = useLoadingState();
   const [page, setPage] = useState<number>(0);
 
   const items = useMemo<Item[]>(() => {
@@ -87,7 +89,11 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
     }
   }, [page, showArchived]);
 
-  const loading = useMemo<boolean>(() => activeLoading || archivedLoading, [activeLoading, archivedLoading]);
+  useEffect(() => {
+    const newLoading = activeLoading || archivedLoading;
+    setLoading(newLoading);
+  }, [activeLoading, archivedLoading]);
+
   const canEdit = useMemo<boolean>(() => group && GroupUtils.canEdit(account, group), [group, account]);
 
   return (
