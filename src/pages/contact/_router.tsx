@@ -4,7 +4,7 @@ import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
 import {Routes} from '../router';
-import ContactMain from './contact-main';
+import ContactMain from './contact-main/contact-main';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
 import {flowRight} from 'lodash';
 

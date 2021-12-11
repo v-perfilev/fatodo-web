@@ -18,7 +18,7 @@ export const contactMainStyles = makeStyles(() => ({
   },
 }));
 
-export const contactHeaderStyles = makeStyles((theme: Theme) => ({
+export const contactMainHeaderStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',

@@ -5,15 +5,15 @@ import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {contactMainStyles} from './_styles';
 import {PlusIcon} from '../../../components/icons/plus-icon';
-import ContactRelations from '../contact-relations';
-import ContactIncoming from '../contact-incoming';
+import ContactRelations from '../contact-relations/contact-relations';
+import ContactIncoming from '../contact-incoming/contact-incoming';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {ContactRouteUtils} from '../_router';
-import ContactOutcoming from '../contact-outcoming';
+import ContactOutcoming from '../contact-outcoming/contact-outcoming';
 import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/contact-dialog-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import {PageSpacer} from '../../../components/surfaces';
-import ContactHeader from './contact-header';
+import ContactMainHeader from './contact-main-header';
 import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
 import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
 import BadgeWithoutIcon from '../../../components/icons/badge-icons/badge-without-icon';
@@ -96,7 +96,7 @@ const ContactMain: FC = () => {
           />
         </Tabs>
         <PageSpacer />
-        <ContactHeader setFilter={setFilter} />
+        <ContactMainHeader setFilter={setFilter} />
         {activeTab === 0 && <ContactRelations filter={filter} />}
         {activeTab === 1 && <ContactOutcoming filter={filter} />}
         {activeTab === 2 && <ContactIncoming filter={filter} />}

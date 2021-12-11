@@ -2,10 +2,10 @@ import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {Skeleton} from '@material-ui/lab';
 import {Grower} from '../../../components/surfaces';
-import {contactSkeletonStyles} from './_styles';
+import {contactSkeletonsItemStyles} from './_styles';
 
-const ContactSkeleton: FC = () => {
-  const classes = contactSkeletonStyles();
+const ContactSkeletonsItem: FC = () => {
+  const classes = contactSkeletonsItemStyles();
 
   return (
     <Box className={classes.root}>
@@ -18,4 +18,4 @@ const ContactSkeleton: FC = () => {
   );
 };
 
-export default ContactSkeleton;
+export default ContactSkeletonsItem;

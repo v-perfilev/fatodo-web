@@ -9,7 +9,7 @@ export const contactSkeletonsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const contactSkeletonStyles = makeStyles((theme: Theme) => ({
+export const contactSkeletonsItemStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',

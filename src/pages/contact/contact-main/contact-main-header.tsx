@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FC} from 'react';
 import {Box, Fab} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
-import {contactHeaderStyles} from './_styles';
+import {contactMainHeaderStyles} from './_styles';
 import {ClearableTextInput} from '../../../components/inputs';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/contact-dialog-context';
@@ -12,8 +12,8 @@ type Props = {
   setFilter: (filter: string) => void;
 };
 
-const ContactHeader: FC<Props> = ({setFilter}: Props) => {
-  const classes = contactHeaderStyles();
+const ContactMainHeader: FC<Props> = ({setFilter}: Props) => {
+  const classes = contactMainHeaderStyles();
   const {update: updateContacts} = useContactContext();
   const {update: updateInfo} = useContactInfoContext();
   const {showContactRequestDialog} = useContactDialogContext();
@@ -42,4 +42,4 @@ const ContactHeader: FC<Props> = ({setFilter}: Props) => {
   );
 };
 
-export default ContactHeader;
+export default ContactMainHeader;

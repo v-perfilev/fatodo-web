@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import FormDialog from '../../../../components/dialogs/form-dialog/form-dialog';
-import ContactRequestForm from './contact-request-form';
+import ContactRequestForm from './contact-request-form/contact-request-form';
 import {useTranslation} from 'react-i18next';
 
 export type ContactRequestDialogProps = {
