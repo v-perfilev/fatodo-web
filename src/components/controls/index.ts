@@ -1,3 +1,3 @@
-export * from './language-select';
-export * from './link';
-export * from './loading-button';
+export * from './language-select/language-select';
+export * from './link/link';
+export * from './loading-button/loading-button';
