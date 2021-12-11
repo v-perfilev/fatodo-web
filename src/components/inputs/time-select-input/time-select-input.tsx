@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react';
 import {Box, Fade, TextField} from '@material-ui/core';
 import {Moment} from 'moment';
 import {ClockView} from '@material-ui/pickers';
-import {timeInputStyles} from './_styles';
+import {timeSelectInputStyles} from './_styles';
 import {DateConverters, DateFormatters} from '../../../shared/utils/date.utils';
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 };
 
 export const TimeSelectInput: FC<Props> = ({label, required, time, setTime}: Props) => {
-  const classes = timeInputStyles();
+  const classes = timeSelectInputStyles();
   const [showClock, setShowClock] = useState(false);
   const [showMinutes, setShowMinutes] = useState(false);
 

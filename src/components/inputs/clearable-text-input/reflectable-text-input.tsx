@@ -1,4 +1,4 @@
-import {ClearableTextInput} from './index';
+import {ClearableTextInput} from './clearable-text-input';
 import React, {ChangeEvent, FC, HTMLAttributes, KeyboardEvent, useEffect, useRef} from 'react';
 import {InputUtils} from '../../../shared/utils/input.utils';
 import {TextFieldProps} from '@material-ui/core';

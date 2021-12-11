@@ -4,7 +4,7 @@ import {Avatar} from '@material-ui/core';
 import csx from 'classnames';
 import {urlPicStyles} from './_styles';
 import {ImageUtils} from '../../../shared/utils/image.utils';
-import {FallbackPic} from '../fallback-pic';
+import {FallbackPic} from '../fallback-pic/fallback-pic';
 import {SizeType} from '../types';
 import {FALLBACK_AVATAR} from '../../../constants';
 

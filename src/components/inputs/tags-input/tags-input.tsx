@@ -1,7 +1,7 @@
 import React, {FC, KeyboardEvent, ReactElement} from 'react';
 import {Field} from 'formik';
 import {Autocomplete, AutocompleteRenderInputParams} from 'formik-material-ui-lab';
-import {TextInput} from '../text-input';
+import {TextInput} from '../text-input/text-input';
 
 type Props = {
   name: string;

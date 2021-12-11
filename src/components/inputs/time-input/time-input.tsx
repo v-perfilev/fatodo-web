@@ -24,6 +24,14 @@ export const TimeInput: FC<Props> = ({name, label}: Props) => {
     setFieldValue(name, time);
   };
 
+  const inputProps = {
+    endAdornment: values[name] && (
+      <IconButton onClick={clear} size="small">
+        <CloseIcon />
+      </IconButton>
+    ),
+  };
+
   return (
     <Field
       component={TimePicker}
@@ -35,13 +43,7 @@ export const TimeInput: FC<Props> = ({name, label}: Props) => {
       ampm={false}
       variant="inline"
       fullWidth
-      InputProps={{
-        endAdornment: values[name] && (
-          <IconButton onClick={clear} size="small">
-            <CloseIcon />
-          </IconButton>
-        ),
-      }}
+      InputProps={inputProps}
     />
   );
 };

@@ -1,6 +1,6 @@
 import {makeStyles, Theme} from '@material-ui/core/styles';
 
-export const timeInputStyles = makeStyles((theme: Theme) => ({
+export const timeSelectInputStyles = makeStyles((theme: Theme) => ({
   textField: {
     width: '100%',
   },

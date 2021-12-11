@@ -26,18 +26,20 @@ export const ClearableTextInput: FC<Props> = ({onChange, inputRef, ...props}: Pr
     updateShowClearButton();
   };
 
+  const inputProps = {
+    endAdornment: showClearButton && (
+      <IconButton onClick={clear} size="small">
+        <CloseIcon />
+      </IconButton>
+    ),
+  };
+
   return (
     <TextField
       {...props}
       onChange={handleOnChange}
       inputRef={RefUtils.mergeRefs(ref, inputRef)}
-      InputProps={{
-        endAdornment: showClearButton && (
-          <IconButton onClick={clear} size="small">
-            <CloseIcon />
-          </IconButton>
-        ),
-      }}
+      InputProps={inputProps}
     />
   );
 };

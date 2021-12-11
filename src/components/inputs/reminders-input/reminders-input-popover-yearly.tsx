@@ -5,8 +5,8 @@ import {Box} from '@material-ui/core';
 import {DateParams} from '../../../models/date-params.model';
 import {DateConverters} from '../../../shared/utils/date.utils';
 import {useTranslation} from 'react-i18next';
-import {TimeSelectInput} from '../time-select-input';
-import {DateSelect} from '../date-select';
+import {TimeSelectInput} from '../time-select-input/time-select-input';
+import {DateSelect} from '../date-select/date-select';
 
 type Props = {
   setReminder: (reminder: Reminder) => void;

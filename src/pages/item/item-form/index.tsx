@@ -17,7 +17,7 @@ import {
   TimeInput,
 } from '../../../components/inputs';
 import {useTranslation} from 'react-i18next';
-import TypeInput from '../../../components/inputs/type-input';
+import TypeInput from '../../../components/inputs/type-input/type-input';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {flowRight} from 'lodash';
 import {Reminder} from '../../../models/reminder.model';

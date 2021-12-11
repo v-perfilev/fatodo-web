@@ -7,7 +7,7 @@ import {LoadingButton} from '../../../../components/controls';
 import {Group, GroupMember, GroupPermission, GroupUser} from '../../../../models/group.model';
 import ItemService from '../../../../services/item.service';
 import {UserView} from '../../../../components/views';
-import {PermissionSelect} from '../../../../components/inputs/permission-select';
+import {PermissionSelect} from '../../../../components/inputs/permission-select/permission-select';
 
 export type GroupEditMemberDialogProps = {
   group: Group;

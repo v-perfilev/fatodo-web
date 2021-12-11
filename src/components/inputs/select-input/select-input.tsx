@@ -12,14 +12,12 @@ type Props = {
 
 export const SelectInput: FC<Props> = ({name, label, options, required}: Props) => {
   return (
-    <>
-      <Field component={TextField} select name={name} label={label} required={required} fullWidth>
-        {Array.from(options.keys()).map((key, index) => (
-          <MenuItem value={key} key={index}>
-            {options.get(key)}
-          </MenuItem>
-        ))}
-      </Field>
-    </>
+    <Field component={TextField} select name={name} label={label} required={required} fullWidth>
+      {Array.from(options.keys()).map((key, index) => (
+        <MenuItem value={key} key={index}>
+          {options.get(key)}
+        </MenuItem>
+      ))}
+    </Field>
   );
 };

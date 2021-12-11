@@ -3,7 +3,7 @@ import {Box} from '@material-ui/core';
 import {dateInputItemStyles} from './_styles';
 import cloneDeep from 'lodash/cloneDeep';
 import {DateUtils} from '../../../shared/utils/date.utils';
-import {CalendarSelect} from '../calendar-select';
+import {CalendarSelect} from '../calendar-select/calendar-select';
 
 type Props = {
   date: Date;

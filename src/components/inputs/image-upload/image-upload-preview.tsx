@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {imageUploadPreviewStyles} from './_styles';
 import {Image} from '../../../models/image.model';
-import {UrlPic} from '../../images/url-pic';
+import {UrlPic} from '../../images/url-pic/url-pic';
 
 type Props = {
   image: Image;

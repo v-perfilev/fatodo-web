@@ -5,8 +5,8 @@ import {Box} from '@material-ui/core';
 import {DateParams} from '../../../models/date-params.model';
 import {DateConverters} from '../../../shared/utils/date.utils';
 import {useTranslation} from 'react-i18next';
-import {TimeSelectInput} from '../time-select-input';
-import {CalendarSelect} from '../calendar-select';
+import {TimeSelectInput} from '../time-select-input/time-select-input';
+import {CalendarSelect} from '../calendar-select/calendar-select';
 import {ArrayUtils} from '../../../shared/utils/array.utils';
 
 type Props = {

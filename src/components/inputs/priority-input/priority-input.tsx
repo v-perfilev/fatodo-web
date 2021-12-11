@@ -3,7 +3,7 @@ import {Field} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {itemPriorityTypes} from '../../../models/item.model';
 import {MenuItem} from '@material-ui/core';
-import {PriorityView} from '../../views/priority-view';
+import {PriorityView} from '../../views';
 
 type Props = {
   name: string;

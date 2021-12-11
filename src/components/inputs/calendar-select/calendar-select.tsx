@@ -43,7 +43,11 @@ export const CalendarSelect: FC<Props> = (props: Props) => {
   const sw = showWeekend ?? true;
   const dateClass = csx(classes.date, {[classes.dateSmall]: true});
 
+  const [datesValues, weekCount] = getDatesAndWeeksCount(dow, dim);
+  const weekArray = Array.from({length: weekCount}, (_, i) => i);
+  const dateArray = Array.from({length: 7}, (_, i) => i);
   const weekdayArray = DateUtils.getWeekdayNames();
+
   const weekdays = (
     <Box className={classes.weekHeader}>
       {weekdayArray.map((name, index) => (
@@ -54,9 +58,6 @@ export const CalendarSelect: FC<Props> = (props: Props) => {
     </Box>
   );
 
-  const [datesValues, weekCount] = getDatesAndWeeksCount(dow, dim);
-  const weekArray = Array.from({length: weekCount}, (_, i) => i);
-  const dateArray = Array.from({length: 7}, (_, i) => i);
   const dates = weekArray.map((week, weekIndex) => (
     <Box className={classes.week} key={weekIndex}>
       {dateArray.map((date, dateIndex) => {

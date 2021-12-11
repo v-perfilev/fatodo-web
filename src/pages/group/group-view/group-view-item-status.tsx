@@ -4,7 +4,7 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
 import {useArchivedItemListContext} from '../../../shared/contexts/list-contexts/archived-item-list-context';
 import {StatusView} from '../../../components/views/status-view';
-import {StatusSelect} from '../../../components/inputs/status-select';
+import {StatusSelect} from '../../../components/inputs/status-select/status-select';
 import ItemService from '../../../services/item.service';
 
 type Props = {
