@@ -8,6 +8,7 @@ type Props = HTMLAttributes<HTMLElement>;
 
 export const Spinner: FC<Props> = ({className}: Props) => {
   const classes = spinnerStyles();
+
   const classNames = csx(classes.root, className);
 
   return (

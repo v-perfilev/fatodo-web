@@ -11,7 +11,6 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 export const CircularSpinner: FC<Props> = ({size, className}: Props) => {
   const classes = circularSpinnerStyles();
-  const classNames = csx(classes.root, className);
 
   let pxSize;
   switch (size) {
@@ -30,6 +29,8 @@ export const CircularSpinner: FC<Props> = ({size, className}: Props) => {
     default:
       pxSize = 70;
   }
+
+  const classNames = csx(classes.root, className);
 
   return (
     <Box className={classNames}>
