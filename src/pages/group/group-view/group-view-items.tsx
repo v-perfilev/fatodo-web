@@ -11,8 +11,8 @@ import GroupViewItemsPagination from './group-view-items-pagination';
 import {Item} from '../../../models/item.model';
 import {CARD_ITEMS_COUNT, GROUP_ITEMS_COUNT} from '../_constants';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
-import GroupViewItemSkeleton from './group-view-item-skeleton';
 import GroupViewItem from './group-view-item';
+import GroupViewItemSkeletons from './group-view-item-skeletons';
 
 type Props = {
   showArchived: boolean;
@@ -90,12 +90,10 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
   const loading = useMemo<boolean>(() => activeLoading || archivedLoading, [activeLoading, archivedLoading]);
   const canEdit = useMemo<boolean>(() => group && GroupUtils.canEdit(account, group), [group, account]);
 
-  const indexArray = useMemo(() => Array.from(Array(GROUP_ITEMS_COUNT).keys()), []);
-
   return (
     <Box className={classes.root}>
       <GroupViewCreateButton group={group} />
-      {loading && indexArray.map((index) => <GroupViewItemSkeleton key={index} />)}
+      {loading && <GroupViewItemSkeletons />}
       {!loading && itemsToShow.map((item) => <GroupViewItem item={item} canEdit={canEdit} key={item.id} />)}
       <GroupViewItemsPagination page={page} totalPages={totalPages} setPage={setPage} />
     </Box>

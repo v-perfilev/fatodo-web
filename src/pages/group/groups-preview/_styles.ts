@@ -82,7 +82,7 @@ export const groupCardCreateButtonStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardItemSkeletonStyles = makeStyles((theme: Theme) => ({
+export const groupPreviewItemSkeletonStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
