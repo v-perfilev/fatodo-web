@@ -5,7 +5,6 @@ export const CARD_ITEM_HEIGHT = 60;
 
 export const CARD_ITEMS_COUNT = 5;
 export const CARD_ITEMS_FIRST_PAGE_COUNT = 4;
-export const CARD_BUTTONS_FIRST_PAGE_COUNT = 1;
 
 export const GROUP_ITEM_HEIGHT = 60;
 

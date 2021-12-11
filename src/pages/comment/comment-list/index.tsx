@@ -12,6 +12,7 @@ import {useWsCommentContext} from '../../../shared/contexts/comment-contexts/ws-
 import {NEW_COMMENT_PREFIX} from '../_constants';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {CircularSpinner} from '../../../components/loaders';
+import CommentSkeletons from '../comment-skeletons/comment-skeletons';
 
 type Props = {
   targetId: string;
@@ -206,9 +207,12 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
       {comments?.data.length > 0 && (
         <CommentContainer comments={comments.data} account={account} setReference={setReference} />
       )}
+      {loading && comments?.data.length == 0 && <CommentSkeletons />}
+      {loading && comments?.data.length > 0 && <CircularSpinner size="sm" />}
       {!loading && comments?.data.length == 0 && <CommentStub />}
-      {loading && <CircularSpinner size="sm" />}
-      {comments && !allLoaded && <CommentLoadButton loadMoreItems={loadMoreItems} loading={loading} />}
+      {!loading && !allLoaded && comments.data.length > 0 && (
+        <CommentLoadButton loadMoreItems={loadMoreItems} loading={loading} />
+      )}
     </>
   );
 };

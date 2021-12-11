@@ -1,1 +1,1 @@
-export const CONTACT_SKELETON_COUNT = 20;
+export const CONTACT_SKELETONS_COUNT = 20;
