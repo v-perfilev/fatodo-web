@@ -8,7 +8,7 @@ import i18n from '../../../../shared/i18n';
 import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha/with-capcha';
 import {PasswordInput, TextInput} from '../../../../components/inputs';
 import {LoadingButton} from '../../../../components/controls';
-import {PasswordStrengthBar} from '../../password-strength-bar';
+import {PasswordStrengthBar} from '../../password-strength-bar/password-strength-bar';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {RegistrationFormUtils, RegistrationFormValues} from './_form';

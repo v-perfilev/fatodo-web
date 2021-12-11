@@ -7,12 +7,12 @@ import {Routes} from '../../router';
 import {FacebookIcon} from '../../../components/icons/facebook-icon';
 import {GoogleIcon} from '../../../components/icons/google-icon';
 import {Box, Divider, Typography} from '@material-ui/core';
-import {socialLoginStyles} from '../_styles';
+import {socialButtonsStyles} from '../_styles';
 import {LoadingButton} from '../../../components/controls';
 import {DateUtils} from '../../../shared/utils/date.utils';
 
 export const SocialButtons: FC = () => {
-  const classes = socialLoginStyles();
+  const classes = socialButtonsStyles();
   const {t} = useTranslation();
   const [facebookLoading, setFacebookLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);

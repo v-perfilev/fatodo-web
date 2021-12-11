@@ -30,7 +30,7 @@ export const authFormStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const socialLoginStyles = makeStyles((theme: Theme) => ({
+export const socialButtonsStyles = makeStyles((theme: Theme) => ({
   header: {
     width: '100%',
     display: 'flex',

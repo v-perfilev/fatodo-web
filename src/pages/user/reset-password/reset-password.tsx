@@ -9,7 +9,7 @@ import {useHistory, useRouteMatch} from 'react-router-dom';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {LOADER_TIMEOUT} from '../../../constants';
 import {Link} from '../../../components/controls';
-import ResetPasswordForm from './reset-password-form';
+import ResetPasswordForm from './reset-password-form/reset-password-form';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {flowRight} from 'lodash';
 

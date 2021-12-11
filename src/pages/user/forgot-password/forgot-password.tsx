@@ -3,7 +3,7 @@ import {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {useHistory} from 'react-router-dom';
-import ForgotPasswordForm from './forgot-password-form';
+import ForgotPasswordForm from './forgot-password-form/forgot-password-form';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import {authPageStyles} from '../_styles';
 import {Routes} from '../../router';

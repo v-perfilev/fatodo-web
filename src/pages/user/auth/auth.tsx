@@ -9,8 +9,8 @@ import {useHistory, useRouteMatch} from 'react-router-dom';
 import {LANDING_URL, SOCIAL_LOGIN} from '../../../constants';
 import {Link} from '../../../components/controls';
 import {SocialButtons} from './social-buttons';
-import LoginForm from './login-form';
-import RegistrationForm from './registration-form';
+import LoginForm from './login-form/login-form';
+import RegistrationForm from './registration-form/registration-form';
 import {flowRight} from 'lodash';
 
 const calculateTabFromRoute = (path: string): number => {

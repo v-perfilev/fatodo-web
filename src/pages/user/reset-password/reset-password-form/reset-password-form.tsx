@@ -7,7 +7,7 @@ import AuthService from '../../../../services/auth.service';
 import withCaptcha, {CaptchaProps} from '../../../../shared/hocs/with-capcha/with-capcha';
 import {PasswordInput} from '../../../../components/inputs';
 import {LoadingButton} from '../../../../components/controls';
-import {PasswordStrengthBar} from '../../password-strength-bar';
+import {PasswordStrengthBar} from '../../password-strength-bar/password-strength-bar';
 import {withSnackContext} from '../../../../shared/hocs/with-snack/with-snack';
 import {SnackState} from '../../../../shared/contexts/snack-context';
 import {ResetPasswordFormUtils, ResetPasswordFormValues} from './_form';
