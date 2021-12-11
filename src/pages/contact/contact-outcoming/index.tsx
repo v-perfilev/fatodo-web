@@ -1,10 +1,9 @@
-import React, {FC, useEffect, useMemo, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {ContactRequestWithUser} from '../../../models/contact-request.model';
 import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
 import ContactOutcomingContainer from './contact-outcoming-container';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
-import ContactOutcomingItemSkeleton from './contact-outcoming-item-skeleton';
-import {CONTACT_SKELETON_COUNT} from '../_constants';
+import ContactSkeletons from '../contact-skeletons/contact-skeletons';
 
 type Props = {
   filter: string;
@@ -39,15 +38,12 @@ const ContactOutcoming: FC<Props> = ({filter}: Props) => {
   useEffect(() => {
     if (users?.length > 0 && outcomingRequests?.length > 0) {
       combineRequestsWithUsers();
-    } else if (users && outcomingRequests) {
+    } else if (outcomingRequests?.length === 0) {
       resetUserRequests();
     }
   }, [users, outcomingRequests]);
 
-  const indexArray = useMemo(() => Array.from(Array(CONTACT_SKELETON_COUNT).keys()), []);
-  const skeletons = indexArray.map((index) => <ContactOutcomingItemSkeleton key={index} />);
-
-  return loading ? <>{skeletons}</> : <ContactOutcomingContainer requests={userRequests} filter={filter} />;
+  return loading ? <ContactSkeletons /> : <ContactOutcomingContainer requests={userRequests} filter={filter} />;
 };
 
 export default ContactOutcoming;

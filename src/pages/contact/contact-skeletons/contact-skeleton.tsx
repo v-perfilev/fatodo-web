@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
-import {contactOutcomingRequestSkeletonStyles} from './_styles';
 import {Skeleton} from '@material-ui/lab';
 import {Grower} from '../../../components/surfaces';
+import {contactSkeletonStyles} from './_styles';
 
-const ContactOutcomingItemSkeleton: FC = () => {
-  const classes = contactOutcomingRequestSkeletonStyles();
+const ContactSkeleton: FC = () => {
+  const classes = contactSkeletonStyles();
 
   return (
     <Box className={classes.root}>
@@ -13,8 +13,9 @@ const ContactOutcomingItemSkeleton: FC = () => {
       <Skeleton className={classes.skeleton2} variant="text" />
       <Grower />
       <Skeleton className={classes.skeleton3} variant="rect" />
+      <Skeleton className={classes.skeleton4} variant="rect" />
     </Box>
   );
 };
 
-export default ContactOutcomingItemSkeleton;
+export default ContactSkeleton;

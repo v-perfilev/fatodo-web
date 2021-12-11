@@ -1,10 +1,9 @@
-import React, {FC, useEffect, useMemo, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {ContactRelationWithUser} from '../../../models/contact-relation.model';
 import ContactRelationsContainer from './contact-relations-container';
 import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
-import ContactRelationsItemSkeleton from './contact-relations-item-skeleton';
-import {CONTACT_SKELETON_COUNT} from '../_constants';
+import ContactSkeletons from '../contact-skeletons/contact-skeletons';
 
 type Props = {
   filter: string;
@@ -39,15 +38,12 @@ const ContactRelations: FC<Props> = ({filter}: Props) => {
   useEffect(() => {
     if (users?.length > 0 && relations?.length > 0) {
       combineRelationsWithUsers();
-    } else if (users && relations) {
+    } else if (relations?.length === 0) {
       resetUserRelations();
     }
-  }, [users, relations]);
+  }, [relations, users]);
 
-  const indexArray = useMemo(() => Array.from(Array(CONTACT_SKELETON_COUNT).keys()), []);
-  const skeletons = indexArray.map((index) => <ContactRelationsItemSkeleton key={index} />);
-
-  return loading ? <>{skeletons}</> : <ContactRelationsContainer relations={userRelations} filter={filter} />;
+  return loading ? <ContactSkeletons /> : <ContactRelationsContainer relations={userRelations} filter={filter} />;
 };
 
 export default ContactRelations;
