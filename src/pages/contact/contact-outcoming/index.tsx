@@ -1,9 +1,10 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useMemo, useState} from 'react';
 import {ContactRequestWithUser} from '../../../models/contact-request.model';
-import {CircularSpinner} from '../../../components/loaders';
 import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
 import ContactOutcomingContainer from './contact-outcoming-container';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
+import ContactOutcomingItemSkeleton from './contact-outcoming-item-skeleton';
+import {CONTACT_SKELETON_COUNT} from '../_constants';
 
 type Props = {
   filter: string;
@@ -43,11 +44,10 @@ const ContactOutcoming: FC<Props> = ({filter}: Props) => {
     }
   }, [users, outcomingRequests]);
 
-  return loading ? (
-    <CircularSpinner size="sm" />
-  ) : (
-    <ContactOutcomingContainer requests={userRequests} filter={filter} />
-  );
+  const indexArray = useMemo(() => Array.from(Array(CONTACT_SKELETON_COUNT).keys()), []);
+  const skeletons = indexArray.map((index) => <ContactOutcomingItemSkeleton key={index} />);
+
+  return loading ? <>{skeletons}</> : <ContactOutcomingContainer requests={userRequests} filter={filter} />;
 };
 
 export default ContactOutcoming;

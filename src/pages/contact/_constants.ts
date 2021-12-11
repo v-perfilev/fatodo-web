@@ -1,0 +1,1 @@
+export const CONTACT_SKELETON_COUNT = 20;
