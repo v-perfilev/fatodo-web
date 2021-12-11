@@ -17,7 +17,6 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 export const TypeView: FC<Props> = ({type, withoutText, className}: Props) => {
   const classes = typeStyles();
-  const classNames = csx(classes.root, className);
   const {t, i18n} = useTranslation();
 
   const icon = useMemo<ReactNode>(() => {
@@ -35,6 +34,8 @@ export const TypeView: FC<Props> = ({type, withoutText, className}: Props) => {
   const text = useMemo<string>(() => {
     return t('common:types.' + type);
   }, [type, i18n.language]);
+
+  const classNames = csx(classes.root, className);
 
   return withoutText ? (
     <Box className={classNames}>

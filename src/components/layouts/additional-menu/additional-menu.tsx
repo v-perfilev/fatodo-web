@@ -32,7 +32,7 @@ const AdditionalMenu: FC = () => {
   }, [loading]);
 
   const filteredMenu = useMemo<MenuElement[]>(() => {
-    return menu.filter((action) => !action.hidden && !action.disabled);
+    return menu?.filter((action) => !action.hidden && !action.disabled);
   }, [menu]);
 
   useEffect(() => {

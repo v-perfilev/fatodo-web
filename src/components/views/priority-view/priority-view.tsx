@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, HTMLAttributes, ReactNode, useMemo} from 'react';
-import {priorityStyles} from './_styles';
+import {priorityViewStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
 import {Box, Tooltip} from '@material-ui/core';
 import {ItemPriorityType} from '../../../models/item.model';
@@ -15,8 +15,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 };
 
 export const PriorityView: FC<Props> = ({priority, withoutText, className}: Props) => {
-  const classes = priorityStyles();
-  const classNames = csx(classes.root, className);
+  const classes = priorityViewStyles();
   const {t, i18n} = useTranslation();
 
   const icon = useMemo<ReactNode>(() => {
@@ -32,6 +31,8 @@ export const PriorityView: FC<Props> = ({priority, withoutText, className}: Prop
   const text = useMemo<string>(() => {
     return t('common:priorities.' + priority);
   }, [priority, i18n.language]);
+
+  const classNames = csx(classes.root, className);
 
   return withoutText ? (
     <Box className={classNames}>

@@ -10,7 +10,7 @@ import {useTranslation} from 'react-i18next';
 import {UserMinusIcon} from '../../../../components/icons/user-minus-icon';
 import {Group, GroupUser} from '../../../../models/group.model';
 import ItemService from '../../../../services/item.service';
-import {PermissionView} from '../../../../components/views/permission-view';
+import {PermissionView} from '../../../../components/views/permission-view/permission-view';
 import {GroupUtils} from '../../../../shared/utils/group.utils';
 import {EditIcon} from '../../../../components/icons/edit-icon';
 

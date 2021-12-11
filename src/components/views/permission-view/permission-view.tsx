@@ -13,7 +13,6 @@ type Props = HTMLAttributes<HTMLElement> & {
 export const PermissionView: FC<Props> = ({permission, className}: Props) => {
   const classes = permissionViewStyles();
   const {t} = useTranslation();
-  const classNames = csx(className, classes.root);
 
   let title = '';
   if (permission === 'ADMIN') {
@@ -21,6 +20,8 @@ export const PermissionView: FC<Props> = ({permission, className}: Props) => {
   } else if (permission === 'EDIT') {
     title = t('group:roles.edit');
   }
+
+  const classNames = csx(className, classes.root);
 
   return <Box className={classNames}>{title}</Box>;
 };

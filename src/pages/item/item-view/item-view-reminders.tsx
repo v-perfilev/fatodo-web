@@ -4,7 +4,7 @@ import {Chip} from '@material-ui/core';
 import {LabeledBox} from '../../../components/surfaces';
 import {itemViewCommonStyles} from './_styles';
 import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';
-import ReminderView from '../../../components/views/reminder-view';
+import ReminderView from '../../../components/views/reminder-view/reminder-view';
 
 const ItemViewReminders: FC = () => {
   const commonClasses = itemViewCommonStyles();

@@ -20,7 +20,6 @@ export const UserView: FC<Props> = (props: Props) => {
   const {user, picSize = 'xs', withUserPic = true, withUsername = false, withPaperBox = false} = props;
   const {onMouseOver, onMouseLeave, className} = props;
   const classes = userViewStyles();
-  const classNames = csx(className, classes.root);
 
   const imageWithUsername = (
     <>
@@ -31,6 +30,8 @@ export const UserView: FC<Props> = (props: Props) => {
   );
 
   const userView = withPaperBox ? <PaperBox>{imageWithUsername}</PaperBox> : imageWithUsername;
+
+  const classNames = csx(className, classes.root);
 
   return (
     <Box onMouseOver={onMouseOver} onMouseLeave={onMouseLeave} className={classNames}>

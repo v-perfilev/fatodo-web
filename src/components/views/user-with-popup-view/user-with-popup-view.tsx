@@ -2,8 +2,8 @@ import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {User} from '../../../models/user.model';
 import {SizeType} from '../../images/types';
-import UserInfoView from '../user-info-view';
-import {UserView} from '../user-view';
+import UserInfoView from '../user-info-view/user-info-view';
+import {UserView} from '../user-view/user-view';
 import {HoverPopup} from '../../surfaces';
 import {PopupContentComponentProps} from '../../surfaces/hover-popup/hover-popup-popper';
 

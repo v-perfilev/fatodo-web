@@ -17,12 +17,12 @@ const ControlMenu: FC<Props> = ({menu, disabled, floatRight}: Props) => {
   const classNames = csx(classes.root, {[classes.floatRight]: floatRight});
 
   const filteredMenu = useMemo<MenuElement[]>(() => {
-    return menu.filter((action) => !action.hidden && !action.hiddenInControlMenu);
+    return menu?.filter((action) => !action.hidden && !action.hiddenInControlMenu);
   }, [menu]);
 
   return (
     <Box className={classNames}>
-      {filteredMenu.map((action, index) => (
+      {filteredMenu?.map((action, index) => (
         <LoadingButton
           key={index}
           startIcon={action.icon}

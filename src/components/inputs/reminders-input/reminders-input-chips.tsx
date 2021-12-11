@@ -2,7 +2,7 @@ import {Reminder} from '../../../models/reminder.model';
 import React, {FC} from 'react';
 import {Box, Chip} from '@material-ui/core';
 import {remindersInputChipsStyles} from './_styles';
-import ReminderView from '../../views/reminder-view';
+import ReminderView from '../../views/reminder-view/reminder-view';
 
 type Props = {
   reminders: Reminder[];

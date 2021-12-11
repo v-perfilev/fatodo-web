@@ -20,8 +20,9 @@ type Props = HTMLAttributes<HTMLElement> &
 
 const UserInfoView: FC<Props> = ({user, account, className, closePopup}: Props) => {
   const classes = userInfoViewStyles();
-  const classNames = csx(classes.root, className);
   const {t} = useTranslation();
+
+  const classNames = csx(classes.root, className);
 
   return (
     <Grid container className={classNames}>

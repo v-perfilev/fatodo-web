@@ -98,7 +98,12 @@ const UsersSelect: FC<Props> = ({allowedIds, ignoredIds, setUserIds}: Props) => 
       </Box>
       <Box className={classes.users}>
         {usersToShow.map((user, index) => (
-          <UsersSelectItem user={user} isSelected={isSelected(user)} toggleSelected={toggleSelected(user)} key={index} />
+          <UsersSelectItem
+            user={user}
+            isSelected={isSelected(user)}
+            toggleSelected={toggleSelected(user)}
+            key={index}
+          />
         ))}
         {usersToShow.length === 0 && <Box className={classes.notFound}>{t('common:usersSelect.usersNotFound')}</Box>}
       </Box>
