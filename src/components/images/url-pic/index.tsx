@@ -30,9 +30,7 @@ export const UrlPic: FC<Props> = (props: Props) => {
     {[classes.lg]: size === 'lg'},
     {[classes.xl]: size === 'xl'}
   );
-
   const classNames = csx(classes.root, sizeClassName, className);
-
   const styles = {borderWidth: border};
 
   return (
