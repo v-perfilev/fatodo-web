@@ -1,28 +1,28 @@
 import React, {FC, useCallback, useEffect, useState} from 'react';
 import {Chat} from '../../../../models/chat.model';
+import ChatService from '../../../../services/chat.service';
+import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {User} from '../../../../models/user.model';
 import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-chat-context';
-import {useSnackContext} from '../../../../shared/contexts/snack-context';
-import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {CircularSpinner} from '../../../../components/loaders';
-import ChatControlContainer from '../chat-control-list/chat-control-container';
-import ChatService from '../../../../services/chat.service';
-import {TIMEOUT_BEFORE_APPLY_FILTER} from '../../_constants';
+import {ArrayUtils} from '../../../../shared/utils/array.utils';
+import ChatControlContainer from './chat-control-list-container';
 import ChatControlStub from '../chat-control-stub';
 
 type Props = {
-  filter: string;
   chat: Chat;
   setChat: (chat: Chat) => void;
   account: User;
 };
 
-const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Props) => {
-  const {chatUpdateEvent, chatLastMessageEvent, chatLastMessageUpdateEvent} = useWsChatContext();
+const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
+  const {chatNewEvent, chatUpdateEvent, chatLastMessageEvent, chatLastMessageUpdateEvent} = useWsChatContext();
   const {handleResponse} = useSnackContext();
   const [chats, setChats] = useState<Chat[]>([]);
   const [loading, setLoading] = useState(true);
-  let timerId;
+  const [allLoaded, setAllLoaded] = useState(false);
+
+  // UPDATERS
 
   const updateChats = useCallback(
     (updateFunc: (prevState: Chat[]) => Chat[]): void => {
@@ -30,6 +30,14 @@ const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Pr
       setChats(combinedChats);
     },
     [chats]
+  );
+
+  const chatInserter = useCallback(
+    (...chats: Chat[]) => (prevState: Chat[]): Chat[] => {
+      const combinedChats = [...chats, ...prevState];
+      return combinedChats.filter(ArrayUtils.uniqueByIdFilter);
+    },
+    []
   );
 
   const chatUpdater = useCallback(
@@ -67,32 +75,50 @@ const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Pr
       if (chatInList) {
         ArrayUtils.deleteItem(prevState, chatInList);
       }
-      return [...prevState, lastMessageChat];
+      const sortedChats = [lastMessageChat, ...prevState].sort((chatA, chatB) => {
+        return chatA.lastMessage?.createdAt < chatB.lastMessage?.createdAt ? 1 : 0;
+      });
+      return [...sortedChats];
     },
     []
   );
 
-  const loadFilteredChats = useCallback((filter: string): void => {
-    setLoading(true);
-    ChatService.getFilteredChats(filter)
-      .then((response) => {
-        const chats = response.data;
-        setChats(chats);
-      })
-      .catch(handleResponse)
-      .finally(() => {
-        setLoading(false);
-      });
+  // LOADERS
+
+  const loadMoreChats = useCallback((): Promise<void> => {
+    return new Promise((resolve) => {
+      ChatService.getAllChatsPageable(chats.length)
+        .then((response) => {
+          const newChats = response.data;
+          if (newChats.length === 0) {
+            setAllLoaded(true);
+          } else {
+            const updateFunc = chatInserter(...newChats);
+            updateChats(updateFunc);
+          }
+        })
+        .catch((response) => {
+          handleResponse(response);
+        })
+        .finally(() => {
+          setLoading(false);
+          resolve();
+        });
+    });
+  }, [chats]);
+
+  // EFFECTS
+
+  useEffect(() => {
+    loadMoreChats().finally();
   }, []);
 
   useEffect(() => {
-    window.clearTimeout(timerId);
-    if (filter.length > 0) {
-      timerId = window.setTimeout(() => loadFilteredChats(filter), TIMEOUT_BEFORE_APPLY_FILTER);
-    } else {
-      setChats([]);
+    if (chatNewEvent) {
+      const updateFunc = chatInserter(chatNewEvent);
+      updateChats(updateFunc);
     }
-  }, [filter]);
+  }, [chatNewEvent]);
 
   useEffect(() => {
     if (chatUpdateEvent) {
@@ -117,15 +143,24 @@ const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Pr
     }
   }, [chatLastMessageUpdateEvent]);
 
+  // RENDERERS
+
   return (
     <>
       {loading && <CircularSpinner size="sm" />}
       {!loading && chats.length === 0 && <ChatControlStub />}
       {!loading && chats.length > 0 && (
-        <ChatControlContainer chat={chat} setChat={setChat} chats={chats} account={account} />
+        <ChatControlContainer
+          chat={chat}
+          setChat={setChat}
+          chats={chats}
+          loadMoreItems={loadMoreChats}
+          allLoaded={allLoaded}
+          account={account}
+        />
       )}
     </>
   );
 };
 
-export default ChatControlFilteredList;
+export default ChatControlList;

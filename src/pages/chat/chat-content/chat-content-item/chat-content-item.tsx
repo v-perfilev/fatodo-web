@@ -2,12 +2,11 @@ import React, {FC, useCallback, useEffect, useMemo} from 'react';
 import {Container} from '@material-ui/core';
 import {chatContentItemStyles} from './_styles';
 import {Message} from '../../../../models/message.model';
-import ChatContentMessage from '../chat-content-message';
-import ChatContentDate from './chat-content-date';
+import ChatContentMessage from '../chat-content-message/chat-content-message';
+import ChatContentDate from './chat-content-item-date';
 import {MessageUtils} from '../../../../shared/utils/message.utils';
 import ChatService from '../../../../services/chat.service';
 import {TIMEOUT_BEFORE_MARK_AS_READ} from '../../_constants';
-import ChatContentSpacer from './chat-content-spacer';
 import {User} from '../../../../models/user.model';
 import {ChatItem} from '../types';
 
@@ -57,7 +56,6 @@ const ChatContentItem: FC<Props> = ({item, isVisible, account}: Props) => {
 
   return (
     <Container maxWidth="md" className={classes.root}>
-      {!date && !message && <ChatContentSpacer />}
       {date && <ChatContentDate date={date} />}
       {message && <ChatContentMessage message={message} account={account} />}
     </Container>

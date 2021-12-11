@@ -1,8 +1,8 @@
 import React, {FC, useMemo, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {chatContentFooterStyles} from './_styles';
-import ChatContentInput from './chat-content-input';
-import ChatContentSendButton from './chat-content-send-button';
+import ChatContentFooterInput from './chat-content-footer-input';
+import ChatContentFooterSendButton from './chat-content-footer-send-button';
 import {MessageDTO} from '../../../../models/dto/message.dto';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
@@ -57,8 +57,8 @@ const ChatContentFooter: FC<Props> = ({chatId, account, addMessage}: Props) => {
 
   return (
     <Box className={classes.root}>
-      <ChatContentInput send={send} message={messageBody} setMessage={setMessageBody} />
-      <ChatContentSendButton send={send} />
+      <ChatContentFooterInput send={send} message={messageBody} setMessage={setMessageBody} />
+      <ChatContentFooterSendButton send={send} />
     </Box>
   );
 };

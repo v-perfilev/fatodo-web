@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {HEADER_HEIGHT} from '../../../components/layouts/header/_constants';
 import {Theme} from '@material-ui/core';
 
-export const messageMainStyles = makeStyles((theme: Theme) => ({
+export const chatMainStyles = makeStyles((theme: Theme) => ({
   bigViewRoot: {
     display: 'flex',
     flexDirection: 'row',

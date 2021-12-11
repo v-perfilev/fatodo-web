@@ -4,10 +4,10 @@ import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useLastLocation} from 'react-router-last-location';
 import {Routes} from '../../router';
-import {messageMainStyles} from './_styles';
+import {chatMainStyles} from './_styles';
 import {Box, Grid, Theme, useMediaQuery} from '@material-ui/core';
-import ChatControl from '../chat-control';
-import ChatContent from '../chat-content';
+import ChatControl from '../chat-control/chat-control';
+import ChatContent from '../chat-content/chat-content';
 import {Chat} from '../../../models/chat.model';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
@@ -23,7 +23,7 @@ import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 type Props = AuthState;
 
 const ChatMain: FC<Props> = ({account}: Props) => {
-  const classes = messageMainStyles();
+  const classes = chatMainStyles();
   const history = useHistory();
   const {chatId} = useParams();
   const lastLocation = useLastLocation();

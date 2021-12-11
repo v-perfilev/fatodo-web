@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Fab} from '@material-ui/core';
-import {chatContentSendButtonStyles} from './_styles';
+import {chatContentFooterSendButtonStyles} from './_styles';
 import {SendMessageIcon} from '../../../../components/icons/send-message-icon';
 
 type Props = {
   send: () => void;
 };
 
-const ChatContentSendButton: FC<Props> = ({send}: Props) => {
-  const classes = chatContentSendButtonStyles();
+const ChatContentFooterSendButton: FC<Props> = ({send}: Props) => {
+  const classes = chatContentFooterSendButtonStyles();
 
   return (
     <Fab className={classes.root} size="small" color="primary" onClick={send}>
@@ -18,4 +18,4 @@ const ChatContentSendButton: FC<Props> = ({send}: Props) => {
   );
 };
 
-export default ChatContentSendButton;
+export default ChatContentFooterSendButton;

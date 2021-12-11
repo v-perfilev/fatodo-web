@@ -24,7 +24,7 @@ type Props = {
   clearMessages: () => void;
 };
 
-const ChatContentActions: FC<Props> = ({chat, title, closeChat, clearMessages}: Props) => {
+const ChatContentHeaderActions: FC<Props> = ({chat, title, closeChat, clearMessages}: Props) => {
   const classes = chatContentHeaderActionsStyles();
   const {users} = useUserListContext();
   const {handleResponse} = useSnackContext();
@@ -146,4 +146,4 @@ const ChatContentActions: FC<Props> = ({chat, title, closeChat, clearMessages}: 
   );
 };
 
-export default ChatContentActions;
+export default ChatContentHeaderActions;

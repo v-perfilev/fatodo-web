@@ -1,10 +1,10 @@
 import React, {FC, memo} from 'react';
 import {ChatControlItemProps} from './types';
-import ChatControlItem from '../chat-control-item';
+import ChatControlItem from '../chat-control-item/chat-control-item';
 
 type Props = ChatControlItemProps;
 
-const ChatControlRenderer: FC<Props> = ({data, index, style}: Props) => {
+const ChatControlListRenderer: FC<Props> = ({data, index, style}: Props) => {
   const chat = data.items[index];
   const isSelected = chat.id === data.chat?.id;
   const account = data.account;
@@ -15,4 +15,4 @@ const ChatControlRenderer: FC<Props> = ({data, index, style}: Props) => {
   );
 };
 
-export default memo(ChatControlRenderer);
+export default memo(ChatControlListRenderer);

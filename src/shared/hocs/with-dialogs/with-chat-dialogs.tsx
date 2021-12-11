@@ -5,38 +5,38 @@ import {Chat} from '../../../models/chat.model';
 import ChatAddMembersDialog, {
   ChatAddMembersDialogProps,
   defaultChatAddMembersDialogProps,
-} from '../../../pages/chat/dialogs/chat-add-members-dialog';
+} from '../../../pages/chat/dialogs/chat-add-members-dialog/chat-add-members-dialog';
 import ChatCreateDialog, {
   ChatCreateDialogProps,
   defaultChatCreateDialogProps,
-} from '../../../pages/chat/dialogs/chat-create-dialog';
+} from '../../../pages/chat/dialogs/chat-create-dialog/chat-create-dialog';
 import {User, UserAccount} from '../../../models/user.model';
 import ChatMembersDialog, {
   ChatMembersDialogProps,
   defaultChatMembersDialogProps,
-} from '../../../pages/chat/dialogs/chat-members-dialog';
+} from '../../../pages/chat/dialogs/chat-members-dialog/chat-members-dialog';
 import {Message} from '../../../models/message.model';
 import ChatReactionsDialog, {
   ChatReactionDialogProps,
   defaultChatReactionDialogProps,
-} from '../../../pages/chat/dialogs/chat-reactions-dialog';
+} from '../../../pages/chat/dialogs/chat-reactions-dialog/chat-reactions-dialog';
 import ChatRenameDialog, {
   ChatRenameDialogProps,
   defaultChatRenameDialogProps,
-} from '../../../pages/chat/dialogs/chat-rename-dialog';
+} from '../../../pages/chat/dialogs/chat-rename-dialog/chat-rename-dialog';
 import {useDialogContext} from '../../contexts/dialog-contexts/dialog-context';
 import ChatReadStatusesDialog, {
   ChatReadStatusesDialogProps,
   defaultChatReadStatusesDialogProps,
-} from '../../../pages/chat/dialogs/chat-read-statuses-dialog';
+} from '../../../pages/chat/dialogs/chat-read-statuses-dialog/chat-read-statuses-dialog';
 import ChatEditDialog, {
   ChatEditDialogProps,
   defaultChatEditDialogProps,
-} from '../../../pages/chat/dialogs/chat-edit-dialog';
+} from '../../../pages/chat/dialogs/chat-edit-dialog/chat-edit-dialog';
 import ChatDirectMessageDialog, {
   ChatDirectMessageDialogProps,
   defaultChatDirectMessageDialogProps,
-} from '../../../pages/chat/dialogs/chat-direct-message-dialog';
+} from '../../../pages/chat/dialogs/chat-direct-message-dialog/chat-direct-message-dialog';
 
 enum ChatDialogs {
   ADD_MEMBERS = 'CHAT_ADD_MEMBERS_DIALOG',

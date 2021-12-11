@@ -1,12 +1,12 @@
 import React, {FC, memo} from 'react';
-import ChatContentItem from '../chat-content-item';
+import ChatContentItem from '../chat-content-item/chat-content-item';
 import {ChatItemProps} from '../types';
-import {chatContentRendererStyles} from './_styles';
+import {chatContentListRendererStyles} from './_styles';
 
 type Props = ChatItemProps;
 
-const ChatContentRenderer: FC<Props> = ({data, index, style}: Props) => {
-  const classes = chatContentRendererStyles();
+const ChatContentListRenderer: FC<Props> = ({data, index, style}: Props) => {
+  const classes = chatContentListRendererStyles();
   const item = data.items[index];
   const account = data.account;
   const isVisible = data.visibleItems.includes(index);
@@ -18,4 +18,4 @@ const ChatContentRenderer: FC<Props> = ({data, index, style}: Props) => {
   );
 };
 
-export default memo(ChatContentRenderer);
+export default memo(ChatContentListRenderer);

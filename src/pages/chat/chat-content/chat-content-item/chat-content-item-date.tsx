@@ -1,13 +1,13 @@
 import React, {FC, memo} from 'react';
 import {Box} from '@material-ui/core';
-import {chatContentDateStyles} from './_styles';
+import {chatContentItemDateStyles} from './_styles';
 
 type Props = {
   date: string;
 };
 
-const ChatContentDate: FC<Props> = ({date}: Props) => {
-  const classes = chatContentDateStyles();
+const ChatContentItemDate: FC<Props> = ({date}: Props) => {
+  const classes = chatContentItemDateStyles();
 
   return (
     <Box className={classes.root}>
@@ -18,4 +18,4 @@ const ChatContentDate: FC<Props> = ({date}: Props) => {
   );
 };
 
-export default memo(ChatContentDate);
+export default memo(ChatContentItemDate);

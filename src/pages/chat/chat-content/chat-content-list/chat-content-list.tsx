@@ -7,7 +7,7 @@ import {CircularSpinner} from '../../../../components/loaders';
 import {ArrayUtils} from '../../../../shared/utils/array.utils';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import {useWsChatContext} from '../../../../shared/contexts/chat-contexts/ws-chat-context';
-import ChatContentContainer from './chat-content-container';
+import ChatContentListContainer from './chat-content-list-container';
 import {VirtualizedListMethods} from '../../../../components/surfaces';
 import {User} from '../../../../models/user.model';
 import {NEW_MESSAGES_PREFIX} from '../../_constants';
@@ -232,7 +232,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
       {loading && <CircularSpinner size="sm" />}
       {!loading && items.length === 0 && <ChatContentStub />}
       {!loading && items.length > 0 && (
-        <ChatContentContainer
+        <ChatContentListContainer
           chat={chat}
           items={items}
           loadMoreItems={loadMoreMessages}

@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {chatContentInputStyles} from './_styles';
+import {chatContentFooterInputStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
 import ReflectableTextInput from '../../../../components/inputs/clearable-text-input/reflectable-text-input';
 
@@ -9,8 +9,8 @@ type Props = {
   setMessage: (message: string) => void;
 };
 
-const ChatContentInput: FC<Props> = ({send, message, setMessage}: Props) => {
-  const classes = chatContentInputStyles();
+const ChatContentFooterInput: FC<Props> = ({send, message, setMessage}: Props) => {
+  const classes = chatContentFooterInputStyles();
   const {t} = useTranslation();
 
   return (
@@ -24,4 +24,4 @@ const ChatContentInput: FC<Props> = ({send, message, setMessage}: Props) => {
   );
 };
 
-export default ChatContentInput;
+export default ChatContentFooterInput;

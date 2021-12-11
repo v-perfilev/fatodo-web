@@ -2,8 +2,8 @@ import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {chatContentHeaderStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
-import ChatContentActions from './chat-content-actions';
-import ChatContentMembers from '../chat-content-members';
+import ChatContentHeaderActions from './chat-content-header-actions';
+import ChatContentMembers from '../chat-content-members/chat-content-members';
 import {useTranslation} from 'react-i18next';
 
 type Props = {
@@ -29,7 +29,7 @@ const ChatContentHeader: FC<Props> = (props: Props) => {
         {chat.isDirect && <Box className={classes.direct}>{t('chat:common.direct')}</Box>}
       </Box>
       <ChatContentMembers chat={chat} />
-      <ChatContentActions chat={chat} title={title} closeChat={closeChat} clearMessages={clearMessages} />
+      <ChatContentHeaderActions chat={chat} title={title} closeChat={closeChat} clearMessages={clearMessages} />
     </Box>
   );
 };

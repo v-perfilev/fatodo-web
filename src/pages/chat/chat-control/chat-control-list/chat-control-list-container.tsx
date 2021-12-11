@@ -4,9 +4,9 @@ import {Chat} from '../../../../models/chat.model';
 import {User} from '../../../../models/user.model';
 import {CHAT_HEIGHT} from '../../_constants';
 import {ChatControlItemDataProps, ChatControlItemProps} from './types';
-import ChatControlRenderer from './chat-control-renderer';
+import ChatControlRenderer from './chat-control-list-renderer';
 import {VirtualizedList} from '../../../../components/surfaces';
-import {chatControlContainerStyles} from './_styles';
+import {chatControlListContainerStyles} from './_styles';
 
 type Props = {
   chat: Chat;
@@ -17,8 +17,8 @@ type Props = {
   account: User;
 };
 
-const ChatControlContainer: FC<Props> = ({chat, setChat, chats, loadMoreItems, allLoaded, account}: Props) => {
-  const classes = chatControlContainerStyles();
+const ChatControlListContainer: FC<Props> = ({chat, setChat, chats, loadMoreItems, allLoaded, account}: Props) => {
+  const classes = chatControlListContainerStyles();
 
   const handleOnChatClick = useCallback(
     (index: number) => (): void => {
@@ -55,4 +55,4 @@ const ChatControlContainer: FC<Props> = ({chat, setChat, chats, loadMoreItems, a
   );
 };
 
-export default memo(ChatControlContainer);
+export default memo(ChatControlListContainer);

@@ -1,13 +1,13 @@
 import React, {Dispatch, FC, ReactElement, SetStateAction, useCallback, useMemo} from 'react';
 import {Box} from '@material-ui/core';
 import {VirtualizedList, VirtualizedListMethods} from '../../../../components/surfaces';
-import ChatContentScrollButton from './chat-content-scroll-button';
+import ChatContentListScrollButton from './chat-content-list-scroll-button';
 import {useUnreadMessagesContext} from '../../../../shared/contexts/chat-contexts/unread-messages-context';
 import {Chat} from '../../../../models/chat.model';
 import {User} from '../../../../models/user.model';
 import {ChatItem, ChatItemProps, ChatListDataProps} from '../types';
-import ChatContentRenderer from './chat-content-renderer';
-import {chatContentContainerStyles} from './_styles';
+import ChatContentRenderer from './chat-content-list-renderer';
+import {chatContentListContainerStyles} from './_styles';
 
 type Props = {
   chat: Chat;
@@ -19,9 +19,9 @@ type Props = {
   setListRef: Dispatch<SetStateAction<VirtualizedListMethods>>;
 };
 
-const ChatContentContainer: FC<Props> = (props: Props) => {
+const ChatContentListContainer: FC<Props> = (props: Props) => {
   const {chat, items, loadMoreItems, allLoaded, account, listRef, setListRef} = props;
-  const classes = chatContentContainerStyles();
+  const classes = chatContentListContainerStyles();
   const {unreadMessageCountMap} = useUnreadMessagesContext();
 
   const getItemKey = useCallback(
@@ -69,7 +69,7 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
         reverseOrder
         virtualizedListRef={setListRef}
       />
-      <ChatContentScrollButton
+      <ChatContentListScrollButton
         show={showScrollButton}
         scrollToBottom={scrollToBottom}
         highlighted={isButtonHighlighted}
@@ -78,4 +78,4 @@ const ChatContentContainer: FC<Props> = (props: Props) => {
   );
 };
 
-export default ChatContentContainer;
+export default ChatContentListContainer;

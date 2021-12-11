@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Fab} from '@material-ui/core';
 import {ArrowDownIcon} from '../../../../components/icons/arrow-down-icon';
-import {chatContentScrollButtonStyles} from './_styles';
+import {chatContentListScrollButtonStyles} from './_styles';
 
 type Props = {
   show: boolean;
@@ -9,8 +9,8 @@ type Props = {
   highlighted: boolean;
 };
 
-const ChatContentScrollButton: FC<Props> = ({show, scrollToBottom, highlighted}: Props) => {
-  const classes = chatContentScrollButtonStyles();
+const ChatContentListScrollButton: FC<Props> = ({show, scrollToBottom, highlighted}: Props) => {
+  const classes = chatContentListScrollButtonStyles();
 
   const color = highlighted ? 'primary' : 'default';
 
@@ -21,4 +21,4 @@ const ChatContentScrollButton: FC<Props> = ({show, scrollToBottom, highlighted}:
   ) : null;
 };
 
-export default ChatContentScrollButton;
+export default ChatContentListScrollButton;

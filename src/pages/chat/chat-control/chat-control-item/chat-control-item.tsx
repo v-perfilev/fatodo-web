@@ -2,7 +2,7 @@ import React, {FC, HTMLAttributes, ReactElement, useEffect, useMemo} from 'react
 import {Box} from '@material-ui/core';
 import {Chat} from '../../../../models/chat.model';
 import {chatControlItemStyles} from './_styles';
-import ChatControlMessage from '../chat-control-message';
+import ChatControlMessage from '../chat-control-message/chat-control-message';
 import {DateFormatters} from '../../../../shared/utils/date.utils';
 import csx from 'classnames';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';

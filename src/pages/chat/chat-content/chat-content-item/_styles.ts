@@ -7,7 +7,7 @@ export const chatContentItemStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const chatContentDateStyles = makeStyles((theme: Theme) => ({
+export const chatContentItemDateStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '100%',
     display: 'flex',

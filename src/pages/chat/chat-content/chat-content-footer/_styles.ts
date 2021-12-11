@@ -17,7 +17,7 @@ export const chatContentFooterStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const chatContentInputStyles = makeStyles((theme: Theme) => ({
+export const chatContentFooterInputStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
     '& > div': {
@@ -26,7 +26,7 @@ export const chatContentInputStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const chatContentSendButtonStyles = makeStyles((theme: Theme) => ({
+export const chatContentFooterSendButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(1),
