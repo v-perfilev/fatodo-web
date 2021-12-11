@@ -24,7 +24,7 @@ const GroupsSortingItem: FC<Props> = ({group, style, bind, setItemRef}: Props) =
   }, [group]);
 
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} xl={2} className={classes.item} style={style} ref={setItemRef}>
+    <Grid item xs={12} sm={6} md={6} lg={4} xl={3} className={classes.item} style={style} ref={setItemRef}>
       <GroupSortingCard bind={bind} />
     </Grid>
   );
