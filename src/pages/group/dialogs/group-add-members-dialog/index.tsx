@@ -4,7 +4,7 @@ import ModalDialog from '../../../../components/dialogs/modal-dialog/modal-dialo
 import {Button} from '@material-ui/core';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {LoadingButton} from '../../../../components/controls';
-import UsersSelect from '../../../../components/surfaces/users-select';
+import UsersSelect from '../../../../components/surfaces/users-select/users-select';
 import {Group} from '../../../../models/group.model';
 import ItemService from '../../../../services/item.service';
 import {useContactContext} from '../../../../shared/contexts/contact-contexts/contact-context';

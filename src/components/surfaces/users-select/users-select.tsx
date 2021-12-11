@@ -7,8 +7,8 @@ import {useUserListContext} from '../../../shared/contexts/list-contexts/user-li
 import {User} from '../../../models/user.model';
 import {ArrayUtils} from '../../../shared/utils/array.utils';
 import {ClearableTextInput} from '../../inputs';
-import {userSelectStyles} from './_styles';
-import UserSelectItem from './user-select-item';
+import {usersSelectStyles} from './_styles';
+import UsersSelectItem from './users-select-item';
 import withUserList from '../../../shared/hocs/with-list/with-user-list';
 import {flowRight} from 'lodash';
 
@@ -19,7 +19,7 @@ type Props = {
 };
 
 const UsersSelect: FC<Props> = ({allowedIds, ignoredIds, setUserIds}: Props) => {
-  const classes = userSelectStyles();
+  const classes = usersSelectStyles();
   const {users, handleUserIds, handleUsers} = useUserListContext();
   const {handleResponse} = useSnackContext();
   const {t} = useTranslation();
@@ -98,7 +98,7 @@ const UsersSelect: FC<Props> = ({allowedIds, ignoredIds, setUserIds}: Props) => 
       </Box>
       <Box className={classes.users}>
         {usersToShow.map((user, index) => (
-          <UserSelectItem user={user} isSelected={isSelected(user)} toggleSelected={toggleSelected(user)} key={index} />
+          <UsersSelectItem user={user} isSelected={isSelected(user)} toggleSelected={toggleSelected(user)} key={index} />
         ))}
         {usersToShow.length === 0 && <Box className={classes.notFound}>{t('common:usersSelect.usersNotFound')}</Box>}
       </Box>

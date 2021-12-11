@@ -15,11 +15,12 @@ type Props = {
 
 export const AvatarGroup: FC<Props> = ({users, onClick, withPopup, shorten}: Props) => {
   const classes = avatarGroupStyles();
-  const classNames = csx(classes.avatars, {[classes.pointer]: onClick});
 
   const avatarsCount = shorten ? SHORTEN_AVATARS_IN_CARD : AVATARS_IN_CARD;
   const usersToShow = users.slice(0, avatarsCount);
   const moreThanLimit = users.length > avatarsCount ? users.length - avatarsCount : 0;
+
+  const classNames = csx(classes.avatars, {[classes.pointer]: onClick});
 
   return (
     <Box className={classNames} onClick={onClick}>

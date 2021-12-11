@@ -1,7 +1,7 @@
 import React, {FC, HTMLAttributes} from 'react';
 import {Box} from '@material-ui/core';
 import {User} from '../../../models/user.model';
-import {userSelectItemStyles} from './_styles';
+import {usersSelectItemStyles} from './_styles';
 import {UrlPic} from '../../images';
 import {CheckboxInput} from '../../inputs';
 
@@ -11,8 +11,8 @@ type Props = HTMLAttributes<HTMLElement> & {
   toggleSelected: () => void;
 };
 
-const UserSelectItem: FC<Props> = ({user, isSelected, toggleSelected, ...props}: Props) => {
-  const classes = userSelectItemStyles();
+const UsersSelectItem: FC<Props> = ({user, isSelected, toggleSelected, ...props}: Props) => {
+  const classes = usersSelectItemStyles();
 
   return (
     <Box className={classes.root} {...props}>
@@ -23,4 +23,4 @@ const UserSelectItem: FC<Props> = ({user, isSelected, toggleSelected, ...props}:
   );
 };
 
-export default UserSelectItem;
+export default UsersSelectItem;

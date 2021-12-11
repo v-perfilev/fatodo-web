@@ -5,7 +5,7 @@ import {Button} from '@material-ui/core';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {LoadingButton} from '../../../../components/controls';
-import UsersSelect from '../../../../components/surfaces/users-select';
+import UsersSelect from '../../../../components/surfaces/users-select/users-select';
 import {useContactContext} from '../../../../shared/contexts/contact-contexts/contact-context';
 import ModalDialog from '../../../../components/dialogs/modal-dialog/modal-dialog';
 

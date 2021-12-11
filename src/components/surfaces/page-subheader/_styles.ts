@@ -1,7 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const pageHeaderStyles = makeStyles((theme: Theme) => ({
+export const pageSubheaderStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',

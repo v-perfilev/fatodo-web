@@ -1,13 +1,13 @@
 import React, {FC, ReactNode} from 'react';
 import {Box, Typography} from '@material-ui/core';
-import {pageHeaderStyles} from './_styles';
+import {pageSubheaderStyles} from './_styles';
 
 type Props = {
   title: ReactNode;
 };
 
 export const PageSubheader: FC<Props> = ({title}: Props) => {
-  const classes = pageHeaderStyles();
+  const classes = pageSubheaderStyles();
 
   return (
     <Box className={classes.root}>

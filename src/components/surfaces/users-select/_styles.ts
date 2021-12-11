@@ -1,7 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const userSelectStyles = makeStyles((theme: Theme) => ({
+export const usersSelectStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
@@ -26,7 +26,7 @@ export const userSelectStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const userSelectItemStyles = makeStyles((theme: Theme) => ({
+export const usersSelectItemStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',

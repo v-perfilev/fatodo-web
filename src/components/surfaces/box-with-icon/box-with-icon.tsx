@@ -9,6 +9,7 @@ type Props = HTMLAttributes<HTMLElement> & {
 
 export const BoxWithIcon: FC<Props> = ({icon, children, className}: Props) => {
   const classes = labeledBoxStyles();
+
   const classNames = csx(classes.root, className);
 
   return (
