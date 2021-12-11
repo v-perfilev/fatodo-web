@@ -3,7 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Item} from '../../../../models/item.model';
 import ItemService from '../../../../services/item.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
-import ConfirmationDialog from '../../../../components/dialogs/confirmation-dialog';
+import ConfirmationDialog from '../../../../components/dialogs/confirmation-dialog/confirmation-dialog';
 
 export type ItemDeleteDialogProps = {
   item: Item;

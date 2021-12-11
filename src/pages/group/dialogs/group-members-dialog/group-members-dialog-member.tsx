@@ -5,7 +5,7 @@ import {UserView} from '../../../../components/views';
 import {groupMembersDialogMemberStyles} from './_styles';
 import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
-import ConfirmationDialog from '../../../../components/dialogs/confirmation-dialog';
+import ConfirmationDialog from '../../../../components/dialogs/confirmation-dialog/confirmation-dialog';
 import {useTranslation} from 'react-i18next';
 import {UserMinusIcon} from '../../../../components/icons/user-minus-icon';
 import {Group, GroupUser} from '../../../../models/group.model';

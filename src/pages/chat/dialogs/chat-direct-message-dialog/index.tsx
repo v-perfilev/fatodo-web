@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import FormDialog from '../../../../components/dialogs/form-dialog';
+import FormDialog from '../../../../components/dialogs/form-dialog/form-dialog';
 import CommentEditForm from './chat-direct-message-form';
 import {User} from '../../../../models/user.model';
 

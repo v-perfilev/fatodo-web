@@ -1,7 +1,7 @@
 import React, {ComponentType, FC, useState} from 'react';
 import {Button} from '@material-ui/core';
 import {LoadingButton} from '../../controls';
-import ModalDialog from '../modal-dialog';
+import ModalDialog from '../modal-dialog/modal-dialog';
 
 export type FormDialogComponentProps = {
   close: () => void;
@@ -39,16 +39,17 @@ const FormDialog: FC<Props> = (props: Props) => {
     resetForm();
   };
 
-  const cancelButton = (
-    <Button onClick={close} color="primary" disabled={isSubmitting}>
-      {cancelText}
-    </Button>
-  );
+  const content = <FormComponent {...{close, setIsSubmitting, setIsValid, setSubmitForm, setResetForm, params}} />;
 
-  const sendButton = (
-    <LoadingButton color="secondary" disabled={isSubmitting || !isValid} loading={isSubmitting} onClick={submitForm}>
-      {sendText}
-    </LoadingButton>
+  const actions = (
+    <>
+      <Button onClick={close} color="primary" disabled={isSubmitting}>
+        {cancelText}
+      </Button>
+      <LoadingButton color="secondary" disabled={isSubmitting || !isValid} loading={isSubmitting} onClick={submitForm}>
+        {sendText}
+      </LoadingButton>
+    </>
   );
 
   return (
@@ -56,13 +57,8 @@ const FormDialog: FC<Props> = (props: Props) => {
       isOpen={show}
       close={close}
       title={title}
-      content={<FormComponent {...{close, setIsSubmitting, setIsValid, setSubmitForm, setResetForm, params}} />}
-      actions={
-        <>
-          {cancelButton}
-          {sendButton}
-        </>
-      }
+      content={content}
+      actions={actions}
       size={size}
       showCloseIcon
     />

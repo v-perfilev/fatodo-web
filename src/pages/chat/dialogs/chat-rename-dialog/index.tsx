@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Chat} from '../../../../models/chat.model';
 import {useTranslation} from 'react-i18next';
-import FormDialog from '../../../../components/dialogs/form-dialog';
+import FormDialog from '../../../../components/dialogs/form-dialog/form-dialog';
 import ChatRenameForm from './chat-rename-form';
 
 export type ChatRenameDialogProps = {

@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {Group} from '../../../../models/group.model';
-import ConfirmationDialog from '../../../../components/dialogs/confirmation-dialog';
+import ConfirmationDialog from '../../../../components/dialogs/confirmation-dialog/confirmation-dialog';
 import ItemService from '../../../../services/item.service';
 
 export type GroupDeleteDialogProps = {
