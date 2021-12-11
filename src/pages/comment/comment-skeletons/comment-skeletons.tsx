@@ -1,5 +1,5 @@
 import React, {FC, useMemo} from 'react';
-import CommentSkeleton from './comment-skeleton';
+import CommentSkeletonsItem from './comment-skeletons-item';
 import {COMMENT_SKELETONS_COUNT} from '../_constants';
 
 const CommentSkeletons: FC = () => {
@@ -8,7 +8,7 @@ const CommentSkeletons: FC = () => {
   return (
     <>
       {indexArray.map((index) => (
-        <CommentSkeleton key={index} />
+        <CommentSkeletonsItem key={index} />
       ))}
     </>
   );

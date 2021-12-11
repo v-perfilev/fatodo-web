@@ -4,10 +4,10 @@ import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {Comment, CommentReactions} from '../../../models/comment.model';
 import {PageableList} from '../../../models/pageable-list.model';
 import {ArrayUtils} from '../../../shared/utils/array.utils';
-import CommentContainer from './comment-container';
+import CommentListContainer from './comment-list-container';
 import {User} from '../../../models/user.model';
-import CommentStub from './comment-stub';
-import CommentLoadButton from './comment-load-button';
+import CommentListStub from './comment-list-stub';
+import CommentListLoadButton from './comment-list-load-button';
 import {useWsCommentContext} from '../../../shared/contexts/comment-contexts/ws-comment-context';
 import {NEW_COMMENT_PREFIX} from '../_constants';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
@@ -208,12 +208,12 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
     <>
       {initialLoading && <CommentSkeletons />}
       {!initialLoading && comments?.data.length > 0 && (
-        <CommentContainer comments={comments.data} account={account} setReference={setReference} />
+        <CommentListContainer comments={comments.data} account={account} setReference={setReference} />
       )}
       {!initialLoading && loading && <CircularSpinner size="sm" />}
-      {!initialLoading && !loading && comments?.data.length == 0 && <CommentStub />}
+      {!initialLoading && !loading && comments?.data.length == 0 && <CommentListStub />}
       {!initialLoading && !loading && !allLoaded && comments.data.length > 0 && (
-        <CommentLoadButton loadMoreItems={loadMoreItems} loading={loading} />
+        <CommentListLoadButton loadMoreItems={loadMoreItems} loading={loading} />
       )}
     </>
   );

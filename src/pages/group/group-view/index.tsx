@@ -21,7 +21,7 @@ import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {useGroupDialogContext} from '../../../shared/contexts/dialog-contexts/group-dialog-context';
 import {flowRight} from 'lodash';
-import Comments from '../../comment';
+import Comments from '../../comment/comment';
 import {MembersIcon} from '../../../components/icons/members-icon';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import ControlMenu from '../../../components/layouts/control-menu/control-menu';

@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useRef, useState} from 'react';
 import {commentStyles} from './_styles';
 import {Box} from '@material-ui/core';
-import CommentControl from './comment-control';
-import CommentList, {CommentListMethods} from './comment-list';
+import CommentControl from './comment-control/comment-control';
+import CommentList, {CommentListMethods} from './comment-list/comment-list';
 import {User} from '../../models/user.model';
 import withAuthState from '../../shared/hocs/with-auth-state/with-auth-state';
 import {flowRight} from 'lodash';

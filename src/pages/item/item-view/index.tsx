@@ -24,7 +24,7 @@ import {CircularSpinner} from '../../../components/loaders';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {useItemDialogContext} from '../../../shared/contexts/dialog-contexts/item-dialog-context';
 import {flowRight} from 'lodash';
-import Comments from '../../comment';
+import Comments from '../../comment/comment';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import ControlMenu from '../../../components/layouts/control-menu/control-menu';

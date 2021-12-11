@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import FormDialog from '../../../../components/dialogs/form-dialog/form-dialog';
-import CommentEditForm from './comment-edit-form';
+import CommentEditForm from './comment-edit-form/comment-edit-form';
 import {Comment} from '../../../../models/comment.model';
 
 export type CommentEditDialogProps = {

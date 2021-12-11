@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {commentLoadButtonStyles} from './_styles';
+import {commentListLoadButtonStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import {LoadingButton} from '../../../components/controls';
 import {RefreshIcon} from '../../../components/icons/refresh-icon';
@@ -10,8 +10,8 @@ type Props = {
   loading: boolean;
 };
 
-const CommentLoadButton: FC<Props> = ({loadMoreItems, loading}: Props) => {
-  const classes = commentLoadButtonStyles();
+const CommentListLoadButton: FC<Props> = ({loadMoreItems, loading}: Props) => {
+  const classes = commentListLoadButtonStyles();
   const {t} = useTranslation();
 
   return (
@@ -30,4 +30,4 @@ const CommentLoadButton: FC<Props> = ({loadMoreItems, loading}: Props) => {
   );
 };
 
-export default CommentLoadButton;
+export default CommentListLoadButton;

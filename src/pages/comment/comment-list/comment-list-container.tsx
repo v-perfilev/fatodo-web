@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
-import {commentContainerStyles} from './_styles';
+import {commentListContainerStyles} from './_styles';
 import {User} from '../../../models/user.model';
 import {Comment} from '../../../models/comment.model';
-import CommentItem from '../comment-item';
+import CommentItem from '../comment-item/comment-item';
 
 type Props = {
   comments: Comment[];
@@ -11,8 +11,8 @@ type Props = {
   setReference: (comment: Comment) => void;
 };
 
-const CommentContainer: FC<Props> = ({comments, account, setReference}: Props) => {
-  const classes = commentContainerStyles();
+const CommentListContainer: FC<Props> = ({comments, account, setReference}: Props) => {
+  const classes = commentListContainerStyles();
 
   return (
     <Box className={classes.root}>
@@ -25,4 +25,4 @@ const CommentContainer: FC<Props> = ({comments, account, setReference}: Props) =
   );
 };
 
-export default CommentContainer;
+export default CommentListContainer;

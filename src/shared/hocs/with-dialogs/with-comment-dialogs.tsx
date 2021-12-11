@@ -5,13 +5,13 @@ import {useDialogContext} from '../../contexts/dialog-contexts/dialog-context';
 import CommentReactionsDialog, {
   CommentReactionDialogProps,
   defaultCommentReactionDialogProps,
-} from '../../../pages/comment/dialogs/comment-reactions-dialog';
+} from '../../../pages/comment/dialogs/comment-reactions-dialog/comment-reactions-dialog';
 import {Comment} from '../../../models/comment.model';
 import {CommentDialogContext} from '../../contexts/dialog-contexts/comment-dialog-context';
 import CommentEditDialog, {
   CommentEditDialogProps,
   defaultCommentEditDialogProps,
-} from '../../../pages/comment/dialogs/comment-edit-dialog';
+} from '../../../pages/comment/dialogs/comment-edit-dialog/comment-edit-dialog';
 
 enum CommentDialogs {
   REACTIONS = 'COMMENT_REACTIONS_DIALOG',

@@ -1,13 +1,13 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const commentContainerStyles = makeStyles(() => ({
+export const commentListContainerStyles = makeStyles(() => ({
   root: {
     position: 'relative',
   },
 }));
 
-export const commentLoadButtonStyles = makeStyles((theme: Theme) => ({
+export const commentListLoadButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -17,7 +17,7 @@ export const commentLoadButtonStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const commentStubStyles = makeStyles((theme: Theme) => ({
+export const commentListStubStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',

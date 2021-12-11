@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
-import {commentSkeletonStyles} from './_styles';
+import {commentSkeletonsItemStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import {Skeleton} from '@material-ui/lab';
 import {Grower} from '../../../components/surfaces';
 
-const CommentSkeleton: FC = () => {
-  const classes = commentSkeletonStyles();
+const CommentSkeletonsItem: FC = () => {
+  const classes = commentSkeletonsItemStyles();
 
   return (
     <Box className={classes.root}>
@@ -27,4 +27,4 @@ const CommentSkeleton: FC = () => {
   );
 };
 
-export default CommentSkeleton;
+export default CommentSkeletonsItem;
