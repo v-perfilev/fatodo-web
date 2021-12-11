@@ -7,6 +7,7 @@ export const activePlaceholderStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    transition: '0.3s',
 
     '& .icon': {
       width: 56,
@@ -19,23 +20,27 @@ export const activePlaceholderStyles = makeStyles((theme: Theme) => ({
       margin: theme.spacing(1),
       color: theme.palette.primary.contrastText,
       background: theme.palette.grey['300'],
-      transition: '0.5s',
+      transition: '0.3s',
 
       '& svg': {
         fontSize: '2rem',
       },
     },
+
     '& .text': {
       fontSize: '1.3rem',
       color: theme.palette.grey['400'],
-      transition: '0.5s',
+      transition: '0.3s',
     },
 
     '&:hover': {
       cursor: 'pointer',
+      backgroundColor: theme.palette.grey[50],
+
       '& .icon': {
         background: theme.palette.grey['400'],
       },
+
       '& .text': {
         color: theme.palette.grey['500'],
       },
@@ -49,10 +54,12 @@ export const activePlaceholderStyles = makeStyles((theme: Theme) => ({
     '& .icon': {
       width: 40,
       height: 40,
+
       '& svg': {
         fontSize: '1.3rem',
       },
     },
+
     '& .text': {
       fontSize: '1rem',
     },
