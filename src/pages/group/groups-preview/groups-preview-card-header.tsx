@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Box, CardHeader, Typography} from '@material-ui/core';
-import {groupCardHeaderStyles} from './_styles';
+import {groupsPreviewCardHeaderStyles} from './_styles';
 import {Routes} from '../../router';
-import GroupPreviewCardActions from './group-preview-card-actions';
+import GroupsPreviewCardActions from './groups-preview-card-actions';
 import {Link} from '../../../components/controls';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {UrlPic} from '../../../components/images';
@@ -14,8 +14,8 @@ type Props = {
   account: UserAccount;
 };
 
-const GroupPreviewCardHeader: FC<Props> = ({account}: Props) => {
-  const classes = groupCardHeaderStyles();
+const GroupsPreviewCardHeader: FC<Props> = ({account}: Props) => {
+  const classes = groupsPreviewCardHeaderStyles();
   const {group} = useGroupViewContext();
 
   return (
@@ -29,11 +29,11 @@ const GroupPreviewCardHeader: FC<Props> = ({account}: Props) => {
             </Typography>
           </Box>
         }
-        action={<GroupPreviewCardActions account={account} />}
+        action={<GroupsPreviewCardActions account={account} />}
         className={classes.root}
       />
     </Link>
   );
 };
 
-export default GroupPreviewCardHeader;
+export default GroupsPreviewCardHeader;

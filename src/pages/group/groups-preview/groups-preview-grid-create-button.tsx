@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {FC, useCallback, useMemo} from 'react';
 import {Grid} from '@material-ui/core';
-import {groupGridItemStyles} from './_styles';
+import {groupsPreviewGridCreateButtonStyles} from './_styles';
 import {ActivePlaceholder} from '../../../components/surfaces';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {useHistory} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {GroupRouteUtils} from '../_router';
 
-const GroupPreviewGridCreateButton: FC = () => {
-  const classes = groupGridItemStyles();
+const GroupsPreviewGridCreateButton: FC = () => {
+  const classes = groupsPreviewGridCreateButtonStyles();
   const history = useHistory();
   const {t, i18n} = useTranslation();
 
@@ -26,4 +26,4 @@ const GroupPreviewGridCreateButton: FC = () => {
   );
 };
 
-export default GroupPreviewGridCreateButton;
+export default GroupsPreviewGridCreateButton;

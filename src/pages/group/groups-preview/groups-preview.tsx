@@ -9,13 +9,13 @@ import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/a
 import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import {CircularSpinner} from '../../../components/loaders';
-import GroupPreviewGridContainer from './group-preview-grid-container';
+import GroupsPreviewGridContainer from './groups-preview-grid-container';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import {flowRight} from 'lodash';
 import withPreviewItemList from '../../../shared/hocs/with-list/with-preview-item-list';
 import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
 
-const GroupPreview: FC = () => {
+const GroupsPreview: FC = () => {
   const history = useHistory();
   const {t, i18n} = useTranslation();
   const {setMenu} = useAdditionalMenuContext();
@@ -45,7 +45,7 @@ const GroupPreview: FC = () => {
     setMenu(menuElements);
   }, [i18n.language]);
 
-  return groupsLoading ? <CircularSpinner /> : <GroupPreviewGridContainer />;
+  return groupsLoading ? <CircularSpinner /> : <GroupsPreviewGridContainer />;
 };
 
-export default flowRight([withGroupList, withPreviewItemList])(GroupPreview);
+export default flowRight([withGroupList, withPreviewItemList])(GroupsPreview);

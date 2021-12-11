@@ -2,15 +2,15 @@ import React, {FC, HTMLAttributes, useMemo} from 'react';
 import {Box} from '@material-ui/core';
 import {DateFormatters} from '../../../shared/utils/date.utils';
 import {Item} from '../../../models/item.model';
-import {groupCardItemChangesStyles} from './_styles';
+import {groupsPreviewCardItemChangesStyles} from './_styles';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 
 type Props = HTMLAttributes<HTMLElement> & {
   item: Item;
 };
 
-const GroupPreviewCardItemChanges: FC<Props> = ({item}: Props) => {
-  const classes = groupCardItemChangesStyles();
+const GroupsPreviewCardItemChanges: FC<Props> = ({item}: Props) => {
+  const classes = groupsPreviewCardItemChangesStyles();
   const {users} = useUserListContext();
 
   const name = useMemo<string>(() => {
@@ -32,4 +32,4 @@ const GroupPreviewCardItemChanges: FC<Props> = ({item}: Props) => {
   );
 };
 
-export default GroupPreviewCardItemChanges;
+export default GroupsPreviewCardItemChanges;

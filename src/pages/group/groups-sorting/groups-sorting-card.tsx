@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {FC, memo} from 'react';
 import {Card, ThemeProvider} from '@material-ui/core';
-import GroupSortingHeader from './group-sorting-header';
-import {groupSortingCardStyles} from './_styles';
+import GroupsSortingCardHeader from './groups-sorting-card-header';
+import {groupsSortingCardStyles} from './_styles';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 
@@ -10,8 +10,8 @@ type Props = {
   bind: (...any) => void;
 };
 
-const GroupSortingCard: FC<Props> = ({bind}: Props) => {
-  const classes = groupSortingCardStyles();
+const GroupsSortingCard: FC<Props> = ({bind}: Props) => {
+  const classes = groupsSortingCardStyles();
   const {group} = useGroupViewContext();
 
   const theme = ThemeFactory.getTheme(group?.color);
@@ -20,11 +20,11 @@ const GroupSortingCard: FC<Props> = ({bind}: Props) => {
     group && (
       <ThemeProvider theme={theme}>
         <Card elevation={3} className={classes.card}>
-          <GroupSortingHeader bind={bind} />
+          <GroupsSortingCardHeader bind={bind} />
         </Card>
       </ThemeProvider>
     )
   );
 };
 
-export default memo(GroupSortingCard);
+export default memo(GroupsSortingCard);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC, useEffect, useMemo, useState} from 'react';
 import {Box, Button, CardActions, Typography} from '@material-ui/core';
-import {groupCardFooterStyles} from './_styles';
+import {groupsPreviewCardFooterStyles} from './_styles';
 import {AvatarGroup, BoxWithIcon} from '../../../components/surfaces';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {ItemsIcon} from '../../../components/icons/items-icon';
@@ -17,8 +17,8 @@ type Props = {
   itemsCount: number;
 };
 
-const GroupPreviewCardFooter: FC<Props> = ({page, setPage, totalPages, itemsCount}: Props) => {
-  const classes = groupCardFooterStyles();
+const GroupsPreviewCardFooter: FC<Props> = ({page, setPage, totalPages, itemsCount}: Props) => {
+  const classes = groupsPreviewCardFooterStyles();
   const {users} = useUserListContext();
   const {group} = useGroupViewContext();
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
@@ -86,4 +86,4 @@ const GroupPreviewCardFooter: FC<Props> = ({page, setPage, totalPages, itemsCoun
   );
 };
 
-export default GroupPreviewCardFooter;
+export default GroupsPreviewCardFooter;

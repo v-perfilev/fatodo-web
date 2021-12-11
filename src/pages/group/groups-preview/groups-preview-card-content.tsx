@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {FC, memo, useEffect} from 'react';
 import {CardContent} from '@material-ui/core';
-import {groupCardContentStyles} from './_styles';
+import {groupsPreviewCardContentStyles} from './_styles';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import GroupPreviewCardCreateButton from './group-preview-card-create-button';
+import GroupsPreviewCardCreateButton from './groups-preview-card-create-button';
 import {Item} from '../../../models/item.model';
-import GroupPreviewCardItem from './group-preview-card-item';
+import GroupsPreviewCardItem from './groups-preview-card-item';
 import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
-import GroupPreviewItemSkeletons from './group-preview-item-skeletons';
+import GroupsPreviewItemSkeletons from './groups-preview-item-skeletons';
 import {useLoadingState} from '../../../shared/hooks/use-loading-state';
 
 type Props = {
@@ -15,8 +15,8 @@ type Props = {
   isFirstPage: boolean;
 };
 
-const GroupPreviewCardContent: FC<Props> = ({itemsToShow, isFirstPage}: Props) => {
-  const classes = groupCardContentStyles();
+const GroupsPreviewCardContent: FC<Props> = ({itemsToShow, isFirstPage}: Props) => {
+  const classes = groupsPreviewCardContentStyles();
   const {group} = useGroupViewContext();
   const {loading: previewLoading} = usePreviewItemListContext();
   const [loading, setLoading] = useLoadingState();
@@ -28,11 +28,11 @@ const GroupPreviewCardContent: FC<Props> = ({itemsToShow, isFirstPage}: Props) =
 
   return (
     <CardContent className={classes.content}>
-      {loading && <GroupPreviewItemSkeletons />}
-      {!loading && isFirstPage && <GroupPreviewCardCreateButton group={group} />}
-      {!loading && itemsToShow.map((item) => <GroupPreviewCardItem item={item} key={item.id} />)}
+      {loading && <GroupsPreviewItemSkeletons />}
+      {!loading && isFirstPage && <GroupsPreviewCardCreateButton group={group} />}
+      {!loading && itemsToShow.map((item) => <GroupsPreviewCardItem item={item} key={item.id} />)}
     </CardContent>
   );
 };
 
-export default memo(GroupPreviewCardContent);
+export default memo(GroupsPreviewCardContent);

@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
-import {groupPreviewItemSkeletonStyles} from './_styles';
+import {groupsPreviewItemSkeletonsItemStyles} from './_styles';
 import {Skeleton} from '@material-ui/lab';
 
-const GroupPreviewItemSkeleton: FC = () => {
-  const classes = groupPreviewItemSkeletonStyles();
+const GroupsPreviewItemSkeletonsItem: FC = () => {
+  const classes = groupsPreviewItemSkeletonsItemStyles();
 
   return (
     <Box className={classes.root}>
@@ -20,4 +20,4 @@ const GroupPreviewItemSkeleton: FC = () => {
   );
 };
 
-export default GroupPreviewItemSkeleton;
+export default GroupsPreviewItemSkeletonsItem;

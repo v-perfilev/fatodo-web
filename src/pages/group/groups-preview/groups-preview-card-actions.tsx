@@ -1,7 +1,7 @@
 import React, {FC, MouseEvent, useRef, useState} from 'react';
 import {IconButton, MenuItem} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../../components/icons/dots-vertical-icon';
-import {groupCardActionsStyles} from './_styles';
+import {groupsPreviewCardActionsStyles} from './_styles';
 import {PopupMenu} from '../../../components/surfaces';
 import {useHistory} from 'react-router-dom';
 import {GroupRouteUtils} from '../_router';
@@ -21,8 +21,8 @@ type Props = {
   account: UserAccount;
 };
 
-const GroupPreviewCardActions: FC<Props> = ({account}: Props) => {
-  const classes = groupCardActionsStyles();
+const GroupsPreviewCardActions: FC<Props> = ({account}: Props) => {
+  const classes = groupsPreviewCardActionsStyles();
   const history = useHistory();
   const {t} = useTranslation();
   const ref = useRef();
@@ -100,4 +100,4 @@ const GroupPreviewCardActions: FC<Props> = ({account}: Props) => {
   );
 };
 
-export default GroupPreviewCardActions;
+export default GroupsPreviewCardActions;

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {IconButton, Tooltip} from '@material-ui/core';
-import {groupPreviewCardItemButtonsStyles} from './_styles';
+import {groupsPreviewCardItemButtonsStyles} from './_styles';
 import {Item} from '../../../models/item.model';
 import {ItemRouteUtils} from '../../item/_router';
 import {EyeIcon} from '../../../components/icons/eye-icon';
@@ -11,8 +11,8 @@ type Props = {
   item: Item;
 };
 
-const GroupPreviewCardItemButtons: FC<Props> = ({item}: Props) => {
-  const classes = groupPreviewCardItemButtonsStyles();
+const GroupsPreviewCardItemButtons: FC<Props> = ({item}: Props) => {
+  const classes = groupsPreviewCardItemButtonsStyles();
   const history = useHistory();
   const {t} = useTranslation();
 
@@ -34,4 +34,4 @@ const GroupPreviewCardItemButtons: FC<Props> = ({item}: Props) => {
   );
 };
 
-export default GroupPreviewCardItemButtons;
+export default GroupsPreviewCardItemButtons;

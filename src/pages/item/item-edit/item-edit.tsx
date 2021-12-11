@@ -1,53 +1,69 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
+import ItemForm from '../item-form/item-form';
+import {useHistory, useParams} from 'react-router-dom';
 import {Routes} from '../../router';
 import {CheckIcon} from '../../../components/icons/check-icon';
 import {CloseIcon} from '../../../components/icons/close-icon';
-import {useHistory, useParams} from 'react-router-dom';
 import ItemService from '../../../services/item.service';
-import ItemForm from '../item-form';
 import {ItemDTO} from '../../../models/dto/item.dto';
-import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
+import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
+import {ItemRouteUtils} from '../_router';
 import {GroupRouteUtils} from '../../group/_router';
 import {CircularSpinner} from '../../../components/loaders';
+import {useItemViewContext} from '../../../shared/contexts/view-contexts/item-view-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
+import withItemView from '../../../shared/hocs/with-view/with-item-view';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
+import {flowRight} from 'lodash';
+import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import {PageSpacer} from '../../../components/surfaces';
 import ControlMenu from '../../../components/layouts/control-menu/control-menu';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {ThemeFactory} from '../../../shared/theme/theme';
-import {itemCreateStyles} from './_styles';
+import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';
+import withReminderList from '../../../shared/hocs/with-list/with-reminder-list';
+import {itemEditStyles} from './_styles';
 
-const ItemCreate: FC = () => {
-  const classes = itemCreateStyles();
+const ItemEdit: FC = () => {
+  const classes = itemEditStyles();
   const {i18n, t} = useTranslation();
-  const history = useHistory();
-  const {groupId} = useParams();
-  const {setMenu} = useAdditionalMenuContext();
   const {handleCode, handleResponse} = useSnackContext();
+  const history = useHistory();
+  const {itemId} = useParams();
+  const {setMenu} = useAdditionalMenuContext();
+  const {handleUserIds} = useUserListContext();
+  const {item, load: loadItem} = useItemViewContext();
   const {group, load: loadGroup} = useGroupViewContext();
+  const {reminders, load: loadReminders} = useReminderListContext();
   const [isSaving, setIsSaving] = useState(false);
   const [saveCallback, setSaveCallback] = useState(() => (): void => {
     // important stub function
   });
 
-  const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(groupId));
+  const redirectToGroupView = (): void => history.push(GroupRouteUtils.getViewUrl(item.groupId));
+  const redirectToItemView = (): void => history.push(ItemRouteUtils.getViewUrl(itemId));
   const redirectToNotFound = (): void => history.push(Routes.PAGE_NOT_FOUND);
+
+  const loadUsers = (): void => {
+    const userIds = group.members.map((user) => user.id);
+    handleUserIds(userIds);
+  };
 
   const menuElements = [
     {icon: <CheckIcon />, action: saveCallback, text: t('item:tooltips.save'), loading: isSaving},
-    {icon: <CloseIcon />, action: redirectToGroupView, text: t('item:tooltips.cancel'), color: 'secondary'},
+    {icon: <CloseIcon />, action: redirectToItemView, text: t('item:tooltips.cancel'), color: 'secondary'},
   ] as MenuElement[];
 
   const theme = ThemeFactory.getTheme(group?.color);
 
   const request = (data: ItemDTO, stopSubmitting: () => void): void => {
     setIsSaving(true);
-    ItemService.createItem(data)
+    ItemService.updateItem(data)
       .then(() => {
-        handleCode('item.created', 'info');
+        handleCode('item.edited', 'info');
         redirectToGroupView();
       })
       .catch((response) => {
@@ -58,21 +74,36 @@ const ItemCreate: FC = () => {
   };
 
   useEffect(() => {
-    loadGroup(groupId, redirectToNotFound, redirectToGroupView);
+    loadItem(itemId, redirectToNotFound);
+    loadReminders(itemId);
   }, []);
+
+  useEffect(() => {
+    if (item) {
+      loadGroup(item.groupId, redirectToNotFound);
+    }
+  }, [item]);
+
+  useEffect(() => {
+    if (group) {
+      loadUsers();
+    }
+  }, [group]);
 
   useEffect(() => {
     setMenu(menuElements);
   }, [i18n.language, isSaving, saveCallback]);
 
-  return !group ? (
+  return !group || !item ? (
     <CircularSpinner />
   ) : (
     <ThemeProvider theme={theme}>
       <Container className={classes.container}>
         <ItemForm
           group={group}
-          header={t('item:headers.create', {group: group.title})}
+          item={item}
+          reminders={reminders}
+          header={t('item:headers.edit', {group: group.title})}
           setSaveCallback={setSaveCallback}
           request={request}
         />
@@ -83,4 +114,4 @@ const ItemCreate: FC = () => {
   );
 };
 
-export default withGroupView(ItemCreate);
+export default flowRight([withGroupView, withItemView, withReminderList])(ItemEdit);

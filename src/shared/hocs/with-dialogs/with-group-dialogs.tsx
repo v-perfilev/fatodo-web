@@ -5,25 +5,25 @@ import {Group, GroupUser} from '../../../models/group.model';
 import GroupDeleteDialog, {
   defaultGroupDeleteDialogProps,
   GroupDeleteDialogProps,
-} from '../../../pages/group/dialogs/group-delete-dialog';
+} from '../../../pages/group/dialogs/group-delete-dialog/group-delete-dialog';
 import {GroupDialogContext} from '../../contexts/dialog-contexts/group-dialog-context';
 import {User} from '../../../models/user.model';
 import GroupAddMembersDialog, {
   defaultGroupAddMembersDialogProps,
   GroupAddMembersDialogProps,
-} from '../../../pages/group/dialogs/group-add-members-dialog';
+} from '../../../pages/group/dialogs/group-add-members-dialog/group-add-members-dialog';
 import GroupMembersDialog, {
   defaultGroupMembersDialogProps,
   GroupMembersDialogProps,
-} from '../../../pages/group/dialogs/group-members-dialog';
+} from '../../../pages/group/dialogs/group-members-dialog/group-members-dialog';
 import GroupEditMemberDialog, {
   defaultGroupEditMemberDialogProps,
   GroupEditMemberDialogProps,
-} from '../../../pages/group/dialogs/group-edit-member-dialog';
+} from '../../../pages/group/dialogs/group-edit-member-dialog/group-edit-member-dialog';
 import GroupLeaveDialog, {
   defaultGroupLeaveDialogProps,
   GroupLeaveDialogProps,
-} from '../../../pages/group/dialogs/group-leave-dialog';
+} from '../../../pages/group/dialogs/group-leave-dialog/group-leave-dialog';
 
 enum GroupDialogs {
   DELETE = 'GROUP_DELETE_DIALOG',

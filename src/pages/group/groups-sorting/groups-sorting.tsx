@@ -4,7 +4,7 @@ import {CloseIcon} from '../../../components/icons/close-icon';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../router';
 import {useTranslation} from 'react-i18next';
-import GroupsSortingContainer from './groups-sorting-container';
+import GroupsSortingContainer from './groups-sorting-grid-container';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';

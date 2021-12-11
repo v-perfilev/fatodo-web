@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {FC, memo, useEffect, useMemo, useState} from 'react';
-import GroupPreviewCardFooter from './group-preview-card-footer';
-import GroupPreviewCardContent from './group-preview-card-content';
+import GroupsPreviewCardFooter from './groups-preview-card-footer';
+import GroupPreviewCardContent from './groups-preview-card-content';
 import {Item} from '../../../models/item.model';
 import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {CARD_ITEMS_COUNT, CARD_ITEMS_FIRST_PAGE_COUNT} from '../_constants';
 
-const GroupPreviewCardBody: FC = () => {
+const GroupsPreviewCardBody: FC = () => {
   const {group} = useGroupViewContext();
   const {items: previewItems, counts: previewCounts, loadMore: loadMoreItems} = usePreviewItemListContext();
   const [page, setPage] = useState<number>(0);
@@ -54,9 +54,9 @@ const GroupPreviewCardBody: FC = () => {
   return (
     <>
       <GroupPreviewCardContent itemsToShow={itemsToShow} isFirstPage={page == 0} />
-      <GroupPreviewCardFooter page={page} totalPages={totalPages} setPage={setPage} itemsCount={count} />
+      <GroupsPreviewCardFooter page={page} totalPages={totalPages} setPage={setPage} itemsCount={count} />
     </>
   );
 };
 
-export default memo(GroupPreviewCardBody);
+export default memo(GroupsPreviewCardBody);

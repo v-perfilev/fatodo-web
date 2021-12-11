@@ -2,13 +2,13 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
-import GroupsPreview from './groups-preview';
-import GroupsSorting from './groups-sorting';
+import GroupsPreview from './groups-preview/groups-preview';
+import GroupsSorting from './groups-sorting/groups-sorting';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
 import {Routes} from '../router';
-import GroupView from './group-view';
-import GroupCreate from './group-create';
-import GroupEdit from './group-edit';
+import GroupView from './group-view/group-view';
+import GroupCreate from './group-create/group-create';
+import GroupEdit from './group-edit/group-edit';
 import {flowRight} from 'lodash';
 
 export enum GroupRoutes {

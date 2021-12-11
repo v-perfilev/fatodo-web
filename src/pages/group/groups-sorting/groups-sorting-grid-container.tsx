@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {FC, MutableRefObject, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
-import {groupSortingGridContainerStyles} from './_styles';
+import {groupsSortingGridContainerStyles} from './_styles';
 import withSortableGrid from '../../../shared/hocs/with-sortable-grid/with-sortable-grid';
 import {animated} from 'react-spring';
 import {SortProps} from '../../../shared/hocs/with-sortable-grid/types';
-import GroupsSortingItem from './groups-sorting-item';
+import GroupsSortingItem from './groups-sorting-grid-item';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
 import {flowRight} from 'lodash';
 
@@ -15,8 +15,8 @@ type BaseProps = {
 
 type Props = SortProps & BaseProps;
 
-const GroupsSortingContainer: FC<Props> = (props: Props) => {
-  const classes = groupSortingGridContainerStyles();
+const GroupsSortingGridContainer: FC<Props> = (props: Props) => {
+  const classes = groupsSortingGridContainerStyles();
   const {groups} = useGroupListContext();
   const {setSortItems, setSortContainerRef, setSortItemRef} = props;
   const {sortContainerHeight, sortSprings, sortBind, sortOrder} = props;
@@ -49,4 +49,4 @@ const GroupsSortingContainer: FC<Props> = (props: Props) => {
   );
 };
 
-export default flowRight([animated, withSortableGrid])(GroupsSortingContainer);
+export default flowRight([animated, withSortableGrid])(GroupsSortingGridContainer);

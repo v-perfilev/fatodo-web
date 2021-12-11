@@ -4,9 +4,9 @@ import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
 import {Routes} from '../router';
-import ItemView from './item-view';
-import ItemEdit from './item-edit';
-import ItemCreate from './item-create';
+import ItemView from './item-view/item-view';
+import ItemEdit from './item-edit/item-edit';
+import ItemCreate from './item-create/item-create';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
 import {flowRight} from 'lodash';
 

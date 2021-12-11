@@ -6,7 +6,7 @@ import {Item} from '../../../models/item.model';
 import ItemDeleteDialog, {
   defaultItemDeleteDialogProps,
   ItemDeleteDialogProps,
-} from '../../../pages/item/dialogs/item-delete-dialog';
+} from '../../../pages/item/dialogs/item-delete-dialog/item-delete-dialog';
 
 enum ItemDialogs {
   DELETE = 'ITEM_DELETE_DIALOG',

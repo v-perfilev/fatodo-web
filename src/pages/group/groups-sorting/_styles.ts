@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 import {CARD_HEADER_HEIGHT} from '../_constants';
 
-export const groupSortingCardStyles = makeStyles(() => ({
+export const groupsSortingCardStyles = makeStyles(() => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
@@ -32,7 +32,7 @@ export const groupSortingCardHeaderStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupSortingCardActionsStyles = makeStyles((theme: Theme) => ({
+export const groupsSortingCardActionsStyles = makeStyles((theme: Theme) => ({
   action: {
     marginTop: 10,
     marginRight: 6,
@@ -46,7 +46,7 @@ export const groupSortingCardActionsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupSortingGridContainerStyles = makeStyles((theme: Theme) => ({
+export const groupsSortingGridContainerStyles = makeStyles((theme: Theme) => ({
   container: {
     width: 'calc(100% - ' + theme.spacing(2) + 'px)',
     position: 'relative',
@@ -54,7 +54,7 @@ export const groupSortingGridContainerStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupSortingGridItemStyles = makeStyles((theme: Theme) => ({
+export const groupsSortingGridItemStyles = makeStyles((theme: Theme) => ({
   item: {
     position: 'absolute',
     width: '100%',

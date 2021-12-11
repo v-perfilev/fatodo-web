@@ -9,7 +9,7 @@ import {
   PAGINATION_BUTTON_WIDTH,
 } from '../_constants';
 
-export const groupCardStyles = makeStyles(() => ({
+export const groupsPreviewCardStyles = makeStyles(() => ({
   card: {
     display: 'flex',
     flexDirection: 'column',
@@ -18,7 +18,7 @@ export const groupCardStyles = makeStyles(() => ({
   },
 }));
 
-export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewCardHeaderStyles = makeStyles((theme: Theme) => ({
   root: {
     height: CARD_HEADER_HEIGHT,
     flexShrink: 0,
@@ -44,7 +44,7 @@ export const groupCardHeaderStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardActionsStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewCardActionsStyles = makeStyles((theme: Theme) => ({
   root: {
     marginTop: -2,
     marginRight: -4,
@@ -62,7 +62,7 @@ export const groupCardActionsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardContentStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewCardContentStyles = makeStyles((theme: Theme) => ({
   content: {
     height: `calc(100% - ${CARD_HEADER_HEIGHT}px - ${CARD_FOOTER_HEIGHT}px)`,
     display: 'flex',
@@ -72,7 +72,7 @@ export const groupCardContentStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardCreateButtonStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewCardCreateButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
@@ -82,7 +82,7 @@ export const groupCardCreateButtonStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupPreviewItemSkeletonStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewItemSkeletonsItemStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
@@ -130,7 +130,7 @@ export const groupPreviewItemSkeletonStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardItemStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewCardItemStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
@@ -181,7 +181,7 @@ export const groupCardItemStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardItemChangesStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewCardItemChangesStyles = makeStyles((theme: Theme) => ({
   name: {
     color: theme.palette.grey['400'],
     fontSize: '0.7rem',
@@ -199,7 +199,7 @@ export const groupCardItemChangesStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupPreviewCardItemButtonsStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewCardItemButtonsStyles = makeStyles((theme: Theme) => ({
   showIcon: {
     '&:hover': {
       color: theme.palette.primary.main,
@@ -207,7 +207,7 @@ export const groupPreviewCardItemButtonsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupCardFooterStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewCardFooterStyles = makeStyles((theme: Theme) => ({
   footer: {
     height: CARD_FOOTER_HEIGHT,
     display: 'flex',
@@ -246,13 +246,22 @@ export const groupCardFooterStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupGridContainerStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewGridContainerStyles = makeStyles((theme: Theme) => ({
   container: {
     padding: theme.spacing(1),
   },
 }));
 
-export const groupGridItemStyles = makeStyles((theme: Theme) => ({
+export const groupsPreviewGridItemStyles = makeStyles((theme: Theme) => ({
+  item: {
+    padding: theme.spacing(1),
+  },
+  card: {
+    height: CARD_HEIGHT,
+  },
+}));
+
+export const groupsPreviewGridCreateButtonStyles = makeStyles((theme: Theme) => ({
   item: {
     padding: theme.spacing(1),
   },

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {FC, HTMLAttributes, useCallback, useMemo} from 'react';
-import {groupCardCreateButtonStyles} from './_styles';
+import {groupsPreviewCardCreateButtonStyles} from './_styles';
 import {ActivePlaceholder} from '../../../components/surfaces';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {ItemRouteUtils} from '../../item/_router';
@@ -13,8 +13,8 @@ type Props = HTMLAttributes<HTMLElement> & {
   group: Group;
 };
 
-const GroupPreviewCardCreateButton: FC<Props> = ({group}: Props) => {
-  const classes = groupCardCreateButtonStyles();
+const GroupsPreviewCardCreateButton: FC<Props> = ({group}: Props) => {
+  const classes = groupsPreviewCardCreateButtonStyles();
   const history = useHistory();
   const {t, i18n} = useTranslation();
 
@@ -39,4 +39,4 @@ const GroupPreviewCardCreateButton: FC<Props> = ({group}: Props) => {
   );
 };
 
-export default GroupPreviewCardCreateButton;
+export default GroupsPreviewCardCreateButton;
