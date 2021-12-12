@@ -168,7 +168,6 @@ export const groupsPreviewCardItemStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     '& > *': {
-      color: theme.palette.grey['400'],
       marginLeft: theme.spacing(1),
     },
   },
@@ -201,6 +200,7 @@ export const groupsPreviewCardItemChangesStyles = makeStyles((theme: Theme) => (
 
 export const groupsPreviewCardItemButtonsStyles = makeStyles((theme: Theme) => ({
   showIcon: {
+    color: theme.palette.grey['400'],
     '&:hover': {
       color: theme.palette.primary.main,
     },

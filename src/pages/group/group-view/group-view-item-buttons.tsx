@@ -164,7 +164,7 @@ const GroupViewItemButtons: FC<Props> = ({item, canEdit}: Props) => {
     </>
   );
 
-  return isBigDevice ? bigDeviceView : smallDeviceView;
+  return !isBigDevice ? bigDeviceView : smallDeviceView;
 };
 
 export default memo(GroupViewItemButtons);

@@ -138,7 +138,7 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     paddingLeft: theme.spacing(1),
-    paddingRight: theme.spacing(2),
+    paddingRight: theme.spacing(1.5),
     transition: '0.3s',
 
     '&:hover': {
@@ -167,7 +167,6 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     '& > *': {
-      color: theme.palette.grey['400'],
       marginLeft: theme.spacing(1),
     },
   },
@@ -183,21 +182,25 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
 
 export const groupViewItemButtonsStyles = makeStyles((theme: Theme) => ({
   showIcon: {
+    color: theme.palette.grey['400'],
     '&:hover': {
       color: theme.palette.primary.main,
     },
   },
   archivedIcon: {
+    color: theme.palette.grey['400'],
     '&:hover': {
       color: theme.palette.secondary.main,
     },
   },
   editIcon: {
+    color: theme.palette.grey['400'],
     '&:hover': {
       color: theme.palette.secondary.main,
     },
   },
   deleteIcon: {
+    color: theme.palette.grey['400'],
     '&:hover': {
       color: theme.palette.error.main,
     },
