@@ -31,9 +31,4 @@ export const contactSkeletonsItemStyles = makeStyles((theme: Theme) => ({
     height: 35,
     marginLeft: theme.spacing(1),
   },
-  skeleton4: {
-    width: 90,
-    height: 35,
-    marginLeft: theme.spacing(1),
-  },
 }));

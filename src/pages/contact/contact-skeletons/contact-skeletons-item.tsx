@@ -13,7 +13,6 @@ const ContactSkeletonsItem: FC = () => {
       <Skeleton className={classes.skeleton2} variant="text" />
       <Grower />
       <Skeleton className={classes.skeleton3} variant="rect" />
-      <Skeleton className={classes.skeleton4} variant="rect" />
     </Box>
   );
 };
