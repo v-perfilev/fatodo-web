@@ -3,7 +3,7 @@ import {FC, ReactNode, useEffect, useMemo} from 'react';
 import {additionalMenuStyles} from './_styles';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab';
-import {CircularProgress} from '@material-ui/core';
+import {CircularProgress, Hidden} from '@material-ui/core';
 import {useLocation} from 'react-router-dom';
 import {MenuIcon} from '../../icons/menu-icon';
 import {CloseIcon} from '../../icons/close-icon';
@@ -41,19 +41,21 @@ const AdditionalMenu: FC = () => {
   }, [pathname]);
 
   return filteredMenu ? (
-    <SpeedDial
-      ariaLabel="Menu"
-      className={classes.root}
-      icon={icon}
-      onClose={handleClose}
-      onOpen={handleOpen}
-      open={open}
-      direction="up"
-    >
-      {filteredMenu.map((action, index) => (
-        <SpeedDialAction icon={action.icon} tooltipTitle={action.text} onClick={action.action} key={index} />
-      ))}
-    </SpeedDial>
+    <Hidden smDown>
+      <SpeedDial
+        ariaLabel="Menu"
+        className={classes.root}
+        icon={icon}
+        onClose={handleClose}
+        onOpen={handleOpen}
+        open={open}
+        direction="up"
+      >
+        {filteredMenu.map((action, index) => (
+          <SpeedDialAction icon={action.icon} tooltipTitle={action.text} onClick={action.action} key={index} />
+        ))}
+      </SpeedDial>
+    </Hidden>
   ) : null;
 };
 
