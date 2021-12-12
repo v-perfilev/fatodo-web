@@ -93,7 +93,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
   const isScrolledToBottom = useMemo<boolean>(() => {
     const clientHeight = listRef.current?.props.height as number;
     const scrollTop = scroll?.scrollOffset;
-    return !clientHeight || getScrollHeight() <= scrollTop + clientHeight;
+    return !clientHeight || getScrollHeight() <= Math.ceil(scrollTop + clientHeight);
   }, [scroll, getScrollHeight]);
 
   useImperativeHandle(
