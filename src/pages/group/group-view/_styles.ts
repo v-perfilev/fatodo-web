@@ -23,7 +23,7 @@ export const groupViewUsersSkeletonStyles = makeStyles((theme: Theme) => ({
     paddingBottom: theme.spacing(0.5),
   },
   skeleton: {
-    width: '100%',
+    width: '30%',
     height: 28,
   },
 }));

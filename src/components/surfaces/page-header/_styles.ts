@@ -12,5 +12,8 @@ export const pageHeaderStyles = makeStyles((theme: Theme) => ({
     '& > *': {
       marginRight: theme.spacing(1.5),
     },
+    '& > *:last-child': {
+      marginRight: 0,
+    },
   },
 }));
