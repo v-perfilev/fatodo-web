@@ -202,6 +202,16 @@ export const groupViewItemButtonsStyles = makeStyles((theme: Theme) => ({
       color: theme.palette.error.main,
     },
   },
+  popupMenu: {
+    '& li': {
+      display: 'flex',
+      alignItems: 'center',
+    },
+    '& li > *:first-child': {
+      marginLeft: theme.spacing(-0.5),
+      marginRight: theme.spacing(1),
+    },
+  },
 }));
 
 export const groupViewItemChangesStyles = makeStyles((theme: Theme) => ({
