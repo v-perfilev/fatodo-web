@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useRef, useState} from 'react';
+import React, {FC, memo, useCallback, useRef, useState} from 'react';
 import {IconButton, MenuItem, Theme, Tooltip, useMediaQuery} from '@material-ui/core';
 import {groupsPreviewCardItemButtonsStyles} from './_styles';
 import {Item} from '../../../models/item.model';
@@ -67,4 +67,4 @@ const GroupsPreviewCardItemButtons: FC<Props> = ({item}: Props) => {
   return isBigDevice ? bigDeviceView : smallDeviceView;
 };
 
-export default GroupsPreviewCardItemButtons;
+export default memo(GroupsPreviewCardItemButtons);

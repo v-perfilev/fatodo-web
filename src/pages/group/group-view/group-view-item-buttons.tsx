@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useRef, useState} from 'react';
+import React, {FC, memo, useCallback, useRef, useState} from 'react';
 import {IconButton, MenuItem, Theme, Tooltip, useMediaQuery} from '@material-ui/core';
 import {groupViewItemButtonsStyles} from './_styles';
 import {EditIcon} from '../../../components/icons/edit-icon';
@@ -167,4 +167,4 @@ const GroupViewItemButtons: FC<Props> = ({item, canEdit}: Props) => {
   return isBigDevice ? bigDeviceView : smallDeviceView;
 };
 
-export default GroupViewItemButtons;
+export default memo(GroupViewItemButtons);
