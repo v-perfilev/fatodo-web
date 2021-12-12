@@ -142,9 +142,9 @@ const GroupViewItemButtons: FC<Props> = ({item, canEdit}: Props) => {
         </MenuItem>
         {canEdit && (
           <MenuItem onClick={clickOnArchivedButton} disabled={archivedLoading}>
-            {!archivedLoading && <CircularSpinner size="xs" />}
-            {archivedLoading && item.archived && <PackageUpIcon color="primary" />}
-            {archivedLoading && !item.archived && <PackageDownIcon color="primary" />}
+            {archivedLoading && <CircularSpinner size="xs" />}
+            {!archivedLoading && item.archived && <PackageUpIcon color="primary" />}
+            {!archivedLoading && !item.archived && <PackageDownIcon color="primary" />}
             {item.archived ? t('group:tooltips.removeFromArchive') : t('group:tooltips.moveToArchive')}
           </MenuItem>
         )}
