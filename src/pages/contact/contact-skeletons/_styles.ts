@@ -23,7 +23,7 @@ export const contactSkeletonsItemStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(0.5),
   },
   skeleton2: {
-    width: 200,
+    width: 150,
     height: 20,
   },
   skeleton3: {
