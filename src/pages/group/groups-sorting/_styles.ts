@@ -48,7 +48,7 @@ export const groupsSortingCardActionsStyles = makeStyles((theme: Theme) => ({
 
 export const groupsSortingGridContainerStyles = makeStyles((theme: Theme) => ({
   container: {
-    width: 'calc(100% - ' + theme.spacing(2) + 'px)',
+    width: `calc(100% - ${theme.spacing(2)}px)`,
     position: 'relative',
     margin: theme.spacing(1),
   },

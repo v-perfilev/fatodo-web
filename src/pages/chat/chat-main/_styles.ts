@@ -7,7 +7,7 @@ export const chatMainStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     flexGrow: 1,
-    height: 'calc(100vh - ' + HEADER_HEIGHT + 'px)',
+    height: `calc(100vh - ${HEADER_HEIGHT}px)`,
   },
   control: {
     height: '100%',
@@ -19,7 +19,7 @@ export const chatMainStyles = makeStyles((theme: Theme) => ({
     height: '100%',
   },
   smallViewRoot: {
-    height: 'calc(100vh - ' + HEADER_HEIGHT + 'px)',
+    height: `calc(100vh - ${HEADER_HEIGHT}px)`,
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
