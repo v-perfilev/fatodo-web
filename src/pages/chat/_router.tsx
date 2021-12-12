@@ -4,7 +4,7 @@ import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
 import {Routes} from '../router';
-import MessageMain from './chat-main/chat-main';
+import ChatMain from './chat-main/chat-main';
 import withUserList from '../../shared/hocs/with-list/with-user-list';
 import {flowRight} from 'lodash';
 
@@ -22,8 +22,8 @@ const ChatRouter: FC = () => {
 
   return (
     <Switch>
-      <PublicRoute exact path={match.path} component={MessageMain} />
-      <PublicRoute exact path={match.path + ChatRoutes.CHAT} component={MessageMain} />
+      <PublicRoute exact path={match.path} component={ChatMain} />
+      <PublicRoute exact path={match.path + ChatRoutes.CHAT} component={ChatMain} />
       <Redirect to={Routes.PAGE_NOT_FOUND} />
     </Switch>
   );

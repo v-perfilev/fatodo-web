@@ -8,11 +8,10 @@ const withHeader = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = headerStyles();
 
   return (
-    <>
+    <Box className={classes.root}>
       <Header />
-      <Box className={classes.spacer} />
       <Component {...props} />
-    </>
+    </Box>
   );
 };
 

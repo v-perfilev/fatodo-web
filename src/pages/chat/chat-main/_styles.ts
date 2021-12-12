@@ -7,17 +7,13 @@ export const chatMainStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'row',
     flexGrow: 1,
-    height: `calc(100vh - ${HEADER_HEIGHT}px)`,
   },
   control: {
-    height: '100%',
     borderRightWidth: 1,
     borderRightStyle: 'solid',
     borderRightColor: theme.palette.grey['300'],
   },
-  content: {
-    height: '100%',
-  },
+  content: {},
   smallViewRoot: {
     height: `calc(100vh - ${HEADER_HEIGHT}px)`,
     display: 'flex',

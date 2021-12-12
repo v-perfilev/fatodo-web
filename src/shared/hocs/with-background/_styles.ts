@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const backgroundStyles = makeStyles(() => ({
   container: {
-    minHeight: '100vh',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -33,7 +33,7 @@ export const backgroundStyles = makeStyles(() => ({
   imgBox: {
     position: 'fixed',
     width: '100%',
-    height: '100vh',
+    height: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

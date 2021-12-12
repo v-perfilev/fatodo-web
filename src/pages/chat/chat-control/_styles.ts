@@ -5,10 +5,10 @@ import {CHAT_CONTROL_HEADER_HEIGHT} from '../_constants';
 export const chatControlStyles = makeStyles(() => ({
   root: {
     position: 'relative',
+    height: '100%',
     display: 'flex',
     flexDirection: 'column',
     flexGrow: 1,
-    height: '100%',
   },
 }));
 

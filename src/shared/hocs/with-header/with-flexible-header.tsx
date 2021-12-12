@@ -7,11 +7,10 @@ import {headerStyles} from './_styles';
 const withFlexibleHeader = (Component: ComponentType): FC => (props): ReactElement => {
   const classes = headerStyles();
   return (
-    <>
+    <Box className={classes.root}>
       <Header flexible />
-      <Box className={classes.spacer} />
       <Component {...props} />
-    </>
+    </Box>
   );
 };
 
