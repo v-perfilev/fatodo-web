@@ -12,5 +12,6 @@ export * from './page-subheader/page-subheader';
 export * from './paper-box/paper-box';
 export * from './popup-menu/popup-menu';
 export * from './solo-badge/solo-badge';
+export * from './tooltip-icon-button/tooltip-icon-button';
 export * from './users-select/users-select';
 export * from './virtualized-list/virtualized-list';

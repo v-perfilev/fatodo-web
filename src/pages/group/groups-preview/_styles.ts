@@ -198,25 +198,6 @@ export const groupsPreviewCardItemChangesStyles = makeStyles((theme: Theme) => (
   },
 }));
 
-export const groupsPreviewCardItemButtonsStyles = makeStyles((theme: Theme) => ({
-  showIcon: {
-    color: theme.palette.grey['400'],
-    '&:hover': {
-      color: theme.palette.primary.main,
-    },
-  },
-  popupMenu: {
-    '& li': {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    '& li > *:first-child': {
-      marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(1),
-    },
-  },
-}));
-
 export const groupsPreviewCardFooterStyles = makeStyles((theme: Theme) => ({
   footer: {
     height: CARD_FOOTER_HEIGHT,

@@ -180,43 +180,6 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupViewItemButtonsStyles = makeStyles((theme: Theme) => ({
-  showIcon: {
-    color: theme.palette.grey['400'],
-    '&:hover': {
-      color: theme.palette.primary.main,
-    },
-  },
-  archivedIcon: {
-    color: theme.palette.grey['400'],
-    '&:hover': {
-      color: theme.palette.secondary.main,
-    },
-  },
-  editIcon: {
-    color: theme.palette.grey['400'],
-    '&:hover': {
-      color: theme.palette.secondary.main,
-    },
-  },
-  deleteIcon: {
-    color: theme.palette.grey['400'],
-    '&:hover': {
-      color: theme.palette.error.main,
-    },
-  },
-  popupMenu: {
-    '& li': {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    '& li > *:first-child': {
-      marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(1),
-    },
-  },
-}));
-
 export const groupViewItemChangesStyles = makeStyles((theme: Theme) => ({
   name: {
     color: theme.palette.grey['400'],
