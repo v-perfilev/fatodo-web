@@ -14,8 +14,7 @@ import {useItemListContext} from '../../../shared/contexts/list-contexts/item-li
 import {useArchivedItemListContext} from '../../../shared/contexts/list-contexts/archived-item-list-context';
 import {useTranslation} from 'react-i18next';
 import {EyeIcon} from '../../../components/icons/eye-icon';
-import {TooltipIconButtonProps} from '../../../components/surfaces';
-import {PopupMenuItemProps} from '../../../components/surfaces/popup-menu/popup-menu-item';
+import {PopupMenuItemProps, TooltipIconButtonProps} from '../../../components/surfaces';
 import GroupViewItemButtonsBig from './group-view-item-buttons-big';
 import GroupViewItemButtonsSmall from './group-view-item-buttons-small';
 

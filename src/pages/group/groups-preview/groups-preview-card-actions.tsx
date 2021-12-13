@@ -2,7 +2,7 @@ import React, {FC, MouseEvent, useRef, useState} from 'react';
 import {Box, IconButton} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../../components/icons/dots-vertical-icon';
 import {groupsPreviewCardActionsStyles} from './_styles';
-import {PopupMenu} from '../../../components/surfaces';
+import {PopupMenu, PopupMenuItem, PopupMenuItemProps} from '../../../components/surfaces';
 import {useHistory} from 'react-router-dom';
 import {GroupRouteUtils} from '../_router';
 import {ItemRouteUtils} from '../../item/_router';
@@ -16,7 +16,6 @@ import {EditIcon} from '../../../components/icons/edit-icon';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {UserAccount} from '../../../models/user.model';
-import {PopupMenuItem, PopupMenuItemProps} from '../../../components/surfaces/popup-menu/popup-menu-item';
 
 type Props = {
   account: UserAccount;

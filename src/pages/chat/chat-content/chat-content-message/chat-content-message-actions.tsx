@@ -1,7 +1,7 @@
 import React, {FC, MouseEvent, useCallback, useRef, useState} from 'react';
 import {Box, IconButton} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
-import {PopupMenu} from '../../../../components/surfaces';
+import {PopupMenu, PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
 import {DeleteIcon} from '../../../../components/icons/delete-icon';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
@@ -12,7 +12,6 @@ import {useUserListContext} from '../../../../shared/contexts/list-contexts/user
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
 import {EyeIcon} from '../../../../components/icons/eye-icon';
 import {EditIcon} from '../../../../components/icons/edit-icon';
-import {PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces/popup-menu/popup-menu-item';
 
 type Props = {
   message: Message;

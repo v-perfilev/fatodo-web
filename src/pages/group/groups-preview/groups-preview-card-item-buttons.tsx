@@ -5,10 +5,9 @@ import {ItemRouteUtils} from '../../item/_router';
 import {EyeIcon} from '../../../components/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
-import {TooltipIconButtonProps} from '../../../components/surfaces';
 import GroupsPreviewCardItemButtonsBig from './groups-preview-card-item-buttons-big';
 import GroupsPreviewCardItemButtonsSmall from './groups-preview-card-item-buttons-small';
-import {PopupMenuItemProps} from '../../../components/surfaces/popup-menu/popup-menu-item';
+import {PopupMenuItemProps, TooltipIconButtonProps} from '../../../components/surfaces';
 
 type Props = {
   item: Item;

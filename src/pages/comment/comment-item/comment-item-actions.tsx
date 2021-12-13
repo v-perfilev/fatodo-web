@@ -6,13 +6,12 @@ import {useUserListContext} from '../../../shared/contexts/list-contexts/user-li
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import CommentService from '../../../services/comment.service';
 import {DotsVerticalIcon} from '../../../components/icons/dots-vertical-icon';
-import {PopupMenu} from '../../../components/surfaces';
+import {PopupMenu, PopupMenuItem, PopupMenuItemProps} from '../../../components/surfaces';
 import {ReactionsIcon} from '../../../components/icons/reactions-icon';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
 import {useCommentDialogContext} from '../../../shared/contexts/dialog-contexts/comment-dialog-context';
 import {EditIcon} from '../../../components/icons/edit-icon';
 import {ReplyIcon} from '../../../components/icons/reply-icon';
-import {PopupMenuItem, PopupMenuItemProps} from '../../../components/surfaces/popup-menu/popup-menu-item';
 
 type Props = {
   comment: Comment;

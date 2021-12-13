@@ -16,7 +16,7 @@ import {EditIcon} from '../../../../components/icons/edit-icon';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
 import {MessageIcon} from '../../../../components/icons/message-icon';
-import {PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces/popup-menu/popup-menu-item';
+import {PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces';
 
 type Props = {
   chat: Chat;
