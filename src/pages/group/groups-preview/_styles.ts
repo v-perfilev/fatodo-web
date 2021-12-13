@@ -50,16 +50,6 @@ export const groupsPreviewCardActionsStyles = makeStyles((theme: Theme) => ({
     marginRight: -4,
     color: theme.palette.primary.contrastText,
   },
-  popupMenu: {
-    '& li': {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    '& svg': {
-      marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(1),
-    },
-  },
 }));
 
 export const groupsPreviewCardContentStyles = makeStyles((theme: Theme) => ({

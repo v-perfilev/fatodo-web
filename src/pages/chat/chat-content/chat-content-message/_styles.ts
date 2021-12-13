@@ -1,19 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 
-export const chatContentMessageActionsStyles = makeStyles((theme: Theme) => ({
-  popupMenu: {
-    '& li': {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    '& svg': {
-      marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(1),
-    },
-  },
-}));
-
 export const chatContentMessageEventStyles = makeStyles((theme: Theme) => ({
   root: {
     width: '80%',

@@ -1,5 +1,5 @@
 import React, {FC, MouseEvent, useRef, useState} from 'react';
-import {IconButton, MenuItem} from '@material-ui/core';
+import {IconButton} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../../components/icons/dots-vertical-icon';
 import {groupsPreviewCardActionsStyles} from './_styles';
 import {PopupMenu} from '../../../components/surfaces';
@@ -16,6 +16,7 @@ import {EditIcon} from '../../../components/icons/edit-icon';
 import {DeleteIcon} from '../../../components/icons/delete-icon';
 import {PlusIcon} from '../../../components/icons/plus-icon';
 import {UserAccount} from '../../../models/user.model';
+import {PopupMenuItem, PopupMenuItemProps} from '../../../components/surfaces/popup-menu/popup-menu-item';
 
 type Props = {
   account: UserAccount;
@@ -67,34 +68,27 @@ const GroupsPreviewCardActions: FC<Props> = ({account}: Props) => {
     handleClose(e);
   };
 
+  const menuItems = [
+    {action: redirectToItemCreate, icon: <PlusIcon color="primary" />, text: t('group:menu.createItem'), show: canEdit},
+    {action: redirectToGroupView, icon: <EyeIcon color="primary" />, text: t('group:menu.viewGroup')},
+    {action: redirectToGroupEdit, icon: <EditIcon color="primary" />, text: t('group:menu.editGroup'), show: canAdmin},
+    {
+      action: openGroupDeleteDialog,
+      icon: <DeleteIcon color="error" />,
+      text: t('group:menu.deleteGroup'),
+      show: canAdmin,
+    },
+  ] as PopupMenuItemProps[];
+
   return (
     <>
       <IconButton onClick={handleClickOnAction} className={classes.root} ref={ref}>
         <DotsVerticalIcon />
       </IconButton>
-      <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        {canEdit && (
-          <MenuItem onClick={redirectToItemCreate}>
-            <PlusIcon color="primary" />
-            {t('group:menu.createItem')}
-          </MenuItem>
-        )}
-        <MenuItem onClick={redirectToGroupView}>
-          <EyeIcon color="primary" />
-          {t('group:menu.viewGroup')}
-        </MenuItem>
-        {canAdmin && (
-          <MenuItem onClick={redirectToGroupEdit}>
-            <EditIcon color="primary" />
-            {t('group:menu.editGroup')}
-          </MenuItem>
-        )}
-        {canAdmin && (
-          <MenuItem onClick={openGroupDeleteDialog}>
-            <DeleteIcon color="error" />
-            {t('group:menu.deleteGroup')}
-          </MenuItem>
-        )}
+      <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
+        {menuItems.map((item, index) => (
+          <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
+        ))}
       </PopupMenu>
     </>
   );

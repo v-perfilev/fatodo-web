@@ -87,19 +87,6 @@ export const commentItemReactionsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const commentItemActionsStyles = makeStyles((theme: Theme) => ({
-  popupMenu: {
-    '& li': {
-      display: 'flex',
-      alignItems: 'center',
-    },
-    '& svg': {
-      marginLeft: theme.spacing(-0.5),
-      marginRight: theme.spacing(1),
-    },
-  },
-}));
-
 export const commentItemReferenceStyles = makeStyles((theme: Theme) => ({
   root: {
     marginBottom: theme.spacing(1),

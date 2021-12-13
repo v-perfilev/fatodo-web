@@ -1,9 +1,9 @@
 import React, {FC, MouseEvent, useRef, useState} from 'react';
-import {IconButton, MenuItem, Theme, useMediaQuery} from '@material-ui/core';
+import {IconButton, Theme, useMediaQuery} from '@material-ui/core';
 import {chatContentHeaderActionsStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
 import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
-import {PopupMenu} from '../../../../components/surfaces';
+import {PopupMenu, TooltipIconButtonProps} from '../../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
 import {DeleteIcon} from '../../../../components/icons/delete-icon';
 import {BroomIcon} from '../../../../components/icons/broom-icon';
@@ -16,6 +16,7 @@ import {EditIcon} from '../../../../components/icons/edit-icon';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
 import {MessageIcon} from '../../../../components/icons/message-icon';
+import {PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces/popup-menu/popup-menu-item';
 
 type Props = {
   chat: Chat;
@@ -97,50 +98,25 @@ const ChatContentHeaderActions: FC<Props> = ({chat, title, closeChat, clearMessa
     closeChat();
   };
 
+  const menuItems = [
+    {action: closeChat, icon: <MessageIcon color="primary" />, text: t('chat:menu.toChatList'), show: !isBigDevice},
+    {action: showMembers, icon: <MembersIcon color="primary" />, text: t('chat:menu.showMembers')},
+    {action: addMembers, icon: <UserPlusIcon color="primary" />, text: t('chat:menu.addMembers'), show: !chat.isDirect},
+    {action: renameChat, icon: <EditIcon color="primary" />, text: t('chat:menu.renameChat'), show: !chat.isDirect},
+    {action: cleanChat, icon: <BroomIcon color="primary" />, text: t('chat:menu.cleanChat')},
+    {action: leaveChat, icon: <LeaveIcon color="primary" />, text: t('chat:menu.leaveChat'), show: !chat.isDirect},
+    {action: deleteChat, icon: <DeleteIcon color="error" />, text: t('chat:menu.deleteChat'), show: !chat.isDirect},
+  ] as PopupMenuItemProps[] | TooltipIconButtonProps[];
+
   return (
     <>
       <IconButton onClick={handleClickOnAction} ref={ref}>
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        {!isBigDevice && (
-          <MenuItem onClick={closeChat}>
-            <MessageIcon color="primary" />
-            {t('chat:menu.toChatList')}
-          </MenuItem>
-        )}
-        <MenuItem onClick={showMembers}>
-          <MembersIcon color="primary" />
-          {t('chat:menu.showMembers')}
-        </MenuItem>
-        {!chat.isDirect && (
-          <MenuItem onClick={addMembers}>
-            <UserPlusIcon color="primary" />
-            {t('chat:menu.addMembers')}
-          </MenuItem>
-        )}
-        {!chat.isDirect && (
-          <MenuItem onClick={renameChat}>
-            <EditIcon color="primary" />
-            {t('chat:menu.renameChat')}
-          </MenuItem>
-        )}
-        <MenuItem onClick={cleanChat}>
-          <BroomIcon color="primary" />
-          {t('chat:menu.cleanChat')}
-        </MenuItem>
-        {!chat.isDirect && (
-          <MenuItem onClick={leaveChat}>
-            <LeaveIcon color="primary" />
-            {t('chat:menu.leaveChat')}
-          </MenuItem>
-        )}
-        {!chat.isDirect && (
-          <MenuItem onClick={deleteChat}>
-            <DeleteIcon color="error" />
-            {t('chat:menu.deleteChat')}
-          </MenuItem>
-        )}
+        {menuItems.map((item, index) => (
+          <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
+        ))}
       </PopupMenu>
     </>
   );

@@ -1,8 +1,7 @@
 import React, {FC, MouseEvent, useCallback, useRef, useState} from 'react';
-import {IconButton, MenuItem} from '@material-ui/core';
+import {IconButton} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {Comment} from '../../../models/comment.model';
-import {commentItemActionsStyles} from './_styles';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import CommentService from '../../../services/comment.service';
@@ -13,6 +12,7 @@ import {DeleteIcon} from '../../../components/icons/delete-icon';
 import {useCommentDialogContext} from '../../../shared/contexts/dialog-contexts/comment-dialog-context';
 import {EditIcon} from '../../../components/icons/edit-icon';
 import {ReplyIcon} from '../../../components/icons/reply-icon';
+import {PopupMenuItem, PopupMenuItemProps} from '../../../components/surfaces/popup-menu/popup-menu-item';
 
 type Props = {
   comment: Comment;
@@ -21,7 +21,6 @@ type Props = {
 };
 
 const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Props) => {
-  const classes = commentItemActionsStyles();
   const {handleResponse} = useSnackContext();
   const {users} = useUserListContext();
   const {t} = useTranslation();
@@ -29,7 +28,7 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Pr
   const {showCommentReactionsDialog, showCommentEditDialog} = useCommentDialogContext();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClickOnAction = useCallback((e: React.MouseEvent<HTMLElement>): void => {
+  const handleOpen = useCallback((e: React.MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     e.stopPropagation();
     setIsOpen(true);
@@ -54,7 +53,7 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Pr
       showCommentReactionsDialog(comment, users);
       handleClose(e);
     },
-    [comment, users]
+    [comment, users, showCommentReactionsDialog]
   );
 
   const openEditDialog = useCallback(
@@ -62,7 +61,7 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Pr
       showCommentEditDialog(comment);
       handleClose(e);
     },
-    [comment]
+    [comment, showCommentEditDialog]
   );
 
   const deleteMessage = useCallback(
@@ -72,35 +71,39 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Pr
       });
       handleClose(e);
     },
-    [comment]
+    [comment, handleResponse]
   );
+
+  const menuItems = [
+    {action: replyToComment, icon: <ReplyIcon color="primary" />, text: t('comment:comment.buttons.response')},
+    {
+      action: openReactionsDialog,
+      icon: <ReactionsIcon color="primary" />,
+      text: t('comment:comment.actions.reactions'),
+    },
+    {
+      action: openEditDialog,
+      icon: <EditIcon color="primary" />,
+      text: t('comment:comment.actions.edit'),
+      show: isOwnComment && !comment.isDeleted,
+    },
+    {
+      action: deleteMessage,
+      icon: <DeleteIcon color="error" />,
+      text: t('comment:comment.actions.delete'),
+      show: isOwnComment && !comment.isDeleted,
+    },
+  ] as PopupMenuItemProps[];
 
   return (
     <>
-      <IconButton onClick={handleClickOnAction} size="small" ref={ref}>
+      <IconButton onClick={handleOpen} size="small" ref={ref}>
         <DotsVerticalIcon />
       </IconButton>
-      <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        <MenuItem onClick={replyToComment}>
-          <ReplyIcon color="primary" />
-          {t('comment:comment.buttons.response')}
-        </MenuItem>
-        <MenuItem onClick={openReactionsDialog}>
-          <ReactionsIcon color="primary" />
-          {t('comment:comment.actions.reactions')}
-        </MenuItem>
-        {isOwnComment && !comment.isDeleted && (
-          <MenuItem onClick={openEditDialog}>
-            <EditIcon color="primary" />
-            {t('comment:comment.actions.edit')}
-          </MenuItem>
-        )}
-        {isOwnComment && !comment.isDeleted && (
-          <MenuItem onClick={deleteMessage}>
-            <DeleteIcon color="error" />
-            {t('comment:comment.actions.delete')}
-          </MenuItem>
-        )}
+      <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
+        {menuItems.map((item, index) => (
+          <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
+        ))}
       </PopupMenu>
     </>
   );

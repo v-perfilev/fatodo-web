@@ -1,18 +1,18 @@
 import React, {FC, MouseEvent, useCallback, useRef, useState} from 'react';
-import {IconButton, MenuItem} from '@material-ui/core';
+import {IconButton} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
 import {PopupMenu} from '../../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
 import {DeleteIcon} from '../../../../components/icons/delete-icon';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {Message} from '../../../../models/message.model';
-import {chatContentMessageActionsStyles} from './_styles';
 import {ReactionsIcon} from '../../../../components/icons/reactions-icon';
 import ChatService from '../../../../services/chat.service';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
 import {EyeIcon} from '../../../../components/icons/eye-icon';
 import {EditIcon} from '../../../../components/icons/edit-icon';
+import {PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces/popup-menu/popup-menu-item';
 
 type Props = {
   message: Message;
@@ -20,7 +20,6 @@ type Props = {
 };
 
 const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => {
-  const classes = chatContentMessageActionsStyles();
   const {handleResponse} = useSnackContext();
   const {users} = useUserListContext();
   const {t} = useTranslation();
@@ -45,7 +44,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
       showMessageReactionsDialog(message, users);
       handleClose(e);
     },
-    [message, users]
+    [message, users, showMessageReactionsDialog]
   );
 
   const openReadStatusesDialog = useCallback(
@@ -53,7 +52,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
       showMessageReadStatusesDialog(message, users);
       handleClose(e);
     },
-    [message, users]
+    [message, users, showMessageReadStatusesDialog]
   );
 
   const editMessage = useCallback(
@@ -61,7 +60,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
       showMessageEditDialog(message);
       handleClose(e);
     },
-    [message]
+    [message, showMessageEditDialog]
   );
 
   const deleteMessage = useCallback(
@@ -71,35 +70,35 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
       });
       handleClose(e);
     },
-    [message]
+    [message, handleResponse]
   );
+
+  const menuItems = [
+    {action: openReactionsDialog, icon: <ReactionsIcon color="primary" />, text: t('chat:message.actions.reactions')},
+    {action: openReadStatusesDialog, icon: <EyeIcon color="primary" />, text: t('chat:message.actions.readStatuses')},
+    {
+      action: editMessage,
+      icon: <EditIcon color="primary" />,
+      text: t('chat:message.actions.edit'),
+      show: isOutcoming && !message.isDeleted,
+    },
+    {
+      action: deleteMessage,
+      icon: <DeleteIcon color="error" />,
+      text: t('chat:message.actions.delete'),
+      show: isOutcoming && !message.isDeleted,
+    },
+  ] as PopupMenuItemProps[];
 
   return (
     <>
       <IconButton onClick={handleClickOnAction} size="small" ref={ref}>
         <DotsVerticalIcon />
       </IconButton>
-      <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        <MenuItem onClick={openReactionsDialog}>
-          <ReactionsIcon color="primary" />
-          {t('chat:message.actions.reactions')}
-        </MenuItem>
-        <MenuItem onClick={openReadStatusesDialog}>
-          <EyeIcon color="primary" />
-          {t('chat:message.actions.readStatuses')}
-        </MenuItem>
-        {isOutcoming && !message.isDeleted && (
-          <MenuItem onClick={editMessage}>
-            <EditIcon color="primary" />
-            {t('chat:message.actions.edit')}
-          </MenuItem>
-        )}
-        {isOutcoming && !message.isDeleted && (
-          <MenuItem onClick={deleteMessage}>
-            <DeleteIcon color="error" />
-            {t('chat:message.actions.delete')}
-          </MenuItem>
-        )}
+      <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
+        {menuItems.map((item, index) => (
+          <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
+        ))}
       </PopupMenu>
     </>
   );

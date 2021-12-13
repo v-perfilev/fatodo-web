@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
-import {Box, IconButton, Tooltip} from '@material-ui/core';
-import {UserView} from '../../../../components/views';
+import {Box} from '@material-ui/core';
+import {PermissionView, UserView} from '../../../../components/views';
 import {groupMembersDialogMemberStyles} from './_styles';
 import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
@@ -10,9 +10,9 @@ import {useTranslation} from 'react-i18next';
 import {UserMinusIcon} from '../../../../components/icons/user-minus-icon';
 import {Group, GroupUser} from '../../../../models/group.model';
 import ItemService from '../../../../services/item.service';
-import {PermissionView} from '../../../../components/views/permission-view/permission-view';
 import {GroupUtils} from '../../../../shared/utils/group.utils';
 import {EditIcon} from '../../../../components/icons/edit-icon';
+import {TooltipIconButton, TooltipIconButtonProps} from '../../../../components/surfaces';
 
 type BaseProps = {
   group: Group;
@@ -67,6 +67,21 @@ const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, o
     />
   );
 
+  const menuItems = [
+    {
+      action: switchToEdit,
+      icon: <EditIcon color="primary" />,
+      text: t('group:tooltips.edit'),
+      show: canAdmin && (user.id !== account.id || canLeave),
+    },
+    {
+      action: switchRemovingConfirmation,
+      icon: <UserMinusIcon color="error" />,
+      text: t('group:tooltips.delete'),
+      show: canAdmin && user.id !== account.id,
+    },
+  ] as TooltipIconButtonProps[];
+
   return (
     <Box className={classes.root}>
       <Box className={classes.user}>
@@ -74,20 +89,9 @@ const GroupMembersDialogMember: FC<Props> = ({group, user, switchToEditMember, o
         <PermissionView permission={user.permission} />
       </Box>
       <Box className={classes.buttons}>
-        {canAdmin && (user.id !== account.id || canLeave) && (
-          <Tooltip title={t('group:tooltips.edit')}>
-            <IconButton size="small" onClick={switchToEdit}>
-              <EditIcon color="primary" />
-            </IconButton>
-          </Tooltip>
-        )}
-        {canAdmin && user.id !== account.id && (
-          <Tooltip title={t('group:tooltips.delete')}>
-            <IconButton size="small" onClick={switchRemovingConfirmation}>
-              <UserMinusIcon color="error" />
-            </IconButton>
-          </Tooltip>
-        )}
+        {menuItems.map((item, index) => (
+          <TooltipIconButton action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
+        ))}
       </Box>
       {removingConfirmation}
     </Box>
