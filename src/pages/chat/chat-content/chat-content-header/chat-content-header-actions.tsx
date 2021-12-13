@@ -1,9 +1,9 @@
 import React, {FC, MouseEvent, useRef, useState} from 'react';
-import {IconButton, Theme, useMediaQuery} from '@material-ui/core';
+import {Box, IconButton, Theme, useMediaQuery} from '@material-ui/core';
 import {chatContentHeaderActionsStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
 import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
-import {PopupMenu, TooltipIconButtonProps} from '../../../../components/surfaces';
+import {PopupMenu} from '../../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
 import {DeleteIcon} from '../../../../components/icons/delete-icon';
 import {BroomIcon} from '../../../../components/icons/broom-icon';
@@ -106,17 +106,19 @@ const ChatContentHeaderActions: FC<Props> = ({chat, title, closeChat, clearMessa
     {action: cleanChat, icon: <BroomIcon color="primary" />, text: t('chat:menu.cleanChat')},
     {action: leaveChat, icon: <LeaveIcon color="primary" />, text: t('chat:menu.leaveChat'), show: !chat.isDirect},
     {action: deleteChat, icon: <DeleteIcon color="error" />, text: t('chat:menu.deleteChat'), show: !chat.isDirect},
-  ] as PopupMenuItemProps[] | TooltipIconButtonProps[];
+  ] as PopupMenuItemProps[];
 
   return (
     <>
       <IconButton onClick={handleClickOnAction} ref={ref}>
         <DotsVerticalIcon />
       </IconButton>
-      <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        {menuItems.map((item, index) => (
-          <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
-        ))}
+      <PopupMenu className={classes.popupMenu} anchorEl={ref?.current} open={isOpen} onClose={handleClose}>
+        <Box>
+          {menuItems.map((item, index) => (
+            <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
+          ))}
+        </Box>
       </PopupMenu>
     </>
   );

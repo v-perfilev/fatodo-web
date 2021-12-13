@@ -1,5 +1,5 @@
 import React, {FC, MouseEvent, useRef, useState} from 'react';
-import {IconButton} from '@material-ui/core';
+import {Box, IconButton} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../../components/icons/dots-vertical-icon';
 import {groupsPreviewCardActionsStyles} from './_styles';
 import {PopupMenu} from '../../../components/surfaces';
@@ -85,10 +85,12 @@ const GroupsPreviewCardActions: FC<Props> = ({account}: Props) => {
       <IconButton onClick={handleClickOnAction} className={classes.root} ref={ref}>
         <DotsVerticalIcon />
       </IconButton>
-      <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        {menuItems.map((item, index) => (
-          <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
-        ))}
+      <PopupMenu anchorEl={ref?.current} open={isOpen} onClose={handleClose}>
+        <Box>
+          {menuItems.map((item, index) => (
+            <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
+          ))}
+        </Box>
       </PopupMenu>
     </>
   );

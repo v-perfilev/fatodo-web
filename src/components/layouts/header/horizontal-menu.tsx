@@ -74,7 +74,7 @@ const HorizontalMenu: FC<Props> = ({redirectMap, isAuthenticated}: Props) => {
         <CurrentUser />
         <ArrowDownIcon />
       </Button>
-      <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
+      <PopupMenu anchorEl={ref?.current} open={isOpen} onClose={handleClose}>
         <MenuItem onClick={redirectMap.toAccount}>
           <AccountIcon marginPosition="right" color="primary" />
           {t('header.account')}

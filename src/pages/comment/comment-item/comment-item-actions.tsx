@@ -1,5 +1,5 @@
 import React, {FC, MouseEvent, useCallback, useRef, useState} from 'react';
-import {IconButton} from '@material-ui/core';
+import {Box, IconButton} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {Comment} from '../../../models/comment.model';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
@@ -100,10 +100,12 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Pr
       <IconButton onClick={handleOpen} size="small" ref={ref}>
         <DotsVerticalIcon />
       </IconButton>
-      <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        {menuItems.map((item, index) => (
-          <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
-        ))}
+      <PopupMenu anchorEl={ref?.current} open={isOpen} onClose={handleClose}>
+        <Box>
+          {menuItems.map((item, index) => (
+            <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
+          ))}
+        </Box>
       </PopupMenu>
     </>
   );

@@ -112,7 +112,7 @@ export const StatusSelect: FC<Props> = ({statusType, setStatusType, loading}: Pr
           {loading && <CircularSpinner className={classes.spinner} size="xs" />}
         </Button>
       </Tooltip>
-      <PopupMenu className={classes.popupMenu} anchorEl={ref.current} open={isOpen} onClose={closeDialog}>
+      <PopupMenu className={classes.popupMenu} anchorEl={ref?.current} open={isOpen} onClose={closeDialog}>
         <Tooltip title={textByStatusType('CREATED')}>
           <MenuItem onClick={setStatusToCreated}>
             <StatusCreatedIcon color="primary" />

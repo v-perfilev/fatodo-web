@@ -53,12 +53,14 @@ export const LanguageSelect: FC<Props> = ({list, className}: Props) => {
   );
 
   const popupMenu = (
-    <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-      {LANGUAGES.map((language, index) => (
-        <MenuItem onClick={(): void => changeLanguage(language.code)} key={index}>
-          {language.name}
-        </MenuItem>
-      ))}
+    <PopupMenu anchorEl={ref?.current} open={isOpen} onClose={handleClose}>
+      <Box>
+        {LANGUAGES.map((language, index) => (
+          <MenuItem onClick={(): void => changeLanguage(language.code)} key={index}>
+            {language.name}
+          </MenuItem>
+        ))}
+      </Box>
     </PopupMenu>
   );
 

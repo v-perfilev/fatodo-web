@@ -1,5 +1,5 @@
 import React, {FC, MouseEvent, useCallback, useRef, useState} from 'react';
-import {IconButton} from '@material-ui/core';
+import {Box, IconButton} from '@material-ui/core';
 import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
 import {PopupMenu} from '../../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
@@ -95,10 +95,12 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
       <IconButton onClick={handleClickOnAction} size="small" ref={ref}>
         <DotsVerticalIcon />
       </IconButton>
-      <PopupMenu anchorEl={ref.current} open={isOpen} onClose={handleClose}>
-        {menuItems.map((item, index) => (
-          <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
-        ))}
+      <PopupMenu anchorEl={ref?.current} open={isOpen} onClose={handleClose}>
+        <Box>
+          {menuItems.map((item, index) => (
+            <PopupMenuItem action={item.action} icon={item.icon} text={item.text} show={item.show} key={index} />
+          ))}
+        </Box>
       </PopupMenu>
     </>
   );
