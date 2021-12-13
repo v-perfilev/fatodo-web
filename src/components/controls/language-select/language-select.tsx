@@ -12,13 +12,13 @@ type Props = HTMLAttributes<HTMLElement> & {
   list?: boolean;
 };
 
-const getShortNameByCode = (code): string => {
+const getShortNameByCode = (code: string, list: boolean): string => {
   const getName = (c): string => LANGUAGES.find((l) => l.code === c)?.name;
   const getShortName = (s): string => s.substr(0, 2);
   const name = LanguageUtils.getLanguages().includes(code)
     ? getName(code)
     : getName(LanguageUtils.getOptions().fallbackLng);
-  return getShortName(name);
+  return list ? name : getShortName(name);
 };
 
 export const LanguageSelect: FC<Props> = ({list, className}: Props) => {
@@ -40,14 +40,14 @@ export const LanguageSelect: FC<Props> = ({list, className}: Props) => {
         <ListItemIcon>
           <LanguageIcon className={classes.icon} />
         </ListItemIcon>
-        <ListItemText>{getShortNameByCode(LanguageUtils.getLanguage())}</ListItemText>
+        <ListItemText>{getShortNameByCode(LanguageUtils.getLanguage(), list)}</ListItemText>
       </ListItem>
     </List>
   );
 
   const buttonElement = (
     <Button color="primary" startIcon={<LanguageIcon />} ref={ref} onClick={handleClick}>
-      {getShortNameByCode(LanguageUtils.getLanguage())}
+      {getShortNameByCode(LanguageUtils.getLanguage(), list)}
       <ArrowDownIcon />
     </Button>
   );
