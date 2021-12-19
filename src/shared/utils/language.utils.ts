@@ -1,9 +1,9 @@
 import i18n from '../i18n';
-import {InitOptions} from 'i18next';
 import {UserAccount} from '../../models/user.model';
 
 export class LanguageUtils {
-  public static getOptions = (): InitOptions => i18n.options;
+  public static getFallbackLanguage = (): string =>
+    Array.isArray(i18n.options.fallbackLng) ? i18n.options.fallbackLng[0] : String(i18n.options.fallbackLng);
 
   public static getLanguages = (): string[] => i18n.languages;
 

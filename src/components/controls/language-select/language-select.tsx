@@ -13,11 +13,11 @@ type Props = HTMLAttributes<HTMLElement> & {
 };
 
 const getShortNameByCode = (code: string, list: boolean): string => {
-  const getName = (c): string => LANGUAGES.find((l) => l.code === c)?.name;
-  const getShortName = (s): string => s.substr(0, 2);
+  const getName = (c: string): string => LANGUAGES.find((l) => l.code === c)?.name;
+  const getShortName = (s: string): string => s.substr(0, 2);
   const name = LanguageUtils.getLanguages().includes(code)
     ? getName(code)
-    : getName(LanguageUtils.getOptions().fallbackLng);
+    : getName(LanguageUtils.getFallbackLanguage());
   return list ? name : getShortName(name);
 };
 

@@ -42,6 +42,9 @@ export const initLanguages = i18next
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
+    interpolation: {
+      escapeValue: false, // react already safes from xss
+    },
   });
 
 export default i18next;
