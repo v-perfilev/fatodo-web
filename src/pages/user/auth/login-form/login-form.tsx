@@ -78,16 +78,19 @@ const formik = withFormik<Props, LoginFormValues>({
     const token = await getToken();
     const dto = LoginFormUtils.mapValuesToDTO(values, token);
 
+    const redirectToHome = (): void => history.push(Routes.ROOT);
+    const redirectToNotActivated = (): void => history.push(Routes.NOT_ACTIVATED, {user: values.user});
+
     setLoading(true);
     AuthService.authenticate(dto)
       .then((response) => {
         const token = SecurityUtils.parseTokenFromResponse(response);
         login(token, values.rememberMe);
-        requestAccountData();
+        requestAccountData(redirectToHome);
       })
       .catch((response) => {
         if (ResponseUtils.getFeedbackCode(response) === 'auth.notActivated') {
-          history.push(Routes.NOT_ACTIVATED, {user: values.user});
+          redirectToNotActivated();
         } else {
           handleResponse(response, '*', ['auth.notActivated']);
           setSubmitting(false);

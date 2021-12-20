@@ -56,7 +56,7 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
     handleUserIds(userIds);
   };
 
-  const resetPage = ():void => {
+  const resetPage = (): void => {
     setPage(0);
   };
 
