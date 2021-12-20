@@ -56,6 +56,10 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
     handleUserIds(userIds);
   };
 
+  const resetPage = ():void => {
+    setPage(0);
+  };
+
   const loadInitial = (load: (groupId: string, offset?: number, size?: number) => void): void => {
     load(group.id);
   };
@@ -74,6 +78,7 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
   }, [items]);
 
   useEffect(() => {
+    resetPage();
     if (showArchived) {
       loadInitial(loadArchived);
     } else {
@@ -87,7 +92,7 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
     } else if (page > 0 && !showArchived) {
       loadMoreIfNeeded(loadActive);
     }
-  }, [page, showArchived]);
+  }, [page]);
 
   useEffect(() => {
     const newLoading = activeLoading || archivedLoading;
