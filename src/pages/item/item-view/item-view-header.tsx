@@ -6,6 +6,7 @@ import {Routes} from '../../router';
 import {useTranslation} from 'react-i18next';
 import {GroupRouteUtils} from '../../group/_router';
 import {Group} from '../../../models/group.model';
+import {UrlPic} from '../../../components/images';
 
 type Props = {
   title: string;
@@ -24,7 +25,10 @@ const ItemViewHeader: FC<Props> = ({title, group}: Props) => {
       </Link>
       <Box>/</Box>
       <Link to={groupViewUrl} withAlwaysUnderline>
-        <Typography variant="body1">{group.title}</Typography>
+        <PageHeader>
+          {group.imageFilename && <UrlPic url={group.imageFilename} size="md" border={2} />}
+          <Typography variant="body1">{group.title}</Typography>
+        </PageHeader>
       </Link>
       <Box>/</Box>
       <Typography variant="h6">{title}</Typography>
