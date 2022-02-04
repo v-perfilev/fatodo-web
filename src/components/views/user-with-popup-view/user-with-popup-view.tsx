@@ -13,13 +13,14 @@ type Props = HTMLAttributes<HTMLElement> & {
   withUserPic?: boolean;
   withUsername?: boolean;
   withPaperBox?: boolean;
+  withInvertedBorder?: boolean;
 };
 
 export const UserWithPopupView: FC<Props> = (props: Props) => {
-  const {user, picSize, withUserPic, withUsername, withPaperBox, className} = props;
+  const {user, picSize, withUserPic, withUsername, withPaperBox, withInvertedBorder, className} = props;
 
   const AnchorComponent: FC<any> = (props: any) => (
-    <UserView {...{user, picSize, withUserPic, withUsername, withPaperBox, className}} {...props} />
+    <UserView {...{user, picSize, withUserPic, withUsername, withPaperBox, withInvertedBorder, className}} {...props} />
   );
 
   const PopupComponent: FC<PopupContentComponentProps> = (props: any) => <UserInfoView user={user} {...props} />;

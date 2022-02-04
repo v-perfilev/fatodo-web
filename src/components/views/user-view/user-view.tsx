@@ -14,16 +14,26 @@ type Props = HTMLAttributes<HTMLElement> & {
   withUserPic?: boolean;
   withUsername?: boolean;
   withPaperBox?: boolean;
+  withInvertedBorder?: boolean;
 };
 
 export const UserView: FC<Props> = (props: Props) => {
-  const {user, picSize = 'xs', withUserPic = true, withUsername = false, withPaperBox = false} = props;
+  const {user, picSize = 'xs'} = props;
+  const {withUserPic = true, withUsername = false, withPaperBox = false, withInvertedBorder = false} = props;
   const {onMouseOver, onMouseLeave, className} = props;
   const classes = userViewStyles();
 
   const imageWithUsername = (
     <>
-      {withUserPic && <UrlPic alt={user.username} url={user.imageFilename} size={picSize} border={1} />}
+      {withUserPic && (
+        <UrlPic
+          alt={user.username}
+          url={user.imageFilename}
+          size={picSize}
+          border={2}
+          invertedBorder={withInvertedBorder}
+        />
+      )}
       {withUserPic && withUsername && <Box className={classes.divider} />}
       {withUsername && <Box>{user.username}</Box>}
     </>

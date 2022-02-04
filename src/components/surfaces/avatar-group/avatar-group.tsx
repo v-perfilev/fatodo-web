@@ -10,10 +10,11 @@ type Props = {
   users: User[];
   onClick?: () => void;
   withPopup?: boolean;
+  withInvertedBorder?: boolean;
   shorten?: boolean;
 };
 
-export const AvatarGroup: FC<Props> = ({users, onClick, withPopup, shorten}: Props) => {
+export const AvatarGroup: FC<Props> = ({users, onClick, withPopup, withInvertedBorder, shorten}: Props) => {
   const classes = avatarGroupStyles();
 
   const avatarsCount = shorten ? SHORTEN_AVATARS_IN_CARD : AVATARS_IN_CARD;
@@ -26,9 +27,9 @@ export const AvatarGroup: FC<Props> = ({users, onClick, withPopup, shorten}: Pro
     <Box className={classNames} onClick={onClick}>
       {usersToShow.map((user, index) =>
         withPopup ? (
-          <UserWithPopupView user={user} picSize="sm" key={index} />
+          <UserWithPopupView user={user} picSize="md" key={index} withInvertedBorder={withInvertedBorder} />
         ) : (
-          <UserView user={user} picSize="sm" key={index} />
+          <UserView user={user} picSize="md" key={index} withInvertedBorder={withInvertedBorder} />
         )
       )}
       {moreThanLimit > 0 && <Typography className={classes.count}>+{moreThanLimit}</Typography>}

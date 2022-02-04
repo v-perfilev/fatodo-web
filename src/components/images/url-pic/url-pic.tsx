@@ -14,11 +14,12 @@ type Props = HTMLAttributes<HTMLElement> & {
   size?: SizeType;
   border?: number;
   variant?: 'circle' | 'rounded' | 'square';
+  invertedBorder?: boolean;
 };
 
 export const UrlPic: FC<Props> = (props: Props) => {
   const classes = urlPicStyles();
-  const {url, alt, size = 'sm', border = 0, variant, className} = props;
+  const {url, alt, size = 'sm', border = 0, variant, invertedBorder, className} = props;
 
   const getRemoteImage = (): string => (size === 'lg' ? ImageUtils.getImage(url) : ImageUtils.getThumbnail(url));
   const src = url ? getRemoteImage() : FALLBACK_AVATAR;
@@ -30,7 +31,7 @@ export const UrlPic: FC<Props> = (props: Props) => {
     {[classes.lg]: size === 'lg'},
     {[classes.xl]: size === 'xl'}
   );
-  const classNames = csx(classes.root, sizeClassName, className);
+  const classNames = csx(classes.root, sizeClassName, {[classes.invertedBorder]: invertedBorder}, className);
   const styles = {borderWidth: border};
 
   return (

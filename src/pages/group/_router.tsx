@@ -2,7 +2,6 @@ import * as React from 'react';
 import {FC} from 'react';
 import {Redirect, Switch, useRouteMatch} from 'react-router-dom';
 import PublicRoute from '../../shared/routes/public-route';
-import GroupsPreview from './groups-preview/groups-preview';
 import GroupsSorting from './groups-sorting/groups-sorting';
 import withFlexibleHeader from '../../shared/hocs/with-header/with-flexible-header';
 import {Routes} from '../router';
@@ -10,6 +9,7 @@ import GroupView from './group-view/group-view';
 import GroupCreate from './group-create/group-create';
 import GroupEdit from './group-edit/group-edit';
 import {flowRight} from 'lodash';
+import GroupsPreview from './groups-preview-new/groups-preview';
 
 export enum GroupRoutes {
   SORTING = '/sorting',
@@ -30,6 +30,7 @@ const GroupRouter: FC = () => {
 
   return (
     <Switch>
+      {/*<PublicRoute exact path={match.path} component={GroupsPreview} />*/}
       <PublicRoute exact path={match.path} component={GroupsPreview} />
       <PublicRoute path={match.path + GroupRoutes.SORTING} component={GroupsSorting} />
       <PublicRoute path={match.path + GroupRoutes.CREATE} component={GroupCreate} />

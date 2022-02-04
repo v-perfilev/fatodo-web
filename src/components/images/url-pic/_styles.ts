@@ -30,4 +30,7 @@ export const urlPicStyles = makeStyles((theme: Theme) => ({
     width: 100,
     height: 100,
   },
+  invertedBorder: {
+    borderColor: theme.palette.tertiary.contrastText,
+  }
 }));

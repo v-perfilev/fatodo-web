@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, MouseEvent, useEffect, useState} from 'react';
 import {ContactUtils} from '../../../shared/utils/contact.utils';
 import {ContactRequestDTO} from '../../../models/dto/contact-request.dto';
 import ContactService from '../../../services/contact.service';
@@ -51,7 +51,9 @@ export const UserInfoViewButtons: FC<Props> = ({user, closePopup}: Props) => {
     setDeclineLoading(false);
   };
 
-  const sendRequest = (): void => {
+  const sendRequest = (e: MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
     setSendLoading(true);
     const dto = {recipientId: user.id, message: ''} as ContactRequestDTO;
     ContactService.sendRequest(dto)
@@ -66,7 +68,9 @@ export const UserInfoViewButtons: FC<Props> = ({user, closePopup}: Props) => {
       });
   };
 
-  const removeRequest = (): void => {
+  const removeRequest = (e: MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
     setRemoveLoading(true);
     ContactService.removeRequest(user.id)
       .then(() => {
@@ -80,7 +84,9 @@ export const UserInfoViewButtons: FC<Props> = ({user, closePopup}: Props) => {
       });
   };
 
-  const acceptRequest = (): void => {
+  const acceptRequest = (e: MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
     setAcceptLoading(true);
     ContactService.acceptRequest(user.id)
       .then(() => {
@@ -94,7 +100,9 @@ export const UserInfoViewButtons: FC<Props> = ({user, closePopup}: Props) => {
       });
   };
 
-  const declineRequest = (): void => {
+  const declineRequest = (e: MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
     setDeclineLoading(true);
     ContactService.declineRequest(user.id)
       .then(() => {
@@ -108,7 +116,9 @@ export const UserInfoViewButtons: FC<Props> = ({user, closePopup}: Props) => {
       });
   };
 
-  const openDirectMessageDialog = (): void => {
+  const openDirectMessageDialog = (e: MouseEvent<HTMLElement>): void => {
+    e.preventDefault();
+    e.stopPropagation();
     showDirectMessageDialog(user);
     closePopup();
   };
