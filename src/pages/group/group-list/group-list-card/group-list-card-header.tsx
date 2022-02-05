@@ -25,7 +25,7 @@ const GroupListCardHeader: FC<Props> = ({account}: Props) => {
     <Link to={Routes.GROUPS + '/' + group.id}>
       <AccordionSummary className={classes.root}>
         <Box className={classes.title}>
-          {group.imageFilename && <UrlPic url={group.imageFilename} size="md" />}
+          {group.imageFilename && <UrlPic url={group.imageFilename} size="md" border={1} invertedBorder />}
           <Typography variant="h6" className={classes.caption}>
             <Truncate>{group.title}</Truncate>
           </Typography>

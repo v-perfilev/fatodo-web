@@ -30,7 +30,8 @@
     "list": "Список групп",
     "leave": "Покинуть",
     "moveToArchive": "Перенести в архив",
-    "removeFromArchive": "Удалить из архива"
+    "removeFromArchive": "Удалить из архива",
+    "showAll": "Показать все записи"
   },
   "menu": {
     "createGroup": "Добавить группу",

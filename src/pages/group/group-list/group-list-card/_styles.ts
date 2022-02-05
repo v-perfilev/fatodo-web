@@ -44,21 +44,22 @@ export const groupListCardAvatarsStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(2),
   },
 }));
 
 export const groupListCardCreateButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
-    borderWidth: 1,
-    borderColor: theme.palette.primary.contrastText,
+    boxShadow: 'inset 0px 0px 0px 2px ' + theme.palette.primary.contrastText,
+    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(1),
   },
 }));
 
 export const groupListCardActionsStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
+    marginLeft: theme.spacing(0.5),
   },
 }));
 
@@ -66,6 +67,7 @@ export const groupListCardExpandButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
     transition: 'transform 400ms ease-out',
+    marginLeft: theme.spacing(0.5),
   },
   rotated: {
     transform: 'rotate(180deg)',
@@ -147,5 +149,32 @@ export const groupListCardItemChangesStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.grey['400'],
     fontWeight: 'bold',
     fontSize: '0.7rem',
+  },
+}));
+
+export const groupListCardInfoStyles = makeStyles((theme: Theme) => ({
+  root: {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(0.5),
+  },
+  showAll: {
+    position: 'absolute',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  badges: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingRight: theme.spacing(0.5),
   },
 }));

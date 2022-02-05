@@ -33,7 +33,7 @@ export const groupListSkeletonsItemStyles = makeStyles((theme: Theme) => ({
     height: 40,
   },
   skeleton2: {
-    width: '100%',
+    width: '90%',
     height: 15,
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5),

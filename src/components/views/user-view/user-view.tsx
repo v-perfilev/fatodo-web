@@ -30,7 +30,7 @@ export const UserView: FC<Props> = (props: Props) => {
           alt={user.username}
           url={user.imageFilename}
           size={picSize}
-          border={2}
+          border={1}
           invertedBorder={withInvertedBorder}
         />
       )}

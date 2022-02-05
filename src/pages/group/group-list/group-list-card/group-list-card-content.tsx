@@ -8,6 +8,7 @@ import {useLoadingState} from '../../../../shared/hooks/use-loading-state';
 import GroupListCardItem from './group-list-card-item';
 import GroupListSkeletons from '../group-list-skeletons/group-list-skeletons';
 import {groupListCardContentStyles} from './_styles';
+import GroupListCardInfo from './group-list-card-info';
 
 type Props = {
   items: Item[];
@@ -21,14 +22,15 @@ const GroupListCardContent: FC<Props> = ({items, count}: Props) => {
   const [loading, setLoading] = useLoadingState();
 
   useEffect(() => {
-    const newLoading = group && previewLoading.has(group.id) ? previewLoading.get(group.id) : false;
-    setLoading(newLoading);
+    const loading = group && previewLoading.has(group.id) ? previewLoading.get(group.id) : false;
+    setLoading(loading);
   }, [group, previewLoading]);
 
   return (
     <AccordionDetails className={classes.content}>
       {loading && <GroupListSkeletons />}
       {!loading && items.map((item) => <GroupListCardItem item={item} key={item.id} />)}
+      {!loading && <GroupListCardInfo items={items} count={count} />}
     </AccordionDetails>
   );
 };

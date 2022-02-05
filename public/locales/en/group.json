@@ -30,7 +30,8 @@
     "list": "List of groups",
     "leave": "Leave",
     "moveToArchive": "Move to archive",
-    "removeFromArchive": "Remove from archive"
+    "removeFromArchive": "Remove from archive",
+    "showAll": "Show all items"
   },
   "menu": {
     "createGroup": "Create group",
