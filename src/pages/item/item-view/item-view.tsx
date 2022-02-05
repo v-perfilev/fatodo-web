@@ -106,6 +106,8 @@ const ItemView: FC<Props> = ({account}: Props) => {
       <Container>
         <ItemViewHeader title={item.title} group={group} />
         <PageDivider height={5} />
+        <ControlMenu menu={menuElements} />
+        <PageDivider />
         <ItemViewInfo />
         <PageDivider />
         <ItemViewDescription />
@@ -113,8 +115,6 @@ const ItemView: FC<Props> = ({account}: Props) => {
         <ItemViewReminders />
         <ItemViewTags />
         <ItemViewChanges />
-        <PageSpacer />
-        <ControlMenu menu={menuElements} />
         <PageSpacer />
         <Comments targetId={item.id} />
       </Container>

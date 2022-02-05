@@ -136,11 +136,11 @@ const GroupView: FC<Props> = ({account}: Props) => {
       <Container>
         <GroupViewHeader group={group} showArchived={showArchived} setShowArchived={setShowArchived} />
         <PageDivider height={5} />
+        <ControlMenu menu={menuElements} />
+        <PageDivider />
         <GroupViewUsers />
         <PageDivider />
         <GroupViewItems showArchived={showArchived} account={account} />
-        <PageDivider />
-        <ControlMenu menu={menuElements} />
         <PageSpacer />
         <Comments targetId={group.id} />
       </Container>
