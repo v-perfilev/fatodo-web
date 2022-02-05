@@ -1,6 +1,6 @@
 import React, {FC, MouseEvent} from 'react';
 import {IconButton} from '@material-ui/core';
-import {groupsPreviewCardCreateButtonStyles} from './_styles';
+import {groupListCardCreateButtonStyles} from './_styles';
 import {PlusIcon} from '../../../../components/icons/plus-icon';
 import {ItemRouteUtils} from '../../../item/_router';
 import {useHistory} from 'react-router-dom';
@@ -8,8 +8,8 @@ import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/gro
 
 type Props = {};
 
-const GroupsPreviewCardCreateButton: FC<Props> = ({}: Props) => {
-  const classes = groupsPreviewCardCreateButtonStyles();
+const GroupListCardCreateButton: FC<Props> = ({}: Props) => {
+  const classes = groupListCardCreateButtonStyles();
   const history = useHistory();
   const {group} = useGroupViewContext();
 
@@ -26,4 +26,4 @@ const GroupsPreviewCardCreateButton: FC<Props> = ({}: Props) => {
   );
 };
 
-export default GroupsPreviewCardCreateButton;
+export default GroupListCardCreateButton;

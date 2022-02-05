@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useContext} from 'react';
 import {Item} from '../../../models/item.model';
 
-export interface GroupsPreviewListState {
+export interface GroupListItemsState {
   items: Map<string, Item[]>;
   counts: Map<string, number>;
   loadInitialState: (groupIds: string[]) => void;
@@ -12,5 +12,5 @@ export interface GroupsPreviewListState {
   setExpanded: (groupIds: string[], value: boolean) => void;
 }
 
-export const GroupsPreviewListContext = React.createContext<GroupsPreviewListState>(null);
-export const useGroupsPreviewListContext = (): GroupsPreviewListState => useContext(GroupsPreviewListContext);
+export const GroupListItemsContext = React.createContext<GroupListItemsState>(null);
+export const useGroupListItemsContext = (): GroupListItemsState => useContext(GroupListItemsContext);

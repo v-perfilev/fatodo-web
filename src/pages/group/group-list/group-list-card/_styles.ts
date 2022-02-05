@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 import {CARD_HEADER_HEIGHT, CARD_ITEM_HEIGHT} from '../../_constants';
 
-export const groupsPreviewCardStyles = makeStyles((theme: Theme) => ({
+export const groupListCardStyles = makeStyles((theme: Theme) => ({
   box: {
     marginTop: theme.spacing(1.5),
     marginBottom: theme.spacing(1.5),
@@ -12,7 +12,7 @@ export const groupsPreviewCardStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupsPreviewCardHeaderStyles = makeStyles((theme: Theme) => ({
+export const groupListCardHeaderStyles = makeStyles((theme: Theme) => ({
   root: {
     height: CARD_HEADER_HEIGHT,
     minHeight: CARD_HEADER_HEIGHT + 'px !important',
@@ -39,7 +39,7 @@ export const groupsPreviewCardHeaderStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupsPreviewCardAvatarsStyles = makeStyles((theme: Theme) => ({
+export const groupListCardAvatarsStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
@@ -48,7 +48,7 @@ export const groupsPreviewCardAvatarsStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupsPreviewCardCreateButtonStyles = makeStyles((theme: Theme) => ({
+export const groupListCardCreateButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
     borderWidth: 1,
@@ -56,13 +56,13 @@ export const groupsPreviewCardCreateButtonStyles = makeStyles((theme: Theme) => 
   },
 }));
 
-export const groupsPreviewCardActionsStyles = makeStyles((theme: Theme) => ({
+export const groupListCardActionsStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
   },
 }));
 
-export const groupsPreviewCardExpandButtonStyles = makeStyles((theme: Theme) => ({
+export const groupListCardExpandButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
     transition: 'transform 400ms ease-out',
@@ -72,7 +72,7 @@ export const groupsPreviewCardExpandButtonStyles = makeStyles((theme: Theme) => 
   },
 }));
 
-export const groupsPreviewCardContentStyles = makeStyles((theme: Theme) => ({
+export const groupListCardContentStyles = makeStyles((theme: Theme) => ({
   content: {
     display: 'flex',
     flexDirection: 'column',
@@ -82,7 +82,7 @@ export const groupsPreviewCardContentStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupsPreviewCardItemStyles = makeStyles((theme: Theme) => ({
+export const groupListCardItemStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
@@ -132,7 +132,7 @@ export const groupsPreviewCardItemStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
-export const groupsPreviewCardItemChangesStyles = makeStyles((theme: Theme) => ({
+export const groupListCardItemChangesStyles = makeStyles((theme: Theme) => ({
   name: {
     color: theme.palette.grey['400'],
     fontSize: '0.7rem',

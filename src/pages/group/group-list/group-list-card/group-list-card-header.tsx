@@ -1,24 +1,24 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {AccordionSummary, Box, Hidden, Typography} from '@material-ui/core';
-import {groupsPreviewCardHeaderStyles} from './_styles';
+import {groupListCardHeaderStyles} from './_styles';
 import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
 import {UrlPic} from '../../../../components/images';
 import {UserAccount} from '../../../../models/user.model';
 import Truncate from 'react-truncate';
-import GroupsPreviewCardActions from './groups-preview-card-actions';
-import GroupsPreviewCardExpandButton from './groups-preview-card-expand-button';
+import GroupListCardActions from './group-list-card-actions';
+import GroupListCardExpandButton from './group-list-card-expand-button';
 import {Routes} from '../../../router';
 import {Link} from '../../../../components/controls';
-import GroupsPreviewCardCreateButton from './groups-preview-card-create-button';
-import GroupsPreviewCardAvatars from './groups-preview-card-avatars';
+import GroupListCardCreateButton from './group-list-card-create-button';
+import GroupListCardAvatars from './group-list-card-avatars';
 
 type Props = {
   account: UserAccount;
 };
 
-const GroupsPreviewCardHeader: FC<Props> = ({account}: Props) => {
-  const classes = groupsPreviewCardHeaderStyles();
+const GroupListCardHeader: FC<Props> = ({account}: Props) => {
+  const classes = groupListCardHeaderStyles();
   const {group} = useGroupViewContext();
 
   return (
@@ -31,14 +31,14 @@ const GroupsPreviewCardHeader: FC<Props> = ({account}: Props) => {
           </Typography>
         </Box>
         <Hidden smDown>
-          <GroupsPreviewCardAvatars />
-          <GroupsPreviewCardCreateButton />
+          <GroupListCardAvatars />
+          <GroupListCardCreateButton />
         </Hidden>
-        <GroupsPreviewCardActions account={account} />
-        <GroupsPreviewCardExpandButton />
+        <GroupListCardActions account={account} />
+        <GroupListCardExpandButton />
       </AccordionSummary>
     </Link>
   );
 };
 
-export default GroupsPreviewCardHeader;
+export default GroupListCardHeader;

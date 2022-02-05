@@ -80,7 +80,7 @@ type Props = {
   item: Item;
 };
 
-const GroupsPreviewCardItemButtons: FC<Props> = ({item}: Props) => {
+const GroupListCardItemButtons: FC<Props> = ({item}: Props) => {
   const history = useHistory();
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'), {noSsr: true});
   const {t} = useTranslation();
@@ -105,4 +105,4 @@ const GroupsPreviewCardItemButtons: FC<Props> = ({item}: Props) => {
   );
 };
 
-export default memo(GroupsPreviewCardItemButtons);
+export default memo(GroupListCardItemButtons);

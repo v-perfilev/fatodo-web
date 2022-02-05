@@ -10,7 +10,7 @@ import {
   PopupMenuItem,
   PopupMenuItemProps,
   TooltipIconButton,
-  TooltipIconButtonProps
+  TooltipIconButtonProps,
 } from '../../../components/surfaces';
 import {DotsVerticalIcon} from '../../../components/icons/dots-vertical-icon';
 
@@ -35,7 +35,6 @@ const GroupsPreviewCardItemButtonsBig: FC<ButtonProps> = ({menuItems}: ButtonPro
     </>
   );
 };
-
 
 const GroupsPreviewCardItemButtonsSmall: FC<ButtonProps> = ({menuItems}: ButtonProps) => {
   const ref = useRef();

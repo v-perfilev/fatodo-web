@@ -1,21 +1,21 @@
 import * as React from 'react';
 import {FC, HTMLAttributes} from 'react';
 import {Box, Card, Typography} from '@material-ui/core';
-import {groupsPreviewCardItemStyles} from './_styles';
+import {groupListCardItemStyles} from './_styles';
 import Truncate from 'react-truncate';
 import {Item} from '../../../../models/item.model';
 import {ItemRouteUtils} from '../../../item/_router';
 import {Link} from '../../../../components/controls';
 import {PriorityView, StatusView, TypeView} from '../../../../components/views';
-import GroupsPreviewCardItemChanges from './groups-preview-card-item-changes';
-import GroupsPreviewCardItemButtons from './groups-preview-card-item-buttons';
+import GroupListCardItemChanges from './group-list-card-item-changes';
+import GroupsPreviewCardItemButtons from './group-list-card-item-buttons';
 
 type Props = HTMLAttributes<HTMLElement> & {
   item: Item;
 };
 
-const GroupsPreviewCardItem: FC<Props> = ({item}: Props) => {
-  const classes = groupsPreviewCardItemStyles();
+const GroupListCardItem: FC<Props> = ({item}: Props) => {
+  const classes = groupListCardItemStyles();
 
   const viewItemUrl = ItemRouteUtils.getViewUrl(item.id);
 
@@ -34,7 +34,7 @@ const GroupsPreviewCardItem: FC<Props> = ({item}: Props) => {
             <Typography className={classes.typography}>
               <Truncate>{item.title}</Truncate>
             </Typography>
-            <GroupsPreviewCardItemChanges item={item} />
+            <GroupListCardItemChanges item={item} />
           </Box>
           <Box className={classes.buttonsCol}>
             <GroupsPreviewCardItemButtons item={item} />
@@ -45,4 +45,4 @@ const GroupsPreviewCardItem: FC<Props> = ({item}: Props) => {
   );
 };
 
-export default GroupsPreviewCardItem;
+export default GroupListCardItem;

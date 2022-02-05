@@ -9,7 +9,7 @@ import GroupView from './group-view/group-view';
 import GroupCreate from './group-create/group-create';
 import GroupEdit from './group-edit/group-edit';
 import {flowRight} from 'lodash';
-import GroupsPreview from './groups-preview-new/groups-preview';
+import GroupList from './group-list/group-list';
 
 export enum GroupRoutes {
   SORTING = '/sorting',
@@ -30,8 +30,7 @@ const GroupRouter: FC = () => {
 
   return (
     <Switch>
-      {/*<PublicRoute exact path={match.path} component={GroupsPreview} />*/}
-      <PublicRoute exact path={match.path} component={GroupsPreview} />
+      <PublicRoute exact path={match.path} component={GroupList} />
       <PublicRoute path={match.path + GroupRoutes.SORTING} component={GroupsSorting} />
       <PublicRoute path={match.path + GroupRoutes.CREATE} component={GroupCreate} />
       <PublicRoute path={match.path + GroupRoutes.EDIT} component={GroupEdit} />

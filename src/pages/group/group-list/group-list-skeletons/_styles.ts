@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import {Theme} from '@material-ui/core';
 import {GROUP_ITEM_HEIGHT} from '../../_constants';
 
-export const groupsPreviewSkeletonsItemStyles = makeStyles((theme: Theme) => ({
+export const groupListSkeletonsItemStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),

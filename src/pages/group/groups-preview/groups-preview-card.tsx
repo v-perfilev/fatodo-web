@@ -13,7 +13,7 @@ import withItemList from '../../../shared/hocs/with-list/with-item-list';
 import GroupsPreviewCardHeader from './groups-preview-card-header';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {Item} from '../../../models/item.model';
-import {useGroupsPreviewListContext} from '../../../shared/contexts/list-contexts/groups-preview-list-context';
+import {useGroupListItemsContext} from '../../../shared/contexts/list-contexts/group-list-items-context';
 
 type Props = AuthState;
 
@@ -21,7 +21,7 @@ const GroupsPreviewCard: FC<Props> = ({account}: Props) => {
   const classes = groupsPreviewCardStyles();
   const {handleUserIds} = useUserListContext();
   const {group} = useGroupViewContext();
-  const {items: previewItems} = useGroupsPreviewListContext();
+  const {items: previewItems} = useGroupListItemsContext();
 
   const items = useMemo<Item[]>(() => {
     return group && previewItems.has(group.id) ? previewItems.get(group.id) : [];

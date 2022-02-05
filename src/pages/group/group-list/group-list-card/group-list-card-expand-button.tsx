@@ -1,17 +1,17 @@
 import React, {FC, MouseEvent, useMemo} from 'react';
 import {IconButton} from '@material-ui/core';
-import {groupsPreviewCardExpandButtonStyles} from './_styles';
+import {groupListCardExpandButtonStyles} from './_styles';
 import {ArrowDownIcon} from '../../../../components/icons/arrow-down-icon';
-import {useGroupsPreviewListContext} from '../../../../shared/contexts/list-contexts/groups-preview-list-context';
+import {useGroupListItemsContext} from '../../../../shared/contexts/list-contexts/group-list-items-context';
 import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
 import csx from 'classnames';
 
 type Props = {};
 
-const GroupsPreviewCardExpandButton: FC<Props> = ({}: Props) => {
-  const classes = groupsPreviewCardExpandButtonStyles();
+const GroupListCardExpandButton: FC<Props> = ({}: Props) => {
+  const classes = groupListCardExpandButtonStyles();
   const {group} = useGroupViewContext();
-  const {expanded: previewExpanded, setExpanded} = useGroupsPreviewListContext();
+  const {expanded: previewExpanded, setExpanded} = useGroupListItemsContext();
 
   const expanded = useMemo<boolean>(() => {
     return group && previewExpanded.has(group.id) ? previewExpanded.get(group.id) : true;
@@ -32,4 +32,4 @@ const GroupsPreviewCardExpandButton: FC<Props> = ({}: Props) => {
   );
 };
 
-export default GroupsPreviewCardExpandButton;
+export default GroupListCardExpandButton;

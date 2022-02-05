@@ -15,14 +15,14 @@ import {EditIcon} from '../../../../components/icons/edit-icon';
 import {DeleteIcon} from '../../../../components/icons/delete-icon';
 import {PlusIcon} from '../../../../components/icons/plus-icon';
 import {UserAccount} from '../../../../models/user.model';
-import {groupsPreviewCardActionsStyles} from './_styles';
+import {groupListCardActionsStyles} from './_styles';
 
 type Props = {
   account: UserAccount;
 };
 
-const GroupsPreviewCardActions: FC<Props> = ({account}: Props) => {
-  const classes = groupsPreviewCardActionsStyles();
+const GroupListCardActions: FC<Props> = ({account}: Props) => {
+  const classes = groupListCardActionsStyles();
   const history = useHistory();
   const {t} = useTranslation();
   const ref = useRef();
@@ -95,4 +95,4 @@ const GroupsPreviewCardActions: FC<Props> = ({account}: Props) => {
   );
 };
 
-export default GroupsPreviewCardActions;
+export default GroupListCardActions;

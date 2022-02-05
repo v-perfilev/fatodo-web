@@ -6,26 +6,26 @@ import {flowRight} from 'lodash';
 import withGroupView from '../../../../shared/hocs/with-view/with-group-view';
 import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
-import {useGroupsPreviewListContext} from '../../../../shared/contexts/list-contexts/groups-preview-list-context';
+import {useGroupListItemsContext} from '../../../../shared/contexts/list-contexts/group-list-items-context';
 import {Item} from '../../../../models/item.model';
 import {ThemeFactory} from '../../../../shared/theme/theme';
 import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
 import withItemList from '../../../../shared/hocs/with-list/with-item-list';
 import withUserList from '../../../../shared/hocs/with-list/with-user-list';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';
-import GroupsPreviewCardContent from './groups-preview-card-content';
-import GroupsPreviewCardHeader from './groups-preview-card-header';
-import {groupsPreviewCardStyles} from './_styles';
+import GroupsPreviewCardContent from './group-list-card-content';
+import GroupListCardHeader from './group-list-card-header';
+import {groupListCardStyles} from './_styles';
 
 type Props = AuthState & {
   group: Group;
 };
 
-const GroupsPreviewCard: FC<Props> = ({account, group}: Props) => {
-  const classes = groupsPreviewCardStyles();
+const GroupListCard: FC<Props> = ({account, group}: Props) => {
+  const classes = groupListCardStyles();
   const {group: contextGroup, setGroup} = useGroupViewContext();
   const {handleUserIds} = useUserListContext();
-  const {items: previewItems, counts: previewCounts, expanded: previewExpanded} = useGroupsPreviewListContext();
+  const {items: previewItems, counts: previewCounts, expanded: previewExpanded} = useGroupListItemsContext();
 
   const items = useMemo<Item[]>(() => {
     return group && previewItems.has(group.id) ? previewItems.get(group.id) : [];
@@ -69,7 +69,7 @@ const GroupsPreviewCard: FC<Props> = ({account, group}: Props) => {
       <ThemeProvider theme={theme}>
         <Box className={classes.box}>
           <Accordion className={classes.accordion} elevation={2} defaultExpanded expanded={expanded}>
-            <GroupsPreviewCardHeader account={account} />
+            <GroupListCardHeader account={account} />
             <GroupsPreviewCardContent items={items} count={count} />
           </Accordion>
         </Box>
@@ -78,4 +78,4 @@ const GroupsPreviewCard: FC<Props> = ({account, group}: Props) => {
   );
 };
 
-export default flowRight([withAuthState, withGroupView, withItemList, withUserList, memo])(GroupsPreviewCard);
+export default flowRight([withAuthState, withGroupView, withItemList, withUserList, memo])(GroupListCard);

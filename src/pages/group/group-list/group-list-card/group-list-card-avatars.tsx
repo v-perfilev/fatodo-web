@@ -4,10 +4,10 @@ import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/gro
 import {User} from '../../../../models/user.model';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {Box} from '@material-ui/core';
-import {groupsPreviewCardAvatarsStyles} from './_styles';
+import {groupListCardAvatarsStyles} from './_styles';
 
-const GroupsPreviewCardAvatars: FC = () => {
-  const classes = groupsPreviewCardAvatarsStyles();
+const GroupListCardAvatars: FC = () => {
+  const classes = groupListCardAvatarsStyles();
   const {users} = useUserListContext();
   const {group} = useGroupViewContext();
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
@@ -29,4 +29,4 @@ const GroupsPreviewCardAvatars: FC = () => {
   );
 };
 
-export default GroupsPreviewCardAvatars;
+export default GroupListCardAvatars;

@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Container} from '@material-ui/core';
-import {groupsPreviewContainerStyles} from './_styles';
+import {groupListContainerStyles} from './_styles';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
-import GroupsPreviewCard from './group-preview-card/groups-preview-card';
+import GroupsPreviewCard from './group-list-card/group-list-card';
 
-const GroupsPreviewContainer: FC = () => {
-  const classes = groupsPreviewContainerStyles();
+const GroupListContainer: FC = () => {
+  const classes = groupListContainerStyles();
   const {groups} = useGroupListContext();
 
   return (
@@ -18,4 +18,4 @@ const GroupsPreviewContainer: FC = () => {
   );
 };
 
-export default GroupsPreviewContainer;
+export default GroupListContainer;

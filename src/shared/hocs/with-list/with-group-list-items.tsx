@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useState} from 'react';
 import {useSnackContext} from '../../contexts/snack-context';
-import {GroupsPreviewListContext} from '../../contexts/list-contexts/groups-preview-list-context';
+import {GroupListItemsContext} from '../../contexts/list-contexts/group-list-items-context';
 import {Item} from '../../../models/item.model';
 import {PageableList} from '../../../models/pageable-list.model';
 import {ArrayUtils} from '../../utils/array.utils';
 import ItemService from '../../../services/item.service';
 
-const withGroupsPreviewList = (Component: ComponentType): FC => (props): ReactElement => {
+const withGroupListItems = (Component: ComponentType): FC => (props): ReactElement => {
   const {handleResponse} = useSnackContext();
   const [items, setItems] = useState<Map<string, Item[]>>(new Map());
   const [counts, setCounts] = useState<Map<string, number>>(new Map());
@@ -83,10 +83,10 @@ const withGroupsPreviewList = (Component: ComponentType): FC => (props): ReactEl
   const context = {items, counts, loadInitialState, loadMore, loading, expanded, setExpanded: setIdsExpanded};
 
   return (
-    <GroupsPreviewListContext.Provider value={context}>
+    <GroupListItemsContext.Provider value={context}>
       <Component {...props} />
-    </GroupsPreviewListContext.Provider>
+    </GroupListItemsContext.Provider>
   );
 };
 
-export default withGroupsPreviewList;
+export default withGroupListItems;

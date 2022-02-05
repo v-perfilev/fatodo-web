@@ -1,17 +1,17 @@
 import React, {FC, useMemo} from 'react';
 import {CARD_ITEMS_COUNT} from '../../_constants';
-import GroupsPreviewSkeletonsItem from './groups-preview-skeletons-item';
+import GroupListSkeletonsItem from './group-list-skeletons-item';
 
-const GroupsPreviewSkeletons: FC = () => {
+const GroupListSkeletons: FC = () => {
   const indexArray = useMemo(() => Array.from(Array(CARD_ITEMS_COUNT).keys()), []);
 
   return (
     <>
       {indexArray.map((index) => (
-        <GroupsPreviewSkeletonsItem key={index} />
+        <GroupListSkeletonsItem key={index} />
       ))}
     </>
   );
 };
 
-export default GroupsPreviewSkeletons;
+export default GroupListSkeletons;

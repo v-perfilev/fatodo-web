@@ -1,23 +1,23 @@
 import * as React from 'react';
 import {FC, memo, useEffect} from 'react';
 import {Item} from '../../../../models/item.model';
-import {useGroupsPreviewListContext} from '../../../../shared/contexts/list-contexts/groups-preview-list-context';
+import {useGroupListItemsContext} from '../../../../shared/contexts/list-contexts/group-list-items-context';
 import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
 import {AccordionDetails} from '@material-ui/core';
 import {useLoadingState} from '../../../../shared/hooks/use-loading-state';
-import GroupsPreviewCardItem from './groups-preview-card-item';
-import GroupsPreviewSkeletons from '../group-preview-skeletons/groups-preview-skeletons';
-import {groupsPreviewCardContentStyles} from './_styles';
+import GroupListCardItem from './group-list-card-item';
+import GroupListSkeletons from '../group-list-skeletons/group-list-skeletons';
+import {groupListCardContentStyles} from './_styles';
 
 type Props = {
   items: Item[];
   count: number;
 };
 
-const GroupsPreviewCardContent: FC<Props> = ({items, count}: Props) => {
-  const classes = groupsPreviewCardContentStyles();
+const GroupListCardContent: FC<Props> = ({items, count}: Props) => {
+  const classes = groupListCardContentStyles();
   const {group} = useGroupViewContext();
-  const {loading: previewLoading} = useGroupsPreviewListContext();
+  const {loading: previewLoading} = useGroupListItemsContext();
   const [loading, setLoading] = useLoadingState();
 
   useEffect(() => {
@@ -27,10 +27,10 @@ const GroupsPreviewCardContent: FC<Props> = ({items, count}: Props) => {
 
   return (
     <AccordionDetails className={classes.content}>
-      {loading && <GroupsPreviewSkeletons />}
-      {!loading && items.map((item) => <GroupsPreviewCardItem item={item} key={item.id} />)}
+      {loading && <GroupListSkeletons />}
+      {!loading && items.map((item) => <GroupListCardItem item={item} key={item.id} />)}
     </AccordionDetails>
   );
 };
 
-export default memo(GroupsPreviewCardContent);
+export default memo(GroupListCardContent);
