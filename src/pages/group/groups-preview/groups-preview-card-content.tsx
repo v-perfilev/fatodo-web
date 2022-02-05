@@ -6,7 +6,7 @@ import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-
 import GroupsPreviewCardCreateButton from './groups-preview-card-create-button';
 import {Item} from '../../../models/item.model';
 import GroupsPreviewCardItem from './groups-preview-card-item';
-import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
+import {useGroupsPreviewListContext} from '../../../shared/contexts/list-contexts/groups-preview-list-context';
 import GroupsPreviewItemSkeletons from './groups-preview-item-skeletons';
 import {useLoadingState} from '../../../shared/hooks/use-loading-state';
 
@@ -18,7 +18,7 @@ type Props = {
 const GroupsPreviewCardContent: FC<Props> = ({itemsToShow, isFirstPage}: Props) => {
   const classes = groupsPreviewCardContentStyles();
   const {group} = useGroupViewContext();
-  const {loading: previewLoading} = usePreviewItemListContext();
+  const {loading: previewLoading} = useGroupsPreviewListContext();
   const [loading, setLoading] = useLoadingState();
 
   useEffect(() => {

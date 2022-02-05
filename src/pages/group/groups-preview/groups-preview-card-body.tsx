@@ -3,13 +3,13 @@ import {FC, memo, useEffect, useMemo, useState} from 'react';
 import GroupsPreviewCardFooter from './groups-preview-card-footer';
 import GroupPreviewCardContent from './groups-preview-card-content';
 import {Item} from '../../../models/item.model';
-import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
+import {useGroupsPreviewListContext} from '../../../shared/contexts/list-contexts/groups-preview-list-context';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import {CARD_ITEMS_COUNT, CARD_ITEMS_FIRST_PAGE_COUNT} from '../_constants';
 
 const GroupsPreviewCardBody: FC = () => {
   const {group} = useGroupViewContext();
-  const {items: previewItems, counts: previewCounts, loadMore: loadMoreItems} = usePreviewItemListContext();
+  const {items: previewItems, counts: previewCounts, loadMore: loadMoreItems} = useGroupsPreviewListContext();
   const [page, setPage] = useState<number>(0);
 
   const items = useMemo<Item[]>(() => {

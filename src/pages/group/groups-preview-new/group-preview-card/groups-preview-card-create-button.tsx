@@ -1,10 +1,10 @@
 import React, {FC, MouseEvent} from 'react';
 import {IconButton} from '@material-ui/core';
 import {groupsPreviewCardCreateButtonStyles} from './_styles';
-import {PlusIcon} from '../../../components/icons/plus-icon';
-import {ItemRouteUtils} from '../../item/_router';
+import {PlusIcon} from '../../../../components/icons/plus-icon';
+import {ItemRouteUtils} from '../../../item/_router';
 import {useHistory} from 'react-router-dom';
-import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
+import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
 
 type Props = {};
 

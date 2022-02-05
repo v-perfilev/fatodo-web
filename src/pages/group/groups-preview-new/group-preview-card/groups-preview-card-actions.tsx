@@ -1,21 +1,21 @@
 import React, {FC, MouseEvent, useRef, useState} from 'react';
 import {Box, IconButton} from '@material-ui/core';
-import {DotsVerticalIcon} from '../../../components/icons/dots-vertical-icon';
-import {groupsPreviewCardActionsStyles} from './_styles';
-import {PopupMenu, PopupMenuItem, PopupMenuItemProps} from '../../../components/surfaces';
+import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
+import {PopupMenu, PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces';
 import {useHistory} from 'react-router-dom';
-import {GroupRouteUtils} from '../_router';
-import {ItemRouteUtils} from '../../item/_router';
-import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
-import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
+import {GroupRouteUtils} from '../../_router';
+import {ItemRouteUtils} from '../../../item/_router';
+import {useGroupListContext} from '../../../../shared/contexts/list-contexts/group-list-context';
+import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
 import {useTranslation} from 'react-i18next';
-import {useGroupDialogContext} from '../../../shared/contexts/dialog-contexts/group-dialog-context';
-import {GroupUtils} from '../../../shared/utils/group.utils';
-import {EyeIcon} from '../../../components/icons/eye-icon';
-import {EditIcon} from '../../../components/icons/edit-icon';
-import {DeleteIcon} from '../../../components/icons/delete-icon';
-import {PlusIcon} from '../../../components/icons/plus-icon';
-import {UserAccount} from '../../../models/user.model';
+import {useGroupDialogContext} from '../../../../shared/contexts/dialog-contexts/group-dialog-context';
+import {GroupUtils} from '../../../../shared/utils/group.utils';
+import {EyeIcon} from '../../../../components/icons/eye-icon';
+import {EditIcon} from '../../../../components/icons/edit-icon';
+import {DeleteIcon} from '../../../../components/icons/delete-icon';
+import {PlusIcon} from '../../../../components/icons/plus-icon';
+import {UserAccount} from '../../../../models/user.model';
+import {groupsPreviewCardActionsStyles} from './_styles';
 
 type Props = {
   account: UserAccount;

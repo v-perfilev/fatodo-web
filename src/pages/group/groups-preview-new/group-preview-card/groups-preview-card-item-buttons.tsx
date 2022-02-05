@@ -1,8 +1,8 @@
 import React, {FC, memo, useCallback, useRef, useState} from 'react';
 import {Box, IconButton, Theme, useMediaQuery} from '@material-ui/core';
-import {Item} from '../../../models/item.model';
-import {ItemRouteUtils} from '../../item/_router';
-import {EyeIcon} from '../../../components/icons/eye-icon';
+import {Item} from '../../../../models/item.model';
+import {ItemRouteUtils} from '../../../item/_router';
+import {EyeIcon} from '../../../../components/icons/eye-icon';
 import {useHistory} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {
@@ -10,9 +10,9 @@ import {
   PopupMenuItem,
   PopupMenuItemProps,
   TooltipIconButton,
-  TooltipIconButtonProps
-} from '../../../components/surfaces';
-import {DotsVerticalIcon} from '../../../components/icons/dots-vertical-icon';
+  TooltipIconButtonProps,
+} from '../../../../components/surfaces';
+import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
 
 type ButtonProps = {
   menuItems: TooltipIconButtonProps[];
@@ -35,7 +35,6 @@ const GroupsPreviewCardItemButtonsBig: FC<ButtonProps> = ({menuItems}: ButtonPro
     </>
   );
 };
-
 
 const GroupsPreviewCardItemButtonsSmall: FC<ButtonProps> = ({menuItems}: ButtonProps) => {
   const ref = useRef();

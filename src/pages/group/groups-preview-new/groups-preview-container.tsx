@@ -3,7 +3,7 @@ import {FC} from 'react';
 import {Container} from '@material-ui/core';
 import {groupsPreviewContainerStyles} from './_styles';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
-import GroupsPreviewCard from './groups-preview-card';
+import GroupsPreviewCard from './group-preview-card/groups-preview-card';
 
 const GroupsPreviewContainer: FC = () => {
   const classes = groupsPreviewContainerStyles();

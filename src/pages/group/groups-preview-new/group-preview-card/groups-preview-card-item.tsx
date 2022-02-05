@@ -3,10 +3,10 @@ import {FC, HTMLAttributes} from 'react';
 import {Box, Card, Typography} from '@material-ui/core';
 import {groupsPreviewCardItemStyles} from './_styles';
 import Truncate from 'react-truncate';
-import {Item} from '../../../models/item.model';
-import {ItemRouteUtils} from '../../item/_router';
-import {Link} from '../../../components/controls';
-import {PriorityView, StatusView, TypeView} from '../../../components/views';
+import {Item} from '../../../../models/item.model';
+import {ItemRouteUtils} from '../../../item/_router';
+import {Link} from '../../../../components/controls';
+import {PriorityView, StatusView, TypeView} from '../../../../components/views';
 import GroupsPreviewCardItemChanges from './groups-preview-card-item-changes';
 import GroupsPreviewCardItemButtons from './groups-preview-card-item-buttons';
 

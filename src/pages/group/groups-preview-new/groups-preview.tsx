@@ -11,8 +11,8 @@ import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-
 import {CircularSpinner} from '../../../components/loaders';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import {flowRight} from 'lodash';
-import withPreviewItemList from '../../../shared/hocs/with-list/with-preview-item-list';
-import {usePreviewItemListContext} from '../../../shared/contexts/list-contexts/preview-item-list-context';
+import withGroupsPreviewList from '../../../shared/hocs/with-list/with-groups-preview-list';
+import {useGroupsPreviewListContext} from '../../../shared/contexts/list-contexts/groups-preview-list-context';
 import GroupsPreviewContainer from './groups-preview-container';
 
 const GroupsPreview: FC = () => {
@@ -20,7 +20,7 @@ const GroupsPreview: FC = () => {
   const {t, i18n} = useTranslation();
   const {setMenu} = useAdditionalMenuContext();
   const {groups, load: loadGroups, loading: groupsLoading} = useGroupListContext();
-  const {loadInitialState} = usePreviewItemListContext();
+  const {loadInitialState} = useGroupsPreviewListContext();
 
   const redirectToGroupCreate = (): void => history.push(GroupRouteUtils.getCreateUrl());
   const redirectToGroupsSorting = (): void => history.push(GroupRouteUtils.getSortingUrl());
@@ -48,4 +48,4 @@ const GroupsPreview: FC = () => {
   return groupsLoading ? <CircularSpinner /> : <GroupsPreviewContainer />;
 };
 
-export default flowRight([withGroupList, withPreviewItemList])(GroupsPreview);
+export default flowRight([withGroupList, withGroupsPreviewList])(GroupsPreview);

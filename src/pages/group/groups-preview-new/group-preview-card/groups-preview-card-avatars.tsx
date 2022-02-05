@@ -1,10 +1,10 @@
 import React, {FC, useEffect, useState} from 'react';
-import {AvatarGroup} from '../../../components/surfaces';
-import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {User} from '../../../models/user.model';
-import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
-import {groupsPreviewCardAvatarsStyles} from './_styles';
+import {AvatarGroup} from '../../../../components/surfaces';
+import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
+import {User} from '../../../../models/user.model';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {Box} from '@material-ui/core';
+import {groupsPreviewCardAvatarsStyles} from './_styles';
 
 const GroupsPreviewCardAvatars: FC = () => {
   const classes = groupsPreviewCardAvatarsStyles();

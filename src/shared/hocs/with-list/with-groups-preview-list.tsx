@@ -1,17 +1,18 @@
 import * as React from 'react';
 import {ComponentType, FC, ReactElement, useState} from 'react';
 import {useSnackContext} from '../../contexts/snack-context';
-import {PreviewItemListContext} from '../../contexts/list-contexts/preview-item-list-context';
+import {GroupsPreviewListContext} from '../../contexts/list-contexts/groups-preview-list-context';
 import {Item} from '../../../models/item.model';
 import {PageableList} from '../../../models/pageable-list.model';
 import {ArrayUtils} from '../../utils/array.utils';
 import ItemService from '../../../services/item.service';
 
-const withPreviewItemList = (Component: ComponentType): FC => (props): ReactElement => {
+const withGroupsPreviewList = (Component: ComponentType): FC => (props): ReactElement => {
   const {handleResponse} = useSnackContext();
   const [items, setItems] = useState<Map<string, Item[]>>(new Map());
   const [counts, setCounts] = useState<Map<string, number>>(new Map());
   const [loading, setLoading] = useState<Map<string, boolean>>(new Map());
+  const [expanded, setExpanded] = useState<Map<string, boolean>>(new Map());
 
   const filterItems = (items: Item[]): Item[] =>
     items.filter(ArrayUtils.withIdFilter).filter(ArrayUtils.uniqueByIdFilter).sort(ArrayUtils.createdAtDescComparator);
@@ -41,6 +42,13 @@ const withPreviewItemList = (Component: ComponentType): FC => (props): ReactElem
     });
   };
 
+  const setIdsExpanded = (groupIds: string[], value: boolean): void => {
+    setExpanded((prevState) => {
+      groupIds.forEach((groupId) => prevState.set(groupId, value));
+      return new Map(prevState);
+    });
+  };
+
   const loadInitialState = (groupIds: string[]): void => {
     setIdsLoading(groupIds, true);
     ItemService.getPreviewItemsByGroupIds(groupIds)
@@ -53,6 +61,7 @@ const withPreviewItemList = (Component: ComponentType): FC => (props): ReactElem
       })
       .finally(() => {
         setIdsLoading(groupIds, false);
+        setIdsExpanded(groupIds, true);
       });
   };
 
@@ -71,13 +80,13 @@ const withPreviewItemList = (Component: ComponentType): FC => (props): ReactElem
       });
   };
 
-  const context = {items, counts, loadInitialState, loadMore, loading};
+  const context = {items, counts, loadInitialState, loadMore, loading, expanded, setExpanded: setIdsExpanded};
 
   return (
-    <PreviewItemListContext.Provider value={context}>
+    <GroupsPreviewListContext.Provider value={context}>
       <Component {...props} />
-    </PreviewItemListContext.Provider>
+    </GroupsPreviewListContext.Provider>
   );
 };
 
-export default withPreviewItemList;
+export default withGroupsPreviewList;
