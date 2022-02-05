@@ -1,19 +1,19 @@
 import React, {FC, useEffect, useMemo, useState} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewItemsStyles} from './_styles';
-import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
-import {useItemListContext} from '../../../shared/contexts/list-contexts/item-list-context';
-import GroupViewCreateButton from './group-view-create-button';
-import {GroupUtils} from '../../../shared/utils/group.utils';
-import {UserAccount} from '../../../models/user.model';
-import {useArchivedItemListContext} from '../../../shared/contexts/list-contexts/archived-item-list-context';
+import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
+import {useItemListContext} from '../../../../shared/contexts/list-contexts/item-list-context';
+import GroupViewCreateButton from '../group-view-create-button';
+import {GroupUtils} from '../../../../shared/utils/group.utils';
+import {UserAccount} from '../../../../models/user.model';
+import {useArchivedItemListContext} from '../../../../shared/contexts/list-contexts/archived-item-list-context';
 import GroupViewItemsPagination from './group-view-items-pagination';
-import {Item} from '../../../models/item.model';
-import {CARD_ITEMS_COUNT, GROUP_ITEMS_COUNT} from '../_constants';
-import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
-import GroupViewItem from './group-view-item';
-import GroupViewItemSkeletons from './group-view-item-skeletons';
-import {useLoadingState} from '../../../shared/hooks/use-loading-state';
+import {Item} from '../../../../models/item.model';
+import {CARD_ITEMS_COUNT, GROUP_ITEMS_COUNT} from '../../_constants';
+import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
+import GroupViewItem from '../group-view-item/group-view-item';
+import GroupViewSkeletonItems from '../group-view-skeleton/group-view-skeleton-items';
+import {useLoadingState} from '../../../../shared/hooks/use-loading-state';
 
 type Props = {
   showArchived: boolean;
@@ -104,7 +104,7 @@ const GroupViewItems: FC<Props> = ({showArchived, account}: Props) => {
   return (
     <Box className={classes.root}>
       <GroupViewCreateButton group={group} />
-      {loading && <GroupViewItemSkeletons />}
+      {loading && <GroupViewSkeletonItems />}
       {!loading && itemsToShow.map((item) => <GroupViewItem item={item} canEdit={canEdit} key={item.id} />)}
       <GroupViewItemsPagination page={page} totalPages={totalPages} setPage={setPage} />
     </Box>

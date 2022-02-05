@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {Skeleton} from '@material-ui/lab';
-import {groupListSkeletonsInfoStyles} from './_styles';
+import {groupListSkeletonInfoStyles} from './_styles';
 
 const GroupListSkeletonsItem: FC = () => {
-  const classes = groupListSkeletonsInfoStyles();
+  const classes = groupListSkeletonInfoStyles();
 
   return (
     <Box className={classes.root}>

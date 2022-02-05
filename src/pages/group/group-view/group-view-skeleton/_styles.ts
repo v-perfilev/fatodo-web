@@ -1,8 +1,21 @@
-import {makeStyles} from '@material-ui/core/styles';
-import {Theme} from '@material-ui/core';
+import {makeStyles, Theme} from '@material-ui/core/styles';
 import {GROUP_ITEM_HEIGHT} from '../../_constants';
 
-export const groupListSkeletonsItemStyles = makeStyles((theme: Theme) => ({
+export const groupViewSkeletonUsersStyles = makeStyles((theme: Theme) => ({
+  root: {
+    margin: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+  },
+  skeleton: {
+    width: '30%',
+    height: 28,
+  },
+}));
+
+export const groupViewSkeletonItemStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(0.5),
     paddingBottom: theme.spacing(0.5),
@@ -29,11 +42,11 @@ export const groupListSkeletonsItemStyles = makeStyles((theme: Theme) => ({
     marginRight: theme.spacing(1),
   },
   skeleton1: {
-    width: 60,
+    width: 70,
     height: 40,
   },
   skeleton2: {
-    width: '90%',
+    width: '100%',
     height: 15,
     marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5),
@@ -45,30 +58,7 @@ export const groupListSkeletonsItemStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.spacing(0.5),
   },
   skeleton4: {
-    width: 30,
+    width: 100,
     height: 20,
-  },
-}));
-
-export const groupListSkeletonsInfoStyles = makeStyles((theme: Theme) => ({
-  root: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(0.5),
-  },
-  badges: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    paddingRight: theme.spacing(0.5),
-  },
-  skeleton: {
-    width: 50,
-    height: 16,
   },
 }));

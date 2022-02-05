@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import {Box} from '@material-ui/core';
 import {Skeleton} from '@material-ui/lab';
-import {groupListSkeletonsItemStyles} from './_styles';
+import {groupViewSkeletonItemStyles} from './_styles';
 
-const GroupListSkeletonsItem: FC = () => {
-  const classes = groupListSkeletonsItemStyles();
+const GroupViewSkeletonItem: FC = () => {
+  const classes = groupViewSkeletonItemStyles();
 
   return (
     <Box className={classes.root}>
@@ -20,4 +20,4 @@ const GroupListSkeletonsItem: FC = () => {
   );
 };
 
-export default GroupListSkeletonsItem;
+export default GroupViewSkeletonItem;

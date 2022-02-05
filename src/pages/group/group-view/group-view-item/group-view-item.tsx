@@ -1,10 +1,10 @@
 import React, {FC, HTMLAttributes} from 'react';
 import {Box, Card, Typography} from '@material-ui/core';
 import {groupViewItemStyles} from './_styles';
-import {Item} from '../../../models/item.model';
-import {Link} from '../../../components/controls';
-import {ItemRouteUtils} from '../../item/_router';
-import {PriorityView, TypeView} from '../../../components/views';
+import {Item} from '../../../../models/item.model';
+import {Link} from '../../../../components/controls';
+import {ItemRouteUtils} from '../../../item/_router';
+import {PriorityView, TypeView} from '../../../../components/views';
 import GroupViewItemChanges from './group-view-item-changes';
 import GroupViewItemButtons from './group-view-item-buttons';
 import GroupViewItemStatus from './group-view-item-status';

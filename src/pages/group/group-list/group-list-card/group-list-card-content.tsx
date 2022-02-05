@@ -6,7 +6,7 @@ import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/gro
 import {AccordionDetails} from '@material-ui/core';
 import {useLoadingState} from '../../../../shared/hooks/use-loading-state';
 import GroupListCardItem from './group-list-card-item';
-import GroupListSkeletons from '../group-list-skeletons/group-list-skeletons';
+import GroupListSkeletonItems from '../group-list-skeleton/group-list-skeleton-items';
 import {groupListCardContentStyles} from './_styles';
 import GroupListCardInfo from './group-list-card-info';
 import GroupListCardCreateLink from './group-list-card-create-link';
@@ -29,7 +29,7 @@ const GroupListCardContent: FC<Props> = ({items, count}: Props) => {
 
   return (
     <AccordionDetails className={classes.content}>
-      {loading && <GroupListSkeletons />}
+      {loading && <GroupListSkeletonItems />}
       {!loading && !count && <GroupListCardCreateLink />}
       {!loading && count && items.map((item) => <GroupListCardItem item={item} key={item.id} />)}
       {!loading && count && <GroupListCardInfo items={items} count={count} />}

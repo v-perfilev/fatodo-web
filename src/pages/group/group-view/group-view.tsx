@@ -1,7 +1,7 @@
 import React, {FC, memo, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Container, ThemeProvider} from '@material-ui/core';
-import GroupViewItems from './group-view-items';
+import GroupViewItems from './group-view-items/group-view-items';
 import GroupViewUsers from './group-view-users';
 import {EditIcon} from '../../../components/icons/edit-icon';
 import {Routes} from '../../router';

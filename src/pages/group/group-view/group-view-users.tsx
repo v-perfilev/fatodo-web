@@ -5,7 +5,7 @@ import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-
 import {UserWithPopupView} from '../../../components/views';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {User} from '../../../models/user.model';
-import GroupViewUsersSkeleton from './group-view-users-skeleton';
+import GroupViewSkeletonUsers from './group-view-skeleton/group-view-skeleton-users';
 import {useLoadingState} from '../../../shared/hooks/use-loading-state';
 
 const GroupViewUsers: FC = () => {
@@ -35,7 +35,7 @@ const GroupViewUsers: FC = () => {
 
   return (
     <Box className={classes.root}>
-      {loading && <GroupViewUsersSkeleton />}
+      {loading && <GroupViewSkeletonUsers />}
       {!loading && usersToShow.map((user) => <UserWithPopupView user={user} withUsername withPaperBox key={user.id} />)}
     </Box>
   );
