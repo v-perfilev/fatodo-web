@@ -9,6 +9,7 @@ import GroupListCardItem from './group-list-card-item';
 import GroupListSkeletons from '../group-list-skeletons/group-list-skeletons';
 import {groupListCardContentStyles} from './_styles';
 import GroupListCardInfo from './group-list-card-info';
+import GroupListCardCreateLink from './group-list-card-create-link';
 
 type Props = {
   items: Item[];
@@ -29,8 +30,9 @@ const GroupListCardContent: FC<Props> = ({items, count}: Props) => {
   return (
     <AccordionDetails className={classes.content}>
       {loading && <GroupListSkeletons />}
-      {!loading && items.map((item) => <GroupListCardItem item={item} key={item.id} />)}
-      {!loading && <GroupListCardInfo items={items} count={count} />}
+      {!loading && !count && <GroupListCardCreateLink />}
+      {!loading && count && items.map((item) => <GroupListCardItem item={item} key={item.id} />)}
+      {!loading && count && <GroupListCardInfo items={items} count={count} />}
     </AccordionDetails>
   );
 };

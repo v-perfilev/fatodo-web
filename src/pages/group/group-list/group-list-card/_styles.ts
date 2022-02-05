@@ -84,6 +84,16 @@ export const groupListCardContentStyles = makeStyles((theme: Theme) => ({
   },
 }));
 
+export const groupListCardCreateLinkStyles = makeStyles((theme: Theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
+  },
+}));
+
 export const groupListCardItemStyles = makeStyles((theme: Theme) => ({
   root: {
     paddingTop: theme.spacing(0.5),

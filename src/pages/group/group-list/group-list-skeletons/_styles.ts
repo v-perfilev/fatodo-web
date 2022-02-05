@@ -49,3 +49,26 @@ export const groupListSkeletonsItemStyles = makeStyles((theme: Theme) => ({
     height: 20,
   },
 }));
+
+export const groupListSkeletonsInfoStyles = makeStyles((theme: Theme) => ({
+  root: {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(0.5),
+  },
+  badges: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingRight: theme.spacing(0.5),
+  },
+  skeleton: {
+    width: 50,
+    height: 16,
+  },
+}));

@@ -8,10 +8,10 @@ import {UserAccount} from '../../../../models/user.model';
 import Truncate from 'react-truncate';
 import GroupListCardActions from './group-list-card-actions';
 import GroupListCardExpandButton from './group-list-card-expand-button';
-import {Routes} from '../../../router';
 import {Link} from '../../../../components/controls';
 import GroupListCardCreateButton from './group-list-card-create-button';
 import GroupListCardAvatars from './group-list-card-avatars';
+import {GroupRouteUtils} from '../../_router';
 
 type Props = {
   account: UserAccount;
@@ -22,7 +22,7 @@ const GroupListCardHeader: FC<Props> = ({account}: Props) => {
   const {group} = useGroupViewContext();
 
   return (
-    <Link to={Routes.GROUPS + '/' + group.id}>
+    <Link to={GroupRouteUtils.getViewUrl(group.id)}>
       <AccordionSummary className={classes.root}>
         <Box className={classes.title}>
           {group.imageFilename && <UrlPic url={group.imageFilename} size="md" border={1} invertedBorder />}
