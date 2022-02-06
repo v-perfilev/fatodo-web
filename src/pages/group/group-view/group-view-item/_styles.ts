@@ -46,6 +46,9 @@ export const groupViewItemStyles = makeStyles((theme: Theme) => ({
   icon: {
     fontSize: '1.8rem',
   },
+  typography: {
+    fontSize: '0.95rem',
+  },
   contentBox: {
     display: 'flex',
     flexGrow: 1,

@@ -154,7 +154,6 @@ export const groupListCardItemStyles = makeStyles((theme: Theme) => ({
     fontSize: '1.5rem',
   },
   typography: {
-    width: '100%',
     fontSize: '0.95rem',
   },
 }));

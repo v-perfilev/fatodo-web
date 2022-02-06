@@ -25,10 +25,10 @@ const ItemViewHeader: FC<Props> = ({title, group}: Props) => {
       </Link>
       <Box>/</Box>
       <Link to={groupViewUrl} withAlwaysUnderline>
-        <PageHeader>
-          {group.imageFilename && <UrlPic url={group.imageFilename} size="md" border={2} />}
-          <Typography variant="body1">{group.title}</Typography>
-        </PageHeader>
+        {group.imageFilename && <UrlPic url={group.imageFilename} size="md" border={2} />}
+      </Link>
+      <Link to={groupViewUrl} withAlwaysUnderline>
+        <Typography variant="body1">{group.title}</Typography>
       </Link>
       <Box>/</Box>
       <Typography variant="h6">{title}</Typography>

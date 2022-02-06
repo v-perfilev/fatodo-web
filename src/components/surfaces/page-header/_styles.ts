@@ -4,6 +4,7 @@ import {Theme} from '@material-ui/core';
 export const pageHeaderStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
+    flexWrap: 'wrap',
     flexDirection: 'row',
     alignItems: 'center',
     color: theme.palette.primary.main,

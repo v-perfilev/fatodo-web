@@ -8,6 +8,7 @@ import {PriorityView, TypeView} from '../../../../components/views';
 import GroupViewItemChanges from './group-view-item-changes';
 import GroupViewItemButtons from './group-view-item-buttons';
 import GroupViewItemStatus from './group-view-item-status';
+import Truncate from 'react-truncate';
 
 type Props = HTMLAttributes<HTMLElement> & {
   item: Item;
@@ -31,7 +32,9 @@ const GroupViewItem: FC<Props> = ({item, canEdit}: Props) => {
             <PriorityView className={classes.icon} priority={item.priority} withoutText />
           </Box>
           <Box className={classes.contentCol}>
-            <Typography>{item.title}</Typography>
+            <Typography className={classes.typography}>
+              <Truncate>{item.title}</Truncate>
+            </Typography>
             <GroupViewItemChanges item={item} />
           </Box>
           <Box className={classes.buttonsCol}>
