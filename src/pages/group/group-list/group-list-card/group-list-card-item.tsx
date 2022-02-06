@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, HTMLAttributes} from 'react';
+import {FC, HTMLAttributes, memo} from 'react';
 import {Box, Card, Typography} from '@material-ui/core';
 import {groupListCardItemStyles} from './_styles';
 import Truncate from 'react-truncate';
@@ -45,4 +45,4 @@ const GroupListCardItem: FC<Props> = ({item}: Props) => {
   );
 };
 
-export default GroupListCardItem;
+export default memo(GroupListCardItem);

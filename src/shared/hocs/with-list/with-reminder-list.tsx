@@ -26,7 +26,7 @@ const withReminderList = (Component: ComponentType): FC => (props): ReactElement
       });
   };
 
-  const context = {reminders, load, loading};
+  const context = {reminders, setReminders, load, loading};
 
   return (
     <ReminderListContext.Provider value={context}>

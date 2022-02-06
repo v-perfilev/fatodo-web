@@ -4,6 +4,7 @@ import {Item} from '../../../models/item.model';
 
 type ArchivedItemListState = {
   items: Item[];
+  setItems: (items: Item[]) => void;
   count: number;
   addItem: (item: Item) => void;
   updateItem: (item: Item) => void;

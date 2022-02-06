@@ -60,7 +60,7 @@ const withItemList = (Component: ComponentType): FC => (props): ReactElement => 
       });
   };
 
-  const context = {items, count, addItem, updateItem, removeItem, load, loading};
+  const context = {items, setItems, count, addItem, updateItem, removeItem, load, loading};
 
   return (
     <ArchivedItemListContext.Provider value={context}>

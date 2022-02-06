@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {FC, memo, useEffect} from 'react';
+import {FC, useEffect} from 'react';
 import {Item} from '../../../../models/item.model';
 import {useGroupListItemsContext} from '../../../../shared/contexts/list-contexts/group-list-items-context';
 import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
@@ -19,13 +19,15 @@ type Props = {
 const GroupListCardContent: FC<Props> = ({items, count}: Props) => {
   const classes = groupListCardContentStyles();
   const {group} = useGroupViewContext();
-  const {loading: previewLoading} = useGroupListItemsContext();
+  const {loading: listLoading} = useGroupListItemsContext();
   const [loading, setLoading] = useLoadingState();
 
+  console.log('1');
+
   useEffect(() => {
-    const loading = group && previewLoading.has(group.id) ? previewLoading.get(group.id) : false;
+    const loading = group && listLoading.has(group.id) ? listLoading.get(group.id) : false;
     setLoading(loading);
-  }, [group, previewLoading]);
+  }, [group, listLoading]);
 
   return (
     <AccordionDetails className={classes.content}>
@@ -37,4 +39,4 @@ const GroupListCardContent: FC<Props> = ({items, count}: Props) => {
   );
 };
 
-export default memo(GroupListCardContent);
+export default GroupListCardContent;

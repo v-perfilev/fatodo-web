@@ -31,7 +31,11 @@
     "leave": "Leave",
     "moveToArchive": "Move to archive",
     "removeFromArchive": "Remove from archive",
-    "showAll": "Show all items"
+    "showAll": "Show all items",
+    "collapse": "Collapse",
+    "expand": "Expand",
+    "saveOrder": "Save order",
+    "resetOrder": "Reset order"
   },
   "menu": {
     "createGroup": "Create group",

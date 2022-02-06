@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ComponentType, FC, ReactElement, useState} from 'react';
+import {ComponentType, FC, ReactElement, useMemo, useState} from 'react';
 import {UserListContext} from '../../contexts/list-contexts/user-list-context';
 import {User} from '../../../models/user.model';
 import UserService from '../../../services/user.service';
@@ -48,7 +48,7 @@ const withUserList = (Component: ComponentType): FC => (props): ReactElement => 
     });
   };
 
-  const loading = loadingIds.length > 0;
+  const loading = useMemo<boolean>(() => loadingIds.length > 0, [loadingIds]);
 
   const context = {users, handleUserIds: addAbsentUserIds, handleUsers: addAbsentUsers, loading};
 

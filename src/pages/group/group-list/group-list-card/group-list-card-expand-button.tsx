@@ -11,19 +11,19 @@ type Props = {};
 const GroupListCardExpandButton: FC<Props> = ({}: Props) => {
   const classes = groupListCardExpandButtonStyles();
   const {group} = useGroupViewContext();
-  const {expanded: previewExpanded, setExpanded} = useGroupListItemsContext();
+  const {collapsed: previewCollapsed, setCollapsed} = useGroupListItemsContext();
 
-  const expanded = useMemo<boolean>(() => {
-    return group && previewExpanded.has(group.id) ? previewExpanded.get(group.id) : true;
-  }, [group, previewExpanded]);
+  const collapsed = useMemo<boolean>(() => {
+    return group && previewCollapsed.has(group.id) ? previewCollapsed.get(group.id) : false;
+  }, [group, previewCollapsed]);
 
   const handleClick = (e: MouseEvent<HTMLElement>): void => {
     e.preventDefault();
     e.stopPropagation();
-    setExpanded([group.id], !expanded);
+    setCollapsed([group.id], !collapsed);
   };
 
-  const classNames = csx(classes.root, {[classes.rotated]: expanded});
+  const classNames = csx(classes.root, {[classes.rotated]: !collapsed});
 
   return (
     <IconButton onClick={handleClick} className={classNames}>

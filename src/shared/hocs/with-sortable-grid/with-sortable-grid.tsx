@@ -62,19 +62,27 @@ const withSortableGrid = (Component: ComponentType<SortProps>): FC => (props): R
     if (!down) order.current = newOrder;
   });
 
-  useEffect(() => {
-    if (containerRef && itemRef && itemRef) {
+  const initSizes = (): void => {
+    if (containerRef && itemRef) {
       setSizes({
         container: {width: containerRef.clientWidth, height: containerRef.clientHeight},
         item: {width: itemRef.clientWidth, height: itemRef.clientHeight},
       });
     }
-  }, [containerRef, itemRef, resize]);
+  };
 
-  useEffect(() => {
+  const updateSpringsAndHeight = (): void => {
     order.current = items.map((_, index) => index);
     setSprings(calculateStyle({indexOrder: order.current, immediate: true}));
     setHeight(sizes.item.height * rowCount);
+  };
+
+  useEffect(() => {
+    initSizes();
+  }, [containerRef, itemRef, resize]);
+
+  useEffect(() => {
+    updateSpringsAndHeight();
   }, [items, sizes]);
 
   const sortingProps = {
@@ -85,6 +93,7 @@ const withSortableGrid = (Component: ComponentType<SortProps>): FC => (props): R
     sortOrder: order,
     sortSprings: springs,
     sortBind: bind,
+    initSizes,
   };
 
   return <Component {...sortingProps} {...props} />;

@@ -24,7 +24,7 @@ const withGroupList = (Component: ComponentType): FC => (props): ReactElement =>
       });
   };
 
-  const context = {groups, load, loading};
+  const context = {groups, setGroups, load, loading};
 
   return (
     <GroupListContext.Provider value={context}>

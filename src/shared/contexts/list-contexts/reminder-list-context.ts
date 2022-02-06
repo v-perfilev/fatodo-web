@@ -4,6 +4,7 @@ import {Reminder} from '../../../models/reminder.model';
 
 type ReminderListState = {
   reminders: Reminder[];
+  setReminders: (reminders: Reminder[]) => void;
   load: (itemId: string) => void;
   loading: boolean;
 };

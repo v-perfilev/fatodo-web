@@ -4,6 +4,7 @@ import {Group} from '../../../models/group.model';
 
 type GroupListState = {
   groups: Group[];
+  setGroups: (groups: Group[]) => void;
   load: () => void;
   loading: boolean;
 };

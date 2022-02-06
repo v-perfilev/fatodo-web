@@ -6,9 +6,7 @@ import {Link} from '../../../../components/controls';
 import {useTranslation} from 'react-i18next';
 import {ItemRouteUtils} from '../../../item/_router';
 
-type Props = {};
-
-const GroupListCardCreateButton: FC<Props> = ({}: Props) => {
+const GroupListCardCreateButton: FC = () => {
   const classes = groupListCardCreateLinkStyles();
   const {t} = useTranslation();
   const {group} = useGroupViewContext();

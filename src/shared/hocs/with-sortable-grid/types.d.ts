@@ -28,4 +28,5 @@ export type SortProps = {
   sortOrder: MutableRefObject<number[]>;
   sortSprings: CSSProperties[];
   sortBind: any;
+  initSizes: () => void;
 };

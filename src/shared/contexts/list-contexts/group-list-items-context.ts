@@ -8,8 +8,10 @@ export interface GroupListItemsState {
   loadInitialState: (groupIds: string[]) => void;
   loadMore: (groupId: string, offset: number, size: number) => void;
   loading: Map<string, boolean>;
-  expanded: Map<string, boolean>;
-  setExpanded: (groupIds: string[], value: boolean) => void;
+  collapsed: Map<string, boolean>;
+  setCollapsed: (groupIds: string[], value: boolean) => void;
+  allCollapsed: boolean;
+  setAllCollapsed: (value: boolean) => void;
 }
 
 export const GroupListItemsContext = React.createContext<GroupListItemsState>(null);

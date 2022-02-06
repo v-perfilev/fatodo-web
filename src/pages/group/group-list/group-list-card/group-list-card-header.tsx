@@ -12,12 +12,15 @@ import {Link} from '../../../../components/controls';
 import GroupListCardCreateButton from './group-list-card-create-button';
 import GroupListCardAvatars from './group-list-card-avatars';
 import {GroupRouteUtils} from '../../_router';
+import GroupListCardSortButton from './group-list-card-sort-button';
 
 type Props = {
   account: UserAccount;
+  sorting: boolean;
+  bind: (...any) => void;
 };
 
-const GroupListCardHeader: FC<Props> = ({account}: Props) => {
+const GroupListCardHeader: FC<Props> = ({account, sorting, bind}: Props) => {
   const classes = groupListCardHeaderStyles();
   const {group} = useGroupViewContext();
 
@@ -30,12 +33,17 @@ const GroupListCardHeader: FC<Props> = ({account}: Props) => {
             <Truncate>{group.title}</Truncate>
           </Typography>
         </Box>
-        <Hidden smDown>
-          <GroupListCardAvatars />
-          <GroupListCardCreateButton />
-        </Hidden>
-        <GroupListCardActions account={account} />
-        <GroupListCardExpandButton />
+        {!sorting && (
+          <>
+            <Hidden smDown>
+              <GroupListCardAvatars />
+              <GroupListCardCreateButton />
+            </Hidden>
+            <GroupListCardActions account={account} />
+            <GroupListCardExpandButton />
+          </>
+        )}
+        {sorting && <GroupListCardSortButton bind={bind} />}
       </AccordionSummary>
     </Link>
   );

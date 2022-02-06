@@ -1,41 +1,46 @@
 import * as React from 'react';
-import {FC} from 'react';
-import {Container} from '@material-ui/core';
-import {groupListContainerStyles} from './_styles';
+import {FC, memo, MutableRefObject, useEffect} from 'react';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
-import GroupsPreviewCard from './group-list-card/group-list-card';
-import ControlMenu from '../../../components/layouts/control-menu/control-menu';
-import {PageDivider} from '../../../components/surfaces';
-import {PlusIcon} from '../../../components/icons/plus-icon';
-import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
-import {ReorderIcon} from '../../../components/icons/reorder-icon';
-import {GroupRouteUtils} from '../_router';
-import {useHistory} from 'react-router-dom';
-import {useTranslation} from 'react-i18next';
+import {SortProps} from '../../../shared/hocs/with-sortable-grid/types';
+import {groupListContainerStyles} from './_styles';
+import GroupListItem from './group-list-item';
 
-const GroupListContainer: FC = () => {
+type Props = SortProps & {
+  sorting: boolean;
+  setOrder: (order: MutableRefObject<number[]>) => void;
+};
+
+const GroupListContainer: FC<Props> = (props: Props) => {
   const classes = groupListContainerStyles();
-  const history = useHistory();
-  const {t} = useTranslation();
   const {groups} = useGroupListContext();
+  const {setSortItems, setSortContainerRef, setSortItemRef} = props;
+  const {sortContainerHeight, sortSprings, sortBind, sortOrder} = props;
+  const {sorting, setOrder} = props;
 
-  const redirectToGroupCreate = (): void => history.push(GroupRouteUtils.getCreateUrl());
-  const redirectToGroupsSorting = (): void => history.push(GroupRouteUtils.getSortingUrl());
+  const containerStyle = {minHeight: sortContainerHeight};
 
-  const menuElements = [
-    {icon: <PlusIcon />, action: redirectToGroupCreate, text: t('group:tooltips.create')},
-    {icon: <ReorderIcon />, action: redirectToGroupsSorting, text: t('group:tooltips.reorder')},
-  ] as MenuElement[];
+  useEffect(() => {
+    setOrder(sortOrder);
+  }, []);
+
+  useEffect(() => {
+    setSortItems(groups);
+  }, [groups]);
 
   return (
-    <Container className={classes.container}>
-      <ControlMenu menu={menuElements} />
-      <PageDivider />
-      {groups?.map((group) => (
-        <GroupsPreviewCard group={group} key={group.id} />
+    <div className={classes.sortingBox} style={containerStyle} ref={setSortContainerRef}>
+      {groups.map((group, i) => (
+        <GroupListItem
+          group={group}
+          sorting={sorting}
+          style={sortSprings[i]}
+          bind={sortBind(i)}
+          setItemRef={setSortItemRef}
+          key={group.id}
+        />
       ))}
-    </Container>
+    </div>
   );
 };
 
-export default GroupListContainer;
+export default memo(GroupListContainer);

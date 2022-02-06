@@ -6,9 +6,7 @@ import {ItemRouteUtils} from '../../../item/_router';
 import {useHistory} from 'react-router-dom';
 import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
 
-type Props = {};
-
-const GroupListCardCreateButton: FC<Props> = ({}: Props) => {
+const GroupListCardCreateButton: FC = () => {
   const classes = groupListCardCreateButtonStyles();
   const history = useHistory();
   const {group} = useGroupViewContext();

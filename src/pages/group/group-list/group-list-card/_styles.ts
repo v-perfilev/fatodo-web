@@ -3,9 +3,13 @@ import {Theme} from '@material-ui/core';
 import {CARD_HEADER_HEIGHT, CARD_ITEM_HEIGHT} from '../../_constants';
 
 export const groupListCardStyles = makeStyles((theme: Theme) => ({
+  sortingBox: {
+    position: 'absolute',
+    width: '100%',
+  },
   box: {
-    marginTop: theme.spacing(1.5),
-    marginBottom: theme.spacing(1.5),
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
   },
   accordion: {
     overflow: 'hidden',
@@ -52,14 +56,13 @@ export const groupListCardCreateButtonStyles = makeStyles((theme: Theme) => ({
     color: theme.palette.primary.contrastText,
     boxShadow: 'inset 0px 0px 0px 2px ' + theme.palette.primary.contrastText,
     marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(2),
   },
 }));
 
 export const groupListCardActionsStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
-    marginLeft: theme.spacing(0.5),
   },
 }));
 
@@ -67,10 +70,16 @@ export const groupListCardExpandButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
     transition: 'transform 400ms ease-out',
-    marginLeft: theme.spacing(0.5),
   },
   rotated: {
     transform: 'rotate(180deg)',
+  },
+}));
+
+export const groupListCardSortButtonStyles = makeStyles((theme: Theme) => ({
+  root: {
+    color: theme.palette.primary.contrastText,
+    marginLeft: theme.spacing(0.5),
   },
 }));
 
