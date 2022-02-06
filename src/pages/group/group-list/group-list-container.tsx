@@ -17,7 +17,7 @@ const GroupListContainer: FC<Props> = (props: Props) => {
   const {sortContainerHeight, sortSprings, sortBind, sortOrder} = props;
   const {sorting, setOrder} = props;
 
-  const containerStyle = {minHeight: sortContainerHeight};
+  const containerStyle = sorting ? {minHeight: sortContainerHeight} : {};
 
   useEffect(() => {
     setOrder(sortOrder);
