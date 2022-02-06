@@ -81,7 +81,7 @@ const GroupListCardActions: FC<Props> = ({account}: Props) => {
 
   return (
     <>
-      <IconButton onClick={handleClickOnAction} className={classes.root} ref={ref}>
+      <IconButton className={classes.root} onClick={handleClickOnAction} ref={ref} size="small">
         <DotsVerticalIcon />
       </IconButton>
       <PopupMenu anchorEl={ref?.current} open={isOpen} onClose={handleClose}>

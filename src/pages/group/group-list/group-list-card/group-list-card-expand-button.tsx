@@ -26,7 +26,7 @@ const GroupListCardExpandButton: FC<Props> = ({}: Props) => {
   const classNames = csx(classes.root, {[classes.rotated]: !collapsed});
 
   return (
-    <IconButton onClick={handleClick} className={classNames}>
+    <IconButton className={classNames} onClick={handleClick} size="small">
       <ArrowDownIcon />
     </IconButton>
   );

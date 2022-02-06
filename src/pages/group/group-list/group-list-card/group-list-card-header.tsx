@@ -34,14 +34,14 @@ const GroupListCardHeader: FC<Props> = ({account, sorting, bind}: Props) => {
           </Typography>
         </Box>
         {!sorting && (
-          <>
+          <Box className={classes.buttons}>
             <Hidden smDown>
               <GroupListCardAvatars />
               <GroupListCardCreateButton />
             </Hidden>
             <GroupListCardActions account={account} />
             <GroupListCardExpandButton />
-          </>
+          </Box>
         )}
         {sorting && <GroupListCardSortButton bind={bind} />}
       </AccordionSummary>

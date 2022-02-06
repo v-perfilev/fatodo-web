@@ -18,7 +18,7 @@ const GroupListCardCreateButton: FC = () => {
   };
 
   return (
-    <IconButton onClick={handleClick} className={classes.root}>
+    <IconButton className={classes.root} onClick={handleClick} size="small">
       <PlusIcon />
     </IconButton>
   );

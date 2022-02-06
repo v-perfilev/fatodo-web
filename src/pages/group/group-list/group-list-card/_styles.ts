@@ -18,10 +18,12 @@ export const groupListCardStyles = makeStyles((theme: Theme) => ({
 
 export const groupListCardHeaderStyles = makeStyles((theme: Theme) => ({
   root: {
+    display: 'flex',
+    alignItems: 'center',
+    flexShrink: 0,
     height: CARD_HEADER_HEIGHT,
     minHeight: CARD_HEADER_HEIGHT + 'px !important',
-    flexShrink: 0,
-    paddingLeft: theme.spacing(2),
+    paddingLeft: theme.spacing(1),
     paddingRight: theme.spacing(1),
     background: theme.palette.gradient,
   },
@@ -35,6 +37,10 @@ export const groupListCardHeaderStyles = makeStyles((theme: Theme) => ({
     '& >  *': {
       marginRight: theme.spacing(1),
     },
+  },
+  buttons: {
+    display: 'flex',
+    alignItems: 'center',
   },
   caption: {
     width: '100%',
@@ -76,6 +82,7 @@ export const groupListCardExpandButtonStyles = makeStyles((theme: Theme) => ({
     transition: 'transform 400ms ease-out',
     boxShadow: 'inset 0px 0px 0px 1px ' + theme.palette.primary.contrastText,
     marginLeft: theme.spacing(0.75),
+    marginRight: theme.spacing(0.75),
   },
   rotated: {
     transform: 'rotate(180deg)',
