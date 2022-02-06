@@ -22,8 +22,6 @@ const GroupListCardContent: FC<Props> = ({items, count}: Props) => {
   const {loading: listLoading} = useGroupListItemsContext();
   const [loading, setLoading] = useLoadingState();
 
-  console.log('1');
-
   useEffect(() => {
     const loading = group && listLoading.has(group.id) ? listLoading.get(group.id) : false;
     setLoading(loading);
