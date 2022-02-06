@@ -47,22 +47,26 @@ export const groupListCardAvatarsStyles = makeStyles((theme: Theme) => ({
   root: {
     display: 'flex',
     alignItems: 'center',
-    paddingLeft: theme.spacing(2),
+    paddingLeft: theme.spacing(1.5),
+    paddingRight: theme.spacing(0.75),
   },
 }));
 
 export const groupListCardCreateButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
-    boxShadow: 'inset 0px 0px 0px 2px ' + theme.palette.primary.contrastText,
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(2),
+    boxShadow: 'inset 0px 0px 0px 1px ' + theme.palette.primary.contrastText,
+    marginLeft: theme.spacing(0.75),
+    marginRight: theme.spacing(0.75),
   },
 }));
 
 export const groupListCardActionsStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
+    boxShadow: 'inset 0px 0px 0px 1px ' + theme.palette.primary.contrastText,
+    marginLeft: theme.spacing(0.75),
+    marginRight: theme.spacing(0.75),
   },
 }));
 
@@ -70,6 +74,8 @@ export const groupListCardExpandButtonStyles = makeStyles((theme: Theme) => ({
   root: {
     color: theme.palette.primary.contrastText,
     transition: 'transform 400ms ease-out',
+    boxShadow: 'inset 0px 0px 0px 1px ' + theme.palette.primary.contrastText,
+    marginLeft: theme.spacing(0.75),
   },
   rotated: {
     transform: 'rotate(180deg)',
@@ -91,14 +97,7 @@ export const groupListCardContentStyles = makeStyles((theme: Theme) => ({
     paddingTop: theme.spacing(1) + 'px !important',
     paddingBottom: theme.spacing(1) + 'px !important',
   },
-}));
-
-export const groupListCardCreateLinkStyles = makeStyles((theme: Theme) => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: theme.spacing(0.5),
+  items: {
     paddingBottom: theme.spacing(0.5),
   },
 }));
@@ -178,16 +177,13 @@ export const groupListCardInfoStyles = makeStyles((theme: Theme) => ({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     alignItems: 'center',
-    marginTop: theme.spacing(1),
+    marginTop: theme.spacing(0.5),
     marginBottom: theme.spacing(0.5),
   },
-  showAll: {
-    position: 'absolute',
-    left: '50%',
-    transform: 'translateX(-50%)',
+  buttons: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexGrow: 1,
+    justifyContent: 'center',
   },
   badges: {
     display: 'flex',

@@ -3,13 +3,12 @@ import {FC, useEffect} from 'react';
 import {Item} from '../../../../models/item.model';
 import {useGroupListItemsContext} from '../../../../shared/contexts/list-contexts/group-list-items-context';
 import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
-import {AccordionDetails} from '@material-ui/core';
+import {AccordionDetails, Box} from '@material-ui/core';
 import {useLoadingState} from '../../../../shared/hooks/use-loading-state';
 import GroupListCardItem from './group-list-card-item';
 import GroupListSkeletonItems from '../group-list-skeleton/group-list-skeleton-items';
 import {groupListCardContentStyles} from './_styles';
 import GroupListCardInfo from './group-list-card-info';
-import GroupListCardCreateLink from './group-list-card-create-link';
 
 type Props = {
   items: Item[];
@@ -30,9 +29,14 @@ const GroupListCardContent: FC<Props> = ({items, count}: Props) => {
   return (
     <AccordionDetails className={classes.content}>
       {loading && <GroupListSkeletonItems />}
-      {!loading && !count && <GroupListCardCreateLink />}
-      {!loading && count && items.map((item) => <GroupListCardItem item={item} key={item.id} />)}
-      {!loading && count && <GroupListCardInfo items={items} count={count} />}
+      {!loading && count > 0 && (
+        <Box className={classes.items}>
+          {items.map((item) => (
+            <GroupListCardItem item={item} key={item.id} />
+          ))}
+        </Box>
+      )}
+      {!loading && <GroupListCardInfo items={items} count={count} />}
     </AccordionDetails>
   );
 };
