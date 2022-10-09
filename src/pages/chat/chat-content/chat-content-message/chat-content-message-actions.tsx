@@ -43,7 +43,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
       showMessageReactionsDialog(message, users);
       handleClose(e);
     },
-    [message, users, showMessageReactionsDialog]
+    [message, users, showMessageReactionsDialog],
   );
 
   const openReadStatusesDialog = useCallback(
@@ -51,7 +51,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
       showMessageReadStatusesDialog(message, users);
       handleClose(e);
     },
-    [message, users, showMessageReadStatusesDialog]
+    [message, users, showMessageReadStatusesDialog],
   );
 
   const editMessage = useCallback(
@@ -59,7 +59,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
       showMessageEditDialog(message);
       handleClose(e);
     },
-    [message, showMessageEditDialog]
+    [message, showMessageEditDialog],
   );
 
   const deleteMessage = useCallback(
@@ -69,7 +69,7 @@ const ChatContentMessageActions: FC<Props> = ({message, isOutcoming}: Props) => 
       });
       handleClose(e);
     },
-    [message, handleResponse]
+    [message, handleResponse],
   );
 
   const menuItems = [

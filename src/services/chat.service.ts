@@ -79,7 +79,7 @@ export default class ChatService {
   public static getAllMessagesByChatIdPageable = (
     chatId: string,
     offset?: number,
-    size?: number
+    size?: number,
   ): AxiosPromise<Message[]> => {
     const url = ChatService.baseUrl + '/messages/' + chatId;
     const params = {offset, size};

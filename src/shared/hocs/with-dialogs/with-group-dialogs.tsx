@@ -43,7 +43,7 @@ const withGroupDialogs = (Component: ComponentType): FC => (props): ReactElement
       const props = {group, show, close, onSuccess} as GroupDeleteDialogProps;
       setDialogProps(GroupDialogs.DELETE, props);
     },
-    [setDialogProps, clearDialogProps]
+    [setDialogProps, clearDialogProps],
   );
 
   const showGroupAddMembersDialog = useCallback(
@@ -53,7 +53,7 @@ const withGroupDialogs = (Component: ComponentType): FC => (props): ReactElement
       const props = {group, show, close, onSuccess} as GroupAddMembersDialogProps;
       setDialogProps(GroupDialogs.ADD_MEMBERS, props);
     },
-    [setDialogProps, updateDialogProps]
+    [setDialogProps, updateDialogProps],
   );
 
   const showGroupEditMemberDialog = useCallback(
@@ -63,7 +63,7 @@ const withGroupDialogs = (Component: ComponentType): FC => (props): ReactElement
       const props = {group, user, show, close, onSuccess} as GroupEditMemberDialogProps;
       setDialogProps(GroupDialogs.EDIT_MEMBER, props);
     },
-    [setDialogProps, updateDialogProps]
+    [setDialogProps, updateDialogProps],
   );
 
   const showGroupMembersDialog = useCallback(
@@ -89,7 +89,7 @@ const withGroupDialogs = (Component: ComponentType): FC => (props): ReactElement
       } as GroupMembersDialogProps;
       setDialogProps(GroupDialogs.MEMBERS, props);
     },
-    [setDialogProps, updateDialogProps, showGroupAddMembersDialog]
+    [setDialogProps, updateDialogProps, showGroupAddMembersDialog],
   );
 
   const showGroupLeaveDialog = useCallback(
@@ -99,7 +99,7 @@ const withGroupDialogs = (Component: ComponentType): FC => (props): ReactElement
       const props = {group, show, close, onSuccess} as GroupLeaveDialogProps;
       setDialogProps(GroupDialogs.LEAVE, props);
     },
-    [setDialogProps, clearDialogProps]
+    [setDialogProps, clearDialogProps],
   );
 
   const initDialogs = (): void => {

@@ -53,7 +53,7 @@ const formik = withFormik<Props, RegistrationFormValues>({
 
   handleSubmit: async (
     values: RegistrationFormValues,
-    {setSubmitting, props}: FormikBag<Props, RegistrationFormValues>
+    {setSubmitting, props}: FormikBag<Props, RegistrationFormValues>,
   ) => {
     const {getToken, onSuccess, handleCode, handleResponse, setLoading} = props;
     const timezone = DateUtils.getTimezone();

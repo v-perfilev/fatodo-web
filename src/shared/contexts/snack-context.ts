@@ -8,7 +8,7 @@ export interface SnackState {
   handleResponse: (
     response: AxiosResponse,
     allowedCodes?: string[] | '*',
-    excludedCodes?: string[] | ''
+    excludedCodes?: string[] | '',
   ) => SnackbarKey;
   handleCode: (code: string, variant: VariantType) => SnackbarKey;
   enqueueSnack: (snack: Snack) => SnackbarKey;

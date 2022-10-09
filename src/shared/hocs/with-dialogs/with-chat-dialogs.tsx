@@ -59,7 +59,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
       const props = {chat, show, close} as ChatAddMembersDialogProps;
       setDialogProps(ChatDialogs.ADD_MEMBERS, props);
     },
-    [setDialogProps, updateDialogProps]
+    [setDialogProps, updateDialogProps],
   );
 
   const showChatCreateDialog = useCallback(
@@ -69,7 +69,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
       const props = {show, close, account} as ChatCreateDialogProps;
       setDialogProps(ChatDialogs.CREATE, props);
     },
-    [setDialogProps, clearDialogProps]
+    [setDialogProps, clearDialogProps],
   );
 
   const showChatMembersDialog = useCallback(
@@ -83,7 +83,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
       const props = {chat, users, show, close, switchToAddMembers} as ChatMembersDialogProps;
       setDialogProps(ChatDialogs.MEMBERS, props);
     },
-    [setDialogProps, updateDialogProps, showChatAddMembersDialog]
+    [setDialogProps, updateDialogProps, showChatAddMembersDialog],
   );
 
   const showChatRenameDialog = useCallback(
@@ -93,7 +93,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
       const props = {chat, title, show, close} as ChatRenameDialogProps;
       setDialogProps(ChatDialogs.RENAME, props);
     },
-    [setDialogProps, updateDialogProps]
+    [setDialogProps, updateDialogProps],
   );
 
   const showMessageReactionsDialog = useCallback(
@@ -103,7 +103,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
       const props = {message, users, show, close} as ChatReactionDialogProps;
       setDialogProps(ChatDialogs.MESSAGE_REACTIONS, props);
     },
-    [setDialogProps, updateDialogProps]
+    [setDialogProps, updateDialogProps],
   );
 
   const showMessageReadStatusesDialog = useCallback(
@@ -113,7 +113,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
       const props = {message, users, show, close} as ChatReadStatusesDialogProps;
       setDialogProps(ChatDialogs.MESSAGE_READ_STATUSES, props);
     },
-    [setDialogProps, updateDialogProps]
+    [setDialogProps, updateDialogProps],
   );
 
   const showMessageEditDialog = useCallback(
@@ -123,7 +123,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
       const props = {message, show, close} as ChatEditDialogProps;
       setDialogProps(ChatDialogs.MESSAGE_EDIT, props);
     },
-    [setDialogProps, updateDialogProps]
+    [setDialogProps, updateDialogProps],
   );
 
   const showDirectMessageDialog = useCallback(
@@ -133,7 +133,7 @@ const withChatDialogs = (Component: ComponentType): FC => (props): ReactElement 
       const props = {user, show, close} as ChatDirectMessageDialogProps;
       setDialogProps(ChatDialogs.DIRECT_MESSAGE, props);
     },
-    [setDialogProps, updateDialogProps]
+    [setDialogProps, updateDialogProps],
   );
 
   const initDialogs = (): void => {

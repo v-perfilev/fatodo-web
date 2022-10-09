@@ -25,7 +25,7 @@ const ChatControlListContainer: FC<Props> = ({chat, setChat, chats, loadMoreItem
       const chat = chats[index];
       setChat(chat);
     },
-    [chats]
+    [chats],
   );
 
   const itemData = useMemo<ChatControlItemDataProps>(
@@ -35,7 +35,7 @@ const ChatControlListContainer: FC<Props> = ({chat, setChat, chats, loadMoreItem
       account,
       handleOnChatClick,
     }),
-    [chats, chat, account, handleOnChatClick]
+    [chats, chat, account, handleOnChatClick],
   );
 
   const itemRenderer = useCallback((props: ChatControlItemProps): ReactElement => <ChatControlRenderer {...props} />, [

@@ -44,7 +44,7 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Pr
       setReference(comment);
       handleClose(e);
     },
-    [comment]
+    [comment],
   );
 
   const openReactionsDialog = useCallback(
@@ -52,7 +52,7 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Pr
       showCommentReactionsDialog(comment, users);
       handleClose(e);
     },
-    [comment, users, showCommentReactionsDialog]
+    [comment, users, showCommentReactionsDialog],
   );
 
   const openEditDialog = useCallback(
@@ -60,7 +60,7 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Pr
       showCommentEditDialog(comment);
       handleClose(e);
     },
-    [comment, showCommentEditDialog]
+    [comment, showCommentEditDialog],
   );
 
   const deleteMessage = useCallback(
@@ -70,7 +70,7 @@ const CommentItemActions: FC<Props> = ({comment, isOwnComment, setReference}: Pr
       });
       handleClose(e);
     },
-    [comment, handleResponse]
+    [comment, handleResponse],
   );
 
   const menuItems = [

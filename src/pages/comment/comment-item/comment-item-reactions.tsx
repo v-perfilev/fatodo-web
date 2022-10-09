@@ -33,7 +33,7 @@ const CommentItemReactions: FC<Props> = ({comment, account}: Props) => {
         return new Map(prevState);
       });
     },
-    [reactionMap]
+    [reactionMap],
   );
 
   const handleClick = useCallback(
@@ -47,7 +47,7 @@ const CommentItemReactions: FC<Props> = ({comment, account}: Props) => {
         CommentService.dislikeCommentReaction(comment.id).catch(handleResponse);
       }
     },
-    [comment, activeReaction]
+    [comment, activeReaction],
   );
 
   const isOwnComment = useMemo((): boolean => {
@@ -79,7 +79,7 @@ const CommentItemReactions: FC<Props> = ({comment, account}: Props) => {
     classes.reaction,
     {[classes.pointer]: !isOwnComment},
     {[classes.countOnRight]: !isOwnComment},
-    {[classes.countOnLeft]: isOwnComment}
+    {[classes.countOnLeft]: isOwnComment},
   );
 
   const reaction = (r: CommentReactionType, key: number): ReactElement => {

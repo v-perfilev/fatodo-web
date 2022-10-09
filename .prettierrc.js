@@ -5,5 +5,5 @@ module.exports = {
   jsxSingleQuote: false,
   tabWidth: 2,
   trailingComma: 'all',
-  arrowParens: 'always'
+  arrowParens: 'always',
 };

@@ -28,7 +28,7 @@ export const AvatarGroup: FC<Props> = ({users, onClick, withPopup, withInvertedB
           <UserWithPopupView user={user} picSize="md" key={index} withInvertedBorder={withInvertedBorder} />
         ) : (
           <UserView user={user} picSize="md" key={index} withInvertedBorder={withInvertedBorder} />
-        )
+        ),
       )}
       {moreThanLimit > 0 && <Typography className={classes.count}>+{moreThanLimit}</Typography>}
     </Box>

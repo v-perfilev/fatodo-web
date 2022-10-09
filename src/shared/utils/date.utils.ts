@@ -59,7 +59,7 @@ export class DateConverters {
     time: Date,
     date: Date,
     timezone: string,
-    withoutYear?: boolean
+    withoutYear?: boolean,
   ): DateParams => {
     if (!time && !date) {
       return null;

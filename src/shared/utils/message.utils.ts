@@ -11,7 +11,7 @@ export class MessageUtils {
     message: Message,
     params: EventMessageParams,
     users: User[],
-    t: TFunction
+    t: TFunction,
   ): string => {
     let text = '';
     const username = MessageUtils.extractUsernameFromMessage(users, message);

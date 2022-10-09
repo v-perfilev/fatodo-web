@@ -107,7 +107,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       isScrolledToTop,
       isScrolledToBottom,
     }),
-    [visibleItems, clearCache, scrollToPosition, scrollToTop, scrollToBottom, isScrolledToTop, isScrolledToBottom]
+    [visibleItems, clearCache, scrollToPosition, scrollToTop, scrollToBottom, isScrolledToTop, isScrolledToBottom],
   );
 
   // MAIN COMPONENT CONTENT
@@ -145,7 +145,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     (index: number): boolean => {
       return reverseOrder ? (index > 0 ? true : allLoaded) : index < loadedLength || allLoaded;
     },
-    [allLoaded, loadedLength, reverseOrder]
+    [allLoaded, loadedLength, reverseOrder],
   );
 
   const wrappedOnItemsRendered = useCallback(
@@ -156,14 +156,14 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
       setVisibleItems(visibleItems);
       onItemsRendered(props);
     },
-    []
+    [],
   );
 
   const wrappedIsItemLoaded = useCallback(
     (index: number): boolean => {
       return loading || isItemLoaded(index);
     },
-    [loading, isItemLoaded]
+    [loading, isItemLoaded],
   );
 
   const wrappedLoadMoreRows = useCallback((): Promise<void> => {
@@ -183,7 +183,7 @@ export const VirtualizedList: FC<Props> = (props: Props) => {
     (index: number): number => {
       return isDynamic ? measurerCache.getHeight(keyCache.get(index)) : itemHeight;
     },
-    [isDynamic]
+    [isDynamic],
   );
 
   // RENDER METHODS

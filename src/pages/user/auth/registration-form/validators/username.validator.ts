@@ -14,5 +14,5 @@ export const usernameValidator = new AsyncValidator(
     name: 'unique',
     message: (): string => i18n.t('account:fields.username.notUnique'),
     test: async (value): Promise<boolean> => (await UserService.doesUsernameExist(value)).data === false,
-  }
+  },
 );

@@ -29,7 +29,7 @@ export class RegistrationFormUtils {
     values: RegistrationFormValues,
     language: string,
     timezone: string,
-    token: string
+    token: string,
   ): RegistrationDTO => ({
     email: values.email.trim(),
     username: values.username.trim(),

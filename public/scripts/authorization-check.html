@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Fatodo</title>
-</head>
-<body>
-<script type="text/javascript">
-  const PERMITTED_DOMAINS = ['https://fatodo.app', 'https://www.fatodo.app'];
-  const TOKEN_KEY = 'token';
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fatodo</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      const PERMITTED_DOMAINS = ['https://fatodo.app', 'https://www.fatodo.app'];
+      const TOKEN_KEY = 'token';
 
-  function parseJwt(token) {
-    let base64Url = token.split('.')[1];
-    let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    let jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
-  }
+      function parseJwt(token) {
+        let base64Url = token.split('.')[1];
+        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        let jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split('')
+            .map(function (c) {
+              return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join(''),
+        );
+        return JSON.parse(jsonPayload);
+      }
 
-  function isJwtNotExpired(token) {
-    let decodedToken = token ? parseJwt(token) : null;
-    let exp = decodedToken ? decodedToken.exp * 1000 : 0;
-    return Date.now() < exp;
-  }
+      function isJwtNotExpired(token) {
+        let decodedToken = token ? parseJwt(token) : null;
+        let exp = decodedToken ? decodedToken.exp * 1000 : 0;
+        return Date.now() < exp;
+      }
 
-  window.addEventListener('message', function(event) {
-    if (PERMITTED_DOMAINS.includes(event.origin)) {
-      let parent = window.parent;
-      let token = localStorage.getItem(TOKEN_KEY);
-      let isAuthorized = isJwtNotExpired(token);
-      parent.postMessage(isAuthorized, '*');
-    }
-  });
-</script>
-</body>
+      window.addEventListener('message', function (event) {
+        if (PERMITTED_DOMAINS.includes(event.origin)) {
+          let parent = window.parent;
+          let token = localStorage.getItem(TOKEN_KEY);
+          let isAuthorized = isJwtNotExpired(token);
+          parent.postMessage(isAuthorized, '*');
+        }
+      });
+    </script>
+  </body>
 </html>

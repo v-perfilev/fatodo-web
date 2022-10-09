@@ -11,5 +11,5 @@ export const emailValidator = new AsyncValidator(
     name: 'unique',
     message: (): string => i18n.t('account:fields.email.notUnique'),
     test: async (value): Promise<boolean> => (await UserService.doesEmailExist(value)).data === false,
-  }
+  },
 );

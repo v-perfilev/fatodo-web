@@ -46,7 +46,7 @@ export default class ItemService {
   public static getItemsByGroupId = (
     groupId: string,
     offset?: number,
-    size?: number
+    size?: number,
   ): AxiosPromise<PageableList<Item>> => {
     const url = ItemService.baseUrl + '/items/' + groupId + '/group-id';
     const params = {offset, size};
@@ -56,7 +56,7 @@ export default class ItemService {
   public static getArchivedItemsByGroupId = (
     groupId: string,
     offset?: number,
-    size?: number
+    size?: number,
   ): AxiosPromise<PageableList<Item>> => {
     const url = ItemService.baseUrl + '/items/archived/' + groupId + '/group-id';
     const params = {offset, size};

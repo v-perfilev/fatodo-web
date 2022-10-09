@@ -62,7 +62,7 @@ const withWsChat = (Component: ComponentType): FC => (props: Props): ReactElemen
         WsChatDestinations.MESSAGE_NEW + chatId,
         WsChatDestinations.MESSAGE_UPDATE + chatId,
         WsChatDestinations.MESSAGE_STATUS + chatId,
-        WsChatDestinations.MESSAGE_REACTION + chatId
+        WsChatDestinations.MESSAGE_REACTION + chatId,
       );
     }
     return wsTopics;

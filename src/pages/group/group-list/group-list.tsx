@@ -65,7 +65,7 @@ const GroupList: FC<Props> = (props: Props) => {
         initSizes();
         setSorting(true);
       },
-      allCollapsed ? 0 : 500
+      allCollapsed ? 0 : 500,
     );
   };
 

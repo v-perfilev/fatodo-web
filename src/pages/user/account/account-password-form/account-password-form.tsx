@@ -45,7 +45,7 @@ const formik = withFormik<Props, AccountPasswordFormValues>({
 
   handleSubmit: (
     values: AccountPasswordFormValues,
-    {setSubmitting, resetForm, props}: FormikBag<Props, AccountPasswordFormValues>
+    {setSubmitting, resetForm, props}: FormikBag<Props, AccountPasswordFormValues>,
   ) => {
     const {handleCode, handleResponse} = props;
 

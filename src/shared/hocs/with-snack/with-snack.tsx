@@ -59,7 +59,7 @@ const withSnack = (Component: ComponentType): FC => (props: Props): ReactElement
           : null;
       return snack ? enqueueSnack(snack) : null;
     },
-    [enqueueSnack]
+    [enqueueSnack],
   );
 
   const handleCode = useCallback(
@@ -68,7 +68,7 @@ const withSnack = (Component: ComponentType): FC => (props: Props): ReactElement
       const snack = message ? new SnackBuilder(message).setVariant(variant).build() : null;
       return snack ? enqueueSnack(snack) : null;
     },
-    [enqueueSnack]
+    [enqueueSnack],
   );
 
   useEffect(() => {

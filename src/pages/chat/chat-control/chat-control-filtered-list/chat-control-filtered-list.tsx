@@ -29,7 +29,7 @@ const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Pr
       const combinedChats = updateFunc(chats);
       setChats(combinedChats);
     },
-    [chats]
+    [chats],
   );
 
   const chatUpdater = useCallback(
@@ -44,7 +44,7 @@ const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Pr
       }
       return [...prevState];
     },
-    []
+    [],
   );
 
   const chatRemover = useCallback(
@@ -58,7 +58,7 @@ const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Pr
       }
       return [...prevState];
     },
-    []
+    [],
   );
 
   const lastMessageUpdater = useCallback(
@@ -69,7 +69,7 @@ const ChatControlFilteredList: FC<Props> = ({filter, chat, setChat, account}: Pr
       }
       return [...prevState, lastMessageChat];
     },
-    []
+    [],
   );
 
   const loadFilteredChats = useCallback((filter: string): void => {

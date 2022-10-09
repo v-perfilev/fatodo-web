@@ -5,5 +5,5 @@ export const passwordStrengthMap = ['(?=.*[A-Z])', '(?=.*[a-z])', '(?=.*\\d)'];
 export const passwordStrengthPrefix = '^(';
 export const passwordStrengthPostfix = '.*)$';
 export const passwordStrengthRegex = new RegExp(
-  passwordStrengthPrefix + passwordStrengthMap.reduce((acc, val) => acc + val) + passwordStrengthPostfix
+  passwordStrengthPrefix + passwordStrengthMap.reduce((acc, val) => acc + val) + passwordStrengthPostfix,
 );

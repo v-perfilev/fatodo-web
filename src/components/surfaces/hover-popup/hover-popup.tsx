@@ -48,7 +48,7 @@ export const HoverPopup: FC<Props> = ({AnchorComponent, PopupComponent}: Props) 
 
   const anchor = useMemo(
     () => <AnchorComponent onMouseOver={onBoxOver} onMouseLeave={onBoxLeave} className={classes.root} />,
-    []
+    [],
   );
 
   return (

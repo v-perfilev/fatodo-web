@@ -65,7 +65,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
       setMessages(combinedMessages);
       setItems(combinedItems);
     },
-    [messages, items]
+    [messages, items],
   );
 
   const messageInserter = useCallback(
@@ -76,7 +76,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
         .filter(ArrayUtils.uniqueByIdFilter)
         .sort(ArrayUtils.createdAtComparator);
     },
-    []
+    [],
   );
 
   const ownMessageInserter = useCallback(
@@ -91,7 +91,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
         .filter(ArrayUtils.uniqueByIdFilter)
         .sort(ArrayUtils.createdAtComparator);
     },
-    []
+    [],
   );
 
   const messageUpdater = useCallback(
@@ -103,7 +103,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
       }
       return [...prevState];
     },
-    []
+    [],
   );
 
   const statusesUpdater = useCallback(
@@ -115,7 +115,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
       }
       return [...prevState];
     },
-    []
+    [],
   );
 
   const reactionsUpdater = useCallback(
@@ -127,7 +127,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
       }
       return [...prevState];
     },
-    []
+    [],
   );
 
   // LOADERS
@@ -167,7 +167,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
       const updateFunc = messageInserter(message);
       updateMessagesAndItems(updateFunc);
     },
-    [messages, items]
+    [messages, items],
   );
 
   useImperativeHandle(
@@ -176,7 +176,7 @@ const ChatContentList: FC<Props> = ({chat, account, chatContentListRef}: Props) 
       clearMessages,
       addMessage,
     }),
-    [messages, items]
+    [messages, items],
   );
 
   // EFFECTS

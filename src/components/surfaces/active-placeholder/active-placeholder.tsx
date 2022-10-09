@@ -22,7 +22,7 @@ export const ActivePlaceholder: FC<Props> = (props: Props) => {
     classes.root,
     {[classes.horizontal]: orientation === 'horizontal'},
     {[classes.small]: size === 'sm'},
-    className
+    className,
   );
 
   return (

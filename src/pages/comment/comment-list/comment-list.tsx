@@ -42,7 +42,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
       const combinedComments = updateFunc(comments);
       setComments(combinedComments);
     },
-    [comments]
+    [comments],
   );
 
   const filterComments = (comments: Comment[]): Comment[] =>
@@ -60,7 +60,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
         count: newComments.count,
       };
     },
-    []
+    [],
   );
 
   const commentInserter = useCallback(
@@ -73,7 +73,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
         count: prevState.count + 1,
       };
     },
-    []
+    [],
   );
 
   const ownCommentInserter = useCallback(
@@ -90,7 +90,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
         count: commentInList ? prevState.count : prevState.count + 1,
       };
     },
-    []
+    [],
   );
 
   const commentUpdater = useCallback(
@@ -106,7 +106,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
         count: prevState.count,
       };
     },
-    []
+    [],
   );
 
   const reactionsUpdater = useCallback(
@@ -122,7 +122,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
         count: prevState.count,
       };
     },
-    []
+    [],
   );
 
   // LOADERS
@@ -156,7 +156,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
       const updateFunc = commentInserter(comment);
       updateComments(updateFunc);
     },
-    [comments]
+    [comments],
   );
 
   useImperativeHandle(
@@ -164,7 +164,7 @@ const CommentList: FC<Props> = ({targetId, account, setReference, commentListRef
     (): CommentListMethods => ({
       addComment,
     }),
-    [comments]
+    [comments],
   );
 
   // EFFECTS

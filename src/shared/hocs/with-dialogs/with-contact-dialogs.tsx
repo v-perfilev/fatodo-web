@@ -24,7 +24,7 @@ const withContactDialogs = (Component: ComponentType): FC => (props): ReactEleme
       const props = {show, close} as ContactRequestDialogProps;
       setDialogProps(ContactDialogs.REQUEST, props);
     },
-    [setDialogProps, clearDialogProps]
+    [setDialogProps, clearDialogProps],
   );
 
   const initDialogs = (): void => {

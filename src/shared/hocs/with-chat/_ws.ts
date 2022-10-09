@@ -8,7 +8,7 @@ type SetUnreadMessageMapType = (value: (prevState: Map<string, string[]>) => Map
 export const handleChatLastMessageEvent = (
   event: Chat,
   account: User,
-  setUnreadMessageMap: SetUnreadMessageMapType
+  setUnreadMessageMap: SetUnreadMessageMapType,
 ): void => {
   const isNotEvent = event.lastMessage?.isEvent !== true;
   const isIncoming = event.lastMessage?.userId != account.id;
@@ -32,7 +32,7 @@ export const handleMessageStatusesEvent = (
   event: MessageStatuses,
   account: User,
   unreadMessageMap: Map<string, string[]>,
-  setUnreadMessageMap: SetUnreadMessageMapType
+  setUnreadMessageMap: SetUnreadMessageMapType,
 ): void => {
   const isChatInMap = unreadMessageMap && unreadMessageMap.has(event.chatId);
   const isReadByUser = event.statuses

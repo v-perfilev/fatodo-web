@@ -35,7 +35,7 @@ const withWsComment = (Component: ComponentType): FC => (props: Props): ReactEle
       wsTopics.push(
         WsCommentDestinations.COMMENT_NEW + targetId,
         WsCommentDestinations.COMMENT_UPDATE + targetId,
-        WsCommentDestinations.COMMENT_REACTION + targetId
+        WsCommentDestinations.COMMENT_REACTION + targetId,
       );
     }
     return wsTopics;

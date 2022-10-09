@@ -16,5 +16,5 @@ export const usernameChangeValidator = (currentLogin: string): AsyncValidator =>
       message: (): string => i18n.t('account:fields.username.notUnique'),
       test: async (value): Promise<boolean> =>
         value == currentLogin || (await UserService.doesUsernameExist(value)).data === false,
-    }
+    },
   );

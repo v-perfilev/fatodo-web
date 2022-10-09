@@ -28,7 +28,7 @@ const ChatContentListContainer: FC<Props> = (props: Props) => {
     (index: number): string => {
       return items[index].message?.id || items[index].date || 'spacer';
     },
-    [items]
+    [items],
   );
 
   const visibleItems = useMemo<number[]>(() => {
@@ -53,7 +53,7 @@ const ChatContentListContainer: FC<Props> = (props: Props) => {
       items,
       account,
     }),
-    [visibleItems, items, account]
+    [visibleItems, items, account],
   );
 
   const itemRenderer = useCallback((props: ChatItemProps): ReactElement => <ChatContentRenderer {...props} />, []);

@@ -28,7 +28,7 @@ const withCommentDialogs = (Component: ComponentType): FC => (props): ReactEleme
       const props = {comment, users, show, close} as CommentReactionDialogProps;
       setDialogProps(CommentDialogs.REACTIONS, props);
     },
-    [setDialogProps, updateDialogProps]
+    [setDialogProps, updateDialogProps],
   );
 
   const showCommentEditDialog = useCallback(
@@ -38,7 +38,7 @@ const withCommentDialogs = (Component: ComponentType): FC => (props): ReactEleme
       const props = {comment, show, close} as CommentEditDialogProps;
       setDialogProps(CommentDialogs.EDIT, props);
     },
-    [setDialogProps, updateDialogProps]
+    [setDialogProps, updateDialogProps],
   );
 
   const initDialogs = (): void => {

@@ -22,7 +22,7 @@ const withItemDialogs = (Component: ComponentType): FC => (props): ReactElement 
       const props = {item, show, close, onSuccess} as ItemDeleteDialogProps;
       setDialogProps(ItemDialogs.DELETE, props);
     },
-    [setDialogProps, clearDialogProps]
+    [setDialogProps, clearDialogProps],
   );
 
   const initDialogs = (): void => {

@@ -12,7 +12,7 @@ export default class CommentService {
   public static getAllPageable = (
     targetId: string,
     offset?: number,
-    size?: number
+    size?: number,
   ): AxiosPromise<PageableList<Comment>> => {
     const url = CommentService.baseUrl + '/comments/' + targetId;
     const params = {offset, size};

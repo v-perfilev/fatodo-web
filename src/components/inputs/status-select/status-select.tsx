@@ -37,7 +37,7 @@ export const StatusSelect: FC<Props> = ({statusType, setStatusType, loading}: Pr
           return t('item:statuses.created');
       }
     },
-    [statusType, loading, i18n.language]
+    [statusType, loading, i18n.language],
   );
 
   const iconByStatusType = useCallback(
@@ -55,7 +55,7 @@ export const StatusSelect: FC<Props> = ({statusType, setStatusType, loading}: Pr
           return <StatusCreatedIcon />;
       }
     },
-    [statusType, loading]
+    [statusType, loading],
   );
 
   const openDialog = (e: React.MouseEvent<HTMLElement>): void => {

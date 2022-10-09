@@ -45,7 +45,7 @@ const formik = withFormik<Props, ForgotPasswordFormValues>({
 
   handleSubmit: async (
     values: ForgotPasswordFormValues,
-    {setSubmitting, props}: FormikBag<Props, ForgotPasswordFormValues>
+    {setSubmitting, props}: FormikBag<Props, ForgotPasswordFormValues>,
   ) => {
     const {getToken, handleCode, handleResponse} = props;
     const token = await getToken();

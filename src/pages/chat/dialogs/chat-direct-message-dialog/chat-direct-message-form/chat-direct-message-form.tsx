@@ -53,7 +53,7 @@ const formik = withFormik<Props, ChatDirectMessageValues>({
 
   handleSubmit: (
     values: ChatDirectMessageValues,
-    {props, setSubmitting}: FormikBag<Props, ChatDirectMessageValues>
+    {props, setSubmitting}: FormikBag<Props, ChatDirectMessageValues>,
   ) => {
     const {params, handleCode, handleResponse} = props;
 

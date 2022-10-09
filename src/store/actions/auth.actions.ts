@@ -22,7 +22,7 @@ export const login = (token?: string, rememberMe?: boolean) => async (dispatch):
 };
 
 export const requestAccountData = (onSuccess?: () => void, onFailure?: () => void) => async (
-  dispatch
+  dispatch,
 ): Promise<void> => {
   try {
     const accountResponse = await UserService.getCurrent();

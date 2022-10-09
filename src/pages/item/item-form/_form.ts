@@ -54,7 +54,7 @@ export class ItemFormUtils {
     item: Item,
     group: Group,
     reminders: Reminder[],
-    timezone: string
+    timezone: string,
   ): ItemDTO => {
     const remindersChanged = JSON.stringify(reminders) !== JSON.stringify(values.reminders);
     const deleteReminders = remindersChanged && values.reminders.length === 0;

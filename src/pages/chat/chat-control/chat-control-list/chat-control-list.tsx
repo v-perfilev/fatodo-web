@@ -29,7 +29,7 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
       const combinedChats = updateFunc(chats);
       setChats(combinedChats);
     },
-    [chats]
+    [chats],
   );
 
   const chatInserter = useCallback(
@@ -37,7 +37,7 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
       const combinedChats = [...chats, ...prevState];
       return combinedChats.filter(ArrayUtils.uniqueByIdFilter);
     },
-    []
+    [],
   );
 
   const chatUpdater = useCallback(
@@ -52,7 +52,7 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
       }
       return [...prevState];
     },
-    []
+    [],
   );
 
   const chatRemover = useCallback(
@@ -66,7 +66,7 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
       }
       return [...prevState];
     },
-    []
+    [],
   );
 
   const lastMessageUpdater = useCallback(
@@ -80,7 +80,7 @@ const ChatControlList: FC<Props> = ({chat, setChat, account}: Props) => {
       });
       return [...sortedChats];
     },
-    []
+    [],
   );
 
   // LOADERS

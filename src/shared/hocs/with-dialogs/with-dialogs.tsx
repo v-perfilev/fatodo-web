@@ -61,7 +61,7 @@ const withDialogs = (Component: ComponentType): FC => (props): ReactElement => {
         const props = propsMap.has(name) ? propsMap.get(name) : dialogMap.get(name).defaultProps;
         return <DialogComponent {...props} key={index} />;
       }),
-    [dialogMap, propsMap]
+    [dialogMap, propsMap],
   );
 
   const context = {

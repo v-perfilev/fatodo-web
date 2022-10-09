@@ -36,7 +36,7 @@ const ChatContentFooter: FC<Props> = ({chatId, account, addMessage}: Props) => {
       createdAt: new Date().getTime(),
       createdBy: account.id,
     }),
-    [messageBody]
+    [messageBody],
   );
 
   const dto = useMemo<MessageDTO>(
@@ -44,7 +44,7 @@ const ChatContentFooter: FC<Props> = ({chatId, account, addMessage}: Props) => {
       text: messageBody,
       forwardedMessageId: null,
     }),
-    [messageBody]
+    [messageBody],
   );
 
   const send = (): void => {

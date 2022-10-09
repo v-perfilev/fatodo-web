@@ -38,7 +38,7 @@ const CommentControl: FC<Props> = ({targetId, account, reference, clearReference
       createdAt: new Date().getTime(),
       createdBy: account.id,
     }),
-    [commentBody]
+    [commentBody],
   );
 
   const dto = useMemo<CommentDTO>(
@@ -46,7 +46,7 @@ const CommentControl: FC<Props> = ({targetId, account, reference, clearReference
       text: commentBody,
       referenceId: reference?.id,
     }),
-    [commentBody, reference]
+    [commentBody, reference],
   );
 
   const send = (): void => {

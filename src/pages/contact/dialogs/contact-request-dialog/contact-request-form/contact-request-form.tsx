@@ -67,7 +67,7 @@ const formik = withFormik<Props, ContactRequestFormValues>({
 
   handleSubmit: (
     values: ContactRequestFormValues,
-    {props, setSubmitting}: FormikBag<Props, ContactRequestFormValues>
+    {props, setSubmitting}: FormikBag<Props, ContactRequestFormValues>,
   ) => {
     const {handleCode, handleResponse} = props;
 

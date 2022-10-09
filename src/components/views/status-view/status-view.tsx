@@ -33,7 +33,7 @@ export const StatusView: FC<Props> = ({statusType}: Props) => {
           return t('item:statuses.created');
       }
     },
-    [statusType, i18n.language]
+    [statusType, i18n.language],
   );
 
   const iconByStatusType = useCallback(
@@ -51,7 +51,7 @@ export const StatusView: FC<Props> = ({statusType}: Props) => {
           return <StatusCreatedIcon color="primary" />;
       }
     },
-    [statusType]
+    [statusType],
   );
 
   return (
