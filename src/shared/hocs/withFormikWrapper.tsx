@@ -1,6 +1,6 @@
 import React, {ComponentType, ReactElement, useCallback, useMemo} from 'react';
 import {FormikProps} from 'formik';
-import {InputBaseProps} from 'formik-material-ui';
+import {InputBaseProps} from 'formik-mui';
 
 type WithFormikWrapperProps = InputBaseProps &
   FormikProps<any> & {

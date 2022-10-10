@@ -18,9 +18,8 @@
     "noEmit": true,
     // "incremental": true,                   /* Enable incremental compilation */ // "importHelpers": true,                 /* Import emit helpers from 'tslib'. */ // "downlevelIteration": true,            /* Provide full support for iterables in 'for-of', spread, and destructuring when targeting 'ES5' or 'ES3'. */
     /* Do not emit outputs. */
-    "isolatedModules": true,
-    /* Strict Type-Checking Options */ /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */
-    "strict": true,
+    "isolatedModules": true /* Transpile each file as a separate module (similar to 'ts.transpileModule'). */,
+    /* Strict Type-Checking Options */ "strict": true,
     // "noImplicitAny": true,                 /* Raise error on expressions and declarations with an implied 'any' type. */
     /* Enable all strict type-checking options. */
     "strictNullChecks": false,

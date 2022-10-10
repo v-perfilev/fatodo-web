@@ -6,7 +6,6 @@ import SnackSelectors from '../../store/snack/snackSelectors';
 import {SnackActions} from '../../store/snack/snackActions';
 import {ReduxSnack} from '../../models/Snack';
 import {SnackbarProvider, useSnackbar} from 'notistack';
-import {makeStyles, Theme} from '@material-ui/core/styles';
 
 const withSnackDisplay = (Component: ComponentType) => (props: any) => {
   const dispatch = useAppDispatch();
@@ -56,32 +55,11 @@ const withSnackDisplay = (Component: ComponentType) => (props: any) => {
 };
 
 const withSnackProvider = (Component: ComponentType) => (props: any) => {
-  const classes = snackStyles();
   return (
-    <SnackbarProvider
-      classes={classes}
-      anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
-      autoHideDuration={7000}
-      preventDuplicate
-    >
+    <SnackbarProvider anchorOrigin={{horizontal: 'right', vertical: 'bottom'}} autoHideDuration={7000} preventDuplicate>
       <Component {...props} />
     </SnackbarProvider>
   );
 };
-
-const snackStyles = makeStyles((theme: Theme) => ({
-  variantSuccess: {
-    backgroundColor: theme.palette.success.main + ' !important',
-  },
-  variantError: {
-    backgroundColor: theme.palette.error.main + ' !important',
-  },
-  variantInfo: {
-    backgroundColor: theme.palette.info.main + ' !important',
-  },
-  variantWarning: {
-    backgroundColor: theme.palette.warning.main + ' !important',
-  },
-}));
 
 export default flowRight([memo, withSnackProvider, withSnackDisplay]);

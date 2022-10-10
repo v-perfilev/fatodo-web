@@ -1,37 +1,31 @@
-import {createMuiTheme, Theme} from '@material-ui/core';
 import {bluePalette, defaultTypography, greenPalette, purplePalette, turquoisePalette, yellowPalette} from './sets';
 import {ColorScheme} from './colors';
-import {defaultOverrides} from './overrides';
+import {createTheme, Theme} from '@mui/material';
 
 class ThemeFactory {
-  private static turquoiseTheme = createMuiTheme({
+  private static turquoiseTheme = createTheme({
     palette: turquoisePalette,
     typography: defaultTypography,
-    overrides: defaultOverrides,
   });
 
-  private static yellowTheme = createMuiTheme({
+  private static yellowTheme = createTheme({
     palette: yellowPalette,
     typography: defaultTypography,
-    overrides: defaultOverrides,
   });
 
-  private static purpleTheme = createMuiTheme({
+  private static purpleTheme = createTheme({
     palette: purplePalette,
     typography: defaultTypography,
-    overrides: defaultOverrides,
   });
 
-  private static greenTheme = createMuiTheme({
+  private static greenTheme = createTheme({
     palette: greenPalette,
     typography: defaultTypography,
-    overrides: defaultOverrides,
   });
 
-  private static blueTheme = createMuiTheme({
+  private static blueTheme = createTheme({
     palette: bluePalette,
     typography: defaultTypography,
-    overrides: defaultOverrides,
   });
 
   public static getDefaultTheme = (): Theme => ThemeFactory.turquoiseTheme;

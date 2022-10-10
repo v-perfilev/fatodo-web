@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from 'react';
-import {Badge, SvgIconProps} from '@material-ui/core';
 import UserListIcon from '../UserListIcon';
+import {Badge, SvgIconProps} from '@mui/material';
 
 type BadgeContactIconProps = PropsWithChildren<SvgIconProps> & {
   count: number;

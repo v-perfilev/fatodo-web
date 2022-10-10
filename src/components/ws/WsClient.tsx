@@ -5,7 +5,7 @@ import {useAppSelector} from '../../store/store';
 import AuthSelectors from '../../store/auth/authSelectors';
 import {CompatClient, IMessage, Stomp, StompHeaders, StompSubscription} from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
-import {Box} from '@material-ui/core';
+import {Box} from '@mui/material';
 
 type WsClientProps = {
   active: boolean;

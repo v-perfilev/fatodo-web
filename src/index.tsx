@@ -1,9 +1,9 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import {Box, CssBaseline} from '@material-ui/core';
 import {initI18n} from './shared/i18n';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {flowRight} from 'lodash';
+import {Box, CssBaseline} from '@mui/material';
 
 // import styles
 import 'react-image-crop/dist/ReactCrop.css';
