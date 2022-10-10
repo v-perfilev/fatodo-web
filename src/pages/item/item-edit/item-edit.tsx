@@ -20,7 +20,7 @@ import {flowRight} from 'lodash';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import {PageSpacer} from '../../../components/surfaces';
-import ControlMenu from '../../../components/layouts/control-menu/control-menu';
+import ControlMenu from '../../../components/layouts/ControlMenu';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {useReminderListContext} from '../../../shared/contexts/list-contexts/reminder-list-context';

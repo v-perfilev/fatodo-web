@@ -13,7 +13,7 @@ import ItemService from '../../../services/item.service';
 import {PlusIcon} from '../../../components/icons/PlusIcon';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import {PageSpacer} from '../../../components/surfaces';
-import ControlMenu from '../../../components/layouts/control-menu/control-menu';
+import ControlMenu from '../../../components/layouts/ControlMenu';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Container, ThemeProvider} from '@material-ui/core';
 import {CloseIcon} from '../../../components/icons/CloseIcon';

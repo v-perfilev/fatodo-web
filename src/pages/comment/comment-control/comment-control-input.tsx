@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
-import ReflectableTextInput from '../../../components/inputs/clearable-text-input/reflectable-text-input';
+import ReflectableTextInput from '../../../components/inputs/ReflectableTextInput';
 import {commentControlInputStyles} from './_styles';
 import {Comment} from '../../../models/comment.model';
 

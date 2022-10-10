@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {chatContentFooterInputStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
-import ReflectableTextInput from '../../../../components/inputs/clearable-text-input/reflectable-text-input';
+import ReflectableTextInput from '../../../../components/inputs/ReflectableTextInput';
 
 type Props = {
   send: () => void;

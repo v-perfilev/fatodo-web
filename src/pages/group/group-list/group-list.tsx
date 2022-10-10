@@ -16,7 +16,7 @@ import {useGroupListItemsContext} from '../../../shared/contexts/list-contexts/g
 import GroupListContainer from './group-list-container';
 import ItemService from '../../../services/item.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
-import ControlMenu from '../../../components/layouts/control-menu/control-menu';
+import ControlMenu from '../../../components/layouts/ControlMenu';
 import {PageDivider} from '../../../components/surfaces';
 import {Container} from '@material-ui/core';
 import withSortableGrid from '../../../shared/hocs/with-sortable-grid/with-sortable-grid';

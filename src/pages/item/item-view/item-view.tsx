@@ -27,7 +27,7 @@ import {flowRight} from 'lodash';
 import Comments from '../../comment/comment';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
-import ControlMenu from '../../../components/layouts/control-menu/control-menu';
+import ControlMenu from '../../../components/layouts/ControlMenu';
 import {GroupUtils} from '../../../shared/utils/group.utils';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';

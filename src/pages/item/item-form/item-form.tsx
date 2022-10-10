@@ -17,7 +17,7 @@ import {
   TimeInput,
 } from '../../../components/inputs';
 import {useTranslation} from 'react-i18next';
-import TypeInput from '../../../components/inputs/type-input/type-input';
+import FormikTypeInput from '../../../components/inputs/FormikTypeInput';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
 import {flowRight} from 'lodash';
 import {Reminder} from '../../../models/reminder.model';
@@ -56,7 +56,7 @@ const ItemForm: FC<Props> = (props: Props) => {
             <TextInput name="title" label={t('item:fields.title.label')} required />
           </Grid>
           <Grid item xs={6} lg={3}>
-            <TypeInput name="type" label={t('item:fields.type.label')} />
+            <FormikTypeInput name="type" label={t('item:fields.type.label')} />
           </Grid>
           <Grid item xs={6} lg={3}>
             <PriorityInput name="priority" label={t('item:fields.priority.label')} />

@@ -24,7 +24,7 @@ import {flowRight} from 'lodash';
 import Comments from '../../comment/comment';
 import {MembersIcon} from '../../../components/icons/MembersIcon';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
-import ControlMenu from '../../../components/layouts/control-menu/control-menu';
+import ControlMenu from '../../../components/layouts/ControlMenu';
 import {UserPlusIcon} from '../../../components/icons/UserPlusIcon';
 import {LeaveIcon} from '../../../components/icons/LeaveIcon';
 import {GroupUtils} from '../../../shared/utils/group.utils';

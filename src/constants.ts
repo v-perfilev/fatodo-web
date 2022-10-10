@@ -17,3 +17,6 @@ export const SOCIAL_LOGIN = process.env.SOCIAL_LOGIN;
 
 export const DEVELOPMENT_MODE = process.env.DEVELOPMENT_MODE;
 export const DEBUG_WS = process.env.DEBUG_WS;
+
+// HEADER
+export const HEADER_HEIGHT = 64;
