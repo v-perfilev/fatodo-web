@@ -1,0 +1,89 @@
+{
+  "headers": {
+    "create": "Create group",
+    "edit": "Edit group"
+  },
+  "list": {
+    "groupsNotFound": "No groups yet"
+  },
+  "view": {
+    "itemsNotFound": "No items yet"
+  },
+  "fields": {
+    "title": {
+      "label": "Title",
+      "required": "Required"
+    },
+    "color": {
+      "label": "Color",
+      "required": "Required"
+    },
+    "image": {
+      "label": "Image"
+    }
+  },
+  "actions": {
+    "showAll": "Show all items",
+    "active": "Active",
+    "archived": "Archived",
+    "createItem": "Create item",
+    "groups": "Groups",
+    "view": "Open",
+    "create": "Create",
+    "edit": "Edit",
+    "members": "Members",
+    "addMembers": "Add members",
+    "leave": "Leave",
+    "delete": "Delete",
+    "moveToArchive": "Move to archive",
+    "removeFromArchive": "Remove from archive",
+    "save": "Save",
+    "update": "Update",
+    "cancel": "Cancel"
+  },
+  "menu": {
+    "createGroup": "Create group",
+    "createItem": "Create item",
+    "viewGroup": "View",
+    "editGroup": "Edit",
+    "deleteGroup": "Delete"
+  },
+  "roles": {
+    "admin": "Administrator",
+    "edit": "Editor",
+    "read": "Reader"
+  },
+  "members": {
+    "title": "Group members",
+    "usersNotFound": "Users not found",
+    "buttons": {
+      "addUsers": "Add members"
+    }
+  },
+  "addMembers": {
+    "title": "Add group members",
+    "buttons": {
+      "send": "Add members",
+      "cancel": "Cancel"
+    }
+  },
+  "editMember": {
+    "title": "Edit group member",
+    "buttons": {
+      "send": "Edit member",
+      "cancel": "Cancel"
+    }
+  },
+  "removeMember": {
+    "title": "Remove user from group",
+    "text": "Are you sure you want to delete user {{username}} from group?"
+  },
+  "leaveGroup": {
+    "title": "Leave group",
+    "text": "Are you sure you want to leave the group \"{{title}}\"?"
+  },
+  "deleteGroup": {
+    "title": "Delete group",
+    "text": "Are you sure you want to delete the group \"{{title}}\"?"
+  }
+}

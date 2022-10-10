@@ -1,5 +1,5 @@
 import timezone from 'moment-timezone';
-import {DateFormatters} from './utils/date.utils';
+import {DateFormatters} from './utils/DateFormatters';
 
 const deprecatedTimeZones = [
   'UCT',
@@ -22,10 +22,9 @@ const deprecatedTimeZones = [
 ];
 const deprecatedTimeZonesRegex = `^${deprecatedTimeZones.join('|^')}`;
 
-export const TIMEZONE_MAP = timezone.tz
+export const timezones = timezone.tz
   .names()
   .filter((timezone) => timezone.indexOf('/') > 0)
   .filter((timezone) => timezone.startsWith('A') || !new RegExp(deprecatedTimeZonesRegex).test(timezone))
   .sort((timezoneA, timezoneB) => timezoneA.localeCompare(timezoneB))
-  .sort((timezoneA, timezoneB) => (DateFormatters.formatZ(timezoneA) > DateFormatters.formatZ(timezoneB) ? 1 : -1))
-  .reduce((map, tz) => map.set(tz, DateFormatters.formatTimezone(tz)), new Map());
+  .sort((timezoneA, timezoneB) => (DateFormatters.formatZ(timezoneA) > DateFormatters.formatZ(timezoneB) ? 1 : -1));

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon, IconProps} from '../surfaces';
+import Icon, {IconProps} from '../surfaces/Icon';
 
 const LikeIcon = (props: IconProps) => (
   <Icon {...props}>

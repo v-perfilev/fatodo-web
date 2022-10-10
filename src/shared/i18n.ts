@@ -1,41 +1,45 @@
 import i18next from 'i18next';
-import backend from 'i18next-http-backend';
-import detector from 'i18next-browser-languagedetector';
 import {initReactI18next} from 'react-i18next';
+import detector from 'i18next-browser-languagedetector';
+import backend from 'i18next-http-backend';
 
-export const LANGUAGES = [
+require('moment/locale/en-gb.js');
+require('moment/locale/ru.js');
+
+export const languages = [
   {
     name: 'English',
-    code: 'en',
+    code: 'EN',
   },
   {
     name: 'Русский',
-    code: 'ru',
+    code: 'RU',
   },
 ];
 
-export const LANGUAGE_MAP = LANGUAGES.reduce((map, lang) => map.set(lang.code, lang.name), new Map());
-
-export const initLanguages = i18next
+export const initI18n = i18next
   .use(detector)
   .use(backend)
   .use(initReactI18next)
   .init({
     debug: false,
-    whitelist: ['en', 'ru'],
-    fallbackLng: 'en',
+    compatibilityJSON: 'v3',
+    fallbackLng: 'EN',
     ns: [
-      'translation',
-      'feedback',
-      'snack',
-      'static',
-      'common',
       'account',
-      'group',
-      'item',
-      'contact',
+      'calendar',
       'chat',
       'comment',
+      'common',
+      'contact',
+      'event',
+      'feedback',
+      'group',
+      'item',
+      'push',
+      'snack',
+      'translation',
+      'user',
     ],
     defaultNS: 'translation',
     load: 'languageOnly',
@@ -45,6 +49,7 @@ export const initLanguages = i18next
     interpolation: {
       escapeValue: false, // react already safes from xss
     },
-  });
+  })
+  .finally();
 
 export default i18next;

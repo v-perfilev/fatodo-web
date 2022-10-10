@@ -1,10 +1,10 @@
 import React, {HTMLAttributes} from 'react';
 import {Avatar, Theme} from '@material-ui/core';
 import csx from 'classnames';
-import {ImageUtils} from '../../shared/utils/image.utils';
 import FallbackPic from './FallbackPic';
 import {FALLBACK_AVATAR} from '../../constants';
 import {makeStyles} from '@material-ui/core/styles';
+import {ImageUtils} from '../../shared/utils/ImageUtils';
 
 export type PicSizeType = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
@@ -20,7 +20,7 @@ type UrlPicProps = HTMLAttributes<HTMLElement> & {
 const UrlPic = ({url, alt, size = 'sm', border = 0, variant, invertedBorder, className}: UrlPicProps) => {
   const classes = urlPicStyles();
 
-  const getRemoteImage = (): string => (size === 'lg' ? ImageUtils.getImage(url) : ImageUtils.getThumbnail(url));
+  const getRemoteImage = (): string => ImageUtils.buildImageUri(url, size !== 'lg');
   const src = url ? getRemoteImage() : FALLBACK_AVATAR;
 
   const sizeClassName = csx(

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon, IconProps} from '../surfaces';
+import Icon, {IconProps} from '../surfaces/Icon';
 
 const StatusWipIcon = (props: IconProps) => (
   <Icon {...props}>

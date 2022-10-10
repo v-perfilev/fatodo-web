@@ -1,0 +1,19 @@
+{
+  "commonGroups": {
+    "header": "Общие группы",
+    "noCommonGroups": "У вас нет общих групп"
+  },
+  "commonContacts": {
+    "header": "Общие контакты",
+    "noCommonContacts": "У вас нет общих контактов"
+  },
+  "actions": {
+    "sendContactRequest": "Добавить в список контактов",
+    "acceptContactRequest": "Принять запрос",
+    "declineContactRequest": "Отклонить запрос",
+    "cancelContactRequest": "Отменить запрос",
+    "waitContactAccepting": "Ожидание подтверждения",
+    "removeContact": "Удалить контакт",
+    "sendMessage": "Отправить сообщение"
+  }
+}

@@ -1,22 +1,32 @@
+export const IS_DEVELOPMENT = Boolean(process.env.DEVELOPMENT_MODE);
+
+// API
 export const BASE_URL = process.env.BASE_URL;
 export const API_URL = process.env.API_URL;
 export const LANDING_URL = process.env.LANDING_URL;
+export const IMAGE_URL = API_URL + '/api/image/store/';
 export const WS_URL = API_URL + '/ws/';
-export const IMAGE_API_URL = API_URL + '/api/image/store/';
+export const WS_ROOT_TOPIC = '/user/topic/root';
 
-export const FALLBACK_AVATAR = '/images/fallback.jpg';
-
+// TIMEOUTS
 export const API_TIMEOUT = 60 * 1000;
 export const LOADER_TIMEOUT = 500;
+
+// AUTHORIZATION
+export const RECAPTCHA_KEY = process.env.RECAPTCHA_KEY;
+export const SOCIAL_LOGIN = process.env.SOCIAL_LOGIN;
 
 export const AUTHORIZATION_HEADER = 'authorization';
 export const AUTHORIZATION_PREFIX = 'Bearer ';
 
-export const RECAPTCHA_KEY = process.env.RECAPTCHA_KEY;
-export const SOCIAL_LOGIN = process.env.SOCIAL_LOGIN;
-
-export const DEVELOPMENT_MODE = process.env.DEVELOPMENT_MODE;
-export const DEBUG_WS = process.env.DEBUG_WS;
-
 // HEADER
 export const HEADER_HEIGHT = 64;
+
+// IMAGES
+export const FALLBACK_AVATAR = '/images/fallback.jpg';
+
+// CALENDAR
+export const CALENDAR_LOAD_INDENT = 5;
+
+// BUILDERS
+export const ID_STUB = 'ID_STUB';

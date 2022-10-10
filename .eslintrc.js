@@ -31,6 +31,7 @@ module.exports = {
     'valid-jsdoc': 'off',
     'require-jsdoc': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
     'max-len': ['error', {code: 120}],

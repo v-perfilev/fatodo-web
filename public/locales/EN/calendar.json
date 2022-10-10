@@ -1,0 +1,13 @@
+{
+  "list": {
+    "dateNotSelected": "Date not selected",
+    "noReminders": "No reminders on selected date"
+  },
+  "selectMonth": {
+    "title": "Select month",
+    "buttons": {
+      "send": "Select",
+      "cancel": "Cancel"
+    }
+  }
+}

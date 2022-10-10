@@ -1,0 +1,42 @@
+{
+  "routes": {
+    "Groups": "Groups",
+    "Calendar": "Calendar",
+    "Events": "Events",
+    "Contacts": "Contacts",
+    "Chats": "Chats",
+    "GroupList": "Groups",
+    "GroupView": "Group",
+    "GroupCreate": "Create group",
+    "GroupEdit": "Edit group",
+    "ItemView": "Item",
+    "ItemCreate": "Create item",
+    "ItemEdit": "Edit item",
+    "ContactList": "Contacts",
+    "IncomingRequestList": "Incoming requests",
+    "OutcomingRequestList": "Outcoming requests",
+    "ChatList": "Chats",
+    "ChatView": "Chat",
+    "CommentList": "Comments",
+    "AccountForm": "Edit account",
+    "AccountSettingsForm": "Edit settings",
+    "AccountChangePasswordForm": "Change password",
+    "UserView": "User",
+    "EventList": "Events",
+    "CalendarView": "Calendar"
+  },
+  "buttons": {
+    "agree": "Agree",
+    "disagree": "Disagree"
+  },
+  "inputs": {
+    "search": "Search",
+    "filter": "Filter"
+  },
+  "salutations": {
+    "you": "You"
+  },
+  "additional": {
+    "fieldNotSet": "Not set"
+  }
+}
