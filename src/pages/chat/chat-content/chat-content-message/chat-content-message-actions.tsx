@@ -1,17 +1,17 @@
 import React, {FC, MouseEvent, useCallback, useRef, useState} from 'react';
 import {Box, IconButton} from '@material-ui/core';
-import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
+import {DotsVerticalIcon} from '../../../../components/icons/DotsVerticalIcon';
 import {PopupMenu, PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
-import {DeleteIcon} from '../../../../components/icons/delete-icon';
+import {DeleteIcon} from '../../../../components/icons/DeleteIcon';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {Message} from '../../../../models/message.model';
-import {ReactionsIcon} from '../../../../components/icons/reactions-icon';
+import {ReactionsIcon} from '../../../../components/icons/ReactionsIcon';
 import ChatService from '../../../../services/chat.service';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
-import {EyeIcon} from '../../../../components/icons/eye-icon';
-import {EditIcon} from '../../../../components/icons/edit-icon';
+import {EyeIcon} from '../../../../components/icons/EyeIcon';
+import {EditIcon} from '../../../../components/icons/EditIcon';
 
 type Props = {
   message: Message;

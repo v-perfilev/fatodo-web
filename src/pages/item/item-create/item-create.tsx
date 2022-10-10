@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Routes} from '../../router';
-import {CheckIcon} from '../../../components/icons/check-icon';
-import {CloseIcon} from '../../../components/icons/close-icon';
+import {CheckIcon} from '../../../components/icons/CheckIcon';
+import {CloseIcon} from '../../../components/icons/CloseIcon';
 import {useHistory, useParams} from 'react-router-dom';
 import ItemService from '../../../services/item.service';
 import ItemForm from '../item-form/item-form';

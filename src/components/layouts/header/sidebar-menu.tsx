@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Box, Divider, Fab, SwipeableDrawer, Toolbar} from '@material-ui/core';
-import {ArrowRightIcon} from '../../icons/arrow-right-icon';
+import {ArrowRightIcon} from '../../icons/ArrowRightIcon';
 import VerticalMenu from './vertical-menu';
 import {sidebarMenuStyles} from './_styles';
 import {LanguageSelect} from '../../controls';

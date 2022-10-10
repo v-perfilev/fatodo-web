@@ -4,18 +4,18 @@ import {Box, List, ListItem, ListItemIcon, ListItemText} from '@material-ui/core
 import {useTranslation} from 'react-i18next';
 import {sidebarMenuStyles} from './_styles';
 import {AuthState} from '../../../store/rerducers/auth.reducer';
-import {LogoutIcon} from '../../icons/logout-icon';
-import {LoginIcon} from '../../icons/login-icon';
-import {SignUpIcon} from '../../icons/signup-icon';
-import {AccountIcon} from '../../icons/account-icon';
+import {LogoutIcon} from '../../icons/LogoutIcon';
+import {LoginIcon} from '../../icons/LoginIcon';
+import {SignUpIcon} from '../../icons/SignUpIcon';
+import {AccountIcon} from '../../icons/AccountIcon';
 import CurrentUser from '../current-user/current-user';
 import {useUnreadMessagesContext} from '../../../shared/contexts/chat-contexts/unread-messages-context';
-import BadgeMessageIcon from '../../icons/badge-icons/badge-message-icon';
+import BadgeMessageIcon from '../../icons/badgeIcons/BadgeMessageIcon';
 import {RedirectMap} from './type';
 import withAuthState from '../../../shared/hocs/with-auth-state/with-auth-state';
-import {GroupsIcon} from '../../icons/groups-icon';
+import {GroupsIcon} from '../../icons/GroupsIcon';
 import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
-import BadgeContactInfo from '../../icons/badge-icons/badge-contact-icon';
+import BadgeContactInfo from '../../icons/badgeIcons/BadgeContactIcon';
 
 type BaseProps = {
   redirectMap: RedirectMap;

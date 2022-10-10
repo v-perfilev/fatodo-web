@@ -3,7 +3,7 @@ import {Field, useFormikContext} from 'formik';
 import {TimePicker} from 'formik-material-ui-pickers';
 import {DateConverters, DateFormats} from '../../../shared/utils/date.utils';
 import {IconButton} from '@material-ui/core';
-import {CloseIcon} from '../../icons/close-icon';
+import {CloseIcon} from '../../icons/CloseIcon';
 import {Moment} from 'moment';
 
 type Props = {

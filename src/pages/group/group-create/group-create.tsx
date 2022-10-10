@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import GroupForm from '../group-form/group-form';
-import {CheckIcon} from '../../../components/icons/check-icon';
-import {CloseIcon} from '../../../components/icons/close-icon';
+import {CheckIcon} from '../../../components/icons/CheckIcon';
+import {CloseIcon} from '../../../components/icons/CloseIcon';
 import {Routes} from '../../router';
 import {useHistory} from 'react-router-dom';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';

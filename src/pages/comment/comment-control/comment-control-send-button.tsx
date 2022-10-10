@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {FC} from 'react';
 import {Fab} from '@material-ui/core';
-import {SendMessageIcon} from '../../../components/icons/send-message-icon';
+import {SendMessageIcon} from '../../../components/icons/SendMessageIcon';
 import {commentControlSendButtonStyles} from './_styles';
 
 type Props = {

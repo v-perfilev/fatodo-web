@@ -9,7 +9,7 @@ export const ACTION_TYPES = {
   CLEAR_AUTH: 'authState/CLEAR_AUTH',
 };
 
-export const clearAuth = () => (dispatch): void => {
+export const clearAuth = () => (dispatch: any): void => {
   SecurityUtils.clearAuthToken();
   dispatch({type: ACTION_TYPES.CLEAR_AUTH});
 };

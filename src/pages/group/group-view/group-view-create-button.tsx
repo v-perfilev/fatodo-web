@@ -3,7 +3,7 @@ import {FC, useCallback, useMemo} from 'react';
 import {Box} from '@material-ui/core';
 import {groupViewCreateButtonStyles} from './_styles';
 import {ActivePlaceholder} from '../../../components/surfaces';
-import {PlusIcon} from '../../../components/icons/plus-icon';
+import {PlusIcon} from '../../../components/icons/PlusIcon';
 import {ItemRouteUtils} from '../../item/_router';
 import {Group} from '../../../models/group.model';
 import {useHistory} from 'react-router-dom';

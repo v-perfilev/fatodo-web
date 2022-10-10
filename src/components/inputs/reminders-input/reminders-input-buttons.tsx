@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {IconButton} from '@material-ui/core';
-import {CloseIcon} from '../../icons/close-icon';
+import {CloseIcon} from '../../icons/CloseIcon';
 
 type Props = {
   clearReminders: (event) => void;

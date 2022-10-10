@@ -3,7 +3,7 @@ import {FC, useState} from 'react';
 import {AppBar, Hidden, IconButton, Slide, Toolbar, useScrollTrigger} from '@material-ui/core';
 import HorizontalMenu from './horizontal-menu';
 import {headerStyles} from './_styles';
-import {MenuIcon} from '../../icons/menu-icon';
+import {MenuIcon} from '../../icons/MenuIcon';
 import {LogoWithText} from '../logo/logo';
 import {SidebarMenu} from './sidebar-menu';
 import {logout} from '../../../store/actions/auth.actions';

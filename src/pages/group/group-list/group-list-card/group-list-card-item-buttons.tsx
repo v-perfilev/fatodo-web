@@ -2,7 +2,7 @@ import React, {FC, memo, useCallback, useRef, useState} from 'react';
 import {Box, IconButton, Theme, useMediaQuery} from '@material-ui/core';
 import {Item} from '../../../../models/item.model';
 import {ItemRouteUtils} from '../../../item/_router';
-import {EyeIcon} from '../../../../components/icons/eye-icon';
+import {EyeIcon} from '../../../../components/icons/EyeIcon';
 import {useHistory} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {
@@ -12,7 +12,7 @@ import {
   TooltipIconButton,
   TooltipIconButtonProps,
 } from '../../../../components/surfaces';
-import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
+import {DotsVerticalIcon} from '../../../../components/icons/DotsVerticalIcon';
 
 type ButtonProps = {
   menuItems: TooltipIconButtonProps[];

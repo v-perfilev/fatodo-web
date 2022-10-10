@@ -5,13 +5,13 @@ import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/gro
 import {Box, Button} from '@material-ui/core';
 import {groupListCardInfoStyles} from './_styles';
 import {BoxWithIcon} from '../../../../components/surfaces';
-import {ItemsIcon} from '../../../../components/icons/items-icon';
+import {ItemsIcon} from '../../../../components/icons/ItemsIcon';
 import {useTranslation} from 'react-i18next';
 import {ItemRouteUtils} from '../../../item/_router';
-import {EyeIcon} from '../../../../components/icons/eye-icon';
+import {EyeIcon} from '../../../../components/icons/EyeIcon';
 import {GroupRouteUtils} from '../../_router';
 import {useHistory} from 'react-router-dom';
-import {PlusIcon} from '../../../../components/icons/plus-icon';
+import {PlusIcon} from '../../../../components/icons/PlusIcon';
 
 type Props = {
   items: Item[];

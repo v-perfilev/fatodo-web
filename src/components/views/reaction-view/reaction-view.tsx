@@ -2,8 +2,8 @@ import * as React from 'react';
 import {FC, ReactElement} from 'react';
 import {Box} from '@material-ui/core';
 import {MessageReactionType} from '../../../models/message.model';
-import {LikeIcon} from '../../icons/like-icon';
-import {DislikeIcon} from '../../icons/dislike-icon';
+import {LikeIcon} from '../../icons/LikeIcon';
+import {DislikeIcon} from '../../icons/DislikeIcon';
 import {IconProps} from '../../surfaces';
 import {CommentReactionType} from '../../../models/comment.model';
 

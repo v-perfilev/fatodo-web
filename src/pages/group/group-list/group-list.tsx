@@ -2,9 +2,9 @@ import * as React from 'react';
 import {FC, MutableRefObject, useEffect, useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {GroupRouteUtils} from '../_router';
-import {ReorderIcon} from '../../../components/icons/reorder-icon';
+import {ReorderIcon} from '../../../components/icons/ReorderIcon';
 import {useTranslation} from 'react-i18next';
-import {PlusIcon} from '../../../components/icons/plus-icon';
+import {PlusIcon} from '../../../components/icons/PlusIcon';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import withGroupList from '../../../shared/hocs/with-list/with-group-list';
 import {useGroupListContext} from '../../../shared/contexts/list-contexts/group-list-context';
@@ -22,10 +22,10 @@ import {Container} from '@material-ui/core';
 import withSortableGrid from '../../../shared/hocs/with-sortable-grid/with-sortable-grid';
 import {SortProps} from '../../../shared/hocs/with-sortable-grid/types';
 import {groupListStyles} from './_styles';
-import {CheckIcon} from '../../../components/icons/check-icon';
-import {CloseIcon} from '../../../components/icons/close-icon';
-import {ArrowUpIcon} from '../../../components/icons/arrow-up-icon';
-import {ArrowDownIcon} from '../../../components/icons/arrow-down-icon';
+import {CheckIcon} from '../../../components/icons/CheckIcon';
+import {CloseIcon} from '../../../components/icons/CloseIcon';
+import {ArrowUpIcon} from '../../../components/icons/ArrowUpIcon';
+import {ArrowDownIcon} from '../../../components/icons/ArrowDownIcon';
 
 type Props = SortProps;
 

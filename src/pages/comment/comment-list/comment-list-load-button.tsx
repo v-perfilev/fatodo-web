@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {commentListLoadButtonStyles} from './_styles';
 import {Box} from '@material-ui/core';
 import {LoadingButton} from '../../../components/controls';
-import {RefreshIcon} from '../../../components/icons/refresh-icon';
+import {RefreshIcon} from '../../../components/icons/RefreshIcon';
 import {useTranslation} from 'react-i18next';
 
 type Props = {

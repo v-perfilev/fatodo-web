@@ -8,8 +8,8 @@ import withBackground from '../../shared/hocs/with-background/with-background';
 import {useHistory, useLocation} from 'react-router-dom';
 import {Routes} from '../router';
 import AuthService from '../../services/auth.service';
-import {HomeIcon} from '../../components/icons/home-icon';
-import {EmailIcon} from '../../components/icons/email-icon';
+import {HomeIcon} from '../../components/icons/HomeIcon';
+import {EmailIcon} from '../../components/icons/EmailIcon';
 import {LoadingButton} from '../../components/controls';
 import {flowRight} from 'lodash';
 
@@ -69,7 +69,7 @@ const NotActivated: FC<Props> = ({timer, resetTimer}: Props) => {
         {t('buttons.sendActivationCode')}
       </LoadingButton>
       <Box m={2} />
-      <LoadingButton startIcon={<HomeIcon />} onClick={resetTimer}>
+      <LoadingButton startIcon={<HomIcon />} onClick={resetTimer}>
         {t('buttons.toHomePage')}
       </LoadingButton>
     </Box>

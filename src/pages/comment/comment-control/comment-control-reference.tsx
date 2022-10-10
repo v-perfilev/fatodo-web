@@ -7,7 +7,7 @@ import {useUserListContext} from '../../../shared/contexts/list-contexts/user-li
 import {User} from '../../../models/user.model';
 import {CommentUtils} from '../../../shared/utils/comment.utils';
 import {DateFormatters} from '../../../shared/utils/date.utils';
-import {CloseIcon} from '../../../components/icons/close-icon';
+import {CloseIcon} from '../../../components/icons/CloseIcon';
 
 type Props = {
   reference?: Comment;

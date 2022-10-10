@@ -3,7 +3,7 @@ import {Box, Fab} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {contactMainHeaderStyles} from './_styles';
 import {ClearableTextInput} from '../../../components/inputs';
-import {PlusIcon} from '../../../components/icons/plus-icon';
+import {PlusIcon} from '../../../components/icons/PlusIcon';
 import {useContactDialogContext} from '../../../shared/contexts/dialog-contexts/contact-dialog-context';
 import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
 import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';

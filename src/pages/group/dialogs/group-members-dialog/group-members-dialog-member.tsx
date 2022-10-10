@@ -5,13 +5,13 @@ import {PermissionView, UserView} from '../../../../components/views';
 import {groupMembersDialogMemberStyles} from './_styles';
 import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
-import ConfirmationDialog from '../../../../components/dialogs/confirmation-dialog/confirmation-dialog';
+import ConfirmationDialog from '../../../../components/dialogs/ConfirmationDialog';
 import {useTranslation} from 'react-i18next';
-import {UserMinusIcon} from '../../../../components/icons/user-minus-icon';
+import {UserMinusIcon} from '../../../../components/icons/UserMinusIcon';
 import {Group, GroupUser} from '../../../../models/group.model';
 import ItemService from '../../../../services/item.service';
 import {GroupUtils} from '../../../../shared/utils/group.utils';
-import {EditIcon} from '../../../../components/icons/edit-icon';
+import {EditIcon} from '../../../../components/icons/EditIcon';
 import {TooltipIconButton, TooltipIconButtonProps} from '../../../../components/surfaces';
 
 type BaseProps = {

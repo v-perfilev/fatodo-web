@@ -5,7 +5,7 @@ import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/with-redi
 import {useTranslation} from 'react-i18next';
 import {staticPageStyles} from './_styles';
 import withBackground from '../../shared/hocs/with-background/with-background';
-import {HomeIcon} from '../../components/icons/home-icon';
+import {HomeIcon} from '../../components/icons/HomeIcon';
 import {flowRight} from 'lodash';
 
 type Props = RedirectTimerProps;
@@ -26,7 +26,7 @@ const InternalError: FC<Props> = ({timer, resetTimer}: Props) => {
       <Box m={2} />
       <Typography>{t('static:redirectToHome.message', {count: timer})}</Typography>
       <Box m={2} />
-      <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
+      <Button variant="contained" color="primary" size="large" startIcon={<HomIcon />} onClick={resetTimer}>
         {t('buttons.toHomePage')}
       </Button>
     </Box>

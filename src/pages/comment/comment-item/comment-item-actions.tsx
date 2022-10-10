@@ -5,13 +5,13 @@ import {Comment} from '../../../models/comment.model';
 import {useUserListContext} from '../../../shared/contexts/list-contexts/user-list-context';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import CommentService from '../../../services/comment.service';
-import {DotsVerticalIcon} from '../../../components/icons/dots-vertical-icon';
+import {DotsVerticalIcon} from '../../../components/icons/DotsVerticalIcon';
 import {PopupMenu, PopupMenuItem, PopupMenuItemProps} from '../../../components/surfaces';
-import {ReactionsIcon} from '../../../components/icons/reactions-icon';
-import {DeleteIcon} from '../../../components/icons/delete-icon';
+import {ReactionsIcon} from '../../../components/icons/ReactionsIcon';
+import {DeleteIcon} from '../../../components/icons/DeleteIcon';
 import {useCommentDialogContext} from '../../../shared/contexts/dialog-contexts/comment-dialog-context';
-import {EditIcon} from '../../../components/icons/edit-icon';
-import {ReplyIcon} from '../../../components/icons/reply-icon';
+import {EditIcon} from '../../../components/icons/EditIcon';
+import {ReplyIcon} from '../../../components/icons/ReplyIcon';
 
 type Props = {
   comment: Comment;

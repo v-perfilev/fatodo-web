@@ -1,19 +1,19 @@
 import React, {FC, memo, useCallback, useRef, useState} from 'react';
 import {Box, IconButton, Theme, useMediaQuery} from '@material-ui/core';
-import {EditIcon} from '../../../../components/icons/edit-icon';
-import {DeleteIcon} from '../../../../components/icons/delete-icon';
+import {EditIcon} from '../../../../components/icons/EditIcon';
+import {DeleteIcon} from '../../../../components/icons/DeleteIcon';
 import {Item} from '../../../../models/item.model';
 import {ItemRouteUtils} from '../../../item/_router';
 import {useHistory} from 'react-router-dom';
 import {useItemDialogContext} from '../../../../shared/contexts/dialog-contexts/item-dialog-context';
-import {PackageUpIcon} from '../../../../components/icons/package-up-icon';
-import {PackageDownIcon} from '../../../../components/icons/package-down-icon';
+import {PackageUpIcon} from '../../../../components/icons/PackageUpIcon';
+import {PackageDownIcon} from '../../../../components/icons/PackageDownIcon';
 import ItemService from '../../../../services/item.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {useItemListContext} from '../../../../shared/contexts/list-contexts/item-list-context';
 import {useArchivedItemListContext} from '../../../../shared/contexts/list-contexts/archived-item-list-context';
 import {useTranslation} from 'react-i18next';
-import {EyeIcon} from '../../../../components/icons/eye-icon';
+import {EyeIcon} from '../../../../components/icons/EyeIcon';
 import {
   PopupMenu,
   PopupMenuItem,
@@ -21,7 +21,7 @@ import {
   TooltipIconButton,
   TooltipIconButtonProps,
 } from '../../../../components/surfaces';
-import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
+import {DotsVerticalIcon} from '../../../../components/icons/DotsVerticalIcon';
 
 type ButtonProps = {
   menuItems: TooltipIconButtonProps[];

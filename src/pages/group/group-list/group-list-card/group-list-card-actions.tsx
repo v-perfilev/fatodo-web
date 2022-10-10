@@ -1,6 +1,6 @@
 import React, {FC, MouseEvent, useRef, useState} from 'react';
 import {Box, IconButton} from '@material-ui/core';
-import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
+import {DotsVerticalIcon} from '../../../../components/icons/DotsVerticalIcon';
 import {PopupMenu, PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces';
 import {useHistory} from 'react-router-dom';
 import {GroupRouteUtils} from '../../_router';
@@ -10,10 +10,10 @@ import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/gro
 import {useTranslation} from 'react-i18next';
 import {useGroupDialogContext} from '../../../../shared/contexts/dialog-contexts/group-dialog-context';
 import {GroupUtils} from '../../../../shared/utils/group.utils';
-import {EyeIcon} from '../../../../components/icons/eye-icon';
-import {EditIcon} from '../../../../components/icons/edit-icon';
-import {DeleteIcon} from '../../../../components/icons/delete-icon';
-import {PlusIcon} from '../../../../components/icons/plus-icon';
+import {EyeIcon} from '../../../../components/icons/EyeIcon';
+import {EditIcon} from '../../../../components/icons/EditIcon';
+import {DeleteIcon} from '../../../../components/icons/DeleteIcon';
+import {PlusIcon} from '../../../../components/icons/PlusIcon';
 import {UserAccount} from '../../../../models/user.model';
 import {groupListCardActionsStyles} from './_styles';
 

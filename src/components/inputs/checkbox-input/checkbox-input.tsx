@@ -2,7 +2,7 @@ import React, {FC, HTMLAttributes} from 'react';
 import {Box} from '@material-ui/core';
 import {checkboxInputStyles} from './_styles';
 import csx from 'classnames';
-import {CheckIcon} from '../../icons/check-icon';
+import {CheckIcon} from '../../icons/CheckIcon';
 
 type Props = HTMLAttributes<HTMLElement> & {
   isSelected: boolean;

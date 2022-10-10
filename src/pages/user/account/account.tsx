@@ -4,7 +4,7 @@ import {Container} from '@material-ui/core';
 import {PageDivider} from '../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
-import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
+import {ArrowBackIcon} from '../../../components/icons/ArrowBackIcon';
 import {useHistory} from 'react-router-dom';
 import {RootState} from '../../../store';
 import {AuthState} from '../../../store/rerducers/auth.reducer';

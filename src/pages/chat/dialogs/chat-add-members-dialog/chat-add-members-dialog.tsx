@@ -7,7 +7,7 @@ import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {LoadingButton} from '../../../../components/controls';
 import UsersSelect from '../../../../components/surfaces/users-select/users-select';
 import {useContactContext} from '../../../../shared/contexts/contact-contexts/contact-context';
-import ModalDialog from '../../../../components/dialogs/modal-dialog/modal-dialog';
+import ModalDialog from '../../../../components/dialogs/ModalDialog';
 
 export type ChatAddMembersDialogProps = {
   chat: Chat;

@@ -2,8 +2,8 @@ import React, {FC, useState} from 'react';
 import {Field, FieldAttributes} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {IconButton, InputAdornment} from '@material-ui/core';
-import {VisibilityOnIcon} from '../../icons/visibility-on-icon';
-import {VisibilityOffIcon} from '../../icons/visibility-off-icon';
+import {VisibilityOnIcon} from '../../icons/VisibilityOnIcon';
+import {VisibilityOffIcon} from '../../icons/VisibilityOffIcon';
 
 type Props = FieldAttributes<any> & {
   name: string;

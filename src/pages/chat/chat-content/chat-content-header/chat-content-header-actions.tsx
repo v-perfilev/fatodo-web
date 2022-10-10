@@ -2,20 +2,20 @@ import React, {FC, MouseEvent, useRef, useState} from 'react';
 import {Box, IconButton, Theme, useMediaQuery} from '@material-ui/core';
 import {chatContentHeaderActionsStyles} from './_styles';
 import {Chat} from '../../../../models/chat.model';
-import {DotsVerticalIcon} from '../../../../components/icons/dots-vertical-icon';
+import {DotsVerticalIcon} from '../../../../components/icons/DotsVerticalIcon';
 import {PopupMenu} from '../../../../components/surfaces';
 import {useTranslation} from 'react-i18next';
-import {DeleteIcon} from '../../../../components/icons/delete-icon';
-import {BroomIcon} from '../../../../components/icons/broom-icon';
-import {LeaveIcon} from '../../../../components/icons/leave-icon';
-import {MembersIcon} from '../../../../components/icons/members-icon';
-import {UserPlusIcon} from '../../../../components/icons/user-plus-icon';
+import {DeleteIcon} from '../../../../components/icons/DeleteIcon';
+import {BroomIcon} from '../../../../components/icons/BroomIcon';
+import {LeaveIcon} from '../../../../components/icons/LeaveIcon';
+import {MembersIcon} from '../../../../components/icons/MembersIcon';
+import {UserPlusIcon} from '../../../../components/icons/UserPlusIcon';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
-import {EditIcon} from '../../../../components/icons/edit-icon';
+import {EditIcon} from '../../../../components/icons/EditIcon';
 import {useUserListContext} from '../../../../shared/contexts/list-contexts/user-list-context';
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
-import {MessageIcon} from '../../../../components/icons/message-icon';
+import {MessageIcon} from '../../../../components/icons/MessageIcon';
 import {PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces';
 
 type Props = {

@@ -16,8 +16,8 @@ import {useChatDialogContext} from '../../../shared/contexts/dialog-contexts/cha
 import ChatService from '../../../services/chat.service';
 import {useSnackContext} from '../../../shared/contexts/snack-context';
 import {ChatRouteUtils} from '../_router';
-import {PlusIcon} from '../../../components/icons/plus-icon';
-import {ArrowBackIcon} from '../../../components/icons/arrow-back-icon';
+import {PlusIcon} from '../../../components/icons/PlusIcon';
+import {ArrowBackIcon} from '../../../components/icons/ArrowBackIcon';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 type Props = AuthState;

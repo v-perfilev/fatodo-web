@@ -3,7 +3,7 @@ import {Box, Fab} from '@material-ui/core';
 import {ClearableTextInput} from '../../../../components/inputs';
 import {chatControlHeaderStyles} from './_styles';
 import {useTranslation} from 'react-i18next';
-import {PlusIcon} from '../../../../components/icons/plus-icon';
+import {PlusIcon} from '../../../../components/icons/PlusIcon';
 import {useChatDialogContext} from '../../../../shared/contexts/dialog-contexts/chat-dialog-context';
 import {UserAccount} from '../../../../models/user.model';
 

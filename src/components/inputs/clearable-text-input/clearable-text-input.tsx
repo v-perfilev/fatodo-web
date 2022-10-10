@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, useRef, useState} from 'react';
 import {IconButton, TextField, TextFieldProps} from '@material-ui/core';
-import {CloseIcon} from '../../icons/close-icon';
+import {CloseIcon} from '../../icons/CloseIcon';
 import {InputUtils} from '../../../shared/utils/input.utils';
 import {RefUtils} from '../../../shared/utils/ref.utils';
 

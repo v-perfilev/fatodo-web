@@ -1,12 +1,12 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import ModalDialog from '../../../../components/dialogs/modal-dialog/modal-dialog';
+import ModalDialog from '../../../../components/dialogs/ModalDialog';
 import {User} from '../../../../models/user.model';
 import {Box, Button} from '@material-ui/core';
 import {ClearableTextInput} from '../../../../components/inputs';
 import {groupMembersDialogStyles} from './_styles';
 import GroupMembersDialogMember from './group-members-dialog-member';
-import {UserPlusIcon} from '../../../../components/icons/user-plus-icon';
+import {UserPlusIcon} from '../../../../components/icons/UserPlusIcon';
 import {Group, GroupUser} from '../../../../models/group.model';
 import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
 import {AuthState} from '../../../../store/rerducers/auth.reducer';

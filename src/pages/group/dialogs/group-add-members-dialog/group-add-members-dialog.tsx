@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import ModalDialog from '../../../../components/dialogs/modal-dialog/modal-dialog';
+import ModalDialog from '../../../../components/dialogs/ModalDialog';
 import {Button} from '@material-ui/core';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
 import {LoadingButton} from '../../../../components/controls';

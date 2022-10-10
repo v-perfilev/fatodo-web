@@ -1,7 +1,7 @@
 import React, {FC, MouseEvent} from 'react';
 import {IconButton} from '@material-ui/core';
 import {groupListCardSortButtonStyles} from './_styles';
-import {ArrowAllIcon} from '../../../../components/icons/arrow-all-icon';
+import {ArrowAllIcon} from '../../../../components/icons/ArrowAllIcon';
 
 type Props = {
   bind: (...any) => void;

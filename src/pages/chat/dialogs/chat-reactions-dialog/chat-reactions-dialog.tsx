@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import ModalDialog from '../../../../components/dialogs/modal-dialog/modal-dialog';
+import ModalDialog from '../../../../components/dialogs/ModalDialog';
 import {User} from '../../../../models/user.model';
 import {Box} from '@material-ui/core';
 import {ClearableTextInput} from '../../../../components/inputs';

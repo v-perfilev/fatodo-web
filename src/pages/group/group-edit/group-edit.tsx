@@ -10,13 +10,13 @@ import {CircularSpinner} from '../../../components/loaders';
 import {useGroupViewContext} from '../../../shared/contexts/view-contexts/group-view-context';
 import withGroupView from '../../../shared/hocs/with-view/with-group-view';
 import ItemService from '../../../services/item.service';
-import {PlusIcon} from '../../../components/icons/plus-icon';
+import {PlusIcon} from '../../../components/icons/PlusIcon';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 import {PageSpacer} from '../../../components/surfaces';
 import ControlMenu from '../../../components/layouts/control-menu/control-menu';
 import {ThemeFactory} from '../../../shared/theme/theme';
 import {Container, ThemeProvider} from '@material-ui/core';
-import {CloseIcon} from '../../../components/icons/close-icon';
+import {CloseIcon} from '../../../components/icons/CloseIcon';
 import {groupEditStyles} from './_styles';
 
 const GroupEdit: FC = () => {

@@ -1,7 +1,7 @@
 import React, {FC, MouseEvent, useMemo} from 'react';
 import {IconButton} from '@material-ui/core';
 import {groupListCardExpandButtonStyles} from './_styles';
-import {ArrowDownIcon} from '../../../../components/icons/arrow-down-icon';
+import {ArrowDownIcon} from '../../../../components/icons/ArrowDownIcon';
 import {useGroupListItemsContext} from '../../../../shared/contexts/list-contexts/group-list-items-context';
 import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
 import csx from 'classnames';

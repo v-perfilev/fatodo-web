@@ -4,7 +4,7 @@ import {useHistory, useRouteMatch} from 'react-router-dom';
 import {useTranslation} from 'react-i18next';
 import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/additional-menu-context';
 import {contactMainStyles} from './_styles';
-import {PlusIcon} from '../../../components/icons/plus-icon';
+import {PlusIcon} from '../../../components/icons/PlusIcon';
 import ContactRelations from '../contact-relations/contact-relations';
 import ContactIncoming from '../contact-incoming/contact-incoming';
 import withVerticalPadding from '../../../shared/hocs/with-vertical-padding/with-vertical-padding';
@@ -16,7 +16,7 @@ import {PageSpacer} from '../../../components/surfaces';
 import ContactMainHeader from './contact-main-header';
 import {useContactInfoContext} from '../../../shared/contexts/contact-contexts/contact-info-context';
 import {useContactContext} from '../../../shared/contexts/contact-contexts/contact-context';
-import BadgeWithoutIcon from '../../../components/icons/badge-icons/badge-without-icon';
+import BadgeWithoutIcon from '../../../components/icons/badgeIcons/BadgeWithoutIcon';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {

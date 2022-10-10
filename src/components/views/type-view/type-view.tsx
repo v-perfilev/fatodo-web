@@ -5,10 +5,10 @@ import {typeStyles} from './_styles';
 import {ItemType} from '../../../models/item.model';
 import {useTranslation} from 'react-i18next';
 import {Box, Tooltip} from '@material-ui/core';
-import {TaskIcon} from '../../icons/task-icon';
-import {EventIcon} from '../../icons/event-icon';
-import {RepetitionIcon} from '../../icons/repetition-icon';
-import {NoteIcon} from '../../icons/note-icon';
+import {TaskIcon} from '../../icons/TaskIcon';
+import {EventIcon} from '../../icons/EventIcon';
+import {RepetitionIcon} from '../../icons/RepetitionIcon';
+import {NoteIcon} from '../../icons/NoteIcon';
 
 type Props = HTMLAttributes<HTMLElement> & {
   type: ItemType;

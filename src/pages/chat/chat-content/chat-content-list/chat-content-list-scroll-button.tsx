@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Fab} from '@material-ui/core';
-import {ArrowDownIcon} from '../../../../components/icons/arrow-down-icon';
+import {ArrowDownIcon} from '../../../../components/icons/ArrowDownIcon';
 import {chatContentListScrollButtonStyles} from './_styles';
 
 type Props = {

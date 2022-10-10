@@ -30,7 +30,9 @@ module.exports = {
   rules: {
     'valid-jsdoc': 'off',
     'require-jsdoc': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
     'max-len': ['error', {code: 120}],
   },
   ignorePatterns: ['webpack'],

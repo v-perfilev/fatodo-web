@@ -5,8 +5,8 @@ import {useAdditionalMenuContext} from '../../../shared/contexts/menu-contexts/a
 import {SpeedDial, SpeedDialAction, SpeedDialIcon} from '@material-ui/lab';
 import {CircularProgress, Hidden} from '@material-ui/core';
 import {useLocation} from 'react-router-dom';
-import {MenuIcon} from '../../icons/menu-icon';
-import {CloseIcon} from '../../icons/close-icon';
+import {MenuIcon} from '../../icons/MenuIcon';
+import {CloseIcon} from '../../icons/CloseIcon';
 import {MenuElement} from '../../../shared/contexts/menu-contexts/types';
 
 const AdditionalMenu: FC = () => {

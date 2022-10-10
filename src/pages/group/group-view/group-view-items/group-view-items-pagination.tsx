@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {FC, useMemo} from 'react';
 import {Box, Button, Typography} from '@material-ui/core';
-import {ArrowUpIcon} from '../../../../components/icons/arrow-up-icon';
-import {ArrowDownIcon} from '../../../../components/icons/arrow-down-icon';
+import {ArrowUpIcon} from '../../../../components/icons/ArrowUpIcon';
+import {ArrowDownIcon} from '../../../../components/icons/ArrowDownIcon';
 import {groupViewItemsPaginationStyles} from './_styles';
 
 type Props = {

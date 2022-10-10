@@ -1,10 +1,10 @@
 import React, {FC, ReactElement, useCallback, useRef, useState} from 'react';
 import {ItemStatusType} from '../../../models/item.model';
 import {Box, Button, MenuItem, Tooltip} from '@material-ui/core';
-import {StatusCreatedIcon} from '../../icons/status-created-icon';
-import {StatusWipIcon} from '../../icons/status-wip-icon';
-import {StatusCompletedIcon} from '../../icons/status-completed-icon';
-import {StatusClosedIcon} from '../../icons/status-closed-icon';
+import {StatusCreatedIcon} from '../../icons/StatusCreatedIcon';
+import {StatusWipIcon} from '../../icons/StatusWipIcon';
+import {StatusCompletedIcon} from '../../icons/StatusCompletedIcon';
+import {StatusClosedIcon} from '../../icons/StatusClosedIcon';
 import {statusInputStyles} from './_styles';
 import {PopupMenu} from '../../surfaces';
 import {CircularSpinner} from '../../loaders';

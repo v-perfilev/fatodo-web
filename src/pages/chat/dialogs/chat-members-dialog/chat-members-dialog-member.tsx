@@ -8,9 +8,9 @@ import {Chat} from '../../../../models/chat.model';
 import withAuthState from '../../../../shared/hocs/with-auth-state/with-auth-state';
 import ChatService from '../../../../services/chat.service';
 import {useSnackContext} from '../../../../shared/contexts/snack-context';
-import ConfirmationDialog from '../../../../components/dialogs/confirmation-dialog/confirmation-dialog';
+import ConfirmationDialog from '../../../../components/dialogs/ConfirmationDialog';
 import {useTranslation} from 'react-i18next';
-import {UserMinusIcon} from '../../../../components/icons/user-minus-icon';
+import {UserMinusIcon} from '../../../../components/icons/UserMinusIcon';
 
 type BaseProps = {
   chat: Chat;

@@ -1,7 +1,7 @@
 import React, {FC, MouseEvent} from 'react';
 import {IconButton} from '@material-ui/core';
 import {groupListCardCreateButtonStyles} from './_styles';
-import {PlusIcon} from '../../../../components/icons/plus-icon';
+import {PlusIcon} from '../../../../components/icons/PlusIcon';
 import {ItemRouteUtils} from '../../../item/_router';
 import {useHistory} from 'react-router-dom';
 import {useGroupViewContext} from '../../../../shared/contexts/view-contexts/group-view-context';
