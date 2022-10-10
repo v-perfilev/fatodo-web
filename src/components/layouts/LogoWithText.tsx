@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {HTMLAttributes} from 'react';
+import React, {HTMLAttributes} from 'react';
 import csx from 'classnames';
 import {Theme, Typography} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';

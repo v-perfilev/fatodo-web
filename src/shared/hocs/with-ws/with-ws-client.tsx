@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ComponentType, FC, PropsWithChildren, ReactElement, useState} from 'react';
-import WsClient from '../../../components/ws/ws-client';
+import WsClient from '../../../components/ws/WsClient';
 import {WS_URL} from '../../../constants';
 import withAuthState from '../with-auth-state/with-auth-state';
 import {AuthState} from '../../../store/rerducers/auth.reducer';

@@ -3,7 +3,7 @@ import {FC, memo} from 'react';
 import * as ReactDOM from 'react-dom';
 import {bindActionCreators} from 'redux';
 
-import App from './components/app';
+import App from './components/App';
 import setupAxiosInterceptors from './shared/axios';
 import store from './store/store';
 import {CssBaseline} from '@material-ui/core';

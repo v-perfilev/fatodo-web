@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {Box, List, ListItem, ListItemIcon, ListItemText, Theme} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {AuthState} from '../../../store/rerducers/auth.reducer';

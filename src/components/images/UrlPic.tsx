@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {HTMLAttributes} from 'react';
+import React, {HTMLAttributes} from 'react';
 import {Avatar, Theme} from '@material-ui/core';
 import csx from 'classnames';
 import {ImageUtils} from '../../shared/utils/image.utils';
@@ -7,12 +6,12 @@ import FallbackPic from './FallbackPic';
 import {FALLBACK_AVATAR} from '../../constants';
 import {makeStyles} from '@material-ui/core/styles';
 
-export type SizeType = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+export type PicSizeType = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 type UrlPicProps = HTMLAttributes<HTMLElement> & {
   url: string;
   alt?: string;
-  size?: SizeType;
+  size?: PicSizeType;
   border?: number;
   variant?: 'circle' | 'rounded' | 'square';
   invertedBorder?: boolean;

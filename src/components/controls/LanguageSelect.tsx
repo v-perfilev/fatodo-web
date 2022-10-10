@@ -1,12 +1,11 @@
-import * as React from 'react';
-import {HTMLAttributes, useRef, useState} from 'react';
+import React, {HTMLAttributes, useRef, useState} from 'react';
 import {Box, Button, List, ListItem, ListItemIcon, ListItemText, MenuItem, Theme} from '@material-ui/core';
 import {LANGUAGES} from '../../shared/i18n';
 import LanguageIcon from '../icons/LanguageIcon';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import {LanguageUtils} from '../../shared/utils/language.utils';
-import {PopupMenu} from '../surfaces';
 import {makeStyles} from '@material-ui/core/styles';
+import PopupMenu from '../surfaces/popupMenu/PopupMenu';
 
 type LanguageSelectProps = HTMLAttributes<HTMLElement> & {
   list?: boolean;

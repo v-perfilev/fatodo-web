@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {AppBar, Hidden, IconButton, Slide, Theme, Toolbar, useScrollTrigger} from '@material-ui/core';
 import HorizontalMenu from './HorizontalMenu';
 import {logout} from '../../../store/actions/auth.actions';
@@ -7,12 +6,12 @@ import {connect, ConnectedProps} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import {Routes} from '../../../pages/router';
 import {RedirectMap} from './type';
-import {Grower} from '../../surfaces';
 import LogoWithText from '../LogoWithText';
 import MenuIcon from '../../icons/MenuIcon';
 import {makeStyles} from '@material-ui/core/styles';
 import {HEADER_HEIGHT} from '../../../constants';
 import SidebarMenu from './SidebarMenu';
+import Grower from '../../surfaces/Grower';
 
 const mapDispatchToProps = {logout};
 const connector = connect(null, mapDispatchToProps);

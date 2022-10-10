@@ -1,5 +1,5 @@
 import {Link as RouterLink, LinkProps as ReactLinkProps} from 'react-router-dom';
-import * as React from 'react';
+import React from 'react';
 import {Link as MaterialLink, LinkProps as MaterialLinkProps} from '@material-ui/core';
 
 type LinkProps = ReactLinkProps &

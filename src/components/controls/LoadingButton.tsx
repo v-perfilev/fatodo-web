@@ -1,5 +1,4 @@
-import * as React from 'react';
-import {ButtonHTMLAttributes} from 'react';
+import React, {ButtonHTMLAttributes} from 'react';
 import {Button, ButtonTypeMap, CircularProgress, LinearProgress} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 

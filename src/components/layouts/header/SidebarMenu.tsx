@@ -1,12 +1,11 @@
-import * as React from 'react';
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {Box, Divider, Fab, SwipeableDrawer, Theme, Toolbar} from '@material-ui/core';
 import VerticalMenu from './VerticalMenu';
 import {RedirectMap} from './type';
-import {Grower} from '../../surfaces';
 import {makeStyles} from '@material-ui/core/styles';
 import ArrowRightIcon from '../../icons/ArrowRightIcon';
 import LanguageSelect from '../../controls/LanguageSelect';
+import Grower from '../../surfaces/Grower';
 
 type Props = {
   show: boolean;

@@ -1,7 +1,7 @@
 import {Reminder} from '../../../models/reminder.model';
 import React from 'react';
 import {Box, Chip} from '@material-ui/core';
-import ReminderView from '../../views/reminder-view/reminder-view';
+import ReminderView from '../../views/ReminderView';
 import {makeStyles} from '@material-ui/core/styles';
 
 type FormikRemindersInputChipsProps = {
