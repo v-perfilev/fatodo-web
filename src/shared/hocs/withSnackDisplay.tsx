@@ -27,21 +27,14 @@ const withSnackDisplay = (Component: ComponentType) => (props: any) => {
   const displayedMessages = Array.from(displayed.values());
 
   const handleSnacks = (): void => {
-    snackList.forEach(({message, color, key, dismissed = false}: ReduxSnack) => {
+    snackList.forEach(({message, variant, key, dismissed = false}: ReduxSnack) => {
       if (dismissed) {
         closeSnackbar(key);
       } else if (!displayedKeys.includes(key) && displayedMessages.includes(message)) {
         dispatch(SnackActions.removeSnack(key));
       } else if (!displayedKeys.includes(key)) {
-        const onCloseComplete = (): void => dispatch(SnackActions.removeSnack(key));
-        enqueueSnackbar({
-          title: message,
-          borderColor: color,
-          borderWidth: 1,
-          _title: {color},
-          id: key,
-          onCloseComplete,
-        });
+        const onClose = (): void => dispatch(SnackActions.removeSnack(key));
+        enqueueSnackbar(message, {key, variant, onClose});
         addDisplayed(key, message);
       }
     });

@@ -1,3 +1,5 @@
+import {VariantType} from 'notistack';
+
 export type SnackVariant = 'info' | 'warning' | 'error';
 
 export interface ReduxSnack extends Snack {
@@ -7,23 +9,23 @@ export interface ReduxSnack extends Snack {
 
 export interface Snack {
   message: string;
-  color: string;
+  variant: VariantType;
 }
 
 export class SnackBuilder {
   private readonly snack: Snack;
 
   constructor(message: string) {
-    this.snack = {message, color: 'primary.500'};
+    this.snack = {message, variant: 'info'};
   }
 
   setVariantColor(variant: SnackVariant): SnackBuilder {
-    this.snack.color = SnackBuilder.getColorFromVariant(variant);
+    this.snack.variant = variant;
     return this;
   }
 
   setStatusColor(status: number): SnackBuilder {
-    this.snack.color = SnackBuilder.getColorFromStatus(status);
+    this.snack.variant = SnackBuilder.getVariantFromStatus(status);
     return this;
   }
 
@@ -31,23 +33,13 @@ export class SnackBuilder {
     return this.snack;
   }
 
-  private static getColorFromStatus = (status: number): string => {
+  private static getVariantFromStatus = (status: number): SnackVariant => {
     if (status >= 400 && status < 500) {
-      return 'warning.500';
+      return 'warning';
     } else if (status >= 500) {
-      return 'error.500';
+      return 'error';
     } else {
-      return 'info.500';
-    }
-  };
-
-  private static getColorFromVariant = (variant: SnackVariant): string => {
-    if (variant === 'info') {
-      return 'info.500';
-    } else if (variant === 'warning') {
-      return 'warning.500';
-    } else {
-      return 'error.500';
+      return 'info';
     }
   };
 }
