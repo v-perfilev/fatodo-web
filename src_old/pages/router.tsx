@@ -43,7 +43,7 @@ export enum Routes {
 
 const Router: FC = () => (
   <Switch>
-    <MixedRoute exact path={Routes.ROOT} component={Auth} redirect={Routes.GROUPS} />
+    <MixedRoute exact path={Routes.ROOT} component={Auth} redirectUrl={Routes.GROUPS} />
     {/*Private Routes*/}
     <PrivateRoute path={Routes.GROUPS} component={GroupRouter} />
     <PrivateRoute path={Routes.ITEMS} component={ItemRouter} />

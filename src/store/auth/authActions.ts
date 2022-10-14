@@ -13,6 +13,7 @@ import {SnackActions} from '../snack/snackActions';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {accountToUser, UserAccount} from '../../models/User';
 import {InfoActions} from '../info/infoActions';
+import {ResetPasswordDTO} from '../../models/dto/ResetPasswordDTO';
 
 const PREFIX = 'auth/';
 
@@ -46,6 +47,14 @@ export class AuthActions {
     },
   );
 
+  static loginThunk = createAsyncThunk<void, {token: string; rememberMe?: boolean}, AsyncThunkConfig>(
+    PREFIX + 'login',
+    async ({token, rememberMe}, thunkAPI) => {
+      await SecurityUtils.saveAuthToken(token, rememberMe);
+      await thunkAPI.dispatch(AuthActions.fetchAccountThunk());
+    },
+  );
+
   static authenticateThunk = createAsyncThunk<void, {dto: LoginDTO; rememberMe?: boolean}, AsyncThunkConfig>(
     PREFIX + 'authenticate',
     async ({dto, rememberMe}, thunkAPI) => {
@@ -72,6 +81,14 @@ export class AuthActions {
     async (dto, thunkAPI) => {
       await AuthService.requestResetPasswordCode(dto);
       thunkAPI.dispatch(SnackActions.handleCode('auth.afterForgotPassword', 'info'));
+    },
+  );
+
+  static resetPasswordThunk = createAsyncThunk<void, ResetPasswordDTO, AsyncThunkConfig>(
+    PREFIX + 'resetPassword',
+    async (dto, thunkAPI) => {
+      await AuthService.resetPassword(dto);
+      thunkAPI.dispatch(SnackActions.handleCode('auth.afterResetPassword', 'info'));
     },
   );
 

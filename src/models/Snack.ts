@@ -1,7 +1,5 @@
 import {VariantType} from 'notistack';
 
-export type SnackVariant = 'info' | 'warning' | 'error';
-
 export interface ReduxSnack extends Snack {
   key: string;
   dismissed: boolean;
@@ -19,7 +17,7 @@ export class SnackBuilder {
     this.snack = {message, variant: 'info'};
   }
 
-  setVariantColor(variant: SnackVariant): SnackBuilder {
+  setVariantColor(variant: VariantType): SnackBuilder {
     this.snack.variant = variant;
     return this;
   }
@@ -33,7 +31,7 @@ export class SnackBuilder {
     return this.snack;
   }
 
-  private static getVariantFromStatus = (status: number): SnackVariant => {
+  private static getVariantFromStatus = (status: number): VariantType => {
     if (status >= 400 && status < 500) {
       return 'warning';
     } else if (status >= 500) {

@@ -10,11 +10,11 @@ type BaseProps = RouteProps & {
 
 type Props = AuthState & BaseProps;
 
-const MixedRoute: FC<Props> = ({isAuthenticated, redirect, ...props}: Props) => {
+const MixedRoute: FC<Props> = ({isAuthenticated, redirectUrl, ...props}: Props) => {
   const history = useHistory();
 
   if (isAuthenticated) {
-    setTimeout(() => history.push(redirect), 100);
+    setTimeout(() => history.push(redirectUrl), 100);
   }
 
   return !isAuthenticated && <Route {...props} />;

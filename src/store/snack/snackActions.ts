@@ -1,10 +1,11 @@
-import {Snack, SnackBuilder, SnackVariant} from '../../models/Snack';
+import {Snack, SnackBuilder} from '../../models/Snack';
 import snackSlice from './snackSlice';
 import {AppDispatch} from '../store';
 import {TranslationUtils} from '../../shared/utils/TranslationUtils';
+import {VariantType} from 'notistack';
 
 export class SnackActions {
-  static handleCode = (code: string, variant: SnackVariant) => (dispatch: AppDispatch) => {
+  static handleCode = (code: string, variant: VariantType) => (dispatch: AppDispatch) => {
     const message = TranslationUtils.getSnackTranslation(code);
     const snack = message ? new SnackBuilder(message).setVariantColor(variant).build() : undefined;
     snack && dispatch(snackSlice.actions.enqueueSnack(snack));
@@ -13,7 +14,7 @@ export class SnackActions {
   static handleResponse = (status: number, feedbackCode: string) => (dispatch: AppDispatch) => {
     const isStatusCorrect = status && status < 500;
     const message = TranslationUtils.getFeedbackTranslation(feedbackCode);
-    let snack = isStatusCorrect && message ? new SnackBuilder(message).setStatusColor(status).build() : undefined;
+    const snack = isStatusCorrect && message ? new SnackBuilder(message).setStatusColor(status).build() : undefined;
     snack && dispatch(snackSlice.actions.enqueueSnack(snack));
   };
 
@@ -25,7 +26,7 @@ export class SnackActions {
     dispatch(snackSlice.actions.removeSnack(key));
   };
 
-  static closeSnack = (key: string = 'all') => (dispatch: AppDispatch) => {
+  static closeSnack = (key = 'all') => (dispatch: AppDispatch) => {
     dispatch(snackSlice.actions.closeSnack(key));
   };
 }

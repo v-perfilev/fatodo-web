@@ -30,6 +30,13 @@ export const passwordValidator = Yup.string()
   .min(8, () => i18n.t('account:fields.password.min8'))
   .max(20, () => i18n.t('account:fields.password.max20'));
 
+export const passwordRepeatValidator = Yup.string()
+  .required(() => i18n.t('account:fields.repeatPassword.required'))
+  .when('password', {
+    is: (val) => val && val.length > 0,
+    then: Yup.string().oneOf([Yup.ref('password')], () => i18n.t('account:fields.repeatPassword.notEqual')),
+  });
+
 export const usernameValidator = new AsyncValidator(
   Yup.string()
     .required(() => i18n.t('account:fields.username.required'))

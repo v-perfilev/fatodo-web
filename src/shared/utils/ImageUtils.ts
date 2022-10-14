@@ -5,7 +5,7 @@ export class ImageUtils {
   private static fileUrlPattern = /(file:\/\/)(.*)/g;
   private static thumbnailPostfix = '/thumbnail';
 
-  public static buildImageUri = (url: string, isThumbnail: boolean): string => {
+  public static buildImageUri = (url: string, isThumbnail?: boolean): string => {
     return IMAGE_URL + url + (isThumbnail ? ImageUtils.thumbnailPostfix : '');
   };
 

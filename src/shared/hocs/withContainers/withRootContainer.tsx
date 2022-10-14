@@ -1,4 +1,4 @@
-import React, {ComponentType, memo, useEffect, useState} from 'react';
+import React, {ComponentType, FC, memo, ReactElement, useEffect, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {ContactsActions} from '../../../store/contacts/contactsActions';
@@ -13,7 +13,7 @@ export type WithRootProps = {
   ready: boolean;
 };
 
-const withRootContainer = (Component: ComponentType<WithRootProps>) => (props: any) => {
+const withRootContainer = (Component: ComponentType<WithRootProps>): FC => (props: any): ReactElement => {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(AuthSelectors.isAuthenticated);
   const isSleepMode = useAppSelector(AuthSelectors.isSleepMode);

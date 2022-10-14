@@ -55,6 +55,20 @@ const authSlice = createSlice({
     });
 
     /*
+    login
+     */
+    builder.addCase(AuthActions.loginThunk.pending, (state, action) => {
+      authSlice.caseReducers.reset(state);
+      authSlice.caseReducers.setLoading(state, {...action, payload: true});
+    });
+    builder.addCase(AuthActions.loginThunk.fulfilled, (state, action) => {
+      authSlice.caseReducers.setIsAuthenticated(state, {...action, payload: true});
+    });
+    builder.addCase(AuthActions.loginThunk.rejected, (state) => {
+      authSlice.caseReducers.reset(state);
+    });
+
+    /*
     authenticate
      */
     builder.addCase(AuthActions.authenticateThunk.pending, (state, action) => {
