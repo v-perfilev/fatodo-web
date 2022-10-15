@@ -50,7 +50,7 @@ const Auth = () => {
         <Tab label={t('account:login.header')} />
         <Tab label={t('account:register.header')} />
       </Tabs>
-      {activeTab === 0 ? <AuthSignInForm /> : <AuthSignUpForm onSuccess={redirectToHome} />}
+      {activeTab === 0 ? <AuthSignInForm onSuccess={redirectToHome} /> : <AuthSignUpForm onSuccess={redirectToHome} />}
       {SOCIAL_LOGIN && <SocialButtons />}
       <Link to={LANDING_URL}>{t('static:actions.toHomePage')}</Link>
     </Stack>

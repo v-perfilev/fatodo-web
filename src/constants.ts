@@ -20,7 +20,7 @@ export const AUTHORIZATION_HEADER = 'authorization';
 export const AUTHORIZATION_PREFIX = 'Bearer ';
 
 // HEADER
-export const HEADER_HEIGHT = 64;
+export const HEADER_HEIGHT = 60;
 
 // IMAGES
 export const FALLBACK_AVATAR = '/images/fallback.jpg';

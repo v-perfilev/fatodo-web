@@ -20,13 +20,13 @@ const logoStyles: SxProps = {
   display: 'flex',
   alignItems: 'center',
   '& img': {
-    height: 50,
+    height: 40,
   },
 };
 
 const textStyles: SxProps = {
   fontWeight: 500,
-  fontSize: '2.2rem',
+  fontSize: '2rem',
   lineHeight: 1,
   letterSpacing: '0.05em',
   marginLeft: 1,

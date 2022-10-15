@@ -81,7 +81,6 @@ const authSlice = createSlice({
       authSlice.caseReducers.setLoading(state, {...action, payload: true});
     });
     builder.addCase(AuthActions.authenticateThunk.fulfilled, (state, action) => {
-      authSlice.caseReducers.reset(state);
       authSlice.caseReducers.setIsAuthenticated(state, {...action, payload: true});
     });
     builder.addCase(AuthActions.authenticateThunk.rejected, (state, action) => {

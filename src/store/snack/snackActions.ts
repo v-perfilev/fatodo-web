@@ -5,7 +5,9 @@ import {TranslationUtils} from '../../shared/utils/TranslationUtils';
 import {VariantType} from 'notistack';
 
 export class SnackActions {
-  static handleCode = (code: string, variant: Omit<VariantType, 'default' | 'success'>) => (dispatch: AppDispatch) => {
+  static handleCode = (code: string, variant: Exclude<VariantType, 'default' | 'success'>) => (
+    dispatch: AppDispatch,
+  ) => {
     const message = TranslationUtils.getSnackTranslation(code);
     const snack = message ? new SnackBuilder(message).setVariantColor(variant).build() : undefined;
     snack && dispatch(snackSlice.actions.enqueueSnack(snack));

@@ -16,7 +16,6 @@ import FormikPasswordInput from '../../../components/inputs/FormikPasswordInput'
 import FormikCheckboxInput from '../../../components/inputs/FormikCheckboxInput';
 import {useNavigate} from 'react-router-dom';
 import {RootRoutes} from '../../../routes/RootRouter';
-import {SnackActions} from '../../../store/snack/snackActions';
 
 type SignInFormValues = {
   user: string;
@@ -60,7 +59,6 @@ const SignInForm = ({getToken}: SignInFormProps) => {
   };
 
   useEffect(() => {
-    dispatch(SnackActions.handleCode('auth.activated', 'info'));
     error === 'auth.notActivated' && redirectToNotActivated();
   }, [error]);
 

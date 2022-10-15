@@ -7,7 +7,7 @@ export interface ReduxSnack extends Snack {
 
 export interface Snack {
   message: string;
-  variant: Omit<VariantType, 'default' | 'success'>;
+  variant: Exclude<VariantType, 'default' | 'success'>;
 }
 
 export class SnackBuilder {
@@ -17,7 +17,7 @@ export class SnackBuilder {
     this.snack = {message, variant: 'info'};
   }
 
-  setVariantColor(variant: Omit<VariantType, 'default' | 'success'>): SnackBuilder {
+  setVariantColor(variant: Exclude<VariantType, 'default' | 'success'>): SnackBuilder {
     this.snack.variant = variant;
     return this;
   }
@@ -31,7 +31,7 @@ export class SnackBuilder {
     return this.snack;
   }
 
-  private static getVariantFromStatus = (status: number): VariantType => {
+  private static getVariantFromStatus = (status: number): Exclude<VariantType, 'default' | 'success'> => {
     if (status >= 400 && status < 500) {
       return 'warning';
     } else if (status >= 500) {

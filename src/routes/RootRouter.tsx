@@ -1,5 +1,5 @@
 import React from 'react';
-import {Navigate, Outlet, Route, Routes} from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import Unauthorized from '../pages/static/Unauthorized';
 import Forbidden from '../pages/static/Forbidden';
 import InternalError from '../pages/static/InternalError';
@@ -18,6 +18,8 @@ import ItemRouter from './ItemRouter';
 import ContactRouter from './ContactRouter';
 import ChatRouter from './ChatRouter';
 import AccountRouter from './AccountRouter';
+import ProtectedRouteOutlet from './outlets/ProtectedRouteOutlet';
+import PublicRouteOutlet from './outlets/PublicRouteOutlet';
 
 export enum RootRoutes {
   ROOT = '/',
@@ -44,27 +46,27 @@ const RootRouter = () => {
   const isAuthenticated = useAppSelector(AuthSelectors.isAuthenticated);
 
   const mixedRoute = isAuthenticated ? <Navigate to={RootRoutes.GROUPS} /> : <Navigate to={RootRoutes.LOGIN} />;
-  const privateRoute = isAuthenticated ? <Outlet /> : <Navigate to={RootRoutes.UNAUTHORIZED} />;
-  const publicRoute = !isAuthenticated ? <Outlet /> : <Navigate to={RootRoutes.ROOT} />;
+  const protectedRoute = isAuthenticated ? <ProtectedRouteOutlet /> : <Navigate to={RootRoutes.UNAUTHORIZED} />;
+  const publicRoute = !isAuthenticated ? <PublicRouteOutlet /> : <Navigate to={RootRoutes.ROOT} />;
 
   return (
     <Routes>
       <Route path={RootRoutes.ROOT} element={mixedRoute} />
 
       {/*Private Routes*/}
-      <Route path={RootRoutes.GROUPS} element={privateRoute}>
+      <Route path={RootRoutes.GROUPS} element={protectedRoute}>
         {GroupRouter()}
       </Route>
-      <Route path={RootRoutes.ITEMS} element={privateRoute}>
+      <Route path={RootRoutes.ITEMS} element={protectedRoute}>
         {ItemRouter()}
       </Route>
-      <Route path={RootRoutes.CONTACTS} element={privateRoute}>
+      <Route path={RootRoutes.CONTACTS} element={protectedRoute}>
         {ContactRouter()}
       </Route>
-      <Route path={RootRoutes.CHATS} element={privateRoute}>
+      <Route path={RootRoutes.CHATS} element={protectedRoute}>
         {ChatRouter()}
       </Route>
-      <Route path={RootRoutes.ACCOUNT} element={privateRoute}>
+      <Route path={RootRoutes.ACCOUNT} element={protectedRoute}>
         {AccountRouter()}
       </Route>
 

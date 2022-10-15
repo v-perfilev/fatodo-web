@@ -1,11 +1,12 @@
-import * as React from 'react';
-import {ComponentType, memo, useState} from 'react';
+import React, {ComponentType, memo, useState} from 'react';
 import {flowRight} from 'lodash';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import SnackSelectors from '../../store/snack/snackSelectors';
 import {SnackActions} from '../../store/snack/snackActions';
 import {ReduxSnack} from '../../models/Snack';
 import {SnackbarProvider, useSnackbar} from 'notistack';
+import {makeStyles} from '@mui/styles';
+import {Theme} from '@mui/material';
 
 const withSnackDisplay = (Component: ComponentType) => (props: any) => {
   const dispatch = useAppDispatch();
@@ -48,11 +49,29 @@ const withSnackDisplay = (Component: ComponentType) => (props: any) => {
 };
 
 const withSnackProvider = (Component: ComponentType) => (props: any) => {
+  const classes = snackClasses();
   return (
-    <SnackbarProvider anchorOrigin={{horizontal: 'right', vertical: 'bottom'}} autoHideDuration={7000} preventDuplicate>
+    <SnackbarProvider
+      classes={classes}
+      anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
+      autoHideDuration={7000}
+      preventDuplicate
+    >
       <Component {...props} />
     </SnackbarProvider>
   );
 };
+
+export const snackClasses = makeStyles((theme: Theme) => ({
+  variantInfo: {
+    backgroundColor: theme.palette.info.main + ' !important',
+  },
+  variantWarning: {
+    backgroundColor: theme.palette.warning.main + ' !important',
+  },
+  variantError: {
+    backgroundColor: theme.palette.error.main + ' !important',
+  },
+}));
 
 export default flowRight([memo, withSnackProvider, withSnackDisplay]);

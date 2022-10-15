@@ -22,7 +22,7 @@ export const initI18n = i18next
   .use(backend)
   .use(initReactI18next)
   .init({
-    debug: true,
+    debug: false,
     compatibilityJSON: 'v3',
     fallbackLng: 'en',
     ns: [

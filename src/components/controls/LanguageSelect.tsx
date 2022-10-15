@@ -5,6 +5,7 @@ import {LanguageUtils} from '../../shared/utils/LanguageUtils';
 import {Box, Button, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, SxProps} from '@mui/material';
 import {languages} from '../../shared/i18n';
 import PopupMenu from '../surfaces/popupMenu/PopupMenu';
+import {styled} from '@mui/styles';
 
 type LanguageSelectProps = HTMLAttributes<HTMLElement> & {
   list?: boolean;
@@ -34,9 +35,9 @@ const LanguageSelect = ({list, className}: LanguageSelectProps) => {
   const listElement = (
     <List component="nav">
       <ListItemButton ref={ref} onClick={handleClick}>
-        <ListItemIcon>
+        <StyledListItemIcon>
           <LanguageIcon sx={iconStyles} />
-        </ListItemIcon>
+        </StyledListItemIcon>
         <ListItemText>{getShortNameByCode(LanguageUtils.getLanguage(), list)}</ListItemText>
       </ListItemButton>
     </List>
@@ -72,5 +73,10 @@ const LanguageSelect = ({list, className}: LanguageSelectProps) => {
 const iconStyles: SxProps = {
   color: 'primary.main',
 };
+
+const StyledListItemIcon = styled(ListItemIcon)({
+  minWidth: 0,
+  marginRight: '16px',
+});
 
 export default LanguageSelect;
