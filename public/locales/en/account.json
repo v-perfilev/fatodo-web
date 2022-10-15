@@ -19,6 +19,9 @@
     "header": "Change password",
     "submit": "Submit"
   },
+  "socialLogin": {
+    "label": "Login with"
+  },
   "fields": {
     "user": {
       "label": "Username / Email",
@@ -42,6 +45,9 @@
       "label": "Confirm password",
       "required": "Required",
       "notEqual": "Passwords are not equals"
+    },
+    "rememberMe": {
+      "label": "Remember me"
     },
     "email": {
       "label": "Email",

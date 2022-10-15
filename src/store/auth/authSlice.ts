@@ -9,6 +9,7 @@ const initialState: AuthState = {
   isAuthenticated: false,
   account: undefined,
   loading: false,
+  error: undefined,
 };
 
 const authSlice = createSlice({
@@ -37,6 +38,10 @@ const authSlice = createSlice({
 
     setLoading: (state: AuthState, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
+    },
+
+    setError: (state: AuthState, action: PayloadAction<string>) => {
+      state.error = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -76,10 +81,12 @@ const authSlice = createSlice({
       authSlice.caseReducers.setLoading(state, {...action, payload: true});
     });
     builder.addCase(AuthActions.authenticateThunk.fulfilled, (state, action) => {
+      authSlice.caseReducers.reset(state);
       authSlice.caseReducers.setIsAuthenticated(state, {...action, payload: true});
     });
-    builder.addCase(AuthActions.authenticateThunk.rejected, (state) => {
+    builder.addCase(AuthActions.authenticateThunk.rejected, (state, action) => {
       authSlice.caseReducers.reset(state);
+      authSlice.caseReducers.setError(state, {...action, payload: action.payload?.feedbackCode});
     });
 
     /*

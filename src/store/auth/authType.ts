@@ -6,4 +6,5 @@ export type AuthState = {
   isAuthenticated: boolean;
   account: UserAccount;
   loading: boolean;
+  error?: string;
 };

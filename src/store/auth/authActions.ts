@@ -58,10 +58,14 @@ export class AuthActions {
   static authenticateThunk = createAsyncThunk<void, {dto: LoginDTO; rememberMe?: boolean}, AsyncThunkConfig>(
     PREFIX + 'authenticate',
     async ({dto, rememberMe}, thunkAPI) => {
-      const response = await AuthService.authenticate(dto);
-      const token = SecurityUtils.parseTokenFromResponse(response);
-      await SecurityUtils.saveAuthToken(token, rememberMe);
-      await thunkAPI.dispatch(AuthActions.fetchAccountThunk());
+      try {
+        const response = await AuthService.authenticate(dto);
+        const token = SecurityUtils.parseTokenFromResponse(response);
+        await SecurityUtils.saveAuthToken(token, rememberMe);
+        await thunkAPI.dispatch(AuthActions.fetchAccountThunk());
+      } catch (response) {
+        return thunkAPI.rejectWithValue(response?.data);
+      }
     },
   );
 
@@ -73,6 +77,14 @@ export class AuthActions {
       LanguageUtils.setLanguageFromUser(account);
       thunkAPI.dispatch(InfoActions.handleUsers([accountToUser(account)]));
       return account;
+    },
+  );
+
+  static activateThunk = createAsyncThunk<void, string, AsyncThunkConfig>(
+    PREFIX + 'activate',
+    async (code, thunkAPI) => {
+      await AuthService.activate(code);
+      thunkAPI.dispatch(SnackActions.handleCode('auth.activated', 'info'));
     },
   );
 

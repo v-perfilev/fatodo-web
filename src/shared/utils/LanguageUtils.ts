@@ -14,7 +14,7 @@ export class LanguageUtils {
   };
 
   public static setLanguageFromUser = (account: UserAccount): void => {
-    const code = account?.info?.language;
+    const code = account?.info?.language?.toLowerCase();
     if (code) {
       DateUtils.resetLocale(code);
       LanguageUtils.setLanguage(code);

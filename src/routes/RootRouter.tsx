@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Routes} from 'react-router-dom';
+import {Navigate, Outlet, Route, Routes} from 'react-router-dom';
 import Unauthorized from '../pages/static/Unauthorized';
 import Forbidden from '../pages/static/Forbidden';
 import InternalError from '../pages/static/InternalError';
@@ -11,6 +11,13 @@ import Activation from '../pages/public/activation/Activation';
 import NotActivated from '../pages/static/NotActivated';
 import ForgotPassword from '../pages/public/forgotPassword/ForgotPassword';
 import ResetPassword from '../pages/public/resetPassword/ResetPassword';
+import {useAppSelector} from '../store/store';
+import AuthSelectors from '../store/auth/authSelectors';
+import GroupRouter from './GroupRouter';
+import ItemRouter from './ItemRouter';
+import ContactRouter from './ContactRouter';
+import ChatRouter from './ChatRouter';
+import AccountRouter from './AccountRouter';
 
 export enum RootRoutes {
   ROOT = '/',
@@ -34,28 +41,60 @@ export enum RootRoutes {
 }
 
 const RootRouter = () => {
+  const isAuthenticated = useAppSelector(AuthSelectors.isAuthenticated);
+
+  const mixedRoute = isAuthenticated ? <Navigate to={RootRoutes.GROUPS} /> : <Navigate to={RootRoutes.LOGIN} />;
+  const privateRoute = isAuthenticated ? <Outlet /> : <Navigate to={RootRoutes.UNAUTHORIZED} />;
+  const publicRoute = !isAuthenticated ? <Outlet /> : <Navigate to={RootRoutes.ROOT} />;
+
   return (
     <Routes>
-      {/*<MixedRoute path={RootRoutes.ROOT} element={Box} redirectUrl={RootRoutes.GROUPS} />*/}
+      <Route path={RootRoutes.ROOT} element={mixedRoute} />
+
       {/*Private Routes*/}
-      {/*<PrivateRoute path={Routes.GROUPS} component={GroupRouter} />*/}
-      {/*<PrivateRoute path={Routes.ITEMS} component={ItemRouter} />*/}
-      {/*<PrivateRoute path={Routes.CONTACTS} component={ContactRouter} />*/}
-      {/*<PrivateRoute path={Routes.CHATS} component={ChatRouter} />*/}
-      {/*<PrivateRoute path={Routes.ACCOUNT} component={AccountSettings} />*/}
+      <Route path={RootRoutes.GROUPS} element={privateRoute}>
+        {GroupRouter()}
+      </Route>
+      <Route path={RootRoutes.ITEMS} element={privateRoute}>
+        {ItemRouter()}
+      </Route>
+      <Route path={RootRoutes.CONTACTS} element={privateRoute}>
+        {ContactRouter()}
+      </Route>
+      <Route path={RootRoutes.CHATS} element={privateRoute}>
+        {ChatRouter()}
+      </Route>
+      <Route path={RootRoutes.ACCOUNT} element={privateRoute}>
+        {AccountRouter()}
+      </Route>
+
       {/*Auth Routes*/}
-      <Route path={RootRoutes.LOGIN} element={<Auth />} />
-      <Route path={RootRoutes.REGISTRATION} element={<Auth />} />
-      <Route path={RootRoutes.SOCIAL_LOGIN_WITH_PARAM} element={<SocialLogin />} />
-      <Route path={RootRoutes.ACTIVATION_WITH_PARAM} element={<Activation />} />
-      <Route path={RootRoutes.FORGOT_PASSWORD} element={<ForgotPassword />} />
-      <Route path={RootRoutes.RESET_PASSWORD_WITH_PARAM} element={<ResetPassword />} />
+      <Route path={RootRoutes.LOGIN} element={publicRoute}>
+        <Route index element={<Auth />} />
+      </Route>
+      <Route path={RootRoutes.REGISTRATION} element={publicRoute}>
+        <Route index element={<Auth />} />
+      </Route>
+      <Route path={RootRoutes.FORGOT_PASSWORD} element={publicRoute}>
+        <Route index element={<ForgotPassword />} />
+      </Route>
+      <Route path={RootRoutes.SOCIAL_LOGIN_WITH_PARAM} element={publicRoute}>
+        <Route index element={<SocialLogin />} />
+      </Route>
+      <Route path={RootRoutes.ACTIVATION_WITH_PARAM} element={publicRoute}>
+        <Route index element={<Activation />} />
+      </Route>
+      <Route path={RootRoutes.RESET_PASSWORD_WITH_PARAM} element={publicRoute}>
+        <Route index element={<ResetPassword />} />
+      </Route>
+
       {/*Errors*/}
       <Route path={RootRoutes.NOT_ACTIVATED} element={<NotActivated />} />
       <Route path={RootRoutes.UNAUTHORIZED} element={<Unauthorized />} />
       <Route path={RootRoutes.FORBIDDEN} element={<Forbidden />} />
       <Route path={RootRoutes.INTERNAL_ERROR} element={<InternalError />} />
       <Route path={RootRoutes.PAGE_NOT_FOUND} element={<PageNotFound />} />
+
       {/*Redirects*/}
       <Route path="*" element={<PageNotFoundRedirect />} />
     </Routes>

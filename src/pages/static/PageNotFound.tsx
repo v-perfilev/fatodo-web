@@ -19,9 +19,9 @@ const PageNotFound = ({timer, resetTimer}: PageNotFoundProps) => {
       <Typography variant="h5" color="primary">
         {t('static:pageNotFound.caption')}
       </Typography>
-      <Typography>{t('static:redirectToHome.message', {count: timer})}</Typography>
+      <Typography textAlign="center">{t('static:redirectToHome.message', {count: timer})}</Typography>
       <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
-        {t('buttons.toHomePage')}
+        {t('static:actions.toHomePage')}
       </Button>
     </Stack>
   );

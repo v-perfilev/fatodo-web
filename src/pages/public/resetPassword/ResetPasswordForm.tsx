@@ -1,4 +1,4 @@
-import {Formik} from 'formik';
+import {Formik, FormikProps} from 'formik';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import * as Yup from 'yup';
@@ -60,7 +60,7 @@ const ResetPasswordForm = ({code, getToken, onSuccess, onFailure}: ForgotPasswor
       validateOnMount
       onSubmit={handleSubmit}
     >
-      {(formikProps) => (
+      {(formikProps: FormikProps<ResetPasswordFormValues>) => (
         <Stack flex={1} spacing={2}>
           <FormikPasswordInput name="password" label={t('account:fields.password.label')} disabled={loading} />
           <FormikPasswordInput
@@ -74,6 +74,7 @@ const ResetPasswordForm = ({code, getToken, onSuccess, onFailure}: ForgotPasswor
             fullWidth
             loading={loading}
             disabled={!formikProps.isValid || loading}
+            onClick={formikProps.submitForm}
           >
             {t('account:resetPassword.submit')}
           </LoadingButton>

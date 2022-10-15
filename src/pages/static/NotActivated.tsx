@@ -2,9 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/withRedirectTimer';
-import {useLocation, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {Stack, SxProps, Typography} from '@mui/material';
-import {RootRoutes} from '../../routes/RootRouter';
 import EmailIcon from '../../components/icons/EmailIcon';
 import HomeIcon from '../../components/icons/HomeIcon';
 import withBackground from '../../shared/hocs/withBackground';
@@ -15,8 +14,6 @@ type NotActivatedProps = RedirectTimerProps;
 const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
   const navigate = useNavigate();
   const {t} = useTranslation();
-  const location = useLocation();
-  const user = location.state.user;
   const [activationLoading, setActivationLoading] = useState<boolean>(false);
   const [activationTimer, setActivationTimer] = useState<number>(undefined);
   const activationTimerMax = 20;
@@ -44,16 +41,12 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
     //   .finally(() => setActivationLoading(false));
   };
 
-  if (!user) {
-    navigate(RootRoutes.INTERNAL_ERROR);
-  }
-
   return (
     <Stack width="100%" spacing={2} alignItems="center">
       <Typography sx={codeStyles} variant="h5" color="primary">
-        {t('static:notActivated.caption', {email: user})}
+        {t('static:notActivated.caption')}
       </Typography>
-      <Typography>{t('static:redirectToHome.message', {count: timer})}</Typography>
+      <Typography textAlign="center">{t('static:redirectToHome.message', {count: timer})}</Typography>
       <LoadingButton
         startIcon={<EmailIcon />}
         onClick={sendActivationCode}
@@ -64,7 +57,7 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
         {t('buttons.sendActivationCode')}
       </LoadingButton>
       <LoadingButton startIcon={<HomeIcon />} onClick={resetTimer}>
-        {t('buttons.toHomePage')}
+        {t('static:actions.toHomePage')}
       </LoadingButton>
     </Stack>
   );

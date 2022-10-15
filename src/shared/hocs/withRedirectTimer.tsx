@@ -10,18 +10,18 @@ const withRedirectTimer = (redirectLink = '/', timerInitValue = 50) => (
   Component: ComponentType<RedirectTimerProps>,
 ) => (props: any) => {
   const [timer, setTimer] = useState<number>(timerInitValue);
-  let timerId;
+  let timerId: number;
 
   useEffect(() => {
     if (timer > 0 && !timerId) {
-      timerId = setTimeout(() => setTimer((prevState) => prevState - 1), 1000);
+      timerId = window.setTimeout(() => setTimer((prevState) => prevState - 1), 1000);
     }
-    return (): void => clearTimeout(timerId);
+    return (): void => window.clearTimeout(timerId);
   }, [timer]);
 
   const resetTimer = (): void => {
     setTimer(0);
-    clearTimeout(timerId);
+    window.clearTimeout(timerId);
   };
 
   return timer === 0 ? <Navigate to={redirectLink} /> : <Component {...props} timer={timer} resetTimer={resetTimer} />;

@@ -30,7 +30,7 @@ const ResetPassword = () => {
         {t('account:resetPassword.header')}
       </Typography>
       <ResetPasswordForm code={code} onSuccess={redirectToHome} onFailure={redirectToInternalError} />
-      <Link to={RootRoutes.ROOT}>{t('buttons.toHomePage')}</Link>
+      <Link to={RootRoutes.ROOT}>{t('static:actions.toHomePage')}</Link>
     </Stack>
   );
 };

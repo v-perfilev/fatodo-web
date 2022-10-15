@@ -9,11 +9,11 @@ require('moment/locale/ru.js');
 export const languages = [
   {
     name: 'English',
-    code: 'EN',
+    code: 'en',
   },
   {
     name: 'Русский',
-    code: 'RU',
+    code: 'ru',
   },
 ];
 
@@ -22,9 +22,9 @@ export const initI18n = i18next
   .use(backend)
   .use(initReactI18next)
   .init({
-    debug: false,
+    debug: true,
     compatibilityJSON: 'v3',
-    fallbackLng: 'EN',
+    fallbackLng: 'en',
     ns: [
       'account',
       'calendar',
@@ -38,6 +38,7 @@ export const initI18n = i18next
       'item',
       'push',
       'snack',
+      'static',
       'translation',
       'user',
     ],

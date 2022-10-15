@@ -14,6 +14,8 @@ class AuthSelectors {
   static account = createSelector(getAuthState, (state) => state.account as UserAccount);
 
   static loading = createSelector(getAuthState, (state) => state.loading as boolean);
+
+  static error = createSelector(getAuthState, (state) => state.error as string);
 }
 
 export default AuthSelectors;

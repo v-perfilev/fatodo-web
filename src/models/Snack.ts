@@ -7,7 +7,7 @@ export interface ReduxSnack extends Snack {
 
 export interface Snack {
   message: string;
-  variant: VariantType;
+  variant: Omit<VariantType, 'default' | 'success'>;
 }
 
 export class SnackBuilder {
@@ -17,7 +17,7 @@ export class SnackBuilder {
     this.snack = {message, variant: 'info'};
   }
 
-  setVariantColor(variant: VariantType): SnackBuilder {
+  setVariantColor(variant: Omit<VariantType, 'default' | 'success'>): SnackBuilder {
     this.snack.variant = variant;
     return this;
   }

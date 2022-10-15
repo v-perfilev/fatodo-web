@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Formik, FormikProps} from 'formik';
 import {flowRight} from 'lodash';
 import withCaptcha, {CaptchaProps} from '../../../shared/hocs/withCaptcha';
@@ -14,6 +14,9 @@ import FormikTextInput from '../../../components/inputs/FormikTextInput';
 import LoadingButton from '../../../components/controls/LoadingButton';
 import FormikPasswordInput from '../../../components/inputs/FormikPasswordInput';
 import FormikCheckboxInput from '../../../components/inputs/FormikCheckboxInput';
+import {useNavigate} from 'react-router-dom';
+import {RootRoutes} from '../../../routes/RootRouter';
+import {SnackActions} from '../../../store/snack/snackActions';
 
 type SignInFormValues = {
   user: string;
@@ -39,7 +42,11 @@ type SignInFormProps = CaptchaProps;
 const SignInForm = ({getToken}: SignInFormProps) => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector(AuthSelectors.loading);
+  const error = useAppSelector(AuthSelectors.error);
+  const navigate = useNavigate();
   const {t} = useTranslation();
+
+  const redirectToNotActivated = (): void => navigate(RootRoutes.NOT_ACTIVATED);
 
   const handleSubmit = async (formValues: SignInFormValues): Promise<void> => {
     dispatch(AuthActions.setLoading(true));
@@ -49,9 +56,13 @@ const SignInForm = ({getToken}: SignInFormProps) => {
       password: formValues.password.trim(),
       token: captchaToken,
     };
-    // TODO handle redirect to not activated
     dispatch(AuthActions.authenticateThunk({dto, rememberMe: formValues.rememberMe}));
   };
+
+  useEffect(() => {
+    dispatch(SnackActions.handleCode('auth.activated', 'info'));
+    error === 'auth.notActivated' && redirectToNotActivated();
+  }, [error]);
 
   return (
     <Formik
@@ -66,11 +77,11 @@ const SignInForm = ({getToken}: SignInFormProps) => {
           <FormikPasswordInput name="password" label={t('account:fields.password.label')} disabled={loading} />
           <FormikCheckboxInput name="rememberMe" Label={{label: t('account:fields.rememberMe.label')}} />
           <LoadingButton
-            type="submit"
             color="secondary"
             fullWidth
             loading={loading}
             disabled={!formikProps.isValid || loading}
+            onClick={formikProps.submitForm}
           >
             {t('account:login.submit')}
           </LoadingButton>

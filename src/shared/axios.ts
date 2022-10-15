@@ -1,4 +1,4 @@
-import axios, {AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse} from 'axios';
+import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {API_TIMEOUT, API_URL} from '../constants';
 import {SecurityUtils} from './utils/SecurityUtils';
 import {ResponseUtils} from './utils/ResponseUtils';
@@ -31,9 +31,9 @@ export const setupAxiosInterceptors = ({onUnauthenticated, enqueueSnack, handleR
   };
 
   const logError = (response: AxiosResponse): void => {
-    const responsePath = response.data.path || 'unknown path';
-    const responseMsg = response.data.message || 'no message';
-    const consoleMsg = `Request failed: ${responsePath} - ${response.status}:  ${responseMsg}`;
+    const responsePath = response?.data.path || 'unknown path';
+    const responseMsg = response?.data.message || 'no message';
+    const consoleMsg = `Request failed: ${responsePath} - ${response?.status}:  ${responseMsg}`;
     console.warn(consoleMsg);
   };
 
@@ -79,13 +79,13 @@ export const setupAxiosInterceptors = ({onUnauthenticated, enqueueSnack, handleR
     }
   };
 
-  const defaultOnResponseError = (err: AxiosError): AxiosPromise => {
+  const defaultOnResponseError = (err: AxiosError): Promise<AxiosResponse> => {
     defaultHandleErrorFeedback(err.response);
     handleErrorStatus(err.response);
     return Promise.reject(err.response);
   };
 
-  const ignore404OnResponseError = (err: AxiosError): AxiosPromise => {
+  const ignore404OnResponseError = (err: AxiosError): Promise<AxiosResponse> => {
     ignore404handleErrorFeedback(err.response);
     handleErrorStatus(err.response);
     return Promise.reject(err.response);
@@ -100,7 +100,9 @@ export const setupAxiosInterceptors = ({onUnauthenticated, enqueueSnack, handleR
     return request;
   };
 
-  const onResponseSuccess = (response: AxiosResponse): AxiosResponse => response;
+  const onResponseSuccess = (response: AxiosResponse): AxiosResponse => {
+    return response;
+  };
 
   axiosDefault.interceptors.request.use(onRequest);
   axiosDefault.interceptors.response.use(onResponseSuccess, defaultOnResponseError);

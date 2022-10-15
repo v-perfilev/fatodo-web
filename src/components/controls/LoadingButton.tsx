@@ -7,7 +7,7 @@ type LoadingButtonProps = ButtonProps & {
 };
 
 const LoadingButton = ({children, loading, progressValue, ...props}: LoadingButtonProps) => {
-  const variant = props.variant || 'outlined';
+  const variant = props.variant || 'contained';
   const color = props.color || 'primary';
   const size = props.size || 'large';
   const progressSize = size === 'large' ? 26 : size === 'medium' ? 20 : 14;

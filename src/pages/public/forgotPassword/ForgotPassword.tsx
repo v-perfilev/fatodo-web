@@ -28,7 +28,7 @@ const ForgotPassword = () => {
         {t('account:forgotPassword.header')}
       </Typography>
       <ForgotPasswordForm onSuccess={redirectToHome} />
-      <Link to={RootRoutes.ROOT}>{t('buttons.toHomePage')}</Link>
+      <Link to={RootRoutes.ROOT}>{t('static:actions.toHomePage')}</Link>
     </Stack>
   );
 };

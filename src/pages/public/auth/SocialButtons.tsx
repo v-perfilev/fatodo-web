@@ -33,10 +33,10 @@ const SocialButtons = () => {
   };
 
   return (
-    <Stack spacing={2}>
+    <Stack width="100%" spacing={2}>
       <Box sx={headerStyles}>
         <Divider />
-        <Typography sx={captionStyles}>{t('auth.socialLogin')}</Typography>
+        <Typography sx={captionStyles}>{t('account:socialLogin.label')}</Typography>
         <Divider />
       </Box>
       <Stack spacing={2} direction="row">

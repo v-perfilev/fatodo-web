@@ -29,7 +29,6 @@ const leftBoxStyles: SxProps = {
   display: 'flex',
   flexGrow: 1,
   flexDirection: 'column',
-  justifyContent: 'space-around',
   alignItems: 'center',
   paddingY: 5,
 };
@@ -37,6 +36,8 @@ const leftBoxStyles: SxProps = {
 const leftBoxContainerStyles: SxProps = {
   width: 350,
   maxWidth: '90%',
+  height: '100%',
+  justifyContent: 'space-around',
 };
 
 const rightBoxStyles: SxProps = {

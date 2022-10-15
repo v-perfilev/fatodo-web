@@ -1,4 +1,4 @@
-import {Formik} from 'formik';
+import {Formik, FormikProps} from 'formik';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
@@ -53,15 +53,15 @@ const ForgotPasswordForm = ({getToken, onSuccess}: ForgotPasswordFormProps) => {
       validateOnMount
       onSubmit={handleSubmit}
     >
-      {(formikProps) => (
+      {(formikProps: FormikProps<ForgotPasswordFormValues>) => (
         <Stack flex={1} spacing={2}>
           <FormikTextInput name="user" label={t('account:fields.user.label')} isDisabled={loading} />
           <LoadingButton
-            type="submit"
             color="secondary"
             fullWidth
             loading={loading}
             disabled={!formikProps.isValid || loading}
+            onClick={formikProps.submitForm}
           >
             {t('account:forgotPassword.submit')}
           </LoadingButton>

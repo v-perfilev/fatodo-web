@@ -1,5 +1,5 @@
 import React from 'react';
-import {Formik} from 'formik';
+import {Formik, FormikProps} from 'formik';
 import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
@@ -70,18 +70,18 @@ const SignUpForm = ({getToken, onSuccess}: SignUpFormProps) => {
       validateOnMount
       onSubmit={handleSubmit}
     >
-      {(formikProps) => (
+      {(formikProps: FormikProps<SignUpFormValues>) => (
         <Stack sx={containerStyles} spacing={2} alignItems="center">
           <FormikTextInput name="email" label={t('account:fields.email.label')} disabled={loading} />
           <FormikTextInput name="username" label={t('account:fields.username.label')} disabled={loading} />
           <FormikPasswordInput name="password" label={t('account:fields.password.label')} disabled={loading} />
           <PasswordStrengthBar password={formikProps.values.password} />
           <LoadingButton
-            type="submit"
             color="secondary"
             fullWidth
             loading={loading}
             disabled={!formikProps.isValid || loading}
+            onClick={formikProps.submitForm}
           >
             {t('account:register.submit')}
           </LoadingButton>
