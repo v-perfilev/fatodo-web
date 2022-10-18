@@ -1,12 +1,10 @@
 import React, {ReactElement} from 'react';
-import {Box, MenuItem, Theme} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
 import CircularSpinner from '../../loaders/CircularSpinner';
 
 export type PopupMenuItemProps = {
   action: (e?: React.MouseEvent<HTMLElement>) => void;
-  icon: ReactElement;
-  text: string;
+  icon?: ReactElement;
+  text?: string;
   loading?: boolean;
   disabled?: boolean;
   show?: boolean;

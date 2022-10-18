@@ -3,7 +3,7 @@ import {Outlet} from 'react-router-dom';
 import {Box, SxProps} from '@mui/material';
 import {HEADER_HEIGHT} from '../../constants';
 import Header from '../../components/layouts/header/Header';
-import FBox from '../../components/surfaces/FBox';
+import FBox from '../../components/boxes/FBox';
 
 const ProtectedRouteOutlet = () => {
   return (

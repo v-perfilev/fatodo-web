@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
 import BadgeMessageIcon from '../../icons/badgeIcons/BadgeMessageIcon';
 import {RedirectMap} from './type';
@@ -11,8 +11,8 @@ import LogoutIcon from '../../icons/LogoutIcon';
 import {useAppSelector} from '../../../store/store';
 import ChatsSelectors from '../../../store/chats/chatsSelectors';
 import ContactsSelectors from '../../../store/contacts/contactsSelectors';
-import {Button, MenuItem, Stack, SxProps} from '@mui/material';
-import PopupMenu from '../../surfaces/popupMenu/PopupMenu';
+import {Button, Stack} from '@mui/material';
+import PopupMenu, {PopupMenuItem} from '../../surfaces/PopupMenu';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {accountToUser} from '../../../models/User';
 import UserView from '../../views/UserView';
@@ -25,13 +25,8 @@ const HorizontalMenu = ({redirectMap}: HorizontalMenuProps) => {
   const unreadCount = useAppSelector(ChatsSelectors.unreadCount);
   const incomingRequestCount = useAppSelector(ContactsSelectors.incomingRequestCount);
   const {t} = useTranslation();
-  const ref = useRef();
-  const [isOpen, setIsOpen] = useState(false);
 
   const user = accountToUser(account);
-
-  const handleClick = (): void => setIsOpen(true);
-  const handleClose = (): void => setIsOpen(false);
 
   return (
     <Stack spacing={2} direction="row" alignItems="center">
@@ -49,26 +44,28 @@ const HorizontalMenu = ({redirectMap}: HorizontalMenuProps) => {
         {t('routes.Contacts')}
       </Button>
       <LanguageSelect />
-      <Button color="primary" onClick={handleClick} ref={ref}>
-        <UserView user={user} withUsername />
-        <ArrowDownIcon />
-      </Button>
-      <PopupMenu anchorEl={ref?.current} open={isOpen} onClose={handleClose}>
-        <MenuItem onClick={redirectMap.toAccount}>
-          <AccountIcon sx={menuIconStyles} color="primary" />
-          {t('routes.AccountForm')}
-        </MenuItem>
-        <MenuItem onClick={redirectMap.logout}>
-          <LogoutIcon sx={menuIconStyles} color="primary" />
-          {t('account:actions.logout')}
-        </MenuItem>
+
+      <PopupMenu
+        trigger={
+          <Button color="primary">
+            <UserView user={user} withUsername />
+            <ArrowDownIcon />
+          </Button>
+        }
+      >
+        <PopupMenuItem
+          action={redirectMap.toAccount}
+          icon={<AccountIcon color="primary" />}
+          text={t('routes.AccountForm')}
+        />
+        <PopupMenuItem
+          action={redirectMap.logout}
+          icon={<LogoutIcon color="primary" />}
+          text={t('account:actions.logout')}
+        />
       </PopupMenu>
     </Stack>
   );
-};
-
-const menuIconStyles: SxProps = {
-  marginRight: 1,
 };
 
 export default HorizontalMenu;

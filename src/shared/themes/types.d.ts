@@ -1,8 +1,9 @@
-declare module '@material-ui/core/styles/createPalette' {
-  import {PaletteColor} from '@mui/material';
+declare module '@mui/material/styles/createPalette' {
+  interface PaletteOptions {
+    gradient: string;
+  }
 
   interface Palette {
-    tertiary: PaletteColor;
     gradient: string;
   }
 }

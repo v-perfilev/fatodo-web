@@ -1,7 +1,7 @@
 import React from 'react';
 import {Stack, SxProps} from '@mui/material';
 import {passwordStrengthMap, passwordStrengthPostfix, passwordStrengthPrefix} from '../../shared/validators';
-import FBox from '../surfaces/FBox';
+import FBox from '../boxes/FBox';
 
 type PasswordStrengthBarProps = {
   password: string;

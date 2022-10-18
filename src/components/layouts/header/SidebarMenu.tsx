@@ -3,8 +3,10 @@ import VerticalMenu from './VerticalMenu';
 import {RedirectMap} from './type';
 import ArrowRightIcon from '../../icons/ArrowRightIcon';
 import LanguageSelect from '../../controls/LanguageSelect';
-import {Box, Divider, Fab, SwipeableDrawer, SxProps, Toolbar} from '@mui/material';
+import {Divider, Fab, SwipeableDrawer, SxProps, Toolbar} from '@mui/material';
 import {HEADER_HEIGHT} from '../../../constants';
+import FBox from '../../boxes/FBox';
+import FCenter from '../../boxes/FCenter';
 
 type SidebarMenuProps = {
   show: boolean;
@@ -15,7 +17,7 @@ type SidebarMenuProps = {
 const SidebarMenu = ({show, onToggle, redirectMap}: SidebarMenuProps) => {
   return (
     <SwipeableDrawer anchor="right" open={show} onOpen={onToggle} onClose={onToggle}>
-      <Box sx={containerStyles}>
+      <FBox sx={containerStyles}>
         <Toolbar sx={toolbarStyles}>
           <Fab size="small" color="primary" onClick={onToggle}>
             <ArrowRightIcon />
@@ -23,8 +25,10 @@ const SidebarMenu = ({show, onToggle, redirectMap}: SidebarMenuProps) => {
         </Toolbar>
         <Divider />
         <VerticalMenu redirectMap={redirectMap} />
-        <LanguageSelect list />
-      </Box>
+        <FCenter paddingY={2}>
+          <LanguageSelect />
+        </FCenter>
+      </FBox>
     </SwipeableDrawer>
   );
 };

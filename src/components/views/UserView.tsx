@@ -3,7 +3,7 @@ import {Box, Stack} from '@mui/material';
 import {User} from '../../models/User';
 import {PicSizeType} from '../../../src_old/components/images/UrlPic';
 import UrlPic from '../images/UrlPic';
-import PaperBox from '../surfaces/PaperBox';
+import PaperBox from '../boxes/PaperBox';
 
 type UserViewProps = HTMLAttributes<HTMLElement> & {
   user: User;

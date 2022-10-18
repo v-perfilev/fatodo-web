@@ -1,13 +1,12 @@
-import React, {HTMLAttributes, useRef, useState} from 'react';
+import React from 'react';
 import LanguageIcon from '../icons/LanguageIcon';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
 import {LanguageUtils} from '../../shared/utils/LanguageUtils';
-import {Box, Button, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, SxProps} from '@mui/material';
+import {Button} from '@mui/material';
 import {languages} from '../../shared/i18n';
-import PopupMenu from '../surfaces/popupMenu/PopupMenu';
-import {styled} from '@mui/styles';
+import PopupMenu, {PopupMenuItem} from '../surfaces/PopupMenu';
 
-type LanguageSelectProps = HTMLAttributes<HTMLElement> & {
+type LanguageSelectProps = {
   list?: boolean;
 };
 
@@ -20,63 +19,25 @@ const getShortNameByCode = (code: string, list: boolean): string => {
   return list ? name : getShortName(name);
 };
 
-const LanguageSelect = ({list, className}: LanguageSelectProps) => {
-  const ref = useRef();
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = (): void => setIsOpen(true);
-  const handleClose = (): void => setIsOpen(false);
-
+const LanguageSelect = ({list}: LanguageSelectProps) => {
   const changeLanguage = (code: string): void => {
     LanguageUtils.setLanguage(code);
-    setIsOpen(false);
   };
 
-  const listElement = (
-    <List component="nav">
-      <ListItemButton ref={ref} onClick={handleClick}>
-        <StyledListItemIcon>
-          <LanguageIcon sx={iconStyles} />
-        </StyledListItemIcon>
-        <ListItemText>{getShortNameByCode(LanguageUtils.getLanguage(), list)}</ListItemText>
-      </ListItemButton>
-    </List>
-  );
-
   const buttonElement = (
-    <Button color="primary" startIcon={<LanguageIcon />} ref={ref} onClick={handleClick}>
+    <Button color="primary" startIcon={<LanguageIcon />}>
       {getShortNameByCode(LanguageUtils.getLanguage(), list)}
       <ArrowDownIcon />
     </Button>
   );
 
-  const popupMenu = (
-    <PopupMenu anchorEl={ref?.current} open={isOpen} onClose={handleClose}>
-      <Box>
-        {languages.map((language, index) => (
-          <MenuItem onClick={(): void => changeLanguage(language.code)} key={index}>
-            {language.name}
-          </MenuItem>
-        ))}
-      </Box>
+  return (
+    <PopupMenu trigger={buttonElement}>
+      {languages.map((language, index) => (
+        <PopupMenuItem action={() => changeLanguage(language.code)} text={language.name} key={index} />
+      ))}
     </PopupMenu>
   );
-
-  return (
-    <Box className={className}>
-      {list ? listElement : buttonElement}
-      {popupMenu}
-    </Box>
-  );
 };
-
-const iconStyles: SxProps = {
-  color: 'primary.main',
-};
-
-const StyledListItemIcon = styled(ListItemIcon)({
-  minWidth: 0,
-  marginRight: '16px',
-});
 
 export default LanguageSelect;
