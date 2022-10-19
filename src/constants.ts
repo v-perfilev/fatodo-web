@@ -30,3 +30,6 @@ export const CALENDAR_LOAD_INDENT = 5;
 
 // BUILDERS
 export const ID_STUB = 'ID_STUB';
+
+// AVATARS
+export const AVATARS_IN_CARD = 3;

@@ -17,12 +17,14 @@ type PopupMenuProps = PropsWithChildren<{
 }>;
 
 export const PopupMenuItem = ({action, icon, text, loading, disabled, hidden}: PopupMenuItemProps) => {
+  const iconElement = icon ? React.cloneElement(icon, {fontSize: 'small'}) : undefined;
+
   return (
     !hidden && (
       <MenuItem disabled={disabled} onClick={action}>
         <FHStack spacing={1}>
-          {loading ? <CircularSpinner size="xs" /> : icon}
-          <Typography>{text}</Typography>
+          {loading ? <CircularSpinner size="xs" /> : iconElement}
+          <Typography fontSize={14}>{text}</Typography>
         </FHStack>
       </MenuItem>
     )
@@ -68,6 +70,7 @@ const PopupMenu = ({trigger, children}: PopupMenuProps) => {
         anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
         transformOrigin={{vertical: 'top', horizontal: 'center'}}
         MenuListProps={{disablePadding: true}}
+        PaperProps={{sx: {borderRadius: 3}}}
         open={isOpen}
         onClose={handleClose}
       >

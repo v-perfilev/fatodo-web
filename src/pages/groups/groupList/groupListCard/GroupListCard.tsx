@@ -12,7 +12,7 @@ import FVStack from '../../../../components/boxes/FVStack';
 type GroupListCardProps = {
   group: Group;
   sorting: boolean;
-  drag: () => void;
+  drag: any;
 };
 
 const GroupListCard = ({group, sorting, drag}: GroupListCardProps) => {

@@ -12,6 +12,7 @@ import {GroupRouteUtils} from '../../../../routes/GroupRouter';
 import {ItemRouteUtils} from '../../../../routes/ItemRouter';
 import {Button} from '@mui/material';
 import BoxWithIcon from '../../../../components/boxes/BoxWithIcon';
+import GroupListCardAvatars from './GroupListCardAvatars';
 
 type GroupListCardHeaderProps = {
   group: Group;
@@ -27,14 +28,13 @@ const GroupListCardInfo = ({group, items, itemsCount}: GroupListCardHeaderProps)
 
   const goToGroupView = (): void => navigate(GroupRouteUtils.getViewUrl(group.id));
   const goToItemCreate = (): void => navigate(ItemRouteUtils.getCreateUrl(group.id));
-  const goToComments = (): void => console.log('navigate comment list');
 
   const showButtonToGroupView = itemsCount !== items.length;
   const showButtonToCreateItem = itemsCount === 0;
 
   return (
-    <FHStack height="45px" px={2} my={1}>
-      {/*<GroupListCardAvatars group={group} />*/}
+    <FHStack height="45px" px={2} mt={1}>
+      <GroupListCardAvatars group={group} />
       <FHStack justifyContent="center">
         {showButtonToGroupView && (
           <Button variant="text" onClick={goToGroupView}>
@@ -47,10 +47,26 @@ const GroupListCardInfo = ({group, items, itemsCount}: GroupListCardHeaderProps)
           </Button>
         )}
       </FHStack>
-      <BoxWithIcon icon={<ItemsIcon color="primary" />}>{itemsCount || 0}</BoxWithIcon>
-      <BoxWithIcon icon={<CommentsIcon color="primary" />} onClick={goToComments}>
-        {commentThread?.count || 0}
-      </BoxWithIcon>
+      <FHStack>
+        {showButtonToGroupView && (
+          <Button variant="text" onClick={goToGroupView}>
+            {t('group:actions.showAll')}
+          </Button>
+        )}
+        {showButtonToCreateItem && (
+          <Button variant="text" onClick={goToItemCreate}>
+            {t('group:actions.createItem')}
+          </Button>
+        )}
+      </FHStack>
+      <FHStack flexGrow={0} spacing={2}>
+        <BoxWithIcon icon={<ItemsIcon color="primary" />} size="small" fontSize={13} color="grey.500">
+          {itemsCount || 0}
+        </BoxWithIcon>
+        <BoxWithIcon icon={<CommentsIcon color="primary" />} size="small" fontSize={13} color="grey.500">
+          {commentThread?.count || 0}
+        </BoxWithIcon>
+      </FHStack>
     </FHStack>
   );
 };

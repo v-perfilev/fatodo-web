@@ -1,33 +1,26 @@
 import React from 'React';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {GroupsActions} from '../../../store/groups/groupsActions';
-import VirtualizedList, {VirtualizedListMethods} from '../../../components/layouts/virtualizedList/VirtualizedList';
+import VirtualizedList, {VirtualizedListMethods} from '../../../components/layouts/lists/VirtualizedList';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
-import {useNavigate} from 'react-router-dom';
 import GroupsSelectors from '../../../store/groups/groupsSelectors';
-import {useDelayedState} from '../../../shared/hooks/useDelayedState';
-import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import GroupListCard from './groupListCard/GroupListCard';
 import {Group} from '../../../models/Group';
 import {ListChildComponentProps} from 'react-window';
+import SortableList from '../../../components/layouts/lists/SortableList';
+import PageContainer from '../../../components/layouts/PageContainer';
+import {Container, Fab} from '@mui/material';
+import GroupListHeader from './GroupListHeader';
+import FBox from '../../../components/boxes/FBox';
+import ArrowUpIcon from '../../../components/icons/ArrowUpIcon';
 
 const GroupList = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const groups = useAppSelector(GroupsSelectors.groups);
-  const [loading, setLoading] = useDelayedState();
   const [sorting, setSorting] = useState<boolean>(false);
+  const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
+  const [order, setOrder] = useState<number[]>(undefined);
   const listRef = useRef<VirtualizedListMethods>();
-
-  const goToGroupCreate = useCallback(() => navigate(GroupRouteUtils.getCreateUrl()), []);
-
-  /*
-  loaders
-   */
-
-  const refresh = useCallback(async (): Promise<void> => {
-    await dispatch(GroupsActions.fetchGroupsThunk());
-  }, []);
 
   /*
   keyExtractor and renderItem
@@ -41,19 +34,13 @@ const GroupList = () => {
   );
 
   const itemRenderer = useCallback(
-    ({data, index}: ListChildComponentProps<Group[]>) => (
-      <GroupListCard group={data[index]} sorting={sorting} drag={sorting ? undefined : undefined} />
+    ({data, index}: ListChildComponentProps<Group[]>, drag?: any) => (
+      <Container>
+        <GroupListCard group={data[index]} sorting={sorting} drag={drag} />
+      </Container>
     ),
     [groups, sorting],
   );
-
-  /*
-  dragHandler
-   */
-
-  // const handleDragEnd = useCallback(({data}: DragEndParams<Group>): void => {
-  //   dispatch(GroupsActions.setGroups(data));
-  // }, []);
 
   /*
   scroll up button
@@ -66,17 +53,41 @@ const GroupList = () => {
    */
 
   useEffect(() => {
-    dispatch(GroupsActions.fetchGroupsThunk()).finally(() => setLoading(false));
+    groups.length === 0 && dispatch(GroupsActions.fetchGroupsThunk());
   }, []);
 
   return (
-    <VirtualizedList
-      itemRenderer={itemRenderer}
-      keyExtractor={keyExtractor}
-      itemData={groups}
-      itemCount={groups.length}
-      virtualizedListRef={listRef}
-    />
+    <PageContainer>
+      <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} />
+      <FBox>
+        {sorting ? (
+          <SortableList
+            itemRenderer={itemRenderer}
+            data={groups}
+            dataCount={groups.length}
+            setOrder={setOrder}
+            paddingTop={53}
+          />
+        ) : (
+          <>
+            <VirtualizedList
+              itemRenderer={itemRenderer}
+              keyExtractor={keyExtractor}
+              data={groups}
+              dataCount={groups.length}
+              paddingTop={53}
+              setIsOnTop={setHideScrollButton}
+              virtualizedListRef={listRef}
+            />
+            {!sorting && !hideScrollButton && (
+              <Fab size="medium" sx={{position: 'absolute', bottom: 10, right: 10}} onClick={scrollUp}>
+                <ArrowUpIcon />
+              </Fab>
+            )}
+          </>
+        )}
+      </FBox>
+    </PageContainer>
   );
 };
 

@@ -2,7 +2,7 @@ import React from 'React';
 import {useCallback} from 'react';
 import {ListChildComponentProps} from 'react-window';
 import {Box} from '@mui/material';
-import VirtualizedList from '../../../components/layouts/virtualizedList/VirtualizedList';
+import VirtualizedList from '../../../components/layouts/lists/VirtualizedList';
 
 const GroupView = () => {
   const data: {key: string; value: string}[] = Array.from({length: 100}).map((_, index) => {
@@ -18,7 +18,7 @@ const GroupView = () => {
     return <Box bgcolor={data[index].value} width="100%" height="100px" />;
   }, []);
 
-  return <VirtualizedList itemRenderer={itemRenderer} keyExtractor={keyExtractor} itemData={data} itemCount={100} />;
+  return <VirtualizedList itemRenderer={itemRenderer} keyExtractor={keyExtractor} data={data} dataCount={100} />;
 };
 
 export default GroupView;

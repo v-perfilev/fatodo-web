@@ -3,12 +3,12 @@ import ReorderIcon from '../../../../components/icons/ReorderIcon';
 import {IconButton} from '@mui/material';
 
 type GroupListCardDragButtonProps = {
-  drag: () => void;
+  drag: any;
 };
 
-const GroupListCardDragButton = ({drag}: GroupListCardDragButtonProps) => {
+const GroupListCardDragButton = ({drag: bind}: GroupListCardDragButtonProps) => {
   return (
-    <IconButton onDrag={drag}>
+    <IconButton color="primary" {...bind}>
       <ReorderIcon />
     </IconButton>
   );

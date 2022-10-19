@@ -6,8 +6,8 @@ export type SortingSize = {
 };
 
 export type SortingSizes = {
-  container: SortingSize;
-  item: SortingSize;
+  container: {width: number; height: number};
+  item: {width: number; height: number};
 };
 
 export type StyleArgs = {

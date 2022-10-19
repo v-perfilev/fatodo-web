@@ -13,9 +13,10 @@ import TruncatedTypography from '../surfaces/TruncatedTypography';
 type StatusViewProps = TypographyProps & {
   statusType: ItemStatusType;
   withoutText?: boolean;
+  size?: 'large' | 'medium' | 'small';
 };
 
-const StatusView = ({statusType, fontSize, color, withoutText}: StatusViewProps) => {
+const StatusView = ({statusType, fontSize, color, size, withoutText}: StatusViewProps) => {
   const {t, i18n} = useTranslation();
 
   const getIcon = (): ReactElement => {
@@ -31,7 +32,7 @@ const StatusView = ({statusType, fontSize, color, withoutText}: StatusViewProps)
     }
   };
 
-  const icon = React.cloneElement(getIcon(), {color: 'primary', mt: !withoutText ? 0.5 : undefined});
+  const icon = React.cloneElement(getIcon(), {color: 'primary', fontSize: size, mt: !withoutText ? 0.5 : undefined});
   const text = useMemo(() => t('common:statuses.' + statusType), [statusType, i18n.language]);
 
   const onlyIcon = <FCenter>{icon}</FCenter>;

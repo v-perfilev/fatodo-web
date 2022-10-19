@@ -12,9 +12,10 @@ import TruncatedTypography from '../surfaces/TruncatedTypography';
 type PriorityViewProps = TypographyProps & {
   priority: ItemPriorityType;
   withoutText?: boolean;
+  size?: 'large' | 'medium' | 'small';
 };
 
-export const PriorityView = ({priority, fontSize, color, withoutText}: PriorityViewProps) => {
+export const PriorityView = ({priority, fontSize, color, size, withoutText}: PriorityViewProps) => {
   const {t, i18n} = useTranslation();
 
   const getIcon = (priority: ItemPriorityType): ReactElement => {
@@ -28,7 +29,7 @@ export const PriorityView = ({priority, fontSize, color, withoutText}: PriorityV
     }
   };
 
-  const icon = React.cloneElement(getIcon(priority), {mt: !withoutText ? 0.5 : undefined});
+  const icon = React.cloneElement(getIcon(priority), {fontSize: size, mt: !withoutText ? 0.5 : undefined});
   const text = useMemo(() => t('common:priorities.' + priority), [priority, i18n.language]);
 
   const onlyIcon = <FCenter>{icon}</FCenter>;

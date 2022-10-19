@@ -6,15 +6,15 @@ import {Avatar, AvatarProps, SxProps} from '@mui/material';
 
 type UrlPicProps = AvatarProps & {
   url: string;
-  invertedBorder?: boolean;
+  size?: number;
 };
 
-const UrlPic = ({url, invertedBorder, ...props}: UrlPicProps) => {
-  // TODO calculate size
-  const src = url ? ImageUtils.buildImageUri(url, true) : FALLBACK_AVATAR;
+const UrlPic = ({url, size = 40, ...props}: UrlPicProps) => {
+  const isThumbnail = size < 100;
+  const src = url ? ImageUtils.buildImageUri(url, isThumbnail) : FALLBACK_AVATAR;
 
   return (
-    <Avatar sx={avatarStyles} src={src} {...props}>
+    <Avatar sx={{...avatarStyles, width: size, height: size}} src={src} {...props}>
       <FallbackPic />
     </Avatar>
   );
@@ -24,9 +24,6 @@ const avatarStyles: SxProps = {
   borderStyle: 'solid',
   borderColor: 'primary.main',
   backgroundColor: 'gray.50',
-  '& img': {
-    height: '100%',
-  },
 };
 
 export default UrlPic;

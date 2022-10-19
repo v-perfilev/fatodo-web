@@ -36,10 +36,9 @@ const Header = ({flexible}: HeaderProps) => {
 
   return (
     <Slide appear={false} in={!flexible || !trigger}>
-      <AppBar sx={appbarStyles} elevation={3}>
+      <AppBar sx={appbarStyles} variant="outlined" elevation={0}>
         <Toolbar sx={toolbarStyles}>
           <LogoWithText href={RootRoutes.ROOT} />
-          {/*<Grower />*/}
           <Hidden smDown>
             <HorizontalMenu redirectMap={redirectMap} />
           </Hidden>
@@ -56,14 +55,15 @@ const Header = ({flexible}: HeaderProps) => {
 };
 
 const appbarStyles: SxProps = {
+  height: HEADER_HEIGHT,
+  minHeight: HEADER_HEIGHT,
   backgroundColor: 'background.paper',
 };
 
 const toolbarStyles: SxProps = {
   height: HEADER_HEIGHT,
-  minHeight: HEADER_HEIGHT,
-  paddingLeft: 2,
-  paddingRight: 2,
+  minHeight: `${HEADER_HEIGHT}px !important`,
+  paddingX: 1,
   justifyContent: 'space-between',
 };
 

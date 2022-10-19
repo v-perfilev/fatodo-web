@@ -3,7 +3,6 @@ import React, {
   PropsWithChildren,
   ReactElement,
   Ref,
-  RefObject,
   useCallback,
   useEffect,
   useImperativeHandle,
@@ -29,12 +28,16 @@ export type VirtualizedListMethods = {
 
 type VirtualizedListProps<T> = {
   itemRenderer: (params: ListChildComponentProps) => ReactElement;
-  itemData: T[];
-  itemCount: number;
+  data: T[];
+  dataCount: number;
   loadMoreItems?: () => Promise<void>;
   itemHeight?: number;
   keyExtractor?: (index: number) => string;
   reverseOrder?: boolean;
+  paddingTop?: number;
+  paddingBottom?: number;
+  setIsOnTop?: (isOnTop: boolean) => void;
+  setIsOnBottom?: (isOnBottom: boolean) => void;
   virtualizedListRef?: Ref<VirtualizedListMethods>;
 };
 
@@ -68,8 +71,9 @@ const VirtualizedListMeasurer = ({index, itemKey, measurerCache, listRef, childr
 };
 
 const VirtualizedList = (props: VirtualizedListProps<any>) => {
-  const {itemRenderer, itemData, itemCount, loadMoreItems} = props;
+  const {itemRenderer, data, dataCount, loadMoreItems} = props;
   const {itemHeight, keyExtractor, reverseOrder, virtualizedListRef} = props;
+  const {paddingTop = 0, paddingBottom = 0, setIsOnTop, setIsOnBottom} = props;
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [scroll, setScroll] = useState<ListOnScrollProps>();
   const measurerCache = useRef<ListMeasurerCache>(new ListMeasurerCache()).current;
@@ -88,8 +92,8 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
   );
 
   const getScrollHeight = useCallback((): number => {
-    return isDynamic ? measurerCache.getTotalHeight() : itemHeight * itemData.length;
-  }, [isDynamic, itemData]);
+    return isDynamic ? measurerCache.getTotalHeight() : itemHeight * data.length;
+  }, [isDynamic, data]);
 
   const scrollToPosition = useCallback((position: number): void => {
     listRef.current?.scrollTo(position);
@@ -100,8 +104,8 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
   }, []);
 
   const scrollToBottom = useCallback((): void => {
-    listRef.current?.scrollToItem(itemData.length - 1);
-  }, [itemData]);
+    listRef.current?.scrollToItem(data.length - 1);
+  }, [data]);
 
   const isScrolledToTop = useMemo<boolean>(() => {
     const scrollTop = scroll?.scrollOffset;
@@ -148,20 +152,35 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
 
   // RENDER PARAMS
 
+  useEffect(() => {
+    setIsOnTop && setIsOnTop(isScrolledToTop);
+  }, [isScrolledToTop]);
+
+  useEffect(() => {
+    setIsOnBottom && setIsOnBottom(isScrolledToBottom);
+  }, [isScrolledToBottom]);
+
   const isItemLoaded = useCallback(
     (index: number): boolean => {
-      const loadedCount = itemData.length;
-      const allLoaded = loadedCount === itemData.length;
+      const loadedCount = data.length;
+      const allLoaded = loadedCount === data.length;
       return reverseOrder ? index > 0 || allLoaded : index < loadedCount || allLoaded;
     },
-    [itemData, itemCount],
+    [data, dataCount],
   );
 
   const getItemSize = useCallback(
     (index: number): number => {
-      return isDynamic ? measurerCache.getHeight(keyExtractor(index)) : itemHeight;
+      const height = isDynamic ? measurerCache.getHeight(keyExtractor(index)) : itemHeight;
+      if (index === 0) {
+        return height + paddingTop;
+      } else if (index === dataCount - 1) {
+        return height + paddingBottom;
+      } else {
+        return height;
+      }
     },
-    [keyExtractor],
+    [keyExtractor, dataCount],
   );
 
   const updateVisibleItems = useCallback((props: ListOnItemsRenderedProps): void => {
@@ -173,8 +192,16 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
 
   const renderer = useCallback(
     (params: ListChildComponentProps) => {
+      let style;
+      if (params.index === 0) {
+        style = {paddingTop, ...params.style};
+      } else if (params.index === dataCount - 1) {
+        style = {paddingBottom, ...params.style};
+      } else {
+        style = params.style;
+      }
       return isDynamic ? (
-        <div style={params.style}>
+        <div style={style}>
           <VirtualizedListMeasurer
             index={params.index}
             itemKey={keyExtractor}
@@ -185,10 +212,10 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
           </VirtualizedListMeasurer>
         </div>
       ) : (
-        <div style={params.style}>{itemRenderer(params)}</div>
+        <div style={style}>{itemRenderer(params)}</div>
       );
     },
-    [itemRenderer, keyExtractor],
+    [itemRenderer, keyExtractor, dataCount],
   );
 
   // RENDER METHODS
@@ -196,27 +223,25 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
   return (
     <AutoSizer>
       {({height, width}): ReactElement => (
-        <>
-          <InfiniteLoader isItemLoaded={isItemLoaded} loadMoreItems={loadMoreItems} itemCount={itemCount}>
-            {({onItemsRendered, ref}) => (
-              <VariableSizeList
-                ref={RefUtils.merge(listRef, ref)}
-                height={height}
-                width={width}
-                itemData={itemData}
-                itemCount={itemCount}
-                itemSize={getItemSize}
-                onScroll={setScroll}
-                onItemsRendered={(props) => {
-                  onItemsRendered(props);
-                  updateVisibleItems(props);
-                }}
-              >
-                {renderer}
-              </VariableSizeList>
-            )}
-          </InfiniteLoader>
-        </>
+        <InfiniteLoader isItemLoaded={isItemLoaded} loadMoreItems={loadMoreItems} itemCount={dataCount}>
+          {({onItemsRendered, ref}) => (
+            <VariableSizeList
+              ref={RefUtils.merge(listRef, ref)}
+              height={height}
+              width={width}
+              itemData={data}
+              itemCount={dataCount}
+              itemSize={getItemSize}
+              onScroll={setScroll}
+              onItemsRendered={(props) => {
+                onItemsRendered(props);
+                updateVisibleItems(props);
+              }}
+            >
+              {renderer}
+            </VariableSizeList>
+          )}
+        </InfiniteLoader>
       )}
     </AutoSizer>
   );

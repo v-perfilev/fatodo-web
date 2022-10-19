@@ -8,7 +8,7 @@ type CollapsedIconProps = IconProps & {
 };
 
 const CollapsedIcon = ({collapsed, ...props}: CollapsedIconProps) => {
-  const style = useSpring({transform: collapsed ? 'rotate(360deg)' : 'rotate(180deg)'});
+  const style = useSpring({transform: collapsed ? 'rotate(180deg)' : 'rotate(360deg)'});
 
   return (
     <animated.div style={{display: 'flex', ...style}}>

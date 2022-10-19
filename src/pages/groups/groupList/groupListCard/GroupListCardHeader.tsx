@@ -15,7 +15,7 @@ type GroupListCardHeaderProps = {
   group: Group;
   collapsed: boolean;
   sorting: boolean;
-  drag: () => void;
+  drag: any;
 };
 
 const GroupListCardHeader = ({group, collapsed, sorting, drag}: GroupListCardHeaderProps) => {
@@ -53,6 +53,11 @@ const containerStyles: SxProps = {
   height: 50,
   borderRadius: 3,
   paddingX: 1,
+  backgroundColor: 'white',
+  cursor: 'pointer',
+  '&:hover': {
+    backgroundColor: 'grey.200',
+  },
 };
 
 const backgroundStyles: SxProps = (theme: Theme) => ({

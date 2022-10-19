@@ -8,7 +8,7 @@ import FVStack from '../../../../components/boxes/FVStack';
 import {GroupUtils} from '../../../../shared/utils/GroupUtils';
 import {useAppSelector} from '../../../../store/store';
 import AuthSelectors from '../../../../store/auth/authSelectors';
-import {Divider} from '@mui/material';
+import PageDivider from '../../../../components/layouts/PageDivider';
 
 type GroupListCardContentProps = {
   group: Group;
@@ -23,13 +23,13 @@ const GroupListCardContent = ({group, items, itemsCount, loading}: GroupListCard
   const canEdit = group && GroupUtils.canEdit(account, group);
 
   return (
-    <FVStack>
+    <FVStack spacing={0}>
       {loading && <GroupListCardSkeleton />}
       {!loading &&
         items.slice(0, 5).map((item, index) => (
-          <FVStack key={index}>
-            <GroupItem item={item} group={group} canEdit={canEdit} />
-            <Divider />
+          <FVStack spacing={0} key={index}>
+            <GroupItem item={item} canEdit={canEdit} />
+            <PageDivider />
           </FVStack>
         ))}
       {!loading && <GroupListCardInfo group={group} items={items} itemsCount={itemsCount} />}

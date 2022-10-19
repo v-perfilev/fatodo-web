@@ -13,9 +13,10 @@ import TruncatedTypography from '../surfaces/TruncatedTypography';
 type TypeViewProps = TypographyProps & {
   type: ItemType;
   withoutText?: boolean;
+  size?: 'large' | 'medium' | 'small';
 };
 
-export const TypeView = ({type, fontSize, color, withoutText}: TypeViewProps) => {
+export const TypeView = ({type, fontSize, color, size, withoutText}: TypeViewProps) => {
   const {t, i18n} = useTranslation();
 
   const getIcon = (): ReactElement => {
@@ -31,7 +32,7 @@ export const TypeView = ({type, fontSize, color, withoutText}: TypeViewProps) =>
     }
   };
 
-  const icon = React.cloneElement(getIcon(), {color: 'primary', mt: !withoutText ? 0.5 : undefined});
+  const icon = React.cloneElement(getIcon(), {color: 'primary', fontSize: size, mt: !withoutText ? 0.5 : undefined});
   const text = useMemo(() => t('common:types.' + type), [type, i18n.language]);
 
   const onlyIcon = <FCenter>{icon}</FCenter>;

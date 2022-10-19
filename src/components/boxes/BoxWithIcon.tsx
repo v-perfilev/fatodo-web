@@ -1,16 +1,22 @@
-import React, {ReactNode} from 'react';
-import {StackProps, Typography} from '@mui/material';
+import React, {ReactElement} from 'react';
+import {Typography, TypographyProps} from '@mui/material';
 import FHStack from './FHStack';
 
-type BoxWithIconProps = StackProps & {
-  icon: ReactNode;
+type BoxWithIconProps = TypographyProps & {
+  icon: ReactElement;
+  size?: 'large' | 'medium' | 'small';
+  fontSize?: number;
 };
 
-const BoxWithIcon = ({icon, children}: BoxWithIconProps) => {
+const BoxWithIcon = ({icon, size, fontSize, children, ...props}: BoxWithIconProps) => {
+  const iconElement = React.cloneElement(icon, {fontSize: size});
+
   return (
     <FHStack spacing={1} flexGrow={0}>
-      {icon}
-      <Typography variant="body2">{children}</Typography>
+      {iconElement}
+      <Typography fontSize={fontSize} {...props}>
+        {children}
+      </Typography>
     </FHStack>
   );
 };

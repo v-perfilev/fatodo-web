@@ -68,4 +68,20 @@ export class ArrayUtils {
     }
     return arrayCopy;
   };
+
+  public static move = (array: any[], oldIndex: number, newIndex): any[] => {
+    const clonedArray = [...array];
+    if (newIndex >= clonedArray.length) {
+      let k = newIndex - clonedArray.length + 1;
+      while (k--) {
+        clonedArray.push(undefined);
+      }
+    }
+    clonedArray.splice(newIndex, 0, clonedArray.splice(oldIndex, 1)[0]);
+    return clonedArray;
+  };
+
+  public static clamp = (value: number, min: number, max: number): number => {
+    return Math.min(Math.max(value, min), max);
+  };
 }
