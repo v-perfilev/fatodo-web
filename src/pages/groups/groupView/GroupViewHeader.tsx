@@ -13,6 +13,7 @@ import MembersIcon from '../../../components/icons/MembersIcon';
 import LeaveIcon from '../../../components/icons/LeaveIcon';
 import DeleteIcon from '../../../components/icons/DeleteIcon';
 import {GroupRouteUtils} from '../../../routes/GroupRouter';
+import UrlPic from '../../../components/images/UrlPic';
 
 type GroupViewHeaderProps = {
   refresh: () => void;
@@ -29,6 +30,7 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived}: GroupViewHead
   const canAdmin = group && GroupUtils.canAdmin(account, group);
   const canLeave = group && GroupUtils.canLeave(account, group);
 
+  const goToGroups = (): void => navigate(GroupRouteUtils.getListUrl());
   const goToGroupEdit = (): void => navigate(GroupRouteUtils.getEditUrl(group?.id));
 
   const menuItems: PageMenuItem[] = [
@@ -67,8 +69,10 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived}: GroupViewHead
     },
   ];
 
+  const image = group?.imageFilename && <UrlPic url={group?.imageFilename} />;
+
   return (
-    <PageHeader title={group?.title}>
+    <PageHeader position="absolute" image={image} title={group?.title} goBackAction={goToGroups}>
       <PageMenu items={menuItems} />
     </PageHeader>
   );

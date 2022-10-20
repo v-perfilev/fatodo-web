@@ -31,7 +31,6 @@ export default class ItemService {
     const url = ItemService.baseUrl + '/group';
     const config: AxiosRequestConfig = {
       headers: {'content-type': 'multipart/form-data'},
-      transformRequest: (_) => formData,
     };
     return axios.post(url, formData, config);
   };
@@ -40,7 +39,6 @@ export default class ItemService {
     const url = ItemService.baseUrl + '/group';
     const config: AxiosRequestConfig = {
       headers: {'content-type': 'multipart/form-data'},
-      transformRequest: (_) => formData,
     };
     return axios.put(url, formData, config);
   };

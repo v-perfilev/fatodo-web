@@ -1,8 +1,37 @@
 import React from 'React';
-import {Box} from '@mui/material';
+import {useAppDispatch} from '../../../store/store';
+import {useNavigate} from 'react-router-dom';
+import {Group} from '../../../models/Group';
+import {GroupRouteUtils} from '../../../routes/GroupRouter';
+import {GroupActions} from '../../../store/group/groupActions';
+import PageContainer from '../../../components/layouts/PageContainer';
+import PageHeader from '../../../components/layouts/PageHeader';
+import {useTranslation} from 'react-i18next';
+import GroupForm from '../groupForm/GroupForm';
+import {Container} from '@mui/material';
 
 const GroupCreate = () => {
-  return <Box>Group create</Box>;
+  const dispatch = useAppDispatch();
+  const {t} = useTranslation();
+  const navigate = useNavigate();
+
+  const goBack = (): void => navigate(-1);
+  const goToGroupView = (group: Group): void => navigate(GroupRouteUtils.getViewUrl(group.id));
+
+  const request = (formData: FormData, stopSubmitting: () => void): void => {
+    dispatch(GroupActions.createGroupThunk(formData))
+      .unwrap()
+      .then((group) => goToGroupView(group))
+      .catch(() => stopSubmitting());
+  };
+  return (
+    <PageContainer>
+      <PageHeader title={t('routes.GroupCreate')} />
+      <Container sx={{marginY: 1}}>
+        <GroupForm request={request} cancel={goBack} />
+      </Container>
+    </PageContainer>
+  );
 };
 
 export default GroupCreate;

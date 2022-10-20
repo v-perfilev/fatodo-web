@@ -6,8 +6,6 @@ import GroupSelectors from '../../../store/group/groupSelectors';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {GroupUtils} from '../../../shared/utils/GroupUtils';
-import {useNavigate} from 'react-router-dom';
-import {ItemRouteUtils} from '../../../routes/ItemRouter';
 import {GroupActions} from '../../../store/group/groupActions';
 import {Item} from '../../../models/Item';
 import {ListChildComponentProps} from 'react-window';
@@ -16,6 +14,9 @@ import GroupItem from '../components/groupItem/GroupItem';
 import PageContainer from '../../../components/layouts/PageContainer';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import GroupViewHeader from './GroupViewHeader';
+import {flowRight} from 'lodash';
+import withThemeProvider from '../../../shared/hocs/withThemeProvider';
+import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 
 const GroupView = ({group, groupId, loading}: WithGroupProps) => {
   const [showArchived, setShowArchived] = useState<boolean>(false);
@@ -25,15 +26,12 @@ const GroupView = ({group, groupId, loading}: WithGroupProps) => {
   const account = useAppSelector(AuthSelectors.account);
   const items = useAppSelector((state) => itemsSelector(state, showArchived));
   const allItemsLoaded = useAppSelector((state) => allItemsLoadedSelector(state, showArchived));
-  const navigate = useNavigate();
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
   const listRef = useRef<VirtualizedListMethods>();
 
   const canEdit = useMemo<boolean>(() => {
     return group && GroupUtils.canEdit(account, group);
   }, [group, account]);
-
-  const goToItemCreate = (): void => navigate(ItemRouteUtils.getCreateUrl(group?.id));
 
   /*
 loaders
@@ -72,7 +70,6 @@ loaders
   const itemRenderer = useCallback(
     ({data, index}: ListChildComponentProps<Item[]>) => (
       <Container>
-        {/*<GroupListCard group={data[index]} sorting={sorting} drag={drag} />*/}
         <GroupItem item={data[index]} canEdit={canEdit} />
       </Container>
     ),
@@ -97,20 +94,22 @@ loaders
 
   return (
     <PageContainer>
-      <GroupViewHeader refresh={refresh} showArchived={showArchived} setShowArchived={setShowArchived} />
-      <VirtualizedList
-        itemRenderer={itemRenderer}
-        keyExtractor={keyExtractor}
-        data={items}
-        dataCount={items.length}
-        loadMoreItems={load}
-        paddingTop={53}
-        setIsOnTop={setHideScrollButton}
-        virtualizedListRef={listRef}
-      />
-      <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
+      <ConditionalSpinner loading={loading}>
+        <GroupViewHeader refresh={refresh} showArchived={showArchived} setShowArchived={setShowArchived} />
+        <VirtualizedList
+          itemRenderer={itemRenderer}
+          keyExtractor={keyExtractor}
+          data={items}
+          dataCount={items.length}
+          loadMoreItems={load}
+          paddingTop={53}
+          setIsOnTop={setHideScrollButton}
+          virtualizedListRef={listRef}
+        />
+        <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
+      </ConditionalSpinner>
     </PageContainer>
   );
 };
 
-export default withGroupContainer(GroupView);
+export default flowRight([withGroupContainer, withThemeProvider])(GroupView);

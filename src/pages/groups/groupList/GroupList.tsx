@@ -65,7 +65,7 @@ const GroupList = () => {
           data={groups}
           dataCount={groups.length}
           setOrder={setOrder}
-          paddingTop={PAGE_HEADER_HEIGHT + 10}
+          paddingTop={PAGE_HEADER_HEIGHT}
         />
       ) : (
         <VirtualizedList
@@ -73,7 +73,7 @@ const GroupList = () => {
           keyExtractor={keyExtractor}
           data={groups}
           dataCount={groups.length}
-          paddingTop={PAGE_HEADER_HEIGHT + 10}
+          paddingTop={PAGE_HEADER_HEIGHT}
           setIsOnTop={setHideScrollButton}
           virtualizedListRef={listRef}
         />

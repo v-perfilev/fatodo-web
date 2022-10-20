@@ -103,7 +103,7 @@ const GroupListHeader = ({sorting, setSorting, order}: GroupListHeaderProps) => 
   ];
 
   return (
-    <PageHeader title={t('routes.Groups')}>
+    <PageHeader position="absolute" title={t('routes.Groups')}>
       <PageMenu items={sorting ? sortingMenuItems : regularMenuItems} />
     </PageHeader>
   );

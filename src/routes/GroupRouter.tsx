@@ -14,6 +14,7 @@ export enum GroupRoutes {
 }
 
 export class GroupRouteUtils {
+  public static getListUrl = (): string => RootRoutes.GROUPS;
   public static getCreateUrl = (): string => RootRoutes.GROUPS + GroupRoutes.CREATE;
   public static getEditUrl = (id: string): string => (RootRoutes.GROUPS + GroupRoutes.EDIT).replace(':groupId', id);
   public static getViewUrl = (id: string): string => (RootRoutes.GROUPS + GroupRoutes.VIEW).replace(':groupId', id);

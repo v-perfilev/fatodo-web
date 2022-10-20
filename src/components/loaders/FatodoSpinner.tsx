@@ -12,6 +12,7 @@ const FatodoSpinner = () => {
 const containerStyles: SxProps = {
   position: 'relative',
   display: 'flex',
+  flexGrow: 1,
 };
 
 const imageStyles: CSSProperties = {

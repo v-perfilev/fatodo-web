@@ -16,8 +16,8 @@ const PageMenu = ({items}: PageMenu) => {
 
   const regularMenu = (
     <>
-      {items.map((itemProps, index) => (
-        <Tooltip title={itemProps.text} key={index}>
+      {items.map((itemProps) => (
+        <Tooltip title={itemProps.text} key={itemProps.text}>
           <IconButton color={itemProps.color} onClick={itemProps.action}>
             {itemProps.icon}
           </IconButton>

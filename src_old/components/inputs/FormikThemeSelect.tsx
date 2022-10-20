@@ -1,9 +1,9 @@
 import React from 'react';
 import {Field} from 'formik';
-import {TextField} from 'formik-material-ui';
 import {colorSchemes} from '../../shared/theme/colors';
-import {MenuItem} from '@material-ui/core';
-import {ThemeView} from '../views';
+import {TextField} from 'formik-mui';
+import {MenuItem} from '@mui/material';
+import ThemeView from '../views/ThemeView';
 
 type FormikThemeSelectProps = {
   name: string;

@@ -7,14 +7,21 @@ import {Avatar, AvatarProps, SxProps} from '@mui/material';
 type UrlPicProps = AvatarProps & {
   url: string;
   size?: number;
+  borderWidth?: number;
 };
 
-const UrlPic = ({url, size = 40, ...props}: UrlPicProps) => {
+const UrlPic = ({url, size = 40, borderWidth = 1, ...props}: UrlPicProps) => {
   const isThumbnail = size < 100;
-  const src = url ? ImageUtils.buildImageUri(url, isThumbnail) : FALLBACK_AVATAR;
+  let src;
+
+  if (url?.startsWith('blob')) {
+    src = url;
+  } else {
+    src = url ? ImageUtils.buildImageUri(url, isThumbnail) : FALLBACK_AVATAR;
+  }
 
   return (
-    <Avatar sx={{...avatarStyles, width: size, height: size}} src={src} {...props}>
+    <Avatar sx={{...avatarStyles, width: size, height: size, borderWidth}} src={src} {...props}>
       <FallbackPic />
     </Avatar>
   );
