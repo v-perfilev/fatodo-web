@@ -1,9 +1,10 @@
-import React, {ComponentType, useEffect, useState} from 'react';
+import React, {ComponentType, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import {Group} from '../../../models/Group';
 import {ItemActions} from '../../../store/item/itemActions';
 import ItemSelectors from '../../../store/item/itemSelectors';
 import {Item} from '../../../models/Item';
+import {useNavigate, useParams} from 'react-router-dom';
 
 export type WithItemProps = {
   group?: Group;
@@ -15,52 +16,30 @@ const withItemContainer = (Component: ComponentType<WithItemProps>) => (props: a
   const dispatch = useAppDispatch();
   const group = useAppSelector(ItemSelectors.group);
   const item = useAppSelector(ItemSelectors.item);
-  const [loading, setLoading] = useState<boolean>(true);
-  // TODO read params from route
-  const route = {params: {itemId: undefined as string, item: undefined as Item, group: undefined as Group}};
-  const routeItemId = route.params.itemId;
-  const routeItem = route.params.item;
-  const routeGroup = route.params.group;
+  const {itemId} = useParams();
+  const navigate = useNavigate();
 
-  const goBack = (): void => {
-    // TODO go back
-  };
+  const canLoad = itemId !== item?.id;
+  const wrongRoute = !itemId;
+  const loadingFinished = itemId === item?.id;
 
-  const setGroupAndItem = (): void => {
-    Promise.all([
-      dispatch(ItemActions.reset()),
-      dispatch(ItemActions.setGroup(routeGroup)),
-      dispatch(ItemActions.setItem(routeItem)),
-    ]).finally(() => setLoading(false));
-  };
+  const goBack = (): void => navigate(-1);
 
   const loadItem = (): void => {
-    dispatch(ItemActions.fetchItemThunk(routeItemId))
+    dispatch(ItemActions.fetchItemThunk(itemId))
       .unwrap()
-      .catch(() => goBack())
-      .finally(() => setLoading(false));
+      .catch(() => goBack());
   };
 
   useEffect(() => {
-    if (routeGroup && routeItem && (routeGroup.id !== group?.id || routeItem.id !== item?.id)) {
-      setGroupAndItem();
-    } else if (routeItemId) {
+    if (canLoad) {
       loadItem();
-    } else if (!routeGroup && !routeItem && !routeItemId) {
+    } else if (wrongRoute) {
       goBack();
-    } else {
-      setLoading(false);
     }
   }, []);
 
-  return (
-    <Component
-      loading={loading}
-      group={group || routeGroup}
-      item={item?.id === routeItem?.id || item?.id === routeItemId ? item : routeItem}
-      {...props}
-    />
-  );
+  return <Component loading={!loadingFinished} group={group} item={item} {...props} />;
 };
 
 export default withItemContainer;

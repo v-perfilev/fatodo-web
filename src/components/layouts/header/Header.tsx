@@ -10,6 +10,7 @@ import {useAppDispatch} from '../../../store/store';
 import {AuthActions} from '../../../store/auth/authActions';
 import LogoWithText from '../../images/LogoWithText';
 import MenuIcon from '../../icons/MenuIcon';
+import FHStack from '../../boxes/FHStack';
 
 type HeaderProps = {
   flexible?: boolean;
@@ -38,11 +39,13 @@ const Header = ({flexible}: HeaderProps) => {
     <Slide appear={false} in={!flexible || !trigger}>
       <AppBar sx={appbarStyles} variant="outlined" elevation={0}>
         <Toolbar sx={toolbarStyles}>
-          <LogoWithText href={RootRoutes.ROOT} />
-          <Hidden smDown>
+          <FHStack>
+            <LogoWithText href={RootRoutes.ROOT} />
+          </FHStack>
+          <Hidden lgDown>
             <HorizontalMenu redirectMap={redirectMap} />
           </Hidden>
-          <Hidden mdUp>
+          <Hidden lgUp>
             <IconButton color="primary" onClick={toggleMenu}>
               <MenuIcon />
             </IconButton>

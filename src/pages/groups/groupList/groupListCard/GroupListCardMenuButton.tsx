@@ -39,25 +39,29 @@ const GroupListCardMenuButton = ({group}: GroupListCardMenuButtonProps) => {
   const menuItems: PopupMenuItemProps[] = [
     {
       action: goToItemCreate,
-      icon: <PlusIcon color="primary" />,
-      text: t('group:menu.createItem'),
+      text: t('group:actions.createItem'),
+      icon: <PlusIcon />,
+      color: 'primary',
       hidden: !canEdit,
     },
     {
       action: goToGroupView,
-      icon: <EyeIcon color="primary" />,
-      text: t('group:menu.viewGroup'),
+      text: t('group:actions.view'),
+      icon: <EyeIcon />,
+      color: 'primary',
     },
     {
       action: goToGroupEdit,
-      icon: <EditIcon color="primary" />,
-      text: t('group:menu.editGroup'),
+      text: t('group:actions.edit'),
+      icon: <EditIcon />,
+      color: 'primary',
       hidden: !canAdmin,
     },
     {
       action: openGroupDeleteDialog,
-      icon: <DeleteIcon color="error" />,
-      text: t('group:menu.deleteGroup'),
+      text: t('group:actions.delete'),
+      icon: <DeleteIcon />,
+      color: 'error',
       hidden: !canAdmin,
     },
   ];

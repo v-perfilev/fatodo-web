@@ -1,37 +1,52 @@
-import React from 'react';
-import FVStack from '../boxes/FVStack';
+import React, {PropsWithChildren, ReactElement} from 'react';
 import FHStack from '../boxes/FHStack';
 import PageDivider from './PageDivider';
-import {Box, BoxProps, Container, SxProps} from '@mui/material';
+import {Box, Container, SxProps, Typography} from '@mui/material';
+import {PAGE_HEADER_HEIGHT} from '../../constants';
 
-type PageHeader = BoxProps;
+type PageHeaderProps = PropsWithChildren<{
+  title: string;
+  image?: ReactElement;
+}>;
 
-const PageHeader = ({children, ...props}: PageHeader) => {
+const PageHeader = ({title, image, children}: PageHeaderProps) => {
   return (
-    <Box {...props}>
-      <Container>
-        <FVStack sx={containerStyle} spacing={0.5}>
-          <FHStack sx={contentStyle} spacing={2}>
-            {children}
+    <Box sx={rootStyles}>
+      <Container sx={containerStyles}>
+        <FHStack sx={contentStyles} spacing={2}>
+          <FHStack flexGrow={0}>
+            {image}
+            <Typography fontSize="16pt" fontWeight="500" color="primary">
+              {title}
+            </Typography>
           </FHStack>
-          <PageDivider />
-        </FVStack>
+          {children}
+        </FHStack>
+        <PageDivider height="2px" color="primary.light" />
       </Container>
     </Box>
   );
 };
 
-const containerStyle: SxProps = {
+const rootStyles: SxProps = {
+  position: 'absolute',
+  zIndex: 100,
   width: '100%',
-  backgroundColor: 'white',
+  height: PAGE_HEADER_HEIGHT,
 };
 
-const contentStyle: SxProps = {
+const containerStyles: SxProps = {
+  height: '100%',
+};
+
+const contentStyles: SxProps = {
   width: '100%',
-  marginTop: 1,
+  height: '100%',
   paddingLeft: 2,
   paddingRight: 1,
   justifyContent: 'space-between',
+  alignItems: 'center',
+  backgroundColor: 'white',
 };
 
 export default PageHeader;

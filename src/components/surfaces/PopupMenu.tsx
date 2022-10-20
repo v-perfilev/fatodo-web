@@ -7,6 +7,7 @@ export type PopupMenuItemProps = {
   action: (e?: React.MouseEvent) => void;
   text: string;
   icon?: ReactElement;
+  color?: 'inherit' | 'default' | 'primary' | 'secondary' | 'error' | 'info' | 'success' | 'warning';
   loading?: boolean;
   disabled?: boolean;
   hidden?: boolean;
@@ -16,8 +17,8 @@ type PopupMenuProps = PropsWithChildren<{
   trigger: ReactElement;
 }>;
 
-export const PopupMenuItem = ({action, icon, text, loading, disabled, hidden}: PopupMenuItemProps) => {
-  const iconElement = icon ? React.cloneElement(icon, {fontSize: 'small'}) : undefined;
+export const PopupMenuItem = ({action, text, icon, color, loading, disabled, hidden}: PopupMenuItemProps) => {
+  const iconElement = icon ? React.cloneElement(icon, {color, fontSize: 'small'}) : undefined;
 
   return (
     !hidden && (

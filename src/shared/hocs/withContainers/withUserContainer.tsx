@@ -1,9 +1,9 @@
 import React, {ComponentType, useEffect} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
-import {useDelayedState} from '../../hooks/useDelayedState';
 import {User} from '../../../models/User';
 import UserSelectors from '../../../store/user/userSelectors';
 import {UserActions} from '../../../store/user/userActions';
+import {useNavigate, useParams} from 'react-router-dom';
 
 export type WithUserProps = {
   user?: User;
@@ -12,43 +12,31 @@ export type WithUserProps = {
 
 const withUserContainer = (Component: ComponentType<WithUserProps>) => (props: any) => {
   const dispatch = useAppDispatch();
-  const [loading, setLoading] = useDelayedState();
-  // TODO read params from route
-  const route = {params: {user: undefined as User, userId: undefined as string}};
-  const routeUser = route.params.user;
-  const routeUserId = route.params.userId;
   const user = useAppSelector(UserSelectors.user);
+  const {userId} = useParams();
+  const navigate = useNavigate();
 
-  const goBack = (): void => {
-    // TODO go back
-  };
+  const canLoad = userId !== user?.id;
+  const wrongRoute = !userId;
+  const loadingFinished = userId === user?.id;
 
-  const selectUser = (): void => {
-    dispatch(UserActions.selectUserThunk(routeUser))
-      .unwrap()
-      .then(() => setLoading(false));
-  };
+  const goBack = (): void => navigate(-1);
 
   const loadUser = (): void => {
-    dispatch(UserActions.fetchUserThunk(routeUserId))
+    dispatch(UserActions.fetchUserThunk(userId))
       .unwrap()
-      .catch(() => goBack())
-      .finally(() => setLoading(false));
+      .catch(() => goBack());
   };
 
   useEffect(() => {
-    if (routeUser && routeUser.id !== user?.id) {
-      selectUser();
-    } else if (routeUserId && routeUserId !== user?.id) {
+    if (canLoad) {
       loadUser();
-    } else if (!routeUser && !routeUserId) {
+    } else if (wrongRoute) {
       goBack();
-    } else {
-      setLoading(false);
     }
   }, []);
 
-  return <Component loading={loading} user={user || routeUser} {...props} />;
+  return <Component loading={!loadingFinished} user={user} {...props} />;
 };
 
 export default withUserContainer;

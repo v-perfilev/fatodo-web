@@ -9,10 +9,10 @@ import {Group} from '../../../models/Group';
 import {ListChildComponentProps} from 'react-window';
 import SortableList from '../../../components/layouts/lists/SortableList';
 import PageContainer from '../../../components/layouts/PageContainer';
-import {Container, Fab} from '@mui/material';
+import {Container} from '@mui/material';
 import GroupListHeader from './GroupListHeader';
-import FBox from '../../../components/boxes/FBox';
-import ArrowUpIcon from '../../../components/icons/ArrowUpIcon';
+import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
+import {PAGE_HEADER_HEIGHT} from '../../../constants';
 
 const GroupList = () => {
   const dispatch = useAppDispatch();
@@ -59,34 +59,26 @@ const GroupList = () => {
   return (
     <PageContainer>
       <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} />
-      <FBox>
-        {sorting ? (
-          <SortableList
-            itemRenderer={itemRenderer}
-            data={groups}
-            dataCount={groups.length}
-            setOrder={setOrder}
-            paddingTop={53}
-          />
-        ) : (
-          <>
-            <VirtualizedList
-              itemRenderer={itemRenderer}
-              keyExtractor={keyExtractor}
-              data={groups}
-              dataCount={groups.length}
-              paddingTop={53}
-              setIsOnTop={setHideScrollButton}
-              virtualizedListRef={listRef}
-            />
-            {!sorting && !hideScrollButton && (
-              <Fab size="medium" sx={{position: 'absolute', bottom: 10, right: 10}} onClick={scrollUp}>
-                <ArrowUpIcon />
-              </Fab>
-            )}
-          </>
-        )}
-      </FBox>
+      {sorting ? (
+        <SortableList
+          itemRenderer={itemRenderer}
+          data={groups}
+          dataCount={groups.length}
+          setOrder={setOrder}
+          paddingTop={PAGE_HEADER_HEIGHT + 10}
+        />
+      ) : (
+        <VirtualizedList
+          itemRenderer={itemRenderer}
+          keyExtractor={keyExtractor}
+          data={groups}
+          dataCount={groups.length}
+          paddingTop={PAGE_HEADER_HEIGHT + 10}
+          setIsOnTop={setHideScrollButton}
+          virtualizedListRef={listRef}
+        />
+      )}
+      <ScrollCornerButton show={!sorting && !hideScrollButton} action={scrollUp} />
     </PageContainer>
   );
 };

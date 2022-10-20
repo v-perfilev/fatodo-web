@@ -46,17 +46,18 @@ const GroupItemMenu = ({item, canEdit}: GroupItemMenuProps) => {
   };
 
   const menuItems: PopupMenuItemProps[] = [
-    {action: goToItemView, icon: <EyeIcon color="primary" />, text: t('group:actions.view')},
+    {action: goToItemView, text: t('group:actions.view'), icon: <EyeIcon />, color: 'primary'},
     {
       action: toggleArchived,
-      icon: item.archived ? <PackageUpIcon color="primary" /> : <PackageDownIcon color="primary" />,
       text: item.archived ? t('group:actions.removeFromArchive') : t('group:actions.moveToArchive'),
+      icon: item.archived ? <PackageUpIcon color="primary" /> : <PackageDownIcon />,
+      color: 'primary',
       loading: archivedLoading,
       disabled: archivedLoading,
       hidden: !canEdit,
     },
-    {action: goToItemEdit, icon: <EditIcon color="primary" />, text: t('group:actions.edit')},
-    {action: openItemDeleteDialog, icon: <DeleteIcon color="error" />, text: t('group:actions.delete')},
+    {action: goToItemEdit, text: t('group:actions.edit'), icon: <EditIcon />, color: 'primary'},
+    {action: openItemDeleteDialog, text: t('group:actions.delete'), icon: <DeleteIcon />, color: 'error'},
   ];
 
   return (

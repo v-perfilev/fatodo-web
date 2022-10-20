@@ -6,13 +6,13 @@ import CollapsedIcon from '../../../components/icons/CollapsedIcon';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import GroupsSelectors from '../../../store/groups/groupsSelectors';
 import {GroupsActions} from '../../../store/groups/groupsActions';
-import FHStack from '../../../components/boxes/FHStack';
-import {IconButton, Typography} from '@mui/material';
 import PageHeader from '../../../components/layouts/PageHeader';
 import {useNavigate} from 'react-router-dom';
 import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import PlusIcon from '../../../components/icons/PlusIcon';
 import RefreshIcon from '../../../components/icons/RefreshIcon';
+import {useTranslation} from 'react-i18next';
+import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
 
 type GroupListHeaderProps = {
   sorting: boolean;
@@ -22,9 +22,10 @@ type GroupListHeaderProps = {
 
 const GroupListHeader = ({sorting, setSorting, order}: GroupListHeaderProps) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const groups = useAppSelector(GroupsSelectors.groups);
   const allCollapsed = useAppSelector(GroupsSelectors.itemsAllCollapsed);
+  const {t} = useTranslation();
+  const navigate = useNavigate();
 
   const goToGroupCreate = useCallback(() => navigate(GroupRouteUtils.getCreateUrl()), []);
 
@@ -59,38 +60,51 @@ const GroupListHeader = ({sorting, setSorting, order}: GroupListHeaderProps) => 
     setTimeout(() => setAllCollapsed(false), 50);
   };
 
+  const sortingMenuItems: PageMenuItem[] = [
+    {
+      action: saveSorting,
+      text: t('group:actions.save'),
+      icon: <CheckIcon />,
+      color: 'primary',
+    },
+    {
+      action: cancelSorting,
+      text: t('group:actions.cancel'),
+      icon: <CloseIcon />,
+      color: 'primary',
+    },
+  ];
+
+  const regularMenuItems: PageMenuItem[] = [
+    {
+      action: refresh,
+      text: t('group:actions.refresh'),
+      icon: <RefreshIcon />,
+      color: 'primary',
+    },
+    {
+      action: goToGroupCreate,
+      text: t('group:actions.createGroup'),
+      icon: <PlusIcon />,
+      color: 'primary',
+    },
+    {
+      action: switchCollapsed,
+      text: t('group:actions.collapse'),
+      icon: <CollapsedIcon collapsed={!allCollapsed} />,
+      color: 'primary',
+    },
+    {
+      action: enableSorting,
+      text: t('group:actions.reorder'),
+      icon: <ReorderIcon />,
+      color: 'primary',
+    },
+  ];
+
   return (
-    <PageHeader sx={{position: 'absolute', zIndex: 100, width: '100%', height: '53px'}}>
-      <FHStack>
-        <Typography fontSize="16pt" fontWeight="500" color="primary">
-          Groups
-        </Typography>
-      </FHStack>
-      {sorting ? (
-        <FHStack flexGrow={0}>
-          <IconButton color="primary" onClick={saveSorting}>
-            <CheckIcon />
-          </IconButton>
-          <IconButton color="primary" onClick={cancelSorting}>
-            <CloseIcon />
-          </IconButton>
-        </FHStack>
-      ) : (
-        <FHStack flexGrow={0}>
-          <IconButton color="primary" onClick={refresh}>
-            <RefreshIcon />
-          </IconButton>
-          <IconButton color="primary" onClick={goToGroupCreate}>
-            <PlusIcon />
-          </IconButton>
-          <IconButton color="primary" onClick={switchCollapsed}>
-            <CollapsedIcon collapsed={!allCollapsed} />
-          </IconButton>
-          <IconButton color="primary" onClick={enableSorting}>
-            <ReorderIcon />
-          </IconButton>
-        </FHStack>
-      )}
+    <PageHeader title={t('routes.Groups')}>
+      <PageMenu items={sorting ? sortingMenuItems : regularMenuItems} />
     </PageHeader>
   );
 };

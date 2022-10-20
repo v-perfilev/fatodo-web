@@ -1,10 +1,13 @@
 import React from 'react';
-import {Divider, DividerProps} from '@mui/material';
+import {Box} from '@mui/material';
 
-type PageDividerProps = DividerProps;
+type PageDividerProps = {
+  height?: string;
+  color?: string;
+};
 
-const PageDivider = (props: PageDividerProps) => {
-  return <Divider {...props} />;
+const PageDivider = ({height = '1px', color = 'grey.300'}: PageDividerProps) => {
+  return <Box sx={{width: '100%', height, backgroundColor: color}} />;
 };
 
 export default PageDivider;
