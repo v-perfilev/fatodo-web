@@ -11,11 +11,12 @@ import withCaptcha, {CaptchaProps} from '../../../shared/hocs/withCaptcha';
 import i18n from '../../../shared/i18n';
 import {DateUtils} from '../../../shared/utils/DateUtils';
 import {RegistrationDTO} from '../../../models/dto/RegistrationDTO';
-import {Stack, SxProps} from '@mui/material';
+import {SxProps} from '@mui/material';
 import FormikTextInput from '../../../components/inputs/FormikTextInput';
 import FormikPasswordInput from '../../../components/inputs/FormikPasswordInput';
 import LoadingButton from '../../../components/controls/LoadingButton';
 import PasswordStrengthBar from '../../../components/inputs/PasswordStrengthBar';
+import FVStack from '../../../components/boxes/FVStack';
 
 export interface SignUpFormValues {
   email: string;
@@ -71,7 +72,7 @@ const SignUpForm = ({getToken, onSuccess}: SignUpFormProps) => {
       onSubmit={handleSubmit}
     >
       {(formikProps: FormikProps<SignUpFormValues>) => (
-        <Stack sx={containerStyles} spacing={2} alignItems="center">
+        <FVStack sx={containerStyles}>
           <FormikTextInput name="email" label={t('account:fields.email.label')} disabled={loading} />
           <FormikTextInput name="username" label={t('account:fields.username.label')} disabled={loading} />
           <FormikPasswordInput name="password" label={t('account:fields.password.label')} disabled={loading} />
@@ -85,7 +86,7 @@ const SignUpForm = ({getToken, onSuccess}: SignUpFormProps) => {
           >
             {t('account:register.submit')}
           </LoadingButton>
-        </Stack>
+        </FVStack>
       )}
     </Formik>
   );

@@ -5,13 +5,13 @@ import * as Yup from 'yup';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {AuthActions} from '../../../store/auth/authActions';
-import {Stack} from '@mui/material';
 import withCaptcha, {CaptchaProps} from '../../../shared/hocs/withCaptcha';
 import {passwordRepeatValidator, passwordValidator} from '../../../shared/validators';
 import LoadingButton from '../../../components/controls/LoadingButton';
 import {ResetPasswordDTO} from '../../../models/dto/ResetPasswordDTO';
 import FormikPasswordInput from '../../../components/inputs/FormikPasswordInput';
 import {flowRight} from 'lodash';
+import FVStack from '../../../components/boxes/FVStack';
 
 export interface ResetPasswordFormValues {
   password: string;
@@ -61,7 +61,7 @@ const ResetPasswordForm = ({code, getToken, onSuccess, onFailure}: ForgotPasswor
       onSubmit={handleSubmit}
     >
       {(formikProps: FormikProps<ResetPasswordFormValues>) => (
-        <Stack flex={1} spacing={2}>
+        <FVStack>
           <FormikPasswordInput name="password" label={t('account:fields.password.label')} disabled={loading} />
           <FormikPasswordInput
             name="repeatPassword"
@@ -78,7 +78,7 @@ const ResetPasswordForm = ({code, getToken, onSuccess, onFailure}: ForgotPasswor
           >
             {t('account:resetPassword.submit')}
           </LoadingButton>
-        </Stack>
+        </FVStack>
       )}
     </Formik>
   );

@@ -1,10 +1,11 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
-import {Button, Stack, SxProps, Typography} from '@mui/material';
+import {Button, SxProps, Typography} from '@mui/material';
 import HomeIcon from '../../components/icons/HomeIcon';
 import withBackground from '../../shared/hocs/withBackground';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/withRedirectTimer';
+import FVStack from '../../components/boxes/FVStack';
 
 type ForbiddenProps = RedirectTimerProps;
 
@@ -12,7 +13,7 @@ const Forbidden = ({timer, resetTimer}: ForbiddenProps) => {
   const {t} = useTranslation();
 
   return (
-    <Stack width="100%" spacing={2} alignItems="center">
+    <FVStack>
       <Typography sx={codeStyles} variant="h5" color="primary">
         403
       </Typography>
@@ -23,7 +24,7 @@ const Forbidden = ({timer, resetTimer}: ForbiddenProps) => {
       <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
         {t('static:actions.toHomePage')}
       </Button>
-    </Stack>
+    </FVStack>
   );
 };
 

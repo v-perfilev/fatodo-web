@@ -11,7 +11,7 @@ import {AuthActions} from '../../../store/auth/authActions';
 import {ForgotPasswordDTO} from '../../../models/dto/ForgotPasswordDTO';
 import LoadingButton from '../../../components/controls/LoadingButton';
 import FormikTextInput from '../../../components/inputs/FormikTextInput';
-import {Stack} from '@mui/material';
+import FVStack from '../../../components/boxes/FVStack';
 
 export interface ForgotPasswordFormValues {
   user: string;
@@ -54,7 +54,7 @@ const ForgotPasswordForm = ({getToken, onSuccess}: ForgotPasswordFormProps) => {
       onSubmit={handleSubmit}
     >
       {(formikProps: FormikProps<ForgotPasswordFormValues>) => (
-        <Stack flex={1} spacing={2}>
+        <FVStack>
           <FormikTextInput name="user" label={t('account:fields.user.label')} isDisabled={loading} />
           <LoadingButton
             color="secondary"
@@ -65,7 +65,7 @@ const ForgotPasswordForm = ({getToken, onSuccess}: ForgotPasswordFormProps) => {
           >
             {t('account:forgotPassword.submit')}
           </LoadingButton>
-        </Stack>
+        </FVStack>
       )}
     </Formik>
   );

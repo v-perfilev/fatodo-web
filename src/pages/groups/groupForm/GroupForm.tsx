@@ -80,7 +80,7 @@ const GroupForm = ({group, request, cancel}: GroupFormProps) => {
       onSubmit={handleSubmit}
     >
       {(formikProps) => (
-        <FVStack spacing={2}>
+        <FVStack>
           <FormikTextInput name="title" label={t('group:fields.title.label')} disabled={formikProps.isSubmitting} />
           <FormikThemeSelect name="color" label={t('group:fields.color.label')} disabled={formikProps.isSubmitting} />
           <FormikImageUpload
@@ -90,7 +90,7 @@ const GroupForm = ({group, request, cancel}: GroupFormProps) => {
             preview
             crop
           />
-          <FHStack spacing={2} justifyContent="flex-end">
+          <FHStack justifyContent="flex-end">
             <Button variant="text" color="secondary" disabled={formikProps.isSubmitting} onClick={cancel}>
               {t('group:actions.cancel')}
             </Button>

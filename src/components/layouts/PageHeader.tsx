@@ -16,8 +16,8 @@ const PageHeader = ({title, image, position = 'relative', goBackAction, children
   return (
     <Box position={position} sx={rootStyles}>
       <Container sx={containerStyles}>
-        <FHStack sx={contentStyles} spacing={2}>
-          <FHStack flexGrow={0}>
+        <FHStack sx={contentStyles}>
+          <FHStack spacing={1} flexGrow={0}>
             {goBackAction && (
               <IconButton color="primary" onClick={goBackAction}>
                 <ArrowLeftIcon />

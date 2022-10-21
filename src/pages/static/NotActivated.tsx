@@ -3,11 +3,12 @@ import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/withRedirectTimer';
 import {useNavigate} from 'react-router-dom';
-import {Stack, SxProps, Typography} from '@mui/material';
+import {SxProps, Typography} from '@mui/material';
 import EmailIcon from '../../components/icons/EmailIcon';
 import HomeIcon from '../../components/icons/HomeIcon';
 import withBackground from '../../shared/hocs/withBackground';
 import LoadingButton from '../../components/controls/LoadingButton';
+import FVStack from '../../components/boxes/FVStack';
 
 type NotActivatedProps = RedirectTimerProps;
 
@@ -42,7 +43,7 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
   };
 
   return (
-    <Stack width="100%" spacing={2} alignItems="center">
+    <FVStack>
       <Typography sx={codeStyles} variant="h5" color="primary">
         {t('static:notActivated.caption')}
       </Typography>
@@ -59,7 +60,7 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
       <LoadingButton startIcon={<HomeIcon />} onClick={resetTimer}>
         {t('static:actions.toHomePage')}
       </LoadingButton>
-    </Stack>
+    </FVStack>
   );
 };
 

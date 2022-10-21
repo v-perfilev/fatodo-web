@@ -70,7 +70,7 @@ const SignInForm = ({getToken}: SignInFormProps) => {
       onSubmit={handleSubmit}
     >
       {(formikProps: FormikProps<SignInFormValues>) => (
-        <Stack sx={containerStyles} spacing={2} alignItems="center">
+        <Stack sx={containerStyles} alignItems="center">
           <FormikTextInput name="user" label={t('account:fields.user.label')} disabled={loading} />
           <FormikPasswordInput name="password" label={t('account:fields.password.label')} disabled={loading} />
           <FormikCheckboxInput name="rememberMe" Label={{label: t('account:fields.rememberMe.label')}} />

@@ -2,9 +2,10 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/withRedirectTimer';
-import {Button, Stack, SxProps, Typography} from '@mui/material';
+import {Button, SxProps, Typography} from '@mui/material';
 import HomeIcon from '../../components/icons/HomeIcon';
 import withBackground from '../../shared/hocs/withBackground';
+import FVStack from '../../components/boxes/FVStack';
 
 type UnauthorizedProps = RedirectTimerProps;
 
@@ -12,7 +13,7 @@ const Unauthorized = ({timer, resetTimer}: UnauthorizedProps) => {
   const {t} = useTranslation();
 
   return (
-    <Stack width="100%" spacing={2} alignItems="center">
+    <FVStack>
       <Typography sx={codeStyles} variant="h5" color="primary">
         401
       </Typography>
@@ -23,7 +24,7 @@ const Unauthorized = ({timer, resetTimer}: UnauthorizedProps) => {
       <Button variant="contained" color="primary" size="large" startIcon={<HomeIcon />} onClick={resetTimer}>
         {t('static:actions.toHomePage')}
       </Button>
-    </Stack>
+    </FVStack>
   );
 };
 

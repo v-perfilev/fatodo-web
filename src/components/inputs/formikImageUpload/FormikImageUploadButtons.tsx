@@ -31,7 +31,7 @@ const FormikImageUploadButtons = ({image, setImage, setSource, setAnchorEl}: For
   };
 
   return (
-    <FHStack spacing={2}>
+    <FHStack>
       <label htmlFor="upload-image">
         <input
           style={inputStyles}

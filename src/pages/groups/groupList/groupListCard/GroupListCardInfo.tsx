@@ -59,7 +59,7 @@ const GroupListCardInfo = ({group, items, itemsCount}: GroupListCardHeaderProps)
           </Button>
         )}
       </FHStack>
-      <FHStack flexGrow={0} spacing={2}>
+      <FHStack flexGrow={0}>
         <BoxWithIcon icon={<ItemsIcon color="primary" />} size="small" fontSize={13} color="grey.500">
           {itemsCount || 0}
         </BoxWithIcon>

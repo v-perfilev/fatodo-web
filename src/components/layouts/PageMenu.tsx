@@ -41,7 +41,7 @@ const PageMenu = ({items}: PageMenu) => {
   );
 
   return (
-    <FHStack flexGrow={1} justifyContent="flex-end">
+    <FHStack flexGrow={1} spacing={1} justifyContent="flex-end">
       {isSmallDevice ? popupMenu : regularMenu}
     </FHStack>
   );

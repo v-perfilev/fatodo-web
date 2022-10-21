@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import {API_URL, BASE_URL} from '../../../constants';
 import {useTranslation} from 'react-i18next';
-import {Box, Divider, Stack, SxProps, Typography} from '@mui/material';
+import {Box, Divider, SxProps, Typography} from '@mui/material';
 import LoadingButton from '../../../components/controls/LoadingButton';
 import FacebookIcon from '../../../components/icons/FacebookIcon';
 import {LanguageUtils} from '../../../shared/utils/LanguageUtils';
 import {DateUtils} from '../../../shared/utils/DateUtils';
 import {RootRoutes} from '../../../routes/RootRouter';
 import GoogleIcon from '../../../components/icons/GoogleIcon';
+import FVStack from '../../../components/boxes/FVStack';
+import FHStack from '../../../components/boxes/FHStack';
 
 const SocialButtons = () => {
   const {t} = useTranslation();
@@ -33,13 +35,13 @@ const SocialButtons = () => {
   };
 
   return (
-    <Stack width="100%" spacing={2}>
+    <FVStack>
       <Box sx={headerStyles}>
         <Divider />
         <Typography sx={captionStyles}>{t('account:socialLogin.label')}</Typography>
         <Divider />
       </Box>
-      <Stack spacing={2} direction="row">
+      <FHStack>
         <LoadingButton
           startIcon={<FacebookIcon />}
           onClick={facebookLogin}
@@ -58,8 +60,8 @@ const SocialButtons = () => {
         >
           Google
         </LoadingButton>
-      </Stack>
-    </Stack>
+      </FHStack>
+    </FVStack>
   );
 };
 

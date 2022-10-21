@@ -30,8 +30,8 @@ const HorizontalMenu = ({redirectMap}: HorizontalMenuProps) => {
   const user = accountToUser(account);
 
   return (
-    <FHStack spacing={2}>
-      <FHStack spacing={2} justifyContent="center">
+    <FHStack>
+      <FHStack justifyContent="center">
         <Button color="primary" startIcon={<GroupsIcon />} onClick={redirectMap.toGroups}>
           {t('routes.Groups')}
         </Button>
@@ -46,7 +46,7 @@ const HorizontalMenu = ({redirectMap}: HorizontalMenuProps) => {
           {t('routes.Contacts')}
         </Button>
       </FHStack>
-      <FHStack spacing={2} justifyContent="flex-end">
+      <FHStack justifyContent="flex-end">
         <LanguageSelect />
         <PopupMenu
           trigger={

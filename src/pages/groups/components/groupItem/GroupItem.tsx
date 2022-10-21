@@ -37,12 +37,12 @@ const GroupItem = ({item, canEdit}: GroupItemProps) => {
       </FHStack>
       <GroupItemChanges item={item} />
       <FHStack justifyContent="space-between">
-        <FHStack spacing={2}>
+        <FHStack>
           <TypeView type={item.type} size="small" fontSize={12} color="grey.500" />
           <PriorityView priority={item.priority} size="small" fontSize={12} color="grey.500" />
           <StatusView statusType={item.status} size="small" fontSize={12} color="grey.500" />
         </FHStack>
-        <FHStack spacing={2} justifyContent="flex-end">
+        <FHStack justifyContent="flex-end">
           {item.remindersCount > 0 && (
             <BoxWithIcon icon={<AlarmIcon color="primary" />} size="small" fontSize={13} color="grey.500">
               {item.remindersCount}
