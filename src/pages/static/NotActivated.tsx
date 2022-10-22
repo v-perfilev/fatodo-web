@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/withRedirectTimer';
-import {useNavigate} from 'react-router-dom';
 import {SxProps, Typography} from '@mui/material';
 import EmailIcon from '../../components/icons/EmailIcon';
 import HomeIcon from '../../components/icons/HomeIcon';
@@ -13,7 +12,6 @@ import FVStack from '../../components/boxes/FVStack';
 type NotActivatedProps = RedirectTimerProps;
 
 const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
-  const navigate = useNavigate();
   const {t} = useTranslation();
   const [activationLoading, setActivationLoading] = useState<boolean>(false);
   const [activationTimer, setActivationTimer] = useState<number>(undefined);
@@ -43,7 +41,7 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
   };
 
   return (
-    <FVStack>
+    <FVStack alignItems="center">
       <Typography sx={codeStyles} variant="h5" color="primary">
         {t('static:notActivated.caption')}
       </Typography>

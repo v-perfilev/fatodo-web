@@ -13,7 +13,7 @@ const Unauthorized = ({timer, resetTimer}: UnauthorizedProps) => {
   const {t} = useTranslation();
 
   return (
-    <FVStack>
+    <FVStack alignItems="center">
       <Typography sx={codeStyles} variant="h5" color="primary">
         401
       </Typography>

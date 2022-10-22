@@ -50,6 +50,10 @@ export class DateFormats {
     return 'MMMM YYYY';
   };
 
+  static getMonthFormat = (): string => {
+    return 'MMMM';
+  };
+
   static getDependsOnDayFormat = (date: Date, dateFormat: DateFormat): string => {
     const isSameDay = moment(date).isSame(moment(new Date()), 'day');
     const isSameYear = moment(date).isSame(moment(new Date()), 'year');
@@ -90,6 +94,11 @@ export class DateFormatters {
     }
     const formatter = formatArray.filter(FilterUtils.notUndefinedFilter).join(', ');
     moment.locale('en');
+    return moment(date).format(formatter);
+  };
+
+  static formatMonth = (date: Date): string => {
+    const formatter = DateFormats.getMonthFormat();
     return moment(date).format(formatter);
   };
 }

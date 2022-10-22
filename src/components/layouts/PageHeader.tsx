@@ -19,7 +19,7 @@ const PageHeader = ({title, image, position = 'relative', goBackAction, children
         <FHStack sx={contentStyles}>
           <FHStack spacing={1} flexGrow={0}>
             {goBackAction && (
-              <IconButton color="primary" onClick={goBackAction}>
+              <IconButton sx={{marginLeft: -2}} color="primary" onClick={goBackAction}>
                 <ArrowLeftIcon />
               </IconButton>
             )}

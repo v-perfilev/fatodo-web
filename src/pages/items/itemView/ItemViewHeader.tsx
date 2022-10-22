@@ -5,7 +5,6 @@ import {useTranslation} from 'react-i18next';
 import {GroupUtils} from '../../../shared/utils/GroupUtils';
 import {useAppSelector} from '../../../store/store';
 import ItemSelectors from '../../../store/item/itemSelectors';
-import GroupSelectors from '../../../store/group/groupSelectors';
 import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
 import PageHeader from '../../../components/layouts/PageHeader';
 import {useNavigate} from 'react-router-dom';
@@ -15,7 +14,7 @@ import {ItemRouteUtils} from '../../../routes/ItemRouter';
 
 const ItemViewHeader = () => {
   const account = useAppSelector(AuthSelectors.account);
-  const group = useAppSelector(GroupSelectors.group);
+  const group = useAppSelector(ItemSelectors.group);
   const item = useAppSelector(ItemSelectors.item);
   // const {showItemDeleteDialog} = useItemDialogContext();
   const navigate = useNavigate();

@@ -16,7 +16,7 @@ const LabeledBox = ({label, isVertical, showNotSet, children, ...props}: Labeled
   const handledChildren = showNotSet ? children || t('additional.fieldNotSet') : children;
   const content =
     typeof handledChildren === 'string' ? (
-      <Typography {...props} color={!children && showNotSet ? 'gray.500' : undefined}>
+      <Typography fontSize={14} color={!children && showNotSet ? 'gray.500' : undefined} {...props}>
         {handledChildren}
       </Typography>
     ) : (
@@ -26,7 +26,7 @@ const LabeledBox = ({label, isVertical, showNotSet, children, ...props}: Labeled
 
   return (
     <Wrapper flexGrow={0} alignItems={alignItems}>
-      <Typography {...props} fontWeight="bold" color="grey.500">
+      <Typography fontSize={14} fontWeight={500} color="grey.500" {...props}>
         {label}:
       </Typography>
       {content}

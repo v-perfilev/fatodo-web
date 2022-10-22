@@ -9,6 +9,7 @@ import PageHeader from '../../../components/layouts/PageHeader';
 import {useTranslation} from 'react-i18next';
 import GroupForm from '../groupForm/GroupForm';
 import {Container} from '@mui/material';
+import FBox from '../../../components/boxes/FBox';
 
 const GroupCreate = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +29,9 @@ const GroupCreate = () => {
     <PageContainer>
       <PageHeader title={t('routes.GroupCreate')} />
       <Container sx={{marginY: 1}}>
-        <GroupForm request={request} cancel={goBack} />
+        <FBox sx={{marginX: 2}}>
+          <GroupForm request={request} cancel={goBack} />
+        </FBox>
       </Container>
     </PageContainer>
   );

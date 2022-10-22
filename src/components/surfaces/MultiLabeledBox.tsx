@@ -11,55 +11,71 @@ export type MultiLabeledBoxItem = {
   showNotSet?: boolean;
 };
 
-type MultiLabeledBoxLabelProps = TypographyProps & {
+type MultiLabeledBoxLabelProps = Omit<TypographyProps, 'height'> & {
   label: string;
+  height: number;
 };
 
-type MultiLabeledBoxValueProps = TypographyProps & {
+type MultiLabeledBoxValueProps = Omit<TypographyProps, 'height'> & {
   value: string | ReactElement;
   showNotSet?: boolean;
+  height: number;
 };
 
-type MultiLabeledBoxProps = TypographyProps & {
+type MultiLabeledBoxProps = Omit<TypographyProps, 'height'> & {
   items: MultiLabeledBoxItem[];
+  height?: number;
 };
 
-const MultiLabeledBoxLabel = ({label, ...props}: MultiLabeledBoxLabelProps) => {
+const MultiLabeledBoxLabel = ({label, height, ...props}: MultiLabeledBoxLabelProps) => {
   return (
-    <FBox>
-      <Typography {...props} fontWeight="bold" color="grey.500">
+    <FBox height={height} alignItems="center">
+      <Typography fontSize={14} fontWeight="bold" color="grey.500" {...props}>
         {label}:
       </Typography>
     </FBox>
   );
 };
 
-const MultiLabeledBoxValue = ({value, showNotSet, ...props}: MultiLabeledBoxValueProps) => {
+const MultiLabeledBoxValue = ({value, showNotSet, height, ...props}: MultiLabeledBoxValueProps) => {
   const {t} = useTranslation();
   const handledChildren = showNotSet ? value || t('additional.fieldNotSet') : value;
 
-  return typeof handledChildren === 'string' ? (
-    <Typography {...props} color={!value && showNotSet ? 'grey.500' : undefined}>
-      {handledChildren}
-    </Typography>
-  ) : (
-    handledChildren
+  const valueElement =
+    typeof handledChildren === 'string' ? (
+      <Typography fontSize={14} color={!value && showNotSet ? 'grey.500' : undefined} {...props}>
+        {handledChildren}
+      </Typography>
+    ) : (
+      handledChildren
+    );
+
+  return (
+    <FBox height={height} alignItems="center">
+      {valueElement}
+    </FBox>
   );
 };
 
-const MultiLabeledBox = ({items, ...props}: MultiLabeledBoxProps) => {
+const MultiLabeledBox = ({items, height = 40, ...props}: MultiLabeledBoxProps) => {
   const filteredItems = items.filter((i) => i.value || i.showNotSet);
 
   return (
-    <FHStack>
-      <FVStack flexGrow={0}>
+    <FHStack flexGrow={0}>
+      <FVStack spacing={0} flexGrow={0}>
         {filteredItems.map((item, index) => (
-          <MultiLabeledBoxLabel label={item.label} key={index} {...props} />
+          <MultiLabeledBoxLabel label={item.label} height={height} key={index} {...props} />
         ))}
       </FVStack>
-      <FVStack flexGrow={0}>
+      <FVStack spacing={0} flexGrow={0}>
         {filteredItems.map((item, index) => (
-          <MultiLabeledBoxValue value={item.value} showNotSet={item.showNotSet} key={index} {...props} />
+          <MultiLabeledBoxValue
+            value={item.value}
+            height={height}
+            showNotSet={item.showNotSet}
+            key={index}
+            {...props}
+          />
         ))}
       </FVStack>
     </FHStack>

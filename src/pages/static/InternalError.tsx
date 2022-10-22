@@ -13,7 +13,7 @@ const InternalError = ({timer, resetTimer}: InternalErrorProps) => {
   const {t} = useTranslation();
 
   return (
-    <FVStack>
+    <FVStack alignItems="center">
       <Typography sx={codeStyles} variant="h5" color="primary">
         505
       </Typography>

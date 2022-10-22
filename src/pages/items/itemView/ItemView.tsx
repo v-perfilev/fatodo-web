@@ -35,10 +35,10 @@ const ItemView = ({group, item, loading}: ItemViewProps) => {
         ? [
             {label: t('item:labels.item'), value: item.title},
             {label: t('item:labels.group'), value: group?.title},
-            {label: t('item:labels.status'), value: <StatusView statusType={item.status} />},
-            {label: t('item:labels.type'), value: <TypeView type={item.type} />},
-            {label: t('item:labels.priority'), value: <PriorityView priority={item.priority} />},
-            {label: t('item:labels.date'), value: item.date && <DateParamView date={item.date} />},
+            {label: t('item:labels.status'), value: <StatusView fontSize={14} statusType={item.status} />},
+            {label: t('item:labels.type'), value: <TypeView fontSize={14} type={item.type} />},
+            {label: t('item:labels.priority'), value: <PriorityView fontSize={14} priority={item.priority} />},
+            {label: t('item:labels.date'), value: item.date && <DateParamView fontSize={14} date={item.date} />},
           ]
         : [],
     [item, group, i18n.language],
@@ -49,7 +49,7 @@ const ItemView = ({group, item, loading}: ItemViewProps) => {
       <ConditionalSpinner loading={loading}>
         <ItemViewHeader />
         <Container sx={{marginY: 1}}>
-          <FVStack>
+          <FVStack sx={{marginX: 2}}>
             <MultiLabeledBox items={labeledItems} />
             <Divider />
             <ItemViewDescription />

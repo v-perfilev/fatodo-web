@@ -12,7 +12,7 @@ const ChipBox = ({children, closeAction, ...props}: ChipBoxProps) => {
   return (
     <PaperBox sx={containerStyles} {...props}>
       <FHStack>
-        <Typography fontWeight="bold" fontSize={12}>
+        <Typography color="grey.700" fontWeight="bold" fontSize={12}>
           {children}
         </Typography>
         {closeAction && (

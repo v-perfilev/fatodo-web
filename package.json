@@ -19,6 +19,7 @@
     "test": "npm run-script lint && npm run-script jest"
   },
   "dependencies": {
+    "@date-io/moment": "^2.16.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.8",

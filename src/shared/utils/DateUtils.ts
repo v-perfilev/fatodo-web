@@ -1,6 +1,7 @@
 import moment from 'moment';
 import {tz} from 'moment-timezone';
 import initI18n from '../i18n';
+import {Moment} from 'moment/moment';
 
 export class DateUtils {
   static resetLocale = (lang?: string): void => {
@@ -43,6 +44,27 @@ export class DateUtils {
     const orderedDays = daysAfterFirstDay.concat(daysBeforeFirstDay);
     return orderedDays.map((d) => dayNames[dayNumbers.indexOf(d)]);
   };
+
+  static getDateFromMoment = (moment: Moment): Date => {
+    let date = new Date();
+    if (moment) {
+      date = moment.toDate();
+    }
+    return date;
+  };
+
+  static getTimeFromMoment = (moment: Moment): Date => {
+    const date = new Date();
+    if (moment) {
+      date.setHours(moment.hours());
+      date.setMinutes(moment.minutes());
+    }
+    return date;
+  };
+
+  static getDayOfWeek = (date: Date): number => moment(date).weekday();
+
+  static getDatesInMonth = (date: Date): number => moment(date).daysInMonth();
 
   static isTheSameDay = (date1: Date, date2: Date): boolean => {
     return moment(date1).isSame(date2, 'date');

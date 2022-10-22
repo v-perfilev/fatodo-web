@@ -12,6 +12,7 @@ import PageContainer from '../../../components/layouts/PageContainer';
 import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
+import FBox from '../../../components/boxes/FBox';
 
 type GroupEditProps = WithGroupProps;
 
@@ -34,7 +35,9 @@ const GroupEdit = ({group, loading}: GroupEditProps) => {
       <ConditionalSpinner loading={loading}>
         <PageHeader title={t('routes.GroupEdit')} />
         <Container sx={{marginY: 1}}>
-          <GroupForm group={group} request={request} cancel={goToGroupView} />
+          <FBox sx={{marginX: 2}}>
+            <GroupForm group={group} request={request} cancel={goToGroupView} />
+          </FBox>
         </Container>
       </ConditionalSpinner>
     </PageContainer>

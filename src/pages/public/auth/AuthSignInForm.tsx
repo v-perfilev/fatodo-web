@@ -9,13 +9,14 @@ import AuthSelectors from '../../../store/auth/authSelectors';
 import {useTranslation} from 'react-i18next';
 import {AuthActions} from '../../../store/auth/authActions';
 import {LoginDTO} from '../../../models/dto/LoginDTO';
-import {Stack, SxProps} from '@mui/material';
+import {SxProps} from '@mui/material';
 import FormikTextInput from '../../../components/inputs/FormikTextInput';
 import LoadingButton from '../../../components/controls/LoadingButton';
 import FormikPasswordInput from '../../../components/inputs/FormikPasswordInput';
 import FormikCheckboxInput from '../../../components/inputs/FormikCheckboxInput';
 import {useNavigate} from 'react-router-dom';
 import {RootRoutes} from '../../../routes/RootRouter';
+import FVStack from '../../../components/boxes/FVStack';
 
 type SignInFormValues = {
   user: string;
@@ -70,7 +71,7 @@ const SignInForm = ({getToken}: SignInFormProps) => {
       onSubmit={handleSubmit}
     >
       {(formikProps: FormikProps<SignInFormValues>) => (
-        <Stack sx={containerStyles} alignItems="center">
+        <FVStack sx={containerStyles}>
           <FormikTextInput name="user" label={t('account:fields.user.label')} disabled={loading} />
           <FormikPasswordInput name="password" label={t('account:fields.password.label')} disabled={loading} />
           <FormikCheckboxInput name="rememberMe" Label={{label: t('account:fields.rememberMe.label')}} />
@@ -83,7 +84,7 @@ const SignInForm = ({getToken}: SignInFormProps) => {
           >
             {t('account:login.submit')}
           </LoadingButton>
-        </Stack>
+        </FVStack>
       )}
     </Formik>
   );
