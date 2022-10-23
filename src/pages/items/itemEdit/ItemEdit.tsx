@@ -16,6 +16,7 @@ import FBox from '../../../components/boxes/FBox';
 import ItemForm from '../itemForm/ItemForm';
 import {useTranslation} from 'react-i18next';
 import ItemSelectors from '../../../store/item/itemSelectors';
+import {Reminder} from '../../../models/Reminder';
 
 type ItemEditProps = WithItemProps;
 
@@ -28,8 +29,8 @@ const ItemEdit = ({group, item, loading}: ItemEditProps) => {
   const goToGroupView = (): void => group && navigate(GroupRouteUtils.getViewUrl(group.id));
   const goToItemView = (): void => item && navigate(ItemRouteUtils.getViewUrl(item.id));
 
-  const request = (dto: ItemDTO, stopSubmitting: () => void): void => {
-    dispatch(ItemActions.updateItemThunk(dto))
+  const request = (dto: ItemDTO, reminders: Reminder[], stopSubmitting: () => void): void => {
+    dispatch(ItemActions.updateItemThunk({dto, reminders}))
       .unwrap()
       .then(() => goToItemView())
       .catch(() => stopSubmitting());

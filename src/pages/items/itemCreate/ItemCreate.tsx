@@ -16,6 +16,7 @@ import PageContainer from '../../../components/layouts/PageContainer';
 import {useTranslation} from 'react-i18next';
 import ItemForm from '../itemForm/ItemForm';
 import FBox from '../../../components/boxes/FBox';
+import {Reminder} from '../../../models/Reminder';
 
 type ItemCreateProps = WithGroupProps;
 
@@ -27,8 +28,8 @@ const ItemCreate = ({group, loading}: ItemCreateProps) => {
   const goToGroupView = (): void => group && navigate(GroupRouteUtils.getViewUrl(group.id));
   const goToItemView = (item: Item): void => item && navigate(ItemRouteUtils.getViewUrl(item.id));
 
-  const request = (dto: ItemDTO, stopSubmitting: () => void): void => {
-    dispatch(ItemActions.createItemThunk(dto))
+  const request = (dto: ItemDTO, reminders: Reminder[], stopSubmitting: () => void): void => {
+    dispatch(ItemActions.createItemThunk({dto, reminders}))
       .unwrap()
       .then((item) => goToItemView(item))
       .catch(() => stopSubmitting());

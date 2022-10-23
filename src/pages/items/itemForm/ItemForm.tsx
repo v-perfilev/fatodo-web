@@ -77,7 +77,7 @@ type ItemFormProps = {
   group: Group;
   item?: Item;
   reminders?: Reminder[];
-  request: (dto: ItemDTO, stopSubmitting: () => void) => void;
+  request: (dto: ItemDTO, reminders: Reminder[], stopSubmitting: () => void) => void;
   cancel: () => void;
 };
 
@@ -102,7 +102,7 @@ const ItemForm = ({group, item, reminders, request, cancel}: ItemFormProps) => {
       deleteReminders: deleteReminders ? true : undefined,
     };
 
-    request(dto, () => helpers.setSubmitting(false));
+    request(dto, values.reminders, () => helpers.setSubmitting(false));
   };
 
   return (
