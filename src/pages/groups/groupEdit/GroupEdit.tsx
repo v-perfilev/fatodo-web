@@ -1,5 +1,5 @@
 import React from 'React';
-import {Container} from '@mui/material';
+import {SxProps} from '@mui/material';
 import withThemeProvider from '../../../shared/hocs/withThemeProvider';
 import withGroupContainer, {WithGroupProps} from '../../../shared/hocs/withContainers/withGroupContainer';
 import {GroupActions} from '../../../store/group/groupActions';
@@ -34,14 +34,17 @@ const GroupEdit = ({group, loading}: GroupEditProps) => {
     <PageContainer>
       <ConditionalSpinner loading={loading}>
         <PageHeader title={t('routes.GroupEdit')} />
-        <Container sx={{marginY: 1}}>
-          <FBox sx={{marginX: 2}}>
-            <GroupForm group={group} request={request} cancel={goToGroupView} />
-          </FBox>
-        </Container>
+        <FBox sx={formContainerStyles}>
+          <GroupForm group={group} request={request} cancel={goToGroupView} />
+        </FBox>
       </ConditionalSpinner>
     </PageContainer>
   );
+};
+
+const formContainerStyles: SxProps = {
+  marginY: 1,
+  marginX: 2,
 };
 
 export default flowRight([withGroupContainer, withThemeProvider])(GroupEdit);

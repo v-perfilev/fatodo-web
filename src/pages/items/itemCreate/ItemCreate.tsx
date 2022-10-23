@@ -1,5 +1,5 @@
 import React from 'React';
-import {Container} from '@mui/material';
+import {SxProps} from '@mui/material';
 import withGroupContainer, {WithGroupProps} from '../../../shared/hocs/withContainers/withGroupContainer';
 import withThemeProvider from '../../../shared/hocs/withThemeProvider';
 import {flowRight} from 'lodash';
@@ -39,14 +39,17 @@ const ItemCreate = ({group, loading}: ItemCreateProps) => {
     <PageContainer>
       <ConditionalSpinner loading={loading}>
         <PageHeader title={t('routes.ItemCreate')} />
-        <Container sx={{marginY: 1}}>
-          <FBox sx={{marginX: 2}}>
-            <ItemForm group={group} request={request} cancel={goToGroupView} />
-          </FBox>
-        </Container>
+        <FBox sx={formContainerStyles}>
+          <ItemForm group={group} request={request} cancel={goToGroupView} />
+        </FBox>
       </ConditionalSpinner>
     </PageContainer>
   );
+};
+
+const formContainerStyles: SxProps = {
+  marginY: 1,
+  marginX: 2,
 };
 
 export default flowRight([withGroupContainer, withThemeProvider])(ItemCreate);

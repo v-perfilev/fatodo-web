@@ -9,10 +9,10 @@ import {Group} from '../../../models/Group';
 import {ListChildComponentProps} from 'react-window';
 import SortableList from '../../../components/layouts/lists/SortableList';
 import PageContainer from '../../../components/layouts/PageContainer';
-import {Container} from '@mui/material';
 import GroupListHeader from './GroupListHeader';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import {PAGE_HEADER_HEIGHT} from '../../../constants';
+import PageContent from '../../../components/layouts/PageContent';
 
 const GroupList = () => {
   const dispatch = useAppDispatch();
@@ -35,9 +35,9 @@ const GroupList = () => {
 
   const itemRenderer = useCallback(
     ({data, index}: ListChildComponentProps<Group[]>, drag?: any) => (
-      <Container>
+      <PageContent>
         <GroupListCard group={data[index]} sorting={sorting} drag={drag} />
-      </Container>
+      </PageContent>
     ),
     [groups, sorting],
   );
@@ -57,8 +57,10 @@ const GroupList = () => {
   }, []);
 
   return (
-    <PageContainer>
-      <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} />
+    <PageContainer withoutContainer>
+      <PageContent>
+        <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} />
+      </PageContent>
       {sorting ? (
         <SortableList
           itemRenderer={itemRenderer}

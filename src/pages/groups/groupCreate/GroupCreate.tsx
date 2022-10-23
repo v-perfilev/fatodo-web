@@ -8,8 +8,8 @@ import PageContainer from '../../../components/layouts/PageContainer';
 import PageHeader from '../../../components/layouts/PageHeader';
 import {useTranslation} from 'react-i18next';
 import GroupForm from '../groupForm/GroupForm';
-import {Container} from '@mui/material';
 import FBox from '../../../components/boxes/FBox';
+import {SxProps} from '@mui/material';
 
 const GroupCreate = () => {
   const dispatch = useAppDispatch();
@@ -28,13 +28,16 @@ const GroupCreate = () => {
   return (
     <PageContainer>
       <PageHeader title={t('routes.GroupCreate')} />
-      <Container sx={{marginY: 1}}>
-        <FBox sx={{marginX: 2}}>
-          <GroupForm request={request} cancel={goBack} />
-        </FBox>
-      </Container>
+      <FBox sx={formContainerStyles}>
+        <GroupForm request={request} cancel={goBack} />
+      </FBox>
     </PageContainer>
   );
+};
+
+const formContainerStyles: SxProps = {
+  marginY: 1,
+  marginX: 2,
 };
 
 export default GroupCreate;

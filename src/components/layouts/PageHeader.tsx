@@ -1,7 +1,7 @@
 import React, {PropsWithChildren, ReactElement} from 'react';
 import FHStack from '../boxes/FHStack';
 import PageDivider from './PageDivider';
-import {Box, Container, IconButton, SxProps, Typography} from '@mui/material';
+import {Box, IconButton, SxProps, Typography} from '@mui/material';
 import {PAGE_HEADER_HEIGHT} from '../../constants';
 import ArrowLeftIcon from '../icons/ArrowLeftIcon';
 
@@ -14,36 +14,30 @@ type PageHeaderProps = PropsWithChildren<{
 
 const PageHeader = ({title, image, position = 'relative', goBackAction, children}: PageHeaderProps) => {
   return (
-    <Box position={position} sx={rootStyles}>
-      <Container sx={containerStyles}>
-        <FHStack sx={contentStyles}>
-          <FHStack spacing={1} flexGrow={0}>
-            {goBackAction && (
-              <IconButton sx={{marginLeft: -2}} color="primary" onClick={goBackAction}>
-                <ArrowLeftIcon />
-              </IconButton>
-            )}
-            {image}
-            <Typography fontSize="16pt" fontWeight="500" color="primary">
-              {title}
-            </Typography>
-          </FHStack>
-          {children}
+    <Box sx={containerStyles} position={position}>
+      <FHStack sx={contentStyles}>
+        <FHStack spacing={1} flexGrow={0}>
+          {goBackAction && (
+            <IconButton sx={{marginLeft: -2}} color="primary" onClick={goBackAction}>
+              <ArrowLeftIcon />
+            </IconButton>
+          )}
+          {image}
+          <Typography fontSize="16pt" fontWeight="500" color="primary">
+            {title}
+          </Typography>
         </FHStack>
-        <PageDivider height="2px" color="primary.light" />
-      </Container>
+        {children}
+      </FHStack>
+      <PageDivider height="2px" color="primary.light" />
     </Box>
   );
 };
 
-const rootStyles: SxProps = {
+const containerStyles: SxProps = {
   zIndex: 100,
   width: '100%',
   height: PAGE_HEADER_HEIGHT,
-};
-
-const containerStyles: SxProps = {
-  height: '100%',
   paddingBottom: '10px',
 };
 

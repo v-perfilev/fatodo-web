@@ -11,7 +11,7 @@ import {ItemRouteUtils} from '../../../routes/ItemRouter';
 import PageContainer from '../../../components/layouts/PageContainer';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 import PageHeader from '../../../components/layouts/PageHeader';
-import {Container} from '@mui/material';
+import {SxProps} from '@mui/material';
 import FBox from '../../../components/boxes/FBox';
 import ItemForm from '../itemForm/ItemForm';
 import {useTranslation} from 'react-i18next';
@@ -40,14 +40,17 @@ const ItemEdit = ({group, item, loading}: ItemEditProps) => {
     <PageContainer>
       <ConditionalSpinner loading={loading}>
         <PageHeader title={t('routes.ItemEdit')} />
-        <Container sx={{marginY: 1}}>
-          <FBox sx={{marginX: 2}}>
-            <ItemForm group={group} item={item} reminders={reminders} request={request} cancel={goToGroupView} />
-          </FBox>
-        </Container>
+        <FBox sx={formContainerStyles}>
+          <ItemForm group={group} item={item} reminders={reminders} request={request} cancel={goToGroupView} />
+        </FBox>
       </ConditionalSpinner>
     </PageContainer>
   );
+};
+
+const formContainerStyles: SxProps = {
+  marginY: 1,
+  marginX: 2,
 };
 
 export default flowRight([withItemContainer, withThemeProvider])(ItemEdit);

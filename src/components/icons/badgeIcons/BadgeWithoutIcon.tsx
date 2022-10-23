@@ -1,5 +1,5 @@
 import React, {PropsWithChildren} from 'react';
-import {Badge, BadgeOrigin, SvgIconProps} from '@mui/material';
+import {Badge, Box, SvgIconProps, SxProps} from '@mui/material';
 
 type BadgeWithoutIconProps = PropsWithChildren<SvgIconProps> & {
   count: number;
@@ -7,17 +7,23 @@ type BadgeWithoutIconProps = PropsWithChildren<SvgIconProps> & {
 };
 
 const BadgeWithoutIcon = ({count, color}: BadgeWithoutIconProps) => {
-  const anchorOrigin: BadgeOrigin = {vertical: 'top', horizontal: 'left'};
   const badgeColor = color || 'error';
+
   return (
-    <Badge
-      sx={{marginTop: 4, marginLeft: 24}}
-      badgeContent={count}
-      color={badgeColor}
-      max={500}
-      anchorOrigin={anchorOrigin}
-    />
+    <Box sx={containerStyles}>
+      <Badge sx={badgeStyles} badgeContent={count} color={badgeColor} max={500} />
+    </Box>
   );
+};
+
+const containerStyles: SxProps = {
+  position: 'relative',
+  width: 33,
+  // height: 33,
+};
+
+const badgeStyles: SxProps = {
+  top: -1,
 };
 
 export default BadgeWithoutIcon;

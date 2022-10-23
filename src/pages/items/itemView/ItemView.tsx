@@ -10,9 +10,9 @@ import StatusView from '../../../components/views/StatusView';
 import TypeView from '../../../components/views/TypeView';
 import PriorityView from '../../../components/views/PriorityView';
 import PageDivider from '../../../components/layouts/PageDivider';
-import {Container, Divider} from '@mui/material';
+import {Divider, SxProps} from '@mui/material';
 import ItemViewChanges from './ItemViewChanges';
-import ItemReminders from './ItemReminders';
+import ItemViewReminders from './ItemViewReminders';
 import ItemViewDescription from './ItemViewDescription';
 import FVStack from '../../../components/boxes/FVStack';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
@@ -48,20 +48,23 @@ const ItemView = ({group, item, loading}: ItemViewProps) => {
     <PageContainer>
       <ConditionalSpinner loading={loading}>
         <ItemViewHeader />
-        <Container sx={{marginY: 1}}>
-          <FVStack sx={{marginX: 2}}>
-            <MultiLabeledBox items={labeledItems} />
-            <Divider />
-            <ItemViewDescription />
-            {showReminders && <PageDivider />}
-            {showReminders && <ItemReminders />}
-            <Divider />
-            <ItemViewChanges />
-          </FVStack>
-        </Container>
+        <FVStack sx={containerStyles}>
+          <MultiLabeledBox items={labeledItems} />
+          <Divider />
+          <ItemViewDescription />
+          {showReminders && <PageDivider />}
+          {showReminders && <ItemViewReminders />}
+          <Divider />
+          <ItemViewChanges />
+        </FVStack>
       </ConditionalSpinner>
     </PageContainer>
   );
+};
+
+const containerStyles: SxProps = {
+  marginY: 1,
+  marginX: 2,
 };
 
 export default flowRight([withItemContainer, withThemeProvider])(ItemView);

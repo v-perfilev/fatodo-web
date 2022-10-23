@@ -18,8 +18,8 @@ const UserView = (props: UserViewProps) => {
 
   const imageWithUsername = (
     <Stack spacing={1} direction="row" alignItems="center">
-      {withUserPic && <UrlPic alt={user.username} url={user.imageFilename} size={size} />}
-      {withUsername && <Box>{user.username}</Box>}
+      {withUserPic && <UrlPic alt={user?.username} url={user?.imageFilename} size={size} />}
+      {withUsername && <Box>{user?.username}</Box>}
     </Stack>
   );
 

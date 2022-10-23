@@ -7,7 +7,7 @@ import LabeledBox from '../../../components/surfaces/LabeledBox';
 import ChipBox from '../../../components/surfaces/ChipBox';
 import ReminderView from '../../../components/views/ReminderView';
 
-const ItemReminders = () => {
+const ItemViewReminders = () => {
   const {t} = useTranslation();
   const reminders = useAppSelector(ItemSelectors.reminders);
 
@@ -24,4 +24,4 @@ const ItemReminders = () => {
   );
 };
 
-export default ItemReminders;
+export default ItemViewReminders;

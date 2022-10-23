@@ -2,7 +2,7 @@ import * as React from 'react';
 import PageNotFoundRedirect from './PageNotFoundRedirect';
 import {RootRoutes} from './RootRouter';
 import {Route} from 'react-router-dom';
-import ContactsMain from '../pages/contacts/ContactsMain';
+import ContactMain from '../pages/contacts/ContactMain';
 
 export enum ContactRoutes {
   INCOMING = '/incoming',
@@ -18,9 +18,9 @@ export class ContactRouteUtils {
 const ContactRouter = () => {
   return (
     <>
-      <Route index element={<ContactsMain />} />
-      <Route path={RootRoutes.CONTACTS + ContactRoutes.OUTCOMING} element={<ContactsMain />} />
-      <Route path={RootRoutes.CONTACTS + ContactRoutes.INCOMING} element={<ContactsMain />} />
+      <Route index element={<ContactMain />} />
+      <Route path={RootRoutes.CONTACTS + ContactRoutes.OUTCOMING} element={<ContactMain />} />
+      <Route path={RootRoutes.CONTACTS + ContactRoutes.INCOMING} element={<ContactMain />} />
       {/*Redirects*/}
       <Route path="*" element={<PageNotFoundRedirect />} />
     </>
