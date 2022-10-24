@@ -4,9 +4,11 @@ import {IconButton, TextField, TextFieldProps} from '@mui/material';
 import {InputUtils} from '../../shared/utils/InputUtils';
 import {RefUtils} from '../../shared/utils/RefUtils';
 
-type ClearableTextInputProps = TextFieldProps;
+type ClearableTextInputProps = TextFieldProps & {
+  disableUnderline?: boolean;
+};
 
-const ClearableTextInput = ({onChange, inputRef, ...props}: ClearableTextInputProps) => {
+const ClearableTextInput = ({onChange, inputRef, disableUnderline, ...props}: ClearableTextInputProps) => {
   const ref = useRef<HTMLInputElement>();
   const [showClearButton, setShowClearButton] = useState(false);
 
@@ -32,6 +34,7 @@ const ClearableTextInput = ({onChange, inputRef, ...props}: ClearableTextInputPr
         <CloseIcon />
       </IconButton>
     ),
+    disableUnderline,
   };
 
   return (

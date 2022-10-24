@@ -5,7 +5,7 @@ import {ImageUtils} from '../../shared/utils/ImageUtils';
 import {Avatar, AvatarProps, SxProps} from '@mui/material';
 
 type UrlPicProps = AvatarProps & {
-  url: string;
+  url?: string;
   size?: number;
   borderWidth?: number;
 };

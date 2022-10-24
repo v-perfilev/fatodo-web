@@ -25,6 +25,10 @@ import {PageableList} from '../../models/PageableList';
 const PREFIX = 'chat/';
 
 export class ChatActions {
+  static reset = () => async (dispatch: AppDispatch) => {
+    dispatch(chatSlice.actions.reset());
+  };
+
   static addMessage = (message: Message, account: UserAccount) => async (dispatch: AppDispatch) => {
     dispatch(chatSlice.actions.setMessages({messages: [message], account}));
   };

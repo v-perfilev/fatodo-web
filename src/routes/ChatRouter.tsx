@@ -2,8 +2,7 @@ import React from 'react';
 import {RootRoutes} from './RootRouter';
 import {Route} from 'react-router-dom';
 import PageNotFoundRedirect from './PageNotFoundRedirect';
-import ChatList from '../pages/chats/chatList/ChatList';
-import ChatView from '../pages/chats/chatView/ChatView';
+import ChatMain from '../pages/chats/ChatMain';
 
 export enum ChatRoutes {
   CHAT = '/:chatId',
@@ -17,8 +16,8 @@ export class ChatRouteUtils {
 const ChatRouter = () => {
   return (
     <>
-      <Route index element={<ChatList />} />
-      <Route path={RootRoutes.CHATS + ChatRoutes.CHAT} element={<ChatView />} />
+      <Route index element={<ChatMain />} />
+      <Route path={RootRoutes.CHATS + ChatRoutes.CHAT} element={<ChatMain />} />
       {/*Redirects*/}
       <Route path="*" element={<PageNotFoundRedirect />} />
     </>
