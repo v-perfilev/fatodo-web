@@ -1,7 +1,6 @@
 import React from 'React';
 import {Box, Grid, SxProps, useMediaQuery} from '@mui/material';
 import {useAppDispatch, useAppSelector} from '../../store/store';
-import AuthSelectors from '../../store/auth/authSelectors';
 import ChatSelectors from '../../store/chat/chatSelectors';
 import {useNavigate, useParams} from 'react-router-dom';
 import {useEffect} from 'react';
@@ -15,7 +14,6 @@ import {ChatRouteUtils} from '../../routes/ChatRouter';
 
 const ChatMain = () => {
   const dispatch = useAppDispatch();
-  const account = useAppSelector(AuthSelectors.account);
   const chat = useAppSelector(ChatSelectors.chat);
   const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'), {noSsr: true});
   const navigate = useNavigate();
@@ -26,34 +24,29 @@ const ChatMain = () => {
     navigate(url, {replace: true});
   };
 
-  const selectChat = (chat: Chat): void => {
-    updateUrlChatParameter(chat);
-  };
-
-  const closeChat = (): void => {
-    dispatch(ChatActions.reset());
-    updateUrlChatParameter(undefined);
-  };
+  useEffect(() => {
+    chat?.id !== chatId && chatId && dispatch(ChatActions.fetchChatThunk(chatId));
+  }, [chatId]);
 
   useEffect(() => {
-    chatId && dispatch(ChatActions.fetchChatThunk(chatId));
-  }, [chatId]);
+    updateUrlChatParameter(chat);
+  }, [chat]);
 
   const bigView = (
     <Grid sx={bigViewStyles} container>
       <Grid sx={controlStyles} item xs={5} lg={4} xl={3}>
-        <ChatList chat={chat} setChat={selectChat} account={account} />
+        <ChatList />
       </Grid>
       <Grid item xs={7} lg={8} xl={9}>
-        <ChatView chat={chat} closeChat={closeChat} account={account} />
+        <ChatView />
       </Grid>
     </Grid>
   );
 
   const smallView = (
     <Box sx={smallViewRootStyles}>
-      {!chatId && <ChatList chat={chat} setChat={selectChat} account={account} />}
-      {chat && <ChatView chat={chat} closeChat={closeChat} account={account} />}
+      {!chatId && <ChatList />}
+      {chat && <ChatView />}
     </Box>
   );
 

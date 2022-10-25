@@ -1,4 +1,4 @@
-import {ListDataProps} from '../../components/surfaces/virtualizedList/types';
+import {ListDataProps} from '../../components/surfaces/virtualizedListOld/types';
 import {User} from '../../models/user.model';
 import {ListChildComponentProps} from 'react-window';
 import {Comment} from '../../models/comment.model';

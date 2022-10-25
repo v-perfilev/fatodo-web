@@ -1,12 +1,12 @@
-import React, {HTMLAttributes} from 'react';
-import {Container} from '@mui/material';
+import React from 'react';
+import {Container, ContainerProps} from '@mui/material';
 import FBox from '../boxes/FBox';
 
-type PageContentProps = HTMLAttributes<HTMLElement>;
+type PageContentProps = ContainerProps;
 
-const PageContent = ({children}: PageContentProps) => {
+const PageContent = ({children, ...props}: PageContentProps) => {
   return (
-    <Container>
+    <Container {...props}>
       <FBox flexGrow={1}>{children}</FBox>
     </Container>
   );

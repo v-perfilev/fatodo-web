@@ -1,5 +1,4 @@
 import React, {ReactElement, useEffect, useMemo, useRef, useState} from 'react';
-import {ListChildComponentProps} from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {animated, UseSpringProps, useSprings} from 'react-spring';
 import {useDrag} from 'react-use-gesture';
@@ -7,7 +6,7 @@ import {ArrayUtils} from '../../../shared/utils/ArrayUtils';
 import {useResize} from '../../../shared/hooks/useResize';
 
 type SortableListProps<T> = {
-  itemRenderer: (params: ListChildComponentProps, drag?: any) => ReactElement;
+  itemRenderer: (item: T, drag?: any) => ReactElement;
   data: T[];
   dataCount: number;
   setOrder: (order: number[]) => void;
@@ -79,10 +78,6 @@ const SortableList = (props: SortableListProps<any>) => {
     return {colCount, rowCount};
   }, [size]);
 
-  const minHeight = useMemo<number>(() => {
-    return grid.rowCount * size.item.height;
-  }, [size, grid]);
-
   const [springs, setSprings] = useSprings(dataCount, calculateSprings({indexOrder: order.current}, size, grid));
 
   const drag = useDrag(({args: [originalIndex], down, movement: [x, y]}) => {
@@ -119,7 +114,7 @@ const SortableList = (props: SortableListProps<any>) => {
           <div style={{position: 'relative'}}>
             {Array.from({length: dataCount}).map((_, index) => (
               <animated.div ref={itemRef} style={{position: 'absolute', width: '100%', ...springs[index]}} key={index}>
-                {itemRenderer({data, index, style: {}}, drag(index))}
+                {itemRenderer(data[index], drag(index))}
               </animated.div>
             ))}
           </div>

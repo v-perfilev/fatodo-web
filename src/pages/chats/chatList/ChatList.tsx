@@ -1,37 +1,32 @@
 import React from 'React';
 import {Chat} from '../../../models/Chat';
-import {UserAccount} from '../../../models/User';
-import VirtualizedList from '../../../components/layouts/lists/VirtualizedList';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import ChatsSelectors from '../../../store/chats/chatsSelectors';
 import {useCallback, useEffect, useState} from 'react';
 import {useDelayedState} from '../../../shared/hooks/useDelayedState';
 import {ChatsActions} from '../../../store/chats/chatsActions';
-import {ListChildComponentProps} from 'react-window';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 import ChatListControl from './ChatListControl';
 import ChatListItem from './ChatListItem';
 import FBox from '../../../components/boxes/FBox';
 import {SxProps} from '@mui/material';
 import {CHATS_FILTER_HEIGHT} from '../../../constants';
-
-type ChatListProps = {
-  chat: Chat;
-  setChat: (chat: Chat) => void;
-  account: UserAccount;
-};
+import ChatSelectors from '../../../store/chat/chatSelectors';
+import VirtualizedList from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 
 type ControlType = 'regular' | 'filtered';
 
-const ChatList = ({chat, setChat, account}: ChatListProps) => {
+const ChatList = () => {
   const dispatch = useAppDispatch();
   // const {showChatCreateDialog} = useChatDialogContext();
+  const chat = useAppSelector(ChatSelectors.chat);
   const chats = useAppSelector(ChatsSelectors.chats);
+  const allLoaded = useAppSelector(ChatsSelectors.allLoaded);
   const filteredChats = useAppSelector(ChatsSelectors.filteredChats);
   const [type, setType] = useState<ControlType>('regular');
   const [filter, setFilter] = useState<string>('');
-  const [loading, setLoading] = useDelayedState();
-  const [filterLoading, setFilterLoading] = useDelayedState();
+  const [loading, setLoading] = useDelayedState(!chats.length);
+  const [filterLoading, setFilterLoading] = useDelayedState(false);
   const [filterLoadCounter, setFilterLoadCounter] = useState<number>(0);
 
   /*
@@ -47,8 +42,8 @@ const ChatList = ({chat, setChat, account}: ChatListProps) => {
   }, [filter]);
 
   /*
-keyExtractor and renderItem
- */
+  keyExtractor and renderItem
+   */
 
   const keyExtractor = useCallback(
     (index: number): string => {
@@ -59,9 +54,9 @@ keyExtractor and renderItem
   );
 
   const itemRenderer = useCallback(
-    ({data, index}: ListChildComponentProps<Chat[]>) => {
-      const isSelected = chat?.id === data[index].id;
-      return <ChatListItem chat={data[index]} selectChat={setChat} isSelected={isSelected} />;
+    (chatItem: Chat) => {
+      const isSelected = chat?.id === chatItem.id;
+      return <ChatListItem chat={chatItem} isSelected={isSelected} />;
     },
     [chat],
   );
@@ -90,14 +85,14 @@ keyExtractor and renderItem
   return (
     <>
       <ChatListControl setFilter={setFilter} />
-      <FBox sx={containerStyles}>
+      <FBox sx={listStyles}>
         <ConditionalSpinner loading={loading || filterLoading}>
           <VirtualizedList
             itemRenderer={itemRenderer}
             keyExtractor={keyExtractor}
-            data={type === 'regular' ? chats : filteredChats}
-            dataCount={type === 'regular' ? chats.length : filteredChats.length}
-            loadMoreItems={type === 'regular' ? load : loadFiltered}
+            itemData={type === 'regular' ? chats : filteredChats}
+            allLoaded={type === 'regular' ? allLoaded : undefined}
+            loadMoreItems={type === 'regular' ? load : undefined}
           />
         </ConditionalSpinner>
       </FBox>
@@ -105,7 +100,7 @@ keyExtractor and renderItem
   );
 };
 
-const containerStyles: SxProps = {
+const listStyles: SxProps = {
   width: '100%',
   height: `calc(100% - ${CHATS_FILTER_HEIGHT}px)`,
 };

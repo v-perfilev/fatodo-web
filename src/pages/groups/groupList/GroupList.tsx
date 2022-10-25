@@ -1,18 +1,19 @@
 import React from 'React';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import {GroupsActions} from '../../../store/groups/groupsActions';
-import VirtualizedList, {VirtualizedListMethods} from '../../../components/layouts/lists/VirtualizedList';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import GroupsSelectors from '../../../store/groups/groupsSelectors';
 import GroupListCard from './groupListCard/GroupListCard';
 import {Group} from '../../../models/Group';
-import {ListChildComponentProps} from 'react-window';
 import SortableList from '../../../components/layouts/lists/SortableList';
 import PageContainer from '../../../components/layouts/PageContainer';
 import GroupListHeader from './GroupListHeader';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import {PAGE_HEADER_HEIGHT} from '../../../constants';
 import PageContent from '../../../components/layouts/PageContent';
+import VirtualizedList, {
+  VirtualizedListMethods,
+} from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 
 const GroupList = () => {
   const dispatch = useAppDispatch();
@@ -34,9 +35,9 @@ const GroupList = () => {
   );
 
   const itemRenderer = useCallback(
-    ({data, index}: ListChildComponentProps<Group[]>, drag?: any) => (
+    (group: Group, drag?: any) => (
       <PageContent>
-        <GroupListCard group={data[index]} sorting={sorting} drag={drag} />
+        <GroupListCard group={group} sorting={sorting} drag={drag} />
       </PageContent>
     ),
     [groups, sorting],
@@ -72,9 +73,8 @@ const GroupList = () => {
       ) : (
         <VirtualizedList
           itemRenderer={itemRenderer}
+          itemData={groups}
           keyExtractor={keyExtractor}
-          data={groups}
-          dataCount={groups.length}
           paddingTop={PAGE_HEADER_HEIGHT}
           setIsOnTop={setHideScrollButton}
           virtualizedListRef={listRef}

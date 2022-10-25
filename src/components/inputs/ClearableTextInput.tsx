@@ -1,32 +1,45 @@
-import React, {ChangeEvent, useRef, useState} from 'react';
+import React, {ChangeEvent, Ref, useCallback, useImperativeHandle, useRef, useState} from 'react';
 import CloseIcon from '../icons/CloseIcon';
 import {IconButton, TextField, TextFieldProps} from '@mui/material';
 import {InputUtils} from '../../shared/utils/InputUtils';
 import {RefUtils} from '../../shared/utils/RefUtils';
 
-type ClearableTextInputProps = TextFieldProps & {
-  disableUnderline?: boolean;
+export type ClearableTextInputMethods = {
+  clear: () => void;
 };
 
-const ClearableTextInput = ({onChange, inputRef, disableUnderline, ...props}: ClearableTextInputProps) => {
+type ClearableTextInputProps = TextFieldProps & {
+  disableUnderline?: boolean;
+  clearableInputRef?: Ref<ClearableTextInputMethods>;
+};
+
+const ClearableTextInput = ({
+  onChange,
+  inputRef,
+  disableUnderline,
+  clearableInputRef,
+  ...props
+}: ClearableTextInputProps) => {
   const ref = useRef<HTMLInputElement>();
   const [showClearButton, setShowClearButton] = useState(false);
 
-  const updateShowClearButton = (): void => {
+  const updateShowClearButton = useCallback((): void => {
     const filterIsNotEmpty = ref.current.value.length > 0;
     setShowClearButton(filterIsNotEmpty);
-  };
+  }, []);
 
-  const clear = (event: React.MouseEvent<HTMLInputElement>): void => {
-    event.stopPropagation();
+  const clear = useCallback((event?: React.MouseEvent<HTMLInputElement>): void => {
+    event?.stopPropagation();
     updateShowClearButton();
     InputUtils.clear(ref);
-  };
+  }, []);
 
-  const handleOnChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const handleOnChange = useCallback((event: ChangeEvent<HTMLInputElement>): void => {
     onChange(event);
     updateShowClearButton();
-  };
+  }, []);
+
+  useImperativeHandle(clearableInputRef, (): ClearableTextInputMethods => ({clear}), [clear]);
 
   const inputProps = {
     endAdornment: showClearButton && (
@@ -38,7 +51,13 @@ const ClearableTextInput = ({onChange, inputRef, disableUnderline, ...props}: Cl
   };
 
   return (
-    <TextField onChange={handleOnChange} inputRef={RefUtils.merge(ref, inputRef)} InputProps={inputProps} {...props} />
+    <TextField
+      variant="standard"
+      onChange={handleOnChange}
+      inputRef={RefUtils.merge(ref, inputRef)}
+      InputProps={inputProps}
+      {...props}
+    />
   );
 };
 

@@ -1,16 +1,20 @@
 import React from 'React';
-import {Box} from '@mui/material';
-import {UserAccount} from '../../../models/User';
-import {Chat} from '../../../models/Chat';
+import ChatViewHeader from './ChatViewHeader';
+import ChatViewFooter from './ChatViewFooter';
+import ChatViewContent from './ChatViewContent';
+import {useAppSelector} from '../../../store/store';
+import ChatSelectors from '../../../store/chat/chatSelectors';
 
-type ChatViewProps = {
-  chat: Chat;
-  closeChat: () => void;
-  account: UserAccount;
-};
+const ChatView = () => {
+  const chat = useAppSelector(ChatSelectors.chat);
 
-const ChatView = ({chat, closeChat, account}: ChatViewProps) => {
-  return <Box>Chat view</Box>;
+  return chat ? (
+    <>
+      <ChatViewHeader />
+      <ChatViewContent />
+      <ChatViewFooter />
+    </>
+  ) : null;
 };
 
 export default ChatView;

@@ -1,6 +1,6 @@
 import {Chat} from '../../../models/Chat';
 import FHStack from '../../../components/boxes/FHStack';
-import {useAppSelector} from '../../../store/store';
+import {useAppDispatch, useAppSelector} from '../../../store/store';
 import InfoSelectors from '../../../store/info/infoSelectors';
 import React, {useCallback} from 'react';
 import {ChatUtils} from '../../../shared/utils/ChatUtils';
@@ -15,24 +15,25 @@ import {alpha, SxProps, Typography} from '@mui/material';
 import BadgeWithoutIcon from '../../../components/icons/badgeIcons/BadgeWithoutIcon';
 import ChatListMessage from './chatListMessage/ChatListMessage';
 import {Theme} from '@mui/material/styles';
+import {ChatActions} from '../../../store/chat/chatActions';
 
 type ChatListItemProps = {
   chat: Chat;
-  selectChat: (chat: Chat) => void;
   isSelected: boolean;
 };
 
-const ChatListItem = ({chat, selectChat, isSelected}: ChatListItemProps) => {
+const ChatListItem = ({chat, isSelected}: ChatListItemProps) => {
+  const dispatch = useAppDispatch();
   const unreadMessageIdsSelector = useCallback(ChatsSelectors.makeUnreadMessageIdsSelector(), []);
   const usersSelector = useCallback(InfoSelectors.makeUsersSelector(), []);
-  const {t} = useTranslation();
   const memberIds = chat.members.map((m) => m.userId);
   const unreadMessageIds = useAppSelector((state) => unreadMessageIdsSelector(state, chat.id));
   const users = useAppSelector((state) => usersSelector(state, memberIds));
   const account = useAppSelector(AuthSelectors.account);
+  const {t} = useTranslation();
 
   const goToChat = (): void => {
-    selectChat(chat);
+    !isSelected && dispatch(ChatActions.fetchChatThunk(chat.id));
   };
 
   const unreadCount = unreadMessageIds.length;
@@ -49,8 +50,8 @@ const ChatListItem = ({chat, selectChat, isSelected}: ChatListItemProps) => {
       {pic}
       <FHStack>
         <FVStack spacing={0.5} alignItems="stretch" justifyContent="center">
-          <FHStack spacing={1} alignItems="center">
-            <FHStack spacing={1} alignItems="center">
+          <FHStack spacing={1}>
+            <FHStack spacing={1}>
               <Typography color="primary" fontWeight="bold" fontSize={14}>
                 {title}
               </Typography>

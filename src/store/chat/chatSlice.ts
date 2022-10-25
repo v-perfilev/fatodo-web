@@ -123,10 +123,7 @@ const chatSlice = createSlice({
 });
 
 const filterMessages = (messages: Message[]): Message[] => {
-  return messages
-    .filter(FilterUtils.uniqueByIdFilter)
-    .filter(FilterUtils.uniqueByUserIdAndTextFilter)
-    .sort(ComparatorUtils.createdAtComparator);
+  return messages.filter(FilterUtils.uniqueByIdOrUserIdAndTextAndDateFilter).sort(ComparatorUtils.createdAtComparator);
 };
 
 const filterReactions = (reactions: MessageReaction[]): MessageReaction[] => {
@@ -148,7 +145,7 @@ const convertMessagesToChatItems = (messagesToConvert: Message[], account: UserA
     }
     handledItems.push({message});
   });
-  return handledItems.reverse();
+  return handledItems;
 };
 
 export default chatSlice;

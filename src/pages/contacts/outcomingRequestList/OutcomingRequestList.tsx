@@ -4,12 +4,13 @@ import {useAppDispatch, useAppSelector} from '../../../store/store';
 import ContactsSelectors from '../../../store/contacts/contactsSelectors';
 import {ContactsActions} from '../../../store/contacts/contactsActions';
 import {ContactRequest} from '../../../models/Contact';
-import {ListChildComponentProps} from 'react-window';
-import VirtualizedList, {VirtualizedListMethods} from '../../../components/layouts/lists/VirtualizedList';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import PageContent from '../../../components/layouts/PageContent';
 import OutcomingRequestListItem from './OutcomingRequestListItem';
+import VirtualizedList, {
+  VirtualizedListMethods,
+} from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 
 const OutcomingRequestList = () => {
   const dispatch = useAppDispatch();
@@ -34,9 +35,9 @@ const OutcomingRequestList = () => {
   );
 
   const itemRenderer = useCallback(
-    ({data, index}: ListChildComponentProps<ContactRequest[]>) => (
-      <PageContent>
-        <OutcomingRequestListItem request={data[index]} />
+    (request: ContactRequest) => (
+      <PageContent maxWidth="md">
+        <OutcomingRequestListItem request={request} />
       </PageContent>
     ),
     [],
@@ -61,8 +62,7 @@ const OutcomingRequestList = () => {
       <VirtualizedList
         itemRenderer={itemRenderer}
         keyExtractor={keyExtractor}
-        data={outcomingRequests}
-        dataCount={outcomingRequests.length}
+        itemData={outcomingRequests}
         setIsOnTop={setHideScrollButton}
         virtualizedListRef={listRef}
       />

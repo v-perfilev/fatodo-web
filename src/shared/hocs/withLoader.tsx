@@ -15,7 +15,7 @@ const withLoader = (Component: ComponentType) => (props: any) => {
     <>
       <Fade in={loading} appear={false}>
         <Box>
-          <FatodoSpinner />
+          <FatodoSpinner position="fixed" />
         </Box>
       </Fade>
       <Fade in={!loading} timeout={1000}>

@@ -5,11 +5,12 @@ import {ContactsActions} from '../../../store/contacts/contactsActions';
 import {useDelayedState} from '../../../shared/hooks/useDelayedState';
 import {ContactRequest} from '../../../models/Contact';
 import IncomingRequestListItem from './IncomingRequestListItem';
-import VirtualizedList, {VirtualizedListMethods} from '../../../components/layouts/lists/VirtualizedList';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
-import {ListChildComponentProps} from 'react-window';
 import PageContent from '../../../components/layouts/PageContent';
+import VirtualizedList, {
+  VirtualizedListMethods,
+} from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 
 const IncomingRequestList = () => {
   const dispatch = useAppDispatch();
@@ -34,9 +35,9 @@ const IncomingRequestList = () => {
   );
 
   const itemRenderer = useCallback(
-    ({data, index}: ListChildComponentProps<ContactRequest[]>) => (
-      <PageContent>
-        <IncomingRequestListItem request={data[index]} />
+    (request: ContactRequest) => (
+      <PageContent maxWidth="md">
+        <IncomingRequestListItem request={request} />
       </PageContent>
     ),
     [],
@@ -61,8 +62,7 @@ const IncomingRequestList = () => {
       <VirtualizedList
         itemRenderer={itemRenderer}
         keyExtractor={keyExtractor}
-        data={incomingRequests}
-        dataCount={incomingRequests.length}
+        itemData={incomingRequests}
         setIsOnTop={setHideScrollButton}
         virtualizedListRef={listRef}
       />

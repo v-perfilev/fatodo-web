@@ -1,19 +1,19 @@
-import React, {HTMLAttributes} from 'react';
-import {Box, Container, SxProps} from '@mui/material';
+import React from 'react';
+import {Box, Container, ContainerProps, SxProps} from '@mui/material';
 import {HEADER_HEIGHT} from '../../constants';
 
-type PageContainerProps = HTMLAttributes<HTMLElement> & {
+type PageContainerProps = ContainerProps & {
   withoutContainer?: boolean;
 };
 
-const PageContainer = ({withoutContainer, children}: PageContainerProps) => {
+const PageContainer = ({withoutContainer, children, ...props}: PageContainerProps) => {
   return withoutContainer ? (
     <Box sx={rootStyles}>
       <Box sx={boxStyles}>{children}</Box>
     </Box>
   ) : (
     <Box sx={rootStyles}>
-      <Container sx={containerStyles}>
+      <Container sx={containerStyles} {...props}>
         <Box sx={boxStyles}>{children}</Box>
       </Container>
     </Box>
@@ -21,7 +21,6 @@ const PageContainer = ({withoutContainer, children}: PageContainerProps) => {
 };
 
 const rootStyles: SxProps = {
-  position: 'relative',
   width: '100%',
   height: `calc(100vh - ${HEADER_HEIGHT}px)`,
 };
@@ -31,6 +30,9 @@ const containerStyles: SxProps = {
 };
 
 const boxStyles: SxProps = {
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
   width: '100%',
   height: '100%',
 };

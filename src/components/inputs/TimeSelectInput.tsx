@@ -35,7 +35,6 @@ const TimeSelectInput = ({label, time, setTime, required}: TimeSelectInputProps)
   };
 
   const handleClock = (momentTime: Moment): void => {
-    console.log(momentTime, momentTime.hours());
     const timeDate = DateUtils.getTimeFromMoment(momentTime);
     setTime(timeDate);
     if (!showMinutes) {

@@ -38,5 +38,5 @@ export const AVATARS_IN_CARD = 3;
 // CHATS
 export const TIMEOUT_BEFORE_MARK_AS_READ = 1000;
 export const CHATS_FILTER_HEIGHT = 50;
-export const CHATS_INFO_HEIGHT = 50;
-export const CHATS_INPUT_HEIGHT = 50;
+export const CHAT_HEADER_HEIGHT = 50;
+export const CHAT_FOOTER_HEIGHT = 50;

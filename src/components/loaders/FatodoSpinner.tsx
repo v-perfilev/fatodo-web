@@ -1,10 +1,14 @@
 import React, {CSSProperties} from 'react';
 import {Box, SxProps} from '@mui/material';
 
-const FatodoSpinner = () => {
+type FatodoSpinnerProps = {
+  position?: 'absolute' | 'fixed';
+};
+
+const FatodoSpinner = ({position = 'absolute'}: FatodoSpinnerProps) => {
   return (
     <Box sx={containerStyles}>
-      <img style={imageStyles} src={'/spinner.svg'} alt="Fatodo" />
+      <img style={imageStyles(position)} src={'/spinner.svg'} alt="Fatodo" />
     </Box>
   );
 };
@@ -15,14 +19,14 @@ const containerStyles: SxProps = {
   flexGrow: 1,
 };
 
-const imageStyles: CSSProperties = {
-  width: 270,
-  height: 270,
-  maxWidth: '70%',
-  position: 'fixed',
+const imageStyles = (position: 'absolute' | 'fixed'): CSSProperties => ({
+  position,
   top: '50%',
   left: '50%',
+  width: position === 'fixed' ? 270 : 200,
+  height: position === 'fixed' ? 270 : 200,
+  maxWidth: '70%',
   transform: 'translate(-50%, -50%)',
-};
+});
 
 export default FatodoSpinner;

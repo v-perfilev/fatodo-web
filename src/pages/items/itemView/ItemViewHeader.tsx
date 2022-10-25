@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {GroupUtils} from '../../../shared/utils/GroupUtils';
 import {useAppSelector} from '../../../store/store';
 import ItemSelectors from '../../../store/item/itemSelectors';
-import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
+import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
 import PageHeader from '../../../components/layouts/PageHeader';
 import {useNavigate} from 'react-router-dom';
 import AuthSelectors from '../../../store/auth/authSelectors';

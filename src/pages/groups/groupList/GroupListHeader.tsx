@@ -12,7 +12,7 @@ import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import PlusIcon from '../../../components/icons/PlusIcon';
 import RefreshIcon from '../../../components/icons/RefreshIcon';
 import {useTranslation} from 'react-i18next';
-import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
+import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
 
 type GroupListHeaderProps = {
   sorting: boolean;

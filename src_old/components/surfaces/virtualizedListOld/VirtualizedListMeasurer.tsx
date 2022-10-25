@@ -1,8 +1,7 @@
-import React, {memo, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {CSSProperties, memo, ReactElement, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {ListKeysCache, ListMeasurerCache} from './caches';
 import {ListDataProps} from './types';
 import {ListChildComponentProps} from 'react-window';
-import {makeStyles} from '@material-ui/core/styles';
 
 type VirtualizedListMeasurerProps = {
   itemRenderer: (params: ListChildComponentProps) => ReactElement;
@@ -15,7 +14,6 @@ type VirtualizedListMeasurerProps = {
 
 const VirtualizedListMeasurer = (props: VirtualizedListMeasurerProps) => {
   const {itemRenderer, itemData, itemKey, measurerCache, keyCache, afterMeasured} = props;
-  const classes = virtualizedListMeasurerStyles();
   const measurerRef = useRef<HTMLDivElement>();
   const indexesToMeasureMap = useRef<Map<number, number>>();
   const [, updateState] = useState<{}>();
@@ -86,7 +84,7 @@ const VirtualizedListMeasurer = (props: VirtualizedListMeasurerProps) => {
   });
 
   return indexesToMeasureMap.current ? (
-    <div className={classes.measurer} ref={measurerRef}>
+    <div style={measurerStyles} ref={measurerRef}>
       {Array.from(indexesToMeasureMap.current.keys()).map((index, key) => (
         <div key={key}>{itemRenderer({index, style: undefined, data: itemData})}</div>
       ))}
@@ -94,14 +92,12 @@ const VirtualizedListMeasurer = (props: VirtualizedListMeasurerProps) => {
   ) : null;
 };
 
-const virtualizedListMeasurerStyles = makeStyles(() => ({
-  measurer: {
-    position: 'absolute',
-    width: '100%',
-    height: 1,
-    visibility: 'hidden',
-    zIndex: -1,
-  },
-}));
+const measurerStyles: CSSProperties = {
+  position: 'absolute',
+  width: '100%',
+  height: 1,
+  visibility: 'hidden',
+  zIndex: -1,
+};
 
 export default memo(VirtualizedListMeasurer);

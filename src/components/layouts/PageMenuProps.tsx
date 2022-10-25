@@ -6,11 +6,12 @@ import DotsVerticalIcon from '../icons/DotsVerticalIcon';
 
 export type PageMenuItem = PopupMenuItemProps;
 
-type PageMenu = {
+type PageMenuProps = {
   items: PageMenuItem[];
+  compactView?: boolean;
 };
 
-const PageMenu = ({items}: PageMenu) => {
+const PageMenu = ({items, compactView}: PageMenuProps) => {
   const theme = useTheme();
   const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -42,7 +43,7 @@ const PageMenu = ({items}: PageMenu) => {
 
   return (
     <FHStack flexGrow={1} spacing={1} justifyContent="flex-end">
-      {isSmallDevice ? popupMenu : regularMenu}
+      {isSmallDevice || compactView ? popupMenu : regularMenu}
     </FHStack>
   );
 };

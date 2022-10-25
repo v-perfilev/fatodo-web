@@ -1,6 +1,5 @@
 import React from 'React';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import VirtualizedList, {VirtualizedListMethods} from '../../../components/layouts/lists/VirtualizedList';
 import withGroupContainer, {WithGroupProps} from '../../../shared/hocs/withContainers/withGroupContainer';
 import GroupSelectors from '../../../store/group/groupSelectors';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
@@ -8,7 +7,6 @@ import AuthSelectors from '../../../store/auth/authSelectors';
 import {GroupUtils} from '../../../shared/utils/GroupUtils';
 import {GroupActions} from '../../../store/group/groupActions';
 import {Item} from '../../../models/Item';
-import {ListChildComponentProps} from 'react-window';
 import GroupItem from '../components/groupItem/GroupItem';
 import PageContainer from '../../../components/layouts/PageContainer';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
@@ -18,6 +16,9 @@ import withThemeProvider from '../../../shared/hocs/withThemeProvider';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 import {PAGE_HEADER_HEIGHT} from '../../../constants';
 import PageContent from '../../../components/layouts/PageContent';
+import VirtualizedList, {
+  VirtualizedListMethods,
+} from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 
 const GroupView = ({group, groupId, loading}: WithGroupProps) => {
   const [showArchived, setShowArchived] = useState<boolean>(false);
@@ -69,9 +70,9 @@ loaders
   );
 
   const itemRenderer = useCallback(
-    ({data, index}: ListChildComponentProps<Item[]>) => (
+    (item: Item) => (
       <PageContent>
-        <GroupItem item={data[index]} canEdit={canEdit} />
+        <GroupItem item={item} canEdit={canEdit} />
       </PageContent>
     ),
     [items],
@@ -102,8 +103,8 @@ loaders
         <VirtualizedList
           itemRenderer={itemRenderer}
           keyExtractor={keyExtractor}
-          data={items}
-          dataCount={items.length}
+          itemData={items}
+          allLoaded={allItemsLoaded}
           loadMoreItems={load}
           paddingTop={PAGE_HEADER_HEIGHT}
           setIsOnTop={setHideScrollButton}

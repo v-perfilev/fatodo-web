@@ -58,8 +58,8 @@ const ContactMain = () => {
     outcomingRequestCount > 0 ? <BadgeWithoutIcon color="secondary" count={outcomingRequestCount} /> : undefined;
 
   return (
-    <PageContainer withoutContainer>
-      <PageContent>
+    <PageContainer>
+      <PageContent maxWidth="md">
         <FHStack>
           <Tabs sx={tabsStyles} variant="fullWidth" textColor="primary" value={activeTab} onChange={handleChange}>
             <Tab sx={tabStyles} label={t('contact:relations.title')} icon={relationsIcon} iconPosition="end" />

@@ -6,7 +6,7 @@ import UserMinusIcon from '../../../components/icons/UserMinusIcon';
 import {ContactsActions} from '../../../store/contacts/contactsActions';
 import InfoSelectors from '../../../store/info/infoSelectors';
 import {ContactRelation} from '../../../models/Contact';
-import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
+import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
 import {useTranslation} from 'react-i18next';
 
 type ContactListItemProps = {

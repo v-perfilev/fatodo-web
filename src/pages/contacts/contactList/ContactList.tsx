@@ -7,12 +7,13 @@ import {ContactsActions} from '../../../store/contacts/contactsActions';
 import InfoSelectors from '../../../store/info/infoSelectors';
 import {ContactRelation} from '../../../models/Contact';
 import ContactListItem from './ContactListItem';
-import VirtualizedList, {VirtualizedListMethods} from '../../../components/layouts/lists/VirtualizedList';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
-import {ListChildComponentProps} from 'react-window';
 import FVStack from '../../../components/boxes/FVStack';
 import PageContent from '../../../components/layouts/PageContent';
+import VirtualizedList, {
+  VirtualizedListMethods,
+} from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 
 const ContactList = () => {
   const usersSelector = useCallback(InfoSelectors.makeUsersSelector(), []);
@@ -43,9 +44,9 @@ const ContactList = () => {
   );
 
   const itemRenderer = useCallback(
-    ({data, index}: ListChildComponentProps<ContactRelation[]>) => (
-      <PageContent>
-        <ContactListItem relation={data[index]} />
+    (relation: ContactRelation) => (
+      <PageContent maxWidth="md">
+        <ContactListItem relation={relation} />
       </PageContent>
     ),
     [],
@@ -78,15 +79,14 @@ const ContactList = () => {
 
   return (
     <FVStack>
-      <PageContent>
+      <PageContent maxWidth="md">
         <ContactListControl setFilter={setFilter} />
       </PageContent>
       <ConditionalSpinner loading={loading}>
         <VirtualizedList
           itemRenderer={itemRenderer}
+          itemData={relationsToShow}
           keyExtractor={keyExtractor}
-          data={relationsToShow}
-          dataCount={relationsToShow.length}
           setIsOnTop={setHideScrollButton}
           virtualizedListRef={listRef}
         />
