@@ -1,5 +1,6 @@
 import React, {
   CSSProperties,
+  memo,
   ReactElement,
   Ref,
   useCallback,
@@ -19,7 +20,6 @@ import VirtualizedListItem from './VirtualizedListItem';
 import {useForceUpdate} from '../../../../shared/hooks/useForceUpdate';
 
 export type VirtualizedListMethods = {
-  visibleItems: number[];
   clearCache: (index?: number) => void;
   scrollToPosition: (position: number) => void;
   scrollToTop: () => void;
@@ -42,6 +42,7 @@ type VirtualizedListProps<T> = {
   paddingBottom?: number;
   setIsOnTop?: (isOnTop: boolean) => void;
   setIsOnBottom?: (isOnBottom: boolean) => void;
+  setVisibleItems?: (visibleItems: number[]) => void;
   virtualizedListRef?: Ref<VirtualizedListMethods>;
 };
 
@@ -58,11 +59,10 @@ const getItemStyles = (length: number, index: number, paddingTop: number, paddin
 const VirtualizedList = (props: VirtualizedListProps<any>) => {
   const {itemRenderer, itemData, allLoaded = true, loadMoreItems} = props;
   const {itemHeight, keyExtractor, reverseOrder, virtualizedListRef} = props;
-  const {paddingTop = 0, paddingBottom = 0, setIsOnTop, setIsOnBottom} = props;
+  const {paddingTop = 0, paddingBottom = 0, setIsOnTop, setIsOnBottom, setVisibleItems} = props;
   const forceUpdate = useForceUpdate();
   const [scroll, setScroll] = useState<ListOnScrollProps>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [keyCache] = useState<ListKeysCache>(new ListKeysCache());
   const [measurerCache] = useState<ListMeasurerCache>(new ListMeasurerCache());
   const listRef = useRef<VariableSizeList>();
@@ -114,7 +114,6 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
   useImperativeHandle(
     virtualizedListRef,
     (): VirtualizedListMethods => ({
-      visibleItems,
       clearCache,
       scrollToPosition,
       scrollToTop,
@@ -122,7 +121,7 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
       isScrolledToTop,
       isScrolledToBottom,
     }),
-    [visibleItems, clearCache, scrollToPosition, scrollToTop, scrollToBottom, isScrolledToTop, isScrolledToBottom],
+    [clearCache, scrollToPosition, scrollToTop, scrollToBottom, isScrolledToTop, isScrolledToBottom],
   );
 
   /*
@@ -147,10 +146,12 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
 
   const wrappedOnItemsRendered = useCallback(
     (onItemsRendered: OnItemsRendered) => (props: ListOnItemsRenderedProps): void => {
-      const firstVisible = props.visibleStartIndex;
-      const visibleItemsCount = props.visibleStopIndex - props.visibleStartIndex + 1;
-      const visibleItems = Array.from({length: visibleItemsCount}, (_, i) => i + firstVisible);
-      setVisibleItems(visibleItems);
+      if (setVisibleItems) {
+        const firstVisible = props.visibleStartIndex;
+        const visibleItemsCount = props.visibleStopIndex - props.visibleStartIndex + 1;
+        const visibleItems = Array.from({length: visibleItemsCount}, (_, i) => i + firstVisible);
+        setVisibleItems(visibleItems);
+      }
       onItemsRendered(props);
     },
     [],
@@ -265,4 +266,4 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
   );
 };
 
-export default VirtualizedList;
+export default memo(VirtualizedList);

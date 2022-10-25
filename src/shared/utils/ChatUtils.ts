@@ -2,7 +2,7 @@ import {Chat, ChatInfo} from '../../models/Chat';
 import {User, UserAccount} from '../../models/User';
 import {MessageUtils} from './MessageUtils';
 import {FilterUtils} from './FilterUtils';
-import {Message} from '../../models/Message';
+import {ChatItem, Message} from '../../models/Message';
 
 export class ChatUtils {
   public static getDirectChatUser = (chat: Chat, users: User[], account: User): User => {
@@ -35,16 +35,14 @@ export class ChatUtils {
     return [...chatUserIds, ...lastMessageUserIds, ...eventUserIds];
   };
 
-  // TODO adapt to virtualized list
-  // public static getUnreadMessages = (
-  //   info: {viewableItems: ViewToken[]; changed: ViewToken[]},
-  //   account: UserAccount,
-  // ): Message[] => {
-  //   return info.viewableItems
-  //     .map((token) => token.item)
-  //     .filter((item) => MessageUtils.isMessage(item.message))
-  //     .filter((item) => MessageUtils.isIncomingMessage(item.message, account))
-  //     .filter((item) => !MessageUtils.isReadMessage(item.message, account))
-  //     .map((item) => item.message);
-  // };
+  public static getUnreadMessages = (chatItems: ChatItem[], account: UserAccount, indexes: number[]): Message[] => {
+    return indexes
+      ? indexes
+          .map((index) => chatItems[index])
+          .filter((item) => MessageUtils.isMessage(item.message))
+          .filter((item) => MessageUtils.isIncomingMessage(item.message, account))
+          .filter((item) => !MessageUtils.isReadMessage(item.message, account))
+          .map((item) => item.message)
+      : [];
+  };
 }

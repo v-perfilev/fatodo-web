@@ -28,7 +28,7 @@ const ItemViewChanges = () => {
   );
 
   return (
-    <FVStack>
+    <FVStack flexGrow={0}>
       {creator && (
         <FHStack flexWrap="wrap">
           {labeledBox(t('item:labels.createdBy'), creator.username)}
