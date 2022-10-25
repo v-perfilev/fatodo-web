@@ -3,22 +3,34 @@ import {SxProps} from '@mui/material';
 import {CHAT_FOOTER_HEIGHT, CHAT_HEADER_HEIGHT} from '../../../constants';
 import ChatSelectors from '../../../store/chat/chatSelectors';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
-import {useCallback} from 'react';
+import {useCallback, useMemo, useRef, useState} from 'react';
 import PageContent from '../../../components/layouts/PageContent';
 import ChatViewItem from './ChatViewItem';
 import {ChatActions} from '../../../store/chat/chatActions';
 import FBox from '../../../components/boxes/FBox';
-import VirtualizedList from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
+import VirtualizedList, {
+  VirtualizedListMethods,
+} from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 import {ChatItem} from '../../../models/Message';
+import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
+import ChatsSelectors from '../../../store/chats/chatsSelectors';
 
 type ChatViewContentProps = {};
 
 const ChatViewContent = ({}: ChatViewContentProps) => {
+  const unreadMessageIdsSelector = useCallback(ChatsSelectors.makeUnreadMessageIdsSelector(), []);
   const dispatch = useAppDispatch();
   const chat = useAppSelector(ChatSelectors.chat);
   const messages = useAppSelector(ChatSelectors.messages);
   const chatItems = useAppSelector(ChatSelectors.chatItems);
   const allLoaded = useAppSelector(ChatSelectors.allLoaded);
+  const unreadMessageIds = useAppSelector((state) => unreadMessageIdsSelector(state, chat.id));
+  const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
+  const listRef = useRef<VirtualizedListMethods>();
+
+  const scrollButtonHighlighted = useMemo<boolean>(() => {
+    return unreadMessageIds.length > 0;
+  }, [unreadMessageIds]);
 
   /*
   loaders
@@ -50,6 +62,12 @@ const ChatViewContent = ({}: ChatViewContentProps) => {
     );
   }, []);
 
+  /*
+  scroll up button
+   */
+
+  const scrollUp = (): void => listRef.current.scrollToBottom();
+
   return (
     <FBox sx={containerStyles}>
       <VirtualizedList
@@ -59,7 +77,10 @@ const ChatViewContent = ({}: ChatViewContentProps) => {
         allLoaded={allLoaded}
         loadMoreItems={load}
         reverseOrder
+        setIsOnBottom={setHideScrollButton}
+        virtualizedListRef={listRef}
       />
+      <ScrollCornerButton show={!hideScrollButton} action={scrollUp} down highlighted={scrollButtonHighlighted} />
     </FBox>
   );
 };

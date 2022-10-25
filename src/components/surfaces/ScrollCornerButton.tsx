@@ -7,11 +7,12 @@ type ScrollCornerButtonProps = {
   show: boolean;
   action: () => void;
   down?: boolean;
+  highlighted?: boolean;
 };
 
-const ScrollCornerButton = ({show, action, down}: ScrollCornerButtonProps) => {
+const ScrollCornerButton = ({show, action, down, highlighted}: ScrollCornerButtonProps) => {
   return show ? (
-    <Fab sx={fabStyles} size="medium" onClick={action}>
+    <Fab sx={fabStyles} size="medium" color={highlighted ? 'primary' : undefined} onClick={action}>
       {down ? <ArrowDownIcon /> : <ArrowUpIcon />}
     </Fab>
   ) : null;
