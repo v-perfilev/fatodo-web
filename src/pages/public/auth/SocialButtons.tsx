@@ -35,7 +35,7 @@ const SocialButtons = () => {
   };
 
   return (
-    <FVStack>
+    <FVStack width="100%">
       <Box sx={headerStyles}>
         <Divider />
         <Typography sx={captionStyles}>{t('account:socialLogin.label')}</Typography>

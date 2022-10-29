@@ -17,9 +17,7 @@ import ChatsSelectors from '../../../store/chats/chatsSelectors';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {ChatUtils} from '../../../shared/utils/ChatUtils';
 
-type ChatViewContentProps = {};
-
-const ChatViewContent = ({}: ChatViewContentProps) => {
+const ChatViewContent = () => {
   const unreadMessageIdsSelector = useCallback(ChatsSelectors.makeUnreadMessageIdsSelector(), []);
   const dispatch = useAppDispatch();
   const account = useAppSelector(AuthSelectors.account);
@@ -42,10 +40,8 @@ const ChatViewContent = ({}: ChatViewContentProps) => {
    */
 
   const load = useCallback(async (): Promise<void> => {
-    if (chat) {
-      await dispatch(ChatActions.fetchMessagesThunk({chatId: chat.id, offset: messages.length}));
-    }
-  }, [chat?.id, chatItems.length]);
+    await dispatch(ChatActions.fetchMessagesThunk({chatId: chat.id, offset: messages.length}));
+  }, [chat.id, chatItems.length]);
 
   /*
   keyExtractor and renderItem
@@ -79,7 +75,7 @@ const ChatViewContent = ({}: ChatViewContentProps) => {
       }, TIMEOUT_BEFORE_MARK_AS_READ);
       unreadTimersRef.current.set(message.id, timerId);
     },
-    [chat?.id, account, unreadTimersRef.current],
+    [chat.id, account, unreadTimersRef.current],
   );
 
   const deleteTimer = useCallback(

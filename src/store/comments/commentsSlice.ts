@@ -75,10 +75,7 @@ const commentsSlice = createSlice({
 });
 
 const filterComments = (comments: Comment[]): Comment[] => {
-  return comments
-    .filter(FilterUtils.uniqueByIdOrUserIdAndTextAndDateFilter)
-    .sort(ComparatorUtils.createdAtComparator)
-    .reverse();
+  return comments.filter(FilterUtils.uniqueByIdOrUserIdAndTextAndDateFilter).sort(ComparatorUtils.createdAtComparator);
 };
 
 const filterReactions = (reactions: CommentReaction[]): CommentReaction[] => {

@@ -6,6 +6,8 @@ import {ChatItem, Message} from '../../models/Message';
 const getChatState = (state: RootState) => state.chat;
 
 class ChatSelectors {
+  static chatId = createSelector(getChatState, (state) => state.chatId as string);
+
   static chat = createSelector(getChatState, (state) => state.chat as Chat);
 
   static messages = createSelector(getChatState, (state) => state.messages as Message[]);

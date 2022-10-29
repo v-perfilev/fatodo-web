@@ -11,7 +11,7 @@ import AuthSelectors from '../../../store/auth/authSelectors';
 import FVStack from '../../../components/boxes/FVStack';
 import DateView from '../../../components/views/DateView';
 import UrlPic from '../../../components/images/UrlPic';
-import {alpha, SxProps, Typography} from '@mui/material';
+import {alpha, Box, SxProps, Typography} from '@mui/material';
 import BadgeWithoutIcon from '../../../components/icons/badgeIcons/BadgeWithoutIcon';
 import ChatListMessage from './chatListMessage/ChatListMessage';
 import {Theme} from '@mui/material/styles';
@@ -60,7 +60,11 @@ const ChatListItem = ({chat, isSelected}: ChatListItemProps) => {
                   {t('chat:common.direct')}
                 </Typography>
               )}
-              {unreadCount > 0 && <BadgeWithoutIcon count={unreadCount} color="secondary" />}
+              {unreadCount > 0 && (
+                <Box sx={badgeContainerStyles}>
+                  <BadgeWithoutIcon count={unreadCount} color="secondary" />
+                </Box>
+              )}
             </FHStack>
             <Typography color="grey.500" fontSize={12}>
               <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
@@ -80,6 +84,10 @@ const chatStyles: SxProps = {
   '&:hover': {
     backgroundColor: 'grey.50',
   },
+};
+
+const badgeContainerStyles: SxProps = {
+  paddingX: 1,
 };
 
 const selectedChatStyles: SxProps = (theme: Theme) => ({

@@ -24,17 +24,17 @@ const ChatViewHeader = () => {
   const dispatch = useAppDispatch();
   const usersSelector = useCallback(InfoSelectors.makeUsersSelector(), []);
   const chat = useAppSelector(ChatSelectors.chat);
-  const memberIds = chat?.members.map((m) => m.userId);
+  const memberIds = chat.members.map((m) => m.userId);
   const users = useAppSelector((state) => usersSelector(state, memberIds));
   const account = useAppSelector(AuthSelectors.account);
   const {t} = useTranslation();
 
   const title = useMemo<string>(() => {
-    return chat ? ChatUtils.getTitle(chat, users, account) : '';
+    return ChatUtils.getTitle(chat, users, account);
   }, [chat, users, account]);
 
   const refresh = (): void => {
-    chat && dispatch(ChatActions.refreshMessagesThunk(chat.id));
+    dispatch(ChatActions.refreshMessagesThunk(chat.id));
   };
 
   const showMembers = (): void => {
@@ -71,14 +71,14 @@ const ChatViewHeader = () => {
       text: t('chat:menu.addMembers'),
       icon: <UserPlusIcon />,
       color: 'primary',
-      hidden: chat?.isDirect,
+      hidden: chat.isDirect,
     },
     {
       action: renameChat,
       text: t('chat:menu.renameChat'),
       icon: <EditIcon />,
       color: 'primary',
-      hidden: chat?.isDirect,
+      hidden: chat.isDirect,
     },
     {action: cleanChat, text: t('chat:menu.cleanChat'), icon: <BroomIcon />, color: 'primary'},
     {
@@ -86,14 +86,14 @@ const ChatViewHeader = () => {
       text: t('chat:menu.leaveChat'),
       icon: <LeaveIcon />,
       color: 'primary',
-      hidden: chat?.isDirect,
+      hidden: chat.isDirect,
     },
     {
       action: deleteChat,
       text: t('chat:menu.deleteChat'),
       icon: <DeleteIcon />,
       color: 'error',
-      hidden: chat?.isDirect,
+      hidden: chat.isDirect,
     },
   ];
 

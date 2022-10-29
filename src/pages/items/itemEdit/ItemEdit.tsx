@@ -37,7 +37,7 @@ const ItemEdit = ({group, item, loading}: ItemEditProps) => {
   };
 
   return (
-    <PageContainer>
+    <PageContainer maxWidth="md">
       <ConditionalSpinner loading={loading}>
         <PageHeader title={t('routes.ItemEdit')} />
         <FBox sx={formContainerStyles}>

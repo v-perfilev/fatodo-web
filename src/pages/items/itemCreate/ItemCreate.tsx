@@ -36,7 +36,7 @@ const ItemCreate = ({group, loading}: ItemCreateProps) => {
   };
 
   return (
-    <PageContainer>
+    <PageContainer maxWidth="md">
       <ConditionalSpinner loading={loading}>
         <PageHeader title={t('routes.ItemCreate')} />
         <FBox sx={formContainerStyles}>

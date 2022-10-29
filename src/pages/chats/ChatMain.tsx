@@ -11,6 +11,7 @@ import ChatList from './chatList/ChatList';
 import {Chat} from '../../models/Chat';
 import ChatView from './chatView/ChatView';
 import {ChatRouteUtils} from '../../routes/ChatRouter';
+import PageContainer from '../../components/layouts/PageContainer';
 
 const ChatMain = () => {
   const dispatch = useAppDispatch();
@@ -33,12 +34,16 @@ const ChatMain = () => {
   }, [chat]);
 
   const bigView = (
-    <Grid sx={bigViewStyles} container>
-      <Grid sx={controlStyles} item xs={5} lg={4} xl={3}>
-        <ChatList />
+    <Grid sx={bigViewRootStyles} container>
+      <Grid sx={controlStyles} item xs={5} md={4} lg={3}>
+        <PageContainer withoutContainer>
+          <ChatList />
+        </PageContainer>
       </Grid>
-      <Grid item xs={7} lg={8} xl={9}>
-        <ChatView />
+      <Grid item xs={7} md={8} lg={9}>
+        <PageContainer withoutContainer>
+          <ChatView />
+        </PageContainer>
       </Grid>
     </Grid>
   );
@@ -53,10 +58,10 @@ const ChatMain = () => {
   return <>{isBigDevice ? bigView : smallView}</>;
 };
 
-const bigViewStyles: SxProps = {
-  display: 'flex',
-  flexDirection: 'row',
-  flexGrow: 1,
+const bigViewRootStyles: SxProps = {
+  position: 'relative',
+  width: '100%',
+  height: `calc(100vh - ${HEADER_HEIGHT}px)`,
 };
 
 const smallViewRootStyles: SxProps = {

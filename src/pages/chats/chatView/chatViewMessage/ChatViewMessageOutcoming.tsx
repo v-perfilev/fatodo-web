@@ -18,7 +18,7 @@ const ChatViewMessageOutcoming = ({message}: ChatViewMessageOutcomingProps) => {
 
   return (
     <FHStack sx={containerStyles} justifyContent="flex-end">
-      <ChatViewMessageReactions message={message} isOutcoming />
+      <ChatViewMessageReactions comment={message} isOwnComment />
       <FVStack sx={messageStyles} spacing={1}>
         <FHStack>
           <FHStack>

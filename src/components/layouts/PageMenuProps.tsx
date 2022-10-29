@@ -13,7 +13,7 @@ type PageMenuProps = {
 
 const PageMenu = ({items, compactView}: PageMenuProps) => {
   const theme = useTheme();
-  const isSmallDevice = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
 
   const regularMenu = (
     <>

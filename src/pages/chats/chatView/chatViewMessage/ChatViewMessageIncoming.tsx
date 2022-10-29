@@ -50,7 +50,7 @@ const ChatViewMessageIncoming = ({message}: ChatViewMessageIncomingProps) => {
           </Typography>
         )}
       </FVStack>
-      <ChatViewMessageReactions message={message} isOutcoming={false} />
+      <ChatViewMessageReactions comment={message} isOwnComment={false} />
     </FHStack>
   );
 };

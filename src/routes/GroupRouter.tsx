@@ -2,10 +2,10 @@ import React from 'react';
 import {RootRoutes} from './RootRouter';
 import {Route} from 'react-router-dom';
 import PageNotFoundRedirect from './PageNotFoundRedirect';
-import GroupList from '../pages/groups/groupList/GroupList';
 import GroupCreate from '../pages/groups/groupCreate/GroupCreate';
 import GroupEdit from '../pages/groups/groupEdit/GroupEdit';
 import GroupView from '../pages/groups/groupView/GroupView';
+import GroupList from '../pages/groups/groupList/GroupList';
 
 export enum GroupRoutes {
   CREATE = '/create',

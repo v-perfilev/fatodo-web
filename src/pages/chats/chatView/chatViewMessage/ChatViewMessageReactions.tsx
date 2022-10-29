@@ -20,54 +20,54 @@ const buildReactionMap = (message: Message, isOutcoming: boolean): Map<MessageRe
 };
 
 type ChatViewMessageReactionsProps = {
-  message: Message;
-  isOutcoming: boolean;
+  comment: Message;
+  isOwnComment: boolean;
 };
 
-const ChatViewMessageReactions = ({message, isOutcoming}: ChatViewMessageReactionsProps) => {
+const ChatViewMessageReactions = ({comment, isOwnComment}: ChatViewMessageReactionsProps) => {
   const dispatch = useAppDispatch();
   const account = useAppSelector(AuthSelectors.account);
   const [activeReaction, setActiveReaction] = useState<MessageReactionType>();
   const [reactionMap, setReactionMap] = useState<Map<MessageReactionType, number>>(
-    buildReactionMap(message, isOutcoming),
+    buildReactionMap(comment, isOwnComment),
   );
 
   const updateReactionsMap = (): void => {
-    const newReactionMap = buildReactionMap(message, isOutcoming);
+    const newReactionMap = buildReactionMap(comment, isOwnComment);
     setReactionMap(newReactionMap);
   };
 
   const updateActiveReaction = (): void => {
-    const reaction = message.reactions.find((r) => r.userId === account.id);
+    const reaction = comment.reactions.find((r) => r.userId === account.id);
     setActiveReaction(reaction?.type);
   };
 
   const handleReaction = useCallback(
     (r: MessageReactionType) => (): void => {
       if (r === activeReaction) {
-        dispatch(ChatActions.noReactionThunk(message));
+        dispatch(ChatActions.noReactionThunk(comment));
       } else if (r === 'LIKE') {
-        dispatch(ChatActions.likeReactionThunk(message));
+        dispatch(ChatActions.likeReactionThunk(comment));
       } else if (r === 'DISLIKE') {
-        dispatch(ChatActions.dislikeReactionThunk(message));
+        dispatch(ChatActions.dislikeReactionThunk(comment));
       }
     },
-    [message, activeReaction],
+    [comment, activeReaction],
   );
 
   useEffect(() => {
     updateReactionsMap();
     updateActiveReaction();
-  }, [message.reactions]);
+  }, [comment.reactions]);
 
   const reaction = (r: MessageReactionType, key: number): ReactElement => {
     const count = reactionMap.get(r);
     const color = r === activeReaction ? 'primary' : 'disabled';
-    const direction = !isOutcoming ? 'row-reverse' : 'row';
-    const handleClick = !isOutcoming ? handleReaction(r) : undefined;
+    const direction = !isOwnComment ? 'row-reverse' : 'row';
+    const handleClick = !isOwnComment ? handleReaction(r) : undefined;
 
     return (
-      <FHStack sx={reactionStyles(isOutcoming)} spacing={1} direction={direction} onClick={handleClick} key={key}>
+      <FHStack sx={reactionStyles(isOwnComment)} spacing={1} direction={direction} onClick={handleClick} key={key}>
         {count > 0 && (
           <Typography color="grey.500" fontSize={12}>
             {count}

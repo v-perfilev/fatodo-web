@@ -31,7 +31,7 @@ const GroupEdit = ({group, loading}: GroupEditProps) => {
   };
 
   return (
-    <PageContainer>
+    <PageContainer maxWidth="md">
       <ConditionalSpinner loading={loading}>
         <PageHeader title={t('routes.GroupEdit')} />
         <FBox sx={formContainerStyles}>

@@ -16,7 +16,7 @@ const PageHeader = ({title, image, position = 'relative', goBackAction, children
   return (
     <Box sx={containerStyles} position={position}>
       <FHStack sx={contentStyles}>
-        <FHStack spacing={1} flexGrow={0}>
+        <FHStack spacing={1}>
           {goBackAction && (
             <IconButton sx={{marginLeft: -2}} color="primary" onClick={goBackAction}>
               <ArrowLeftIcon />
@@ -27,7 +27,9 @@ const PageHeader = ({title, image, position = 'relative', goBackAction, children
             {title}
           </Typography>
         </FHStack>
-        {children}
+        <FHStack spacing={1} flexGrow={0}>
+          {children}
+        </FHStack>
       </FHStack>
       <PageDivider height="2px" color="primary.light" />
     </Box>
@@ -46,8 +48,6 @@ const contentStyles: SxProps = {
   height: '100%',
   paddingLeft: 2,
   paddingRight: 1,
-  justifyContent: 'space-between',
-  alignItems: 'center',
   backgroundColor: 'white',
 };
 

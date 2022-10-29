@@ -6,8 +6,8 @@ import {Group} from '../../../models/Group';
 import {useNavigate, useParams} from 'react-router-dom';
 
 export type WithGroupProps = {
-  groupId: string;
   group?: Group;
+  groupId: string;
   loading: boolean;
 };
 
@@ -37,7 +37,7 @@ const withGroupContainer = (Component: ComponentType<WithGroupProps>) => (props:
     }
   }, []);
 
-  return <Component loading={!loadingFinished} groupId={groupId} group={group} {...props} />;
+  return <Component loading={!loadingFinished} group={group} groupId={groupId} {...props} />;
 };
 
 export default withGroupContainer;

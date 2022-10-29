@@ -19,10 +19,6 @@ export const SOCIAL_LOGIN = process.env.SOCIAL_LOGIN;
 export const AUTHORIZATION_HEADER = 'authorization';
 export const AUTHORIZATION_PREFIX = 'Bearer ';
 
-// HEADER
-export const HEADER_HEIGHT = 60;
-export const PAGE_HEADER_HEIGHT = 60;
-
 // IMAGES
 export const FALLBACK_AVATAR = '/images/fallback.jpg';
 
@@ -35,8 +31,19 @@ export const ID_STUB = 'ID_STUB';
 // AVATARS
 export const AVATARS_IN_CARD = 3;
 
+// HEADER
+export const HEADER_HEIGHT = 60;
+export const PAGE_HEADER_HEIGHT = 80;
+
 // CHATS
 export const TIMEOUT_BEFORE_MARK_AS_READ = 1000;
 export const CHATS_FILTER_HEIGHT = 50;
 export const CHAT_HEADER_HEIGHT = 50;
 export const CHAT_FOOTER_HEIGHT = 50;
+
+// COMMENTS
+export const COMMENTS_HEADER_HEIGHT = 50;
+export const COMMENTS_FOOTER_HEIGHT = 50;
+
+// EVENTS
+export const EVENTS_HEADER_HEIGHT = 50;

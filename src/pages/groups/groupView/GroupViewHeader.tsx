@@ -14,14 +14,17 @@ import LeaveIcon from '../../../components/icons/LeaveIcon';
 import DeleteIcon from '../../../components/icons/DeleteIcon';
 import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import UrlPic from '../../../components/images/UrlPic';
+import {IconButton} from '@mui/material';
+import CommentsIcon from '../../../components/icons/CommentsIcon';
 
 type GroupViewHeaderProps = {
   refresh: () => void;
   showArchived: boolean;
   setShowArchived: Dispatch<SetStateAction<boolean>>;
+  toggleCollapsed?: () => void;
 };
 
-const GroupViewHeader = ({refresh, showArchived, setShowArchived}: GroupViewHeaderProps) => {
+const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapsed}: GroupViewHeaderProps) => {
   const group = useAppSelector(GroupSelectors.group);
   const account = useAppSelector(AuthSelectors.account);
   const {t} = useTranslation();
@@ -73,6 +76,11 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived}: GroupViewHead
 
   return (
     <PageHeader position="absolute" image={image} title={group?.title} goBackAction={goToGroups}>
+      {toggleCollapsed && (
+        <IconButton color="primary" onClick={toggleCollapsed}>
+          <CommentsIcon />
+        </IconButton>
+      )}
       <PageMenu items={menuItems} />
     </PageHeader>
   );

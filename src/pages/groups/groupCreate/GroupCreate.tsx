@@ -26,7 +26,7 @@ const GroupCreate = () => {
       .catch(() => stopSubmitting());
   };
   return (
-    <PageContainer>
+    <PageContainer maxWidth="md">
       <PageHeader title={t('routes.GroupCreate')} />
       <FBox sx={formContainerStyles}>
         <GroupForm request={request} cancel={goBack} />
