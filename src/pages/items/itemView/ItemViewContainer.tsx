@@ -24,9 +24,10 @@ type ItemViewContainerProps = {
   group: Group;
   item: Item;
   loading: boolean;
+  toggleCollapsed?: () => void;
 };
 
-const ItemViewContainer = ({group, item, loading}: ItemViewContainerProps) => {
+const ItemViewContainer = ({group, item, loading, toggleCollapsed}: ItemViewContainerProps) => {
   const {t, i18n} = useTranslation();
   const reminders = useAppSelector(ItemSelectors.reminders);
 
@@ -48,9 +49,9 @@ const ItemViewContainer = ({group, item, loading}: ItemViewContainerProps) => {
   );
 
   return (
-    <PageContainer maxWidth="md">
-      <ConditionalSpinner loading={loading}>
-        <ItemViewHeader />
+    <ConditionalSpinner loading={loading}>
+      <ItemViewHeader toggleCollapsed={toggleCollapsed} />
+      <PageContainer maxWidth="md">
         <FVStack sx={containerStyles}>
           <MultiLabeledBox items={labeledItems} />
           <Divider />
@@ -60,8 +61,8 @@ const ItemViewContainer = ({group, item, loading}: ItemViewContainerProps) => {
           <Divider />
           <ItemViewChanges />
         </FVStack>
-      </ConditionalSpinner>
-    </PageContainer>
+      </PageContainer>
+    </ConditionalSpinner>
   );
 };
 

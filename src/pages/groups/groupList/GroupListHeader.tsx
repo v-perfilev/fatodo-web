@@ -13,14 +13,17 @@ import PlusIcon from '../../../components/icons/PlusIcon';
 import RefreshIcon from '../../../components/icons/RefreshIcon';
 import {useTranslation} from 'react-i18next';
 import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
+import {IconButton} from '@mui/material';
+import BellIcon from '../../../components/icons/BellIcon';
 
 type GroupListHeaderProps = {
   sorting: boolean;
   setSorting: (sorting: boolean) => void;
   order: number[];
+  toggleCollapsed?: () => void;
 };
 
-const GroupListHeader = ({sorting, setSorting, order}: GroupListHeaderProps) => {
+const GroupListHeader = ({sorting, setSorting, order, toggleCollapsed}: GroupListHeaderProps) => {
   const dispatch = useAppDispatch();
   const groups = useAppSelector(GroupsSelectors.groups);
   const allCollapsed = useAppSelector(GroupsSelectors.itemsAllCollapsed);
@@ -104,6 +107,11 @@ const GroupListHeader = ({sorting, setSorting, order}: GroupListHeaderProps) => 
 
   return (
     <PageHeader maxWidth="md" position="absolute" title={t('routes.Groups')}>
+      {toggleCollapsed && (
+        <IconButton color="primary" onClick={toggleCollapsed}>
+          <BellIcon />
+        </IconButton>
+      )}
       <PageMenu items={sorting ? sortingMenuItems : regularMenuItems} />
     </PageHeader>
   );

@@ -63,7 +63,7 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
 
   return (
     <PageContainer withoutContainer>
-      <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} />
+      <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} toggleCollapsed={toggleCollapsed} />
       {sorting ? (
         <SortableList
           itemRenderer={itemRenderer}

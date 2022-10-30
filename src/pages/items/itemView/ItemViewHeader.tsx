@@ -11,8 +11,14 @@ import {useNavigate} from 'react-router-dom';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import {ItemRouteUtils} from '../../../routes/ItemRouter';
+import {IconButton} from '@mui/material';
+import CommentsIcon from '../../../components/icons/CommentsIcon';
 
-const ItemViewHeader = () => {
+type ItemViewHeaderProps = {
+  toggleCollapsed?: () => void;
+};
+
+const ItemViewHeader = ({toggleCollapsed}: ItemViewHeaderProps) => {
   const account = useAppSelector(AuthSelectors.account);
   const group = useAppSelector(ItemSelectors.group);
   const item = useAppSelector(ItemSelectors.item);
@@ -48,7 +54,12 @@ const ItemViewHeader = () => {
   ];
 
   return (
-    <PageHeader title={item?.title} goBackAction={goToGroupView}>
+    <PageHeader maxWidth="md" title={item?.title} goBackAction={goToGroupView}>
+      {toggleCollapsed && (
+        <IconButton color="primary" onClick={toggleCollapsed}>
+          <CommentsIcon />
+        </IconButton>
+      )}
       <PageMenu items={menuItems} />
     </PageHeader>
   );
