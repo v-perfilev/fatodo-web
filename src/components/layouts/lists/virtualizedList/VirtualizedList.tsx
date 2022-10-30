@@ -31,7 +31,7 @@ export type VirtualizedListMethods = {
 type OnItemsRendered = (props: ListOnItemsRenderedProps) => any;
 
 type VirtualizedListProps<T> = {
-  itemRenderer: (item: T) => ReactElement;
+  itemRenderer: (item: T, index?: number) => ReactElement;
   itemData: T[];
   allLoaded?: boolean;
   loadMoreItems?: () => Promise<void>;
@@ -50,7 +50,7 @@ const getItemStyles = (length: number, index: number, paddingTop: number, paddin
   let calculatedStyle: CSSProperties = {};
   if (index === 0) {
     calculatedStyle = {paddingTop};
-  } else if (index === length) {
+  } else if (index === length - 1) {
     calculatedStyle = {paddingBottom};
   }
   return calculatedStyle;
@@ -186,7 +186,7 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
       return (
         <div style={style}>
           <VirtualizedListItem {...{index, keyExtractor, forceUpdate, measurerCache, listRef}}>
-            <div style={itemStyle}>{itemRenderer(item)}</div>
+            <div style={itemStyle}>{itemRenderer(item, index)}</div>
           </VirtualizedListItem>
         </div>
       );

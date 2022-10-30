@@ -1,13 +1,11 @@
 import React from 'React';
-import {SxProps} from '@mui/material';
-import {CHAT_FOOTER_HEIGHT, CHAT_HEADER_HEIGHT, TIMEOUT_BEFORE_MARK_AS_READ} from '../../../constants';
+import {PAGE_FOOTER_HEIGHT, PAGE_HEADER_HEIGHT, TIMEOUT_BEFORE_MARK_AS_READ} from '../../../constants';
 import ChatSelectors from '../../../store/chat/chatSelectors';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import PageContent from '../../../components/layouts/PageContent';
 import ChatViewItem from './ChatViewItem';
 import {ChatActions} from '../../../store/chat/chatActions';
-import FBox from '../../../components/boxes/FBox';
 import VirtualizedList, {
   VirtualizedListMethods,
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
@@ -104,7 +102,7 @@ const ChatViewContent = () => {
   const scrollUp = (): void => listRef.current.scrollToBottom();
 
   return (
-    <FBox sx={containerStyles}>
+    <>
       <VirtualizedList
         itemRenderer={itemRenderer}
         keyExtractor={keyExtractor}
@@ -112,18 +110,21 @@ const ChatViewContent = () => {
         allLoaded={allLoaded}
         loadMoreItems={load}
         reverseOrder
+        paddingTop={PAGE_HEADER_HEIGHT + 8}
+        paddingBottom={PAGE_FOOTER_HEIGHT + 8}
         setIsOnBottom={setHideScrollButton}
         setVisibleItems={setVisibleItems}
         virtualizedListRef={listRef}
       />
-      <ScrollCornerButton show={!hideScrollButton} action={scrollUp} down highlighted={scrollButtonHighlighted} />
-    </FBox>
+      <ScrollCornerButton
+        show={!hideScrollButton}
+        action={scrollUp}
+        down
+        highlighted={scrollButtonHighlighted}
+        bottomPadding={PAGE_FOOTER_HEIGHT}
+      />
+    </>
   );
-};
-
-const containerStyles: SxProps = {
-  width: '100%',
-  height: `calc(100% - ${CHAT_HEADER_HEIGHT}px - ${CHAT_FOOTER_HEIGHT}px)`,
 };
 
 export default ChatViewContent;

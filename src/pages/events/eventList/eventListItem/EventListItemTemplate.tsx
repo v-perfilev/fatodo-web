@@ -21,10 +21,10 @@ const EventListItemTemplate = ({image, title, content, message, date, loading}: 
   const template = (
     <FHStack sx={containerStyles} alignItems="flex-start">
       {image}
-      <FVStack>
+      <FVStack spacing={1}>
         <FHStack>
           <FHStack>
-            <Typography color="grey.500" fontWeight="bold">
+            <Typography color="grey.500" fontWeight="bold" fontSize={14}>
               {title}
             </Typography>
           </FHStack>
@@ -32,10 +32,10 @@ const EventListItemTemplate = ({image, title, content, message, date, loading}: 
             <DateView date={dateToShow} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
           </Typography>
         </FHStack>
-        <Typography>{content}</Typography>
+        <Typography fontSize={14}>{content}</Typography>
         {message && (
           <PaperBox sx={paperStyles} elevation={0}>
-            <Typography>{message}</Typography>
+            <Typography fontSize={12}>{message}</Typography>
           </PaperBox>
         )}
       </FVStack>

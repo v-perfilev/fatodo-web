@@ -16,6 +16,7 @@ import BadgeWithoutIcon from '../../../components/icons/badgeIcons/BadgeWithoutI
 import ChatListMessage from './chatListMessage/ChatListMessage';
 import {Theme} from '@mui/material/styles';
 import {ChatActions} from '../../../store/chat/chatActions';
+import FBox from '../../../components/boxes/FBox';
 
 type ChatListItemProps = {
   chat: Chat;
@@ -46,41 +47,48 @@ const ChatListItem = ({chat, isSelected}: ChatListItemProps) => {
   const styles: SxProps = isSelected ? selectedChatStyles : chatStyles;
 
   return (
-    <FHStack sx={styles} spacing={1} onClick={goToChat}>
-      {pic}
-      <FHStack>
-        <FVStack spacing={0.5} alignItems="stretch" justifyContent="center">
-          <FHStack spacing={1}>
+    <FBox sx={containerStyles}>
+      <FHStack sx={styles} spacing={1} onClick={goToChat}>
+        {pic}
+        <FHStack>
+          <FVStack spacing={0.5} alignItems="stretch" justifyContent="center">
             <FHStack spacing={1}>
-              <Typography color="primary" fontWeight="bold" fontSize={14}>
-                {title}
-              </Typography>
-              {chat.isDirect && (
-                <Typography color="grey.500" fontSize={14}>
-                  {t('chat:common.direct')}
+              <FHStack spacing={1}>
+                <Typography color="primary" fontWeight="bold" fontSize={14}>
+                  {title}
                 </Typography>
-              )}
-              {unreadCount > 0 && (
-                <Box sx={badgeContainerStyles}>
-                  <BadgeWithoutIcon count={unreadCount} color="secondary" />
-                </Box>
-              )}
+                {chat.isDirect && (
+                  <Typography color="grey.500" fontSize={14}>
+                    {t('chat:common.direct')}
+                  </Typography>
+                )}
+                {unreadCount > 0 && (
+                  <Box sx={badgeContainerStyles}>
+                    <BadgeWithoutIcon count={unreadCount} color="secondary" />
+                  </Box>
+                )}
+              </FHStack>
+              <Typography color="grey.500" fontSize={12}>
+                <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
+              </Typography>
             </FHStack>
-            <Typography color="grey.500" fontSize={12}>
-              <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
-            </Typography>
-          </FHStack>
-          <ChatListMessage message={chat.lastMessage} account={account} />
-        </FVStack>
+            <ChatListMessage message={chat.lastMessage} account={account} />
+          </FVStack>
+        </FHStack>
       </FHStack>
-    </FHStack>
+    </FBox>
   );
+};
+
+const containerStyles: SxProps = {
+  paddingY: 0.5,
 };
 
 const chatStyles: SxProps = {
   cursor: 'pointer',
-  paddingY: 2,
+  paddingY: 1,
   paddingX: 1,
+  borderRadius: 3,
   '&:hover': {
     backgroundColor: 'grey.50',
   },
@@ -92,8 +100,9 @@ const badgeContainerStyles: SxProps = {
 
 const selectedChatStyles: SxProps = (theme: Theme) => ({
   cursor: 'pointer',
-  paddingY: 2,
+  paddingY: 1,
   paddingX: 1,
+  borderRadius: 3,
   backgroundColor: alpha(theme.palette.primary.main, 0.1),
 });
 

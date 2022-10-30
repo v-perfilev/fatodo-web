@@ -1,6 +1,5 @@
 import React from 'React';
-import {SxProps, Typography} from '@mui/material';
-import {CHAT_HEADER_HEIGHT} from '../../../constants';
+import {Typography} from '@mui/material';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {ChatUtils} from '../../../shared/utils/ChatUtils';
@@ -19,6 +18,7 @@ import LeaveIcon from '../../../components/icons/LeaveIcon';
 import DeleteIcon from '../../../components/icons/DeleteIcon';
 import FHStack from '../../../components/boxes/FHStack';
 import AvatarGroup from '../../../components/surfaces/AvatarGroup';
+import PageHeader from '../../../components/layouts/PageHeader';
 
 const ChatViewHeader = () => {
   const dispatch = useAppDispatch();
@@ -98,7 +98,7 @@ const ChatViewHeader = () => {
   ];
 
   return (
-    <FHStack sx={containerStyles}>
+    <PageHeader position="absolute">
       <FHStack spacing={1}>
         <Typography color="primary" fontWeight="bold" fontSize={14}>
           {title}
@@ -113,17 +113,8 @@ const ChatViewHeader = () => {
         <AvatarGroup users={users} />
         <PageMenu items={menuItems} compactView />
       </FHStack>
-    </FHStack>
+    </PageHeader>
   );
-};
-
-const containerStyles: SxProps = {
-  width: '100%',
-  height: CHAT_HEADER_HEIGHT,
-  paddingX: 1,
-  borderBottomWidth: 1,
-  borderBottomStyle: 'solid',
-  borderBottomColor: 'grey.300',
 };
 
 export default ChatViewHeader;

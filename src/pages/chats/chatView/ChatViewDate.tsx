@@ -13,7 +13,7 @@ const ChatViewDate = ({date}: ChatViewDateProps) => {
       <Typography color="primary" fontWeight="bold" fontSize={14}>
         {date}
       </Typography>
-      <PageDivider color="secondary.main" />
+      <PageDivider color="primary.light" />
     </FVStack>
   );
 };

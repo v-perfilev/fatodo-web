@@ -63,23 +63,23 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
 
   return (
     <PageContainer withoutContainer>
-      <PageContent maxWidth="md">
-        <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} />
-      </PageContent>
+      <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} />
       {sorting ? (
         <SortableList
           itemRenderer={itemRenderer}
           data={groups}
           dataCount={groups.length}
           setOrder={setOrder}
-          paddingTop={PAGE_HEADER_HEIGHT}
+          paddingTop={PAGE_HEADER_HEIGHT + 8}
+          paddingBottom={8}
         />
       ) : (
         <VirtualizedList
           itemRenderer={itemRenderer}
           itemData={groups}
           keyExtractor={keyExtractor}
-          paddingTop={PAGE_HEADER_HEIGHT}
+          paddingTop={PAGE_HEADER_HEIGHT + 8}
+          paddingBottom={8}
           setIsOnTop={setHideScrollButton}
           virtualizedListRef={listRef}
         />

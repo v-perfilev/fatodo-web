@@ -1,13 +1,13 @@
 import React from 'react';
 import {Container, ContainerProps} from '@mui/material';
-import FBox from '../boxes/FBox';
+import FVStack from '../boxes/FVStack';
 
 type PageContentProps = ContainerProps;
 
 const PageContent = ({children, ...props}: PageContentProps) => {
   return (
     <Container {...props}>
-      <FBox flexGrow={1}>{children}</FBox>
+      <FVStack spacing={0}>{children}</FVStack>
     </Container>
   );
 };

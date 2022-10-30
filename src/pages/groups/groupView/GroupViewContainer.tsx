@@ -16,6 +16,7 @@ import VirtualizedList, {
   VirtualizedListMethods,
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 import {Group} from '../../../models/Group';
+import PageDivider from '../../../components/layouts/PageDivider';
 
 type GroupViewContainerProps = {
   group: Group;
@@ -74,8 +75,9 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
   );
 
   const itemRenderer = useCallback(
-    (item: Item) => (
+    (item: Item, index: number) => (
       <PageContent maxWidth="md">
+        {index !== 0 && <PageDivider />}
         <GroupItem item={item} canEdit={canEdit} />
       </PageContent>
     ),
@@ -100,21 +102,20 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
 
   return (
     <ConditionalSpinner loading={loading}>
-      <PageContent maxWidth="md">
-        <GroupViewHeader
-          refresh={refresh}
-          showArchived={showArchived}
-          setShowArchived={setShowArchived}
-          toggleCollapsed={toggleCollapsed}
-        />
-      </PageContent>
+      <GroupViewHeader
+        refresh={refresh}
+        showArchived={showArchived}
+        setShowArchived={setShowArchived}
+        toggleCollapsed={toggleCollapsed}
+      />
       <VirtualizedList
         itemRenderer={itemRenderer}
         keyExtractor={keyExtractor}
         itemData={items}
         allLoaded={allItemsLoaded}
         loadMoreItems={load}
-        paddingTop={PAGE_HEADER_HEIGHT}
+        paddingTop={PAGE_HEADER_HEIGHT + 8}
+        paddingBottom={8}
         setIsOnTop={setHideScrollButton}
         virtualizedListRef={listRef}
       />

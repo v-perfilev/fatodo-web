@@ -1,10 +1,7 @@
 import ClearableTextInput from '../../../components/inputs/ClearableTextInput';
-import FHStack from '../../../components/boxes/FHStack';
 import React, {Dispatch, SetStateAction} from 'react';
 import {useTranslation} from 'react-i18next';
-import {SxProps} from '@mui/material';
-import {Theme} from '@mui/material/styles';
-import {CHATS_FILTER_HEIGHT} from '../../../constants';
+import PageHeader from '../../../components/layouts/PageHeader';
 
 type ChatListControlProps = {
   setFilter: Dispatch<SetStateAction<string>>;
@@ -19,7 +16,7 @@ const ChatListControl = ({setFilter}: ChatListControlProps) => {
   };
 
   return (
-    <FHStack flexGrow={0} sx={containerStyles}>
+    <PageHeader position="absolute">
       <ClearableTextInput
         variant="standard"
         placeholder={t('inputs.filter')}
@@ -27,19 +24,8 @@ const ChatListControl = ({setFilter}: ChatListControlProps) => {
         fullWidth
         disableUnderline
       />
-    </FHStack>
+    </PageHeader>
   );
 };
-
-const containerStyles: SxProps = (theme: Theme) => ({
-  zIndex: 1,
-  width: '100%',
-  height: CHATS_FILTER_HEIGHT,
-  padding: 1,
-  backgroundColor: theme.palette.background.default,
-  borderBottomWidth: 1,
-  borderBottomStyle: 'solid',
-  borderBottomColor: 'grey.300',
-});
 
 export default ChatListControl;

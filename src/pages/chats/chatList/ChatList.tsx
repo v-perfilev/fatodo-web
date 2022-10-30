@@ -8,11 +8,10 @@ import {ChatsActions} from '../../../store/chats/chatsActions';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 import ChatListControl from './ChatListControl';
 import ChatListItem from './ChatListItem';
-import FBox from '../../../components/boxes/FBox';
-import {SxProps} from '@mui/material';
-import {CHATS_FILTER_HEIGHT} from '../../../constants';
+import {PAGE_HEADER_HEIGHT} from '../../../constants';
 import ChatSelectors from '../../../store/chat/chatSelectors';
 import VirtualizedList from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
+import PageContent from '../../../components/layouts/PageContent';
 
 type ControlType = 'regular' | 'filtered';
 
@@ -56,7 +55,11 @@ const ChatList = () => {
   const itemRenderer = useCallback(
     (chatItem: Chat) => {
       const isSelected = chat?.id === chatItem.id;
-      return <ChatListItem chat={chatItem} isSelected={isSelected} />;
+      return (
+        <PageContent>
+          <ChatListItem chat={chatItem} isSelected={isSelected} />
+        </PageContent>
+      );
     },
     [chat],
   );
@@ -85,24 +88,18 @@ const ChatList = () => {
   return (
     <>
       <ChatListControl setFilter={setFilter} />
-      <FBox sx={listStyles}>
-        <ConditionalSpinner loading={loading || filterLoading}>
-          <VirtualizedList
-            itemRenderer={itemRenderer}
-            keyExtractor={keyExtractor}
-            itemData={type === 'regular' ? chats : filteredChats}
-            allLoaded={type === 'regular' ? allLoaded : undefined}
-            loadMoreItems={type === 'regular' ? load : undefined}
-          />
-        </ConditionalSpinner>
-      </FBox>
+      <ConditionalSpinner loading={loading || filterLoading}>
+        <VirtualizedList
+          itemRenderer={itemRenderer}
+          keyExtractor={keyExtractor}
+          itemData={type === 'regular' ? chats : filteredChats}
+          allLoaded={type === 'regular' ? allLoaded : undefined}
+          loadMoreItems={type === 'regular' ? load : undefined}
+          paddingTop={PAGE_HEADER_HEIGHT + 4}
+        />
+      </ConditionalSpinner>
     </>
   );
-};
-
-const listStyles: SxProps = {
-  width: '100%',
-  height: `calc(100% - ${CHATS_FILTER_HEIGHT}px)`,
 };
 
 export default ChatList;

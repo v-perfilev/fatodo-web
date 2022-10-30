@@ -14,7 +14,7 @@ type PageMultiColumnProps = {
   additionalElement: (props: PageMultipleColumnChildrenProps) => ReactElement;
 };
 
-const PageHeader = ({mainElement, additionalElement}: PageMultiColumnProps) => {
+const PageMultiColumn = ({mainElement, additionalElement}: PageMultiColumnProps) => {
   const isSmallDevice = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
   const [collapsed, setCollapsed] = useState<boolean>(true);
 
@@ -56,6 +56,7 @@ const containerStyles = (isSmallDevice: boolean): SxProps =>
     ? {
         width: '100vw',
         height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+        overflow: 'hidden',
       }
     : {
         width: '200vw',
@@ -80,4 +81,4 @@ const smallDeviceAdditionalColumnStyles = (isSmallDevice: boolean): SxProps =>
         left: '50%',
       };
 
-export default PageHeader;
+export default PageMultiColumn;

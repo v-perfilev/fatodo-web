@@ -1,6 +1,5 @@
 import React from 'React';
-import {IconButton, SxProps} from '@mui/material';
-import {CHAT_FOOTER_HEIGHT} from '../../../constants';
+import {IconButton} from '@mui/material';
 import FHStack from '../../../components/boxes/FHStack';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import {useTranslation} from 'react-i18next';
@@ -10,6 +9,7 @@ import {MessageDTO} from '../../../models/dto/MessageDTO';
 import {ChatActions} from '../../../store/chat/chatActions';
 import ClearableTextInput, {ClearableTextInputMethods} from '../../../components/inputs/ClearableTextInput';
 import SendMessageIcon from '../../../components/icons/SendMessageIcon';
+import PageFooter from '../../../components/layouts/PageFooter';
 
 const ChatViewFooter = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +40,7 @@ const ChatViewFooter = () => {
   };
 
   return (
-    <FHStack sx={containerStyles}>
+    <PageFooter position="absolute">
       <ClearableTextInput
         placeholder={t('chat:view.inputPlaceholder')}
         onChange={handleChange}
@@ -54,17 +54,8 @@ const ChatViewFooter = () => {
           <SendMessageIcon />
         </IconButton>
       </FHStack>
-    </FHStack>
+    </PageFooter>
   );
-};
-
-const containerStyles: SxProps = {
-  width: '100%',
-  height: CHAT_FOOTER_HEIGHT,
-  paddingX: 1,
-  borderTopWidth: 1,
-  borderTopStyle: 'solid',
-  borderTopColor: 'grey.300',
 };
 
 export default ChatViewFooter;

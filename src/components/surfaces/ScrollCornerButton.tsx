@@ -8,20 +8,21 @@ type ScrollCornerButtonProps = {
   action: () => void;
   down?: boolean;
   highlighted?: boolean;
+  bottomPadding?: number;
 };
 
-const ScrollCornerButton = ({show, action, down, highlighted}: ScrollCornerButtonProps) => {
+const ScrollCornerButton = ({show, action, down, highlighted, bottomPadding = 0}: ScrollCornerButtonProps) => {
   return show ? (
-    <Fab sx={fabStyles} size="medium" color={highlighted ? 'primary' : undefined} onClick={action}>
+    <Fab sx={fabStyles(bottomPadding)} size="medium" color={highlighted ? 'primary' : undefined} onClick={action}>
       {down ? <ArrowDownIcon /> : <ArrowUpIcon />}
     </Fab>
   ) : null;
 };
 
-const fabStyles: SxProps = {
+const fabStyles = (bottomPadding: number): SxProps => ({
   position: 'absolute',
-  bottom: 10,
+  bottom: bottomPadding + 10,
   right: 10,
-};
+});
 
 export default ScrollCornerButton;

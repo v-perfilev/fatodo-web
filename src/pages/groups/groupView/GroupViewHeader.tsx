@@ -75,7 +75,7 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
   const image = group?.imageFilename && <UrlPic url={group?.imageFilename} />;
 
   return (
-    <PageHeader position="absolute" image={image} title={group?.title} goBackAction={goToGroups}>
+    <PageHeader maxWidth="md" position="absolute" image={image} title={group?.title} goBackAction={goToGroups}>
       {toggleCollapsed && (
         <IconButton color="primary" onClick={toggleCollapsed}>
           <CommentsIcon />

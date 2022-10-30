@@ -6,12 +6,12 @@ import {useTranslation} from 'react-i18next';
 import {CommentDTO} from '../../../models/dto/CommentDTO';
 import CommentsSelectors from '../../../store/comments/commentsSelectors';
 import {Comment} from '../../../models/Comment';
-import {COMMENTS_FOOTER_HEIGHT} from '../../../constants';
 import SendMessageIcon from '../../../components/icons/SendMessageIcon';
 import {CommentsActions} from '../../../store/comments/commentsActions';
-import {IconButton, SxProps} from '@mui/material';
+import {IconButton} from '@mui/material';
 import FVStack from '../../../components/boxes/FVStack';
 import CommentListReference from './CommentListReference';
+import PageFooter from '../../../components/layouts/PageFooter';
 
 type CommentsViewControlProps = {
   reference: Comment;
@@ -47,7 +47,7 @@ const CommentListFooter = ({reference, setReference}: CommentsViewControlProps) 
   };
 
   return (
-    <FHStack sx={containerStyles}>
+    <PageFooter maxWidth="md" position="absolute">
       <FVStack spacing={0}>
         {reference && <CommentListReference reference={reference} setReference={setReference} />}
         <ClearableTextInput
@@ -64,17 +64,8 @@ const CommentListFooter = ({reference, setReference}: CommentsViewControlProps) 
           <SendMessageIcon />
         </IconButton>
       </FHStack>
-    </FHStack>
+    </PageFooter>
   );
-};
-
-const containerStyles: SxProps = {
-  width: '100%',
-  height: COMMENTS_FOOTER_HEIGHT,
-  paddingX: 1,
-  borderTopWidth: 1,
-  borderTopStyle: 'solid',
-  borderTopColor: 'grey.300',
 };
 
 export default CommentListFooter;
