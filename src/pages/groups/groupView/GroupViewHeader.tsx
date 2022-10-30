@@ -16,6 +16,8 @@ import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import UrlPic from '../../../components/images/UrlPic';
 import {IconButton} from '@mui/material';
 import CommentsIcon from '../../../components/icons/CommentsIcon';
+import {ItemRouteUtils} from '../../../routes/ItemRouter';
+import PlusIcon from '../../../components/icons/PlusIcon';
 
 type GroupViewHeaderProps = {
   refresh: () => void;
@@ -31,9 +33,11 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
   const navigate = useNavigate();
 
   const canAdmin = group && GroupUtils.canAdmin(account, group);
+  const canEdit = group && GroupUtils.canEdit(account, group);
   const canLeave = group && GroupUtils.canLeave(account, group);
 
   const goToGroups = (): void => navigate(GroupRouteUtils.getListUrl());
+  const goToItemCreate = (): void => navigate(ItemRouteUtils.getCreateUrl(group?.id));
   const goToGroupEdit = (): void => navigate(GroupRouteUtils.getEditUrl(group?.id));
 
   const menuItems: PageMenuItem[] = [
@@ -42,6 +46,13 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
       text: t('group:actions.refresh'),
       icon: <RefreshIcon />,
       color: 'primary',
+    },
+    {
+      action: goToItemCreate,
+      text: t('group:actions.createItem'),
+      icon: <PlusIcon />,
+      color: 'primary',
+      hidden: !canEdit,
     },
     {
       action: goToGroupEdit,

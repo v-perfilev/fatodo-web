@@ -4,12 +4,11 @@ import {useNavigate} from 'react-router-dom';
 import {Group} from '../../../models/Group';
 import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import {GroupActions} from '../../../store/group/groupActions';
-import PageContainer from '../../../components/layouts/PageContainer';
 import PageHeader from '../../../components/layouts/PageHeader';
 import {useTranslation} from 'react-i18next';
 import GroupForm from '../groupForm/GroupForm';
-import FBox from '../../../components/boxes/FBox';
 import {SxProps} from '@mui/material';
+import PageContent from '../../../components/layouts/PageContent';
 
 const GroupCreate = () => {
   const dispatch = useAppDispatch();
@@ -26,18 +25,17 @@ const GroupCreate = () => {
       .catch(() => stopSubmitting());
   };
   return (
-    <PageContainer maxWidth="md">
-      <PageHeader title={t('routes.GroupCreate')} />
-      <FBox sx={formContainerStyles}>
+    <>
+      <PageHeader maxWidth="md" title={t('routes.GroupCreate')} />
+      <PageContent sx={containerStyles} maxWidth="md">
         <GroupForm request={request} cancel={goBack} />
-      </FBox>
-    </PageContainer>
+      </PageContent>
+    </>
   );
 };
 
-const formContainerStyles: SxProps = {
-  marginY: 1,
-  marginX: 2,
+const containerStyles: SxProps = {
+  paddingY: 2,
 };
 
 export default GroupCreate;

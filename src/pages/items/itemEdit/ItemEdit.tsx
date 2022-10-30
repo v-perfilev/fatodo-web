@@ -8,15 +8,14 @@ import {useAppDispatch, useAppSelector} from '../../../store/store';
 import {useNavigate} from 'react-router-dom';
 import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import {ItemRouteUtils} from '../../../routes/ItemRouter';
-import PageContainer from '../../../components/layouts/PageContainer';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 import PageHeader from '../../../components/layouts/PageHeader';
 import {SxProps} from '@mui/material';
-import FBox from '../../../components/boxes/FBox';
 import ItemForm from '../itemForm/ItemForm';
 import {useTranslation} from 'react-i18next';
 import ItemSelectors from '../../../store/item/itemSelectors';
 import {Reminder} from '../../../models/Reminder';
+import PageContent from '../../../components/layouts/PageContent';
 
 type ItemEditProps = WithItemProps;
 
@@ -37,20 +36,17 @@ const ItemEdit = ({group, item, loading}: ItemEditProps) => {
   };
 
   return (
-    <PageContainer maxWidth="md">
-      <ConditionalSpinner loading={loading}>
-        <PageHeader title={t('routes.ItemEdit')} />
-        <FBox sx={formContainerStyles}>
-          <ItemForm group={group} item={item} reminders={reminders} request={request} cancel={goToGroupView} />
-        </FBox>
-      </ConditionalSpinner>
-    </PageContainer>
+    <ConditionalSpinner loading={loading}>
+      <PageHeader maxWidth="md" title={t('routes.ItemEdit')} />
+      <PageContent sx={containerStyles} maxWidth="md">
+        <ItemForm group={group} item={item} reminders={reminders} request={request} cancel={goToGroupView} />
+      </PageContent>
+    </ConditionalSpinner>
   );
 };
 
-const formContainerStyles: SxProps = {
-  marginY: 1,
-  marginX: 2,
+const containerStyles: SxProps = {
+  paddingY: 2,
 };
 
 export default flowRight([withItemContainer, withThemeProvider])(ItemEdit);

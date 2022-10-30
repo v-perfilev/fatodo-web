@@ -12,11 +12,10 @@ import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import {ItemRouteUtils} from '../../../routes/ItemRouter';
 import {ItemActions} from '../../../store/item/itemActions';
 import PageHeader from '../../../components/layouts/PageHeader';
-import PageContainer from '../../../components/layouts/PageContainer';
 import {useTranslation} from 'react-i18next';
 import ItemForm from '../itemForm/ItemForm';
-import FBox from '../../../components/boxes/FBox';
 import {Reminder} from '../../../models/Reminder';
+import PageContent from '../../../components/layouts/PageContent';
 
 type ItemCreateProps = WithGroupProps;
 
@@ -36,20 +35,17 @@ const ItemCreate = ({group, loading}: ItemCreateProps) => {
   };
 
   return (
-    <PageContainer maxWidth="md">
-      <ConditionalSpinner loading={loading}>
-        <PageHeader title={t('routes.ItemCreate')} />
-        <FBox sx={formContainerStyles}>
-          <ItemForm group={group} request={request} cancel={goToGroupView} />
-        </FBox>
-      </ConditionalSpinner>
-    </PageContainer>
+    <ConditionalSpinner loading={loading}>
+      <PageHeader maxWidth="md" title={t('routes.ItemCreate')} />
+      <PageContent sx={containerStyles} maxWidth="md">
+        <ItemForm group={group} request={request} cancel={goToGroupView} />
+      </PageContent>
+    </ConditionalSpinner>
   );
 };
 
-const formContainerStyles: SxProps = {
-  marginY: 1,
-  marginX: 2,
+const containerStyles: SxProps = {
+  paddingY: 2,
 };
 
 export default flowRight([withGroupContainer, withThemeProvider])(ItemCreate);

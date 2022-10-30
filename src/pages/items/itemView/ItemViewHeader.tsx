@@ -13,6 +13,7 @@ import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import {ItemRouteUtils} from '../../../routes/ItemRouter';
 import {IconButton} from '@mui/material';
 import CommentsIcon from '../../../components/icons/CommentsIcon';
+import {useItemDialogContext} from '../../../shared/contexts/dialogContexts/ItemDialogContext';
 
 type ItemViewHeaderProps = {
   toggleCollapsed?: () => void;
@@ -22,7 +23,7 @@ const ItemViewHeader = ({toggleCollapsed}: ItemViewHeaderProps) => {
   const account = useAppSelector(AuthSelectors.account);
   const group = useAppSelector(ItemSelectors.group);
   const item = useAppSelector(ItemSelectors.item);
-  // const {showItemDeleteDialog} = useItemDialogContext();
+  const {showItemDeleteDialog} = useItemDialogContext();
   const navigate = useNavigate();
   const {t} = useTranslation();
 
@@ -31,7 +32,7 @@ const ItemViewHeader = ({toggleCollapsed}: ItemViewHeaderProps) => {
 
   const openItemDeleteDialog = (): void => {
     const onSuccess = (): void => goToGroupView();
-    // showItemDeleteDialog(item, onSuccess);
+    showItemDeleteDialog(item, onSuccess);
   };
 
   const canEdit = group && GroupUtils.canAdmin(account, group);

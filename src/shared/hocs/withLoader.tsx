@@ -28,9 +28,8 @@ const withLoader = (Component: ComponentType) => (props: any) => {
 };
 
 const containerStyles: SxProps = {
+  width: '100%',
   minHeight: '100%',
-  display: 'flex',
-  flexGrow: 1,
 };
 
 export default flowRight([memo, withLoader]);

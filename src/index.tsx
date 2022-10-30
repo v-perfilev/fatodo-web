@@ -23,6 +23,7 @@ import './styles.css';
 // import translations
 import './shared/i18n';
 import RootRouter from './routes/RootRouter';
+import withDialogs from './shared/hocs/withDialogs/withDialogs';
 
 // setup axios
 const axiosActions = bindActionCreators(
@@ -52,7 +53,7 @@ const WrappedApp = flowRight([
   withSnackDisplay,
   withWsClient,
   withLoader,
-  // withDialogs,
+  withDialogs,
   withRootContainer,
 ])(App);
 
