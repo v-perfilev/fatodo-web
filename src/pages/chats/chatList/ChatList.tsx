@@ -69,7 +69,7 @@ const ChatList = () => {
    */
 
   useEffect(() => {
-    loading && !chats.length && load().finally(() => setLoading(false));
+    loading && load().finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {

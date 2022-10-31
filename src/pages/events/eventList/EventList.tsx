@@ -12,6 +12,9 @@ import PageContent from '../../../components/layouts/PageContent';
 import EventListItem from './eventListItem/EventListItem';
 import {PAGE_HEADER_HEIGHT} from '../../../constants';
 import PageDivider from '../../../components/layouts/PageDivider';
+import {useDelayedState} from '../../../shared/hooks/useDelayedState';
+import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
+import EventListSkeleton from '../skeletons/EventListSkeleton';
 
 type EventListProps = {
   toggleCollapsed?: () => void;
@@ -21,6 +24,7 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
   const dispatch = useAppDispatch();
   const events = useAppSelector(EventsSelectors.events);
   const allLoaded = useAppSelector(EventsSelectors.allLoaded);
+  const [loading, setLoading] = useDelayedState(!events.length);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
   const listRef = useRef<VirtualizedListMethods>();
 
@@ -72,25 +76,29 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
    */
 
   useEffect(() => {
-    load().finally();
-    refreshUnread().finally();
+    if (loading) {
+      load().finally(() => setLoading(false));
+      refreshUnread().finally();
+    }
   }, []);
 
   return (
     <>
       <EventListHeader toggleCollapsed={toggleCollapsed} />
-      <VirtualizedList
-        itemRenderer={itemRenderer}
-        keyExtractor={keyExtractor}
-        itemData={events}
-        allLoaded={allLoaded}
-        loadMoreItems={load}
-        paddingTop={PAGE_HEADER_HEIGHT + 8}
-        paddingBottom={8}
-        setIsOnTop={setHideScrollButton}
-        virtualizedListRef={listRef}
-      />
-      <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
+      <ConditionalSpinner loading={loading} loadingPlaceholder={<EventListSkeleton />}>
+        <VirtualizedList
+          itemRenderer={itemRenderer}
+          keyExtractor={keyExtractor}
+          itemData={events}
+          allLoaded={allLoaded}
+          loadMoreItems={load}
+          paddingTop={PAGE_HEADER_HEIGHT + 8}
+          paddingBottom={8}
+          setIsOnTop={setHideScrollButton}
+          virtualizedListRef={listRef}
+        />
+        <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
+      </ConditionalSpinner>
     </>
   );
 };

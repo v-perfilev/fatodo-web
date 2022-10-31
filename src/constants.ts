@@ -49,4 +49,4 @@ export const COMMENTS_HEADER_HEIGHT = 80;
 export const COMMENTS_FOOTER_HEIGHT = 50;
 
 // EVENTS
-export const EVENTS_HEADER_HEIGHT = 50;
+export const EVENT_SKELETON_HEIGHT = 124;
