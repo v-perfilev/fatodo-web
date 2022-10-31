@@ -39,6 +39,10 @@ export const HEADER_HEIGHT = 60;
 export const PAGE_HEADER_HEIGHT = 60;
 export const PAGE_FOOTER_HEIGHT = 60;
 
+// COMMENTS
+export const ITEM_SKELETON_HEIGHT = 139;
+export const GROUP_INFO_SKELETON_HEIGHT = 45;
+
 // CHATS
 export const TIMEOUT_BEFORE_MARK_AS_READ = 1000;
 export const CHAT_SKELETON_HEIGHT = 67;

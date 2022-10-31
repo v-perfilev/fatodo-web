@@ -25,7 +25,6 @@ const GroupListCardHeader = ({group, collapsed, sorting, drag}: GroupListCardHea
 
   return (
     <FHStack sx={containerStyles} onClick={goToGroupView}>
-      <Box sx={backgroundStyles} />
       <FHStack spacing={1}>
         {group?.imageFilename && <UrlPic url={group.imageFilename} sizes="9" />}
         <TruncatedTypography fontSize={16} color="primary">
@@ -42,6 +41,7 @@ const GroupListCardHeader = ({group, collapsed, sorting, drag}: GroupListCardHea
           </>
         )}
       </FHStack>
+      <Box sx={backgroundStyles} />
     </FHStack>
   );
 };
@@ -52,7 +52,8 @@ const containerStyles: SxProps = {
   width: '100%',
   height: 50,
   borderRadius: 3,
-  paddingX: 1,
+  paddingLeft: 2,
+  paddingRight: 1,
   backgroundColor: 'white',
   cursor: 'pointer',
   '&:hover': {
@@ -66,6 +67,7 @@ const backgroundStyles: SxProps = (theme: Theme) => ({
   left: 0,
   right: 0,
   bottom: 0,
+  marginLeft: '0px !important',
   opacity: 0.3,
   background: theme.palette.gradient,
 });

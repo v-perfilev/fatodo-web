@@ -17,6 +17,7 @@ import VirtualizedList, {
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 import {Group} from '../../../models/Group';
 import PageDivider from '../../../components/layouts/PageDivider';
+import GroupViewListSkeleton from '../skeletons/GroupViewListSkeleton';
 
 type GroupViewContainerProps = {
   group: Group;
@@ -101,7 +102,7 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
   }, [showArchived]);
 
   return (
-    <ConditionalSpinner loading={loading}>
+    <ConditionalSpinner loading={loading} loadingPlaceholder={<GroupViewListSkeleton />}>
       <GroupViewHeader
         refresh={refresh}
         showArchived={showArchived}
