@@ -27,7 +27,7 @@ export class ListKeysCache {
 }
 
 export class ListMeasurerCache {
-  private defaultHeight: Readonly<number> = 0;
+  private defaultHeight: Readonly<number> = 100;
   private measurementMap = new Map<string, number>();
 
   public setHeight(key: string, height: number): void {

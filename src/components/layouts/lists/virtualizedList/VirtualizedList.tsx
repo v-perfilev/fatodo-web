@@ -62,7 +62,7 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
   const {paddingTop = 0, paddingBottom = 0, setIsOnTop, setIsOnBottom, setVisibleItems} = props;
   const forceUpdate = useForceUpdate();
   const [scroll, setScroll] = useState<ListOnScrollProps>();
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [keyCache] = useState<ListKeysCache>(new ListKeysCache());
   const [measurerCache] = useState<ListMeasurerCache>(new ListMeasurerCache());
   const listRef = useRef<VariableSizeList>();
@@ -211,7 +211,7 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
         scrollToBottom();
       }
     }
-    if (loading) {
+    if (height > 0 && loading) {
       setLoading(false);
     }
   }, [height]);

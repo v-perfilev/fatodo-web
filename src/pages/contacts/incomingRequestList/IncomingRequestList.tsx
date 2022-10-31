@@ -7,12 +7,12 @@ import {ContactRequest} from '../../../models/Contact';
 import IncomingRequestListItem from './IncomingRequestListItem';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
-import PageContent from '../../../components/layouts/PageContent';
 import VirtualizedList, {
   VirtualizedListMethods,
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 import ContactListSkeleton from '../skeletons/ContactListSkeleton';
 import PageDivider from '../../../components/layouts/PageDivider';
+import {Box} from '@mui/material';
 
 const IncomingRequestList = () => {
   const dispatch = useAppDispatch();
@@ -38,10 +38,10 @@ const IncomingRequestList = () => {
 
   const itemRenderer = useCallback(
     (request: ContactRequest, index: number) => (
-      <PageContent maxWidth="md">
+      <Box>
         {index !== 0 && <PageDivider />}
         <IncomingRequestListItem request={request} />
-      </PageContent>
+      </Box>
     ),
     [],
   );

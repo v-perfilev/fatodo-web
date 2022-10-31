@@ -1,7 +1,7 @@
 import React from 'React';
 import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {IconButton, SxProps, Tab, Tabs} from '@mui/material';
+import {Box, IconButton, SxProps, Tab, Tabs} from '@mui/material';
 import PageContainer from '../../components/layouts/PageContainer';
 import {useAppSelector} from '../../store/store';
 import ContactsSelectors from '../../store/contacts/contactsSelectors';
@@ -13,10 +13,7 @@ import IncomingRequestList from './incomingRequestList/IncomingRequestList';
 import OutcomingRequestList from './outcomingRequestList/OutcomingRequestList';
 import FHStack from '../../components/boxes/FHStack';
 import PlusIcon from '../../components/icons/PlusIcon';
-import PageContent from '../../components/layouts/PageContent';
 import {useContactDialogContext} from '../../shared/contexts/dialogContexts/ContactDialogContext';
-import FVStack from '../../components/boxes/FVStack';
-import FBox from '../../components/boxes/FBox';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -62,9 +59,9 @@ const ContactMain = () => {
     outcomingRequestCount > 0 ? <BadgeWithoutIcon color="secondary" count={outcomingRequestCount} /> : undefined;
 
   return (
-    <PageContainer>
-      <PageContent maxWidth="md" disableGutters>
-        <FHStack>
+    <PageContainer maxWidth="md">
+      <Box>
+        <FHStack spacing={0}>
           <Tabs sx={tabsStyles} variant="scrollable" textColor="primary" value={activeTab} onChange={handleChange}>
             <Tab sx={tabStyles} label={t('contact:relations.title')} icon={relationsIcon} iconPosition="end" />
             <Tab sx={tabStyles} label={t('contact:incoming.title')} icon={incomingIcon} iconPosition="end" />
@@ -74,7 +71,7 @@ const ContactMain = () => {
             <PlusIcon />
           </IconButton>
         </FHStack>
-      </PageContent>
+      </Box>
       {activeTab === 0 && <ContactList />}
       {activeTab === 1 && <IncomingRequestList />}
       {activeTab === 2 && <OutcomingRequestList />}
@@ -88,6 +85,7 @@ const tabsStyles: SxProps = {
 
 const tabStyles: SxProps = {
   minHeight: 55,
+  minWidth: '33%',
 };
 
 export default ContactMain;

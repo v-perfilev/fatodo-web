@@ -28,7 +28,6 @@ const containerStyles: SxProps = (theme: Theme) => ({
   width: '100%',
   zIndex: 1,
   paddingTop: 2,
-  paddingBottom: 1,
   backgroundColor: theme.palette.background.default,
 });
 

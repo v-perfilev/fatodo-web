@@ -10,12 +10,12 @@ import ContactListItem from './ContactListItem';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 import FVStack from '../../../components/boxes/FVStack';
-import PageContent from '../../../components/layouts/PageContent';
 import VirtualizedList, {
   VirtualizedListMethods,
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 import ContactListSkeleton from '../skeletons/ContactListSkeleton';
 import PageDivider from '../../../components/layouts/PageDivider';
+import {Box} from '@mui/material';
 
 const ContactList = () => {
   const usersSelector = useCallback(InfoSelectors.makeUsersSelector(), []);
@@ -46,10 +46,10 @@ const ContactList = () => {
 
   const itemRenderer = useCallback(
     (relation: ContactRelation, index: number) => (
-      <PageContent maxWidth="md">
+      <Box>
         {index !== 0 && <PageDivider />}
         <ContactListItem relation={relation} />
-      </PageContent>
+      </Box>
     ),
     [],
   );
@@ -81,9 +81,7 @@ const ContactList = () => {
 
   return (
     <FVStack>
-      <PageContent maxWidth="md">
-        <ContactListControl setFilter={setFilter} />
-      </PageContent>
+      <ContactListControl setFilter={setFilter} />
       <ConditionalSpinner loading={loading} loadingPlaceholder={<ContactListSkeleton />}>
         <VirtualizedList
           itemRenderer={itemRenderer}
