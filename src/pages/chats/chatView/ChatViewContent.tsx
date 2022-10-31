@@ -1,5 +1,11 @@
 import React from 'React';
-import {DEFAULT_MARGIN, PAGE_FOOTER_HEIGHT, PAGE_HEADER_HEIGHT, TIMEOUT_BEFORE_MARK_AS_READ} from '../../../constants';
+import {
+  DEFAULT_MARGIN,
+  HEADER_HEIGHT,
+  PAGE_FOOTER_HEIGHT,
+  PAGE_HEADER_HEIGHT,
+  TIMEOUT_BEFORE_MARK_AS_READ,
+} from '../../../constants';
 import ChatSelectors from '../../../store/chat/chatSelectors';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
@@ -14,6 +20,8 @@ import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton'
 import ChatsSelectors from '../../../store/chats/chatsSelectors';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {ChatUtils} from '../../../shared/utils/ChatUtils';
+import {Container, SxProps} from '@mui/material';
+import FBox from '../../../components/boxes/FBox';
 
 const ChatViewContent = () => {
   const unreadMessageIdsSelector = useCallback(ChatsSelectors.makeUnreadMessageIdsSelector(), []);
@@ -116,15 +124,27 @@ const ChatViewContent = () => {
         setVisibleItems={setVisibleItems}
         virtualizedListRef={listRef}
       />
-      <ScrollCornerButton
-        show={!hideScrollButton}
-        action={scrollUp}
-        down
-        highlighted={scrollButtonHighlighted}
-        bottomPadding={PAGE_FOOTER_HEIGHT}
-      />
+      <Container sx={containerStyles}>
+        <FBox sx={boxStyles}>
+          <ScrollCornerButton
+            show={!hideScrollButton}
+            action={scrollUp}
+            down
+            highlighted={scrollButtonHighlighted}
+            bottomPadding={PAGE_FOOTER_HEIGHT}
+          />
+        </FBox>
+      </Container>
     </>
   );
+};
+
+const containerStyles: SxProps = {
+  marginTop: `calc(100vh - ${HEADER_HEIGHT}px)`,
+};
+
+const boxStyles: SxProps = {
+  position: 'relative',
 };
 
 export default ChatViewContent;

@@ -1,9 +1,7 @@
 import ArrowUpIcon from '../icons/ArrowUpIcon';
-import {Container, ContainerProps, Fab, SxProps} from '@mui/material';
+import {ContainerProps, Fab, SxProps} from '@mui/material';
 import React from 'react';
 import ArrowDownIcon from '../icons/ArrowDownIcon';
-import FBox from '../boxes/FBox';
-import {HEADER_HEIGHT} from '../../constants';
 
 type ScrollCornerButtonProps = ContainerProps & {
   show: boolean;
@@ -13,36 +11,17 @@ type ScrollCornerButtonProps = ContainerProps & {
   bottomPadding?: number;
 };
 
-const ScrollCornerButton = ({
-  show,
-  action,
-  down,
-  highlighted,
-  bottomPadding = 0,
-  ...props
-}: ScrollCornerButtonProps) => {
+const ScrollCornerButton = ({show, action, down, highlighted, bottomPadding = 0}: ScrollCornerButtonProps) => {
   return show ? (
-    <Container sx={containerStyles} {...props}>
-      <FBox sx={boxStyles}>
-        <Fab sx={fabStyles(bottomPadding)} size="small" color={highlighted ? 'primary' : undefined} onClick={action}>
-          {down ? <ArrowDownIcon /> : <ArrowUpIcon />}
-        </Fab>
-      </FBox>
-    </Container>
+    <Fab sx={fabStyles(bottomPadding)} size="small" color={highlighted ? 'primary' : undefined} onClick={action}>
+      {down ? <ArrowDownIcon /> : <ArrowUpIcon />}
+    </Fab>
   ) : null;
-};
-
-const containerStyles: SxProps = {
-  marginTop: `calc(100vh - ${HEADER_HEIGHT}px)`,
-};
-
-const boxStyles: SxProps = {
-  position: 'relative',
 };
 
 const fabStyles = (bottomPadding: number): SxProps => ({
   position: 'absolute',
-  right: 0,
+  right: 10,
   bottom: bottomPadding + 10,
 });
 
