@@ -1,6 +1,6 @@
 import React, {memo} from 'react';
 import EventSkeleton from './EventSkeleton';
-import {EVENT_SKELETON_HEIGHT, HEADER_HEIGHT, PAGE_HEADER_HEIGHT} from '../../../constants';
+import {DEFAULT_MARGIN, EVENT_SKELETON_HEIGHT, HEADER_HEIGHT, PAGE_HEADER_HEIGHT} from '../../../constants';
 import PageContent from '../../../components/layouts/PageContent';
 import PageDivider from '../../../components/layouts/PageDivider';
 import FVStack from '../../../components/boxes/FVStack';
@@ -24,7 +24,7 @@ const EventListSkeleton = () => {
 };
 
 const containerStyles: SxProps = {
-  marginTop: PAGE_HEADER_HEIGHT + 4 + 'px',
+  marginTop: PAGE_HEADER_HEIGHT + DEFAULT_MARGIN / 2 + 'px',
 };
 
 export default memo(EventListSkeleton);

@@ -11,8 +11,9 @@ import VirtualizedList, {
 import PageContent from '../../../components/layouts/PageContent';
 import CommentListItem from './commentListItem/CommentListItem';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
-import {PAGE_FOOTER_HEIGHT, PAGE_HEADER_HEIGHT} from '../../../constants';
+import {DEFAULT_MARGIN, PAGE_FOOTER_HEIGHT, PAGE_HEADER_HEIGHT} from '../../../constants';
 import CommentListFooter from './CommentListFooter';
+import CommentListSkeleton from '../skeletons/CommentListSkeleton';
 
 type CommentListProps = {
   targetId: string;
@@ -75,23 +76,25 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   }, [targetId]);
 
   return (
-    <ConditionalSpinner loading={loading}>
+    <>
       <CommentListHeader toggleCollapsed={toggleCollapsed} />
-      <VirtualizedList
-        itemRenderer={itemRenderer}
-        keyExtractor={keyExtractor}
-        itemData={comments}
-        allLoaded={allLoaded}
-        loadMoreItems={load}
-        reverseOrder
-        paddingTop={PAGE_HEADER_HEIGHT + 8}
-        paddingBottom={PAGE_FOOTER_HEIGHT + 8}
-        setIsOnBottom={setHideScrollButton}
-        virtualizedListRef={listRef}
-      />
-      <ScrollCornerButton show={!hideScrollButton} action={scrollDown} down bottomPadding={PAGE_FOOTER_HEIGHT} />
+      <ConditionalSpinner loading={loading} loadingPlaceholder={<CommentListSkeleton />}>
+        <VirtualizedList
+          itemRenderer={itemRenderer}
+          keyExtractor={keyExtractor}
+          itemData={comments}
+          allLoaded={allLoaded}
+          loadMoreItems={load}
+          reverseOrder
+          paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
+          paddingBottom={PAGE_FOOTER_HEIGHT + DEFAULT_MARGIN}
+          setIsOnBottom={setHideScrollButton}
+          virtualizedListRef={listRef}
+        />
+        <ScrollCornerButton show={!hideScrollButton} action={scrollDown} down bottomPadding={PAGE_FOOTER_HEIGHT} />
+      </ConditionalSpinner>
       <CommentListFooter reference={reference} setReference={setReference} />
-    </ConditionalSpinner>
+    </>
   );
 };
 

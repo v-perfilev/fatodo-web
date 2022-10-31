@@ -9,7 +9,7 @@ import SortableList from '../../../components/layouts/lists/SortableList';
 import PageContainer from '../../../components/layouts/PageContainer';
 import GroupListHeader from './GroupListHeader';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
-import {PAGE_HEADER_HEIGHT} from '../../../constants';
+import {DEFAULT_MARGIN, PAGE_HEADER_HEIGHT} from '../../../constants';
 import PageContent from '../../../components/layouts/PageContent';
 import VirtualizedList, {
   VirtualizedListMethods,
@@ -70,7 +70,7 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
           data={groups}
           dataCount={groups.length}
           setOrder={setOrder}
-          paddingTop={PAGE_HEADER_HEIGHT + 8}
+          paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
           paddingBottom={8}
         />
       ) : (
@@ -78,7 +78,7 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
           itemRenderer={itemRenderer}
           itemData={groups}
           keyExtractor={keyExtractor}
-          paddingTop={PAGE_HEADER_HEIGHT + 8}
+          paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
           paddingBottom={8}
           setIsOnTop={setHideScrollButton}
           virtualizedListRef={listRef}

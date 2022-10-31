@@ -36,7 +36,7 @@ const CommentListItem = ({comment, setReference}: CommentListItemProps) => {
       <FVStack sx={commentStyles} spacing={1}>
         <FHStack>
           <FHStack>
-            <Typography color="primary" fontWeight="bold">
+            <Typography color="primary" fontWeight="bold" fontSize={14}>
               {user?.username}
             </Typography>
           </FHStack>

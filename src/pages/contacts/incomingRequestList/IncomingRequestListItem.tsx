@@ -9,6 +9,7 @@ import InfoSelectors from '../../../store/info/infoSelectors';
 import {ContactRequest} from '../../../models/Contact';
 import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
 import {useTranslation} from 'react-i18next';
+import {SxProps} from '@mui/material';
 
 type IncomingRequestListItemProps = {
   request: ContactRequest;
@@ -52,13 +53,17 @@ const IncomingRequestListItem = ({request}: IncomingRequestListItemProps) => {
   ];
 
   return (
-    <FHStack>
+    <FHStack sx={containerStyles}>
       <FHStack>
         <UserView user={user} withUsername />
       </FHStack>
       <PageMenu items={men} fullView />
     </FHStack>
   );
+};
+
+const containerStyles: SxProps = {
+  paddingY: 1,
 };
 
 export default IncomingRequestListItem;

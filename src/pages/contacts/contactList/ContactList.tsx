@@ -14,11 +14,12 @@ import PageContent from '../../../components/layouts/PageContent';
 import VirtualizedList, {
   VirtualizedListMethods,
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
+import ContactListSkeleton from '../skeletons/ContactListSkeleton';
+import PageDivider from '../../../components/layouts/PageDivider';
 
 const ContactList = () => {
   const usersSelector = useCallback(InfoSelectors.makeUsersSelector(), []);
   const dispatch = useAppDispatch();
-  // const {showContactRequestDialog} = useContactDialogContext();
   const relations = useAppSelector(ContactsSelectors.relations);
   const userIds = relations.map((r) => r.secondUserId);
   const users = useAppSelector((state) => usersSelector(state, userIds));
@@ -44,8 +45,9 @@ const ContactList = () => {
   );
 
   const itemRenderer = useCallback(
-    (relation: ContactRelation) => (
+    (relation: ContactRelation, index: number) => (
       <PageContent maxWidth="md">
+        {index !== 0 && <PageDivider />}
         <ContactListItem relation={relation} />
       </PageContent>
     ),
@@ -63,7 +65,7 @@ const ContactList = () => {
    */
 
   useEffect(() => {
-    loading && !relations.length && refresh().finally(() => setLoading(false));
+    loading && refresh().finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -82,7 +84,7 @@ const ContactList = () => {
       <PageContent maxWidth="md">
         <ContactListControl setFilter={setFilter} />
       </PageContent>
-      <ConditionalSpinner loading={loading}>
+      <ConditionalSpinner loading={loading} loadingPlaceholder={<ContactListSkeleton />}>
         <VirtualizedList
           itemRenderer={itemRenderer}
           itemData={relationsToShow}

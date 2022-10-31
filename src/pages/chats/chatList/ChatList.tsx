@@ -8,7 +8,7 @@ import {ChatsActions} from '../../../store/chats/chatsActions';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 import ChatListControl from './ChatListControl';
 import ChatListItem from './ChatListItem';
-import {PAGE_HEADER_HEIGHT} from '../../../constants';
+import {DEFAULT_MARGIN, PAGE_HEADER_HEIGHT} from '../../../constants';
 import ChatSelectors from '../../../store/chat/chatSelectors';
 import VirtualizedList from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 import PageContent from '../../../components/layouts/PageContent';
@@ -95,7 +95,7 @@ const ChatList = () => {
           itemData={type === 'regular' ? chats : filteredChats}
           allLoaded={type === 'regular' ? allLoaded : undefined}
           loadMoreItems={type === 'regular' ? load : undefined}
-          paddingTop={PAGE_HEADER_HEIGHT + 4}
+          paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN / 2}
         />
       </ConditionalSpinner>
     </>

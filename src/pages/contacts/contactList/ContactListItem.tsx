@@ -8,6 +8,7 @@ import InfoSelectors from '../../../store/info/infoSelectors';
 import {ContactRelation} from '../../../models/Contact';
 import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
 import {useTranslation} from 'react-i18next';
+import {SxProps} from '@mui/material';
 
 type ContactListItemProps = {
   relation: ContactRelation;
@@ -38,13 +39,17 @@ const ContactListItem = ({relation}: ContactListItemProps) => {
   ];
 
   return (
-    <FHStack>
+    <FHStack sx={containerStyles}>
       <FHStack>
         <UserView user={user} withUsername />
       </FHStack>
       <PageMenu items={menuItems} fullView />
     </FHStack>
   );
+};
+
+const containerStyles: SxProps = {
+  paddingY: 1,
 };
 
 export default ContactListItem;

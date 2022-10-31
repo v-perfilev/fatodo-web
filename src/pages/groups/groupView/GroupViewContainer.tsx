@@ -10,7 +10,7 @@ import GroupItem from '../components/groupItem/GroupItem';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import GroupViewHeader from './GroupViewHeader';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
-import {PAGE_HEADER_HEIGHT} from '../../../constants';
+import {DEFAULT_MARGIN, PAGE_HEADER_HEIGHT} from '../../../constants';
 import PageContent from '../../../components/layouts/PageContent';
 import VirtualizedList, {
   VirtualizedListMethods,
@@ -114,7 +114,7 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
         itemData={items}
         allLoaded={allItemsLoaded}
         loadMoreItems={load}
-        paddingTop={PAGE_HEADER_HEIGHT + 8}
+        paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
         paddingBottom={8}
         setIsOnTop={setHideScrollButton}
         virtualizedListRef={listRef}

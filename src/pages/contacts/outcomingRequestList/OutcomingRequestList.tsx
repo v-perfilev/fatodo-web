@@ -11,6 +11,8 @@ import OutcomingRequestListItem from './OutcomingRequestListItem';
 import VirtualizedList, {
   VirtualizedListMethods,
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
+import ContactListSkeleton from '../skeletons/ContactListSkeleton';
+import PageDivider from '../../../components/layouts/PageDivider';
 
 const OutcomingRequestList = () => {
   const dispatch = useAppDispatch();
@@ -35,8 +37,9 @@ const OutcomingRequestList = () => {
   );
 
   const itemRenderer = useCallback(
-    (request: ContactRequest) => (
+    (request: ContactRequest, index: number) => (
       <PageContent maxWidth="md">
+        {index !== 0 && <PageDivider />}
         <OutcomingRequestListItem request={request} />
       </PageContent>
     ),
@@ -54,11 +57,11 @@ const OutcomingRequestList = () => {
    */
 
   useEffect(() => {
-    loading && !outcomingRequests.length && refresh().finally(() => setLoading(false));
+    loading && refresh().finally(() => setLoading(false));
   }, []);
 
   return (
-    <ConditionalSpinner loading={loading}>
+    <ConditionalSpinner loading={loading} loadingPlaceholder={<ContactListSkeleton />}>
       <VirtualizedList
         itemRenderer={itemRenderer}
         keyExtractor={keyExtractor}

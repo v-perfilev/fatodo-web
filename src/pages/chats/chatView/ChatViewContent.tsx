@@ -1,5 +1,5 @@
 import React from 'React';
-import {PAGE_FOOTER_HEIGHT, PAGE_HEADER_HEIGHT, TIMEOUT_BEFORE_MARK_AS_READ} from '../../../constants';
+import {DEFAULT_MARGIN, PAGE_FOOTER_HEIGHT, PAGE_HEADER_HEIGHT, TIMEOUT_BEFORE_MARK_AS_READ} from '../../../constants';
 import ChatSelectors from '../../../store/chat/chatSelectors';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
@@ -110,8 +110,8 @@ const ChatViewContent = () => {
         allLoaded={allLoaded}
         loadMoreItems={load}
         reverseOrder
-        paddingTop={PAGE_HEADER_HEIGHT + 8}
-        paddingBottom={PAGE_FOOTER_HEIGHT + 8}
+        paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
+        paddingBottom={PAGE_FOOTER_HEIGHT + DEFAULT_MARGIN}
         setIsOnBottom={setHideScrollButton}
         setVisibleItems={setVisibleItems}
         virtualizedListRef={listRef}

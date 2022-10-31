@@ -10,7 +10,7 @@ import {EventsActions} from '../../../store/events/eventsActions';
 import {Event} from '../../../models/Event';
 import PageContent from '../../../components/layouts/PageContent';
 import EventListItem from './eventListItem/EventListItem';
-import {PAGE_HEADER_HEIGHT} from '../../../constants';
+import {DEFAULT_MARGIN, PAGE_HEADER_HEIGHT} from '../../../constants';
 import PageDivider from '../../../components/layouts/PageDivider';
 import {useDelayedState} from '../../../shared/hooks/useDelayedState';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
@@ -92,8 +92,8 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
           itemData={events}
           allLoaded={allLoaded}
           loadMoreItems={load}
-          paddingTop={PAGE_HEADER_HEIGHT + 8}
-          paddingBottom={8}
+          paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
+          paddingBottom={DEFAULT_MARGIN}
           setIsOnTop={setHideScrollButton}
           virtualizedListRef={listRef}
         />

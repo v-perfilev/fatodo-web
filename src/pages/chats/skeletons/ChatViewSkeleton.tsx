@@ -16,7 +16,7 @@ import {Skeleton} from '@mui/material';
 import FHStack from '../../../components/boxes/FHStack';
 
 const ChatViewSkeleton = () => {
-  const height = window.innerHeight - HEADER_HEIGHT - PAGE_HEADER_HEIGHT - PAGE_FOOTER_HEIGHT - 2 + DEFAULT_MARGIN;
+  const height = window.innerHeight - HEADER_HEIGHT - PAGE_HEADER_HEIGHT - PAGE_FOOTER_HEIGHT - 2 * DEFAULT_MARGIN;
   const count = Math.floor(height / (MESSAGE_SKELETON_HEIGHT * 2));
   const indexArray = Array.from(Array(count).keys());
 
