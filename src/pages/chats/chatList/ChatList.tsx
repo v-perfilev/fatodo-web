@@ -17,7 +17,6 @@ type ControlType = 'regular' | 'filtered';
 
 const ChatList = () => {
   const dispatch = useAppDispatch();
-  // const {showChatCreateDialog} = useChatDialogContext();
   const chat = useAppSelector(ChatSelectors.chat);
   const chats = useAppSelector(ChatsSelectors.chats);
   const allLoaded = useAppSelector(ChatsSelectors.allLoaded);

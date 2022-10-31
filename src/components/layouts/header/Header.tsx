@@ -23,11 +23,24 @@ const Header = ({flexible}: HeaderProps) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const redirectMap = {
-    toAccount: (): void => navigate(RootRoutes.ACCOUNT),
-    toGroups: (): void => navigate(RootRoutes.GROUPS),
-    toChats: (): void => navigate(RootRoutes.CHATS),
-    toContacts: (): void => navigate(RootRoutes.CONTACTS),
+    toAccount: (): void => {
+      setShowMenu(false);
+      navigate(RootRoutes.ACCOUNT);
+    },
+    toGroups: (): void => {
+      setShowMenu(false);
+      navigate(RootRoutes.GROUPS);
+    },
+    toChats: (): void => {
+      setShowMenu(false);
+      navigate(RootRoutes.CHATS);
+    },
+    toContacts: (): void => {
+      setShowMenu(false);
+      navigate(RootRoutes.CONTACTS);
+    },
     logout: (): void => {
+      setShowMenu(false);
       dispatch(AuthActions.logout());
       navigate(RootRoutes.LOGIN);
     },

@@ -56,7 +56,7 @@ const IncomingRequestListItem = ({request}: IncomingRequestListItemProps) => {
       <FHStack>
         <UserView user={user} withUsername />
       </FHStack>
-      <PageMenu items={men} />
+      <PageMenu items={men} fullView />
     </FHStack>
   );
 };

@@ -18,6 +18,7 @@ import {IconButton} from '@mui/material';
 import CommentsIcon from '../../../components/icons/CommentsIcon';
 import {ItemRouteUtils} from '../../../routes/ItemRouter';
 import PlusIcon from '../../../components/icons/PlusIcon';
+import {useGroupDialogContext} from '../../../shared/contexts/dialogContexts/GroupDialogContext';
 
 type GroupViewHeaderProps = {
   refresh: () => void;
@@ -29,6 +30,7 @@ type GroupViewHeaderProps = {
 const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapsed}: GroupViewHeaderProps) => {
   const group = useAppSelector(GroupSelectors.group);
   const account = useAppSelector(AuthSelectors.account);
+  const {showGroupMembersDialog, showGroupLeaveDialog, showGroupDeleteDialog} = useGroupDialogContext();
   const {t} = useTranslation();
   const navigate = useNavigate();
 
@@ -36,9 +38,21 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
   const canEdit = group && GroupUtils.canEdit(account, group);
   const canLeave = group && GroupUtils.canLeave(account, group);
 
-  const goToGroups = (): void => navigate(GroupRouteUtils.getListUrl());
+  const goToGroupList = (): void => navigate(GroupRouteUtils.getListUrl());
   const goToItemCreate = (): void => navigate(ItemRouteUtils.getCreateUrl(group?.id));
   const goToGroupEdit = (): void => navigate(GroupRouteUtils.getEditUrl(group?.id));
+
+  const openGroupMembersDialog = (): void => {
+    showGroupMembersDialog(group);
+  };
+
+  const openGroupLeaveDialog = (): void => {
+    showGroupLeaveDialog(group, goToGroupList);
+  };
+
+  const openGroupDeleteDialog = (): void => {
+    showGroupDeleteDialog(group, goToGroupList);
+  };
 
   const menuItems: PageMenuItem[] = [
     {
@@ -62,20 +76,20 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
       hidden: !canAdmin,
     },
     {
-      action: console.log,
+      action: openGroupMembersDialog,
       text: t('group:actions.members'),
       icon: <MembersIcon />,
       color: 'primary',
     },
     {
-      action: console.log,
+      action: openGroupLeaveDialog,
       text: t('group:actions.leave'),
       icon: <LeaveIcon />,
       color: 'secondary',
       hidden: !canLeave,
     },
     {
-      action: console.log,
+      action: openGroupDeleteDialog,
       text: t('group:actions.delete'),
       icon: <DeleteIcon />,
       color: 'error',
@@ -86,7 +100,7 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
   const image = group?.imageFilename && <UrlPic url={group?.imageFilename} />;
 
   return (
-    <PageHeader maxWidth="md" position="absolute" image={image} title={group?.title} goBackAction={goToGroups}>
+    <PageHeader maxWidth="md" position="absolute" image={image} title={group?.title} goBackAction={goToGroupList}>
       {toggleCollapsed && (
         <IconButton color="primary" onClick={toggleCollapsed}>
           <CommentsIcon />

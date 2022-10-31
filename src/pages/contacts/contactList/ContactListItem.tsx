@@ -42,7 +42,7 @@ const ContactListItem = ({relation}: ContactListItemProps) => {
       <FHStack>
         <UserView user={user} withUsername />
       </FHStack>
-      <PageMenu items={menuItems} />
+      <PageMenu items={menuItems} fullView />
     </FHStack>
   );
 };

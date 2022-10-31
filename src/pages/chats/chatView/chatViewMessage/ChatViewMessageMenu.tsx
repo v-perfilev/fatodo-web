@@ -6,6 +6,7 @@ import EditIcon from '../../../../components/icons/EditIcon';
 import DeleteIcon from '../../../../components/icons/DeleteIcon';
 import ReactionsIcon from '../../../../components/icons/ReactionsIcon';
 import PageMenu, {PageMenuItem} from '../../../../components/layouts/PageMenuProps';
+import {useChatDialogContext} from '../../../../shared/contexts/dialogContexts/ChatDialogContext';
 
 type ChatViewMessageMenuProps = {
   message: Message;
@@ -14,23 +15,27 @@ type ChatViewMessageMenuProps = {
 
 const ChatViewMessageMenu = ({message, isOutcoming}: ChatViewMessageMenuProps) => {
   const {t} = useTranslation();
-  // const {showMessageReactionsDialog, showMessageReadStatusesDialog, showMessageEditDialog, showMessageDeleteDialog} =
-  //   useChatDialogContext();
+  const {
+    showMessageReactionsDialog,
+    showMessageReadStatusesDialog,
+    showMessageEditDialog,
+    showMessageDeleteDialog,
+  } = useChatDialogContext();
 
   const openReactionsDialog = (): void => {
-    // showMessageReactionsDialog(message);
+    showMessageReactionsDialog(message);
   };
 
   const openReadStatusesDialog = (): void => {
-    // showMessageReadStatusesDialog(message);
+    showMessageReadStatusesDialog(message);
   };
 
   const editMessage = (): void => {
-    // showMessageEditDialog(message);
+    showMessageEditDialog(message);
   };
 
   const deleteMessage = (): void => {
-    // showMessageDeleteDialog(message);
+    showMessageDeleteDialog(message);
   };
 
   const menuItems: PageMenuItem[] = [

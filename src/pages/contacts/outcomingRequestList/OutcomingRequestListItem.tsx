@@ -42,7 +42,7 @@ const OutcomingRequestListItem = ({request}: OutcomingRequestListItemProps) => {
       <FHStack>
         <UserView user={user} withUsername />
       </FHStack>
-      <PageMenu items={menuElements} />
+      <PageMenu items={menuElements} fullView />
     </FHStack>
   );
 };

@@ -6,6 +6,7 @@ import ReactionsIcon from '../../../../components/icons/ReactionsIcon';
 import {Comment} from '../../../../models/Comment';
 import ReplyIcon from '../../../../components/icons/ReplyIcon';
 import PageMenu, {PageMenuItem} from '../../../../components/layouts/PageMenuProps';
+import {useCommentDialogContext} from '../../../../shared/contexts/dialogContexts/CommentDialogContext';
 
 type CommentListItemMenuProps = {
   comment: Comment;
@@ -15,22 +16,22 @@ type CommentListItemMenuProps = {
 
 const CommentListItemMenu = ({comment, isOwnComment, setReference}: CommentListItemMenuProps) => {
   const {t} = useTranslation();
-  // const {showCommentReactionsDialog, showCommentEditDialog, showCommentDeleteDialog} = useCommentDialogContext();
+  const {showCommentReactionsDialog, showCommentEditDialog, showCommentDeleteDialog} = useCommentDialogContext();
 
   const replyToComment = (): void => {
     setReference(comment);
   };
 
   const openReactionsDialog = (): void => {
-    // showCommentReactionsDialog(comment);
+    showCommentReactionsDialog(comment);
   };
 
   const editComment = (): void => {
-    // showCommentEditDialog(comment);
+    showCommentEditDialog(comment);
   };
 
   const deleteComment = (): void => {
-    // showCommentDeleteDialog(comment);
+    showCommentDeleteDialog(comment);
   };
 
   const menuItems: PageMenuItem[] = [

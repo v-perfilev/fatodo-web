@@ -8,10 +8,11 @@ export type PageMenuItem = PopupMenuItemProps;
 
 type PageMenuProps = {
   items: PageMenuItem[];
+  fullView?: boolean;
   compactView?: boolean;
 };
 
-const PageMenu = ({items, compactView}: PageMenuProps) => {
+const PageMenu = ({items, fullView, compactView}: PageMenuProps) => {
   const theme = useTheme();
   const isSmallDevice = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -43,7 +44,7 @@ const PageMenu = ({items, compactView}: PageMenuProps) => {
 
   return (
     <FHStack flexGrow={1} spacing={1} justifyContent="flex-end">
-      {isSmallDevice || compactView ? popupMenu : regularMenu}
+      {(isSmallDevice && !fullView) || compactView ? popupMenu : regularMenu}
     </FHStack>
   );
 };

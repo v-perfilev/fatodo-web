@@ -16,7 +16,7 @@ import PageContainer from '../../components/layouts/PageContainer';
 const ChatMain = () => {
   const dispatch = useAppDispatch();
   const chat = useAppSelector(ChatSelectors.chat);
-  const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('sm'), {noSsr: true});
+  const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'), {noSsr: true});
   const navigate = useNavigate();
   const {chatId} = useParams();
 

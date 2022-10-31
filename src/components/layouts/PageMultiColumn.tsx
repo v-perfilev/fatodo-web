@@ -37,6 +37,8 @@ const PageMultiColumn = ({mainElement, additionalElement}: PageMultiColumnProps)
     setCollapsed(true);
   }, [isSmallDevice]);
 
+  console.log(isSmallDevice, collapsed);
+
   return (
     <Grid sx={containerStyles(isSmallDevice)} container>
       <Grid item xs={6} md={7} lg={8}>
@@ -51,18 +53,12 @@ const PageMultiColumn = ({mainElement, additionalElement}: PageMultiColumnProps)
   );
 };
 
-const containerStyles = (isSmallDevice: boolean): SxProps =>
-  !isSmallDevice
-    ? {
-        width: '100vw',
-        height: `calc(100vh - ${HEADER_HEIGHT}px)`,
-        overflow: 'hidden',
-      }
-    : {
-        width: '200vw',
-        height: `calc(100vh - ${HEADER_HEIGHT}px)`,
-        overflow: 'hidden',
-      };
+const containerStyles = (isSmallDevice: boolean): SxProps => ({
+  position: 'relative',
+  width: isSmallDevice ? '200vw' : '100vw',
+  height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+  overflow: 'hidden',
+});
 
 const smallDeviceAdditionalColumnStyles = (isSmallDevice: boolean): SxProps =>
   !isSmallDevice
@@ -75,9 +71,8 @@ const smallDeviceAdditionalColumnStyles = (isSmallDevice: boolean): SxProps =>
     : {
         position: 'absolute',
         zIndex: 100,
-        top: 0,
-        right: 0,
-        bottom: 0,
+        width: '50%',
+        height: '100%',
         left: '50%',
       };
 

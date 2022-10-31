@@ -1,5 +1,5 @@
 import React from 'React';
-import {Typography} from '@mui/material';
+import {IconButton, Typography} from '@mui/material';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {ChatUtils} from '../../../shared/utils/ChatUtils';
@@ -19,6 +19,8 @@ import DeleteIcon from '../../../components/icons/DeleteIcon';
 import FHStack from '../../../components/boxes/FHStack';
 import AvatarGroup from '../../../components/surfaces/AvatarGroup';
 import PageHeader from '../../../components/layouts/PageHeader';
+import {useChatDialogContext} from '../../../shared/contexts/dialogContexts/ChatDialogContext';
+import CloseIcon from '../../../components/icons/CloseIcon';
 
 const ChatViewHeader = () => {
   const dispatch = useAppDispatch();
@@ -27,40 +29,50 @@ const ChatViewHeader = () => {
   const memberIds = chat.members.map((m) => m.userId);
   const users = useAppSelector((state) => usersSelector(state, memberIds));
   const account = useAppSelector(AuthSelectors.account);
+  const {
+    showChatMembersDialog,
+    showChatAddMembersDialog,
+    showChatRenameDialog,
+    showChatClearDialog,
+    showChatLeaveDialog,
+    showChatDeleteDialog,
+  } = useChatDialogContext();
   const {t} = useTranslation();
 
   const title = useMemo<string>(() => {
     return ChatUtils.getTitle(chat, users, account);
   }, [chat, users, account]);
 
+  const closeChat = (): void => {
+    dispatch(ChatActions.reset());
+  };
+
   const refresh = (): void => {
     dispatch(ChatActions.refreshMessagesThunk(chat.id));
   };
 
   const showMembers = (): void => {
-    // showChatMembersDialog(chat);
+    showChatMembersDialog(chat);
   };
 
   const addMembers = (): void => {
-    // showChatAddMembersDialog(chat);
+    showChatAddMembersDialog(chat);
   };
 
   const renameChat = (): void => {
-    // showChatRenameDialog(chat);
+    showChatRenameDialog(chat);
   };
 
   const cleanChat = (): void => {
-    // showChatClearDialog(chat);
+    showChatClearDialog(chat);
   };
 
   const leaveChat = (): void => {
-    // const onSuccess = () => navigation.goBack();
-    // showChatLeaveDialog(chat, onSuccess);
+    showChatLeaveDialog(chat, closeChat);
   };
 
   const deleteChat = (): void => {
-    // const onSuccess = () => navigation.goBack();
-    // showChatDeleteDialog(chat, onSuccess);
+    showChatDeleteDialog(chat, closeChat);
   };
 
   const menuItems: PageMenuItem[] = [
@@ -108,6 +120,9 @@ const ChatViewHeader = () => {
             {t('chat:common.direct')}
           </Typography>
         )}
+        <IconButton onClick={closeChat}>
+          <CloseIcon />
+        </IconButton>
       </FHStack>
       <FHStack flexGrow={0}>
         <AvatarGroup users={users} />

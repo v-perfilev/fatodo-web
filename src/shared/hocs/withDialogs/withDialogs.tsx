@@ -4,6 +4,10 @@ import {flowRight} from 'lodash';
 import {DialogContext} from '../../contexts/dialogContexts/DialogContext';
 import withItemDialogs from './withItemDialogs';
 import {Box, SxProps} from '@mui/material';
+import withChatDialogs from './withChatDialogs';
+import withCommentDialogs from './withCommentDialogs';
+import withContactDialogs from './withContactDialogs';
+import withGroupDialogs from './withGroupDialogs';
 
 type ComponentWithProps = {
   component: ComponentType;
@@ -83,4 +87,11 @@ const containerStyles: SxProps = {
   height: 0,
 };
 
-export default flowRight([withDialogs, withItemDialogs]);
+export default flowRight([
+  withDialogs,
+  withChatDialogs,
+  withCommentDialogs,
+  withContactDialogs,
+  withGroupDialogs,
+  withItemDialogs,
+]);

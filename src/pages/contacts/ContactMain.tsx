@@ -14,6 +14,7 @@ import OutcomingRequestList from './outcomingRequestList/OutcomingRequestList';
 import FHStack from '../../components/boxes/FHStack';
 import PlusIcon from '../../components/icons/PlusIcon';
 import PageContent from '../../components/layouts/PageContent';
+import {useContactDialogContext} from '../../shared/contexts/dialogContexts/ContactDialogContext';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -39,6 +40,7 @@ const calculateRouteFromTab = (tab: number): string => {
 
 const ContactMain = () => {
   const contactInfo = useAppSelector(ContactsSelectors.info);
+  const {showContactRequestDialog} = useContactDialogContext();
   const {t} = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,7 +68,7 @@ const ContactMain = () => {
             <Tab sx={tabStyles} label={t('contact:incoming.title')} icon={incomingIcon} iconPosition="end" />
             <Tab sx={tabStyles} label={t('contact:outcoming.title')} icon={outcomingIcon} iconPosition="end" />
           </Tabs>
-          <IconButton color="primary" size="large">
+          <IconButton color="primary" size="large" onClick={showContactRequestDialog}>
             <PlusIcon />
           </IconButton>
         </FHStack>
