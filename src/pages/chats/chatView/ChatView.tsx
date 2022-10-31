@@ -5,25 +5,16 @@ import ChatViewContent from './ChatViewContent';
 import {useAppSelector} from '../../../store/store';
 import ChatSelectors from '../../../store/chat/chatSelectors';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
-import {Box} from '@mui/material';
+import ChatViewSkeleton from '../skeletons/ChatViewSkeleton';
 
 const ChatView = () => {
-  const chatId = useAppSelector(ChatSelectors.chatId);
-  const chat = useAppSelector(ChatSelectors.chat);
-
-  const loading = !!chatId && !chat;
+  const loading = useAppSelector(ChatSelectors.loading);
 
   return (
-    <ConditionalSpinner loading={loading}>
-      {chat ? (
-        <>
-          <ChatViewHeader />
-          <ChatViewContent />
-          <ChatViewFooter />
-        </>
-      ) : (
-        <Box />
-      )}
+    <ConditionalSpinner loading={loading} loadingPlaceholder={<ChatViewSkeleton />}>
+      <ChatViewHeader />
+      <ChatViewContent />
+      <ChatViewFooter />
     </ConditionalSpinner>
   );
 };

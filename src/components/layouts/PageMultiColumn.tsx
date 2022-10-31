@@ -37,8 +37,6 @@ const PageMultiColumn = ({mainElement, additionalElement}: PageMultiColumnProps)
     setCollapsed(true);
   }, [isSmallDevice]);
 
-  console.log(isSmallDevice, collapsed);
-
   return (
     <Grid sx={containerStyles(isSmallDevice)} container>
       <Grid item xs={6} md={7} lg={8}>

@@ -12,6 +12,7 @@ import {PAGE_HEADER_HEIGHT} from '../../../constants';
 import ChatSelectors from '../../../store/chat/chatSelectors';
 import VirtualizedList from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 import PageContent from '../../../components/layouts/PageContent';
+import ChatListSkeleton from '../skeletons/ChatListSkeleton';
 
 type ControlType = 'regular' | 'filtered';
 
@@ -19,8 +20,8 @@ const ChatList = () => {
   const dispatch = useAppDispatch();
   const chat = useAppSelector(ChatSelectors.chat);
   const chats = useAppSelector(ChatsSelectors.chats);
-  const allLoaded = useAppSelector(ChatsSelectors.allLoaded);
   const filteredChats = useAppSelector(ChatsSelectors.filteredChats);
+  const allLoaded = useAppSelector(ChatsSelectors.allLoaded);
   const [type, setType] = useState<ControlType>('regular');
   const [filter, setFilter] = useState<string>('');
   const [loading, setLoading] = useDelayedState(!chats.length);
@@ -87,7 +88,7 @@ const ChatList = () => {
   return (
     <>
       <ChatListControl setFilter={setFilter} />
-      <ConditionalSpinner loading={loading || filterLoading}>
+      <ConditionalSpinner loading={loading || filterLoading} loadingPlaceholder={<ChatListSkeleton />}>
         <VirtualizedList
           itemRenderer={itemRenderer}
           keyExtractor={keyExtractor}

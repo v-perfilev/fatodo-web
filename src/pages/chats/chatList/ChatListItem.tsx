@@ -50,31 +50,29 @@ const ChatListItem = ({chat, isSelected}: ChatListItemProps) => {
     <FBox sx={containerStyles}>
       <FHStack sx={styles} spacing={1} onClick={goToChat}>
         {pic}
-        <FHStack>
-          <FVStack spacing={0.5} alignItems="stretch" justifyContent="center">
+        <FVStack spacing={0.5} alignItems="stretch" justifyContent="center">
+          <FHStack spacing={1}>
             <FHStack spacing={1}>
-              <FHStack spacing={1}>
-                <Typography color="primary" fontWeight="bold" fontSize={14}>
-                  {title}
-                </Typography>
-                {chat.isDirect && (
-                  <Typography color="grey.500" fontSize={14}>
-                    {t('chat:common.direct')}
-                  </Typography>
-                )}
-                {unreadCount > 0 && (
-                  <Box sx={badgeContainerStyles}>
-                    <BadgeWithoutIcon count={unreadCount} color="secondary" />
-                  </Box>
-                )}
-              </FHStack>
-              <Typography color="grey.500" fontSize={12}>
-                <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
+              <Typography color="primary" fontWeight="bold" fontSize={14}>
+                {title}
               </Typography>
+              {chat.isDirect && (
+                <Typography color="grey.500" fontSize={14}>
+                  {t('chat:common.direct')}
+                </Typography>
+              )}
+              {unreadCount > 0 && (
+                <Box sx={badgeContainerStyles}>
+                  <BadgeWithoutIcon count={unreadCount} color="secondary" />
+                </Box>
+              )}
             </FHStack>
-            <ChatListMessage message={chat.lastMessage} account={account} />
-          </FVStack>
-        </FHStack>
+            <Typography color="grey.500" fontSize={12}>
+              <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
+            </Typography>
+          </FHStack>
+          <ChatListMessage message={chat.lastMessage} account={account} />
+        </FVStack>
       </FHStack>
     </FBox>
   );

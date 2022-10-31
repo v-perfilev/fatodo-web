@@ -15,6 +15,7 @@ const initialState: ChatState = {
   messages: [],
   chatItems: [],
   allLoaded: false,
+  loading: false,
 };
 
 const chatSlice = createSlice({
@@ -84,6 +85,10 @@ const chatSlice = createSlice({
     calculateAllLoaded: (state: ChatState, action: PayloadAction<number>) => {
       state.allLoaded = state.messages.length === action.payload;
     },
+
+    setLoading: (state: ChatState, action: PayloadAction<boolean>) => {
+      state.loading = action.payload;
+    },
   },
   extraReducers: (builder) => {
     /*
@@ -91,10 +96,14 @@ const chatSlice = createSlice({
     */
     builder.addCase(ChatActions.fetchChatThunk.pending, (state, action) => {
       chatSlice.caseReducers.reset(state);
+      chatSlice.caseReducers.setLoading(state, {...action, payload: true});
       chatSlice.caseReducers.setChatId(state, {...action, payload: action.meta.arg});
     });
     builder.addCase(ChatActions.fetchChatThunk.fulfilled, (state, action) => {
       chatSlice.caseReducers.setChat(state, action);
+    });
+    builder.addCase(ChatActions.fetchChatThunk.rejected, (state) => {
+      chatSlice.caseReducers.reset(state);
     });
 
     /*
@@ -106,6 +115,7 @@ const chatSlice = createSlice({
       const account = action.payload.account;
       chatSlice.caseReducers.setMessages(state, {...action, payload: {messages, account}});
       chatSlice.caseReducers.calculateAllLoaded(state, {...action, payload: count});
+      chatSlice.caseReducers.setLoading(state, {...action, payload: false});
     });
 
     /*

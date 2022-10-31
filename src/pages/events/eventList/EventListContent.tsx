@@ -1,6 +1,6 @@
 import React from 'React';
 import {Box, SxProps} from '@mui/material';
-import {COMMENTS_FOOTER_HEIGHT, COMMENTS_HEADER_HEIGHT, EVENTS_HEADER_HEIGHT} from '../../../constants';
+import {EVENTS_HEADER_HEIGHT} from '../../../constants';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import EventsSelectors from '../../../store/events/eventsSelectors';
 import {useCallback, useEffect, useRef, useState} from 'react';
@@ -12,7 +12,6 @@ import VirtualizedList, {
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import EventListItem from './eventListItem/EventListItem';
-import EventListHeader from './EventListHeader';
 
 const EventListContent = () => {
   const dispatch = useAppDispatch();

@@ -1,5 +1,5 @@
 import React from 'React';
-import {IconButton, Typography} from '@mui/material';
+import {Hidden, IconButton, SxProps, Typography} from '@mui/material';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {ChatUtils} from '../../../shared/utils/ChatUtils';
@@ -112,6 +112,9 @@ const ChatViewHeader = () => {
   return (
     <PageHeader position="absolute">
       <FHStack spacing={1}>
+        <IconButton sx={closeButtonStyles} onClick={closeChat}>
+          <CloseIcon />
+        </IconButton>
         <Typography color="primary" fontWeight="bold" fontSize={14}>
           {title}
         </Typography>
@@ -120,16 +123,19 @@ const ChatViewHeader = () => {
             {t('chat:common.direct')}
           </Typography>
         )}
-        <IconButton onClick={closeChat}>
-          <CloseIcon />
-        </IconButton>
       </FHStack>
       <FHStack flexGrow={0}>
-        <AvatarGroup users={users} />
+        <Hidden mdDown>
+          <AvatarGroup users={users} />
+        </Hidden>
         <PageMenu items={menuItems} compactView />
       </FHStack>
     </PageHeader>
   );
+};
+
+const closeButtonStyles: SxProps = {
+  marginLeft: -1,
 };
 
 export default ChatViewHeader;
