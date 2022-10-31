@@ -39,10 +39,10 @@ const PageMultiColumn = ({mainElement, additionalElement}: PageMultiColumnProps)
 
   return (
     <Grid sx={containerStyles(isSmallDevice)} container>
-      <Grid item xs={6} md={7} lg={8}>
+      <Grid item xs={6} md={7} lg={8} xl={9}>
         <PageContainer withoutContainer>{firstNode}</PageContainer>
       </Grid>
-      <Grid sx={smallDeviceAdditionalColumnStyles(isSmallDevice)} item xs={6} md={5} lg={4}>
+      <Grid sx={smallDeviceAdditionalColumnStyles(isSmallDevice)} item xs={6} md={5} lg={4} xl={3}>
         <animated.div style={animatedColumnStyle}>
           <PageContainer withoutContainer>{secondNode}</PageContainer>
         </animated.div>

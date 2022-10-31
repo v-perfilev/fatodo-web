@@ -19,7 +19,6 @@ const BadgeWithoutIcon = ({count, color}: BadgeWithoutIconProps) => {
 const containerStyles: SxProps = {
   position: 'relative',
   width: 33,
-  // height: 33,
 };
 
 const badgeStyles: SxProps = {

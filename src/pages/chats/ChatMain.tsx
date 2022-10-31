@@ -51,8 +51,16 @@ const ChatMain = () => {
 
   const smallView = (
     <Box sx={smallViewRootStyles}>
-      {!chatId && <ChatList />}
-      {(chat || chatLoading) && <ChatView />}
+      {!chatId && (
+        <PageContainer withoutContainer>
+          <ChatList />
+        </PageContainer>
+      )}
+      {(chat || chatLoading) && (
+        <PageContainer withoutContainer>
+          <ChatList />
+        </PageContainer>
+      )}
     </Box>
   );
 

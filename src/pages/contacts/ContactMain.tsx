@@ -15,6 +15,8 @@ import FHStack from '../../components/boxes/FHStack';
 import PlusIcon from '../../components/icons/PlusIcon';
 import PageContent from '../../components/layouts/PageContent';
 import {useContactDialogContext} from '../../shared/contexts/dialogContexts/ContactDialogContext';
+import FVStack from '../../components/boxes/FVStack';
+import FBox from '../../components/boxes/FBox';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -61,9 +63,9 @@ const ContactMain = () => {
 
   return (
     <PageContainer>
-      <PageContent maxWidth="md">
+      <PageContent maxWidth="md" disableGutters>
         <FHStack>
-          <Tabs sx={tabsStyles} variant="fullWidth" textColor="primary" value={activeTab} onChange={handleChange}>
+          <Tabs sx={tabsStyles} variant="scrollable" textColor="primary" value={activeTab} onChange={handleChange}>
             <Tab sx={tabStyles} label={t('contact:relations.title')} icon={relationsIcon} iconPosition="end" />
             <Tab sx={tabStyles} label={t('contact:incoming.title')} icon={incomingIcon} iconPosition="end" />
             <Tab sx={tabStyles} label={t('contact:outcoming.title')} icon={outcomingIcon} iconPosition="end" />
