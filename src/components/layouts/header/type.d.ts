@@ -1,7 +1,9 @@
 export interface RedirectMap {
-  toAccount: () => void;
   toGroups: () => void;
   toChats: () => void;
   toContacts: () => void;
+  toAccountMain: () => void;
+  toAccountSettings: () => void;
+  toAccountChangePassword: () => void;
   logout: () => void;
 }

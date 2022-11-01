@@ -4,7 +4,7 @@ import FHStack from '../../../../components/boxes/FHStack';
 import DateView from '../../../../components/views/DateView';
 import {SxProps, Typography} from '@mui/material';
 import PaperBox from '../../../../components/boxes/PaperBox';
-import CircularSpinner from '../../../../components/loaders/CircularSpinner';
+import EventSkeleton from '../../skeletons/EventSkeleton';
 
 type EventListItemTemplateProps = {
   image?: ReactElement;
@@ -42,7 +42,7 @@ const EventListItemTemplate = ({image, title, content, message, date, loading}: 
     </FHStack>
   );
 
-  return loading ? <CircularSpinner /> : template;
+  return loading ? <EventSkeleton /> : template;
 };
 
 const containerStyles: SxProps = {

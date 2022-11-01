@@ -17,6 +17,8 @@ import AuthSelectors from '../../../store/auth/authSelectors';
 import {accountToUser} from '../../../models/User';
 import UserView from '../../views/UserView';
 import FHStack from '../../boxes/FHStack';
+import SettingsIcon from '../../icons/SettingsIcon';
+import PasswordIcon from '../../icons/PasswordIcon';
 
 type HorizontalMenuProps = {
   redirectMap: RedirectMap;
@@ -57,13 +59,27 @@ const HorizontalMenu = ({redirectMap}: HorizontalMenuProps) => {
           }
         >
           <PopupMenuItem
-            action={redirectMap.toAccount}
-            icon={<AccountIcon color="primary" />}
+            action={redirectMap.toAccountMain}
+            icon={<AccountIcon />}
+            color="primary"
             text={t('routes.AccountForm')}
           />
           <PopupMenuItem
+            action={redirectMap.toAccountSettings}
+            icon={<SettingsIcon />}
+            color="primary"
+            text={t('routes.AccountSettingsForm')}
+          />
+          <PopupMenuItem
+            action={redirectMap.toAccountChangePassword}
+            icon={<PasswordIcon />}
+            color="primary"
+            text={t('routes.AccountChangePasswordForm')}
+          />
+          <PopupMenuItem
             action={redirectMap.logout}
-            icon={<LogoutIcon color="primary" />}
+            icon={<LogoutIcon />}
+            color="primary"
             text={t('account:actions.logout')}
           />
         </PopupMenu>

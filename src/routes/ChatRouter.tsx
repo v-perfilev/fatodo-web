@@ -9,7 +9,7 @@ export enum ChatRoutes {
 }
 
 export class ChatRouteUtils {
-  public static getRootUrl = (): string => RootRoutes.CHATS;
+  public static getListUrl = (): string => RootRoutes.CHATS;
   public static getChatUrl = (id: string): string => (RootRoutes.CHATS + ChatRoutes.CHAT).replace(':chatId', id);
 }
 

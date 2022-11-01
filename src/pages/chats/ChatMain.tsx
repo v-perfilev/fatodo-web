@@ -22,7 +22,7 @@ const ChatMain = () => {
   const {chatId} = useParams();
 
   const updateUrlChatParameter = (chat: Chat): void => {
-    const url = chat ? ChatRouteUtils.getChatUrl(chat.id) : ChatRouteUtils.getRootUrl();
+    const url = chat ? ChatRouteUtils.getChatUrl(chat.id) : ChatRouteUtils.getListUrl();
     navigate(url, {replace: true});
   };
 

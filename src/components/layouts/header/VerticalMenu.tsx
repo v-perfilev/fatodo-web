@@ -14,6 +14,9 @@ import AuthSelectors from '../../../store/auth/authSelectors';
 import {accountToUser} from '../../../models/User';
 import UserView from '../../views/UserView';
 import {styled} from '@mui/styles';
+import PageDivider from '../PageDivider';
+import SettingsIcon from '../../icons/SettingsIcon';
+import PasswordIcon from '../../icons/PasswordIcon';
 
 type VerticalMenuProps = {
   redirectMap: RedirectMap;
@@ -39,24 +42,46 @@ const VerticalMenu = ({redirectMap}: VerticalMenuProps) => {
           </StyledListItemIcon>
           <ListItemText>{t('routes.Groups')}</ListItemText>
         </ListItemButton>
+
         <ListItemButton onClick={redirectMap.toChats}>
           <StyledListItemIcon>
             <BadgeMessageIcon count={unreadCount} color="primary" />
           </StyledListItemIcon>
           <ListItemText>{t('routes.Chats')}</ListItemText>
         </ListItemButton>
+
         <ListItemButton onClick={redirectMap.toContacts}>
           <StyledListItemIcon>
             <BadgeContactInfo count={incomingRequestCount} color="primary" />
           </StyledListItemIcon>
           <ListItemText>{t('routes.Contacts')}</ListItemText>
         </ListItemButton>
-        <ListItemButton onClick={redirectMap.toAccount}>
+
+        <PageDivider />
+
+        <ListItemButton onClick={redirectMap.toAccountMain}>
           <StyledListItemIcon>
             <AccountIcon color="primary" />
           </StyledListItemIcon>
           <ListItemText>{t('routes.AccountForm')}</ListItemText>
         </ListItemButton>
+
+        <ListItemButton onClick={redirectMap.toAccountSettings}>
+          <StyledListItemIcon>
+            <SettingsIcon color="primary" />
+          </StyledListItemIcon>
+          <ListItemText>{t('routes.AccountSettingsForm')}</ListItemText>
+        </ListItemButton>
+
+        <ListItemButton onClick={redirectMap.toAccountChangePassword}>
+          <StyledListItemIcon>
+            <PasswordIcon color="primary" />
+          </StyledListItemIcon>
+          <ListItemText>{t('routes.AccountChangePasswordForm')}</ListItemText>
+        </ListItemButton>
+
+        <PageDivider />
+
         <ListItemButton onClick={redirectMap.logout}>
           <StyledListItemIcon>
             <LogoutIcon color="primary" />

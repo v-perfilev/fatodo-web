@@ -41,7 +41,7 @@ const containerStyles: SxProps = {
 };
 
 const toolbarStyles: SxProps = {
-  height: HEADER_HEIGHT,
+  height: HEADER_HEIGHT - 1,
   display: 'flex',
   flexDirection: 'row-reverse',
   justifyContent: 'space-between',

@@ -11,6 +11,10 @@ import {AuthActions} from '../../../store/auth/authActions';
 import LogoWithText from '../../images/LogoWithText';
 import MenuIcon from '../../icons/MenuIcon';
 import FHStack from '../../boxes/FHStack';
+import {GroupRouteUtils} from '../../../routes/GroupRouter';
+import {ChatRouteUtils} from '../../../routes/ChatRouter';
+import {ContactRouteUtils} from '../../../routes/ContactRouter';
+import {AccountRouteUtils} from '../../../routes/AccountRouter';
 
 type HeaderProps = {
   flexible?: boolean;
@@ -23,21 +27,29 @@ const Header = ({flexible}: HeaderProps) => {
   const [showMenu, setShowMenu] = useState(false);
 
   const redirectMap = {
-    toAccount: (): void => {
-      setShowMenu(false);
-      navigate(RootRoutes.ACCOUNT);
-    },
     toGroups: (): void => {
       setShowMenu(false);
-      navigate(RootRoutes.GROUPS);
+      navigate(GroupRouteUtils.getListUrl());
     },
     toChats: (): void => {
       setShowMenu(false);
-      navigate(RootRoutes.CHATS);
+      navigate(ChatRouteUtils.getListUrl());
     },
     toContacts: (): void => {
       setShowMenu(false);
-      navigate(RootRoutes.CONTACTS);
+      navigate(ContactRouteUtils.getListUrl());
+    },
+    toAccountMain: (): void => {
+      setShowMenu(false);
+      navigate(AccountRouteUtils.getMainUrl());
+    },
+    toAccountSettings: (): void => {
+      setShowMenu(false);
+      navigate(AccountRouteUtils.getSettingsUrl());
+    },
+    toAccountChangePassword: (): void => {
+      setShowMenu(false);
+      navigate(AccountRouteUtils.getChangePasswordUrl());
     },
     logout: (): void => {
       setShowMenu(false);
