@@ -2,7 +2,7 @@ import React, {memo, ReactElement} from 'react';
 import FVStack from '../../../../components/boxes/FVStack';
 import FHStack from '../../../../components/boxes/FHStack';
 import DateView from '../../../../components/views/DateView';
-import {SxProps, Typography} from '@mui/material';
+import {Box, SxProps, Typography} from '@mui/material';
 import PaperBox from '../../../../components/boxes/PaperBox';
 import EventSkeleton from '../../skeletons/EventSkeleton';
 
@@ -20,7 +20,7 @@ const EventListItemTemplate = ({image, title, content, message, date, loading}: 
 
   const template = (
     <FHStack sx={containerStyles} alignItems="flex-start">
-      {image}
+      <Box>{image}</Box>
       <FVStack spacing={1}>
         <FHStack>
           <FHStack>
