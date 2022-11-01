@@ -11,9 +11,6 @@ import {AuthActions} from '../../../store/auth/authActions';
 import LogoWithText from '../../images/LogoWithText';
 import MenuIcon from '../../icons/MenuIcon';
 import FHStack from '../../boxes/FHStack';
-import {GroupRouteUtils} from '../../../routes/GroupRouter';
-import {ChatRouteUtils} from '../../../routes/ChatRouter';
-import {ContactRouteUtils} from '../../../routes/ContactRouter';
 import {AccountRouteUtils} from '../../../routes/AccountRouter';
 
 type HeaderProps = {
@@ -29,15 +26,19 @@ const Header = ({flexible}: HeaderProps) => {
   const redirectMap = {
     toGroups: (): void => {
       setShowMenu(false);
-      navigate(GroupRouteUtils.getListUrl());
+      navigate(RootRoutes.GROUPS);
+    },
+    toCalendar: (): void => {
+      setShowMenu(false);
+      navigate(RootRoutes.CALENDAR);
     },
     toChats: (): void => {
       setShowMenu(false);
-      navigate(ChatRouteUtils.getListUrl());
+      navigate(RootRoutes.CHATS);
     },
     toContacts: (): void => {
       setShowMenu(false);
-      navigate(ContactRouteUtils.getListUrl());
+      navigate(RootRoutes.CONTACTS);
     },
     toAccountMain: (): void => {
       setShowMenu(false);

@@ -17,6 +17,7 @@ import {styled} from '@mui/styles';
 import PageDivider from '../PageDivider';
 import SettingsIcon from '../../icons/SettingsIcon';
 import PasswordIcon from '../../icons/PasswordIcon';
+import CalendarIcon from '../../icons/CalendarIcon';
 
 type VerticalMenuProps = {
   redirectMap: RedirectMap;
@@ -41,6 +42,13 @@ const VerticalMenu = ({redirectMap}: VerticalMenuProps) => {
             <GroupsIcon color="primary" />
           </StyledListItemIcon>
           <ListItemText>{t('routes.Groups')}</ListItemText>
+        </ListItemButton>
+
+        <ListItemButton onClick={redirectMap.toCalendar}>
+          <StyledListItemIcon>
+            <CalendarIcon color="primary" />
+          </StyledListItemIcon>
+          <ListItemText>{t('routes.Calendar')}</ListItemText>
         </ListItemButton>
 
         <ListItemButton onClick={redirectMap.toChats}>

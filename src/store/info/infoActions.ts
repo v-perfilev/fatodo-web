@@ -111,7 +111,7 @@ export class InfoActions {
 }
 
 const extractIdsToLoad = (ids: string[], entries: [string, any][]): string[] => {
-  const existingIds = entries.map(([key, _]) => key);
+  const existingIds = entries.map(([key]) => key);
   return ids
     .filter(FilterUtils.notUndefinedFilter)
     .filter(FilterUtils.notNullFilter)

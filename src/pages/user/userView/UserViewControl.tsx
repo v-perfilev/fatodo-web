@@ -5,7 +5,6 @@ import ContactsSelectors from '../../../store/contacts/contactsSelectors';
 import {User} from '../../../models/User';
 import {ContactsActions} from '../../../store/contacts/contactsActions';
 import {ContactRequestDTO} from '../../../models/dto/ContactRequestDTO';
-import FVStack from '../../../components/boxes/FVStack';
 import {ContactUtils} from '../../../shared/utils/ContactUtils';
 import {useDelayedState} from '../../../shared/hooks/useDelayedState';
 import {useTranslation} from 'react-i18next';

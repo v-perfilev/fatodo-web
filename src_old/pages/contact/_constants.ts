@@ -1,1 +1,0 @@
-export const CONTACT_SKELETONS_COUNT = 20;

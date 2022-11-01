@@ -122,7 +122,7 @@ export class ChatsActions {
   static setChatLastMessageAction = createAsyncThunk<void, Message, AsyncThunkConfig>(
     PREFIX + 'addChatLastMessageAction',
     async (message, thunkAPI) => {
-      let chat = thunkAPI.getState().chats.chats.find((chat) => chat.id === message.chatId);
+      const chat = thunkAPI.getState().chats.chats.find((chat) => chat.id === message.chatId);
       let updatedChat: Chat;
       if (chat) {
         updatedChat = {...chat, lastMessage: message};
@@ -137,7 +137,7 @@ export class ChatsActions {
   static updateChatLastMessageAction = createAsyncThunk<void, Message, AsyncThunkConfig>(
     PREFIX + 'addChatLastMessageAction',
     async (message, thunkAPI) => {
-      let chat = thunkAPI.getState().chats.chats.find((chat) => chat.id === message.chatId);
+      const chat = thunkAPI.getState().chats.chats.find((chat) => chat.id === message.chatId);
       if (chat?.lastMessage?.id === message.id) {
         const updatedChat = {...chat, lastMessage: message};
         thunkAPI.dispatch(chatsSlice.actions.setChats([updatedChat]));

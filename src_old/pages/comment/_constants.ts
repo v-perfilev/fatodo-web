@@ -1,7 +1,0 @@
-export const COMMENTS_CONTROL_HEIGHT = 65;
-export const COMMENTS_CONTROL_INPUT_HEIGHT = 50;
-export const COMMENTS_CONTROL_REFERENCE_HEIGHT = 25;
-
-export const COMMENT_SKELETONS_COUNT = 5;
-
-export const NEW_COMMENT_PREFIX = 'new-comment-';

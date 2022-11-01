@@ -9,7 +9,7 @@ const ContactMain = () => {
 
   const additionalElement = useCallback(() => <EventList />, []);
 
-  return <PageMultiColumn {...{mainElement, additionalElement}} />;
+  return <PageMultiColumn disableOnSmartDevice {...{mainElement, additionalElement}} />;
 };
 
 export default ContactMain;

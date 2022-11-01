@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Formik, FormikProps} from 'formik';
 import {flowRight} from 'lodash';
 import withCaptcha, {CaptchaProps} from '../../../shared/hocs/withCaptcha';
@@ -45,11 +45,13 @@ const SignInForm = ({getToken}: SignInFormProps) => {
   const error = useAppSelector(AuthSelectors.error);
   const navigate = useNavigate();
   const {t} = useTranslation();
+  const [user, setUser] = useState<string>(undefined);
 
-  const redirectToNotActivated = (): void => navigate(RootRoutes.NOT_ACTIVATED);
+  const redirectToNotActivated = (): void => navigate(RootRoutes.NOT_ACTIVATED, {state: {user}});
 
   const handleSubmit = async (formValues: SignInFormValues): Promise<void> => {
     dispatch(AuthActions.setLoading(true));
+    setUser(formValues.user.trim);
     const captchaToken = await getToken().catch(() => dispatch(AuthActions.setLoading(false)));
     const dto: LoginDTO = {
       user: formValues.user.trim(),

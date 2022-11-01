@@ -147,7 +147,7 @@ const prepareInfoContentWithId = <T extends {id: string}>(
   newValues: T[],
 ): [string, T][] => {
   const newIds = newValues.map((value) => value.id);
-  const updatedValues = stateValues.filter(([key, _]) => !newIds.includes(key));
+  const updatedValues = stateValues.filter(([key]) => !newIds.includes(key));
   newValues.forEach((value) => updatedValues.push([value.id, value]));
   return updatedValues;
 };
@@ -157,7 +157,7 @@ const prepareInfoContentWithTargetId = <T extends {targetId: string}>(
   newValues: T[],
 ): [string, T][] => {
   const newTargetIds = newValues.map((value) => value.targetId);
-  const updatedValues = stateValues.filter(([key, _]) => !newTargetIds.includes(key));
+  const updatedValues = stateValues.filter(([key]) => !newTargetIds.includes(key));
   newValues.forEach((value) => updatedValues.push([value.targetId, value]));
   return updatedValues;
 };

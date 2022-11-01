@@ -8,15 +8,36 @@ import HomeIcon from '../../components/icons/HomeIcon';
 import withBackground from '../../shared/hocs/withBackground';
 import LoadingButton from '../../components/controls/LoadingButton';
 import FVStack from '../../components/boxes/FVStack';
+import AuthService from '../../services/AuthService';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {RootRoutes} from '../../routes/RootRouter';
 
 type NotActivatedProps = RedirectTimerProps;
 
 const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
   const {t} = useTranslation();
+  const location = useLocation();
   const [activationLoading, setActivationLoading] = useState<boolean>(false);
   const [activationTimer, setActivationTimer] = useState<number>(undefined);
+  const navigate = useNavigate();
   const activationTimerMax = 20;
   let timerId: number;
+
+  const user = location.state?.user;
+
+  const redirectToRoot = (): void => navigate(RootRoutes.ROOT);
+
+  const sendActivationCode = (): void => {
+    setActivationLoading(true);
+    AuthService.requestActivationCode(user)
+      .then(() => setActivationTimer(activationTimerMax))
+      .catch(() => setActivationTimer(0))
+      .finally(() => setActivationLoading(false));
+  };
+
+  useEffect(() => {
+    !user && redirectToRoot();
+  }, []);
 
   useEffect(() => {
     if (activationTimer !== undefined) {
@@ -30,15 +51,6 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
     }
     return (): void => clearTimeout(timerId);
   }, [activationTimer]);
-
-  const sendActivationCode = (): void => {
-    // TODO
-    // setActivationLoading(true);
-    // AuthService.requestActivationCode(user)
-    //   .then(() => setActivationTimer(activationTimerMax))
-    //   .catch(() => setActivationTimer(0))
-    //   .finally(() => setActivationLoading(false));
-  };
 
   return (
     <FVStack alignItems="center">

@@ -3,7 +3,7 @@ export class StoreUtils {
     if (!requestedKey) {
       return undefined;
     }
-    const entry = store.find(([key, _]) => key === requestedKey);
+    const entry = store.find(([key]) => key === requestedKey);
     return entry ? entry[1] : defaultValue;
   };
 
@@ -11,7 +11,7 @@ export class StoreUtils {
     if (!requestedKeys) {
       return [];
     }
-    return store.filter(([key, _]) => requestedKeys.includes(key)).map(([_, value]) => value);
+    return store.filter(([key]) => requestedKeys.includes(key)).map(([, value]) => value);
   };
 
   public static reduceBoolean = (store: [string, boolean][]): any => {
@@ -20,13 +20,13 @@ export class StoreUtils {
 
   static setValue(store: [string, any][], requestedKey: string, value: any): [string, any][] {
     const entry: [string, any] = [requestedKey, value];
-    const index = store.findIndex(([key, _]) => key === requestedKey);
+    const index = store.findIndex(([key]) => key === requestedKey);
     index >= 0 ? (store[index] = entry) : store.push(entry);
     return store;
   }
 
   static setMultipleValues(store: [string, any][], requestedKeys: string[], value: any): [string, any][] {
-    const updatedStore = store.filter(([key, _]) => !requestedKeys.includes(key));
+    const updatedStore = store.filter(([key]) => !requestedKeys.includes(key));
     requestedKeys.forEach((key) => updatedStore.push([key, value]));
     return updatedStore;
   }
@@ -36,16 +36,16 @@ export class StoreUtils {
     requestedKeys: string[],
     func: (key: string) => any,
   ): [string, any][] {
-    const updatedStore = store.filter(([key, _]) => !requestedKeys.includes(key));
+    const updatedStore = store.filter(([key]) => !requestedKeys.includes(key));
     requestedKeys.forEach((key) => updatedStore.push([key, func(key)]));
     return updatedStore;
   }
 
   static setAllValues(store: [string, any][], value: any): [string, any][] {
-    return store.map(([key, _]) => [key, value]);
+    return store.map(([key]) => [key, value]);
   }
 
   static deleteValue(store: [string, any][], requestedKey: any): [string, any][] {
-    return store.filter(([key, _]) => key !== requestedKey);
+    return store.filter(([key]) => key !== requestedKey);
   }
 }

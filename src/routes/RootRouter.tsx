@@ -20,13 +20,15 @@ import ChatRouter from './ChatRouter';
 import AccountRouter from './AccountRouter';
 import ProtectedRouteOutlet from './outlets/ProtectedRouteOutlet';
 import PublicRouteOutlet from './outlets/PublicRouteOutlet';
+import CalendarView from '../pages/calendar/calendarView/CalendarView';
 
 export enum RootRoutes {
   ROOT = '/',
   GROUPS = '/groups',
   ITEMS = '/items',
-  CONTACTS = '/contacts',
+  CALENDAR = '/calendar',
   CHATS = '/chats',
+  CONTACTS = '/contacts',
   ACCOUNT = '/account',
   LOGIN = '/login',
   REGISTRATION = '/registration',
@@ -60,11 +62,14 @@ const RootRouter = () => {
       <Route path={RootRoutes.ITEMS} element={protectedRoute}>
         {ItemRouter()}
       </Route>
-      <Route path={RootRoutes.CONTACTS} element={protectedRoute}>
-        {ContactRouter()}
+      <Route path={RootRoutes.CALENDAR} element={protectedRoute}>
+        <Route index element={<CalendarView />} />
       </Route>
       <Route path={RootRoutes.CHATS} element={protectedRoute}>
         {ChatRouter()}
+      </Route>
+      <Route path={RootRoutes.CONTACTS} element={protectedRoute}>
+        {ContactRouter()}
       </Route>
       <Route path={RootRoutes.ACCOUNT} element={protectedRoute}>
         {AccountRouter()}

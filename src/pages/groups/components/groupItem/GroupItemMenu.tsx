@@ -13,6 +13,7 @@ import {useNavigate} from 'react-router-dom';
 import {IconButton} from '@mui/material';
 import PopupMenu, {PopupMenuItem, PopupMenuItemProps} from '../../../../components/surfaces/PopupMenu';
 import {ItemRouteUtils} from '../../../../routes/ItemRouter';
+import {useItemDialogContext} from '../../../../shared/contexts/dialogContexts/ItemDialogContext';
 
 type GroupItemMenuProps = {
   item: Item;
@@ -23,7 +24,7 @@ const GroupItemMenu = ({item, canEdit}: GroupItemMenuProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {t} = useTranslation();
-  // const {showItemDeleteDialog} = useItemDialogContext();
+  const {showItemDeleteDialog} = useItemDialogContext();
   const [archivedLoading, setArchivedLoading] = useState<boolean>(false);
 
   const goToItemView = (): void => navigate(ItemRouteUtils.getViewUrl(item.id));
@@ -42,7 +43,7 @@ const GroupItemMenu = ({item, canEdit}: GroupItemMenuProps) => {
 
   const openItemDeleteDialog = (): void => {
     const onSuccess = (): void => deleteItem(item);
-    // showItemDeleteDialog(item, onSuccess);
+    showItemDeleteDialog(item, onSuccess);
   };
 
   const menuItems: PopupMenuItemProps[] = [

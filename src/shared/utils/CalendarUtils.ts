@@ -22,7 +22,7 @@ export class CalendarUtils {
     return routes;
   };
 
-  public static generateCalendarMonths = (item: CalendarItem, indent: number = 3): CalendarMonth[] => {
+  public static generateCalendarMonths = (item: CalendarItem, indent = 3): CalendarMonth[] => {
     const centralMoment = moment({year: item.year, month: item.month});
     const routes: CalendarMonth[] = [];
     for (let i = -indent; i <= indent; i++) {

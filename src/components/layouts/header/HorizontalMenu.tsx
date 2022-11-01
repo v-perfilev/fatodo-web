@@ -19,6 +19,7 @@ import UserView from '../../views/UserView';
 import FHStack from '../../boxes/FHStack';
 import SettingsIcon from '../../icons/SettingsIcon';
 import PasswordIcon from '../../icons/PasswordIcon';
+import CalendarIcon from '../../icons/CalendarIcon';
 
 type HorizontalMenuProps = {
   redirectMap: RedirectMap;
@@ -36,6 +37,9 @@ const HorizontalMenu = ({redirectMap}: HorizontalMenuProps) => {
       <FHStack justifyContent="center">
         <Button color="primary" startIcon={<GroupsIcon />} onClick={redirectMap.toGroups}>
           {t('routes.Groups')}
+        </Button>
+        <Button color="primary" startIcon={<CalendarIcon />} onClick={redirectMap.toCalendar}>
+          {t('routes.Calendar')}
         </Button>
         <Button color="primary" startIcon={<BadgeMessageIcon count={unreadCount} />} onClick={redirectMap.toChats}>
           {t('routes.Chats')}
