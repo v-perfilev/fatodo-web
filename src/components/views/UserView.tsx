@@ -1,35 +1,35 @@
-import React, {HTMLAttributes} from 'react';
-import {Box, Stack} from '@mui/material';
+import React from 'react';
+import {Box} from '@mui/material';
 import {User} from '../../models/User';
 import UrlPic from '../images/UrlPic';
-import PaperBox from '../boxes/PaperBox';
+import HoverPopup from '../layouts/hoverPopup/HoverPopup';
+import UserPopupView from '../../pages/user/userView/UserView';
+import FHStack from '../boxes/FHStack';
+import {useAppSelector} from '../../store/store';
+import AuthSelectors from '../../store/auth/authSelectors';
 
-type UserViewProps = HTMLAttributes<HTMLElement> & {
+type UserViewProps = {
   user: User;
   size?: number;
   withUserPic?: boolean;
   withUsername?: boolean;
-  withPaperBox?: boolean;
 };
 
-const UserView = (props: UserViewProps) => {
-  const {user, size, withUserPic = true, withUsername = false, withPaperBox = false} = props;
-  const {onMouseOver, onMouseLeave} = props;
+const UserView = ({user, size, withUserPic = true, withUsername = false}: UserViewProps) => {
+  const account = useAppSelector(AuthSelectors.account);
 
-  const imageWithUsername = (
-    <Stack spacing={1} direction="row" alignItems="center">
+  const isAnotherUser = user && user.id !== account.id;
+
+  const userView = (
+    <FHStack spacing={1}>
       {withUserPic && <UrlPic alt={user?.username} url={user?.imageFilename} size={size} />}
       {withUsername && <Box>{user?.username}</Box>}
-    </Stack>
+    </FHStack>
   );
 
-  const userView = withPaperBox ? <PaperBox>{imageWithUsername}</PaperBox> : imageWithUsername;
+  const userPopupView = <UserPopupView user={user} />;
 
-  return (
-    <Box onMouseOver={onMouseOver} onMouseLeave={onMouseLeave}>
-      {userView}
-    </Box>
-  );
+  return isAnotherUser ? <HoverPopup anchorElement={userView} popupElement={userPopupView} /> : userView;
 };
 
 export default UserView;
