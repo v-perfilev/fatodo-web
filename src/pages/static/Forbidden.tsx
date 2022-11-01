@@ -1,7 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
-import {Button, SxProps, Typography} from '@mui/material';
+import {Button, Typography} from '@mui/material';
 import HomeIcon from '../../components/icons/HomeIcon';
 import withBackground from '../../shared/hocs/withBackground';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/withRedirectTimer';
@@ -14,7 +14,7 @@ const Forbidden = ({timer, resetTimer}: ForbiddenProps) => {
 
   return (
     <FVStack alignItems="center">
-      <Typography sx={codeStyles} variant="h5" color="primary">
+      <Typography variant="h5" color="primary" lineHeight={1} fontSize={150}>
         403
       </Typography>
       <Typography variant="h5" color="primary">
@@ -26,11 +26,6 @@ const Forbidden = ({timer, resetTimer}: ForbiddenProps) => {
       </Button>
     </FVStack>
   );
-};
-
-const codeStyles: SxProps = {
-  fontSize: '10em',
-  lineHeight: 1,
 };
 
 export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer()])(Forbidden);

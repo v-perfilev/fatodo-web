@@ -1,21 +1,32 @@
 import React, {ComponentType, CSSProperties} from 'react';
-import {Box, Grid, Hidden, Stack, SxProps} from '@mui/material';
+import {Box, Grid, Hidden, SxProps} from '@mui/material';
 import {LANDING_URL} from '../../constants';
 import LogoWithText from '../../components/images/LogoWithText';
 import LanguageSelect from '../../components/controls/LanguageSelect';
+import FHStack from '../../components/boxes/FHStack';
+import FVStack from '../../components/boxes/FVStack';
+import PageContent from '../../components/layouts/PageContent';
 
 const withBackground = (imgSrc: string) => (Component: ComponentType) => (props: any) => {
   return (
     <Grid container>
-      <Grid sx={leftBoxStyles} item xs={12} md={6}>
-        <Stack sx={leftBoxContainerStyles} spacing={2} alignItems="center">
-          <LogoWithText href={LANDING_URL} />
-          <Component {...props} />
-          <LanguageSelect />
-        </Stack>
+      <Grid sx={containerStyles} item xs={12} md={6}>
+        <FVStack alignItems="stretch">
+          <FHStack minHeight={100} justifyContent="center">
+            <LogoWithText href={LANDING_URL} />
+          </FHStack>
+          <FHStack justifyContent="center">
+            <PageContent maxWidth="xs">
+              <Component {...props} />
+            </PageContent>
+          </FHStack>
+          <FHStack minHeight={100} justifyContent="center">
+            <LanguageSelect />
+          </FHStack>
+        </FVStack>
       </Grid>
       <Hidden smDown>
-        <Grid sx={rightBoxStyles} item md={6}>
+        <Grid sx={containerStyles} item md={6}>
           <Box sx={imgBoxStyles}>
             <img style={imgStyles} src={imgSrc} alt="Fatodo background" />
           </Box>
@@ -25,23 +36,10 @@ const withBackground = (imgSrc: string) => (Component: ComponentType) => (props:
   );
 };
 
-const leftBoxStyles: SxProps = {
-  display: 'flex',
-  flexGrow: 1,
-  flexDirection: 'column',
-  alignItems: 'center',
-  paddingY: 5,
-};
-
-const leftBoxContainerStyles: SxProps = {
-  width: 350,
-  maxWidth: '90%',
-  height: '100%',
-  justifyContent: 'space-around',
-};
-
-const rightBoxStyles: SxProps = {
+const containerStyles: SxProps = {
   position: 'relative',
+  minHeight: '100vh',
+  display: 'flex',
 };
 
 const imgBoxStyles: SxProps = {

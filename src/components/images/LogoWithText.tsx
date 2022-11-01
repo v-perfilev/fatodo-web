@@ -26,7 +26,7 @@ const logoStyles: SxProps = {
 
 const textStyles: SxProps = {
   fontWeight: 500,
-  fontSize: '2rem',
+  fontSize: 35,
   lineHeight: 1,
   letterSpacing: '0.05em',
   marginLeft: 1,

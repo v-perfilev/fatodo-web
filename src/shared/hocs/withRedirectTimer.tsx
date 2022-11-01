@@ -6,7 +6,7 @@ export type RedirectTimerProps = {
   resetTimer: () => void;
 };
 
-const withRedirectTimer = (redirectLink = '/', timerInitValue = 50) => (
+const withRedirectTimer = (redirectLink = '/', timerInitValue = 60) => (
   Component: ComponentType<RedirectTimerProps>,
 ) => (props: any) => {
   const [timer, setTimer] = useState<number>(timerInitValue);

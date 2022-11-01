@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/withRedirectTimer';
-import {SxProps, Typography} from '@mui/material';
+import {Typography} from '@mui/material';
 import EmailIcon from '../../components/icons/EmailIcon';
 import HomeIcon from '../../components/icons/HomeIcon';
 import withBackground from '../../shared/hocs/withBackground';
@@ -42,7 +42,7 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
 
   return (
     <FVStack alignItems="center">
-      <Typography sx={codeStyles} variant="h5" color="primary">
+      <Typography variant="h5" color="primary" lineHeight={1} fontSize={150}>
         {t('static:notActivated.caption')}
       </Typography>
       <Typography textAlign="center">{t('static:redirectToHome.message', {count: timer})}</Typography>
@@ -62,9 +62,4 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
   );
 };
 
-const codeStyles: SxProps = {
-  fontSize: '10em',
-  lineHeight: 1,
-};
-
-export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer('/', 60)])(NotActivated);
+export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer()])(NotActivated);
