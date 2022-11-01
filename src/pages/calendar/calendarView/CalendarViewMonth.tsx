@@ -1,13 +1,20 @@
 import React from 'React';
-import {useAppDispatch} from '../../../store/store';
-import {Box} from '@mui/material';
+import {CalendarMonth} from '../../../models/Calendar';
+import FVStack from '../../../components/boxes/FVStack';
+import CalendarViewWeekDays from './CalendarViewWeekDays';
+import CalendarViewMonthDates from './CalendarViewMonthDates';
 
-type CalendarViewMonthProps = {};
+type CalendarViewMonthProps = {
+  month: CalendarMonth;
+};
 
-const CalendarViewMonth = ({}: CalendarViewMonthProps) => {
-  const dispatch = useAppDispatch();
-
-  return <Box />;
+const CalendarViewMonth = ({month}: CalendarViewMonthProps) => {
+  return (
+    <FVStack spacing={1}>
+      <CalendarViewWeekDays />
+      <CalendarViewMonthDates month={month} />
+    </FVStack>
+  );
 };
 
 export default CalendarViewMonth;

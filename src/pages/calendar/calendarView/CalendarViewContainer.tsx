@@ -14,8 +14,8 @@ type CalendarViewContainerProps = {
   toggleCollapsed?: () => void;
 };
 
-const months = CalendarUtils.generateAllCalendarMonths();
-const monthKeys = months.map((r) => r.key);
+export const calendarMonths = CalendarUtils.generateAllCalendarMonths();
+export const calendarMonthKeys = calendarMonths.map((r) => r.key);
 const getInitialMonth = (): CalendarMonth => CalendarUtils.generateCurrentCalendarMonth();
 
 const CalendarViewContainer = ({toggleCollapsed}: CalendarViewContainerProps) => {
@@ -26,9 +26,9 @@ const CalendarViewContainer = ({toggleCollapsed}: CalendarViewContainerProps) =>
 
   const selectMonth = useCallback((month: CalendarItem): void => {
     const key = CalendarUtils.buildMonthKey(month.year, month.month);
-    const index = monthKeys.indexOf(key);
-    if (index && index >= 0 && index < months.length) {
-      const activeMonth = months[index];
+    const index = calendarMonthKeys.indexOf(key);
+    if (index && index >= 0 && index < calendarMonths.length) {
+      const activeMonth = calendarMonths[index];
       setActiveMonth(activeMonth);
     }
   }, []);
@@ -45,13 +45,16 @@ const CalendarViewContainer = ({toggleCollapsed}: CalendarViewContainerProps) =>
     <>
       <CalendarViewHeader month={activeMonth} selectMonth={selectMonth} toggleCollapsed={toggleCollapsed} />
       <PageContent sx={containerStyles} maxWidth="md">
-        <CalendarViewMonth />
+        <CalendarViewMonth month={activeMonth} />
       </PageContent>
     </>
   );
 };
 
 const containerStyles: SxProps = {
+  display: 'flex',
+  flexGrow: 1,
+  alignItems: 'center',
   paddingY: 2,
 };
 

@@ -10,6 +10,9 @@ import {DateFormatters} from '../../../shared/utils/DateFormatters';
 import FHStack from '../../../components/boxes/FHStack';
 import ArrowDownIcon from '../../../components/icons/ArrowDownIcon';
 import ActiveDateIcon from '../../../components/icons/ActiveDateIcon';
+import ArrowLeftIcon from '../../../components/icons/ArrowLeftIcon';
+import ArrowRightIcon from '../../../components/icons/ArrowRightIcon';
+import {calendarMonthKeys, calendarMonths} from './CalendarViewContainer';
 
 type GroupListHeaderProps = {
   month: CalendarMonth;
@@ -32,24 +35,56 @@ const CalendarViewHeader = ({month, selectMonth, toggleCollapsed}: GroupListHead
     return currentMonth.key === month.key;
   }, [month]);
 
+  const canGoToPreviousMonth = useMemo<boolean>(() => {
+    const key = CalendarUtils.buildMonthKey(month.year, month.month);
+    const index = calendarMonthKeys.indexOf(key);
+    return index > 0;
+  }, [month]);
+
+  const canGoToNextMonth = useMemo<boolean>(() => {
+    const key = CalendarUtils.buildMonthKey(month.year, month.month);
+    const index = calendarMonthKeys.indexOf(key);
+    return index >= 0 && index < calendarMonthKeys.length - 1;
+  }, [month]);
+
   const handleMonthClick = useCallback((): void => {
     showSelectMonthDialog(month, selectMonth);
-  }, [month, selectMonth]);
+  }, [month]);
+
+  const goToPreviousMonth = useCallback((): void => {
+    const key = CalendarUtils.buildMonthKey(month.year, month.month);
+    const index = calendarMonthKeys.indexOf(key);
+    const activeMonth = calendarMonths[index - 1];
+    selectMonth(activeMonth);
+  }, [month]);
+
+  const goToNextMonth = useCallback((): void => {
+    const key = CalendarUtils.buildMonthKey(month.year, month.month);
+    const index = calendarMonthKeys.indexOf(key);
+    const activeMonth = calendarMonths[index + 1];
+    selectMonth(activeMonth);
+  }, [month]);
 
   const goToCurrentMonth = useCallback((): void => {
     const currentMonth = CalendarUtils.generateCurrentCalendarMonth();
     selectMonth(currentMonth);
-  }, [selectMonth]);
+  }, []);
 
   return (
     <PageHeader maxWidth="md">
       <FHStack>
-        <FHStack sx={monthNameStyles} flexGrow={0} onClick={handleMonthClick}>
+        <IconButton color="primary" disabled={!canGoToPreviousMonth} onClick={goToPreviousMonth}>
+          <ArrowLeftIcon />
+        </IconButton>
+        <FHStack sx={monthNameStyles} spacing={1} flexGrow={0} onClick={handleMonthClick}>
           <Typography fontSize={16} fontWeight="bold" color="primary">
             {monthWithYear}
           </Typography>
           <ArrowDownIcon color="primary" />
         </FHStack>
+        <IconButton color="primary" disabled={!canGoToNextMonth} onClick={goToNextMonth}>
+          <ArrowRightIcon />
+        </IconButton>
       </FHStack>
       {toggleCollapsed && (
         <IconButton color="primary" onClick={toggleCollapsed}>

@@ -10,6 +10,7 @@ export class LanguageUtils {
   public static getFallbackLanguage = (): string => i18n.languages[0];
 
   public static setLanguage = (code: string): void => {
+    DateUtils.resetLocale(code);
     i18n.changeLanguage(code).finally();
   };
 

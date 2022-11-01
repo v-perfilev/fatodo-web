@@ -48,6 +48,7 @@ const containerStyles = (position: string): SxProps => ({
   flexDirection: 'column',
   width: '100%',
   height: PAGE_HEADER_HEIGHT,
+  flexShrink: 0,
 });
 
 const contentStyles: SxProps = {
