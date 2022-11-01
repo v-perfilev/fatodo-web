@@ -51,7 +51,7 @@ const SignInForm = ({getToken}: SignInFormProps) => {
 
   const handleSubmit = async (formValues: SignInFormValues): Promise<void> => {
     dispatch(AuthActions.setLoading(true));
-    setUser(formValues.user.trim);
+    setUser(formValues.user.trim());
     const captchaToken = await getToken().catch(() => dispatch(AuthActions.setLoading(false)));
     const dto: LoginDTO = {
       user: formValues.user.trim(),

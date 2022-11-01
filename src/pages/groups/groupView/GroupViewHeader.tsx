@@ -99,6 +99,7 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
 
   const image = group?.imageFilename && <UrlPic url={group?.imageFilename} />;
 
+  // TODO show archived toggler
   return (
     <PageHeader maxWidth="md" position="absolute" image={image} title={group?.title} goBackAction={goToGroupList}>
       {toggleCollapsed && (
