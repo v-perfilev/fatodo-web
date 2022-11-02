@@ -1,8 +1,7 @@
-import React from 'React';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Chat} from '../../../models/Chat';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import ChatsSelectors from '../../../store/chats/chatsSelectors';
-import {useCallback, useEffect, useState} from 'react';
 import {useDelayedState} from '../../../shared/hooks/useDelayedState';
 import {ChatsActions} from '../../../store/chats/chatsActions';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';

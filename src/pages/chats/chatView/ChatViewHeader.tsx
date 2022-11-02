@@ -1,11 +1,10 @@
-import React from 'React';
+import React, {useCallback, useMemo} from 'react';
 import {Hidden, IconButton, SxProps, Typography} from '@mui/material';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {ChatUtils} from '../../../shared/utils/ChatUtils';
 import ChatSelectors from '../../../store/chat/chatSelectors';
 import InfoSelectors from '../../../store/info/infoSelectors';
-import {useCallback, useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
 import {ChatActions} from '../../../store/chat/chatActions';
 import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';

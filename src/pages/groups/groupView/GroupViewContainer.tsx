@@ -1,5 +1,4 @@
-import React from 'React';
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import GroupSelectors from '../../../store/group/groupSelectors';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import AuthSelectors from '../../../store/auth/authSelectors';

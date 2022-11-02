@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import PageHeader from '../../../components/layouts/PageHeader';
 import AccountChangePasswordForm from './AccountChangePasswordForm';
 import {useTranslation} from 'react-i18next';

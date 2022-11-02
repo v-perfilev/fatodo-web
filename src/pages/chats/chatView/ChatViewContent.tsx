@@ -1,4 +1,4 @@
-import React from 'React';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
   DEFAULT_MARGIN,
   HEADER_HEIGHT,
@@ -8,7 +8,6 @@ import {
 } from '../../../constants';
 import ChatSelectors from '../../../store/chat/chatSelectors';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
-import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import PageContent from '../../../components/layouts/PageContent';
 import ChatViewItem from './ChatViewItem';
 import {ChatActions} from '../../../store/chat/chatActions';

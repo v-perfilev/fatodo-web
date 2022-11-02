@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {CalendarMonth} from '../../../models/Calendar';
 import FVStack from '../../../components/boxes/FVStack';
 import CalendarViewWeekDays from './CalendarViewWeekDays';

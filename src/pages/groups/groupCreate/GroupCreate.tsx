@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {useAppDispatch} from '../../../store/store';
 import {useNavigate} from 'react-router-dom';
 import {Group} from '../../../models/Group';

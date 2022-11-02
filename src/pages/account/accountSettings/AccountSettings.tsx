@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
 import PageHeader from '../../../components/layouts/PageHeader';
 import AccountSettingsForm from './AccountSettingsForm';

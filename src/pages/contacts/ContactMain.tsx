@@ -1,5 +1,4 @@
-import React from 'React';
-import {useCallback} from 'react';
+import React, {useCallback} from 'react';
 import PageMultiColumn from '../../components/layouts/PageMultiColumn';
 import EventList from '../events/eventList/EventList';
 import ContactMainContainer from './ContactMainContainer';

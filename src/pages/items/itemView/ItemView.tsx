@@ -1,11 +1,10 @@
-import React from 'React';
+import React, {useCallback} from 'react';
 import {flowRight} from 'lodash';
 import withItemContainer, {WithItemProps} from '../../../shared/hocs/withContainers/withItemContainer';
 import withThemeProvider from '../../../shared/hocs/withThemeProvider';
 import PageMultiColumn, {PageMultipleColumnChildrenProps} from '../../../components/layouts/PageMultiColumn';
 import CommentList from '../../comments/commentList/CommentList';
 import ItemViewContainer from './ItemViewContainer';
-import {useCallback} from 'react';
 
 const ItemView = ({group, item, loading}: WithItemProps) => {
   const mainElement = useCallback(

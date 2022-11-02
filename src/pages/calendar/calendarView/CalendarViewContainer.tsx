@@ -1,4 +1,4 @@
-import React from 'React';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import PageContent from '../../../components/layouts/PageContent';
 import CalendarViewHeader from './CalendarViewHeader';
@@ -6,7 +6,6 @@ import CalendarViewMonth from './CalendarViewMonth';
 import {SxProps} from '@mui/material';
 import CalendarSelectors from '../../../store/calendar/calendarSelectors';
 import {CalendarItem, CalendarMonth} from '../../../models/Calendar';
-import {useCallback, useEffect, useRef, useState} from 'react';
 import {CalendarUtils} from '../../../shared/utils/CalendarUtils';
 import {CalendarActions} from '../../../store/calendar/calendarActions';
 

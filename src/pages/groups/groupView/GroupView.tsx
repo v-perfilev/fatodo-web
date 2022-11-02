@@ -1,11 +1,10 @@
-import React from 'React';
+import React, {useCallback} from 'react';
 import withGroupContainer, {WithGroupProps} from '../../../shared/hocs/withContainers/withGroupContainer';
 import {flowRight} from 'lodash';
 import withThemeProvider from '../../../shared/hocs/withThemeProvider';
 import PageMultiColumn, {PageMultipleColumnChildrenProps} from '../../../components/layouts/PageMultiColumn';
 import GroupViewContainer from './GroupViewContainer';
 import CommentList from '../../comments/commentList/CommentList';
-import {useCallback} from 'react';
 
 const GroupView = ({group, groupId, loading}: WithGroupProps) => {
   const mainElement = useCallback(

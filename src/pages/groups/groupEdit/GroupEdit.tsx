@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {SxProps} from '@mui/material';
 import withThemeProvider from '../../../shared/hocs/withThemeProvider';
 import withGroupContainer, {WithGroupProps} from '../../../shared/hocs/withContainers/withGroupContainer';

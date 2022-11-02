@@ -1,6 +1,5 @@
-import React from 'React';
+import React, {useCallback} from 'react';
 import PageMultiColumn, {PageMultipleColumnChildrenProps} from '../../../components/layouts/PageMultiColumn';
-import {useCallback} from 'react';
 import GroupListContainer from './GroupListContainer';
 import EventList from '../../events/eventList/EventList';
 

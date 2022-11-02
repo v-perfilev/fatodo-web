@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import ChatViewHeader from './ChatViewHeader';
 import ChatViewFooter from './ChatViewFooter';
 import ChatViewContent from './ChatViewContent';

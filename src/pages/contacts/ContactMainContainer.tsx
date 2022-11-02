@@ -1,5 +1,4 @@
-import React from 'React';
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box, IconButton, SxProps, Tab, Tabs} from '@mui/material';
 import {useAppSelector} from '../../store/store';

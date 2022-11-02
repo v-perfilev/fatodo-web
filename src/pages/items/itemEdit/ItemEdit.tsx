@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import withThemeProvider from '../../../shared/hocs/withThemeProvider';
 import withItemContainer, {WithItemProps} from '../../../shared/hocs/withContainers/withItemContainer';
 import {flowRight} from 'lodash';

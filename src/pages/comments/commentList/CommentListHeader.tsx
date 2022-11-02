@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import {IconButton} from '@mui/material';
 import {useTranslation} from 'react-i18next';
 import CloseIcon from '../../../components/icons/CloseIcon';

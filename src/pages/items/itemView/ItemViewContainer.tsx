@@ -1,8 +1,7 @@
-import React from 'React';
+import React, {useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useAppSelector} from '../../../store/store';
 import ItemSelectors from '../../../store/item/itemSelectors';
-import {useMemo} from 'react';
 import StatusView from '../../../components/views/StatusView';
 import TypeView from '../../../components/views/TypeView';
 import PriorityView from '../../../components/views/PriorityView';

@@ -1,5 +1,4 @@
-import React from 'React';
-import {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {GroupsActions} from '../../../store/groups/groupsActions';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import GroupsSelectors from '../../../store/groups/groupsSelectors';

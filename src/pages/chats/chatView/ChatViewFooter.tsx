@@ -1,10 +1,9 @@
-import React from 'React';
+import React, {useRef, useState} from 'react';
 import {IconButton} from '@mui/material';
 import FHStack from '../../../components/boxes/FHStack';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import {useTranslation} from 'react-i18next';
 import ChatSelectors from '../../../store/chat/chatSelectors';
-import {useRef, useState} from 'react';
 import {MessageDTO} from '../../../models/dto/MessageDTO';
 import {ChatActions} from '../../../store/chat/chatActions';
 import ClearableTextInput, {ClearableTextInputMethods} from '../../../components/inputs/ClearableTextInput';

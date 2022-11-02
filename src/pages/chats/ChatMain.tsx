@@ -1,9 +1,8 @@
-import React from 'React';
+import React, {useEffect} from 'react';
 import {Box, Grid, SxProps, useMediaQuery} from '@mui/material';
 import {useAppDispatch, useAppSelector} from '../../store/store';
 import ChatSelectors from '../../store/chat/chatSelectors';
 import {useNavigate, useParams} from 'react-router-dom';
-import {useEffect} from 'react';
 import {ChatActions} from '../../store/chat/chatActions';
 import {Theme} from '@mui/material/styles';
 import {HEADER_HEIGHT} from '../../constants';
