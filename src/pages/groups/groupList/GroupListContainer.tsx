@@ -6,7 +6,6 @@ import GroupsSelectors from '../../../store/groups/groupsSelectors';
 import GroupListCard from './groupListCard/GroupListCard';
 import {Group} from '../../../models/Group';
 import SortableList from '../../../components/layouts/lists/SortableList';
-import PageContainer from '../../../components/layouts/PageContainer';
 import GroupListHeader from './GroupListHeader';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import {DEFAULT_MARGIN, PAGE_HEADER_HEIGHT} from '../../../constants';
@@ -62,7 +61,7 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
   }, []);
 
   return (
-    <PageContainer withoutContainer>
+    <>
       <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} toggleCollapsed={toggleCollapsed} />
       {sorting ? (
         <SortableList
@@ -85,7 +84,7 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
         />
       )}
       <ScrollCornerButton show={!sorting && !hideScrollButton} action={scrollUp} />
-    </PageContainer>
+    </>
   );
 };
 

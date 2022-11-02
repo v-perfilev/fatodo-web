@@ -18,7 +18,7 @@ const CalendarViewMonthDates = ({month}: CalendarViewMonthDatesProps) => {
     <Box sx={containerStyles(isSmallDevice)}>
       {pageDates.map((date, index) => (
         <Box sx={boxStyles(isSmallDevice)} key={index}>
-          <CalendarViewDate month={month} date={date} isSmallDevice={isSmallDevice} />
+          <CalendarViewDate month={month} date={date} />
         </Box>
       ))}
     </Box>

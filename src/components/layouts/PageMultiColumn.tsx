@@ -58,8 +58,7 @@ const containerStyles = (isSmallDevice: boolean): SxProps => ({
   position: 'relative',
   width: isSmallDevice ? '200vw' : '100vw',
   height: `calc(100vh - ${HEADER_HEIGHT}px)`,
-  overflowX: 'hidden',
-  overflowY: 'scroll',
+  overflow: 'hidden',
 });
 
 const smallDeviceAdditionalColumnStyles = (isSmallDevice: boolean): SxProps =>

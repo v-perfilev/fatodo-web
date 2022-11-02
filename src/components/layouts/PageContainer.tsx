@@ -35,6 +35,7 @@ const boxStyles: SxProps = {
   flexDirection: 'column',
   width: '100%',
   height: '100%',
+  overflowY: 'scroll',
 };
 
 export default PageContainer;

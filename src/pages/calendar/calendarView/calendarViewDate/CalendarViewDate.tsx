@@ -1,54 +1,25 @@
-import React, {memo, useCallback} from 'react';
-import FVStack from '../../../../components/boxes/FVStack';
-import FHStack from '../../../../components/boxes/FHStack';
+import React, {useCallback} from 'react';
 import {CalendarDate, CalendarMonth} from '../../../../models/Calendar';
-import {useAppSelector} from '../../../../store/store';
+import CalendarViewDateContainer from './CalendarViewDateContainer';
 import CalendarSelectors from '../../../../store/calendar/calendarSelectors';
-import {SxProps, Typography} from '@mui/material';
-import CalendarViewDateReminders from './CalendarViewDateReminders';
-import FBox from '../../../../components/boxes/FBox';
+import {useAppSelector} from '../../../../store/store';
+import CalendarViewReminders from '../calendarViewReminders/CalendarViewReminders';
+import HoverPopup from '../../../../components/layouts/hoverPopup/HoverPopup';
 
 type CalendarViewDateProps = {
   month: CalendarMonth;
   date: CalendarDate;
-  isSmallDevice: boolean;
 };
 
-const CalendarViewDate = ({month, date, isSmallDevice}: CalendarViewDateProps) => {
+const CalendarViewDate = ({month, date}: CalendarViewDateProps) => {
   const remindersSelector = useCallback(CalendarSelectors.makeRemindersSelector(), []);
   const reminders = useAppSelector((state) => remindersSelector(state, month.key, date.date));
 
-  const handleClick = (): void => {
-    date.isCurrentMonth && console.log(date);
-  };
+  const calendarViewDate = <CalendarViewDateContainer {...{month, date, reminders}} />;
 
-  const bg = date.isCurrentMonth ? 'grey.50' : 'grey.200';
-  const color = 'grey.500';
+  const calendarViewReminders = reminders.length ? <CalendarViewReminders reminders={reminders} /> : undefined;
 
-  return (
-    <FVStack sx={containerStyles(bg, date.isCurrentMonth, isSmallDevice)} spacing={0.5} onClick={handleClick}>
-      <FHStack flexGrow={0} justifyContent="flex-end">
-        <Typography fontSize="14" fontWeight="bold" color={color}>
-          {date.date}
-        </Typography>
-      </FHStack>
-      <FBox sx={remindersStyles}>
-        <CalendarViewDateReminders reminders={reminders} />
-      </FBox>
-    </FVStack>
-  );
+  return <HoverPopup anchorElement={calendarViewDate} popupElement={calendarViewReminders} />;
 };
 
-const containerStyles = (backgroundColor: string, isCurrentMonth: boolean, isSmallDevice: boolean): SxProps => ({
-  cursor: isCurrentMonth ? 'pointer' : 'default',
-  paddingX: isSmallDevice ? 0.5 : 1.5,
-  paddingY: isSmallDevice ? 0.5 : 1,
-  borderRadius: 3,
-  backgroundColor,
-});
-
-const remindersStyles: SxProps = {
-  height: 50,
-};
-
-export default memo(CalendarViewDate);
+export default CalendarViewDate;

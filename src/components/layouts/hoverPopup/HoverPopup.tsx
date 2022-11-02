@@ -4,13 +4,15 @@ import {Box, SxProps} from '@mui/material';
 
 type HoverPopupProps = {
   anchorElement: ReactElement;
-  popupElement: ReactElement;
+  popupElement?: ReactElement;
 };
 
 const HoverPopup = ({anchorElement, popupElement}: HoverPopupProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [isOverBox, setIsOverBox] = useState(false);
   const [isOverPopover, setIsOverPopover] = useState(false);
+
+  const hasPopup = !!popupElement;
 
   const onBoxOver = useCallback((event: React.MouseEvent<HTMLElement>): void => {
     setIsOverBox(true);
@@ -41,21 +43,23 @@ const HoverPopup = ({anchorElement, popupElement}: HoverPopupProps) => {
 
   return (
     <>
-      <Box sx={anchorStyles} onMouseOver={onBoxOver} onMouseLeave={onBoxLeave}>
+      <Box sx={anchorStyles(hasPopup)} onMouseOver={onBoxOver} onMouseLeave={onBoxLeave}>
         {anchorElement}
       </Box>
-      <HoverPopupPopper
-        anchorEl={anchorEl}
-        content={popupElement}
-        onMouseOver={onPopoverOver}
-        onMouseLeave={onPopoverLeave}
-      />
+      {hasPopup && (
+        <HoverPopupPopper
+          anchorEl={anchorEl}
+          content={popupElement}
+          onMouseOver={onPopoverOver}
+          onMouseLeave={onPopoverLeave}
+        />
+      )}
     </>
   );
 };
 
-const anchorStyles: SxProps = {
-  cursor: 'pointer',
-};
+const anchorStyles = (hasPopup: boolean): SxProps => ({
+  cursor: hasPopup ? 'pointer' : 'default',
+});
 
 export default HoverPopup;

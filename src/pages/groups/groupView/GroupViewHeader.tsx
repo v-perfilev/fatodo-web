@@ -85,7 +85,7 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
       action: openGroupLeaveDialog,
       text: t('group:actions.leave'),
       icon: <LeaveIcon />,
-      color: 'secondary',
+      color: 'error',
       hidden: !canLeave,
     },
     {

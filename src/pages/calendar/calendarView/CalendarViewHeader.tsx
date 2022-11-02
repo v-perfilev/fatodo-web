@@ -93,14 +93,14 @@ const CalendarViewHeader = ({month, selectMonth, toggleCollapsed}: GroupListHead
           <ArrowRightIcon />
         </IconButton>
       </FHStack>
-      {toggleCollapsed && (
-        <IconButton color="primary" onClick={toggleCollapsed}>
-          <BellIcon />
-        </IconButton>
-      )}
       {!isCurrentMonth && (
         <IconButton color="primary" onClick={goToCurrentMonth}>
           <ActiveDateIcon />
+        </IconButton>
+      )}
+      {toggleCollapsed && (
+        <IconButton color="primary" onClick={toggleCollapsed}>
+          <BellIcon />
         </IconButton>
       )}
     </PageHeader>

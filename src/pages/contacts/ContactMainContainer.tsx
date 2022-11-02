@@ -2,7 +2,6 @@ import React from 'React';
 import {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Box, IconButton, SxProps, Tab, Tabs} from '@mui/material';
-import PageContainer from '../../components/layouts/PageContainer';
 import {useAppSelector} from '../../store/store';
 import ContactsSelectors from '../../store/contacts/contactsSelectors';
 import {useLocation, useNavigate} from 'react-router-dom';
@@ -14,6 +13,7 @@ import OutcomingRequestList from './outcomingRequestList/OutcomingRequestList';
 import FHStack from '../../components/boxes/FHStack';
 import PlusIcon from '../../components/icons/PlusIcon';
 import {useContactDialogContext} from '../../shared/contexts/dialogContexts/ContactDialogContext';
+import PageContent from '../../components/layouts/PageContent';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -59,7 +59,7 @@ const ContactMainContainer = () => {
     outcomingRequestCount > 0 ? <BadgeWithoutIcon color="secondary" count={outcomingRequestCount} /> : undefined;
 
   return (
-    <PageContainer maxWidth="md">
+    <PageContent maxWidth="md">
       <Box>
         <FHStack spacing={0}>
           <Tabs sx={tabsStyles} variant="scrollable" textColor="primary" value={activeTab} onChange={handleChange}>
@@ -75,7 +75,7 @@ const ContactMainContainer = () => {
       {activeTab === 0 && <ContactList />}
       {activeTab === 1 && <IncomingRequestList />}
       {activeTab === 2 && <OutcomingRequestList />}
-    </PageContainer>
+    </PageContent>
   );
 };
 

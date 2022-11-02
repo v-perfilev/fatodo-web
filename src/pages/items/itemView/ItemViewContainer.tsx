@@ -14,11 +14,11 @@ import ItemViewDescription from './ItemViewDescription';
 import FVStack from '../../../components/boxes/FVStack';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 import ItemViewHeader from './ItemViewHeader';
-import PageContainer from '../../../components/layouts/PageContainer';
 import MultiLabeledBox, {MultiLabeledBoxItem} from '../../../components/surfaces/MultiLabeledBox';
 import DateParamView from '../../../components/views/DateParamView';
 import {Group} from '../../../models/Group';
 import {Item} from '../../../models/Item';
+import PageContent from '../../../components/layouts/PageContent';
 
 type ItemViewContainerProps = {
   group: Group;
@@ -51,8 +51,8 @@ const ItemViewContainer = ({group, item, loading, toggleCollapsed}: ItemViewCont
   return (
     <ConditionalSpinner loading={loading}>
       <ItemViewHeader toggleCollapsed={toggleCollapsed} />
-      <PageContainer maxWidth="md">
-        <FVStack sx={containerStyles}>
+      <PageContent sx={containerStyles} maxWidth="md">
+        <FVStack>
           <MultiLabeledBox items={labeledItems} />
           <Divider />
           <ItemViewDescription />
@@ -61,14 +61,13 @@ const ItemViewContainer = ({group, item, loading, toggleCollapsed}: ItemViewCont
           <Divider />
           <ItemViewChanges />
         </FVStack>
-      </PageContainer>
+      </PageContent>
     </ConditionalSpinner>
   );
 };
 
 const containerStyles: SxProps = {
-  marginY: 1,
-  marginX: 2,
+  paddingY: 2,
 };
 
 export default ItemViewContainer;
