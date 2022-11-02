@@ -1,16 +1,16 @@
 import React, {useEffect} from 'react';
 import {Field, useFormikContext} from 'formik';
 import {FieldAttributes} from 'formik/dist/Field';
-import {TextField} from '@mui/material';
 import UserService from '../../services/UserService';
+import {TextField} from 'formik-mui';
 
 type FormikUserInputProps = FieldAttributes<any>;
 
 const FormikUserInput = ({userName, ...props}: FormikUserInputProps) => {
   const {values, setFieldValue, errors} = useFormikContext<any>();
 
-  const value = values[name];
-  const isError = name in errors;
+  const value = values[props.name];
+  const isError = props.name in errors;
 
   useEffect(() => {
     if (value.length > 1 && !isError) {
