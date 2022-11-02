@@ -14,7 +14,9 @@ const ItemViewDescription: FC = () => {
       {item.description}
     </LabeledBox>
   ) : (
-    <Typography color="grey.500">{t('item:view.noDescription')}</Typography>
+    <Typography fontSize={14} color="grey.500">
+      {t('item:view.noDescription')}
+    </Typography>
   );
 };
 

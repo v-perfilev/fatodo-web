@@ -79,7 +79,7 @@ const CalendarViewHeader = ({month, selectMonth, toggleCollapsed}: GroupListHead
 
   return (
     <PageHeader maxWidth="md">
-      <FHStack spacing={1}>
+      <FHStack sx={monthNameBoxStyles} spacing={1}>
         <IconButton color="primary" disabled={!canGoToPreviousMonth} onClick={goToPreviousMonth}>
           <ArrowLeftIcon />
         </IconButton>
@@ -105,6 +105,10 @@ const CalendarViewHeader = ({month, selectMonth, toggleCollapsed}: GroupListHead
       )}
     </PageHeader>
   );
+};
+
+const monthNameBoxStyles: SxProps = {
+  marginLeft: -2,
 };
 
 const monthNameStyles: SxProps = {

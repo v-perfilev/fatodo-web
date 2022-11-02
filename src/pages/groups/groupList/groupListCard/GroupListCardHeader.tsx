@@ -52,7 +52,6 @@ const containerStyles: SxProps = {
   width: '100%',
   height: 50,
   borderRadius: 3,
-  paddingLeft: 2,
   paddingRight: 1,
   backgroundColor: 'white',
   cursor: 'pointer',

@@ -60,8 +60,6 @@ const HoverPopup = ({anchorElement, popupElement}: HoverPopupProps) => {
 
 const anchorStyles = (hasPopup: boolean): SxProps => ({
   cursor: hasPopup ? 'pointer' : 'default',
-  userSelect: 'none',
-  outline: 'none',
 });
 
 export default HoverPopup;

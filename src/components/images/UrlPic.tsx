@@ -30,7 +30,7 @@ const UrlPic = ({url, size = 40, borderWidth = 1, ...props}: UrlPicProps) => {
 const avatarStyles: SxProps = {
   borderStyle: 'solid',
   borderColor: 'primary.main',
-  backgroundColor: 'gray.50',
+  backgroundColor: 'grey.50',
 };
 
 export default UrlPic;

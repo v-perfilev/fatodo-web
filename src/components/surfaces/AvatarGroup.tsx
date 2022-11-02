@@ -23,7 +23,7 @@ const AvatarGroup = ({users}: AvatarGroupProps) => {
         ))}
       </FHStack>
       {moreThanLimit > 0 && (
-        <Typography fontSize={13} color="gray.500">
+        <Typography fontSize={13} color="grey.500">
           +{moreThanLimit}
         </Typography>
       )}

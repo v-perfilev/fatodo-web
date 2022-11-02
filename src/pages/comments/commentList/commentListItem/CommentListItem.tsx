@@ -62,7 +62,6 @@ const CommentListItem = ({comment, setReference}: CommentListItemProps) => {
 };
 
 const containerStyles: SxProps = {
-  width: '100%',
   paddingX: 1,
   paddingY: 1,
 };

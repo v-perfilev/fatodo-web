@@ -46,7 +46,7 @@ const EventListItemTemplate = ({image, title, content, message, date, loading}: 
 };
 
 const containerStyles: SxProps = {
-  paddingX: 2,
+  paddingX: 1,
   paddingY: 2,
 };
 

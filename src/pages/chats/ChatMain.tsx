@@ -37,12 +37,12 @@ const ChatMain = () => {
 
   const bigView = (
     <Grid sx={bigViewRootStyles} container>
-      <Grid sx={controlStyles} item xs={5} md={4} lg={3}>
+      <Grid sx={controlStyles} item xs={5} md={4} xl={3}>
         <PageContainer withoutContainer>
           <ChatList />
         </PageContainer>
       </Grid>
-      <Grid item xs={7} md={8} lg={9}>
+      <Grid item xs={7} md={8} xl={9}>
         <PageContainer withoutContainer>{(chat || chatLoading) && <ChatView />}</PageContainer>
       </Grid>
     </Grid>

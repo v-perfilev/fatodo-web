@@ -16,7 +16,7 @@ const LabeledBox = ({label, isVertical, showNotSet, children, ...props}: Labeled
   const handledChildren = showNotSet ? children || t('additional.fieldNotSet') : children;
   const content =
     typeof handledChildren === 'string' ? (
-      <Typography fontSize={14} color={!children && showNotSet ? 'gray.500' : undefined} {...props}>
+      <Typography fontSize={14} color={!children && showNotSet ? 'grey.500' : undefined} {...props}>
         {handledChildren}
       </Typography>
     ) : (

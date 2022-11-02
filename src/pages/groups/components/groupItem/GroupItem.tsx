@@ -69,7 +69,7 @@ const containerStyles: SxProps = {
 };
 
 const titleBoxStyles: SxProps = {
-  marginRight: -2,
+  marginRight: -1,
 };
 
 const authorBoxStyles: SxProps = {

@@ -16,7 +16,7 @@ type PageHeaderProps = ContainerProps & {
 const PageHeader = ({title, image, position = 'relative', goBackAction, children, ...props}: PageHeaderProps) => {
   return (
     <Container sx={containerStyles(position)} {...props}>
-      <FHStack sx={contentStyles}>
+      <FHStack spacing={1} sx={contentStyles}>
         {title && (
           <FHStack spacing={1}>
             {goBackAction && (
@@ -53,11 +53,13 @@ const containerStyles = (position: string): SxProps => ({
 });
 
 const contentStyles: SxProps = {
+  paddingLeft: 2,
+  paddingRight: 1,
   backgroundColor: 'white',
 };
 
 const goBackButtonStyles: SxProps = {
-  marginLeft: -1,
+  marginLeft: -2,
 };
 
 export default PageHeader;
