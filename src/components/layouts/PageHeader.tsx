@@ -1,9 +1,10 @@
 import React, {ReactElement} from 'react';
 import FHStack from '../boxes/FHStack';
 import PageDivider from './PageDivider';
-import {Container, ContainerProps, IconButton, SxProps, Typography} from '@mui/material';
+import {Container, ContainerProps, IconButton, SxProps} from '@mui/material';
 import {PAGE_HEADER_HEIGHT} from '../../constants';
 import ArrowLeftIcon from '../icons/ArrowLeftIcon';
+import TruncatedTypography from '../surfaces/TruncatedTypography';
 
 type PageHeaderProps = ContainerProps & {
   title?: string;
@@ -24,9 +25,9 @@ const PageHeader = ({title, image, position = 'relative', goBackAction, children
               </IconButton>
             )}
             {image}
-            <Typography fontSize={16} fontWeight="500" color="primary">
+            <TruncatedTypography fontSize={16} fontWeight="500" color="primary">
               {title}
-            </Typography>
+            </TruncatedTypography>
           </FHStack>
         )}
         <FHStack spacing={1} flexGrow={title ? 0 : 1}>

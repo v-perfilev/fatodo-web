@@ -19,6 +19,7 @@ import CommentsIcon from '../../../components/icons/CommentsIcon';
 import {ItemRouteUtils} from '../../../routes/ItemRouter';
 import PlusIcon from '../../../components/icons/PlusIcon';
 import {useGroupDialogContext} from '../../../shared/contexts/dialogContexts/GroupDialogContext';
+import GroupViewArchivedToggler from './GroupViewArchivedToggler';
 
 type GroupViewHeaderProps = {
   refresh: () => void;
@@ -99,9 +100,9 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
 
   const image = group?.imageFilename && <UrlPic url={group?.imageFilename} />;
 
-  // TODO show archived toggler
   return (
     <PageHeader maxWidth="md" position="absolute" image={image} title={group?.title} goBackAction={goToGroupList}>
+      <GroupViewArchivedToggler showArchived={showArchived} setShowArchived={setShowArchived} />
       {toggleCollapsed && (
         <IconButton color="primary" onClick={toggleCollapsed}>
           <CommentsIcon />

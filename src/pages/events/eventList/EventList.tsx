@@ -36,10 +36,6 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
     await dispatch(EventsActions.fetchEventsThunk(events.length));
   }, [events.length]);
 
-  const refresh = useCallback(async (): Promise<void> => {
-    await dispatch(EventsActions.refreshEventsThunk());
-  }, []);
-
   const refreshUnread = useCallback(async (): Promise<void> => {
     await dispatch(EventsActions.refreshUnreadCountThunk());
   }, []);
