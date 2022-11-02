@@ -1,7 +1,7 @@
 import React, {memo, useCallback, useMemo} from 'react';
 import PageHeader from '../../../components/layouts/PageHeader';
 import {useTranslation} from 'react-i18next';
-import {IconButton, SxProps, Typography} from '@mui/material';
+import {IconButton, SxProps, Typography, useMediaQuery} from '@mui/material';
 import BellIcon from '../../../components/icons/BellIcon';
 import {CalendarItem, CalendarMonth} from '../../../models/Calendar';
 import {useCalendarDialogContext} from '../../../shared/contexts/dialogContexts/CalendarDialogContext';
@@ -13,6 +13,7 @@ import ActiveDateIcon from '../../../components/icons/ActiveDateIcon';
 import ArrowLeftIcon from '../../../components/icons/ArrowLeftIcon';
 import ArrowRightIcon from '../../../components/icons/ArrowRightIcon';
 import {calendarMonthKeys, calendarMonths} from './CalendarViewContainer';
+import {Theme} from '@mui/material/styles';
 
 type GroupListHeaderProps = {
   month: CalendarMonth;
@@ -21,14 +22,20 @@ type GroupListHeaderProps = {
 };
 
 const CalendarViewHeader = ({month, selectMonth, toggleCollapsed}: GroupListHeaderProps) => {
+  const isSmallDevice = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
   const {showSelectMonthDialog} = useCalendarDialogContext();
   const {i18n} = useTranslation();
 
   const monthWithYear = useMemo(() => {
     const monthMoment = CalendarUtils.getMonthMoment(month.year, month.month);
-    const monthWithYear = DateFormatters.formatDate(monthMoment.toDate(), undefined, undefined, 'MONTH_YEAR');
+    const monthWithYear = DateFormatters.formatDate(
+      monthMoment.toDate(),
+      undefined,
+      undefined,
+      isSmallDevice ? 'MONTH_YEAR_SHORT' : 'MONTH_YEAR',
+    );
     return monthWithYear.toUpperCase();
-  }, [month, i18n.language]);
+  }, [isSmallDevice, month, i18n.language]);
 
   const isCurrentMonth = useMemo<boolean>(() => {
     const currentMonth = CalendarUtils.generateCurrentCalendarMonth();
@@ -72,7 +79,7 @@ const CalendarViewHeader = ({month, selectMonth, toggleCollapsed}: GroupListHead
 
   return (
     <PageHeader maxWidth="md">
-      <FHStack>
+      <FHStack spacing={1}>
         <IconButton color="primary" disabled={!canGoToPreviousMonth} onClick={goToPreviousMonth}>
           <ArrowLeftIcon />
         </IconButton>

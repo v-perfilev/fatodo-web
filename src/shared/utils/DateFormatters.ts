@@ -2,9 +2,10 @@ import moment from 'moment';
 import {tz} from 'moment-timezone';
 import {DateFormat, TimeFormat, UserAccount} from '../../models/User';
 import {FilterUtils} from './FilterUtils';
+import {DateUtils} from './DateUtils';
 
 export type TimeFormatType = 'FULL';
-export type DateFormatType = 'FULL' | 'SHORT' | 'MONTH_YEAR' | 'DEPENDS_ON_DAY';
+export type DateFormatType = 'FULL' | 'SHORT' | 'MONTH_YEAR' | 'MONTH_YEAR_SHORT' | 'DEPENDS_ON_DAY';
 
 export class DateFormats {
   static getTimeFormat = (format: TimeFormat): string => {
@@ -46,8 +47,8 @@ export class DateFormats {
     }
   };
 
-  static getMonthYearFormat = (): string => {
-    return 'MMMM YYYY';
+  static getMonthYearFormat = (short: boolean): string => {
+    return short ? 'MMM YYYY' : 'MMMM YYYY';
   };
 
   static getMonthFormat = (): string => {
@@ -85,15 +86,19 @@ export class DateFormatters {
     }
     if (dateFormatType === 'DEPENDS_ON_DAY') {
       formatArray.push(DateFormats.getDependsOnDayFormat(date, dateFormat));
-      moment.locale('en');
+      DateUtils.resetLocale('en');
     } else if (dateFormatType === 'FULL') {
       formatArray.push(DateFormats.getFullDateFormat(dateFormat));
-      moment.locale('en');
+      DateUtils.resetLocale('en');
     } else if (dateFormatType === 'SHORT') {
       formatArray.push(DateFormats.getShortDateFormat(dateFormat));
-      moment.locale('en');
+      DateUtils.resetLocale('en');
     } else if (dateFormatType === 'MONTH_YEAR') {
-      formatArray.push(DateFormats.getMonthYearFormat());
+      formatArray.push(DateFormats.getMonthYearFormat(false));
+      DateUtils.resetLocale();
+    } else if (dateFormatType === 'MONTH_YEAR_SHORT') {
+      formatArray.push(DateFormats.getMonthYearFormat(true));
+      DateUtils.resetLocale();
     }
     const formatter = formatArray.filter(FilterUtils.notUndefinedFilter).join(', ');
     return moment(date).format(formatter);

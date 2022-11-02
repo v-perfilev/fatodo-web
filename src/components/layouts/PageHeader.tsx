@@ -52,7 +52,6 @@ const containerStyles = (position: string): SxProps => ({
 });
 
 const contentStyles: SxProps = {
-  paddingLeft: 1,
   backgroundColor: 'white',
 };
 

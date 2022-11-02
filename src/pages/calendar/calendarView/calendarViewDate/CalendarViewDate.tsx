@@ -11,9 +11,10 @@ import FBox from '../../../../components/boxes/FBox';
 type CalendarViewDateProps = {
   month: CalendarMonth;
   date: CalendarDate;
+  isSmallDevice: boolean;
 };
 
-const CalendarViewDate = ({month, date}: CalendarViewDateProps) => {
+const CalendarViewDate = ({month, date, isSmallDevice}: CalendarViewDateProps) => {
   const remindersSelector = useCallback(CalendarSelectors.makeRemindersSelector(), []);
   const reminders = useAppSelector((state) => remindersSelector(state, month.key, date.date));
 
@@ -25,7 +26,7 @@ const CalendarViewDate = ({month, date}: CalendarViewDateProps) => {
   const color = 'grey.500';
 
   return (
-    <FVStack sx={containerStyles(bg, date.isCurrentMonth)} onClick={handleClick}>
+    <FVStack sx={containerStyles(bg, date.isCurrentMonth, isSmallDevice)} spacing={0.5} onClick={handleClick}>
       <FHStack flexGrow={0} justifyContent="flex-end">
         <Typography fontSize="14" fontWeight="bold" color={color}>
           {date.date}
@@ -38,10 +39,10 @@ const CalendarViewDate = ({month, date}: CalendarViewDateProps) => {
   );
 };
 
-const containerStyles = (backgroundColor: string, isCurrentMonth: boolean): SxProps => ({
+const containerStyles = (backgroundColor: string, isCurrentMonth: boolean, isSmallDevice: boolean): SxProps => ({
   cursor: isCurrentMonth ? 'pointer' : 'default',
-
-  padding: 2,
+  paddingX: isSmallDevice ? 0.5 : 1.5,
+  paddingY: isSmallDevice ? 0.5 : 1,
   borderRadius: 3,
   backgroundColor,
 });
