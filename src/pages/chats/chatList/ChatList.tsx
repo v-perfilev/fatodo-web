@@ -55,7 +55,7 @@ const ChatList = () => {
     (chatItem: Chat) => {
       const isSelected = chat?.id === chatItem.id;
       return (
-        <PageContent>
+        <PageContent maxWidth="md">
           <ChatListItem chat={chatItem} isSelected={isSelected} />
         </PageContent>
       );

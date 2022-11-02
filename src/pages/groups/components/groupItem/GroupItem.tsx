@@ -30,13 +30,15 @@ const GroupItem = ({item, canEdit}: GroupItemProps) => {
   const goToItemView = (): void => navigate(ItemRouteUtils.getViewUrl(item.id));
 
   return (
-    <FVStack sx={containerStyles} px={2} py={2} onClick={goToItemView}>
-      <FHStack mr={-1} justifyContent="space-between">
+    <FVStack sx={containerStyles} spacing={0} onClick={goToItemView}>
+      <FHStack sx={titleBoxStyles} justifyContent="space-between">
         <TruncatedTypography fontSize={14}>{item.title}</TruncatedTypography>
         <GroupItemMenu item={item} canEdit={canEdit} />
       </FHStack>
-      <GroupItemChanges item={item} />
-      <FHStack justifyContent="space-between">
+      <FHStack sx={authorBoxStyles}>
+        <GroupItemChanges item={item} />
+      </FHStack>
+      <FHStack sx={infoBoxStyles} justifyContent="space-between">
         <FHStack>
           <TypeView type={item.type} size="small" fontSize={12} color="grey.500" />
           <PriorityView priority={item.priority} size="small" fontSize={12} color="grey.500" />
@@ -58,11 +60,24 @@ const GroupItem = ({item, canEdit}: GroupItemProps) => {
 };
 
 const containerStyles: SxProps = {
+  padding: 2,
   borderRadius: 3,
   cursor: 'pointer',
   '&:hover': {
     backgroundColor: 'grey.50',
   },
+};
+
+const titleBoxStyles: SxProps = {
+  marginRight: -2,
+};
+
+const authorBoxStyles: SxProps = {
+  marginTop: 0.5,
+};
+
+const infoBoxStyles: SxProps = {
+  marginTop: 2,
 };
 
 export default GroupItem;

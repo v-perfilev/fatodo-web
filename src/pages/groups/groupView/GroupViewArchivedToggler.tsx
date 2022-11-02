@@ -14,7 +14,7 @@ const GroupViewArchivedToggler = ({showArchived, setShowArchived}: GroupViewArch
   const switchArchived = (): void => setShowArchived((prevState) => !prevState);
 
   return (
-    <FVStack spacing={0} justifyContent="center" alignItems="center">
+    <FVStack spacing={0} marginRight={1} justifyContent="center" alignItems="center">
       <Typography color="grey.400" fontSize={12}>
         {showArchived ? t('group:actions.archived') : t('group:actions.active')}
       </Typography>
@@ -25,7 +25,6 @@ const GroupViewArchivedToggler = ({showArchived, setShowArchived}: GroupViewArch
 
 const switchStyles: SxProps = {
   marginY: -0.5,
-  // paddingTop: 0,
 };
 
 export default GroupViewArchivedToggler;

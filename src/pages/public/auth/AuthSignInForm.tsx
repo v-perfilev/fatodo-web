@@ -78,7 +78,7 @@ const SignInForm = ({getToken}: SignInFormProps) => {
           <FormikPasswordInput name="password" label={t('account:fields.password.label')} disabled={loading} />
           <FormikCheckboxInput name="rememberMe" Label={{label: t('account:fields.rememberMe.label')}} />
           <LoadingButton
-            color="secondary"
+            color="primary"
             fullWidth
             loading={loading}
             disabled={!formikProps.isValid || loading}

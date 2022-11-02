@@ -85,7 +85,6 @@ const containerStyles: SxProps = {
 const chatStyles: SxProps = {
   cursor: 'pointer',
   paddingY: 1,
-  paddingX: 1,
   borderRadius: 3,
   '&:hover': {
     backgroundColor: 'grey.50',
@@ -99,7 +98,6 @@ const badgeContainerStyles: SxProps = {
 const selectedChatStyles: SxProps = (theme: Theme) => ({
   cursor: 'pointer',
   paddingY: 1,
-  paddingX: 1,
   borderRadius: 3,
   backgroundColor: alpha(theme.palette.primary.main, 0.1),
 });

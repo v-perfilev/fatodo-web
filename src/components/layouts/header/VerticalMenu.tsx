@@ -41,28 +41,28 @@ const VerticalMenu = ({redirectMap}: VerticalMenuProps) => {
           <StyledListItemIcon>
             <GroupsIcon color="primary" />
           </StyledListItemIcon>
-          <ListItemText>{t('routes.Groups')}</ListItemText>
+          <StyledListItemText>{t('routes.Groups')}</StyledListItemText>
         </ListItemButton>
 
         <ListItemButton onClick={redirectMap.toCalendar}>
           <StyledListItemIcon>
             <CalendarIcon color="primary" />
           </StyledListItemIcon>
-          <ListItemText>{t('routes.Calendar')}</ListItemText>
+          <StyledListItemText>{t('routes.Calendar')}</StyledListItemText>
         </ListItemButton>
 
         <ListItemButton onClick={redirectMap.toChats}>
           <StyledListItemIcon>
             <BadgeMessageIcon count={unreadCount} color="primary" />
           </StyledListItemIcon>
-          <ListItemText>{t('routes.Chats')}</ListItemText>
+          <StyledListItemText>{t('routes.Chats')}</StyledListItemText>
         </ListItemButton>
 
         <ListItemButton onClick={redirectMap.toContacts}>
           <StyledListItemIcon>
             <BadgeContactInfo count={incomingRequestCount} color="primary" />
           </StyledListItemIcon>
-          <ListItemText>{t('routes.Contacts')}</ListItemText>
+          <StyledListItemText>{t('routes.Contacts')}</StyledListItemText>
         </ListItemButton>
 
         <PageDivider />
@@ -71,21 +71,21 @@ const VerticalMenu = ({redirectMap}: VerticalMenuProps) => {
           <StyledListItemIcon>
             <AccountIcon color="primary" />
           </StyledListItemIcon>
-          <ListItemText>{t('routes.AccountForm')}</ListItemText>
+          <StyledListItemText>{t('routes.AccountForm')}</StyledListItemText>
         </ListItemButton>
 
         <ListItemButton onClick={redirectMap.toAccountSettings}>
           <StyledListItemIcon>
             <SettingsIcon color="primary" />
           </StyledListItemIcon>
-          <ListItemText>{t('routes.AccountSettingsForm')}</ListItemText>
+          <StyledListItemText>{t('routes.AccountSettingsForm')}</StyledListItemText>
         </ListItemButton>
 
         <ListItemButton onClick={redirectMap.toAccountChangePassword}>
           <StyledListItemIcon>
             <PasswordIcon color="primary" />
           </StyledListItemIcon>
-          <ListItemText>{t('routes.AccountChangePasswordForm')}</ListItemText>
+          <StyledListItemText>{t('routes.AccountChangePasswordForm')}</StyledListItemText>
         </ListItemButton>
 
         <PageDivider />
@@ -94,7 +94,7 @@ const VerticalMenu = ({redirectMap}: VerticalMenuProps) => {
           <StyledListItemIcon>
             <LogoutIcon color="primary" />
           </StyledListItemIcon>
-          <ListItemText>{t('account:actions.logout')}</ListItemText>
+          <StyledListItemText>{t('account:actions.logout')}</StyledListItemText>
         </ListItemButton>
       </List>
     </Stack>
@@ -103,7 +103,13 @@ const VerticalMenu = ({redirectMap}: VerticalMenuProps) => {
 
 const StyledListItemIcon = styled(ListItemIcon)({
   minWidth: 0,
-  marginRight: '16px',
+  marginRight: 16,
+});
+
+const StyledListItemText = styled(ListItemText)({
+  '& *': {
+    fontSize: 14,
+  },
 });
 
 export default VerticalMenu;

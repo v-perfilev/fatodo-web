@@ -16,7 +16,7 @@ const ChatMain = () => {
   const dispatch = useAppDispatch();
   const chat = useAppSelector(ChatSelectors.chat);
   const chatLoading = useAppSelector(ChatSelectors.loading);
-  const isBigDevice = useMediaQuery((theme: Theme) => theme.breakpoints.up('md'), {noSsr: true});
+  const isSmallDevice = useMediaQuery((theme: Theme) => theme.breakpoints.down('lg'), {noSsr: true});
   const navigate = useNavigate();
   const {chatId} = useParams();
 
@@ -57,19 +57,20 @@ const ChatMain = () => {
       )}
       {(chat || chatLoading) && (
         <PageContainer withoutContainer>
-          <ChatList />
+          <ChatView />
         </PageContainer>
       )}
     </Box>
   );
 
-  return <>{isBigDevice ? bigView : smallView}</>;
+  return <>{isSmallDevice ? smallView : bigView}</>;
 };
 
 const bigViewRootStyles: SxProps = {
   position: 'relative',
-  width: '100%',
+  width: '100vw',
   height: `calc(100vh - ${HEADER_HEIGHT}px)`,
+  overflow: 'hidden',
 };
 
 const smallViewRootStyles: SxProps = {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box} from '@mui/material';
+import {Typography} from '@mui/material';
 import {User} from '../../models/User';
 import UrlPic from '../images/UrlPic';
 import HoverPopup from '../layouts/hoverPopup/HoverPopup';
@@ -23,7 +23,7 @@ const UserView = ({user, size, withUserPic = true, withUsername = false}: UserVi
   const userView = (
     <FHStack spacing={1}>
       {withUserPic && <UrlPic alt={user?.username} url={user?.imageFilename} size={size} />}
-      {withUsername && <Box>{user?.username}</Box>}
+      {withUsername && <Typography fontSize={14}>{user?.username}</Typography>}
     </FHStack>
   );
 

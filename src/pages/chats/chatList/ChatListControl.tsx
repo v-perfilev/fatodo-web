@@ -21,7 +21,7 @@ const ChatListControl = ({setFilter}: ChatListControlProps) => {
   };
 
   return (
-    <PageHeader position="absolute">
+    <PageHeader maxWidth="md" position="absolute">
       <ClearableTextInput
         variant="standard"
         placeholder={t('inputs.filter')}

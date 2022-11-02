@@ -78,7 +78,7 @@ const SignUpForm = ({getToken, onSuccess}: SignUpFormProps) => {
           <FormikPasswordInput name="password" label={t('account:fields.password.label')} disabled={loading} />
           <PasswordStrengthBar password={formikProps.values.password} />
           <LoadingButton
-            color="secondary"
+            color="primary"
             fullWidth
             loading={loading}
             disabled={!formikProps.isValid || loading}

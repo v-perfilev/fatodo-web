@@ -70,7 +70,7 @@ const ResetPasswordForm = ({code, getToken, onSuccess, onFailure}: ForgotPasswor
           />
           <LoadingButton
             type="submit"
-            color="secondary"
+            color="primary"
             fullWidth
             loading={loading}
             disabled={!formikProps.isValid || loading}

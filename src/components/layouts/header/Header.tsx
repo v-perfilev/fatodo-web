@@ -92,7 +92,8 @@ const appbarStyles: SxProps = {
 const toolbarStyles: SxProps = {
   height: HEADER_HEIGHT,
   minHeight: `${HEADER_HEIGHT}px !important`,
-  paddingX: 1,
+  paddingLeft: 2,
+  paddingRight: 1,
   justifyContent: 'space-between',
 };
 

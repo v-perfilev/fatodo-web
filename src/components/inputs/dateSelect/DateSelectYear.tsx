@@ -43,7 +43,6 @@ const containerStyles: SxProps = {
 
 const itemStyles: SxProps = {
   margin: 1,
-  userSelect: 'none',
   cursor: 'pointer',
   fontSize: '1.3em',
   color: 'grey.700',

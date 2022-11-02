@@ -25,6 +25,7 @@ const GroupListCardHeader = ({group, collapsed, sorting, drag}: GroupListCardHea
 
   return (
     <FHStack sx={containerStyles} onClick={goToGroupView}>
+      <Box sx={backgroundStyles} />
       <FHStack spacing={1}>
         {group?.imageFilename && <UrlPic url={group.imageFilename} sizes="9" />}
         <TruncatedTypography fontSize={16} color="primary">
@@ -41,7 +42,6 @@ const GroupListCardHeader = ({group, collapsed, sorting, drag}: GroupListCardHea
           </>
         )}
       </FHStack>
-      <Box sx={backgroundStyles} />
     </FHStack>
   );
 };

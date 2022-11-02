@@ -21,13 +21,13 @@ const UserViewGroup = ({group}: UserViewGroupProps) => {
 
   return (
     <FHStack sx={containerStyles} onClick={goToGroupView}>
+      <Box sx={backgroundStyles} />
       <FHStack spacing={1}>
         {group?.imageFilename && <UrlPic url={group.imageFilename} sizes="9" />}
         <TruncatedTypography fontSize={16} color="primary">
           {group.title}
         </TruncatedTypography>
       </FHStack>
-      <Box sx={backgroundStyles} />
     </FHStack>
   );
 };

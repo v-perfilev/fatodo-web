@@ -57,7 +57,7 @@ const ForgotPasswordForm = ({getToken, onSuccess}: ForgotPasswordFormProps) => {
         <FVStack>
           <FormikTextInput name="user" label={t('account:fields.user.label')} isDisabled={loading} />
           <LoadingButton
-            color="secondary"
+            color="primary"
             fullWidth
             loading={loading}
             disabled={!formikProps.isValid || loading}
