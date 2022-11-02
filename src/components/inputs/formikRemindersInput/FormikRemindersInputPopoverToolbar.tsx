@@ -6,7 +6,8 @@ import MonthIcon from '../../icons/MonthIcon';
 import YearIcon from '../../icons/YearIcon';
 import {useTranslation} from 'react-i18next';
 import {ReminderPeriodicity} from '../../../models/Reminder';
-import {SxProps, ToggleButton, ToggleButtonGroup, Toolbar, Typography, Zoom} from '@mui/material';
+import {alpha, SxProps, ToggleButton, ToggleButtonGroup, Toolbar, Typography, Zoom} from '@mui/material';
+import {Theme} from '@mui/material/styles';
 
 type FormikRemindersInputPopoverToolbarProps = {
   periodicity: ReminderPeriodicity;
@@ -47,7 +48,7 @@ const FormikRemindersInputPopoverToolbar = ({periodicity, setPeriodicity}: Formi
         </ToggleButton>
       </ToggleButtonGroup>
       <Zoom in={show} timeout={150}>
-        <Typography sx={titleStyles} fontWeight="600" color="primary.contrastText" fontSize={16}>
+        <Typography sx={titleStyles} fontWeight="bold" color="primary" fontSize={16}>
           {t('common:reminders.periodicity.' + periodicity)}
         </Typography>
       </Zoom>
@@ -61,27 +62,28 @@ const toolbarStyles: SxProps = {
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'primary.main',
   paddingTop: 1,
 };
 
-const buttonStyles: SxProps = {
-  color: 'rgba(255, 255, 255, 0.7) !important',
-  border: '1px solid ' + 'rgba(255, 255, 255, 0.7) !important',
+const buttonStyles: SxProps = (theme: Theme) => ({
+  color: alpha(theme.palette.primary.main, 0.7),
+  borderWidth: 1,
+  borderStyle: 'solid',
+  borderColor: alpha(theme.palette.primary.main, 0.7),
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.15) !important',
+    backgroundColor: alpha(theme.palette.primary.main, 0.15),
   },
   '&.Mui-selected': {
-    color: 'rgba(255, 255, 255, 1) !important',
-    backgroundColor: 'rgba(255, 255, 255, 0.2) !important',
+    color: alpha(theme.palette.primary.main, 1),
+    backgroundColor: alpha(theme.palette.primary.main, 0.2),
     '&:hover': {
-      backgroundColor: 'rgba(255, 255, 255, 0.25) !important',
+      backgroundColor: alpha(theme.palette.primary.main, 0.25),
     },
   },
-};
+});
 
 const titleStyles: SxProps = {
-  marginTop: 0.5,
+  marginTop: 1,
 };
 
 export default FormikRemindersInputPopoverToolbar;

@@ -12,6 +12,7 @@ import AuthSelectors from '../../../store/auth/authSelectors';
 import {Button, Popover, SxProps} from '@mui/material';
 import FHStack from '../../boxes/FHStack';
 import FVStack from '../../boxes/FVStack';
+import PageDivider from '../../layouts/PageDivider';
 
 type FormikRemindersInputPopoverProps = {
   anchorEl: HTMLElement;
@@ -44,6 +45,7 @@ const FormikRemindersInputPopover = ({anchorEl, handleClose}: FormikRemindersInp
       transformOrigin={{vertical: 'top', horizontal: 'center'}}
     >
       <FormikRemindersInputPopoverToolbar periodicity={periodicity} setPeriodicity={setPeriodicity} />
+      <PageDivider height="2px" color="primary.light" />
       <FVStack sx={containerStyles}>
         <FVStack>
           {periodicity === 'ONCE' && <FormikRemindersInputPopoverOnce setReminder={setReminder} timezone={timezone} />}
