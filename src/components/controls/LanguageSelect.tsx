@@ -8,6 +8,7 @@ import PopupMenu, {PopupMenuItem} from '../surfaces/PopupMenu';
 
 type LanguageSelectProps = {
   list?: boolean;
+  onChange?: (code: string) => void;
 };
 
 const getShortNameByCode = (code: string, list: boolean): string => {
@@ -19,9 +20,10 @@ const getShortNameByCode = (code: string, list: boolean): string => {
   return list ? name : getShortName(name);
 };
 
-const LanguageSelect = ({list}: LanguageSelectProps) => {
+const LanguageSelect = ({list, onChange}: LanguageSelectProps) => {
   const changeLanguage = (code: string): void => {
     LanguageUtils.setLanguage(code);
+    onChange?.(code);
   };
 
   const buttonElement = (

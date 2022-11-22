@@ -53,7 +53,7 @@ const containerStyles: SxProps = {
   padding: 1,
   width: '100%',
   maxHeight: '100%',
-  overflowY: 'scroll',
+  overflowY: 'auto',
 };
 
 const itemStyles: SxProps = {

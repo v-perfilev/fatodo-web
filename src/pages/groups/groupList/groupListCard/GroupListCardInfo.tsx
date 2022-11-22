@@ -47,18 +47,6 @@ const GroupListCardInfo = ({group, items, itemsCount}: GroupListCardHeaderProps)
           </Button>
         )}
       </FHStack>
-      <FHStack>
-        {showButtonToGroupView && (
-          <Button variant="text" onClick={goToGroupView}>
-            {t('group:actions.showAll')}
-          </Button>
-        )}
-        {showButtonToCreateItem && (
-          <Button variant="text" onClick={goToItemCreate}>
-            {t('group:actions.createItem')}
-          </Button>
-        )}
-      </FHStack>
       <FHStack flexGrow={0}>
         <BoxWithIcon icon={<ItemsIcon color="primary" />} size="small" fontSize={13} color="grey.500">
           {itemsCount || 0}

@@ -31,10 +31,12 @@ const containerStyles: SxProps = {
   display: 'flex',
   flexWrap: 'wrap',
   width: '100%',
+  paddingX: 0,
+  paddingY: 1,
 };
 
 const chipStyles: SxProps = {
-  margin: 1,
+  margin: 0.5,
 };
 
 export default FormikRemindersInputChips;

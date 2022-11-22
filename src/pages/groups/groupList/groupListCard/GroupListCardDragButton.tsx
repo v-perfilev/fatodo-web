@@ -1,6 +1,6 @@
 import React from 'react';
 import ReorderIcon from '../../../../components/icons/ReorderIcon';
-import {IconButton} from '@mui/material';
+import {Box, IconButton} from '@mui/material';
 
 type GroupListCardDragButtonProps = {
   drag: any;
@@ -8,9 +8,11 @@ type GroupListCardDragButtonProps = {
 
 const GroupListCardDragButton = ({drag: bind}: GroupListCardDragButtonProps) => {
   return (
-    <IconButton color="primary" {...bind}>
-      <ReorderIcon />
-    </IconButton>
+    <Box color="white">
+      <IconButton {...bind} color="inherit">
+        <ReorderIcon />
+      </IconButton>
+    </Box>
   );
 };
 

@@ -13,7 +13,8 @@ import PopupMenu, {PopupMenuItem, PopupMenuItemProps} from '../../../../componen
 import {useNavigate} from 'react-router-dom';
 import {GroupRouteUtils} from '../../../../routes/GroupRouter';
 import {ItemRouteUtils} from '../../../../routes/ItemRouter';
-import {IconButton} from '@mui/material';
+import {Box, IconButton} from '@mui/material';
+import {useGroupDialogContext} from '../../../../shared/contexts/dialogContexts/GroupDialogContext';
 
 type GroupListCardMenuButtonProps = {
   group: Group;
@@ -21,7 +22,7 @@ type GroupListCardMenuButtonProps = {
 
 const GroupListCardMenuButton = ({group}: GroupListCardMenuButtonProps) => {
   const account = useAppSelector(AuthSelectors.account);
-  // const {showGroupDeleteDialog} = useGroupDialogContext();
+  const {showGroupDeleteDialog} = useGroupDialogContext();
   const {t} = useTranslation();
   const navigate = useNavigate();
 
@@ -33,7 +34,7 @@ const GroupListCardMenuButton = ({group}: GroupListCardMenuButtonProps) => {
   const goToGroupEdit = (): void => navigate(GroupRouteUtils.getEditUrl(group.id));
 
   const openGroupDeleteDialog = (): void => {
-    // showGroupDeleteDialog(group);
+    showGroupDeleteDialog(group);
   };
 
   const menuItems: PopupMenuItemProps[] = [
@@ -69,9 +70,11 @@ const GroupListCardMenuButton = ({group}: GroupListCardMenuButtonProps) => {
   return (
     <PopupMenu
       trigger={
-        <IconButton>
-          <DotsVerticalIcon color="primary" />
-        </IconButton>
+        <Box color="white">
+          <IconButton color="inherit">
+            <DotsVerticalIcon />
+          </IconButton>
+        </Box>
       }
     >
       {menuItems.map((itemProps, index) => (

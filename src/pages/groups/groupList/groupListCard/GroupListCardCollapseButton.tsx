@@ -2,7 +2,7 @@ import React from 'react';
 import {Group} from '../../../../models/Group';
 import {useAppDispatch} from '../../../../store/store';
 import {GroupsActions} from '../../../../store/groups/groupsActions';
-import {IconButton} from '@mui/material';
+import {Box, IconButton} from '@mui/material';
 import CollapsedIcon from '../../../../components/icons/CollapsedIcon';
 
 type GroupListCardCollapseButtonProps = {
@@ -24,9 +24,11 @@ const GroupListCardCollapseButton = ({group, collapsed}: GroupListCardCollapseBu
   };
 
   return (
-    <IconButton onClick={handlePress}>
-      <CollapsedIcon color="primary" collapsed={!collapsed} />
-    </IconButton>
+    <Box color="white">
+      <IconButton onClick={handlePress} color="inherit">
+        <CollapsedIcon collapsed={!collapsed} />
+      </IconButton>
+    </Box>
   );
 };
 

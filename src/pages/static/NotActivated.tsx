@@ -54,7 +54,7 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
 
   return (
     <FVStack alignItems="center">
-      <Typography variant="h5" color="primary" lineHeight={1} fontSize={150}>
+      <Typography variant="h5" color="primary" lineHeight={1} textAlign="center" fontSize={25}>
         {t('static:notActivated.caption')}
       </Typography>
       <Typography textAlign="center">{t('static:redirectToHome.message', {count: timer})}</Typography>
@@ -65,7 +65,7 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
         loading={activationLoading}
         progressValue={activationTimer * (100 / activationTimerMax)}
       >
-        {t('buttons.sendActivationCode')}
+        {t('static:actions.sendActivationCode')}
       </LoadingButton>
       <LoadingButton startIcon={<HomeIcon />} onClick={resetTimer}>
         {t('static:actions.toHomePage')}

@@ -9,7 +9,7 @@ export default class AuthService {
   private static baseUrl = '/api/auth';
 
   public static activate = (code: string): AxiosPromise<void> => {
-    const url = AuthService.baseUrl + 'account/activate/' + code;
+    const url = AuthService.baseUrl + '/account/activate/' + code;
     return axios.get(url);
   };
 
@@ -24,12 +24,12 @@ export default class AuthService {
   };
 
   public static resetPassword = (dto: ResetPasswordDTO): AxiosPromise<void> => {
-    const url = AuthService.baseUrl + 'account/reset-password';
+    const url = AuthService.baseUrl + '/account/reset-password';
     return axios.post(url, dto);
   };
 
   public static requestActivationCode = (user: string): AxiosPromise<void> => {
-    const url = AuthService.baseUrl + 'account/request-activation-code/' + user;
+    const url = AuthService.baseUrl + '/account/request-activation-code/' + user;
     return axios.get(url);
   };
 

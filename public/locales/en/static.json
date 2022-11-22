@@ -19,6 +19,7 @@
     "message_plural": "For redirecting to home page press the button or wait {{count}} seconds..."
   },
   "actions": {
-    "toHomePage": "To home page"
+    "toHomePage": "To home page",
+    "sendActivationCode": "Send activation code again"
   }
 }

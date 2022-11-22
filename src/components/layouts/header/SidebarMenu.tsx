@@ -7,6 +7,9 @@ import {Divider, Fab, SwipeableDrawer, SxProps, Toolbar} from '@mui/material';
 import {HEADER_HEIGHT} from '../../../constants';
 import FBox from '../../boxes/FBox';
 import FCenter from '../../boxes/FCenter';
+import {ChangeLanguageDTO} from '../../../models/dto/ChangeLanguageDTO';
+import {AuthActions} from '../../../store/auth/authActions';
+import {useAppDispatch} from '../../../store/store';
 
 type SidebarMenuProps = {
   show: boolean;
@@ -15,6 +18,13 @@ type SidebarMenuProps = {
 };
 
 const SidebarMenu = ({show, onToggle, redirectMap}: SidebarMenuProps) => {
+  const dispatch = useAppDispatch();
+
+  const changeLanguage = (code: string): void => {
+    const dto: ChangeLanguageDTO = {language: code.toUpperCase()};
+    dispatch(AuthActions.changeLanguageThunk(dto));
+  };
+
   return (
     <SwipeableDrawer anchor="right" open={show} onOpen={onToggle} onClose={onToggle}>
       <FBox sx={containerStyles}>
@@ -26,7 +36,7 @@ const SidebarMenu = ({show, onToggle, redirectMap}: SidebarMenuProps) => {
         <Divider />
         <VerticalMenu redirectMap={redirectMap} />
         <FCenter paddingY={2}>
-          <LanguageSelect />
+          <LanguageSelect onChange={changeLanguage} />
         </FCenter>
       </FBox>
     </SwipeableDrawer>

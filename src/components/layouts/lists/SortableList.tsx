@@ -110,7 +110,7 @@ const SortableList = (props: SortableListProps<any>) => {
   return (
     <AutoSizer>
       {({width, height}): ReactElement => (
-        <div style={{width, height, paddingTop, paddingBottom, overflowY: 'scroll'}} ref={containerRef}>
+        <div style={{width, height, paddingTop, paddingBottom, overflowY: 'auto'}} ref={containerRef}>
           <div style={{position: 'relative'}}>
             {Array.from({length: dataCount}).map((_, index) => (
               <animated.div ref={itemRef} style={{position: 'absolute', width: '100%', ...springs[index]}} key={index}>

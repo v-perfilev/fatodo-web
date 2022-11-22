@@ -48,7 +48,7 @@ const SignUpForm = ({getToken, onSuccess}: SignUpFormProps) => {
   const handleSubmit = async (formValues: SignUpFormValues): Promise<void> => {
     dispatch(AuthActions.setLoading(true));
     const captchaToken = await getToken().catch(() => dispatch(AuthActions.setLoading(false)));
-    const language = i18n.language;
+    const language = i18n.language.toUpperCase();
     const timezone = DateUtils.getTimezone();
 
     const dto: RegistrationDTO = {

@@ -8,7 +8,7 @@ import GroupsIcon from '../../icons/GroupsIcon';
 import ArrowDownIcon from '../../icons/ArrowDownIcon';
 import AccountIcon from '../../icons/AccountIcon';
 import LogoutIcon from '../../icons/LogoutIcon';
-import {useAppSelector} from '../../../store/store';
+import {useAppDispatch, useAppSelector} from '../../../store/store';
 import ChatsSelectors from '../../../store/chats/chatsSelectors';
 import ContactsSelectors from '../../../store/contacts/contactsSelectors';
 import {Button} from '@mui/material';
@@ -20,17 +20,25 @@ import FHStack from '../../boxes/FHStack';
 import SettingsIcon from '../../icons/SettingsIcon';
 import PasswordIcon from '../../icons/PasswordIcon';
 import CalendarIcon from '../../icons/CalendarIcon';
+import {ChangeLanguageDTO} from '../../../models/dto/ChangeLanguageDTO';
+import {AuthActions} from '../../../store/auth/authActions';
 
 type HorizontalMenuProps = {
   redirectMap: RedirectMap;
 };
 const HorizontalMenu = ({redirectMap}: HorizontalMenuProps) => {
+  const dispatch = useAppDispatch();
   const account = useAppSelector(AuthSelectors.account);
   const unreadCount = useAppSelector(ChatsSelectors.unreadCount);
   const incomingRequestCount = useAppSelector(ContactsSelectors.incomingRequestCount);
   const {t} = useTranslation();
 
   const user = accountToUser(account);
+
+  const changeLanguage = (code: string): void => {
+    const dto: ChangeLanguageDTO = {language: code.toUpperCase()};
+    dispatch(AuthActions.changeLanguageThunk(dto));
+  };
 
   return (
     <FHStack>
@@ -53,7 +61,7 @@ const HorizontalMenu = ({redirectMap}: HorizontalMenuProps) => {
         </Button>
       </FHStack>
       <FHStack justifyContent="flex-end">
-        <LanguageSelect />
+        <LanguageSelect onChange={changeLanguage} />
         <PopupMenu
           trigger={
             <Button color="primary">
