@@ -24,8 +24,8 @@ const ChatViewSkeleton = () => {
     <FVStack spacing={0}>
       <PageHeader>
         <FHStack justifyContent="space-between">
-          <Skeleton variant="rectangular" width={200} height={18} />
-          <Skeleton variant="rectangular" width={50} height={18} />
+          <Skeleton variant="rounded" width={200} height={18} />
+          <Skeleton variant="rounded" width={50} height={18} />
         </FHStack>
       </PageHeader>
       <FVStack marginY={1} spacing={0}>
@@ -37,7 +37,7 @@ const ChatViewSkeleton = () => {
         ))}
       </FVStack>
       <PageFooter>
-        <Skeleton variant="rectangular" width="30%" height={18} />
+        <Skeleton variant="rounded" width="30%" height={18} />
       </PageFooter>
     </FVStack>
   );

@@ -13,14 +13,14 @@ const EventSkeleton = () => {
         <Skeleton variant="circular" width={40} height={40} />
         <FVStack spacing={1.5} alignItems="stretch" justifyContent="center">
           <FHStack>
-            <Skeleton variant="rectangular" width={150} height={18} />
+            <Skeleton variant="rounded" width={150} height={18} />
             <FHStack justifyContent="flex-end">
-              <Skeleton variant="rectangular" width={60} height={15} />
+              <Skeleton variant="rounded" width={60} height={15} />
             </FHStack>
           </FHStack>
-          <Skeleton variant="rectangular" width="80%" height={15} />
+          <Skeleton variant="rounded" width="80%" height={15} />
           <PaperBox sx={paperStyles} elevation={0}>
-            <Skeleton variant="rectangular" width="60%" height={15} />
+            <Skeleton variant="rounded" width="60%" height={15} />
           </PaperBox>
         </FVStack>
       </FHStack>

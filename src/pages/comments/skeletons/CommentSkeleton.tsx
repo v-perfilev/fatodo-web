@@ -14,10 +14,10 @@ const CommentSkeleton = () => {
         </Box>
         <FVStack sx={messageStyles} spacing={2} alignItems="stretch" justifyContent="center">
           <FHStack justifyContent="space-between">
-            <Skeleton variant="rectangular" width={100} height={18} />
-            <Skeleton variant="rectangular" width={50} height={18} />
+            <Skeleton variant="rounded" width={100} height={18} />
+            <Skeleton variant="rounded" width={50} height={18} />
           </FHStack>
-          <Skeleton variant="rectangular" width="70%" height={15} />
+          <Skeleton variant="rounded" width="70%" height={15} />
         </FVStack>
       </FHStack>
     </FBox>

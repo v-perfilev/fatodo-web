@@ -7,7 +7,7 @@ const ContactSkeleton = () => {
   return (
     <FHStack sx={containerStyles} spacing={1} alignItems="flex-end">
       <Skeleton variant="circular" width={40} height={40} />
-      <Skeleton variant="rectangular" width={150} height={18} />
+      <Skeleton variant="rounded" width={150} height={18} />
       <FHStack spacing={1} justifyContent="flex-end">
         <Skeleton variant="circular" width={30} height={30} />
         <Skeleton variant="circular" width={30} height={30} />

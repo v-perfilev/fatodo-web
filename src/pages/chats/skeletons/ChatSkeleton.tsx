@@ -10,13 +10,13 @@ const ChatSkeleton = () => {
       <Skeleton variant="circular" width={40} height={40} />
       <FVStack spacing={1} alignItems="stretch" justifyContent="center">
         <FHStack spacing={1}>
-          <Skeleton variant="rectangular" width={70} height={18} />
-          <Skeleton variant="rectangular" width={30} height={18} />
+          <Skeleton variant="rounded" width={70} height={18} />
+          <Skeleton variant="rounded" width={30} height={18} />
           <FHStack justifyContent="flex-end">
-            <Skeleton variant="rectangular" width={60} height={15} />
+            <Skeleton variant="rounded" width={60} height={15} />
           </FHStack>
         </FHStack>
-        <Skeleton variant="rectangular" width={200} height={15} />
+        <Skeleton variant="rounded" width={200} height={15} />
       </FVStack>
     </FHStack>
   );
