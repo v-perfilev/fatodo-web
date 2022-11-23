@@ -26,6 +26,7 @@ const ChipBox = ({children, closeAction, ...props}: ChipBoxProps) => {
 };
 
 const containerStyles: SxProps = {
+  margin: 0.5,
   paddingX: 2,
   paddingY: 1,
   borderRadius: 3,
