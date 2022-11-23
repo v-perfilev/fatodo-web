@@ -31,7 +31,7 @@ const CalendarViewReminderItem = ({reminder}: CalendarViewReminderItemProps) => 
       <Box>
         <FCenter>{bulletView}</FCenter>
       </Box>
-      <FVStack spacing={0.5}>
+      <FVStack spacing={0}>
         <Typography fontSize={14} fontWeight="bold">
           {itemView}
         </Typography>

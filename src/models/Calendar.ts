@@ -1,13 +1,12 @@
-export interface CalendarItem {
+import {CalendarReminder} from './Reminder';
+
+export interface CalendarMonth {
   year: number;
   month: number;
+  monthIndex?: number;
 }
 
-export interface CalendarMonth extends CalendarItem {
-  key: string;
-}
-
-export interface CalendarDate {
+export interface CalendarDate extends CalendarMonth {
   date: number;
-  isCurrentMonth: boolean;
+  reminders?: CalendarReminder[];
 }

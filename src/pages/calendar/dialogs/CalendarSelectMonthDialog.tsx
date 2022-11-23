@@ -1,6 +1,6 @@
 import React, {memo, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {CalendarItem, CalendarMonth} from '../../../models/Calendar';
+import {CalendarMonth} from '../../../models/Calendar';
 import ModalDialog from '../../../components/modals/ModalDialog';
 import {Button, Grid, SxProps} from '@mui/material';
 import {MonthPicker, YearPicker} from '@mui/x-date-pickers';
@@ -8,7 +8,7 @@ import moment, {Moment} from 'moment';
 
 export type CalendarSelectMonthDialogProps = {
   month: CalendarMonth;
-  selectMonth: (month: CalendarItem) => void;
+  selectMonth: (month: CalendarMonth) => void;
   show: boolean;
   close: () => void;
 };
@@ -25,7 +25,7 @@ const CalendarSelectMonthDialog = ({month, selectMonth, show, close}: CalendarSe
   const [value, setValue] = useState<Moment>();
 
   const handleSelect = (): void => {
-    const calendarItem: CalendarItem = {year: value.year(), month: value.month()};
+    const calendarItem: CalendarMonth = {year: value.year(), month: value.month()};
     selectMonth(calendarItem);
     close();
   };

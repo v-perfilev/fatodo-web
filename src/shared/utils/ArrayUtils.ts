@@ -84,4 +84,10 @@ export class ArrayUtils {
   public static clamp = (value: number, min: number, max: number): number => {
     return Math.min(Math.max(value, min), max);
   };
+
+  public static range = (start: number, end: number, max = Number.MAX_VALUE, min = -Number.MAX_VALUE): number[] => {
+    const clampedStart = Math.max(start, min);
+    const clampedEnd = Math.min(end, max);
+    return Array.from(Array(clampedEnd - clampedStart + 1).keys()).map((x) => x + clampedStart);
+  };
 }

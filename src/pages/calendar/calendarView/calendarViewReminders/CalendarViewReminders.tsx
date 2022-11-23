@@ -14,7 +14,7 @@ const CalendarViewReminders = ({reminders}: CalendarViewRemindersProps) => {
     <FVStack spacing={0.5}>
       {reminders.map((reminder, index) => (
         <Box key={index}>
-          {index !== 0 && <PageDivider />}
+          {index !== 0 && <PageDivider marginY={1} />}
           <CalendarViewReminderItem reminder={reminder} />
         </Box>
       ))}

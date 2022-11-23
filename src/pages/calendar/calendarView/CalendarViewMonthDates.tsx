@@ -1,24 +1,26 @@
 import React, {memo, useMemo} from 'react';
 import {CalendarUtils} from '../../../shared/utils/CalendarUtils';
-import {CalendarDate, CalendarMonth} from '../../../models/Calendar';
+import {CalendarDate} from '../../../models/Calendar';
 import {Box, SxProps, useMediaQuery} from '@mui/material';
 import CalendarViewDate from './calendarViewDate/CalendarViewDate';
 import {Theme} from '@mui/material/styles';
 
 type CalendarViewMonthDatesProps = {
-  month: CalendarMonth;
+  activeMonthIndex: number;
 };
 
-const CalendarViewMonthDates = ({month}: CalendarViewMonthDatesProps) => {
+const CalendarViewMonthDates = ({activeMonthIndex}: CalendarViewMonthDatesProps) => {
   const isSmallDevice = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
 
-  const pageDates = useMemo<CalendarDate[]>(() => CalendarUtils.getOnePageDates(month.year, month.month), [month]);
+  const pageDates = useMemo<CalendarDate[]>(() => {
+    return CalendarUtils.generateMonthDates(activeMonthIndex);
+  }, [activeMonthIndex]);
 
   return (
     <Box sx={containerStyles(isSmallDevice)}>
       {pageDates.map((date, index) => (
         <Box sx={boxStyles(isSmallDevice)} key={index}>
-          <CalendarViewDate month={month} date={date} />
+          <CalendarViewDate activeMonthIndex={activeMonthIndex} date={date} />
         </Box>
       ))}
     </Box>

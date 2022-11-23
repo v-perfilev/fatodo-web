@@ -3,78 +3,73 @@ import PageHeader from '../../../components/layouts/PageHeader';
 import {useTranslation} from 'react-i18next';
 import {IconButton, SxProps, Typography, useMediaQuery} from '@mui/material';
 import BellIcon from '../../../components/icons/BellIcon';
-import {CalendarItem, CalendarMonth} from '../../../models/Calendar';
+import {CalendarMonth} from '../../../models/Calendar';
 import {useCalendarDialogContext} from '../../../shared/contexts/dialogContexts/CalendarDialogContext';
-import {CalendarUtils} from '../../../shared/utils/CalendarUtils';
+import {CalendarConstants, CalendarUtils} from '../../../shared/utils/CalendarUtils';
 import {DateFormatters} from '../../../shared/utils/DateFormatters';
 import FHStack from '../../../components/boxes/FHStack';
 import ArrowDownIcon from '../../../components/icons/ArrowDownIcon';
 import ActiveDateIcon from '../../../components/icons/ActiveDateIcon';
 import ArrowLeftIcon from '../../../components/icons/ArrowLeftIcon';
 import ArrowRightIcon from '../../../components/icons/ArrowRightIcon';
-import {calendarMonthKeys, calendarMonths} from './CalendarViewContainer';
 import {Theme} from '@mui/material/styles';
 
 type GroupListHeaderProps = {
-  month: CalendarMonth;
-  selectMonth: (month: CalendarItem) => void;
+  activeMonthIndex: number;
+  selectMonth: (month: CalendarMonth) => void;
   toggleCollapsed?: () => void;
 };
 
-const CalendarViewHeader = ({month, selectMonth, toggleCollapsed}: GroupListHeaderProps) => {
+const CalendarViewHeader = ({activeMonthIndex, selectMonth, toggleCollapsed}: GroupListHeaderProps) => {
   const isSmallDevice = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
   const {showSelectMonthDialog} = useCalendarDialogContext();
   const {i18n} = useTranslation();
 
-  const monthWithYear = useMemo(() => {
-    const monthMoment = CalendarUtils.getMonthMoment(month.year, month.month);
+  const month = useMemo<CalendarMonth>(() => {
+    return CalendarUtils.getMonthByMonthIndex(activeMonthIndex);
+  }, [activeMonthIndex]);
+
+  const monthWithYear = useMemo<string>(() => {
+    const monthDate = CalendarUtils.getMonthDate(month);
     const monthWithYear = DateFormatters.formatDate(
-      monthMoment.toDate(),
+      monthDate,
       undefined,
       undefined,
       isSmallDevice ? 'MONTH_YEAR_SHORT' : 'MONTH_YEAR',
     );
     return monthWithYear.toUpperCase();
-  }, [isSmallDevice, month, i18n.language]);
+  }, [month, i18n.language]);
 
   const isCurrentMonth = useMemo<boolean>(() => {
-    const currentMonth = CalendarUtils.generateCurrentCalendarMonth();
-    return currentMonth.key === month.key;
-  }, [month]);
+    const currentMonth = CalendarUtils.getCurrentDate();
+    return currentMonth.monthIndex === activeMonthIndex;
+  }, [activeMonthIndex]);
 
   const canGoToPreviousMonth = useMemo<boolean>(() => {
-    const key = CalendarUtils.buildMonthKey(month.year, month.month);
-    const index = calendarMonthKeys.indexOf(key);
-    return index > 0;
-  }, [month]);
+    return activeMonthIndex > 0;
+  }, [activeMonthIndex]);
 
   const canGoToNextMonth = useMemo<boolean>(() => {
-    const key = CalendarUtils.buildMonthKey(month.year, month.month);
-    const index = calendarMonthKeys.indexOf(key);
-    return index >= 0 && index < calendarMonthKeys.length - 1;
-  }, [month]);
+    return activeMonthIndex < CalendarConstants.maxMonthIndex;
+  }, [activeMonthIndex]);
 
   const handleMonthClick = useCallback((): void => {
     showSelectMonthDialog(month, selectMonth);
   }, [month]);
 
   const goToPreviousMonth = useCallback((): void => {
-    const key = CalendarUtils.buildMonthKey(month.year, month.month);
-    const index = calendarMonthKeys.indexOf(key);
-    const activeMonth = calendarMonths[index - 1];
-    selectMonth(activeMonth);
-  }, [month]);
+    const month = CalendarUtils.getMonthByMonthIndex(activeMonthIndex - 1);
+    selectMonth(month);
+  }, [activeMonthIndex]);
 
   const goToNextMonth = useCallback((): void => {
-    const key = CalendarUtils.buildMonthKey(month.year, month.month);
-    const index = calendarMonthKeys.indexOf(key);
-    const activeMonth = calendarMonths[index + 1];
-    selectMonth(activeMonth);
-  }, [month]);
+    const month = CalendarUtils.getMonthByMonthIndex(activeMonthIndex + 1);
+    selectMonth(month);
+  }, [activeMonthIndex]);
 
   const goToCurrentMonth = useCallback((): void => {
-    const currentMonth = CalendarUtils.generateCurrentCalendarMonth();
-    selectMonth(currentMonth);
+    const currentDate = CalendarUtils.getCurrentDate();
+    selectMonth(currentDate);
   }, []);
 
   return (

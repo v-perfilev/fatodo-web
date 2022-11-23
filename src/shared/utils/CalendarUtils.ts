@@ -1,76 +1,99 @@
 import moment from 'moment';
 import {CalendarReminder} from '../../models/Reminder';
-import {CalendarDate, CalendarItem, CalendarMonth} from '../../models/Calendar';
+import {CalendarDate, CalendarMonth} from '../../models/Calendar';
 
 export class CalendarUtils {
-  public static generateCurrentCalendarMonth = (): CalendarMonth => {
+  /*
+  Index getters
+   */
+
+  static getMonthIndexByItem = (value: CalendarMonth): number => {
+    const dateMoment = moment({year: value.year, month: value.month, date: 1});
+    return dateMoment.diff(CalendarConstants.firstDate, 'month');
+  };
+
+  /*
+   CalendarDate getters
+   */
+
+  public static getCurrentDate = (): CalendarDate => {
     const now = moment();
     const year = now.year();
     const month = now.month();
-    const key = CalendarUtils.buildMonthKey(year, month);
-    return {key, year, month};
+    const date = now.date();
+    return CalendarUtils.enrichDate({year, month, date});
   };
 
-  public static generateAllCalendarMonths = (): CalendarMonth[] => {
-    const routes: CalendarMonth[] = [];
-    for (let year = 1900; year <= 2100; year++) {
-      for (let month = 0; month <= 11; month++) {
-        const key = CalendarUtils.buildMonthKey(year, month);
-        routes.push({key, year, month});
-      }
-    }
-    return routes;
+  public static getDateByMonthIndex = (monthIndex: number): CalendarDate => {
+    const dateMoment = CalendarConstants.firstDate.clone().add(monthIndex, 'month');
+    const year = dateMoment.year();
+    const month = dateMoment.month();
+    const date = dateMoment.date();
+    return CalendarUtils.enrichDate({year, month, date});
   };
 
-  public static generateCalendarMonths = (item: CalendarItem, indent = 3): CalendarMonth[] => {
-    const centralMoment = moment({year: item.year, month: item.month});
-    const routes: CalendarMonth[] = [];
-    for (let i = -indent; i <= indent; i++) {
-      const m = centralMoment.clone().add(i, 'month');
-      const year = m.year();
-      const month = m.month();
-      const key = CalendarUtils.buildMonthKey(year, month);
-      routes.push({key, year, month});
-    }
-    return routes;
+  /*
+   CalendarMonth getters
+   */
+
+  public static getMonthByMonthIndex = (monthIndex: number): CalendarMonth => {
+    const dateMoment = CalendarConstants.firstDate.clone().add(monthIndex, 'month');
+    const year = dateMoment.year();
+    const month = dateMoment.month();
+    return {year, month};
   };
 
-  public static getMonthMoment = (year: number, month: number): moment.Moment => {
-    return moment({year, month, d: 10});
-  };
+  /*
+  GENERATORS
+   */
 
-  public static getNowDate = (isCurrentMonth = true): CalendarDate => {
-    return {date: new Date().getDate(), isCurrentMonth};
-  };
-
-  public static getOnePageDates = (year: number, month: number): CalendarDate[] => {
+  public static generateMonthDates = (index: number): CalendarDate[] => {
+    const dateMoment = CalendarConstants.firstDate.clone().add(index, 'month');
+    const year = dateMoment.year();
+    const month = dateMoment.month();
     const monthMoment = moment({year, month, d: 10});
-    const previousMonthMoment = monthMoment.clone().subtract(1, 'month');
+
+    const prevMonthMoment = monthMoment.clone().subtract(1, 'month');
+    const nextMonthMoment = monthMoment.clone().add(1, 'month');
+
+    const prevYear = prevMonthMoment.year();
+    const prevMonth = prevMonthMoment.month();
+
+    const nextYear = nextMonthMoment.year();
+    const nextMonth = nextMonthMoment.month();
+
     const firstDateMoment = monthMoment.clone().startOf('month');
     const firstDateDay = firstDateMoment.day() === 0 ? 7 : firstDateMoment.day();
     const lastDateMoment = monthMoment.clone().endOf('month');
     const lastDateDay = lastDateMoment.day() === 0 ? 7 : lastDateMoment.day();
     const daysInMonth = monthMoment.daysInMonth();
-    const daysPreviousInMonth = previousMonthMoment.daysInMonth();
+    const daysPreviousInMonth = prevMonthMoment.daysInMonth();
 
-    const dates: CalendarDate[] = [];
+    const calendarDates: CalendarDate[] = [];
     for (let i = 1; i < firstDateDay; i++) {
-      const date: CalendarDate = {date: daysPreviousInMonth - firstDateDay + i + 1, isCurrentMonth: false};
-      dates.push(date);
+      const date = daysPreviousInMonth - firstDateDay + i + 1;
+      const enrichedDate = CalendarUtils.enrichDate({year: prevYear, month: prevMonth, date});
+      calendarDates.push(enrichedDate);
     }
 
     for (let i = 1; i <= daysInMonth; i++) {
-      const date: CalendarDate = {date: i, isCurrentMonth: true};
-      dates.push(date);
+      const date = i;
+      const enrichedDate = CalendarUtils.enrichDate({year, month, date});
+      calendarDates.push(enrichedDate);
     }
 
     for (let i = lastDateDay + 1; i <= 7; i++) {
-      const date: CalendarDate = {date: i - lastDateDay, isCurrentMonth: false};
-      dates.push(date);
+      const date = i - lastDateDay;
+      const enrichedDate = CalendarUtils.enrichDate({year: nextYear, month: nextMonth, date});
+      calendarDates.push(enrichedDate);
     }
 
-    return dates;
+    return calendarDates;
   };
+
+  /*
+  REMINDERS
+   */
 
   public static extractRemindersGroupIds = (reminders: CalendarReminder[]): string[] => {
     return reminders.map((r) => r.parentId);
@@ -88,7 +111,42 @@ export class CalendarUtils {
     return [yearFrom, monthFrom, yearTo, monthTo];
   };
 
-  public static buildMonthKey = (year: number, month: number): string => {
+  /*
+  UTILS
+   */
+
+  public static enrichDate = (value: CalendarDate): CalendarDate => {
+    const monthIndex = CalendarUtils.getMonthIndexByItem(value);
+    return {...value, monthIndex};
+  };
+
+  public static buildMonthKeyByItem = (value: CalendarMonth): string => {
+    const year = value.year;
+    const month = value.month;
     return year + '_' + month;
   };
+
+  public static buildMonthKeyByIndex = (monthIndex: number): string => {
+    const date = CalendarUtils.getDateByMonthIndex(monthIndex);
+    const year = date.year;
+    const month = date.month;
+    return year + '_' + month;
+  };
+
+  public static getMonthDate = (value: CalendarMonth): Date => {
+    const year = value.year;
+    const month = value.month;
+    return moment({year, month, d: 10}).toDate();
+  };
+}
+
+export class CalendarConstants {
+  public static readonly firstDate = moment({year: 1900, month: 0, date: 1});
+
+  public static readonly lastDate = moment({year: 2100, month: 11, date: 31});
+
+  public static maxMonthIndex = CalendarUtils.getMonthIndexByItem({
+    year: CalendarConstants.lastDate.year(),
+    month: CalendarConstants.lastDate.month(),
+  });
 }

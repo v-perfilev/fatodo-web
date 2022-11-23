@@ -9,14 +9,15 @@ import {CalendarReminder} from '../../../../models/Reminder';
 import {Theme} from '@mui/material/styles';
 
 type CalendarViewDateContainerProps = {
+  activeMonthIndex: number;
   date: CalendarDate;
   reminders: CalendarReminder[];
 };
 
-const CalendarViewDateContainer = ({date, reminders}: CalendarViewDateContainerProps) => {
+const CalendarViewDateContainer = ({activeMonthIndex, date, reminders}: CalendarViewDateContainerProps) => {
   const isSmallDevice = useMediaQuery((theme: Theme) => theme.breakpoints.only('xs'));
 
-  const bg = date.isCurrentMonth ? 'grey.50' : 'grey.200';
+  const bg = activeMonthIndex === date.monthIndex ? 'grey.50' : 'grey.200';
   const color = 'grey.500';
 
   return (
