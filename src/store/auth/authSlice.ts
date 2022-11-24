@@ -60,16 +60,16 @@ const authSlice = createSlice({
     });
 
     /*
-    login
+    socialLogin
      */
-    builder.addCase(AuthActions.loginThunk.pending, (state, action) => {
+    builder.addCase(AuthActions.socialLoginThunk.pending, (state, action) => {
       authSlice.caseReducers.reset(state);
       authSlice.caseReducers.setLoading(state, {...action, payload: true});
     });
-    builder.addCase(AuthActions.loginThunk.fulfilled, (state, action) => {
+    builder.addCase(AuthActions.socialLoginThunk.fulfilled, (state, action) => {
       authSlice.caseReducers.setIsAuthenticated(state, {...action, payload: true});
     });
-    builder.addCase(AuthActions.loginThunk.rejected, (state) => {
+    builder.addCase(AuthActions.socialLoginThunk.rejected, (state) => {
       authSlice.caseReducers.reset(state);
     });
 

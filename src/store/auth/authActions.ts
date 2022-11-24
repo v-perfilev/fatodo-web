@@ -47,9 +47,10 @@ export class AuthActions {
     },
   );
 
-  static loginThunk = createAsyncThunk<void, {token: string; rememberMe?: boolean}, AsyncThunkConfig>(
+  static socialLoginThunk = createAsyncThunk<void, {token: string; rememberMe?: boolean}, AsyncThunkConfig>(
     PREFIX + 'login',
     async ({token, rememberMe}, thunkAPI) => {
+      SecurityUtils.clearAuthToken();
       await SecurityUtils.saveAuthToken(token, rememberMe);
       await thunkAPI.dispatch(AuthActions.fetchAccountThunk());
     },
@@ -59,6 +60,7 @@ export class AuthActions {
     PREFIX + 'authenticate',
     async ({dto, rememberMe}, thunkAPI) => {
       try {
+        SecurityUtils.clearAuthToken();
         const response = await AuthService.authenticate(dto);
         const token = SecurityUtils.parseTokenFromResponse(response);
         await SecurityUtils.saveAuthToken(token, rememberMe);
