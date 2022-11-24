@@ -38,8 +38,9 @@ const FormikRemindersInput = ({name, label}: FormikRemindersInputProps) => {
   const removeReminder = (index: number, e: React.SyntheticEvent): void => {
     e.stopPropagation();
     setReminders((prevState) => {
-      prevState.splice(index, 1);
-      return [...prevState];
+      const array = [...prevState];
+      array.splice(index, 1);
+      return [...array];
     });
   };
 
