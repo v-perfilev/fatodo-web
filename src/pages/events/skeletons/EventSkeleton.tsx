@@ -8,8 +8,8 @@ import FBox from '../../../components/boxes/FBox';
 
 const EventSkeleton = () => {
   return (
-    <FBox sx={containerStyles}>
-      <FHStack spacing={1} alignItems="flex-start">
+    <FBox sx={boxStyles}>
+      <FHStack sx={containerStyles} alignItems="flex-start">
         <Skeleton variant="circular" width={40} height={40} />
         <FVStack spacing={1.5} alignItems="stretch" justifyContent="center">
           <FHStack>
@@ -28,10 +28,15 @@ const EventSkeleton = () => {
   );
 };
 
-const containerStyles: SxProps = {
+const boxStyles: SxProps = {
   width: '100%',
   height: EVENT_SKELETON_HEIGHT,
   alignItems: 'center',
+};
+
+const containerStyles: SxProps = {
+  paddingX: 1,
+  paddingY: 2,
 };
 
 const paperStyles: SxProps = {
