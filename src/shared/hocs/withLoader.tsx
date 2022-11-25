@@ -28,6 +28,7 @@ const withLoader = (Component: ComponentType) => (props: any) => {
 };
 
 const containerStyles: SxProps = {
+  display: 'flex',
   width: '100%',
   minHeight: '100%',
 };
