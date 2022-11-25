@@ -7,7 +7,7 @@ type IconPicProps = {
   size?: number;
 };
 
-const IconPic = ({icon, size = 50}: IconPicProps) => {
+const IconPic = ({icon, size = 40}: IconPicProps) => {
   const iconElement = React.cloneElement(icon, {size: '70%', color: 'primary'});
 
   return <FBox sx={containerStyles(size)}>{iconElement}</FBox>;
@@ -20,8 +20,9 @@ const containerStyles = (size: number): SxProps => ({
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: 'background.default',
-  borderSize: 1,
-  borderColor: 'primary',
+  borderWidth: '1px',
+  borderColor: 'primary.main',
+  borderStyle: 'solid',
   borderRadius: 10,
 });
 
