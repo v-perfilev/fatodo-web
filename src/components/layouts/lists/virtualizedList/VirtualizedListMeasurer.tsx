@@ -26,10 +26,12 @@ const VirtualizedListMeasurer = (props: VirtualizedListMeasurerProps<any>) => {
     const keysInCache = Array.from(Array(loadedLength).keys())
       .map((index) => keyExtractor(index))
       .filter((key) => keyCache.keys().includes(key));
-    return loadedLength !== keysInCache.length;
+    return loadedLength !== keysInCache.length || loadedLength !== keyCache.size();
   }, [loadedLength]);
 
   const updateCaches = useCallback((): void => {
+    // clear key cache
+    keyCache.clear();
     // update key cache
     for (let i = 0; i < loadedLength; i++) {
       const key = keyExtractor(i);
