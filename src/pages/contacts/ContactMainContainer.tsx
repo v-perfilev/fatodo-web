@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Box, IconButton, SxProps, Tab, Tabs} from '@mui/material';
+import {Box, Fab, SxProps, Tab, Tabs} from '@mui/material';
 import {useAppSelector} from '../../store/store';
 import ContactsSelectors from '../../store/contacts/contactsSelectors';
 import {useLocation, useNavigate} from 'react-router-dom';
@@ -66,9 +66,9 @@ const ContactMainContainer = () => {
             <Tab sx={tabStyles} label={t('contact:incoming.title')} icon={incomingIcon} iconPosition="end" />
             <Tab sx={tabStyles} label={t('contact:outcoming.title')} icon={outcomingIcon} iconPosition="end" />
           </Tabs>
-          <IconButton color="primary" size="large" onClick={showContactRequestDialog}>
+          <Fab color="primary" size="small" onClick={showContactRequestDialog}>
             <PlusIcon />
-          </IconButton>
+          </Fab>
         </FHStack>
       </Box>
       {activeTab === 0 && <ContactList />}

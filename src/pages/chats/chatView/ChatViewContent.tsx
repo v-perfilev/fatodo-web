@@ -21,6 +21,7 @@ import AuthSelectors from '../../../store/auth/authSelectors';
 import {ChatUtils} from '../../../shared/utils/ChatUtils';
 import {Container, SxProps} from '@mui/material';
 import FBox from '../../../components/boxes/FBox';
+import ChatViewStub from './ChatViewStub';
 
 const ChatViewContent = () => {
   const unreadMessageIdsSelector = useCallback(ChatsSelectors.makeUnreadMessageIdsSelector(), []);
@@ -110,30 +111,35 @@ const ChatViewContent = () => {
 
   return (
     <>
-      <VirtualizedList
-        itemRenderer={itemRenderer}
-        keyExtractor={keyExtractor}
-        itemData={chatItems}
-        allLoaded={allLoaded}
-        loadMoreItems={load}
-        reverseOrder
-        paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
-        paddingBottom={PAGE_FOOTER_HEIGHT + DEFAULT_MARGIN}
-        setIsOnBottom={setHideScrollButton}
-        setVisibleItems={setVisibleItems}
-        virtualizedListRef={listRef}
-      />
-      <Container sx={containerStyles}>
-        <FBox sx={boxStyles}>
-          <ScrollCornerButton
-            show={!hideScrollButton}
-            action={scrollUp}
-            down
-            highlighted={scrollButtonHighlighted}
-            bottomPadding={PAGE_FOOTER_HEIGHT}
+      {messages.length === 0 && <ChatViewStub />}
+      {messages.length > 0 && (
+        <>
+          <VirtualizedList
+            itemRenderer={itemRenderer}
+            keyExtractor={keyExtractor}
+            itemData={chatItems}
+            allLoaded={allLoaded}
+            loadMoreItems={load}
+            reverseOrder
+            paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
+            paddingBottom={PAGE_FOOTER_HEIGHT + DEFAULT_MARGIN}
+            setIsOnBottom={setHideScrollButton}
+            setVisibleItems={setVisibleItems}
+            virtualizedListRef={listRef}
           />
-        </FBox>
-      </Container>
+          <Container sx={containerStyles}>
+            <FBox sx={boxStyles}>
+              <ScrollCornerButton
+                show={!hideScrollButton}
+                action={scrollUp}
+                down
+                highlighted={scrollButtonHighlighted}
+                bottomPadding={PAGE_FOOTER_HEIGHT}
+              />
+            </FBox>
+          </Container>
+        </>
+      )}
     </>
   );
 };

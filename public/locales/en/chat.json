@@ -1,6 +1,7 @@
 {
   "common": {
-    "direct": "Direct"
+    "direct": "Direct",
+    "chatNotSelected": "Chat not selected"
   },
   "list": {
     "chatsNotFound": "No chats yet"

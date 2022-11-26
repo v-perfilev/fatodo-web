@@ -11,6 +11,7 @@ import {Chat} from '../../models/Chat';
 import ChatView from './chatView/ChatView';
 import {ChatRouteUtils} from '../../routes/ChatRouter';
 import PageContainer from '../../components/layouts/PageContainer';
+import ChatStub from './ChatStub';
 
 const ChatMain = () => {
   const dispatch = useAppDispatch();
@@ -43,7 +44,10 @@ const ChatMain = () => {
         </PageContainer>
       </Grid>
       <Grid item xs={7} md={8} xl={9}>
-        <PageContainer withoutContainer>{(chat || chatLoading) && <ChatView />}</PageContainer>
+        <PageContainer withoutContainer>
+          {(chat || chatLoading) && <ChatView />}
+          {!chat && !chatLoading && <ChatStub />}
+        </PageContainer>
       </Grid>
     </Grid>
   );

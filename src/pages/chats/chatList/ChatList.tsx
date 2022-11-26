@@ -12,6 +12,7 @@ import ChatSelectors from '../../../store/chat/chatSelectors';
 import VirtualizedList from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 import PageContent from '../../../components/layouts/PageContent';
 import ChatListSkeleton from '../skeletons/ChatListSkeleton';
+import ChatListStub from './ChatListStub';
 
 type ControlType = 'regular' | 'filtered';
 
@@ -89,14 +90,17 @@ const ChatList = () => {
     <>
       <ChatListControl setFilter={setFilter} />
       <ConditionalSpinner loading={loading || filterLoading} loadingPlaceholder={<ChatListSkeleton />}>
-        <VirtualizedList
-          itemRenderer={itemRenderer}
-          keyExtractor={keyExtractor}
-          itemData={type === 'regular' ? chats : filteredChats}
-          allLoaded={type === 'regular' ? allLoaded : undefined}
-          loadMoreItems={type === 'regular' ? load : undefined}
-          paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN / 2}
-        />
+        {chats.length === 0 && <ChatListStub />}
+        {chats.length > 0 && (
+          <VirtualizedList
+            itemRenderer={itemRenderer}
+            keyExtractor={keyExtractor}
+            itemData={type === 'regular' ? chats : filteredChats}
+            allLoaded={type === 'regular' ? allLoaded : undefined}
+            loadMoreItems={type === 'regular' ? load : undefined}
+            paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN / 2}
+          />
+        )}
       </ConditionalSpinner>
     </>
   );
