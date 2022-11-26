@@ -14,6 +14,7 @@ import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton'
 import {DEFAULT_MARGIN, PAGE_FOOTER_HEIGHT, PAGE_HEADER_HEIGHT} from '../../../constants';
 import CommentListFooter from './CommentListFooter';
 import CommentListSkeleton from '../skeletons/CommentListSkeleton';
+import {useDelayedState} from '../../../shared/hooks/useDelayedState';
 
 type CommentListProps = {
   targetId: string;
@@ -26,19 +27,21 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   const stateTargetId = useAppSelector(CommentsSelectors.targetId);
   const comments = useAppSelector(CommentsSelectors.comments);
   const allLoaded = useAppSelector(CommentsSelectors.allLoaded);
+  const [loading, setLoading] = useDelayedState();
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
   const [reference, setReference] = useState<Comment>();
 
   const canLoad = targetId && targetId !== stateTargetId;
-  const loading = !targetId || targetId !== stateTargetId;
+  const contextLoading = !targetId || targetId !== stateTargetId;
 
   /*
   loaders
    */
 
   const initialLoad = (): void => {
+    setLoading(true);
     dispatch(CommentsActions.init(targetId));
-    dispatch(CommentsActions.fetchCommentsThunk({targetId, offset: 0}));
+    dispatch(CommentsActions.fetchCommentsThunk({targetId, offset: 0})).finally(() => setLoading(false));
   };
 
   const load = useCallback(async (): Promise<void> => {
@@ -78,7 +81,7 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   return (
     <>
       <CommentListHeader toggleCollapsed={toggleCollapsed} />
-      <ConditionalSpinner loading={loading} loadingPlaceholder={<CommentListSkeleton />}>
+      <ConditionalSpinner loading={loading || contextLoading} loadingPlaceholder={<CommentListSkeleton />}>
         <VirtualizedList
           itemRenderer={itemRenderer}
           keyExtractor={keyExtractor}
