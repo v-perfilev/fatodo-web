@@ -17,6 +17,7 @@ import VirtualizedList, {
 import {Group} from '../../../models/Group';
 import PageDivider from '../../../components/layouts/PageDivider';
 import GroupViewListSkeleton from '../skeletons/GroupViewListSkeleton';
+import GroupViewStub from './GroupViewStub';
 
 type GroupViewContainerProps = {
   group: Group;
@@ -108,18 +109,23 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
         setShowArchived={setShowArchived}
         toggleCollapsed={toggleCollapsed}
       />
-      <VirtualizedList
-        itemRenderer={itemRenderer}
-        keyExtractor={keyExtractor}
-        itemData={items}
-        allLoaded={allItemsLoaded}
-        loadMoreItems={load}
-        paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
-        paddingBottom={8}
-        setIsOnTop={setHideScrollButton}
-        virtualizedListRef={listRef}
-      />
-      <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
+      {items.length === 0 && <GroupViewStub />}
+      {items.length > 0 && (
+        <>
+          <VirtualizedList
+            itemRenderer={itemRenderer}
+            keyExtractor={keyExtractor}
+            itemData={items}
+            allLoaded={allItemsLoaded}
+            loadMoreItems={load}
+            paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
+            paddingBottom={8}
+            setIsOnTop={setHideScrollButton}
+            virtualizedListRef={listRef}
+          />
+          <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
+        </>
+      )}
     </ConditionalSpinner>
   );
 };

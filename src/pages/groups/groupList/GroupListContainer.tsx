@@ -14,6 +14,7 @@ import VirtualizedList, {
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
 import {useDelayedState} from '../../../shared/hooks/useDelayedState';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
+import GroupListStub from './GroupListStub';
 
 type GroupListContainerProps = {
   toggleCollapsed?: () => void;
@@ -67,27 +68,34 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
     <>
       <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} toggleCollapsed={toggleCollapsed} />
       <ConditionalSpinner loading={loading}>
-        {sorting ? (
-          <SortableList
-            itemRenderer={itemRenderer}
-            data={groups}
-            dataCount={groups.length}
-            setOrder={setOrder}
-            paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
-            paddingBottom={8}
-          />
-        ) : (
-          <VirtualizedList
-            itemRenderer={itemRenderer}
-            itemData={groups}
-            keyExtractor={keyExtractor}
-            paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
-            paddingBottom={8}
-            setIsOnTop={setHideScrollButton}
-            virtualizedListRef={listRef}
-          />
+        {groups.length === 0 && <GroupListStub />}
+        {groups.length > 0 && sorting && (
+          <>
+            <SortableList
+              itemRenderer={itemRenderer}
+              data={groups}
+              dataCount={groups.length}
+              setOrder={setOrder}
+              paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
+              paddingBottom={8}
+            />
+            <ScrollCornerButton show={!sorting && !hideScrollButton} action={scrollUp} />
+          </>
         )}
-        <ScrollCornerButton show={!sorting && !hideScrollButton} action={scrollUp} />
+        {groups.length > 0 && !sorting && (
+          <>
+            <VirtualizedList
+              itemRenderer={itemRenderer}
+              itemData={groups}
+              keyExtractor={keyExtractor}
+              paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
+              paddingBottom={8}
+              setIsOnTop={setHideScrollButton}
+              virtualizedListRef={listRef}
+            />
+            <ScrollCornerButton show={!sorting && !hideScrollButton} action={scrollUp} />
+          </>
+        )}
       </ConditionalSpinner>
     </>
   );

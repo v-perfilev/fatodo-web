@@ -66,15 +66,17 @@ const IncomingRequestList = () => {
     <ConditionalSpinner loading={loading} loadingPlaceholder={<ContactListSkeleton />}>
       {incomingRequests.length === 0 && <IncomingRequestListStub />}
       {incomingRequests.length > 0 && (
-        <VirtualizedList
-          itemRenderer={itemRenderer}
-          keyExtractor={keyExtractor}
-          itemData={incomingRequests}
-          setIsOnTop={setHideScrollButton}
-          virtualizedListRef={listRef}
-        />
+        <>
+          <VirtualizedList
+            itemRenderer={itemRenderer}
+            keyExtractor={keyExtractor}
+            itemData={incomingRequests}
+            setIsOnTop={setHideScrollButton}
+            virtualizedListRef={listRef}
+          />
+          <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
+        </>
       )}
-      <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
     </ConditionalSpinner>
   );
 };

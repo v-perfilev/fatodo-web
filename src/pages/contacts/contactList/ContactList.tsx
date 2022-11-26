@@ -87,15 +87,17 @@ const ContactList = () => {
       <ConditionalSpinner loading={loading} loadingPlaceholder={<ContactListSkeleton />}>
         {relations.length === 0 && <ContactListStub />}
         {relations.length > 0 && (
-          <VirtualizedList
-            itemRenderer={itemRenderer}
-            itemData={relationsToShow}
-            keyExtractor={keyExtractor}
-            setIsOnTop={setHideScrollButton}
-            virtualizedListRef={listRef}
-          />
+          <>
+            <VirtualizedList
+              itemRenderer={itemRenderer}
+              itemData={relationsToShow}
+              keyExtractor={keyExtractor}
+              setIsOnTop={setHideScrollButton}
+              virtualizedListRef={listRef}
+            />
+            <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
+          </>
         )}
-        <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
       </ConditionalSpinner>
     </FVStack>
   );
