@@ -16,6 +16,7 @@ import VirtualizedList, {
 import ContactListSkeleton from '../skeletons/ContactListSkeleton';
 import PageDivider from '../../../components/layouts/PageDivider';
 import {Box} from '@mui/material';
+import ContactListStub from './ContactListStub';
 
 const ContactList = () => {
   const usersSelector = useCallback(InfoSelectors.makeUsersSelector(), []);
@@ -84,13 +85,16 @@ const ContactList = () => {
     <FVStack>
       <ContactListControl setFilter={setFilter} />
       <ConditionalSpinner loading={loading} loadingPlaceholder={<ContactListSkeleton />}>
-        <VirtualizedList
-          itemRenderer={itemRenderer}
-          itemData={relationsToShow}
-          keyExtractor={keyExtractor}
-          setIsOnTop={setHideScrollButton}
-          virtualizedListRef={listRef}
-        />
+        {relations.length === 0 && <ContactListStub />}
+        {relations.length > 0 && (
+          <VirtualizedList
+            itemRenderer={itemRenderer}
+            itemData={relationsToShow}
+            keyExtractor={keyExtractor}
+            setIsOnTop={setHideScrollButton}
+            virtualizedListRef={listRef}
+          />
+        )}
         <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
       </ConditionalSpinner>
     </FVStack>

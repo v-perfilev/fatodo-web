@@ -13,6 +13,7 @@ import VirtualizedList, {
 import ContactListSkeleton from '../skeletons/ContactListSkeleton';
 import PageDivider from '../../../components/layouts/PageDivider';
 import {Box} from '@mui/material';
+import IncomingRequestListStub from './IncomingRequestListStub';
 
 const IncomingRequestList = () => {
   const dispatch = useAppDispatch();
@@ -63,13 +64,16 @@ const IncomingRequestList = () => {
 
   return (
     <ConditionalSpinner loading={loading} loadingPlaceholder={<ContactListSkeleton />}>
-      <VirtualizedList
-        itemRenderer={itemRenderer}
-        keyExtractor={keyExtractor}
-        itemData={incomingRequests}
-        setIsOnTop={setHideScrollButton}
-        virtualizedListRef={listRef}
-      />
+      {incomingRequests.length === 0 && <IncomingRequestListStub />}
+      {incomingRequests.length > 0 && (
+        <VirtualizedList
+          itemRenderer={itemRenderer}
+          keyExtractor={keyExtractor}
+          itemData={incomingRequests}
+          setIsOnTop={setHideScrollButton}
+          virtualizedListRef={listRef}
+        />
+      )}
       <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
     </ConditionalSpinner>
   );

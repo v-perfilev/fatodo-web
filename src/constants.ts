@@ -38,6 +38,7 @@ export const DEFAULT_MARGIN = 8;
 // HEADER
 export const HEADER_HEIGHT = 60;
 export const PAGE_HEADER_HEIGHT = 60;
+export const PAGE_CONTROL_HEIGHT = 64;
 export const PAGE_FOOTER_HEIGHT = 60;
 
 // COMMENTS
