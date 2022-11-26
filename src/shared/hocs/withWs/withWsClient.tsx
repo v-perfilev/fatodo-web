@@ -30,7 +30,7 @@ const withWsClient = (Component: ComponentType) => (props: any) => {
   return (
     <>
       <Component {...props} />
-      <WsClient active={!isSleepMode} url={WS_URL} topics={[WS_ROOT_TOPIC]} onMessage={onMessage} />
+      <WsClient active={!isSleepMode} url={WS_URL} topics={[WS_ROOT_TOPIC]} onMessage={onMessage} debug />
     </>
   );
 };
