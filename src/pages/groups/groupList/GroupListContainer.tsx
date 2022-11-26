@@ -12,6 +12,8 @@ import PageContent from '../../../components/layouts/PageContent';
 import VirtualizedList, {
   VirtualizedListMethods,
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
+import {useDelayedState} from '../../../shared/hooks/useDelayedState';
+import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 
 type GroupListContainerProps = {
   toggleCollapsed?: () => void;
@@ -20,6 +22,8 @@ type GroupListContainerProps = {
 const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
   const dispatch = useAppDispatch();
   const groups = useAppSelector(GroupsSelectors.groups);
+  const groupsInitialized = useAppSelector(GroupsSelectors.groupsInitialized);
+  const [loading, setLoading] = useDelayedState(!groupsInitialized);
   const [sorting, setSorting] = useState<boolean>(false);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
   const [order, setOrder] = useState<number[]>(undefined);
@@ -56,33 +60,35 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
    */
 
   useEffect(() => {
-    groups.length === 0 && dispatch(GroupsActions.fetchGroupsThunk());
+    loading && dispatch(GroupsActions.fetchGroupsThunk()).finally(() => setLoading(false));
   }, []);
 
   return (
     <>
       <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} toggleCollapsed={toggleCollapsed} />
-      {sorting ? (
-        <SortableList
-          itemRenderer={itemRenderer}
-          data={groups}
-          dataCount={groups.length}
-          setOrder={setOrder}
-          paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
-          paddingBottom={8}
-        />
-      ) : (
-        <VirtualizedList
-          itemRenderer={itemRenderer}
-          itemData={groups}
-          keyExtractor={keyExtractor}
-          paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
-          paddingBottom={8}
-          setIsOnTop={setHideScrollButton}
-          virtualizedListRef={listRef}
-        />
-      )}
-      <ScrollCornerButton show={!sorting && !hideScrollButton} action={scrollUp} />
+      <ConditionalSpinner loading={loading}>
+        {sorting ? (
+          <SortableList
+            itemRenderer={itemRenderer}
+            data={groups}
+            dataCount={groups.length}
+            setOrder={setOrder}
+            paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
+            paddingBottom={8}
+          />
+        ) : (
+          <VirtualizedList
+            itemRenderer={itemRenderer}
+            itemData={groups}
+            keyExtractor={keyExtractor}
+            paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
+            paddingBottom={8}
+            setIsOnTop={setHideScrollButton}
+            virtualizedListRef={listRef}
+          />
+        )}
+        <ScrollCornerButton show={!sorting && !hideScrollButton} action={scrollUp} />
+      </ConditionalSpinner>
     </>
   );
 };

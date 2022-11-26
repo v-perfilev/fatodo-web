@@ -19,11 +19,12 @@ const ChatList = () => {
   const dispatch = useAppDispatch();
   const chat = useAppSelector(ChatSelectors.chat);
   const chats = useAppSelector(ChatsSelectors.chats);
+  const chatsInitialized = useAppSelector(ChatsSelectors.chatsInitialized);
   const filteredChats = useAppSelector(ChatsSelectors.filteredChats);
   const allLoaded = useAppSelector(ChatsSelectors.allLoaded);
   const [type, setType] = useState<ControlType>('regular');
   const [filter, setFilter] = useState<string>('');
-  const [loading, setLoading] = useDelayedState(!chats.length);
+  const [loading, setLoading] = useDelayedState(!chatsInitialized);
   const [filterLoading, setFilterLoading] = useDelayedState(false);
   const [filterLoadCounter, setFilterLoadCounter] = useState<number>(0);
 

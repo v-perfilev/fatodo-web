@@ -17,7 +17,8 @@ import {Box} from '@mui/material';
 const OutcomingRequestList = () => {
   const dispatch = useAppDispatch();
   const outcomingRequests = useAppSelector(ContactsSelectors.outcomingRequests);
-  const [loading, setLoading] = useDelayedState(!outcomingRequests.length);
+  const outcomingRequestsInitialized = useAppSelector(ContactsSelectors.outcomingRequestsInitialized);
+  const [loading, setLoading] = useDelayedState(!outcomingRequestsInitialized);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
   const listRef = useRef<VirtualizedListMethods>();
 
