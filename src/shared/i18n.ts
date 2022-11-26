@@ -17,6 +17,8 @@ export const languages = [
   },
 ];
 
+const supportedLngs = languages.map((l) => l.code);
+
 export const initI18n = i18next
   .use(detector)
   .use(backend)
@@ -25,6 +27,7 @@ export const initI18n = i18next
     debug: false,
     compatibilityJSON: 'v3',
     fallbackLng: 'en',
+    supportedLngs,
     ns: [
       'account',
       'calendar',

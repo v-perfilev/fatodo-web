@@ -18,12 +18,8 @@ import {ResetPasswordDTO} from '../../models/dto/ResetPasswordDTO';
 const PREFIX = 'auth/';
 
 export class AuthActions {
-  static setIsActive = (isActive: boolean) => (dispatch: AppDispatch) => {
-    dispatch(authSlice.actions.setIsActive(isActive));
-  };
-
-  static setIsSleepMode = (isSleepMode: boolean) => (dispatch: AppDispatch) => {
-    dispatch(authSlice.actions.setIsSleepMode(isSleepMode));
+  static resetError = () => (dispatch: AppDispatch) => {
+    dispatch(authSlice.actions.setError(undefined));
   };
 
   static setIsAuthenticated = () => (dispatch: AppDispatch) => {

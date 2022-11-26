@@ -49,7 +49,7 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
         window.clearTimeout(timerId);
       }
     }
-    return (): void => clearTimeout(timerId);
+    return (): void => window.clearTimeout(timerId);
   }, [activationTimer]);
 
   return (
@@ -74,4 +74,4 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
   );
 };
 
-export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer()])(NotActivated);
+export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer])(NotActivated);

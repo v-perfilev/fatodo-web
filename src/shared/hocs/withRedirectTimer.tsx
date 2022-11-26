@@ -1,30 +1,35 @@
 import React, {ComponentType, useEffect, useState} from 'react';
-import {Navigate} from 'react-router-dom';
+import {RootRoutes} from '../../routes/RootRouter';
+import {useNavigate} from 'react-router-dom';
 
 export type RedirectTimerProps = {
   timer: number;
   resetTimer: () => void;
 };
 
-const withRedirectTimer = (redirectLink = '/', timerInitValue = 60) => (
-  Component: ComponentType<RedirectTimerProps>,
-) => (props: any) => {
-  const [timer, setTimer] = useState<number>(timerInitValue);
+const withRedirectTimer = (Component: ComponentType<RedirectTimerProps>) => (props: any) => {
+  const navigate = useNavigate();
+  const [timer, setTimer] = useState<number>(60);
   let timerId: number;
+
+  const redirectToRoot = (): void => navigate(RootRoutes.ROOT);
 
   useEffect(() => {
     if (timer > 0 && !timerId) {
       timerId = window.setTimeout(() => setTimer((prevState) => prevState - 1), 1000);
     }
+    if (timer === 0) {
+      redirectToRoot();
+    }
     return (): void => window.clearTimeout(timerId);
   }, [timer]);
 
   const resetTimer = (): void => {
-    setTimer(0);
     window.clearTimeout(timerId);
+    setTimer(0);
   };
 
-  return timer === 0 ? <Navigate to={redirectLink} /> : <Component {...props} timer={timer} resetTimer={resetTimer} />;
+  return <Component {...props} timer={timer} resetTimer={resetTimer} />;
 };
 
 export default withRedirectTimer;

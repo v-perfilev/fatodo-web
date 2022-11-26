@@ -3,11 +3,18 @@ import {UserAccount} from '../../models/User';
 import {DateUtils} from './DateUtils';
 
 export class LanguageUtils {
-  public static getLanguages = (): readonly string[] => i18n.languages;
+  public static getLanguages = (): readonly string[] => {
+    return i18n.languages;
+  };
 
-  public static getLanguage = (): string => i18n.language;
+  public static getLanguage = (): string => {
+    const presentedLang = i18n.languages.find((l) => i18n.language.startsWith(l));
+    return presentedLang || LanguageUtils.getFallbackLanguage();
+  };
 
-  public static getFallbackLanguage = (): string => i18n.languages[0];
+  public static getFallbackLanguage = (): string => {
+    return i18n.languages[0];
+  };
 
   public static setLanguage = (code: string): void => {
     DateUtils.resetLocale(code);

@@ -8,7 +8,6 @@ import {AuthActions} from '../../../store/auth/authActions';
 import {emailValidator, passwordValidator, usernameValidator} from '../../../shared/validators';
 import * as Yup from 'yup';
 import withCaptcha, {CaptchaProps} from '../../../shared/hocs/withCaptcha';
-import i18n from '../../../shared/i18n';
 import {DateUtils} from '../../../shared/utils/DateUtils';
 import {RegistrationDTO} from '../../../models/dto/RegistrationDTO';
 import {SxProps} from '@mui/material';
@@ -17,6 +16,7 @@ import FormikPasswordInput from '../../../components/inputs/FormikPasswordInput'
 import LoadingButton from '../../../components/controls/LoadingButton';
 import PasswordStrengthBar from '../../../components/inputs/PasswordStrengthBar';
 import FVStack from '../../../components/boxes/FVStack';
+import {LanguageUtils} from '../../../shared/utils/LanguageUtils';
 
 export interface SignUpFormValues {
   email: string;
@@ -48,7 +48,7 @@ const SignUpForm = ({getToken, onSuccess}: SignUpFormProps) => {
   const handleSubmit = async (formValues: SignUpFormValues): Promise<void> => {
     dispatch(AuthActions.setLoading(true));
     const captchaToken = await getToken().catch(() => dispatch(AuthActions.setLoading(false)));
-    const language = i18n.language.toUpperCase();
+    const language = LanguageUtils.getLanguage().toUpperCase();
     const timezone = DateUtils.getTimezone();
 
     const dto: RegistrationDTO = {

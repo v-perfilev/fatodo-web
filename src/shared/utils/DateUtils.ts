@@ -1,11 +1,12 @@
 import moment from 'moment';
 import {tz} from 'moment-timezone';
-import initI18n from '../i18n';
 import {Moment} from 'moment/moment';
+import {LanguageUtils} from './LanguageUtils';
 
 export class DateUtils {
   static resetLocale = (lang?: string): void => {
-    const locale = (lang || initI18n.language).toLowerCase();
+    const i18nLang = LanguageUtils.getLanguage();
+    const locale = (lang || i18nLang).toLowerCase();
     moment.locale(locale);
   };
 

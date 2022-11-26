@@ -12,7 +12,6 @@ import {flowRight} from 'lodash';
 const withWsClient = (Component: ComponentType) => (props: any) => {
   const dispatch = useAppDispatch();
   const account = useAppSelector(AuthSelectors.account);
-  const isSleepMode = useAppSelector(AuthSelectors.isSleepMode);
   const wsStateHandler = useRef<WsStateHandler>();
   const wsEventHandler = useRef<WsEventHandler>();
 
@@ -30,7 +29,7 @@ const withWsClient = (Component: ComponentType) => (props: any) => {
   return (
     <>
       <Component {...props} />
-      <WsClient active={!isSleepMode} url={WS_URL} topics={[WS_ROOT_TOPIC]} onMessage={onMessage} />
+      <WsClient active url={WS_URL} topics={[WS_ROOT_TOPIC]} onMessage={onMessage} />
     </>
   );
 };

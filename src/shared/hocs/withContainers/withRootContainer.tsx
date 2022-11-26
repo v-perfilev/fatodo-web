@@ -6,7 +6,6 @@ import {ChatsActions} from '../../../store/chats/chatsActions';
 import {EventsActions} from '../../../store/events/eventsActions';
 import {AuthActions} from '../../../store/auth/authActions';
 import {SecurityUtils} from '../../utils/SecurityUtils';
-import {RootActions} from '../../../store/rootActions';
 import {flowRight} from 'lodash';
 
 export type WithRootProps = {
@@ -16,7 +15,6 @@ export type WithRootProps = {
 const withRootContainer = (Component: ComponentType<WithRootProps>): FC => (props: any): ReactElement => {
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(AuthSelectors.isAuthenticated);
-  const isSleepMode = useAppSelector(AuthSelectors.isSleepMode);
   const [ready, setReady] = useState(false);
 
   const login = (): void => {
@@ -34,18 +32,9 @@ const withRootContainer = (Component: ComponentType<WithRootProps>): FC => (prop
     dispatch(EventsActions.fetchUnreadCountThunk());
   };
 
-  const reset = (): void => {
-    dispatch(RootActions.resetState());
-  };
-
   useEffect(() => {
     login();
   }, []);
-
-  useEffect(() => {
-    !isSleepMode && isAuthenticated && refresh();
-    isSleepMode && reset();
-  }, [isSleepMode]);
 
   useEffect(() => {
     isAuthenticated && refresh();

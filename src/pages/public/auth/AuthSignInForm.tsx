@@ -62,6 +62,7 @@ const SignInForm = ({getToken}: SignInFormProps) => {
   };
 
   useEffect(() => {
+    error === 'auth.notActivated' && dispatch(AuthActions.resetError());
     error === 'auth.notActivated' && redirectToNotActivated();
   }, [error]);
 

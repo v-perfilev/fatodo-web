@@ -28,4 +28,4 @@ const PageNotFound = ({timer, resetTimer}: PageNotFoundProps) => {
   );
 };
 
-export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer()])(PageNotFound);
+export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer])(PageNotFound);

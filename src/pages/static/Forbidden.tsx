@@ -28,4 +28,4 @@ const Forbidden = ({timer, resetTimer}: ForbiddenProps) => {
   );
 };
 
-export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer()])(Forbidden);
+export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer])(Forbidden);
