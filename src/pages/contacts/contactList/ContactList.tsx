@@ -9,7 +9,6 @@ import {ContactRelation} from '../../../models/Contact';
 import ContactListItem from './ContactListItem';
 import ScrollCornerButton from '../../../components/surfaces/ScrollCornerButton';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
-import FVStack from '../../../components/boxes/FVStack';
 import VirtualizedList, {
   VirtualizedListMethods,
 } from '../../../components/layouts/lists/virtualizedList/VirtualizedList';
@@ -82,7 +81,7 @@ const ContactList = () => {
   }, [relations, filter]);
 
   return (
-    <FVStack>
+    <>
       <ContactListControl setFilter={setFilter} />
       <ConditionalSpinner loading={loading} loadingPlaceholder={<ContactListSkeleton />}>
         {relations.length === 0 && <ContactListStub />}
@@ -99,7 +98,7 @@ const ContactList = () => {
           </>
         )}
       </ConditionalSpinner>
-    </FVStack>
+    </>
   );
 };
 

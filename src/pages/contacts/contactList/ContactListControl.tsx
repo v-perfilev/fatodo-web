@@ -27,7 +27,6 @@ const ContactListControl = ({setFilter}: ContactListHeaderProps) => {
 const containerStyles: SxProps = (theme: Theme) => ({
   width: '100%',
   zIndex: 1,
-  paddingTop: 2,
   backgroundColor: theme.palette.background.default,
 });
 

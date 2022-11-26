@@ -13,6 +13,7 @@ import FHStack from '../../components/boxes/FHStack';
 import PlusIcon from '../../components/icons/PlusIcon';
 import {useContactDialogContext} from '../../shared/contexts/dialogContexts/ContactDialogContext';
 import PageContent from '../../components/layouts/PageContent';
+import FVStack from '../../components/boxes/FVStack';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -53,27 +54,29 @@ const ContactMainContainer = () => {
 
   const relationsIcon = relationCount > 0 ? <BadgeWithoutIcon color="secondary" count={relationCount} /> : undefined;
   const incomingIcon =
-    incomingRequestCount > 0 ? <BadgeWithoutIcon color="error" count={incomingRequestCount} /> : undefined;
+    incomingRequestCount > 0 ? <BadgeWithoutIcon color="secondary" count={incomingRequestCount} /> : undefined;
   const outcomingIcon =
     outcomingRequestCount > 0 ? <BadgeWithoutIcon color="secondary" count={outcomingRequestCount} /> : undefined;
 
   return (
     <PageContent maxWidth="md">
-      <Box>
-        <FHStack spacing={0}>
-          <Tabs sx={tabsStyles} variant="scrollable" textColor="primary" value={activeTab} onChange={handleChange}>
-            <Tab sx={tabStyles} label={t('contact:relations.title')} icon={relationsIcon} iconPosition="end" />
-            <Tab sx={tabStyles} label={t('contact:incoming.title')} icon={incomingIcon} iconPosition="end" />
-            <Tab sx={tabStyles} label={t('contact:outcoming.title')} icon={outcomingIcon} iconPosition="end" />
-          </Tabs>
-          <Fab color="primary" size="small" onClick={showContactRequestDialog}>
-            <PlusIcon />
-          </Fab>
-        </FHStack>
-      </Box>
-      {activeTab === 0 && <ContactList />}
-      {activeTab === 1 && <IncomingRequestList />}
-      {activeTab === 2 && <OutcomingRequestList />}
+      <FVStack>
+        <Box>
+          <FHStack spacing={0}>
+            <Tabs sx={tabsStyles} variant="scrollable" textColor="primary" value={activeTab} onChange={handleChange}>
+              <Tab sx={tabStyles} label={t('contact:relations.title')} icon={relationsIcon} iconPosition="end" />
+              <Tab sx={tabStyles} label={t('contact:incoming.title')} icon={incomingIcon} iconPosition="end" />
+              <Tab sx={tabStyles} label={t('contact:outcoming.title')} icon={outcomingIcon} iconPosition="end" />
+            </Tabs>
+            <Fab color="primary" size="small" onClick={showContactRequestDialog}>
+              <PlusIcon />
+            </Fab>
+          </FHStack>
+        </Box>
+        {activeTab === 0 && <ContactList />}
+        {activeTab === 1 && <IncomingRequestList />}
+        {activeTab === 2 && <OutcomingRequestList />}
+      </FVStack>
     </PageContent>
   );
 };

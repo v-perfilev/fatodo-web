@@ -41,6 +41,7 @@ const IncomingRequestListItem = ({request}: IncomingRequestListItemProps) => {
       action: acceptRequest,
       text: t('contact:incoming.accept'),
       icon: <CheckIcon />,
+      color: 'primary',
       disabled: disabled,
     },
     {

@@ -8,7 +8,7 @@ type BadgeContactIconProps = PropsWithChildren<SvgIconProps> & {
 
 const BadgeContactInfo = ({count, ...props}: BadgeContactIconProps) => {
   return (
-    <Badge badgeContent={count} color="error">
+    <Badge badgeContent={count} color="secondary">
       <UserListIcon {...props} />
     </Badge>
   );
