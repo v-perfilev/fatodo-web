@@ -21,7 +21,7 @@ const ChatListMessageEvent = ({message}: ChatListMessageEventProps) => {
   const text = MessageUtils.buildEventMessageText(params, messageUser, paramUsers, t);
 
   return (
-    <Typography color="grey.500" fontSize={14}>
+    <Typography color="grey.500" fontSize={12}>
       {text}
     </Typography>
   );
