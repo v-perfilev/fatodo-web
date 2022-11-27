@@ -6,7 +6,7 @@ import ReactionView from '../../../../components/views/ReactionView';
 import FHStack from '../../../../components/boxes/FHStack';
 import {Comment, CommentReactionType, commentReactionTypes} from '../../../../models/Comment';
 import {MessageReactionType} from '../../../../models/Message';
-import {SxProps, Typography} from '@mui/material';
+import {Box, SxProps, Typography} from '@mui/material';
 import {CommentsActions} from '../../../../store/comments/commentsActions';
 
 const buildReactionMap = (comment: Comment, isOwnComment: boolean): Map<CommentReactionType, number> => {
@@ -80,17 +80,12 @@ const CommentListItemReactions = ({comment, isOwnComment}: CommentListItemReacti
   };
 
   return (
-    <FVStack sx={containerStyles} spacing={1}>
-      {Array.from(reactionMap.keys()).map(reaction)}
-    </FVStack>
+    <Box>
+      <FVStack marginTop={1} spacing={1}>
+        {Array.from(reactionMap.keys()).map(reaction)}
+      </FVStack>
+    </Box>
   );
-};
-
-const containerStyles: SxProps = {
-  height: '100%',
-  flex: 1,
-  flexDirection: 'column',
-  justifyContent: 'center',
 };
 
 const reactionStyles = (isOutcoming: boolean): SxProps => ({

@@ -17,7 +17,7 @@ const GroupListCardCollapseButton = ({group, collapsed}: GroupListCardCollapseBu
     dispatch(GroupsActions.setCollapsed(groupId, value));
   };
 
-  const handlePress = (e: React.MouseEvent): void => {
+  const handleClick = (e: React.MouseEvent): void => {
     e.preventDefault();
     e.stopPropagation();
     setCollapsed(group.id, !collapsed);
@@ -25,7 +25,7 @@ const GroupListCardCollapseButton = ({group, collapsed}: GroupListCardCollapseBu
 
   return (
     <Box color="white">
-      <IconButton onClick={handlePress} color="inherit">
+      <IconButton onClick={handleClick} color="inherit">
         <CollapsedIcon collapsed={!collapsed} />
       </IconButton>
     </Box>

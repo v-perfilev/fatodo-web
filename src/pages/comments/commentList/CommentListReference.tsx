@@ -32,7 +32,7 @@ const CommentListReference = ({reference, setReference}: CommentListReferencePro
       <Typography fontWeight="bold" fontSize={12}>
         {user.username}, <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
       </Typography>
-      <IconButton size="small" onClick={clearReference}>
+      <IconButton sx={{width: 8, height: 8, overflow: 'hidden'}} onClick={clearReference}>
         <CloseIcon />
       </IconButton>
     </FHStack>

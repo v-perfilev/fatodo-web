@@ -7,7 +7,7 @@ import ChatSelectors from '../../../store/chat/chatSelectors';
 import InfoSelectors from '../../../store/info/infoSelectors';
 import {useTranslation} from 'react-i18next';
 import {ChatActions} from '../../../store/chat/chatActions';
-import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
+import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
 import RefreshIcon from '../../../components/icons/RefreshIcon';
 import MembersIcon from '../../../components/icons/MembersIcon';
 import UserPlusIcon from '../../../components/icons/UserPlusIcon';

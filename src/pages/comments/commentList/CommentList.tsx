@@ -27,7 +27,7 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   const stateTargetId = useAppSelector(CommentsSelectors.targetId);
   const comments = useAppSelector(CommentsSelectors.comments);
   const allLoaded = useAppSelector(CommentsSelectors.allLoaded);
-  const [loading, setLoading] = useDelayedState();
+  const [loading, setLoading] = useDelayedState(false);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
   const [reference, setReference] = useState<Comment>();
 

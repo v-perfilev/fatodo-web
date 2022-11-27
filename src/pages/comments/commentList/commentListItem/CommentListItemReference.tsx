@@ -23,7 +23,7 @@ const CommentListItemReference = ({reference}: CommentListItemReferenceProps) =>
       <Typography color="grey.400" fontWeight="bold" fontSize={12}>
         {t('comment:list.reference')}:
       </Typography>
-      <Typography fontWeight="bold" fontSize={12}>
+      <Typography color="grey.600" fontWeight="bold" fontSize={12}>
         {user?.username}, <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
       </Typography>
     </FHStack>

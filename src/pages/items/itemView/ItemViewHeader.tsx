@@ -5,7 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {GroupUtils} from '../../../shared/utils/GroupUtils';
 import {useAppSelector} from '../../../store/store';
 import ItemSelectors from '../../../store/item/itemSelectors';
-import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
+import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
 import PageHeader from '../../../components/layouts/PageHeader';
 import {useNavigate} from 'react-router-dom';
 import AuthSelectors from '../../../store/auth/authSelectors';
@@ -43,14 +43,14 @@ const ItemViewHeader = ({toggleCollapsed}: ItemViewHeaderProps) => {
       text: t('item:actions.edit'),
       icon: <EditIcon />,
       color: 'primary',
-      disabled: !canEdit,
+      hidden: !canEdit,
     },
     {
       action: openItemDeleteDialog,
       text: t('item:actions.delete'),
       icon: <DeleteIcon />,
       color: 'error',
-      disabled: !canEdit,
+      hidden: !canEdit,
     },
   ];
 

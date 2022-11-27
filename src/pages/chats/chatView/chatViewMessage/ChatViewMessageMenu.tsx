@@ -5,7 +5,7 @@ import EyeIcon from '../../../../components/icons/EyeIcon';
 import EditIcon from '../../../../components/icons/EditIcon';
 import DeleteIcon from '../../../../components/icons/DeleteIcon';
 import ReactionsIcon from '../../../../components/icons/ReactionsIcon';
-import PageMenu, {PageMenuItem} from '../../../../components/layouts/PageMenuProps';
+import PageMenu, {PageMenuItem} from '../../../../components/layouts/PageMenu';
 import {useChatDialogContext} from '../../../../shared/contexts/dialogContexts/ChatDialogContext';
 
 type ChatViewMessageMenuProps = {

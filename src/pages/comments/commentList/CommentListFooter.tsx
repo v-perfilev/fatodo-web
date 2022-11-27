@@ -31,6 +31,7 @@ const CommentListFooter = ({reference, setReference}: CommentsViewControlProps) 
     const dto: CommentDTO = {text: messageBody, referenceId: reference?.id};
     dispatch(CommentsActions.sendCommentThunk({targetId, dto}));
     setMessageBody('');
+    setReference(undefined);
     inputRef.current?.clear();
   };
 

@@ -12,7 +12,7 @@ import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import PlusIcon from '../../../components/icons/PlusIcon';
 import RefreshIcon from '../../../components/icons/RefreshIcon';
 import {useTranslation} from 'react-i18next';
-import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
+import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
 import {IconButton} from '@mui/material';
 import BellIcon from '../../../components/icons/BellIcon';
 

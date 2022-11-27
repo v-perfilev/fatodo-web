@@ -27,6 +27,7 @@ const containerStyles = (position: string): SxProps => ({
   flexDirection: 'column',
   width: '100%',
   height: PAGE_FOOTER_HEIGHT,
+  overflow: 'hidden',
 });
 
 const contentStyles: SxProps = {

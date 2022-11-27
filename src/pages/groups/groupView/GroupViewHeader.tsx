@@ -2,7 +2,7 @@ import React, {Dispatch, memo, SetStateAction} from 'react';
 import PageHeader from '../../../components/layouts/PageHeader';
 import RefreshIcon from '../../../components/icons/RefreshIcon';
 import {useTranslation} from 'react-i18next';
-import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
+import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
 import {useAppSelector} from '../../../store/store';
 import GroupSelectors from '../../../store/group/groupSelectors';
 import AuthSelectors from '../../../store/auth/authSelectors';
@@ -94,7 +94,7 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
       text: t('group:actions.delete'),
       icon: <DeleteIcon />,
       color: 'error',
-      hidden: !canLeave,
+      hidden: !canAdmin,
     },
   ];
 

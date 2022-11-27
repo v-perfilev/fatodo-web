@@ -52,8 +52,14 @@ const GroupItemMenu = ({item, canEdit}: GroupItemMenuProps) => {
       disabled: archivedLoading,
       hidden: !canEdit,
     },
-    {action: goToItemEdit, text: t('group:actions.edit'), icon: <EditIcon />, color: 'primary'},
-    {action: openItemDeleteDialog, text: t('group:actions.delete'), icon: <DeleteIcon />, color: 'error'},
+    {action: goToItemEdit, text: t('group:actions.edit'), icon: <EditIcon />, color: 'primary', hidden: !canEdit},
+    {
+      action: openItemDeleteDialog,
+      text: t('group:actions.delete'),
+      icon: <DeleteIcon />,
+      color: 'error',
+      hidden: !canEdit,
+    },
   ];
 
   return (

@@ -6,7 +6,7 @@ import UserMinusIcon from '../../../components/icons/UserMinusIcon';
 import {ContactsActions} from '../../../store/contacts/contactsActions';
 import InfoSelectors from '../../../store/info/infoSelectors';
 import {ContactRequest} from '../../../models/Contact';
-import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenuProps';
+import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
 import {useTranslation} from 'react-i18next';
 import {SxProps} from '@mui/material';
 

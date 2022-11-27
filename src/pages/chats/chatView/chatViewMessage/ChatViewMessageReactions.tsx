@@ -6,7 +6,7 @@ import FVStack from '../../../../components/boxes/FVStack';
 import FHStack from '../../../../components/boxes/FHStack';
 import {ChatActions} from '../../../../store/chat/chatActions';
 import ReactionView from '../../../../components/views/ReactionView';
-import {SxProps, Typography} from '@mui/material';
+import {Box, SxProps, Typography} from '@mui/material';
 
 const buildReactionMap = (message: Message, isOutcoming: boolean): Map<MessageReactionType, number> => {
   const map = new Map();
@@ -79,17 +79,12 @@ const ChatViewMessageReactions = ({comment, isOwnComment}: ChatViewMessageReacti
   };
 
   return (
-    <FVStack sx={containerStyles} spacing={1}>
-      {Array.from(reactionMap.keys()).map(reaction)}
-    </FVStack>
+    <Box>
+      <FVStack marginTop={1} spacing={1}>
+        {Array.from(reactionMap.keys()).map(reaction)}
+      </FVStack>
+    </Box>
   );
-};
-
-const containerStyles: SxProps = {
-  height: '100%',
-  flex: 1,
-  flexDirection: 'column',
-  justifyContent: 'center',
 };
 
 const reactionStyles = (isOutcoming: boolean): SxProps => ({
