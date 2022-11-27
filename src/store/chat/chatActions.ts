@@ -1,5 +1,5 @@
 import chatSlice from './chatSlice';
-import {Chat} from '../../models/Chat';
+import {Chat, ChatMember} from '../../models/Chat';
 import ChatService from '../../services/ChatService';
 import {MessageDTO} from '../../models/dto/MessageDTO';
 import {UserAccount} from '../../models/User';
@@ -28,6 +28,18 @@ const PREFIX = 'chat/';
 export class ChatActions {
   static reset = () => async (dispatch: AppDispatch) => {
     dispatch(chatSlice.actions.reset());
+  };
+
+  static removeChat = (chatId: string) => async (dispatch: AppDispatch) => {
+    dispatch(chatSlice.actions.removeChat(chatId));
+  };
+
+  static addMembers = (members: ChatMember[]) => async (dispatch: AppDispatch) => {
+    dispatch(chatSlice.actions.setMembers(members));
+  };
+
+  static removeMembers = (members: ChatMember[]) => async (dispatch: AppDispatch) => {
+    dispatch(chatSlice.actions.removeMembers(members));
   };
 
   static addMessage = (message: Message, account: UserAccount) => async (dispatch: AppDispatch) => {

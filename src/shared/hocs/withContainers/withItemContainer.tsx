@@ -20,11 +20,11 @@ const withItemContainer = (Component: ComponentType<WithItemProps>) => (props: a
   const item = useAppSelector(ItemSelectors.item);
   const {itemId} = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useDelayedState(itemId !== item?.id);
+  const [loading, setLoading] = useDelayedState(itemId !== item?.id || group?.id !== item?.id);
 
-  const canLoad = itemId !== item?.id;
+  const canLoad = itemId !== item?.id || group?.id !== item?.groupId;
   const wrongRoute = !itemId;
-  const loadingFinished = itemId === item?.id;
+  const loadingFinished = itemId === item?.id && group?.id === item?.groupId;
 
   const goBack = (): void => navigate(-1);
   const goToGroups = (): void => navigate(GroupRouteUtils.getListUrl());
@@ -53,7 +53,7 @@ const withItemContainer = (Component: ComponentType<WithItemProps>) => (props: a
     }
   }, [group, item]);
 
-  return <Component loading={!loadingFinished} group={group} item={item} {...props} />;
+  return <Component loading={loading || !loadingFinished} group={group} item={item} {...props} />;
 };
 
 export default withItemContainer;
