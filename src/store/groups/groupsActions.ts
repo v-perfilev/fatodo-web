@@ -16,14 +16,6 @@ export class GroupsActions {
     dispatch(groupsSlice.actions.setGroups(groups));
   };
 
-  static cacheGroups = () => (dispatch: AppDispatch) => {
-    dispatch(groupsSlice.actions.cacheGroups());
-  };
-
-  static resetGroupsFromCache = () => (dispatch: AppDispatch) => {
-    dispatch(groupsSlice.actions.resetGroupsFromCache());
-  };
-
   static addGroup = (group: Group) => (dispatch: AppDispatch) => {
     dispatch(groupsSlice.actions.addGroup(group));
   };
