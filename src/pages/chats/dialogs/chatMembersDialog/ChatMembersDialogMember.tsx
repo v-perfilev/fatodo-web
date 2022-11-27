@@ -14,9 +14,10 @@ import {IconButton} from '@mui/material';
 type ChatMembersDialogMemberProps = {
   chat: Chat;
   user: User;
+  onDelete: (userId: string) => void;
 };
 
-const ChatMembersDialogMember = ({chat, user}: ChatMembersDialogMemberProps) => {
+const ChatMembersDialogMember = ({chat, user, onDelete}: ChatMembersDialogMemberProps) => {
   const dispatch = useAppDispatch();
   const {t} = useTranslation();
   const account = useAppSelector(AuthSelectors.account);
@@ -31,6 +32,9 @@ const ChatMembersDialogMember = ({chat, user}: ChatMembersDialogMemberProps) => 
     setRemovingLoading(true);
     dispatch(ChatActions.removeChatMemberThunk({chat, userId: user.id}))
       .unwrap()
+      .then(() => {
+        onDelete(user.id);
+      })
       .finally(() => {
         setRemovingLoading(false);
         setShowRemovingConfirmation(false);

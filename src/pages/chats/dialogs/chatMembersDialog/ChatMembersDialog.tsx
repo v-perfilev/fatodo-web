@@ -32,16 +32,34 @@ const ChatMembersDialog = ({chat, show, close, switchToAddMembers}: ChatMembersD
   const users = useAppSelector((state) => usersSelector(state, memberIds));
   const {t} = useTranslation();
   const [usersToShow, setUsersToShow] = useState<User[]>([]);
+  const [deletedMemberIds, setDeletedMemberIds] = useState<string[]>([]);
+
+  const conditionalClose = (): void => {
+    if (deletedMemberIds.length >= 0) {
+      setDeletedMemberIds([]);
+    }
+    close();
+  };
+
+  const updateUsersToShow = (filter?: string): void => {
+    const updatedUsersToShow = users
+      .filter((user) => !deletedMemberIds.includes(user.id))
+      .filter((user) => filter === undefined || user.username.includes(filter));
+    setUsersToShow(updatedUsersToShow);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value;
-    const updatedUsersToShow = users.filter((u) => u.username.includes(value));
-    setUsersToShow(updatedUsersToShow);
+    updateUsersToShow(value);
+  };
+
+  const onMemberDelete = (userId: string): void => {
+    setDeletedMemberIds((prevState) => [...prevState, userId]);
   };
 
   useEffect(() => {
     if (chat) {
-      setUsersToShow(users);
+      updateUsersToShow();
     }
   }, [chat, users]);
 
@@ -51,7 +69,7 @@ const ChatMembersDialog = ({chat, show, close, switchToAddMembers}: ChatMembersD
       {usersToShow.length > 0 && (
         <FVStack>
           {usersToShow.map((user) => (
-            <ChatMembersDialogMember chat={chat} user={user} key={user.id} />
+            <ChatMembersDialogMember chat={chat} user={user} onDelete={onMemberDelete} key={user.id} />
           ))}
         </FVStack>
       )}
@@ -71,7 +89,15 @@ const ChatMembersDialog = ({chat, show, close, switchToAddMembers}: ChatMembersD
     </Button>
   );
 
-  return <ModalDialog open={show} close={close} title={t('chat:members.title')} content={content} actions={actions} />;
+  return (
+    <ModalDialog
+      open={show}
+      close={conditionalClose}
+      title={t('chat:members.title')}
+      content={content}
+      actions={actions}
+    />
+  );
 };
 
 export default memo(ChatMembersDialog);
