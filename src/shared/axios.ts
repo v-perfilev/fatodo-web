@@ -75,7 +75,7 @@ export const setupAxiosInterceptors = ({onUnauthenticated, enqueueSnack, handleR
 
   const handleErrorStatus = (response: AxiosResponse): void => {
     const status = ResponseUtils.getStatus(response);
-    if (status === 403 || status === 401) {
+    if (status === 401) {
       onUnauthenticated();
     }
   };
