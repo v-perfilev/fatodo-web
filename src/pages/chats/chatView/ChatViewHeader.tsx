@@ -96,7 +96,7 @@ const ChatViewHeader = () => {
       action: leaveChat,
       text: t('chat:menu.leaveChat'),
       icon: <LeaveIcon />,
-      color: 'primary',
+      color: 'error',
       hidden: chat.isDirect,
     },
     {
