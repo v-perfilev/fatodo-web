@@ -21,6 +21,7 @@ import {SnackActions} from '../snack/snackActions';
 import {ChatsActions} from '../chats/chatsActions';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {PageableList} from '../../models/PageableList';
+import {ChatRenameDTO} from '../../models/dto/ChatRenameDTO';
 
 const PREFIX = 'chat/';
 
@@ -44,14 +45,6 @@ export class ChatActions {
   static setMessageStatus = (status: MessageStatus, account: UserAccount) => async (dispatch: AppDispatch) => {
     dispatch(chatSlice.actions.setMessageStatus({status, account}));
   };
-
-  static selectChatThunk = createAsyncThunk<void, Chat, AsyncThunkConfig>(
-    PREFIX + 'selectChat',
-    async (chat, thunkAPI) => {
-      await thunkAPI.dispatch(chatSlice.actions.setChat(chat));
-      await thunkAPI.dispatch(ChatActions.fetchMessagesThunk({chatId: chat.id, offset: 0}));
-    },
-  );
 
   static fetchChatThunk = createAsyncThunk<Chat, string, AsyncThunkConfig>(
     PREFIX + 'fetchChat',
@@ -131,10 +124,10 @@ export class ChatActions {
     },
   );
 
-  static renameChatThunk = createAsyncThunk<void, {chat: Chat; title: string}, AsyncThunkConfig>(
+  static renameChatThunk = createAsyncThunk<void, {chat: Chat; dto: ChatRenameDTO}, AsyncThunkConfig>(
     PREFIX + 'renameChat',
-    async ({chat, title}, thunkAPI) => {
-      await ChatService.renameChat(chat.id, title);
+    async ({chat, dto}, thunkAPI) => {
+      await ChatService.renameChat(chat.id, dto);
       thunkAPI.dispatch(SnackActions.handleCode('chat.renamed', 'info'));
     },
   );

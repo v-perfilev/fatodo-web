@@ -43,7 +43,7 @@ const ChatRenameForm = ({chat, request, cancel}: ChatRenameFormProps) => {
       {(formikProps) => (
         <FVStack>
           <FormikTextInput
-            name="text"
+            name="title"
             label={t('chat:renameChat.fields.title.label')}
             disabled={formikProps.isSubmitting}
           />
