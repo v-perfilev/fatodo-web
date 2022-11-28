@@ -39,11 +39,9 @@ const CalendarViewReminderItem = ({reminder}: CalendarViewReminderItemProps) => 
           {groupView}
         </Typography>
       </FVStack>
-      <Box>
-        <Typography color="grey.500" fontSize={12}>
-          <DateView date={date} timeFormat="FULL" />
-        </Typography>
-      </Box>
+      <Typography color="grey.500" fontSize={12} whiteSpace="nowrap">
+        <DateView date={date} timeFormat="FULL" />
+      </Typography>
     </FHStack>
   );
 };

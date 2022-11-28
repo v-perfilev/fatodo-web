@@ -20,6 +20,7 @@ import AvatarGroup from '../../../components/surfaces/AvatarGroup';
 import PageHeader from '../../../components/layouts/PageHeader';
 import {useChatDialogContext} from '../../../shared/contexts/dialogContexts/ChatDialogContext';
 import CloseIcon from '../../../components/icons/CloseIcon';
+import TruncatedTypography from '../../../components/surfaces/TruncatedTypography';
 
 const ChatViewHeader = () => {
   const dispatch = useAppDispatch();
@@ -114,9 +115,9 @@ const ChatViewHeader = () => {
         <IconButton sx={closeButtonStyles} onClick={closeChat}>
           <CloseIcon />
         </IconButton>
-        <Typography color="primary" fontWeight="bold" fontSize={14}>
+        <TruncatedTypography color="primary" fontWeight="bold" fontSize={14}>
           {title}
-        </Typography>
+        </TruncatedTypography>
         {chat.isDirect && (
           <Typography color="grey.500" fontSize={14}>
             {t('chat:common.direct')}

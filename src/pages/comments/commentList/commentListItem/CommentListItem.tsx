@@ -14,6 +14,7 @@ import CommentListItemMenu from './CommentListItemMenu';
 import CommentListItemReference from './CommentListItemReference';
 import DateView from '../../../../components/views/DateView';
 import {Box, SxProps, Typography} from '@mui/material';
+import TruncatedTypography from '../../../../components/surfaces/TruncatedTypography';
 
 type CommentListItemProps = {
   comment: Comment;
@@ -36,11 +37,11 @@ const CommentListItem = ({comment, setReference}: CommentListItemProps) => {
       <FVStack sx={commentStyles} spacing={1}>
         <FHStack>
           <FHStack>
-            <Typography color="primary" fontWeight="bold" fontSize={14}>
+            <TruncatedTypography color="primary" fontWeight="bold" fontSize={14}>
               {user?.username}
-            </Typography>
+            </TruncatedTypography>
           </FHStack>
-          <Typography color="grey.400" fontWeight="bold" fontSize={12}>
+          <Typography color="grey.400" fontSize={12} whiteSpace="nowrap">
             <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
           </Typography>
           <FHStack flexGrow={0} spacing={0.5}>

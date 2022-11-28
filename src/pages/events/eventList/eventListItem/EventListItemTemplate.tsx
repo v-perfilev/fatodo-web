@@ -5,6 +5,7 @@ import DateView from '../../../../components/views/DateView';
 import {Box, SxProps, Typography} from '@mui/material';
 import PaperBox from '../../../../components/boxes/PaperBox';
 import EventSkeleton from '../../skeletons/EventSkeleton';
+import TruncatedTypography from '../../../../components/surfaces/TruncatedTypography';
 
 type EventListItemTemplateProps = {
   image?: ReactElement;
@@ -24,11 +25,11 @@ const EventListItemTemplate = ({image, title, content, message, date, loading}: 
       <FVStack spacing={1}>
         <FHStack>
           <FHStack>
-            <Typography color="grey.500" fontWeight="bold" fontSize={14}>
+            <TruncatedTypography color="grey.500" fontWeight="bold" fontSize={14}>
               {title}
-            </Typography>
+            </TruncatedTypography>
           </FHStack>
-          <Typography color="grey.400" fontWeight="bold" fontSize={12}>
+          <Typography color="grey.400" fontSize={12} whiteSpace="nowrap">
             <DateView date={dateToShow} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
           </Typography>
         </FHStack>

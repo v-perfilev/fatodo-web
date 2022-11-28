@@ -3,7 +3,7 @@ import React, {Dispatch, SetStateAction} from 'react';
 import {useTranslation} from 'react-i18next';
 import PageHeader from '../../../components/layouts/PageHeader';
 import {useChatDialogContext} from '../../../shared/contexts/dialogContexts/ChatDialogContext';
-import {Fab} from '@mui/material';
+import {Box, Fab} from '@mui/material';
 import PlusIcon from '../../../components/icons/PlusIcon';
 import FBox from '../../../components/boxes/FBox';
 
@@ -29,11 +29,11 @@ const ChatListControl = ({setFilter}: ChatListControlProps) => {
         fullWidth
         disableUnderline
       />
-      <FBox>
+      <Box>
         <Fab color="primary" size="small" onClick={showChatCreateDialog}>
           <PlusIcon />
         </Fab>
-      </FBox>
+      </Box>
     </PageHeader>
   );
 };

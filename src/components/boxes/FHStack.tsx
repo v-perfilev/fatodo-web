@@ -5,7 +5,7 @@ type FHStackProps = StackProps;
 
 const FHStack = ({children, ...props}: FHStackProps) => {
   return (
-    <Stack flexGrow={1} spacing={2} direction="row" alignItems="center" {...props}>
+    <Stack minWidth={0} flexGrow={1} spacing={2} direction="row" alignItems="center" {...props}>
       {children}
     </Stack>
   );

@@ -24,7 +24,7 @@ const EventListSkeleton = () => {
 };
 
 const containerStyles: SxProps = {
-  marginTop: PAGE_HEADER_HEIGHT + DEFAULT_MARGIN / 2 + 'px',
+  marginTop: PAGE_HEADER_HEIGHT + DEFAULT_MARGIN + 'px',
 };
 
 export default memo(EventListSkeleton);

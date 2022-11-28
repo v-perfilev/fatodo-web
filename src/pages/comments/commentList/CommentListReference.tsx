@@ -29,7 +29,7 @@ const CommentListReference = ({reference, setReference}: CommentListReferencePro
       <Typography color="grey.400" fontWeight="bold" fontSize={12}>
         {t('comment:list.reference')}:
       </Typography>
-      <Typography fontWeight="bold" fontSize={12}>
+      <Typography fontSize={12} whiteSpace="nowrap">
         {user.username}, <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
       </Typography>
       <IconButton sx={{width: 8, height: 8, overflow: 'hidden'}} onClick={clearReference}>

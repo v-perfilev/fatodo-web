@@ -37,7 +37,7 @@ const ChatViewMessageIncoming = ({message}: ChatViewMessageIncomingProps) => {
             </Typography>
           </FHStack>
           <FHStack flexGrow={0}>
-            <Typography color="grey.400" fontWeight="bold" fontSize={12}>
+            <Typography color="grey.400" fontSize={12} whiteSpace="nowrap">
               <DateView date={date} timeFormat="FULL" />
             </Typography>
             <ChatViewMessageMenu message={message} isOutcoming={false} />

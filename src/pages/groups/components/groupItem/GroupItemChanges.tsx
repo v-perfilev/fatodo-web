@@ -16,7 +16,7 @@ const GroupItemChanges = ({item}: GroupItemChangesProps) => {
   const date = new Date(item.createdAt);
 
   return (
-    <Typography fontSize={10} color="grey.500">
+    <Typography fontSize={10} color="grey.500" whiteSpace="nowrap">
       {user?.username} / <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
     </Typography>
   );

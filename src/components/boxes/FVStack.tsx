@@ -5,7 +5,7 @@ type FVStackProps = StackProps;
 
 const FVStack = ({children, ...props}: FVStackProps) => {
   return (
-    <Stack flexGrow={1} spacing={2} alignItems="stretch" {...props}>
+    <Stack minWidth={0} flexGrow={1} spacing={2} alignItems="stretch" {...props}>
       {children}
     </Stack>
   );

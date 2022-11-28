@@ -68,9 +68,11 @@ const ContactMainContainer = () => {
               <Tab sx={tabStyles} label={t('contact:incoming.title')} icon={incomingIcon} iconPosition="end" />
               <Tab sx={tabStyles} label={t('contact:outcoming.title')} icon={outcomingIcon} iconPosition="end" />
             </Tabs>
-            <Fab color="primary" size="small" onClick={showContactRequestDialog}>
-              <PlusIcon />
-            </Fab>
+            <Box>
+              <Fab color="primary" size="small" onClick={showContactRequestDialog}>
+                <PlusIcon />
+              </Fab>
+            </Box>
           </FHStack>
         </Box>
         {activeTab === 0 && <ContactList />}

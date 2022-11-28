@@ -17,6 +17,7 @@ import ChatListMessage from './chatListMessage/ChatListMessage';
 import {Theme} from '@mui/material/styles';
 import {ChatActions} from '../../../store/chat/chatActions';
 import FBox from '../../../components/boxes/FBox';
+import TruncatedTypography from '../../../components/surfaces/TruncatedTypography';
 
 type ChatListItemProps = {
   chat: Chat;
@@ -53,9 +54,9 @@ const ChatListItem = ({chat, isSelected}: ChatListItemProps) => {
         <FVStack spacing={0.5} alignItems="stretch" justifyContent="center">
           <FHStack spacing={1}>
             <FHStack spacing={1}>
-              <Typography color="primary" fontWeight="bold" fontSize={14}>
+              <TruncatedTypography color="primary" fontWeight="bold" fontSize={14}>
                 {title}
-              </Typography>
+              </TruncatedTypography>
               {chat.isDirect && (
                 <Typography color="grey.500" fontSize={14}>
                   {t('chat:common.direct')}
@@ -67,7 +68,7 @@ const ChatListItem = ({chat, isSelected}: ChatListItemProps) => {
                 </Box>
               )}
             </FHStack>
-            <Typography color="grey.500" fontSize={12}>
+            <Typography color="grey.500" fontSize={12} whiteSpace="nowrap">
               <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
             </Typography>
           </FHStack>
