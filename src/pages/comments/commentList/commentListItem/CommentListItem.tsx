@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction, useCallback} from 'react';
+import React, {useCallback} from 'react';
 import {useAppSelector} from '../../../../store/store';
 import AuthSelectors from '../../../../store/auth/authSelectors';
 import {useTranslation} from 'react-i18next';
@@ -8,20 +8,17 @@ import {Comment} from '../../../../models/Comment';
 import FHStack from '../../../../components/boxes/FHStack';
 import UserView from '../../../../components/views/UserView';
 import FVStack from '../../../../components/boxes/FVStack';
-import CommentListItemReferenceButton from './CommentListItemReferenceButton';
 import CommentListItemReactions from './CommentListItemReactions';
 import CommentListItemMenu from './CommentListItemMenu';
-import CommentListItemReference from './CommentListItemReference';
 import DateView from '../../../../components/views/DateView';
 import {Box, SxProps, Typography} from '@mui/material';
 import TruncatedTypography from '../../../../components/surfaces/TruncatedTypography';
 
 type CommentListItemProps = {
   comment: Comment;
-  setReference: Dispatch<SetStateAction<Comment>>;
 };
 
-const CommentListItem = ({comment, setReference}: CommentListItemProps) => {
+const CommentListItem = ({comment}: CommentListItemProps) => {
   const userSelector = useCallback(InfoSelectors.makeUserSelector(), []);
   const {t} = useTranslation();
   const account = useAppSelector(AuthSelectors.account);
@@ -45,11 +42,9 @@ const CommentListItem = ({comment, setReference}: CommentListItemProps) => {
             <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
           </Typography>
           <FHStack flexGrow={0} spacing={0.5}>
-            <CommentListItemReferenceButton comment={comment} setReference={setReference} />
-            <CommentListItemMenu comment={comment} isOwnComment={isOwnComment} setReference={setReference} />
+            <CommentListItemMenu comment={comment} isOwnComment={isOwnComment} />
           </FHStack>
         </FHStack>
-        {comment.reference && <CommentListItemReference reference={comment.reference} />}
         {!comment.isDeleted && <Typography fontSize={14}>{comment.text}</Typography>}
         {comment.isDeleted && (
           <Typography color="grey.400" fontWeight="bold" fontSize={14}>

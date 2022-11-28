@@ -11,16 +11,11 @@ import {useCommentDialogContext} from '../../../../shared/contexts/dialogContext
 type CommentListItemMenuProps = {
   comment: Comment;
   isOwnComment: boolean;
-  setReference: Dispatch<SetStateAction<Comment>>;
 };
 
-const CommentListItemMenu = ({comment, isOwnComment, setReference}: CommentListItemMenuProps) => {
+const CommentListItemMenu = ({comment, isOwnComment}: CommentListItemMenuProps) => {
   const {t} = useTranslation();
   const {showCommentReactionsDialog, showCommentEditDialog, showCommentDeleteDialog} = useCommentDialogContext();
-
-  const replyToComment = (): void => {
-    setReference(comment);
-  };
 
   const openReactionsDialog = (): void => {
     showCommentReactionsDialog(comment);
@@ -35,12 +30,6 @@ const CommentListItemMenu = ({comment, isOwnComment, setReference}: CommentListI
   };
 
   const menuItems: PageMenuItem[] = [
-    {
-      action: replyToComment,
-      text: t('comment:comment.buttons.response'),
-      icon: <ReplyIcon />,
-      color: 'primary',
-    },
     {
       action: openReactionsDialog,
       text: t('comment:comment.actions.reactions'),

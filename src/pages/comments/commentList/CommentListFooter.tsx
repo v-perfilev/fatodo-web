@@ -5,20 +5,13 @@ import ClearableTextInput, {ClearableTextInputMethods} from '../../../components
 import {useTranslation} from 'react-i18next';
 import {CommentDTO} from '../../../models/dto/CommentDTO';
 import CommentsSelectors from '../../../store/comments/commentsSelectors';
-import {Comment} from '../../../models/Comment';
 import SendMessageIcon from '../../../components/icons/SendMessageIcon';
 import {CommentsActions} from '../../../store/comments/commentsActions';
 import {IconButton} from '@mui/material';
 import FVStack from '../../../components/boxes/FVStack';
-import CommentListReference from './CommentListReference';
 import PageFooter from '../../../components/layouts/PageFooter';
 
-type CommentsViewControlProps = {
-  reference: Comment;
-  setReference: (comment: Comment) => void;
-};
-
-const CommentListFooter = ({reference, setReference}: CommentsViewControlProps) => {
+const CommentListFooter = () => {
   const dispatch = useAppDispatch();
   const {t} = useTranslation();
   const targetId = useAppSelector(CommentsSelectors.targetId);
@@ -28,10 +21,9 @@ const CommentListFooter = ({reference, setReference}: CommentsViewControlProps) 
   const isValid = messageBody.length > 0;
 
   const handleSend = (): void => {
-    const dto: CommentDTO = {text: messageBody, referenceId: reference?.id};
+    const dto: CommentDTO = {text: messageBody};
     dispatch(CommentsActions.sendCommentThunk({targetId, dto}));
     setMessageBody('');
-    setReference(undefined);
     inputRef.current?.clear();
   };
 
@@ -50,7 +42,6 @@ const CommentListFooter = ({reference, setReference}: CommentsViewControlProps) 
   return (
     <PageFooter maxWidth="md" position="absolute">
       <FVStack spacing={0}>
-        {reference && <CommentListReference reference={reference} setReference={setReference} />}
         <ClearableTextInput
           placeholder={t('comment:list.inputPlaceholder')}
           onChange={handleChange}

@@ -29,7 +29,6 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   const allLoaded = useAppSelector(CommentsSelectors.allLoaded);
   const [loading, setLoading] = useDelayedState(false);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
-  const [reference, setReference] = useState<Comment>();
 
   const canLoad = targetId && targetId !== stateTargetId;
   const contextLoading = !targetId || targetId !== stateTargetId;
@@ -62,7 +61,7 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   const itemRenderer = useCallback(
     (comment: Comment) => (
       <PageContent maxWidth="md">
-        <CommentListItem comment={comment} setReference={setReference} />
+        <CommentListItem comment={comment} />
       </PageContent>
     ),
     [],
@@ -96,7 +95,7 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
         />
         <ScrollCornerButton show={!hideScrollButton} action={scrollDown} down bottomPadding={PAGE_FOOTER_HEIGHT} />
       </ConditionalSpinner>
-      <CommentListFooter reference={reference} setReference={setReference} />
+      <CommentListFooter />
     </>
   );
 };
