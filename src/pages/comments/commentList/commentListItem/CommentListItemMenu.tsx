@@ -1,10 +1,9 @@
-import React, {Dispatch, SetStateAction} from 'react';
+import React from 'react';
 import {useTranslation} from 'react-i18next';
 import EditIcon from '../../../../components/icons/EditIcon';
 import DeleteIcon from '../../../../components/icons/DeleteIcon';
 import ReactionsIcon from '../../../../components/icons/ReactionsIcon';
 import {Comment} from '../../../../models/Comment';
-import ReplyIcon from '../../../../components/icons/ReplyIcon';
 import PageMenu, {PageMenuItem} from '../../../../components/layouts/PageMenu';
 import {useCommentDialogContext} from '../../../../shared/contexts/dialogContexts/CommentDialogContext';
 

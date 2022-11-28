@@ -20,7 +20,7 @@ const ChatViewFooter = () => {
   const isValid = messageBody.length > 0;
 
   const handleSend = (): void => {
-    const dto: MessageDTO = {text: messageBody, referenceId: null};
+    const dto: MessageDTO = {text: messageBody};
     dispatch(ChatActions.sendMessageThunk({chatId: chat.id, dto}));
     setMessageBody('');
     inputRef.current?.clear();
