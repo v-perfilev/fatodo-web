@@ -4,6 +4,7 @@ import {useAppSelector} from '../../../../store/store';
 import InfoSelectors from '../../../../store/info/infoSelectors';
 import DateView from '../../../../components/views/DateView';
 import {Typography} from '@mui/material';
+import UserLink from '../../../../components/links/UserLink';
 
 type GroupItemChangesProps = {
   item: Item;
@@ -17,7 +18,7 @@ const GroupItemChanges = ({item}: GroupItemChangesProps) => {
 
   return (
     <Typography fontSize={10} color="grey.500" whiteSpace="nowrap">
-      {user?.username} / <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
+      <UserLink user={user} /> / <DateView date={date} timeFormat="FULL" dateFormat="DEPENDS_ON_DAY" />
     </Typography>
   );
 };

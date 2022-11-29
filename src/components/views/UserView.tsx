@@ -19,6 +19,7 @@ const UserView = ({user, size, withUserPic = true, withUsername = false}: UserVi
   const account = useAppSelector(AuthSelectors.account);
 
   const isAnotherUser = user && user.id !== account.id;
+  const isNotDeleted = user && !user.deleted;
 
   const userView = (
     <FHStack spacing={1}>
@@ -29,7 +30,11 @@ const UserView = ({user, size, withUserPic = true, withUsername = false}: UserVi
 
   const userPopupView = <UserPopupView user={user} />;
 
-  return isAnotherUser ? <HoverPopup anchorElement={userView} popupElement={userPopupView} /> : userView;
+  return isAnotherUser || isNotDeleted ? (
+    <HoverPopup anchorElement={userView} popupElement={userPopupView} />
+  ) : (
+    userView
+  );
 };
 
 export default UserView;
