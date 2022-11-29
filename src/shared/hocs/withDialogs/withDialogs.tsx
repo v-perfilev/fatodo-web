@@ -9,6 +9,7 @@ import withCommentDialogs from './withCommentDialogs';
 import withContactDialogs from './withContactDialogs';
 import withGroupDialogs from './withGroupDialogs';
 import withCalendarDialogs from './withCalendarDialogs';
+import withAccountDialogs from './withAccountDialogs';
 
 const withDialogs = (Component: ComponentType) => (props: any) => {
   const [dialogMap, setDialogMap] = useState<Map<string, DialogComponentWithProps>>(new Map());
@@ -98,6 +99,7 @@ const containerStyles: SxProps = {
 export default flowRight([
   memo,
   withDialogs,
+  withAccountDialogs,
   withCalendarDialogs,
   withChatDialogs,
   withCommentDialogs,

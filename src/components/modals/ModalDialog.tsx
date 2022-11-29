@@ -22,15 +22,16 @@ type ModalDialogProps = {
   content: ReactElement | string;
   actions?: ReactElement;
   size?: Breakpoint;
+  color?: string;
   withText?: boolean;
 };
 
-const ModalDialog = ({open, close, title, content, actions, size, withText}: ModalDialogProps) => {
+const ModalDialog = ({open, close, title, content, actions, size, color = 'primary', withText}: ModalDialogProps) => {
   return (
     <Dialog open={open} onClose={close} fullWidth maxWidth={size}>
       <DialogTitle sx={titleStyles}>
         <FHStack justifyContent="space-between">
-          <Typography color="primary" fontSize="18" fontWeight="bold">
+          <Typography color={color} fontSize="18" fontWeight="bold">
             {title}
           </Typography>
           <IconButton size="small" onClick={close}>
@@ -38,7 +39,7 @@ const ModalDialog = ({open, close, title, content, actions, size, withText}: Mod
           </IconButton>
         </FHStack>
       </DialogTitle>
-      <PageDivider height="2px" color="primary.light" />
+      <PageDivider height="2px" color={`${color}.light`} />
       <DialogContent>
         {withText && <DialogContentText>{content}</DialogContentText>}
         {!withText && <Box>{content}</Box>}

@@ -2,16 +2,27 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import PageHeader from '../../../components/layouts/PageHeader';
 import AccountMainForm from './AccountMainForm';
-import {SxProps} from '@mui/material';
+import {Button, SxProps} from '@mui/material';
 import PageContent from '../../../components/layouts/PageContent';
+import PageDivider from '../../../components/layouts/PageDivider';
+import {useAccountDialogContext} from '../../../shared/contexts/dialogContexts/AccountDialogContext';
+import FVStack from '../../../components/boxes/FVStack';
 
 const AccountMain = () => {
   const {t} = useTranslation();
+  const {showDeletePermanentlyDialog} = useAccountDialogContext();
+
   return (
     <>
       <PageHeader maxWidth="md" title={t('routes.AccountForm')} />
       <PageContent sx={containerStyles} maxWidth="md">
-        <AccountMainForm />
+        <FVStack spacing={2}>
+          <AccountMainForm />
+          <PageDivider />
+          <Button variant="contained" color="error" onClick={showDeletePermanentlyDialog}>
+            {t('account:actions.deletePermanently')}
+          </Button>
+        </FVStack>
       </PageContent>
     </>
   );
