@@ -30,7 +30,7 @@ const UserView = ({user, size, withUserPic = true, withUsername = false}: UserVi
 
   const userPopupView = <UserPopupView user={user} />;
 
-  return isAnotherUser || isNotDeleted ? (
+  return isAnotherUser && isNotDeleted ? (
     <HoverPopup anchorElement={userView} popupElement={userPopupView} />
   ) : (
     userView
