@@ -27,7 +27,7 @@ const VirtualizedListMeasurer = (props: VirtualizedListMeasurerProps<any>) => {
       .map((index) => keyExtractor(index))
       .filter((key) => keyCache.keys().includes(key));
     return loadedLength !== keysInCache.length || loadedLength !== keyCache.size();
-  }, [loadedLength]);
+  }, [itemData]);
 
   const updateCaches = useCallback((): void => {
     // clear key cache
@@ -44,7 +44,7 @@ const VirtualizedListMeasurer = (props: VirtualizedListMeasurerProps<any>) => {
       }
     });
     forceUpdate();
-  }, [loadedLength]);
+  }, [itemData]);
 
   const measure = useCallback(() => {
     if (measurerRef.current && indexesToMeasureMap.current?.size > 0) {

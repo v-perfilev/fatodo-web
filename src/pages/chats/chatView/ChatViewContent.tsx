@@ -107,7 +107,7 @@ const ChatViewContent = () => {
   scroll up button
    */
 
-  const scrollUp = (): void => listRef.current.scrollToBottom();
+  const scrollDown = (): void => listRef.current.scrollToBottom();
 
   return (
     <>
@@ -131,7 +131,7 @@ const ChatViewContent = () => {
             <FBox sx={boxStyles}>
               <ScrollCornerButton
                 show={!hideScrollButton}
-                action={scrollUp}
+                action={scrollDown}
                 down
                 highlighted={scrollButtonHighlighted}
                 bottomPadding={PAGE_FOOTER_HEIGHT}
