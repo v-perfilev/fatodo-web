@@ -24,6 +24,8 @@ import './styles.css';
 import './shared/i18n';
 import RootRouter from './routes/RootRouter';
 import withDialogs from './shared/hocs/withDialogs/withDialogs';
+import withNotificationDisplay from './shared/hocs/withNotificationDisplay';
+import {NavigateSetter} from './shared/history';
 
 // setup axios
 const axiosActions = bindActionCreators(
@@ -44,12 +46,18 @@ type AppProps = {
   ready: boolean;
 };
 
-const App = ({ready}: AppProps) => <Router>{ready && <RootRouter />}</Router>;
+const App = ({ready}: AppProps) => (
+  <Router>
+    {ready && <RootRouter />}
+    <NavigateSetter />
+  </Router>
+);
 
 const WrappedApp = flowRight([
   hot(module),
   withStore,
   withMui,
+  withNotificationDisplay,
   withSnackDisplay,
   withWsClient,
   withLoader,

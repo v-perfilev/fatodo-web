@@ -23,7 +23,7 @@ const CalendarViewDateContainer = ({activeMonthIndex, date, reminders}: Calendar
   return (
     <FVStack sx={containerStyles(bg, isSmallDevice)} spacing={0.5}>
       <FHStack flexGrow={0} justifyContent="flex-end">
-        <Typography fontSize="14" fontWeight="bold" color={color}>
+        <Typography fontSize={14} fontWeight="bold" color={color}>
           {date.date}
         </Typography>
       </FHStack>

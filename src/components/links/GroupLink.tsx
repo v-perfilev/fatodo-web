@@ -6,12 +6,15 @@ import {GroupRouteUtils} from '../../routes/GroupRouter';
 type GroupLinkProps = {
   group: GroupInfo;
   color?: string;
+  noLink?: boolean;
 };
 
-export const GroupLink = ({group, color}: GroupLinkProps) => {
+export const GroupLink = ({group, color, noLink}: GroupLinkProps) => {
   const url = GroupRouteUtils.getViewUrl(group.id);
 
-  return (
+  return noLink ? (
+    <>{group.title}</>
+  ) : (
     <Link to={url} color={color}>
       {group.title}
     </Link>

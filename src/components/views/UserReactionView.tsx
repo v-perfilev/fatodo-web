@@ -9,12 +9,13 @@ import {Box, SxProps} from '@mui/material';
 type UserReactionViewProps = {
   user: User;
   reactionType: MessageReactionType & CommentReactionType;
+  size?: number;
 };
 
-const UserReactionView = ({user, reactionType}: UserReactionViewProps) => {
+const UserReactionView = ({user, reactionType, size}: UserReactionViewProps) => {
   return (
     <Box sx={containerStyles}>
-      <UserView user={user} />
+      <UserView user={user} size={size} />
       <Box sx={reactionStyles}>
         <ReactionView reactionType={reactionType} color="primary" />
       </Box>

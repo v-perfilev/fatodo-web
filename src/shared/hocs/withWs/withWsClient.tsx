@@ -8,22 +8,32 @@ import {WsEventHandler} from './WsEventHandler';
 import {WsStateHandler} from './WsStateHandler';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {flowRight} from 'lodash';
+import {WsPushHandler} from './WsPushHandler';
 
 const withWsClient = (Component: ComponentType) => (props: any) => {
   const dispatch = useAppDispatch();
   const account = useAppSelector(AuthSelectors.account);
   const wsStateHandler = useRef<WsStateHandler>();
   const wsEventHandler = useRef<WsEventHandler>();
+  const wsPushHandler = useRef<WsPushHandler>();
 
   const onMessage = (msg: WsEvent<any>): void => {
     msg.payload = JSON.parse(msg.payload);
     wsStateHandler.current.handleMessage(msg);
     wsEventHandler.current.handleMessage(msg);
+    wsPushHandler.current?.handleMessage(msg);
   };
 
   useEffect(() => {
-    wsStateHandler.current = new WsStateHandler(dispatch, account);
-    wsEventHandler.current = new WsEventHandler(dispatch, account);
+    if (account) {
+      wsStateHandler.current = new WsStateHandler(dispatch, account);
+      wsEventHandler.current = new WsEventHandler(dispatch, account);
+      wsPushHandler.current = new WsPushHandler(dispatch, account);
+    } else {
+      wsStateHandler.current = undefined;
+      wsEventHandler.current = undefined;
+      wsPushHandler.current = undefined;
+    }
   }, [account]);
 
   return (

@@ -10,9 +10,10 @@ import {ChatRouteUtils} from '../../routes/ChatRouter';
 type ChatLinkProps = PropsWithChildren<{
   chat: ChatInfo;
   color?: string;
+  noLink?: boolean;
 }>;
 
-export const ChatLink = ({chat, color, children}: ChatLinkProps) => {
+export const ChatLink = ({chat, color, noLink, children}: ChatLinkProps) => {
   const usersSelector = useCallback(InfoSelectors.makeUsersSelector(), []);
   const memberIds = chat.members.map((m) => m.userId);
   const account = useAppSelector(AuthSelectors.account);
@@ -21,7 +22,9 @@ export const ChatLink = ({chat, color, children}: ChatLinkProps) => {
   const title = children || ChatUtils.getTitle(chat, users, account);
   const url = ChatRouteUtils.getChatUrl(chat.id);
 
-  return (
+  return noLink ? (
+    <>{title}</>
+  ) : (
     <Link to={url} color={color}>
       {title}
     </Link>

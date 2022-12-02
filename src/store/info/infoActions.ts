@@ -12,6 +12,8 @@ import {FilterUtils} from '../../shared/utils/FilterUtils';
 import {ChatInfo} from '../../models/Chat';
 import {MessageInfo} from '../../models/Message';
 import {CommentInfo, CommentThreadInfo} from '../../models/Comment';
+import {EventUtils} from '../../shared/utils/EventUtils';
+import {Event} from '../../models/Event';
 
 const PREFIX = 'info/';
 
@@ -108,6 +110,33 @@ export class InfoActions {
   static refreshCommentThreadsThunk = createAsyncThunk(PREFIX + 'refreshCommentThreads', async (targetId: string) => {
     await CommentService.refreshThread(targetId);
   });
+
+  /*
+  Dependencies
+   */
+  static loadDependenciesThunk = createAsyncThunk<void, Event[], AsyncThunkConfig>(
+    PREFIX + 'loadDependencies',
+    async (events, thunkAPI) => {
+      // handle userIds
+      const userIds = EventUtils.extractEventsUserIds(events);
+      thunkAPI.dispatch(InfoActions.handleUserIdsThunk(userIds));
+      // handle groupIds
+      const groupIds = EventUtils.extractEventsGroupIds(events);
+      thunkAPI.dispatch(InfoActions.handleGroupIdsThunk(groupIds));
+      // handle itemIds
+      const itemIds = EventUtils.extractEventsItemIds(events);
+      thunkAPI.dispatch(InfoActions.handleItemIdsThunk(itemIds));
+      // handle chatIds
+      const chatIds = EventUtils.extractEventsChatIds(events);
+      thunkAPI.dispatch(InfoActions.handleChatIdsThunk(chatIds));
+      // handle messageIds
+      const messageIds = EventUtils.extractEventsMessageIds(events);
+      thunkAPI.dispatch(InfoActions.handleMessageIdsThunk(messageIds));
+      // handle commentIds
+      const commentIds = EventUtils.extractEventsCommentIds(events);
+      thunkAPI.dispatch(InfoActions.handleCommentIdsThunk(commentIds));
+    },
+  );
 }
 
 const extractIdsToLoad = (ids: string[], entries: [string, any][]): string[] => {

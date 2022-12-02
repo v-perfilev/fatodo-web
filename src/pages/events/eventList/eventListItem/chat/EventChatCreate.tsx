@@ -3,7 +3,7 @@ import EventListItemTemplate from '../EventListItemTemplate';
 import {Trans, useTranslation} from 'react-i18next';
 import React, {ReactElement} from 'react';
 import ChatLink from '../../../../../components/links/ChatLink';
-import EventListItemUsers from '../EventListItemUsers';
+import UserListLinks from '../../../../../components/links/UserListLinks';
 import UserView from '../../../../../components/views/UserView';
 import UserLink from '../../../../../components/links/UserLink';
 
@@ -14,7 +14,7 @@ const EventChatCreate = ({user, chat, users, date}: WithEventChatProps) => {
 
   const User = (): ReactElement => (user ? <UserLink user={user} /> : null);
   const Chat = (): ReactElement => (chat ? <ChatLink chat={chat}>{t('event:links.chat')}</ChatLink> : null);
-  const Users = (): ReactElement => (users ? <EventListItemUsers users={users} /> : null);
+  const Users = (): ReactElement => (users ? <UserListLinks users={users} /> : null);
 
   const image = <UserView user={user} />;
 
