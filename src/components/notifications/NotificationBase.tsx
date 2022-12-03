@@ -15,9 +15,9 @@ const NotificationBase = ({notificationBaseRef, children}: NotificationBaseProps
   const [open, setOpen] = useState<boolean>(false);
 
   const transitions = useTransition(open, {
-    from: {opacity: 0, transform: 'translateX(100%)'},
+    from: {opacity: 0, transform: 'translateX(150%)'},
     enter: [{opacity: 1}, {transform: 'translateX(0%)'}],
-    leave: [{opacity: 0}, {transform: 'translateX(100%)'}],
+    leave: [{opacity: 0}, {transform: 'translateX(150%)'}],
     config: config.default,
   });
 

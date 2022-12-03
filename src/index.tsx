@@ -26,6 +26,7 @@ import RootRouter from './routes/RootRouter';
 import withDialogs from './shared/hocs/withDialogs/withDialogs';
 import withNotificationDisplay from './shared/hocs/withNotificationDisplay';
 import {NavigateSetter} from './shared/history';
+import withSound from './shared/hocs/withSound';
 
 // setup axios
 const axiosActions = bindActionCreators(
@@ -57,6 +58,7 @@ const WrappedApp = flowRight([
   hot(module),
   withStore,
   withMui,
+  withSound,
   withNotificationDisplay,
   withSnackDisplay,
   withWsClient,

@@ -9,9 +9,11 @@ import {WsStateHandler} from './WsStateHandler';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {flowRight} from 'lodash';
 import {WsPushHandler} from './WsPushHandler';
+import {useSoundContext} from '../../contexts/SoundContext';
 
 const withWsClient = (Component: ComponentType) => (props: any) => {
   const dispatch = useAppDispatch();
+  const sounds = useSoundContext();
   const account = useAppSelector(AuthSelectors.account);
   const wsStateHandler = useRef<WsStateHandler>();
   const wsEventHandler = useRef<WsEventHandler>();
@@ -28,7 +30,7 @@ const withWsClient = (Component: ComponentType) => (props: any) => {
     if (account) {
       wsStateHandler.current = new WsStateHandler(dispatch, account);
       wsEventHandler.current = new WsEventHandler(dispatch, account);
-      wsPushHandler.current = new WsPushHandler(dispatch, account);
+      wsPushHandler.current = new WsPushHandler(dispatch, account, sounds);
     } else {
       wsStateHandler.current = undefined;
       wsEventHandler.current = undefined;
