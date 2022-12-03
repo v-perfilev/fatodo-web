@@ -4,7 +4,6 @@ import {useTranslation} from 'react-i18next';
 import FHStack from '../../../../components/boxes/FHStack';
 import {useAppSelector} from '../../../../store/store';
 import InfoSelectors from '../../../../store/info/infoSelectors';
-import {MessageUtils} from '../../../../shared/utils/MessageUtils';
 import AuthSelectors from '../../../../store/auth/authSelectors';
 import FVStack from '../../../../components/boxes/FVStack';
 import UserView from '../../../../components/views/UserView';
@@ -12,6 +11,7 @@ import ChatViewMessageReactions from './ChatViewMessageReactions';
 import ChatViewMessageMenu from './ChatViewMessageMenu';
 import DateView from '../../../../components/views/DateView';
 import {Box, SxProps, Typography} from '@mui/material';
+import {MessageUtils} from '../../../../shared/utils/MessageUtils';
 
 type ChatViewMessageIncomingProps = {
   message: Message;
@@ -64,7 +64,8 @@ const messageStyles = (isRead: boolean): SxProps => ({
   flexShrink: 1,
   minWidth: '60%',
   borderWidth: 1,
-  borderColor: isRead ? 'grey.50' : 'primary',
+  borderStyle: 'solid',
+  borderColor: isRead ? 'grey.50' : 'primary.main',
   paddingLeft: 2,
   paddingRight: 1,
   paddingTop: 1,
