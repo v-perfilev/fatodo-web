@@ -1,5 +1,5 @@
-import React, {CSSProperties, memo, PropsWithChildren, Ref, useImperativeHandle, useState} from 'react';
-import {animated, config, useTransition} from 'react-spring';
+import React, {CSSProperties, memo, PropsWithChildren, Ref, useImperativeHandle} from 'react';
+import {animated, useSpring} from 'react-spring';
 import {HEADER_HEIGHT} from '../../constants';
 
 type NotificationBaseProps = PropsWithChildren<{
@@ -12,22 +12,15 @@ export type NotificationBaseMethods = {
 };
 
 const NotificationBase = ({notificationBaseRef, children}: NotificationBaseProps) => {
-  const [open, setOpen] = useState<boolean>(false);
-
-  const transitions = useTransition(open, {
-    from: {opacity: 0, transform: 'translateX(150%)'},
-    enter: [{opacity: 1}, {transform: 'translateX(0%)'}],
-    leave: [{opacity: 0}, {transform: 'translateX(150%)'}],
-    config: config.default,
-  });
+  const [styles, api] = useSpring(() => ({opacity: 0, transform: 'translateX(150%)', config: {duration: 300}}));
 
   const show = () => {
-    setOpen(true);
+    api.start({opacity: 1, transform: 'translateX(0%)'});
   };
 
   const close = (): Promise<void> => {
-    setOpen(false);
-    return new Promise((resolve) => setTimeout(() => resolve(), config.default.tension));
+    api.start({opacity: 0, transform: 'translateX(150%)'});
+    return new Promise((resolve) => setTimeout(() => resolve(), 300));
   };
 
   useImperativeHandle(
@@ -39,7 +32,7 @@ const NotificationBase = ({notificationBaseRef, children}: NotificationBaseProps
     [],
   );
 
-  return transitions((style) => <animated.div style={{...containerStyle, ...style}}>{children}</animated.div>);
+  return <animated.div style={{...containerStyle, ...styles}}>{children}</animated.div>;
 };
 
 const containerStyle: CSSProperties = {
