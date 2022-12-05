@@ -21,11 +21,15 @@ import PageHeader from '../../../components/layouts/PageHeader';
 import {useChatDialogContext} from '../../../shared/contexts/dialogContexts/ChatDialogContext';
 import CloseIcon from '../../../components/icons/CloseIcon';
 import TruncatedTypography from '../../../components/surfaces/TruncatedTypography';
+import ChatsSelectors from '../../../store/chats/chatsSelectors';
+import EyeIcon from '../../../components/icons/EyeIcon';
 
 const ChatViewHeader = () => {
   const dispatch = useAppDispatch();
+  const unreadMessageIdsSelector = useCallback(ChatsSelectors.makeUnreadMessageIdsSelector(), []);
   const usersSelector = useCallback(InfoSelectors.makeUsersSelector(), []);
   const chat = useAppSelector(ChatSelectors.chat);
+  const unreadMessageIds = useAppSelector((state) => unreadMessageIdsSelector(state, chat?.id));
   const memberIds = chat.members.map((m) => m.userId);
   const users = useAppSelector((state) => usersSelector(state, memberIds));
   const account = useAppSelector(AuthSelectors.account);
@@ -38,6 +42,10 @@ const ChatViewHeader = () => {
     showChatDeleteDialog,
   } = useChatDialogContext();
   const {t} = useTranslation();
+
+  const showMarkAsRead = useMemo<boolean>(() => {
+    return unreadMessageIds.length > 0;
+  }, [chat, unreadMessageIds]);
 
   const title = useMemo<string>(() => {
     return ChatUtils.getTitle(chat, users, account);
@@ -67,6 +75,10 @@ const ChatViewHeader = () => {
     showChatClearDialog(chat);
   };
 
+  const markAsRead = (): void => {
+    dispatch(ChatActions.markChatAsReadThunk(chat));
+  };
+
   const leaveChat = (): void => {
     showChatLeaveDialog(chat, closeChat);
   };
@@ -93,6 +105,13 @@ const ChatViewHeader = () => {
       hidden: chat.isDirect,
     },
     {action: cleanChat, text: t('chat:menu.cleanChat'), icon: <BroomIcon />, color: 'primary'},
+    {
+      action: markAsRead,
+      text: t('chat:menu.markAsRead'),
+      icon: <EyeIcon />,
+      color: 'primary',
+      hidden: !showMarkAsRead,
+    },
     {
       action: leaveChat,
       text: t('chat:menu.leaveChat'),
