@@ -40,6 +40,7 @@ export const HEADER_HEIGHT = 60;
 export const PAGE_HEADER_HEIGHT = 60;
 export const PAGE_CONTROL_HEIGHT = 64;
 export const PAGE_FOOTER_HEIGHT = 60;
+export const PAGE_MARGIN_HEIGHT = 16;
 
 // COMMENTS
 export const ITEM_SKELETON_HEIGHT = 127;

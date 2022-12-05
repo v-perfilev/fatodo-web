@@ -31,7 +31,7 @@ const formatValue = (date: Date, account: UserAccount, mode: FormikDateTimePicke
 const FormikDateInput = ({name, label, mode}: FormikDateInputProps) => {
   const {values, setFieldValue} = useFormikContext<any>();
   const account = useAppSelector(AuthSelectors.account);
-  const ampm = account.info.timeFormat === 'H12';
+  const ampm = account.settings.timeFormat === 'H12';
 
   const value = values[name];
   const momentValue = moment(value);

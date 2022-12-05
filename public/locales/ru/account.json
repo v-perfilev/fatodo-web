@@ -22,6 +22,9 @@
   "socialLogin": {
     "label": "Войти через"
   },
+  "settings": {
+    "notificationsSubtitle": "Уведомления"
+  },
   "fields": {
     "user": {
       "label": "Имя пользователя / Email",
@@ -101,6 +104,9 @@
     "timezone": {
       "label": "Часовой пояс",
       "required": "Обязательное поле"
+    },
+    "emailReminders": {
+      "label": "Email напоминания"
     },
     "image": {
       "label": "Изображение"

@@ -22,6 +22,9 @@
   "socialLogin": {
     "label": "Login with"
   },
+  "settings": {
+    "notificationsSubtitle": "Notifications"
+  },
   "fields": {
     "user": {
       "label": "Username / Email",
@@ -101,6 +104,9 @@
     "timezone": {
       "label": "Timezone",
       "required": "Required"
+    },
+    "emailReminders": {
+      "label": "Email reminders"
     },
     "image": {
       "label": "Image"

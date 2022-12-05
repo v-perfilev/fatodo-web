@@ -5,7 +5,6 @@ import PageHeader from '../../../components/layouts/PageHeader';
 import {useChatDialogContext} from '../../../shared/contexts/dialogContexts/ChatDialogContext';
 import {Box, Fab} from '@mui/material';
 import PlusIcon from '../../../components/icons/PlusIcon';
-import FBox from '../../../components/boxes/FBox';
 
 type ChatListControlProps = {
   setFilter: Dispatch<SetStateAction<string>>;

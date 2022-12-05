@@ -12,7 +12,7 @@ type DateParamViewProps = TypographyProps & {
 
 const DateParamView = ({date: paramDate, ...props}: DateParamViewProps) => {
   const account = useAppSelector(AuthSelectors.account);
-  const timezone = account.info.timezone;
+  const timezone = account.settings.timezone;
 
   let description = '';
   if (paramDate.time) {

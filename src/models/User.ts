@@ -14,6 +14,7 @@ export interface UserAccount {
   provider: string;
   authorities: string[];
   info: UserInfo;
+  settings: UserSettings;
 }
 
 export interface UserInfo {
@@ -21,10 +22,14 @@ export interface UserInfo {
   lastname?: string;
   imageFilename?: string;
   gender?: Gender;
+}
+
+export interface UserSettings {
   language: Language;
   timezone: string;
   timeFormat: TimeFormat;
   dateFormat: DateFormat;
+  emailReminders: boolean;
 }
 
 export interface User {

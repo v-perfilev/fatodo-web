@@ -24,7 +24,7 @@ const FormikRemindersInputPopover = ({anchorEl, handleClose}: FormikRemindersInp
   const {t} = useTranslation();
   const [reminder, setReminder] = useState<Reminder>(null);
   const [periodicity, setPeriodicity] = useState<ReminderPeriodicity>('ONCE');
-  const timezone = account.info.timezone;
+  const timezone = account.settings.timezone;
 
   const isOpen = Boolean(anchorEl);
 

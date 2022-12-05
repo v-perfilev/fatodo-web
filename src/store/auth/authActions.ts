@@ -11,7 +11,7 @@ import {ChangePasswordDTO} from '../../models/dto/ChangePasswordDTO';
 import {ChangeLanguageDTO} from '../../models/dto/ChangeLanguageDTO';
 import {SnackActions} from '../snack/snackActions';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {accountToUser, UserAccount} from '../../models/User';
+import {accountToUser, UserAccount, UserSettings} from '../../models/User';
 import {InfoActions} from '../info/infoActions';
 import {ResetPasswordDTO} from '../../models/dto/ResetPasswordDTO';
 
@@ -118,10 +118,19 @@ export class AuthActions {
     },
   );
 
-  static updateAccountThunk = createAsyncThunk<void, FormData, AsyncThunkConfig>(
-    PREFIX + 'updateAccount',
+  static updateAccountInfoThunk = createAsyncThunk<void, FormData, AsyncThunkConfig>(
+    PREFIX + 'updateAccountInfo',
     async (formData, thunkAPI) => {
-      await UserService.updateAccount(formData);
+      await UserService.updateAccountInfo(formData);
+      await thunkAPI.dispatch(AuthActions.fetchAccountThunk());
+      thunkAPI.dispatch(SnackActions.handleCode('auth.afterUpdateAccount', 'info'));
+    },
+  );
+
+  static updateAccountSettingsThunk = createAsyncThunk<void, UserSettings, AsyncThunkConfig>(
+    PREFIX + 'updateAccountSettings',
+    async (settings, thunkAPI) => {
+      await UserService.updateAccountSettings(settings);
       await thunkAPI.dispatch(AuthActions.fetchAccountThunk());
       thunkAPI.dispatch(SnackActions.handleCode('auth.afterUpdateAccount', 'info'));
     },

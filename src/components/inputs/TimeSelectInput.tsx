@@ -24,7 +24,7 @@ const TimeSelectInput = ({label, time, setTime, required}: TimeSelectInputProps)
   const [showClock, setShowClock] = useState<boolean>(false);
   const [showMinutes, setShowMinutes] = useState<boolean>(false);
   const account = useAppSelector(AuthSelectors.account);
-  const ampm = account.info.timeFormat === 'H12';
+  const ampm = account.settings.timeFormat === 'H12';
 
   const toggleHoursView = (): void => setShowClock(true);
   const toggleMinutesView = (): void => setShowMinutes(true);
