@@ -44,7 +44,7 @@ const ChatViewHeader = () => {
   const {t} = useTranslation();
 
   const showMarkAsRead = useMemo<boolean>(() => {
-    return unreadMessageIds.length > 0;
+    return unreadMessageIds?.length > 0;
   }, [chat, unreadMessageIds]);
 
   const title = useMemo<string>(() => {
