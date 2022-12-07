@@ -17,8 +17,8 @@ const SocialButtons = () => {
   const [googleLoading, setGoogleLoading] = useState(false);
 
   const oAuth2Login = (provider: string): void => {
-    const apiUrl = API_URL + '/oauth2/authorize/' + provider;
-    const languageParam = 'language=' + LanguageUtils.getLanguage();
+    const apiUrl = API_URL + '/api/oauth2/authorize/' + provider;
+    const languageParam = 'language=' + LanguageUtils.getLanguage().toUpperCase();
     const timezoneParam = 'timezone=' + DateUtils.getTimezone();
     const redirectParam = 'redirect=' + BASE_URL + RootRoutes.SOCIAL_LOGIN;
     window.location.href = apiUrl + '?' + languageParam + '&' + timezoneParam + '&' + redirectParam;
