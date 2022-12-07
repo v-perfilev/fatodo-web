@@ -15,7 +15,7 @@ const SocialLogin = () => {
 
   useEffect(() => {
     if (token) {
-      dispatch(AuthActions.socialLoginThunk({token, rememberMe: true}))
+      dispatch(AuthActions.socialLoginThunk(token))
         .unwrap()
         .then(() => redirectToHome())
         .catch(() => redirectToInternalError());
