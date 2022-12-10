@@ -27,7 +27,8 @@ const withRootContainer = (Component: ComponentType<WithRootProps>): FC => (prop
 
   const refresh = (): void => {
     dispatch(ContactsActions.fetchRelationsThunk());
-    dispatch(ContactsActions.fetchInfoThunk());
+    dispatch(ContactsActions.fetchOutcomingRequestsThunk());
+    dispatch(ContactsActions.fetchIncomingRequestsThunk());
     dispatch(ChatsActions.fetchUnreadMessagesMapThunk());
     dispatch(EventsActions.fetchUnreadCountThunk());
   };
