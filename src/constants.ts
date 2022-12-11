@@ -10,7 +10,6 @@ export const WS_ROOT_TOPIC = '/user/topic/root';
 
 // TIMEOUTS
 export const API_TIMEOUT = 60 * 1000;
-export const SAME_DATE_TIMEOUT = 5 * 1000;
 export const LOADER_TIMEOUT = 500;
 
 // AUTHORIZATION

@@ -9,6 +9,7 @@ import {ComparatorUtils} from '../../shared/utils/ComparatorUtils';
 const initialState: CommentsState = {
   targetId: undefined,
   comments: [],
+  createdIds: [],
   allLoaded: false,
 };
 
@@ -36,6 +37,10 @@ const commentsSlice = createSlice({
       }
     },
 
+    removeComment: (state: CommentsState, action: PayloadAction<Comment>) => {
+      state.comments = state.comments.filter((c) => c.id !== action.payload.id);
+    },
+
     setCommentReaction: (state: CommentsState, action: PayloadAction<CommentReaction>) => {
       const reaction = action.payload;
       if (state.targetId === reaction.targetId) {
@@ -48,6 +53,14 @@ const commentsSlice = createSlice({
           state.comments = filterComments([comment, ...state.comments]);
         }
       }
+    },
+
+    addCreatedId: (state: CommentsState, action: PayloadAction<string>) => {
+      state.createdIds = [...state.createdIds, action.payload];
+    },
+
+    removeCreatedId: (state: CommentsState, action: PayloadAction<string>) => {
+      state.createdIds = state.createdIds.filter((id) => id !== action.payload);
     },
 
     calculateAllLoaded: (state: CommentsState, action: PayloadAction<number>) => {
@@ -75,7 +88,7 @@ const commentsSlice = createSlice({
 });
 
 const filterComments = (comments: Comment[]): Comment[] => {
-  return comments.filter(FilterUtils.uniqueByIdOrUserIdAndTextAndDateFilter).sort(ComparatorUtils.createdAtComparator);
+  return comments.filter(FilterUtils.uniqueByIdFilter).sort(ComparatorUtils.createdAtComparator);
 };
 
 const filterReactions = (reactions: CommentReaction[]): CommentReaction[] => {
