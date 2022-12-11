@@ -1,27 +1,28 @@
 import {AppDispatch} from './store';
-import calendarSlice from './calendar/calendarSlice';
-import chatSlice from './chat/chatSlice';
-import chatsSlice from './chats/chatsSlice';
-import commentsSlice from './comments/commentsSlice';
-import contactsSlice from './contacts/contactsSlice';
-import eventsSlice from './events/eventsSlice';
-import groupSlice from './group/groupSlice';
-import groupsSlice from './groups/groupsSlice';
-import itemSlice from './item/itemSlice';
-import userSlice from './user/userSlice';
+import {AuthActions} from './auth/authActions';
+import {CalendarActions} from './calendar/calendarActions';
+import {ChatActions} from './chat/chatActions';
+import {ChatsActions} from './chats/chatsActions';
+import {CommentsActions} from './comments/commentsActions';
+import {ContactsActions} from './contacts/contactsActions';
+import {EventsActions} from './events/eventsActions';
+import {GroupActions} from './group/groupActions';
+import {GroupsActions} from './groups/groupsActions';
+import {ItemActions} from './item/itemActions';
+import {UserActions} from './user/userActions';
 
 export class RootActions {
-  static resetState = () => (dispatch: AppDispatch) => {
-    // all stores except of authStore and infoStore
-    dispatch(calendarSlice.actions.reset());
-    dispatch(chatSlice.actions.reset());
-    dispatch(chatsSlice.actions.reset());
-    dispatch(commentsSlice.actions.reset());
-    dispatch(contactsSlice.actions.reset());
-    dispatch(eventsSlice.actions.reset());
-    dispatch(groupSlice.actions.reset());
-    dispatch(groupsSlice.actions.reset());
-    dispatch(itemSlice.actions.reset());
-    dispatch(userSlice.actions.reset());
+  static afterLogoutState = () => (dispatch: AppDispatch) => {
+    dispatch(AuthActions.afterLogout());
+    dispatch(CalendarActions.afterLogout());
+    dispatch(ChatActions.afterLogout());
+    dispatch(ChatsActions.afterLogout());
+    dispatch(CommentsActions.afterLogout());
+    dispatch(ContactsActions.afterLogout());
+    dispatch(EventsActions.afterLogout());
+    dispatch(GroupActions.afterLogout());
+    dispatch(GroupsActions.afterLogout());
+    dispatch(ItemActions.afterLogout());
+    dispatch(UserActions.afterLogout());
   };
 }

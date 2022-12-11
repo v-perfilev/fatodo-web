@@ -12,6 +12,10 @@ import calendarSlice from '../calendar/calendarSlice';
 const PREFIX = 'groups/';
 
 export class GroupsActions {
+  static afterLogout = () => (dispatch: AppDispatch) => {
+    dispatch(groupsSlice.actions.reset());
+  };
+
   static setGroups = (groups: Group[]) => (dispatch: AppDispatch) => {
     dispatch(groupsSlice.actions.setGroups(groups));
   };

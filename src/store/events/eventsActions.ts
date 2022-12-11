@@ -9,6 +9,10 @@ import {InfoActions} from '../info/infoActions';
 const PREFIX = 'events/';
 
 export class EventsActions {
+  static afterLogout = () => (dispatch: AppDispatch) => {
+    dispatch(eventsSlice.actions.reset());
+  };
+
   static addEvent = (event: Event, isOwnEvent: boolean) => async (dispatch: AppDispatch) => {
     dispatch(InfoActions.loadDependenciesThunk([event]));
     dispatch(eventsSlice.actions.setEvents([event]));

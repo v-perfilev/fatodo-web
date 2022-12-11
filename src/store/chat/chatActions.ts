@@ -26,6 +26,10 @@ import {ChatRenameDTO} from '../../models/dto/ChatRenameDTO';
 const PREFIX = 'chat/';
 
 export class ChatActions {
+  static afterLogout = () => (dispatch: AppDispatch) => {
+    dispatch(chatSlice.actions.reset());
+  };
+
   static reset = () => async (dispatch: AppDispatch) => {
     dispatch(chatSlice.actions.reset());
   };

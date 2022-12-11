@@ -14,6 +14,10 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 const PREFIX = 'comments/';
 
 export class CommentsActions {
+  static afterLogout = () => (dispatch: AppDispatch) => {
+    dispatch(commentsSlice.actions.reset());
+  };
+
   static init = (targetId: string) => async (dispatch: AppDispatch) => {
     dispatch(commentsSlice.actions.reset());
     dispatch(commentsSlice.actions.setTargetId(targetId));

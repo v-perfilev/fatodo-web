@@ -15,6 +15,10 @@ import {GroupActions} from '../group/groupActions';
 const PREFIX = 'item/';
 
 export class ItemActions {
+  static afterLogout = () => (dispatch: AppDispatch) => {
+    dispatch(itemSlice.actions.reset());
+  };
+
   static reset = () => async (dispatch: AppDispatch) => {
     dispatch(itemSlice.actions.reset());
   };

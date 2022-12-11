@@ -11,6 +11,10 @@ import {ArrayUtils} from '../../shared/utils/ArrayUtils';
 const PREFIX = 'calendar/';
 
 export class CalendarActions {
+  static afterLogout = () => (dispatch: AppDispatch) => {
+    dispatch(calendarSlice.actions.reset());
+  };
+
   static reset = () => (dispatch: AppDispatch) => {
     dispatch(calendarSlice.actions.reset());
   };

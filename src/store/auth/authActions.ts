@@ -14,10 +14,15 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {accountToUser, UserAccount, UserSettings} from '../../models/User';
 import {InfoActions} from '../info/infoActions';
 import {ResetPasswordDTO} from '../../models/dto/ResetPasswordDTO';
+import {RootActions} from '../rootActions';
 
 const PREFIX = 'auth/';
 
 export class AuthActions {
+  static afterLogout = () => (dispatch: AppDispatch) => {
+    dispatch(authSlice.actions.reset());
+  };
+
   static resetError = () => (dispatch: AppDispatch) => {
     dispatch(authSlice.actions.setError(undefined));
   };
@@ -32,7 +37,7 @@ export class AuthActions {
 
   static logout = () => (dispatch: AppDispatch) => {
     SecurityUtils.clearAuthToken();
-    dispatch(authSlice.actions.reset());
+    dispatch(RootActions.afterLogoutState());
   };
 
   static registerThunk = createAsyncThunk<void, RegistrationDTO, AsyncThunkConfig>(
