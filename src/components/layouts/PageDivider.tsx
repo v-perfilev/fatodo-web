@@ -8,7 +8,7 @@ type PageDividerProps = BoxProps & {
 };
 
 const PageDivider = ({height = '1px', color = 'grey.300', ...props}: PageDividerProps) => {
-  return <FBox sx={{maxHeight: height, height: height, backgroundColor: color}} {...props} />;
+  return <FBox sx={{minWidth: '100%', maxHeight: height, height: height, backgroundColor: color}} {...props} />;
 };
 
 export default PageDivider;
