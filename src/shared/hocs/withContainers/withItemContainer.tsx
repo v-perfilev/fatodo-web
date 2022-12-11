@@ -42,6 +42,8 @@ const withItemContainer = (Component: ComponentType<WithItemProps>) => (props: a
       loadItem();
     } else if (wrongRoute) {
       goBack();
+    } else {
+      setLoading(false);
     }
   }, []);
 

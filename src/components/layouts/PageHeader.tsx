@@ -34,7 +34,7 @@ const PageHeader = ({title, image, position = 'relative', goBackAction, children
           {children}
         </FHStack>
       </FHStack>
-      <PageDivider height="2px" color="primary.light" />
+      <PageDivider ml={-2} mr={-2} height="2px" color="primary.light" />
     </Container>
   );
 };
@@ -53,8 +53,10 @@ const containerStyles = (position: string): SxProps => ({
 });
 
 const contentStyles: SxProps = {
-  paddingLeft: 2,
-  paddingRight: 1,
+  marginLeft: -2,
+  marginRight: -2,
+  paddingLeft: 3,
+  paddingRight: 3,
   backgroundColor: 'white',
 };
 

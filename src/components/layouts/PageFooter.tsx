@@ -11,7 +11,7 @@ type PageHeaderProps = ContainerProps & {
 const PageFooter = ({position = 'relative', children, ...props}: PageHeaderProps) => {
   return (
     <Container sx={containerStyles(position)} {...props}>
-      <PageDivider height="2px" color="primary.light" />
+      <PageDivider ml={-2} mr={-2} height="2px" color="primary.light" />
       <FHStack sx={contentStyles}>{children}</FHStack>
     </Container>
   );

@@ -45,6 +45,8 @@ const withGroupContainer = (Component: ComponentType<WithGroupProps>) => (props:
   useEffect(() => {
     if (!group && !loading) {
       goToGroups();
+    } else {
+      setLoading(false);
     }
   }, [group]);
 
