@@ -1,6 +1,7 @@
 import React, {
   CSSProperties,
   memo,
+  MutableRefObject,
   ReactElement,
   Ref,
   useCallback,
@@ -43,7 +44,8 @@ type VirtualizedListProps<T> = {
   setIsOnTop?: (isOnTop: boolean) => void;
   setIsOnBottom?: (isOnBottom: boolean) => void;
   setVisibleItems?: (visibleItems: number[]) => void;
-  virtualizedListRef?: Ref<VirtualizedListMethods>;
+  virtualizedListMethodsRef?: Ref<VirtualizedListMethods>;
+  virtualizedListRef?: MutableRefObject<HTMLDivElement>;
 };
 
 const getItemStyles = (length: number, index: number, paddingTop: number, paddingBottom: number): CSSProperties => {
@@ -58,7 +60,7 @@ const getItemStyles = (length: number, index: number, paddingTop: number, paddin
 
 const VirtualizedList = (props: VirtualizedListProps<any>) => {
   const {itemRenderer, itemData, allLoaded = true, loadMoreItems} = props;
-  const {itemHeight, keyExtractor, reverseOrder, virtualizedListRef} = props;
+  const {itemHeight, keyExtractor, reverseOrder, virtualizedListMethodsRef, virtualizedListRef} = props;
   const {paddingTop = 0, paddingBottom = 0, setIsOnTop, setIsOnBottom, setVisibleItems} = props;
   const forceUpdate = useForceUpdate();
   const [scroll, setScroll] = useState<ListOnScrollProps>();
@@ -112,7 +114,7 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
   const prevIsScrolledToBottom = RefUtils.usePrevious(isScrolledToBottom);
 
   useImperativeHandle(
-    virtualizedListRef,
+    virtualizedListMethodsRef,
     (): VirtualizedListMethods => ({
       clearCache,
       scrollToPosition,
@@ -254,6 +256,7 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
                 itemSize={getItemSize}
                 onItemsRendered={wrappedOnItemsRendered(onItemsRendered)}
                 onScroll={setScroll}
+                outerRef={virtualizedListRef}
                 ref={RefUtils.merge(listRef, ref)}
               >
                 {isDynamic ? measurableItemRenderer : styledItemRenderer}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import ChatViewHeader from './ChatViewHeader';
 import ChatViewFooter from './ChatViewFooter';
 import ChatViewContent from './ChatViewContent';
@@ -9,12 +9,13 @@ import ChatViewSkeleton from '../skeletons/ChatViewSkeleton';
 
 const ChatView = () => {
   const loading = useAppSelector(ChatSelectors.loading);
+  const listRef = useRef<HTMLDivElement>();
 
   return (
     <ConditionalSpinner loading={loading} loadingPlaceholder={<ChatViewSkeleton />}>
-      <ChatViewHeader />
-      <ChatViewContent />
-      <ChatViewFooter />
+      <ChatViewHeader width={listRef.current?.clientWidth} />
+      <ChatViewContent listRef={listRef} />
+      <ChatViewFooter width={listRef.current?.clientWidth} />
     </ConditionalSpinner>
   );
 };

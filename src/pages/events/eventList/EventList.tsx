@@ -26,7 +26,8 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
   const allLoaded = useAppSelector(EventsSelectors.allLoaded);
   const [loading, setLoading] = useDelayedState(!events.length);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
-  const listRef = useRef<VirtualizedListMethods>();
+  const listMethodsRef = useRef<VirtualizedListMethods>();
+  const listRef = useRef<HTMLDivElement>();
 
   /*
   loaders
@@ -65,7 +66,7 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
   scroll up button
    */
 
-  const scrollUp = (): void => listRef.current.scrollToTop();
+  const scrollUp = (): void => listMethodsRef.current.scrollToTop();
 
   /*
   effects
@@ -80,7 +81,7 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
 
   return (
     <>
-      <EventListHeader toggleCollapsed={toggleCollapsed} />
+      <EventListHeader width={listRef.current?.clientWidth} toggleCollapsed={toggleCollapsed} />
       <ConditionalSpinner loading={loading} loadingPlaceholder={<EventListSkeleton />}>
         <VirtualizedList
           itemRenderer={itemRenderer}
@@ -91,6 +92,7 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
           paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
           paddingBottom={DEFAULT_MARGIN}
           setIsOnTop={setHideScrollButton}
+          virtualizedListMethodsRef={listMethodsRef}
           virtualizedListRef={listRef}
         />
         <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />

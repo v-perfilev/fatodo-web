@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {MutableRefObject, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
   DEFAULT_MARGIN,
   HEADER_HEIGHT,
@@ -23,7 +23,11 @@ import {Container, SxProps} from '@mui/material';
 import FBox from '../../../components/boxes/FBox';
 import ChatViewStub from './ChatViewStub';
 
-const ChatViewContent = () => {
+type ChatViewContentProps = {
+  listRef?: MutableRefObject<HTMLDivElement>;
+};
+
+const ChatViewContent = ({listRef}: ChatViewContentProps) => {
   const unreadMessageIdsSelector = useCallback(ChatsSelectors.makeUnreadMessageIdsSelector(), []);
   const dispatch = useAppDispatch();
   const account = useAppSelector(AuthSelectors.account);
@@ -34,7 +38,7 @@ const ChatViewContent = () => {
   const unreadMessageIds = useAppSelector((state) => unreadMessageIdsSelector(state, chat.id));
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
-  const listRef = useRef<VirtualizedListMethods>();
+  const listMethodsRef = useRef<VirtualizedListMethods>();
   const unreadTimersRef = useRef<Map<string, any>>(new Map());
 
   const scrollButtonHighlighted = useMemo<boolean>(() => {
@@ -107,7 +111,7 @@ const ChatViewContent = () => {
   scroll up button
    */
 
-  const scrollDown = (): void => listRef.current.scrollToBottom();
+  const scrollDown = (): void => listMethodsRef.current.scrollToBottom();
 
   return (
     <>
@@ -125,6 +129,7 @@ const ChatViewContent = () => {
             paddingBottom={PAGE_FOOTER_HEIGHT + DEFAULT_MARGIN}
             setIsOnBottom={setHideScrollButton}
             setVisibleItems={setVisibleItems}
+            virtualizedListMethodsRef={listMethodsRef}
             virtualizedListRef={listRef}
           />
           <Container sx={containerStyles}>

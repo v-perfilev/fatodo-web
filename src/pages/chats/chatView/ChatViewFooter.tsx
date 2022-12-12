@@ -10,7 +10,11 @@ import ClearableTextInput, {ClearableTextInputMethods} from '../../../components
 import SendMessageIcon from '../../../components/icons/SendMessageIcon';
 import PageFooter from '../../../components/layouts/PageFooter';
 
-const ChatViewFooter = () => {
+type ChatViewFooterProps = {
+  width?: number;
+};
+
+const ChatViewFooter = ({width}: ChatViewFooterProps) => {
   const dispatch = useAppDispatch();
   const {t} = useTranslation();
   const chat = useAppSelector(ChatSelectors.chat);
@@ -39,7 +43,7 @@ const ChatViewFooter = () => {
   };
 
   return (
-    <PageFooter position="absolute">
+    <PageFooter width={width} position="absolute">
       <ClearableTextInput
         placeholder={t('chat:view.inputPlaceholder')}
         onChange={handleChange}

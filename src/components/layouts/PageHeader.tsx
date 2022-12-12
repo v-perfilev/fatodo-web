@@ -1,7 +1,7 @@
 import React, {ReactElement} from 'react';
 import FHStack from '../boxes/FHStack';
 import PageDivider from './PageDivider';
-import {Container, ContainerProps, IconButton, SxProps} from '@mui/material';
+import {Box, Container, ContainerProps, IconButton, SxProps} from '@mui/material';
 import {PAGE_HEADER_HEIGHT} from '../../constants';
 import ArrowLeftIcon from '../icons/ArrowLeftIcon';
 import TruncatedTypography from '../surfaces/TruncatedTypography';
@@ -11,52 +11,63 @@ type PageHeaderProps = ContainerProps & {
   image?: ReactElement;
   position?: 'relative' | 'absolute';
   goBackAction?: () => void;
+  width?: number;
 };
 
-const PageHeader = ({title, image, position = 'relative', goBackAction, children, ...props}: PageHeaderProps) => {
+const PageHeader = ({
+  title,
+  image,
+  position = 'relative',
+  goBackAction,
+  width,
+  children,
+  ...props
+}: PageHeaderProps) => {
   return (
-    <Container sx={containerStyles(position)} {...props}>
-      <FHStack spacing={1} sx={contentStyles}>
-        {title && (
-          <FHStack spacing={1}>
-            {goBackAction && (
-              <IconButton sx={goBackButtonStyles} color="primary" onClick={goBackAction}>
-                <ArrowLeftIcon />
-              </IconButton>
-            )}
-            {image}
-            <TruncatedTypography fontSize={16} fontWeight="500" color="primary">
-              {title}
-            </TruncatedTypography>
+    <Box sx={boxStyles(position, width)}>
+      <Container sx={containerStyles} {...props}>
+        <FHStack spacing={1} sx={contentStyles}>
+          {title && (
+            <FHStack spacing={1}>
+              {goBackAction && (
+                <IconButton sx={goBackButtonStyles} color="primary" onClick={goBackAction}>
+                  <ArrowLeftIcon />
+                </IconButton>
+              )}
+              {image}
+              <TruncatedTypography fontSize={16} fontWeight="500" color="primary">
+                {title}
+              </TruncatedTypography>
+            </FHStack>
+          )}
+          <FHStack spacing={1} flexGrow={title ? 0 : 1}>
+            {children}
           </FHStack>
-        )}
-        <FHStack spacing={1} flexGrow={title ? 0 : 1}>
-          {children}
         </FHStack>
-      </FHStack>
-      <PageDivider ml={-2} mr={-2} height="2px" color="primary.light" />
-    </Container>
+        <PageDivider height="2px" color="primary.light" />
+      </Container>
+    </Box>
   );
 };
 
-const containerStyles = (position: string): SxProps => ({
+const boxStyles = (position: string, width?: number): SxProps => ({
   position,
   zIndex: 100,
   top: 0,
   left: 0,
-  right: 0,
-  display: 'flex',
-  flexDirection: 'column',
-  width: '100%',
-  height: PAGE_HEADER_HEIGHT,
-  flexShrink: 0,
+  width: width || '100%',
 });
 
+const containerStyles: SxProps = {
+  display: 'flex',
+  flexDirection: 'column',
+  height: PAGE_HEADER_HEIGHT,
+  flexShrink: 0,
+};
+
 const contentStyles: SxProps = {
-  marginLeft: -2,
-  marginRight: -2,
-  paddingLeft: 3,
-  paddingRight: 3,
+  paddingLeft: 2,
+  paddingRight: 1,
   backgroundColor: 'white',
 };
 

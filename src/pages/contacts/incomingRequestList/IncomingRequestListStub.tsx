@@ -6,7 +6,6 @@ import PageStub from '../../../components/layouts/PageStub';
 const IncomingRequestListStub = () => {
   const {t} = useTranslation();
   const height = window.innerHeight - HEADER_HEIGHT - PAGE_HEADER_HEIGHT - PAGE_MARGIN_HEIGHT;
-  console.log(height, window.innerHeight);
 
   return <PageStub text={t('contact:incoming.requestsNotFound')} height={height} />;
 };

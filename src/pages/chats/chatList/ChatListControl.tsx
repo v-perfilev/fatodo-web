@@ -8,9 +8,10 @@ import PlusIcon from '../../../components/icons/PlusIcon';
 
 type ChatListControlProps = {
   setFilter: Dispatch<SetStateAction<string>>;
+  width?: number;
 };
 
-const ChatListControl = ({setFilter}: ChatListControlProps) => {
+const ChatListControl = ({setFilter, width}: ChatListControlProps) => {
   const {showChatCreateDialog} = useChatDialogContext();
   const {t} = useTranslation();
 
@@ -20,7 +21,7 @@ const ChatListControl = ({setFilter}: ChatListControlProps) => {
   };
 
   return (
-    <PageHeader maxWidth="md" position="absolute">
+    <PageHeader width={width} maxWidth="md" position="absolute">
       <ClearableTextInput
         variant="standard"
         placeholder={t('inputs.filter')}

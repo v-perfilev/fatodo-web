@@ -28,7 +28,8 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
   const [sorting, setSorting] = useState<boolean>(false);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
   const [order, setOrder] = useState<number[]>(undefined);
-  const listRef = useRef<VirtualizedListMethods>();
+  const listMethodsRef = useRef<VirtualizedListMethods>();
+  const listRef = useRef<HTMLDivElement>();
 
   /*
   keyExtractor and renderItem
@@ -54,7 +55,7 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
   scroll up button
    */
 
-  const scrollUp = (): void => listRef.current.scrollToTop();
+  const scrollUp = (): void => listMethodsRef.current.scrollToTop();
 
   /*
   effects
@@ -64,9 +65,17 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
     loading && dispatch(GroupsActions.fetchGroupsThunk()).finally(() => setLoading(false));
   }, []);
 
+  console.log(listRef.current, listRef.current?.clientWidth, listRef.current?.offsetWidth);
+
   return (
     <>
-      <GroupListHeader sorting={sorting} setSorting={setSorting} order={order} toggleCollapsed={toggleCollapsed} />
+      <GroupListHeader
+        width={listRef.current?.clientWidth}
+        sorting={sorting}
+        setSorting={setSorting}
+        order={order}
+        toggleCollapsed={toggleCollapsed}
+      />
       <ConditionalSpinner loading={loading}>
         {groups.length === 0 && <GroupListStub />}
         {groups.length > 0 && sorting && (
@@ -91,6 +100,7 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
               paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
               paddingBottom={8}
               setIsOnTop={setHideScrollButton}
+              virtualizedListMethodsRef={listMethodsRef}
               virtualizedListRef={listRef}
             />
             <ScrollCornerButton show={!sorting && !hideScrollButton} action={scrollUp} />

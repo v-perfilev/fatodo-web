@@ -23,12 +23,13 @@ type CommentListProps = {
 
 const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   const dispatch = useAppDispatch();
-  const listRef = useRef<VirtualizedListMethods>();
   const stateTargetId = useAppSelector(CommentsSelectors.targetId);
   const comments = useAppSelector(CommentsSelectors.comments);
   const allLoaded = useAppSelector(CommentsSelectors.allLoaded);
   const [loading, setLoading] = useDelayedState(false);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
+  const listMethodsRef = useRef<VirtualizedListMethods>();
+  const listRef = useRef<HTMLDivElement>();
 
   const canLoad = targetId && targetId !== stateTargetId;
   const contextLoading = !targetId || targetId !== stateTargetId;
@@ -71,7 +72,7 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   scroll up button
    */
 
-  const scrollDown = (): void => listRef.current.scrollToBottom();
+  const scrollDown = (): void => listMethodsRef.current.scrollToBottom();
 
   useEffect(() => {
     canLoad && initialLoad();
@@ -79,7 +80,7 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
 
   return (
     <>
-      <CommentListHeader toggleCollapsed={toggleCollapsed} />
+      <CommentListHeader width={listRef.current?.clientWidth} toggleCollapsed={toggleCollapsed} />
       <ConditionalSpinner loading={loading || contextLoading} loadingPlaceholder={<CommentListSkeleton />}>
         <VirtualizedList
           itemRenderer={itemRenderer}
@@ -91,11 +92,12 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
           paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN}
           paddingBottom={PAGE_FOOTER_HEIGHT + DEFAULT_MARGIN}
           setIsOnBottom={setHideScrollButton}
+          virtualizedListMethodsRef={listMethodsRef}
           virtualizedListRef={listRef}
         />
         <ScrollCornerButton show={!hideScrollButton} action={scrollDown} down bottomPadding={PAGE_FOOTER_HEIGHT} />
       </ConditionalSpinner>
-      <CommentListFooter />
+      <CommentListFooter width={listRef.current?.clientWidth} />
     </>
   );
 };

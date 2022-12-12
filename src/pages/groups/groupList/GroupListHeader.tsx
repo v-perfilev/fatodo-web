@@ -17,13 +17,14 @@ import {IconButton} from '@mui/material';
 import BellIcon from '../../../components/icons/BellIcon';
 
 type GroupListHeaderProps = {
+  width?: number;
   sorting: boolean;
   setSorting: (sorting: boolean) => void;
   order: number[];
   toggleCollapsed?: () => void;
 };
 
-const GroupListHeader = ({sorting, setSorting, order, toggleCollapsed}: GroupListHeaderProps) => {
+const GroupListHeader = ({width, sorting, setSorting, order, toggleCollapsed}: GroupListHeaderProps) => {
   const dispatch = useAppDispatch();
   const groups = useAppSelector(GroupsSelectors.groups);
   const allCollapsed = useAppSelector(GroupsSelectors.itemsAllCollapsed);
@@ -106,7 +107,7 @@ const GroupListHeader = ({sorting, setSorting, order, toggleCollapsed}: GroupLis
   ];
 
   return (
-    <PageHeader maxWidth="md" position="absolute" title={t('routes.Groups')}>
+    <PageHeader width={width} maxWidth="md" position="absolute" title={t('routes.Groups')}>
       {toggleCollapsed && (
         <IconButton color="primary" onClick={toggleCollapsed}>
           <BellIcon />

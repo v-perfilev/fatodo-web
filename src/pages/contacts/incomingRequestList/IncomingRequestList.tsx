@@ -21,7 +21,7 @@ const IncomingRequestList = () => {
   const incomingRequestsInitialized = useAppSelector(ContactsSelectors.incomingRequestsInitialized);
   const [loading, setLoading] = useDelayedState(!incomingRequestsInitialized);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
-  const listRef = useRef<VirtualizedListMethods>();
+  const listMethodsRef = useRef<VirtualizedListMethods>();
 
   const refresh = useCallback(async (): Promise<void> => {
     await dispatch(ContactsActions.fetchIncomingRequestsThunk());
@@ -52,7 +52,7 @@ const IncomingRequestList = () => {
   scroll up button
    */
 
-  const scrollUp = (): void => listRef.current.scrollToTop();
+  const scrollUp = (): void => listMethodsRef.current.scrollToTop();
 
   /*
   Effects
@@ -72,7 +72,7 @@ const IncomingRequestList = () => {
             keyExtractor={keyExtractor}
             itemData={incomingRequests}
             setIsOnTop={setHideScrollButton}
-            virtualizedListRef={listRef}
+            virtualizedListMethodsRef={listMethodsRef}
           />
           <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
         </>

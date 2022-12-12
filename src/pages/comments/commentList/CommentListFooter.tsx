@@ -11,7 +11,11 @@ import {IconButton} from '@mui/material';
 import FVStack from '../../../components/boxes/FVStack';
 import PageFooter from '../../../components/layouts/PageFooter';
 
-const CommentListFooter = () => {
+type CommentListFooterProps = {
+  width?: number;
+};
+
+const CommentListFooter = ({width}: CommentListFooterProps) => {
   const dispatch = useAppDispatch();
   const {t} = useTranslation();
   const targetId = useAppSelector(CommentsSelectors.targetId);
@@ -40,7 +44,7 @@ const CommentListFooter = () => {
   };
 
   return (
-    <PageFooter maxWidth="md" position="absolute">
+    <PageFooter width={width} maxWidth="md" position="absolute">
       <FVStack spacing={0}>
         <ClearableTextInput
           placeholder={t('comment:list.inputPlaceholder')}

@@ -26,9 +26,10 @@ type GroupViewHeaderProps = {
   showArchived: boolean;
   setShowArchived: Dispatch<SetStateAction<boolean>>;
   toggleCollapsed?: () => void;
+  width?: number;
 };
 
-const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapsed}: GroupViewHeaderProps) => {
+const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapsed, width}: GroupViewHeaderProps) => {
   const group = useAppSelector(GroupSelectors.group);
   const account = useAppSelector(AuthSelectors.account);
   const {showGroupMembersDialog, showGroupLeaveDialog, showGroupDeleteDialog} = useGroupDialogContext();
@@ -101,7 +102,14 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
   const image = group?.imageFilename && <UrlPic url={group?.imageFilename} />;
 
   return (
-    <PageHeader maxWidth="md" position="absolute" image={image} title={group?.title} goBackAction={goToGroupList}>
+    <PageHeader
+      width={width}
+      maxWidth="md"
+      position="absolute"
+      image={image}
+      title={group?.title}
+      goBackAction={goToGroupList}
+    >
       <GroupViewArchivedToggler showArchived={showArchived} setShowArchived={setShowArchived} />
       {toggleCollapsed && (
         <IconButton color="primary" onClick={toggleCollapsed}>

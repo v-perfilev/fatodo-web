@@ -24,7 +24,11 @@ import TruncatedTypography from '../../../components/surfaces/TruncatedTypograph
 import ChatsSelectors from '../../../store/chats/chatsSelectors';
 import EyeIcon from '../../../components/icons/EyeIcon';
 
-const ChatViewHeader = () => {
+type ChatViewHeaderProps = {
+  width: number;
+};
+
+const ChatViewHeader = ({width}: ChatViewHeaderProps) => {
   const dispatch = useAppDispatch();
   const unreadMessageIdsSelector = useCallback(ChatsSelectors.makeUnreadMessageIdsSelector(), []);
   const usersSelector = useCallback(InfoSelectors.makeUsersSelector(), []);
@@ -129,7 +133,7 @@ const ChatViewHeader = () => {
   ];
 
   return (
-    <PageHeader position="absolute">
+    <PageHeader width={width} position="absolute">
       <FHStack spacing={1}>
         <IconButton sx={closeButtonStyles} onClick={closeChat}>
           <CloseIcon />

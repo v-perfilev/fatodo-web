@@ -28,7 +28,7 @@ const ContactList = () => {
   const [filter, setFilter] = useState<string>('');
   const [relationsToShow, setRelationsToShow] = useState<ContactRelation[]>([]);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
-  const listRef = useRef<VirtualizedListMethods>();
+  const listMethodsRef = useRef<VirtualizedListMethods>();
 
   const refresh = useCallback(async (): Promise<void> => {
     await dispatch(ContactsActions.fetchRelationsThunk());
@@ -59,7 +59,7 @@ const ContactList = () => {
   scroll up button
    */
 
-  const scrollUp = (): void => listRef.current.scrollToTop();
+  const scrollUp = (): void => listMethodsRef.current.scrollToTop();
 
   /*
   Effects
@@ -92,7 +92,7 @@ const ContactList = () => {
               itemData={relationsToShow}
               keyExtractor={keyExtractor}
               setIsOnTop={setHideScrollButton}
-              virtualizedListRef={listRef}
+              virtualizedListMethodsRef={listMethodsRef}
             />
             <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
           </>

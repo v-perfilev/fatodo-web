@@ -39,7 +39,7 @@ const GroupItem = ({item, canEdit}: GroupItemProps) => {
         <GroupItemChanges item={item} />
       </FHStack>
       <FHStack sx={infoBoxStyles} justifyContent="space-between">
-        <FHStack>
+        <FHStack spacing={1}>
           <TypeView type={item.type} size="small" fontSize={12} color="grey.500" />
           <PriorityView priority={item.priority} size="small" fontSize={12} color="grey.500" />
           <StatusView statusType={item.status} size="small" fontSize={12} color="grey.500" />

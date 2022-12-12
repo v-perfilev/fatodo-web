@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Chat} from '../../../models/Chat';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import ChatsSelectors from '../../../store/chats/chatsSelectors';
@@ -28,6 +28,7 @@ const ChatList = () => {
   const [loading, setLoading] = useDelayedState(!chatsInitialized);
   const [filterLoading, setFilterLoading] = useDelayedState(false);
   const [filterLoadCounter, setFilterLoadCounter] = useState<number>(0);
+  const listRef = useRef<HTMLDivElement>();
 
   /*
   loaders
@@ -88,7 +89,7 @@ const ChatList = () => {
 
   return (
     <>
-      <ChatListControl setFilter={setFilter} />
+      <ChatListControl width={listRef.current?.clientWidth} setFilter={setFilter} />
       <ConditionalSpinner loading={loading || filterLoading} loadingPlaceholder={<ChatListSkeleton />}>
         {chats.length === 0 && <ChatListStub />}
         {chats.length > 0 && (
@@ -99,6 +100,7 @@ const ChatList = () => {
             allLoaded={type === 'regular' ? allLoaded : undefined}
             loadMoreItems={type === 'regular' ? load : undefined}
             paddingTop={PAGE_HEADER_HEIGHT + DEFAULT_MARGIN / 2}
+            virtualizedListRef={listRef}
           />
         )}
       </ConditionalSpinner>

@@ -1,34 +1,39 @@
 import React from 'react';
 import FHStack from '../boxes/FHStack';
 import PageDivider from './PageDivider';
-import {Container, ContainerProps, SxProps} from '@mui/material';
+import {Box, Container, ContainerProps, SxProps} from '@mui/material';
 import {PAGE_FOOTER_HEIGHT} from '../../constants';
 
 type PageHeaderProps = ContainerProps & {
   position?: 'relative' | 'absolute';
+  width?: number;
 };
 
-const PageFooter = ({position = 'relative', children, ...props}: PageHeaderProps) => {
+const PageFooter = ({position = 'relative', width, children, ...props}: PageHeaderProps) => {
   return (
-    <Container sx={containerStyles(position)} {...props}>
-      <PageDivider ml={-2} mr={-2} height="2px" color="primary.light" />
-      <FHStack sx={contentStyles}>{children}</FHStack>
-    </Container>
+    <Box sx={boxStyles(position, width)}>
+      <Container sx={containerStyles} {...props}>
+        <PageDivider height="2px" color="primary.light" />
+        <FHStack sx={contentStyles}>{children}</FHStack>
+      </Container>
+    </Box>
   );
 };
 
-const containerStyles = (position: string): SxProps => ({
+const boxStyles = (position: string, width?: number): SxProps => ({
   position,
   zIndex: 100,
   bottom: 0,
   left: 0,
-  right: 0,
+  width: width || '100%',
+});
+
+const containerStyles: SxProps = {
   display: 'flex',
   flexDirection: 'column',
-  width: '100%',
   height: PAGE_FOOTER_HEIGHT,
   overflow: 'hidden',
-});
+};
 
 const contentStyles: SxProps = {
   paddingX: 1,

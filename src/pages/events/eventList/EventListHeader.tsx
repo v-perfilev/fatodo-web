@@ -6,13 +6,14 @@ import PageHeader from '../../../components/layouts/PageHeader';
 
 type EventListHeaderProps = {
   toggleCollapsed?: () => void;
+  width?: number;
 };
 
-const EventListHeader = ({toggleCollapsed}: EventListHeaderProps) => {
+const EventListHeader = ({toggleCollapsed, width}: EventListHeaderProps) => {
   const {t} = useTranslation();
 
   return (
-    <PageHeader maxWidth="md" position="absolute" title={t('routes.EventList')}>
+    <PageHeader width={width} maxWidth="md" position="absolute" title={t('routes.EventList')}>
       {toggleCollapsed && (
         <IconButton color="primary" onClick={toggleCollapsed}>
           <CloseIcon />

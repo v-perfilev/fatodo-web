@@ -1,20 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
 
 html {
-  overflow: hidden;
   -webkit-tap-highlight-color: transparent;
-}
-
-* {
-  scrollbar-color: #21b0a7 #ffffff;
-  scrollbar-width: thin;
-}
-
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #21b0a7;
-  border-radius: 2px;
 }
