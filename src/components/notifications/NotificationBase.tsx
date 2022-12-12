@@ -36,6 +36,7 @@ const NotificationBase = ({notificationBaseRef, children}: NotificationBaseProps
 };
 
 const containerStyle: CSSProperties = {
+  zIndex: 100000,
   position: 'fixed',
   top: `${HEADER_HEIGHT + 10}px`,
   right: `10px`,
