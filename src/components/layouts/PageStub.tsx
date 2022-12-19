@@ -1,19 +1,15 @@
 import React, {memo} from 'react';
-import {Box, BoxProps, SxProps, Typography} from '@mui/material';
+import {Box, BoxProps, SxProps} from '@mui/material';
 
 type PageStubProps = BoxProps & {
-  text: string;
+  text?: string; // TODO remove
   height?: number;
 };
 
-const PageStub = ({text, height, ...props}: PageStubProps) => {
+const PageStub = ({height, children, ...props}: PageStubProps) => {
   return (
     <Box height={height} sx={boxStyles} {...props}>
-      <Box>
-        <Typography fontWeight="bold" fontSize="lg" color="lightgray">
-          {text}
-        </Typography>
-      </Box>
+      <Box>{children}</Box>
     </Box>
   );
 };

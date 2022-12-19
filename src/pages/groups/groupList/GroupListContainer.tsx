@@ -65,8 +65,6 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
     loading && dispatch(GroupsActions.fetchGroupsThunk()).finally(() => setLoading(false));
   }, []);
 
-  console.log(listRef.current, listRef.current?.clientWidth, listRef.current?.offsetWidth);
-
   return (
     <>
       <GroupListHeader

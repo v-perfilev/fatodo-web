@@ -3,12 +3,6 @@
     "create": "Добавить группу",
     "edit": "Редактировать группу"
   },
-  "list": {
-    "groupsNotFound": "Пока групп нет"
-  },
-  "view": {
-    "itemsNotFound": "Пока записей нет"
-  },
   "fields": {
     "title": {
       "label": "Название",
