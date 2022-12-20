@@ -28,4 +28,4 @@ const InternalError = ({timer, resetTimer}: InternalErrorProps) => {
   );
 };
 
-export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer])(InternalError);
+export default flowRight([withBackground('/images/octopus.png'), withRedirectTimer])(InternalError);

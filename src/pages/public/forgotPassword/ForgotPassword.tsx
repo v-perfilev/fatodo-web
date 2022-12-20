@@ -33,4 +33,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default flowRight([withBackground('/images/background-1.jpg')])(ForgotPassword);
+export default flowRight([withBackground('/images/octopus.png')])(ForgotPassword);

@@ -35,4 +35,4 @@ const ResetPassword = () => {
   );
 };
 
-export default flowRight([withBackground('/images/background-1.jpg')])(ResetPassword);
+export default flowRight([withBackground('/images/octopus.png')])(ResetPassword);

@@ -74,4 +74,4 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
   );
 };
 
-export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer])(NotActivated);
+export default flowRight([withBackground('/images/octopus.png'), withRedirectTimer])(NotActivated);

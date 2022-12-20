@@ -11,12 +11,12 @@ const withBackground = (imgSrc: string) => (Component: ComponentType) => (props:
   return (
     <Grid container>
       <Grid sx={containerStyles} item xs={12} md={6}>
-        <FVStack alignItems="stretch">
-          <FHStack minHeight={100} justifyContent="center">
-            <LogoWithText href={LANDING_URL} />
-          </FHStack>
+        <FVStack>
           <FHStack justifyContent="center">
             <PageContent maxWidth="xs">
+              <FHStack minHeight={100} justifyContent="center">
+                <LogoWithText href={LANDING_URL} />
+              </FHStack>
               <Component {...props} />
             </PageContent>
           </FHStack>
@@ -44,8 +44,8 @@ const containerStyles: SxProps = {
 
 const imgBoxStyles: SxProps = {
   position: 'fixed',
-  width: '100%',
-  height: '100%',
+  width: '50vw',
+  height: '100vh',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -53,8 +53,8 @@ const imgBoxStyles: SxProps = {
 };
 
 const imgStyles: CSSProperties = {
-  minWidth: '100%',
-  minHeight: '100%',
+  maxWidth: '50vw',
+  maxHeight: '100vh',
 };
 
 export default withBackground;

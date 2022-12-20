@@ -61,4 +61,4 @@ const tabStyles: CSSProperties = {
   width: '100%',
 };
 
-export default flowRight([withBackground('/images/background-1.jpg')])(Auth);
+export default flowRight([withBackground('/images/octopus.png')])(Auth);

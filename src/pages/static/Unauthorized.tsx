@@ -28,4 +28,4 @@ const Unauthorized = ({timer, resetTimer}: UnauthorizedProps) => {
   );
 };
 
-export default flowRight([withBackground('/images/background-1.jpg'), withRedirectTimer])(Unauthorized);
+export default flowRight([withBackground('/images/octopus.png'), withRedirectTimer])(Unauthorized);
