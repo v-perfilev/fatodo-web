@@ -1,4 +1,4 @@
-import React, {MutableRefObject, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {Dispatch, SetStateAction, useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {
   DEFAULT_MARGIN,
   HEADER_HEIGHT,
@@ -24,10 +24,10 @@ import FBox from '../../../components/boxes/FBox';
 import ChatViewStub from './ChatViewStub';
 
 type ChatViewContentProps = {
-  listRef?: MutableRefObject<HTMLDivElement>;
+  setWidth: Dispatch<SetStateAction<number>>;
 };
 
-const ChatViewContent = ({listRef}: ChatViewContentProps) => {
+const ChatViewContent = ({setWidth}: ChatViewContentProps) => {
   const unreadMessageIdsSelector = useCallback(ChatsSelectors.makeUnreadMessageIdsSelector(), []);
   const dispatch = useAppDispatch();
   const account = useAppSelector(AuthSelectors.account);
@@ -130,7 +130,7 @@ const ChatViewContent = ({listRef}: ChatViewContentProps) => {
             setIsOnBottom={setHideScrollButton}
             setVisibleItems={setVisibleItems}
             virtualizedListMethodsRef={listMethodsRef}
-            virtualizedListRef={listRef}
+            setWidth={setWidth}
           />
           <Container sx={containerStyles}>
             <FBox sx={boxStyles}>

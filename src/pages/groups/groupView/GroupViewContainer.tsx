@@ -35,8 +35,8 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
   const items = useAppSelector((state) => itemsSelector(state, showArchived));
   const allItemsLoaded = useAppSelector((state) => allItemsLoadedSelector(state, showArchived));
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
+  const [width, setWidth] = useState<number>();
   const listMethodsRef = useRef<VirtualizedListMethods>();
-  const listRef = useRef<HTMLDivElement>();
 
   const canEdit = useMemo<boolean>(() => {
     return group && GroupUtils.canEdit(account, group);
@@ -109,7 +109,7 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
         showArchived={showArchived}
         setShowArchived={setShowArchived}
         toggleCollapsed={toggleCollapsed}
-        width={listRef.current?.clientWidth}
+        width={width}
       />
       {items.length === 0 && <GroupViewStub />}
       {items.length > 0 && (
@@ -124,7 +124,7 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
             paddingBottom={8}
             setIsOnTop={setHideScrollButton}
             virtualizedListMethodsRef={listMethodsRef}
-            virtualizedListRef={listRef}
+            setWidth={setWidth}
           />
           <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
         </>

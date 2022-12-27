@@ -1,7 +1,6 @@
 import React, {
   CSSProperties,
   memo,
-  MutableRefObject,
   ReactElement,
   Ref,
   useCallback,
@@ -13,7 +12,7 @@ import React, {
 } from 'react';
 import {ListKeysCache, ListMeasurerCache} from './caches';
 import {ListChildComponentProps, ListOnItemsRenderedProps, ListOnScrollProps, VariableSizeList} from 'react-window';
-import AutoSizer from 'react-virtualized-auto-sizer';
+import AutoSizer, {Size} from 'react-virtualized-auto-sizer';
 import InfiniteLoader from 'react-window-infinite-loader';
 import VirtualizedListMeasurer from './VirtualizedListMeasurer';
 import {RefUtils} from '../../../../shared/utils/RefUtils';
@@ -45,7 +44,7 @@ type VirtualizedListProps<T> = {
   setIsOnBottom?: (isOnBottom: boolean) => void;
   setVisibleItems?: (visibleItems: number[]) => void;
   virtualizedListMethodsRef?: Ref<VirtualizedListMethods>;
-  virtualizedListRef?: MutableRefObject<HTMLDivElement>;
+  setWidth?: (width: number) => void;
 };
 
 const getItemStyles = (length: number, index: number, paddingTop: number, paddingBottom: number): CSSProperties => {
@@ -60,7 +59,7 @@ const getItemStyles = (length: number, index: number, paddingTop: number, paddin
 
 const VirtualizedList = (props: VirtualizedListProps<any>) => {
   const {itemRenderer, itemData, allLoaded = true, loadMoreItems} = props;
-  const {itemHeight, keyExtractor, reverseOrder, virtualizedListMethodsRef, virtualizedListRef} = props;
+  const {itemHeight, keyExtractor, reverseOrder, setWidth, virtualizedListMethodsRef} = props;
   const {paddingTop = 0, paddingBottom = 0, setIsOnTop, setIsOnBottom, setVisibleItems} = props;
   const forceUpdate = useForceUpdate();
   const [scroll, setScroll] = useState<ListOnScrollProps>();
@@ -76,6 +75,10 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
   const loadedLength = useMemo<number>(() => {
     return itemData.length;
   }, [itemData]);
+
+  const handleResize = (size: Size) => {
+    setWidth?.(size.width);
+  };
 
   const height = isDynamic ? measurerCache.getTotalHeight() : itemHeight * loadedLength;
   const prevHeight = RefUtils.usePrevious(height);
@@ -242,7 +245,7 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
   );
 
   return (
-    <AutoSizer>
+    <AutoSizer onResize={handleResize}>
       {({height, width}): ReactElement => (
         <>
           {isDynamic && measurer}
@@ -256,7 +259,6 @@ const VirtualizedList = (props: VirtualizedListProps<any>) => {
                 itemSize={getItemSize}
                 onItemsRendered={wrappedOnItemsRendered(onItemsRendered)}
                 onScroll={setScroll}
-                outerRef={virtualizedListRef}
                 ref={RefUtils.merge(listRef, ref)}
               >
                 {isDynamic ? measurableItemRenderer : styledItemRenderer}

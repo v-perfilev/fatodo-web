@@ -26,8 +26,8 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
   const allLoaded = useAppSelector(EventsSelectors.allLoaded);
   const [loading, setLoading] = useDelayedState(!events.length);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
+  const [width, setWidth] = useState<number>();
   const listMethodsRef = useRef<VirtualizedListMethods>();
-  const listRef = useRef<HTMLDivElement>();
 
   /*
   loaders
@@ -81,7 +81,7 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
 
   return (
     <>
-      <EventListHeader width={listRef.current?.clientWidth} toggleCollapsed={toggleCollapsed} />
+      <EventListHeader width={width} toggleCollapsed={toggleCollapsed} />
       <ConditionalSpinner loading={loading} loadingPlaceholder={<EventListSkeleton />}>
         <VirtualizedList
           itemRenderer={itemRenderer}
@@ -93,7 +93,7 @@ const EventList = ({toggleCollapsed}: EventListProps) => {
           paddingBottom={DEFAULT_MARGIN}
           setIsOnTop={setHideScrollButton}
           virtualizedListMethodsRef={listMethodsRef}
-          virtualizedListRef={listRef}
+          setWidth={setWidth}
         />
         <ScrollCornerButton show={!hideScrollButton} action={scrollUp} />
       </ConditionalSpinner>

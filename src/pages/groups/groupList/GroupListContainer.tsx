@@ -28,8 +28,8 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
   const [sorting, setSorting] = useState<boolean>(false);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
   const [order, setOrder] = useState<number[]>(undefined);
+  const [width, setWidth] = useState<number>();
   const listMethodsRef = useRef<VirtualizedListMethods>();
-  const listRef = useRef<HTMLDivElement>();
 
   /*
   keyExtractor and renderItem
@@ -68,7 +68,7 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
   return (
     <>
       <GroupListHeader
-        width={listRef.current?.clientWidth}
+        width={width}
         sorting={sorting}
         setSorting={setSorting}
         order={order}
@@ -99,7 +99,7 @@ const GroupListContainer = ({toggleCollapsed}: GroupListContainerProps) => {
               paddingBottom={8}
               setIsOnTop={setHideScrollButton}
               virtualizedListMethodsRef={listMethodsRef}
-              virtualizedListRef={listRef}
+              setWidth={setWidth}
             />
             <ScrollCornerButton show={!sorting && !hideScrollButton} action={scrollUp} />
           </>

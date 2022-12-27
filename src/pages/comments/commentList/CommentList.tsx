@@ -28,8 +28,8 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   const allLoaded = useAppSelector(CommentsSelectors.allLoaded);
   const [loading, setLoading] = useDelayedState(false);
   const [hideScrollButton, setHideScrollButton] = useState<boolean>(true);
+  const [width, setWidth] = useState<number>();
   const listMethodsRef = useRef<VirtualizedListMethods>();
-  const listRef = useRef<HTMLDivElement>();
 
   const canLoad = targetId && targetId !== stateTargetId;
   const contextLoading = !targetId || targetId !== stateTargetId;
@@ -80,7 +80,7 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
 
   return (
     <>
-      <CommentListHeader width={listRef.current?.clientWidth} toggleCollapsed={toggleCollapsed} />
+      <CommentListHeader width={width} toggleCollapsed={toggleCollapsed} />
       <ConditionalSpinner loading={loading || contextLoading} loadingPlaceholder={<CommentListSkeleton />}>
         <VirtualizedList
           itemRenderer={itemRenderer}
@@ -93,11 +93,11 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
           paddingBottom={PAGE_FOOTER_HEIGHT + DEFAULT_MARGIN}
           setIsOnBottom={setHideScrollButton}
           virtualizedListMethodsRef={listMethodsRef}
-          virtualizedListRef={listRef}
+          setWidth={setWidth}
         />
         <ScrollCornerButton show={!hideScrollButton} action={scrollDown} down bottomPadding={PAGE_FOOTER_HEIGHT} />
       </ConditionalSpinner>
-      <CommentListFooter width={listRef.current?.clientWidth} />
+      <CommentListFooter width={width} />
     </>
   );
 };
