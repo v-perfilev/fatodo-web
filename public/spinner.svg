@@ -8,7 +8,8 @@
                 begin="-0.7s"
                 fill="freeze"
                 repeatCount="indefinite"
-                keyTimes="0;1"
+                keyTimes="0; 1"
+                keyPoints="0; 1"
                 keySplines="0 0 0.58 1"
                 calcMode="spline">
             <mpath xlink:href="#motionPath0"/>
@@ -22,7 +23,8 @@
                 begin="-0.5s"
                 fill="freeze"
                 repeatCount="indefinite"
-                keyTimes="0;1"
+                keyTimes="0; 1"
+                keyPoints="0; 1"
                 keySplines="0 0 0.58 1"
                 calcMode="spline">
             <mpath xlink:href="#motionPath1"/>
@@ -36,7 +38,8 @@
                 begin="-0.25s"
                 fill="freeze"
                 repeatCount="indefinite"
-                keyTimes="0;1"
+                keyTimes="0; 1"
+                keyPoints="0; 1"
                 keySplines="0 0 0.58 1"
                 calcMode="spline">
             <mpath xlink:href="#motionPath2"/>
@@ -50,7 +53,8 @@
                 begin="0s"
                 fill="freeze"
                 repeatCount="indefinite"
-                keyTimes="0;1"
+                keyTimes="0; 1"
+                keyPoints="0; 1"
                 keySplines="0 0 0.58 1"
                 calcMode="spline">
             <mpath xlink:href="#motionPath3"/>
