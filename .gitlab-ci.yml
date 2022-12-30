@@ -1,8 +1,9 @@
 image: node:16-alpine
 
 variables:
-  TAG_LATEST: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:latest
-  TAG_COMMIT: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME:$CI_COMMIT_SHORT_SHA
+  IMAGE: $CI_REGISTRY_IMAGE/$CI_COMMIT_REF_NAME
+  TAG: $CI_COMMIT_SHORT_SHA
+  HELM_REPOSITORY: ${CI_API_V4_URL}/projects/${HELM_PROJECT_ID}/packages/helm/stable
 
 cache:
   paths:
@@ -30,9 +31,9 @@ publish-to-docker:
     - docker:20-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker build $DOCKER_APP_BUILD_PARAMS -t $TAG_COMMIT -t $TAG_LATEST .
-    - docker push $TAG_COMMIT
-    - docker push $TAG_LATEST
+    - docker build -t $IMAGE:$TAG -t $IMAGE:latest .
+    - docker push $IMAGE:$TAG
+    - docker push $IMAGE:latest
   only:
     - develop
     - master
@@ -41,14 +42,31 @@ deploy-to-stage:
   image: alpine:latest
   stage: deploy
   script:
-    - chmod og= $SERVER_ID_RSA
+    - chmod og= $STAGE_SERVER_ID_RSA
     - apk update && apk add openssh-client
-    - ssh -i $SERVER_ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
-    - ssh -i $SERVER_ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker pull $TAG_COMMIT"
-    - ssh -i $SERVER_ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker container rm -f $APP_NAME || true"
-    - ssh -i $SERVER_ID_RSA -o StrictHostKeyChecking=no $SERVER_USER@$SERVER_IP "docker run -d $DOCKER_APP_PARAMS $DOCKER_COMMON_PARAMS --name $APP_NAME $TAG_COMMIT"
+    - ssh -i $STAGE_SERVER_ID_RSA -o StrictHostKeyChecking=no $STAGE_SERVER_USER@$STAGE_SERVER_IP "docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY"
+    - ssh -i $STAGE_SERVER_ID_RSA -o StrictHostKeyChecking=no $STAGE_SERVER_USER@$STAGE_SERVER_IP "docker pull $IMAGE:$TAG"
+    - ssh -i $STAGE_SERVER_ID_RSA -o StrictHostKeyChecking=no $STAGE_SERVER_USER@$STAGE_SERVER_IP "docker container rm -f $APP_NAME || true"
+    - ssh -i $STAGE_SERVER_ID_RSA -o StrictHostKeyChecking=no $STAGE_SERVER_USER@$STAGE_SERVER_IP "docker run -d $DOCKER_APP_PARAMS $DOCKER_COMMON_PARAMS --name $APP_NAME $IMAGE:$TAG"
   environment:
     name: staging
-    url: $SERVER_URL
+    url: $STAGE_SERVER_URL
   only:
     - develop
+
+deploy-to-prod:
+  image: dtzar/helm-kubectl:3.10
+  stage: deploy
+  before_script:
+    - export KUBECONFIG=$PROD_KUBECONFIG
+  script:
+    - helm repo add project --username ${CI_REGISTRY_USER} --password ${CI_REGISTRY_PASSWORD} ${HELM_REPOSITORY}
+    - helm upgrade $HELM_PROJECT_NAME project/$HELM_PROJECT_CHART
+      --install --wait --reuse-values
+      --set $HELM_APP_NAME.image.repository=$IMAGE
+      --set $HELM_APP_NAME.image.tag=$TAG
+  environment:
+    name: production
+    url: $PROD_URL
+  only:
+    - master
