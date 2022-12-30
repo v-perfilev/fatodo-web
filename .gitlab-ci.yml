@@ -31,7 +31,7 @@ publish-to-docker:
     - docker:20-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker build -t $IMAGE:$TAG -t $IMAGE:latest .
+    - docker build $DOCKER_BUILD_PARAMS -t $IMAGE:$TAG -t $IMAGE:latest .
     - docker push $IMAGE:$TAG
     - docker push $IMAGE:latest
   only:
