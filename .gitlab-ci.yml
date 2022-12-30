@@ -24,7 +24,7 @@ compile:
     paths:
       - dist/
 
-publish-to-docker:
+publish-to-docker-stage:
   image: docker:20
   stage: publish
   services:
@@ -34,8 +34,24 @@ publish-to-docker:
     - docker build $DOCKER_BUILD_PARAMS -t $IMAGE:$TAG -t $IMAGE:latest .
     - docker push $IMAGE:$TAG
     - docker push $IMAGE:latest
+  environment:
+    name: staging
   only:
     - develop
+
+publish-to-docker-prod:
+  image: docker:20
+  stage: publish
+  services:
+    - docker:20-dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - docker build $DOCKER_BUILD_PARAMS -t $IMAGE:$TAG -t $IMAGE:latest .
+    - docker push $IMAGE:$TAG
+    - docker push $IMAGE:latest
+  environment:
+    name: production
+  only:
     - master
 
 deploy-to-stage:
