@@ -52,6 +52,7 @@ const Auth = () => {
       </Tabs>
       {activeTab === 0 ? <AuthSignInForm onSuccess={redirectToHome} /> : <AuthSignUpForm onSuccess={redirectToHome} />}
       {SOCIAL_LOGIN && <SocialButtons />}
+      <Link to={RootRoutes.ROOT}>{t('static:actions.toForgotPassword')}</Link>
       <Link to={LANDING_URL}>{t('static:actions.toHomePage')}</Link>
     </Stack>
   );

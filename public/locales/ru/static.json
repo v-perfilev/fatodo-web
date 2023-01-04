@@ -21,6 +21,7 @@
   },
   "actions": {
     "toHomePage": "На главную страницу",
+    "toForgotPassword": "Забыли пароль?",
     "sendActivationCode": "Отправить код активации повторно"
   }
 }

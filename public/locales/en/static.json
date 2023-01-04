@@ -20,6 +20,7 @@
   },
   "actions": {
     "toHomePage": "To home page",
+    "toForgotPassword": "Forgot password?",
     "sendActivationCode": "Send activation code again"
   }
 }
