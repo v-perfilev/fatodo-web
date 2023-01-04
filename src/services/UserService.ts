@@ -44,8 +44,8 @@ export default class UserService {
     return axios.put(url, settings);
   };
 
-  public static deleteAccountPermanently = (userId: string): AxiosPromise<void> => {
-    const url = UserService.baseUrl + '/account/' + userId;
+  public static deleteAccountPermanently = (): AxiosPromise<void> => {
+    const url = UserService.baseUrl + '/account';
     return axios.delete(url);
   };
 

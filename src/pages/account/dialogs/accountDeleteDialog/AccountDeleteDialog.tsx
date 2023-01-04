@@ -22,7 +22,7 @@ const AccountDeleteDialog = ({show, close}: AccountDeleteDialogProps) => {
   const {t} = useTranslation();
 
   const request = (): void => {
-    dispatch(AuthActions.deleteAccountPermanentlyThunk(account.id))
+    dispatch(AuthActions.deleteAccountPermanentlyThunk())
       .unwrap()
       .then(() => close());
   };

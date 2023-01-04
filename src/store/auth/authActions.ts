@@ -141,10 +141,10 @@ export class AuthActions {
     },
   );
 
-  static deleteAccountPermanentlyThunk = createAsyncThunk<void, string, AsyncThunkConfig>(
+  static deleteAccountPermanentlyThunk = createAsyncThunk<void, void, AsyncThunkConfig>(
     PREFIX + 'deleteAccount',
-    async (userId, thunkAPI) => {
-      await UserService.deleteAccountPermanently(userId);
+    async (_, thunkAPI) => {
+      await UserService.deleteAccountPermanently();
       await thunkAPI.dispatch(AuthActions.logout());
       thunkAPI.dispatch(SnackActions.handleCode('auth.afterDeleteAccount', 'info'));
     },
