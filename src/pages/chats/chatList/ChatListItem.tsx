@@ -40,7 +40,7 @@ const ChatListItem = ({chat, isSelected}: ChatListItemProps) => {
 
   const unreadCount = unreadMessageIds.length;
   const directUser = ChatUtils.getDirectChatUser(chat, users, account);
-  const title = ChatUtils.getTitle(chat, users, account) || t('common:links.userDeleted');
+  const title = ChatUtils.getTitle(chat, users, account, t) || t('common:links.userDeleted');
   const date = chat.lastMessage?.createdAt ? new Date(chat.lastMessage.createdAt) : null;
 
   const pic = directUser ? <UserView user={directUser} /> : <UrlPic url={undefined} />;

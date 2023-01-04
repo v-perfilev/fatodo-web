@@ -13,6 +13,7 @@ import CommentListItemMenu from './CommentListItemMenu';
 import DateView from '../../../../components/views/DateView';
 import {Box, SxProps, Typography} from '@mui/material';
 import TruncatedTypography from '../../../../components/surfaces/TruncatedTypography';
+import UserLink from '../../../../components/links/UserLink';
 
 type CommentListItemProps = {
   comment: Comment;
@@ -35,7 +36,7 @@ const CommentListItem = ({comment}: CommentListItemProps) => {
         <FHStack>
           <FHStack>
             <TruncatedTypography color="primary" fontWeight="bold" fontSize={14}>
-              {user?.username}
+              <UserLink user={user} />
             </TruncatedTypography>
           </FHStack>
           <Typography color="grey.400" fontSize={12} whiteSpace="nowrap">

@@ -12,6 +12,7 @@ import ChatViewMessageMenu from './ChatViewMessageMenu';
 import DateView from '../../../../components/views/DateView';
 import {Box, SxProps, Typography} from '@mui/material';
 import {MessageUtils} from '../../../../shared/utils/MessageUtils';
+import UserLink from '../../../../components/links/UserLink';
 
 type ChatViewMessageIncomingProps = {
   message: Message;
@@ -19,9 +20,9 @@ type ChatViewMessageIncomingProps = {
 
 const ChatViewMessageIncoming = ({message}: ChatViewMessageIncomingProps) => {
   const userSelector = useCallback(InfoSelectors.makeUserSelector(), []);
-  const {t} = useTranslation();
   const account = useAppSelector(AuthSelectors.account);
   const user = useAppSelector((state) => userSelector(state, message.userId));
+  const {t} = useTranslation();
 
   const date = new Date(message.createdAt);
   const isRead = MessageUtils.isReadMessage(message, account);
@@ -33,7 +34,7 @@ const ChatViewMessageIncoming = ({message}: ChatViewMessageIncomingProps) => {
         <FHStack>
           <FHStack>
             <Typography color="primary" fontWeight="bold" fontSize={14}>
-              {user?.username}
+              <UserLink user={user} />
             </Typography>
           </FHStack>
           <FHStack flexGrow={0}>

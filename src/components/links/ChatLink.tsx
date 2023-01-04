@@ -6,6 +6,7 @@ import AuthSelectors from '../../store/auth/authSelectors';
 import InfoSelectors from '../../store/info/infoSelectors';
 import Link from '../controls/Link';
 import {ChatRouteUtils} from '../../routes/ChatRouter';
+import {useTranslation} from 'react-i18next';
 
 type ChatLinkProps = PropsWithChildren<{
   chat: ChatInfo;
@@ -18,8 +19,9 @@ export const ChatLink = ({chat, color, noLink, children}: ChatLinkProps) => {
   const memberIds = chat.members.map((m) => m.userId);
   const account = useAppSelector(AuthSelectors.account);
   const users = useAppSelector((state) => usersSelector(state, memberIds));
+  const {t} = useTranslation();
 
-  const title = children || ChatUtils.getTitle(chat, users, account);
+  const title = children || ChatUtils.getTitle(chat, users, account, t);
   const url = ChatRouteUtils.getChatUrl(chat.id);
 
   return noLink ? (

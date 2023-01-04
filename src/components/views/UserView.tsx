@@ -7,6 +7,7 @@ import UserPopupView from '../../pages/user/userView/UserView';
 import FHStack from '../boxes/FHStack';
 import {useAppSelector} from '../../store/store';
 import AuthSelectors from '../../store/auth/authSelectors';
+import {useTranslation} from 'react-i18next';
 
 type UserViewProps = {
   user: User;
@@ -17,6 +18,7 @@ type UserViewProps = {
 
 const UserView = ({user, size, withUserPic = true, withUsername = false}: UserViewProps) => {
   const account = useAppSelector(AuthSelectors.account);
+  const {t} = useTranslation();
 
   const isAnotherUser = user && user.id !== account.id;
   const isNotDeleted = user && !user.deleted;
@@ -24,7 +26,9 @@ const UserView = ({user, size, withUserPic = true, withUsername = false}: UserVi
   const userView = (
     <FHStack spacing={1}>
       {withUserPic && <UrlPic alt={user?.username} url={user?.imageFilename} size={size} />}
-      {withUsername && <Typography fontSize={14}>{user?.username}</Typography>}
+      {withUsername && (
+        <Typography fontSize={14}>{user?.deleted ? t('common:links.userDeleted') : user?.username}</Typography>
+      )}
     </FHStack>
   );
 

@@ -6,6 +6,7 @@ import {useAppSelector} from '../../../../store/store';
 import InfoSelectors from '../../../../store/info/infoSelectors';
 import FBox from '../../../../components/boxes/FBox';
 import {Typography} from '@mui/material';
+import UserLink from '../../../../components/links/UserLink';
 
 type ChatListMessageIncomingProps = {
   message: Message;
@@ -19,7 +20,7 @@ const ChatListMessageIncoming = ({message}: ChatListMessageIncomingProps) => {
   return (
     <FHStack spacing={1}>
       <Typography color="grey.400" fontWeight="bold" fontSize={12}>
-        {user?.username}:
+        <UserLink user={user} />:
       </Typography>
       {!message.isDeleted && (
         <FBox>

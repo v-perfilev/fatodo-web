@@ -45,15 +45,15 @@ const ChatViewHeader = ({width}: ChatViewHeaderProps) => {
     showChatLeaveDialog,
     showChatDeleteDialog,
   } = useChatDialogContext();
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
 
   const showMarkAsRead = useMemo<boolean>(() => {
     return unreadMessageIds?.length > 0;
   }, [chat, unreadMessageIds]);
 
   const title = useMemo<string>(() => {
-    return ChatUtils.getTitle(chat, users, account);
-  }, [chat, users, account]);
+    return ChatUtils.getTitle(chat, users, account, t) || t('common:links.userDeleted');
+  }, [chat, users, account, i18n.language]);
 
   const closeChat = (): void => {
     dispatch(ChatActions.reset());
