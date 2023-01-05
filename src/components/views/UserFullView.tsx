@@ -6,6 +6,7 @@ import MultiLabeledBox, {MultiLabeledBoxItem} from '../surfaces/MultiLabeledBox'
 import UrlPic from '../images/UrlPic';
 import {Typography} from '@mui/material';
 import FHStack from '../boxes/FHStack';
+import {UserUtils} from '../../shared/utils/UserUtils';
 
 type UserFullViewProps = {
   user: User;
@@ -27,7 +28,7 @@ export const UserFullView = ({user}: UserFullViewProps) => {
       <UrlPic url={user.imageFilename} size={90} />
       <FVStack>
         <Typography fontSize={18} fontWeight="bold" color="primary">
-          {user.username}
+          {UserUtils.getUsername(user, t)}
         </Typography>
         <MultiLabeledBox items={labeledItems} height={30} />
       </FVStack>

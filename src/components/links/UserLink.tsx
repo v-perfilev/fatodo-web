@@ -1,6 +1,7 @@
 import React from 'react';
 import {User} from '../../models/User';
 import {useTranslation} from 'react-i18next';
+import {UserUtils} from '../../shared/utils/UserUtils';
 
 type UserLinkProps = {
   user: User;
@@ -9,12 +10,7 @@ type UserLinkProps = {
 export const UserLink = ({user}: UserLinkProps) => {
   const {t} = useTranslation();
 
-  let text = user?.username;
-  if (user?.deleted) {
-    text = t('common:links.userDeleted');
-  }
-
-  return <>{text}</>;
+  return <>{UserUtils.getUsername(user, t)}</>;
 };
 
 export default UserLink;

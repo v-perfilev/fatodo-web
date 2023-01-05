@@ -8,6 +8,7 @@ import FHStack from '../boxes/FHStack';
 import {useAppSelector} from '../../store/store';
 import AuthSelectors from '../../store/auth/authSelectors';
 import {useTranslation} from 'react-i18next';
+import {UserUtils} from '../../shared/utils/UserUtils';
 
 type UserViewProps = {
   user: User;
@@ -26,9 +27,7 @@ const UserView = ({user, size, withUserPic = true, withUsername = false}: UserVi
   const userView = (
     <FHStack spacing={1}>
       {withUserPic && <UrlPic alt={user?.username} url={user?.imageFilename} size={size} />}
-      {withUsername && (
-        <Typography fontSize={14}>{user?.deleted ? t('common:links.userDeleted') : user?.username}</Typography>
-      )}
+      {withUsername && <Typography fontSize={14}>{UserUtils.getUsername(user, t)}</Typography>}
     </FHStack>
   );
 

@@ -23,7 +23,7 @@ const CalendarViewReminderItem = ({reminder}: CalendarViewReminderItemProps) => 
 
   const bulletView = <Bullet color={group?.color} size={12} />;
   const groupView = group ? <GroupLink group={group} color="grey.500" /> : null;
-  const itemView = item ? <ItemLink item={item} /> : null;
+  const itemView = item ? <ItemLink item={item} color="grey.600" /> : null;
   const date = new Date(reminder.date);
 
   return (

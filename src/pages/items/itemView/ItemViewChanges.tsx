@@ -8,6 +8,7 @@ import InfoSelectors from '../../../store/info/infoSelectors';
 import {DateFormatters} from '../../../shared/utils/DateFormatters';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import LabeledBox from '../../../components/surfaces/LabeledBox';
+import {UserUtils} from '../../../shared/utils/UserUtils';
 
 const ItemViewChanges = () => {
   const userSelector = useCallback(InfoSelectors.makeUserSelector(), []);
@@ -31,13 +32,13 @@ const ItemViewChanges = () => {
     <FVStack flexGrow={0}>
       {creator && (
         <FHStack flexWrap="wrap">
-          {labeledBox(t('item:labels.createdBy'), creator.deleted ? t('common:links.userDeleted') : creator.username)}
+          {labeledBox(t('item:labels.createdBy'), UserUtils.getUsername(creator, t))}
           {labeledBox(t('item:labels.createdAt'), formatDate(item.createdAt))}
         </FHStack>
       )}
       {updater && item.createdAt !== item.lastModifiedAt && (
         <FHStack flexWrap="wrap">
-          {labeledBox(t('item:labels.updatedBy'), updater.deleted ? t('common:links.userDeleted') : updater.username)}
+          {labeledBox(t('item:labels.updatedBy'), UserUtils.getUsername(updater, t))}
           {labeledBox(t('item:labels.createdAt'), formatDate(item.lastModifiedAt))}
         </FHStack>
       )}
