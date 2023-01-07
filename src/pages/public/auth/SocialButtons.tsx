@@ -51,15 +51,16 @@ const SocialButtons = () => {
         >
           Facebook
         </LoadingButton>
-        <LoadingButton
-          startIcon={<GoogleIcon />}
-          onClick={googleLogin}
-          fullWidth
-          loading={googleLoading}
-          disabled={facebookLoading || googleLoading}
-        >
-          Google
-        </LoadingButton>
+        {/*TODO*/}
+        {/*<LoadingButton*/}
+        {/*  startIcon={<GoogleIcon />}*/}
+        {/*  onClick={googleLogin}*/}
+        {/*  fullWidth*/}
+        {/*  loading={googleLoading}*/}
+        {/*  disabled={facebookLoading || googleLoading}*/}
+        {/*>*/}
+        {/*  Google*/}
+        {/*</LoadingButton>*/}
       </FHStack>
     </FVStack>
   );
