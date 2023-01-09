@@ -33,7 +33,6 @@ export enum RootRoutes {
   LOGIN = '/login',
   REGISTRATION = '/registration',
   SOCIAL_LOGIN = '/social-login',
-  SOCIAL_LOGIN_WITH_PARAM = '/social-login/:token',
   ACTIVATION_WITH_PARAM = '/activation/:code',
   FORGOT_PASSWORD = '/forgot-password',
   RESET_PASSWORD_WITH_PARAM = '/reset-password/:code',
@@ -85,7 +84,7 @@ const RootRouter = () => {
       <Route path={RootRoutes.FORGOT_PASSWORD} element={publicRoute}>
         <Route index element={<ForgotPassword />} />
       </Route>
-      <Route path={RootRoutes.SOCIAL_LOGIN_WITH_PARAM} element={publicRoute}>
+      <Route path={RootRoutes.SOCIAL_LOGIN} element={publicRoute}>
         <Route index element={<SocialLogin />} />
       </Route>
       <Route path={RootRoutes.ACTIVATION_WITH_PARAM} element={publicRoute}>

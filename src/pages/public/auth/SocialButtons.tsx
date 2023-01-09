@@ -7,14 +7,15 @@ import FacebookIcon from '../../../components/icons/FacebookIcon';
 import {LanguageUtils} from '../../../shared/utils/LanguageUtils';
 import {DateUtils} from '../../../shared/utils/DateUtils';
 import {RootRoutes} from '../../../routes/RootRouter';
-import GoogleIcon from '../../../components/icons/GoogleIcon';
 import FVStack from '../../../components/boxes/FVStack';
 import FHStack from '../../../components/boxes/FHStack';
+import GoogleIcon from '../../../components/icons/GoogleIcon';
 
 const SocialButtons = () => {
   const {t} = useTranslation();
-  const [facebookLoading, setFacebookLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [facebookLoading, setFacebookLoading] = useState(false);
+  const [appleLoading, setAppleLoading] = useState(false);
 
   const oAuth2Login = (provider: string): void => {
     const apiUrl = API_URL + '/api/oauth2/authorize/' + provider;
@@ -24,14 +25,19 @@ const SocialButtons = () => {
     window.location.href = apiUrl + '?' + languageParam + '&' + timezoneParam + '&' + redirectParam;
   };
 
+  const googleLogin = (): void => {
+    setGoogleLoading(true);
+    oAuth2Login('google');
+  };
+
   const facebookLogin = (): void => {
     setFacebookLoading(true);
     oAuth2Login('facebook');
   };
 
-  const googleLogin = (): void => {
-    setGoogleLoading(true);
-    oAuth2Login('google');
+  const appleLogin = (): void => {
+    setAppleLoading(true);
+    oAuth2Login('apple');
   };
 
   return (
@@ -42,25 +48,34 @@ const SocialButtons = () => {
         <Divider />
       </Box>
       <FHStack>
+        {/*TODO*/}
+        <LoadingButton
+          startIcon={<GoogleIcon />}
+          onClick={googleLogin}
+          fullWidth
+          loading={googleLoading}
+          disabled={googleLoading || facebookLoading || appleLoading}
+        >
+          Google
+        </LoadingButton>
         <LoadingButton
           startIcon={<FacebookIcon />}
           onClick={facebookLogin}
           fullWidth
           loading={facebookLoading}
-          disabled={facebookLoading || googleLoading}
+          disabled={facebookLoading || googleLoading || appleLoading}
         >
           Facebook
         </LoadingButton>
-        {/*TODO*/}
-        {/*<LoadingButton*/}
-        {/*  startIcon={<GoogleIcon />}*/}
-        {/*  onClick={googleLogin}*/}
-        {/*  fullWidth*/}
-        {/*  loading={googleLoading}*/}
-        {/*  disabled={facebookLoading || googleLoading}*/}
-        {/*>*/}
-        {/*  Google*/}
-        {/*</LoadingButton>*/}
+        <LoadingButton
+          startIcon={<FacebookIcon />}
+          onClick={appleLogin}
+          fullWidth
+          loading={appleLoading}
+          disabled={facebookLoading || googleLoading || appleLoading}
+        >
+          Apple
+        </LoadingButton>
       </FHStack>
     </FVStack>
   );
