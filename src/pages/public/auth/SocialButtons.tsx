@@ -10,6 +10,7 @@ import {RootRoutes} from '../../../routes/RootRouter';
 import FVStack from '../../../components/boxes/FVStack';
 import FHStack from '../../../components/boxes/FHStack';
 import GoogleIcon from '../../../components/icons/GoogleIcon';
+import AppleIcon from '../../../components/icons/AppleIcon';
 
 const SocialButtons = () => {
   const {t} = useTranslation();
@@ -68,7 +69,7 @@ const SocialButtons = () => {
           Facebook
         </LoadingButton>
         <LoadingButton
-          startIcon={<FacebookIcon />}
+          startIcon={<AppleIcon />}
           onClick={appleLogin}
           fullWidth
           loading={appleLoading}
