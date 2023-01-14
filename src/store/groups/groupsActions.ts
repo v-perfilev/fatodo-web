@@ -7,7 +7,6 @@ import {InfoActions} from '../info/infoActions';
 import {Item} from '../../models/Item';
 import {SnackActions} from '../snack/snackActions';
 import {PageableList} from '../../models/PageableList';
-import calendarSlice from '../calendar/calendarSlice';
 
 const PREFIX = 'groups/';
 
@@ -20,8 +19,17 @@ export class GroupsActions {
     dispatch(groupsSlice.actions.setGroups(groups));
   };
 
-  static addGroup = (group: Group) => (dispatch: AppDispatch) => {
+  static createGroup = (group: Group) => (dispatch: AppDispatch) => {
     dispatch(groupsSlice.actions.addGroup(group));
+    dispatch(groupsSlice.actions.setCollapsed([group.id, false]));
+  };
+
+  static addGroup = (group: Group) => (dispatch: AppDispatch) => {
+    const memberIds = group.members.map((m) => m.userId);
+    dispatch(groupsSlice.actions.addGroup(group));
+    dispatch(GroupsActions.fetchItemsThunk([group.id]));
+    dispatch(InfoActions.handleCommentThreadIdsThunk([group.id]));
+    dispatch(InfoActions.handleUserIdsThunk(memberIds));
   };
 
   static updateGroup = (group: Group) => (dispatch: AppDispatch) => {
@@ -34,7 +42,6 @@ export class GroupsActions {
     dispatch(groupsSlice.actions.removeItemsCount(groupId));
     dispatch(groupsSlice.actions.removeItemsLoading(groupId));
     dispatch(groupsSlice.actions.removeCollapsed(groupId));
-    dispatch(calendarSlice.actions.reset());
   };
 
   static addMembers = (members: GroupMember[]) => (dispatch: AppDispatch) => {
@@ -49,15 +56,13 @@ export class GroupsActions {
     dispatch(groupsSlice.actions.removeMembers(members));
   };
 
-  static addItem = (item: Item) => (dispatch: AppDispatch) => {
+  static addItem = (item: Item, dontChangeCount?: boolean) => (dispatch: AppDispatch) => {
     dispatch(groupsSlice.actions.addItem(item));
-    dispatch(groupsSlice.actions.incrementItemsCount(item.groupId));
-    dispatch(calendarSlice.actions.reset());
+    !dontChangeCount && dispatch(groupsSlice.actions.incrementItemsCount(item.groupId));
   };
 
   static updateItem = (item: Item) => (dispatch: AppDispatch) => {
     dispatch(groupsSlice.actions.updateItem(item));
-    dispatch(calendarSlice.actions.reset());
   };
 
   static updateItemArchived = (item: Item) => (dispatch: AppDispatch) => {
@@ -70,10 +75,9 @@ export class GroupsActions {
     }
   };
 
-  static removeItem = (item: Item) => (dispatch: AppDispatch) => {
+  static removeItem = (item: Item, dontChangeCount?: boolean) => (dispatch: AppDispatch) => {
     dispatch(groupsSlice.actions.removeItem(item));
-    dispatch(groupsSlice.actions.decrementItemsCount(item.groupId));
-    dispatch(calendarSlice.actions.reset());
+    !dontChangeCount && dispatch(groupsSlice.actions.decrementItemsCount(item.groupId));
   };
 
   static setCollapsed = (groupId: string, value: boolean) => (dispatch: AppDispatch) => {
@@ -92,7 +96,6 @@ export class GroupsActions {
       thunkAPI.dispatch(GroupsActions.fetchItemsThunk([groupId]));
       thunkAPI.dispatch(InfoActions.handleCommentThreadIdsThunk([groupId]));
       thunkAPI.dispatch(InfoActions.handleUserIdsThunk(memberIds));
-      thunkAPI.dispatch(calendarSlice.actions.reset());
       return response.data;
     },
   );
@@ -124,28 +127,7 @@ export class GroupsActions {
         .flatMap((i) => [i.createdBy, i.lastModifiedBy]);
       itemIds.length > 0 && thunkAPI.dispatch(InfoActions.handleCommentThreadIdsThunk(itemIds));
       itemUserIds.length > 0 && thunkAPI.dispatch(InfoActions.handleUserIdsThunk(itemUserIds));
-      thunkAPI.dispatch(calendarSlice.actions.reset());
       return response.data;
-    },
-  );
-
-  static removeGroupThunk = createAsyncThunk<string, string, AsyncThunkConfig>(
-    PREFIX + 'deleteGroup',
-    async (groupId, thunkAPI) => {
-      await ItemService.deleteGroup(groupId);
-      thunkAPI.dispatch(SnackActions.handleCode('group.deleted', 'info'));
-      thunkAPI.dispatch(calendarSlice.actions.reset());
-      return groupId;
-    },
-  );
-
-  static leaveGroupThunk = createAsyncThunk<string, string, AsyncThunkConfig>(
-    PREFIX + 'leaveGroup',
-    async (groupId, thunkAPI) => {
-      await ItemService.leaveGroup(groupId);
-      thunkAPI.dispatch(SnackActions.handleCode('group.left', 'info'));
-      thunkAPI.dispatch(calendarSlice.actions.reset());
-      return groupId;
     },
   );
 

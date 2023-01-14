@@ -5,7 +5,6 @@ import {Group, GroupMember} from '../../models/Group';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import ItemService from '../../services/ItemService';
 import {ArrayUtils} from '../../shared/utils/ArrayUtils';
-import groupsSlice from '../groups/groupsSlice';
 import {InfoActions} from '../info/infoActions';
 import {SnackActions} from '../snack/snackActions';
 import {PageableList} from '../../models/PageableList';
@@ -119,31 +118,11 @@ export class GroupActions {
     },
   );
 
-  static updateItemArchivedThunk = createAsyncThunk<Item, Item, AsyncThunkConfig>(
-    PREFIX + 'updateItemArchived',
-    async (item, thunkAPI) => {
-      const response = await ItemService.updateItemArchived(item.id, !item.archived);
-      thunkAPI.dispatch(GroupActions.updateItem(response.data));
-      thunkAPI.dispatch(SnackActions.handleCode('item.edited', 'info'));
-      return response.data;
-    },
-  );
-
-  static removeItemThunk = createAsyncThunk<string, Item, AsyncThunkConfig>(
-    PREFIX + 'deleteItem',
-    async (item, thunkAPI) => {
-      await ItemService.deleteItem(item.id);
-      thunkAPI.dispatch(GroupsActions.removeItem(item));
-      thunkAPI.dispatch(SnackActions.handleCode('item.deleted', 'info'));
-      return item.id;
-    },
-  );
-
   static createGroupThunk = createAsyncThunk<Group, FormData, AsyncThunkConfig>(
     PREFIX + 'createGroup',
     async (formData, thunkAPI) => {
       const response = await ItemService.createGroup(formData);
-      thunkAPI.dispatch(GroupsActions.addGroup(response.data));
+      thunkAPI.dispatch(GroupsActions.createGroup(response.data));
       thunkAPI.dispatch(SnackActions.handleCode('group.created', 'info'));
       return response.data;
     },
@@ -190,9 +169,29 @@ export class GroupActions {
       const updatedMembers = group.members.filter((m) => !userIds.includes(m.userId));
       const updatedGroup = {...group, members: updatedMembers};
       await ItemService.removeMembersFromGroup(group.id, userIds);
-      thunkAPI.dispatch(groupsSlice.actions.updateGroup(updatedGroup));
+      thunkAPI.dispatch(GroupsActions.updateGroup(updatedGroup));
       thunkAPI.dispatch(SnackActions.handleCode('group.edited', 'info'));
       return updatedGroup;
+    },
+  );
+
+  static removeGroupThunk = createAsyncThunk<string, string, AsyncThunkConfig>(
+    PREFIX + 'deleteGroup',
+    async (groupId, thunkAPI) => {
+      await ItemService.deleteGroup(groupId);
+      thunkAPI.dispatch(GroupsActions.removeGroup(groupId));
+      thunkAPI.dispatch(SnackActions.handleCode('group.deleted', 'info'));
+      return groupId;
+    },
+  );
+
+  static leaveGroupThunk = createAsyncThunk<string, string, AsyncThunkConfig>(
+    PREFIX + 'leaveGroup',
+    async (groupId, thunkAPI) => {
+      await ItemService.leaveGroup(groupId);
+      thunkAPI.dispatch(GroupsActions.removeGroup(groupId));
+      thunkAPI.dispatch(SnackActions.handleCode('group.left', 'info'));
+      return groupId;
     },
   );
 }

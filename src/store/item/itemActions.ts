@@ -31,6 +31,11 @@ export class ItemActions {
     dispatch(itemSlice.actions.removeGroup(groupId));
   };
 
+  static setItem = (item: Item) => async (dispatch: AppDispatch) => {
+    dispatch(itemSlice.actions.setItem(item));
+    dispatch(ItemActions.fetchRemindersThunk(item.id));
+  };
+
   static removeItem = (groupId: string) => async (dispatch: AppDispatch) => {
     dispatch(itemSlice.actions.removeItem(groupId));
   };
@@ -71,7 +76,7 @@ export class ItemActions {
     PREFIX + 'createItem',
     async ({dto}, thunkAPI) => {
       const response = await ItemService.createItem(dto);
-      thunkAPI.dispatch(GroupsActions.addItem(response.data));
+      thunkAPI.dispatch(GroupsActions.addItem(response.data, true));
       thunkAPI.dispatch(GroupActions.addItem(response.data));
       thunkAPI.dispatch(SnackActions.handleCode('item.created', 'info'));
       return response.data;
@@ -108,6 +113,17 @@ export class ItemActions {
       thunkAPI.dispatch(GroupActions.updateItemArchived(response.data));
       thunkAPI.dispatch(SnackActions.handleCode('item.edited', 'info'));
       return response.data;
+    },
+  );
+
+  static removeItemThunk = createAsyncThunk<string, Item, AsyncThunkConfig>(
+    PREFIX + 'deleteItem',
+    async (item, thunkAPI) => {
+      await ItemService.deleteItem(item.id);
+      thunkAPI.dispatch(GroupsActions.removeItem(item, true));
+      thunkAPI.dispatch(GroupActions.removeItem(item.id));
+      thunkAPI.dispatch(SnackActions.handleCode('item.deleted', 'info'));
+      return item.id;
     },
   );
 }

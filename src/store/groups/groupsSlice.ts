@@ -200,28 +200,6 @@ const groupsSlice = createSlice({
       const loadingMap: [string, boolean][] = action.meta.arg.map((groupId) => [groupId, false]);
       groupsSlice.caseReducers.setItemsLoading(state, {...action, payload: loadingMap});
     });
-
-    /*
-    removeGroup
-    */
-    builder.addCase(GroupsActions.removeGroupThunk.fulfilled, (state, action) => {
-      groupsSlice.caseReducers.removeGroup(state, action);
-      groupsSlice.caseReducers.removeItems(state, action);
-      groupsSlice.caseReducers.removeItemsCount(state, action);
-      groupsSlice.caseReducers.removeItemsLoading(state, action);
-      groupsSlice.caseReducers.removeCollapsed(state, action);
-    });
-
-    /*
-    leaveGroup
-    */
-    builder.addCase(GroupsActions.leaveGroupThunk.fulfilled, (state, action) => {
-      groupsSlice.caseReducers.removeGroup(state, action);
-      groupsSlice.caseReducers.removeItems(state, action);
-      groupsSlice.caseReducers.removeItemsCount(state, action);
-      groupsSlice.caseReducers.removeItemsLoading(state, action);
-      groupsSlice.caseReducers.removeCollapsed(state, action);
-    });
   },
 });
 
