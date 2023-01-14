@@ -2,7 +2,7 @@ import React from 'react';
 import {FieldAttributes} from 'formik/dist/Field';
 import {useTranslation} from 'react-i18next';
 import FHStack from '../boxes/FHStack';
-import CheckboxInput from '../controls/CheckboxInput';
+import Checkbox from '../controls/Checkbox';
 import {Typography} from '@mui/material';
 import {useFormikContext} from 'formik';
 import FBox from '../boxes/FBox';
@@ -18,7 +18,7 @@ const FormikStatusInput = ({name}: FormikStatusInputProps) => {
 
   return (
     <FHStack spacing={1} alignItems="center">
-      <CheckboxInput isSelected={value} onClick={toggleValue} />
+      <Checkbox checked={value} onClick={toggleValue} />
       <Typography fontSize="lg">
         {value && t('common:statuses.closed')}
         {!value && t('common:statuses.workInProgress')}

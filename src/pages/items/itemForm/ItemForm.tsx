@@ -10,7 +10,7 @@ import {Reminder} from '../../../models/Reminder';
 import {ItemDTO} from '../../../models/dto/ItemDTO';
 import FVStack from '../../../components/boxes/FVStack';
 import FHStack from '../../../components/boxes/FHStack';
-import {Button} from '@mui/material';
+import {Box, Button} from '@mui/material';
 import LoadingButton from '../../../components/controls/LoadingButton';
 import FormikPrioritySelect from '../../../components/inputs/FormikPrioritySelect';
 import FormikRemindersInput from '../../../components/inputs/formikRemindersInput/FormikRemindersInput';
@@ -86,7 +86,11 @@ const ItemForm = ({group, item, reminders, request, cancel}: ItemFormProps) => {
     >
       {(formikProps) => (
         <FVStack>
-          {item && <FormikStatusInput name="done" />}
+          {item && (
+            <Box mb={1}>
+              <FormikStatusInput name="done" />
+            </Box>
+          )}
 
           <FormikPrioritySelect
             name="priority"

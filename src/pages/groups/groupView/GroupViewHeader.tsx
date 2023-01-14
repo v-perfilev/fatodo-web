@@ -1,6 +1,5 @@
 import React, {Dispatch, memo, SetStateAction} from 'react';
 import PageHeader from '../../../components/layouts/PageHeader';
-import RefreshIcon from '../../../components/icons/RefreshIcon';
 import {useTranslation} from 'react-i18next';
 import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
 import {useAppSelector} from '../../../store/store';
@@ -22,14 +21,13 @@ import {useGroupDialogContext} from '../../../shared/contexts/dialogContexts/Gro
 import GroupViewArchivedToggler from './GroupViewArchivedToggler';
 
 type GroupViewHeaderProps = {
-  refresh: () => void;
   showArchived: boolean;
   setShowArchived: Dispatch<SetStateAction<boolean>>;
   toggleCollapsed?: () => void;
   width?: number;
 };
 
-const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapsed, width}: GroupViewHeaderProps) => {
+const GroupViewHeader = ({showArchived, setShowArchived, toggleCollapsed, width}: GroupViewHeaderProps) => {
   const group = useAppSelector(GroupSelectors.group);
   const account = useAppSelector(AuthSelectors.account);
   const {showGroupMembersDialog, showGroupLeaveDialog, showGroupDeleteDialog} = useGroupDialogContext();
@@ -57,12 +55,6 @@ const GroupViewHeader = ({refresh, showArchived, setShowArchived, toggleCollapse
   };
 
   const menuItems: PageMenuItem[] = [
-    {
-      action: refresh,
-      text: t('group:actions.refresh'),
-      icon: <RefreshIcon />,
-      color: 'primary',
-    },
     {
       action: goToItemCreate,
       text: t('group:actions.createItem'),

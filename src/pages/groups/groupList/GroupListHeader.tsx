@@ -10,7 +10,6 @@ import PageHeader from '../../../components/layouts/PageHeader';
 import {useNavigate} from 'react-router-dom';
 import {GroupRouteUtils} from '../../../routes/GroupRouter';
 import PlusIcon from '../../../components/icons/PlusIcon';
-import RefreshIcon from '../../../components/icons/RefreshIcon';
 import {useTranslation} from 'react-i18next';
 import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
 import {IconButton} from '@mui/material';
@@ -32,8 +31,6 @@ const GroupListHeader = ({width, sorting, setSorting, order, toggleCollapsed}: G
   const navigate = useNavigate();
 
   const goToGroupCreate = useCallback(() => navigate(GroupRouteUtils.getCreateUrl()), []);
-
-  const refresh = useCallback((): Promise<void> => dispatch(GroupsActions.fetchGroupsThunk()), []);
 
   const setAllCollapsed = (value: boolean): void => {
     dispatch(GroupsActions.setAllCollapsed(value));
@@ -80,12 +77,6 @@ const GroupListHeader = ({width, sorting, setSorting, order, toggleCollapsed}: G
   ];
 
   const regularMenuItems: PageMenuItem[] = [
-    {
-      action: refresh,
-      text: t('group:actions.refresh'),
-      icon: <RefreshIcon />,
-      color: 'primary',
-    },
     {
       action: goToGroupCreate,
       text: t('group:actions.createGroup'),

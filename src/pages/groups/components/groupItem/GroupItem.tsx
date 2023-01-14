@@ -1,19 +1,15 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {Item} from '../../../../models/Item';
-import GroupItemMenu from './GroupItemMenu';
-import GroupItemChanges from './GroupItemChanges';
-import InfoSelectors from '../../../../store/info/infoSelectors';
-import {useAppSelector} from '../../../../store/store';
 import {useNavigate} from 'react-router-dom';
-import FVStack from '../../../../components/boxes/FVStack';
 import FHStack from '../../../../components/boxes/FHStack';
-import BoxWithIcon from '../../../../components/boxes/BoxWithIcon';
-import AlarmIcon from '../../../../components/icons/AlarmIcon';
-import CommentsIcon from '../../../../components/icons/CommentsIcon';
-import PriorityView from '../../../../components/views/PriorityView';
 import TruncatedTypography from '../../../../components/surfaces/TruncatedTypography';
 import {ItemRouteUtils} from '../../../../routes/ItemRouter';
 import {SxProps} from '@mui/material';
+import GroupItemDoneCheckbox from './GroupItemDoneCheckbox';
+import FBox from '../../../../components/boxes/FBox';
+import FVStack from '../../../../components/boxes/FVStack';
+import GroupItemDate from './GroupItemDate';
+import GroupItemCounters from './GroupItemCounters';
 
 type GroupItemProps = {
   item: Item;
@@ -21,59 +17,32 @@ type GroupItemProps = {
 };
 
 const GroupItem = ({item, canEdit}: GroupItemProps) => {
-  const commentThreadSelector = useCallback(InfoSelectors.makeCommentThreadSelector(), []);
-  const commentThread = useAppSelector((state) => commentThreadSelector(state, item.id));
   const navigate = useNavigate();
 
   const goToItemView = (): void => navigate(ItemRouteUtils.getViewUrl(item.id));
 
   return (
-    <FVStack sx={containerStyles} spacing={0} onClick={goToItemView}>
-      <FHStack sx={titleBoxStyles} justifyContent="space-between">
-        <TruncatedTypography fontSize={14}>{item.title}</TruncatedTypography>
-        <GroupItemMenu item={item} canEdit={canEdit} />
-      </FHStack>
-      <FHStack sx={authorBoxStyles}>
-        <GroupItemChanges item={item} />
-      </FHStack>
-      <FHStack sx={infoBoxStyles} justifyContent="space-between">
-        <FHStack spacing={1}>
-          <PriorityView priority={item.priority} size="small" fontSize={12} color="grey.500" />
-        </FHStack>
-        <FHStack justifyContent="flex-end">
-          {item.remindersCount > 0 && (
-            <BoxWithIcon icon={<AlarmIcon color="primary" />} size="small" fontSize={13} color="grey.500">
-              {item.remindersCount}
-            </BoxWithIcon>
-          )}
-          <BoxWithIcon icon={<CommentsIcon color="primary" />} size="small" fontSize={13} color="grey.500">
-            {commentThread?.count || 0}
-          </BoxWithIcon>
-        </FHStack>
-      </FHStack>
-    </FVStack>
+    <FHStack sx={containerStyles} spacing={2} onClick={goToItemView}>
+      <GroupItemDoneCheckbox item={item} canEdit={canEdit} />
+      <FBox alignItems="center">
+        <TruncatedTypography fontSize={16}>{item.title}</TruncatedTypography>
+      </FBox>
+      <FVStack height="100%" justifyContent="space-between" alignItems="flex-end" spacing={2} py="0.5">
+        <GroupItemDate item={item} />
+        <GroupItemCounters item={item} />
+      </FVStack>
+    </FHStack>
   );
 };
 
 const containerStyles: SxProps = {
   padding: 2,
   borderRadius: 3,
+  alignItems: 'center',
   cursor: 'pointer',
   '&:hover': {
     backgroundColor: 'grey.50',
   },
-};
-
-const titleBoxStyles: SxProps = {
-  marginRight: -1,
-};
-
-const authorBoxStyles: SxProps = {
-  marginTop: 0.5,
-};
-
-const infoBoxStyles: SxProps = {
-  marginTop: 2,
 };
 
 export default GroupItem;

@@ -59,12 +59,6 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
       : dispatch(GroupActions.fetchActiveItemsThunk({groupId, offset}));
   }, [items, showArchived]);
 
-  const refresh = useCallback(async (): Promise<void> => {
-    showArchived
-      ? dispatch(GroupActions.refreshArchivedItemsThunk(groupId))
-      : dispatch(GroupActions.refreshActiveItemsThunk(groupId));
-  }, [showArchived]);
-
   /*
   keyExtractor and renderItem
    */
@@ -105,7 +99,6 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
   return (
     <ConditionalSpinner loading={loading} loadingPlaceholder={<GroupViewListSkeleton />}>
       <GroupViewHeader
-        refresh={refresh}
         showArchived={showArchived}
         setShowArchived={setShowArchived}
         toggleCollapsed={toggleCollapsed}

@@ -1,6 +1,5 @@
 import React, {memo} from 'react';
 import GroupListCardCollapseButton from './GroupListCardCollapseButton';
-import GroupListCardMenuButton from './GroupListCardMenuButton';
 import {Group} from '../../../../models/Group';
 import FHStack from '../../../../components/boxes/FHStack';
 import GroupListCardDragButton from './GroupListCardDragButton';
@@ -10,6 +9,10 @@ import UrlPic from '../../../../components/images/UrlPic';
 import {Box, SxProps} from '@mui/material';
 import {Theme} from '@mui/material/styles';
 import TruncatedTypography from '../../../../components/surfaces/TruncatedTypography';
+import {useAppSelector} from '../../../../store/store';
+import AuthSelectors from '../../../../store/auth/authSelectors';
+import {GroupUtils} from '../../../../shared/utils/GroupUtils';
+import GroupListCardCreateButton from './GroupListCardCreateButton';
 
 type GroupListCardHeaderProps = {
   group: Group;
@@ -19,7 +22,10 @@ type GroupListCardHeaderProps = {
 };
 
 const GroupListCardHeader = ({group, collapsed, sorting, drag}: GroupListCardHeaderProps) => {
+  const account = useAppSelector(AuthSelectors.account);
   const navigate = useNavigate();
+
+  const canEdit = group && GroupUtils.canEdit(account, group);
 
   const goToGroupView = (): void => !sorting && navigate(GroupRouteUtils.getViewUrl(group.id));
 
@@ -33,14 +39,9 @@ const GroupListCardHeader = ({group, collapsed, sorting, drag}: GroupListCardHea
         </TruncatedTypography>
       </FHStack>
       <FHStack flexGrow={0} spacing={1}>
-        {sorting ? (
-          <GroupListCardDragButton drag={drag} />
-        ) : (
-          <>
-            <GroupListCardCollapseButton group={group} collapsed={collapsed} />
-            <GroupListCardMenuButton group={group} />
-          </>
-        )}
+        {sorting && <GroupListCardDragButton drag={drag} />}
+        {!sorting && canEdit && <GroupListCardCreateButton group={group} />}
+        {!sorting && <GroupListCardCollapseButton group={group} collapsed={collapsed} />}
       </FHStack>
     </FHStack>
   );

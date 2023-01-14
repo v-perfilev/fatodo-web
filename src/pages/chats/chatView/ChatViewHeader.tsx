@@ -8,7 +8,6 @@ import InfoSelectors from '../../../store/info/infoSelectors';
 import {useTranslation} from 'react-i18next';
 import {ChatActions} from '../../../store/chat/chatActions';
 import PageMenu, {PageMenuItem} from '../../../components/layouts/PageMenu';
-import RefreshIcon from '../../../components/icons/RefreshIcon';
 import MembersIcon from '../../../components/icons/MembersIcon';
 import UserPlusIcon from '../../../components/icons/UserPlusIcon';
 import EditIcon from '../../../components/icons/EditIcon';
@@ -59,10 +58,6 @@ const ChatViewHeader = ({width}: ChatViewHeaderProps) => {
     dispatch(ChatActions.reset());
   };
 
-  const refresh = (): void => {
-    dispatch(ChatActions.refreshMessagesThunk(chat.id));
-  };
-
   const showMembers = (): void => {
     showChatMembersDialog(chat);
   };
@@ -92,7 +87,6 @@ const ChatViewHeader = ({width}: ChatViewHeaderProps) => {
   };
 
   const menuItems: PageMenuItem[] = [
-    {action: refresh, text: t('chat:menu.refresh'), icon: <RefreshIcon />, color: 'primary'},
     {action: showMembers, text: t('chat:menu.showMembers'), icon: <MembersIcon />, color: 'primary'},
     {
       action: addMembers,

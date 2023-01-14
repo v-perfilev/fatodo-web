@@ -50,6 +50,10 @@ export class GroupActions {
     dispatch(groupSlice.actions.setItem(item));
   };
 
+  static updateItemArchived = (item: Item) => (dispatch: AppDispatch) => {
+    dispatch(groupSlice.actions.updateItemArchived(item));
+  };
+
   static removeItem = (itemId: string) => (dispatch: AppDispatch) => {
     dispatch(groupSlice.actions.removeItem(itemId));
   };
