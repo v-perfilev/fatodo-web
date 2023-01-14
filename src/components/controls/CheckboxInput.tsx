@@ -5,7 +5,7 @@ import {SxProps} from '@mui/material';
 
 type CheckboxInputProps = {
   isSelected: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const CheckboxInput = ({isSelected, onClick}: CheckboxInputProps) => {
@@ -17,6 +17,7 @@ const CheckboxInput = ({isSelected, onClick}: CheckboxInputProps) => {
 };
 
 const containerStyles: SxProps = {
+  flexGrow: 0,
   cursor: 'pointer',
   width: 35,
   height: 35,

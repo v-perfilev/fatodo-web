@@ -10,27 +10,43 @@ import {TypographyProps} from '@mui/material';
 import TruncatedTypography from '../surfaces/TruncatedTypography';
 
 type PriorityViewProps = TypographyProps & {
-  priority: ItemPriorityType;
+  priority: number | ItemPriorityType;
   withoutText?: boolean;
   size?: 'large' | 'medium' | 'small';
 };
 
 export const PriorityView = ({priority, fontSize, color, size, withoutText}: PriorityViewProps) => {
   const {t, i18n} = useTranslation();
-
-  const getIcon = (priority: ItemPriorityType): ReactElement => {
+  const getIcon = (priority: number | ItemPriorityType): ReactElement => {
     switch (priority) {
+      case 1:
       case 'LOW':
-        return <LowPriorityIcon color="info" />;
+        return <LowPriorityIcon color="disabled" />;
+      case 2:
       case 'NORMAL':
         return <NormalPriorityIcon color="primary" />;
+      case 3:
       case 'HIGH':
         return <HighPriorityIcon color="error" />;
     }
   };
 
+  const getText = (priority: number | ItemPriorityType): string => {
+    switch (priority) {
+      case 1:
+      case 'LOW':
+        return t('common:priorities.low');
+      case 2:
+      case 'NORMAL':
+        return t('common:priorities.normal');
+      case 3:
+      case 'HIGH':
+        return t('common:priorities.high');
+    }
+  };
+
   const icon = React.cloneElement(getIcon(priority), {fontSize: size, mt: !withoutText ? 0.5 : undefined});
-  const text = useMemo(() => t('common:priorities.' + priority), [priority, i18n.language]);
+  const text = useMemo(() => getText(priority), [priority, i18n.language]);
 
   const onlyIcon = <FCenter>{icon}</FCenter>;
 

@@ -7,12 +7,13 @@ import PriorityView from '../views/PriorityView';
 type FormikPrioritySelectProps = FieldAttributes<any>;
 
 const FormikPrioritySelect = ({name, label}: FormikPrioritySelectProps) => {
-  const prioritySelectMap = useMemo<Map<string, ReactElement>>(() => {
-    const map = new Map<string, ReactElement>();
-    itemPriorityTypes.forEach((p) => map.set(p, <PriorityView priority={p} />));
+  const prioritySelectMap = useMemo<Map<number, ReactElement>>(() => {
+    const map = new Map<number, ReactElement>();
+    itemPriorityTypes.forEach((p, index) => map.set(index + 1, <PriorityView priority={p} />));
     return map;
   }, []);
 
+  console.log(prioritySelectMap);
   return <FormikSelectInput name={name} label={label} options={prioritySelectMap} />;
 };
 

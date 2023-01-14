@@ -5,71 +5,46 @@ import * as Yup from 'yup';
 import i18n from '../../../shared/i18n';
 import FormikTextInput from '../../../components/inputs/FormikTextInput';
 import {useTranslation} from 'react-i18next';
-import {
-  Item,
-  ItemPriorityType,
-  itemPriorityTypes,
-  ItemStatusType,
-  itemStatusTypes,
-  ItemType,
-  itemTypes,
-} from '../../../models/Item';
+import {Item} from '../../../models/Item';
 import {Reminder} from '../../../models/Reminder';
 import {ItemDTO} from '../../../models/dto/ItemDTO';
 import FVStack from '../../../components/boxes/FVStack';
 import FHStack from '../../../components/boxes/FHStack';
-import {UserAccount} from '../../../models/User';
-import {useAppSelector} from '../../../store/store';
-import AuthSelectors from '../../../store/auth/authSelectors';
-import {DateConverters} from '../../../shared/utils/DateConverters';
 import {Button} from '@mui/material';
 import LoadingButton from '../../../components/controls/LoadingButton';
-import FormikStatusSelect from '../../../components/inputs/FormikStatusSelect';
-import FormikTypeSelect from '../../../components/inputs/FormikTypeSelect';
 import FormikPrioritySelect from '../../../components/inputs/FormikPrioritySelect';
-import FormikDateInput from '../../../components/inputs/FormikDateInput';
 import FormikRemindersInput from '../../../components/inputs/formikRemindersInput/FormikRemindersInput';
+import FormikStatusInput from '../../../components/inputs/FormikStatusInput';
 
 export interface ItemFormValues {
   title: string;
-  status: ItemStatusType;
-  type: ItemType;
-  priority: ItemPriorityType;
-  time?: Date;
-  date?: Date;
+  priority: number;
   description?: string;
   reminders?: Reminder[];
+  done: boolean;
 }
 
 const defaultItemFormValues: Readonly<ItemFormValues> = {
   title: '',
-  status: itemStatusTypes[0],
-  type: itemTypes[0],
-  priority: itemPriorityTypes[1],
-  time: null,
-  date: null,
+  priority: 2,
   description: '',
   reminders: [],
+  done: false,
 };
 
-const initialValues = (item: Item, reminders: Reminder[], account: UserAccount): ItemFormValues =>
+const initialValues = (item: Item, reminders: Reminder[]): ItemFormValues =>
   item
     ? {
         title: item.title,
-        status: item.status,
-        type: item.type,
         priority: item.priority,
-        time: DateConverters.getTimeFromParamDate(item.date, account.settings.timezone),
-        date: DateConverters.getDateFromParamDate(item.date, account.settings.timezone),
         description: item.description,
         reminders: reminders,
+        done: item.done,
       }
     : defaultItemFormValues;
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required(() => i18n.t('item:fields.title.required')),
-  status: Yup.string().required(() => i18n.t('item:fields.type.required')),
-  type: Yup.string().required(() => i18n.t('item:fields.type.required')),
   priority: Yup.string().required(() => i18n.t('item:fields.priority.required')),
 });
 
@@ -82,7 +57,6 @@ type ItemFormProps = {
 };
 
 const ItemForm = ({group, item, reminders, request, cancel}: ItemFormProps) => {
-  const account = useAppSelector(AuthSelectors.account);
   const {t} = useTranslation();
 
   const handleSubmit = (values: ItemFormValues, helpers: FormikHelpers<ItemFormValues>): void => {
@@ -92,13 +66,11 @@ const ItemForm = ({group, item, reminders, request, cancel}: ItemFormProps) => {
     const dto: ItemDTO = {
       id: item ? item.id : null,
       title: values.title,
-      status: values.status,
-      type: values.type,
       priority: values.priority,
-      date: DateConverters.getParamDateFromTimeAndDate(values.time, values.date, account.settings.timezone),
       description: values.description,
       reminders: !deleteReminders && remindersChanged ? values.reminders : undefined,
       groupId: group.id,
+      done: values.done,
       deleteReminders: deleteReminders ? true : undefined,
     };
 
@@ -107,45 +79,23 @@ const ItemForm = ({group, item, reminders, request, cancel}: ItemFormProps) => {
 
   return (
     <Formik
-      initialValues={initialValues(item, reminders, account)}
+      initialValues={initialValues(item, reminders)}
       validationSchema={validationSchema}
       enableReinitialize
       onSubmit={handleSubmit}
     >
       {(formikProps) => (
         <FVStack>
+          {item && <FormikStatusInput name="done" />}
+
+          <FormikPrioritySelect
+            name="priority"
+            label={t('item:fields.priority.label')}
+            disabled={formikProps.isSubmitting}
+          />
+
           <FormikTextInput name="title" label={t('item:fields.title.label')} disabled={formikProps.isSubmitting} />
-          <FormikStatusSelect name="status" label={t('item:fields.status.label')} disabled={formikProps.isSubmitting} />
-          <FHStack>
-            <FHStack flexBasis={1}>
-              <FormikTypeSelect name="type" label={t('item:fields.type.label')} dDisabled={formikProps.isSubmitting} />
-            </FHStack>
-            <FHStack flexBasis={1}>
-              <FormikPrioritySelect
-                name="priority"
-                label={t('item:fields.priority.label')}
-                disabled={formikProps.isSubmitting}
-              />
-            </FHStack>
-          </FHStack>
-          <FHStack>
-            <FHStack flexBasis={1}>
-              <FormikDateInput
-                mode="time"
-                name="time"
-                label={t('item:fields.time.label')}
-                disabled={formikProps.isSubmitting}
-              />
-            </FHStack>
-            <FHStack flexBasis={1}>
-              <FormikDateInput
-                mode="date"
-                name="date"
-                label={t('item:fields.date.label')}
-                disabled={formikProps.isSubmitting}
-              />
-            </FHStack>
-          </FHStack>
+
           <FormikTextInput
             name="description"
             label={t('item:fields.description.label')}

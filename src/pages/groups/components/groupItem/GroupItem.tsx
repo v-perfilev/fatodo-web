@@ -10,9 +10,7 @@ import FHStack from '../../../../components/boxes/FHStack';
 import BoxWithIcon from '../../../../components/boxes/BoxWithIcon';
 import AlarmIcon from '../../../../components/icons/AlarmIcon';
 import CommentsIcon from '../../../../components/icons/CommentsIcon';
-import TypeView from '../../../../components/views/TypeView';
 import PriorityView from '../../../../components/views/PriorityView';
-import StatusView from '../../../../components/views/StatusView';
 import TruncatedTypography from '../../../../components/surfaces/TruncatedTypography';
 import {ItemRouteUtils} from '../../../../routes/ItemRouter';
 import {SxProps} from '@mui/material';
@@ -40,9 +38,7 @@ const GroupItem = ({item, canEdit}: GroupItemProps) => {
       </FHStack>
       <FHStack sx={infoBoxStyles} justifyContent="space-between">
         <FHStack spacing={1}>
-          <TypeView type={item.type} size="small" fontSize={12} color="grey.500" />
           <PriorityView priority={item.priority} size="small" fontSize={12} color="grey.500" />
-          <StatusView statusType={item.status} size="small" fontSize={12} color="grey.500" />
         </FHStack>
         <FHStack justifyContent="flex-end">
           {item.remindersCount > 0 && (

@@ -2,8 +2,6 @@ import React, {useMemo} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useAppSelector} from '../../../store/store';
 import ItemSelectors from '../../../store/item/itemSelectors';
-import StatusView from '../../../components/views/StatusView';
-import TypeView from '../../../components/views/TypeView';
 import PriorityView from '../../../components/views/PriorityView';
 import PageDivider from '../../../components/layouts/PageDivider';
 import {Divider, SxProps} from '@mui/material';
@@ -14,10 +12,10 @@ import FVStack from '../../../components/boxes/FVStack';
 import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 import ItemViewHeader from './ItemViewHeader';
 import MultiLabeledBox, {MultiLabeledBoxItem} from '../../../components/surfaces/MultiLabeledBox';
-import DateParamView from '../../../components/views/DateParamView';
 import {Group} from '../../../models/Group';
 import {Item} from '../../../models/Item';
 import PageContent from '../../../components/layouts/PageContent';
+import StatusView from '../../../components/views/StatusView';
 
 type ItemViewContainerProps = {
   group: Group;
@@ -38,10 +36,8 @@ const ItemViewContainer = ({group, item, loading, toggleCollapsed}: ItemViewCont
         ? [
             {label: t('item:labels.item'), value: item.title},
             {label: t('item:labels.group'), value: group?.title},
-            {label: t('item:labels.status'), value: <StatusView fontSize={14} statusType={item.status} />},
-            {label: t('item:labels.type'), value: <TypeView fontSize={14} type={item.type} />},
             {label: t('item:labels.priority'), value: <PriorityView fontSize={14} priority={item.priority} />},
-            {label: t('item:labels.date'), value: item.date && <DateParamView fontSize={14} date={item.date} />},
+            {label: t('item:labels.status'), value: <StatusView fontSize={14} done={item.done} />},
           ]
         : [],
     [item, group, i18n.language],

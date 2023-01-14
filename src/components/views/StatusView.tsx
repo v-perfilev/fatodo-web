@@ -1,52 +1,41 @@
 import React, {ReactElement, useMemo} from 'react';
-import {ItemStatusType} from '../../models/Item';
-import StatusCreatedIcon from '../icons/StatusCreatedIcon';
-import StatusWipIcon from '../icons/StatusWipIcon';
-import StatusClosedIcon from '../icons/StatusClosedIcon';
-import StatusCompletedIcon from '../icons/StatusCompletedIcon';
-import FCenter from '../boxes/FCenter';
-import FHStack from '../boxes/FHStack';
 import {useTranslation} from 'react-i18next';
-import {TypographyProps} from '@mui/material';
+import FHStack from '../boxes/FHStack';
 import TruncatedTypography from '../surfaces/TruncatedTypography';
+import CheckboxInput from '../controls/CheckboxInput';
+import {TypographyProps} from '@mui/material';
 
 type StatusViewProps = TypographyProps & {
-  statusType: ItemStatusType;
-  withoutText?: boolean;
-  size?: 'large' | 'medium' | 'small';
+  done: boolean;
 };
 
-const StatusView = ({statusType, fontSize, color, size, withoutText}: StatusViewProps) => {
+export const StatusView = ({done, fontSize, color}: StatusViewProps) => {
   const {t, i18n} = useTranslation();
 
-  const getIcon = (): ReactElement => {
-    switch (statusType) {
-      case 'CREATED':
-        return <StatusCreatedIcon />;
-      case 'WORK_IN_PROGRESS':
-        return <StatusWipIcon />;
-      case 'COMPLETED':
-        return <StatusCompletedIcon />;
-      case 'CLOSED':
-        return <StatusClosedIcon />;
+  const getIcon = (done: boolean): ReactElement => {
+    return <CheckboxInput isSelected={done} />;
+  };
+
+  const getText = (done: boolean): string => {
+    switch (done) {
+      case false:
+        return t('common:statuses.workInProgress');
+      case true:
+        return t('common:statuses.closed');
     }
   };
 
-  const icon = React.cloneElement(getIcon(), {color: 'primary', fontSize: size, mt: !withoutText ? 0.5 : undefined});
-  const text = useMemo(() => t('common:statuses.' + statusType), [statusType, i18n.language]);
+  const icon = React.cloneElement(getIcon(done));
+  const text = useMemo(() => getText(done), [done, i18n.language]);
 
-  const onlyIcon = <FCenter>{icon}</FCenter>;
-
-  const iconWithText = (
-    <FHStack spacing={1} flexGrow={0}>
+  return (
+    <FHStack spacing={2} alignItems="center">
       {icon}
       <TruncatedTypography fontSize={fontSize} color={color}>
         {text}
       </TruncatedTypography>
     </FHStack>
   );
-
-  return withoutText ? onlyIcon : iconWithText;
 };
 
 export default StatusView;
