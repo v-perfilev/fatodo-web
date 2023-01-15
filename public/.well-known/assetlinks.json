@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.fatodo",
+    "sha256_cert_fingerprints":
+    ["84:FE:34:30:AD:65:09:45:60:6E:F3:94:80:3E:94:02:C8:64:66:38:84:6C:C9:58:86:3A:74:44:96:D8:B2:61"]
+  }
+}]
