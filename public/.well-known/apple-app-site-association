@@ -1,0 +1,11 @@
+{
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "LXS45ZYGU6.app.fatodo.Fatodo",
+                "paths": [ "/activation/*" ]
+            }
+        ]
+    }
+}
