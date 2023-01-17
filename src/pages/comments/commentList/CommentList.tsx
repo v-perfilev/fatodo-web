@@ -15,6 +15,8 @@ import {DEFAULT_MARGIN, PAGE_FOOTER_HEIGHT, PAGE_HEADER_HEIGHT} from '../../../c
 import CommentListFooter from './CommentListFooter';
 import CommentListSkeleton from '../skeletons/CommentListSkeleton';
 import {useDelayedState} from '../../../shared/hooks/useDelayedState';
+import {InfoActions} from '../../../store/info/infoActions';
+import InfoSelectors from '../../../store/info/infoSelectors';
 
 type CommentListProps = {
   targetId: string;
@@ -23,6 +25,8 @@ type CommentListProps = {
 
 const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   const dispatch = useAppDispatch();
+  const commentThreadSelector = useCallback(InfoSelectors.makeCommentThreadSelector(), []);
+  const commentThread = useAppSelector((state) => commentThreadSelector(state, targetId));
   const stateTargetId = useAppSelector(CommentsSelectors.targetId);
   const comments = useAppSelector(CommentsSelectors.comments);
   const allLoaded = useAppSelector(CommentsSelectors.allLoaded);
@@ -47,6 +51,10 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   const load = useCallback(async (): Promise<void> => {
     await dispatch(CommentsActions.fetchCommentsThunk({targetId, offset: comments.length}));
   }, [targetId, comments.length]);
+
+  const refreshComments = useCallback((): void => {
+    dispatch(InfoActions.refreshCommentThreadsThunk(targetId));
+  }, [targetId]);
 
   /*
   keyExtractor and renderItem
@@ -77,6 +85,12 @@ const CommentList = ({targetId, toggleCollapsed}: CommentListProps) => {
   useEffect(() => {
     canLoad && initialLoad();
   }, [targetId]);
+
+  useEffect(() => {
+    if (targetId && commentThread?.unread > 0) {
+      refreshComments();
+    }
+  }, [targetId, commentThread]);
 
   return (
     <>
