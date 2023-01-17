@@ -1,4 +1,4 @@
-import React, {memo} from 'react';
+import React, {memo, useMemo} from 'react';
 import {Item} from '../../../../models/Item';
 import GroupListCardSkeleton from '../../skeletons/GroupListCardSkeleton';
 import GroupListCardInfo from './GroupListCardInfo';
@@ -21,11 +21,13 @@ type GroupListCardContentProps = {
 const GroupListCardContent = ({group, items, itemsCount, loading}: GroupListCardContentProps) => {
   const account = useAppSelector(AuthSelectors.account);
 
+  const itemsToShow = useMemo<Item[]>(() => [...items].reverse().slice(0, 5), [items]);
+
   const canEdit = group && GroupUtils.canEdit(account, group);
 
   return (
     <ConditionalLoader loading={loading} loadingPlaceholder={<GroupListCardSkeleton />}>
-      {items.slice(0, 5).map((item, index) => (
+      {itemsToShow.map((item, index) => (
         <FVStack spacing={0} key={index}>
           <GroupItem item={item} canEdit={canEdit} />
           <PageDivider />
