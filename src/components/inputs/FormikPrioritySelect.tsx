@@ -13,7 +13,6 @@ const FormikPrioritySelect = ({name, label}: FormikPrioritySelectProps) => {
     return map;
   }, []);
 
-  console.log(prioritySelectMap);
   return <FormikSelectInput name={name} label={label} options={prioritySelectMap} />;
 };
 

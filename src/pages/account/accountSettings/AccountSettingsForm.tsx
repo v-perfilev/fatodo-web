@@ -14,15 +14,12 @@ import FormikLanguageInput from '../../../components/inputs/FormikLanguageInput'
 import FormikTimezoneInput from '../../../components/inputs/FormikTimezoneInput';
 import FormikTimeFormatInput from '../../../components/inputs/FormikTimeFormatInput';
 import FormikDateFormatInput from '../../../components/inputs/FormikDateFormatInput';
-import FormikSwitchInput from '../../../components/inputs/FormikSwitchInput';
-import PageSubtitle from '../../../components/layouts/PageSubtitle';
 
 export interface AccountSettingsFormValues {
   language: Language;
   timezone: string;
   timeFormat: TimeFormat;
   dateFormat: DateFormat;
-  emailReminders: boolean;
 }
 
 const defaultAccountSettingsFormValues: Readonly<AccountSettingsFormValues> = {
@@ -30,7 +27,6 @@ const defaultAccountSettingsFormValues: Readonly<AccountSettingsFormValues> = {
   timezone: '',
   timeFormat: timeFormats[0],
   dateFormat: dateFormats[0],
-  emailReminders: true,
 };
 
 const initialValues = (account: UserAccount): AccountSettingsFormValues =>
@@ -75,14 +71,6 @@ const AccountSettingsForm = () => {
           <FormikDateFormatInput
             name="dateFormat"
             label={t('account:fields.dateFormat.label')}
-            disabled={formikProps.isSubmitting}
-          />
-
-          <PageSubtitle subtitle={t('account:settings.notificationsSubtitle')} />
-
-          <FormikSwitchInput
-            name="emailReminders"
-            label={t('account:fields.emailReminders.label')}
             disabled={formikProps.isSubmitting}
           />
 

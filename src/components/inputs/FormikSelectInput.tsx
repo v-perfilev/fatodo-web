@@ -9,7 +9,6 @@ type FormikSelectInputProps = FieldAttributes<any> & {
 };
 
 const FormikSelectInput = ({options, ...props}: FormikSelectInputProps) => {
-  console.log(options);
   return (
     <Field component={TextField} select fullWidth {...props}>
       {Array.from(options.keys()).map((key: string, index: number) => (

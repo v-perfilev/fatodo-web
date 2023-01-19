@@ -11,7 +11,7 @@ import {ChangePasswordDTO} from '../../models/dto/ChangePasswordDTO';
 import {ChangeLanguageDTO} from '../../models/dto/ChangeLanguageDTO';
 import {SnackActions} from '../snack/snackActions';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {accountToUser, UserAccount, UserSettings} from '../../models/User';
+import {accountToUser, UserAccount, UserNotifications, UserSettings} from '../../models/User';
 import {InfoActions} from '../info/infoActions';
 import {ResetPasswordDTO} from '../../models/dto/ResetPasswordDTO';
 import {RootActions} from '../rootActions';
@@ -136,6 +136,15 @@ export class AuthActions {
     PREFIX + 'updateAccountSettings',
     async (settings, thunkAPI) => {
       await UserService.updateAccountSettings(settings);
+      await thunkAPI.dispatch(AuthActions.fetchAccountThunk());
+      thunkAPI.dispatch(SnackActions.handleCode('auth.afterUpdateAccount', 'info'));
+    },
+  );
+
+  static updateAccountNotificationsThunk = createAsyncThunk<void, UserNotifications, AsyncThunkConfig>(
+    PREFIX + 'updateAccountNotifications',
+    async (notifications, thunkAPI) => {
+      await UserService.updateAccountNotifications(notifications);
       await thunkAPI.dispatch(AuthActions.fetchAccountThunk());
       thunkAPI.dispatch(SnackActions.handleCode('auth.afterUpdateAccount', 'info'));
     },
