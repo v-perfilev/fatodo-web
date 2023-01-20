@@ -18,7 +18,8 @@ const AccountChangePassword = () => {
 };
 
 const containerStyles: SxProps = {
-  paddingY: 2,
+  paddingTop: 4,
+  paddingBottom: 2,
 };
 
 export default AccountChangePassword;

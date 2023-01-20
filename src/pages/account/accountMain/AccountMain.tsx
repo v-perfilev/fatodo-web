@@ -19,7 +19,7 @@ const AccountMain = () => {
         <FVStack spacing={2}>
           <AccountMainForm />
           <PageDivider />
-          <Button variant="contained" color="error" onClick={showDeletePermanentlyDialog}>
+          <Button variant="outlined" color="error" onClick={showDeletePermanentlyDialog}>
             {t('account:actions.deletePermanently')}
           </Button>
         </FVStack>
@@ -29,7 +29,8 @@ const AccountMain = () => {
 };
 
 const containerStyles: SxProps = {
-  paddingY: 2,
+  paddingTop: 4,
+  paddingBottom: 2,
 };
 
 export default AccountMain;
