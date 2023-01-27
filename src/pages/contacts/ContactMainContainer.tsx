@@ -14,6 +14,7 @@ import PlusIcon from '../../components/icons/PlusIcon';
 import {useContactDialogContext} from '../../shared/contexts/dialogContexts/ContactDialogContext';
 import PageContent from '../../components/layouts/PageContent';
 import FVStack from '../../components/boxes/FVStack';
+import {HEADER_HEIGHT} from '../../constants';
 
 const calculateTabFromRoute = (path: string): number => {
   switch (path) {
@@ -60,7 +61,7 @@ const ContactMainContainer = () => {
 
   return (
     <PageContent maxWidth="md">
-      <FVStack>
+      <FVStack sx={stackStyles}>
         <Box>
           <FHStack spacing={0}>
             <Tabs sx={tabsStyles} variant="scrollable" textColor="primary" value={activeTab} onChange={handleChange}>
@@ -81,6 +82,10 @@ const ContactMainContainer = () => {
       </FVStack>
     </PageContent>
   );
+};
+
+const stackStyles: SxProps = {
+  height: `calc(100vh - ${HEADER_HEIGHT}px)`,
 };
 
 const tabsStyles: SxProps = {
