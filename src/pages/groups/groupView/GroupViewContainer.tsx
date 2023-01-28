@@ -77,7 +77,7 @@ const GroupViewContainer = ({group, groupId, loading, toggleCollapsed}: GroupVie
         <GroupItem item={item} canEdit={canEdit} />
       </PageContent>
     ),
-    [items],
+    [items, canEdit],
   );
 
   /*
