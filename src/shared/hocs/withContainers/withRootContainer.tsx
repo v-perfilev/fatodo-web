@@ -7,6 +7,8 @@ import {EventsActions} from '../../../store/events/eventsActions';
 import {AuthActions} from '../../../store/auth/authActions';
 import {SecurityUtils} from '../../utils/SecurityUtils';
 import {flowRight} from 'lodash';
+import {ActivityDTO} from '../../../models/dto/ActivityDTO';
+import {ACTIVITY_TIMEOUT} from '../../../constants';
 
 export type WithRootProps = {
   ready: boolean;
@@ -16,6 +18,7 @@ const withRootContainer = (Component: ComponentType<WithRootProps>): FC => (prop
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(AuthSelectors.isAuthenticated);
   const [ready, setReady] = useState(false);
+  let activityTimerId: number;
 
   const login = (): void => {
     const tryToLogin = async (token: string): Promise<void> => {
@@ -33,12 +36,28 @@ const withRootContainer = (Component: ComponentType<WithRootProps>): FC => (prop
     dispatch(EventsActions.fetchUnreadCountThunk());
   };
 
+  const writeActivity = (): void => {
+    SecurityUtils.getAuthToken().then((token) => {
+      if (token) {
+        const deviceType = 'WEB';
+        const deviceId = token.substring(0, 10);
+        const dto: ActivityDTO = {deviceType, deviceId};
+        dispatch(AuthActions.writeActivityThunk(dto));
+      }
+    });
+  };
+
   useEffect(() => {
     login();
   }, []);
 
   useEffect(() => {
-    isAuthenticated && refresh();
+    if (isAuthenticated) {
+      refresh();
+      activityTimerId = window.setInterval(() => writeActivity(), ACTIVITY_TIMEOUT);
+    } else {
+      window.clearInterval(activityTimerId);
+    }
   }, [isAuthenticated]);
 
   return <Component ready={ready} {...props} />;

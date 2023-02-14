@@ -15,6 +15,8 @@ import {accountToUser, UserAccount, UserNotifications, UserSettings} from '../..
 import {InfoActions} from '../info/infoActions';
 import {ResetPasswordDTO} from '../../models/dto/ResetPasswordDTO';
 import {RootActions} from '../rootActions';
+import {ActivityDTO} from '../../models/dto/ActivityDTO';
+import AnalyticsService from '../../services/AnalyticsService';
 
 const PREFIX = 'auth/';
 
@@ -156,6 +158,13 @@ export class AuthActions {
       await UserService.deleteAccountPermanently();
       await thunkAPI.dispatch(AuthActions.logout());
       thunkAPI.dispatch(SnackActions.handleCode('auth.afterDeleteAccount', 'info'));
+    },
+  );
+
+  static writeActivityThunk = createAsyncThunk<void, ActivityDTO, AsyncThunkConfig>(
+    PREFIX + 'activity',
+    async (dto) => {
+      await AnalyticsService.writeActivity(dto);
     },
   );
 }

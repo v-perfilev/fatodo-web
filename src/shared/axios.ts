@@ -13,11 +13,13 @@ axios.defaults.paramsSerializer = (params: any) => qs.stringify(params, {arrayFo
 
 export const axiosDefault = axios.create();
 export const axiosIgnore404 = axios.create();
+export const axiosIgnoreAll = axios.create();
 
 const retryDelay = axiosRetry.exponentialDelay;
 const retryCondition = (error: AxiosError) => !error.response && error.config.method.toLowerCase() === 'get';
 axiosRetry(axiosDefault, {retryDelay, retryCondition});
 axiosRetry(axiosIgnore404, {retryDelay, retryCondition});
+axiosRetry(axiosIgnoreAll, {retryDelay, retryCondition});
 
 interface SetupAxiosActions {
   onUnauthenticated: () => void;
@@ -92,6 +94,11 @@ export const setupAxiosInterceptors = ({onUnauthenticated, enqueueSnack, handleR
     return Promise.reject(err.response);
   };
 
+  const ignoreAllOnResponseError = (err: AxiosError): Promise<AxiosResponse> => {
+    handleErrorStatus(err.response);
+    return Promise.reject(err.response);
+  };
+
   const onRequest = async (request: AxiosRequestConfig): Promise<AxiosRequestConfig> => {
     const token = await SecurityUtils.getAuthToken();
     if (token) {
@@ -110,6 +117,9 @@ export const setupAxiosInterceptors = ({onUnauthenticated, enqueueSnack, handleR
 
   axiosIgnore404.interceptors.request.use(onRequest);
   axiosIgnore404.interceptors.response.use(onResponseSuccess, ignore404OnResponseError);
+
+  axiosIgnoreAll.interceptors.request.use(onRequest);
+  axiosIgnoreAll.interceptors.response.use(onResponseSuccess, ignoreAllOnResponseError);
 };
 
 export default axiosDefault;
