@@ -54,7 +54,8 @@ const withRootContainer = (Component: ComponentType<WithRootProps>): FC => (prop
   useEffect(() => {
     if (isAuthenticated) {
       refresh();
-      activityTimerId.current = window.setInterval(() => writeActivity(), ACTIVITY_TIMEOUT);
+      writeActivity();
+      activityTimerId.current = window.setInterval(writeActivity, ACTIVITY_TIMEOUT);
     } else {
       window.clearInterval(activityTimerId.current);
     }
