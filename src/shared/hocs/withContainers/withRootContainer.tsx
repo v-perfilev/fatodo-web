@@ -1,4 +1,4 @@
-import React, {ComponentType, FC, memo, ReactElement, useEffect, useState} from 'react';
+import React, {ComponentType, FC, memo, ReactElement, useEffect, useRef, useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../../store/store';
 import AuthSelectors from '../../../store/auth/authSelectors';
 import {ContactsActions} from '../../../store/contacts/contactsActions';
@@ -18,7 +18,7 @@ const withRootContainer = (Component: ComponentType<WithRootProps>): FC => (prop
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(AuthSelectors.isAuthenticated);
   const [ready, setReady] = useState(false);
-  let activityTimerId: number;
+  const activityTimerId = useRef<number>();
 
   const login = (): void => {
     const tryToLogin = async (token: string): Promise<void> => {
@@ -54,9 +54,9 @@ const withRootContainer = (Component: ComponentType<WithRootProps>): FC => (prop
   useEffect(() => {
     if (isAuthenticated) {
       refresh();
-      activityTimerId = window.setInterval(() => writeActivity(), ACTIVITY_TIMEOUT);
+      activityTimerId.current = window.setInterval(() => writeActivity(), ACTIVITY_TIMEOUT);
     } else {
-      window.clearInterval(activityTimerId);
+      window.clearInterval(activityTimerId.current);
     }
   }, [isAuthenticated]);
 

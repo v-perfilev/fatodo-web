@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {flowRight} from 'lodash';
 import withRedirectTimer, {RedirectTimerProps} from '../../shared/hocs/withRedirectTimer';
@@ -14,14 +14,15 @@ import {RootRoutes} from '../../routes/RootRouter';
 
 type NotActivatedProps = RedirectTimerProps;
 
+const activationTimerMax = 20;
+
 const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
   const {t} = useTranslation();
   const location = useLocation();
   const [activationLoading, setActivationLoading] = useState<boolean>(false);
   const [activationTimer, setActivationTimer] = useState<number>(undefined);
   const navigate = useNavigate();
-  const activationTimerMax = 20;
-  let timerId: number;
+  const timerId = useRef<number>();
 
   const user = location.state?.user;
 
@@ -42,14 +43,14 @@ const NotActivated = ({timer, resetTimer}: NotActivatedProps) => {
   useEffect(() => {
     if (activationTimer !== undefined) {
       if (activationTimer >= 0) {
-        timerId = window.setTimeout(() => setActivationTimer((prevState) => prevState - 1), 1000);
+        timerId.current = window.setTimeout(() => setActivationTimer((prevState) => prevState - 1), 1000);
       }
       if (activationTimer < 0) {
         setActivationTimer(undefined);
-        window.clearTimeout(timerId);
+        window.clearTimeout(timerId.current);
       }
     }
-    return (): void => window.clearTimeout(timerId);
+    return (): void => window.clearTimeout(timerId.current);
   }, [activationTimer]);
 
   return (

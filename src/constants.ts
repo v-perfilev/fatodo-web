@@ -11,7 +11,7 @@ export const WS_ROOT_TOPIC = '/user/topic/root';
 // TIMEOUTS
 export const API_TIMEOUT = 60 * 1000;
 export const LOADER_TIMEOUT = 500;
-export const ACTIVITY_TIMEOUT = 10000;
+export const ACTIVITY_TIMEOUT = 10 * 1000;
 
 // AUTHORIZATION
 export const RECAPTCHA_KEY = process.env.RECAPTCHA_KEY;
