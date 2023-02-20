@@ -7,6 +7,7 @@
     }
   },
   "usersSelect": {
+    "contactsNotFound": "First you need to at least one user to your contact list",
     "usersNotFound": "Users not found"
   },
   "reminders": {

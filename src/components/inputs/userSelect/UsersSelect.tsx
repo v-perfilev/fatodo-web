@@ -13,14 +13,14 @@ import UserService from '../../../services/UserService';
 import {Typography} from '@mui/material';
 
 type Props = {
-  allowedIds: string[];
+  contactIds: string[];
   setUserIds: (ids: string[]) => void;
 };
 
-const UsersSelect: FC<Props> = ({allowedIds, setUserIds}: Props) => {
+const UsersSelect: FC<Props> = ({contactIds, setUserIds}: Props) => {
   const dispatch = useAppDispatch();
   const usersSelector = useCallback(InfoSelectors.makeUsersSelector(), []);
-  const users = useAppSelector((state) => usersSelector(state, allowedIds));
+  const users = useAppSelector((state) => usersSelector(state, contactIds));
   const {t} = useTranslation();
   const [filter, setFilter] = useState<string>('');
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -40,7 +40,7 @@ const UsersSelect: FC<Props> = ({allowedIds, setUserIds}: Props) => {
   };
 
   const handleUsersToShow = (): void => {
-    const idsToShow = allowedIds.filter((id) => !selectedIds.includes(id));
+    const idsToShow = contactIds.filter((id) => !selectedIds.includes(id));
     const updatedUsersToShow = users.filter((u) => idsToShow.includes(u.id));
     const selectedUsers = users.filter((u) => selectedIds.includes(u.id));
     updatedUsersToShow.push(...selectedUsers);
@@ -59,11 +59,11 @@ const UsersSelect: FC<Props> = ({allowedIds, setUserIds}: Props) => {
   };
 
   useEffect(() => {
-    if (users.length !== allowedIds.length) {
-      const handleUserIds = async () => dispatch(InfoActions.handleUserIdsThunk(allowedIds));
+    if (users.length !== contactIds.length) {
+      const handleUserIds = async () => dispatch(InfoActions.handleUserIdsThunk(contactIds));
       handleUserIds().finally();
     }
-  }, [allowedIds]);
+  }, [contactIds]);
 
   useEffect(() => {
     loadUserFromFilter();
@@ -92,7 +92,14 @@ const UsersSelect: FC<Props> = ({allowedIds, setUserIds}: Props) => {
           ))}
         </FVStack>
       )}
-      {usersToShow.length === 0 && (
+      {users.length === 0 && (
+        <FCenter>
+          <Typography fontSize={14} color="grey.400">
+            {t('common:usersSelect.contactsNotFound')}
+          </Typography>
+        </FCenter>
+      )}
+      {users.length > 0 && usersToShow.length === 0 && (
         <FCenter>
           <Typography fontSize={14} color="grey.400">
             {t('common:usersSelect.usersNotFound')}
