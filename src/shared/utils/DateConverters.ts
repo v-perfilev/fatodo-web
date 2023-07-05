@@ -65,9 +65,10 @@ export class DateConverters {
     if (!weekDays) {
       return null;
     }
+    let result = weekDays.slice();
     const dateDifference = DateConverters.getDateDifferenceWithTimezone(paramDate, timezone);
     if (dateDifference !== 0) {
-      weekDays = weekDays.map((day) => {
+      result = result.map((day) => {
         let newDay = day + dateDifference;
         if (newDay < 0) {
           newDay = 6;
@@ -78,16 +79,17 @@ export class DateConverters {
         return newDay;
       });
     }
-    return weekDays.sort((a, b) => a - b);
+    return result.sort((a, b) => a - b);
   };
 
   static getMonthDaysFromParamDate = (paramDate: DateParams, monthDays: number[], timezone: string): number[] => {
     if (!monthDays) {
       return null;
     }
+    let result = monthDays.slice();
     const dateDifference = DateConverters.getDateDifferenceWithTimezone(paramDate, timezone);
     if (dateDifference !== 0) {
-      monthDays = monthDays.map((day) => {
+      result = result.map((day) => {
         let newDay = day + dateDifference;
         if (newDay < 1) {
           newDay = 31;
@@ -98,8 +100,7 @@ export class DateConverters {
         return newDay;
       });
     }
-    console.log(monthDays);
-    return monthDays.sort((a, b) => a - b);
+    return result.sort((a, b) => a - b);
   };
 
   static getTimeWithTimezone = (paramDate: DateParams, timezone: string): number => {
