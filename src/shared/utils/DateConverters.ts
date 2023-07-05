@@ -98,6 +98,7 @@ export class DateConverters {
         return newDay;
       });
     }
+    console.log(monthDays);
     return monthDays.sort((a, b) => a - b);
   };
 
