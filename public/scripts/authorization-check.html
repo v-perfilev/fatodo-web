@@ -29,6 +29,8 @@
         return Date.now() < exp;
       }
 
+      console.log("test, before adding listener");
+
       window.addEventListener('message', function (event) {
         console.log("test, client side", event)
         if (PERMITTED_DOMAINS.includes(event.origin)) {
