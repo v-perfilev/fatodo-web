@@ -30,6 +30,7 @@
       }
 
       window.addEventListener('message', function (event) {
+        console.log("test, client side", event)
         if (PERMITTED_DOMAINS.includes(event.origin)) {
           let parent = window.parent;
           let token = localStorage.getItem(TOKEN_KEY);
