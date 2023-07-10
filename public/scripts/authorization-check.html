@@ -30,7 +30,7 @@
       }
 
       const internalConsole = {
-        panel: $(parent.document.body).append('<div>'),
+        panel: parent.append('<div>'),
         log: function (m) {
           this.panel.prepend('<div>' + m + '</div>');
         }
@@ -41,7 +41,6 @@
       window.addEventListener('message', function (event) {
         internalConsole.log("test, client side", event)
         if (PERMITTED_DOMAINS.includes(event.origin)) {
-          let parent = window.parent;
           let token = localStorage.getItem(TOKEN_KEY);
           let isAuthorized = isJwtNotExpired(token);
           parent.postMessage(isAuthorized, '*');
