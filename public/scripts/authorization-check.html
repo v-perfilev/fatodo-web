@@ -29,10 +29,17 @@
         return Date.now() < exp;
       }
 
-      console.log("test, before adding listener");
+      const internalConsole = {
+        panel: $(parent.document.body).append('<div>'),
+        log: function (m) {
+          this.panel.prepend('<div>' + m + '</div>');
+        }
+      };
+
+      internalConsole.log("test, before adding listener");
 
       window.addEventListener('message', function (event) {
-        console.log("test, client side", event)
+        internalConsole.log("test, client side", event)
         if (PERMITTED_DOMAINS.includes(event.origin)) {
           let parent = window.parent;
           let token = localStorage.getItem(TOKEN_KEY);
