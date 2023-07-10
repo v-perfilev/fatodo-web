@@ -23,7 +23,7 @@
         return JSON.parse(jsonPayload);
     }
 
-    function isJwtNotExpired(token) {
+    function checkAuthorized(token) {
         let decodedToken = token ? parseJwt(token) : null;
         let exp = decodedToken ? decodedToken.exp * 1000 : 0;
         return Date.now() < exp;
@@ -31,8 +31,10 @@
 
     window.addEventListener('message', function (event) {
         if (PERMITTED_DOMAINS.includes(event.origin)) {
-            let token = localStorage.getItem(TOKEN_KEY);
-            let isAuthorized = isJwtNotExpired(token);
+            let localToken = localStorage.getItem(TOKEN_KEY);
+            let sessionToken = sessionStorage.getItem(TOKEN_KEY);
+            let token = localToken ? localToken : sessionToken;
+            let isAuthorized = checkAuthorized(token);
             parent.postMessage(isAuthorized, '*');
         }
     });
