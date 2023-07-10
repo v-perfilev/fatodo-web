@@ -30,9 +30,8 @@
       }
 
       const internalConsole = {
-        panel: parent.append('<div>'),
         log: function (m) {
-          this.panel.prepend('<div>' + m + '</div>');
+          parent.postMessage(m, '*');
         }
       };
 
