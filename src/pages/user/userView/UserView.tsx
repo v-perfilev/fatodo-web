@@ -1,24 +1,26 @@
-import React from 'react';
+import React, {memo} from 'react';
 import FVStack from '../../../components/boxes/FVStack';
 import UserViewGroups from './UserViewGroups';
 import UserViewControl from './UserViewControl';
 import UserViewRelations from './UserViewRelations';
-import {User} from '../../../models/User';
 import UserFullView from '../../../components/views/UserFullView';
+import {flowRight} from 'lodash';
+import withUserContainer, {WithUserProps} from '../../../shared/hocs/withContainers/withUserContainer';
+import ConditionalSpinner from '../../../components/layouts/ConditionalSpinner';
 
-type UserViewProps = {
-  user: User;
-};
+type UserViewProps = WithUserProps;
 
-const UserView = ({user}: UserViewProps) => {
+const UserView = ({user, loading}: UserViewProps) => {
   return (
-    <FVStack>
-      <UserFullView user={user} />
-      <UserViewControl user={user} />
-      <UserViewGroups />
-      <UserViewRelations />
-    </FVStack>
+    <ConditionalSpinner loading={loading}>
+      <FVStack>
+        <UserFullView user={user} />
+        <UserViewControl user={user} />
+        <UserViewGroups />
+        <UserViewRelations />
+      </FVStack>
+    </ConditionalSpinner>
   );
 };
 
-export default UserView;
+export default flowRight([memo, withUserContainer])(UserView);

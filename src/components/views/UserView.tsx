@@ -31,7 +31,7 @@ const UserView = ({user, size, withUserPic = true, withUsername = false}: UserVi
     </FHStack>
   );
 
-  const userPopupView = <UserPopupView user={user} />;
+  const userPopupView = <UserPopupView userId={user?.id} />;
 
   return isAnotherUser && isNotDeleted ? (
     <HoverPopup anchorElement={userView} popupElement={userPopupView} />
