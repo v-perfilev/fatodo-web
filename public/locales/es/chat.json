@@ -1,0 +1,134 @@
+{
+  "common": {
+    "direct": "Directo",
+    "chatNotSelected": "Chat no seleccionado"
+  },
+  "list": {
+    "chatsNotFound": "Aún no hay chats"
+  },
+  "view": {
+    "messagesNotFound": "Aún no hay mensajes",
+    "inputPlaceholder": "Escribe tu mensaje..."
+  },
+  "menu": {
+    "showMembers": "Miembros",
+    "addMembers": "Agregar miembros",
+    "renameChat": "Renombrar chat",
+    "cleanChat": "Limpiar chat",
+    "markAsRead": "Marcar todo como leído",
+    "leaveChat": "Salir del chat",
+    "deleteChat": "Eliminar chat"
+  },
+  "message": {
+    "deleted": "Mensaje eliminado",
+    "actions": {
+      "reactions": "Reacciones",
+      "readStatuses": "Leído",
+      "edit": "Editar",
+      "delete": "Eliminar"
+    }
+  },
+  "event": {
+    "CREATE_DIRECT_CHAT": "{{username}} creó un chat directo con {{usernames}}",
+    "CREATE_CHAT": "{{username}} creó un chat con {{usernames}}",
+    "RENAME_CHAT": "{{username}} cambió el nombre del chat a \"{{title}}\"",
+    "LEAVE_CHAT": "{{username}} dejó el chat",
+    "CLEAR_CHAT": "Has limpiado el historial del chat",
+    "ADD_MEMBERS": "{{username}} agregó nuevos miembros al chat: {{usernames}}",
+    "DELETE_MEMBERS": "{{username}} eliminó miembros del chat: {{usernames}}"
+  },
+  "actions": {
+    "createChat": "Crear chat",
+    "back": "Atrás"
+  },
+  "createChat": {
+    "title": "Crear chat",
+    "fields": {
+      "users": {
+        "label": "Usuarios",
+        "current": "Ingresa el identificador de otro usuario",
+        "notRegistered": "Usuario no registrado"
+      }
+    },
+    "send": "Crear",
+    "cancel": "Cancelar"
+  },
+  "renameChat": {
+    "title": "Renombrar chat",
+    "fields": {
+      "title": {
+        "label": "Título",
+        "required": "Requerido"
+      }
+    },
+    "send": "Renombrar",
+    "cancel": "Cancelar"
+  },
+  "members": {
+    "title": "Miembros del chat",
+    "usersNotFound": "Usuarios no encontrados",
+    "buttons": {
+      "addUsers": "Agregar miembros"
+    }
+  },
+  "addMembers": {
+    "title": "Agregar miembros al chat",
+    "buttons": {
+      "send": "Agregar miembros",
+      "cancel": "Cancelar"
+    }
+  },
+  "removeMember": {
+    "title": "Eliminar usuario del chat",
+    "text": "¿Estás seguro de que deseas eliminar al usuario {{username}} del chat?"
+  },
+  "reactions": {
+    "title": "Reacciones al mensaje",
+    "reactionsNotFound": "Aún no hay reacciones"
+  },
+  "readStatuses": {
+    "title": "Leído",
+    "readStatusesNotFound": "Nadie ha leído este mensaje"
+  },
+  "editMessage": {
+    "title": "Editar mensaje",
+    "fields": {
+      "text": {
+        "label": "Texto",
+        "required": "Requerido"
+      }
+    },
+    "send": "Editar",
+    "cancel": "Cancelar"
+  },
+  "directMessage": {
+    "title": "Mensaje directo",
+    "fields": {
+      "username": {
+        "label": "Usuario"
+      },
+      "text": {
+        "label": "Texto",
+        "required": "Requerido"
+      }
+    },
+    "send": "Enviar",
+    "cancel": "Cancelar"
+  },
+  "clearChat": {
+    "title": "Limpiar chat",
+    "text": "¿Estás seguro de que deseas limpiar el chat?"
+  },
+  "leaveChat": {
+    "title": "Salir del chat",
+    "text": "¿Estás seguro de que deseas salir del chat?"
+  },
+  "deleteChat": {
+    "title": "Eliminar chat",
+    "text": "¿Estás seguro de que deseas eliminar el chat?"
+  },
+  "deleteMessage": {
+    "title": "Eliminar mensaje",
+    "text": "¿Estás seguro de que deseas eliminar el mensaje?"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "headers": {
+    "create": "Crear tarea en {{group}}",
+    "edit": "Editar tarea en {{group}}"
+  },
+  "view": {
+    "noDescription": "Sin descripción"
+  },
+  "labels": {
+    "status": "Estado",
+    "priority": "Prioridad",
+    "description": "Descripción",
+    "reminders": "Recordatorios",
+    "item": "Tarea",
+    "group": "Grupo",
+    "createdBy": "Creado por",
+    "createdAt": "Creado el",
+    "updatedBy": "Actualizado por",
+    "updatedAt": "Actualizado el"
+  },
+  "fields": {
+    "title": {
+      "label": "Título",
+      "required": "Requerido"
+    },
+    "priority": {
+      "label": "Prioridad",
+      "required": "Requerido"
+    },
+    "description": {
+      "label": "Descripción"
+    },
+    "reminders": {
+      "label": "Recordatorios"
+    }
+  },
+  "actions": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "create": "Crear tarea",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "list": "Lista de tareas",
+    "add": "Agregar",
+    "close": "Cerrar"
+  },
+  "deleteItem": {
+    "title": "Eliminar tarea",
+    "text": "¿Estás seguro de que deseas eliminar la tarea \"{{title}}\"?"
+  }
+}

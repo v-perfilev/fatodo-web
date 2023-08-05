@@ -1,0 +1,48 @@
+{
+  "default": "Error en el servidor",
+  "connection": "Falló la conexión con el servidor",
+  "form": {
+    "invalid": "Datos del formulario no válidos"
+  },
+  "auth": {
+    "alreadyActivated": "La cuenta ya está activada",
+    "notActivated": "La cuenta no está activada",
+    "wrongPassword": "Contraseña actual incorrecta",
+    "wrongProvider": "Operación no posible para el proveedor de su cuenta"
+  },
+  "security": {
+    "forbidden": "Acceso prohibido",
+    "unauthorized": "No está autorizado",
+    "notRegistered": "El usuario aún no está registrado",
+    "wrongPassword": "Contraseña incorrecta, intente nuevamente",
+    "wrongProvider": {
+      "GOOGLE": "El usuario está registrado con Google",
+      "FACEBOOK": "El usuario está registrado con Facebook",
+      "APPLE": "El usuario está registrado con Apple"
+    }
+  },
+  "model": {
+    "databaseError": "Error en el servidor",
+    "exists": "El objeto ya existe",
+    "duplicated": "Al menos uno de los campos únicos está duplicado",
+    "notFound": "Objeto no encontrado",
+    "invalid": "El objeto contiene un parámetro no válido"
+  },
+  "permission": {
+    "restricted": "No tiene suficientes permisos para realizar esta operación",
+    "usersNotAllowed": "Usuarios que no están en la lista de contactos"
+  },
+  "service": {
+    "group": {
+      "invalid": "El grupo contiene datos no válidos"
+    }
+  },
+  "contact": {
+    "relation": {
+      "exists": "La relación ya existe"
+    },
+    "request": {
+      "exists": "La solicitud ya ha sido enviada"
+    }
+  }
+}

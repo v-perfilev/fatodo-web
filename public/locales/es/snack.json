@@ -1,0 +1,53 @@
+{
+  "auth": {
+    "registered": "Te has registrado, se envió un enlace de activación a tu dirección de correo electrónico",
+    "activated": "¡La cuenta fue activada con éxito, ahora puedes iniciar sesión!",
+    "afterForgotPassword": "Se envió el enlace para cambiar la contraseña a tu dirección de correo electrónico",
+    "afterResetPassword": "La contraseña se cambió con éxito, ahora puedes iniciar sesión",
+    "afterChangePassword": "La contraseña se cambió",
+    "afterUpdateAccount": "Datos de la cuenta actualizados",
+    "afterDeleteAccount": "Cuenta eliminada permanentemente"
+  },
+  "image": {
+    "tooSmall": "Imagen seleccionada demasiado pequeña"
+  },
+  "group": {
+    "created": "Grupo creado",
+    "edited": "Grupo editado",
+    "deleted": "Grupo eliminado",
+    "sorted": "Grupos reordenados",
+    "left": "Has dejado el grupo"
+  },
+  "item": {
+    "created": "Tarea creada",
+    "edited": "Tarea editada",
+    "deleted": "Tarea eliminada"
+  },
+  "contact": {
+    "relationRemoved": "Relación eliminada",
+    "requestSent": "Solicitud de contacto enviada",
+    "requestRemoved": "Solicitud de contacto eliminada",
+    "requestAccepted": "Solicitud de contacto aceptada",
+    "requestDeclined": "Solicitud de contacto rechazada"
+  },
+  "chat": {
+    "created": "Chat creado",
+    "edited": "Chat editado",
+    "renamed": "Chat renombrado",
+    "deleted": "Chat eliminado",
+    "cleared": "Historial del chat eliminado",
+    "left": "Has dejado el chat",
+    "messageEdited": "Mensaje editado",
+    "messageDeleted": "Mensaje eliminado"
+  },
+  "comment": {
+    "commentEdited": "Comentario editado",
+    "commentDeleted": "Comentario eliminado"
+  },
+  "security": {
+    "oauth2": {
+      "internal": "Algo salió mal con el proveedor remoto",
+      "wrongProvider": "Usuario registrado directamente, por favor inicia sesión con la contraseña"
+    }
+  }
+}

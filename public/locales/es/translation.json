@@ -1,0 +1,42 @@
+{
+  "routes": {
+    "Groups": "Tareas",
+    "Calendar": "Calendario",
+    "Events": "Eventos",
+    "Contacts": "Contactos",
+    "Chats": "Chats",
+    "GroupList": "Grupos",
+    "GroupView": "Grupo",
+    "GroupCreate": "Crear grupo",
+    "GroupEdit": "Editar grupo",
+    "ItemView": "Tarea",
+    "ItemCreate": "Crear tarea",
+    "ItemEdit": "Editar tarea",
+    "ContactList": "Contactos",
+    "IncomingRequestList": "Solicitudes entrantes",
+    "OutcomingRequestList": "Solicitudes salientes",
+    "ChatList": "Chats",
+    "ChatView": "Chat",
+    "CommentList": "Comentarios",
+    "AccountForm": "Cuenta",
+    "AccountSettingsForm": "Configuración",
+    "AccountChangePasswordForm": "Cambiar contraseña",
+    "UserView": "Usuario",
+    "EventList": "Eventos",
+    "CalendarView": "Calendario"
+  },
+  "buttons": {
+    "agree": "Aceptar",
+    "disagree": "Rechazar"
+  },
+  "inputs": {
+    "search": "Buscar",
+    "filter": "Filtrar"
+  },
+  "salutations": {
+    "you": "Tú"
+  },
+  "additional": {
+    "fieldNotSet": "No establecido"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "list": {
+    "dateNotSelected": "Fecha no seleccionada",
+    "noReminders": "No hay recordatorios en la fecha seleccionada"
+  },
+  "selectMonth": {
+    "title": "Seleccionar mes",
+    "buttons": {
+      "send": "Seleccionar",
+      "cancel": "Cancelar"
+    }
+  }
+}

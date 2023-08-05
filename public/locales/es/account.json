@@ -1,0 +1,143 @@
+{
+  "login": {
+    "header": "Iniciar sesión",
+    "submit": "Iniciar sesión"
+  },
+  "register": {
+    "header": "Registrarse",
+    "submit": "Registrarse"
+  },
+  "forgotPassword": {
+    "header": "¿Olvidaste tu contraseña?",
+    "submit": "Solicitar código"
+  },
+  "resetPassword": {
+    "header": "Restablecer contraseña",
+    "submit": "Enviar"
+  },
+  "changePassword": {
+    "header": "Cambiar contraseña",
+    "submit": "Enviar"
+  },
+  "socialLogin": {
+    "label": "Iniciar sesión con"
+  },
+  "settings": {
+    "labels": {
+      "notifications": "Notificaciones",
+      "email": "Email",
+      "push": "Push"
+    },
+    "notifications": {
+      "reminder": "Recordatorios",
+      "itemCreate": "Nuevas tareas",
+      "itemGroupCreate": "Nuevos grupos",
+      "itemMemberAdd": "Nuevos miembros en grupos",
+      "chatCreate": "Nuevos chats",
+      "chatMessageCreate": "Nuevos mensajes",
+      "chatReactionIncoming": "Reacciones en chats",
+      "contactRequestIncoming": "Nuevas solicitudes de contacto",
+      "contactAcceptOutcoming": "Solicitudes de contacto aceptadas",
+      "commentCreate": "Nuevos comentarios",
+      "commentReactionIncoming": "Reacciones en comentarios"
+    }
+  },
+  "fields": {
+    "user": {
+      "label": "Nombre de usuario / Email",
+      "required": "Campo requerido"
+    },
+    "password": {
+      "label": "Contraseña",
+      "required": "Campo requerido",
+      "invalid": "Puede contener solo letras mayúsculas y minúsculas y números",
+      "strength": "Debe contener letras mayúsculas y minúsculas y números",
+      "min8": "No puede ser menor de 8 caracteres",
+      "max20": "No puede ser mayor de 20 caracteres"
+    },
+    "oldPassword": {
+      "label": "Contraseña actual"
+    },
+    "newPassword": {
+      "label": "Nueva contraseña"
+    },
+    "repeatPassword": {
+      "label": "Confirmar contraseña",
+      "required": "Campo requerido",
+      "notEqual": "Las contraseñas no coinciden"
+    },
+    "rememberMe": {
+      "label": "Recordarme"
+    },
+    "email": {
+      "label": "Email",
+      "required": "Campo requerido",
+      "notValid": "Debe contener un email válido",
+      "notUnique": "Debe ser único"
+    },
+    "username": {
+      "label": "Nombre de usuario",
+      "required": "Campo requerido",
+      "invalid": "Puede contener solo letras mayúsculas y minúsculas y números",
+      "min5": "No puede ser menor de 5 caracteres",
+      "max20": "No puede ser mayor de 20 caracteres",
+      "notUnique": "Debe ser único"
+    },
+    "firstname": {
+      "label": "Nombre"
+    },
+    "lastname": {
+      "label": "Apellido"
+    },
+    "language": {
+      "label": "Idioma",
+      "required": "Campo requerido"
+    },
+    "gender": {
+      "label": "Género",
+      "options": {
+        "MALE": "Hombre",
+        "FEMALE": "Mujer",
+        "DIVERSE": "Diverso"
+      }
+    },
+    "timeFormat": {
+      "label": "Formato de hora",
+      "options": {
+        "H12": "12 horas",
+        "H24": "24 horas"
+      }
+    },
+    "dateFormat": {
+      "label": "Formato de fecha",
+      "options": {
+        "YMD_DASH": "aaaa-mm-dd",
+        "MDY_SLASH": "mm/dd/aaaa",
+        "DMY_DASH": "dd-mm-aaaa",
+        "DMY_DOT": "dd.mm.aaaa",
+        "DMY_SLASH": "dd/mm/aaaa"
+      }
+    },
+    "timezone": {
+      "label": "Zona horaria",
+      "required": "Campo requerido"
+    },
+    "emailReminders": {
+      "label": "Recordatorios por email"
+    },
+    "image": {
+      "label": "Imagen"
+    }
+  },
+  "deletePermanently": {
+    "title": "Eliminar cuenta",
+    "text": "Si quieres eliminar tu cuenta, escribe \"{{username}}\"",
+    "confirm": "Eliminar",
+    "cancel": "Cancelar"
+  },
+  "actions": {
+    "save": "Guardar",
+    "deletePermanently": "Eliminar cuenta permanentemente",
+    "logout": "Cerrar sesión"
+  }
+}

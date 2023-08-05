@@ -1,0 +1,79 @@
+{
+  "headers": {
+    "create": "Crear grupo",
+    "edit": "Editar grupo"
+  },
+  "fields": {
+    "title": {
+      "label": "Título",
+      "required": "Requerido"
+    },
+    "color": {
+      "label": "Color",
+      "required": "Requerido"
+    },
+    "image": {
+      "label": "Imagen"
+    }
+  },
+  "actions": {
+    "showAll": "Mostrar todas las tareas",
+    "active": "Activas",
+    "archived": "Archivadas",
+    "groups": "Grupos",
+    "view": "Abrir",
+    "createGroup": "Crear grupo",
+    "createItem": "Crear tarea",
+    "create": "Crear",
+    "edit": "Editar",
+    "leave": "Abandonar",
+    "delete": "Eliminar",
+    "members": "Miembros",
+    "addMembers": "Agregar miembros",
+    "moveToArchive": "Mover a archivo",
+    "removeFromArchive": "Eliminar de archivo",
+    "save": "Guardar",
+    "update": "Actualizar",
+    "cancel": "Cancelar",
+    "collapse": "Colapsar",
+    "reorder": "Reordenar"
+  },
+  "roles": {
+    "admin": "Administrador",
+    "edit": "Editor",
+    "read": "Lector"
+  },
+  "members": {
+    "title": "Miembros del grupo",
+    "usersNotFound": "Usuarios no encontrados",
+    "buttons": {
+      "addUsers": "Agregar miembros"
+    }
+  },
+  "addMembers": {
+    "title": "Agregar miembros al grupo",
+    "buttons": {
+      "send": "Agregar miembros",
+      "cancel": "Cancelar"
+    }
+  },
+  "editMember": {
+    "title": "Editar miembro del grupo",
+    "buttons": {
+      "send": "Editar miembro",
+      "cancel": "Cancelar"
+    }
+  },
+  "removeMember": {
+    "title": "Eliminar usuario del grupo",
+    "text": "¿Estás seguro de que deseas eliminar al usuario {{username}} del grupo?"
+  },
+  "leaveGroup": {
+    "title": "Abandonar grupo",
+    "text": "¿Estás seguro de que deseas abandonar el grupo \"{{title}}\"?"
+  },
+  "deleteGroup": {
+    "title": "Eliminar grupo",
+    "text": "¿Estás seguro de que deseas eliminar el grupo \"{{title}}\"?"
+  }
+}
