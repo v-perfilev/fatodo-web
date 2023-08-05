@@ -4,6 +4,7 @@ import detector from 'i18next-browser-languagedetector';
 import backend from 'i18next-http-backend';
 
 require('moment/locale/en-gb.js');
+require('moment/locale/es.js');
 require('moment/locale/ru.js');
 
 export const languages = [
