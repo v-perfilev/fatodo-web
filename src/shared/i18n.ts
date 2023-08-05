@@ -14,7 +14,7 @@ export const languages = [
   },
   {
     name: 'Español',
-    code: 'eы',
+    code: 'es',
   },
   {
     name: 'Русский',

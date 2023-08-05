@@ -39,7 +39,7 @@ module.exports = () => ({
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
-    new ContextReplacementPlugin(/moment[/\\]locale$/, /en|ru/),
+    new ContextReplacementPlugin(/moment[/\\]locale$/, /en|es|ru/),
     new CopyWebpackPlugin([{from: './public/', to: ''}]),
     new Dotenv({
       path: '.env',
