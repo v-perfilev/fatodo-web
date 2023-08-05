@@ -5,6 +5,7 @@ import {LanguageUtils} from '../../shared/utils/LanguageUtils';
 import {Button} from '@mui/material';
 import {languages} from '../../shared/i18n';
 import PopupMenu, {PopupMenuItem} from '../surfaces/PopupMenu';
+import {useForceUpdate} from '../../shared/hooks/useForceUpdate';
 
 type LanguageSelectProps = {
   list?: boolean;
@@ -21,9 +22,12 @@ const getShortNameByCode = (code: string, list: boolean): string => {
 };
 
 const LanguageSelect = ({list, onChange}: LanguageSelectProps) => {
+  const forceUpdate = useForceUpdate();
+
   const changeLanguage = (code: string): void => {
     LanguageUtils.setLanguage(code);
     onChange?.(code);
+    setTimeout(forceUpdate, 50);
   };
 
   const buttonElement = (
