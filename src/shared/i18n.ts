@@ -12,6 +12,10 @@ export const languages = [
     code: 'en',
   },
   {
+    name: 'Español',
+    code: 'eы',
+  },
+  {
     name: 'Русский',
     code: 'ru',
   },
