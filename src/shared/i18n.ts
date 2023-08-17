@@ -4,8 +4,12 @@ import detector from 'i18next-browser-languagedetector';
 import backend from 'i18next-http-backend';
 
 require('moment/locale/en-gb.js');
+require('moment/locale/de.js');
 require('moment/locale/es.js');
+require('moment/locale/fr.js');
+require('moment/locale/pt.js');
 require('moment/locale/ru.js');
+require('moment/locale/uk.js');
 
 export const languages = [
   {
@@ -13,12 +17,28 @@ export const languages = [
     code: 'en',
   },
   {
+    name: 'Deutsch',
+    code: 'de',
+  },
+  {
     name: 'Español',
     code: 'es',
   },
   {
+    name: 'Français',
+    code: 'fr',
+  },
+  {
+    name: 'Português',
+    code: 'pt',
+  },
+  {
     name: 'Русский',
     code: 'ru',
+  },
+  {
+    name: 'Українська',
+    code: 'uk',
   },
 ];
 
