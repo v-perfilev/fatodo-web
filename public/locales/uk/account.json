@@ -1,0 +1,143 @@
+{
+  "login": {
+    "header": "Вхід",
+    "submit": "Увійти"
+  },
+  "register": {
+    "header": "Реєстрація",
+    "submit": "Зареєструватися"
+  },
+  "forgotPassword": {
+    "header": "Забули пароль?",
+    "submit": "Запитати код"
+  },
+  "resetPassword": {
+    "header": "Відновлення пароля",
+    "submit": "Відправити"
+  },
+  "changePassword": {
+    "header": "Зміна пароля",
+    "submit": "Відправити"
+  },
+  "socialLogin": {
+    "label": "Увійти через"
+  },
+  "settings": {
+    "labels": {
+      "notifications": "Сповіщення",
+      "email": "Email",
+      "push": "Push"
+    },
+    "notifications": {
+      "reminder": "Нагадування",
+      "itemCreate": "Нові завдання",
+      "itemGroupCreate": "Нові групи",
+      "itemMemberAdd": "Нові користувачі в групах",
+      "chatCreate": "Нові чати",
+      "chatMessageCreate": "Нові повідомлення",
+      "chatReactionIncoming": "Реакції в чатах",
+      "contactRequestIncoming": "Нові запити в контакти",
+      "contactAcceptOutcoming": "Прийняті запити в контакти",
+      "commentCreate": "Нові коментарі",
+      "commentReactionIncoming": "Реакції в коментарях"
+    }
+  },
+  "fields": {
+    "user": {
+      "label": "Ім'я користувача / Email",
+      "required": "Обов'язкове поле"
+    },
+    "password": {
+      "label": "Пароль",
+      "required": "Обов'язкове поле",
+      "invalid": "Може містити лише великі і малі латинські букви та цифри",
+      "strength": "Повинен містити великі і малі латинські букви та цифри",
+      "min8": "Не може бути коротше 8 символів",
+      "max20": "Не може бути довше 20 символів"
+    },
+    "oldPassword": {
+      "label": "Старий пароль"
+    },
+    "newPassword": {
+      "label": "Новий пароль"
+    },
+    "repeatPassword": {
+      "label": "Повторіть пароль",
+      "required": "Обов'язкове поле",
+      "notEqual": "Паролі не співпадають"
+    },
+    "rememberMe": {
+      "label": "Запам'ятати мене"
+    },
+    "email": {
+      "label": "Email",
+      "required": "Обов'язкове поле",
+      "notValid": "Поле містить некоректний email",
+      "notUnique": "Поле повинно бути унікальним"
+    },
+    "username": {
+      "label": "Ім'я користувача",
+      "required": "Обов'язкове поле",
+      "invalid": "Може містити лише великі і малі латинські букви та цифри",
+      "min5": "Не може бути коротше 5 символів",
+      "max20": "Не може бути довше 20 символів",
+      "notUnique": "Поле повинно бути унікальним"
+    },
+    "firstname": {
+      "label": "Ім'я"
+    },
+    "lastname": {
+      "label": "Прізвище"
+    },
+    "language": {
+      "label": "Мова",
+      "required": "Обов'язкове поле"
+    },
+    "gender": {
+      "label": "Стать",
+      "options": {
+        "MALE": "Чоловіча",
+        "FEMALE": "Жіноча",
+        "DIVERSE": "Не вказувати"
+      }
+    },
+    "timeFormat": {
+      "label": "Формат часу",
+      "options": {
+        "H12": "12 годин",
+        "H24": "24 години"
+      }
+    },
+    "dateFormat": {
+      "label": "Формат дати",
+      "options": {
+        "YMD_DASH": "рррр-мм-дд",
+        "MDY_SLASH": "мм/дд/рррр",
+        "DMY_DASH": "дд-мм-рррр",
+        "DMY_DOT": "дд.мм.рррр",
+        "DMY_SLASH": "дд/мм/рррр"
+      }
+    },
+    "timezone": {
+      "label": "Часовий пояс",
+      "required": "Обов'язкове поле"
+    },
+    "emailReminders": {
+      "label": "Email нагадування"
+    },
+    "image": {
+      "label": "Зображення"
+    }
+  },
+  "deletePermanently": {
+    "title": "Видалення аккаунту",
+    "text": "Якщо Ви хочете видалити Ваш аккаунт, наберіть \"{{username}}\"",
+    "confirm": "Видалити",
+    "cancel": "Скасувати"
+  },
+  "actions": {
+    "save": "Зберегти",
+    "deletePermanently": "Видалити аккаунт назавжди",
+    "logout": "Вийти"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "headers": {
+    "create": "Aufgabe in {{group}} erstellen",
+    "edit": "Aufgabe in {{group}} bearbeiten"
+  },
+  "view": {
+    "noDescription": "Keine Beschreibung"
+  },
+  "labels": {
+    "status": "Status",
+    "priority": "Priorität",
+    "description": "Beschreibung",
+    "reminders": "Erinnerungen",
+    "item": "Aufgabe",
+    "group": "Gruppe",
+    "createdBy": "Erstellt von",
+    "createdAt": "Erstellt am",
+    "updatedBy": "Aktualisiert von",
+    "updatedAt": "Aktualisiert am"
+  },
+  "fields": {
+    "title": {
+      "label": "Titel",
+      "required": "Erforderlich"
+    },
+    "priority": {
+      "label": "Priorität",
+      "required": "Erforderlich"
+    },
+    "description": {
+      "label": "Beschreibung"
+    },
+    "reminders": {
+      "label": "Erinnerungen"
+    }
+  },
+  "actions": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "create": "Aufgabe erstellen",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "list": "Liste von Aufgaben",
+    "add": "Hinzufügen",
+    "close": "Schließen"
+  },
+  "deleteItem": {
+    "title": "Aufgabe löschen",
+    "text": "Sind Sie sicher, dass Sie die Aufgabe \"{{title}}\" löschen möchten?"
+  }
+}

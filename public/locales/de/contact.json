@@ -1,0 +1,37 @@
+{
+  "relations": {
+    "title": "Kontakte",
+    "remove": "Entfernen",
+    "relationsNotFound": "Noch keine Kontakte vorhanden"
+  },
+  "outcoming": {
+    "title": "Ausgehend",
+    "remove": "Entfernen",
+    "requestsNotFound": "Keine ausgehenden Anfragen vorhanden"
+  },
+  "incoming": {
+    "title": "Eingehend",
+    "accept": "Akzeptieren",
+    "decline": "Ablehnen",
+    "requestsNotFound": "Keine eingehenden Anfragen vorhanden"
+  },
+  "addContact": {
+    "title": "Benutzer zur Kontaktliste hinzufügen",
+    "fields": {
+      "user": {
+        "label": "Benutzername / E-Mail",
+        "required": "Pflichtfeld",
+        "current": "Geben Sie die Kennung eines anderen Benutzers ein",
+        "notRegistered": "Benutzer nicht registriert"
+      },
+      "message": {
+        "label": "Nachricht"
+      }
+    },
+    "send": "Anfrage senden",
+    "cancel": "Abbrechen"
+  },
+  "actions": {
+    "addContact": "Kontakt hinzufügen"
+  }
+}

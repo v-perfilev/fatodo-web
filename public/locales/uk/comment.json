@@ -1,0 +1,33 @@
+{
+  "list": {
+    "inputPlaceholder": "Залиште свій коментар...",
+    "commentsNotFound": "Поки немає коментарів"
+  },
+  "comment": {
+    "deleted": "Коментар видалено",
+    "actions": {
+      "reactions": "Реакції",
+      "edit": "Редагувати",
+      "delete": "Видалити"
+    }
+  },
+  "reactions": {
+    "title": "Реакції на коментар",
+    "reactionsNotFound": "Поки немає реакцій"
+  },
+  "editComment": {
+    "title": "Редагувати коментар",
+    "fields": {
+      "text": {
+        "label": "Текст",
+        "required": "Обов'язкове поле"
+      }
+    },
+    "send": "Редагувати",
+    "cancel": "Скасувати"
+  },
+  "deleteComment": {
+    "title": "Видалення коментаря",
+    "text": "Ви впевнені, що хочете видалити коментар?"
+  }
+}

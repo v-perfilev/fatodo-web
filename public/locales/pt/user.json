@@ -1,0 +1,19 @@
+{
+  "commonGroups": {
+    "header": "Grupos comuns",
+    "noCommonGroups": "Você não possui grupos comuns"
+  },
+  "commonContacts": {
+    "header": "Contatos comuns",
+    "noCommonContacts": "Você não possui contatos comuns"
+  },
+  "actions": {
+    "sendContactRequest": "Enviar solicitação de contato",
+    "acceptContactRequest": "Aceitar solicitação de contato",
+    "declineContactRequest": "Recusar solicitação de contato",
+    "cancelContactRequest": "Cancelar solicitação de contato",
+    "waitContactAccepting": "Aguardando aceitação do contato",
+    "removeContact": "Remover contato",
+    "sendMessage": "Enviar mensagem"
+  }
+}

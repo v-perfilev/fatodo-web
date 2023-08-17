@@ -1,0 +1,116 @@
+{
+  "chat": {
+    "create": {
+      "title": "Новий чат",
+      "content": "<user/> створив <chat/> з <users/>",
+      "content_FEMALE": "<user/> створила <chat/> з <users/>"
+    },
+    "update": {
+      "title": "Чат відредаговано",
+      "content": "<user/> відредагував <chat/>",
+      "content_FEMALE": "<user/> відредагувала <chat/>"
+    },
+    "memberAdd": {
+      "title": "Чат змінено",
+      "content": "<user/> додав <users/> в <chat/>",
+      "content_FEMALE": "<user/> додала <users/> в <chat/>"
+    },
+    "memberDelete": {
+      "title": "Чат змінено",
+      "content": "<user/> видалив <users/> з чату <chat/>",
+      "content_FEMALE": "<user/> видала <users/> з <chat/>"
+    },
+    "memberLeave": {
+      "title": "Чат змінено",
+      "content": "<user/> покинув <chat/>",
+      "content_FEMALE": "<user/> покинула <chat/>"
+    },
+    "messageCreate": {
+      "title": "Нове повідомлення"
+    },
+    "reaction": {
+      "title": "Реакція в чаті",
+      "content": "<user/> відреагував(ла) на ваше повідомлення в чаті <chat/>"
+    }
+  },
+  "comment": {
+    "add": {
+      "title": "Коментар додано",
+      "contentWithGroup": "<user/> додав коментар до групи <group/>",
+      "contentWithGroup_FEMALE": "<user/> додала коментар до групи <group/>",
+      "contentWithItem": "<user/> додав коментар до групи <item/>",
+      "contentWithItem_FEMALE": "<user/> додала коментар до групи <item/>"
+    },
+    "reaction": {
+      "title": "Реакція на коментар",
+      "contentWithGroup": "<user/> відреагував(ла) на ваш коментар до групи <group/>",
+      "contentWithGroup_FEMALE": "<user/> відреагувала на ваш коментар до групи <group/>",
+      "contentWithItem": "<user/> відреагував(ла) на ваш коментар до завдання <item/>",
+      "contentWithItem_FEMALE": "<user/> відреагувала на ваш коментар до завдання <item/>"
+    }
+  },
+  "contact": {
+    "accept": {
+      "title": "Запит прийнято",
+      "content": "<firstUser/> прийняв(ла) запит від користувача <secondUser/>"
+    },
+    "send": {
+      "title": "Запит відправлено",
+      "content": "<firstUser/> відправив(ла) запит користувачу <secondUser/>"
+    }
+  },
+  "default": {
+    "welcome": {
+      "title": "Ласкаво просимо!",
+      "content": "Ви приєдналися до Fatodo!"
+    }
+  },
+  "item": {
+    "create": {
+      "title": "Нове завдання",
+      "content": "<user/> створив завдання <item/> у групі <group/>",
+      "content_FEMALE": "<user/> створила завдання <item/> у групі <group/>"
+    },
+    "groupCreate": {
+      "title": "Нова група",
+      "content": "<user/> створив групу <group/>",
+      "content_FEMALE": "<user/> створила групу <group/>"
+    },
+    "groupUpdate": {
+      "title": "Група відредагована",
+      "content": "<user/> відредагував групу <group/>",
+      "content_FEMALE": "<user/> відредагувала групу <group/>"
+    },
+    "memberAdd": {
+      "title": "Група змінена",
+      "content": "<user/> додав <users/> до групи <group/>",
+      "content_FEMALE": "<user/> додала <users/> до групи <group/>"
+    },
+    "memberDelete": {
+      "title": "Група змінена",
+      "content": "<user/> видалив <users/> з групи <group/>",
+      "content_FEMALE": "<user/> видала <users/> з групи <group/>"
+    },
+    "memberLeave": {
+      "title": "Група змінена",
+      "content": "<user/> покинув <group/>",
+      "content_FEMALE": "<user/> покинула <group/>"
+    },
+    "memberRole": {
+      "title": "Група змінена",
+      "content": "<user/> змінив(ла) роль користувача <users/> у групі <group/>"
+    },
+    "update": {
+      "title": "Завдання відредаговано",
+      "content": "<user/> відредагував завдання <item/> у групі <group/>",
+      "content_FEMALE": "<user/> відредагувала завдання <item/> у групі <group/>"
+    }
+  },
+  "reminder": {
+    "title": "Нагадування",
+    "content": "Завдання <item/> у групі <group/>"
+  },
+  "links": {
+    "chat": "чат"
+  }
+}

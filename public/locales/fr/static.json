@@ -1,0 +1,26 @@
+{
+  "internalError": {
+    "caption": "Quelque chose s'est mal passé"
+  },
+  "pageNotFound": {
+    "caption": "Page introuvable"
+  },
+  "unauthorized": {
+    "caption": "Vous n'êtes pas autorisé"
+  },
+  "forbidden": {
+    "caption": "Accès interdit"
+  },
+  "notActivated": {
+    "caption": "Votre compte n'est pas encore activé. \n Un lien avec le code d'activation a été envoyé à votre adresse e-mail"
+  },
+  "redirectToHome": {
+    "message": "Pour être redirigé vers la page d'accueil, appuyez sur le bouton ou attendez {{count}} seconde...",
+    "message_plural": "Pour être redirigé vers la page d'accueil, appuyez sur le bouton ou attendez {{count}} secondes..."
+  },
+  "actions": {
+    "toHomePage": "Vers la page d'accueil",
+    "toForgotPassword": "Mot de passe oublié ?",
+    "sendActivationCode": "Envoyer à nouveau le code d'activation"
+  }
+}

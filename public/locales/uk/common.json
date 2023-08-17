@@ -1,0 +1,45 @@
+{
+  "imageUpload": {
+    "buttons": {
+      "upload": "Завантажити",
+      "update": "Змінити",
+      "clear": "Видалити"
+    }
+  },
+  "usersSelect": {
+    "contactsNotFound": "Спочатку додайте хоча б одного користувача до списку контактів",
+    "usersNotFound": "Користувачі не знайдені"
+  },
+  "reminders": {
+    "fields": {
+      "time": "Час",
+      "date": "Дата",
+      "weekdays": "Дні тижня",
+      "monthdays": "Дні місяця"
+    },
+    "periodicity": {
+      "ONCE": "одноразово",
+      "DAILY": "щоденно",
+      "WEEKLY": "щотижня",
+      "MONTHLY": "щомісяця",
+      "YEARLY": "щорічно"
+    },
+    "ONCE": "о {{time}} {{date}}",
+    "DAILY": "о {{time}}",
+    "WEEKLY": "о {{time}} в {{weekDays}}",
+    "MONTHLY": "о {{time}} {{monthDates}} кожного місяця",
+    "YEARLY": "о {{time}} {{date}}"
+  },
+  "statuses": {
+    "workInProgress": "В роботі",
+    "closed": "Завершена"
+  },
+  "priorities": {
+    "low": "Низький",
+    "normal": "Середній",
+    "high": "Високий"
+  },
+  "links": {
+    "userDeleted": "Користувача видалено"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "chat": {
+    "create": {
+      "title": "Neuer Chat",
+      "content": "<user/> hat <chat/> mit <users/> erstellt"
+    },
+    "update": {
+      "title": "Chat bearbeitet",
+      "content": "<user/> hat <chat/> bearbeitet"
+    },
+    "memberAdd": {
+      "title": "Chat geändert",
+      "content": "<user/> hat <users/> zu <chat/> hinzugefügt"
+    },
+    "memberDelete": {
+      "title": "Chat geändert",
+      "content": "<user/> hat <users/> aus <chat/> gelöscht"
+    },
+    "memberLeave": {
+      "title": "Chat geändert",
+      "content": "<user/> hat <chat/> verlassen"
+    },
+    "messageCreate": {
+      "title": "Neue Nachricht"
+    },
+    "reaction": {
+      "title": "Reaktion im Chat",
+      "content": "<user/> hat auf deine Nachricht in <chat/> reagiert"
+    }
+  },
+  "comment": {
+    "add": {
+      "title": "Kommentar hinzugefügt",
+      "contentWithGroup": "<user/> hat einen Kommentar in der Gruppe <group/> hinzugefügt",
+      "contentWithItem": "<user/> hat einen Kommentar zur Aufgabe <item/> hinzugefügt"
+    },
+    "reaction": {
+      "title": "Reaktion auf Kommentar",
+      "contentWithGroup": "<user/> hat auf deinen Kommentar in der Gruppe <group/> reagiert",
+      "contentWithItem": "<user/> hat auf deinen Kommentar zur Aufgabe <item/> reagiert"
+    }
+  },
+  "contact": {
+    "accept": {
+      "title": "Kontaktanfrage akzeptiert",
+      "content": "<firstUser/> hat die Kontaktanfrage von <secondUser/> akzeptiert"
+    },
+    "send": {
+      "title": "Kontaktanfrage gesendet",
+      "content": "<firstUser/> hat eine Kontaktanfrage an <secondUser/> gesendet"
+    }
+  },
+  "default": {
+    "welcome": {
+      "title": "Willkommen!",
+      "content": "Du bist bei Fatodo beigetreten!"
+    }
+  },
+  "item": {
+    "create": {
+      "title": "Neue Aufgabe",
+      "content": "<user/> hat die Aufgabe <item/> in der Gruppe <group/> erstellt"
+    },
+    "groupCreate": {
+      "title": "Neue Gruppe",
+      "content": "<user/> hat die Gruppe <group/> erstellt"
+    },
+    "groupUpdate": {
+      "title": "Gruppe bearbeitet",
+      "content": "<user/> hat die Gruppe <group/> bearbeitet"
+    },
+    "memberAdd": {
+      "title": "Gruppe geändert",
+      "content": "<user/> hat <users/> zur Gruppe <group/> hinzugefügt"
+    },
+    "memberDelete": {
+      "title": "Gruppe geändert",
+      "content": "<user/> hat <users/> aus der Gruppe <group/> gelöscht"
+    },
+    "memberLeave": {
+      "title": "Gruppe geändert",
+      "content": "<user/> hat die Gruppe <group/> verlassen"
+    },
+    "memberRole": {
+      "title": "Gruppe geändert",
+      "content": "<user/> hat die Rolle von <users/> in der Gruppe <group/> geändert"
+    },
+    "update": {
+      "title": "Aufgabe bearbeitet",
+      "content": "<user/> hat die Aufgabe <item/> in der Gruppe <group/> bearbeitet"
+    }
+  },
+  "reminder": {
+    "title": "Erinnerung",
+    "content": "Aufgabe <item/> in der Gruppe <group/>"
+  },
+  "links": {
+    "chat": "Chat"
+  }
+}

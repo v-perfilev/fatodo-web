@@ -1,0 +1,45 @@
+{
+  "imageUpload": {
+    "buttons": {
+      "upload": "Enviar",
+      "update": "Atualizar",
+      "clear": "Limpar"
+    }
+  },
+  "usersSelect": {
+    "contactsNotFound": "Primeiro você precisa adicionar pelo menos um usuário à sua lista de contatos",
+    "usersNotFound": "Usuários não encontrados"
+  },
+  "reminders": {
+    "fields": {
+      "time": "Hora",
+      "date": "Data",
+      "weekdays": "Dias da semana",
+      "monthdays": "Dias do mês"
+    },
+    "periodicity": {
+      "ONCE": "uma vez",
+      "DAILY": "diariamente",
+      "WEEKLY": "semanalmente",
+      "MONTHLY": "mensalmente",
+      "YEARLY": "anualmente"
+    },
+    "ONCE": "às {{time}} do dia {{date}}",
+    "DAILY": "às {{time}}",
+    "WEEKLY": "às {{time}} nos dias da semana {{weekDays}}",
+    "MONTHLY": "às {{time}} no dia {{monthDates}} de cada mês",
+    "YEARLY": "às {{time}} no dia {{date}}"
+  },
+  "statuses": {
+    "workInProgress": "Em andamento",
+    "closed": "Fechado"
+  },
+  "priorities": {
+    "low": "Baixa",
+    "normal": "Normal",
+    "high": "Alta"
+  },
+  "links": {
+    "userDeleted": "Usuário excluído"
+  }
+}

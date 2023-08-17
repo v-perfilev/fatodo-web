@@ -1,0 +1,42 @@
+{
+  "routes": {
+    "Groups": "Групи",
+    "Calendar": "Календар",
+    "Contacts": "Контакти",
+    "Chats": "Чати",
+    "Events": "Події",
+    "GroupList": "Групи",
+    "GroupView": "Група",
+    "GroupCreate": "Створити групу",
+    "GroupEdit": "Редагувати групу",
+    "ItemView": "Задача",
+    "ItemCreate": "Створити задачу",
+    "ItemEdit": "Редагувати задачу",
+    "ContactList": "Контакти",
+    "IncomingRequestList": "Вхідні запити",
+    "OutcomingRequestList": "Вихідні запити",
+    "ChatList": "Чати",
+    "ChatView": "Чат",
+    "CommentList": "Коментарі",
+    "AccountForm": "Обліковий запис",
+    "AccountSettingsForm": "Налаштування",
+    "AccountChangePasswordForm": "Змінити пароль",
+    "UserView": "Користувач",
+    "EventList": "Події",
+    "CalendarView": "Календар"
+  },
+  "buttons": {
+    "agree": "Підтвердити",
+    "disagree": "Скасувати"
+  },
+  "inputs": {
+    "search": "Пошук",
+    "filter": "Фільтр"
+  },
+  "salutations": {
+    "you": "Ви"
+  },
+  "additional": {
+    "fieldNotSet": "Не встановлено"
+  }
+}

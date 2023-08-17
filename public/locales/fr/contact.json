@@ -1,0 +1,37 @@
+{
+  "relations": {
+    "title": "Contacts",
+    "remove": "Supprimer",
+    "relationsNotFound": "Aucun contact pour le moment"
+  },
+  "outcoming": {
+    "title": "Sortants",
+    "remove": "Supprimer",
+    "requestsNotFound": "Aucune demande de sortie"
+  },
+  "incoming": {
+    "title": "Entrants",
+    "accept": "Accepter",
+    "decline": "Refuser",
+    "requestsNotFound": "Aucune demande entrante"
+  },
+  "addContact": {
+    "title": "Ajouter un utilisateur à la liste des contacts",
+    "fields": {
+      "user": {
+        "label": "Nom d'utilisateur / Email",
+        "required": "Obligatoire",
+        "current": "Entrez l'identifiant d'un autre utilisateur",
+        "notRegistered": "Utilisateur non enregistré"
+      },
+      "message": {
+        "label": "Message"
+      }
+    },
+    "send": "Envoyer la demande",
+    "cancel": "Annuler"
+  },
+  "actions": {
+    "addContact": "Ajouter un contact"
+  }
+}

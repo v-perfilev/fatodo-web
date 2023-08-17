@@ -1,0 +1,51 @@
+{
+  "headers": {
+    "create": "Додавання завдання до {{group}}",
+    "edit": "Редагування завдання в {{group}}"
+  },
+  "view": {
+    "noDescription": "Без опису"
+  },
+  "labels": {
+    "status": "Статус",
+    "priority": "Пріоритет",
+    "description": "Опис",
+    "reminders": "Нагадування",
+    "item": "Завдання",
+    "group": "Група",
+    "createdBy": "Додано",
+    "createdAt": "Дата додавання",
+    "updatedBy": "Оновлено",
+    "updatedAt": "Дата оновлення"
+  },
+  "fields": {
+    "title": {
+      "label": "Назва",
+      "required": "Обов'язкове поле"
+    },
+    "priority": {
+      "label": "Пріоритет",
+      "required": "Обов'язкове поле"
+    },
+    "description": {
+      "label": "Опис"
+    },
+    "reminders": {
+      "label": "Нагадування"
+    }
+  },
+  "actions": {
+    "save": "Зберегти",
+    "cancel": "Скасувати",
+    "create": "Створити завдання",
+    "edit": "Редагувати",
+    "delete": "Видалити",
+    "list": "Список завдань",
+    "add": "Додати",
+    "close": "Закрити"
+  },
+  "deleteItem": {
+    "title": "Видалення завдання",
+    "text": "Ви впевнені, що хочете видалити завдання \"{{title}}\"?"
+  }
+}

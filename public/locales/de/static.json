@@ -1,0 +1,26 @@
+{
+  "internalError": {
+    "caption": "Etwas ist schief gelaufen"
+  },
+  "pageNotFound": {
+    "caption": "Seite nicht gefunden"
+  },
+  "unauthorized": {
+    "caption": "Du bist nicht autorisiert"
+  },
+  "forbidden": {
+    "caption": "Zugriff verboten"
+  },
+  "notActivated": {
+    "caption": "Dein Konto ist noch nicht aktiviert \n Ein Link mit dem Aktivierungscode wurde an deine E-Mail-Adresse gesendet"
+  },
+  "redirectToHome": {
+    "message": "Zum Umleiten zur Startseite drücke den Button oder warte {{count}} Sekunde...",
+    "message_plural": "Zum Umleiten zur Startseite drücke den Button oder warte {{count}} Sekunden..."
+  },
+  "actions": {
+    "toHomePage": "Zur Startseite",
+    "toForgotPassword": "Passwort vergessen?",
+    "sendActivationCode": "Aktivierungscode erneut senden"
+  }
+}

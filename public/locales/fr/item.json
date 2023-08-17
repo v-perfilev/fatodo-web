@@ -1,0 +1,51 @@
+{
+  "headers": {
+    "create": "Créer une tâche dans {{group}}",
+    "edit": "Modifier une tâche dans {{group}}"
+  },
+  "view": {
+    "noDescription": "Pas de description"
+  },
+  "labels": {
+    "status": "Statut",
+    "priority": "Priorité",
+    "description": "Description",
+    "reminders": "Rappels",
+    "item": "Tâche",
+    "group": "Groupe",
+    "createdBy": "Créé par",
+    "createdAt": "Créé le",
+    "updatedBy": "Mis à jour par",
+    "updatedAt": "Mis à jour le"
+  },
+  "fields": {
+    "title": {
+      "label": "Titre",
+      "required": "Requis"
+    },
+    "priority": {
+      "label": "Priorité",
+      "required": "Requis"
+    },
+    "description": {
+      "label": "Description"
+    },
+    "reminders": {
+      "label": "Rappels"
+    }
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "create": "Créer une tâche",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "list": "Liste des tâches",
+    "add": "Ajouter",
+    "close": "Fermer"
+  },
+  "deleteItem": {
+    "title": "Supprimer la tâche",
+    "text": "Êtes-vous sûr de vouloir supprimer la tâche \"{{title}}\" ?"
+  }
+}

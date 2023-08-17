@@ -1,0 +1,143 @@
+{
+  "login": {
+    "header": "Connexion",
+    "submit": "Se connecter"
+  },
+  "register": {
+    "header": "Inscription",
+    "submit": "S'inscrire"
+  },
+  "forgotPassword": {
+    "header": "Mot de passe oublié ?",
+    "submit": "Demander un code"
+  },
+  "resetPassword": {
+    "header": "Réinitialiser le mot de passe",
+    "submit": "Soumettre"
+  },
+  "changePassword": {
+    "header": "Changer le mot de passe",
+    "submit": "Soumettre"
+  },
+  "socialLogin": {
+    "label": "Se connecter avec"
+  },
+  "settings": {
+    "labels": {
+      "notifications": "Notifications",
+      "email": "Email",
+      "push": "Push"
+    },
+    "notifications": {
+      "reminder": "Rappels",
+      "itemCreate": "Nouvelles tâches",
+      "itemGroupCreate": "Nouveaux groupes",
+      "itemMemberAdd": "Nouveaux membres dans les groupes",
+      "chatCreate": "Nouveaux chats",
+      "chatMessageCreate": "Nouveaux messages",
+      "chatReactionIncoming": "Réactions dans les discussions",
+      "contactRequestIncoming": "Nouvelles demandes de contact",
+      "contactAcceptOutcoming": "Demandes de contact acceptées",
+      "commentCreate": "Nouveaux commentaires",
+      "commentReactionIncoming": "Réactions dans les commentaires"
+    }
+  },
+  "fields": {
+    "user": {
+      "label": "Nom d'utilisateur / Email",
+      "required": "Champ obligatoire"
+    },
+    "password": {
+      "label": "Mot de passe",
+      "required": "Champ obligatoire",
+      "invalid": "Peut contenir uniquement des caractères en majuscules, en minuscules et des chiffres",
+      "strength": "Doit contenir des caractères en majuscules, en minuscules et des chiffres",
+      "min8": "Ne peut pas être inférieur à 8 caractères",
+      "max20": "Ne peut pas dépasser 20 caractères"
+    },
+    "oldPassword": {
+      "label": "Mot de passe actuel"
+    },
+    "newPassword": {
+      "label": "Nouveau mot de passe"
+    },
+    "repeatPassword": {
+      "label": "Confirmer le mot de passe",
+      "required": "Champ obligatoire",
+      "notEqual": "Les mots de passe ne correspondent pas"
+    },
+    "rememberMe": {
+      "label": "Se souvenir de moi"
+    },
+    "email": {
+      "label": "Email",
+      "required": "Champ obligatoire",
+      "notValid": "Doit contenir un email correct",
+      "notUnique": "Doit être unique"
+    },
+    "username": {
+      "label": "Nom d'utilisateur",
+      "required": "Champ obligatoire",
+      "invalid": "Peut contenir uniquement des caractères en majuscules, en minuscules et des chiffres",
+      "min5": "Ne peut pas être inférieur à 5 caractères",
+      "max20": "Ne peut pas dépasser 20 caractères",
+      "notUnique": "Doit être unique"
+    },
+    "firstname": {
+      "label": "Prénom"
+    },
+    "lastname": {
+      "label": "Nom de famille"
+    },
+    "language": {
+      "label": "Langue",
+      "required": "Champ obligatoire"
+    },
+    "gender": {
+      "label": "Genre",
+      "options": {
+        "MALE": "Homme",
+        "FEMALE": "Femme",
+        "DIVERSE": "Divers"
+      }
+    },
+    "timeFormat": {
+      "label": "Format de l'heure",
+      "options": {
+        "H12": "12 heures",
+        "H24": "24 heures"
+      }
+    },
+    "dateFormat": {
+      "label": "Format de la date",
+      "options": {
+        "YMD_DASH": "aaaa-mm-jj",
+        "MDY_SLASH": "mm/jj/aaaa",
+        "DMY_DASH": "jj-mm-aaaa",
+        "DMY_DOT": "jj.mm.aaaa",
+        "DMY_SLASH": "jj/mm/aaaa"
+      }
+    },
+    "timezone": {
+      "label": "Fuseau horaire",
+      "required": "Champ obligatoire"
+    },
+    "emailReminders": {
+      "label": "Rappels par email"
+    },
+    "image": {
+      "label": "Image"
+    }
+  },
+  "deletePermanently": {
+    "title": "Supprimer le compte",
+    "text": "Si vous souhaitez supprimer votre compte, tapez \"{{username}}\"",
+    "confirm": "Supprimer",
+    "cancel": "Annuler"
+  },
+  "actions": {
+    "save": "Enregistrer",
+    "deletePermanently": "Supprimer le compte définitivement",
+    "logout": "Se déconnecter"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "headers": {
+    "create": "Criar tarefa em {{group}}",
+    "edit": "Editar tarefa em {{group}}"
+  },
+  "view": {
+    "noDescription": "Sem descrição"
+  },
+  "labels": {
+    "status": "Status",
+    "priority": "Prioridade",
+    "description": "Descrição",
+    "reminders": "Lembretes",
+    "item": "Tarefa",
+    "group": "Grupo",
+    "createdBy": "Criado por",
+    "createdAt": "Criado em",
+    "updatedBy": "Atualizado por",
+    "updatedAt": "Atualizado em"
+  },
+  "fields": {
+    "title": {
+      "label": "Título",
+      "required": "Obrigatório"
+    },
+    "priority": {
+      "label": "Prioridade",
+      "required": "Obrigatório"
+    },
+    "description": {
+      "label": "Descrição"
+    },
+    "reminders": {
+      "label": "Lembretes"
+    }
+  },
+  "actions": {
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "create": "Criar tarefa",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "list": "Lista de tarefas",
+    "add": "Adicionar",
+    "close": "Fechar"
+  },
+  "deleteItem": {
+    "title": "Excluir tarefa",
+    "text": "Tem certeza de que deseja excluir a tarefa \"{{title}}\"?"
+  }
+}

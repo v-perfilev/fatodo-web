@@ -1,0 +1,21 @@
+{
+  "item": {
+    "create": "Nouvelle tâche",
+    "createGroup": "Nouveau groupe",
+    "addMembers": "Membres ajoutés au groupe"
+  },
+  "chat": {
+    "create": "Nouveau chat",
+    "createMessage": "Nouveau message",
+    "reaction": "Nouvelle réaction dans le chat"
+  },
+  "contact": {
+    "request": "Nouvelle demande de contact",
+    "requestAccept": "Demande de contact acceptée"
+  },
+  "comment": {
+    "create": "Nouveau commentaire",
+    "reaction": "Nouvelle réaction dans le commentaire"
+  },
+  "reminder": "Rappel"
+}

@@ -1,0 +1,100 @@
+{
+  "chat": {
+    "create": {
+      "title": "Nouveau chat",
+      "content": "<user/> a créé <chat/> avec <users/>"
+    },
+    "update": {
+      "title": "Chat modifié",
+      "content": "<user/> a modifié <chat/>"
+    },
+    "memberAdd": {
+      "title": "Chat modifié",
+      "content": "<user/> a ajouté <users/> à <chat/>"
+    },
+    "memberDelete": {
+      "title": "Chat modifié",
+      "content": "<user/> a supprimé <users/> de <chat/>"
+    },
+    "memberLeave": {
+      "title": "Chat modifié",
+      "content": "<user/> a quitté <chat/>"
+    },
+    "messageCreate": {
+      "title": "Nouveau message"
+    },
+    "reaction": {
+      "title": "Réaction dans le chat",
+      "content": "<user/> a réagi à votre message dans <chat/>"
+    }
+  },
+  "comment": {
+    "add": {
+      "title": "Commentaire ajouté",
+      "contentWithGroup": "<user/> a ajouté un commentaire dans le groupe <group/>",
+      "contentWithItem": "<user/> a ajouté un commentaire dans la tâche <item/>"
+    },
+    "reaction": {
+      "title": "Réaction au commentaire",
+      "contentWithGroup": "<user/> a réagi à votre commentaire dans le groupe <group/>",
+      "contentWithItem": "<user/> a réagi à votre commentaire dans la tâche <item/>"
+    }
+  },
+  "contact": {
+    "accept": {
+      "title": "Demande de contact acceptée",
+      "content": "<firstUser/> a accepté la demande de contact de <secondUser/>"
+    },
+    "send": {
+      "title": "Demande de contact envoyée",
+      "content": "<firstUser/> a envoyé une demande de contact à <secondUser/>"
+    }
+  },
+  "default": {
+    "welcome": {
+      "title": "Bienvenue !",
+      "content": "Vous avez rejoint Fatodo !"
+    }
+  },
+  "item": {
+    "create": {
+      "title": "Nouvelle tâche",
+      "content": "<user/> a créé la tâche <item/> dans le groupe <group/>"
+    },
+    "groupCreate": {
+      "title": "Nouveau groupe",
+      "content": "<user/> a créé le groupe <group/>"
+    },
+    "groupUpdate": {
+      "title": "Groupe modifié",
+      "content": "<user/> a modifié le groupe <group/>"
+    },
+    "memberAdd": {
+      "title": "Groupe modifié",
+      "content": "<user/> a ajouté <users/> au groupe <group/>"
+    },
+    "memberDelete": {
+      "title": "Groupe modifié",
+      "content": "<user/> a supprimé <users/> du groupe <group/>"
+    },
+    "memberLeave": {
+      "title": "Groupe modifié",
+      "content": "<user/> a quitté le groupe <group/>"
+    },
+    "memberRole": {
+      "title": "Groupe modifié",
+      "content": "<user/> a changé le rôle de <users/> dans le groupe <group/>"
+    },
+    "update": {
+      "title": "Tâche modifiée",
+      "content": "<user/> a modifié la tâche <item/> dans le groupe <group/>"
+    }
+  },
+  "reminder": {
+    "title": "Rappel",
+    "content": "Tâche <item/> dans le groupe <group/>"
+  },
+  "links": {
+    "chat": "chat"
+  }
+}

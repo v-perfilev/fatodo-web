@@ -1,0 +1,48 @@
+{
+  "default": "Erreur sur le serveur",
+  "connection": "Échec de la connexion au serveur",
+  "form": {
+    "invalid": "Les données du formulaire ne sont pas valides"
+  },
+  "auth": {
+    "alreadyActivated": "Le compte est déjà activé",
+    "notActivated": "Le compte n'est pas activé",
+    "wrongPassword": "Mauvais mot de passe actuel",
+    "wrongProvider": "Opération impossible pour le fournisseur de compte"
+  },
+  "security": {
+    "forbidden": "Accès interdit",
+    "unauthorized": "Vous n'êtes pas autorisé",
+    "notRegistered": "L'utilisateur n'est pas encore enregistré",
+    "wrongPassword": "Mauvais mot de passe, réessayez",
+    "wrongProvider": {
+      "GOOGLE": "L'utilisateur est enregistré avec Google",
+      "FACEBOOK": "L'utilisateur est enregistré avec Facebook",
+      "APPLE": "L'utilisateur est enregistré avec Apple"
+    }
+  },
+  "model": {
+    "databaseError": "Erreur sur le serveur",
+    "exists": "L'objet existe déjà",
+    "duplicated": "Au moins un des champs uniques est en double",
+    "notFound": "L'objet n'a pas été trouvé",
+    "invalid": "L'objet contient un paramètre invalide"
+  },
+  "permission": {
+    "restricted": "Pas suffisamment de droits pour effectuer cette opération",
+    "usersNotAllowed": "Utilisateurs non autorisés dans la liste de contacts"
+  },
+  "service": {
+    "group": {
+      "invalid": "Le groupe contient des données non valides"
+    }
+  },
+  "contact": {
+    "relation": {
+      "exists": "La relation existe déjà"
+    },
+    "request": {
+      "exists": "La demande a déjà été envoyée"
+    }
+  }
+}

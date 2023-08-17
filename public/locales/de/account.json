@@ -1,0 +1,143 @@
+{
+  "login": {
+    "header": "Anmeldung",
+    "submit": "Anmelden"
+  },
+  "register": {
+    "header": "Registrierung",
+    "submit": "Registrieren"
+  },
+  "forgotPassword": {
+    "header": "Passwort vergessen?",
+    "submit": "Code anfordern"
+  },
+  "resetPassword": {
+    "header": "Passwort zurücksetzen",
+    "submit": "Absenden"
+  },
+  "changePassword": {
+    "header": "Passwort ändern",
+    "submit": "Absenden"
+  },
+  "socialLogin": {
+    "label": "Anmelden mit"
+  },
+  "settings": {
+    "labels": {
+      "notifications": "Benachrichtigungen",
+      "email": "E-Mail",
+      "push": "Push"
+    },
+    "notifications": {
+      "reminder": "Erinnerungen",
+      "itemCreate": "Neue Aufgaben",
+      "itemGroupCreate": "Neue Gruppen",
+      "itemMemberAdd": "Neue Mitglieder in Gruppen",
+      "chatCreate": "Neue Chats",
+      "chatMessageCreate": "Neue Nachrichten",
+      "chatReactionIncoming": "Reaktionen in Chats",
+      "contactRequestIncoming": "Neue Kontaktanfragen",
+      "contactAcceptOutcoming": "Akzeptierte Kontaktanfragen",
+      "commentCreate": "Neue Kommentare",
+      "commentReactionIncoming": "Reaktionen in Kommentaren"
+    }
+  },
+  "fields": {
+    "user": {
+      "label": "Benutzername / E-Mail",
+      "required": "Erforderlich"
+    },
+    "password": {
+      "label": "Passwort",
+      "required": "Erforderlich",
+      "invalid": "Kann nur Großbuchstaben, Kleinbuchstaben und Zahlen enthalten",
+      "strength": "Sollte Großbuchstaben, Kleinbuchstaben und Zahlen enthalten",
+      "min8": "Darf nicht weniger als 8 Zeichen lang sein",
+      "max20": "Darf nicht länger als 20 Zeichen sein"
+    },
+    "oldPassword": {
+      "label": "Aktuelles Passwort"
+    },
+    "newPassword": {
+      "label": "Neues Passwort"
+    },
+    "repeatPassword": {
+      "label": "Passwort bestätigen",
+      "required": "Erforderlich",
+      "notEqual": "Passwörter stimmen nicht überein"
+    },
+    "rememberMe": {
+      "label": "Angemeldet bleiben"
+    },
+    "email": {
+      "label": "E-Mail",
+      "required": "Erforderlich",
+      "notValid": "Sollte eine gültige E-Mail-Adresse enthalten",
+      "notUnique": "Sollte eindeutig sein"
+    },
+    "username": {
+      "label": "Benutzername",
+      "required": "Erforderlich",
+      "invalid": "Kann nur Großbuchstaben, Kleinbuchstaben und Zahlen enthalten",
+      "min5": "Darf nicht weniger als 5 Zeichen lang sein",
+      "max20": "Darf nicht länger als 20 Zeichen sein",
+      "notUnique": "Sollte eindeutig sein"
+    },
+    "firstname": {
+      "label": "Vorname"
+    },
+    "lastname": {
+      "label": "Nachname"
+    },
+    "language": {
+      "label": "Sprache",
+      "required": "Erforderlich"
+    },
+    "gender": {
+      "label": "Geschlecht",
+      "options": {
+        "MALE": "Männlich",
+        "FEMALE": "Weiblich",
+        "DIVERSE": "Divers"
+      }
+    },
+    "timeFormat": {
+      "label": "Zeitformat",
+      "options": {
+        "H12": "12-Stunden",
+        "H24": "24-Stunden"
+      }
+    },
+    "dateFormat": {
+      "label": "Datumsformat",
+      "options": {
+        "YMD_DASH": "yyyy-mm-dd",
+        "MDY_SLASH": "mm/dd/yyyy",
+        "DMY_DASH": "dd-mm-yyyy",
+        "DMY_DOT": "dd.mm.yyyy",
+        "DMY_SLASH": "dd/mm/yyyy"
+      }
+    },
+    "timezone": {
+      "label": "Zeitzone",
+      "required": "Erforderlich"
+    },
+    "emailReminders": {
+      "label": "E-Mail-Erinnerungen"
+    },
+    "image": {
+      "label": "Bild"
+    }
+  },
+  "deletePermanently": {
+    "title": "Konto löschen",
+    "text": "Wenn du dein Konto löschen möchtest, gib \"{{username}}\" ein",
+    "confirm": "Löschen",
+    "cancel": "Abbrechen"
+  },
+  "actions": {
+    "save": "Speichern",
+    "deletePermanently": "Konto endgültig löschen",
+    "logout": "Abmelden"
+  }
+}

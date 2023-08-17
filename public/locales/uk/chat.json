@@ -1,0 +1,140 @@
+{
+  "common": {
+    "direct": "Дірект",
+    "chatNotSelected": "Чат не обрано"
+  },
+  "list": {
+    "chatsNotFound": "Поки немає чатів"
+  },
+  "view": {
+    "messagesNotFound": "Поки немає повідомлень",
+    "inputPlaceholder": "Введіть повідомлення..."
+  },
+  "menu": {
+    "showMembers": "Учасники",
+    "addMembers": "Запросити",
+    "renameChat": "Перейменувати чат",
+    "cleanChat": "Очистити чат",
+    "markAsRead": "Відмітити все як прочитане",
+    "leaveChat": "Покинути чат",
+    "deleteChat": "Видалити чат"
+  },
+  "message": {
+    "deleted": "Повідомлення видалено",
+    "actions": {
+      "reactions": "Реакції",
+      "readStatuses": "Прочитані",
+      "edit": "Редагувати",
+      "delete": "Видалити"
+    }
+  },
+  "event": {
+    "CREATE_DIRECT_CHAT": "{{username}} створив дірект чат з {{usernames}}",
+    "CREATE_DIRECT_CHAT_FEMALE": "{{username}} створила дірект чат з {{usernames}}",
+    "CREATE_CHAT": "{{username}} створив чат з {{usernames}}",
+    "CREATE_CHAT_FEMALE": "{{username}} створила чат з {{usernames}}",
+    "RENAME_CHAT": "{{username}} перейменував чат на \"{{title}}\"",
+    "RENAME_CHAT_FEMALE": "{{username}} перейменувала чат на \"{{title}}\"",
+    "LEAVE_CHAT": "{{username}} покинув чат",
+    "LEAVE_CHAT_FEMALE": "{{username}} покинула чат",
+    "CLEAR_CHAT": "Ви очистили історію чату",
+    "ADD_MEMBERS": "{{username}} додав до чату нових користувачів: {{usernames}}",
+    "ADD_MEMBERS_FEMALE": "{{username}} додала до чату нових користувачів: {{usernames}}",
+    "DELETE_MEMBERS": "{{username}} видалив з чату користувачів: {{usernames}}",
+    "DELETE_MEMBERS_FEMALE": "{{username}} видала з чату користувачів: {{usernames}}"
+  },
+  "actions": {
+    "createChat": "Створити чат",
+    "back": "Повернутися назад"
+  },
+  "createChat": {
+    "title": "Створити чат",
+    "fields": {
+      "users": {
+        "label": "Користувачі",
+        "current": "Введіть ідентифікатор іншого користувача",
+        "notRegistered": "Користувач не зареєстрований"
+      }
+    },
+    "send": "Створити",
+    "cancel": "Скасувати"
+  },
+  "renameChat": {
+    "title": "Перейменувати чат",
+    "fields": {
+      "title": {
+        "label": "Назва",
+        "required": "Обов'язкове поле"
+      }
+    },
+    "send": "Перейменувати",
+    "cancel": "Скасувати"
+  },
+  "members": {
+    "title": "Учасники чату",
+    "usersNotFound": "Користувачі не знайдені",
+    "buttons": {
+      "addUsers": "Додати користувачів"
+    }
+  },
+  "addMembers": {
+    "title": "Додавання користувачів до чату",
+    "buttons": {
+      "send": "Додати користувачів",
+      "cancel": "Скасувати"
+    }
+  },
+  "removeMember": {
+    "title": "Видалення користувача",
+    "text": "Ви впевнені, що хочете видалити користувача {{username}} з чату?"
+  },
+  "reactions": {
+    "title": "Реакції на повідомлення",
+    "reactionsNotFound": "Поки немає реакцій"
+  },
+  "readStatuses": {
+    "title": "Прочитані",
+    "readStatusesNotFound": "Поки ніхто не прочитав"
+  },
+  "editMessage": {
+    "title": "Редагувати повідомлення",
+    "fields": {
+      "title": {
+        "label": "Текст",
+        "required": "Обов'язкове поле"
+      }
+    },
+    "send": "Редагувати",
+    "cancel": "Скасувати"
+  },
+  "directMessage": {
+    "title": "Пряме повідомлення",
+    "fields": {
+      "username": {
+        "label": "Користувач"
+      },
+      "text": {
+        "label": "Текст",
+        "required": "Обов'язкове поле"
+      }
+    },
+    "send": "Відправити",
+    "cancel": "Скасувати"
+  },
+  "clearChat": {
+    "title": "Очищення чату",
+    "text": "Ви впевнені, що хочете очистити чат?"
+  },
+  "leaveChat": {
+    "title": "Вихід з чату",
+    "text": "Ви впевнені, що хочете покинути чат?"
+  },
+  "deleteChat": {
+    "title": "Видалення чату",
+    "text": "Ви впевнені, що хочете видалити чат?"
+  },
+  "deleteMessage": {
+    "title": "Видалення повідомлення",
+    "text": "Ви впевнені, що хочете видалити повідомлення?"
+  }
+}

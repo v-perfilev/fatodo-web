@@ -8,22 +8,20 @@ import PopupMenu, {PopupMenuItem} from '../surfaces/PopupMenu';
 import {useForceUpdate} from '../../shared/hooks/useForceUpdate';
 
 type LanguageSelectProps = {
-  list?: boolean;
   onChange?: (code: string) => void;
 };
 
-const getShortNameByCode = (code: string, list: boolean): string => {
-  const getName = (c: string): string => languages.find((l) => l.code === c)?.name;
-  const getShortName = (s: string): string => s?.substr(0, 2);
-  const name = LanguageUtils.getLanguages().includes(code)
-    ? getName(code)
-    : getName(LanguageUtils.getFallbackLanguage());
-  return list ? name : getShortName(name);
+const getName = (c: string): string => {
+  return languages.find((l) => l.code === c)?.name || '';
 };
 
-const LanguageSelect = ({list, onChange}: LanguageSelectProps) => {
-  const forceUpdate = useForceUpdate();
+const getShortName = (c: string): string => {
+  const name = getName(c);
+  return name.length >= 2 ? name?.substr(0, 2) : '';
+};
 
+const LanguageSelect = ({onChange}: LanguageSelectProps) => {
+  const forceUpdate = useForceUpdate();
   const changeLanguage = (code: string): void => {
     LanguageUtils.setLanguage(code);
     onChange?.(code);
@@ -32,7 +30,7 @@ const LanguageSelect = ({list, onChange}: LanguageSelectProps) => {
 
   const buttonElement = (
     <Button color="primary" startIcon={<LanguageIcon />}>
-      {getShortNameByCode(LanguageUtils.getLanguage(), list)}
+      {getShortName(LanguageUtils.getLanguage())}
       <ArrowDownIcon />
     </Button>
   );

@@ -1,0 +1,33 @@
+{
+  "list": {
+    "inputPlaceholder": "Tapez votre commentaire...",
+    "commentsNotFound": "Aucun commentaire pour le moment"
+  },
+  "comment": {
+    "deleted": "Commentaire supprimé",
+    "actions": {
+      "reactions": "Réactions",
+      "edit": "Modifier",
+      "delete": "Supprimer"
+    }
+  },
+  "reactions": {
+    "title": "Réactions au commentaire",
+    "reactionsNotFound": "Aucune réaction pour le moment"
+  },
+  "editComment": {
+    "title": "Modifier le commentaire",
+    "fields": {
+      "text": {
+        "label": "Texte",
+        "required": "Obligatoire"
+      }
+    },
+    "send": "Modifier",
+    "cancel": "Annuler"
+  },
+  "deleteComment": {
+    "title": "Supprimer le commentaire",
+    "text": "Êtes-vous sûr de vouloir supprimer le commentaire ?"
+  }
+}

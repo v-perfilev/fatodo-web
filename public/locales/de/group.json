@@ -1,0 +1,79 @@
+{
+  "headers": {
+    "create": "Gruppe erstellen",
+    "edit": "Gruppe bearbeiten"
+  },
+  "fields": {
+    "title": {
+      "label": "Titel",
+      "required": "Erforderlich"
+    },
+    "color": {
+      "label": "Farbe",
+      "required": "Erforderlich"
+    },
+    "image": {
+      "label": "Bild"
+    }
+  },
+  "actions": {
+    "showAll": "Alle Aufgaben anzeigen",
+    "active": "Aktiv",
+    "archived": "Archiviert",
+    "groups": "Gruppen",
+    "view": "Öffnen",
+    "createGroup": "Gruppe erstellen",
+    "createItem": "Aufgabe erstellen",
+    "create": "Erstellen",
+    "edit": "Bearbeiten",
+    "leave": "Verlassen",
+    "delete": "Löschen",
+    "members": "Mitglieder",
+    "addMembers": "Mitglieder hinzufügen",
+    "moveToArchive": "Ins Archiv verschieben",
+    "removeFromArchive": "Aus dem Archiv entfernen",
+    "save": "Speichern",
+    "update": "Aktualisieren",
+    "cancel": "Abbrechen",
+    "collapse": "Einklappen",
+    "reorder": "Neu anordnen"
+  },
+  "roles": {
+    "admin": "Administrator",
+    "edit": "Bearbeiter",
+    "read": "Leser"
+  },
+  "members": {
+    "title": "Gruppenmitglieder",
+    "usersNotFound": "Benutzer nicht gefunden",
+    "buttons": {
+      "addUsers": "Mitglieder hinzufügen"
+    }
+  },
+  "addMembers": {
+    "title": "Gruppenmitglieder hinzufügen",
+    "buttons": {
+      "send": "Mitglieder hinzufügen",
+      "cancel": "Abbrechen"
+    }
+  },
+  "editMember": {
+    "title": "Gruppenmitglied bearbeiten",
+    "buttons": {
+      "send": "Mitglied bearbeiten",
+      "cancel": "Abbrechen"
+    }
+  },
+  "removeMember": {
+    "title": "Benutzer aus Gruppe entfernen",
+    "text": "Sind Sie sicher, dass Sie den Benutzer {{username}} aus der Gruppe löschen möchten?"
+  },
+  "leaveGroup": {
+    "title": "Gruppe verlassen",
+    "text": "Sind Sie sicher, dass Sie die Gruppe \"{{title}}\" verlassen möchten?"
+  },
+  "deleteGroup": {
+    "title": "Gruppe löschen",
+    "text": "Sind Sie sicher, dass Sie die Gruppe \"{{title}}\" löschen möchten?"
+  }
+}

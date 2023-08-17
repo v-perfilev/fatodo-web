@@ -1,0 +1,53 @@
+{
+  "auth": {
+    "registered": "Você se registrou, o link de ativação foi enviado para o seu endereço de email",
+    "activated": "A conta foi ativada com sucesso, agora você pode fazer o login!",
+    "afterForgotPassword": "O link para alterar a senha foi enviado para o seu endereço de email",
+    "afterResetPassword": "A senha foi alterada, agora você pode fazer o login!",
+    "afterChangePassword": "A senha foi alterada",
+    "afterUpdateAccount": "Dados da conta atualizados",
+    "afterDeleteAccount": "Conta excluída permanentemente"
+  },
+  "image": {
+    "tooSmall": "Imagem selecionada é muito pequena"
+  },
+  "group": {
+    "created": "Grupo criado",
+    "edited": "Grupo editado",
+    "deleted": "Grupo excluído",
+    "sorted": "Grupos reordenados",
+    "left": "Você saiu do grupo"
+  },
+  "item": {
+    "created": "Tarefa criada",
+    "edited": "Tarefa editada",
+    "deleted": "Tarefa excluída"
+  },
+  "contact": {
+    "relationRemoved": "Relação removida",
+    "requestSent": "Solicitação de contato enviada",
+    "requestRemoved": "Solicitação de contato removida",
+    "requestAccepted": "Solicitação de contato aceita",
+    "requestDeclined": "Solicitação de contato recusada"
+  },
+  "chat": {
+    "created": "Conversa criada",
+    "edited": "Conversa editada",
+    "renamed": "Conversa renomeada",
+    "deleted": "Conversa excluída",
+    "cleared": "Histórico da conversa excluído",
+    "left": "Você saiu da conversa",
+    "messageEdited": "Mensagem editada",
+    "messageDeleted": "Mensagem excluída"
+  },
+  "comment": {
+    "commentEdited": "Comentário editado",
+    "commentDeleted": "Comentário excluído"
+  },
+  "security": {
+    "oauth2": {
+      "internal": "Algo deu errado com o provedor remoto",
+      "wrongProvider": "Usuário registrado diretamente, faça o login com a senha"
+    }
+  }
+}

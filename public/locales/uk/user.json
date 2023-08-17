@@ -1,0 +1,19 @@
+{
+  "commonGroups": {
+    "header": "Спільні групи",
+    "noCommonGroups": "У вас немає спільних груп"
+  },
+  "commonContacts": {
+    "header": "Спільні контакти",
+    "noCommonContacts": "У вас немає спільних контактів"
+  },
+  "actions": {
+    "sendContactRequest": "Додати до списку контактів",
+    "acceptContactRequest": "Прийняти запит",
+    "declineContactRequest": "Відхилити запит",
+    "cancelContactRequest": "Скасувати запит",
+    "waitContactAccepting": "Очікування підтвердження",
+    "removeContact": "Видалити контакт",
+    "sendMessage": "Відправити повідомлення"
+  }
+}

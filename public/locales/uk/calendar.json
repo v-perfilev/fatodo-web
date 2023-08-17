@@ -1,0 +1,13 @@
+{
+  "list": {
+    "dateNotSelected": "Дата не вибрана",
+    "noReminders": "Немає нагадувань на вибрану дату"
+  },
+  "selectMonth": {
+    "title": "Вибрати місяць",
+    "buttons": {
+      "send": "Вибрати",
+      "cancel": "Скасувати"
+    }
+  }
+}
