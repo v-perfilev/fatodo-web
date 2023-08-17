@@ -1,11 +1,11 @@
 {
   "login": {
     "header": "Login",
-    "submit": "Entrar"
+    "submit": "Conecte-se"
   },
   "register": {
     "header": "Registo",
-    "submit": "Registar"
+    "submit": "Inscrever-se"
   },
   "forgotPassword": {
     "header": "Esqueceu a senha?",
