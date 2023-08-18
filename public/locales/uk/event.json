@@ -29,34 +29,37 @@
       "title": "Нове повідомлення"
     },
     "reaction": {
-      "title": "Реакція в чаті",
-      "content": "<user/> відреагував(ла) на ваше повідомлення в чаті <chat/>"
+      "title": "Реакція у чаті",
+      "content": "<user/> відреагував на ваше повідомлення в чаті <chat/>",
+      "content_FEMALE": "<user/> відреагувала на ваше повідомлення в чаті <chat/>"
     }
   },
   "comment": {
     "add": {
-      "title": "Коментар додано",
-      "contentWithGroup": "<user/> додав коментар до групи <group/>",
-      "contentWithGroup_FEMALE": "<user/> додала коментар до групи <group/>",
-      "contentWithItem": "<user/> додав коментар до групи <item/>",
-      "contentWithItem_FEMALE": "<user/> додала коментар до групи <item/>"
+      "title": "Додано коментар",
+      "contentWithGroup": "<user/> додав коментар у групі <group/>",
+      "contentWithGroup_FEMALE": "<user/> додала коментар у групі <group/>",
+      "contentWithItem": "<user/> додав коментар у групі <item/>",
+      "contentWithItem_FEMALE": "<user/> додала коментар у групі <item/>"
     },
     "reaction": {
       "title": "Реакція на коментар",
-      "contentWithGroup": "<user/> відреагував(ла) на ваш коментар до групи <group/>",
+      "contentWithGroup": "<user/> відреагував на ваш коментар до групи <group/>",
       "contentWithGroup_FEMALE": "<user/> відреагувала на ваш коментар до групи <group/>",
-      "contentWithItem": "<user/> відреагував(ла) на ваш коментар до завдання <item/>",
+      "contentWithItem": "<user/> відреагував на ваш коментар до завдання <item/>",
       "contentWithItem_FEMALE": "<user/> відреагувала на ваш коментар до завдання <item/>"
     }
   },
   "contact": {
     "accept": {
       "title": "Запит прийнято",
-      "content": "<firstUser/> прийняв(ла) запит від користувача <secondUser/>"
+      "content": "<firstUser/> прийняв запит від користувача <secondUser/>",
+      "content_FEMALE": "<firstUser/> прийняла запит від користувача <secondUser/>"
     },
     "send": {
       "title": "Запит відправлено",
-      "content": "<firstUser/> відправив(ла) запит користувачу <secondUser/>"
+      "content": "<firstUser/> відправив запит користувачу <secondUser/>",
+      "content_FEMALE": "<firstUser/> відправила запит користувачу <secondUser/>"
     }
   },
   "default": {
@@ -93,17 +96,18 @@
     },
     "memberLeave": {
       "title": "Група змінена",
-      "content": "<user/> покинув <group/>",
-      "content_FEMALE": "<user/> покинула <group/>"
+      "content": "<user/> покинув групу <group/>",
+      "content_FEMALE": "<user/> покинула групу <group/>"
     },
     "memberRole": {
       "title": "Група змінена",
-      "content": "<user/> змінив(ла) роль користувача <users/> у групі <group/>"
+      "content": "<user/> змінив роль користувача <users/> в групі <group/>",
+      "content_FEMALE": "<user/> змінила роль користувача <users/> в групі <group/>"
     },
     "update": {
       "title": "Завдання відредаговано",
-      "content": "<user/> відредагував завдання <item/> у групі <group/>",
-      "content_FEMALE": "<user/> відредагувала завдання <item/> у групі <group/>"
+      "content": "<user/> відредагував завдання <item/> в групі <group/>",
+      "content_FEMALE": "<user/> відредагувала завдання <item/> в групі <group/>"
     }
   },
   "reminder": {
