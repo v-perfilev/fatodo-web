@@ -3,7 +3,6 @@ import {API_URL, BASE_URL} from '../../../constants';
 import {useTranslation} from 'react-i18next';
 import {Box, Divider, SxProps, Typography} from '@mui/material';
 import LoadingButton from '../../../components/controls/LoadingButton';
-import FacebookIcon from '../../../components/icons/FacebookIcon';
 import {LanguageUtils} from '../../../shared/utils/LanguageUtils';
 import {DateUtils} from '../../../shared/utils/DateUtils';
 import {RootRoutes} from '../../../routes/RootRouter';
@@ -15,7 +14,6 @@ import AppleIcon from '../../../components/icons/AppleIcon';
 const SocialButtons = () => {
   const {t} = useTranslation();
   const [googleLoading, setGoogleLoading] = useState(false);
-  const [facebookLoading, setFacebookLoading] = useState(false);
   const [appleLoading, setAppleLoading] = useState(false);
 
   const oAuth2Login = (provider: string): void => {
@@ -31,11 +29,6 @@ const SocialButtons = () => {
     oAuth2Login('google');
   };
 
-  const facebookLogin = (): void => {
-    setFacebookLoading(true);
-    oAuth2Login('facebook');
-  };
-
   const appleLogin = (): void => {
     setAppleLoading(true);
     oAuth2Login('apple');
@@ -49,31 +42,21 @@ const SocialButtons = () => {
         <Divider />
       </Box>
       <FHStack>
-        {/*TODO*/}
         <LoadingButton
           startIcon={<GoogleIcon />}
           onClick={googleLogin}
           fullWidth
           loading={googleLoading}
-          disabled={googleLoading || facebookLoading || appleLoading}
+          disabled={googleLoading || appleLoading}
         >
           Google
-        </LoadingButton>
-        <LoadingButton
-          startIcon={<FacebookIcon />}
-          onClick={facebookLogin}
-          fullWidth
-          loading={facebookLoading}
-          disabled={facebookLoading || googleLoading || appleLoading}
-        >
-          Facebook
         </LoadingButton>
         <LoadingButton
           startIcon={<AppleIcon />}
           onClick={appleLogin}
           fullWidth
           loading={appleLoading}
-          disabled={facebookLoading || googleLoading || appleLoading}
+          disabled={googleLoading || appleLoading}
         >
           Apple
         </LoadingButton>
