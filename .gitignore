@@ -154,3 +154,8 @@ psd
 thumb
 sketch
 dist
+
+######################
+# Secrets
+######################
+public/.well-known
